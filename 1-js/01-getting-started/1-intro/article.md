@@ -11,7 +11,7 @@
 **اِسکریپت‌ها** نیازی به آماده‌سازی (Compilation) ندارند و فقط کافیست آنها را به صورت متنی در یک فایل (Plain Text) بنویسیم. 
 
 از این نظر جاوا اِسکریپت تفاوت زیادی با زبان
-[جاوا](https://en.wikipedia.org/wiki/Java_(programming_language)).
+[جاوا](https://en.wikipedia.org/wiki/Java_(programming_language))
 دارد
 
 **چرا جاوا** **اِسکریپت**
@@ -24,7 +24,7 @@
 
 موتورهای مختلف دارای **اسم رمز** خاص خود هستند، برای نمونه : 
 
-**V8** برای مرورگرهای کروم و اُپِرا
+[V8](https://en.wikipedia.org/wiki/V8_(JavaScript_engine)) برای مرورگرهای کروم و اُپِرا
 
 **Spider Monkey** برای مرورگر فایرفاکس 
 اسم رمزهای دیگری چون **Trident** ، **Chakra** برای نسخه‌های مختلف **IE** ، همینطور **ChakraCore** برای مرورگر اِج مایکروسافت، و **Nitro** ، **SquireFish** برای مرورگر سافاری وجود دارند. 
