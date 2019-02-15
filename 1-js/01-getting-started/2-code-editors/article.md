@@ -1,57 +1,63 @@
-# Code editors
+# ویرایشگرهای متن 
 
-A code editor is the place where programmers spend most of their time.
+ویرایشگرهای متن محلی ‌است که برنامه‌نویسان بیشتر وقت خود را آنجا صرف میکنند. 
 
-There are two main types of code editors: IDEs and lightweight editors. Many people use one tool of each type.
+در مجموع دو نوع ویرایشگر وجود دارد : یکی IDE ها و دیگری ویرایشگرهای سبک برای کد نویسی. بعضی از هر دوی اینها استفاده می‌کنند. 
 
 ## IDE
 
-The term [IDE](https://en.wikipedia.org/wiki/Integrated_development_environment) (Integrated Development Environment) refers to a powerful editor with many features that usually operates on a "whole project." As the name suggests, it's not just an editor, but a full-scale "development environment."
+عبارت [IDE](https://en.wikipedia.org/wiki/Integrated_development_environment) یا همان Integrated Development Environment به یک ویرایشگر قدرتمند با امکانات بسیار اشاره دارد که معمولا از این امکانات در "کل" یک پروژه استفاده می‌شود. 
 
-An IDE loads the project (which can be many files), allows navigation between files, provides autocompletion based on the whole project (not just the open file), and integrates with a version management system (like [git](https://git-scm.com/)), a testing environment, and other "project-level" stuff.
+درواقع IDE امکاناتی چون بارگذاری کل پروژه، امکان جابجایی بین فایل‌ها، امکان تکمیل خودکار کدها بر اساس نوع پروژه‌ای که انجام می‌دهید (و نه بر اساس صرفا یک فایل) را دارد، همینطور با یک سیستم کنترل نسخه مانند [Git](https://git-scm.com/) سازگار است، امکاناتی مانند محیط تست نرم افزار را در اختیار شما قرار می‌دهد و سایر امکاناتی که در سطح پروژه اهمیت دارد. 
 
-If you haven't selected an IDE yet, consider the following options:
+اگر هنوز یک IDE انتخاب نکرده‌اید، موارد زیر را در نظر داشته باشید : 
 
-- [WebStorm](http://www.jetbrains.com/webstorm/) for frontend development. The same company offers other editors for other languages (paid).
-- [Netbeans](http://netbeans.org/) (free).
+- [WebStorm](http://www.jetbrains.com/webstorm/) برای توسعه Front End . کمپانی Jetbrains همینطور IDE های دیگری را برای زبان‌های دیگر ارائه می‌کند (که رایگان نیستند) 
 
-All of these IDEs are cross-platform.
+- [Netbeans](http://netbeans.org/) (رایگان) 
 
-For Windows, there's also "Visual Studio", not to be confused with "Visual Studio Code." "Visual Studio" is a paid and mighty Windows-only editor, well-suited for the .NET platform. A free version of it is called [Visual Studio Community](https://www.visualstudio.com/vs/community/).
+این IDE ها اصطلاحا Cross Platform هستند. 
 
-Many IDEs are paid but have a trial period. Their cost is usually negligible compared to a qualified developer's salary, so just choose the best one for you.
+همینطور برای Windows می‌توانید از Visual Studio استفاده کنید (منظور Visual Studio Code نیست). Visual Studio یک نرم افزار غیر رایگان است و فقط بر روی Windows کار می‌کند که برای توسعه پلتفرم dot net مناسب است. نسخه رایگان این نرم افزار [Visual Studio Community](https://www.visualstudio.com/vs/community/) نام دارد.  
 
-## Lightweight editors
+بعضی از IDE ها پولی هستند ولی برای مدتی به صورت آزمایشی می‌توان از آنها به رایگان استفاده کرد. معمولا قیمت آنها در مقایسه با درآمد برنامه‌نویسان ناچیز است، پس یک IDE خوب برای خود انتخاب کنید. 
 
-"Lightweight editors" are not as powerful as IDEs, but they're fast, elegant and simple.
+## ویرایشگرهای سبک 
 
-They are mainly used to open and edit a file instantly.
+این دسته از ویرایشگرها به اندازه IDE ها قدرتمند نیستند، ولی سبک، زیبا و ساده هستند.  
 
-The main difference between a "lightweight editor" and an "IDE" is that an IDE works on a project-level, so it loads much more data on start, analyzes the project structure if needed and so on. A lightweight editor is much faster if we need only one file.
+معمولا برای ویرایش سریع یک فایل استفاده می‌شوند. 
 
-In practice, lightweight editors may have a lot of plugins including directory-level syntax analyzers and autocompleters, so there's no strict border between a lightweight editor and an IDE.
+تفاوت اصلی بین ویرایشگرهای سبک و IDE ها در آن است که IDE ها در سطح پروژه استفاده می‌‌شوند، در نتیجه در آغاز اطلاعات زیادی را بارگذاری می‌کنند، ساختار پروژه را تحلیل میکنند و موارد این‌چنینی. در زمانیکه بخواهیم روی یک فایل کار کنیم ویرایشگرهای سبک بسیار سریع‌تر هستند. 
 
-The following options deserve your attention:
+در عمل ویرایشگرهای سبک دارای افزونه‌های متعددی هستند، مانند تحلیل‌کننده‌های سینتَکس (syntax)، تکمیل‌کننده های کد و غیره. به همین دلیل نمی‌تواند مرز دقیقی بین IDE و ویرایشگرهای سبک قائل بود. 
 
-- [Visual Studio Code](https://code.visualstudio.com/) (cross-platform, free) also has many IDE-like features.
-- [Atom](https://atom.io/) (cross-platform, free).
-- [Sublime Text](http://www.sublimetext.com) (cross-platform, shareware).
-- [Notepad++](https://notepad-plus-plus.org/) (Windows, free).
-- [Vim](http://www.vim.org/) and [Emacs](https://www.gnu.org/software/emacs/) are also cool if you know how to use them.
+موارد زیر ارزش توجه را دارند : 
 
-## My favorites
+- [Visual Studio Code](https://code.visualstudio.com/) : رایگان - Cross Platform و همچنین تعدادی از قابلیت‌های IDE ها را دارد 
 
-The personal preference of the author is to have both an IDE for projects and a lightweight editor for quick and easy file editing.
+- [Atom](https://atom.io/) : رایگان - Cross Platform 
 
-I'm using:
+- [Sublime Text](http://www.sublimetext.com) : رایگان برای مدت محدود - Cross Platform 
 
-- As an IDE for JS -- [WebStorm](http://www.jetbrains.com/webstorm/) (I switch to one of the other JetBrains offerings when using other languages)
-- As a lightweight editor -- [Sublime Text](http://www.sublimetext.com) or [Atom](https://atom.io/).
+- [Notepad++](https://notepad-plus-plus.org/) : برای Windows - رایگان 
 
-## Let's not argue
+- [Vim](http://www.vim.org/) و [Emacs](https://www.gnu.org/software/emacs/) هم اگر با نحوه کارشان آشنا باشید خوب هستند. 
 
-The editors in the lists above are those that either I or my friends whom I consider good developers have been using for a long time and are happy with.
+## مورد علاقه‌های من 
 
-There are other great editors in our big world. Please choose the one you like the most.
+ترجیح نویسنده بر آن است که برای پروژه‌ها از IDE و برای کارهای سریع و ساده از ویرایشگرهای سبک استفاده کند. 
 
-The choice of an editor, like any other tool, is individual and depends on your projects, habits, and personal preferences.
+من از این نرم‌افزارها استفاده می‌کنم : 
+
+- به عنوان IDE : برای توسعه JavaScript از [WebStorm](http://www.jetbrains.com/webstorm/) (در کار با زبان‌های دیگر از دیگر محصولات JetBrains استفاده می‌کنم) 
+
+- به عنوان یک ویرایشگر سبک : [Sublime Text](http://www.sublimetext.com) یا [Atom](https://atom.io/) 
+
+## بیایید بحث نکنیم 
+
+ویرایشگرهایی بالا آنهایی هستند که من و دوستانم که آنها را توسعه‌دهندگان خوبی می‌دانم مورد استفاده قرار ‌می‌دهند و راضی هستند. 
+
+ویرایشگرهای دیگری نیز وجود دارند پس همانی که مورد علاقه شماست را انتخاب کنید. 
+
+انتخاب ویرایشگر یا هر ابزار دیگری شخصی بوده و به نوع پروژه، عادات و سلیقه شخصی بستگی دارد. 
