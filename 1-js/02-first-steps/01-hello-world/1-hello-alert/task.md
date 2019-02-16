@@ -1,12 +1,12 @@
-importance: 5
+اهمیت : 5
 
 ---
 
-# Show an alert
+# نمایش Alert
 
-Create a page that shows a message "I'm JavaScript!".
+صفحه‌ای بسازید که این پیام را نمایش دهد : "I'm JavaScript!".
 
-Do it in a sandbox, or on your hard drive, doesn't matter, just ensure that it works.
+برای اینکار می‌توانید از یک sandbox یا روی کامپیوتر خودتان انجام دهید. مهم نیست در کجا، صرفا اطمینان حاصل کنید که کدتان کار می‌کند.
 
 [demo src="solution"]
 

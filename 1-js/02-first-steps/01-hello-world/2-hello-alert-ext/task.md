@@ -1,9 +1,9 @@
-importance: 5
+اهمیت : 5
 
 ---
 
-# Show an alert with an external script
+# نمایش Alert از طریق اسکریپت خارجی
 
-Take the solution of the previous task <info:task/hello-alert>. Modify it by extracting the script content into an external file `alert.js`, residing in the same folder.
+این تمرین همان تمرین قبلی <info:task/hello-alert> است، با این تفاوت که باید کدهای جاوا اسکریپت را در فایلی جداگانه به نام `alert.js` و در همان دایرکتوری قرار دهید.
 
-Open the page, ensure that the alert works.
+صفحه را باز کنید و از درست کار کردن آن مطمئن شوید.

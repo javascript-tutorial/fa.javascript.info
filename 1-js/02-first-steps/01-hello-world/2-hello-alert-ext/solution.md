@@ -1,8 +1,8 @@
-The HTML code:
+کدهای HTML : 
 
 [html src="index.html"]
 
-For the file `alert.js` in the same folder:
+برای فایل `alert.js` در همان دایرکتوی :
 
 [js src="alert.js"]
 
