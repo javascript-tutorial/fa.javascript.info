@@ -1,22 +1,20 @@
-# Code structure
+# ساختار کد
 
-The first thing we'll study is the building blocks of code.
+اولین چیزی که خواهیم آموخت نحوه ساخت بلاکِ کد است.
 
 ## Statements
 
-Statements are syntax constructs and commands that perform actions.
+Statement ها دستورات و کدهایی هستند که باعث وقوع عملی می‌شوند.
 
-We've already seen a statement, `alert('Hello, world!')`, which shows the message "Hello, world!".
+پیش از این Statement ـی دیده‌ایم : `alert('Hello, world')` که پیام Hello, world را نمایش می‌داد.
 
-We can have as many statements in our code as we want. Statements can be separated with a semicolon.
-
-For example, here we split "Hello World" into two alerts:
+ما به هر تعداد Statement ـی که بخواهیم می‌توانیم در کدهای خود داشته باشیم. Statement ها از طریق semicolon (سِمی‌کالِن) از هم تفکیک می‌شوند. ‌برای نمونه ما در اینجا می‌توانیم عبارت "Hello World" را در دو Alert داشته باشیم :
 
 ```js run no-beautify
 alert('Hello'); alert('World');
 ```
 
-Usually, statements are written on separate lines to make the code more readable:
+معمولا Statement ها به منظور خوانایی کدها، در خطوط جداگانه نوشته می‌شوند :
 
 ```js run no-beautify
 alert('Hello');
@@ -25,20 +23,19 @@ alert('World');
 
 ## Semicolons [#semicolon]
 
-A semicolon may be omitted in most cases when a line break exists.
+ممکن است Semicolon در انتهای یک Line Break حذف شود.
 
-This would also work:
+این کد کار خواهد کرد :
 
 ```js run no-beautify
 alert('Hello')
 alert('World')
 ```
+در اینجا جاوا اسکریپت Line Break را به صورت ضمنی به عنوان یک Semicolon در نظر می‌گیرد، که به آن [درج خودکار semicolon](https://tc39.github.io/ecma262/#sec-automatic-semicolon-insertion) گفته می‌شود.
 
-Here, JavaScript interprets the line break as an "implicit" semicolon. This is called an [automatic semicolon insertion](https://tc39.github.io/ecma262/#sec-automatic-semicolon-insertion).
+**در نظر داشته باشید که همیشه Line Break به معنی Semicolon نیست.**
 
-**In most cases, a newline implies a semicolon. But "in most cases" does not mean "always"!**
-
-There are cases when a newline does not mean a semicolon. For example:
+به طور نمونه :
 
 ```js run no-beautify
 alert(3 +
@@ -46,22 +43,23 @@ alert(3 +
 + 2);
 ```
 
-The code outputs `6` because JavaScript does not insert semicolons here. It is intuitively obvious that if the line ends with a plus `"+"`, then it is an "incomplete expression", so the semicolon is not required. And in this case that works as intended.
+خروجی این کد `6` خواهد بود به این دلیل که جاوا اسکریپت Semicolon ـی در انتهای هر Line Break قرار نمی‌دهد. همانطور که مشخص است زمانیکه `"+"` در انتهای هر خط قرار می‌گیرد، عبارت کامل نمی‌شود و در نتیجه به Semicolon نیازی نیست.
 
-**But there are situations where JavaScript "fails" to assume a semicolon where it is really needed.**
+**اما شرایطی نیز وجود دارد که جاوا اسکریپت در تشخیص نیاز به Semicolon دچار خطا می‌شود.**
 
-Errors which occur in such cases are quite hard to find and fix.
+خطاهایی که در چنین شرایطی رخ می‌دهند به سختی پیدا می‌شود و قابل رفع هستند.
 
-````smart header="An example of an error"
-If you're curious to see a concrete example of such an error, check this code out:
+````smart header="نمونه‌ای از یک خطا"
+اگر واقعا به دنبال دیدن چنین خطایی هستید کد زیر را آزمایش کنید :
 
 ```js run
 [1, 2].forEach(alert)
 ```
 
-No need to think about the meaning of the brackets `[]` and `forEach` yet. We'll study them later. For now, just remember the result of the code: it shows `1` then `2`.
+فعلا نیازی نیست تا معنی [] و foreach را متوجه شوید. در آینده با آنها آشنا خواهیم شد. فعلا در نظر داشته باشید که نتیجه‌ی این کد نمایش عدد `1` و `2` است.
 
-Now, let's add an `alert` before the code and *not* finish it with a semicolon:
+حال بیایید `alert` را پیش از این کد قرار دهیم و در انتهای آن semicolon قرار ندهیم.
+
 
 ```js run no-beautify
 alert("There will be an error")
@@ -69,42 +67,43 @@ alert("There will be an error")
 [1, 2].forEach(alert)
 ```
 
-Now if we run the code, only the first `alert` is shown and then we have an error!
+حال اگر کد را اجرا کنیم فقط `alert` اول را خواهیم دید و سپس با خطا مواجه می‌شویم.
 
-But everything is fine again if we add a semicolon after `alert`:
+اما اگر انتهای `alert` اول یک semicolon قرار دهیم همه چیز دوباره درست کار خواهد کرد :
+
 ```js run
 alert("All fine now");
 
 [1, 2].forEach(alert)  
 ```
 
-Now we have the "All fine now" message followed by `1` and `2`.
+دلیل وقوع این خطا آن است که جاوا اسکریپت پیش از براکت‌ها `[...]` semicolon در نظر نمی‌گیرد.
+از آنجایی که semicolon به صورت خودکار در انتهای alert اول قرار داده نمی‌شود، تمام کد به عنوان یک Statement در نظر گرفته می‌شود. موتور جاوا اسکریپت کد را به این شکل خواهد دید :
 
-
-The error in the no-semicolon variant occurs because JavaScript does not assume a semicolon before square brackets `[...]`.
-
-So, because the semicolon is not auto-inserted, the code in the first example is treated as a single statement. Here's how the engine sees it:
 
 ```js run no-beautify
 alert("There will be an error")[1, 2].forEach(alert)
 ```
 
-But it should be two separate statements, not one. Such a merging in this case is just wrong, hence the error. This can happen in other situations.
+این خطا ممکن است در شرایط مشابه نیز بوجود آید.
 ````
 
-We recommend putting semicolons between statements even if they are separated by newlines. This rule is widely adopted by the community. Let's note once again -- *it is possible* to leave out semicolons most of the time. But it's safer -- especially for a beginner -- to use them.
+ما توصیه می‌کنیم که semicolon را در انتهای هر Statement قرار دهید، حتی اگر در خطوط جداگانه‌ای قرار دارند. این اصل به شکل گسترده‌ای در جامعه برنامه‌نویسان جاوا اسکریپت جا افتاده است.
+یکبار دیگر تکرار می‌کنیم : این امکان وجود دارد که در اکثر مواقع semicolon را قرار ندهید. ولی قرار دادن آن امن‌تر است، مخصوصا برای تازه‌کارها.
+
 
 ## Comments
 
-As time goes on, programs become more and more complex. It becomes necessary to add *comments* which describe what the code does and why.
+هر چه به جلو می‌رویم برنامه ما پیچیده‌تر می‌شود و قرار دادن *comment* برای واضح‌تر شدن کد ضروری می‌شود.
 
-Comments can be put into any place of a script. They don't affect its execution because the engine simply ignores them.
+Comment ها می‌توانند در هر جایی از اسکریپت قرار بگیرند و تاثیری در اجرای دستورات ندارند، چراکه به سادگی توسط موتور جاوا اسکریپت نادیده گرفته می‌شوند.
 
-**One-line comments start with two forward slash characters `//`.**
+**Comment یک خطی با دو Forward Slash یعنی `//` شروع می‌شود.**
 
-The rest of the line is a comment. It may occupy a full line of its own or follow a statement.
+از محلی که `//` را قرار می‌دهیم، تا انتهای خط نادیده گرفته خواهد شد. همینطور Comment می‌تواند به دنبال یک Statement بیاید.
 
-Like here:
+مانند :
+
 ```js run
 // This comment occupies a line of its own
 alert('Hello');
@@ -112,9 +111,9 @@ alert('Hello');
 alert('World'); // This comment follows the statement
 ```
 
-**Multiline comments start with a forward slash and an asterisk <code>/&#42;</code> and end with an asterisk and a forward slash <code>&#42;/</code>.**
+**Comment های چند خطی با یک /  و علامت * شروع شده و با علامت * و سپس / پایان می‌یابند.**
 
-Like this:
+مانند :
 
 ```js run
 /* An example with two messages.
@@ -124,9 +123,7 @@ alert('Hello');
 alert('World');
 ```
 
-The content of comments is ignored, so if we put code inside <code>/&#42; ... &#42;/</code>, it won't execute.
-
-Sometimes it can be handy to temporarily disable a part of code:
+همانطور که گفتیم دستوراتی که در Comment قرار می‌گیرند اجرا نمی‌شوند، از این رو گاهی اوقات از این روش برای غیر فعال کردن بخشی از کد می‌توان استفاده نمود.
 
 ```js run
 /* Commenting out the code
@@ -135,14 +132,14 @@ alert('Hello');
 alert('World');
 ```
 
-```smart header="Use hotkeys!"
-In most editors, a line of code can be commented out by pressing the `key:Ctrl+/` hotkey for a single-line comment and something like `key:Ctrl+Shift+/` -- for multiline comments (select a piece of code and press the hotkey). For Mac, try `key:Cmd` instead of `key:Ctrl`.
+```smart header="از کلیدهای میان‌بُر استفاده کنید"
+بعضی ویرایشگرها قابلیت Comment کردن کد از طریق کلیدهای میان‌بُر را دارند. معمولا `ctrl + /` در ویندوز Comment های تک خطی و `ctrl + shift + /` می‌تواند Comment چند خطی بوجود آورد (باید ابتدا بخشی از کد را انتخاب نمایید). همینطور در Mac می‌توانید از کلید `cmd` بجای `ctrl` استفاده نمایید. 
 ```
 
-````warn header="Nested comments are not supported!"
-There may not be `/*...*/` inside another `/*...*/`.
+````warn header="Comment های تو در تو حساب نمی‌شوند"
+امکان قرار دادن یک Comment داخل Comment ـی دیگر وجود ندارد.
 
-Such code will die with an error:
+این کد با خطا مواجه خواهد شد :
 
 ```js run no-beautify
 /*
@@ -152,8 +149,8 @@ alert( 'World' );
 ```
 ````
 
-Please, don't hesitate to comment your code.
+لطفا برای استفاده از Comment در کدهای خود مردد نباشید.
 
-Comments increase the overall code footprint, but that's not a problem at all. There are many tools which minify code before publishing to a production server. They remove comments, so they don't appear in the working scripts. Therefore, comments do not have negative effects on production at all.
+Comment ها حجم کد را افزایش می‌دهند، اما این اصلا اشکال نیست. ابزارهای گوناگونی وجود دارند که قبل از انتشار برنامه روی سروِر کدهای شما را کم حجم و Comment ها را حذف می‌کنند. بنابراین Comment ها روی خروجی نهایی تاثیری نخواهند داشت.
 
-Later in the tutorial there will be a chapter <info:coding-style> that also explains how to write better comments.
+در ادامه آموزش در بخش <info:coding-style> نحوه بهتر نوشتن Comment ها را خواهیم آموخت.
