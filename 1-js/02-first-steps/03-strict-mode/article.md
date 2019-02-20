@@ -1,16 +1,18 @@
-# The modern mode, "use strict"
+# حالت مدرن، “use strict”
 
-For a long time, JavaScript evolved without compatibility issues. New features were added to the language while old functionality didn't change.
+برای مدتی طولانی جاوا اسکریپت بدون مشکل سازگار پذیری توسعه داده می‌شد و امکانات جدید بدون اینکه نیازی به تغییر در امکانات قبلی باشد، به این زبان اضافه می‌شد.
 
-That had the benefit of never breaking existing code. But the downside was that any mistake or an imperfect decision made by JavaScript's creators got stuck in the language forever.
+مزیت این موضوع در این بود که هیچگاه در کدهای قدیمی اشکالی بوجود نمی‌آمد. اما مشکل اینجا بود که اگر اشکالی در طراحی زبان، توسط خالقان جاوا اسکریپت رخ داده بود، تا ابد بجا می‌ماند.
 
-This was the case until 2009 when ECMAScript 5 (ES5) appeared. It added new features to the language and modified some of the existing ones. To keep the old code working, most modifications are off by default. You need to explicitly enable them with a special directive: `"use strict"`.
+این موضوع تا سال 2009 که ECMAScript 5 (ES5) معرفی شد، ادامه داشت.ES5 قابلیت‌های جدیدی را به زبان افزود و اصلاحاتی را نیز بر روی امکانات فعلی انجام داد. 
+
+به منظور اینکه کدهای قدیمی کار کنند، بیشتر تغییراتی که در ES5 اتفاق افتاد، به صورت پیش‌فرض غیر فعال است، و برای فعال‌سازی آنها باید از طریق عبارت `"use strict"` چنین کاری را انجام داد.
 
 ## "use strict"
 
-The directive looks like a string: `"use strict"` or `'use strict'`. When it is located at the top of a script, the whole script works the "modern" way.
+عبارتِ دستوریِ (directive) `"use strict"` یا `'use strict'` شبیه به یک رشته است که زمانیکه در ابتدای اسکریپت قرار می‌گیرد، تمام اسکریپت در حالت مدرن کار خواهد کرد.
+برای نمونه :
 
-For example:
 
 ```js
 "use strict";
@@ -19,15 +21,15 @@ For example:
 ...
 ```
 
-We will learn functions (a way to group commands) soon.
+در مورد فانکشِن‌ها (روشی برای گروه‌بندی کردن دستورات) در آینده خواهیم آموخت. 
 
-Looking ahead, let's just note that `"use strict"` can be put at the start of most kinds of functions instead of the whole script. Doing that enables strict mode in that function only. But usually, people use it for the whole script.
+در اینجا صرفا بدانید که می‌توانیم در ابتدای اکثر فانکشن‌ها `"use strict"` قرار دهیم تا قواعد مدرن صرفا بر روی کدهای داخل فانکشن اعمال شوند.
 
 
-````warn header="Ensure that \"use strict\" is at the top"
-Please make sure that `"use strict"` is at the top of your scripts, otherwise strict mode may not be enabled.
+````warn header="از بالا بودن عبارت \"use strict\" در کدهای خود مطمئن شوید"
 
-Strict mode isn't enabled here:
+این عبارت حتما باید در ابتدای اسکریپت شما باشد، در غیر این صورت حالت مدرن فعال نخواهد شد.
+Strict mode در اینجا فعال نیست :
 
 ```js no-strict
 alert("some code");
@@ -38,24 +40,25 @@ alert("some code");
 // strict mode is not activated
 ```
 
-Only comments may appear above `"use strict"`.
+فقط Comment ها می‌توانند در بالای `"use strict"` قرار گیرند..
 ````
 
-```warn header="There's no way to cancel `use strict`"
-There is no directive like `"no use strict"` that reverts the engine to old behavior.
+```warn header="هیچ راه برای خنثی کردن `use strict` وجود ندارد"
+هیچ دستوری مانند `no use strict` وجود ندارد تا به موتور جاوا اسکریپت دستور دهد به روش قدیمی کار کند.
+زمانی‌که `use strict` را قرار می‌دهیم، راه برگشتی وجود ندارد.
 
-Once we enter strict mode, there's no return.
 ```
 
-## Always "use strict"
+## همیشه از "use strict" استفاده کنید
 
-We have yet to cover the differences between strict mode and the "default" mode.
+ما همچنان باید به آموختن تفاوت‌های use strict و default mode ادامه دهیم.
 
-In the next chapters, as we learn language features, we'll note the differences between the strict and default modes. Luckily, there aren't many and they actually make our lives better.
+در بخش‌های بعدی که با قابلیت‌های زبان جاوا اسکریپت آشنا می‌شویم، به تفاوت‌های بین strict mode و "default" mode اشاره خواهیم کرد و خواهیم دید که use strict چطور زندگی ما را راحت‌تر کرده است.
 
-For now, it's enough to know about it in general:
+تا به اینجا کافیست بدانید :
 
-1. The `"use strict"` directive switches the engine to the "modern" mode, changing the behavior of some built-in features. We'll see the details later in the tutorial.
-2. Strict mode is enabled by placing `"use strict"` at the top of a script or function. Several language features, like "classes" and "modules", enable strict mode automatically.
-3. Strict mode is supported by all modern browsers.
-4. We recommended always starting scripts with `"use strict"`. All examples in this tutorial assume strict mode unless (very rarely) specified otherwise.
+
+1. عبارت `"use strict"` باعث فعال شدن حالت مدرن موتور جاوا اسکریپت می‌شود و رفتار برخی قابلیت‌های درونی موتور را تغییر می‌دهد.
+2. این حالت با قرار دادن رشته `"strict mode"` در ابتدای اسکریپت یا فانکشن فعال می‌شود. برخی قابلیت‌های زبان از جمله "class" ها و "module" ها به صورت خودکار use strict را فعال می‌کنند.
+3. Use strict توسط اکثر مرورگرهای مدرن پشتیبانی می‌شود.
+4. ما توصیه می‌کنیم تا همیشه از `"use strict"` استفاده کنید. تمام مثال‌های این آموزش‌ها با `"use strict"` فعال انجام می‌شوند (مگر در موارد استثنایی که ذکر خواهند شد).
