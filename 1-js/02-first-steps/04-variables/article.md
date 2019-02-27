@@ -1,24 +1,24 @@
-# Variables
+# متغیرها
 
-Most of the time, a JavaScript application needs to work with information. Here are two examples:
-1. An online shop -- the information might include goods being sold and a shopping cart.
-2. A chat application -- the information might include users, messages, and much more.
+بیشتر اوقات برنامه‌های جاوا اسکریپت نیاز دارند تا با اطلاعات کار کنند. بطور نمونه : 
+1. یک فروشگاه آنلاین - اطلاعات شامل كالاهایی که فروخته می‌شوند و سبد خرید بشود. 
+2. یک نرم‌افزار چت - اطلاعات شامل کاربران، پیام‌ها و دیگر موارد می‌شود.
 
-Variables are used to store this information.
+متغیرها برای ذخیره سازی اطلاعات استفاده می‌شوند.
 
-## A variable
+## متغیر
 
-A [variable](https://en.wikipedia.org/wiki/Variable_(computer_science)) is a "named storage" for data. We can use variables to store goodies, visitors, and other data.
+یک [متغیر](https://en.wikipedia.org/wiki/Variable_(computer_science)) در واقع "فضایی برای ذخیره سازی" اطلاعات با نامی مشخص است. ما از متغیرها برای ذخیره سازی نام کالاها، بازدید‌کنندگان و دیگر انواع اطلاعات استفاده می‌کنیم.
 
-To create a variable in JavaScript, use the `let` keyword.
+برای ساخت یک متغیر در جاوا اسکریپت از `let` استفاده کنید.
 
-The statement below creates (in other words: *declares* or *defines*) a variable with the name "message":
+عبارت زیر یک متغیر با نام "message" تعریف می‌کند. به این عمل *define* یا *declare* گفته می‌شود.
 
 ```js
 let message;
 ```
 
-Now, we can put some data into it by using the assignment operator `=`:
+حالا می‌توانیم اطلاعاتی را از طریق عملگر `=` در این متغیر قرار دهیم :
 
 ```js
 let message;
@@ -28,7 +28,7 @@ message = 'Hello'; // store the string
 */!*
 ```
 
-The string is now saved into the memory area associated with the variable. We can access it using the variable name:
+حال رشته کاراکترهایی که نوشتیم در بخشی از حافظه کامپیوتر که در اختیار این متغیر می‌باشد ذخیره شده است :
 
 ```js run
 let message;
@@ -39,7 +39,7 @@ alert(message); // shows the variable content
 */!*
 ```
 
-To be concise, we can combine the variable declaration and assignment into a single line:
+به منظور اختصار می‌توانیم تعریف متغیر و مقدار دهی به آن را در یک خط قرار دهیم :
 
 ```js run
 let message = 'Hello!'; // define the variable and assign the value
@@ -47,15 +47,13 @@ let message = 'Hello!'; // define the variable and assign the value
 alert(message); // Hello!
 ```
 
-We can also declare multiple variables in one line:
+همینطور می‌توانیم چند متغیر را در یک خط تعریف کنیم :
 
 ```js no-beautify
 let user = 'John', age = 25, message = 'Hello';
 ```
 
-That might seem shorter, but we don't recommended it. For the sake of better readability, please use a single line per variable.
-
-The multiline variant is a bit longer, but easier to read:
+این مورد ممکن است کوتاه‌تر به نظر آید اما ما پیشنهاد نمی‌کنیم. چراکه خوانایی را پایین می‌آورد. لطفا برای تعریف متغیرها از خطوط جداگانه استفاده کنید :
 
 ```js
 let user = 'John';
@@ -63,14 +61,15 @@ let age = 25;
 let message = 'Hello';
 ```
 
-Some people also define multiple variables in this multiline style:
+بعضی برنامه‌نویسان متغیرهای متعدد را به این صورت در چند خط می‌نویسند :
+
 ```js no-beautify
 let user = 'John',
   age = 25,
   message = 'Hello';
 ```
 
-...Or even in the "comma-first" style:
+...همینطور برخی به صورت comma-first اینکار را انجام می‌دهند :
 
 ```js no-beautify
 let user = 'John'
@@ -78,32 +77,30 @@ let user = 'John'
   , message = 'Hello';
 ```
 
-Technically, all these variants do the same thing. So, it's a matter of personal taste and aesthetics.
+از لحاظ فنی همه این حالات کار خواهند کرد و انتخاب آن‌ها به سلایق و زیبایی شناسی شخصی مربوط است.
 
 
-````smart header="`var` instead of `let`"
-In older scripts, you may also find another keyword: `var` instead of `let`:
+````smart header="`var` بجای `let`"
+در اسکریپت‌های قدیمی ممکن است بجای کلیدواژه `let` با کلیدواژه `var` برخورد کنید :
 
 ```js
 *!*var*/!* message = 'Hello';
 ```
 
-The `var` keyword is *almost* the same as `let`. It also declares a variable, but in a slightly different, "old-school" way.
+کلیدواژه `var` تقریبا با `let` یکسان است و یک متغیر را تعریف می‌کند، ولی روش کار آن قدیمی است.
+تفاوت کوچکی بین این دو وجود دارد که در حال حاضر به آن نمی‌پردازیم و در مبحث <info:var>به آن خواهیم پرداخت.
 
-There are subtle differences between `let` and `var`, but they do not matter for us yet. We'll cover them in detail in the chapter <info:var>.
 ````
 
-## A real-life analogy
+## یک مقایسه‌ی واقعی
 
-We can easily grasp the concept of a "variable" if we imagine it as a "box" for data, with a uniquely-named sticker on it.
-
-For instance, the variable `message` can be imagined as a box labeled `"message"` with the value `"Hello!"` in it:
+برای درک مفهوم متغیر، می‌توانیم آن را یک جعبه برای نگهداری اطلاعات تصور کنیم، که یک نام منحصربه‌فرد روی آن چسبانده‌ایم.
+برای نمونه، تصور کنید متغیر "`message`" در جعبه‌ای با برچسب `message` و با مقدار "`Hello!`" باشد :
 
 ![](variable.png)
 
-We can put any value in the box.
+ما می‌توانیم هر مقداری در آن قرار دهیم. همینطور می‌توانیم هر چند بار که خواستیم این مقدار با تغییر دهیم :
 
-We can also change it as many times as we want:
 ```js run
 let message;
 
@@ -114,11 +111,11 @@ message = 'World!'; // value changed
 alert(message);
 ```
 
-When the value is changed, the old data is removed from the variable:
+وقتی مقدار تغییر کرد، اطلاعات قبلی از آن پاک خواهند شد :
 
 ![](variable-change.png)
 
-We can also declare two variables and copy data from one into the other.
+ما همینطور می‌توانیم دو متغیر تعریف کرده و اطلاعات یکی را در دیگری کپی کنیم.
 
 ```js run
 let hello = 'Hello world!';
@@ -135,33 +132,34 @@ alert(hello); // Hello world!
 alert(message); // Hello world!
 ```
 
-```smart header="Functional languages"
-It's interesting to note that [functional](https://en.wikipedia.org/wiki/Functional_programming) programming languages, like [Scala](http://www.scala-lang.org/) or [Erlang](http://www.erlang.org/), forbid changing variable values.
+```smart header="زبان‌های Functional"
+جالب است بدانید زبان‌های [functional](https://en.wikipedia.org/wiki/Functional_programming) مانند [Scala](http://www.scala-lang.org/) یا [Erlang](http://www.erlang.org/) تغییر مقدار متغیر را ممنوع کرده‌اند.
 
-In such languages, once the value is stored "in the box", it's there forever. If we need to store something else, the language forces us to create a new box (declare a new variable). We can't reuse the old one.
+در این نوع زبان‌ها وقتی مقداری را در جعبه قرار می‌دهیم تا ابد آنجا می‌ماند و اگر بخواهیم مقداری دیگر را ذخیره کنیم، ما را مجبور می‌کنند تا جعبه‌ای جدید بسازیم.
 
-Though it may seem a little odd at first sight, these languages are quite capable of serious development. More than that, there are areas like parallel computations where this limitation confers certain benefits. Studying such a language (even if you're not planning to use it soon) is recommended to broaden the mind.
+اگرچه در نگاه اول این زبان‌ها عجیب به نظر می‌رسند، ولی کاملا توانایی توسعه‌ (در پروژه‌های) جدی را دارند. مهم‌تر از آن در زمینه‌هایی مانند محاسبات موازی (Parallel Computation) این محدودیت‌ها تبدیل به مزیت می‌شوند. مطالعه‌ی چنین زبان‌هایی (حتی اگر به این زودی قصد استفاده از آنها را ندارید) برای وسیع شدن دیدتان، توصیه می‌شود.
+
 ```
 
-## Variable naming [#variable-naming]
+## نام‌گذاری متغیرها [#variable-naming]
 
-There are two limitations on variable names in JavaScript:
+دو محدودیت برای نام‌گذاری متغیرها در جاوا اسکریپت وجود دارد :
 
-1. The name must contain only letters, digits, or the symbols `$` and `_`.
-2. The first character must not be a digit.
+1. نام باید فقط از کاراکترها، اعداد یا علامت `$` و `_` تشکیل شده باشد.
+2. اولین کاراکتر نمی‌تواند عدد باشد.
 
-Examples of valid names:
+بطور نمونه :
 
 ```js
 let userName;
 let test123;
 ```
 
-When the name contains multiple words, [camelCase](https://en.wikipedia.org/wiki/CamelCase) is commonly used. That is: words go one after another, each word starting with a capital letter: `myVeryLongName`.
+زمانی‌که به یک نام متشکل از چند کلمه است، عموما از روش [camelCase](https://en.wikipedia.org/wiki/CamelCase) استفاده می‌شود. به این صورت که کلمات یکی پس از دیگری پشت هم نوشته می‌شوند و حرف اول هر کلمه کاراکتر بزرگ هست : `myVeryLongName` .
 
-What's interesting -- the dollar sign `'$'` and the underscore `'_'` can also be used in names. They are regular symbols, just like letters, without any special meaning.
+همینطور از `'$'` و `'_'` نیز می‌توان استفاده نمود. معنی خاصی ندارند و همانند حروف قابل استفاده هستند.
 
-These names are valid:
+این نام‌ها معتبر هستند :
 
 ```js run untrusted
 let $ = 1; // declared a variable with the name "$"
@@ -170,7 +168,7 @@ let _ = 2; // and now a variable with the name "_"
 alert($ + _); // 3
 ```
 
-Examples of incorrect variable names:
+این نام‌ها نامعتبر هستند :
 
 ```js no-beautify
 let 1a; // cannot start with a digit
@@ -178,27 +176,28 @@ let 1a; // cannot start with a digit
 let my-name; // hyphens '-' aren't allowed in the name
 ```
 
-```smart header="Case matters"
-Variables named `apple` and `AppLE` are two different variables.
+```smart header="بزرگی و کوچکی حروف مهم است"
+متغیر apple با Apple متفاوت است.
 ```
 
-````smart header="Non-English letters are allowed, but not recommended"
-It is possible to use any language, including cyrillic letters or even hieroglyphs, like this:
+````smart header="کاراکترهای غیر انگلیسی مجاز هستند ولی توصیه نمی‌شوند"
+امکان استفاده از کاراکترهای زبان‌های دیگر وجود دارد. مانند :
 
 ```js
 let имя = '...';
 let 我 = '...';
 ```
 
-Technically, there is no error here, such names are allowed, but there is an international tradition to use English in variable names. Even if we're writing a small script, it may have a long life ahead. People from other countries may need to read it some time.
+از نظر فنی اینها درست کار می‌کنند ولی بر اساس یک رسم بین‌المللی برای نام متغیرها از زبان انگلیسی استفاده می‌شود. حتی اگر اسکریپتی کوچک می‌نویسیم، ممکن است تا مدت طولانی‌ای مورد استفاده و توسعه قرار بگیرد و اشخاصی از سایر کشورها ممکن است نیاز باشد روزی آن اسکریپت را بخوانند.
 ````
 
-````warn header="Reserved names"
-There is a [list of reserved words](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Lexical_grammar#Keywords), which cannot be used as variable names because they are used by the language itself.
+````warn header="نام‌های رِزِرو شده"
 
-For example: `let`, `class`, `return`, and `function` are reserved.
+تعدادی  [نام رزرو شده ](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Lexical_grammar#Keywords) وجود دارد که نمی‌توان از آنها برای نام متغیرها استفاده نمود چراکه آنها توسط خودِ زبان جاوا اسکریپت استفاده شده‌اند.
 
-The code below gives a syntax error:
+برای نمونه `let`، `class`، `return` و `function` رزرو هستند.
+
+این کد خاطی Syntax خواهد داشت :
 
 ```js run no-beautify
 let let = 5; // can't name a variable "let", error!
@@ -206,9 +205,9 @@ let return = 5; // also can't name it "return", error!
 ```
 ````
 
-````warn header="An assignment without `use strict`"
+````warn header="مقدار دهی بدون `use strict`"
 
-Normally, we need to define a variable before using it. But in the old times, it was technically possible to create a variable by a mere assignment of the value without using `let`. This still works now if we don't put `use strict` in our scripts to maintain compatibility with old scripts.
+در گذشته این امکان وجود داشت تا متغیری را بدون استفاده از `let` و صرفا با مقدار دهی تعریف نمود. درصورتیکه از `use strict` استفاده نکنیم، این امکان همچنان وجود دارد، 
 
 ```js run no-strict
 // note: no "use strict" in this example
@@ -218,7 +217,7 @@ num = 5; // the variable "num" is created if it didn't exist
 alert(num); // 5
 ```
 
-This is a bad practice and would cause an error in strict mode:
+این روش مناسب نیست و در صورت وجود use strict با خطا مواجه خواهد شد :
 
 ```js
 "use strict";
@@ -229,15 +228,15 @@ num = 5; // error: num is not defined
 ```
 ````
 
-## Constants
+## ثابت‌ها
 
-To declare a constant (unchanging) variable, use `const` instead of `let`:
+برای تعریف ثابت (متغیری که تغیر نمی‌کند) از `const` بجای `let` استفاده می‌کنیم :
 
 ```js
 const myBirthday = '18.04.1982';
 ```
 
-Variables declared using `const` are called "constants". They cannot be changed. An attempt to do so would cause an error:
+متغیرهایی که با const ساخته می‌شود را ثابت (constant) می‌گوییم. آنها قابل تغییر نیستند و تلاش برای اینکار با خطا روبرو خواهد شد :
 
 ```js run
 const myBirthday = '18.04.1982';
@@ -245,16 +244,14 @@ const myBirthday = '18.04.1982';
 myBirthday = '01.01.2001'; // error, can't reassign the constant!
 ```
 
-When a programmer is sure that a variable will never change, they can declare it with `const` to guarantee and clearly communicate that fact to everyone.
+وقتی برنامه‎‌نویس اطمینان دارد که متغیری هیچگاه تغییر نمی‌کند می‌تواند آن را به عنوان const تعریف کند تا برای دیگران نیز این موضوع واضح باشد.
 
 
-### Uppercase constants
+### ثابت‌های با حروف بزرگ
 
-There is a widespread practice to use constants as aliases for difficult-to-remember values that are known prior to execution.
+به صورت یک عُرفِ همه‌گیر، از ثابت‌های با حروف بزرگ به عنوان نام مستعار برای مقادیری که به خاطر سپردن آنها دشوار است، استفاده می‌شود. این دسته از ثابت‌ها اصطلاحا prior to execution (پیش از اجرای برنامه) مقدارشان قطعی است.
 
-Such constants are named using capital letters and underscores.
-
-Like this:
+در ثابت‌ها از حروف بزرگ و _ استفاده می‌شود :
 
 ```js run
 const COLOR_RED = "#F00";
@@ -267,64 +264,59 @@ let color = COLOR_ORANGE;
 alert(color); // #FF7F00
 ```
 
-Benefits:
+مزایا :
 
-- `COLOR_ORANGE` is much easier to remember than `"#FF7F00"`.
-- It is much easier to mistype `"#FF7F00"` than `COLOR_ORANGE`.
-- When reading the code, `COLOR_ORANGE` is much more meaningful than `#FF7F00`.
+- `COLOR_ORANGE` بسیار راحت‌تر از `"#FF7F00"` به یاد می‌ماند.
+- اشتباه در نوشتن `"#FF7F00"` بسیار محتمل‌تر از `COLOR_ORANGE` است.
+- در هنگام خواندن کد، خواندن `COLOR_ORANGE` بسیار معنادارتر از `#FF7F00` است.
 
-When should we use capitals for a constant and when should we name it normally? Let's make that clear.
+چه زمانی باید از حروف بزرگ و چه زمانی باید از حروف معمولی برای نام‌گذاری یک constant استفاده کنیم؟
 
-Being a "constant" just means that a variable's value never changes. But there are constants that are known prior to execution (like a hexadecimal value for red) and there are constants that are *calculated* in run-time, during the execution, but do not change after their initial assignment.
+Constant بودن یک متغیر صرفا بدین معناست که مقدار آن تغییر نخواهد کرد. یک دسته از ثابت‌ها پیش از اجرای برنامه مقدارشان قطعی خواهد بود و دسته دیگر در حین اجرای (Run Time) برنامه مقدارشان مشخص می‌شود (و دیگر مقدارشان تغییر نمی‌کند)
 
-For instance:
+برای نمونه :
+
 ```js
 const pageLoadTime = /* time taken by a webpage to load */;
 ```
 
-The value of `pageLoadTime` is not known prior to the page load, so it's named normally. But it's still a constant because it doesn't change after assignment.
+مقدار ثابت `pageLoadTime` پیش از اجرای برنامه مشخص نبوده و به همین دلیل به صورت عادی نوشته شده است. اما همچنان یک ثابت است چراکه زمان اجرای برنامه بعد دیگر تغییر نخواهد کرد.
+به تعبیری دیگر ثابت‌های با حروف بزرگ زمانی که اصطلاحا مقداری به صورت "hard code" شده داریم، استفاده می‌شود (مانند کد رنگ قرمز).
 
-In other words, capital-named constants are only used as aliases for "hard-coded" values.  
+## نام‌های مناسب انتخاب کنید
 
-## Name things right
+لطفا نام متغیرهای خود را با حساسیت انتخاب کنید و برای اینکار خوب فکر کنید.
 
-Talking about variables, there's one more extremely important thing.
+انتخاب نام برای متغیرها یکی از کارهای مهم و پیچیده در برنامه‌نویسی است. یک نگاه سریع به نام متغیرها می‌تواند تفاوت یک برنامه‌نویس تازه‌کار و با تجربه را نشان دهد.
 
-Please name your variables sensibly. Take time to think about this.
+در پروژه‌های واقعی، بجای از صفر نوشتن برنامه‌ها، بیشتر زمان صرف اصلاح و توسعه کدهای موجود می‌شود. وقتی پس از مدتی به کدهای قبلی باز می‌گردیم، بدست آوردن اطلاعات از آن دسته کدهایی که نام‌گذاری‌های خوبی دارند بسیار راحت‌تر است (منظور متغیرهایی است که نام‌های خوبی دارند).
 
-Variable naming is one of the most important and complex skills in programming. A quick glance at variable names can reveal which code was written by a beginner versus an experienced developer.
+لطفا پیش از انتخاب نام برای یک متغیر خوب به آن فکر کنید. ثمره‌ی آن را خواهید دید.
 
-In a real project, most of the time is spent modifying and extending an existing code base rather than writing something completely separate from scratch. When we return to some code after doing something else for a while, it's much easier to find information that is well-labeled. Or, in other words, when the variables have good names.
+بعضی از دستورالعمل‌های مفید :
 
-Please spend time thinking about the right name for a variable before declaring it. Doing so will repay you handsomely.
-
-Some good-to-follow rules are:
-
-- Use human-readable names like `userName` or `shoppingCart`.
+- از نام‌هایی که برای انسان قابل فهم است استفاده کنید مانند `userName` یا `shoppingCart`.
 - Stay away from abbreviations or short names like `a`, `b`, `c`, unless you really know what you're doing.
-- Make names maximally descriptive and concise. Examples of bad names are `data` and `value`. Such names say nothing. It's only okay to use them if the context of the code makes it exceptionally obvious which data or value the variable is referencing.
-- Agree on terms within your team and in your own mind. If a site visitor is called a "user" then we should name related variables `currentUser` or `newUser` instead of `currentVisitor` or `newManInTown`.
+- از نام‌های مخفف یا کوتاه استفاده نکنید مانند `a`، `b`، `c`، مگر آنکه بدانید چه می‌کنید.
+- نام‌های کاملا واضح و مختصر انتخاب کنید. نمونه‌هایی از نام‌های بد `data` و `value` هستند. این نام‌ها هیچ‌چیز را توضیح نمی‌دهند. استفاده از این دست نام‌ها فقط زمانی قابل قبول است که محتوای کدی که می‌نویسید استثنا مشخص کند که data یا value به چه چیزی اشاره می‌کند.
+- با ذهن خود و تیم کاریتان توافق نظر داشته باشید. اگر به مخاطبان وب‌سایت‌تان user می‌گویید، متغیرهای مرتبط را بجای `currentVisitor` یا `newManInTown` باید `currentUser` یا `newUser` بنامید.
 
-Sounds simple? Indeed it is, but creating descriptive and concise variable names in practice is not. Go for it.
+```smart header="ایجاد یا استفاده مجدد?"
+به عنوان آخرین نکته برخی برنامه‌نویسان تنبل بجای تعریف متغیرهای جدید، از متغیرهای موجود دوباره استفاده می‌کنند.
 
-```smart header="Reuse or create?"
-And the last note. There are some lazy programmers who, instead of declaring new variables, tend to reuse existing ones.
+در نتیجه متغیرهای آن‌ها مانند جعبه‌ایست که افراد متفاوت چیزهای مختلفی درون آن ریخته‌اند و نام روی برچسب آن را تغییر نداده‌اند.
 
-As a result, their variables are like boxes into which people throw different things without changing their stickers. What's inside the box now? Who knows? We need to come closer and check.
+این دسته از برنامه‌نویسان در تعریف متغیر مقداری صرفه‌جویی، ولی مدت زمان زیادی از زمان رفع خطاها می‌افزایند.
 
-Such programmers save a little bit on variable declaration but lose ten times more on debugging.
-
-An extra variable is good, not evil.
-
-Modern JavaScript minifiers and browsers optimize code well enough, so it won't create performance issues. Using different variables for different values can even help the engine optimize your code.
+بهینه‌سازی‌هایی که در مرورگرهای امروزی و همینطور کم‌حجم‌کننده‌های جاوا اسکریپت صورت می‌گیرد، در بوجود نیامدن مشکلات عملکردی (Performance) برنامه‌های ما کمک می‌کنند. حتی استفاده از متغیرهای مختلف برای مقادیر مختلف به موتور جاوا اسکریپت کمک می‌کند تا کد شما را بهینه کند.
 ```
 
-## Summary
+## خلاصه
 
-We can declare variables to store data by using the `var`, `let`, or `const` keywords.
+ما می‌توانیم با استفاده از کلیدواژه‌های `var`، `let` یا `const` متغیرهایی را برای ذخیره سازی اطلاعات تعریف کنیم.
 
-- `let` -- is a modern variable declaration. The code must be in strict mode to use `let` in Chrome (V8).
-- `var` -- is an old-school variable declaration. Normally we don't use it at all, but we'll cover subtle differences from `let` in the chapter <info:var>, just in case you need them.
-- `const` -- is like `let`, but the value of the variable can't be changed.
+- `let` -- حالت جدید تعریف متغیر است. کد شما باید در حالت `strict mode` باشد تا بتوان از `let` در Chrome – V8 استفاده نمود.
+- `var` -- حالت قدیمی تعریف متغیر می‌باشد. معمولا اصلا از این روش استفاده نمی‌کنیم، اما تفاوت‌های آن را بخش دیگری بیان خواهیم کرد تا در صورت نیاز بتوانید از آن استفاده نمایید.
+- `const` -- همانند `let` است با این تفاوت که مقدار آن قابل تغییر نیست.
 
-Variables should be named in a way that allows us to easily understand what's inside them.
+نام متغیرها باید به گونه‌ای باشد که به ما اجازه دهد به راحتی متوجه معنی آنها بشویم.

@@ -1,4 +1,4 @@
-In the code below, each line corresponds to the item in the task list.
+در کدهای زیر، هر خط مربوط به مواردیست که در متن تمرین بیان شد.
 
 ```js run
 let admin, name; // can declare two variables at once

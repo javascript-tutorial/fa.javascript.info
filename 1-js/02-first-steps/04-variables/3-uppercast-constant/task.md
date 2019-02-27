@@ -1,10 +1,10 @@
-importance: 4
+اهمیت : 4
 
 ---
 
-# Uppercase const?
+# ثابت با حروف بزرگ?
 
-Examine the following code:
+کد زیر را آزمایش کنید :
 
 ```js
 const birthday = '18.04.1982';
@@ -12,9 +12,9 @@ const birthday = '18.04.1982';
 const age = someCode(birthday);
 ```
 
-Here we have a constant `birthday` date and the `age` is calculated from `birthday` with the help of some code (it is not provided for shortness, and because details don't matter here).
+ما در اینجا یک ثابت با نام `birthday` داریم و ثابتی دیگر با نام `age` که با کمک کدهای دیگر و به واسطه `birthday` محاسبه می‌شود.
 
-Would it be right to use upper case for `birthday`? For `age`? Or even for both?
+آیا نوشتن `birthday` با حروف بزرگ درست است ؟ برای `age` چطور ؟
 
 ```js
 const BIRTHDAY = '18.04.1982'; // make uppercase?

@@ -1,8 +1,8 @@
-importance: 3
+اهمیت: 3
 
 ---
 
-# Giving the right name
+# انتصاب نام صحیح
 
-1. Create a variable with the name of our planet. How would you name such a variable?
-2. Create a variable to store the name of a current visitor to a website. How would you name that variable?
+1. متغیری با نام کره‌مان تعریف کنید. چطور نامی مناسب برای آن انتخاب می‌کنید ؟
+2. متغیری برای ذخیره نام کاربر جاری در وب‌سایت تعریف کنید. چطور نامی مناسب برای آن انتخاب می‌کنید ؟
