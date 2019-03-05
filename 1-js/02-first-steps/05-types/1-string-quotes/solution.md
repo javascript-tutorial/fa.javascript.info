@@ -1,5 +1,5 @@
 
-Backticks embed the expression inside `${...}` into the string.
+Backtick ها می‌توانند عبارات جاوا اسکریپتی را در یک رشته کاراکتر قرار دهند.
 
 ```js run
 let name = "Ilya";

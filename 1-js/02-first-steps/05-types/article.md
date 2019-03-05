@@ -1,6 +1,6 @@
-# Data types
+# انواع داده
 
-A variable in JavaScript can contain any data. A variable can at one moment be a string and at another be a number:
+یک متغیر در جاوا اسکریپت می‌تواند هر نوع داده‌ای را در خود ذخیره کند. یک متغیر می‌تواند در یک لحظه حاوی رشته‌ای اِز کاراکترها و در لحظه دیگر یک عدد باشد.
 
 ```js
 // no error
@@ -8,63 +8,53 @@ let message = "hello";
 message = 123456;
 ```
 
-Programming languages that allow such things are called "dynamically typed", meaning that there are data types, but variables are not bound to any of them.
+زبان‌های برنامه‌نویسی‌ای که چنین امکانی به شما می‌دهند "Dynamically Typed" نامیده می‌شوند. به این معنی که انواعی از داده وجود دارد و متغیرها محدود به آنها نیستند.
+در جاوا اسکریپت هفت نوع پایه‌ای از انواع داده وجود دارد که الان به صورت کلی به آنها می‌پردازیم و در بخش‌های بعدی در مورد هرکدام با جزئیات صحبت خواهیم کرد.
 
-There are seven basic data types in JavaScript. Here, we'll cover them in general and in the next chapters we'll talk about each of them in detail.
-
-## A number
+## عدد
 
 ```js
 let n = 123;
 n = 12.345;
 ```
 
-The *number* type represents both integer and floating point numbers.
+نوع *number* (عدد) اعداد صحیح و اعداد اعشاری را شامل می‌شود. عملیات مختلفی در مورد اعداد وجود دارد مانند ضرب `*` ، تقسیم `/` ، جمع `+` ، تفریق `-` و غیره.
+همینطور بجز اعداد معمولی، اعداد خاصی نیز وجود دارند که به همین نوع از متغیرها مربوط می‌شوند. یعنی : بینهایت، منفی بینهایت و `NaN` .
 
-There are many operations for numbers, e.g. multiplication `*`, division `/`, addition `+`, subtraction `-`, and so on.
+- بینهایت : نماد بیانگر علامت ریاضیاتیِ [∞](https://en.wikipedia.org/wiki/Infinity) است. این مقدار خاص بوده که از هر عدد دیگری بزرگتر است.
 
-Besides regular numbers, there are so-called "special numeric values" which also belong to this data type: `Infinity`, `-Infinity` and `NaN`.
-
-- `Infinity` represents the mathematical [Infinity](https://en.wikipedia.org/wiki/Infinity) ∞. It is a special value that's greater than any number.
-
-    We can get it as a result of division by zero:
+از تقسیم هر عددی با صفر به این مقدار می‌رسیم :
 
     ```js run
     alert( 1 / 0 ); // Infinity
     ```
 
-    Or just reference it directly:
+     یا به طور مستقیم نیز به آن دسترسی داریم :
 
     ```js run
     alert( Infinity ); // Infinity
     ```
-- `NaN` represents a computational error. It is a result of an incorrect or an undefined mathematical operation, for instance:
+- `NaN`: بیانگر یک اشکال محاسباتی است و در نتیجه یک عملیات ریاضیاتی غلط یا تعریف نشده بوجود می‌آید. برای نمونه:
 
     ```js run
     alert( "not a number" / 2 ); // NaN, such division is erroneous
     ```
 
-    `NaN` is sticky. Any further operation on `NaN` returns `NaN`:
+   هر عملی بر روی `NaN` نتیجه `NaN` خواهد داشت :
 
     ```js run
     alert( "not a number" / 2 + 5 ); // NaN
     ```
 
-    So, if there's a `NaN` somewhere in a mathematical expression, it propagates to the whole result.
+    در نتیجه اگر `NaN` در عملیات ریاضیاتی‌ای وجود داشته باشد، بر روی تمام معادله تاثیر می‌گذارد (نتیجه معادله برابر `NaN` خواهد بود).
 
-```smart header="Mathematical operations are safe"
-Doing maths is "safe" in JavaScript. We can do anything: divide by zero, treat non-numeric strings as numbers, etc.
-
-The script will never stop with a fatal error ("die"). At worst, we'll get `NaN` as the result.
+```smart header="عملگرهای ریاضیاتی امن هستند"
+عملیات ریاضی در جاوا اسکریپت امن است. ما هر نوع عملی می‌توانیم انجام دهیم مانند تقسیم بر صفر. اسکریپت ما هیچگاه با خطا مواجه نخواهد شد. در بدترین حالت `NaN` را به عنوان نتیجه خواهیم گرفت.
 ```
 
-Special numeric values formally belong to the "number" type. Of course they are not numbers in the common sense of this word.
+## رشته کاراکترها
 
-We'll see more about working with numbers in the chapter <info:number>.
-
-## A string
-
-A string in JavaScript must be surrounded by quotes.
+یک رشته کاراکتر در جاوا اسکریپت باید در بین کوتِیشِن‌ها محصور شوند.
 
 ```js
 let str = "Hello";
@@ -72,15 +62,14 @@ let str2 = 'Single quotes are ok too';
 let phrase = `can embed ${str}`;
 ```
 
-In JavaScript, there are 3 types of quotes.
+در جاوا اسکریپت سه نوع کوتِیشِن داریم :
 
-1. Double quotes: `"Hello"`.
-2. Single quotes: `'Hello'`.
-3. Backticks: <code>&#96;Hello&#96;</code>.
+1. Double qoutes مانند `"Hello"`.
+2. Single qoutes مانند `'Hello'`.
+3. Backticks مانند <code>&#96;Hello&#96;</code>.
 
-Double and single quotes are "simple" quotes. There's no difference between them in JavaScript.
-
-Backticks are "extended functionality" quotes. They allow us to embed variables and expressions into a string by wrapping them in `${…}`, for example:
+Double quotes و Single quotes همان کوتِیشِن‌های عادی هستند و در جاوا اسکریپت تفاوتی با هم ندارند.
+Backticks امکان توسعه به ما می‌دهند. بوسیله‌ی آنها می‌توانیم داخل یک رشته کاراکتر عبارات و دستورات جاوا اسکریپت بنویسیم.
 
 ```js run
 let name = "John";
@@ -92,35 +81,36 @@ alert( `Hello, *!*${name}*/!*!` ); // Hello, John!
 alert( `the result is *!*${1 + 2}*/!*` ); // the result is 3
 ```
 
-The expression inside `${…}` is evaluated and the result becomes a part of the string. We can put anything in there: a variable like `name` or an arithmetical expression like `1 + 2` or something more complex.
+عبارتی که در `${…}` قرار می‌گیرد اجرا شده و نتیجه آن در رشته مورد نظر قرار می‌گیرد.
 
-Please note that this can only be done in backticks. Other quotes don't have this embedding functionality!
+توجه داشته باشید که quote ها چنین قابلیتی را ندارند :
+
 ```js run
 alert( "the result is ${1 + 2}" ); // the result is ${1 + 2} (double quotes do nothing)
 ```
 
-We'll cover strings more thoroughly in the chapter <info:string>.
+در مورد رشته‌ها در بخش‌های بعدی بیشتر صحبت خواهیم کرد.
 
-```smart header="There is no *character* type."
-In some languages, there is a special "character" type for a single character. For example, in the C language and in Java it is `char`.
+```smart header="نوع داده‌ای برای کاراکترها وجود ندارد"
+در زبان‌هایی مانند C و یا Java نوع داده‌ای خاصی مختص به کاراکترها تحت عنوان `char` وجود دارد.
 
-In JavaScript, there is no such type. There's only one type: `string`. A string may consist of only one character or many of them.
+در جاوا اسکریپت چنین نوعی نداریم. فقط یک نوع داده برای رشته‌ها داریم که آن `string` است، که شامل یک یا چند کاراکتر می‌تواند باشد.
 ```
 
-## A boolean (logical type)
+## نوع Boolean
 
-The boolean type has only two values: `true` and `false`.
+نوع Boolean فقط یکی از دو مقدار `true` و `false` را شامل می‌شود.
 
-This type is commonly used to store yes/no values: `true` means "yes, correct", and `false` means "no, incorrect".
+این نوع معمولا برای ذخیره مقدار yes یا no استفاده می‌شود. `true` به معنی yes و `false` به معنی no می‎‌باشد.
 
-For instance:
+برای نمونه :
 
 ```js
 let nameFieldChecked = true; // yes, name field is checked
 let ageFieldChecked = false; // no, age field is not checked
 ```
 
-Boolean values also come as a result of comparisons:
+مقدار Booealn معمولا به عنوان یک نتیجه‌ی مقایسه بدست می‌آیند :
 
 ```js run
 let isGreater = 4 > 1;
@@ -128,31 +118,29 @@ let isGreater = 4 > 1;
 alert( isGreater ); // true (the comparison result is "yes")
 ```
 
-We'll cover booleans more deeply in the chapter <info:logical-operators>.
+در مورد Boolean ها در بخش‌های بعدی صحبت خواهیم کرد.
 
-## The "null" value
+## مقدار "null"
 
-The special `null` value does not belong to any of the types described above.
-
-It forms a separate type of its own which contains only the `null` value:
+مقدار `null` یکی دیگر از انواع داده در جاوا اسکریپت می‌باشد.
 
 ```js
 let age = null;
 ```
 
-In JavaScript, `null` is not a "reference to a non-existing object" or a "null pointer" like in some other languages.
+در جاوا اسکریپت `null` مانند بعضی از زبان‌های برنامه‌نویسی به معنی وجود نداشتن یک شیء یا به معنی null pointer نیست. 
 
-It's just a special value which represents "nothing", "empty" or "value unknown".
+Null صرفا یک مقدار خاص است که نمایانگر "خالی بودن" ، "هیچ بودن" و "مشخص نبودن مقدار" می‌باشد.
 
-The code above states that `age` is unknown or empty for some reason.
+در مثال بالا مقدار `age` به هر دلیلی نا مشخص یا خالی است.
 
-## The "undefined" value
+## مقدار "undefined"
 
-The special value `undefined` also stands apart. It makes a type of its own, just like `null`.
+مقدار `undefined` نیز مانند `null` یک نوع مجزا در جاوا اسکریپت است.
 
-The meaning of `undefined` is "value is not assigned".
+`undefined` بدین معنی‌ است که "مقداری اختصاص نیافته است".
 
-If a variable is declared, but not assigned, then its value is `undefined`:
+ اگر متغیری تعریف کنیم و مقداری به آن اختصاص ندهیم، مقدار آن `undefined` خواهد بود :
 
 ```js run
 let x;
@@ -160,7 +148,7 @@ let x;
 alert(x); // shows "undefined"
 ```
 
-Technically, it is possible to assign `undefined` to any variable:
+از لحاظ فنی، امکان تخصیص دادن `undefined` به هر متغیری وجود دارد :
 
 ```js run
 let x = 123;
@@ -170,28 +158,26 @@ x = undefined;
 alert(x); // "undefined"
 ```
 
-...But we don't recommend doing that. Normally, we use `null` to assign an "empty" or "unknown" value to a variable, and we use `undefined` for checks like seeing if a variable has been assigned.
+اما ما چنین کاری را توصیه نمی‌کنیم و برای تخصیص مقدار "خالی" یا "مجهول" از `null` استفاده می‌کنیم و از `undefined` برای بررسی اینکه به متغیری مقدار تخصیص یافته یا خیر استفاده می‌کنیم.
 
-## Objects and Symbols
+## Object ها و Symbol ها
 
-The `object` type is special.
+نوع `object` از انواع خاص است.
 
-All other types are called "primitive" because their values can contain only a single thing (be it a string or a number or whatever). In contrast, objects are used to store collections of data and more complex entities. We'll deal with them later in the chapter <info:object> after we learn more about primitives.
+انواعی که تا بدین جا مطالعه کردیم از انواع "اولیه" بودند چراکه مقدار آنها فقط شامل یک چیز می‌شد. اما object ها برای ذخیره مجموعه‌ای از داده‌ها به شکلی پیچیده‌تر استفاده می‌شوند. پس از آنکه در مورد انواع اولیه بیشتر مطالعه کردیم، در مورد object ها بیشتر خواهیم آموخت.
 
-The `symbol` type is used to create unique identifiers for objects. We have to mention it here for completeness, but it's better to study this type after objects.
+نوع `symbol` برای ایجاد یک شناسه منحصر به فرد برای object ها مورد استفاده قرار می‌گیرد. به منظور تکمیل عنوان این بخش این نوع داده را نیز در اینجا عنوان کردیم ولی بهتر است جزئیات آن را در بخش‌های بعدی بررسی کنیم.
 
-## The typeof operator [#type-typeof]
+## عملگر typeof [#type-typeof]
 
-The `typeof` operator returns the type of the argument. It's useful when we want to process values of different types differently or just want to do a quick check.
+این عملگر نوع عبارت را نشان می‌دهد. معمولا زمانی که می‌خواهیم سریع نوع یک مقدار را بررسی کنیم یا زمانی‌که می‌خواهیم پردازشی بر اساس نوع یک مقدار انجام دهیم، کاربرد دارد.
 
-It supports two forms of syntax:
+این عملگر به دو شکل قابل استفاده است :
 
-1. As an operator: `typeof x`.
-2. As a function: `typeof(x)`.
+1. به عنوان عملگر : `typeof x`.
+2. به عنوان فانکشن : `typeof (x)`.
 
-In other words, it works with parentheses or without them. The result is the same.
-
-The call to `typeof x` returns a string with the type name:
+با صدا زدن `typeof x` رشته کاراکتری حاوی نوع آن مقدار نمایش داد می‌شود :
 
 ```js
 typeof undefined // "undefined"
@@ -217,29 +203,27 @@ typeof alert // "function"  (3)
 */!*
 ```
 
-The last three lines may need additional explanation:
+سه خط آخر احتمالا نیاز به توضیحات بیشتری دارد.
 
-1. `Math` is a built-in object that provides mathematical operations. We will learn it in the chapter <info:number>. Here, it serves just as an example of an object.
-2. The result of `typeof null` is `"object"`. That's wrong. It is an officially recognized error in `typeof`, kept for compatibility. Of course, `null` is not an object. It is a special value with a separate type of its own. So, again, this is an error in the language.
-3. The result of `typeof alert` is `"function"`, because `alert` is a function of the language. We'll study functions in the next chapters where we'll see that there's no special "function" type in JavaScript. Functions belong to the object type. But `typeof` treats them differently. Formally, it's incorrect, but very convenient in practice.
+1. `Math` یک آبجکت در اصطلاحا built-in (از پیش نوشته شده در هسته زبان) است که عملیات متنوع ریاضیاتی در اختیار ما قرار می‌دهد. در اینجا صرفا یک مثال از آن را نمایش دادیم و در بخش Numbers با آن بیشتر آشنا خواهیم شد.
+2. خروجی `typeof null` همانطور که می‌بینید `"object"` است و این صحیح نیست. این یک خطا در نوع کار `typeof` می‌باشد که به منظور سازگاری باقی مانده است. مطمئنا `null` یک object نیست. خودِ null یکی از انواع داده در جاوا اسکریپت است. 
+3. نوع `alert` یک فانکشن است چراکه `alert` یکی از فانکشن‌های جاوا اسکریپت می‌باشد. ما در بخش‌های بعدی با فانکشن‌ها بیشتر آشنا خواهیم شد و خواهیم آموخت که نوعی تحت عنوان فانکشن نداریم و خودِ فانکشن‌ها در اصل از نوعِ object هستند. اما عملگر `typeof` به آنها به طرز دیگری برخورد می‌کند. 
 
 
-## Summary
+## خلاصه
 
-There are 7 basic types in JavaScript.
+در جاوا اسکریپت 7 نوع داده‌ی پایه‌ای داریم :
 
-- `number` for numbers of any kind: integer or floating-point.
-- `string` for strings. A string may have one or more characters, there's no separate single-character type.
-- `boolean` for `true`/`false`.
-- `null` for unknown values -- a standalone type that has a single value `null`.
-- `undefined` for unassigned values -- a standalone type that has a single value `undefined`.
-- `object` for more complex data structures.
-- `symbol` for unique identifiers.
+- `number` که شامل اعداد صحیح و اعداد اعشاری می‌شود.
+- `string` برای رشته کاراکترها. یک string می‌تواند یک یا چند کاراکتر داشته باشد. هیچ نوع داده‌ای تحت عنوان char در جاوا اسکریپت وجود ندارد.
+- `boolean` برای `true` و یا `false`.
+- `null` برای مقادیر مجهول. null یک نوع مستقل بوده که یک مقدار تحت عنوان `null` دارد.
+- `undefined` برای مقادیر تخصیص نیافته. یک نوع مستقل بوده که یک مقدار تحت عنوان `undefined` دارد.
+- `object` برای ذخیره ساختارهای پیچیده‌تر اطلاعات.
+- `symbol` برای شناسه‌های یکتا.
 
-The `typeof` operator allows us to see which type is stored in a variable.
+عملگر `typeof` به شما اجازه می‌دهد نوع مقدار ذخیره شده در یک متغیر را تشخصی دهید.
 
-- Two forms: `typeof x` or `typeof(x)`.
-- Returns a string with the name of the type, like `"string"`.
-- For `null` returns `"object"` -- this is an error in the language, it's not actually an object.
-
-In the next chapters, we'll concentrate on primitive values and once we're familiar with them, we'll move on to objects.
+به دو طریق : `typeof x` و یا `typeof(x)`.
+نوع متغیر را باز می‌گرداند مانند `"string"`.
+برای `null` مقدار `"object"` را نمایش می‌دهد. این یک خطا در خودِ زبان است. در واقع null یک object نیست.

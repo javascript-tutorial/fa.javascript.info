@@ -1,10 +1,10 @@
-importance: 5
+اهمیت : 5
 
 ---
 
-# String quotes
+# کوتِیشِن‌های string
 
-What is the output of the script?
+خروجی این اسکریپت چه خواهد بود :
 
 ```js
 let name = "Ilya";
