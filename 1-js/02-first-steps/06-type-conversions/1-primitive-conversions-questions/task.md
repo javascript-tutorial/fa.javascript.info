@@ -1,10 +1,10 @@
-importance: 5
+اهمیت : 5
 
 ---
 
-# Type conversions
+# تبدیل انوع داده
 
-What are results of these expressions?
+ نتیجه این عبارات چه خواهد بود ؟
 
 ```js no-beautify
 "" + 1 + 0
@@ -23,4 +23,4 @@ null + 1
 undefined + 1
 ```
 
-Think well, write down and then compare with the answer.
+به خوبی روی آن فکر کنید، بنویسید و با پاسخ‌ها مقایسه کنید.

@@ -1,22 +1,24 @@
-# Type Conversions
+# تبدیل نوع داده 
 
-Most of the time, operators and functions automatically convert the values given to them to the right type. This is called "type conversion".
+بیشتر مواقع عملگرها و فانکشن‌ها به طور خودکار مقادیری که آنها داده می‌شود را به نوع صحیح تبدیل می‌کنند. به این عمل "تبدیل نوع داده" گفته می‌شود.
 
-For example, `alert` automatically converts any value to a string to show it. Mathematical operations convert values to numbers.
+برای نمونه فانکشن `alert` مقدار ورودی خود را به نوع داده‌ی string تبدیل می‌کند. عملگرهای ریاضیاتی مقادیر را به نوع number تبدیل می‌کنند.
 
-There are also cases when we need to explicitly convert a value to the expected type.
+همینطور شرایطی وجود دارد که ما نیاز داریم مقدار را به نوع مورد نظرمان تبدیل کنیم.
 
-```smart header="Not talking about objects yet"
-In this chapter, we won't cover objects. Instead, we'll study primitives first. Later, after we learn about objects, we'll see how object conversion works in the chapter <info:object-toprimitive>.
+
+```smart header="هنوز در مورد object ها صحبت نکرده‌ایم"
+در این بخش در مورد object ها صحبت نمی‌کنیم. بجای آن ابتدا انواع اولیه را خواهیم آموخت. بعدتر زمانی که در مورد object ها آموختیم، در مورد چگونگی تبدیل object ها صحبت خواهیم کرد.
 ```
 
-## ToString
+## تبدیل به string
 
-String conversion happens when we need the string form of a value.
+تبدیل به string زمانی رخ می‌دهد که ما به بخش رشته کاراکترهای یک مقدار نیاز داریم.
 
-For example, `alert(value)` does it to show the value.
+برای نمونه `alert(value)` تبدیل به string را برای نمایش، انجام می‌دهد.
 
-We can also call the `String(value)` function to convert a value to a string:
+همینطور می‌توانیم با صدا زدن `String(value)` تبدیل یک مقدار به string را انجام دهیم.
+
 
 ```js run
 let value = true;
@@ -28,19 +30,20 @@ alert(typeof value); // string
 */!*
 ```
 
-String conversion is mostly obvious. A `false` becomes `"false"`, `null` becomes `"null"`, etc.
+تبدیل به string عموما واضح است. `false` به `"false"` ، `null` به `"null"` و برای بقیه مقادیر هم به همین ترتیب انجام می‌شود.
 
-## ToNumber
+## تبدیل به number
 
-Numeric conversion happens in mathematical functions and expressions automatically.
+تبدیل به number در فانکشن‌ها و عبارات ریاضیاتی به طور خودکار انجام می‌شود.
 
-For example, when division `/` is applied to non-numbers:
+برای نمونه وقتی تقسیم `/` بر روی مقادیر غیر عددی رخ می‌دهد :
+
 
 ```js run
 alert( "6" / "2" ); // 3, strings are converted to numbers
 ```
 
-We can use the `Number(value)` function to explicitly convert a `value` to a number:
+برای تبدیل یک مقدار به عدد بطور مشخص، می‌توانیم از فانکشن `Number(value)` استفاده کنیم.
 
 ```js run
 let str = "123";
@@ -51,9 +54,10 @@ let num = Number(str); // becomes a number 123
 alert(typeof num); // number
 ```
 
-Explicit conversion is usually required when we read a value from a string-based source like a text form but expect a number to be entered.
+معمولا زمانی که مقداری را از یک منبع متنی (string based) مانند input های فرم دریافت می‌کنیم، در حالیکه نیاز به ورود مقدار عدد داشته‌ایم، باید آن مقدار را بطور مشخص به عدد تبدیل کنیم.
 
-If the string is not a valid number, the result of such a conversion is `NaN`. For instance:
+اگر نتیجه عدد معتبری نبود، نتیجه تبدیل `NaN` خواهد بود.
+
 
 ```js run
 let age = Number("an arbitrary string instead of a number");
@@ -61,14 +65,14 @@ let age = Number("an arbitrary string instead of a number");
 alert(age); // NaN, conversion failed
 ```
 
-Numeric conversion rules:
+قواعد تبدیل به number :
 
 | Value |  Becomes... |
 |-------|-------------|
 |`undefined`|`NaN`|
 |`null`|`0`|
 |<code>true&nbsp;and&nbsp;false</code> | `1` and `0` |
-| `string` | Whitespaces from the start and end are removed. If the remaining string is empty, the result is `0`. Otherwise, the number is "read" from the string. An error gives `NaN`. |
+| `string` | فاصله‌های خالی ابتدا و انتها حذف می‌شوند. اگر رشته‌ی باقی مانده خالی باشد نتیجه `0` خواهد بود. در غیر اینصورت عدد موجود در رشته کاراکترها خوانده خواهد شد. همینطور اگر خطایی رخ دهد نتیجه `NaN` خواهد بود. |
 
 Examples:
 
@@ -79,26 +83,23 @@ alert( Number(true) );        // 1
 alert( Number(false) );       // 0
 ```
 
-Please note that `null` and `undefined` behave differently here: `null` becomes zero while `undefined` becomes `NaN`.
+لطفا در نظر داشته باشید که `null` و `undefined` در اینجا متفاوت عمل می‌کنند. `Null` به `0` تبدیل می‌شود و `undefined` به `NaN` تبدیل می‌شود.
 
-````smart header="Addition '+' concatenates strings"
-Almost all mathematical operations convert values to numbers. A notable exception is addition `+`. If one of the added values is a string, the other one is also converted to a string.
+````smart header="عملگر '+' رشته‌ها را بهم می‌چسباند"
+تقریبا همه‌ی عملگرهای ریاضیاتی، مقادیر را به عدد (number) تبدیل می‌کنند. تنها یک استثنا وجود دارد و آن `+` است. اگر یکی از مقادیر string باشد، بقیه مقادیر نیز به string تبدیل می‌شوند.
 
-Then, it concatenates (joins) them:
+سپس string ها را بهم  می‌چسباند:
+
 
 ```js run
 alert( 1 + '2' ); // '12' (string to the right)
 alert( '1' + 2 ); // '12' (string to the left)
 ```
 
-This only happens when at least one of the arguments is a string. Otherwise, values are converted to numbers.
+این مورد فقط زمانی روی میدهد که حداقل یکی از مقادیر string باشد، در غیر اینصورت تمام مقادیر به number تبدیل می‌شوند.
 ````
 
-## ToBoolean
-
-Boolean conversion is the simplest one.
-
-It happens in logical operations (later we'll meet condition tests and other similar things) but can also be performed explicitly with a call to `Boolean(value)`.
+## تبدیل به boolean
 
 The conversion rule:
 
@@ -106,6 +107,18 @@ The conversion rule:
 - Other values become `true`.
 
 For instance:
+
+تبدیل به boolean آسان‌ترین حالت است.
+
+این مورد در عملیات منطقی (مانند عبارات شرطی که با آنها در بخش‌های بعدی آشنا خواهیم شد) رخ می‌دهد. همینطور به صورت مشخص نیز می‌توان با فانکشن `Boolean(value)` اینکار را انجام داد.
+
+قاعده تبدیل :
+
+- مقادیری که در ظاهر "خالی" هستند، مانند `0` ، `string` خالی ، `null` ، `undefined` و `NaN` به `false` تبدیل می‌شوند.
+- بقیه مقادیر به `true` تبدیل می‌شوند.
+
+برای نمونه :
+
 
 ```js run
 alert( Boolean(1) ); // true
@@ -115,9 +128,8 @@ alert( Boolean("hello") ); // true
 alert( Boolean("") ); // false
 ```
 
-````warn header="Please note: the string with zero `\"0\"` is `true`"
-Some languages (namely PHP) treat `"0"` as `false`. But in JavaScript, a non-empty string is always `true`.
-
+````warn header="توجه داشته باشید که string حاوی 0 یعنی `0` برابر با `true` خواهد بود"
+برخی زبان‌ها (مانند PHP) با `"0"` به عنوان `false` برخورد می‌کنند. اما در جاوا اسکریپت هر string ـی که خالی نباشد `true` خواهد بود.
 ```js run
 alert( Boolean("0") ); // true
 alert( Boolean(" ") ); // spaces, also true (any non-empty string is true)
@@ -125,36 +137,39 @@ alert( Boolean(" ") ); // spaces, also true (any non-empty string is true)
 ````
 
 
-## Summary
+## خلاصه
 
-The three most widely used type conversions are to string, to number, and to boolean.
+سه نوع تبدیل نوع داده، که بطور گسترده مورد استفاده قرار می‌گیرد، تبدیل به string ، تبدیل به number و تبدیل به boolean است.
 
-**`ToString`** -- Occurs when we output something. Can be performed with `String(value)`. The conversion to string is usually obvious for primitive values.
+**`تبدیل به string`** - زمانی که می‌خواهیم خروجی‌ای داشته باشم رخ می‌دهد. از طریق `String(value)` قابل انجام است. تبدیل به string معمولا وقتی مقدار از انواع اولیه داده است، واضح خواهد بود.
 
-**`ToNumber`** -- Occurs in math operations. Can be performed with `Number(value)`.
+**`تبدیل به number`** – در عملگرهای ریاضیاتی رخ می‌دهد. از طریق `Number(value)` قابل انجام است.
 
-The conversion follows the rules:
+این تبدیل از این قوانین پیروی می‌کند :
+
 
 | Value |  Becomes... |
 |-------|-------------|
 |`undefined`|`NaN`|
 |`null`|`0`|
 |<code>true&nbsp;/&nbsp;false</code> | `1 / 0` |
-| `string` | The string is read "as is", whitespaces from both sides are ignored. An empty string becomes `0`. An error gives `NaN`. |
+| `string` | فاصله‌های خالی ابتدا و انتها حذف می‌شوند. اگر رشته‌ی باقی مانده خالی باشد نتیجه `0` خواهد بود. در غیر اینصورت عدد موجود در رشته کاراکترها خوانده خواهد شد. همینطور اگر خطایی رخ دهد نتیجه `NaN` خواهد بود. |
 
-**`ToBoolean`** -- Occurs in logical operations. Can be performed with `Boolean(value)`.
+**`تبدیل به boolean`** – در عملگرهای  منطقی رخ می‌دهد. از طریق `Boolean(value)` قابل انجام است.
 
-Follows the rules:
+این تبدیل از این قوانین پیروی می‌کند :
+
 
 | Value |  Becomes... |
 |-------|-------------|
 |`0`, `null`, `undefined`, `NaN`, `""` |`false`|
 |any other value| `true` |
 
+اکثر این قوانین آسان بوده و ساده به خاطر می‌مانند. استثناهایی که معمولا در آن اشتباه می‌کنیم :
 
-Most of these rules are easy to understand and memorize. The notable exceptions where people usually make mistakes are:
+- `undefined` به عنوان number برابر `NaN` خواهد بود و `0` نخواهد بود.
 
-- `undefined` is `NaN` as a number, not `0`.
-- `"0"` and space-only strings like `"   "` are true as a boolean.
+- `"0"` و string حاوی جای خالی `"  "` به عنوان `boolean` برابر true خواهند بود.
 
-Objects aren't covered here. We'll return to them later in the chapter <info:object-toprimitive> that is devoted exclusively to objects after we learn more basic things about JavaScript.
+در اینجا در مورد تبدیل object ها صحبت نکردیم و در بخش‌های بعدی به آنها خواهیم پرداخت. 
+
