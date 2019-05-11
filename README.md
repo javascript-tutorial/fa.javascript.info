@@ -10,7 +10,10 @@ This repository hosts the translation of <https://javascript.info> in Persian (F
     - Our bot will mark it in the issue, for everyone to know that you're translating it.
     - The comment should only contain the title, as in the issue.
 - Fork the repository, translate and send a PR when done.
-    - PR title should match article title, for our bot to track your progress.
+    - PR title should match article title, the bot will write it's number into the issue.
+- Then if you're a maintainer, you can merge it, otherwise maintainers will review it and merge.
+    - If something's unclear, make an issue.
+    - If no one responds, the backup contact is iliakan@javacript.info.
     
 **Let others know what you're translating, in message boards or chats in your language. Invite them to join!**
 
