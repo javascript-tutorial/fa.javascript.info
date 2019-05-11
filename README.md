@@ -8,10 +8,13 @@ This repository hosts the translation of <https://javascript.info> in Persian (F
 - Choose an unchecked article you'd like to translate.
 - Add a comment with the article title to the issue, e.g. `An Introduction to JavaScript`.
     - Our bot will mark it in the issue, for everyone to know that you're translating it.
-    - The comment should only contain the title, as in the issue.
+    - The comment should only contain the title.
 - Fork the repository, translate and send a PR when done.
     - PR title should match article title, the bot will write it's number into the issue.
-- Then if you're a maintainer, you can merge it, otherwise maintainers will review it and merge.
+
+If you're a maintainer, you can just translate and push, but please check articles as translated in the [issue](https://github.com/javascript-tutorial/fa.javascript.info/issues/1), for others to see that.
+
+If you're just a newcomer, without write access to the repo, please kindly allow maintainers to review and merge your translation.
    
 If something's unclear, feel free to ask, make an issue [here](https://github.com/javascript-tutorial/fa.javascript.info/issues/new) or in the [English repo](https://github.com/javascript-tutorial/en.javascript.info/issues/new). 
     
