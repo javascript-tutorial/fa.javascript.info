@@ -1,9 +1,16 @@
+<<<<<<< HEAD
 # The Modern JavaScript Tutorial in Persian (Farsi)
 
 This repository hosts the translation of <https://javascript.info> in Persian (Farsi).
+=======
+# The Modern JavaScript Tutorial
+
+This repository hosts the English content of the Modern JavaScript Tutorial, published at [https://javascript.info](https://javascript.info).
+>>>>>>> 29a3c58d72b8f10f9f1f9ce5cf691d2ab44a9d01
 
 **That's how you can contribute:**
 
+<<<<<<< HEAD
 - See the [Persian (Farsi) Translate Progress](https://github.com/javascript-tutorial/fa.javascript.info/issues/1) issue.
 - Choose an unchecked article you'd like to translate.
 - Add a comment with the article title to the issue, e.g. `An Introduction to JavaScript`.
@@ -31,6 +38,21 @@ P.S. The full list of languages can be found at <https://javascript.info/transla
 ## Structure
 
 Every chapter, an article or a task resides in its own folder.
+=======
+We'd like to make the tutorial available in many languages. Please help us to translate.
+
+See <https://github.com/javascript-tutorial/translate> for the details.
+
+## Contributions
+
+We'd also like to collaborate on the tutorial with other people.
+
+Something's wrong? A topic is missing? Explain it to people, add as PR 👏
+
+**You can edit the text in any editor.** The tutorial uses enhanced "markdown" format, easy to grasp. And if you want to see how it looks on-site, there's a server to run the tutorial locally at <https://github.com/javascript-tutorial/server>.  
+
+The list of contributors is available at <https://javascript.info/about#contributors>.
+>>>>>>> 29a3c58d72b8f10f9f1f9ce5cf691d2ab44a9d01
 
 The folder is named `N-url`, where `N` – is the number for sorting (articles are ordered), and `url` is the URL-slug on the site.
 
@@ -136,4 +158,14 @@ Please don't translate or remove the `[#...]` part, it's for URL anchors.
 
 You can run the tutorial server locally to see how the translation looks.
 
+<<<<<<< HEAD
 The server and install instructions are at <https://github.com/javascript-tutorial/server>. 
+=======
+Each of these files starts from the `# Main header`.
+
+It's very easy to add something new.
+
+---
+💓  
+Ilya Kantor @iliakan
+>>>>>>> 29a3c58d72b8f10f9f1f9ce5cf691d2ab44a9d01
