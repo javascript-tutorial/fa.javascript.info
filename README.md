@@ -134,6 +134,6 @@ Please don't translate or remove the `[#...]` part, it's for URL anchors.
 
 ## Running locally
 
-You can run the tutorial locally to immediately see the changes.
+You can run the tutorial server locally to see how the translation looks.
 
-The server is at <https://github.com/javascript-tutorial/server>. 
+The server and install instructions are at <https://github.com/javascript-tutorial/server>. 
