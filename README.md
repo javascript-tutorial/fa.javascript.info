@@ -6,8 +6,9 @@ This repository hosts the translation of <https://javascript.info> in Persian (F
 
 - See the [Persian (Farsi) Translate Progress](https://github.com/javascript-tutorial/fa.javascript.info/issues/1) issue.
 - Choose an unchecked article you'd like to translate.
-- Add a comment with copy-pasted article title to the issue, e.g. `An Introduction to JavaScript`.
+- Add a comment with the article title to the issue, e.g. `An Introduction to JavaScript`.
     - Our bot will mark it in the issue, for everyone to know that you're translating it.
+    - The comment should only contain the title, as in the issue.
 - Fork the repository, translate and send a PR when done.
     - PR title should match article title, for our bot to track your progress.
     
