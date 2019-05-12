@@ -2,29 +2,26 @@
 
 This repository hosts the translation of <https://javascript.info> in Persian (Farsi).
 
+
 **That's how you can contribute:**
 
 - See the [Persian (Farsi) Translate Progress](https://github.com/javascript-tutorial/fa.javascript.info/issues/1) issue.
 - Choose an unchecked article you'd like to translate.
 - Add a comment with the article title to the issue, e.g. `An Introduction to JavaScript`.
     - Our bot will mark it in the issue, for everyone to know that you're translating it.
-    - The comment should only contain the title.
+    - Your comment should contain only the title.
 - Fork the repository, translate and send a PR when done.
     - PR title should match article title, the bot will write it's number into the issue.
 
-If you're a maintainer, you can just translate and push, but please check articles as translated in the [issue](https://github.com/javascript-tutorial/fa.javascript.info/issues/1), for others to see that.
-
-If you're just a newcomer, without write access to the repo, please kindly allow maintainers to review and merge your translation.
+Please kindly allow maintainers to review and merge or request changes in your translation.
    
-If something's unclear, feel free to ask, make an issue [here](https://github.com/javascript-tutorial/fa.javascript.info/issues/new) or in the [English repo](https://github.com/javascript-tutorial/en.javascript.info/issues/new). 
+If maintainers do not respond, or if you'd like to become a maintainer, write us at the [main repo](https://github.com/javascript-tutorial/en.javascript.info/issues/new).
     
 **Let others know what you're translating, in message boards or chats in your language. Invite them to join!**
 
 🎉 Thank you!
 
 Your name and the contribution size will appear in the "About project" page when the translation gets published.
-
-If you'd like to join as a maintainer, write us at <https://github.com/javascript-tutorial/en.javascript.info/issues/new>.
 
 P.S. The full list of languages can be found at <https://javascript.info/translate>.
 
