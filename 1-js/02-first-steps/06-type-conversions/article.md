@@ -105,13 +105,6 @@ alert( '1' + 2 ); // '12' (string to the left)
 
 ## تبدیل به boolean
 
-The conversion rule:
-
-- Values that are intuitively "empty", like `0`, an empty string, `null`, `undefined`, and `NaN`, become `false`.
-- Other values become `true`.
-
-For instance:
-
 تبدیل به boolean آسان‌ترین حالت است.
 
 این مورد در عملیات منطقی (مانند عبارات شرطی که با آنها در بخش‌های بعدی آشنا خواهیم شد) رخ می‌دهد. همینطور به صورت مشخص نیز می‌توان با فانکشن `Boolean(value)` اینکار را انجام داد.

@@ -60,6 +60,11 @@ To insert multiple lines, press `key:Shift+Enter`.
 ## Summary
 >>>>>>> 29a3c58d72b8f10f9f1f9ce5cf691d2ab44a9d01
 
+## ورودی چند خطی
+
+معمولا زمانیکه چند خط کد وارد می‌کنیم و سپس `key:Enter` را می‌زنیم، آن کد اجرا می‌شود.
+برای ورود چند خط کد و سپس اجرای آنها از کلید `key:Shift+Enter` استفاده نمایید.
+
 ## خلاصه
 
 Now we have the environment ready. In the next section, we'll get down to JavaScript.

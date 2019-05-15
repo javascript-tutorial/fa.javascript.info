@@ -49,20 +49,13 @@ alert("some code");
 
 ```
 
-<<<<<<< HEAD
-## همیشه از "use strict" استفاده کنید
+## کنسول مرورگر
 
-ما همچنان باید به آموختن تفاوت‌های use strict و default mode ادامه دهیم.
-=======
-## Browser console
+در ادامه کار زمانیکه از کنسول مرورگر خود برای اجرای کدها استفاده می‌کنید در نظر داشته باشید که این کنسول به طور پیش فرض از `use strict` استفاده نمی‌کند.
+گاهی اوقات زمانیکه وجود `use strict` تفاوتی ایجاد می‌کند، استفاده از کنسول مرورگر نتایج اشتباهی به شما خواهد داد.
+حتی اگر از `key:Shift+Enter` برای وارد کردن عبارت `use strict` استفاده نمایید، نتیجه نخواهد داد.
 
-For the future, when you use a browser console to test features, please note that it doesn't `use strict` by default.
-
-Sometimes, when `use strict` makes a difference, you'll get incorrect results.
-
-Even if we press `key:Shift+Enter` to input multiple lines, and put `use strict` on top, it doesn't work. That's because of how the console executes the code internally.
-
-The reliable way to ensure `use strict` would be to input the code into console like this:
+راه حل قابل اتکا برای این موضوع آن است که به این شکل عبارت `use strict` را وارد نمایید :
 
 ```js
 (function() {
@@ -71,9 +64,6 @@ The reliable way to ensure `use strict` would be to input the code into console 
   // ...your code...
 })()
 ```
-
-## Always "use strict"
->>>>>>> 29a3c58d72b8f10f9f1f9ce5cf691d2ab44a9d01
 
 در بخش‌های بعدی که با قابلیت‌های زبان جاوا اسکریپت آشنا می‌شویم، به تفاوت‌های بین strict mode و "default" mode اشاره خواهیم کرد و خواهیم دید که use strict چطور زندگی ما را راحت‌تر کرده است.
 

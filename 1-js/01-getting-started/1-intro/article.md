@@ -28,9 +28,6 @@ The programs in this language are called *scripts*. They can be written right in
 
 از این نظر جاوا اِسکریپت تفاوت زیادی با زبان [جاوا](https://en.wikipedia.org/wiki/Java_(programming_language)) دارد .
 
-  
-
-**چرا جاوا** **اِسکریپت** 
 
   
 
