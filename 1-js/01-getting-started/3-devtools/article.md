@@ -46,7 +46,19 @@
 
 ![safari](safari.png)
 
+<<<<<<< HEAD
 حالا `cmd + opt + c` می‌‌تواند پنل توسعه دهندگان را باز کند. 
+=======
+Now `key:Cmd+Opt+C` can toggle the console. Also, note that the new top menu item named "Develop" has appeared. It has many commands and options.
+
+## Multi-line input
+
+Usually, when we put a line of code into the console, and then press `key:Enter`, it executes.
+
+To insert multiple lines, press `key:Shift+Enter`.
+
+## Summary
+>>>>>>> 29a3c58d72b8f10f9f1f9ce5cf691d2ab44a9d01
 
 ## ورودی چند خطی
 

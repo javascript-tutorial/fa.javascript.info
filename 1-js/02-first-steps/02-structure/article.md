@@ -153,4 +153,8 @@ alert( 'World' );
 
 Comment ها حجم کد را افزایش می‌دهند، اما این اصلا اشکال نیست. ابزارهای گوناگونی وجود دارند که قبل از انتشار برنامه روی سروِر کدهای شما را کم حجم و Comment ها را حذف می‌کنند. بنابراین Comment ها روی خروجی نهایی تاثیری نخواهند داشت.
 
+<<<<<<< HEAD
 در ادامه آموزش در بخش <info:coding-style> نحوه بهتر نوشتن Comment ها را خواهیم آموخت.
+=======
+Later in the tutorial there will be a chapter <info:code-quality> that also explains how to write better comments.
+>>>>>>> 29a3c58d72b8f10f9f1f9ce5cf691d2ab44a9d01

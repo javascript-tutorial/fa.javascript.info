@@ -1,10 +1,18 @@
 # Hello, world!
 
+<<<<<<< HEAD
 آموزش پیش روی شما مفاهیم هسته‌ای جاوا اسکریپت است که وابسته به پلتفرم نیست. در ادامه با پلتفرم‌هایی مانند Node.JS و نحوه استفاده از آنها آشنا خواهیم شد.
 
 ما برای اجرای اسکریپت‌هایی که می‌نویسیم به محیطی برای اجرا نیاز داریم و از آنجایی که این یک دوره آنلاین است، مرورگر انتخاب خوبی است. سعی ما بر این است تا از دستوراتی که اختصاصا مربوط به مرورگر هستند مانند `alert` کمتر استفاده کنیم. مخصوصا برای شمایی قصد استفاده از جاوا اسکریپت در پلتفرم‌های دیگری چون Node.JS را دارید.
 
 پس ابتدا نگاهی به نحوه متصل کردن یک اسکریپت به یک صفحه وب می‌اندازیم. اگر در محیط Server Side هستید (مانند Node.JS) می‌توانید از این دستور برای اجرای اسکریپت استفاده نمایید : `node my.js`
+=======
+The tutorial that you're reading is about core JavaScript, which is platform-independent. Later on, you'll learn about Node.js and other platforms that use it.
+
+But we need a working environment to run our scripts and, since this book is online, the browser is a good choice. We'll keep the amount of browser-specific commands (like `alert`) to a minimum so that you don't spend time on them if you plan to concentrate on another environment (like Node.js). We'll focus on JavaScript in the browser in the [next part](/ui) of the tutorial.
+
+So first, let's see how we attach a script to a webpage. For server-side environments (like Node.js), you can execute the script with a command like `"node my.js"`.
+>>>>>>> 29a3c58d72b8f10f9f1f9ce5cf691d2ab44a9d01
 
 ## تگِ script
 

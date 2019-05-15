@@ -6,7 +6,11 @@
 
   
 
+<<<<<<< HEAD
 ## جاوا اسکریپت چیست  
+=======
+The programs in this language are called *scripts*. They can be written right in a web page's HTML and run automatically as the page loads.
+>>>>>>> 29a3c58d72b8f10f9f1f9ce5cf691d2ab44a9d01
 
   
 
@@ -39,7 +43,11 @@
 [موتور جاوااِسکریپت](https://en.wikipedia.org/wiki/JavaScript_engine)
  وجود داشته باشد، این زبان قابلیت اجرا شدن را داراست.  
 
+<<<<<<< HEAD
 مرورگرهای وب دارای موتوری داخلی برای اجرای جاوا اِسکریپت هستند، که گاهی آن را  **ماشین مجازی جاوا** **اِسکریپت** نیز می‌نامند.  
+=======
+JavaScript's capabilities greatly depend on the environment it's running in. For instance, [Node.js](https://wikipedia.org/wiki/Node.js) supports functions that allow JavaScript to read/write arbitrary files, perform network requests, etc.
+>>>>>>> 29a3c58d72b8f10f9f1f9ce5cf691d2ab44a9d01
 
   
 
@@ -59,7 +67,11 @@
 
 بخاطر سپردن این نام‌ها مفید هستند، چراکه در مقالات مختلف به آنها بر خواهید خورد، همینطور زمانیکه ما در این آموزش برای نمونه می‌گوییم ویژگی X توسط موتور **V8** پشتیبانی می‌شود، یعنی به احتمال زیاد در مرورگرهای کروم و اپرا پشتیبانی خواهد شد.  
 
+<<<<<<< HEAD
   
+=======
+    This is called the "Same Origin Policy". To work around that, *both pages* must agree for data exchange and contain a special JavaScript code that handles it. We'll cover that in the tutorial.
+>>>>>>> 29a3c58d72b8f10f9f1f9ce5cf691d2ab44a9d01
 
 **موتورها** **چگونه کار** **می‌کنند** 
 
@@ -71,6 +83,7 @@
 
   
 
+<<<<<<< HEAD
 ۱. موتور در ابتدا اِسکریپت را می‌خواند (Parse).  
 
   
@@ -190,6 +203,14 @@
   
 
 نمونه‌هایی از این زبان‌ها :  
+=======
+```compare
++ Full integration with HTML/CSS.
++ Simple things are done simply.
++ Support by all major browsers and enabled by default.
+```
+JavaScript is the only browser technology that combines these three things.
+>>>>>>> 29a3c58d72b8f10f9f1f9ce5cf691d2ab44a9d01
 
   
 
