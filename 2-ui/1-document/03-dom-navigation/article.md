@@ -237,12 +237,7 @@ alert( document.documentElement.parentElement ); // null
 
 In other words, the `documentElement` (`<html>`) is the root node. Formally, it has `document` as its parent. But `document` is not an element node, so `parentNode` returns it and `parentElement` does not.
 
-This loop travels up from an arbitrary element `elem` to `<html>`, but not to the `document`:
-```js
-while(elem = elem.parentElement) {
-  alert( elem ); // parent chain till <html>
-}
-```
+Sometimes that matters when we're walking over the chain of parents and call a method on each of them, but `document` doesn't have it, so we exclude it.
 ````
 
 Let's modify one of the examples above: replace `childNodes` with `children`. Now it shows only elements:

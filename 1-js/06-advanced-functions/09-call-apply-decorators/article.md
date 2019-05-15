@@ -305,7 +305,7 @@ If we look more closely, there's a minor difference between such uses of `call` 
 
 So, these calls complement each other. Where we expect an iterable, `call` works, where we expect an array-like, `apply` works.
 
-And if `args` is both iterable and array-like, like a real array, then we technically could use any of them, but `apply` will probably be faster, because it's a single operation. Most JavaScript engines internally optimize it better than a pair `call + spread`.
+And if `args` is both iterable and array-like, like a real array, then we technically could use any of them, but `apply` will probably be faster, because it's a single operation. Most JavaScript engines internally optimize is better than a pair `call + spread`.
 
 One of the most important uses of `apply` is passing the call to another function, like this:
 
@@ -453,7 +453,7 @@ let wrapper = function() {
 }
 ```
 
-We also saw an example of *method borrowing* when we take a method from an object and `call` it in the context of another object. It is quite common to take array methods and apply them to `arguments`. The alternative is to use rest parameters object that is a real array.
+We also saw an example of *method borrowing* when we take a method from an object and `call` it in the context of another object. It is quite common to take array methods and apply them to arguments. The alternative is to use rest parameters object that is a real array.
 
 
 There are many decorators there in the wild. Check how well you got them by solving the tasks of this chapter.

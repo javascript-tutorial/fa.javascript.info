@@ -18,7 +18,7 @@ function count() {
   if (i == 1000000000) {
     alert("Done in " + (Date.now() - start) + 'ms');
   } else {
-    setTimeout(count);
+    setTimeout(count, 0);
   }
 
   // a piece of heavy job

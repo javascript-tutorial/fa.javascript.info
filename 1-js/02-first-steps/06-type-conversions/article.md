@@ -1,10 +1,6 @@
 # تبدیل نوع داده 
 
-<<<<<<< HEAD
 بیشتر مواقع عملگرها و فانکشن‌ها به طور خودکار مقادیری که آنها داده می‌شود را به نوع صحیح تبدیل می‌کنند. به این عمل "تبدیل نوع داده" گفته می‌شود.
-=======
-Most of the time, operators and functions automatically convert the values given to them to the right type. 
->>>>>>> 29a3c58d72b8f10f9f1f9ce5cf691d2ab44a9d01
 
 برای نمونه فانکشن `alert` مقدار ورودی خود را به نوع داده‌ی string تبدیل می‌کند. عملگرهای ریاضیاتی مقادیر را به نوع number تبدیل می‌کنند.
 
