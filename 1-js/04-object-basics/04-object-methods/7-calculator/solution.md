@@ -1,5 +1,6 @@
 
-```js run demo solution
+
+```js run demo
 let calculator = {
   sum() {
     return this.a + this.b;
@@ -19,3 +20,4 @@ calculator.read();
 alert( calculator.sum() );
 alert( calculator.mul() );
 ```
+

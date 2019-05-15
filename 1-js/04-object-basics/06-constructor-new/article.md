@@ -83,7 +83,7 @@ let user = new function() {
 The constructor can't be called again, because it is not saved anywhere, just created and called. So this trick aims to encapsulate the code that constructs the single object, without future reuse.
 ````
 
-## Constructor mode test: new.target
+## Dual-syntax constructors: new.target
 
 ```smart header="Advanced stuff"
 The syntax from this section is rarely used, skip it unless you want to know everything.
@@ -109,9 +109,7 @@ new User(); // function User { ... }
 */!*
 ```
 
-That can be used inside the function to know whether it was called with `new`, "in constructor mode", or without it, "in regular mode".
-
-We can also make both `new` and regular calls to do the same, like this:
+That can be used to allow both `new` and regular calls to work the same. That is, create the same object:
 
 ```js run
 function User(name) {
@@ -227,5 +225,5 @@ JavaScript provides constructor functions for many built-in language objects: li
 ```smart header="Objects, we'll be back!"
 In this chapter we only cover the basics about objects and constructors. They are essential for learning more about data types and functions in the next chapters.
 
-After we learn that, we return to objects and cover them in-depth in the chapters <info:prototypes> and <info:classes>.
+After we learn that, in the chapter <info:object-oriented-programming> we return to objects and cover them in-depth, including inheritance and classes.
 ```

@@ -1,4 +1,6 @@
-```js demo
+
+
+```js run no-beautify
 function debounce(f, ms) {
 
   let isCooldown = false;
@@ -16,7 +18,7 @@ function debounce(f, ms) {
 }
 ```
 
-A call to `debounce` returns a wrapper. There may be two states:
+The call to `debounce` returns a wrapper. There may be two states:
 
 - `isCooldown = false` -- ready to run.
 - `isCooldown = true` -- waiting for the timeout.

@@ -53,13 +53,7 @@ alert(message); // Hello!
 let user = 'John', age = 25, message = 'Hello';
 ```
 
-<<<<<<< HEAD
 این مورد ممکن است کوتاه‌تر به نظر آید اما ما پیشنهاد نمی‌کنیم. چراکه خوانایی را پایین می‌آورد. لطفا برای تعریف متغیرها از خطوط جداگانه استفاده کنید :
-=======
-That might seem shorter, but we don't recommend it. For the sake of better readability, please use a single line per variable.
-
-The multiline variant is a bit longer, but easier to read:
->>>>>>> 29a3c58d72b8f10f9f1f9ce5cf691d2ab44a9d01
 
 ```js
 let user = 'John';
@@ -138,13 +132,8 @@ alert(hello); // Hello world!
 alert(message); // Hello world!
 ```
 
-<<<<<<< HEAD
 ```smart header="زبان‌های Functional"
 جالب است بدانید زبان‌های [functional](https://en.wikipedia.org/wiki/Functional_programming) مانند [Scala](http://www.scala-lang.org/) یا [Erlang](http://www.erlang.org/) تغییر مقدار متغیر را ممنوع کرده‌اند.
-=======
-```smart header="Functional languages"
-It's interesting to note that there exist [functional](https://en.wikipedia.org/wiki/Functional_programming) programming languages, like [Scala](http://www.scala-lang.org/) or [Erlang](http://www.erlang.org/) that forbid changing variable values.
->>>>>>> 29a3c58d72b8f10f9f1f9ce5cf691d2ab44a9d01
 
 در این نوع زبان‌ها وقتی مقداری را در جعبه قرار می‌دهیم تا ابد آنجا می‌ماند و اگر بخواهیم مقداری دیگر را ذخیره کنیم، ما را مجبور می‌کنند تا جعبه‌ای جدید بسازیم.
 
@@ -166,11 +155,7 @@ let userName;
 let test123;
 ```
 
-<<<<<<< HEAD
 زمانی‌که به یک نام متشکل از چند کلمه است، عموما از روش [camelCase](https://en.wikipedia.org/wiki/CamelCase) استفاده می‌شود. به این صورت که کلمات یکی پس از دیگری پشت هم نوشته می‌شوند و حرف اول هر کلمه کاراکتر بزرگ هست : `myVeryLongName` .
-=======
-When the name contains multiple words, [camelCase](https://en.wikipedia.org/wiki/CamelCase) is commonly used. That is: words go one after another, each word except first starting with a capital letter: `myVeryLongName`.
->>>>>>> 29a3c58d72b8f10f9f1f9ce5cf691d2ab44a9d01
 
 همینطور از `'$'` و `'_'` نیز می‌توان استفاده نمود. معنی خاصی ندارند و همانند حروف قابل استفاده هستند.
 
@@ -195,13 +180,8 @@ let my-name; // hyphens '-' aren't allowed in the name
 متغیر apple با Apple متفاوت است.
 ```
 
-<<<<<<< HEAD
 ````smart header="کاراکترهای غیر انگلیسی مجاز هستند ولی توصیه نمی‌شوند"
 امکان استفاده از کاراکترهای زبان‌های دیگر وجود دارد. مانند :
-=======
-````smart header="Non-Latin letters are allowed, but not recommended"
-It is possible to use any language, including cyrillic letters or even hieroglyphs, like this:
->>>>>>> 29a3c58d72b8f10f9f1f9ce5cf691d2ab44a9d01
 
 ```js
 let имя = '...';
@@ -271,11 +251,7 @@ myBirthday = '01.01.2001'; // error, can't reassign the constant!
 
 به صورت یک عُرفِ همه‌گیر، از ثابت‌های با حروف بزرگ به عنوان نام مستعار برای مقادیری که به خاطر سپردن آنها دشوار است، استفاده می‌شود. این دسته از ثابت‌ها اصطلاحا prior to execution (پیش از اجرای برنامه) مقدارشان قطعی است.
 
-<<<<<<< HEAD
 در ثابت‌ها از حروف بزرگ و _ استفاده می‌شود :
-=======
-For instance, let's make constants for colors in so-called "web" (hexadecimal) format:
->>>>>>> 29a3c58d72b8f10f9f1f9ce5cf691d2ab44a9d01
 
 ```js run
 const COLOR_RED = "#F00";
@@ -309,11 +285,7 @@ const pageLoadTime = /* time taken by a webpage to load */;
 
 ## نام‌های مناسب انتخاب کنید
 
-<<<<<<< HEAD
 لطفا نام متغیرهای خود را با حساسیت انتخاب کنید و برای اینکار خوب فکر کنید.
-=======
-A variable name should have a clean, obvious meaning, describe the data that it stores.
->>>>>>> 29a3c58d72b8f10f9f1f9ce5cf691d2ab44a9d01
 
 انتخاب نام برای متغیرها یکی از کارهای مهم و پیچیده در برنامه‌نویسی است. یک نگاه سریع به نام متغیرها می‌تواند تفاوت یک برنامه‌نویس تازه‌کار و با تجربه را نشان دهد.
 

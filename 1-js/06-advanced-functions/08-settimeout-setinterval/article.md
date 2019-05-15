@@ -7,7 +7,7 @@ There are two methods for it:
 - `setTimeout` allows to run a function once after the interval of time.
 - `setInterval` allows to run a function regularly with the interval between the runs.
 
-These methods are not a part of JavaScript specification. But most environments have the internal scheduler and provide these methods. In particular, they are supported in all browsers and Node.js.
+These methods are not a part of JavaScript specification. But most environments have the internal scheduler and provide these methods. In particular, they are supported in all browsers and Node.JS.
 
 
 ## setTimeout
@@ -15,7 +15,7 @@ These methods are not a part of JavaScript specification. But most environments 
 The syntax:
 
 ```js
-let timerId = setTimeout(func|code, [delay], [arg1], [arg2], ...)
+let timerId = setTimeout(func|code, delay[, arg1, arg2...])
 ```
 
 Parameters:
@@ -25,7 +25,7 @@ Parameters:
 Usually, that's a function. For historical reasons, a string of code can be passed, but that's not recommended.
 
 `delay`
-: The delay before run, in milliseconds (1000 ms = 1 second), by default 0.
+: The delay before run, in milliseconds (1000 ms = 1 second).
 
 `arg1`, `arg2`...
 : Arguments for the function (not supported in IE9-)
@@ -99,7 +99,7 @@ clearTimeout(timerId);
 alert(timerId); // same identifier (doesn't become null after canceling)
 ```
 
-As we can see from `alert` output, in a browser the timer identifier is a number. In other environments, this can be something else. For instance, Node.js returns a timer object with additional methods.
+As we can see from `alert` output, in a browser the timer identifier is a number. In other environments, this can be something else. For instance, Node.JS returns a timer object with additional methods.
 
 Again, there is no universal specification for these methods, so that's fine.
 
@@ -110,7 +110,7 @@ For browsers, timers are described in the [timers section](https://www.w3.org/TR
 The `setInterval` method has the same syntax as `setTimeout`:
 
 ```js
-let timerId = setInterval(func|code, [delay], [arg1], [arg2], ...)
+let timerId = setInterval(func|code, delay[, arg1, arg2...])
 ```
 
 All arguments have the same meaning. But unlike `setTimeout` it runs the function not only once, but regularly after the given interval of time.
@@ -238,7 +238,7 @@ There's a side-effect. A function references the outer lexical environment, so, 
 
 ## setTimeout(...,0)
 
-There's a special use case: `setTimeout(func, 0)`, or just `setTimeout(func)`.
+There's a special use case: `setTimeout(func, 0)`.
 
 This schedules the execution of `func` as soon as possible. But scheduler will invoke it only after the current code is complete.
 
@@ -247,7 +247,7 @@ So the function is scheduled to run "right after" the current code. In other wor
 For instance, this outputs "Hello", then immediately "World":
 
 ```js run
-setTimeout(() => alert("World"));
+setTimeout(() => alert("World"), 0);
 
 alert("Hello");
 ```
@@ -260,7 +260,7 @@ There's a trick to split CPU-hungry tasks using `setTimeout`.
 
 For instance, a syntax-highlighting script (used to colorize code examples on this page) is quite CPU-heavy. To highlight the code, it performs the analysis, creates many colored elements, adds them to the document -- for a big text that takes a lot. It may even cause the browser to "hang", which is unacceptable.
 
-So we can split the long text into pieces. First 100 lines, then plan another 100 lines using `setTimeout(..., 0)`, and so on.
+So we can split the long text into pieces. First 100 lines, then plan another 100 lines using `setTimeout(...,0)`, and so on.
 
 For clarity, let's take a simpler example for consideration. We have a function to count from `1` to `1000000000`.
 
@@ -303,7 +303,7 @@ function count() {
   if (i == 1e9) {
     alert("Done in " + (Date.now() - start) + 'ms');
   } else {
-    setTimeout(count); // schedule the new call (**)
+    setTimeout(count, 0); // schedule the new call (**)
   }
 
 }
@@ -338,7 +338,7 @@ function count() {
 
   // move the scheduling at the beginning
   if (i < 1e9 - 1e6) {
-    setTimeout(count); // schedule the new call
+    setTimeout(count, 0); // schedule the new call
   }
 
   do {
@@ -371,8 +371,8 @@ setTimeout(function run() {
   times.push(Date.now() - start); // remember delay from the previous call
 
   if (start + 100 < Date.now()) alert(times); // show the delays after 100ms
-  else setTimeout(run); // else re-schedule
-});
+  else setTimeout(run, 0); // else re-schedule
+}, 0);
 
 // an example of the output:
 // 1,1,1,1,9,15,20,24,30,35,40,45,50,55,59,64,70,75,80,85,90,95,100
@@ -382,7 +382,7 @@ First timers run immediately (just as written in the spec), and then the delay c
 
 That limitation comes from ancient times and many scripts rely on it, so it exists for historical reasons.
 
-For server-side JavaScript, that limitation does not exist, and there exist other ways to schedule an immediate asynchronous job, like [process.nextTick](https://nodejs.org/api/process.html) and [setImmediate](https://nodejs.org/api/timers.html) for Node.js. So the notion is browser-specific only.
+For server-side JavaScript, that limitation does not exist, and there exist other ways to schedule an immediate asynchronous job, like [process.nextTick](https://nodejs.org/api/process.html) and [setImmediate](https://nodejs.org/api/timers.html) for Node.JS. So the notion is browser-specific only.
 ````
 
 ### Allowing the browser to render
@@ -430,7 +430,7 @@ And if we use `setTimeout` to split it into pieces then changes are applied in-b
     } while (i % 1e3 != 0);
 
     if (i < 1e9) {
-      setTimeout(count);
+      setTimeout(count, 0);
     }
 
   }

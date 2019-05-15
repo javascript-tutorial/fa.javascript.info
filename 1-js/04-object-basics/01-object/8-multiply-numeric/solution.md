@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ``` js run
 
 // before the call
@@ -18,5 +17,3 @@ function multiplyNumeric(obj) {
 
 alert(menu); 
 ```
-=======
->>>>>>> 29a3c58d72b8f10f9f1f9ce5cf691d2ab44a9d01
