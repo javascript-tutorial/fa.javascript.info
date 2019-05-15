@@ -55,8 +55,6 @@
 
 ## خلاصه
 
-Now we have the environment ready. In the next section, we'll get down to JavaScript.
-
 - Developer tools به ما امکان مشاهده خطاها، آزمایش متغیرها و امکانات بسیار دیگری را می‌دهد. 
 
 - از طریق کلید `F12` در بیشتر مرورگرها در Windows باز می‌شود. Chrome در Mac با کلیدهای `cmd + opt + j` باز می‌شود و Safari با `cmd + opt + c` (که ابتدا نیاز به فعال‌سازی دارد) 
