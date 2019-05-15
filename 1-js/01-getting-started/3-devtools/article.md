@@ -48,6 +48,11 @@
 
 حالا `cmd + opt + c` می‌‌تواند پنل توسعه دهندگان را باز کند. 
 
+## ورودی چند خطی
+
+معمولا زمانیکه چند خط کد وارد می‌کنیم و سپس `key:Enter` را می‌زنیم، آن کد اجرا می‌شود.
+برای ورود چند خط کد و سپس اجرای آنها از کلید `key:Shift:Enter` استفاده نمایید.
+
 ## خلاصه
 
 Now we have the environment ready. In the next section, we'll get down to JavaScript.
