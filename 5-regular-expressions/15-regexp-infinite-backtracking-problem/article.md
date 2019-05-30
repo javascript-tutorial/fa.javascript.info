@@ -24,7 +24,11 @@ We want to find all tags, with or without attributes -- like `subject:<a href=".
 
 In particular, we need it to match tags like `<a test="<>" href="#">` -- with `<` and `>` in attributes. That's allowed by [HTML standard](https://html.spec.whatwg.org/multipage/syntax.html#syntax-attributes).
 
+<<<<<<< HEAD:5-regular-expressions/15-regexp-infinite-backtracking-problem/article.md
 Now we can see that a simple regexp like `pattern:<[^>]+>` doesn't work, because it stops at the first `>`, and we need to ignore `<>` inside an attribute.
+=======
+A simple regexp like `pattern:<[^>]+>` doesn't work, because it stops at the first `>`, and we need to ignore `<>` if inside an attribute:
+>>>>>>> 08734734021aa128c13da2382fe8fa062677bb9f:9-regular-expressions/15-regexp-infinite-backtracking-problem/article.md
 
 ```js run
 // the match doesn't reach the end of the tag - wrong!
@@ -40,7 +44,11 @@ In the regexp language that is: `pattern:<\w+(\s*\w+=(\w+|"[^"]*")\s*)*>`:
 1. `pattern:<\w+` -- is the tag start,
 2. `pattern:(\s*\w+=(\w+|"[^"]*")\s*)*` -- is an arbitrary number of pairs `word=value`, where the value can be either a word `pattern:\w+` or a quoted string `pattern:"[^"]*"`.
 
+<<<<<<< HEAD:5-regular-expressions/15-regexp-infinite-backtracking-problem/article.md
 That doesn't yet support few details of HTML grammar, for instance strings in 'single' quotes, but they can be added later, so that's somewhat close to real life. For now we want the regexp to be simple.
+=======
+That regexp is not perfect! It doesn't support all the details of HTML syntax, such as unquoted values, and there are other ways to improve, but let's not add complexity. It will demonstrate the problem for us.
+>>>>>>> 08734734021aa128c13da2382fe8fa062677bb9f:9-regular-expressions/15-regexp-infinite-backtracking-problem/article.md
 
 Let's try it in action:
 
@@ -216,6 +224,8 @@ The string has no `>` at the end, so the match is impossible, but the regexp eng
 (a=b a=b) (a=b a=b)
 ...
 ```
+
+As there are many combinations, it takes a lot of time.
 
 ## How to fix?
 
