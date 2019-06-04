@@ -1,6 +1,10 @@
 # Hello, world!
 
+<<<<<<< HEAD
 آموزش پیش روی شما مفاهیم هسته‌ای جاوا اسکریپت است که وابسته به پلتفرم نیست. در ادامه با پلتفرم‌هایی مانند Node.JS و نحوه استفاده از آنها آشنا خواهیم شد.
+=======
+This part of the tutorial is about core JavaScript, the language itself. Later on, you'll learn about Node.js and other platforms that use it.
+>>>>>>> a0266c574c0ab8a0834dd38ed65e7e4ee27f9cdb
 
 ما برای اجرای اسکریپت‌هایی که می‌نویسیم به محیطی برای اجرا نیاز داریم و از آنجایی که این یک دوره آنلاین است، مرورگر انتخاب خوبی است. سعی ما بر این است تا از دستوراتی که اختصاصا مربوط به مرورگر هستند مانند `alert` کمتر استفاده کنیم. مخصوصا برای شمایی قصد استفاده از جاوا اسکریپت در پلتفرم‌های دیگری چون Node.JS را دارید.
 
@@ -45,8 +49,13 @@
 تگ `<script>` تعدادی attributes (صفات) دارد که امروزه کمتر از آنها استفاده می‌شود، ولی ممکن است در کدهای قدیمی همچنان آنها را ببینید :
 
 
+<<<<<<< HEAD
 صفت  `type` : <code>&lt;script <u>type</u>=...&gt;</code>
 : نسخه قدیمی HTML یعنی HTML4 نیازمند تعیین `type` در تگ `<script>` بود. معمولا مقدار آن `type=text/javascript` بود. در حال حاضر دیگر این مورد الزامی نیست. 
+=======
+The `type` attribute: <code>&lt;script <u>type</u>=...&gt;</code>
+: The old HTML standard, HTML4, required a script to have a `type`. Usually it was `type="text/javascript"`. It's not required anymore. Also, the modern HTML standard, HTML5, totally changed the meaning of this attribute. Now, it can be used for JavaScript modules. But that's an advanced topic; we'll talk about modules in another part of the tutorial.
+>>>>>>> a0266c574c0ab8a0834dd38ed65e7e4ee27f9cdb
 
 صفت `language` : <code>&lt;script <u>language</u>=...&gt;</code>
 : مقصود از این صفت تعیین زبان اسکریپت است. از آنجایی که جاوا اسکریپت زبان پیش‌فرض است، نیازی به تعیین آن نیست.
