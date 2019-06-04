@@ -60,7 +60,13 @@ There's an error that may happen if we forget the flag:
 
 Here the regexp `[𝒳-𝒴]` is treated as `[12-34]` (where `2` is the right part of `𝒳` and `3` is the left part of `𝒴`), and the range between two halves `2` and `3` is unacceptable.
 
+<<<<<<< HEAD:5-regular-expressions/06-regexp-unicode/article.md
 Using the flag would make it work right:
+=======
+But without `u` flag, surrogate pairs are assumed to be a "pair of independent characters", so `[𝒳-𝒴]` is like `[<55349><56499>-<55349><56500>]` (replaced each surrogate pair with code points). Now we can clearly see that the range `56499-55349` is unacceptable, as the left range border must be less than the right one.
+
+Using the `u` flag makes it work right:
+>>>>>>> a0266c574c0ab8a0834dd38ed65e7e4ee27f9cdb:9-regular-expressions/20-regexp-unicode/article.md
 
 ```js run
 alert( '𝒴'.match(/[𝒳-𝒵]/u) ); // 𝒴
