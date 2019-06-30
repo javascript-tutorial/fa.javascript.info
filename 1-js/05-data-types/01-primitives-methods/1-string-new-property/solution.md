@@ -1,5 +1,5 @@
 
-Try running it:
+اجرا کنید:
 
 ```js run
 let str = "Hello";
@@ -9,23 +9,25 @@ str.test = 5; // (*)
 alert(str.test); 
 ```
 
-There may be two kinds of result:
-1. `undefined`
-2. An error.
+ممکن است دو نوع جواب وجود داشته باشد:
+۱. `تعریف نشده`
+۲. یک خطا
 
-Why? Let's replay what's happening at line `(*)`:
+چرا؟ بگذارید دوباره ببینیم چه اتفاقی در خط `(*)` می‌افتد:
 
-1. When a property of `str` is accessed, a "wrapper object" is created.
-2. The operation with the property is carried out on it. So, the object gets the `test` property.
-3. The operation finishes and the "wrapper object" disappears.
 
-So, on the last line, `str` has no trace of the property. A new wrapper object for every object operation on a string.
+۱. وفتی یک مشخصه‌ی `str` در دسترس قرار می‌گیرد، یک دربرگیرنده شئ ساخته می‌شود.
 
-Some browsers though may decide to further limit the programmer and disallow to assign properties to primitives at all. That's why in practice we can also see errors at line `(*)`. It's a little bit farther from the specification though.
+۲. عملوند به همراه مشخصه می‌آید. بنابراین شئ مشخصه `test` را هم دارد.
 
-**This example clearly shows that primitives are not objects.**
+۳. عملیات تمام می‌شود و دربرگیرنده شئ ناپدید میشود.
 
-They just can not store data. 
+ بنابراین، در خط آخر،  `str` هیچ نشانه‌ای از مشخصه ندارد. یک شئ دربرگیرنده جدید برای هر عملوند شئ روی رشته حرف.
+ 
+بعضی از مرورگرها حتی ممکن است تصمیم بگیرند که برنامه‌نویس را محدود کنند و اجازه‌ی دسترسی به تخصیص مشخصه‌ها به داده‌های ابتدایی ندهند. به همین علت است که ما میتوانیم همچنین در عمل، خطا در خط `(*)` را ببینیم. البته کمی دور از انتظار است.
 
-All property/method operations are performed with the help of temporary objects.
+**این مثال به وضوح نشان میدهد که داده‌های ابتدایی، شئ نیستند.**
+ 
+آنها نمیتوانند اطلاعات را ذخیره کنند.
 
+تمامی عملوند‌های توابع/مشخصه‌‌ها با کمک اشیا موقتی انجام می‌شود.
