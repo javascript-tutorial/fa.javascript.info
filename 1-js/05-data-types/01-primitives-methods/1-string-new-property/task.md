@@ -2,10 +2,10 @@ importance: 5
 
 ---
 
-# Can I add a string property?
+# آیا میتوان یک مشخصه‌ی رشته حرف اضافه کرد؟
 
 
-Consider the following code:
+کد زیر را در نظر بگیرید:
 
 ```js
 let str = "Hello";
@@ -15,4 +15,4 @@ str.test = 5;
 alert(str.test);
 ```
 
-How do you think, will it work? What will be shown?
+فکر میکنید چطور کار خواهد کرد؟ چه چیزی نمایش داده خواهد شد؟

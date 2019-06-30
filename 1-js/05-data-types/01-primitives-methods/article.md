@@ -1,22 +1,22 @@
-# Methods of primitives
+# توابع ابتدایی
 
-JavaScript allows us to work with primitives (strings, numbers, etc.) as if they were objects.
+.جاوااسکریپت اجازه‌ی استفاده کردن از داده‌های ابتدایی مثل رشته حروف، اعداد و غیره، به مثابه یک شئ را به ما می‌دهد
 
-They also provide methods to call as such. We will study those soon, but first we'll see how it works because, of course, primitives are not objects (and here we will make it even clearer).
+همچنین توابعی برای صدا کردن را فراهم میکنند. ما آنها را به زودی مطالعه خواهیم کرد اما ابتدا باید ببینیم که آنها چطور کار میکنند چراکه داده‌های ابتدایی، شئ نیستند.(در اینجا حتی این موضوع را روشن‌تر خواهیم کرد).
 
-Let's look at the key distinctions between primitives and objects.
+بیایید به تفاوت‌های اصلی بین یک شئ و داده‌های ابتدایی بنگریم.
 
-A primitive
+یک داده ابتدایی
 
-- Is a value of a primitive type.
-- There are 6 primitive types: `string`, `number`, `boolean`, `symbol`, `null` and `undefined`.
+- مقداری از یک نوع ابتدایی‌ست.
+- شش نوع ابتدایی وجود دارد: `رشته حروف`، `اعداد`، `متغیر بولی`، `نماد`، `هیچ` و `تعریف نشده`.
 
-An object
+یک شئ
 
-- Is capable of storing multiple values as properties.
-- Can be created with `{}`, for instance: `{name: "John", age: 30}`. There are other kinds of objects in JavaScript; functions, for example, are objects.
+- قابلیت نگه‌داری مقادیر چندگانه به عنوان مشخصه‌ها می‌باشد. 
+- میتواند با فلان ساخته شود به عنوان مثال، فلان. انواع دیگری از اشیا هم در جاوااسکریپت داریم: توابع، برای مثال اشیا هستند.
 
-One of the best things about objects is that we can store a function as one of its properties.
+یکی از بهترین خصوصیات اشیا این است که ما میتوانیم یک تابع را به عنوان مشخصه‌های خودش ذخیره کنیم.
 
 ```js run
 let john = {
@@ -29,32 +29,29 @@ let john = {
 john.sayHi(); // Hi buddy!
 ```
 
-So here we've made an object `john` with the method `sayHi`.
+ما اینجا یک شئ ساختیم `john` با تابع `sayHi`.
 
-Many built-in objects already exist, such as those that work with dates, errors, HTML elements, etc. They have different properties and methods.
+تعداد زیادی اشیا از قبل تعریف شده در حال حاضر وجود دارد مثل آنهایی که با تاریخ، خطاها، المان‌های `html` و غیره کار میکنند که توابع و مشخصه‌های متفاتی هم دارند.
 
-But, these features come with a cost!
+اما این خواص هزینه‌ای دارند!
 
-Objects are "heavier" than primitives. They require additional resources to support the internal machinery. But as properties and methods are very useful in programming, JavaScript engines try to optimize them to reduce the additional burden.
+اشیا از داده‌های ابتدایی وزین‌تر هستند. آنها به منابعی اضافی برای پشتیبانی از فعالیت درونی سیستم دارند. درحالیکه مشخصه‌ها و توابع در برنامه‌نویسی خیلی مفید هستند، موتور‌های جاوااسکریپت با بهینه‌سازی سعی در کاهش بار اضافی به وجود آمده دارند.
 
-## A primitive as an object
+## یک داده‌ ابتدایی به عنوان یک شئ
 
-Here's the paradox faced by the creator of JavaScript:
+تناقضی که سازنده جاوااسکریپت با آن مواجه شده:
+-خیلی کارها هستند که یک نفر بخواهد با داده‌های ابتدایی مثل رشته حروف یا اعداد انجام دهد که اگر دسترسی به آنها به عنوان تابع باشد عالی میشود.
 
-- There are many things one would want to do with a primitive like a string or a number. It would be great to access them as methods.
-- Primitives must be as fast and lightweight as possible.
+راه حال، اندکی عجیب به نظر میرسد:
+۱. داده‌های ابتدایی هنوز داده‌های ابتدایی هستند. همانطور خواسته شده، یک مقدار واحد.
+۲. زبان اجازه دسترسی به توابع و مشخصه‌های رشته حروف، اعداد، متغیرهای بولی و نمادها را میدهد.
+۳. وقتی این اتفاق می‌افتد، یک دربرگیرنده شی اختصاصی ساخته میشود گه عملکرد اضافی را فراهم میکند و سپس نابود میشود
 
-The solution looks a little bit awkward, but here it is:
+دربرگیرنده‌های اشیا برای هر نوع ابتدایی مختلف هستند به نام‌های: ‍`رشته حروف`،‍ `عدد`، `متغیر بولی` و `نماد`. بنابراین آنها مجموعه‌ای از توابع مختلفی را فراهم میسازند.
 
-1. Primitives are still primitive. A single value, as desired.
-2. The language allows access to methods and properties of strings, numbers, booleans and symbols.
-3. When this happens, a special "object wrapper" is created that provides the extra functionality, and then is destroyed.
+برای مثال، تابع [str.toUpperCase()](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/String/toUpperCase) که خروجی آن، حروف کاپیتال شده رشته حرف ورودی میباشد.
 
-The "object wrappers" are different for each primitive type and are called: `String`, `Number`, `Boolean` and `Symbol`. Thus, they provide different sets of methods.
-
-For instance, there exists a method [str.toUpperCase()](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/String/toUpperCase) that returns a capitalized string.
-
-Here's how it works:
+روش کار به صورت زیر است:
 
 ```js run
 let str = "Hello";
@@ -62,17 +59,20 @@ let str = "Hello";
 alert( str.toUpperCase() ); // HELLO
 ```
 
-Simple, right? Here's what actually happens in `str.toUpperCase()`:
+ساده است، نه؟! ببینیم در درون `str.toUpperCase()` چه اتفاقی می‌افتد:
 
-1. The string `str` is a primitive. So in the moment of accessing its property, a special object is created that knows the value of the string, and has useful methods, like `toUpperCase()`.
-2. That method runs and returns a new string (shown by `alert`).
-3. The special object is destroyed, leaving the primitive `str` alone.
 
-So primitives can provide methods, but they still remain lightweight.
+۱. رشته حرف `str` یک داده ابتدایی‌ست. پس در هنگام دسترسی به مشخصه‌ش، یک شی اختصاصی ساخته میشود که مقدار رشته حرف را میداند و توابع مفیدی مثل `toUpperCase()` دارد.
 
-The JavaScript engine highly optimizes this process. It may even skip the creation of the extra object at all. But it must still adhere to the specification and behave as if it creates one.
+۲. این تابع اجرا میشود و یک رشته حرف جدید را خروجی میدهد. (نشان داده شده توسط `alert` .)
 
-A number has methods of its own, for instance, [toFixed(n)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed) rounds the number to the given precision:
+۳. شی اختصاصی نابود میشود و داده ابتدایی `str` را تنها میگذارد.
+
+بنابراین داده‌های ابتدایی میتوانند توابع را فراهم سازند و در عین حال سبک‌وزن هم میمانند.
+
+موتور جاوااسکریپت این پردازه را به شدت بهینه میسازد به طوریکه حتی ممکن است ساخته شدن شئ اضافی را انجام ندهد. اما هنوز بایستی به مشخصات پایبند باشد و مثل ساخته شدن یک شئ رفتار کند.
+
+یک عدد هم توابع خودش را دارد، به عنوان مثلا، [toFixed(n)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed) عدد را با دقت خواسته شده گرد میکند:
 
 ```js run
 let n = 1.23456;
@@ -80,15 +80,15 @@ let n = 1.23456;
 alert( n.toFixed(2) ); // 1.23
 ```
 
-We'll see more specific methods in chapters <info:number> and <info:string>.
+در بخش‌های <info:number> and <info:string> توابع خاص بیشتری خواهیم دید.
 
+````warn header="Constructors `رشته حرف/عدد/متغیر بولی` فقط برای استفاده‌ی درونی هستند"
 
-````warn header="Constructors `String/Number/Boolean` are for internal use only"
-Some languages like Java allow us to create "wrapper objects" for primitives explicitly using a syntax like `new Number(1)` or `new Boolean(false)`.
+بعضی از زبان‌های برنامه‌نویسی مثل جاوا به ما اجازه ساختن دربرگیرنده اشیا برای داده‌های ابتدایی را میدهند که با کدی مثل `new Number(1)` یا  `new Boolean(false)` کار میکنند.
 
-In JavaScript, that's also possible for historical reasons, but highly **unrecommended**. Things will go crazy in several places.
+در جاوااسکریپت، به دلایل تاریخی، این فعالیت ممکن است اما **اصلا** توصیه نمیشود. اینطور چیزها ممکن است در برخی جاها اصلا کار نکنند.
 
-For instance:
+به عنوان مثال:
 
 ```js run
 alert( typeof 1 ); // "number"
@@ -96,7 +96,7 @@ alert( typeof 1 ); // "number"
 alert( typeof new Number(1) ); // "object"!
 ```
 
-And because what follows, `zero`, is an object, the alert will show up:
+اما چون `صفر` یک شئ است، پیغام زیر ظاهر خواهد شد:
 
 ```js run
 let zero = new Number(0);
@@ -106,25 +106,27 @@ if (zero) { // zero is true, because it's an object
 }
 ```
 
-On the other hand, using the same functions `String/Number/Boolean` without `new` is a totally sane and useful thing. They convert a value to the corresponding type: to a string, a number, or a boolean (primitive).
+از سویی دیگر، توابع مشابه  `رشته حرف/عدد/متغیر بولی` بدون `new`، به شدت چیز به درد بخوری هستند. آنها یک مقدار را به نوع مربوطه‌شان تبدیل میکنند: یک رشته حرف، یک عدد یا یک متغیر بولی
+(داده ابتدایی).
+ 
+برای مثال، این کاملا صحیح است:
 
-For example, this is entirely valid:
 ```js
 let num = Number("123"); // convert a string to number
 ```
-````
 
 
-````warn header="null/undefined have no methods"
-The special primitives `null` and `undefined` are exceptions. They have no corresponding "wrapper objects" and provide no methods. In a sense, they are "the most primitive".
+````warn header=".هیچ/تعریف نشده هیچ تابعی ندارند"````
 
-An attempt to access a property of such value would give the error:
+داده‌های ابتدایی خاص `هیچ` و `تعریف نشده`، استثنا هستند. آنها هیچ دربرگیرنده اشیا خاصی ندارند و هیچ تابعی را فراهم نمیسازند. به زبانی دیگر، آنها ابتدایی ترین ها هستند.
+
+یک تلاش برای دسترسی به مشخصه چنین مقداری، خطای ذیل را میدهد:
 
 ```js run
 alert(null.test); // error
 ````
 
-## Summary
+## خلاصه
 
-- Primitives except `null` and `undefined` provide many helpful methods. We will study those in the upcoming chapters.
-- Formally, these methods work via temporary objects, but JavaScript engines are well tuned to optimize that internally, so they are not expensive to call.
+- داده‌های ابتدایی به جز `هیچ` و  `تعریف نشده`، توابع مفید زیادی را فراهم میسازند که ما آنهارا در بخش‌های آتی بررسی خواهیم کرد.
+- به طور رسمی، این توابع با اشیا موقتی سر و کار دارند اما موتورهای جاوااسکریپت به بهترین نحو، به صورت درونی، بهینه‌سازی شده‌ند، به همین علت صدا زدن آنها دشواری خاصی ندارد.
