@@ -3,14 +3,20 @@
 The lifecycle of an HTML page has three important events:
 
 - `DOMContentLoaded` -- the browser fully loaded HTML, and the DOM tree is built, but external resources like pictures `<img>` and stylesheets may be not yet loaded.  
-- `load` -- the browser loaded all resources (images, styles etc).
-- `beforeunload/unload` -- when the user is leaving the page.
+- `load` -- not only HTML is loaded, but also all the external resources: images, styles etc.
+- `beforeunload/unload` -- the user is leaving the page.
 
 Each event may be useful:
 
 - `DOMContentLoaded` event -- DOM is ready, so the handler can lookup DOM nodes, initialize the interface.
+<<<<<<< HEAD:2-ui/3-event-details/10-onload-ondomcontentloaded/article.md
 - `load` event -- additional resources are loaded, we can get image sizes (if not specified in HTML/CSS) etc.
 - `beforeunload/unload` event -- the user is leaving: we can check if the user saved the changes and ask them whether they really want to leave.
+=======
+- `load` event -- external resources are loaded, so styles are applied, image sizes are known etc.
+- `beforeunload` event -- the user is leaving: we can check if the user saved the changes and ask them whether they really want to leave.
+- `unload` -- the user almost left, but we still can initiate some operations, such as sending out statistics.
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd:2-ui/5-loading/01-onload-ondomcontentloaded/article.md
 
 Let's explore the details of these events.
 
@@ -53,7 +59,16 @@ When the browser initially loads HTML and comes across a `<script>...</script>` 
 
 External scripts (with `src`) also put DOM building to pause while the script is loading and executing. So `DOMContentLoaded` waits for external scripts as well.
 
+<<<<<<< HEAD:2-ui/3-event-details/10-onload-ondomcontentloaded/article.md
 The only exception are external scripts with `async` and `defer` attributes. They tell the browser to continue processing without waiting for the scripts. This lets the user see the page before scripts finish loading, which is good for performance.
+=======
+```html run
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    alert("DOM ready!");
+  });
+</script>
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd:2-ui/5-loading/01-onload-ondomcontentloaded/article.md
 
 ### Scripts with `async` and `defer`
 

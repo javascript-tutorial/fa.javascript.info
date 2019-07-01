@@ -32,7 +32,7 @@ That's unless we declare the same-named variable by our own:
 <script>
   let elem = 5;
 
-  alert(elem); // the variable overrides the element
+  alert(elem); // 5
 </script>
 ```
 
@@ -260,6 +260,101 @@ For instance:
 </script>
 ```
 
+<<<<<<< HEAD
+=======
+## getElementsBy*
+
+There are also other methods to look for nodes by a tag, class, etc.
+
+Today, they are mostly history, as `querySelector` is more powerful and shorter to write.
+
+So here we cover them mainly for completeness, while you can still find them in the old scripts.
+
+- `elem.getElementsByTagName(tag)` looks for elements with the given tag and returns the collection of them. The `tag` parameter can also be a star `"*"` for "any tags".
+- `elem.getElementsByClassName(className)` returns elements that have the given CSS class.
+- `document.getElementsByName(name)` returns elements with the given `name` attribute, document-wide. very rarely used.
+
+For instance:
+```js
+// get all divs in the document
+let divs = document.getElementsByTagName('div');
+```
+
+Let's find all `input` tags inside the table:
+
+```html run height=50
+<table id="table">
+  <tr>
+    <td>Your age:</td>
+
+    <td>
+      <label>
+        <input type="radio" name="age" value="young" checked> less than 18
+      </label>
+      <label>
+        <input type="radio" name="age" value="mature"> from 18 to 50
+      </label>
+      <label>
+        <input type="radio" name="age" value="senior"> more than 60
+      </label>
+    </td>
+  </tr>
+</table>
+
+<script>
+*!*
+  let inputs = table.getElementsByTagName('input');
+*/!*
+
+  for (let input of inputs) {
+    alert( input.value + ': ' + input.checked );
+  }
+</script>
+```
+
+```warn header="Don't forget the `\"s\"` letter!"
+Novice developers sometimes forget the letter `"s"`. That is, they try to call `getElementByTagName` instead of <code>getElement<b>s</b>ByTagName</code>.
+
+The `"s"` letter is absent in `getElementById`, because it returns a single element. But `getElementsByTagName` returns a collection of elements, so there's `"s"` inside.
+```
+
+````warn header="It returns a collection, not an element!"
+Another widespread novice mistake is to write:
+
+```js
+// doesn't work
+document.getElementsByTagName('input').value = 5;
+```
+
+That won't work, because it takes a *collection* of inputs and assigns the value to it rather than to elements inside it.
+
+We should either iterate over the collection or get an element by its index, and then assign, like this:
+
+```js
+// should work (if there's an input)
+document.getElementsByTagName('input')[0].value = 5;
+```
+````
+
+Looking for `.article` elements:
+
+```html run height=50
+<form name="my-form">
+  <div class="article">Article</div>
+  <div class="long article">Long article</div>
+</form>
+
+<script>
+  // find by name attribute
+  let form = document.getElementsByName('my-form')[0];
+
+  // find by class inside the form
+  let articles = form.getElementsByClassName('article');
+  alert(articles.length); // 2, found two elements with class "article"
+</script>
+```
+
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 ## Live collections
 
 All methods `"getElementsBy*"` return a *live* collection. Such collections always reflect the current state of the document and "auto-update" when it changes.
@@ -309,8 +404,6 @@ If we use it instead, then both scripts output `1`:
 ```
 
 Now we can easily see the difference. The static collection did not increase after the appearance of a new `div` in the document.
-
-Here we used separate scripts to illustrate how the element addition affects the collection, but any DOM manipulations affect them. Soon we'll see more of them.
 
 ## Summary
 
@@ -374,5 +467,5 @@ Besides that:
 - There is `elem.matches(css)` to check if `elem` matches the given CSS selector.
 - There is `elem.closest(css)` to look for the nearest ancestor that matches the given CSS-selector. The `elem` itself is also checked.
 
-And let's mention one more method here to check for the child-parent relationship:
+And let's mention one more method here to check for the child-parent relationship, as it's sometimes useful:
 -  `elemA.contains(elemB)` returns true if `elemB` is inside `elemA` (a descendant of `elemA`) or when `elemA==elemB`.

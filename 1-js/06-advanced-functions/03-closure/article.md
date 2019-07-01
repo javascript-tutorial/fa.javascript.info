@@ -132,7 +132,11 @@ Here's the picture of Lexical Environments when the execution is inside `say("Jo
 
 During the function call we have two Lexical Environments: the inner one (for the function call) and the outer one (global):
 
+<<<<<<< HEAD
 - The inner Lexical Environment corresponds to the current execution of  `say`. It has a single variable: `name`, the function argument. We called `say("John")`, so the value of `name` is `"John"`.
+=======
+    It has a single property: `name`, the function argument. We called `say("John")`, so the value of `name` is `"John"`.
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 - The outer Lexical Environment is the global Lexical Environment.
 
 The inner Lexical Environment has the `outer` reference to the outer one.
@@ -238,7 +242,7 @@ function makeCounter() {
   let count = 0;
 
   return function() {
-    return count++; // has access to the outer counter
+    return count++; // has access to the outer "count"
   };
 }
 
@@ -299,7 +303,11 @@ alert( counter2() ); // 0 (independent)
 ```
 
 
+<<<<<<< HEAD
 Hopefully, the situation with outer variables is quite clear for you now. But in more complex situations a deeper understanding of internals may be required. So let's dive deeper.
+=======
+Hopefully, the situation with outer variables is clear now. For most situations such understanding is enough. There are few details in the specification that we omitted for brevity. So in the next section we cover even more details, not to miss anything.
+>>>>>>> 6bbe0b4313a7845303be835d632ef8e5bc7715cd
 
 ## Environments in detail
 
