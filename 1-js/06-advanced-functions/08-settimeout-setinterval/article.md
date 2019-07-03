@@ -75,7 +75,7 @@ Novice developers sometimes make a mistake by adding brackets `()` after the fun
 // wrong!
 setTimeout(sayHi(), 1000);
 ```
-That doesn't work, because `setTimeout` expects a reference to function. And here `sayHi()` runs the function, and the *result of its execution* is passed to `setTimeout`. In our case the result of `sayHi()` is `undefined` (the function returns nothing), so nothing is scheduled.
+That doesn't work, because `setTimeout` expects a reference to a function. And here `sayHi()` runs the function, and the *result of its execution* is passed to `setTimeout`. In our case the result of `sayHi()` is `undefined` (the function returns nothing), so nothing is scheduled.
 ````
 
 ### Canceling with clearTimeout
@@ -127,10 +127,10 @@ let timerId = setInterval(() => alert('tick'), 2000);
 setTimeout(() => { clearInterval(timerId); alert('stop'); }, 5000);
 ```
 
-```smart header="Modal windows freeze time in Chrome/Opera/Safari"
-In browsers IE and Firefox the internal timer continues "ticking" while showing `alert/confirm/prompt`, but in Chrome, Opera and Safari the internal timer becomes "frozen".
+```smart header="Time goes on while `alert` is shown"
+In most browsers, including Chrome and Firefox the internal timer continues "ticking" while showing `alert/confirm/prompt`.
 
-So if you run the code above and don't dismiss the `alert` window for some time, then in Firefox/IE next `alert` will be shown immediately as you do it (2 seconds passed from the previous invocation), and in Chrome/Opera/Safari -- after 2 more seconds (timer did not tick during the `alert`).
+So if you run the code above and don't dismiss the `alert` window for some time, then in the next `alert` will be shown immediately as you do it. The actual interval between alerts will be shorter than 5 seconds.
 ```
 
 ## Recursive setTimeout
@@ -176,7 +176,7 @@ let timerId = setTimeout(function request() {
 ```
 
 
-And if we regularly have CPU-hungry tasks, then we can measure the time taken by the execution and plan the next call sooner or later.
+And if we the functions that we're scheduling are CPU-hungry, then we can measure the time taken by the execution and plan the next call sooner or later.
 
 **Recursive `setTimeout` guarantees a delay between the executions, `setInterval` -- does not.**
 
@@ -236,7 +236,7 @@ For `setInterval` the function stays in memory until `clearInterval` is called.
 There's a side-effect. A function references the outer lexical environment, so, while it lives, outer variables live too. They may take much more memory than the function itself. So when we don't need the scheduled function anymore, it's better to cancel it, even if it's very small.
 ````
 
-## setTimeout(...,0)
+## Zero delay setTimeout
 
 There's a special use case: `setTimeout(func, 0)`.
 
@@ -254,10 +254,12 @@ alert("Hello");
 
 The first line "puts the call into calendar after 0ms". But the scheduler will only "check the calendar" after the current code is complete, so `"Hello"` is first, and `"World"` -- after it.
 
-### Splitting CPU-hungry tasks
+There are also advanced browser-related use cases of zero-delay timeout, that we'll discuss in the chapter <info:event-loop>.
 
-There's a trick to split CPU-hungry tasks using `setTimeout`.
+````smart header="Zero delay is in fact not zero (in a browser)"
+In the browser, there's a limitation of how often nested timers can run. The [HTML5 standard](https://html.spec.whatwg.org/multipage/timers-and-user-prompts.html#timers) says: "after five nested timers, the interval is forced to be at least 4 milliseconds.".
 
+<<<<<<< HEAD
 For instance, a syntax-highlighting script (used to colorize code examples on this page) is quite CPU-heavy. To highlight the code, it performs the analysis, creates many colored elements, adds them to the document -- for a big text that takes a lot. It may even cause the browser to "hang", which is unacceptable.
 
 So we can split the long text into pieces. First 100 lines, then plan another 100 lines using `setTimeout(...,0)`, and so on.
@@ -362,6 +364,9 @@ If you run it, it's easy to notice that it takes significantly less time.
 In the browser, there's a limitation of how often nested timers can run. The [HTML5 standard](https://www.w3.org/TR/html5/webappapis.html#timers) says: "after five nested timers, the interval is forced to be at least four milliseconds.".
 
 Let's demonstrate what it means with the example below. The `setTimeout` call in it re-schedules itself after `0ms`. Each call remembers the real time from the previous one in the `times` array. What do the real delays look like? Let's see:
+=======
+Let's demonstrate what it means with the example below. The `setTimeout` call in it re-schedules itself with zero delay. Each call remembers the real time from the previous one in the `times` array. What do the real delays look like? Let's see:
+>>>>>>> b300836f00536a5eb9a716ad2cbb6b8fe97c25af
 
 ```js run
 let start = Date.now();
@@ -378,10 +383,13 @@ setTimeout(function run() {
 // 1,1,1,1,9,15,20,24,30,35,40,45,50,55,59,64,70,75,80,85,90,95,100
 ```
 
-First timers run immediately (just as written in the spec), and then the delay comes into play and we see `9, 15, 20, 24...`.
+First timers run immediately (just as written in the spec), and then we see `9, 15, 20, 24...`. The 4+ ms obligatory delay between invocations comes into play.
+
+The similar thing happens if we use `setInterval` instead of `setTimeout`: `setInterval(f)` runs `f` few times with zero-delay, and afterwards with 4+ ms delay.
 
 That limitation comes from ancient times and many scripts rely on it, so it exists for historical reasons.
 
+<<<<<<< HEAD
 For server-side JavaScript, that limitation does not exist, and there exist other ways to schedule an immediate asynchronous job, like [process.nextTick](https://nodejs.org/api/process.html) and [setImmediate](https://nodejs.org/api/timers.html) for Node.JS. So the notion is browser-specific only.
 ````
 
@@ -441,16 +449,18 @@ And if we use `setTimeout` to split it into pieces then changes are applied in-b
 
 Now the `<div>` shows increasing values of `i`.
 
+=======
+For server-side JavaScript, that limitation does not exist, and there exist other ways to schedule an immediate asynchronous job, like [setImmediate](https://nodejs.org/api/timers.html) for Node.js. So this note is browser-specific.
+````
+
+>>>>>>> b300836f00536a5eb9a716ad2cbb6b8fe97c25af
 ## Summary
 
 - Methods `setInterval(func, delay, ...args)` and `setTimeout(func, delay, ...args)` allow to run the `func` regularly/once after `delay` milliseconds.
 - To cancel the execution, we should call `clearInterval/clearTimeout` with the value returned by `setInterval/setTimeout`.
 - Nested `setTimeout` calls is a more flexible alternative to `setInterval`. Also they can guarantee the minimal time *between* the executions.
-- Zero-timeout scheduling `setTimeout(...,0)` is used to schedule the call "as soon as possible, but after the current code is complete".
-
-Some use cases of `setTimeout(...,0)`:
-- To split CPU-hungry tasks into pieces, so that the script doesn't "hang"
-- To let the browser do something else while the process is going on (paint the progress bar).
+- Zero delay scheduling with `setTimeout(func, 0)` (the same as `setTimeout(func)`) is used to schedule the call "as soon as possible, but after the current code is complete".
+- The browsere ensures that for five or more nested call of `setTimeout`, or for zero-delay `setInterval`, the real delay between calls is at least 4ms. That's for historical reasons.
 
 Please note that all scheduling methods do not *guarantee* the exact delay. We should not rely on that in the scheduled code.
 
@@ -459,4 +469,4 @@ For example, the in-browser timer may slow down for a lot of reasons:
 - The browser tab is in the background mode.
 - The laptop is on battery.
 
-All that may increase the minimal timer resolution (the minimal delay) to 300ms or even 1000ms depending on the browser and settings.
+All that may increase the minimal timer resolution (the minimal delay) to 300ms or even 1000ms depending on the browser and OS-level performance settings.

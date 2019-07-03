@@ -5,7 +5,7 @@ The unicode flag `/.../u` enables the correct support of surrogate pairs.
 
 Surrogate pairs are explained in the chapter <info:string>.
 
-Let's briefly remind them here. In short, normally characters are encoded with 2 bytes. That gives us 65536 characters maximum. But there are more characters in the world.
+Let's briefly review them here. In short, normally characters are encoded with 2 bytes. That gives us 65536 characters maximum. But there are more characters in the world.
 
 So certain rare characters are encoded with 4 bytes, like `𝒳` (mathematical X) or `😄` (a smile).
 
@@ -60,7 +60,13 @@ There's an error that may happen if we forget the flag:
 
 Here the regexp `[𝒳-𝒴]` is treated as `[12-34]` (where `2` is the right part of `𝒳` and `3` is the left part of `𝒴`), and the range between two halves `2` and `3` is unacceptable.
 
+<<<<<<< HEAD:5-regular-expressions/06-regexp-unicode/article.md
 Using the flag would make it work right:
+=======
+But without `u` flag, surrogate pairs are assumed to be a "pair of independent characters", so `[𝒳-𝒴]` is like `[<55349><56499>-<55349><56500>]` (replaced each surrogate pair with code points). Now we can clearly see that the range `56499-55349` is unacceptable, as the left range border must be less than the right one.
+
+Using the `u` flag makes it work right:
+>>>>>>> b300836f00536a5eb9a716ad2cbb6b8fe97c25af:9-regular-expressions/20-regexp-unicode/article.md
 
 ```js run
 alert( '𝒴'.match(/[𝒳-𝒵]/u) ); // 𝒴

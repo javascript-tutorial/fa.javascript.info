@@ -158,7 +158,13 @@ function curry(f) {
 
 Advanced currying allows both to keep the function callable normally and to get partials easily. To understand the benefits we definitely need a worthy real-life example.
 
+<<<<<<< HEAD
 For instance, we have the logging function `log(date, importance, message)` that formats and outputs the information. In real projects such functions also have many other useful features like: sending it over the network or filtering:
+=======
+Advanced currying allows the function to be both callable normally and partially.
+
+For instance, we have the logging function `log(date, importance, message)` that formats and outputs the information. In real projects such functions also have many other useful features like sending logs over the network, here we just use `alert`:
+>>>>>>> b300836f00536a5eb9a716ad2cbb6b8fe97c25af
 
 ```js
 function log(date, importance, message) {
@@ -172,34 +178,29 @@ Let's curry it!
 log = _.curry(log);
 ```
 
-After that `log` still works the normal way:
+After that `log` work both the normal way and in the curried form:
 
 ```js
-log(new Date(), "DEBUG", "some debug");
-```
-
-...But also can be called in the curried form:
-
-```js
+log(new Date(), "DEBUG", "some debug"); // log(a,b,c)
 log(new Date())("DEBUG")("some debug"); // log(a)(b)(c)
 ```
 
-Let's get a convenience function for today's logs:
+Now we can easily make a convenience function for current logs:
 
 ```js
-// todayLog will be the partial of log with fixed first argument
-let todayLog = log(new Date());
+// currentLog will be the partial of log with fixed first argument
+let logNow = log(new Date());
 
 // use it
-todayLog("INFO", "message"); // [HH:mm] INFO message
+logNow("INFO", "message"); // [HH:mm] INFO message
 ```
 
-And now a convenience function for today's debug messages:
+And here's a convenience function for current debug messages:
 
 ```js
-let todayDebug = todayLog("DEBUG");
+let debugNow = logNow("DEBUG");
 
-todayDebug("message"); // [HH:mm] DEBUG message
+debugNow("message"); // [HH:mm] DEBUG message
 ```
 
 So:

@@ -340,7 +340,11 @@ Functions are objects.
 
 Here we covered their properties:
 
+<<<<<<< HEAD
 - `name` -- the function name. Exists not only when given in the function definition, but also for assignments and object properties.
+=======
+- `name` -- the function name. Usually taken from the function definition, but if there's none, JavaScript tries to guess it from the context (e.g. an assignment).
+>>>>>>> b300836f00536a5eb9a716ad2cbb6b8fe97c25af
 - `length` -- the number of arguments in the function definition. Rest parameters are not counted.
 
 If the function is declared as a Function Expression (not in the main code flow), and it carries the name, then it is called a Named Function Expression. The name can be used inside to reference itself, for recursive calls or such.
