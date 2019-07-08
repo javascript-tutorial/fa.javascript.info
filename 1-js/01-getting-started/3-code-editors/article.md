@@ -12,6 +12,7 @@
 
 اگر هنوز یک IDE انتخاب نکرده‌اید، موارد زیر را در نظر داشته باشید : 
 
+<<<<<<< HEAD:1-js/01-getting-started/2-code-editors/article.md
 - [WebStorm](http://www.jetbrains.com/webstorm/) برای توسعه Front End . کمپانی Jetbrains همینطور IDE های دیگری را برای زبان‌های دیگر ارائه می‌کند (که رایگان نیستند) 
 
 - [Netbeans](http://netbeans.org/) (رایگان) 
@@ -19,6 +20,14 @@
 این IDE ها اصطلاحا Cross Platform هستند. 
 
 همینطور برای Windows می‌توانید از Visual Studio استفاده کنید (منظور Visual Studio Code نیست). Visual Studio یک نرم افزار غیر رایگان است و فقط بر روی Windows کار می‌کند که برای توسعه پلتفرم dot net مناسب است. نسخه رایگان این نرم افزار [Visual Studio Community](https://www.visualstudio.com/vs/community/) نام دارد.  
+=======
+- [Visual Studio Code](https://code.visualstudio.com/) (cross-platform, free).
+- [WebStorm](http://www.jetbrains.com/webstorm/) (cross-platform, paid).
+
+For Windows, there's also "Visual Studio", not to be confused with "Visual Studio Code". "Visual Studio" is a paid and mighty Windows-only editor, well-suited for the .NET platform. It's also good at JavaScript. There's also a free version [Visual Studio Community](https://www.visualstudio.com/vs/community/).
+
+Many IDEs are paid, but have a trial period. Their cost is usually negligible compared to a qualified developer's salary, so just choose the best one for you.
+>>>>>>> 5e9eca374f644ea85c7d548bbe344fd30e5fb89d:1-js/01-getting-started/3-code-editors/article.md
 
 بعضی از IDE ها پولی هستند ولی برای مدتی به صورت آزمایشی می‌توان از آنها به رایگان استفاده کرد. معمولا قیمت آنها در مقایسه با درآمد برنامه‌نویسان ناچیز است، پس یک IDE خوب برای خود انتخاب کنید. 
 
@@ -32,6 +41,7 @@
 
 در عمل ویرایشگرهای سبک دارای افزونه‌های متعددی هستند، مانند تحلیل‌کننده‌های سینتَکس (syntax)، تکمیل‌کننده های کد و غیره. به همین دلیل نمی‌تواند مرز دقیقی بین IDE و ویرایشگرهای سبک قائل بود. 
 
+<<<<<<< HEAD:1-js/01-getting-started/2-code-editors/article.md
 موارد زیر ارزش توجه را دارند : 
 
 - [Visual Studio Code](https://code.visualstudio.com/) : رایگان - Cross Platform و همچنین تعدادی از قابلیت‌های IDE ها را دارد 
@@ -43,6 +53,14 @@
 - [Notepad++](https://notepad-plus-plus.org/) : برای Windows - رایگان 
 
 - [Vim](http://www.vim.org/) و [Emacs](https://www.gnu.org/software/emacs/) هم اگر با نحوه کارشان آشنا باشید خوب هستند. 
+=======
+- [Atom](https://atom.io/) (cross-platform, free).
+- [Sublime Text](http://www.sublimetext.com) (cross-platform, shareware).
+- [Notepad++](https://notepad-plus-plus.org/) (Windows, free).
+- [Vim](http://www.vim.org/) and [Emacs](https://www.gnu.org/software/emacs/) are also cool if you know how to use them.
+
+## Let's not argue
+>>>>>>> 5e9eca374f644ea85c7d548bbe344fd30e5fb89d:1-js/01-getting-started/3-code-editors/article.md
 
 ## مورد علاقه‌های من 
 

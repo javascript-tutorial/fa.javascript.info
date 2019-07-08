@@ -203,7 +203,15 @@ typeof alert // "function"  (3)
 */!*
 ```
 
+<<<<<<< HEAD
 سه خط آخر احتمالا نیاز به توضیحات بیشتری دارد.
+=======
+The last three lines may need additional explanation:
+
+1. `Math` is a built-in object that provides mathematical operations. We will learn it in the chapter <info:number>. Here, it serves just as an example of an object.
+2. The result of `typeof null` is `"object"`. That's wrong. It is an officially recognized error in `typeof`, kept for compatibility. Of course, `null` is not an object. It is a special value with a separate type of its own. So, again, this is an error in the language.
+3. The result of `typeof alert` is `"function"`, because `alert` is a function. We'll study functions in the next chapters where we'll also see that there's no special "function" type in JavaScript. Functions belong to the object type. But `typeof` treats them differently, returning `"function"`. That's not quite correct, but very convenient in practice.
+>>>>>>> 5e9eca374f644ea85c7d548bbe344fd30e5fb89d
 
 1. `Math` یک آبجکت در اصطلاحا built-in (از پیش نوشته شده در هسته زبان) است که عملیات متنوع ریاضیاتی در اختیار ما قرار می‌دهد. در اینجا صرفا یک مثال از آن را نمایش دادیم و در بخش Numbers با آن بیشتر آشنا خواهیم شد.
 2. خروجی `typeof null` همانطور که می‌بینید `"object"` است و این صحیح نیست. این یک خطا در نوع کار `typeof` می‌باشد که به منظور سازگاری باقی مانده است. مطمئنا `null` یک object نیست. خودِ null یکی از انواع داده در جاوا اسکریپت است. 

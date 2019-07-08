@@ -58,7 +58,7 @@ These common words do not make it obvious why the regexp fails, so let's elabora
 
 3. Then the dot repeats because of the quantifier `pattern:.+`. The regular expression engine builds the match by taking characters one by one while it is possible.
 
-    ...When it becomes impossible? All characters match the dot, so it only stops when it reaches the end of the string:
+    ...When does it become impossible? All characters match the dot, so it only stops when it reaches the end of the string:
 
     ![](witch_greedy3.png)
 
@@ -262,7 +262,11 @@ Why it happens?
 
 1. First the regexp finds a link start `match:<a href="`.
 
+<<<<<<< HEAD:5-regular-expressions/08-regexp-greedy-and-lazy/article.md
 2. Then it looks for `pattern:.*?`, we take one character, then check if there's a match for the rest of the pattern, then take another one...
+=======
+But the problem is: that's already beyond the link, in another tag `<p>`. Not what we want.
+>>>>>>> 5e9eca374f644ea85c7d548bbe344fd30e5fb89d:9-regular-expressions/08-regexp-greedy-and-lazy/article.md
 
     The quantifier `pattern:.*?` consumes characters until it meets `match:class="doc">`.
 

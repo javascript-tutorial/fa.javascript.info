@@ -24,7 +24,11 @@ We want to find all tags, with or without attributes -- like `subject:<a href=".
 
 In particular, we need it to match tags like `<a test="<>" href="#">` -- with `<` and `>` in attributes. That's allowed by [HTML standard](https://html.spec.whatwg.org/multipage/syntax.html#syntax-attributes).
 
+<<<<<<< HEAD:5-regular-expressions/15-regexp-infinite-backtracking-problem/article.md
 Now we can see that a simple regexp like `pattern:<[^>]+>` doesn't work, because it stops at the first `>`, and we need to ignore `<>` inside an attribute.
+=======
+A simple regexp like `pattern:<[^>]+>` doesn't work, because it stops at the first `>`, and we need to ignore `<>` if inside an attribute:
+>>>>>>> 5e9eca374f644ea85c7d548bbe344fd30e5fb89d:9-regular-expressions/15-regexp-infinite-backtracking-problem/article.md
 
 ```js run
 // the match doesn't reach the end of the tag - wrong!
@@ -40,7 +44,11 @@ In the regexp language that is: `pattern:<\w+(\s*\w+=(\w+|"[^"]*")\s*)*>`:
 1. `pattern:<\w+` -- is the tag start,
 2. `pattern:(\s*\w+=(\w+|"[^"]*")\s*)*` -- is an arbitrary number of pairs `word=value`, where the value can be either a word `pattern:\w+` or a quoted string `pattern:"[^"]*"`.
 
+<<<<<<< HEAD:5-regular-expressions/15-regexp-infinite-backtracking-problem/article.md
 That doesn't yet support few details of HTML grammar, for instance strings in 'single' quotes, but they can be added later, so that's somewhat close to real life. For now we want the regexp to be simple.
+=======
+That regexp is not perfect! It doesn't support all the details of HTML syntax, such as unquoted values, and there are other ways to improve, but let's not add complexity. It will demonstrate the problem for us.
+>>>>>>> 5e9eca374f644ea85c7d548bbe344fd30e5fb89d:9-regular-expressions/15-regexp-infinite-backtracking-problem/article.md
 
 Let's try it in action:
 
@@ -111,7 +119,7 @@ First, one may notice that the regexp is a little bit strange. The quantifier `p
 
 Indeed, the regexp is artificial. But the reason why it is slow is the same as those we saw above. So let's understand it, and then return to the real-life examples.
 
-What happen during the search of `pattern:(\d+)*$` in the line `subject:123456789z`?
+What happens during the search of `pattern:(\d+)*$` in the line `subject:123456789z`?
 
 1. First, the regexp engine tries to find a number `pattern:\d+`. The plus `pattern:+` is greedy by default, so it consumes all digits:
 
@@ -217,6 +225,8 @@ The string has no `>` at the end, so the match is impossible, but the regexp eng
 ...
 ```
 
+As there are many combinations, it takes a lot of time.
+
 ## How to fix?
 
 The problem -- too many variants in backtracking even if we don't need them.
@@ -247,7 +257,9 @@ The pattern to take as much repetitions as possible without backtracking is: `pa
 
 In other words, the lookahead `pattern:?=` looks for the maximal count `pattern:a+` from the current position. And then they are "consumed into the result" by the backreference `pattern:\1`.
 
-There will be no backtracking, because lookahead does not backtrack. If it found like 5 times of `pattern:a+` and the further match failed, then it doesn't go back to 4.
+There will be no backtracking, because lookahead does not backtrack. If, for
+example, it found 5 instances of `pattern:a+` and the further match failed,
+it won't go back to the 4th instance.
 
 Let's fix the regexp for a tag with attributes from the beginning of the chapter`pattern:<\w+(\s*\w+=(\w+|"[^"]*")\s*)*>`. We'll use lookahead to prevent backtracking of `name=value` pairs:
 
