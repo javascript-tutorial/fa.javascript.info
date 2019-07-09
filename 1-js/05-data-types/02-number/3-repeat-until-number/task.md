@@ -2,13 +2,12 @@ importance: 5
 
 ---
 
-# Repeat until the input is a number
+# تا زمانی که ورودی یک عدد است تکرار کن
 
-Create a function `readNumber` which prompts for a number until the visitor enters a valid numeric value.
+یک تابع `readNumber` بسازید که تا زمانی که بازدیدکننده یک عدد وارد نکرده باشد، نرود.
 
-The resulting value must be returned as a number.
+خروجی به فرمت عدد باید باشد.
 
-The visitor can also stop the process by entering an empty line or pressing "CANCEL". In that case, the function should return `null`.
-
+بازدید کننده میتواند با وارد کردن یک خط خالی یا فشردن دکمه‌ی "CANCEL" پردازش را متوقف کند. در این حالت، تابع خروجی `null` را می‌دهد.
 [demo]
 

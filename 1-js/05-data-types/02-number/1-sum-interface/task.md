@@ -2,10 +2,10 @@ importance: 5
 
 ---
 
-# Sum numbers from the visitor
+# اعداد را جمع کنید
 
-Create a script that prompts the visitor to enter two numbers and then shows their sum.
+کدی بنویسید که از بازدیدکننده درخواست میکند دو عدد را وارد کند و سپس جمع آنهارا نشان دهد.
 
 [demo]
 
-P.S. There is a gotcha with types.
+پی نوشت: حواستان به مدل‌های داده‌ها باشد.

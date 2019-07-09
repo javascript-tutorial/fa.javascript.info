@@ -2,10 +2,9 @@ importance: 4
 
 ---
 
-# An occasional infinite loop
+# یک حلقه‌ی بی‌نهایت 
 
-This loop is infinite. It never ends. Why?
-
+این حلقه بی‌نهایت است. هیچوقت تمام نمی‌شود. چرا؟
 ```js
 let i = 0;
 while (i != 10) {

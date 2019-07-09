@@ -1,7 +1,6 @@
-That's because `i` would never equal `10`.
+به این علت است که `i` هیچوقت برابر ده نمیشود.
 
-Run it to see the *real* values of `i`:
-
+این تکه کد را اجرا کنید تا مقدار حقیقی `i` را ببینید:
 ```js run
 let i = 0;
 while (i < 11) {
@@ -10,8 +9,9 @@ while (i < 11) {
 }
 ```
 
-None of them is exactly `10`.
 
-Such things happen because of the precision losses when adding fractions like `0.2`.
+هیچکدام از آنها دقیقا ده نیست.
 
-Conclusion: evade equality checks when working with decimal fractions.
+چنین اتفاقاتی به علت از دست رفتن دقت در حین جمع کردن کسرهایی مثل `0.2` رخ می‌دهد. 
+
+نتیجه: وقتی با کسرهای اعشاری کار میکنید، از تساوی استفاده نکنید.
