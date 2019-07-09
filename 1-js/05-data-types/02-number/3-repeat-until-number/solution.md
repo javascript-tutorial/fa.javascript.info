@@ -15,9 +15,8 @@ function readNumber() {
 alert(`Read: ${readNumber()}`);
 ```
 
-The solution is a little bit more intricate that it could be because we need to handle `null`/empty lines.
+جواب اندکی پیچیده‌ست که به خاطر این است که باید `null`/خالی را هم در نظر بگیریم. 
 
-So we actually accept the input until it is a "regular number". Both `null` (cancel) and empty line also fit that condition, because in numeric form they are `0`.
+پس ما تا وقتی ورودی را می‌پذیریم که عدد عادی باشد. هردوی `null` (cancel) و خط خالی هم در این شرایط میگنجد، چونکه در فرم عددی صفر هستند. 
 
-After we stopped, we need to treat `null` and empty line specially (return `null`), because converting them to a number would return `0`.
-
+بعد از اینکه برنامه متوقف شد بایستی `null` و مخصوصا خط‌های خالی (خروجی `null`) را در نظر بگیریم، چون تبدیل آنها به عدد صفر برمی‌گرداند.
