@@ -1,12 +1,12 @@
-We need to "map" all values from the interval 0..1 into values from `min` to `max`.
+نیاز داریم که تمام مقادیر را در بازه 0..1 به مقادیر از `min` تا `max` ارتباط دهیم.
 
-That can be done in two stages:
+این به دو روش قابل انجام است:
 
-1. If we multiply a random number from 0..1 by `max-min`, then the interval of possible values increases `0..1` to `0..max-min`.
-2. Now if we add `min`, the possible interval becomes from `min` to `max`.
+۱. اگر یک عدد تصادفی از 0..1 را در عددی `max-min` ضرب کنیم، بازه‌ی مقادیر ممکن از `0..1` به `0..max-min` افزایش می‌یابد.
 
-The function:
+۲. حالا اگر `min` را اضافه کنیم، بازه‌ی ممکن از `min` تا `max` میشود.
 
+تابع:
 ```js run
 function random(min, max) {
   return min + Math.random() * (max - min);

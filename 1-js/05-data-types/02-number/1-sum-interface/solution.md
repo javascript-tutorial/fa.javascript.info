@@ -1,5 +1,3 @@
-
-
 ```js run demo
 let a = +prompt("The first number?", "");
 let b = +prompt("The second number?", "");
@@ -7,6 +5,6 @@ let b = +prompt("The second number?", "");
 alert( a + b );
 ```
 
-Note the unary plus `+` before `prompt`. It immediately converts the value to a number.
+توجه کنید که جمع واحد `+` قبل از `prompt` است. این یعنی در همان لحظه به مقدار عددی تبدیل می‌شود.
 
-Otherwise, `a` and `b` would be string their sum would be their concatenation, that is: `"1" + "2" = "12"`.
+در غیر اینصورت، `a` و `b`، رشته حرفی میبودند و جمع آنها، پیوست کردن آنها به یکدیگر می‌بود که یعنی:‌ `"1" + "2" = "12"`.

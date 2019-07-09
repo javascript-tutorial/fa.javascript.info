@@ -2,19 +2,17 @@ importance: 2
 
 ---
 
-# A random integer from min to max
+# عدد صحیح تصادفی از مینیمم تا ماکسیمم
 
-Create a function `randomInteger(min, max)` that generates a random *integer* number from `min` to `max` including both `min` and `max` as possible values.
+یک تابع `randomInteger(min, max)` می‌سازد که یک عدد صحیح تصادفی از `min` تا `max` که هر دو شامل مقادیر `min` و `max` می‌شود را خروجی می‌دهد. 
 
-Any number from the interval `min..max` must appear with the same probability.
+هر عدد از بازه‌ی `min..max` باید احتمال یکسانی داشته باشد.
 
-
-Examples of its work:
-
+مثال‌هایی از کارکردش:
 ```js
 alert( random(1, 5) ); // 1
 alert( random(1, 5) ); // 3
 alert( random(1, 5) ); // 5
 ```
 
-You can use the solution of the [previous task](info:task/random-min-max) as the base.
+میتوانید از [راه حل قبلی](info:task/random-min-max) هم به عنوان پایه استفاده کنید.

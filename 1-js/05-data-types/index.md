@@ -1,3 +1,3 @@
-# Data types
+# مدل‌های داده
 
-More data structures and more in-depth study of the types.
+ساختارهای داده بیشتر و مطالعه‌ی عمیق‌تر این مدل‌ها.
