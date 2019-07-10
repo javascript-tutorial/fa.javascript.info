@@ -1,5 +1,5 @@
-The answer is:
+جواب:
 
-- `a = 4` (multiplied by 2)
-- `x = 5` (calculated as 1 + 4)
+- `a = 4` (ضربدر دو شده)
+- `x = 5` (محاسبه‌ی 1 + 4)
 

@@ -1,3 +1,3 @@
-# JavaScript Fundamentals
+# مفاهیم پایه‌ای جاوا اسکریپت
 
-Let's learn the fundamentals of script building.
+بیایید مفاهیم پایه‌ای کد زدن با جاوا اسکریپت را یاد بگیریم!

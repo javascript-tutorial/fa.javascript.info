@@ -2,9 +2,9 @@ importance: 3
 
 ---
 
-# Assignment result
+# نتیجه‌ی مقداردهی
 
-What are the values of `a` and `x` after the code below?
+مقادیر `a` و `x` بعد از اجرای کد زیر چیست؟
 
 ```js
 let a = 2;
