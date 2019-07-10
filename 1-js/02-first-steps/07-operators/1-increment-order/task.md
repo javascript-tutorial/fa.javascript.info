@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# The postfix and prefix forms
+# فرم‌های پسوندی و پیشوندی
 
-What are the final values of all variables `a`, `b`, `c` and `d` after the code below?
+مقادیر نهایی تمام متغیرهای `a`، `b`، `c`، و `d` بعد از اجرای کد زیر چیست؟
 
 ```js
 let a = 1, b = 1;

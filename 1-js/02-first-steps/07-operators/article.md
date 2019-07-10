@@ -1,15 +1,17 @@
-# Operators
+# عملگرها
 
-We know many operators from school. They are things like addition `+`, multiplication `*`, subtraction `-`, and so on.
+ما عملگرهای مختلفی را از زمان مدرسه به خاطر داریم. مانند جمع +، تفریق -، ضرب *، تقسیم و دیگر عملگرها. 
 
-In this chapter, we'll concentrate on aspects of operators that are not covered by school arithmetic.
+در این بخش ما بر روی زوایایی از عملگرها متمرکز می‎شویم که در مدرسه نیاموخته‌ایم.
 
-## Terms: "unary", "binary", "operand"
+## اصطلاحات: unary (یونِری) – binary (باینری) – operand (اُپِرند)
 
-Before we move on, let's grasp some common terminology.
 
-- *An operand* -- is what operators are applied to. For instance, in the multiplication of `5 * 2` there are two operands: the left operand is `5` and the right operand is `2`. Sometimes, people call these "arguments" instead of "operands".
-- An operator is *unary* if it has a single operand. For example, the unary negation `-` reverses the sign of a number:
+پیش از ادامه بیایید مفهوم این اصطلاحات را بفهمیم.
+
+- یک operand – همان چیزی است که عملگرها بر روی آنها اعمال می‌شوند. برای نمونه در ضرب 5 * 2 دو operand داریم. برخی آن را آرگمان (argument) نیز می‌خوانند.
+
+- یک عملگر زمانی unary است که فقط یک operand داشته باشد. برای نمونه unary منفی کننده‌ی – که علامت یک عدد را برعکس می‌کند:
 
     ```js run
     let x = 1;
@@ -19,62 +21,59 @@ Before we move on, let's grasp some common terminology.
     */!*
     alert( x ); // -1, unary negation was applied
     ```
-- An operator is *binary* if it has two operands. The same minus exists in binary form as well:
-
+    - یک عملگر زمانی binary است که دو operand داشته باشد. همان عملگر منفی کننده در شکل binary هم وجود دارد:
+    
     ```js run no-beautify
     let x = 1, y = 3;
     alert( y - x ); // 2, binary minus subtracts values
     ```
 
-    Formally, we're talking about two different operators here: the unary negation (single operand: reverses the sign) and the binary subtraction (two operands: subtracts).
+در اصل در اینجا ما در مورد دو عملگر مجزا صحبت کردیم. اولی عملگر unary منفی کننده (که علامت عدد را برعکس می‌کرد) و دیگری عملگر تفریق binary (تفریق دو عدد از هم).
 
-## String concatenation, binary +
+## تلفیق رشته‌ها، عملگر + binary
 
-Now, let's see special features of JavaScript operators that are beyond school arithmetics.
 
-Usually, the plus operator `+` sums numbers.
-
-But, if the binary `+` is applied to strings, it merges (concatenates) them:
+معمولا از عملگر + برای جمع اعداد استفاده می‌شود، اما زمانیکه این عملگر به رشته‌‌‌ها اعمال شود، آنها را ادغام می‌کند.
 
 ```js
 let s = "my" + "string";
 alert(s); // mystring
 ```
 
-Note that if one of the operands is a string, the other one is converted to a string too.
+در نظر داشته باشید که اگر یکی از operand ها string باشد، دیگری نیز به string تبدیل می‌شود.
 
-For example:
+برای نمونه:
 
 ```js run
 alert( '1' + 2 ); // "12"
 alert( 2 + '1' ); // "21"
 ```
 
-See, it doesn't matter whether the first operand is a string or the second one. The rule is simple: if either operand is a string, the other one is converted into a string as well.
+همانطور که می‌بینید مهم نیست که operand ابتدا آمده باشد یا نه، قاعده ساده است: اگر هر کدام از operand ها string بود، دیگری نیز به string تبدیل می‌شود.
 
-However, note that operations run from left to right. If there are two numbers followed by a string, the numbers will be added before being converted to a string:
-
+با این حال در نظر داشته باشید که عملیات از چپ به راست انجام می‌شود. اگر دو عدد در پیش از یک string آمده باشند، ابتدا آن دو عدد جمع می‌شوند و سپس به string تبدیل می‌شوند:
 
 ```js run
 alert(2 + 2 + '1' ); // "41" and not "221"
 ```
 
-String concatenation and conversion is a special feature of the binary plus `+`. Other arithmetic operators work only with numbers and always convert their operands to numbers.
+تبدیل و الصاق رشته‌ها یکی از ویژگی‌های خاص عملگر + است. دیگر عملگرهای ریاضیاتی فقط با اعداد کار می‌کنند و همیشه operand خود را به number تبدیل می‌کنند.
 
-For instance, subtraction and division:
+برای نمونه:
 
 ```js run
 alert( 2 - '1' ); // 1
 alert( '6' / '2' ); // 3
 ```
 
-## Numeric conversion, unary +
+## تبدیل به عدد، عملگر unary +
 
-The plus `+` exists in two forms: the binary form that we used above and the unary form.
 
-The unary plus or, in other words, the plus operator `+` applied to a single value, doesn't do anything to numbers. But if the operand is not a number, the unary plus converts it into a number.
+علامت جمع + به دو شکل وجود دارد: به صورت عملگر binary که بالاتر از آن استفاده کردیم و به صورت عملگر unary.
 
-For example:
+عملگر + که به یک مقدار اعمال می‌شود، هیچ عملی رو اعداد انجام نمی‌دهد. اما اگر operand یک عدد نباشد، عملگر + آن را به عدد تبدیل می‌کند.
+
+برای نمونه:
 
 ```js run
 // No effect on numbers
@@ -91,13 +90,13 @@ alert( +"" );   // 0
 */!*
 ```
 
-It actually does the same thing as `Number(...)`, but is shorter.
+در واقع این همان کاریست که `Number(...)` انجام می‌دهد ولی به شکلی کوتاه‌تر.
 
-The need to convert strings to numbers arises very often. For example, if we are getting values from HTML form fields, they are usually strings.
+نیاز به تبدیل رشته‌ به عدد اغلب پیش می‌آید. برای نمونه اگر در حال دریافت مقادیری از اینپوت‌های HTML هستیم معمولا به این موضوع نیاز پیدا می‌کنیم. 
 
-What if we want to sum them?
+اگر خواستیم آنها را جمع ببندیم چطور؟
 
-The binary plus would add them as strings:
+عملگر + به صورت رشته‌ای آنها را بهم اضافه می‌کند:
 
 ```js run
 let apples = "2";
@@ -106,7 +105,7 @@ let oranges = "3";
 alert( apples + oranges ); // "23", the binary plus concatenates strings
 ```
 
-If we want to treat them as numbers, we need to convert and then sum them:
+اگر خواستیم با آنها مانند عدد برخورد کنیم، آنها را به عدد تبدیل کرده و سپس آنها را جمع می‌کنیم:
 
 ```js run
 let apples = "2";
@@ -121,42 +120,43 @@ alert( +apples + +oranges ); // 5
 // alert( Number(apples) + Number(oranges) ); // 5
 ```
 
-From a mathematician's standpoint, the abundance of pluses may seem strange. But from a programmer's standpoint, there's nothing special: unary pluses are applied first, they convert strings to numbers, and then the binary plus sums them up.
+از دیدگاه یک ریاضی‌دان، تعدد علامت + ممکن است عجیب به نظر برسد، اما از دیدگاه یک برنامه‌نویس اینطور نیست.  unary plusهایی که در ابتدا آمده‌اند رشته‌ها را عدد تبدیل می‌کنند و سپس binary plus اعداد را با هم جمع می‌کند.
 
-Why are unary pluses applied to values before the binary ones? As we're going to see, that's because of their *higher precedence*.
+چرا unary plus ها پیش از binary plus ها اعمال شدند؟ به این دلیل که اولویت آنها بالاتر است.
 
-## Operator precedence
+## اولویت عملگرها
 
-If an expression has more than one operator, the execution order is defined by their *precedence*, or, in other words, the implicit priority order of operators.
+اگر در یک عبارت بیش از یک عملگر وجود داشته باشد، ترتیب اجرای آنها بر اساس تقدم آنها خواهد بود.
 
-From school, we all know that the multiplication in the expression `1 + 2 * 2` should be calculated before the addition. That's exactly the precedence thing. The multiplication is said to have *a higher precedence* than the addition.
+از زمان مدرسه همه ما می‌دانیم که در یک عمل ریاضی مانند 1 + 2 * 2 ابتدا عمل ضرب انجام می‌شود و سپس عمل جمع. این همان اولویت عملگرها است. اینکه عمل ضرب اولویت بالاتری نسبت به جمع دارد.
 
-Parentheses override any precedence, so if we're not satisfied with the implicit order, we can use them to change it. For example: `(1 + 2) * 2`.
+پرانتزها بر هر اولویتی، اولویت دارند و زمانی‌که از ترتیب قرارگیری عملگرها راضی نیستیم می‌توانیم با پرانتزها این اولویت را تغییر دهیم.
 
-There are many operators in JavaScript. Every operator has a corresponding precedence number. The one with the larger number executes first. If the precedence is the same, the execution order is from left to right.
+عملگرهای مختلفی در جاوا اسکریپت وجود دارد و هر کدام اولویت مربوط به خود را دارا می‌باشند. در جدول زیر عملگری که عدد بالاتری دارد اولویتش بالاتر است. همینطور اگر دو عملگر عدد یکسانی داشتند اولویت اجرا از چپ به راست (در کد) می‌باشد.
 
-Here's an extract from the [precedence table](https://developer.mozilla.org/en/JavaScript/Reference/operators/operator_precedence) (you don't need to remember this, but note that unary operators are higher than corresponding binary ones):
 
-| Precedence | Name | Sign |
+این یک قسمتی از [precedence table](https://developer.mozilla.org/en/JavaScript/Reference/operators/operator_precedence) است. (نیاز نیست این جدول را حفظ باشید اما توجه داشته باشید که عملگرهای unary از دودویی‌های مربوطشان بالاتر هستند):
+
+| اولویت | نام | علامت |
 |------------|------|------|
 | ... | ... | ... |
-| 16 | unary plus | `+` |
-| 16 | unary negation | `-` |
-| 14 | multiplication | `*` |
-| 14 | division | `/` |
-| 13 | addition | `+` |
-| 13 | subtraction | `-` |
+| 16 | unary جمع | `+` |
+| 16 | unary تفریق | `-` |
+| 14 | ضرب | `*` |
+| 14 | تقسیم | `/` |
+| 13 | جمع | `+` |
+| 13 | تفریق | `-` |
 | ... | ... | ... |
-| 3 | assignment | `=` |
+| 3 | مقدارده | `=` |
 | ... | ... | ... |
 
-As we can see, the "unary plus" has a priority of `16` which is higher than the `13` of "addition" (binary plus). That's why, in the expression `"+apples + +oranges"`, unary pluses work before the addition.
+همانطور که می‌بینیم unary + اولویت 16 دارد که از binary + با اولویت 13 بالاتر است. به همین دلیل است که در عبارت “+apples + +oranges” علامت‌های unary plus پیش از علامت جمع اجرا می‌شوند.
 
-## Assignment
+## مقداردهی
 
-Let's note that an assignment `=` is also an operator. It is listed in the precedence table with the very low priority of `3`.
+در نظر داشته باشید که مقداردهی با علامت = نیز یک عملگر است. در جدول اولویت‌ها با اولویت پایینی (3) قرار گرفته است.
 
-That's why, when we assign a variable, like `x = 2 * 2 + 1`, the calculations are done first and then the `=` is evaluated, storing the result in `x`.
+به همین دلیل است که وقتی متغیری را مقدار دهی می‌کنیم، مانند x = 2 * 2 + 1 ، ابتدا عملیات محاسباتی انجام شده و سپس مقداردهی صورت می‌گیرد. 
 
 ```js
 let x = 2 * 2 + 1;
@@ -164,7 +164,7 @@ let x = 2 * 2 + 1;
 alert( x ); // 5
 ```
 
-It is possible to chain assignments:
+همینطور زنجیر وار نوشتن مقداردهی ها امکان پذیر است:
 
 ```js run
 let a, b, c;
@@ -178,14 +178,14 @@ alert( b ); // 4
 alert( c ); // 4
 ```
 
-Chained assignments evaluate from right to left. First, the rightmost expression `2 + 2` is evaluated and then assigned to the variables on the left: `c`, `b` and `a`. At the end, all the variables share a single value.
+مقداردهی‌های زنجیر وار از سمت راست انجام می‌شوند. یعنی ابتدا 2 + 2 محاسبه می‌شود و در متغیر c سپس b و در آخر در a قرار می‌گیرد. عملا همه متغیرها یک مقدار دارای یک مقدار هستند.
 
-````smart header="The assignment operator `\"=\"` returns a value"
-An operator always returns a value. That's obvious for most of them like addition `+` or multiplication `*`. But the assignment operator follows this rule too.
+````smart header="عملگر `\"=\"` یک مقدار را باز می‌گرداند"
+یک عملگر همیشه مقداری را باز می‌گرداند. این موضوع در مورد عملگری چون جمع + یا ضرب * واضح است، اما برای عملگر = هم چنین قانونی وجود دارد.
 
-The call `x = value` writes the `value` into `x` *and then returns it*.
+عبارت x = value ابتدا value را در x می‌نویسد و سپس آن را باز می‌گرداند.
 
-Here's a demo that uses an assignment as part of a more complex expression:
+در اینجا یک نمونه از مقداردهی به عنوان بخشی از یک عبارت پیچیده‌تر را داریم:
 
 ```js run
 let a = 1;
@@ -199,18 +199,19 @@ alert( a ); // 3
 alert( c ); // 0
 ```
 
-In the example above, the result of `(a = b + 1)` is the value which is assigned to `a` (that is `3`). It is then used to subtract from `3`.
+در مثال بالا، مقدار (a = b + 1) مقداریست که در متغیر a نوشته قرار می‌گیرد (که برابر 3 است). سپس (در ادامه کد) از 3 کم می‌شود.
 
-Funny code, isn't it? We should understand how it works, because sometimes we see it in 3rd-party libraries, but shouldn't write anything like that ourselves. Such tricks definitely don't make code clearer or readable.
+کد جالبی‌ست. ما باید طرز کار آن را یاد بگیریم تا زمانی که در کدهای کتابخانه‌های مختلف با آن روبرو می‌شویم بدانیم که چطور کار می‌کند. ولی نباید به این شکل برنامه‌نویسی کنیم چراکه کدهای ما را ناخوانا می‌کند.
 ````
 
-## Remainder %
+## عملگر باقی مانده %
 
-The remainder operator `%`, despite its appearance, is not related to percents.
 
-The result of `a % b` is the remainder of the integer division of `a` by `b`.
+این عملگر بر خلاف ظاهرش، مربوط به درصد نمی‌باشد. 
 
-For instance:
+نتیجه محاسبه‌ی a % b برابر خواهد بود با باقی‌مانده‌ی تقسیم عدد a بر b.
+
+برای نمونه:
 
 ```js run
 alert( 5 % 2 ); // 1 is a remainder of 5 divided by 2
@@ -218,13 +219,13 @@ alert( 8 % 3 ); // 2 is a remainder of 8 divided by 3
 alert( 6 % 3 ); // 0 is a remainder of 6 divided by 3
 ```
 
-## Exponentiation **
+## عملگر توان **
 
-The exponentiation operator `**` is a recent addition to the language.
+این عملگر اخیرا به جاوا اسکریپت اضافه شد. 
 
-For a natural number `b`, the result of `a ** b` is `a` multiplied by itself `b` times.
+برای عدد طبیعی b ، نتیجه محاسبه a ** b برابر خواهد بود با به تعداد b عدد a ضرب در خودش می‌شود.
 
-For instance:
+برای نمونه:
 
 ```js run
 alert( 2 ** 2 ); // 4  (2 * 2)
@@ -232,31 +233,33 @@ alert( 2 ** 3 ); // 8  (2 * 2 * 2)
 alert( 2 ** 4 ); // 16 (2 * 2 * 2 * 2)
 ```
 
-The operator works for non-integer numbers of `a` and `b` as well.
+این عملگر برای اعداد غیر صحیح نیز کار می‌کند.
 
-For instance:
+برای نمونه:
 
 ```js run
 alert( 4 ** (1/2) ); // 2 (power of 1/2 is the same as a square root, that's maths)
 alert( 8 ** (1/3) ); // 2 (power of 1/3 is the same as a cubic root)
 ```
 
-## Increment/decrement
+## عملگر افزایش/کاهش 
+
 
 <!-- Can't use -- in title, because built-in parse turns it into – -->
 
-Increasing or decreasing a number by one is among the most common numerical operations.
+این عملگرها جزو رایج‌ترین نمونه‌های موجود در کار با اعداد هستند.
 
-So, there are special operators for it:
+بنابراین عملگرهای خاصی برای این موضوع وجود دارند:
 
-- **Increment** `++` increases a variable by 1:
+- افزایش ++ که یک واحد به عدد اضافه می‌کند:
+
 
     ```js run no-beautify
     let counter = 2;
     counter++;      // works the same as counter = counter + 1, but is shorter
     alert( counter ); // 3
     ```
-- **Decrement** `--` decreases a variable by 1:
+- کاهش -- که یک واحد از عدد کم می‌کند:
 
     ```js run no-beautify
     let counter = 2;
@@ -265,21 +268,23 @@ So, there are special operators for it:
     ```
 
 ```warn
-Increment/decrement can only be applied to variables. Trying to use it on a value like `5++` will give an error.
+این عملگرها فقط بر روی اعداد کار می‌کنند و برای نمونه 5++ با خطا مواجه خواهد شد.
 ```
 
-The operators `++` and `--` can be placed either before or after a variable.
+عملگرهای ++ و – می‌توانند پیش و پس از متغیر قرار گیرند.
 
-- When the operator goes after the variable, it is in "postfix form": `counter++`.
-- The "prefix form" is when the operator goes before the variable: `++counter`.
+- وقتی پس از متغیر قرار بگیرد حالت پسوندی دارد counter++
 
-Both of these statements do the same thing: increase `counter` by `1`.
+- وقتی پیش از متغیر قرار گیرد حالت پیشوندی دارد ++counter
 
-Is there any difference? Yes, but we can only see it if we use the returned value of `++/--`.
 
-Let's clarify. As we know, all operators return a value. Increment/decrement is no exception. The prefix form returns the new value while the postfix form returns the old value (prior to increment/decrement).
+هردو گزاره، کار یکسانی می‌کنند. counter را یکی اضافه می‌کنند.
 
-To see the difference, here's an example:
+آیا تفاوتی بین آنها وجود دارد؟ بله، اما فقط با مشاهده‌ی مقدار باز گردانده شده از آن، می‌توانیم این تفاوت را دریابیم.
+
+حالت پیشوندی مقدار جدید را باز می‌گرداند درحالیکه حالت پسوندی مقدار قبلی را باز می‌گرداند.
+
+برای نمونه:
 
 ```js run
 let counter = 1;
@@ -288,9 +293,7 @@ let a = ++counter; // (*)
 alert(a); // *!*2*/!*
 ```
 
-In the line `(*)`, the *prefix* form `++counter` increments `counter` and returns the new value, `2`. So, the `alert` shows `2`.
-
-Now, let's use the postfix form:
+در خط `(*)` حالت پیشوندی ++counter متغیر counter را یک واحد افزایش می‌دهد و مقدار 2 را باز می‌گرداند. در نتیجه alert مقدار 2 را نمایش می‌دهد:
 
 ```js run
 let counter = 1;
@@ -299,11 +302,11 @@ let a = counter++; // (*) changed ++counter to counter++
 alert(a); // *!*1*/!*
 ```
 
-In the line `(*)`, the *postfix* form `counter++` also increments `counter` but returns the *old* value (prior to increment). So, the `alert` shows `1`.
+در خط `(*)‍` حالت پسوندی counter++ مقدار counter را یک واحد افزایش می‌دهد ولی مقدار قبلی این متغیر را باز می‌گرداند. در نتیجه alert مقدار 1 را نمایش می‌دهد.
 
-To summarize:
+در نتیجه:
 
-- If the result of increment/decrement is not used, there is no difference in which form to use:
+- اگر مقدار بازگشتی از عملگرهای ++ و – مورد استفاده قرار نگیرد، تفاوتی در استفاده از آنها وجود ندارد:
 
     ```js run
     let counter = 0;
@@ -311,41 +314,41 @@ To summarize:
     ++counter;
     alert( counter ); // 2, the lines above did the same
     ```
-- If we'd like to increase a value *and* immediately use the result of the operator, we need the prefix form:
+    - اگر می‌خواهیم مقداری را افزایش داده و بلافاصله از نتیجه عملگر استفاده نماییم، باید از حالت پیشوندی استفاده کنیم:
 
     ```js run
     let counter = 0;
     alert( ++counter ); // 1
     ```
-- If we'd like to increment a value but use its previous value, we need the postfix form:
-
+    - اگر می‌خواهیم مقداری را افزایش داده و از مقدار قبلی آن استفاده نماییم باید از حالت پسوندی استفاده کنیم:
+    
     ```js run
     let counter = 0;
     alert( counter++ ); // 0
     ```
 
-````smart header="Increment/decrement among other operators"
-The operators `++/--` can be used inside expressions as well. Their precedence is higher than most other arithmetical operations.
+````smart header="عملگرهای افزایش و کاهش در بین دیگر عملگرها"
+عملگرهای ++ و – در عبارات (expressions) قابل استفاده هستند. اولویت آنها از اکثر عملگرهای ریاضیاتی بالاتر است.
 
-For instance:
+برای نمونه:
 
 ```js run
 let counter = 1;
 alert( 2 * ++counter ); // 4
 ```
 
-Compare with:
+در مقایسه با:
 
 ```js run
 let counter = 1;
 alert( 2 * counter++ ); // 2, because counter++ returns the "old" value
 ```
 
-Though technically okay, such notation usually makes code less readable. One line does multiple things -- not good.
+با اینکه از نظر فنی مشکلی ندارد ولی چنین روشی خوانایی کد را کاهش می‌دهد. اینکه یک خط کارهای مختلفی انجام می‌دهد مناسب نیست.
 
-While reading code, a fast "vertical" eye-scan can easily miss something like `counter++` and it won't be obvious that the variable increased.
+در هنگام خواندن کدها، چشم به صورت عمودی و با سرعت کدها را می‌خوانند و چیزی مانند counter++ و افزایش مقدار counter به سادگی از چشم پنهان می‌ماند.
 
-We advise a style of "one line -- one action":
+ما پیشنهاد می‌کنیم هر عمل را در یک خط بنویسید:
 
 ```js run
 let counter = 1;
@@ -354,13 +357,13 @@ counter++;
 ```
 ````
 
-## Bitwise operators
+## عملگرهای بیتی
 
-Bitwise operators treat arguments as 32-bit integer numbers and work on the level of their binary representation.
+عملگرهای بیتی با آرگومان‌ها به شکل اعداد صحیح ۳۲ بیتی رفتار میکنند و در سطح نمایش دودویی با آنها کار میکنند. 
 
-These operators are not JavaScript-specific. They are supported in most programming languages.
+این عملگرها فقط برای جاوا اسکریپت نیستند و در اکثر زبان‌های برنامه نویسی پشتیبانی می‌شوند.
 
-The list of operators:
+لیست عملگرها:
 
 - AND ( `&` )
 - OR ( `|` )
@@ -370,13 +373,12 @@ The list of operators:
 - RIGHT SHIFT ( `>>` )
 - ZERO-FILL RIGHT SHIFT ( `>>>` )
 
-These operators are used very rarely. To understand them, we need to delve into low-level number representation and it would not be optimal to do that right now, especially since we won't need them any time soon. If you're curious, you can read the [Bitwise Operators](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators) article on MDN. It would be more practical to do that when a real need arises.
+این عملگرها به ندرت استفاده می‌شوند. برای درک آنها، باید به سطح زبان سیستم در نمایش اعداد برویم و اصلا این کار، کار بهینه‌ای در حال حاضر نیست و حتی به آنها هم در آینده‌ی نزدیک نیاز نداریم. اگر علاقه‌مند هستید میتوانید [Bitwise Operators](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators) را بخوانید. خیلی منطقی‌تر است که وقتی واقعا به آن نیازمند هستید آن را استفاده کنید. 
+## تغییر در همان محل
 
-## Modify-in-place
+ما اغلب نیاز داریم تا یک عملگر را روی متغیری اعمال کنیم و مقدار جدید را در همان متغیر ذخیره کنیم.
 
-We often need to apply an operator to a variable and store the new result in that same variable.
-
-For example:
+به عنوان مثال:
 
 ```js
 let n = 2;
@@ -384,7 +386,7 @@ n = n + 5;
 n = n * 2;
 ```
 
-This notation can be shortened using the operators `+=` and `*=`:
+عملگرها میتوانند به شکل خلاصه `*=` و `+=` نوشته شوند:
 
 ```js run
 let n = 2;
@@ -394,9 +396,9 @@ n *= 2; // now n = 14 (same as n = n * 2)
 alert( n ); // 14
 ```
 
-Short "modify-and-assign" operators exist for all arithmetical and bitwise operators: `/=`, `-=`, etc.
+این سبک عملگرها برای تمامی عملگرهای بیتی و ریاضی وجود دارند: `/=`، `-=` و غیره.
 
-Such operators have the same precedence as a normal assignment, so they run after most other calculations:
+این عملگرها اولویت یکسانی با بقیه انواع مقداردهی‌ها دارند بنابراین بعد اکثر محاسبات اجرا می‌شوند:
 
 ```js run
 let n = 2;
@@ -406,13 +408,13 @@ n *= 3 + 5;
 alert( n ); // 16  (right part evaluated first, same as n *= 8)
 ```
 
-## Comma
+## کاما
 
-The comma operator `,` is one of the rarest and most unusual operators. Sometimes, it's used to write shorter code, so we need to know it in order to understand what's going on.
+عملگر `,` یکی از نادرترین و غیرمعمول ترین عملگر‌هاست. بعضی اوقات، برای نوشتن کد کوتاه‌تر است پس ما نیاز داریم که متوجه بشویم که چه اتفاقی در حال رخ دادن است.
 
-The comma operator allows us to evaluate several expressions, dividing them with a comma `,`. Each of them is evaluated but only the result of the last one is returned.
+این عملگر به ما اجازه ارزیابی برخی عبارت را می‌دهد که با یک کاما از یکدیگر جدا می‌شوند. هر کدام از آنها هم محاسبه و ارزیابی می‌شود اما تنها جواب آخری برگردانده می‌شود.
 
-For example:
+به عنوان مثال:
 
 ```js run
 *!*
@@ -422,25 +424,26 @@ let a = (1 + 2, 3 + 4);
 alert( a ); // 7 (the result of 3 + 4)
 ```
 
-Here, the first expression `1 + 2` is evaluated and its result is thrown away. Then, `3 + 4` is evaluated and returned as the result.
 
-```smart header="Comma has a very low precedence"
-Please note that the comma operator has very low precedence, lower than `=`, so parentheses are important in the example above.
+اولین عبارت ۱ +‌ ۲ محاسبه می‌شود و جوابش دور ریخته می‌شود. سپس، ۳ + ۴ محاسبه می‌شود و به عنوان جواب بازگردانده می‌شود.
+```smart header="کاما اولیویت بسیار کمی دارد"
 
-Without them: `a = 1 + 2, 3 + 4` evaluates `+` first, summing the numbers into `a = 3, 7`, then the assignment operator `=` assigns    `a = 3`, and finally the number after the comma, `7`, is not processed so it's ignored.
+توجه داشته باشید که عملگر کاما اولویت بسیار کمی دارد، کمتر از `=`، بنابراین پرانتزها در مثال بالا مهم هستند.
+
+بدون آنها: `a = 1 + 2, 3 + 4` اول عملگر جمع را محاسبه می‌کند، یعنی نتیجه می‌شود `a = 3, 7`، سپس عملگر `=` باعث می‌شود که `a = 3` و در نهایت عدد بعد از کاما، یعنی هفت، پردازش نمی‌شود. 
 ```
 
-Why do we need an operator that throws away everything except the last part?
+چرا عملگری نیاز داریم که هرچیزی را به جز قسمت آخر دور میریزد؟
 
-Sometimes, people use it in more complex constructs to put several actions in one line.
+بعضی اوقات، در ساختارهای پیچیده برای انجام عمل‌های متعددی در یک خط استفاده می‌شود.
 
-For example:
+برای نمونه:
 
 ```js
-// three operations in one line
+// سه عملگر در یک خط
 for (*!*a = 1, b = 3, c = a * b*/!*; a < 10; a++) {
  ...
 }
 ```
 
-Such tricks are used in many JavaScript frameworks. That's why we're mentioning them. But, usually, they don't improve code readability so we should think well before using them.
+چنین عملیاتی در frameworkهای جاوا اسکریپت خیلی استفاده می‌شوند. به همین علت است که آنهارا توضیح داد. اما عموما، خوانایی کد را بهبود نمی‌بخشند بنابراین قبل از استفاده کردن آنها باید فکر کنیم.
