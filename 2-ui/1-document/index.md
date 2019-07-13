@@ -1,3 +1,3 @@
 # Document
 
-Here we'll learn to manipulate a web-page using JavaScript.
+در این قسمت ما یاد میگیریم که چگونه با کمک جاوااسکریپت در یک صفحه‌ی وب دست ببریم و تغییرش دهیم.
