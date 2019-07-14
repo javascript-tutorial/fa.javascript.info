@@ -1,18 +1,18 @@
-# Functions
+# توابع (Functions)
 
-Quite often we need to perform a similar action in many places of the script.
 
-For example, we need to show a nice-looking message when a visitor logs in, logs out and maybe somewhere else.
+اغلب اوقات ما نیاز داریم یک مجموعه‌ای از دستورهارا در خیلی از جاهای کد چندین بار اجرا کنیم.
+برای مثال، میخواهیم که پیغامی زیبا برای کسی که وارد صفحه‌ای میشود یا خارج می‌شود یا جاهایی دیگر بفرستیم.
 
-Functions are the main "building blocks" of the program. They allow the code to be called many times without repetition.
+توابع بلوک‌های ساختمانی اصلی یک برنامه‌ند. آنها به کد اجازه‌ی فراخوانی شدن چند باره را بدون تکرار می‌دهند.
 
-We've already seen examples of built-in functions, like `alert(message)`, `prompt(message, default)` and `confirm(question)`. But we can create functions of our own as well.
+ما مثال‌هایی از توابع درون سیستمی مثل `alert(message)`، `prompt(message, default)` و `confirm(question)` را دیده‌ایم. اما میتوانیم توابع خودمان را هم بسازیم.
 
-## Function Declaration
+## تعریف توابع (Function Declaration)
 
-To create a function we can use a *function declaration*.
+برای ساختن یک تابع ما به تعریف کردن تابع نیاز خواهیم داشت.‌(*function declaration*)
 
-It looks like this:
+چیزی شبیه:
 
 ```js
 function showMessage() {
@@ -20,13 +20,12 @@ function showMessage() {
 }
 ```
 
-The `function` keyword goes first, then goes the *name of the function*, then a list of *parameters* between the parentheses (empty in the example above) and finally the code of the function, also named "the function body", between curly braces.
-
+کلمه‌ی `function` اول می‌آید، سپس اسم تابع و سپس لیستی از پارامترها داخل پرانتز (در مثال بالا داخل پرانتزها خالی‌ست) و در نهایت کد تابع، با نام بدنه‌ی تابع، که توسط دو براکت محصور شده است.
 ![](function_basics.png)
 
-Our new function can be called by its name: `showMessage()`.
+تابع جدید ما می‌تواند با اسمش صدا زده شود: `showMessage()`.
 
-For instance:
+برای نمونه:
 
 ```js run
 function showMessage() {
@@ -38,18 +37,17 @@ showMessage();
 showMessage();
 */!*
 ```
+فراخوانی `showMessage()` کد درون تابع را اجرا می‌کند. در اینجا ما پیغام را دوبار خواهیم دید.
 
-The call `showMessage()` executes the code of the function. Here we will see the message two times.
+این مثال یکی از اهداف اصلی توابع را نشان می‌دهد: اجتناب از کد تکراری.
 
-This example clearly demonstrates one of the main purposes of functions: to avoid code duplication.
+اگر ما نیاز داشته باشیم نحوه‌ای که پیغام نشان داده می‌شود را عوض کنیم، تنها لازم است که کد را در یک قسمت تغییر دهیم: تابعی که آن را خروجی می‌دهد.
 
-If we ever need to change the message or the way it is shown, it's enough to modify the code in one place: the function which outputs it.
+## متغیرهای محلی (Local variables)
 
-## Local variables
+اگر یک متغیر در درون تابع تعریف شود، فقط در درون همان تابع قابل استفاده است. 
 
-A variable declared inside a function is only visible inside that function.
-
-For example:
+برای نمونه:
 
 ```js run
 function showMessage() {
@@ -65,9 +63,9 @@ showMessage(); // Hello, I'm JavaScript!
 alert( message ); // <-- Error! The variable is local to the function
 ```
 
-## Outer variables
+## متغیرهای بیرونی (Outer variables)
 
-A function can access an outer variable as well, for example:
+یک تابع می‌تواند به متغیر درونی دسترسی داشته باشد، به عنوان مثال:
 
 ```js run no-beautify
 let *!*userName*/!* = 'John';
@@ -80,9 +78,8 @@ function showMessage() {
 showMessage(); // Hello, John
 ```
 
-The function has full access to the outer variable. It can modify it as well.
-
-For instance:
+تابع دسترسی کامل به متغیر بیرونی دارد. همینطور میتواند آنرا تغییر هم بدهد.
+برای مثال:
 
 ```js run
 let *!*userName*/!* = 'John';
@@ -101,16 +98,16 @@ showMessage();
 alert( userName ); // *!*Bob*/!*, the value was modified by the function
 ```
 
-The outer variable is only used if there's no local one. So an occasional modification may happen if we forget `let`.
+متغیر بیرونی فقط در مواقعی مورد استفاده قرار میگیرد که متغیر محلی‌ای وجود نداشته باشد. در صورت فراموش کردن `let` ممکن است یک تغییر گاه‌به‌گاهی صورت بگیرد.
 
-If a same-named variable is declared inside the function then it *shadows* the outer one. For instance, in the code below the function uses the local `userName`. The outer one is ignored:
+اگر یک متغیر هم‌نام در درون تابع تعریف شود، جانشین متغیر بیرونی می‌شود. برای مثال، در کد زیر، تابع از متغیر محلی `userName` استفاده می‌کند و متغیر بیرونی نادیده گرفته می‌شود:
 
 ```js run
 let userName = 'John';
 
 function showMessage() {
 *!*
-  let userName = "Bob"; // declare a local variable
+  let userName = "Bob"; // تعریف یک متغیر محلی
 */!*
 
   let message = 'Hello, ' + userName; // *!*Bob*/!*
@@ -123,19 +120,19 @@ showMessage();
 alert( userName ); // *!*John*/!*, unchanged, the function did not access the outer variable
 ```
 
-```smart header="Global variables"
-Variables declared outside of any function, such as the outer `userName` in the code above, are called *global*.
+```smart header="متغیرهای سراسری (Global Variables)"
+متغیرهای تعریف شده بیرون از هر تابعی، مثل `userName` در کد بالا، سراسری نامیده می‌شوند.
 
-Global variables are visible from any function (unless shadowed by locals).
+متغیرهای سراسری برای هر تابعی قابل استفاده است (مگر اینکه متغیری محلی آن را تغییر دهد).
 
-Usually, a function declares all variables specific to its task. Global variables only store project-level data, and it's important that these variables are accessible from anywhere. Modern code has few or no globals. Most variables reside in their functions.
+معمولا، یک تابع تمام متغیرهای مربوط به کارش را تعریف می‌کند. متغیرهای سراسری فقط اطلاعات سطح-پروژه را ذخیره می‌کنند و مهم است که این متغیرها قابل دسترسی از هرجایی باشند. کدهای جدید متغیرهای سراسری کمی دارند یا اصلا ندارند. اکثر متغیرها در درون تابع‌ هایشان تعریف می‌شوند.
 ```
 
-## Parameters
+## پارامترها
 
-We can pass arbitrary data to functions using parameters (also called *function arguments*) .
+ما میتوانیم اطلاعات دلخواهی را به توابع با کمک پارامترها پاس بدهیم. (همچنین به آنها آرگومان‌های تابع گفته می‌شود.)
 
-In the example below, the function has two parameters: `from` and `text`.
+در مثال زیر، تابع دو پارامتر دارد: `from` و `text`.
 
 ```js run
 function showMessage(*!*from, text*/!*) { // arguments: from, text
@@ -148,10 +145,8 @@ showMessage('Ann', "What's up?"); // Ann: What's up? (**)
 */!*
 ```
 
-When the function is called in lines `(*)` and `(**)`, the given values are copied to local variables `from` and `text`. Then the function uses them.
-
-Here's one more example: we have a variable `from` and pass it to the function. Please note: the function changes `from`, but the change is not seen outside, because a function always gets a copy of the value:
-
+وقتی تابع در خطوط `(*)` و `(**)` صدا زده می‌شود، مقادیر داده شده در متغیرهای محلی `from` و `text` کپی می‌شوند. سپس، تابع از آنها استفاده می‌کند.
+مثالی دیگر: یک متغیر `from` داریم و به تابع پاس میدهیم. توجه کنید: تابع، `from` را تغییر می‌دهد، اما تغییر در بیرون دیده نمی‌شود، چراکه تابع همیشه یک کپی از مقدار آن را میگیرد:
 
 ```js run
 function showMessage(from, text) {
@@ -171,19 +166,19 @@ showMessage(from, "Hello"); // *Ann*: Hello
 alert( from ); // Ann
 ```
 
-## Default values
+## مقادیر پیش‌فرض
 
-If a parameter is not provided, then its value becomes `undefined`.
+اگر پارامتری فراهم نشده باشد، مقادیر آن `undefined` می‌شوند.
 
-For instance, the aforementioned function `showMessage(from, text)` can be called with a single argument:
+برای مثال، تابع `showMessage(from, text)`، میتواند با یک آرگومان صدا زده شود:
 
 ```js
 showMessage("Ann");
 ```
 
-That's not an error. Such a call would output `"Ann: undefined"`. There's no `text`, so it's assumed that `text === undefined`.
+این یک خطا نیست. خروجی این فراخوانی `"Ann: undefined"` است. `text` نداریم پس پیش‌فرض این است که `text === undefined`.
 
-If we want to use a "default" `text` in this case, then we can specify it after `=`:
+اگر ما میخواهیم یک پیش‌فرض `text` در این حالت استفاده بکنیم، میتوانیم بعد از `=` مشخصش کنیم:
 
 ```js run
 function showMessage(from, *!*text = "no text given"*/!*) {
@@ -193,9 +188,9 @@ function showMessage(from, *!*text = "no text given"*/!*) {
 showMessage("Ann"); // Ann: no text given
 ```
 
-Now if the `text` parameter is not passed, it will get the value `"no text given"`
+حالا اگر `text` پارامتر پاس داده نشود، مقدار `"no text given"` را می‌گیرد.
 
-Here `"no text given"` is a string, but it can be a more complex expression, which is only evaluated and assigned if the parameter is missing. So, this is also possible:
+اینجا `"no text given"` یک رشته‌ی حرفی‌ست، اما میتواند عبارت پیچیده‌تری باشد، که تنها در حالتی ارزیابی و مقداردهی می‌شود که پارامتری وجود نداشته باشد. همچنین، این هم ممکن است:
 
 ```js run
 function showMessage(from, text = anotherFunction()) {
@@ -204,17 +199,16 @@ function showMessage(from, text = anotherFunction()) {
 }
 ```
 
-```smart header="Evaluation of default parameters"
+```smart header="ارزیابی پارامترهای پیش‌فرض"
 
-In JavaScript, a default parameter is evaluated every time the function is called without the respective parameter. In the example above, `anotherFunction()` is called every time `showMessage()` is called without the `text` parameter. This is in contrast to some other languages like Python, where any default parameters are evaluated only once during the initial interpretation.
-
+در جاوااسکریپت، یک پارامتر پیش‌فرض هربار که تابع صدا زده می‌شود، بدون پارامتر مربوطه، محاسبه می‌شود. در مثال بالا،  `anotherFunction()` هربار که `showMessage()` صدا زده می‌شود، فراخوانی می‌شود بدون توجه به پارامتر `text`. این در زبان‌های دیگری مثل پایتون فرق دارد که هر پارامتر پیش‌فرضی فقط یک بار در مقداردهی اولیه ارزیابی می‌شود.
 ```
 
 
-````smart header="Default parameters old-style"
-Old editions of JavaScript did not support default parameters. So there are alternative ways to support them, that you can find mostly in the old scripts.
+````smart header="پارامترهای پیش‌فرض قدیمی"
+ورژن‌های قدیمی جاوااسکریپت از پارامترهای پیش‌فرض پشتیبانی نمیکردند. بنابراین برای پشتیبانی راه‌های فرعی‌ای وجود داشت که میتوانید در کد‌های قدیمی بیابید.
 
-For instance, an explicit check for being `undefined`:
+برای نمونه، یک آزمون ساده برای بررسی `undefined`:
 
 ```js
 function showMessage(from, text) {
@@ -242,11 +236,11 @@ function showMessage(from, text) {
 ````
 
 
-## Returning a value
+## بازگردانی مقدار یک (Returning a value)
 
-A function can return a value back into the calling code as the result.
+یک تابع می‌تواند مقداری را در فراخوانی کد به عنوان یک جواب بازگرداند.
 
-The simplest example would be a function that sums two values:
+ساده‌ترین مثال یک تابعی‌ست که جمع دو عدد را حساب می‌کند:
 
 ```js run no-beautify
 function sum(a, b) {
@@ -257,9 +251,9 @@ let result = sum(1, 2);
 alert( result ); // 3
 ```
 
-The directive `return` can be in any place of the function. When the execution reaches it, the function stops, and the value is returned to the calling code (assigned to `result` above).
+`return` میتواند در هرجایی از تابع باشد. وقتی اجرای تابع به آن می‌رسد، تابع متوقف می‌شود و مقدار به کد صدازده شده، بازگردانده ‌می‌شود (که در کد بالا `result` است.)
 
-There may be many occurrences of `return` in a single function. For instance:
+`return` ممکن است در یک تابع بارها ظاهر شود. برای مثال:
 
 ```js run
 function checkAge(age) {
@@ -283,9 +277,9 @@ if ( checkAge(age) ) {
 }
 ```
 
-It is possible to use `return` without a value. That causes the function to exit immediately.
+همچنین ممکن است که `return` را بدون مقدار استفاده کرد. این باعث می‌شود که تابع در همان لحظه خارج شود.
 
-For example:
+برای مثال:
 
 ```js
 function showMovie(age) {
@@ -300,10 +294,10 @@ function showMovie(age) {
 }
 ```
 
-In the code above, if `checkAge(age)` returns `false`, then `showMovie` won't proceed to the `alert`.
+در کد بالا، اگر `checkAge(age)`، `false` برگرداند، سپس، `showMovie` به `alert` نمیرسد.
+````smart header="یک تابع با مقدار خالی `return` یا بدون آن، `undefined` بازمیگرداند."
 
-````smart header="A function with an empty `return` or without it returns `undefined`"
-If a function does not return a value, it is the same as if it returns `undefined`:
+اگر یک تابع مقداری را برنگرداند، مثل این میماند که `undefined` را برگردانده باشد:
 
 ```js run
 function doNothing() { /* empty */ }
@@ -311,7 +305,7 @@ function doNothing() { /* empty */ }
 alert( doNothing() === undefined ); // true
 ```
 
-An empty `return` is also the same as `return undefined`:
+مقدار `return` خالی، مثل `return undefined` است:
 
 ```js run
 function doNothing() {
@@ -322,80 +316,80 @@ alert( doNothing() === undefined ); // true
 ```
 ````
 
-````warn header="Never add a newline between `return` and the value"
-For a long expression in `return`, it might be tempting to put it on a separate line, like this:
+````warn header="هرگز خط خالی بین `return` و مقدار نگذارید"
+
+برای جمله‌ای طولانی در `return`، شاید وسوسه کننده به نظر برسد که در یک خطی جدا بدین شکل بگذاریم:
 
 ```js
 return
  (some + long + expression + or + whatever * f(a) + f(b))
 ```
-That doesn't work, because JavaScript assumes a semicolon after `return`. That'll work the same as:
+
+اما این کار نمیکند چون جاوااسکریپت بعد `return` یک `;` فرض میگیرد. مثل:
 
 ```js
 return*!*;*/!*
  (some + long + expression + or + whatever * f(a) + f(b))
 ```
-So, it effectively becomes an empty return. We should put the value on the same line instead.
+
+بنابراین، به یک بازگردانی خالی تبدیل می‌شود. باید مقدار را دقیقا در همان خط بگذاریم.
 ````
 
-## Naming a function [#function-naming]
+## نامگذاری یک تابع [#function-naming]
 
-Functions are actions. So their name is usually a verb. It should be brief, as accurate as possible and describe what the function does, so that someone reading the code gets an indication of what the function does.
+توابع، اعمال هستند. بنابراین اسم آنها عموما یک فعل است. باید خلاصه باشد و با بیشترین دقت ممکن، فعالیت تابع را توصیف کند که اگر کسی کد را مطالعه می‌کرد متوجه نوع فعالیت تابع بشود.
 
-It is a widespread practice to start a function with a verbal prefix which vaguely describes the action. There must be an agreement within the team on the meaning of the prefixes.
+این یک روش معمول است که تابع را با پیشوند فعلی شروع کنیم که کارش را به گنگی توصیف کند. یک توافقی در تیم باید بر معنی‌های این پیشوندها باشد.
 
-For instance, functions that start with `"show"` usually show something.
-
+برای نمونه، توابعی که با `"show"` شروع میشوند، معمولی چیزی را نمایش می‌دهند.
 Function starting with...
+توابعی که با این‌ها شروع میشوند...
+- `"get…"` -- یک مقداری را بازمیگرداند،
+- `"calc…"` -- چیزی را محاسبه می‌کند،
+- `"create…"` -- چیزی را می‌سازد،
+- `"check…"` -- چیزی را بررسی می‌کند و مقدار بولی برمی‌گرداند و غیره.
 
-- `"get…"` -- return a value,
-- `"calc…"` -- calculate something,
-- `"create…"` -- create something,
-- `"check…"` -- check something and return a boolean, etc.
-
-Examples of such names:
+نمونه‌هایی از چنین نام‌هایی:
 
 ```js no-beautify
-showMessage(..)     // shows a message
-getAge(..)          // returns the age (gets it somehow)
-calcSum(..)         // calculates a sum and returns the result
-createForm(..)      // creates a form (and usually returns it)
-checkPermission(..) // checks a permission, returns true/false
+showMessage(..)     // پیغامی را نشان می‌دهد.
+getAge(..)          // سن را برمی‌گرداند که به نحوی مقدارش به آن رسیده
+calcSum(..)         // جمع میکند و جواب را برمی‌گرداند
+createForm(..)      // یک فرم میسازد و عموما آن را برمی‌گرداند
+checkPermission(..) // یک سطح دسترسی را بررسی میکند و صحیح و غلط برمیگرداند
 ```
 
-With prefixes in place, a glance at a function name gives an understanding what kind of work it does and what kind of value it returns.
+با پیشوند‌ها در جای خود، نگاهی به نام تابع، درکی از نوع کار و مقداری که برمیگرداند را به ما می‌دهد.
 
-```smart header="One function -- one action"
-A function should do exactly what is suggested by its name, no more.
+```smart header="یک تابع، یک فعالیت"
+یک تابع بایستی چیزی که از نامش پیداست را انجام بدهد، نه بیشتر.
 
-Two independent actions usually deserve two functions, even if they are usually called together (in that case we can make a 3rd function that calls those two).
+دو فعالیت مستقل،‌ عموما به دو تابع نیاز دارند، حتی اگر عموما باهم نامیده می‌شوند (در این حالت می‌توانیم یک تابع سومی بسازیم که دوتای دیگر را صدا می‌زند)
 
-A few examples of breaking this rule:
+مثال هایی از شکستن این قانون:
+- `getAge` -- کار خوبی نیست اگر یک `alert` را نشان بدهد با سن (فقط باید دریافت کند).
 
-- `getAge` -- would be bad if it shows an `alert` with the age (should only get).
-- `createForm` -- would be bad if it modifies the document, adding a form to it (should only create it and return).
-- `checkPermission` -- would be bad if it displays the `access granted/denied` message (should only perform the check and return the result).
+- `createForm` -- کار خوبی نیست اگر document را تغییر بدهد یا فرمی به آن اضافه کند (باید فقط آنرا بسازد و برگرداند).
 
-These examples assume common meanings of prefixes. What they mean for you is determined by you and your team. Maybe it's pretty normal for your code to behave differently. But you should have a firm understanding of what a prefix means, what a prefixed function can and cannot do. All same-prefixed functions should obey the rules. And the team should share the knowledge.
+
+- `checkPermission` -- کار خوبی نیست اگر پیام `access granted/denied` را نشان دهد (فقط باید بررسی را اجرا کند و مقدار را برگرداند).
+
+این مثال‌ها معانی مشترکی از پیشوند‌ها را فرض می‌کنند. اینکه چه معنی‌ای برای شما دارد توسط خود شما و تیمتان مشخص می‌شود. شاید خیلی برایتان عادی باشد که کدتان متفاوت رفتار کند. اما شما باید یک درک قاطع از اینکه آنها چه معنی ای میدهند و هر تابعی چه کاری را میکند و چه کاری را نمیکند
 ```
 
-```smart header="Ultrashort function names"
-Functions that are used *very often* sometimes have ultrashort names.
-
-For example, the [jQuery](http://jquery.com) framework defines a function with `$`. The [LoDash](http://lodash.com/) library has its core function named `_`.
-
-These are exceptions. Generally functions names should be concise and descriptive.
+```smart header="نام‌های خیلی کوتاه تابع"
+توابعی که بیشتر مورد استفاده قرار می‌گیرند، بعضی اوقات اسم‌های خیلی کوتاهی دارند.
+برای مثال، فریمورک [jQuery](http://jquery.com) یک تابع را با `$` تعریف می‌کند. کتابخانه‌ [LoDash](http://lodash.com/) هم تابع اصلی‌ش با نام `_` است.
+اینها استثنا هستند. عموما اسم‌های توابع باید مختصر و توصیفی باشند.
 ```
 
 ## Functions == Comments
 
-Functions should be short and do exactly one thing. If that thing is big, maybe it's worth it to split the function into a few smaller functions. Sometimes following this rule may not be that easy, but it's definitely a good thing.
+توابع باید کوتاه باشند و دقیقا یک کار مشخص را انجام بدهند. اگر آن کار بزرگ است شاید نیاز باشد که تابع را به چند تابع کوچکتر بشکانیم. گاهی اوقات دنبال کردن این قانون کار ساده‌ای نیست اما قطعا در کل چیز مفید و خوبی‌ست.
 
-A separate function is not only easier to test and debug -- its very existence is a great comment!
-
-For instance, compare the two functions `showPrimes(n)` below. Each one outputs [prime numbers](https://en.wikipedia.org/wiki/Prime_number) up to `n`.
-
-The first variant uses a label:
+یک تابع مجزا نه تنها برای آزمودن و Debug کردن ساده‌تر است بلکه حتی وجود داشتنش هم توصیفی از نحوه کارکرد است. 
+برای نمونه، دو تابع `showPrimes(n)` زیر را مقاسیه کنید. هر یک [prime numbers](https://en.wikipedia.org/wiki/Prime_number) را تا `n` خروجی می‌دهد.
+حالت اول:
 
 ```js
 function showPrimes(n) {
@@ -410,7 +404,7 @@ function showPrimes(n) {
 }
 ```
 
-The second variant uses an additional function `isPrime(n)` to test for primality:
+در حالت دوم، از یک تابع افزوده‌ای به نام `isPrime(n)` استفاده می‌شود:
 
 ```js
 function showPrimes(n) {
@@ -430,13 +424,11 @@ function isPrime(n) {
 }
 ```
 
-The second variant is easier to understand, isn't it? Instead of the code piece we see a name of the action (`isPrime`). Sometimes people refer to such code as *self-describing*.
+حالت دوم قابل فهم‌تر است، نه؟ تفاوت حالت دوم این است که به جای کد، یک تابع با نام (`isPrime`) اضافه شده است. بعضی اوقات به اینجور کدها، کدهای خود-توصیف میگویند.
+بنابراین، حتی اگر ما قصد استفاده دوباره تابع را نداریم، توابع می‌توانند ساخته شوند.
+## خلاصه
 
-So, functions can be created even if we don't intend to reuse them. They structure the code and make it readable.
-
-## Summary
-
-A function declaration looks like this:
+یک تعریف تابع شبیه این است:
 
 ```js
 function name(parameters, delimited, by, comma) {
@@ -444,18 +436,17 @@ function name(parameters, delimited, by, comma) {
 }
 ```
 
-- Values passed to a function as parameters are copied to its local variables.
-- A function may access outer variables. But it works only from inside out. The code outside of the function doesn't see its local variables.
-- A function can return a value. If it doesn't, then its result is `undefined`.
+- مقادیر پاس داده شده به یک تابع به عنوان پارامتر، در متغیرهای محلی کپی می‌شوند.
+- یک تابع ممکن است به متغیرهای بیرونی هم دسترسی داشته باشد. اما کد بیرون از تابع، متغیرهای محلی را نمی‌بیند.
+- یک تابع میتواند یک مقدار را برگرداند. در غیراینصورت مقدار `undefined` را برمی‌گرداند.
 
-To make the code clean and easy to understand, it's recommended to use mainly local variables and parameters in the function, not outer variables.
+برای قابل فهم کردن و تمیز کردن کد، توصیه می‌شود از متغیرهای محلی و پارامترهای تابع را استفاده کنیم تا متغیرهای بیرونی.
+فهم اینکه یک تابع پارامترها را میگیرد و با آنها کار می‌کند و سپس یک خروجی می‌دهد همیشه ساده‌تر است تا اینکه یک تابع که هیچ پارامتری نمی‌گیرد اما متغیرهای بیرونی را تغییر می‌دهد.
 
-It is always easier to understand a function which gets parameters, works with them and returns a result than a function which gets no parameters, but modifies outer variables as a side-effect.
+نامگذاری تابع:
 
-Function naming:
+- یک نام، واضحا توضیح می‌دهد که تابع چه کاری انجام می‌دهد. وقتی یک تابعی در کد صدا زده می‌شود، یک اسم خوب سریعا باعث می‌شود ما متوجه شویم که چه کاری می‌کند و چه چیزی را برمی‌گرداند.
+- یک تابع، یک فعالیت است، بنابراین اسم توابع عموما افعال خطابی هستند.
 
-- A name should clearly describe what the function does. When we see a function call in the code, a good name instantly gives us an understanding what it does and returns.
-- A function is an action, so function names are usually verbal.
-- There exist many well-known function prefixes like `create…`, `show…`, `get…`, `check…` and so on. Use them to hint what a function does.
-
-Functions are the main building blocks of scripts. Now we've covered the basics, so we actually can start creating and using them. But that's only the beginning of the path. We are going to return to them many times, going more deeply into their advanced features.
+پیشوندهای توابع شناخته‌شده زیادی مثل `create…`، `show…`، `get…`، `check…` و غیره وجود دارد. از آنها برای نشان دادن اینکه تابع چه کاری می‌کند استفاده کنید.
+توابع، بلوک‌های اصلی ساختمان یک کد هستند. ما مباحث پایه‌ای را پوشش دادیم حالا می‌توانیم آنها را بسازیم و استفاده کنیم. اما این تنها شروع راه است. باز به این مبحث برخواهیم گشت و دقیق‌تر خواهیم شد.
