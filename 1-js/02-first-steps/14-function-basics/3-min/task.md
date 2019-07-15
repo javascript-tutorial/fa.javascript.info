@@ -4,7 +4,6 @@ importance: 1
 
 # تابع min(a, b)
 
-Write a function `min(a,b)` which returns the least of two numbers `a` and `b`.
 تابع `min(a,b)` را بنویسید که کمترین را از دو عدد `a` و `b` خروجی می‌دهد.
 
 برای نمونه:
