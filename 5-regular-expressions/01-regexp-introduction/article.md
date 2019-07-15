@@ -85,7 +85,7 @@ alert( "I love JavaScript".search(regexp));
 
 Regular expressions may have flags that affect the search.
 
-There are only 5 of them in JavaScript:
+There are only 6 of them in JavaScript:
 
 `i`
 : With this flag the search is case-insensitive: no difference between `A` and `a` (see the example below).
