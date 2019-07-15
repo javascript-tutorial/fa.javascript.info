@@ -2,25 +2,25 @@ importance: 4
 
 ---
 
-# Rewrite the function using '?' or '||'
+# تابع را با کمک '?' یا '||' بازنویسی کنید
 
-The following function returns `true` if the parameter `age` is greater than `18`.
+تابع زیر `true` را برمیگرداند اگر پارامتر `age` از `18` بزرگتر باشد.
+فلان را برمیگرداند
 
-Otherwise it asks for a confirmation and returns its result.
+در غیر اینصورت برای تأیید سوال می‌پرسد و سپس جواب را بر‌میگرداند:
 
 ```js
 function checkAge(age) {
-  if (age > 18) {
-    return true;
-  } else {
-    return confirm('Do you have your parents permission to access this page?');
-  }
+if (age > 18) {
+return true;
+} else {
+return confirm('Do you have your parents permission to access this page?');
+}
 }
 ```
 
-Rewrite it, to perform the same, but without `if`, in a single line.
+بازنویسی کنید، تا همین رفتار، بدون `if`، در یک خط اجرا شود.
 
-Make two variants of `checkAge`:
-
-1. Using a question mark operator `?`
-2. Using OR `||`
+دو حالت از `checkAge` بسازید:
+۱. با استفاده از عملگر علامت سوال `?`
+۲. با استفاده از OR `||`

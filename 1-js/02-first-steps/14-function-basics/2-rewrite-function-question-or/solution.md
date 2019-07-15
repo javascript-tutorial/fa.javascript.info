@@ -1,4 +1,4 @@
-Using a question mark operator `'?'`:
+با استفاده از یک عملگر علامت سوال `'?'`:
 
 ```js
 function checkAge(age) {
@@ -6,7 +6,7 @@ function checkAge(age) {
 }
 ```
 
-Using OR `||` (the shortest variant):
+با استفاده از OR `||` (کوتاه‌ترین حالت)
 
 ```js
 function checkAge(age) {
@@ -14,4 +14,4 @@ function checkAge(age) {
 }
 ```
 
-Note that the parentheses around `age > 18` are not required here. They exist for better readabilty.
+توجه داشته باشید که پرانتزهای دور `age > 18` لازم نیست. برای خوانایی نوشته شده‌ند.

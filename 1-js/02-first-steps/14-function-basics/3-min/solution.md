@@ -1,4 +1,4 @@
-A solution using `if`:
+راه حل با کمک `if`:
 
 ```js
 function min(a, b) {
@@ -10,7 +10,7 @@ function min(a, b) {
 }
 ```
 
-A solution with a question mark operator `'?'`:
+راه حل با علامت سوال `'?'`:
 
 ```js
 function min(a, b) {
@@ -18,4 +18,4 @@ function min(a, b) {
 }
 ```
 
-P.S. In the case of an equality `a == b` it does not matter what to return.
+پی‌نوشت: در حالت `a == b`، مهم نیست که چه چیزی برگردانده شود.

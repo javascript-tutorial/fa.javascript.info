@@ -2,37 +2,37 @@ importance: 4
 
 ---
 
-# Is "else" required?
+# آیا "else" لازم است؟
 
-The following function returns `true` if the parameter `age` is greater than `18`.
+تابع زیر `true` را برمیگرداند اگر پارامتر `age` از `18` بزرگتر باشد.
 
-Otherwise it asks for a confirmation and returns its result:
+در غیر اینصورت برای تأیید سوال می‌پرسد و سپس جواب را بر‌میگرداند:
 
 ```js
 function checkAge(age) {
-  if (age > 18) {
-    return true;
+if (age > 18) {
+return true;
 *!*
-  } else {
-    // ...
-    return confirm('Did parents allow you?');
-  }
+} else {
+// ...
+return confirm('Did parents allow you?');
+}
 */!*
 }
 ```
 
-Will the function work differently if `else` is removed?
+آیا اگر `else` را حذف کنیم تابع جور دیگری کار می‌کند؟
 
 ```js
 function checkAge(age) {
-  if (age > 18) {
-    return true;
-  }
+if (age > 18) {
+return true;
+}
 *!*
-  // ...
-  return confirm('Did parents allow you?');
+// ...
+return confirm('Did parents allow you?');
 */!*
 }
 ```
 
-Is there any difference in the behavior of these two variants?
+آیا هیچ تفاوتی در رفتار این دو حالت وجود دارد؟

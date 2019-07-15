@@ -2,11 +2,11 @@ importance: 1
 
 ---
 
-# Function min(a, b)
+# تابع min(a, b)
 
-Write a function `min(a,b)` which returns the least of two numbers `a` and `b`.
+تابع `min(a,b)` را بنویسید که کمترین را از دو عدد `a` و `b` خروجی می‌دهد.
 
-For instance:
+برای نمونه:
 
 ```js
 min(2, 5) == 2
