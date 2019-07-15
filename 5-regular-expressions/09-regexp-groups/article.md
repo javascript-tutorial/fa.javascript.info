@@ -51,11 +51,15 @@ alert("my@mail.com @ his@site.com.uk".match(reg)); // my@mail.com,his@site.com.u
 
 ## Contents of parentheses  
 
-Parentheses are numbered from left to right. The search engine remembers the content of each and allows to reference it in the pattern or in the replacement string.
+Parentheses are numbered from left to right. The search engine remembers the content matched by each of them and allows to reference it in the pattern or in the replacement string.
 
 For instance, we can find an HTML-tag using a (simplified) pattern `pattern:<.*?>`. Usually we'd want to do something with the result after it.
 
+<<<<<<< HEAD:5-regular-expressions/09-regexp-groups/article.md
 If we enclose the inner contents of `<...>` into parentheses, then we can access it like this:
+=======
+We'll get both the tag as a whole and its content as an array:
+>>>>>>> be342e50e3a3140014b508437afd940cd0439ab7:9-regular-expressions/09-regexp-groups/article.md
 
 ```js run
 let str = '<h1>Hello, world!</h1>';
@@ -64,7 +68,7 @@ let reg = /<(.*?)>/;
 alert( str.match(reg) ); // Array: ["<h1>", "h1"]
 ```
 
-The call to [String#match](mdn:js/String/match) returns groups only if the regexp has no `pattern:/.../g` flag.
+The call to [String#match](mdn:js/String/match) returns groups only if the regexp only looks for the first match, that is: has no `pattern:/.../g` flag.
 
 If we need all matches with their groups then we can use [RegExp#exec](mdn:js/RegExp/exec) method as described in <info:regexp-methods>:
 
@@ -146,6 +150,74 @@ alert( match[2] ); // c
 
 The array length is permanent: `3`. But there's nothing for the group `pattern:(z)?`, so the result is `["ac", undefined, "c"]`.
 
+<<<<<<< HEAD:5-regular-expressions/09-regexp-groups/article.md
+=======
+## Named groups
+
+Remembering groups by their numbers is hard. For simple patterns it's doable, but for more complex ones we can give names to parentheses.
+
+That's done by putting `pattern:?<name>` immediately after the opening paren, like this:
+
+```js run
+*!*
+let dateRegexp = /(?<year>[0-9]{4})-(?<month>[0-9]{2})-(?<day>[0-9]{2})/;
+*/!*
+let str = "2019-04-30";
+
+let groups = str.match(dateRegexp).groups;
+
+alert(groups.year); // 2019
+alert(groups.month); // 04
+alert(groups.day); // 30
+```
+
+As you can see, the groups reside in the `.groups` property of the match.
+
+We can also use them in the replacement string, as `pattern:$<name>` (like `$1..9`, but a name instead of a digit).
+
+For instance, let's reformat the date into `day.month.year`:
+
+```js run
+let dateRegexp = /(?<year>[0-9]{4})-(?<month>[0-9]{2})-(?<day>[0-9]{2})/;
+
+let str = "2019-04-30";
+
+let rearranged = str.replace(dateRegexp, '$<day>.$<month>.$<year>');
+
+alert(rearranged); // 30.04.2019
+```
+
+If we use a function for the replacement, then named `groups` object is always the last argument:
+
+```js run
+let dateRegexp = /(?<year>[0-9]{4})-(?<month>[0-9]{2})-(?<day>[0-9]{2})/;
+
+let str = "2019-04-30";
+
+let rearranged = str.replace(dateRegexp,
+  (str, year, month, day, offset, input, groups) =>
+   `${groups.day}.${groups.month}.${groups.year}`
+);
+
+alert(rearranged); // 30.04.2019
+```
+
+Usually, when we intend to use named groups, we don't need positional arguments of the function. For the majority of real-life cases we only need `str` and `groups`.
+
+So we can write it a little bit shorter:
+
+```js
+let rearranged = str.replace(dateRegexp, (str, ...args) => {
+  let {year, month, day} = args.pop();
+  alert(str); // 2019-04-30
+  alert(year); // 2019
+  alert(month); // 04
+  alert(day); // 30
+});
+```
+
+
+>>>>>>> be342e50e3a3140014b508437afd940cd0439ab7:9-regular-expressions/09-regexp-groups/article.md
 ## Non-capturing groups with ?:
 
 Sometimes we need parentheses to correctly apply a quantifier, but we don't want their contents in the array.
@@ -168,3 +240,18 @@ let result = str.match(reg);
 alert( result.length ); // 2
 alert( result[1] ); // John
 ```
+<<<<<<< HEAD:5-regular-expressions/09-regexp-groups/article.md
+=======
+
+## Summary
+
+Parentheses group together a part of the regular expression, so that the quantifier applies to it as a whole.
+
+Parentheses groups are numbered left-to-right, and can optionally be named with  `(?<name>...)`.
+
+The content, matched by a group, can be referenced both in the replacement string as `$1`, `$2` etc, or by the name `$name` if named.
+
+So, parentheses groups are called "capturing groups", as they "capture" a part of the match. We get that part separately from the result as a member of the array or in `.groups` if it's named.
+
+We can exclude the group from remembering (make in "non-capturing") by putting `?:` at the start: `(?:...)`, that's used if we'd like to apply a quantifier to the whole group, but don't need it in the result.
+>>>>>>> be342e50e3a3140014b508437afd940cd0439ab7:9-regular-expressions/09-regexp-groups/article.md

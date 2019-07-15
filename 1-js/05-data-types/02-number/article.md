@@ -12,7 +12,13 @@
 let billion = 1000000000;
 ```
 
+<<<<<<< HEAD
 اما در زندگی واقعی ما عموما از نوشتن رشته حرف با تعداد زیاد صفر خودداری میکنیم به خاطر اینکه به راحتی ممکن است خطا داشته باشیم و اشتباه بنویسیم. همینطور، ما تنبل هستیم! ما معمولا یه چیزی شبیه `"1bn"` مینویسیم به جای یک میلیارد یا  `"7.3bn"` برای هفت میلیارد و سیصد میلیون. این حقیقت برای اکثر اعداد بزرگ هم صحیح است.
+=======
+But in real life, we usually avoid writing a long string of zeroes as it's easy to mistype. Also, we are lazy. We will usually write something like `"1bn"` for a billion or `"7.3bn"` for 7 billion 300 million. The same is true for most large numbers.
+
+In JavaScript, we shorten a number by appending the letter `"e"` to the number and specifying the zeroes count:
+>>>>>>> be342e50e3a3140014b508437afd940cd0439ab7
 
 در جاوااسکریپت، ما یک عدد را براساس اضافه کردن حرف `"e"` به انتهای آن خلاصه میکنیم و با آن تعداد صفرها مشخص میشود.
 ```js run

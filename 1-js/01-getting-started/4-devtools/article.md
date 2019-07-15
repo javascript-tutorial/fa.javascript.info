@@ -1,62 +1,64 @@
-# پنل توسعه‌دهندگان 
+# Developer console
 
-کدها تمایل به خطا دارند. شما (اگر [ربات](https://en.wikipedia.org/wiki/Bender_(Futurama)) نباشید) معمولا در کدهایی که می‌نویسید خطاهایی تولید می‌کنید. 
+Code is prone to errors. You will quite likely make errors... Oh, what am I talking about? You are *absolutely* going to make errors, at least if you're a human, not a [robot](https://en.wikipedia.org/wiki/Bender_(Futurama)).
 
-در مرورگر کاربران به طور پیش‌فرض نمی‌توانند خطاها را ببینند. در نتیجه اگر اشکالی در اسکریپت بوجود آید، ما نمی‌توانیم ببنیم که خطا در چه بخشی بوجود آمده و آن را درست کنیم. 
+But in the browser, users don't see errors by default. So, if something goes wrong in the script, we won't see what's broken and can't fix it.
 
-به منظور دیدن خطاها و بسیار امکانات دیگر درباره اسکریپت‌ها، بخشی تحت عنوان developer tools در مرورگرها قرار داده شد. 
+To see errors and get a lot of other useful information about scripts, "developer tools" have been embedded in browsers.
 
-بسیاری از توسعه‌دهندگان از Chrome و Firefox استفاده می‌کنند چراکه بهترین developer tools را دارا هستند. دیگر مرورگرها نیز developer tools ارائه می‌کنند که بعضا دارای ویژگی‌های خاصی نیز هستند، ولی معمولا این تلاش سایز مرورگرها برای پیشی گرفتن از Chrome و Firefox هست. در نتیجه معمولا توسعه‌دهندگان یک مرورگر را به عنوان مرورگر محبوب خود انتخاب می‌کنند و در صورتی که مشکلی خاصِ یک مرورگر وجود داشت، از مرورگری دیگر برای آن مورد خاص استفاده می‌کنند. 
+Most developers lean towards Chrome or Firefox for development because those browsers have the best developer tools. Other browsers also provide developer tools, sometimes with special features, but are usually playing "catch-up" to Chrome or Firefox. So most developers have a "favorite" browser and switch to others if a problem is browser-specific.
 
-ابزارهای توسعه (developer tools) قدرتمند هستند. آنها ویژگی‌های بسیاری دارند. برای شروع یاد می‌گیریم که چطور آنها را باز کنیم و به خطاها نگاهی می‌اندازیم، همینطور دستورات جاوا اسکریپت را اجرا می‌‌کنیم. 
+Developer tools are potent; they have many features. To start, we'll learn how to open them, look at errors, and run JavaScript commands.
 
 ## Google Chrome
 
-این صفحه [bug.html](bug.html) را باز کنید. 
+Open the page [bug.html](bug.html).
 
-یک خطای جاوا اسکریپتی در کد اسکریپت این صفحه وجود دارد که از چشمان کاربران پنهان است. به همین منظور پنل توسعه‌دهندگان را باز می‌کنیم تا آن را ببینیم. 
+There's an error in the JavaScript code on it. It's hidden from a regular visitor's eyes, so let's open developer tools to see it.
 
-کلید `F12` را فشار دهید یا اگر در سیستم‌عامل Mac هستید کلیدهای `cmd + opt + j` را بفشارید. 
+Press `key:F12` or, if you're on Mac, then `key:Cmd+Opt+J`.
 
-پنل توسعه‌دهندگان به صورت پیش‌فرض روی تب Console باز می‌شود و شما چیزی شبیه به این را باید ببینید : 
+The developer tools will open on the Console tab by default.
+
+It looks somewhat like this:
 
 ![chrome](chrome.png)
 
-ظاهرا دقیق این پنل بر اساس نسخه Chrome تغییر می‌کند ولی در نهایت چیزی شبیه به این خواهد بود. 
+The exact look of developer tools depends on your version of Chrome. It changes from time to time but should be similar.
 
-- در اینجا می می‌توانیم خطایی به رنگ قرمز ببینیم. در این اینجا اسکریپت ما دارای دستوری ناشناخته به نام "lalala" است. 
+- Here we can see the red-colored error message. In this case, the script contains an unknown "lalala" command.
+- On the right, there is a clickable link to the source `bug.html:12` with the line number where the error has occurred.
 
-- در سمت راست لینک قابل کلیکی وجود دارد که عنوان آن `bug.html:12` است که نشان دهنده محل وقوع خطا است. 
+Below the error message, there is a blue `>` symbol. It marks a "command line" where we can type JavaScript commands. Press `key:Enter` to run them (`key:Shift+Enter` to input multi-line commands).
 
-در زیر پیام خطا، یک علامت `<` به رنگ آبی وجود دارد.در اینجا ما می‌توانیم دستورات جاوا اسکریپتی بنویسم. با فشردن `Enter` این دستورات اجرا می‌شوند (`Shift + Enter` برای نوشتن دستورات در چند خط). 
+Now we can see errors, and that's enough for a start. We'll come back to developer tools later and cover debugging more in-depth in the chapter <info:debugging-chrome>.
 
-تا اینجا می می‌توانیم خطاها را ببینیم و این برای شروع کافی است. ما در آینده به این پنل، به منظور رفع خطاها (Debugging) دوباره سر خواهیم زد. 
 
-## مرورگر Firefox ، Edge و دیگر مرورگرها  
+## Firefox, Edge, and others
 
-بیشتر مرورگرها از کلید `F12` برای باز کردن developer tools استفاده می‌کنند. 
+Most other browsers use `key:F12` to open developer tools.
 
-ظاهر و حس کار با این پنل‌ها بسیار مشابه است. زمانی که کار با یکی از آنها را فرا بگیرید، می‌توانید به راحتی از دیگری استفاده کنید. 
+The look & feel of them is quite similar. Once you know how to use one of these tools (you can start with Chrome), you can easily switch to another.
 
 ## Safari
 
-این مرورگر (که فقط در سیستم عامل Mac و نه در Windows و Linux) در اینجا مقداری متفاوت است و ابتدا باید ویژگی Developer menu را فعال کنیم. 
+Safari (Mac browser, not supported by Windows/Linux) is a little bit special here. We need to enable the "Develop menu" first.
 
-به Preferences رفته و به تب Advanced بروید و تیک مربوط به Developer menu را در پایین فعال کنید. 
+Open Preferences and go to the "Advanced" pane. There's a checkbox at the bottom:
 
 ![safari](safari.png)
 
-حالا `cmd + opt + c` می‌‌تواند پنل توسعه دهندگان را باز کند. 
+Now `key:Cmd+Opt+C` can toggle the console. Also, note that the new top menu item named "Develop" has appeared. It has many commands and options.
 
-## ورودی چند خطی
+## Multi-line input
 
-معمولا زمانیکه چند خط کد وارد می‌کنیم و سپس `key:Enter` را می‌زنیم، آن کد اجرا می‌شود.
-برای ورود چند خط کد و سپس اجرای آنها از کلید `key:Shift+Enter` استفاده نمایید.
+Usually, when we put a line of code into the console, and then press `key:Enter`, it executes.
 
-## خلاصه
+To insert multiple lines, press `key:Shift+Enter`.
 
-- Developer tools به ما امکان مشاهده خطاها، آزمایش متغیرها و امکانات بسیار دیگری را می‌دهد. 
+## Summary
 
-- از طریق کلید `F12` در بیشتر مرورگرها در Windows باز می‌شود. Chrome در Mac با کلیدهای `cmd + opt + j` باز می‌شود و Safari با `cmd + opt + c` (که ابتدا نیاز به فعال‌سازی دارد) 
+- Developer tools allow us to see errors, run commands, examine variables, and much more.
+- They can be opened with `key:F12` for most browsers on Windows. Chrome for Mac needs `key:Cmd+Opt+J`, Safari: `key:Cmd+Opt+C` (need to enable first).
 
-حال که محیط مناسب برای کار با جاوا اسکریپت را آماده کردیم، در بخش بعدی بیشتر با جاوا اسکریپت آشنا خواهیم شد. 
+Now we have the environment ready. In the next section, we'll get down to JavaScript.

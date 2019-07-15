@@ -3,14 +3,20 @@
 The lifecycle of an HTML page has three important events:
 
 - `DOMContentLoaded` -- the browser fully loaded HTML, and the DOM tree is built, but external resources like pictures `<img>` and stylesheets may be not yet loaded.  
-- `load` -- the browser loaded all resources (images, styles etc).
-- `beforeunload/unload` -- when the user is leaving the page.
+- `load` -- not only HTML is loaded, but also all the external resources: images, styles etc.
+- `beforeunload/unload` -- the user is leaving the page.
 
 Each event may be useful:
 
 - `DOMContentLoaded` event -- DOM is ready, so the handler can lookup DOM nodes, initialize the interface.
+<<<<<<< HEAD:2-ui/3-event-details/10-onload-ondomcontentloaded/article.md
 - `load` event -- additional resources are loaded, we can get image sizes (if not specified in HTML/CSS) etc.
 - `beforeunload/unload` event -- the user is leaving: we can check if the user saved the changes and ask them whether they really want to leave.
+=======
+- `load` event -- external resources are loaded, so styles are applied, image sizes are known etc.
+- `beforeunload` event -- the user is leaving: we can check if the user saved the changes and ask them whether they really want to leave.
+- `unload` -- the user almost left, but we still can initiate some operations, such as sending out statistics.
+>>>>>>> be342e50e3a3140014b508437afd940cd0439ab7:2-ui/5-loading/01-onload-ondomcontentloaded/article.md
 
 Let's explore the details of these events.
 
@@ -53,7 +59,16 @@ When the browser initially loads HTML and comes across a `<script>...</script>` 
 
 External scripts (with `src`) also put DOM building to pause while the script is loading and executing. So `DOMContentLoaded` waits for external scripts as well.
 
+<<<<<<< HEAD:2-ui/3-event-details/10-onload-ondomcontentloaded/article.md
 The only exception are external scripts with `async` and `defer` attributes. They tell the browser to continue processing without waiting for the scripts. This lets the user see the page before scripts finish loading, which is good for performance.
+=======
+```html run
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    alert("DOM ready!");
+  });
+</script>
+>>>>>>> be342e50e3a3140014b508437afd940cd0439ab7:2-ui/5-loading/01-onload-ondomcontentloaded/article.md
 
 ### Scripts with `async` and `defer`
 
@@ -121,9 +136,43 @@ The example below correctly shows image sizes, because `window.onload` waits for
 
 ## window.onunload
 
+<<<<<<< HEAD:2-ui/3-event-details/10-onload-ondomcontentloaded/article.md
 When a visitor leaves the page, the `unload` event triggers on `window`. We can do something there that doesn't involve a delay, like closing related popup windows. But we can't cancel the transition to another page.
 
 For that we should use another event -- `onbeforeunload`.
+=======
+When a visitor leaves the page, the `unload` event triggers on `window`. We can do something there that doesn't involve a delay, like closing related popup windows.
+
+The notable exception is sending analytics.
+
+Let's say we gather data about how the page is used: mouse clicks, scrolls, viewed page areas, and so on.
+
+Naturally, `unload` event is when the user leaves us, and we'd like to save the data on our server.
+
+There exists a special `navigator.sendBeacon(url, data)` method for such needs, described in the specification <https://w3c.github.io/beacon/>.
+
+It sends the data in background. The transition to another page is not delayed: the browser leaves the page, but still performs `sendBeacon`.
+
+Here's how to use it:
+```js
+let analyticsData = { /* object with gathered data */ };
+
+window.addEventListener("unload", function() {
+  navigator.sendBeacon("/analytics", JSON.stringify(analyticsData));
+};
+```
+
+- The request is sent as POST.
+- We can send not only a string, but also forms and other formats, as described in the chapter <info:fetch>, but usually it's a stringified object.
+- The data is limited by 64kb.
+
+When the `sendBeacon` request is finished, the browser probably has already left the document, so there's no way to get server response (which is usually empty for analytics).
+
+There's also a `keepalive` flag for doing such "after-page-left" requests in  [fetch](info:fetch) method for generic network requests. You can find more information in the chapter <info:fetch-api>.
+
+
+If we want to cancel the transition to another page, we can't do it here. But we can use  another event -- `onbeforeunload`.
+>>>>>>> be342e50e3a3140014b508437afd940cd0439ab7:2-ui/5-loading/01-onload-ondomcontentloaded/article.md
 
 ## window.onbeforeunload [#window.onbeforeunload]
 

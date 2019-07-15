@@ -126,11 +126,19 @@ alert( +apples + +oranges ); // 5
 
 ## اولویت عملگرها
 
+<<<<<<< HEAD
 اگر در یک عبارت بیش از یک عملگر وجود داشته باشد، ترتیب اجرای آنها بر اساس تقدم آنها خواهد بود.
+=======
+If an expression has more than one operator, the execution order is defined by their *precedence*, or, in other words, the default priority order of operators.
+>>>>>>> be342e50e3a3140014b508437afd940cd0439ab7
 
 از زمان مدرسه همه ما می‌دانیم که در یک عمل ریاضی مانند 1 + 2 * 2 ابتدا عمل ضرب انجام می‌شود و سپس عمل جمع. این همان اولویت عملگرها است. اینکه عمل ضرب اولویت بالاتری نسبت به جمع دارد.
 
+<<<<<<< HEAD
 پرانتزها بر هر اولویتی، اولویت دارند و زمانی‌که از ترتیب قرارگیری عملگرها راضی نیستیم می‌توانیم با پرانتزها این اولویت را تغییر دهیم.
+=======
+Parentheses override any precedence, so if we're not satisfied with the default order, we can use them to change it. For example, write `(1 + 2) * 2`.
+>>>>>>> be342e50e3a3140014b508437afd940cd0439ab7
 
 عملگرهای مختلفی در جاوا اسکریپت وجود دارد و هر کدام اولویت مربوط به خود را دارا می‌باشند. در جدول زیر عملگری که عدد بالاتری دارد اولویتش بالاتر است. همینطور اگر دو عملگر عدد یکسانی داشتند اولویت اجرا از چپ به راست (در کد) می‌باشد.
 
@@ -199,9 +207,15 @@ alert( a ); // 3
 alert( c ); // 0
 ```
 
+<<<<<<< HEAD
 در مثال بالا، مقدار (a = b + 1) مقداریست که در متغیر a نوشته قرار می‌گیرد (که برابر 3 است). سپس (در ادامه کد) از 3 کم می‌شود.
 
 کد جالبی‌ست. ما باید طرز کار آن را یاد بگیریم تا زمانی که در کدهای کتابخانه‌های مختلف با آن روبرو می‌شویم بدانیم که چطور کار می‌کند. ولی نباید به این شکل برنامه‌نویسی کنیم چراکه کدهای ما را ناخوانا می‌کند.
+=======
+In the example above, the result of expression `(a = b + 1)` is the value which was assigned to `a` (that is `3`). It is then used for further evaluations.
+
+Funny code, isn't it? We should understand how it works, because sometimes we see it in JavaScript libraries, but shouldn't write anything like that ourselves. Such tricks definitely don't make code clearer or readable.
+>>>>>>> be342e50e3a3140014b508437afd940cd0439ab7
 ````
 
 ## عملگر باقی مانده %
@@ -430,10 +444,17 @@ alert( a ); // 7 (the result of 3 + 4)
 
 توجه داشته باشید که عملگر کاما اولویت بسیار کمی دارد، کمتر از `=`، بنابراین پرانتزها در مثال بالا مهم هستند.
 
+<<<<<<< HEAD
 بدون آنها: `a = 1 + 2, 3 + 4` اول عملگر جمع را محاسبه می‌کند، یعنی نتیجه می‌شود `a = 3, 7`، سپس عملگر `=` باعث می‌شود که `a = 3` و در نهایت عدد بعد از کاما، یعنی هفت، پردازش نمی‌شود. 
 ```
 
 چرا عملگری نیاز داریم که هرچیزی را به جز قسمت آخر دور میریزد؟
+=======
+Without them: `a = 1 + 2, 3 + 4` evaluates `+` first, summing the numbers into `a = 3, 7`, then the assignment operator `=` assigns `a = 3`, and the rest is ignored. It's like `(a = 1 + 2), 3 + 4`.
+```
+
+Why do we need an operator that throws away everything except the last expression?
+>>>>>>> be342e50e3a3140014b508437afd940cd0439ab7
 
 بعضی اوقات، در ساختارهای پیچیده برای انجام عمل‌های متعددی در یک خط استفاده می‌شود.
 
@@ -446,4 +467,8 @@ for (*!*a = 1, b = 3, c = a * b*/!*; a < 10; a++) {
 }
 ```
 
+<<<<<<< HEAD
 چنین عملیاتی در frameworkهای جاوا اسکریپت خیلی استفاده می‌شوند. به همین علت است که آنهارا توضیح داد. اما عموما، خوانایی کد را بهبود نمی‌بخشند بنابراین قبل از استفاده کردن آنها باید فکر کنیم.
+=======
+Such tricks are used in many JavaScript frameworks. That's why we're mentioning them. But usually they don't improve code readability so we should think well before using them.
+>>>>>>> be342e50e3a3140014b508437afd940cd0439ab7

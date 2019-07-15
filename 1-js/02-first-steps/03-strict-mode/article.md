@@ -55,7 +55,21 @@ alert("some code");
 گاهی اوقات زمانیکه وجود `use strict` تفاوتی ایجاد می‌کند، استفاده از کنسول مرورگر نتایج اشتباهی به شما خواهد داد.
 حتی اگر از `key:Shift+Enter` برای وارد کردن عبارت `use strict` استفاده نمایید، نتیجه نخواهد داد.
 
+<<<<<<< HEAD
 راه حل قابل اتکا برای این موضوع آن است که به این شکل عبارت `use strict` را وارد نمایید :
+=======
+You can try to press `key:Shift+Enter` to input multiple lines, and put `use strict` on top, like this:
+
+```js
+'use strict'; <Shift+Enter for a newline>
+//  ...your code
+<Enter to run>
+```
+
+It works in most browsers, namely Firefox and Chrome.
+
+If it doesn't, the most reliable way to ensure `use strict` would be to input the code into console like this:
+>>>>>>> be342e50e3a3140014b508437afd940cd0439ab7
 
 ```js
 (function() {
