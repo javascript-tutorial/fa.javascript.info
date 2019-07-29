@@ -84,7 +84,7 @@ Now it works correctly, because every time the code block in `for (..) {...}` is
 
 So, the value of `i` now lives a little bit closer. Not in `makeArmy()` Lexical Environment, but in the Lexical Environment that corresponds the current loop iteration. A `shooter` gets the value exactly from the one where it was created.
 
-![](lexenv-makearmy.png)
+![](lexenv-makearmy.svg)
 
 Here we rewrote `while` into `for`.
 

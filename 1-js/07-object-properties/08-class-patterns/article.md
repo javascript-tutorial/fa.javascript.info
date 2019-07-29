@@ -187,7 +187,7 @@ So the prototype chain should be `rabbit` -> `Rabbit.prototype` -> `Animal.proto
 
 Like this:
 
-![](class-inheritance-rabbit-animal.png)
+![](class-inheritance-rabbit-animal.svg)
 
 The code to implement that:
 
@@ -227,7 +227,7 @@ The line `(*)` sets up the prototype chain. So that `rabbit` first searches meth
 
 So here's the full picture:
 
-![](class-inheritance-rabbit-animal-2.png)
+![](class-inheritance-rabbit-animal-2.svg)
 
 ## Summary
 

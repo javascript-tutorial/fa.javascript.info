@@ -44,7 +44,7 @@ rabbit.hide(); // White Rabbit hides!
 
 The `extends` keyword actually adds a `[[Prototype]]` reference from `Rabbit.prototype` to `Animal.prototype`, just as you expect it to be, and as we've seen before.
 
-![](animal-rabbit-extends.png)
+![](animal-rabbit-extends.svg)
 
 So now `rabbit` has access both to its own methods and to methods of `Animal`.
 
@@ -338,7 +338,7 @@ So, in both lines `(*)` and `(**)` the value of `this.__proto__` is exactly the 
 
 Here's the picture of what happens:
 
-![](this-super-loop.png)
+![](this-super-loop.svg)
 
 1. Inside `longEar.eat()`, the line `(**)` calls `rabbit.eat` providing it with `this=longEar`.
     ```js
@@ -477,7 +477,7 @@ Now we can call `Rabbit.compare` assuming that the inherited `Animal.compare` wi
 How does it work? Again, using prototypes. As you might have already guessed, extends also gives `Rabbit` the `[[Prototype]]` reference to `Animal`.
 
 
-![](animal-rabbit-static.png)
+![](animal-rabbit-static.svg)
 
 So, `Rabbit` function now inherits from `Animal` function. And `Animal` function normally has `[[Prototype]]` referencing `Function.prototype`, because it doesn't `extend` anything.
 
@@ -505,7 +505,7 @@ Please note that built-in classes don't have such static `[[Prototype]]` referen
 
 Here's the picture structure for `Date` and `Object`:
 
-![](object-date-inheritance.png)
+![](object-date-inheritance.svg)
 
 Note, there's no link between `Date` and `Object`. Both `Object` and `Date` exist independently. `Date.prototype` inherits from `Object.prototype`, but that's all.
 
