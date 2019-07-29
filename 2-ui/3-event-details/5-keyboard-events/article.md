@@ -91,6 +91,28 @@ document.addEventListener('keydown', function(event) {
 });
 ```
 
+<<<<<<< HEAD
+=======
+On the other hand, there's a problem with `event.code`. For different keyboard layouts, the same key may have different labels (letters).
+
+For example, here are US layout ("QWERTY") and German layout ("QWERTZ") under it (courtesy of Wikipedia):
+
+![](us-layout.svg)
+
+![](german-layout.svg)
+
+For the same key, US layout has "Z", while German layout has "Y" (letters are swapped).
+
+So, `event.code` will equal `KeyZ` for people with German layout when they press "Y".
+
+That sounds odd, but so it is. The [specification](https://www.w3.org/TR/uievents-code/#table-key-code-alphanumeric-writing-system) explicitly mentions such behavior.
+
+- `event.code` has the benefit of staying always the same, bound to the physical key location, even if the visitor changes languages. So hotkeys that rely on it work well even in case of a language switch.
+- `event.code` may match a wrong character for unexpected layout. Same letters in different layouts may map to different physical keys, leading to different codes. Luckily, that happens only with several codes, e.g. `keyA`, `keyQ`, `keyZ` (as we've seen), and doesn't happen with special keys such as `Shift`. You can find the list in the [specification](https://www.w3.org/TR/uievents-code/#table-key-code-alphanumeric-writing-system).
+
+So, to reliably track layout-dependent characters, `event.key` may be a better way.
+
+>>>>>>> f72405a263e1d1adbc8d17179ee46af70842bb55
 ## Auto-repeat
 
 If a key is being pressed for a long enough time, it starts to repeat: the `keydown` triggers again and again, and then when it's released we finally get `keyup`. So it's kind of normal to have many `keydown` and a single `keyup`.

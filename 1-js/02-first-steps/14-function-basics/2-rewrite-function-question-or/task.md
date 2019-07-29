@@ -11,11 +11,19 @@ importance: 4
 
 ```js
 function checkAge(age) {
+<<<<<<< HEAD
 if (age > 18) {
 return true;
 } else {
 return confirm('Do you have your parents permission to access this page?');
 }
+=======
+  if (age > 18) {
+    return true;
+  } else {
+    return confirm('Did parents allow you?');
+  }
+>>>>>>> f72405a263e1d1adbc8d17179ee46af70842bb55
 }
 ```
 

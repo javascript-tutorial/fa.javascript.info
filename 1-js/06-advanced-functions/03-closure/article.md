@@ -126,7 +126,11 @@ First, when a function runs, a new function Lexical Environment is created autom
     say("John"); // Hello, John
     ```-->
 
+<<<<<<< HEAD
 Here's the picture of Lexical Environments when the execution is inside `say("John")`, at the line labelled with an arrow:
+=======
+![lexical environment](lexical-environment-simple.svg)
+>>>>>>> f72405a263e1d1adbc8d17179ee46af70842bb55
 
 ![lexical environment](lexical-environment-simple.svg)
 
@@ -411,6 +415,11 @@ In the example below, when the execution goes into `if` block, the new "if-only"
     ```-->
 
 ![](lexenv-if.svg)
+<<<<<<< HEAD
+=======
+
+When the execution gets into the `if` block, the new "if-only" Lexical Environment is created for it.
+>>>>>>> f72405a263e1d1adbc8d17179ee46af70842bb55
 
 The new Lexical Environment gets the enclosing one as the outer reference, so `phrase` can be found. But all variables and Function Expressions declared inside `if` reside in that Lexical Environment and can't be seen from the outside.
 

@@ -92,9 +92,13 @@ alert( +"" );   // 0
 
 در واقع این همان کاریست که `Number(...)` انجام می‌دهد ولی به شکلی کوتاه‌تر.
 
+<<<<<<< HEAD
 نیاز به تبدیل رشته‌ به عدد اغلب پیش می‌آید. برای نمونه اگر در حال دریافت مقادیری از اینپوت‌های HTML هستیم معمولا به این موضوع نیاز پیدا می‌کنیم. 
 
 اگر خواستیم آنها را جمع ببندیم چطور؟
+=======
+The need to convert strings to numbers arises very often. For example, if we are getting values from HTML form fields, they are usually strings. What if we want to sum them?
+>>>>>>> f72405a263e1d1adbc8d17179ee46af70842bb55
 
 عملگر + به صورت رشته‌ای آنها را بهم اضافه می‌کند:
 
@@ -256,14 +260,14 @@ alert( 8 ** (1/3) ); // 2 (power of 1/3 is the same as a cubic root)
 
     ```js run no-beautify
     let counter = 2;
-    counter++;      // works the same as counter = counter + 1, but is shorter
+    counter++;        // works the same as counter = counter + 1, but is shorter
     alert( counter ); // 3
     ```
 - کاهش -- که یک واحد از عدد کم می‌کند:
 
     ```js run no-beautify
     let counter = 2;
-    counter--;      // works the same as counter = counter - 1, but is shorter
+    counter--;        // works the same as counter = counter - 1, but is shorter
     alert( counter ); // 1
     ```
 

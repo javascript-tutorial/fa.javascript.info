@@ -94,6 +94,17 @@ When the pattern contains `pattern:\b`, it tests that the position in string fit
 For instance, in the string `subject:Hello, Java!` the following positions match `\b`:
 
 ![](hello-java-boundaries.svg)
+<<<<<<< HEAD
+=======
+
+So it matches `pattern:\bHello\b`, because:
+
+1. At the beginning of the string the first `\b` test matches.
+2. Then the word `Hello` matches.
+3. Then `\b` matches, as we're between `o` and a space.
+
+Pattern `pattern:\bJava\b` also matches. But not `pattern:\bHell\b` (because there's no word boundary after `l`) and not `Java!\b` (because the exclamation sign is not a wordly character, so there's no word boundary after it).
+>>>>>>> f72405a263e1d1adbc8d17179ee46af70842bb55
 
 So it matches `pattern:\bHello\b` and `pattern:\bJava\b`, but not `pattern:\bHell\b` (because there's no word boundary after `l`) and not `Java!\b` (because the exclamation sign is not a wordly character, so there's no word boundary after it).
 

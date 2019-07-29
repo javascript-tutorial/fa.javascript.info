@@ -176,7 +176,11 @@ let timerId = setTimeout(function request() {
 ```
 
 
+<<<<<<< HEAD
 And if we regularly have CPU-hungry tasks, then we can measure the time taken by the execution and plan the next call sooner or later.
+=======
+And if the functions that we're scheduling are CPU-hungry, then we can measure the time taken by the execution and plan the next call sooner or later.
+>>>>>>> f72405a263e1d1adbc8d17179ee46af70842bb55
 
 **Recursive `setTimeout` guarantees a delay between the executions, `setInterval` -- does not.**
 

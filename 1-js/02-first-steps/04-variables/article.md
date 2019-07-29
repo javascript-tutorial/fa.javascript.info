@@ -315,8 +315,14 @@ const pageLoadTime = /* time taken by a webpage to load */;
 
 ما می‌توانیم با استفاده از کلیدواژه‌های `var`، `let` یا `const` متغیرهایی را برای ذخیره سازی اطلاعات تعریف کنیم.
 
+<<<<<<< HEAD
 - `let` -- حالت جدید تعریف متغیر است. کد شما باید در حالت `strict mode` باشد تا بتوان از `let` در Chrome – V8 استفاده نمود.
 - `var` -- حالت قدیمی تعریف متغیر می‌باشد. معمولا اصلا از این روش استفاده نمی‌کنیم، اما تفاوت‌های آن را بخش دیگری بیان خواهیم کرد تا در صورت نیاز بتوانید از آن استفاده نمایید.
 - `const` -- همانند `let` است با این تفاوت که مقدار آن قابل تغییر نیست.
+=======
+- `let` -- is a modern variable declaration.
+- `var` -- is an old-school variable declaration. Normally we don't use it at all, but we'll cover subtle differences from `let` in the chapter <info:var>, just in case you need them.
+- `const` -- is like `let`, but the value of the variable can't be changed.
+>>>>>>> f72405a263e1d1adbc8d17179ee46af70842bb55
 
 نام متغیرها باید به گونه‌ای باشد که به ما اجازه دهد به راحتی متوجه معنی آنها بشویم.

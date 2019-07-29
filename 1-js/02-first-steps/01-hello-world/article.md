@@ -1,6 +1,10 @@
 # Hello, world!
 
+<<<<<<< HEAD
 آموزش پیش روی شما مفاهیم هسته‌ای جاوا اسکریپت است که وابسته به پلتفرم نیست. در ادامه با پلتفرم‌هایی مانند Node.JS و نحوه استفاده از آنها آشنا خواهیم شد.
+=======
+This part of the tutorial is about core JavaScript, the language itself.
+>>>>>>> f72405a263e1d1adbc8d17179ee46af70842bb55
 
 ما برای اجرای اسکریپت‌هایی که می‌نویسیم به محیطی برای اجرا نیاز داریم و از آنجایی که این یک دوره آنلاین است، مرورگر انتخاب خوبی است. سعی ما بر این است تا از دستوراتی که اختصاصا مربوط به مرورگر هستند مانند `alert` کمتر استفاده کنیم. مخصوصا برای شمایی قصد استفاده از جاوا اسکریپت در پلتفرم‌های دیگری چون Node.JS را دارید.
 
@@ -45,8 +49,13 @@
 تگ `<script>` تعدادی attributes (صفات) دارد که امروزه کمتر از آنها استفاده می‌شود، ولی ممکن است در کدهای قدیمی همچنان آنها را ببینید :
 
 
+<<<<<<< HEAD
 صفت  `type` : <code>&lt;script <u>type</u>=...&gt;</code>
 : نسخه قدیمی HTML یعنی HTML4 نیازمند تعیین `type` در تگ `<script>` بود. معمولا مقدار آن `type=text/javascript` بود. در حال حاضر دیگر این مورد الزامی نیست. 
+=======
+The `type` attribute: <code>&lt;script <u>type</u>=...&gt;</code>
+: The old HTML standard, HTML4, required a script to have a `type`. Usually it was `type="text/javascript"`. It's not required anymore. Also, the modern HTML standard totally changed the meaning of this attribute. Now, it can be used for JavaScript modules. But that's an advanced topic; we'll talk about modules in another part of the tutorial.
+>>>>>>> f72405a263e1d1adbc8d17179ee46af70842bb55
 
 صفت `language` : <code>&lt;script <u>language</u>=...&gt;</code>
 : مقصود از این صفت تعیین زبان اسکریپت است. از آنجایی که جاوا اسکریپت زبان پیش‌فرض است، نیازی به تعیین آن نیست.
@@ -73,9 +82,13 @@ Comment های قبل و بعد از اسکریپت
 <script src="/path/to/script.js"></script>
 ```
 
+<<<<<<< HEAD
 در اینجا `/path/to/script.js` ما از آدرس دهی مطلق استفاده کرده‌ایم (که از دایرکتوری ریشه است).
 
 امکان آدرس دهی به صورت نسبی هم وجود دارد. برای مثال `src="script.js"` به این معنی است که فایل `script.js` در دایرکتوری فعلی قرار دارد.
+=======
+Here, `/path/to/script.js` is an absolute path to the script from the site root. One can also provide a relative path from the current page. For instance, `src="script.js"` would mean a file `"script.js"` in the current folder.
+>>>>>>> f72405a263e1d1adbc8d17179ee46af70842bb55
 
 همینطور می‌توانیم از آدرس URL کامل استفاده کنیم :
 
