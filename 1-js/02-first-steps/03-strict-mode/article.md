@@ -4,9 +4,13 @@
 
 مزیت این موضوع در این بود که هیچگاه در کدهای قدیمی اشکالی بوجود نمی‌آمد. اما مشکل اینجا بود که اگر اشکالی در طراحی زبان، توسط خالقان جاوا اسکریپت رخ داده بود، تا ابد بجا می‌ماند.
 
+<<<<<<< HEAD
 این موضوع تا سال 2009 که ECMAScript 5 (ES5) معرفی شد، ادامه داشت.ES5 قابلیت‌های جدیدی را به زبان افزود و اصلاحاتی را نیز بر روی امکانات فعلی انجام داد. 
 
 به منظور اینکه کدهای قدیمی کار کنند، بیشتر تغییراتی که در ES5 اتفاق افتاد، به صورت پیش‌فرض غیر فعال است، و برای فعال‌سازی آنها باید از طریق عبارت `"use strict"` چنین کاری را انجام داد.
+=======
+This was the case until 2009 when ECMAScript 5 (ES5) appeared. It added new features to the language and modified some of the existing ones. To keep the old code working, most such modifications are off by default. You need to explicitly enable them with a special directive: `"use strict"`.
+>>>>>>> 34e9cdca3642882bd36c6733433a503a40c6da74
 
 ## "use strict"
 
@@ -21,9 +25,13 @@
 ...
 ```
 
+<<<<<<< HEAD
 در مورد فانکشِن‌ها (روشی برای گروه‌بندی کردن دستورات) در آینده خواهیم آموخت. 
 
 در اینجا صرفا بدانید که می‌توانیم در ابتدای اکثر فانکشن‌ها `"use strict"` قرار دهیم تا قواعد مدرن صرفا بر روی کدهای داخل فانکشن اعمال شوند.
+=======
+We will learn functions (a way to group commands) soon. Looking ahead, let's note that `"use strict"` can be put at the start of most kinds of functions instead of the whole script. Doing that enables strict mode in that function only. But usually, people use it for the whole script.
+>>>>>>> 34e9cdca3642882bd36c6733433a503a40c6da74
 
 
 ````warn header="از بالا بودن عبارت \"use strict\" در کدهای خود مطمئن شوید"

@@ -176,7 +176,11 @@ let timerId = setTimeout(function request() {
 ```
 
 
+<<<<<<< HEAD
 And if we regularly have CPU-hungry tasks, then we can measure the time taken by the execution and plan the next call sooner or later.
+=======
+And if the functions that we're scheduling are CPU-hungry, then we can measure the time taken by the execution and plan the next call sooner or later.
+>>>>>>> 34e9cdca3642882bd36c6733433a503a40c6da74
 
 **Recursive `setTimeout` guarantees a delay between the executions, `setInterval` -- does not.**
 
@@ -201,7 +205,7 @@ setTimeout(function run() {
 
 For `setInterval` the internal scheduler will run `func(i)` every 100ms:
 
-![](setinterval-interval.png)
+![](setinterval-interval.svg)
 
 Did you notice?
 
@@ -217,7 +221,7 @@ In the edge case, if the function always executes longer than `delay` ms, then t
 
 And here is the picture for the recursive `setTimeout`:
 
-![](settimeout-interval.png)
+![](settimeout-interval.svg)
 
 **The recursive `setTimeout` guarantees the fixed delay (here 100ms).**
 

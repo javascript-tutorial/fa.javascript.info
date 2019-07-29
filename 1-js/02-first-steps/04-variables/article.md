@@ -97,7 +97,7 @@ let user = 'John'
 برای درک مفهوم متغیر، می‌توانیم آن را یک جعبه برای نگهداری اطلاعات تصور کنیم، که یک نام منحصربه‌فرد روی آن چسبانده‌ایم.
 برای نمونه، تصور کنید متغیر "`message`" در جعبه‌ای با برچسب `message` و با مقدار "`Hello!`" باشد :
 
-![](variable.png)
+![](variable.svg)
 
 ما می‌توانیم هر مقداری در آن قرار دهیم. همینطور می‌توانیم هر چند بار که خواستیم این مقدار با تغییر دهیم :
 
@@ -113,7 +113,7 @@ alert(message);
 
 وقتی مقدار تغییر کرد، اطلاعات قبلی از آن پاک خواهند شد :
 
-![](variable-change.png)
+![](variable-change.svg)
 
 ما همینطور می‌توانیم دو متغیر تعریف کرده و اطلاعات یکی را در دیگری کپی کنیم.
 
@@ -315,8 +315,14 @@ const pageLoadTime = /* time taken by a webpage to load */;
 
 ما می‌توانیم با استفاده از کلیدواژه‌های `var`، `let` یا `const` متغیرهایی را برای ذخیره سازی اطلاعات تعریف کنیم.
 
+<<<<<<< HEAD
 - `let` -- حالت جدید تعریف متغیر است. کد شما باید در حالت `strict mode` باشد تا بتوان از `let` در Chrome – V8 استفاده نمود.
 - `var` -- حالت قدیمی تعریف متغیر می‌باشد. معمولا اصلا از این روش استفاده نمی‌کنیم، اما تفاوت‌های آن را بخش دیگری بیان خواهیم کرد تا در صورت نیاز بتوانید از آن استفاده نمایید.
 - `const` -- همانند `let` است با این تفاوت که مقدار آن قابل تغییر نیست.
+=======
+- `let` -- is a modern variable declaration.
+- `var` -- is an old-school variable declaration. Normally we don't use it at all, but we'll cover subtle differences from `let` in the chapter <info:var>, just in case you need them.
+- `const` -- is like `let`, but the value of the variable can't be changed.
+>>>>>>> 34e9cdca3642882bd36c6733433a503a40c6da74
 
 نام متغیرها باید به گونه‌ای باشد که به ما اجازه دهد به راحتی متوجه معنی آنها بشویم.
