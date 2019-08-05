@@ -2,12 +2,17 @@
 
 # Global object
 
+<<<<<<< HEAD
 When JavaScript was created, there was an idea of a "global object" that provides all global variables and functions. It was planned that multiple in-browser scripts would use that single global object and share variables through it.
+=======
+The global object provides variables and functions that are available anywhere. By default, those that are built into the language or the environment.
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 Since then, JavaScript greatly evolved, and that idea of linking code through global variables became much less appealing. In modern JavaScript, the concept of modules took its place.
 
 But the global object still remains in the specification.
 
+<<<<<<< HEAD
 In a browser it is named "window", for Node.JS it is "global", for other environments it may have another name.
 
 It does two things:
@@ -17,6 +22,19 @@ It does two things:
 
     ```js run
     alert("Hello");
+=======
+We'll use `window` here, assuming that our environment is a browser. If your script may run in other environments, it's better to use `globalThis` instead.
+
+All properties of the global object can be accessed directly:
+
+```js run
+alert("Hello");
+// is the same as
+window.alert("Hello");
+```
+
+In a browser, global functions and variables declared with `var` (not `let/const`!) become the property of the global object:
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
     // the same as
     window.alert("Hello");
@@ -24,11 +42,17 @@ It does two things:
 
     The same applies to other built-ins. E.g. we can use `window.Array` instead of `Array`.
 
+<<<<<<< HEAD
 2. Provides access to global Function Declarations and `var` variables. We can read and write them using its properties, for instance:
 
     <!-- no-strict to move variables out of eval -->
     ```js untrusted run no-strict refresh
     var phrase = "Hello";
+=======
+Please don't rely on that! This behavior exists for compatibility reasons. Modern scripts use [JavaScript modules](info:modules) where such thing doesn't happen.
+
+If we used `let` instead, such thing wouldn't happen:
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
     function sayHi() {
       alert(phrase);
@@ -54,8 +78,12 @@ alert(window.user); // undefined, don't have let
 alert("user" in window); // false
 ```
 
+<<<<<<< HEAD
 ```smart header="The global object is not a global Environment Record"
 In versions of ECMAScript prior to ES-2015, there were no `let/const` variables, only `var`. And global object was used as a global Environment Record (wordings were a bit different, but that's the gist).
+=======
+That said, using global variables is generally discouraged. There should be as few global variables as possible. The code design where a function gets "input" variables and produces certain "outcome" is clearer, less prone to errors and easier to test than if it uses outer or global variables.
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 But starting from ES-2015, these entities are split apart. There's a global Lexical Environment with its Environment Record. And there's a global object that provides *some* of the global variables.
 

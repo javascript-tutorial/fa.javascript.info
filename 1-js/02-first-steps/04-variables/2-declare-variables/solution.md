@@ -1,4 +1,10 @@
+<<<<<<< HEAD
 ابتدا نامی برای کره‌مان :
+=======
+## The variable for our planet
+
+That's simple:
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 ```js
 let ourPlanetName = "Earth";
@@ -6,7 +12,11 @@ let ourPlanetName = "Earth";
 
 توجه داشته باشید که می‌توانستیم از کلمه `planet` استفاده کنیم اما ممکن است کاملا واضح نباشد که planet به چه چیزی اشاره می‌کند. زیباست که نام‌ها را واضح‌تر انتخاب کنیم. حداقل تا زمانی که نام متغیر خیلی طولانی نباشد.
 
+<<<<<<< HEAD
 دومین مورد نام کاربر جاری در وب‌سایت است :
+=======
+## The name of the current visitor
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 ```js
 let currentUserName = "John";

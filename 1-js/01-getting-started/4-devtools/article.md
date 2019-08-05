@@ -48,12 +48,20 @@
 
 حالا `cmd + opt + c` می‌‌تواند پنل توسعه دهندگان را باز کند. 
 
+<<<<<<< HEAD
 ## ورودی چند خطی
 
 معمولا زمانیکه چند خط کد وارد می‌کنیم و سپس `key:Enter` را می‌زنیم، آن کد اجرا می‌شود.
 برای ورود چند خط کد و سپس اجرای آنها از کلید `key:Shift+Enter` استفاده نمایید.
 
 ## خلاصه
+=======
+```smart header="Multi-line input"
+Usually, when we put a line of code into the console, and then press `key:Enter`, it executes.
+
+To insert multiple lines, press `key:Shift+Enter`. This way one can enter long fragments of JavaScript code.
+```
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 - Developer tools به ما امکان مشاهده خطاها، آزمایش متغیرها و امکانات بسیار دیگری را می‌دهد. 
 

@@ -30,7 +30,11 @@
 
 - <http://caniuse.com> جدولی بر اساس پشتیبانی خواص. فرضاً برای دیدن اینکه کدام موتورها توابع مدرن  رمزنگاری را پشتیبانی میکند به <http://caniuse.com/#feat=cryptography> مراجعه کنید.
 
+<<<<<<< HEAD
 - <https://kangax.github.io/compat-table> جدولی با ویژگی‌های زبان و موتورهایی که قابلیت پشتیبانی آنهارا دارند یا ندارند.
+=======
+- **MSDN** – Microsoft manual with a lot of information, including JavaScript (often referred to as JScript). If one needs something specific to Internet Explorer, better go there: <http://msdn.microsoft.com/>.
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 تمام این منابع در توسعه و برنامه‌نویسی‌ در زندگی واقعی مفیدند چراکه بسیاری اطلاعات ارزشمند راجب جزئیات زبان، پشتیبانیشان و غیره را دارند.
 

@@ -4,14 +4,24 @@
  
 یک پلتفرم می‌تواند یک مرورگر، وب-سرور، یا یک ماشین لباسشویی  یا هر میزبان دیگری باشد. هرکدام از این‌ها عملکرد مختص به آن پلتفرم را فراهم می‌کند. مشخصه‌ی جاوااسکریپت (JavaScript specification) آن را یک محیط میزبانی (*host environment*) مینامد.
 
+<<<<<<< HEAD
 یک محیط میزبانی اشیا و توابع اضافی مربوط به پلتفرم را به هسته‌ی اصلی زبان می‌افزاید. مرورگرهای وب ابزاری برای کنترل کردن صفحات وب می‌دهند. Node.JS قابلیت‌های سمت سرور را فراهم میسازد و غیره.
 
 در ادامه یک نگاه سریع به اتفاقی‌ست که وقتی ما جاوااسکریپت را در مرورگر وب اجرا می‌کنیم، می‌افتد:
 ![](windowObjects.svg)
+=======
+A platform may be a browser, or a web-server or another *host*, even a coffee machine. Each of them provides platform-specific functionality. The JavaScript specification calls that a *host environment*.
+
+A host environment provides own objects and functions additional to the language core. Web browsers give a means to control web pages. Node.js provides server-side features, and so on.
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 یک شئ پایه‌‌ای (root) به نام `window` داریم که دو نقش دارد:
 
+<<<<<<< HEAD
 ۱. اولا، یک شئ سراسری (Global Object) برای کد جاوااسکریپت است، همینطور که در بخش <info:global-object> توضیح داده‌ شد.
+=======
+![](windowObjects.svg)
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 ۲. دوما، صفحه‌ی مرورگر (Browser Window) را نمایش میدهد و توابعی برای کنترل آن فراهم می‌سازد.
 
@@ -34,7 +44,13 @@ alert(window.innerHeight); // inner window height
 توابع و مشخصه‌های مربوط به صفحه (window-specific) بیشتری وجود دارد که در بخش‌های بعدی به آنها خواهیم پرداخت. 
 ## Document Object Model (DOM)
 
+<<<<<<< HEAD
 شئ `document` دسترسی مارا به محتویات صفحه فراهم می‌سازد. ما میتوانیم هرچیزی که در صفحه‌ از آن استفاده می‌شود را بسازیم یا تغییر بدهیم.
+=======
+Document Object Model, or DOM for short, represents all page content as objects that can be modified.
+
+The `document` object is the main "entry point" to the page. We can change or create anything on the page using it.
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 برای نمونه:
 ```js run
@@ -55,6 +71,7 @@ setTimeout(() => document.body.style.background = "", 1000);
 
 در دوران گذشته، هیچ استانداردی وجود نداشت -- هر مرورگر هرطور که دلش میخواست کد خودش را می‌نوشت. مرورگرهای متفاوت مجموعه‌ها، توابع، مشخصه‌های مختلفی برای چیزهای یکسان داشتند، توسعه‌دهندگان هم مجبور بودند برای هرکدام کدی جدا بنویسند. واقعا زمان تاریک و به هم ریخته‌ای بود!
 
+<<<<<<< HEAD
 حتی الان هم ممکن است که با کدهای قدیمی‌ای مواجه شویم که مشخصه‌های مربوط به مرورگر را استفاده می‌کنند و ناسازگاری دارند. اما نیازی نیست که اینها را یاد بگیرید مگر اینکه واقعا به آنها نیاز داشته باشید (احتمال اینکه به آنها نیاز داشته باشید خیلی کم است)، ما هم در این روند آموزش، چیزهای به روز را یاد می‌دهیم. 
 
 سپس استاندارد‌های DOM به وجود آمدند، تا همگان را به توافق برسانند. اولین انتشار آن "DOM Level 1"، سپس با DOM Level 2 توسعه یافت، سپس DOM Level 3 و الان DOM Level 4 است. گروه WhatWG از نام‌گذاری با اعداد خسته شد و الان به آن فقط "DOM" می‌گویند. ما هم همینکار را می‌کنیم.
@@ -69,6 +86,18 @@ setTimeout(() => document.body.style.background = "", 1000);
 
 CSSOM همراه با DOM برای تغییر و تصحیح قوانین استایل برای document استفاده می‌گردد.
 اگرچه در عمل، CSSOM به ندرت مورد استفاده‌ میگیرد، به این علت که قوانین CSS عموما ثابت (Static) هستند. ما به ندرت نیاز داریم که قوانین CSS را در جاوا اسکریپت حذف یا اضافه کنیم، بنابراین ما الان به آنها نخواهیم پرداخت.
+=======
+```smart header="DOM is not only for browsers"
+The DOM specification explains the structure of a document and provides objects to manipulate it. There are non-browser instruments that use DOM too.
+
+For instance, server-side scripts that download HTML pages and process them can also use DOM. They may support only a part of the specification though.
+```
+
+```smart header="CSSOM for styling"
+CSS rules and stylesheets are structured in a different way than HTML. There's a separate specification [CSSOM](https://www.w3.org/TR/cssom-1/) that explains how they are represented as objects, and how to read and write them.
+
+CSSOM is used together with DOM when we modify style rules for the document. In practice though, CSSOM is rarely required, because usually CSS rules are static. We rarely need to add/remove CSS rules from JavaScript, but that's also possible.
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 ```
 
 ## BOM (قسمتی از خصوصیت HTML)
@@ -84,7 +113,7 @@ CSSOM همراه با DOM برای تغییر و تصحیح قوانین است�
 
 ```js run
 alert(location.href); // shows current URL
-if (confirm("Go to wikipedia?")) {
+if (confirm("Go to Wikipedia?")) {
   location.href = "https://wikipedia.org"; // redirect the browser to another URL
 }
 ```

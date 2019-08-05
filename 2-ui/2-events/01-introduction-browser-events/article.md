@@ -162,15 +162,19 @@ button.onclick = sayThanks();
 
 If we add brackets, then `sayThanks()` --  will be the *result* of the function execution, so `onclick` in the last code becomes `undefined` (the function returns nothing). That won't work.
 
+<<<<<<< HEAD
 ...But in the markup we do need the brackets:
+=======
+...On the other hand, in the markup we do need the parentheses:
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 ```html
 <input type="button" id="button" onclick="sayThanks()">
 ```
 
-The difference is easy to explain. When the browser reads the attribute, it creates a handler function with the body from its content.
+The difference is easy to explain. When the browser reads the attribute, it creates a handler function with *body from its content*: `sayThanks()`.
 
-So the last example is the same as:
+So the markup generates this property:
 ```js
 button.onclick = function() {
 *!*
@@ -349,7 +353,11 @@ Some properties of `event` object:
 : Event type, here it's `"click"`.
 
 `event.currentTarget`
+<<<<<<< HEAD
 : Element that handled the event. That's exactly the same as `this`, unless you bind `this` to something else, and then `event.currentTarget` becomes useful.
+=======
+: Element that handled the event. That's exactly the same as `this`, unless the handler is an arrow function, or its `this` is bound to something else, then we can get the element from  `event.currentTarget`.
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 `event.clientX / event.clientY`
 : Window-relative coordinates of the cursor, for mouse events.
@@ -369,7 +377,7 @@ That's possible because when the browser reads the attribute, it creates a handl
 
 ## Object handlers: handleEvent
 
-We can assign an object as an event handler using `addEventListener`. When an event occurs, its `handleEvent` method is called with it.
+We can assign not just a function, but an object as an event handler using `addEventListener`. When an event occurs, its `handleEvent` method is called.
 
 For instance:
 
@@ -386,7 +394,7 @@ For instance:
 </script>
 ```
 
-In other words, when `addEventListener` receives an object as the handler, it calls `object.handleEvent(event)` in case of an event.
+As we can see, when `addEventListener` receives an object as the handler, it calls `object.handleEvent(event)` in case of an event.
 
 We could also use a class for that:
 

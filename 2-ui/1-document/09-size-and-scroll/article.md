@@ -46,7 +46,11 @@ Usually paddings are shown empty on illustrations, but if there's a lot of text 
 
 Element properties that provide width, height and other geometry are always numbers. They are assumed to be in pixels.
 
+<<<<<<< HEAD
 Here's the overall picture:
+=======
+![](metric-all.svg)
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 ![](metric-all.svg)
 

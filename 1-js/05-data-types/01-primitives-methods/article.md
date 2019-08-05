@@ -1,8 +1,12 @@
 # توابع ابتدایی
 
+<<<<<<< HEAD
 .جاوااسکریپت اجازه‌ی استفاده کردن از داده‌های ابتدایی مثل رشته حروف، اعداد و غیره، به مثابه یک شئ را به ما می‌دهد
 
 همچنین توابعی برای صدا کردن را فراهم میکنند. ما آنها را به زودی مطالعه خواهیم کرد اما ابتدا باید ببینیم که آنها چطور کار میکنند چراکه داده‌های ابتدایی، شئ نیستند.(در اینجا حتی این موضوع را روشن‌تر خواهیم کرد).
+=======
+JavaScript allows us to work with primitives (strings, numbers, etc.) as if they were objects. They also provide methods to call as such. We will study those soon, but first we'll see how it works because, of course, primitives are not objects (and here we will make it even clearer).
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 بیایید به تفاوت‌های اصلی بین یک شئ و داده‌های ابتدایی بنگریم.
 
@@ -35,7 +39,11 @@ john.sayHi(); // Hi buddy!
 
 اما این خواص هزینه‌ای دارند!
 
+<<<<<<< HEAD
 اشیا از داده‌های ابتدایی وزین‌تر هستند. آنها به منابعی اضافی برای پشتیبانی از فعالیت درونی سیستم دارند. درحالیکه مشخصه‌ها و توابع در برنامه‌نویسی خیلی مفید هستند، موتور‌های جاوااسکریپت با بهینه‌سازی سعی در کاهش بار اضافی به وجود آمده دارند.
+=======
+Objects are "heavier" than primitives. They require additional resources to support the internal machinery.
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 ## یک داده‌ ابتدایی به عنوان یک شئ
 
@@ -84,7 +92,12 @@ alert( n.toFixed(2) ); // 1.23
 
 ````warn header="Constructors `رشته حرف/عدد/متغیر بولی` فقط برای استفاده‌ی درونی هستند"
 
+<<<<<<< HEAD
 بعضی از زبان‌های برنامه‌نویسی مثل جاوا به ما اجازه ساختن دربرگیرنده اشیا برای داده‌های ابتدایی را میدهند که با کدی مثل `new Number(1)` یا  `new Boolean(false)` کار میکنند.
+=======
+````warn header="Constructors `String/Number/Boolean` are for internal use only"
+Some languages like Java allow us to explicitly create "wrapper objects" for primitives using a syntax like `new Number(1)` or `new Boolean(false)`.
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 در جاوااسکریپت، به دلایل تاریخی، این فعالیت ممکن است اما **اصلا** توصیه نمیشود. اینطور چیزها ممکن است در برخی جاها اصلا کار نکنند.
 

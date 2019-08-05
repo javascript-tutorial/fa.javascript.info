@@ -20,8 +20,18 @@ function showMessage() {
 }
 ```
 
+<<<<<<< HEAD
 کلمه‌ی `function` اول می‌آید، سپس اسم تابع و سپس لیستی از پارامترها داخل پرانتز (در مثال بالا داخل پرانتزها خالی‌ست) و در نهایت کد تابع، با نام بدنه‌ی تابع، که توسط دو براکت محصور شده است.
 ![](function_basics.png)
+=======
+The `function` keyword goes first, then goes the *name of the function*, then a list of *parameters* between the parentheses (comma-separated, empty in the example above) and finally the code of the function, also named "the function body", between curly braces.
+
+```js
+function name(parameters) {
+  ...body...
+}
+```
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 تابع جدید ما می‌تواند با اسمش صدا زده شود: `showMessage()`.
 
@@ -199,6 +209,7 @@ function showMessage(from, text = anotherFunction()) {
 }
 ```
 
+<<<<<<< HEAD
 ```smart header="ارزیابی پارامترهای پیش‌فرض"
 
 در جاوااسکریپت، یک پارامتر پیش‌فرض هربار که تابع صدا زده می‌شود، بدون پارامتر مربوطه، محاسبه می‌شود. در مثال بالا،  `anotherFunction()` هربار که `showMessage()` صدا زده می‌شود، فراخوانی می‌شود بدون توجه به پارامتر `text`. این در زبان‌های دیگری مثل پایتون فرق دارد که هر پارامتر پیش‌فرضی فقط یک بار در مقداردهی اولیه ارزیابی می‌شود.
@@ -207,6 +218,16 @@ function showMessage(from, text = anotherFunction()) {
 
 ````smart header="پارامترهای پیش‌فرض قدیمی"
 ورژن‌های قدیمی جاوااسکریپت از پارامترهای پیش‌فرض پشتیبانی نمیکردند. بنابراین برای پشتیبانی راه‌های فرعی‌ای وجود داشت که میتوانید در کد‌های قدیمی بیابید.
+=======
+```smart header="Evaluation of default parameters"
+In JavaScript, a default parameter is evaluated every time the function is called without the respective parameter. In the example above, `anotherFunction()` is called every time `showMessage()` is called without the `text` parameter.
+
+This is in contrast to some other languages like Python, where any default parameters are evaluated only once during the initial interpretation.
+```
+
+````smart header="Default parameters old-style"
+Old editions of JavaScript did not support default parameters. So there are alternative ways to support them, that you can find mostly in the old scripts.
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 برای نمونه، یک آزمون ساده برای بررسی `undefined`:
 
@@ -331,6 +352,23 @@ return
 return*!*;*/!*
  (some + long + expression + or + whatever * f(a) + f(b))
 ```
+<<<<<<< HEAD
+=======
+
+So, it effectively becomes an empty return.
+
+If we want the returned expression to wrap across multiple lines, we should start it at the same line as `return`. Or at least put the opening parentheses there as follows:
+
+```js
+return (
+  some + long + expression
+  + or +
+  whatever * f(a) + f(b)
+  )
+```
+And it will work just as we expect it to.
+````
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 بنابراین، به یک بازگردانی خالی تبدیل می‌شود. باید مقدار را دقیقا در همان خط بگذاریم.
 ````

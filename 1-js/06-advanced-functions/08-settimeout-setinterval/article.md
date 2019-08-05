@@ -130,7 +130,11 @@ setTimeout(() => { clearInterval(timerId); alert('stop'); }, 5000);
 ```smart header="Modal windows freeze time in Chrome/Opera/Safari"
 In browsers IE and Firefox the internal timer continues "ticking" while showing `alert/confirm/prompt`, but in Chrome, Opera and Safari the internal timer becomes "frozen".
 
+<<<<<<< HEAD
 So if you run the code above and don't dismiss the `alert` window for some time, then in Firefox/IE next `alert` will be shown immediately as you do it (2 seconds passed from the previous invocation), and in Chrome/Opera/Safari -- after 2 more seconds (timer did not tick during the `alert`).
+=======
+So if you run the code above and don't dismiss the `alert` window for some time, then in the next `alert` will be shown immediately as you do it. The actual interval between alerts will be shorter than 2 seconds.
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 ```
 
 ## Recursive setTimeout
@@ -176,9 +180,13 @@ let timerId = setTimeout(function request() {
 ```
 
 
+<<<<<<< HEAD
 And if we regularly have CPU-hungry tasks, then we can measure the time taken by the execution and plan the next call sooner or later.
+=======
+And if the functions that we're scheduling are CPU-hungry, then we can measure the time taken by the execution and plan the next call sooner or later.
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
-**Recursive `setTimeout` guarantees a delay between the executions, `setInterval` -- does not.**
+**Recursive `setTimeout` allows to set the delay between the executions more precisely than `setInterval`.**
 
 Let's compare two code fragments. The first one uses `setInterval`:
 
@@ -223,7 +231,7 @@ And here is the picture for the recursive `setTimeout`:
 
 That's because a new call is planned at the end of the previous one.
 
-````smart header="Garbage collection"
+````smart header="Garbage collection and setInterval/setTimeout callback"
 When a function is passed in `setInterval/setTimeout`, an internal reference is created to it and saved in the scheduler. It prevents the function from being garbage collected, even if there are no other references to it.
 
 ```js
@@ -242,7 +250,7 @@ There's a special use case: `setTimeout(func, 0)`.
 
 This schedules the execution of `func` as soon as possible. But scheduler will invoke it only after the current code is complete.
 
-So the function is scheduled to run "right after" the current code. In other words, *asynchronously*.
+So the function is scheduled to run "right after" the current code.
 
 For instance, this outputs "Hello", then immediately "World":
 
@@ -445,6 +453,7 @@ Now the `<div>` shows increasing values of `i`.
 
 - Methods `setInterval(func, delay, ...args)` and `setTimeout(func, delay, ...args)` allow to run the `func` regularly/once after `delay` milliseconds.
 - To cancel the execution, we should call `clearInterval/clearTimeout` with the value returned by `setInterval/setTimeout`.
+<<<<<<< HEAD
 - Nested `setTimeout` calls is a more flexible alternative to `setInterval`. Also they can guarantee the minimal time *between* the executions.
 - Zero-timeout scheduling `setTimeout(...,0)` is used to schedule the call "as soon as possible, but after the current code is complete".
 
@@ -453,6 +462,13 @@ Some use cases of `setTimeout(...,0)`:
 - To let the browser do something else while the process is going on (paint the progress bar).
 
 Please note that all scheduling methods do not *guarantee* the exact delay. We should not rely on that in the scheduled code.
+=======
+- Nested `setTimeout` calls is a more flexible alternative to `setInterval`, allowing to set the time *between* executions more precisely.
+- Zero delay scheduling with `setTimeout(func, 0)` (the same as `setTimeout(func)`) is used to schedule the call "as soon as possible, but after the current code is complete".
+- The browser limits the minimal delay for five or more nested call of `setTimeout` or for `setInterval` (after 5th call) to 4ms. That's for historical reasons.
+
+Please note that all scheduling methods do not *guarantee* the exact delay.
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 For example, the in-browser timer may slow down for a lot of reasons:
 - The CPU is overloaded.
