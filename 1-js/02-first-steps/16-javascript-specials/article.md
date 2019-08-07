@@ -143,9 +143,9 @@ Assignments
 : There is a simple assignment: `a = b` and combined ones like `a *= 2`.
 
 Bitwise
-: Bitwise operators work with integers on bit-level: see the [docs](mdn:/JavaScript/Reference/Operators/Bitwise_Operators) when they are needed.
+: Bitwise operators work with 32-bit integers at the lowest, bit-level: see the [docs](mdn:/JavaScript/Reference/Operators/Bitwise_Operators) when they are needed.
 
-Ternary
+Conditional
 : The only operator with three parameters: `cond ? resultA : resultB`. If `cond` is truthy, returns `resultA`, otherwise `resultB`.
 
 Logical operators
@@ -245,10 +245,8 @@ We covered three ways to create a function in JavaScript:
       let result = a + b;
 
       return result;
-    }
+    };
     ```
-
-    Function expressions can have a name, like `sum = function name(a, b)`, but that `name` is only visible inside that function.
 
 3. Arrow functions:
 
@@ -274,13 +272,7 @@ We covered three ways to create a function in JavaScript:
 - Parameters can have default values: `function sum(a = 1, b = 2) {...}`.
 - Functions always return something. If there's no `return` statement, then the result is `undefined`.
 
-
-| Function Declaration | Function Expression |
-|----------------------|---------------------|
-| visible in the whole code block | created when the execution reaches it |
-|   - | can have a name, visible only inside the function |
-
-More: see <info:function-basics>, <info:function-expressions-arrows>.
+Details: see <info:function-basics>, <info:function-expressions-arrows>.
 
 ## More to come
 

@@ -256,14 +256,14 @@ alert( 8 ** (1/3) ); // 2 (power of 1/3 is the same as a cubic root)
 
     ```js run no-beautify
     let counter = 2;
-    counter++;      // works the same as counter = counter + 1, but is shorter
+    counter++;        // works the same as counter = counter + 1, but is shorter
     alert( counter ); // 3
     ```
 - کاهش -- که یک واحد از عدد کم می‌کند:
 
     ```js run no-beautify
     let counter = 2;
-    counter--;      // works the same as counter = counter - 1, but is shorter
+    counter--;        // works the same as counter = counter - 1, but is shorter
     alert( counter ); // 1
     ```
 

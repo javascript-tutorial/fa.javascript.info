@@ -1,21 +1,21 @@
-# محیط مرورگر و خصوصیات (Specs)
+# Browser environment, specs
 
-زبان جاوا اسکریپت در ابتدا برای مرورگر‌های وب ساخته شد. از آن زمان، پیشرفت بسیاری کرده و به زبانی پراستفاده و پلتفرم‌ها شده است‌.
- 
-یک پلتفرم می‌تواند یک مرورگر، وب-سرور، یا یک ماشین لباسشویی  یا هر میزبان دیگری باشد. هرکدام از این‌ها عملکرد مختص به آن پلتفرم را فراهم می‌کند. مشخصه‌ی جاوااسکریپت (JavaScript specification) آن را یک محیط میزبانی (*host environment*) مینامد.
+The JavaScript language was initially created for web browsers. Since then, it has evolved and become a language with many uses and platforms.
 
-یک محیط میزبانی اشیا و توابع اضافی مربوط به پلتفرم را به هسته‌ی اصلی زبان می‌افزاید. مرورگرهای وب ابزاری برای کنترل کردن صفحات وب می‌دهند. Node.JS قابلیت‌های سمت سرور را فراهم میسازد و غیره.
+A platform may be a browser, or a web-server or another *host*, even a coffee machine. Each of them provides platform-specific functionality. The JavaScript specification calls that a *host environment*.
 
-در ادامه یک نگاه سریع به اتفاقی‌ست که وقتی ما جاوااسکریپت را در مرورگر وب اجرا می‌کنیم، می‌افتد:
-![](windowObjects.png)
+A host environment provides own objects and functions additional to the language core. Web browsers give a means to control web pages. Node.js provides server-side features, and so on.
 
-یک شئ پایه‌‌ای (root) به نام `window` داریم که دو نقش دارد:
+Here's a bird's-eye view of what we have when JavaScript runs in a web-browser:
 
-۱. اولا، یک شئ سراسری (Global Object) برای کد جاوااسکریپت است، همینطور که در بخش <info:global-object> توضیح داده‌ شد.
+![](windowObjects.svg)
 
-۲. دوما، صفحه‌ی مرورگر (Browser Window) را نمایش میدهد و توابعی برای کنترل آن فراهم می‌سازد.
+There's a "root" object called `window`. It has two roles:
 
-برای نمونه، ما اینجا به عنوان یک شئ سراسری استفاده‌ش میکنیم:
+1. First, it is a global object for JavaScript code, as described in the chapter <info:global-object>.
+2. Second, it represents the "browser window" and provides methods to control it.
+
+For instance, here we use it as a global object:
 
 ```js run
 function sayHi() {
@@ -26,91 +26,88 @@ function sayHi() {
 window.sayHi();
 ```
 
-و ما اینجا به عنوان یک صفحه‌ی مرورگر از آن برای دیدن ارتفاع صفحه استفاده می‌کنیم:
+And here we use it as a browser window, to see the window height:
+
 ```js run
 alert(window.innerHeight); // inner window height
 ```
 
-توابع و مشخصه‌های مربوط به صفحه (window-specific) بیشتری وجود دارد که در بخش‌های بعدی به آنها خواهیم پرداخت. 
-## Document Object Model (DOM)
+There are more window-specific methods and properties, we'll cover them later.
 
-شئ `document` دسترسی مارا به محتویات صفحه فراهم می‌سازد. ما میتوانیم هرچیزی که در صفحه‌ از آن استفاده می‌شود را بسازیم یا تغییر بدهیم.
+## DOM (Document Object Model)
 
-برای نمونه:
+Document Object Model, or DOM for short, represents all page content as objects that can be modified.
+
+The `document` object is the main "entry point" to the page. We can change or create anything on the page using it.
+
+For instance:
 ```js run
-// رنگ پس‌زمینه را به قرمز تغییر میدهیم
+// change the background color to red
 document.body.style.background = "red";
 
-// سپس بعد از یک ثانیه به حالت قبل بازمیگردانیم
+// change it back after 1 second
 setTimeout(() => document.body.style.background = "", 1000);
 ```
 
-در اینجا ما از `document.body.style` استفاده کردیم، اما بیشتر هم هست. خیلی بیشتر! توابع و مشخصه‌ها در خصوصیات (Specification) توضیح داده شده‌ند.
-1. [W3C](https://en.wikipedia.org/wiki/World_Wide_Web_Consortium) -- مستندات در این لینک است <https://www.w3.org/TR/dom>.
-2. [WhatWG](https://en.wikipedia.org/wiki/WHATWG), موجود در <https://dom.spec.whatwg.org>.
+Here we used `document.body.style`, but there's much, much more. Properties and methods are described in the specification:
 
-هردوی این گروه‌ها کامل با یکدیگر موافق نیستند بنابراین دو مجموعه‌ی استانداردها وجود دارد. اما خیلی مشابه یکدیگر هستند و تا ۹۹٪ به یکدیگر شباهت دارند. البته تفاوت‌های بسیار ریزی وجود دارند که احتمالا حتی متوجهشان نخواهید شد.
+- **DOM Living Standard** at <https://dom.spec.whatwg.org>
 
-به نظر شخصی من، <https://dom.spec.whatwg.org> برای استفاده مناسب است.
+```smart header="DOM is not only for browsers"
+The DOM specification explains the structure of a document and provides objects to manipulate it. There are non-browser instruments that use DOM too.
 
-در دوران گذشته، هیچ استانداردی وجود نداشت -- هر مرورگر هرطور که دلش میخواست کد خودش را می‌نوشت. مرورگرهای متفاوت مجموعه‌ها، توابع، مشخصه‌های مختلفی برای چیزهای یکسان داشتند، توسعه‌دهندگان هم مجبور بودند برای هرکدام کدی جدا بنویسند. واقعا زمان تاریک و به هم ریخته‌ای بود!
-
-حتی الان هم ممکن است که با کدهای قدیمی‌ای مواجه شویم که مشخصه‌های مربوط به مرورگر را استفاده می‌کنند و ناسازگاری دارند. اما نیازی نیست که اینها را یاد بگیرید مگر اینکه واقعا به آنها نیاز داشته باشید (احتمال اینکه به آنها نیاز داشته باشید خیلی کم است)، ما هم در این روند آموزش، چیزهای به روز را یاد می‌دهیم. 
-
-سپس استاندارد‌های DOM به وجود آمدند، تا همگان را به توافق برسانند. اولین انتشار آن "DOM Level 1"، سپس با DOM Level 2 توسعه یافت، سپس DOM Level 3 و الان DOM Level 4 است. گروه WhatWG از نام‌گذاری با اعداد خسته شد و الان به آن فقط "DOM" می‌گویند. ما هم همینکار را می‌کنیم.
-```smart header="DOM فقط برای مرورگرها نیست"
-خصوصیات DOM ساختار یک document را توصیف می‌کند و اشیائی برایی تغییر آن فراهم می‌کند. همینطور ابزارهای غیر-مرورگری‌ای هستند که از آن استفاده می‌کنند.
-
-برای مثال، ابزار سمت سرور که صفحات HTML را دانلود و پردازش می‌کنند از DOM استفاده ‌می‌کنند. اگرچه ممکن است فقط یک قسمتی از خصوصیات‌ش را پشتیبانی کنند.
+For instance, server-side scripts that download HTML pages and process them can also use DOM. They may support only a part of the specification though.
 ```
 
-```smart header="CSSOM برای استایل دادن"
-قوانین CSS و شیوه‌نامه (stylesheets) مشابه HTML ساختاربندی نشده‌ند. یک خصوصیت مجزا [CSSOM](https://www.w3.org/TR/cssom-1/) که نمایان شدنشان به شکل اشیا و نحوه نوشته و خوانده شدنشان را توصیف میکند.
+```smart header="CSSOM for styling"
+CSS rules and stylesheets are structured in a different way than HTML. There's a separate specification [CSSOM](https://www.w3.org/TR/cssom-1/) that explains how they are represented as objects, and how to read and write them.
 
-CSSOM همراه با DOM برای تغییر و تصحیح قوانین استایل برای document استفاده می‌گردد.
-اگرچه در عمل، CSSOM به ندرت مورد استفاده‌ میگیرد، به این علت که قوانین CSS عموما ثابت (Static) هستند. ما به ندرت نیاز داریم که قوانین CSS را در جاوا اسکریپت حذف یا اضافه کنیم، بنابراین ما الان به آنها نخواهیم پرداخت.
+CSSOM is used together with DOM when we modify style rules for the document. In practice though, CSSOM is rarely required, because usually CSS rules are static. We rarely need to add/remove CSS rules from JavaScript, but that's also possible.
 ```
 
-## BOM (قسمتی از خصوصیت HTML)
+## BOM (Browser object model)
 
-مدل اشیا مرورگر (Browser Object Model یا BOM)، اشیا افزوده‌ای هستند که توسط مرورگر فراهم میشوند (محیط میزبانی یا host environment) تا با هرچیزی به جز document کار کنند. 
+Browser Object Model (BOM) are additional objects provided by the browser (host environment) to work with everything except the document.
 
-برای نمونه:
+For instance:
 
-- شئ [navigator](mdn:api/Window/navigator) اطلاعات پس‌زمینه در مورد مرورگر و سیستم‌های عامل فراهم می‌کند. مشخصه‌های زیادی هستند، اما دو مورد معروف آن: `navigator.userAgent` که درباره مرورگر کنونی‌ست و `navigator.platform` که درباره پلتفرم است (کمک میکند که بین ویندوز/لینوکس/مک و بقیه بتوانیم تمایز قائل شویم).
-- شئ [location](mdn:api/Window/location) به ما اجازه خواندن URL کنونی را می‌دهد و می‌تواند مرورگر به صفحه‌ی جدیدی انتقال یابد.
+- The [navigator](mdn:api/Window/navigator) object provides background information about the browser and the operating system. There are many properties, but the two most widely known are: `navigator.userAgent` -- about the current browser, and `navigator.platform` -- about the platform (can help to differ between Windows/Linux/Mac etc).
+- The [location](mdn:api/Window/location) object allows us to read the current URL and can redirect the browser to a new one.
 
-نحوه‌ی استفاده از شئ `location`:
+Here's how we can use the `location` object:
 
 ```js run
 alert(location.href); // shows current URL
-if (confirm("Go to wikipedia?")) {
+if (confirm("Go to Wikipedia?")) {
   location.href = "https://wikipedia.org"; // redirect the browser to another URL
 }
 ```
 
-توابع `alert/confirm/prompt` همچنین قسمتی از BOM هستند: مستقیما به document مربوط نیستند اما توابع مختص مرورگر برای ارتباط با کاربر را نمایش می‌دهند. 
+Functions `alert/confirm/prompt` are also a part of BOM: they are directly not related to the document, but represent pure browser methods of communicating with the user.
 
-```smart header="HTML خصوصیت"
-BOM قسمتی از [HTML specification](https://html.spec.whatwg.org) عمومی است.
-بله، درست متوجه‌ شدید. خصوصیت HTML در <https://html.spec.whatwg.org> نه تنها درباره "HTML زبان" (tags, attributes) است، بلکه مجموعه‌ای از اشیا، توابع و افزونه‌های DOM مربوط به مرورگر را هم پوشش می‌دهد. این معنی HTML در حالتی کلی‌ست.
-```
+BOM is the part of the general [HTML specification](https://html.spec.whatwg.org).
 
-## خلاصه
+Yes, you heard that right. The HTML spec at <https://html.spec.whatwg.org> is not only about the "HTML language" (tags, attributes), but also covers a bunch of objects, methods and browser-specific DOM extensions. That's "HTML in broad terms". Also, some parts have additional specs listed at <https://spec.whatwg.org>.
 
-در بحث استانداردها داریم:
+## Summary
 
-خصوصیت DOM
-: ساختمان document، تغییرها و اتفاقات (events) را توصیف می‌کند. <https://dom.spec.whatwg.org> 
+Talking about standards, we have:
 
-خصوصیت CSSOM
-: شیوه‌نامه و قواعد استایل دادن، تغییر آنها با اتصال آنها به documents را توصیف می‌کند. <https://www.w3.org/TR/cssom-1/> 
+DOM specification
+: Describes the document structure, manipulations and events, see <https://dom.spec.whatwg.org>.
 
-خصوصیت HTML
-: زبان HTML (چیزهایی مثل tags) و همینطور BOM و توابع مرورگر مختلف را توصیف می‌کند: `setTimeout`، `alert`، `location` و غیره. <https://html.spec.whatwg.org>. خصوصیت DOM را می‌گیرد و با بسیاری از مشخصه‌ها و توابع آنرا بسط می‌دهد.
+CSSOM specification
+: Describes stylesheets and style rules, manipulations with them and their binding to documents, see <https://www.w3.org/TR/cssom-1/>.
 
-حالا میرویم برای یادگیری DOM، چراکه document نقش اصلی در رابط کاربری را دارد.
+HTML specification
+: Describes the HTML language (e.g. tags) and also the BOM (browser object model) -- various browser functions: `setTimeout`, `alert`, `location` and so on, see <https://html.spec.whatwg.org>. It takes the DOM specification and extends it with many additional properties and methods.
 
-به لینک‌های بالا توجه داشته باشید چراکه خیلی اطلاعات برای یادگرفتن دارند که پوش دادن آنها در اینجا غیرممکن است.
+Additionally, some classes are described separately at <https://spec.whatwg.org/>.
 
-هنگامی که می‌خواهید راجب یک مشخصه یا یک تابع مطالعه کنید، راهنمای Mozilla در <https://developer.mozilla.org/en-US/search> منبع خوبیست اما خواندن خصوصیت مربوطه بهتر است: پیچیده‌ةر است وخواندش طولانی‌تر است اما دانش پایه‌ای شما را کامل و درست می‌کند.
+Please note these links, as there's so much stuff to learn it's impossible to cover and remember everything.
+
+When you'd like to read about a property or a method, the Mozilla manual at <https://developer.mozilla.org/en-US/search> is also a nice resource, but the corresponding spec may be better: it's more complex and longer to read, but will make your fundamental knowledge sound and complete.
+
+To find something, it's often convenient to use an internet search "WHATWG [term]" or "MDN [term]", e.g <https://google.com?q=whatwg+localstorage>, <https://google.com?q=mdn+localstorage>.
+
+Now we'll get down to learning DOM, because the document plays the central role in the UI.

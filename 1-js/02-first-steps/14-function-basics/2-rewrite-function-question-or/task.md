@@ -11,11 +11,11 @@ importance: 4
 
 ```js
 function checkAge(age) {
-if (age > 18) {
-return true;
-} else {
-return confirm('Do you have your parents permission to access this page?');
-}
+  if (age > 18) {
+    return true;
+  } else {
+    return confirm('Did parents allow you?');
+  }
 }
 ```
 

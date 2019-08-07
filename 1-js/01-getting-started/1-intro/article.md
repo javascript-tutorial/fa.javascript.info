@@ -149,7 +149,7 @@
 
   
 
-![](limitations.png) 
+![](limitations.svg) 
 
   
 
