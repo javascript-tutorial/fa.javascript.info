@@ -45,7 +45,7 @@ Here the flow is:
 
 As the result is passed along the chain of handlers, we can see a sequence of `alert` calls: `1` -> `2` -> `4`.
 
-![](promise-then-chain.png)
+![](promise-then-chain.svg)
 
 The whole thing works, because a call to `promise.then` returns a promise, so that we can call the next `.then` on it.
 
@@ -94,7 +94,7 @@ promise.then(function(result) {
 
 ...But that's a totally different thing. Here's the picture (compare it with the chaining above):
 
-![](promise-then-many.png)
+![](promise-then-many.svg)
 
 All `.then` on the same promise get the same result -- the result of that promise. So in the code above all `alert` show the same: `1`. There is no result-passing between them.
 
@@ -671,7 +671,7 @@ To summarize, `.then/catch(handler)` returns a new promise that changes dependin
 
 The picture of how the promise returned by `.then/catch` changes:
 
-![](promise-handler-variants.png)
+![](promise-handler-variants.svg)
 
 The smaller picture of how handlers are called:
 

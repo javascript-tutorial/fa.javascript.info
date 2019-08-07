@@ -71,7 +71,7 @@ alert(Object.getOwnPropertyNames(User.prototype)); // constructor, sayHi
 
 Here's the illustration of what `class User` creates:
 
-![](class-user.png)
+![](class-user.svg)
 
 
 

@@ -40,7 +40,7 @@ Setting `Rabbit.prototype = animal` literally states the following: "When a `new
 
 That's the resulting picture:
 
-![](proto-constructor-animal-rabbit.png)
+![](proto-constructor-animal-rabbit.svg)
 
 On the picture, `"prototype"` is a horizontal arrow, it's a regular property, and `[[Prototype]]` is vertical, meaning the inheritance of `rabbit` from `animal`.
 
@@ -61,7 +61,7 @@ Rabbit.prototype = { constructor: Rabbit };
 */
 ```
 
-![](function-prototype-constructor.png)
+![](function-prototype-constructor.svg)
 
 We can check it:
 
@@ -85,7 +85,7 @@ let rabbit = new Rabbit(); // inherits from {constructor: Rabbit}
 alert(rabbit.constructor == Rabbit); // true (from prototype)
 ```
 
-![](rabbit-prototype-constructor.png)
+![](rabbit-prototype-constructor.svg)
 
 We can use `constructor` property to create a new object using the same constructor as the existing one.
 

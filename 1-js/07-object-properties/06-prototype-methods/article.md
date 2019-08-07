@@ -109,7 +109,7 @@ But `Object` also can serve us well here, because language creators gave a thoug
 
 The `__proto__` is not a property of an object, but an accessor property of `Object.prototype`:
 
-![](object-prototype-2.png)
+![](object-prototype-2.svg)
 
 So, if `obj.__proto__` is read or assigned, the corresponding getter/setter is called from its prototype, and it gets/sets `[[Prototype]]`.
 
@@ -130,7 +130,7 @@ alert(obj[key]); // "some value"
 
 `Object.create(null)` creates an empty object without a prototype (`[[Prototype]]` is `null`):
 
-![](object-prototype-null.png)
+![](object-prototype-null.svg)
 
 So, there is no inherited getter/setter for `__proto__`. Now it is processed as a regular data property, so the example above works right.
 
@@ -227,7 +227,7 @@ for(let prop in rabbit) {
 ```
 Here we have the following inheritance chain: `rabbit`, then `animal`, then `Object.prototype` (because `animal` is a literal object `{...}`, so it's by default), and then `null` above it:
 
-![](rabbit-animal-object.png)
+![](rabbit-animal-object.svg)
 
 Note, there's one funny thing. Where is the method `rabbit.hasOwnProperty` coming from? Looking at the chain we can see that the method is provided by `Object.prototype.hasOwnProperty`. In other words, it's inherited.
 
