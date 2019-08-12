@@ -1,23 +1,23 @@
-# JavaScript specials
+# خلاصه‌ی فصل
 
-This chapter briefly recaps the features of JavaScript that we've learned by now, paying special attention to subtle moments.
+در این قسمت به صورت خلاصه مباحثی را که تا به حال یاد گرفته‌ایم مرور می‌کنیم. این مباحث که شامل نحوه‌ی نوشتن دستورات، ساخت متغیّر، شرط، حلقه و تابع هستند اصول پایه‌ی زبان جاوااسکریپت را تشکیل می‌دهند. بعد از این فصل وارد مبحث اشیاء در جاوااسکریپت خواهیم شد.
 
-## Code structure
+## ساختار کد
 
-Statements are delimited with a semicolon:
+دستورات (statementها) با ویرگول‌نقطه‌ی انگلیسی (;) از یکدیگر جدا می‌شوند.
 
 ```js run no-beautify
 alert('Hello'); alert('World');
 ```
 
-Usually, a line-break is also treated as a delimiter, so that would also work:
+معمولاً همین که به خط بعدی می‌روید نیز به منزله‌ی جداسازی دستورات در نظر گرفته می‌شود، بنابراین این کد هم به درستی کار می‌کند:
 
 ```js run no-beautify
 alert('Hello')
 alert('World')
 ```
 
-That's called "automatic semicolon insertion". Sometimes it doesn't work, for instance:
+به این موضوع «درج خودکار ویرگول‌نقطه (automatic semicolon insertion)» گفته می‌شود. ولی گاهی اوقات درست کار نمی‌کند، مثل اینجا:
 
 ```js run
 alert("There will be an error after this message")
@@ -25,27 +25,27 @@ alert("There will be an error after this message")
 [1, 2].forEach(alert)
 ```
 
-Most codestyle guides agree that we should put a semicolon after each statement.
+در بیشتر سبک‌های کدنویسی پیشنهاد شده است که حتماً بعد از هر دستور ویر‌گول‌نقطه گذاشته شود.
 
-Semicolons are not required after code blocks `{...}` and syntax constructs with them like loops:
+لازم نیست بعد از بلاک‌های کد {...} و ساختارهایی که با این بلاک‌ها ساخته می‌شوند، مثل حلقه‌ها ویرگول‌نقطه قرار دهید.
 
 ```js
 function f() {
-  // no semicolon needed after function declaration
+  // بعد از ساخت تابع، نیازی به ویرگول‌نقطه نیست.
 }
 
 for(;;) {
-  // no semicolon needed after the loop
+  // بعد از حلقه نیازی نیست ویرگول‌نقطه بگذارید.
 }
 ```
 
-...But even if we can put an "extra" semicolon somewhere, that's not an error. It will be ignored.
+ولی با این حال اگر ویرگول‌نقطه‌ی اضافی در کد خود بنویسید مشکلی ایجاد نمی‌کند و نادیده گرفته می‌شود.
 
-More in: <info:structure>.
+برای اطّلاعات بیشتر اینجا را ببینید <info:structure>.
 
-## Strict mode
+## حالت Strict
 
-To fully enable all features of modern JavaScript, we should start scripts with `"use strict"`.
+برای اینکه تمام قابلیّت‌های مدرن جاوااسکریپت فعّال شود لازم است که فایل جاوااسکریپت خود را با عبارت`"use strict"` شروع کنیم:
 
 ```js
 'use strict';
@@ -53,67 +53,68 @@ To fully enable all features of modern JavaScript, we should start scripts with 
 ...
 ```
 
-The directive must be at the top of a script or at the beginning of a function.
+این دستور می‌تواند در ابتدای یک فایل جاوااسکریپت یا ابتدای یک تابع نوشته شود.
 
-Without `"use strict"`, everything still works, but some features behave in the old-fashion, "compatible" way. We'd generally prefer the modern behavior.
+بدون نوشتن `"use strict"` هم کد ما کار می‌کند، ولی بعضی چیزها در حالت قدیمی خود عمل می‌کنند. ما معمولاً رفتار مدرن آن‌ها را ترجیح می‌دهیم.
 
-Some modern features of the language (like classes that we'll study in the future) enable strict mode implicitly.
+بعضی از ویژگی‌های مدرن جاوااسکریپت (مثل کلاس‌ها که بعداً به آن می‌رسیم) به صورت خودکار و بدون اینکه نیازی باشد `"use strict"` را بنویسیم کد را در حالت strict اجرا می‌کنند.
 
-More in: <info:strict-mode>.
+برای اطلاعات بیشتر اینجا را ببینید: <info:strict-mode>.
 
-## Variables
+## متغیّرها (Variables)
 
-Can be declared using:
+می‌تواند به شکل‌های زیر ساخته شود:
 
 - `let`
-- `const` (constant, can't be changed)
-- `var` (old-style, will see later)
+- `const` (ثابت، نمی‌توان مقدارش را تغییر داد)
+- `var` (سبک قدیمی، که بعداً تفاوت‌هایش را می‌بینیم)
 
-A variable name can include:
-- Letters and digits, but the first character may not be a digit.
-- Characters `$` and `_` are normal, on par with letters.
-- Non-Latin alphabets and hieroglyphs are also allowed, but commonly not used.
+نام متغیّر می‌تواند شامل این موارد باشد:
 
-Variables are dynamically typed. They can store any value:
+حروف و ارقام، ولی اوّلین کاراکتر نمی‌تواند رقم باشد- .
+کاراکترهای $ و _ هم مثل سایر حروف الفبا مجاز هستند- .
+حروف الفبای غیر انگلیسی و حروف تصویری هم مجاز هستند، ولی معمولاً استفاده نمی‌شوند- .
+
+نوع متغیّر پویا است و هر نوع مقداری را می‌توان در آن نگهداری کرد:
 
 ```js
 let x = 5;
 x = "John";
 ```
 
-There are 7 data types:
+۷ نوع داده وجود دارد:
+عدد-  (number) برای اعداد اعشاری و اعداد صحیح.
+رشته- (string) برای متن‌ها
+بولین-  (boolean) برای نشان دادن مقادیر منطقی true/false
+- null: نوعی که فقط دارای مقدار خاص null است و نشان‌دهنده‌ی خالی بودن یا وجود نداشتن است.
+- undefined: نوعی که فقط دارای مقدار خاص undefined است و نشان‌دهنده‌ی این است که چیزی نسبت داده نشده است.
+شیء-  (object): برای ساختارهای اطّلاعاتی پیچیده (بعداً در مورد این نوع صحبت خواهیم کرد).
+نماد-  (symbol): برای شناسه‌های منحصر به فرد (بعداً در مورد این نوع صحبت خواهیم کرد).
 
-- `number` for both floating-point and integer numbers,
-- `string` for strings,
-- `boolean` for logical values: `true/false`,
-- `null` -- a type with a single value `null`, meaning "empty" or "does not exist",
-- `undefined` -- a type with a single value `undefined`, meaning "not assigned",
-- `object` and `symbol` -- for complex data structures and unique identifiers, we haven't learnt them yet.
-
-The `typeof` operator returns the type for a value, with two exceptions:
+عملگر `typeof` نوع هر مقداری را در قالب یک رشته به ما بر می‌گرداند با دو استثناء:
 ```js
-typeof null == "object" // error in the language
-typeof function(){} == "function" // functions are treated specially
+typeof null == "object" // اشتباهی در زبان جاوااسکریپت
+typeof function(){} == "function" // تابع‌ها در اصل زیرمجموعه‌ای از اشیاء هستند
 ```
 
-More in: <info:variables> and <info:types>.
+برای اطلاعات بیشتر <info:variables> و <info:types> را ببینید
 
-## Interaction
+## تعامل
 
-We're using a browser as a working environment, so basic UI functions will be:
+ما از مرورگر به عنوان محیط کار خود استفاده می‌کنیم، در این محیط چند تابع برای ارتباط با کاربر وجود دارد:
 
-[`prompt(question[, default])`](mdn:api/Window/prompt)
-: Ask a `question`, and return either what the visitor entered or `null` if they pressed "cancel".
+[`prompt(question)`](mdn:api/Window/prompt)
+پیامی را به کاربر نمایش می‌دهد که از او می‌خواهد متنی را تایپ کند. بعد متن تایپ شده را بر می‌گرداند. در صورتی که کاربر روی: cancel کلیک کند یا کلید Esc را فشار دهد مقدار null را بر می‌گرداند.
 
 [`confirm(question)`](mdn:api/Window/confirm)
-: Ask a `question` and suggest to choose between Ok and Cancel. The choice is returned as `true/false`.
+پیامی را نشان می‌دهد و منتظر می‌ماند تا کاربر روی دکمه‌ی: cancel یا ok کلیک کند. در صورت کلیک روی ok مقدار true و در صورت کلیک روی cancel یا زدن Esc مقدار false را بر می‌گرداند.
 
-[`alert(message)`](mdn:api/Window/alert)
-: Output a `message`.
+[`alert`](mdn:api/Window/alert)
+پیامی را به کاربر نمایش می‌دهد:.
 
-All these functions are *modal*, they pause the code execution and prevent the visitor from interacting with the page until they answer.
+این سه تابع modal هستند: به این معنا که به اجرای کد جاوااسکریپت را متوقّف می‌کنند و به کاربر اجازه نمی‌دهند که با بقیّه‌ی صفحه تعامل داشته باشد و کار کند، تا اینکه این کادرها بسته شوند. این ویژگی با طبیعت زبان جاوااسکریپت زیاد سازگار نیست، به همین دلیل سازندگان مرورگرها (به خصوص کروم) توصیه می‌کنند از روش‌های دیگری غیر از این‌ها استفاده شود و محدودیت‌هایی نیز به وجود آورده‌اند (مثلاً در کروم حتماً باید همان سربرگی که می‌خواهد این modalها را نمایش دهد در حالت focus باشد و…). ولی به دلیل سادگی این روش و سخت‌تر بودن روش‌های جایگزین، در این آموزش ما همیشه از همین‌ها استفاده می‌کنیم.
 
-For instance:
+مثال:
 
 ```js run
 let userName = prompt("Your name?", "Alice");
@@ -123,58 +124,63 @@ alert( "Visitor: " + userName ); // Alice
 alert( "Tea wanted: " + isTeaWanted ); // true
 ```
 
-More in: <info:alert-prompt-confirm>.
+اطلاعات بیشتر در: <info:alert-prompt-confirm>.
 
-## Operators
+## عملگرها
 
-JavaScript supports the following operators:
+جاوااسکریپت از عملگرهای زیر پشتیبانی می‌کند:
 
-Arithmetical
-: Regular: `* + - /`, also `%` for the remainder and `**` for power of a number.
+عملگرهای محاسباتی
+: عملگرهای عادی: `* + - /`, و نیز `%` برای محاسبه‌ی باقیمانده‌ی تقسیم و `**` برای به توان رساندن اعداد.
 
-    The binary plus `+` concatenates strings. And if any of the operands is a string, the other one is converted to string too:
+عملگر دودویی + رشته‌ها را به هم وصل می‌کند. و اگر یکی از دو طرف این عملگر از نوع رشته باشد، طرف دیگر به صورت خودکار به رشته تبدیل می‌شود.
 
     ```js run
     alert( '1' + 2 ); // '12', string
     alert( 1 + '2' ); // '12', string
     ```
 
-Assignments
-: There is a simple assignment: `a = b` and combined ones like `a *= 2`.
+انتساب
+دو نوع انتساب داریم: انتساب معمولی مثل: a = b و انتساب ترکیبی مثل a *= 2.
 
-Bitwise
-: Bitwise operators work with 32-bit integers at the lowest, bit-level: see the [docs](mdn:/JavaScript/Reference/Operators/Bitwise_Operators) when they are needed.
+بیتی (bitwise)
+عملگرهای بیتی با اعداد صحیح در سطح بیتی (مبنای ۲) کار می‌کنند (و زیاد کاربرد ندارند:). اگر علاقه دارید در مورد این نوع عملگرها بیشتر بدانید به [مستندات موزیلا](mdn:/JavaScript/Reference/Operators/Bitwise_Operators) مراجعه کنید.
 
-Conditional
-: The only operator with three parameters: `cond ? resultA : resultB`. If `cond` is truthy, returns `resultA`, otherwise `resultB`.
+سه‌تایی (ternary)
+تنها عملگری است که سه پارامتر می‌گیرد:: cond ? resultA : result اگر cond مقداری truthy باشد (در تبدیل به بولین معادل true باشد)، مقدار resultA را بر می‌گرداند، در غیر این صورت resultB.
 
-Logical operators
-: Logical AND `&&` and OR `||` perform short-circuit evaluation and then return the value where it stopped. Logical NOT `!` converts the operand to boolean type and returns the inverse value.
+عملگرهای منطقی (logical)
+عملگر «و» (&&): در صورتی که طرف چپ: falsy باشد همان را بر می‌گرداند و در غیر این صورت طرف راست را بر می‌گرداند (در صورت اوّل کلاً طرف راست بررسی نخواهد شد که truthy است یا falsy).
 
-Comparisons
-: Equality check `==` for values of different types converts them to a number (except `null` and `undefined` that equal each other and nothing else), so these are equal:
+عملگر «یا» (||): در صورتی که طرف چپ truthy باشد همان را بر می‌گرداند و در غیر این صورت طرف راست را بر می‌گرداند (در صورت اوّل کلاً طرف راست بررسی نخواهد شد که truthy است یا falsy).
+
+عملگرهای مقایسه‌ای
+کوچکتر (<)، بزرگتر (>)، کوچکتر یا مساوی (<=)، بزرگتر یا مساوی (>=)، نامساوی (!=) و:…
+
+عملگر بررسی تساوی (==) برای مقادیری که نوع متفاوتی از یکدیگر دارند، هر دو را به نوع عدد تبدیل می‌کند (به استثنای null و undefined که این دو با هم برابرند و با هیچ چیز دیگر برابر نیستند).
+
 
     ```js run
     alert( 0 == false ); // true
     alert( 0 == '' ); // true
     ```
 
-    Other comparisons convert to a number as well.
+سایر عملگرهای مقایسه‌ای هر دو طرف را تبدیل به عدد می‌کنند.
 
-    The strict equality operator `===` doesn't do the conversion: different types always mean different values for it, so:
+عملگر مساوی سه‌تایی `===` تبدیل نوع انجام نمی‌دهد، و اگر نوع دو طرف یکسان نباشد، قطعاً با یکدیگر برابر در نظر گرفته نخواهند شد
 
-    Values `null` and `undefined` are special: they equal `==` each other and don't equal anything else.
+مقادیر null و undefined خاص هستند. این دو مقدار با هم مساوی در نظر گرفته می‌شوند و با هیچ چیز دیگری مساوی نیستند.
 
-    Greater/less comparisons compare strings character-by-character, other types are converted to a number.
+عملگرهای کوچکتر/بزرگتر رشته‌ها را کاراکتر به کاراکتر به ترتیب حروف الفبا مقایسه می‌کنند، و بقیه‌ی نوع‌ها را به عدد تبدیل می‌کنند.
 
-Other operators
-: There are few others, like a comma operator.
+سایر عملگرها
+عملگرهای دیگری مثل ویرگول انگلیسی (,) و غیره نیز در زبان جاوااسکریپت وجود دارند.
 
-More in: <info:operators>, <info:comparison>, <info:logical-operators>.
+اطّلاعات بیشتر در: <info:operators>، <info:comparison>، <info:logical-operators>.
 
-## Loops
+## حلقه‌ها
 
-- We covered 3 types of loops:
+- تا به حال با ۳ نوع حلقه آشنا شدیم:
 
     ```js
     // 1
@@ -193,25 +199,25 @@ More in: <info:operators>, <info:comparison>, <info:logical-operators>.
     }
     ```
 
-- The variable declared in `for(let...)` loop is visible only inside the loop. But we can also omit `let` and reuse an existing variable.
-- Directives `break/continue` allow to exit the whole loop/current iteration. Use labels to break nested loops.
+- متغیّری که درون for(let...)  ساخته می‌شود فقط در درون خود حلقه دیده می‌شود و قابل استفاده است. البته شما می‌توانید کلمه‌ی let را از اینجا حذف کنید تا از یکی از متغیّرهایی که از قبل ساخته‌اید استفاده کنید.
+- دستور break برای متوقّف کردن و خروج از کلّ حلقه و دستور continue برای خروج از دور فعلی حلقه استفاده می‌شود. برای خروج از حلقه‌های تودرتو می‌توانید از برچسب (label) استفاده کنید.
 
-Details in: <info:while-for>.
+[جزئیات بیشتر را در: <info:while-for> .مطالعه کنید
 
-Later we'll study more types of loops to deal with objects.
+بعداً که با اشیاء آشنا شویم چند مدل حلقه‌ی دیگر را نیز در جاوااسکریپت می‌آموزیم.
 
-## The "switch" construct
+## ساختار switch
 
-The "switch" construct can replace multiple `if` checks. It uses `===` (strict equality) for comparisons.
+ساختار switch می‌تواند جایگزین چند بررسی از طریق if بشود. در این ساختار به صورت خودکار از === برای مقایسه‌ها استفاده می‌شود.
 
-For instance:
+برای مثال:
 
 ```js run
 let age = prompt('Your age?', 18);
 
 switch (age) {
   case 18:
-    alert("Won't work"); // the result of prompt is a string, not a number
+    alert("Won't work"); // نتیجه عدد نیست، بلکه رشته است
 
   case "18":
     alert("This works!");
@@ -222,13 +228,13 @@ switch (age) {
 }
 ```
 
-Details in: <info:switch>.
+جزئیات بیشتر را در <info:switch> مطالعه کنید.
 
-## Functions
+## تابع‌ها (functions)
 
-We covered three ways to create a function in JavaScript:
+ما تا به حال با سه روش برای ساخت تابع‌ها آشنا شدیم:
 
-1. Function Declaration: the function in the main code flow
+۱. اعلام تابع (function declaration):
 
     ```js
     function sum(a, b) {
@@ -238,7 +244,7 @@ We covered three ways to create a function in JavaScript:
     }
     ```
 
-2. Function Expression: the function in the context of an expression
+۲. عبارت تابعی (function expression):
 
     ```js
     let sum = function(a, b) {
@@ -248,32 +254,33 @@ We covered three ways to create a function in JavaScript:
     };
     ```
 
-3. Arrow functions:
+۳. تابع پیکانی (Arrow function)
 
     ```js
-    // expression at the right side
+    // :عبارتی در سمت راست که همان بر می‌گردد
     let sum = (a, b) => a + b;
 
-    // or multi-line syntax with { ... }, need return here:
+    // یا مدل چند خطّی با {...}، که در این حالت باید return :هم بنویسید
     let sum = (a, b) => {
       // ...
       return a + b;
     }
 
-    // without arguments
+    // بدون آرگومان ورودی
     let sayHi = () => alert("Hello");
 
-    // with a single argument
+    // فقط یک آرگومان
     let double = n => n * 2;
     ```
 
 
-- Functions may have local variables: those declared inside its body. Such variables are only visible inside the function.
-- Parameters can have default values: `function sum(a = 1, b = 2) {...}`.
-- Functions always return something. If there's no `return` statement, then the result is `undefined`.
+- تابع‌ها می‌توانند دارای متغیّرهایی باشند که داخل خود تابع ساخته می‌شوند که به آن‌ها متغیّرهای محلّی می‌گوییم و این گونه متغیّرها فقط در داخل خود تابع دیده می‌شوند و فقط در آن‌جا به آن‌ها دسترسی داریم.
+- پارامترهای ورودی تابع می‌توانند مقدار پیش‌فرض بپذیرند: `function sum(a = 1, b = 2) {...}`
+- تابع‌ها همیشه چیزی را بر می‌گردانند. اگر داخل تابع اصلاً از دستور return استفاده نشده باشد، نتیجه می‌شود undefined.
 
-Details: see <info:function-basics>, <info:function-expressions-arrows>.
+برای مشاهده‌ی جزئیات بیشتر <info:function-basics> و <info:function-expressions-arrows> را ببینید.
 
-## More to come
+## هنوز خیلی مطلب باقی مانده است
 
-That was a brief list of JavaScript features. As of now we've studied only basics. Further in the tutorial you'll find more specials and advanced features of JavaScript.
+موارد فوق تنها خلاصه‌ای از قابلیت‌های جاوااسکریپت بود. تا الآن فقط مبانی این زبان را یاد گرفته‌ایم. در ادامه باقابلیت‌ها و ویژگی‌های حرفه‌ای جاوااسکریپت آشنا خواهیم شد.
+
