@@ -21,9 +21,13 @@
 ...
 ```
 
+<<<<<<< HEAD
 در مورد فانکشِن‌ها (روشی برای گروه‌بندی کردن دستورات) در آینده خواهیم آموخت. 
 
 در اینجا صرفا بدانید که می‌توانیم در ابتدای اکثر فانکشن‌ها `"use strict"` قرار دهیم تا قواعد مدرن صرفا بر روی کدهای داخل فانکشن اعمال شوند.
+=======
+We will learn functions (a way to group commands) soon. Looking ahead, let's note that `"use strict"` can be put at the beginning of the function body instead of the whole script. Doing that enables strict mode in that function only. But usually, people use it for the whole script.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 
 ````warn header="از بالا بودن عبارت \"use strict\" در کدهای خود مطمئن شوید"
