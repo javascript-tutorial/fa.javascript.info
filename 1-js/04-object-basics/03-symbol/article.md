@@ -3,11 +3,11 @@
 
 By specification, object property keys may be either of string type, or of symbol type. Not numbers, not booleans, only strings or symbols, these two types.
 
-Till now we've only seen strings. Now let's see the advantages that symbols can give us.
+Till now we've been using only strings. Now let's see the benefits that symbols can give us.
 
 ## Symbols
 
-"Symbol" value represents a unique identifier.
+A "symbol" represents a unique identifier.
 
 A value of this type can be created using `Symbol()`:
 
@@ -18,7 +18,7 @@ let id = Symbol();
 
 Upon creation, we can give symbol a description (also called a symbol name), mostly useful for debugging purposes:
 
-```js
+```js run
 // id is a symbol with the description "id"
 let id = Symbol("id");
 ```
@@ -50,7 +50,9 @@ alert(id); // TypeError: Cannot convert a Symbol value to a string
 */!*
 ```
 
-If we really want to show a symbol, we need to call `.toString()` on it, like here:
+That's a "language guard" against messing up, because strings and symbols are fundamentally different and should not accidentally convert one into another.
+
+If we really want to show a symbol, we need to explicitly call `.toString()` on it, like here:
 ```js run
 let id = Symbol("id");
 *!*
@@ -58,28 +60,39 @@ alert(id.toString()); // Symbol(id), now it works
 */!*
 ```
 
-That's a "language guard" against messing up, because strings and symbols are fundamentally different and should not occasionally convert one into another.
+Or get `symbol.description` property to show the description only:
+```js run
+let id = Symbol("id");
+*!*
+alert(id.description); // id
+*/!*
+```
+
 ````
 
 ## "Hidden" properties
 
-Symbols allow us to create "hidden" properties of an object, that no other part of code can occasionally access or overwrite.
+Symbols allow us to create "hidden" properties of an object, that no other part of code can accidentally access or overwrite.
 
-For instance, if we're working with `user` objects, that belong to a third-party code and don't have any `id` field. We'd like to add identifiers to them.
+For instance, if we're working with `user` objects, that belong to a third-party code. We'd like to add identifiers to them.
 
 Let's use a symbol key for it:
 
 ```js run
-let user = { name: "John" };
+let user = { // belongs to another code
+  name: "John"
+};
+
 let id = Symbol("id");
 
-user[id] = "ID Value";
+user[id] = 1;
+
 alert( user[id] ); // we can access the data using the symbol as the key
 ```
 
 What's the benefit of using `Symbol("id")` over a string `"id"`?
 
-As `user` objects belongs to another code, and that code also works with them, we shouldn't just add any fields to it. That's unsafe. But a symbol cannot be accessed occasionally, the third-party code probably won't even see it, so it's probably all right to do.
+As `user` objects belongs to another code, and that code also works with them, we shouldn't just add any fields to it. That's unsafe. But a symbol cannot be accessed accidentally, the third-party code probably won't even see it, so it's probably all right to do.
 
 Also, imagine that another script wants to have its own identifier inside `user`, for its own purposes. That may be another JavaScript library, so that the scripts are completely unaware of each other.
 
@@ -99,13 +112,13 @@ There will be no conflict between our and their identifiers, because symbols are
 ```js run
 let user = { name: "John" };
 
-// our script uses "id" property
-user.id = "ID Value";
+// Our script uses "id" property
+user.id = "Our id value";
 
-// ...if later another script the uses "id" for its purposes...
+// ...Another script also wants "id" for its purposes...
 
 user.id = "Their id value"
-// boom! overwritten! it did not mean to harm the colleague, but did it!
+// Boom! overwritten by another script!
 ```
 
 ### Symbols in a literal
@@ -120,7 +133,7 @@ let id = Symbol("id");
 let user = {
   name: "John",
 *!*
-  [id]: 123 // not just "id: 123"
+  [id]: 123 // not "id: 123"
 */!*
 };
 ```
@@ -271,7 +284,7 @@ Symbols are always different values, even if they have the same name. If we want
 Symbols have two main use cases:
 
 1. "Hidden" object properties.
-    If we want to add a property into an object that "belongs" to another script or a library, we can create a symbol and use it as a property key. A symbolic property does not appear in `for..in`, so it won't be occasionally processed together with other properties. Also it won't be accessed directly, because another script does not have our symbol. So the property will be protected from occasional use or overwrite.
+    If we want to add a property into an object that "belongs" to another script or a library, we can create a symbol and use it as a property key. A symbolic property does not appear in `for..in`, so it won't be accidentally processed together with other properties. Also it won't be accessed directly, because another script does not have our symbol. So the property will be protected from accidental use or overwrite.
 
     So we can "covertly" hide something into objects that we need, but others should not see, using symbolic properties.
 

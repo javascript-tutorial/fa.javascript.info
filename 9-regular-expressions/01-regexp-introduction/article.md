@@ -1,18 +1,16 @@
 # Patterns and flags
 
-Regular expressions is a powerful way of searching and replacing inside a string.
+Regular expressions is a powerful way to search and replace in text.
 
-In JavaScript regular expressions are implemented using objects of a built-in `RegExp` class and integrated with strings.
+In JavaScript, they are available as `RegExp` object, and also integrated in methods of strings.
 
-Please note that regular expressions vary between programming languages. In this tutorial we concentrate on JavaScript. Of course there's a lot in common, but they are a somewhat different in Perl, Ruby, PHP etc.
-
-## Regular expressions
+## Regular Expressions
 
 A regular expression (also "regexp", or just "reg") consists of a *pattern* and optional *flags*.
 
 There are two syntaxes to create a regular expression object.
 
-The long syntax:
+The "long" syntax:
 
 ```js
 regexp = new RegExp("pattern", "flags");
@@ -65,18 +63,18 @@ From here on the color scheme is:
 
 
 ````smart header="When to use `new RegExp`?"
-Normally we use the short syntax `/.../`. But it does not allow any variable insertions, so we must know the exact regexp at the time of writing the code.
+Normally we use the short syntax `/.../`. But it does not support variable insertions `${...}`.
 
-On the other hand, `new RegExp` allows to construct a pattern dynamically from a string.
+On the other hand, `new RegExp` allows to construct a pattern dynamically from a string, so it's more flexible.
 
-So we can figure out what we need to search and create `new RegExp` from it:
+Here's an example of a dynamically generated regexp:
 
 ```js run
-let search = prompt("What you want to search?", "love");
-let regexp = new RegExp(search);
+let tag = prompt("Which tag you want to search?", "h2");
+let regexp = new RegExp(`<${tag}>`);
 
-// find whatever the user wants
-alert( "I love JavaScript".search(regexp));
+// finds <h2> by default
+alert( "<h1> <h2> <h3>".search(regexp));
 ```
 ````
 
@@ -94,36 +92,34 @@ There are only 6 of them in JavaScript:
 : With this flag the search looks for all matches, without it -- only the first one (we'll see uses in the next chapter).
 
 `m`
-: Multiline mode (covered in the chapter <info:regexp-multiline>).
+: Multiline mode (covered in the chapter <info:regexp-multiline-mode>).
+
+`s`
+: "Dotall" mode, allows `.` to match newlines (covered in the chapter <info:regexp-character-classes>).
 
 `u`
 : Enables full unicode support. The flag enables correct processing of surrogate pairs. More about that in the chapter <info:regexp-unicode>.
 
 `y`
-: Sticky mode (covered in the [next chapter](info:regexp-methods#y-flag))
+: Sticky mode (covered in the chapter <info:regexp-sticky>)
 
+We'll cover all these flags further in the tutorial.
 
-## The "i" flag
-
-The simplest flag is `i`.
-
-An example with it:
+For now, the simplest flag is `i`, here's an example:
 
 ```js run
 let str = "I love JavaScript!";
 
-alert( str.search(/LOVE/) ); // -1 (not found)
-alert( str.search(/LOVE/i) ); // 2
-```
+alert( str.search(/LOVE/i) ); // 2 (found lowercased)
 
-1. The first search returns `-1` (not found), because the search is case-sensitive by default.
-2. With the flag `pattern:/LOVE/i` the search found `match:love` at position 2.
+alert( str.search(/LOVE/) ); // -1 (nothing found without 'i' flag)
+```
 
 So the `i` flag already makes regular expressions more powerful than a simple substring search. But there's so much more. We'll cover other flags and features in the next chapters.
 
 
 ## Summary
 
-- A regular expression consists of a pattern and optional flags: `g`, `i`, `m`, `u`, `y`.
+- A regular expression consists of a pattern and optional flags: `g`, `i`, `m`, `u`, `s`, `y`.
 - Without flags and special symbols that we'll study later, the search by a regexp is the same as a  substring search.
-- The method `str.search(regexp)` returns the index where the match is found or `-1` if there's no match.
+- The method `str.search(regexp)` returns the index where the match is found or `-1` if there's no match. In the next chapter we'll see other methods.
