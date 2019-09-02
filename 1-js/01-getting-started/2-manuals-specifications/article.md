@@ -7,7 +7,11 @@
 
 اما در ابتدا اگر بخواهیم آنقدر رسمی و دقیق باشیم، درک این زبان سخت می‌شود. بنابراین اگر به منبع اطلاعات قابل اعتماد در مورد جزئیات این زبان نیاز دارید، Specification بهترین مکان است. اما برای استفاده‌ی روزانه نیست.
 
+<<<<<<< HEAD
 آخرین نوشته در <https://tc39.es/ecma262/> است.
+=======
+[The ECMA-262 specification](https://www.ecma-international.org/publications/standards/Ecma-262.htm) contains the most in-depth, detailed and formalized information about JavaScript. It defines the language.
+>>>>>>> c4d1987ebc470b30c234dbde6fac6e77b7509927
 
 برای آگاهی از ویژگی‌های به روز که تقریبا استاندارد هستند، به <https://github.com/tc39/proposals> مراجعه کنید.
 

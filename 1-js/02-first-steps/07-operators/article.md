@@ -28,7 +28,11 @@
     alert( y - x ); // 2, binary minus subtracts values
     ```
 
+<<<<<<< HEAD
 در اصل در اینجا ما در مورد دو عملگر مجزا صحبت کردیم. اولی عملگر unary منفی کننده (که علامت عدد را برعکس می‌کرد) و دیگری عملگر تفریق binary (تفریق دو عدد از هم).
+=======
+    Formally, in the examples above we have two different operators that share the same symbol: the negation operator, a unary operator that reverses the sign, and the subtraction operator, a binary operator that subtracts one number from another.
+>>>>>>> c4d1987ebc470b30c234dbde6fac6e77b7509927
 
 ## تلفیق رشته‌ها، عملگر + binary
 

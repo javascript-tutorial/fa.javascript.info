@@ -152,12 +152,17 @@ alert( "Tea wanted: " + isTeaWanted ); // true
 عملگرهای منطقی (logical)
 عملگر «و» (&&): در صورتی که طرف چپ: falsy باشد همان را بر می‌گرداند و در غیر این صورت طرف راست را بر می‌گرداند (در صورت اوّل کلاً طرف راست بررسی نخواهد شد که truthy است یا falsy).
 
+<<<<<<< HEAD
 عملگر «یا» (||): در صورتی که طرف چپ truthy باشد همان را بر می‌گرداند و در غیر این صورت طرف راست را بر می‌گرداند (در صورت اوّل کلاً طرف راست بررسی نخواهد شد که truthy است یا falsy).
 
 عملگرهای مقایسه‌ای
 کوچکتر (<)، بزرگتر (>)، کوچکتر یا مساوی (<=)، بزرگتر یا مساوی (>=)، نامساوی (!=) و:…
 
 عملگر بررسی تساوی (==) برای مقادیری که نوع متفاوتی از یکدیگر دارند، هر دو را به نوع عدد تبدیل می‌کند (به استثنای null و undefined که این دو با هم برابرند و با هیچ چیز دیگر برابر نیستند).
+=======
+Logical operators
+: Logical AND `&&` and OR `||` perform short-circuit evaluation and then return the value where it stopped (not necessary `true`/`false`). Logical NOT `!` converts the operand to boolean type and returns the inverse value.
+>>>>>>> c4d1987ebc470b30c234dbde6fac6e77b7509927
 
 
     ```js run

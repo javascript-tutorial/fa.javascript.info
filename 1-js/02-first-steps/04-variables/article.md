@@ -12,7 +12,11 @@
 
 برای ساخت یک متغیر در جاوا اسکریپت از `let` استفاده کنید.
 
+<<<<<<< HEAD
 عبارت زیر یک متغیر با نام "message" تعریف می‌کند. به این عمل *define* یا *declare* گفته می‌شود.
+=======
+The statement below creates (in other words: *declares*) a variable with the name "message":
+>>>>>>> c4d1987ebc470b30c234dbde6fac6e77b7509927
 
 ```js
 let message;

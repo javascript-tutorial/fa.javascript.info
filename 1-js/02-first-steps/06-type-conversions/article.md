@@ -11,9 +11,13 @@
 در این بخش در مورد object ها صحبت نمی‌کنیم. بجای آن ابتدا انواع اولیه را خواهیم آموخت. بعدتر زمانی که در مورد object ها آموختیم، در مورد چگونگی تبدیل object ها صحبت خواهیم کرد.
 ```
 
+<<<<<<< HEAD
 ## تبدیل به string
 
 تبدیل به string زمانی رخ می‌دهد که ما به بخش رشته کاراکترهای یک مقدار نیاز داریم.
+=======
+## To String
+>>>>>>> c4d1987ebc470b30c234dbde6fac6e77b7509927
 
 برای نمونه `alert(value)` تبدیل به string را برای نمایش، انجام می‌دهد.
 
@@ -34,7 +38,11 @@ alert(typeof value); // string
 
 ## تبدیل به number
 
+<<<<<<< HEAD
 تبدیل به number در فانکشن‌ها و عبارات ریاضیاتی به طور خودکار انجام می‌شود.
+=======
+## To Number
+>>>>>>> c4d1987ebc470b30c234dbde6fac6e77b7509927
 
 برای نمونه وقتی تقسیم `/` بر روی مقادیر غیر عددی رخ می‌دهد :
 
@@ -99,7 +107,11 @@ alert( '1' + 2 ); // '12' (string to the left)
 این مورد فقط زمانی روی میدهد که حداقل یکی از مقادیر string باشد، در غیر اینصورت تمام مقادیر به number تبدیل می‌شوند.
 ````
 
+<<<<<<< HEAD
 ## تبدیل به boolean
+=======
+## To Boolean
+>>>>>>> c4d1987ebc470b30c234dbde6fac6e77b7509927
 
 تبدیل به boolean آسان‌ترین حالت است.
 
@@ -136,9 +148,15 @@ alert( Boolean(" ") ); // spaces, also true (any non-empty string is true)
 
 **`تبدیل به string`** - زمانی که می‌خواهیم خروجی‌ای داشته باشم رخ می‌دهد. از طریق `String(value)` قابل انجام است. تبدیل به string معمولا وقتی مقدار از انواع اولیه داده است، واضح خواهد بود.
 
+<<<<<<< HEAD
 **`تبدیل به number`** – در عملگرهای ریاضیاتی رخ می‌دهد. از طریق `Number(value)` قابل انجام است.
 
 این تبدیل از این قوانین پیروی می‌کند :
+=======
+**`To String`** -- Occurs when we output something. Can be performed with `String(value)`. The conversion to string is usually obvious for primitive values.
+
+**`To Number`** -- Occurs in math operations. Can be performed with `Number(value)`.
+>>>>>>> c4d1987ebc470b30c234dbde6fac6e77b7509927
 
 
 | Value |  Becomes... |
@@ -148,9 +166,13 @@ alert( Boolean(" ") ); // spaces, also true (any non-empty string is true)
 |<code>true&nbsp;/&nbsp;false</code> | `1 / 0` |
 | `string` | فاصله‌های خالی ابتدا و انتها حذف می‌شوند. اگر رشته‌ی باقی مانده خالی باشد نتیجه `0` خواهد بود. در غیر اینصورت عدد موجود در رشته کاراکترها خوانده خواهد شد. همینطور اگر خطایی رخ دهد نتیجه `NaN` خواهد بود. |
 
+<<<<<<< HEAD
 **`تبدیل به boolean`** – در عملگرهای  منطقی رخ می‌دهد. از طریق `Boolean(value)` قابل انجام است.
 
 این تبدیل از این قوانین پیروی می‌کند :
+=======
+**`To Boolean`** -- Occurs in logical operations. Can be performed with `Boolean(value)`.
+>>>>>>> c4d1987ebc470b30c234dbde6fac6e77b7509927
 
 
 | Value |  Becomes... |
