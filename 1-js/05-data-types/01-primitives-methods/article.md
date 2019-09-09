@@ -51,7 +51,13 @@ john.sayHi(); // Hi buddy!
 
 برای مثال، تابع [str.toUpperCase()](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/String/toUpperCase) که خروجی آن، حروف کاپیتال شده رشته حرف ورودی میباشد.
 
+<<<<<<< HEAD
 روش کار به صورت زیر است:
+=======
+For instance, there exists a string method [str.toUpperCase()](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/String/toUpperCase) that returns a capitalized `str`.
+
+Here's how it works:
+>>>>>>> 3dd8ca09c1a7ed7a7b04eefc69898559902478e1
 
 ```js run
 let str = "Hello";
