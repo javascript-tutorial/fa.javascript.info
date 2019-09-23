@@ -3,7 +3,9 @@
 
 As we know, objects can store properties.
 
-Till now, a property was a simple "key-value" pair to us. But an object property is actually a more complex and tunable thing.
+Till now, a property was a simple "key-value" pair to us. But an object property is actually a more flexible and powerful thing.
+
+In this chapter we'll study additional configuration options, and in the next we'll see how to invisibly turn them into getter/setter functions.
 
 ## Property flags
 
@@ -307,13 +309,13 @@ Property descriptors work at the level of individual properties.
 There are also methods that limit access to the *whole* object:
 
 [Object.preventExtensions(obj)](mdn:js/Object/preventExtensions)
-: Forbids to add properties to the object.
+: Forbids the addition of new properties to the object.
 
 [Object.seal(obj)](mdn:js/Object/seal)
-: Forbids to add/remove properties, sets for all existing properties `configurable: false`.
+: Forbids adding/removing of properties. Sets `configurable: false` for all existing properties.
 
 [Object.freeze(obj)](mdn:js/Object/freeze)
-: Forbids to add/remove/change properties, sets for all existing properties `configurable: false, writable: false`.
+: Forbids adding/removing/changing of properties. Sets `configurable: false, writable: false` for all existing properties.
 
 And also there are tests for them:
 
