@@ -151,7 +151,7 @@ say.*!*hi*/!*('John'); // Hello, John!
 say.*!*bye*/!*('John'); // Bye, John!
 ```
 
-## export default
+## Export default
 
 In practice, there are mainly two kinds of modules.
 
@@ -275,7 +275,7 @@ let User = user.default; // the default export
 new User('John');
 ```
 
-### A word agains default exports
+### A word against default exports
 
 Named exports are explicit. They exactly name what they import, so we have that information from them, that's a good thing.
 
@@ -305,7 +305,7 @@ import func from '/path/to/func.js';
 ...
 ```
 
-Still, some teams consider it a serous drawback of default exports. So they prefer to always use named exports. Even if only a single thing is exported, it's still exported under a name, without `default`.
+Still, some teams consider it a serious drawback of default exports. So they prefer to always use named exports. Even if only a single thing is exported, it's still exported under a name, without `default`.
 
 That also makes re-export (see below) a little bit easier.
 

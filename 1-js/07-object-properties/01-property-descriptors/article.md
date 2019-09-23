@@ -313,7 +313,11 @@ There are also methods that limit access to the *whole* object:
 : Forbids to add/remove properties, sets for all existing properties `configurable: false`.
 
 [Object.freeze(obj)](mdn:js/Object/freeze)
+<<<<<<< HEAD
 : Forbids to add/remove/change properties, sets for all existing properties `configurable: false, writable: false`.
+=======
+: Forbids adding/removing/changing of properties. Sets `configurable: false, writable: false` for all existing properties.
+>>>>>>> 4d654318ccb6d37d6cefc9b859cf111ff3c96b27
 
 And also there are tests for them:
 

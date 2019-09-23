@@ -285,7 +285,11 @@ const pageLoadTime = /* time taken by a webpage to load */;
 
 ## نام‌های مناسب انتخاب کنید
 
+<<<<<<< HEAD
 لطفا نام متغیرهای خود را با حساسیت انتخاب کنید و برای اینکار خوب فکر کنید.
+=======
+A variable name should have a clean, obvious meaning, describing the data that it stores.
+>>>>>>> 4d654318ccb6d37d6cefc9b859cf111ff3c96b27
 
 انتخاب نام برای متغیرها یکی از کارهای مهم و پیچیده در برنامه‌نویسی است. یک نگاه سریع به نام متغیرها می‌تواند تفاوت یک برنامه‌نویس تازه‌کار و با تجربه را نشان دهد.
 
