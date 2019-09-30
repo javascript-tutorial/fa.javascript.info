@@ -60,7 +60,11 @@ Comment های قبل و بعد از اسکریپت
     //--></script>
     ```
 
+<<<<<<< HEAD
     این ترفند در جاوا اسکریپت مدرن استفاده نمی‌شود. از این روش برای پنهان کردن کدهای جاوا اسکریپتی که در مرورگرهای قدیمی نمی‌توانستند اجرا شوند، استفاده می‌شد. 
+=======
+    This trick isn't used in modern JavaScript. These comments hide JavaScript code from old browsers that didn't know how to process the `<script>` tag. Since browsers released in the last 15 years don't have this issue, this kind of comment can help you identify really old code.
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
 
 ## اسکریپت‌‌های خارجی 
