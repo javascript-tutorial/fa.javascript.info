@@ -1,8 +1,12 @@
 # محیط مرورگر و خصوصیات (Specs)
 
+<<<<<<< HEAD
 زبان جاوا اسکریپت در ابتدا برای مرورگر‌های وب ساخته شد. از آن زمان، پیشرفت بسیاری کرده و به زبانی پراستفاده و پلتفرم‌ها شده است‌.
  
 یک پلتفرم می‌تواند یک مرورگر، وب-سرور، یا یک ماشین لباسشویی  یا هر میزبان دیگری باشد. هرکدام از این‌ها عملکرد مختص به آن پلتفرم را فراهم می‌کند. مشخصه‌ی جاوااسکریپت (JavaScript specification) آن را یک محیط میزبانی (*host environment*) مینامد.
+=======
+The JavaScript language was initially created for web browsers. Since then it has evolved and become a language with many uses and platforms.
+>>>>>>> 71ff8f81b05e2438a3c56507888e06c528a71182
 
 یک محیط میزبانی اشیا و توابع اضافی مربوط به پلتفرم را به هسته‌ی اصلی زبان می‌افزاید. مرورگرهای وب ابزاری برای کنترل کردن صفحات وب می‌دهند. Node.JS قابلیت‌های سمت سرور را فراهم میسازد و غیره.
 
@@ -64,16 +68,27 @@ setTimeout(() => document.body.style.background = "", 1000);
 برای مثال، ابزار سمت سرور که صفحات HTML را دانلود و پردازش می‌کنند از DOM استفاده ‌می‌کنند. اگرچه ممکن است فقط یک قسمتی از خصوصیات‌ش را پشتیبانی کنند.
 ```
 
+<<<<<<< HEAD
 ```smart header="CSSOM برای استایل دادن"
 قوانین CSS و شیوه‌نامه (stylesheets) مشابه HTML ساختاربندی نشده‌ند. یک خصوصیت مجزا [CSSOM](https://www.w3.org/TR/cssom-1/) که نمایان شدنشان به شکل اشیا و نحوه نوشته و خوانده شدنشان را توصیف میکند.
+=======
+```smart header="CSSOM for styling"
+CSS rules and stylesheets are structured in a different way than HTML. There's a separate specification, [CSS Object Model (CSSOM)](https://www.w3.org/TR/cssom-1/), that explains how they are represented as objects, and how to read and write them.
+>>>>>>> 71ff8f81b05e2438a3c56507888e06c528a71182
 
 CSSOM همراه با DOM برای تغییر و تصحیح قوانین استایل برای document استفاده می‌گردد.
 اگرچه در عمل، CSSOM به ندرت مورد استفاده‌ میگیرد، به این علت که قوانین CSS عموما ثابت (Static) هستند. ما به ندرت نیاز داریم که قوانین CSS را در جاوا اسکریپت حذف یا اضافه کنیم، بنابراین ما الان به آنها نخواهیم پرداخت.
 ```
 
+<<<<<<< HEAD
 ## BOM (قسمتی از خصوصیت HTML)
 
 مدل اشیا مرورگر (Browser Object Model یا BOM)، اشیا افزوده‌ای هستند که توسط مرورگر فراهم میشوند (محیط میزبانی یا host environment) تا با هرچیزی به جز document کار کنند. 
+=======
+## BOM (Browser Object Model)
+
+The Browser Object Model (BOM) represents additional objects provided by the browser (host environment) for working with everything except the document.
+>>>>>>> 71ff8f81b05e2438a3c56507888e06c528a71182
 
 برای نمونه:
 
