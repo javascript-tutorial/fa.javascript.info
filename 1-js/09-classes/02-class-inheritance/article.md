@@ -7,7 +7,7 @@ So we can create new functionality on top of the existing.
 
 ## The "extends" keyword
 
-Let's say with have class `Animal`:
+Let's say we have class `Animal`:
 
 ```js
 class Animal {
@@ -40,7 +40,7 @@ The syntax to extend another class is: `class Child extends Parent`.
 
 Let's create `class Rabbit` that inherits from `Animal`:
 
-```js
+```js run
 *!*
 class Rabbit extends Animal {
 */!*
