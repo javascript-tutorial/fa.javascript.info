@@ -1,9 +1,13 @@
 
 # Class inheritance
 
-Let's say we have two classes.
+Class inheritance is a way for one class to extend another class.
 
-`Animal`:
+So we can create new functionality on top of the existing.
+
+## The "extends" keyword
+
+Let's say we have class `Animal`:
 
 ```js
 class Animal {
@@ -24,52 +28,19 @@ class Animal {
 let animal = new Animal("My animal");
 ```
 
+Here's how we can represent `animal` object and `Animal` class graphically:
+
 ![](rabbit-animal-independent-animal.svg)
 
+...And we would like to create another `class Rabbit`.
 
-...And `Rabbit`:
+As rabbits are animals, `Rabbit` class should be based on `Animal`, have access to animal methods, so that rabbits can do what "generic" animals can do.
 
-```js
-class Rabbit {
-  constructor(name) {
-    this.name = name;
-  }
-  hide() {
-    alert(`${this.name} hides!`);
-  }
-}
+The syntax to extend another class is: `class Child extends Parent`.
 
-let rabbit = new Rabbit("My rabbit");
-```
-
-![](rabbit-animal-independent-rabbit.svg)
-
-
-Right now they are fully independent.
-
-But we'd want `Rabbit` to extend `Animal`. In other words, rabbits should be based on animals, have access to methods of `Animal` and extend them with its own methods.
-
-To inherit from another class, we should specify `"extends"` and the parent class before the braces `{..}`.
-
-Here `Rabbit` inherits from `Animal`:
+Let's create `class Rabbit` that inherits from `Animal`:
 
 ```js run
-class Animal {
-  constructor(name) {
-    this.speed = 0;
-    this.name = name;
-  }
-  run(speed) {
-    this.speed += speed;
-    alert(`${this.name} runs with speed ${this.speed}.`);
-  }
-  stop() {
-    this.speed = 0;
-    alert(`${this.name} stands still.`);
-  }
-}
-
-// Inherit from Animal by specifying "extends Animal"
 *!*
 class Rabbit extends Animal {
 */!*
@@ -84,15 +55,18 @@ rabbit.run(5); // White Rabbit runs with speed 5.
 rabbit.hide(); // White Rabbit hides!
 ```
 
-Now the `Rabbit` code became a bit shorter, as it uses `Animal` constructor by default, and it also can `run`, as animals do.
+Object of `Rabbit` class have access to both `Rabbit` methods, such as `rabbit.hide()`, and also to `Animal` methods, such as `rabbit.run()`.
 
-Internally, `extends` keyword adds `[[Prototype]]` reference from `Rabbit.prototype` to `Animal.prototype`:
+Internally, `extends` keyword works using the good old prototype mechanics. It sets `Rabbit.prototype.[[Prototype]]` to `Animal.prototype`. So, if a method is not found in `Rabbit.prototype`, JavaScript takes it from `Animal.prototype`.
 
 ![](animal-rabbit-extends.svg)
 
-So, if a method is not found in `Rabbit.prototype`, JavaScript takes it from `Animal.prototype`.
+For instance, to find `rabbit.run` method, the engine checks (bottom-up on the picture):
+1. The `rabbit` object (has no `run`).
+2. Its prototype, that is `Rabbit.prototype` (has `hide`, but not `run`).
+3. Its prototype, that is (due to `extends`) `Animal.prototype`, that finally has the `run` method.
 
-As we can recall from the chapter <info:native-prototypes>, JavaScript uses prototypal inheritance for build-in objects. E.g. `Date.prototype.[[Prototype]]` is `Object.prototype`, so dates have generic object methods.
+As we can recall from the chapter <info:native-prototypes>, JavaScript itself uses prototypal inheritance for built-in objects. E.g. `Date.prototype.[[Prototype]]` is `Object.prototype`. That's why dates have access to generic object methods.
 
 ````smart header="Any expression is allowed after `extends`"
 Class syntax allows to specify not just a class, but any expression after `extends`.
@@ -119,19 +93,20 @@ That may be useful for advanced programming patterns when we use functions to ge
 
 ## Overriding a method
 
-Now let's move forward and override a method. As of now, `Rabbit` inherits the `stop` method that sets `this.speed = 0` from `Animal`.
+Now let's move forward and override a method. By default, all methods that are not specified in `class Rabbit` are taken directly "as is" from `class Animal`.
 
-If we specify our own `stop` in `Rabbit`, then it will be used instead:
+But if we specify our own method in `Rabbit`, such as `stop()` then it will be used instead:
 
 ```js
 class Rabbit extends Animal {
   stop() {
-    // ...this will be used for rabbit.stop()
+    // ...now this will be used for rabbit.stop()
+    // instead of stop() from class Animal
   }
 }
 ```
 
-...But usually we don't want to totally replace a parent method, but rather to build on top of it to tweak or extend its functionality. We do something in our method, but call the parent method before/after it or in the process.
+Usually we don't want to totally replace a parent method, but rather to build on top of it to tweak or extend its functionality. We do something in our method, but call the parent method before/after it or in the process.
 
 Classes provide `"super"` keyword for that.
 
@@ -206,7 +181,7 @@ setTimeout(function() { super.stop() }, 1000);
 
 With constructors it gets a little bit tricky.
 
-Till now, `Rabbit` did not have its own `constructor`.
+Until now, `Rabbit` did not have its own `constructor`.
 
 According to the [specification](https://tc39.github.io/ecma262/#sec-runtime-semantics-classdefinitionevaluation), if a class extends another class and has no `constructor`, then the following "empty" `constructor` is generated:
 
@@ -261,16 +236,16 @@ The short answer is: constructors in inheriting classes must call `super(...)`, 
 
 Of course, there's an explanation. Let's get into details, so you'll really understand what's going on.
 
-In JavaScript, there's a distinction between a "constructor function of an inheriting class" and all others. In an inheriting class, the corresponding constructor function is labeled with a special internal property `[[ConstructorKind]]:"derived"`.
+In JavaScript, there's a distinction between a constructor function of an inheriting class (so-called "derived constructor") and other functions. A derived constructor has a special internal property `[[ConstructorKind]]:"derived"`. That's a special internal label.
 
-The difference is:
+That label affects its behavior with `new`.
 
-- When a normal constructor runs, it creates an empty object and assigns it to `this`.
+- When a regular function is executed with `new`, it creates an empty object and assigns it to `this`.
 - But when a derived constructor runs, it doesn't do this. It expects the parent constructor to do this job.
 
-So if we're making a constructor of our own, then we must call `super`, because otherwise the object for `this` won't be created. And we'll get an error.
+So a derived constructor must call `super` in order to execute its parent (non-derived) constructor, otherwise the object for `this` won't be created. And we'll get an error.
 
-For `Rabbit` constructor to work, it needs to call `super()` before using `this`, like here:
+For the `Rabbit` constructor to work, it needs to call `super()` before using `this`, like here:
 
 ```js run
 class Animal {
@@ -554,4 +529,4 @@ rabbit.eat();  // Error calling super (because there's no [[HomeObject]])
     - So it's not safe to copy a method with `super` from one object to another.
 
 Also:
-- Arrow functions don't have own `this` or `super`, so they transparently fit into the surrounding context.
+- Arrow functions don't have their own `this` or `super`, so they transparently fit into the surrounding context.

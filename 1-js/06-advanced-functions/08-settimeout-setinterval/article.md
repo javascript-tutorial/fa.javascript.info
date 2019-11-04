@@ -61,7 +61,7 @@ So, this will also work:
 setTimeout("alert('Hello')", 1000);
 ```
 
-But using strings is not recommended, use functions instead of them, like this:
+But using strings is not recommended, use arrow functions instead of them, like this:
 
 ```js run no-beautify
 setTimeout(() => alert('Hello'), 1000);
@@ -184,7 +184,7 @@ Let's compare two code fragments. The first one uses `setInterval`:
 ```js
 let i = 1;
 setInterval(function() {
-  func(i);
+  func(i++);
 }, 100);
 ```
 
@@ -193,12 +193,12 @@ The second one uses nested `setTimeout`:
 ```js
 let i = 1;
 setTimeout(function run() {
-  func(i);
+  func(i++);
   setTimeout(run, 100);
 }, 100);
 ```
 
-For `setInterval` the internal scheduler will run `func(i)` every 100ms:
+For `setInterval` the internal scheduler will run `func(i++)` every 100ms:
 
 ![](setinterval-interval.svg)
 
@@ -288,7 +288,7 @@ For server-side JavaScript, that limitation does not exist, and there exist othe
 
 - Methods `setTimeout(func, delay, ...args)` and `setInterval(func, delay, ...args)` allow us to run the `func` once/regularly after `delay` milliseconds.
 - To cancel the execution, we should call `clearTimeout/clearInterval` with the value returned by `setTimeout/setInterval`.
-- Nested `setTimeout` calls is a more flexible alternative to `setInterval`, allowing us to set the time *between* executions more precisely.
+- Nested `setTimeout` calls are a more flexible alternative to `setInterval`, allowing us to set the time *between* executions more precisely.
 - Zero delay scheduling with `setTimeout(func, 0)` (the same as `setTimeout(func)`) is used to schedule the call "as soon as possible, but after the current script is complete".
 - The browser limits the minimal delay for five or more nested call of `setTimeout` or for `setInterval` (after 5th call) to 4ms. That's for historical reasons.
 
