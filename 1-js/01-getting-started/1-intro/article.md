@@ -51,7 +51,12 @@
 
   
 
+<<<<<<< HEAD
 [Spider Monkey](https://en.wikipedia.org/wiki/SpiderMonkey) برای مرورگر فایرفاکس  
+=======
+The engine applies optimizations at each step of the process. It even watches the compiled script as it runs, analyzes the data that flows through it, and further optimizes the machine code based on that knowledge.
+```
+>>>>>>> 2b5ac971c1bd8abe7b17cdcf724afd84799b6cbd
 
 اسم رمزهای دیگری چون **Trident** ، **Chakra** برای نسخه‌های مختلف **IE** ، همینطور **ChakraCore** برای مرورگر اِج مایکروسافت، و **Nitro** ، **SquireFish** برای مرورگر سافاری وجود دارند.  
 

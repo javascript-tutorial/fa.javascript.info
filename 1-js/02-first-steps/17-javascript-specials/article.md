@@ -280,7 +280,11 @@ switch (age) {
 
 برای مشاهده‌ی جزئیات بیشتر <info:function-basics> و <info:function-expressions-arrows> را ببینید.
 
+<<<<<<< HEAD:1-js/02-first-steps/16-javascript-specials/article.md
 ## هنوز خیلی مطلب باقی مانده است
+=======
+Details: see <info:function-basics>, <info:arrow-functions-basics>.
+>>>>>>> 2b5ac971c1bd8abe7b17cdcf724afd84799b6cbd:1-js/02-first-steps/17-javascript-specials/article.md
 
 موارد فوق تنها خلاصه‌ای از قابلیت‌های جاوااسکریپت بود. تا الآن فقط مبانی این زبان را یاد گرفته‌ایم. در ادامه باقابلیت‌ها و ویژگی‌های حرفه‌ای جاوااسکریپت آشنا خواهیم شد.
 
