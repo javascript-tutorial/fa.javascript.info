@@ -197,7 +197,11 @@ alert( 0.1 + 0.2 == 0.3 ); // *!*false*/!*
 alert( 0.1 + 0.2 ); // 0.30000000000000004
 ```
 
+<<<<<<< HEAD
 اوه! اتفاقات بدتری تا یک مقایسه‌ی ساده میتواند بیفتد. مثلا فرض کنید شما در فروشگاهی اینترنتی مقدار `$0.10` و `$0.20` را به حساب خود واریز میکنید. مجموع موجودی شما `$0.30000000000000004` میشود. این شکه کننده‌ست!
+=======
+Ouch! There are more consequences than an incorrect comparison here. Imagine you're making an e-shopping site and the visitor puts `$0.10` and `$0.20` goods into their cart. The order total will be `$0.30000000000000004`. That would surprise anyone.
+>>>>>>> 79417c6e73645d37f184f0cc7e4bc3353e85224f
 
 اما چرا این اتفاق می‌افتد؟
 
