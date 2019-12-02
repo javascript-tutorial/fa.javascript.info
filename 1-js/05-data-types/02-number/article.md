@@ -1,9 +1,19 @@
 # اعداد
 
+<<<<<<< HEAD
 تمامی اعداد در جاوااسکریپت به فرمت ۶۴-بیتی ذخیره می‌شوند. [IEEE-754](http://en.wikipedia.org/wiki/IEEE_754-1985)، همینطور شناخته شده با نام "دقت دوبرابر"
 
 بگذارید ابتدا تمام چیزهایی که راجبشان را میدانیم را باز و جمع‌بندی کنیم.
 ## راه‌های دیگر نوشتن یک عدد
+=======
+In modern JavaScript, there are two types of numbers:
+
+1. Regular numbers in JavaScript are stored in 64-bit format [IEEE-754](https://en.wikipedia.org/wiki/IEEE_754-2008_revision), also known as "double precision floating point numbers". These are numbers that we're using most of the time, and we'll talk about them in this chapter.
+
+2. BigInt numbers, to represent integers of arbitrary length. They are sometimes needed, because a regular number can't exceed <code>2<sup>53</sup></code> or be less than <code>-2<sup>53</sup></code>. As bigints are used in few special areas, we devote them a special chapter <info:bigint>.
+
+So here we'll talk about regular numbers. Let's expand our knowledge of them.
+>>>>>>> 47d186598add3a0ea759615596a12e277ce8fb5a
 
 
 فرض کنید نیاز داریم بنویسیم یک میلیارد. راه واضح این است که: 
@@ -27,14 +37,22 @@ alert( 7.3e9 );  // 7.3 billions (7,300,000,000)
 1.23e6 = 1.23 * 1000000 
 ```
 
+<<<<<<< HEAD
 
 حالا بگذارید مقداری خیلی کوچک بنویسیم. مثلا؛ یک میکروثانیه، (یک میلیونیوم ثانیه):
+=======
+Now let's write something very small. Say, 1 microsecond (one millionth of a second):
+>>>>>>> 47d186598add3a0ea759615596a12e277ce8fb5a
 
 ```js
 let ms = 0.000001;
 ```
 
+<<<<<<< HEAD
 دقیقا مثل قبل، استفاده از `"e"` میتواند کمک کند. اگر ما بخواهیم که از نوشتن صفرها خودداری کنیم، میتوانیم بنویسیم که:
+=======
+Just like before, using `"e"` can help. If we'd like to avoid writing the zeroes explicitly, we could say the same as:
+>>>>>>> 47d186598add3a0ea759615596a12e277ce8fb5a
 
 ```js
 let ms = 1e-6; // شش صفر در چپ ۱ 
@@ -267,14 +285,22 @@ alert( 9999999999999999 ); // shows 10000000000000000
 
 یک اتفاق جالب دیگر که در نمایش دادن اعداد درون سیستم می‌افتد وجود دو نوع صفر میباشد! `0` و `-0`.
 
+<<<<<<< HEAD
 این به این علت است که علامت با یک بیت مشخص میشود بنابراین هر عدد میتواند مثبت یا منفی باشد، حتی صفر.
+=======
+That's because a sign is represented by a single bit, so it can be set or not set for any number including a zero.
+>>>>>>> 47d186598add3a0ea759615596a12e277ce8fb5a
 
 در اکثر حالات، تفاوت غیرقابل توجه است، چراکه عملگرها برای داشتن رفتار یکسان وفق داده شده‌ند. 
 ```
 
+<<<<<<< HEAD
 
 
 ## آزمون‌ها: isFinite و isNaN
+=======
+## Tests: isFinite and isNaN
+>>>>>>> 47d186598add3a0ea759615596a12e277ce8fb5a
 
 آیا این دو مقدار عددی خاص را به یاد دارید؟
 
@@ -406,9 +432,16 @@ alert( Math.pow(2, 10) ); // دو به توان ده = 1024
 
 برای سیستم‌های عددی متفاوت:
 
+<<<<<<< HEAD
 - میتوان اعداد را مستقیما در فرم پایه۱۶ (`0x`) نوشت، پایه۸ (`0o`) و دودویی (`0b`) نوشت.
 
 - `parseInt(str, base)` یک عدد صحیح را از هر سیستم عددی با پایه‌ی `2 ≤ base ≤ 36` را استخراج می‌کند. 
+=======
+To write numbers with many zeroes:
+
+- Append `"e"` with the zeroes count to the number. Like: `123e6` is the same as `123` with 6 zeroes `123000000`.
+- A negative number after `"e"` causes the number to be divided by 1 with given zeroes. E.g. `123e-6` means `0.000123` (`123` millionth).
+>>>>>>> 47d186598add3a0ea759615596a12e277ce8fb5a
 
 - `num.toString(base)` یک عدد را به یک رشته‌ی حرفی در سیستم عددی با پایه داده شده تبدیل می‌کند.
 

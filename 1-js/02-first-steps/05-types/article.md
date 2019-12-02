@@ -11,7 +11,13 @@ message = 123456;
 زبان‌های برنامه‌نویسی‌ای که چنین امکانی به شما می‌دهند "Dynamically Typed" نامیده می‌شوند. به این معنی که انواعی از داده وجود دارد و متغیرها محدود به آنها نیستند.
 در جاوا اسکریپت هفت نوع پایه‌ای از انواع داده وجود دارد که الان به صورت کلی به آنها می‌پردازیم و در بخش‌های بعدی در مورد هرکدام با جزئیات صحبت خواهیم کرد.
 
+<<<<<<< HEAD
 ## عدد
+=======
+There are eight basic data types in JavaScript. Here, we'll cover them in general and in the next chapters we'll talk about each of them in detail.
+
+## Number
+>>>>>>> 47d186598add3a0ea759615596a12e277ce8fb5a
 
 ```js
 let n = 123;
@@ -52,14 +58,41 @@ n = 12.345;
 عملیات ریاضی در جاوا اسکریپت امن است. ما هر نوع عملی می‌توانیم انجام دهیم مانند تقسیم بر صفر. اسکریپت ما هیچگاه با خطا مواجه نخواهد شد. در بدترین حالت `NaN` را به عنوان نتیجه خواهیم گرفت.
 ```
 
+<<<<<<< HEAD
 ## رشته کاراکترها
+=======
+Special numeric values formally belong to the "number" type. Of course they are not numbers in the common sense of this word.
+
+We'll see more about working with numbers in the chapter <info:number>.
+
+## BigInt
+
+In JavaScript, the "number" type cannot represent integer values larger than <code>2<sup>53</sup></code> (or less than <code>-2<sup>53</sup></code> for negatives), that's a technical limitation caused by their internal representation. That's about 16 decimal digits, so for most purposes the limitation isn't a problem, but sometimes we need really big numbers, e.g. for cryptography or microsecond-precision timestamps.
+
+`BigInt` type was recently added to the language to represent integers of arbitrary length.
+
+A `BigInt` is created by appending `n` to the end of an integer literal:
+
+```js
+// the "n" at the end means it's a BigInt
+const bigInt = 1234567890123456789012345678901234567890n;
+```
+
+As `BigInt` numbers are rarely needed, we devoted them a separate chapter <info:bigint>.
+
+```smart header="Compatability issues"
+Right now `BigInt` is supported in Firefox and Chrome, but not in Safari/IE/Edge.
+```
+
+## String
+>>>>>>> 47d186598add3a0ea759615596a12e277ce8fb5a
 
 یک رشته کاراکتر در جاوا اسکریپت باید در بین کوتِیشِن‌ها محصور شوند.
 
 ```js
 let str = "Hello";
 let str2 = 'Single quotes are ok too';
-let phrase = `can embed ${str}`;
+let phrase = `can embed another ${str}`;
 ```
 
 در جاوا اسکریپت سه نوع کوتِیشِن داریم :
@@ -68,8 +101,14 @@ let phrase = `can embed ${str}`;
 2. Single qoutes مانند `'Hello'`.
 3. Backticks مانند <code>&#96;Hello&#96;</code>.
 
+<<<<<<< HEAD
 Double quotes و Single quotes همان کوتِیشِن‌های عادی هستند و در جاوا اسکریپت تفاوتی با هم ندارند.
 Backticks امکان توسعه به ما می‌دهند. بوسیله‌ی آنها می‌توانیم داخل یک رشته کاراکتر عبارات و دستورات جاوا اسکریپت بنویسیم.
+=======
+Double and single quotes are "simple" quotes. There's practically no difference between them in JavaScript.
+
+Backticks are "extended functionality" quotes. They allow us to embed variables and expressions into a string by wrapping them in `${…}`, for example:
+>>>>>>> 47d186598add3a0ea759615596a12e277ce8fb5a
 
 ```js run
 let name = "John";
@@ -91,13 +130,22 @@ alert( "the result is ${1 + 2}" ); // the result is ${1 + 2} (double quotes do n
 
 در مورد رشته‌ها در بخش‌های بعدی بیشتر صحبت خواهیم کرد.
 
+<<<<<<< HEAD
 ```smart header="نوع داده‌ای برای کاراکترها وجود ندارد"
 در زبان‌هایی مانند C و یا Java نوع داده‌ای خاصی مختص به کاراکترها تحت عنوان `char` وجود دارد.
+=======
+```smart header="There is no *character* type."
+In some languages, there is a special "character" type for a single character. For example, in the C language and in Java it is called "char".
+>>>>>>> 47d186598add3a0ea759615596a12e277ce8fb5a
 
 در جاوا اسکریپت چنین نوعی نداریم. فقط یک نوع داده برای رشته‌ها داریم که آن `string` است، که شامل یک یا چند کاراکتر می‌تواند باشد.
 ```
 
+<<<<<<< HEAD
 ## نوع Boolean
+=======
+## Boolean (logical type)
+>>>>>>> 47d186598add3a0ea759615596a12e277ce8fb5a
 
 نوع Boolean فقط یکی از دو مقدار `true` و `false` را شامل می‌شود.
 
@@ -184,6 +232,8 @@ typeof undefined // "undefined"
 
 typeof 0 // "number"
 
+typeof 10n // "bigint"
+
 typeof true // "boolean"
 
 typeof "foo" // "string"
@@ -205,6 +255,7 @@ typeof alert // "function"  (3)
 
 سه خط آخر احتمالا نیاز به توضیحات بیشتری دارد.
 
+<<<<<<< HEAD
 1. `Math` یک آبجکت در اصطلاحا built-in (از پیش نوشته شده در هسته زبان) است که عملیات متنوع ریاضیاتی در اختیار ما قرار می‌دهد. در اینجا صرفا یک مثال از آن را نمایش دادیم و در بخش Numbers با آن بیشتر آشنا خواهیم شد.
 2. خروجی `typeof null` همانطور که می‌بینید `"object"` است و این صحیح نیست. این یک خطا در نوع کار `typeof` می‌باشد که به منظور سازگاری باقی مانده است. مطمئنا `null` یک object نیست. خودِ null یکی از انواع داده در جاوا اسکریپت است. 
 3. نوع `alert` یک فانکشن است چراکه `alert` یکی از فانکشن‌های جاوا اسکریپت می‌باشد. ما در بخش‌های بعدی با فانکشن‌ها بیشتر آشنا خواهیم شد و خواهیم آموخت که نوعی تحت عنوان فانکشن نداریم و خودِ فانکشن‌ها در اصل از نوعِ object هستند. اما عملگر `typeof` به آنها به طرز دیگری برخورد می‌کند. 
@@ -213,6 +264,20 @@ typeof alert // "function"  (3)
 ## خلاصه
 
 در جاوا اسکریپت 7 نوع داده‌ی پایه‌ای داریم :
+=======
+## Summary
+
+There are 8 basic data types in JavaScript.
+
+- `number` for numbers of any kind: integer or floating-point, integers are limited by ±2<sup>53</sup>.
+- `bigint` is for integer numbers of arbitrary length.
+- `string` for strings. A string may have one or more characters, there's no separate single-character type.
+- `boolean` for `true`/`false`.
+- `null` for unknown values -- a standalone type that has a single value `null`.
+- `undefined` for unassigned values -- a standalone type that has a single value `undefined`.
+- `object` for more complex data structures.
+- `symbol` for unique identifiers.
+>>>>>>> 47d186598add3a0ea759615596a12e277ce8fb5a
 
 - `number` که شامل اعداد صحیح و اعداد اعشاری می‌شود.
 - `string` برای رشته کاراکترها. یک string می‌تواند یک یا چند کاراکتر داشته باشد. هیچ نوع داده‌ای تحت عنوان char در جاوا اسکریپت وجود ندارد.

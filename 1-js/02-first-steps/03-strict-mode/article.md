@@ -47,6 +47,10 @@ alert("some code");
 هیچ دستوری مانند `no use strict` وجود ندارد تا به موتور جاوا اسکریپت دستور دهد به روش قدیمی کار کند.
 زمانی‌که `use strict` را قرار می‌دهیم، راه برگشتی وجود ندارد.
 
+<<<<<<< HEAD
+=======
+Once we enter strict mode, there's no going back.
+>>>>>>> 47d186598add3a0ea759615596a12e277ce8fb5a
 ```
 
 ## کنسول مرورگر

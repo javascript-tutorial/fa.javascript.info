@@ -62,7 +62,13 @@ function formatDate(date) {
   year = year.toString().slice(-2);
   month = month < 10 ? '0' + month : month;
   dayOfMonth = dayOfMonth < 10 ? '0' + dayOfMonth : dayOfMonth;
+<<<<<<< HEAD
       
+=======
+  hour = hour < 10 ? '0' + hour : hour;
+  minutes = minutes < 10 ? '0' + minutes : minutes;
+
+>>>>>>> 47d186598add3a0ea759615596a12e277ce8fb5a
   if (diffSec < 1) {
     return 'right now';  
   } else if (diffMin < 1) {

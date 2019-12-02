@@ -26,11 +26,23 @@
 
 - در اینجا می می‌توانیم خطایی به رنگ قرمز ببینیم. در این اینجا اسکریپت ما دارای دستوری ناشناخته به نام "lalala" است. 
 
+<<<<<<< HEAD
 - در سمت راست لینک قابل کلیکی وجود دارد که عنوان آن `bug.html:12` است که نشان دهنده محل وقوع خطا است. 
+=======
+Below the error message, there is a blue `>` symbol. It marks a "command line" where we can type JavaScript commands. Press `key:Enter` to run them.
+>>>>>>> 47d186598add3a0ea759615596a12e277ce8fb5a
 
 در زیر پیام خطا، یک علامت `<` به رنگ آبی وجود دارد.در اینجا ما می‌توانیم دستورات جاوا اسکریپتی بنویسم. با فشردن `Enter` این دستورات اجرا می‌شوند (`Shift + Enter` برای نوشتن دستورات در چند خط). 
 
+<<<<<<< HEAD
 تا اینجا می می‌توانیم خطاها را ببینیم و این برای شروع کافی است. ما در آینده به این پنل، به منظور رفع خطاها (Debugging) دوباره سر خواهیم زد. 
+=======
+```smart header="Multi-line input"
+Usually, when we put a line of code into the console, and then press `key:Enter`, it executes.
+
+To insert multiple lines, press `key:Shift+Enter`. This way one can enter long fragments of JavaScript code.
+```
+>>>>>>> 47d186598add3a0ea759615596a12e277ce8fb5a
 
 ## مرورگر Firefox ، Edge و دیگر مرورگرها  
 
@@ -50,12 +62,16 @@
 
 ## ورودی چند خطی
 
+<<<<<<< HEAD
 معمولا زمانیکه چند خط کد وارد می‌کنیم و سپس `key:Enter` را می‌زنیم، آن کد اجرا می‌شود.
 برای ورود چند خط کد و سپس اجرای آنها از کلید `key:Shift+Enter` استفاده نمایید.
 
 ## خلاصه
 
 - Developer tools به ما امکان مشاهده خطاها، آزمایش متغیرها و امکانات بسیار دیگری را می‌دهد. 
+=======
+## Summary
+>>>>>>> 47d186598add3a0ea759615596a12e277ce8fb5a
 
 - از طریق کلید `F12` در بیشتر مرورگرها در Windows باز می‌شود. Chrome در Mac با کلیدهای `cmd + opt + j` باز می‌شود و Safari با `cmd + opt + c` (که ابتدا نیاز به فعال‌سازی دارد) 
 
