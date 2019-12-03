@@ -59,7 +59,7 @@ n = 12.345;
 ```js
 let str = "Hello";
 let str2 = 'Single quotes are ok too';
-let phrase = `can embed ${str}`;
+let phrase = `can embed another ${str}`;
 ```
 
 در جاوا اسکریپت سه نوع کوتِیشِن داریم :
@@ -183,6 +183,8 @@ alert(x); // "undefined"
 typeof undefined // "undefined"
 
 typeof 0 // "number"
+
+typeof 10n // "bigint"
 
 typeof true // "boolean"
 
