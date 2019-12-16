@@ -408,7 +408,12 @@ alert( Math.pow(2, 10) ); // دو به توان ده = 1024
 
 - میتوان اعداد را مستقیما در فرم پایه۱۶ (`0x`) نوشت، پایه۸ (`0o`) و دودویی (`0b`) نوشت.
 
+<<<<<<< HEAD
 - `parseInt(str, base)` یک عدد صحیح را از هر سیستم عددی با پایه‌ی `2 ≤ base ≤ 36` را استخراج می‌کند. 
+=======
+- Append `"e"` with the zeroes count to the number. Like: `123e6` is the same as `123` with 6 zeroes `123000000`.
+- A negative number after `"e"` causes the number to be divided by 1 with given zeroes. E.g. `123e-6` means `0.000123` (`123` millionths).
+>>>>>>> 524d59884650be539544c34f71d821432b7280fd
 
 - `num.toString(base)` یک عدد را به یک رشته‌ی حرفی در سیستم عددی با پایه داده شده تبدیل می‌کند.
 
