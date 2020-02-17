@@ -71,7 +71,11 @@
 
   
 
+<<<<<<< HEAD
 ۱. موتور در ابتدا اِسکریپت را می‌خواند (Parse).  
+=======
+- JavaScript on a webpage may not read/write arbitrary files on the hard disk, copy them or execute programs. It has no direct access to OS functions.
+>>>>>>> 9acc1302a14a3bbabbc9bf95d04581094bd0f1a8
 
   
 
