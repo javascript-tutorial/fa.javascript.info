@@ -132,8 +132,13 @@ alert('Hello');
 alert('World');
 ```
 
+<<<<<<< HEAD
 ```smart header="از کلیدهای میان‌بُر استفاده کنید"
 بعضی ویرایشگرها قابلیت Comment کردن کد از طریق کلیدهای میان‌بُر را دارند. معمولا `ctrl + /` در ویندوز Comment های تک خطی و `ctrl + shift + /` می‌تواند Comment چند خطی بوجود آورد (باید ابتدا بخشی از کد را انتخاب نمایید). همینطور در Mac می‌توانید از کلید `cmd` بجای `ctrl` استفاده نمایید. 
+=======
+```smart header="Use hotkeys!"
+In most editors, a line of code can be commented out by pressing the `key:Ctrl+/` hotkey for a single-line comment and something like `key:Ctrl+Shift+/` -- for multiline comments (select a piece of code and press the hotkey). For Mac, try `key:Cmd` instead of `key:Ctrl` and `key:Option` instead of `key:Shift`.
+>>>>>>> 405150f1f286db19a3c1ed913fa3e905fcefbe46
 ```
 
 ````warn header="Comment های تو در تو حساب نمی‌شوند"

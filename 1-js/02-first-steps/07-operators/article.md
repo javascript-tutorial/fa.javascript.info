@@ -150,7 +150,11 @@ alert( +apples + +oranges ); // 5
 | 3 | مقدارده | `=` |
 | ... | ... | ... |
 
+<<<<<<< HEAD
 همانطور که می‌بینیم unary + اولویت 16 دارد که از binary + با اولویت 13 بالاتر است. به همین دلیل است که در عبارت “+apples + +oranges” علامت‌های unary plus پیش از علامت جمع اجرا می‌شوند.
+=======
+As we can see, the "unary plus" has a priority of `17` which is higher than the `13` of "addition" (binary plus). That's why, in the expression `"+apples + +oranges"`, unary pluses work before the addition.
+>>>>>>> 405150f1f286db19a3c1ed913fa3e905fcefbe46
 
 ## مقداردهی
 
