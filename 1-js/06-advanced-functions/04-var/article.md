@@ -203,7 +203,7 @@ The Function Expression is wrapped with parenthesis `(function {...})`, because 
 
 ```js run
 // Try to declare and immediately call a function
-function() { // <-- Error: Unexpected token (
+function() { // <-- Error: Function statements require a function name
 
   let message = "Hello";
 
