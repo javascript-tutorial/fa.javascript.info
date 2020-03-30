@@ -186,9 +186,9 @@ There's a property `event.eventPhase` that tells us the number of the phase on w
 
 The event handling process:
 
-- When an event happens -- the most nested element where it happens gets labeled as the "target element" (`event.target`).
-- Then the event first moves from the document root down to the `event.target`, calling handlers assigned with `addEventListener(...., true)` on the way.
-- Then the event moves from `event.target` up to the root, calling handlers assigned using  `on<event>` and `addEventListener` without the 3rd argument or with the 3rd argument `false`.
+- Then the event moves down from the document root to `event.target`, calling handlers assigned with `addEventListener(..., true)` on the way (`true` is a shorthand for `{capture: true}`).
+- Then handlers are called on the target element itself.
+- Then the event bubbles up from `event.target` up to the root, calling handlers assigned using `on<event>` and `addEventListener` without the 3rd argument or with the 3rd argument `false/{capture:false}`.
 
 Each handler can access `event` object properties:
 
