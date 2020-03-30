@@ -45,13 +45,8 @@
 تگ `<script>` تعدادی attributes (صفات) دارد که امروزه کمتر از آنها استفاده می‌شود، ولی ممکن است در کدهای قدیمی همچنان آنها را ببینید :
 
 
-<<<<<<< HEAD
 صفت  `type` : <code>&lt;script <u>type</u>=...&gt;</code>
 : نسخه قدیمی HTML یعنی HTML4 نیازمند تعیین `type` در تگ `<script>` بود. معمولا مقدار آن `type=text/javascript` بود. در حال حاضر دیگر این مورد الزامی نیست. 
-=======
-The `type` attribute: <code>&lt;script <u>type</u>=...&gt;</code>
-: The old HTML standard, HTML4, required a script to have a `type`. Usually it was `type="text/javascript"`. It's not required anymore. Also, the modern HTML standard totally changed the meaning of this attribute. Now, it can be used for JavaScript modules. But that's an advanced topic, we'll talk about modules in another part of the tutorial.
->>>>>>> 62299ed853674c4fd1427cd310516d5535bce648
 
 صفت `language` : <code>&lt;script <u>language</u>=...&gt;</code>
 : مقصود از این صفت تعیین زبان اسکریپت است. از آنجایی که جاوا اسکریپت زبان پیش‌فرض است، نیازی به تعیین آن نیست.
