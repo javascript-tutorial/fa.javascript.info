@@ -318,7 +318,11 @@ alert( isFinite(num) );
 
 یک تابع از پیش آماده شده‌ی خاص [Object.is](mdn:js/Object/is) که مقادیر را مثل `===` مقایسه میکند، اما برای دو حالت مرزی قابل اعتمادتر است.
 
+<<<<<<< HEAD
 ۱. با `NaN` کار میکند:  `Object.is(NaN, NaN) === true`، که چیز خوبیست.
+=======
+There is a special built-in method [`Object.is`](mdn:js/Object/is) that compares values like `===`, but is more reliable for two edge cases:
+>>>>>>> 62299ed853674c4fd1427cd310516d5535bce648
 
 ۲. مقادیر `0` و `-0` متفاوت هستند: `Object.is(0, -0) === false`، به ندرت اهمیت دارد، اما این مقادیر در اصل متفاوتند.
 
@@ -412,7 +416,13 @@ alert( Math.pow(2, 10) ); // دو به توان ده = 1024
 
 - `num.toString(base)` یک عدد را به یک رشته‌ی حرفی در سیستم عددی با پایه داده شده تبدیل می‌کند.
 
+<<<<<<< HEAD
 برای تبدیل مقادیری مثل `12pt` و `100px` به یک عدد:
+=======
+- Can write numbers directly in hex (`0x`), octal (`0o`) and binary (`0b`) systems.
+- `parseInt(str, base)` parses the string `str` into an integer in numeral system with given `base`, `2 ≤ base ≤ 36`.
+- `num.toString(base)` converts a number to a string in the numeral system with the given `base`.
+>>>>>>> 62299ed853674c4fd1427cd310516d5535bce648
 
 - `parseInt/parseFloat` را برای تبدیلات ساده استفاده کنید که یک عدد را از یک رشته‌ی حرفی می‌خواند و سپس مقداری که قبل از بروز خطا خوانده‌ست را برمی‌گرداند.
 
