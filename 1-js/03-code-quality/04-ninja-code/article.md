@@ -1,185 +1,183 @@
-# Ninja code
+# کد نینجا
 
-
-```quote author="Confucius"
-Learning without thought is labor lost; thought without learning is perilous.
+```quote author="کنفسیوس"
+یادگیری بدون تفکر، بی‌فایده است؛ تفکر بدون یادگیری، خطرناک.
 ```
 
-Programmer ninjas of the past used these tricks to sharpen the mind of code maintainers.
+نینجاهای برنامه‌نویس در گذشته از این ترفندها برای باز کردن ذهن **حافظان کد** استفاده می‌کرده‌اند.
 
-Code review gurus look for them in test tasks.
+خبره‌های بازبینی کد، در تست‌های خود به دنبال این گونه ترفندها می‌گردند.
 
-Novice developers sometimes use them even better than programmer ninjas.
+توسعه‌دهندگان تازه‌کار، بعضی اوقات در استفاده از این ترفندها بهتر از نینجاهای برنامه‌نویس عمل می‌کنند.
 
-Read them carefully and find out who you are -- a ninja, a novice, or maybe a code reviewer?
+موارد زیر را با دقت بخوانید و مشخص کنید کدام هستید: یک نینجا، یک تازه‌کار، یا شاید یک بازبین کد؟
 
 
-```warn header="Irony detected"
-Many try to follow ninja paths. Few succeed.
+```warn header="مزاح"
+افراد زیادی سعی می‌کنند مسیرهای نینجا شدن را طی کنند. تعداد اندکی موفق می‌شوند.
 ```
 
+## اختصار، روح شوخ‌طبعی است
 
-## Brevity is the soul of wit
+کد را تا حد امکان کوتاه کنید. به همه نشان بدهید که چقدر باهوش هستید.
 
-Make the code as short as possible. Show how smart you are.
+بگذارید ویژگی‌های ریز زبان، شما را راهنمایی کنند.
 
-Let subtle language features guide you.
-
-For instance, take a look at this ternary operator `'?'`:
+برای نمونه، به این عملگر سه‌گانه (`'?'`) نگاه کنید:
 
 ```js
-// taken from a well-known javascript library
+// برگرفته از یک کتابخانه‌ی مشهور جاوااسکریپت
 i = i ? i < 0 ? Math.max(0, len + i) : i : 0;
 ```
 
-Cool, right? If you write like that, a developer who comes across this line and tries to understand what is the value of `i` is going to have a merry time. Then come to you, seeking for an answer.
+زیباست، نه؟ اگر شما هم به این شکل، کد بنویسید، توسعه‌دهنده‌ای که گذرش به این خط بیفتد و سعی کند
+مقدار `i` را دریابد، پس از سرمستی فراوان و در پی جواب، به سراغ شما خواهد آمد.
 
-Tell them that shorter is always better. Initiate them into the paths of ninja.
+به او بگویید که «کوتاه‌تر، همیشه بهتر است». وی را به راه نینجا شدن هدایت کنید.
 
-## One-letter variables
+## متغیرهای تک‌حرفی
 
-```quote author="Laozi (Tao Te Ching)"
-The Dao hides in wordlessness. Only the Dao is well begun and well
-completed.
+```quote author="لائوتسه (دائو دِ جینگ)"
+دائو، در سکوت، پنهان است. تنها دائو به خوبی شروع شده و به خوبی کامل می‌شود.
 ```
 
-Another way to code faster is to use single-letter variable names everywhere. Like `a`, `b` or `c`.
+یک راه دیگر برای کدنویسی سریع‌تر، استفاده از متغیرهای تک‌حرفی در همه‌جاست. برای مثال: `a`، `b` یا `c`.
 
-A short variable disappears in the code like a real ninja in the forest. No one will be able to find it using "search" of the editor. And even if someone does, they won't be able to "decipher" what the name `a` or `b` means.
+همانند یک نینجای واقعی در جنگل، یک متغیر کوتاه در کد ناپدید می‌شود. هیچ‌کس قادر به پیدا کردن آن با استفاده از «جستجو»ی ویرایشگر نخواهد بود. حتی اگر کسی آن را پیدا کند، نخواهد توانست معنی `a` یا `b` را رمزگشایی کند.
 
-...But there's an exception. A real ninja will never use `i` as the counter in a `"for"` loop. Anywhere, but not here. Look around, there are many more exotic letters. For instance, `x` or `y`.
+اما یک استثنا وجود دارد. یک نینجای واقعی هرگز از `i` برای شمارنده‌ی یک حلقه‌ی `for` استفاده نخواهد کرد. در هر جایی از این نام استفاده می‌کند، به جز این مورد خاص. به اطراف خود بنگرید، تعداد زیادی از حروف عجیب و غریب وجود دارند. برای مثال، `x` یا `y`. از آن‌ها استفاده کنید.
 
-An exotic variable as a loop counter is especially cool if the loop body takes 1-2 pages (make it longer if you can). Then if someone looks deep inside the loop, they won't be able to quickly figure out that the variable named `x` is the loop counter.
+به‌خصوص استفاده از یک متغیر نامتعارف به عنوان شمارنده‌ی یک حلقه، وقتی حالتان را دگرگون می‌کند که بدنه‌ی حلقه، ۱-۲ صفحه باشد (اگر امکان طولانی‌تر کردن آن وجود دارد، دریغ نکنید). حال اگر شخصی با دقت به درون حلقه نگاه کند، به سرعت نخواهد توانست تشخیص دهد که متغیری با نام `x`، در واقع همان شمارنده‌ی حلقه است.
 
-## Use abbreviations
+## از مخفف‌ها استفاده کنید
 
-If the team rules forbid the use of one-letter and vague names -- shorten them, make abbreviations.
+اگر قوانین تیم، استفاده از اسامی تک‌حرفی و مبهم را ممنوع کرده است، آن‌ها را کوتاه کنید، مخفف بسازید.
 
-Like this:
+همانند زیر:
 
 - `list` -> `lst`.
 - `userAgent` -> `ua`.
 - `browser` -> `brsr`.
-- ...etc
+- و غیره
 
-Only the one with truly good intuition will be able to understand such names. Try to shorten everything. Only a worthy person should be able to uphold the development of your code.
+فقط افراد بابصیرت قادر خواهند بود این نوع اسامی را دریابند. سعی کنید همه‌چیز را کوتاه کنید. تنها یک فرد شایسته باید بتواند توسعه‌ی کد شما را تایید کند.
 
-## Soar high. Be abstract.
+## اوج بگیر. سبک باش.
 
-```quote author="Laozi (Tao Te Ching)"
-The great square is cornerless<br>
-The great vessel is last complete,<br>
-The great note is rarified sound,<br>
-The great image has no form.
+```quote author="لائوتسه (دائو دِ جینگ)"
+مربع بزرگ، بدون زاویه است<br>
+ظرف بزرگ، دیر کامل می‌شود<br>
+موسیقی بزرگ، بی‌آواست<br>
+تصویر بزرگ، بی‌صورت است.
 ```
 
-While choosing a name try to use the most abstract word. Like `obj`, `data`, `value`, `item`, `elem` and so on.
+هنگامی که می‌خواهید نامی را انتخاب کنید، سعی کنید از خلاصه‌ترین کلمات استفاده کنید. برای مثال `obj`، `data`، `value`، `item`، `elem` و غیره.
 
-- **The ideal name for a variable is `data`.** Use it everywhere you can. Indeed, every variable holds *data*, right?
+- **نام ایده‌آل برای یک متغیر، `data` است.** در هر جایی که توانستید از آن استفاده کنید. در واقع، هر متغیری **داده** را درون خود نگه می‌دارد، نه؟
 
-    ...But what to do if `data` is already taken? Try `value`, it's also universal. After all, a variable eventually gets a *value*.
+    اما اگر `data` قبلا گرفته شده بود چه؟ `value` را امتحان کنید، این نام نیز جهانی است. گذشته از این‌ها، یک متغیر در نهایت یک **مقدار** به خود می‌گیرد.
 
-- **Name a variable by its type: `str`, `num`...**
+- **یک متغیر را با نوعش نام‌گذاری کنید: `str`، `num` و غیره**
 
-    Give them a try. A young initiate may wonder -- are such names really useful for a ninja? Indeed, they are!
+    امتحان کنید. یک تازه‌وارد جوان ممکن است تعجب کند: آیا واقعا این نام‌ها برای یک نینجا مفید هستند؟ در واقع، بله!
 
-    Sure, the variable name still means something. It says what's inside the variable: a string, a number or something else. But when an outsider tries to understand the code, they'll be surprised to see that there's actually no information at all! And will ultimately fail to alter your well-thought code.
+    البته، نام متغیر هنوز هم دارای معنی است. مشخص می‌کند چه چیزی درون متغیر ذخیره شده است: یک رشته، یک عدد یا چیزی دیگر. اما وقتی یک شخص خارجی سعی کند کد شما را بفهمد، شگفت‌زده خواهد شد، چرا که در واقع اصلا هیچ اطلاعاتی را نمی‌توان برداشت کرد! و در نهایت در تغییر کد شما، که روی آن بسیار فکر کرده‌اید و عرق فراوان ریخته‌اید، با شکست مواجه خواهد شد.
 
-    The value type is easy to find out by debugging. But what's the meaning of the variable? Which string/number does it store?
+    نوع مقدار را به راحتی می‌توان با اشکال‌زدایی به دست آورد. ولی مراد از خود متغیر چیست؟ کدام رشته/عدد را در خود ذخیره می‌کند؟
 
-    There's just no way to figure out without a good meditation!
+    بدون یک مراقبه‌ی طاقت‌فرسا، هیچ راهی برای فهمیدن آن وجود ندارد.
 
-- **...But what if there are no more such names?** Just add a number: `data1, item2, elem5`...
+- **حال اگر نام دیگری به این شکل وجود نداشته باشد چه؟** کافی است یک عدد به آن‌ها اضافه کنید: `data1`، ‍`item2`، `elem5` و غیره.
 
-## Attention test
+## تست توجه
 
-Only a truly attentive programmer should be able to understand your code. But how to check that?
+تنها یک برنامه‌نویس ملتفت باید قادر به درک کدتان باشد. اما چگونه از کیفیت کد خود مطمئن شویم؟
 
-**One of the ways -- use similar variable names, like `date` and `data`.**
+**یکی از راه‌ها، استفاده از اسامی مشابه برای متغیرهاست، برای مثال `date` و `data`.**
 
-Mix them where you can.
+هر جایی توانستید، آن‌ها را در هم آمیزید.
 
-A quick read of such code becomes impossible. And when there's a typo... Ummm... We're stuck for long, time to drink tea.
+خواندن سریع اینچنین کدی غیرممکن خواهد بود. و هنگامی که یک غلط تایپی در کدتان وجود داشته باشد، برای یک مدت طولانی درگیر خواهیم بود. در چنین شرایطی، چای بنوشید.
 
 
-## Smart synonyms
+## مترادف‌های خلاقانه
 
-```quote author="Confucius"
-The hardest thing of all is to find a black cat in a dark room, especially if there is no cat.
+```quote author="کنفسیوس"
+سخت‌ترین کار، یافتن یک گربه‌ی سیاه در یک اتاق تاریک است، به‌خصوص اگر هیچ گربه‌ای وجود نداشته باشد.
 ```
 
-Using *similar* names for *same* things makes life more interesting and shows your creativity to the public.
+استفاده از نام‌های **مشابه** برای مفاهیم **یکسان**  زندگی را بسیار جذاب‌تر نموده و خلاقیت شما را در معرض دید عموم قرار می‌دهد.
 
-For instance, consider function prefixes. If a function shows a message on the screen -- start it with `display…`, like `displayMessage`. And then if another function shows on the screen something else, like a user name, start it with `show…` (like `showName`).
+برای نمونه، پیشوند توابع را در نظر بگیرید. اگر تابعی یک پیام را بر روی صفحه نمایش می‌دهد، نام آن را با `display...` آغاز کنید، مثلا `displayMessage`. حال اگر یک تابع دیگر، چیز دیگری (برای مثال نام یک کاربر) را بر روی صفحه نمایش می‌دهد، نام تابع را با `show...` شروع کنید، مثلا `showName`.
 
-Insinuate that there's a subtle difference between such functions, while there is none.
+با این کار، این تلقین را ایجاد کنید که یک تفاوت ناچیز بین این توابع وجود دارد، در حالی که این طور نیست.
 
-Make a pact with fellow ninjas of the team: if John starts "showing" functions with `display...` in his code, then Peter could use `render..`, and Ann -- `paint...`. Note how much more interesting and diverse the code became.
+با یاران نینجای خود عهدی ببندید: اگر آرش توابع را در کد خود با `display...` نمایش می‌دهد، محمد می‌تواند از `render...` استفاده کند، آیدا از `paint...`و غیره. ملاحظه می‌کنید که با این کار، کدتان بسیار جالب و متنوع خواهد شد.
 
-...And now the hat trick!
+... و اینک برگ برنده!
 
-For two functions with important differences -- use the same prefix!
+برای توابعی که تفاوت‌های فاحش و مهمی دارند، از پیشوندهای یکسانی استفاده کنید!
 
-For instance, the function `printPage(page)` will use a printer. And the function `printText(text)` will put the text on-screen. Let an unfamiliar reader think well over similarly named function `printMessage`: "Where does it put the message? To a printer or on the screen?". To make it really shine, `printMessage(message)` should output it in the new window!
+برای نمونه، تابع `printPage(page)` از یک چاپگر استفاده خواهد کرد. و تابع `printText(text)` متن را بر روی صفحه نمایش خواهد داد. اجازه بدهید یک فرد اجنبی، با دیدن تابع `printMessage` به فکر فرو برود: «این تابع، پیام را به کجا می‌فرستد؟ به یک چاپگر یا به صفحه‌ی نمایش؟». برای این که کارتان واقعا بدرخشد، بهتر است `printMessage(message)` پیام را در پنچره‌ی جدید به کاربر نمایش دهد!
 
-## Reuse names
+## از نام‌ها دوباره استفاده کنید
 
-```quote author="Laozi (Tao Te Ching)"
-Once the whole is divided, the parts<br>
-need names.<br>
-There are already enough names.<br>
-One must know when to stop.
+```quote author="لائوتسه (دائو دِ جینگ)"
+وقتی کل، تقسیم شود، اجزا به نام احتیاج دارند.<br>
+نام‌های موجود کفایت می‌کنند.<br>
+باید بدانی چه زمانی توقف کنی.
 ```
 
-Add a new variable only when absolutely necessary.
+تنها زمانی که واقعا ضروری است از یک متغیر جدید استفاده کنید.
 
-Instead, reuse existing names. Just write new values into them.
+در عوض، از نام‌های موجود دوباره استفاده کنید. کافی است مقادیر جدید را به آن‌ها نسبت دهید.
 
-In a function try to use only variables passed as parameters.
+در یک تابع، سعی کنید تنها از متغیرهایی که به عنوان پارامتر ارسال شده‌اند استفاده کنید.
 
-That would make it really hard to identify what's exactly in the variable *now*. And also where it comes from. The purpose is to develop the intuition and memory of a person reading the code. A person with weak intuition would have to analyze the code line-by-line and track the changes through every code branch.
+این کار، تشخیص این که در هر لحظه دقیقا چه چیزی در متغیر ذخیره شده است، و همچنین مقدار آن از کجا آمده است، را بسیار سخت خواهد نمود.
+هدف این است که بینش و حافظه‌ی شخصی که در حال خواندن کد است را تقویت کنیم. فردی با بینش اندک باید کد را خط‌به‌خط تحلیل نموده و تغییرات را در هر شاخه از کد دنبال کند.
 
-**An advanced variant of the approach is to covertly (!) replace the value with something alike in the middle of a loop or a function.**
+**نسخه‌ی پیشرفته‌ی این روش این است که به طور محرمانه، در میان یک حلقه یا یک تابع، مقدار متغیر را با یک مقدار مشابه جایگزین کنیم.**
 
-For instance:
+برای نمونه:
 
 ```js
 function ninjaFunction(elem) {
-  // 20 lines of code working with elem
+  // ۲۰ خط از کد که با elem کار می‌کنند
 
   elem = clone(elem);
 
-  // 20 more lines, now working with the clone of the elem!
+  // ۲۰ خط دیگر، که حال با کپی elem کار می‌کنند
 }
 ```
 
-A fellow programmer who wants to work with `elem` in the second half of the function will be surprised... Only during the debugging, after examining the code they will find out that they're working with a clone!
+یک یار برنامه‌نویس که می‌خواهد با `elem` در نیمه‌ی دوم تابع کار کند، شگفت‌زده خواهد شد. تنها در طول اشکال‌زدایی، و پس از بررسی کد متوجه خواهد شد که در حال کار با یک متغیر کپی است.
 
-Seen in code regularly. Deadly effective even against an experienced ninja.
+این امر به دفعات مشاهده شده است. به شدت موثر است، حتی در مقابل یک نینجای باتجربه.
 
-## Underscores for fun
+## زیرخط‌ها برای سرگرمی
 
-Put underscores `_` and `__` before variable names. Like `_name` or `__value`. It would be great if only you knew their meaning. Or, better, add them just for fun, without particular meaning at all. Or different meanings in different places.
+از زیرخط‌های `_` و `__` قبل از نام متغیرها استفاده کنید، برای مثال `_name` یا `__value`. عالی است اگر فقط شما معنی آن‌ها را بدانید. حتی بهتر، آن‌ها را صرفا برای سرگرمی اضافه کنید، بدون این که اصلا معنی خاصی داشته باشند. یا می‌توانند معانی مختلفی در مکان‌های متفاوت داشته باشند.
 
-You kill two rabbits with one shot. First, the code becomes longer and less readable, and the second, a fellow developer may spend a long time trying to figure out what the underscores mean.
+دو نشان را با یک تیر خواهید زد. اول این که کدتان طولانی‌تر شده و خوانایی آن کمتر خواهد شد، و دوم این که یک یار توسعه‌دهنده ممکن است مدت زمان زیادی را صرف فهمیدن معنی زیرخط‌ها بکند.
 
-A smart ninja puts underscores at one spot of code and evades them at other places. That makes the code even more fragile and increases the probability of future errors.
+یک نینجای زیرک، زیرخط‌ها را در یک مکان از کد قرار داده، و در مکان‌های دیگر از آن‌ها پرهیز می‌کند. این کار، کد را شکننده‌تر می‌کند و احتمال خطاهای آتی را افزایش خواهد داد.
 
-## Show your love
+## عشق خود را نشان دهید
 
-Let everyone see how magnificent your entities are! Names like `superElement`, `megaFrame` and `niceItem` will definitely enlighten a reader.
+بگذارید همه ببینند موجودیت‌های شما چقدر باشکوه هستند! نام‌هایی مانند `superElement`، `megaFrame` و `niceItem`
+قطعا مخاطب را روشن خواهند کرد.
 
-Indeed, from one hand, something is written: `super..`, `mega..`, `nice..` But from the other hand -- that brings no details. A reader may decide to look for a hidden meaning and meditate for an hour or two of their paid working time.
+از یک طرف، متغیرهایی به این شکل نام‌گذاری شده‌اند: `super..`، `mega..`، `nice..`. ولی از طرف دیگر، هیچ جزئیاتی را نمی‌توان از نامشان استخراج نمود. ممکن است مخاطب به مدت یک یا دو ساعت از زمان کاری خود در جستجوی یک معنی مخفی به مراقبه بپردازد.
 
+## متغیرهای بیرونی را مخفی کنید
 
-## Overlap outer variables
-
-```quote author="Guan Yin Zi"
-When in the light, can't see anything in the darkness.<br>
-When in the darkness, can see everything in the light.
+```quote author="گوان یین زی"
+در روشنایی بایست، چیزی در تاریکی دیده نخواهد شد.<br>
+در تاریکی بایست، همه چیز در روشنایی دیده خواهد شد.
 ```
 
-Use same names for variables inside and outside a function. As simple. No efforts to invent new names.
+از اسامی یکسانی برای متغیرهای درون و بیرون یک تابع استفاده کنید. به همین سادگی. نیازی به تلاش برای اختراع نام‌های جدید نیست.
 
 ```js
 let *!*user*/!* = authenticateUser();
@@ -189,52 +187,57 @@ function render() {
   ...
   ...many lines...
   ...
-  ... // <-- a programmer wants to work with user here and...
+  ... // <-- یک برنامه‌نویس می‌خواهد در این‌جا با user کار کند و ...
   ...
 }
 ```
 
-A programmer who jumps inside the `render` will probably fail to notice that there's a local `user` shadowing the outer one.
+برنامه‌نویسی که تابع `render` را می‌خواند احتمالا متوجه نخواهد شد که یک `user` محلی وجود دارد که بر روی متغیر بیرونی سایه انداخته است.
 
-Then they'll try to work with `user` assuming that it's the external variable, the result of `authenticateUser()`... The trap is sprung! Hello, debugger...
-
-
-## Side-effects everywhere!
-
-There are functions that look like they don't change anything. Like `isReady()`, `checkPermission()`, `findTags()`... They are assumed to carry out calculations, find and return the data, without changing anything outside of them. In other words, without "side-effects".
-
-**A really beautiful trick is to add a "useful" action to them, besides the main task.**
-
-An expression of dazed surprise on the face of your colleague when they see a function named `is..`, `check..` or `find...` changing something -- will definitely broaden your boundaries of reason.
-
-**Another way to surprise is to return a non-standard result.**
-
-Show your original thinking! Let the call of `checkPermission` return not `true/false`, but a complex object with the results of the check.
-
-Those developers who try to write `if (checkPermission(..))`, will wonder why it doesn't work. Tell them: "Read the docs!". And give this article.
+با فرض این که `user` یک متغیر خارجی است کار را ادامه می‌دهند. خواهند پنداشت این متغیر، نتیجه‌ی تابع `authenticateUser()` است. تله پهن شده است. درود بر اشکال‌زدایی.
 
 
-## Powerful functions!
+## اثرات جانبی در همه‌جا!
 
-```quote author="Laozi (Tao Te Ching)"
-The great Tao flows everywhere,<br>
-both to the left and to the right.
+توابعی وجود دارند که در ظاهر، چیزی را تغییر نمی‌دهند. مانند `isReady()`، `checkPermission()`، `findTags()` و ...
+فرض بر این است که این توابع، محاسباتی را انجام داده، داده‌ای را پیدا کرده و برمی‌گردانند، بدون این که چیزی را در خارج از حوزه‌ی خود تغییر دهند. به عبارت دیگر، این توابع بدون اثرات جانبی هستند.
+
+**یک ترفند واقعا زیبا این است که در کنار وظیفه‌ی اصلی توابع، یک عمل مفید دیگر را نیز به آن‌ها اضافه کنیم،**
+
+حالت تعجب روی چهره‌ی یارانتان وقتی تابعی را می‌بینند که با `is..`، `check..` یا `find...` نام‌گذاری شده است
+و چیزی را هم تغییر می‌دهد، قطعا مرزهای منطق و استدلال شما را پهناورتر خواهد کرد.
+
+**یک راه دیگر برای شگفت‌زده کردن، برگرداندن یک نتیجه‌ی غیراستاندارد است.**
+
+تفکر اصل خود را نشان دهید! بگذارید فراخوانی `checkPermission` مقدار `true/false` را برنگرداند، در عوض یک شی پیچیده با نتایچ بررسی را برگرداند.
+
+توسعه‌دهندگانی که سعی کنند از `if (checkPermission(..))` استفاده کنند، حیرت‌زده خواهند شد که چرا این تابع به درستی عمل نمی‌کند. به آن‌ها بگویید: «مستندات را بخوانید!». و این مقاله را به آن‌ها معرفی کنید.
+
+
+## توابع قدرتمند
+
+```quote author="لائوتسه (دائو دِ جینگ)"
+دائوی بزرگ در همه‌جا جاری است،<br>
+در چپ، و در راست.
 ```
 
-Don't limit the function by what's written in its name. Be broader.
+توابع را محدود به چیزی که در نامشان نوشته شده است نکنید. بازتر فکر کنید.
 
-For instance, a function `validateEmail(email)` could (besides checking the email for correctness) show an error message and ask to re-enter the email.
+برای نمونه، تابع `validateEmail(email)` می‌تواند (در کنار بررسی صحت ایمیل) پیام خطایی را نمایش داده و از کاربر بخواهد تا ایمیل را دوباره وارد کند.
 
-Additional actions should not be obvious from the function name. A true ninja coder will make them not obvious from the code as well.
+اعمال اضافی نباید از روی نام تابع به راحتی برداشت شوند. یک کدنویس نینجای واقعی به گونه‌ای کد خود را می‌نویسد که از روی خود کد هم نتوان اعمال اضافی را تشخیص داد.
 
-**Joining several actions into one protects your code from reuse.**
+**ادغام چندین عمل در یکی، از کد شما در مقابل استفاده‌ی مجدد محافظت می‌کند.**
 
-Imagine, another developer wants only to check the email, and not output any message. Your function  `validateEmail(email)` that does both will not suit them. So they won't break your meditation by asking anything about it.
+تصور کنید، توسعه‌دهنده‌ی دیگری می‌خواهد تنها ایمیل را بررسی کنید، نه این که پیامی را برگرداند.
+تابع شما، `validateEmail(email)`، که هر دو کار را با هم انجام می‌دهد به کارش نخواهد آمد.
+در نتیجه وی، مراقبه‌ی شما را با پرسیدن سوالاتی در مورد آن تابع بر هم نخواهد زد.
 
-## Summary
+## خلاصه
 
-All "pieces of advice" above are from the real code... Sometimes, written by experienced developers. Maybe even more experienced than you are ;)
+تمام نصایح بالا برگرفته از کدهای واقعی هستند. گاهی اوقات، این کدها توسط توسعه‌دهندگان باتجربه نوشته شده‌اند، حتی شاید باتجربه‌تر از شما.
 
-- Follow some of them, and your code will become full of surprises.
-- Follow many of them, and your code will become truly yours, no one would want to change it.
-- Follow all, and your code will become a valuable lesson for young developers looking for enlightenment.
+- برخی از این نصایح را دنبال کنید، و کدتان سرشار از شگفتی خواهد بود.
+- تعداد زیادی از آن‌ها را دنبال کنید، و کدتان به واقع تنها متعلق به خودتان خواهد بود، هیچ‌کس تمایلی به تغییر آن نخواهد داشت.
+- همه‌ی آن‌ها را دنبال کنید، و کدتان به یک درس باارزش برای توسعه‌دهندگان جوان که به دنبال روشنگری هستند تبدیل خواهد شد.
+
