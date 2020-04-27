@@ -15,11 +15,11 @@ while (i) {
 ```js
 let i = 3;
 
-alert(i--); // shows 3, decreases i to 2
+alert(i--); // ۳ را نشان میدهد و i به ۲ کاهش میابد
 
-alert(i--) // shows 2, decreases i to 1
+alert(i--) // ۲ را نشان میدهد و i به ۱ کاهش میابد
 
-alert(i--) // shows 1, decreases i to 0
+alert(i--) // ۱ را نشان میدهد و i به ۰ کاهش میابد
 
 // تمام. عبارت while(i) حلقه را خاتمه میدهد
 ```
