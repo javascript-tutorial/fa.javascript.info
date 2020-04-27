@@ -1,4 +1,4 @@
-The answer: `1`.
+پاسخ: `1`.
 
 ```js run
 let i = 3;
@@ -8,9 +8,9 @@ while (i) {
 }
 ```
 
-Every loop iteration decreases `i` by `1`. The check `while(i)` stops the loop when `i = 0`.
+در هر بار تکرار حلقه متغیر `i` به مقدار `1` عدد کم میشود. عبارت `while(i)` وقتی به `i = 0` برسد متوقف میشود.
 
-Hence, the steps of the loop form the following sequence ("loop unrolled"):
+حالا گام های حلقه به این صورت است ("تشریح حلقه"):
 
 ```js
 let i = 3;
@@ -21,5 +21,5 @@ alert(i--) // shows 2, decreases i to 1
 
 alert(i--) // shows 1, decreases i to 0
 
-// done, while(i) check stops the loop
+// تمام. عبارت while(i) حلقه را خاتمه میدهد
 ```
