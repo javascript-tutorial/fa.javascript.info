@@ -2,19 +2,20 @@ importance: 4
 
 ---
 
-# Which values does the while loop show?
+# حلقه چه مقادیری نشان میدهد؟
 
-For every loop iteration, write down which value it outputs and then compare it with the solution.
+در هر بار گردش حلقه، حدس بزنید خروجی چه عددی است و با جواب مسئله مقایسه کنید.
 
-Both loops `alert` the same values, or not?
+هر دو حلقه، مقادیر یکسانی را `alert` میکنند یا خیر؟
 
-1. The prefix form `++i`:
+1. حالت پیشوند `i++`:
 
     ```js
     let i = 0;
     while (++i < 5) alert( i );
     ```
-2. The postfix form `i++`
+    
+2. حالت پسوند `++i`:
 
     ```js
     let i = 0;
