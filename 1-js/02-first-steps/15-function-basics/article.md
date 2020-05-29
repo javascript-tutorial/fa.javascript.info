@@ -208,36 +208,55 @@ function showMessage(from, text = anotherFunction()) {
 در جاوااسکریپت، یک پارامتر پیش‌فرض هربار که تابع صدا زده می‌شود، بدون پارامتر مربوطه، محاسبه می‌شود. در مثال بالا،  `anotherFunction()` هربار که `showMessage()` صدا زده می‌شود، فراخوانی می‌شود بدون توجه به پارامتر `text`. این در زبان‌های دیگری مثل پایتون فرق دارد که هر پارامتر پیش‌فرضی فقط یک بار در مقداردهی اولیه ارزیابی می‌شود.
 ```
 
+<<<<<<< HEAD:1-js/02-first-steps/14-function-basics/article.md
 ````smart header="پارامترهای پیش‌فرض قدیمی"
 ورژن‌های قدیمی جاوااسکریپت از پارامترهای پیش‌فرض پشتیبانی نمیکردند. بنابراین برای پشتیبانی راه‌های فرعی‌ای وجود داشت که میتوانید در کد‌های قدیمی بیابید.
 
 برای نمونه، یک آزمون ساده برای بررسی `undefined`:
+=======
+### Alternative default parameters
 
-```js
-function showMessage(from, text) {
+Sometimes it makes sense to set default values for parameters not in the function declaration, but at a later stage, during its execution.
+>>>>>>> cd2c7ce3c8f033e6f7861ed1b126552e41ba3e31:1-js/02-first-steps/15-function-basics/article.md
+
+To check for an omitted parameter, we can compare it with `undefined`:
+
+```js run
+function showMessage(text) {
 *!*
   if (text === undefined) {
-    text = 'no text given';
+    text = 'empty message';
   }
 */!*
 
-  alert( from + ": " + text );
+  alert(text);
 }
+
+showMessage(); // empty message
 ```
 
-...Or the `||` operator:
+...Or we could use the `||` operator:
 
 ```js
-function showMessage(from, text) {
-  // if text is falsy then text gets the "default" value
-  text = text || 'no text given';
+// if text parameter is omitted or "" is passed, set it to 'empty'
+function showMessage(text) {
+  text = text || 'empty';
   ...
 }
 ```
 
+Modern JavaScript engines support the [nullish coalescing operator](info:nullish-coalescing-operator) `??`, it's better when falsy values, such as `0`, are considered regular:
 
-````
+```js run
+// if there's no "count" parameter, show "unknown"
+function showCount(count) {
+  alert(count ?? "unknown");
+}
 
+showCount(0); // 0
+showCount(null); // unknown
+showCount(); // unknown
+```
 
 ## بازگردانی مقدار یک (Returning a value)
 

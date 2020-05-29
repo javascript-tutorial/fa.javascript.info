@@ -92,6 +92,30 @@ let user = {
 ```
 That is called a "trailing" or "hanging" comma. Makes it easier to add/remove/move around properties, because all lines become alike.
 
+````smart header="Object with const can be changed"
+Please note: an object declared as `const` *can* be modified.
+
+For instance:
+
+```js run
+const user = {
+  name: "John"
+};
+
+*!*
+user.name = "Pete"; // (*)
+*/!*
+
+alert(user.name); // Pete
+```
+
+It might seem that the line `(*)` would cause an error, but no. The `const` fixes the value of `user`, but not its contents.
+
+The `const` would give an error only if we try to set `user=...` as a whole.
+
+There's another way to make constant object properties, we'll cover it later in the chapter <info:property-descriptors>.
+````
+
 ## Square brackets
 
 For multiword properties, the dot access doesn't work:
@@ -161,7 +185,7 @@ alert( user.key ) // undefined
 
 ### Computed properties
 
-We can use square brackets in an object literal. That's called *computed properties*.
+We can use square brackets in an object literal, when creating an object. That's called *computed properties*.
 
 For instance:
 
@@ -249,9 +273,25 @@ let user = {
 };
 ```
 
+
 ## Property names limitations
 
-Property names (keys) must be either strings or symbols (a special type for identifiers, to be covered later).
+As we already know, a variable cannot have a name equal to one of language-reserved words like "for", "let", "return" etc.
+
+But for an object property, there's no such restriction:
+
+```js run
+// these properties are all right
+let obj = {
+  for: 1,
+  let: 2,
+  return: 3
+};
+
+alert( obj.for + obj.let + obj.return );  // 6
+```
+
+In short, there are no limitations on property names. They can be any strings or symbols (a special type for identifiers, to be covered later).
 
 Other types are automatically converted to strings.
 
@@ -267,25 +307,7 @@ alert( obj["0"] ); // test
 alert( obj[0] ); // test (same property)
 ```
 
-**Reserved words are allowed as property names.**
-
-As we already know, a variable cannot have a name equal to one of language-reserved words like "for", "let", "return" etc.
-
-But for an object property, there's no such restriction. Any name is fine:
-
-```js run
-let obj = {
-  for: 1,
-  let: 2,
-  return: 3
-};
-
-alert( obj.for + obj.let + obj.return );  // 6
-```
-
-We can use any string as a key, but there's a special property named `__proto__` that gets special treatment for historical reasons.
-
-For instance, we can't set it to a non-object value:
+There's a minor gotcha with a special property named `__proto__`. We can't set it to a non-object value:
 
 ```js run
 let obj = {};
@@ -295,19 +317,13 @@ alert(obj.__proto__); // [object Object] - the value is an object, didn't work a
 
 As we see from the code, the assignment to a primitive `5` is ignored.
 
-The nature of `__proto__` will be revealed in detail later in the chapter [](info:prototype-inheritance).
-
-As for now, it's important to know that such behavior of `__proto__` can become a source of bugs and even vulnerabilities if we intend to store user-provided keys in an object.
-
-The problem is that a visitor may choose `__proto__` as the key, and the assignment logic will be ruined (as shown above).
-
-There are two workarounds for the problem:
-1. Modify the object's behavior to treat `__proto__` as a regular property. We'll learn how to do it in the chapter [](info:prototype-methods).
-2. Using [Map](info:map-set) data structure which supports arbitrary keys. We'll learn it in the chapter <info:map-set>.
+We'll cover the special nature of `__proto__` in [subsequent chapters](info:prototype-inheritance), and suggest the [ways to fix](info:prototype-methods) such behavior.
 
 ## Property existence test, "in" operator
 
-A notable objects feature is that it's possible to access any property. There will be no error if the property doesn't exist! Accessing a non-existing property just returns `undefined`. It provides a very common way to test whether the property exists -- to get it and compare vs undefined:
+A notable feature of objects in JavaScript, compared to many other languages, is that it's possible to access any property. There will be no error if the property doesn't exist!
+
+Reading a non-existing property just returns `undefined`. So we can easily test whether the property exists:
 
 ```js run
 let user = {};
@@ -315,7 +331,7 @@ let user = {};
 alert( user.noSuchProperty === undefined ); // true means "no such property"
 ```
 
-There also exists a special operator `"in"` to check for the existence of a property.
+There's also a special operator `"in"` for that.
 
 The syntax is:
 ```js
@@ -333,17 +349,18 @@ alert( "blabla" in user ); // false, user.blabla doesn't exist
 
 Please note that on the left side of `in` there must be a *property name*. That's usually a quoted string.
 
-If we omit quotes, that would mean a variable containing the actual name will be tested. For instance:
+If we omit quotes, that means a variable, it should contain the actual name to be tested. For instance:
 
 ```js run
 let user = { age: 30 };
 
 let key = "age";
-alert( *!*key*/!* in user ); // true, takes the name from key and checks for such property
+alert( *!*key*/!* in user ); // true, property "age" exists
 ```
 
-````smart header="Using \"in\" for properties that store `undefined`"
-Usually, the strict comparison `"=== undefined"` check the property existence just fine. But there's a special case when it fails, but `"in"` works correctly.
+Why does the `in` operator exist? Isn't it enough to compare against `undefined`?
+
+Well, most of the time the comparison with `undefined` works fine. But there's a special case when it fails, but `"in"` works correctly.
 
 It's when an object property exists, but stores `undefined`:
 
@@ -357,11 +374,10 @@ alert( obj.test ); // it's undefined, so - no such property?
 alert( "test" in obj ); // true, the property does exist!
 ```
 
-
 In the code above, the property `obj.test` technically exists. So the `in` operator works right.
 
-Situations like this happen very rarely, because `undefined` is usually not assigned. We mostly use `null` for "unknown" or "empty" values. So the `in` operator is an exotic guest in the code.
-````
+Situations like this happen very rarely, because `undefined` should not be explicitly assigned. We mostly use `null` for "unknown" or "empty" values. So the `in` operator is an exotic guest in the code.
+
 
 ## The "for..in" loop
 
@@ -395,7 +411,6 @@ for(let key in user) {
 Note that all "for" constructs allow us to declare the looping variable inside the loop, like `let key` here.
 
 Also, we could use another variable name here instead of `key`. For instance, `"for(let prop in obj)"` is also widely used.
-
 
 ### Ordered like an object
 
@@ -480,6 +495,7 @@ for(let code in codes) {
 
 Now it works as intended.
 
+<<<<<<< HEAD
 ## Copying by reference
 
 One of the fundamental differences of objects vs primitives is that they are stored and copied "by reference".
@@ -736,6 +752,8 @@ There's a standard algorithm for deep cloning that handles the case above and mo
 
 
 
+=======
+>>>>>>> cd2c7ce3c8f033e6f7861ed1b126552e41ba3e31
 ## Summary
 
 Objects are associative arrays with several special features.
@@ -752,10 +770,6 @@ Additional operators:
 - To delete a property: `delete obj.prop`.
 - To check if a property with the given key exists: `"key" in obj`.
 - To iterate over an object: `for(let key in obj)` loop.
-
-Objects are assigned and copied by reference. In other words, a variable stores not the "object value", but a "reference" (address in memory) for the value. So copying such a variable or passing it as a function argument copies that reference, not the object. All operations via copied references (like adding/removing properties) are performed on the same single object.
-
-To make a "real copy" (a clone) we can use `Object.assign` or  [_.cloneDeep(obj)](https://lodash.com/docs#cloneDeep).
 
 What we've studied in this chapter is called a "plain object", or just `Object`.
 

@@ -159,6 +159,14 @@ alert( "Tea wanted: " + isTeaWanted ); // true
 
 عملگر بررسی تساوی (==) برای مقادیری که نوع متفاوتی از یکدیگر دارند، هر دو را به نوع عدد تبدیل می‌کند (به استثنای null و undefined که این دو با هم برابرند و با هیچ چیز دیگر برابر نیستند).
 
+<<<<<<< HEAD:1-js/02-first-steps/17-javascript-specials/article.md
+=======
+Nullish coalescing operator
+: The `??` operator provides a way to choose a defined value from a list of variables. The result of `a ?? b` is `a` unless it's `null/undefined`, then `b`.
+
+Comparisons
+: Equality check `==` for values of different types converts them to a number (except `null` and `undefined` that equal each other and nothing else), so these are equal:
+>>>>>>> cd2c7ce3c8f033e6f7861ed1b126552e41ba3e31:1-js/02-first-steps/18-javascript-specials/article.md
 
     ```js run
     alert( 0 == false ); // true
@@ -176,7 +184,11 @@ alert( "Tea wanted: " + isTeaWanted ); // true
 سایر عملگرها
 عملگرهای دیگری مثل ویرگول انگلیسی (,) و غیره نیز در زبان جاوااسکریپت وجود دارند.
 
+<<<<<<< HEAD:1-js/02-first-steps/17-javascript-specials/article.md
 اطّلاعات بیشتر در: <info:operators>، <info:comparison>، <info:logical-operators>.
+=======
+More in: <info:operators>, <info:comparison>, <info:logical-operators>, <info:nullish-coalescing-operator>.
+>>>>>>> cd2c7ce3c8f033e6f7861ed1b126552e41ba3e31:1-js/02-first-steps/18-javascript-specials/article.md
 
 ## حلقه‌ها
 
@@ -217,7 +229,12 @@ let age = prompt('Your age?', 18);
 
 switch (age) {
   case 18:
+<<<<<<< HEAD:1-js/02-first-steps/17-javascript-specials/article.md
     alert("Won't work"); // نتیجه عدد نیست، بلکه رشته است
+=======
+    alert("Won't work"); // the result of prompt is a string, not a number
+    break;
+>>>>>>> cd2c7ce3c8f033e6f7861ed1b126552e41ba3e31:1-js/02-first-steps/18-javascript-specials/article.md
 
   case "18":
     alert("This works!");

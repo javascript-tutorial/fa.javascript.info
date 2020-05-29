@@ -6,9 +6,16 @@
 
 همینطور شرایطی وجود دارد که ما نیاز داریم مقدار را به نوع مورد نظرمان تبدیل کنیم.
 
+<<<<<<< HEAD:1-js/02-first-steps/06-type-conversions/article.md
 
 ```smart header="هنوز در مورد object ها صحبت نکرده‌ایم"
 در این بخش در مورد object ها صحبت نمی‌کنیم. بجای آن ابتدا انواع اولیه را خواهیم آموخت. بعدتر زمانی که در مورد object ها آموختیم، در مورد چگونگی تبدیل object ها صحبت خواهیم کرد.
+=======
+```smart header="Not talking about objects yet"
+In this chapter, we won't cover objects. For now we'll just be talking about primitives.
+
+Later, after we learn about objects, in the chapter <info:object-toprimitive> we'll see how objects fit in.
+>>>>>>> cd2c7ce3c8f033e6f7861ed1b126552e41ba3e31:1-js/02-first-steps/07-type-conversions/article.md
 ```
 
 ## تبدیل به string

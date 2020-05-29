@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 
 ```js run no-beautify
@@ -5,26 +6,24 @@ function debounce(f, ms) {
 
   let isCooldown = false;
 
+=======
+```js demo
+function debounce(func, ms) {
+  let timeout;
+>>>>>>> cd2c7ce3c8f033e6f7861ed1b126552e41ba3e31
   return function() {
-    if (isCooldown) return;
-
-    f.apply(this, arguments);
-
-    isCooldown = true;
-
-    setTimeout(() => isCooldown = false, ms);
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func.apply(this, arguments), ms);
   };
-
 }
+<<<<<<< HEAD
 ```
 
 The call to `debounce` returns a wrapper. There may be two states:
+=======
+>>>>>>> cd2c7ce3c8f033e6f7861ed1b126552e41ba3e31
 
-- `isCooldown = false` -- ready to run.
-- `isCooldown = true` -- waiting for the timeout.
+```
 
-In the first call `isCooldown` is falsy, so the call proceeds, and the state changes to `true`.
+A call to `debounce` returns a wrapper. When called, it schedules the original function call after given `ms` and cancels the previous such timeout.
 
-While `isCooldown` is true, all other calls are ignored.
-
-Then `setTimeout` reverts it to `false` after the given delay.

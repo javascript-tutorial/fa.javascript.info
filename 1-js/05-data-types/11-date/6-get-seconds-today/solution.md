@@ -22,5 +22,11 @@ An alternative solution would be to get hours/minutes/seconds and convert them t
 function getSecondsToday() {
   let d = new Date();
   return d.getHours() * 3600 + d.getMinutes() * 60 + d.getSeconds();
+<<<<<<< HEAD
 };
+=======
+}
+
+alert( getSecondsToday() );
+>>>>>>> cd2c7ce3c8f033e6f7861ed1b126552e41ba3e31
 ```
