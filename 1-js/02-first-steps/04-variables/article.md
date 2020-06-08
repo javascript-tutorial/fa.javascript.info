@@ -79,9 +79,14 @@ let user = 'John'
 
 از لحاظ فنی همه این حالات کار خواهند کرد و انتخاب آن‌ها به سلایق و زیبایی شناسی شخصی مربوط است.
 
+<<<<<<< HEAD
 
 ````smart header="`var` بجای `let`"
 در اسکریپت‌های قدیمی ممکن است بجای کلیدواژه `let` با کلیدواژه `var` برخورد کنید :
+=======
+````smart header="`var` instead of `let`"
+In older scripts, you may also find another keyword: `var` instead of `let`:
+>>>>>>> d35baee32dcce127a69325c274799bb81db1afd8
 
 ```js
 *!*var*/!* message = 'Hello';
@@ -132,8 +137,27 @@ alert(hello); // Hello world!
 alert(message); // Hello world!
 ```
 
+<<<<<<< HEAD
 ```smart header="زبان‌های Functional"
 جالب است بدانید زبان‌های [functional](https://en.wikipedia.org/wiki/Functional_programming) مانند [Scala](http://www.scala-lang.org/) یا [Erlang](http://www.erlang.org/) تغییر مقدار متغیر را ممنوع کرده‌اند.
+=======
+````warn header="Declaring twice triggers an error"
+A variable should be declared only once.
+
+A repeated declaration of the same variable is an error:
+
+```js run
+let message = "This";
+
+// repeated 'let' leads to an error
+let message = "That"; // SyntaxError: 'message' has already been declared
+```
+So, we should declare a variable once and then refer to it without `let`.
+````
+
+```smart header="Functional languages"
+It's interesting to note that there exist [functional](https://en.wikipedia.org/wiki/Functional_programming) programming languages, like [Scala](http://www.scala-lang.org/) or [Erlang](http://www.erlang.org/) that forbid changing variable values.
+>>>>>>> d35baee32dcce127a69325c274799bb81db1afd8
 
 در این نوع زبان‌ها وقتی مقداری را در جعبه قرار می‌دهیم تا ابد آنجا می‌ماند و اگر بخواهیم مقداری دیگر را ذخیره کنیم، ما را مجبور می‌کنند تا جعبه‌ای جدید بسازیم.
 
@@ -188,7 +212,11 @@ let имя = '...';
 let 我 = '...';
 ```
 
+<<<<<<< HEAD
 از نظر فنی اینها درست کار می‌کنند ولی بر اساس یک رسم بین‌المللی برای نام متغیرها از زبان انگلیسی استفاده می‌شود. حتی اگر اسکریپتی کوچک می‌نویسیم، ممکن است تا مدت طولانی‌ای مورد استفاده و توسعه قرار بگیرد و اشخاصی از سایر کشورها ممکن است نیاز باشد روزی آن اسکریپت را بخوانند.
+=======
+Technically, there is no error here. Such names are allowed, but there is an international convention to use English in variable names. Even if we're writing a small script, it may have a long life ahead. People from other countries may need to read it some time.
+>>>>>>> d35baee32dcce127a69325c274799bb81db1afd8
 ````
 
 ````warn header="نام‌های رِزِرو شده"
