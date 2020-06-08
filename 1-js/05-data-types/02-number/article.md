@@ -412,17 +412,7 @@ alert( Math.pow(2, 10) ); // دو به توان ده = 1024
 
 - `num.toString(base)` یک عدد را به یک رشته‌ی حرفی در سیستم عددی با پایه داده شده تبدیل می‌کند.
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 برای تبدیل مقادیری مثل `12pt` و `100px` به یک عدد:
-=======
-- Can write numbers directly in hex (`0x`), octal (`0o`) and binary (`0b`) systems.
-- `parseInt(str, base)` parses the string `str` into an integer in numeral system with given `base`, `2 ≤ base ≤ 36`.
-- `num.toString(base)` converts a number to a string in the numeral system with the given `base`.
->>>>>>> 62299ed853674c4fd1427cd310516d5535bce648
-=======
-برای تبدیل مقادیری مثل `12pt` و `100px` به یک عدد:
->>>>>>> master
 
 - `parseInt/parseFloat` را برای تبدیلات ساده استفاده کنید که یک عدد را از یک رشته‌ی حرفی می‌خواند و سپس مقداری که قبل از بروز خطا خوانده‌ست را برمی‌گرداند.
 
