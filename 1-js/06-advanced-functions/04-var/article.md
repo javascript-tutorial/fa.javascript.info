@@ -13,7 +13,17 @@ In the very first chapter about [variables](info:variables), we mentioned three 
 2. `const`
 3. `var`
 
+<<<<<<< HEAD
+`let` and `const` behave exactly the same way in terms of Lexical Environments.
+
+But `var` is a very different beast, that originates from very old times. It's generally not used in modern scripts, but still lurks in the old ones.
+
+If you don't plan meeting such scripts you may even skip this chapter or postpone it, but then there's a chance that it bites you later.
+
+From the first sight, `var` behaves similar to `let`. That is, declares a variable:
+=======
 The `var` declaration is similar to `let`. Most of the time we can replace `let` by `var` or vice-versa and expect things to work:
+>>>>>>> d35baee32dcce127a69325c274799bb81db1afd8
 
 ```js run
 var message = "Hi";
@@ -28,11 +38,11 @@ On the other hand, it's important to understand differences when migrating old s
 
 ## "var" has no block scope
 
-Variables, declared with `var`, are either function-wide or global. They are visible through blocks.
+`var` variables are either function-wide or global, they are visible through blocks.
 
 For instance:
 
-```js run
+```js
 if (true) {
   var test = true; // use "var" instead of "let"
 }
@@ -42,19 +52,7 @@ alert(test); // true, the variable lives after if
 */!*
 ```
 
-As `var` ignores code blocks, we've got a global variable `test`.
-
-If we used `let test` instead of `var test`, then the variable would only be visible inside `if`:
-
-```js run
-if (true) {
-  let test = true; // use "let"
-}
-
-*!*
-alert(test); // Error: test is not defined
-*/!*
-```
+If we used `let test` on the 2nd line, then it wouldn't be visible to `alert`. But `var` ignores code blocks, so we've got a global `test`.
 
 The same thing for loops: `var` cannot be block- or loop-local:
 
@@ -70,7 +68,7 @@ alert(i); // 10, "i" is visible after loop, it's a global variable
 
 If a code block is inside a function, then `var` becomes a function-level variable:
 
-```js run
+```js
 function sayHi() {
   if (true) {
     var phrase = "Hello";
@@ -80,11 +78,14 @@ function sayHi() {
 }
 
 sayHi();
-alert(phrase); // Error: phrase is not defined (Check the Developer Console)
+alert(phrase); // Error: phrase is not defined
 ```
 
 As we can see, `var` pierces through `if`, `for` or other code blocks. That's because a long time ago in JavaScript blocks had no Lexical Environments. And `var` is a remnant of that.
 
+<<<<<<< HEAD
+## "var" are processed at the function start
+=======
 ## "var" tolerates redeclarations
 
 If we declare the same variable with `let` twice in the same scope, that's an error:
@@ -106,6 +107,7 @@ alert(user); // John
 ```
 
 ## "var" variables can be declared below their use
+>>>>>>> d35baee32dcce127a69325c274799bb81db1afd8
 
 `var` declarations are processed when the function starts (or script starts for globals).
 
@@ -113,7 +115,7 @@ In other words, `var` variables are defined from the beginning of the function, 
 
 So this code:
 
-```js run
+```js
 function sayHi() {
   phrase = "Hello";
 
@@ -123,12 +125,11 @@ function sayHi() {
   var phrase;
 */!*
 }
-sayHi();
 ```
 
 ...Is technically the same as this (moved `var phrase` above):
 
-```js run
+```js
 function sayHi() {
 *!*
   var phrase;
@@ -138,12 +139,11 @@ function sayHi() {
 
   alert(phrase);
 }
-sayHi();
 ```
 
 ...Or even as this (remember, code blocks are ignored):
 
-```js run
+```js
 function sayHi() {
   phrase = "Hello"; // (*)
 
@@ -155,7 +155,6 @@ function sayHi() {
 
   alert(phrase);
 }
-sayHi();
 ```
 
 People also call such behavior "hoisting" (raising), because all `var` are "hoisted" (raised) to the top of the function.
@@ -275,11 +274,11 @@ In all the above cases we declare a Function Expression and run it immediately. 
 
 ## Summary
 
-There are two main differences of `var` compared to `let/const`:
+There are two main differences of `var`:
 
-1. `var` variables have no block scope, they are visible minimum at the function level.
-2. `var` declarations are processed at function start (script start for globals).
+1. Variables have no block scope, they are visible minimum at the function level.
+2. Variable declarations are processed at function start.
 
 There's one more very minor difference related to the global object, that we'll cover in the next chapter.
 
-These differences make `var` worse than `let` most of the time. Block-level variables is such a great thing. That's why `let` was introduced in the standard long ago, and is now a major way (along with `const`) to declare a variable.
+These differences are actually a bad thing most of the time. First, we can't create block-local variables. And hoisting just creates more space for errors. So, for new scripts `var` is used exceptionally rarely.
