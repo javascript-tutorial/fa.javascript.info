@@ -1,57 +1,59 @@
-# Nullish coalescing operator '??'
+# عملگر Nullish coalescing '??'
 
 [recent browser="new"]
 
-The nullish coalescing operator `??` provides a short syntax for selecting a first "defined" variable from the list.
+عملگر nullish coalescing `??` یک سینتکس کوتاه شده است انتخاب نخستین متغیر تعریف شده است.
 
-The result of `a ?? b` is:
-- `a` if it's not `null` or `undefined`,
-- `b`, otherwise.
+نتیجه‌ی گزاره‌ی `a ?? b` برابر است با:
 
-So, `x = a ?? b` is a short equivalent to:
+- `a` به شرطی که `null` یا `undefined` نباشد,
+- `b`, در غیر این صورت.
+
+پس, `x = a ?? b` یک معادل کوتاه شده برای عبارت زیر است:
 
 ```js
-x = (a !== null && a !== undefined) ? a : b;
+x = a !== null && a !== undefined ? a : b;
 ```
 
-Here's a longer example.
+حال به بررسی یک نمونه‌ی طولانی می‌پردازیم.
 
-Imagine, we have a user, and there are variables `firstName`, `lastName` or `nickName` for their first name, last name and the nick name. All of them may be undefined, if the user decided not to enter any value.
+تصور کنین که ما یک کاربر داریم و متغیرهای, `firstName`, `lastName` یا `nickName` را برای نام، نام خانوادگی و نام مستعار داریم. همه‌ی آن‌ها ممکن است که تعریف نشده باشند(undefined) به شرطی که کاربر آن‌ها را وارد نکرده باشد.
 
-We'd like to display the user name: one of these three variables, or show "Anonymous" if nothing is set.
+ما می‌خواهیم که نام کاربر را نمایش دهیم: یکی از سه متغیر بالا, یا عبارت "ناشناس" به شرطی که چیزی تعریف نشده باشد.
 
-Let's use the `??` operator to select the first defined one:
+از عملگر `??` برای انتخاب اولین متغیر تعریف شده استفاده می‌کنیم:
 
 ```js run
 let firstName = null;
 let lastName = null;
 let nickName = "Supercoder";
 
-// show the first not-null/undefined value
+// نخستین مقداری که null یا undefined نیست را نمایش می‌دهد
 *!*
-alert(firstName ?? lastName ?? nickName ?? "Anonymous"); // Supercoder
+alert(firstName ?? lastName ?? nickName ?? "ناشناس"); // Supercoder
 */!*
 ```
 
-## Comparison with ||
+## مقایسه با ||
 
-The OR `||` operator can be used in the same way as `??`. Actually, we can replace `??` with `||` in the code above and get the same result, as it was described in the [previous chapter](info:logical-operators#or-finds-the-first-truthy-value).
+عملگر یا `||` هم می‌تواند به همان شکل عملگر `??` استفاده شود. در حقیقت ما می‌توانیم عملگر `??` را با عملگر `||` در کد بالا جایگزین کنیم و همان نتیجه را بگیریم. همانطور که در بخش قبلی توضیح داده شد [previous chapter](info:logical-operators#or-finds-the-first-truthy-value).
 
-The important difference is that:
-- `||` returns the first *truthy* value.
-- `??` returns the first *defined* value.
+تفاوت ارزشمند این دو عبارت است از:
 
-This matters a lot when we'd like to treat `null/undefined` differently from `0`.
+- `||` نخستین مقدار _truthy_ را باز می‌گرداند.
+- `??` نخستین مقدار _defined_ را باز می‌گرداند.
 
-For example, consider this:
+این موضوع به خصوص هنگامی که می‌خواهیم بین `null/undefined` و `0` تفاوت داشته باشیم خودش را نشان می‌دهد.
+
+برای نمونه در نظر بگیرید:
 
 ```js
 height = height ?? 100;
 ```
 
-This sets `height` to `100` if it's not defined.
+در این‌جا به `height` مقدار `100` را در صورتی که مقدار تعریف شده‌ای نداشته باشد نسبت می‌دهیم.
 
-Let's compare it with `||`:
+مقایسه با `||`:
 
 ```js run
 let height = 0;
@@ -60,71 +62,71 @@ alert(height || 100); // 100
 alert(height ?? 100); // 0
 ```
 
-Here, `height || 100` treats zero height as unset, same as `null`, `undefined` or any other falsy value. So the result is `100`.
+در این‌جا, `height || 100` با مقدار صفر همان‌گونه برخورد میکنه که با `null`، `undefined` و یا هر مقدار falsy دیگری. پس صفر تبدیل به `100` می‌شود.
 
-The `height ?? 100` returns `100` only if `height` is exactly `null` or `undefined`. So the `alert` shows the height value `0` "as is".
+عبارت `height ?? 100` مقدار `100` را در صورتی باز می‌گرداند که `height` دقیقا `null` و یا `undefined` باشد. پس صفر، "همانی که هست، می‌ماند".
 
-Which behavior is better depends on a particular use case. When zero height is a valid value, then `??` is preferrable.
+    این‌که کدام رویکرد بهتر است، به موضوع ما بستگی دارد. اگر مقدار صفر برای `height` قابل قبول است، بهتر است از `??` استفاده کنیم.
 
-## Precedence
+## اولویت‌ها
 
-The precedence of the `??` operator is rather low: `7` in the [MDN table](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence#Table).
+اولویت عملگر `??` عموما پایین است: `7` در جدول [MDN table](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence#Table).
 
-So `??` is evaluated after most other operations, but before `=` and `?`.
+پس `??` پس از بسیاری از عملگرها وارد عمل می‌شود, البته پیش از `=` و `?`.
 
-If we need to choose a value with `??` in a complex expression, then consider adding parentheses:
+اگر تصمیم به استفاده از `??` در یک عبارت پیچیده گرفتید, حتما از پرانتز استفاده کنید:
 
 ```js run
 let height = null;
 let width = null;
 
-// important: use parentheses
+// مهم: از پرانتز استفاده کنید
 let area = (height ?? 100) * (width ?? 50);
 
 alert(area); // 5000
 ```
 
-Otherwise, if we omit parentheses, `*` has the higher precedence than `??` and would run first.
+در غیر این صورت, اگر پرانتز را فراموش کنیم, `*` اولویت بالاتری نسبت به `??` دارد . زودتر اجرا می‌شود.
 
-That would work be the same as:
+این‌گونه خواهیم داشت:
 
 ```js
-// probably not correct
-let area = height ?? (100 * width) ?? 50;
+// احتمالا نتیجه‌ی نادرست می‌دهد
+let area = height ?? 100 * width ?? 50;
 ```
 
-There's also a related language-level limitation.
+هم‌چنین یک محدودیت سطح زبان (language-level) نیز برای این موضوع داریم.
 
-**Due to safety reasons, it's forbidden to use `??` together with `&&` and `||` operators.**
+**برای احتیاط, به کار بردن `??` همراه با `&&` و `||` ممنوع است.**
 
-The code below triggers a syntax error:
+کد زیر یک خطای نگارشی (سینتکس) به ما خواهد داد:
 
 ```js run
-let x = 1 && 2 ?? 3; // Syntax error
+let x = 1 && 2 ?? 3; // Syntax error خطای نگارشی
 ```
 
-The limitation is surely debatable, but it was added to the language specification with the purpose to avoid programming mistakes, as people start to switch to `??` from `||`.
+این محدودیت قابل بحث است, اما برای جلوگیری از اشتباهات برنامه‌نویسان به زبان اضافه شده است, که به مرور مردم از `??` به جای `||` استفاده خواهند کرد.
 
-Use explicit parentheses to work around it:
+از پرانتز برای این کار استفاده کنید:
 
 ```js run
 *!*
-let x = (1 && 2) ?? 3; // Works
+let x = (1 && 2) ?? 3; // به درستی کار می‌کند
 */!*
 
 alert(x); // 2
 ```
 
-## Summary
+## چکیده
 
-- The nullish coalescing operator `??` provides a short way to choose a "defined" value from the list.
+- عملگر nullish coalescing `??` یک راه سریع برای مشخص کردن عبارت "تعریف شده (defined)" از یک لیست به کار می‌رود.
 
-    It's used to assign default values to variables:
+  از آن برای تعیین کردن مقدار پیش‌فرض برای متغیرها استفاده می‌شود:
 
-    ```js
-    // set height=100, if height is null or undefined
-    height = height ?? 100;
-    ```
+  ```js
+  // ست کردن height به 100, اگر برابر null یا undefined باشد
+  height = height ?? 100;
+  ```
 
-- The operator `??` has a very low precedence, a bit higher than `?` and `=`.
-- It's forbidden to use it with `||` or `&&` without explicit parentheses.
+- عملگر `??` ترتیب اولویت پایینی دارد, البته بیشتر از `?` و `=`.
+- به کار بردن آن با `||` یا `&&` بدون به کار بردن پرانتز ممنوع است.
