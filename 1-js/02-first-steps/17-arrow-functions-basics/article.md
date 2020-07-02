@@ -1,111 +1,113 @@
-# Arrow functions, the basics
+# مفاهیم ساده‌ی Arrow functions
 
-There's another very simple and concise syntax for creating functions, that's often better than Function Expressions.
+یک راه ساده‌تر و کوتاه‌تر دیگر برای ساختن تابع‌ها وجود دارد‌؛ راهی که معمولا از Function Expressions بهتر است.
 
-It's called "arrow functions", because it looks like this:
+به‌خاطر شکلی که دارد، arrow functions نام گرفته است.
 
 ```js
-let func = (arg1, arg2, ...argN) => expression
+let func = (arg1, arg2, ...argN) => expression;
 ```
 
-...This creates a function `func` that accepts arguments `arg1..argN`, then evaluates the `expression` on the right side with their use and returns its result.
+...این کد یک تابع `func` می‌سازد که دو آرگومان `arg1..argN` می‌پذیرد و با استفاده از این دو آرگومان `expression` سمت راست را محاسبه می‌کند و نتیجه را برمی‌گرداند.
 
-In other words, it's the shorter version of:
+به بیانی دیگر، این کد نسخه‌ی کوتاه‌شده کد زیر است:
 
 ```js
-let func = function(arg1, arg2, ...argN) {
+let func = function (arg1, arg2, ...argN) {
   return expression;
 };
 ```
 
-Let's see a concrete example:
+بیایید مثال دیگری ببینیم:
 
 ```js run
 let sum = (a, b) => a + b;
 
-/* This arrow function is a shorter form of:
+/* این arrow function نسخه‌ی کوتاه تابع زیر است:
 
 let sum = function(a, b) {
   return a + b;
 };
 */
 
-alert( sum(1, 2) ); // 3
+alert(sum(1, 2)); // 3
 ```
 
-As you can, see `(a, b) => a + b` means a function that accepts two arguments named `a` and `b`. Upon the execution, it evaluates the expression `a + b` and returns the result.
+همانطور که می‌بینید `(a, b) => a + b` بدین معنی‌ست که این تابع دو آرگومان با نام‌های `a` و `b` می‌پذیرد. و هنگام اجرا شدن، مقدار `a + b` را حساب می‌کند و نتیجه را برمی‌گرداند.
 
-- If we have only one argument, then parentheses around parameters can be omitted, making that even shorter.
+- اگر فقط یک آرگومان داشته باشیم می‌توانیم پرانتزهای دور آرگومان را حذف کنیم و کد را از این هم کوتاه‌تر کنیم.
 
-    For example:
+  برای مثال:
 
-    ```js run
-    *!*
-    let double = n => n * 2;
-    // roughly the same as: let double = function(n) { return n * 2 }
-    */!*
+  ```js run
+  *!*
+  let double = n => n * 2;
+  // معادل است با: let double = function(n) { return n * 2 }
+  */!*
 
-    alert( double(3) ); // 6
-    ```
+  alert( double(3) ); // 6
+  ```
 
-- If there are no arguments, parentheses will be empty (but they should be present):
+- اگر آرگومان ورودی نداریم، پرانتزها خالی می‌مانند (ولی حتما باید حاضر باشند):
 
-    ```js run
-    let sayHi = () => alert("Hello!");
+  ```js run
+  let sayHi = () => alert("Hello!");
 
-    sayHi();
-    ```
+  sayHi();
+  ```
 
 Arrow functions can be used in the same way as Function Expressions.
+از Arrow functionها به همان شکل Function Expressionها استفاده می‌شود.
 
-For instance, to dynamically create a function:
+برای مثال، برای ساخت یک تابع به‌شکل داینامیک مانند زیر عمل می‌کنیم:
 
 ```js run
 let age = prompt("What is your age?", 18);
 
-let welcome = (age < 18) ?
-  () => alert('Hello') :
-  () => alert("Greetings!");
+let welcome = age < 18 ? () => alert("Hello") : () => alert("Greetings!");
 
 welcome();
 ```
 
-Arrow functions may appear unfamiliar and not very readable at first, but that quickly changes as the eyes get used to the structure.
+Arrow functionها ممکن است در ابتدا غریبه و ناخوانا به نظر برسند اما وقتی چشمتان به آن عادت می‌کند، همه چیز عوض می‌شود.
 
-They are very convenient for simple one-line actions, when we're just too lazy to write many words.
+و برای کدهای یک خطی بسیار مناسب هستند. مخصوصا وقتی خسته‌تر از آن هستیم که کلمات زیادی بنویسیم.
 
-## Multiline arrow functions
+## Arrow functionهای چندخطی
 
 The examples above took arguments from the left of `=>` and evaluated the right-side expression with them.
+مثال‌های بالا از سمت چپ فلش `=>`آرگومان گرفتند و سمت راست را با آن محاسبه کردند.
 
 Sometimes we need something a little bit more complex, like multiple expressions or statements. It is also possible, but we should enclose them in curly braces. Then use a normal `return` within them.
+گاهی کد پیچیده‌تری داریم که چند expression یا statement دارد. این هم امکان‌پذیر است ولی باید کد را درون کمانک قرار دهیم. و درون کمانک نیز از `return` استفاده کنیم.
 
-Like this:
+مانند این:
 
 ```js run
-let sum = (a, b) => {  // the curly brace opens a multiline function
+let sum = (a, b) => {  // کمانک یک تابع چندخظی را دربرمی‌گیرد
   let result = a + b;
 *!*
-  return result; // if we use curly braces, then we need an explicit "return" 
+  return result; // اگر از کمانک استفاده کنیم باید از return استفاده کنیم
 */!*
 };
 
 alert( sum(1, 2) ); // 3
 ```
 
-```smart header="More to come"
-Here we praised arrow functions for brevity. But that's not all!
+```smart header="باز هم هست"
+ما در اینجا از کوتاهی و مختصری arrow functionها گفتیم. ولی فقط این نیست!
 
-Arrow functions have other interesting features.
+Arrow functionها ویژگی‌های جالب دیگری هم دارند.
 
-To study them in-depth, we first need to get to know some other aspects of JavaScript, so we'll return to arrow functions later in the chapter <info:arrow-functions>.
+برای این که عمیق واردش بشویم، نیاز داریم اول بخش‌های دیگری از جاوااسکریپت را بشناسیم. برای همین در فصل دیگری به arrow functionها برمی‌گردیم <info:arrow-functions>.
 
 For now, we can already use arrow functions for one-line actions and callbacks.
+فعلا می‌توانیم از arrow functionها برای اعمال و callbackهای یک خطی استفاده کنیم.
 ```
 
-## Summary
+## خلاصه
 
-Arrow functions are handy for one-liners. They come in two flavors:
+Arrow functionها مناسب کدهای یک خطی هستند. و به دو صورت مختلف می‌توان از آن‌ها استفاده کرد:
 
-1. Without curly braces: `(...args) => expression` -- the right side is an expression: the function evaluates it and returns the result.
-2. With curly braces: `(...args) => { body }` -- brackets allow us to write multiple statements inside the function, but we need an explicit `return` to return something.
+1. بدون کمانک: `(...args) => expression` -- سمت راست یک expression یا عبارت است: تابع آن را می‌خواند و نتیجه را برمی‌گرداند.
+2. با کمانک: `(...args) => { body }` -- کمانک‌ها به ما این امکان را می‌دهند تا چند statement را داخل تابع بنویسیم, اما در این صورت باید حتما از `return` برای بازگرداندن نتیجه استفاده کنیم.
