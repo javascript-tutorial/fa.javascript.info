@@ -4,15 +4,7 @@
  
 یک پلتفرم می‌تواند یک مرورگر، وب-سرور، یا یک ماشین لباسشویی  یا هر میزبان دیگری باشد. هرکدام از این‌ها عملکرد مختص به آن پلتفرم را فراهم می‌کند. مشخصه‌ی جاوااسکریپت (JavaScript specification) آن را یک محیط میزبانی (*host environment*) مینامد.
 
-<<<<<<< HEAD
 یک محیط میزبانی اشیا و توابع اضافی مربوط به پلتفرم را به هسته‌ی اصلی زبان می‌افزاید. مرورگرهای وب ابزاری برای کنترل کردن صفحات وب می‌دهند. Node.JS قابلیت‌های سمت سرور را فراهم میسازد و غیره.
-=======
-A platform may be a browser, or a web-server or another *host*, even a "smart" coffee machine, if it can run JavaScript. Each of them provides platform-specific functionality. The JavaScript specification calls that a *host environment*.
-
-A host environment provides own objects and functions additional to the language core. Web browsers give a means to control web pages. Node.js provides server-side features, and so on.
-
-Here's a bird's-eye view of what we have when JavaScript runs in a web browser:
->>>>>>> 340ce4342100f36bb3c4e42dbe9ffa647d8716c8
 
 در ادامه یک نگاه سریع به اتفاقی‌ست که وقتی ما جاوااسکریپت را در مرورگر وب اجرا می‌کنیم، می‌افتد:
 ![](windowObjects.svg)
@@ -53,15 +45,11 @@ document.body.style.background = "red";
 setTimeout(() => document.body.style.background = "", 1000);
 ```
 
-<<<<<<< HEAD
 در اینجا ما از `document.body.style` استفاده کردیم، اما بیشتر هم هست. خیلی بیشتر! توابع و مشخصه‌ها در خصوصیات (Specification) توضیح داده شده‌ند.
 1. [W3C](https://en.wikipedia.org/wiki/World_Wide_Web_Consortium) -- مستندات در این لینک است <https://www.w3.org/TR/dom>.
 2. [WhatWG](https://en.wikipedia.org/wiki/WHATWG), موجود در <https://dom.spec.whatwg.org>.
 
 هردوی این گروه‌ها کامل با یکدیگر موافق نیستند بنابراین دو مجموعه‌ی استانداردها وجود دارد. اما خیلی مشابه یکدیگر هستند و تا ۹۹٪ به یکدیگر شباهت دارند. البته تفاوت‌های بسیار ریزی وجود دارند که احتمالا حتی متوجهشان نخواهید شد.
-=======
-Here we used `document.body.style`, but there's much, much more. Properties and methods are described in the specification: [DOM Living Standard](https://dom.spec.whatwg.org).
->>>>>>> 340ce4342100f36bb3c4e42dbe9ffa647d8716c8
 
 به نظر شخصی من، <https://dom.spec.whatwg.org> برای استفاده مناسب است.
 
@@ -76,18 +64,11 @@ Here we used `document.body.style`, but there's much, much more. Properties and 
 برای مثال، ابزار سمت سرور که صفحات HTML را دانلود و پردازش می‌کنند از DOM استفاده ‌می‌کنند. اگرچه ممکن است فقط یک قسمتی از خصوصیات‌ش را پشتیبانی کنند.
 ```
 
-<<<<<<< HEAD
 ```smart header="CSSOM برای استایل دادن"
 قوانین CSS و شیوه‌نامه (stylesheets) مشابه HTML ساختاربندی نشده‌ند. یک خصوصیت مجزا [CSSOM](https://www.w3.org/TR/cssom-1/) که نمایان شدنشان به شکل اشیا و نحوه نوشته و خوانده شدنشان را توصیف میکند.
 
 CSSOM همراه با DOM برای تغییر و تصحیح قوانین استایل برای document استفاده می‌گردد.
 اگرچه در عمل، CSSOM به ندرت مورد استفاده‌ میگیرد، به این علت که قوانین CSS عموما ثابت (Static) هستند. ما به ندرت نیاز داریم که قوانین CSS را در جاوا اسکریپت حذف یا اضافه کنیم، بنابراین ما الان به آنها نخواهیم پرداخت.
-=======
-```smart header="CSSOM for styling"
-There's also a separate specification, [CSS Object Model (CSSOM)](https://www.w3.org/TR/cssom-1/) for CSS rules and stylesheets, that explains how they are represented as objects, and how to read and write them.
-
-CSSOM is used together with DOM when we modify style rules for the document. In practice though, CSSOM is rarely required, because we rarely need to modify CSS rules from JavaScript (usually we just add/remove CSS classes, not modify their CSS rules), but that's also possible.
->>>>>>> 340ce4342100f36bb3c4e42dbe9ffa647d8716c8
 ```
 
 ## BOM (قسمتی از خصوصیت HTML)
