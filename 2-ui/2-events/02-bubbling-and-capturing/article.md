@@ -175,14 +175,9 @@ The code sets click handlers on *every* element in the document to see which one
 
 If you click on `<p>`, then the sequence is:
 
-<<<<<<< HEAD
-1. `HTML` -> `BODY` -> `FORM` -> `DIV` -> `P` (capturing phase, the first listener), and then:
-2. `P` -> `DIV` -> `FORM` -> `BODY` -> `HTML` (bubbling phase, the second listener).
-=======
 1. `HTML` -> `BODY` -> `FORM` -> `DIV` (capturing phase, the first listener):
 2. `P` (target phase, triggers two times, as we've set two listeners: capturing and bubbling)
 3. `DIV` -> `FORM` -> `BODY` -> `HTML` (bubbling phase, the second listener).
->>>>>>> d35baee32dcce127a69325c274799bb81db1afd8
 
 Please note that `P` shows up two times: at the end of capturing and at the start of bubbling.
 

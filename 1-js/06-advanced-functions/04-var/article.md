@@ -13,7 +13,6 @@ In the very first chapter about [variables](info:variables), we mentioned three 
 2. `const`
 3. `var`
 
-<<<<<<< HEAD
 `let` and `const` behave exactly the same way in terms of Lexical Environments.
 
 But `var` is a very different beast, that originates from very old times. It's generally not used in modern scripts, but still lurks in the old ones.
@@ -21,9 +20,6 @@ But `var` is a very different beast, that originates from very old times. It's g
 If you don't plan meeting such scripts you may even skip this chapter or postpone it, but then there's a chance that it bites you later.
 
 From the first sight, `var` behaves similar to `let`. That is, declares a variable:
-=======
-The `var` declaration is similar to `let`. Most of the time we can replace `let` by `var` or vice-versa and expect things to work:
->>>>>>> d35baee32dcce127a69325c274799bb81db1afd8
 
 ```js run
 var message = "Hi";
@@ -83,9 +79,6 @@ alert(phrase); // Error: phrase is not defined
 
 As we can see, `var` pierces through `if`, `for` or other code blocks. That's because a long time ago in JavaScript blocks had no Lexical Environments. And `var` is a remnant of that.
 
-<<<<<<< HEAD
-## "var" are processed at the function start
-=======
 ## "var" tolerates redeclarations
 
 If we declare the same variable with `let` twice in the same scope, that's an error:
@@ -107,7 +100,6 @@ alert(user); // John
 ```
 
 ## "var" variables can be declared below their use
->>>>>>> d35baee32dcce127a69325c274799bb81db1afd8
 
 `var` declarations are processed when the function starts (or script starts for globals).
 
