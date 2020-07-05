@@ -1,4 +1,3 @@
-
 ```js run
 function ask(question, yes, no) {
   if (confirm(question)) yes()
@@ -14,4 +13,4 @@ ask(
 );
 ```
 
-Looks short and clean, right?
+کوتاه و تمیز است، مگر نه؟
