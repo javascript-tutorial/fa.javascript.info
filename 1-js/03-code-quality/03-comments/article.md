@@ -1,14 +1,12 @@
-# Comments
+# یادداشت ها 
+همانطور که از فصل <اطلاعات: ساختار> می دانیم ، یادداشت ها می توانند تک خطی : با شروع `//` و چند خطی: `/ * ... * /` باشند.
 
-As we know from the chapter <info:structure>, comments can be single-line: starting with `//` and multiline: `/* ... */`.
+ما معمولاً از آنها برای توصیف چگونگی و چرایی کار کد استفاده می کنیم.
 
-We normally use them to describe how and why the code works.
+در نگاه اول ، یادداشت کردن ممکن است بدیهی باشد ، اما افراد تازه کار در برنامه نویسی اغلب از آنها به اشتباه استفاده می کنند.
+## یادداشت های بد 
 
-At first sight, commenting might be obvious, but novices in programming often use them wrongly.
-
-## Bad comments
-
-Novices tend to use comments to explain "what is going on in the code". Like this:
+تازه کارها تمایل دارند از یادداشت ها برای توضیح "آنچه در کد پیش می آید" استفاده کنند. مثل این:
 
 ```js
 // This code will do this thing (...) and that thing (...)
@@ -18,13 +16,13 @@ complex;
 code;
 ```
 
-But in good code, the amount of such "explanatory" comments should be minimal. Seriously, the code should be easy to understand without them.
+اما در کد خوب ، مقدار چنین یادداشت های "توضیحی" باید حداقل باشد. به طور جدی ، کد باید بدون آنها قابل درک باشد.
 
-There's a great rule about that: "if the code is so unclear that it requires a comment, then maybe it should be rewritten instead".
+یک قانون عالی در مورد آن وجود دارد: "اگر کد آنقدر نامشخص باشد که به یادداشت نیاز داشته باشد ، پس شاید به جای آن باید بازنویسی شود".
 
-### Recipe: factor out functions
+### دستور العمل: توابع فاکتور گیرنده 
 
-Sometimes it's beneficial to replace a code piece with a function, like here:
+گاهی اوقات جایگزینی یک قطعه کد با یک تابع مانند اینجا مفید است:
 
 ```js
 function showPrimes(n) {
@@ -43,7 +41,7 @@ function showPrimes(n) {
 }
 ```
 
-The better variant, with a factored out function `isPrime`:
+نوع بهتر ، با تابع فاکتور گیرنده ی 'isPrime':
 
 
 ```js
@@ -65,11 +63,11 @@ function isPrime(n) {
 }
 ```
 
-Now we can understand the code easily. The function itself becomes the comment. Such code is called *self-descriptive*.
+اکنون می توانیم کد را به راحتی درک کنیم. این تابع به خودی خود یادداشت می شود. به این کد *توصیفی از خود* گفته می شود.
 
-### Recipe: create functions
+### دستور العمل: ایجاد توابع 
 
-And if we have a long "code sheet" like this:
+و اگر ما یک "صفحه کد" طولانی مانند این داریم:
 
 ```js
 // here we add whiskey
@@ -90,7 +88,7 @@ for(let t = 0; t < 3; t++) {
 // ...
 ```
 
-Then it might be a better variant to refactor it into functions like:
+بنابراین ممکن است نوع بهتری باشد که دوباره فاکتور بگیریم به توابع مانند:
 
 ```js
 addWhiskey(glass);
@@ -111,21 +109,22 @@ function addJuice(container) {
 }
 ```
 
-Once again, functions themselves tell what's going on. There's nothing to comment. And also the code structure is better when split. It's clear what every function does, what it takes and what it returns.
+یک بار دیگر ، خود توابع می گویند چه اتفاقی می افتد. هیچ چیزی برای یادداشت وجود ندارد و همچنین ساختار کد هنگام تقسیم شده بهتر است. مشخص است که هر تابع چه کاری انجام می دهد ، چه چیزی را می گیرد و چه چیزی را برمی گرداند.
 
-In reality, we can't totally avoid "explanatory" comments. There are complex algorithms. And there are smart "tweaks" for purposes of optimization. But generally we should try to keep the code simple and self-descriptive.
+در واقعیت ، ما کاملاً نمی توانیم از یادداشت های "توضیحی" اجتناب کنیم. الگوریتم های پیچیده ای وجود دارد. و "ترفندهای" هوشمندانه ای برای اهداف بهینه سازی وجود دارد. اما به طور کلی باید سعی کنیم کد را ساده و توصیفی از خود نگه داریم.
 
-## Good comments
+## یادداشت های خوب 
 
-So, explanatory comments are usually bad. Which comments are good?
+بنابراین ، یادداشت های توضیحی معمولاً بد هستند. کدام یادداشت ها خوب هستند؟
 
-Describe the architecture
-: Provide a high-level overview of components, how they interact, what's the control flow in various situations... In short -- the bird's eye view of the code. There's a special language [UML](http://wikipedia.org/wiki/Unified_Modeling_Language) to build high-level architecture diagrams explaining the code. Definitely worth studying.
+معماری را شرح دهید
+: ارائه بررسی اجمالی سطح بالا از مؤلفه ها ، نحوه تعامل آنها ، جریان کنترل در موقعیت های مختلف چیست... به طور خلاصه - نگاه کلی به ظاهر کد. یک زبان ویژه [UML](http://wikipedia.org/wiki/Unified_Modeling_Language) برای ساختن نمودارهای معماری سطح بالا وجود دارد که کد را توضیح می دهد. قطعاً ارزش مطالعه را دارد.
 
-Document function parameters and usage
-: There's a special syntax [JSDoc](http://en.wikipedia.org/wiki/JSDoc) to document a function: usage, parameters, returned value.
+پارامترهای تابع سند و استفاده
+: 
+یک دستورالعمل ویژه [JSDoc](http://en.wikipedia.org/wiki/JSDoc) برای ثبت یک تابع وجود دارد: استفاده ، پارامترها ، مقدار برگشتی.
 
-For instance:
+برای مثال:
 ```js
 /**
  * Returns x raised to the n-th power.
@@ -139,42 +138,44 @@ function pow(x, n) {
 }
 ```
 
-Such comments allow us to understand the purpose of the function and use it the right way without looking in its code.
+چنین یادداشت هایی به ما امکان می دهد بدون نگاه کردن به کد  ، هدف از تابع را بفهمیم و از آن به روش صحیح استفاده کنیم.
 
-By the way, many editors like [WebStorm](https://www.jetbrains.com/webstorm/) can understand them as well and use them to provide autocomplete and some automatic code-checking.
+ به هر حال ، بسیاری از ویراستاران مانند 
+ [WebStorm](https://www.jetbrains.com/webstorm/)
+ می تواند آنها را به خوبی درک کرده و از آنها برای ارائه خودکار و برخی بررسی خودکار کد استفاده کند. 
+ 
+همچنین ابزارهایی مانند
+ [JSDoc 3](https://github.com/jsdoc3/jsdoc)
+ که می تواند مستندات HTML را از یادداشت ها ایجاد کند.
+ می توانید اطلاعات بیشتر در مورد JSDoc را در <http://usejsdoc.org/> مطالعه کنید.
+ 
+    اگر راه های زیادی برای حل این مورد وجود دارد ، چرا این یکی؟ مخصوصاً وقتی که واضح ترین آن نیست.
+    
+         بدون چنین یادداشت هایی شرایط زیر امکان پذیر است:
+         1. شما (یا همكار خود) كدی را كه چند وقت پیش نوشتید باز می كنید و می بینید كه "زیر حد بهینه" است.
+         2. شما فکر می کنید: "من در آن زمان چقدر احمق بودم ، و چقدر باهوش تر شدم حالا" ، و با استفاده از نوع "واضح تر و صحیح تر" بازنویسی می کنید.
+         3. ... میل به بازنویسی خوب بود. اما در این روند می بینید که در واقع فاقد راه حل "آشکارتر" است. شما حتی کم به خاطر می آورید ، چرا که مدتها قبل آن را امتحان کرده اید. شما به نوع صحیح بر می گردید ، اما زمان هدر رفته است.
+    
+         یادداشت ها که راه حل را توضیح می دهد بسیار مهم هستند. آنها به ادامه پیشرفت صحیح راه کمک می کنند.
 
-Also, there are tools like [JSDoc 3](https://github.com/jsdoc3/jsdoc) that can generate HTML-documentation from the comments. You can read more information about JSDoc at <http://usejsdoc.org/>.
+آیا ویژگی های محسوس کد وجود دارد؟  کجا استفاده شده از آنها؟
+: اگر کد دارای چیزهای لطیف و ضد شهودی است ، قطعاً ارزش اظهار نظر را دارد.
 
-Why is the task solved this way?
-: What's written is important. But what's *not* written may be even more important to understand what's going on. Why is the task solved exactly this way? The code gives no answer.
+## خلاصه 
 
-    If there are many ways to solve the task, why this one? Especially when it's not the most obvious one.
+نشانه مهم توسعه دهنده خوب ، یادداشت ها است: حضور آنها و حتی عدم حضور آنها.
 
-    Without such comments the following situation is possible:
-    1. You (or your colleague) open the code written some time ago, and see that it's "suboptimal".
-    2. You think: "How stupid I was then, and how much smarter I'm now", and rewrite using the "more obvious and correct" variant.
-    3. ...The urge to rewrite was good. But in the process you see that the "more obvious" solution is actually lacking. You even dimly remember why, because you already tried it long ago. You revert to the correct variant, but the time was wasted.
+نظرات خوب به ما امکان می دهد کد را به خوبی حفظ کنیم ، پس از تاخیر به آن برگردیم و از آن به طور مؤثر استفاده کنیم.
 
-    Comments that explain the solution are very important. They help to continue development the right way.
+**درباره این یادداشت کنید:**
 
-Any subtle features of the code? Where they are used?
-: If the code has anything subtle and counter-intuitive, it's definitely worth commenting.
+- معماری کلی ، نمای سطح بالا.
+- استفاده از تابع.
+- راه حل های مهم ، به ویژه هنگامی که فوراً آشکار نباشد.
 
-## Summary
+**از یادداشت خودداری کنید:**
 
-An important sign of a good developer is comments: their presence and even their absence.
+- این  "نحوه کار کد" و "آنچه انجام می دهد" را می گوید.
+- آنها را فقط زمانی قرار بده که غیرممکن کد ساده تر و توصیفی از خود شود که نیازی به آنها نداشته باشد.
 
-Good comments allow us to maintain the code well, come back to it after a delay and use it more effectively.
-
-**Comment this:**
-
-- Overall architecture, high-level view.
-- Function usage.
-- Important solutions, especially when not immediately obvious.
-
-**Avoid comments:**
-
-- That tell "how code works" and "what it does".
-- Put them in only if it's impossible to make the code so simple and self-descriptive that it doesn't require them.
-
-Comments are also used for auto-documenting tools like JSDoc3: they read them and generate HTML-docs (or docs in another format).
+ایادداشت ها برای ابزارهای مستندسازی خودکار مانند JSDoc3 نیز استفاده می شود: آنها را می خوانند و اسناد HTML تولید می کنند (یا اسناد را با قالب دیگر).
