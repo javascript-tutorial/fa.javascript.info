@@ -56,7 +56,6 @@ alert(sum(1, 2)); // 3
   sayHi();
   ```
 
-Arrow functions can be used in the same way as Function Expressions.
 از Arrow functionها به همان شکل Function Expressionها استفاده می‌شود.
 
 برای مثال، برای ساخت یک تابع به‌شکل داینامیک مانند زیر عمل می‌کنیم:
@@ -69,17 +68,15 @@ let welcome = age < 18 ? () => alert("Hello") : () => alert("Greetings!");
 welcome();
 ```
 
-Arrow functionها ممکن است در ابتدا غریبه و ناخوانا به نظر برسند اما وقتی چشمتان به آن عادت می‌کند، همه چیز عوض می‌شود.
+ممکن است در ابتدا غریبه و ناخوانا به نظر برسند اما وقتی چشمتان به آن عادت می‌کند، همه چیز عوض می‌شود.
 
 و برای کدهای یک خطی بسیار مناسب هستند. مخصوصا وقتی خسته‌تر از آن هستیم که کلمات زیادی بنویسیم.
 
-## Arrow functionهای چندخطی
+## وقتی Arrow Functionها چندخطی می‌شوند
 
-The examples above took arguments from the left of `=>` and evaluated the right-side expression with them.
-مثال‌های بالا از سمت چپ فلش `=>`آرگومان گرفتند و سمت راست را با آن محاسبه کردند.
+مثال‌های بالا از سمت چپ فلش `<=` آرگومان گرفتند و سمت راست را با آن محاسبه کردند.
 
-Sometimes we need something a little bit more complex, like multiple expressions or statements. It is also possible, but we should enclose them in curly braces. Then use a normal `return` within them.
-گاهی کد پیچیده‌تری داریم که چند expression یا statement دارد. این هم امکان‌پذیر است ولی باید کد را درون کمانک قرار دهیم. و درون کمانک نیز از `return` استفاده کنیم.
+گاهی کد پیچیده‌تری داریم که چند expression یا statement دارد. در این مواقع باید کد را درون کمانک قرار دهیم. و درون کمانک نیز از `return` استفاده کنیم.
 
 مانند این:
 
@@ -97,17 +94,16 @@ alert( sum(1, 2) ); // 3
 ```smart header="باز هم هست"
 ما در اینجا از کوتاهی و مختصری arrow functionها گفتیم. ولی فقط این نیست!
 
-Arrow functionها ویژگی‌های جالب دیگری هم دارند.
+این توابع ویژگی‌های جالب دیگری هم دارند.
 
 برای این که عمیق واردش بشویم، نیاز داریم اول بخش‌های دیگری از جاوااسکریپت را بشناسیم. برای همین در فصل دیگری به arrow functionها برمی‌گردیم <info:arrow-functions>.
 
-For now, we can already use arrow functions for one-line actions and callbacks.
 فعلا می‌توانیم از arrow functionها برای اعمال و callbackهای یک خطی استفاده کنیم.
 ```
 
 ## خلاصه
 
-Arrow functionها مناسب کدهای یک خطی هستند. و به دو صورت مختلف می‌توان از آن‌ها استفاده کرد:
+توابع Arrow function مناسب کدهای تک‌خطی هستند. و به‌صورت‌های مختلفی می‌توان از آن‌ها استفاده کرد.
 
 1. بدون کمانک: `(...args) => expression` -- سمت راست یک expression یا عبارت است: تابع آن را می‌خواند و نتیجه را برمی‌گرداند.
 2. با کمانک: `(...args) => { body }` -- کمانک‌ها به ما این امکان را می‌دهند تا چند statement را داخل تابع بنویسیم, اما در این صورت باید حتما از `return` برای بازگرداندن نتیجه استفاده کنیم.

@@ -1,4 +1,4 @@
-# Arrow functionها را بازنویسی کنید
+# بازنویسی Arrow Functionها
 
 در کد زیر function expressionها را با arrow functionها جایگزین کنید:
 
