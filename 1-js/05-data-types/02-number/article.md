@@ -142,7 +142,13 @@ alert( 123456..toString(36) ); // 2n9c
 
 دو روش برای اینکار داریم:
 
+<<<<<<< HEAD
 ۱. ضرب و تقسیم
+=======
+    For example, to round the number to the 2nd digit after the decimal, we can multiply the number by `100` (or a bigger power of 10), call the rounding function and then divide it back.
+    ```js run
+    let num = 1.23456;
+>>>>>>> 445bda39806050acd96f87166a7c97533a0c67e9
 
 برای مثال، برای رند کردن عدد تا دومین رقم اعشاری، میتوانیم عدد را در ۱۰۰ ضرب کنیم، تابع رند کردن را صدا بزنیم و سپس دوباره تقسیم کنیم.
   
