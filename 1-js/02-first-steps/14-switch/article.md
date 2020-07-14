@@ -43,7 +43,7 @@ switch (a) {
     break;
 *!*
   case 4:
-    alert( 'Exactly!' );
+    alert('Exactly!');
     break;
 */!*
   case 5:
@@ -108,7 +108,6 @@ switch (+a) {
 }
 ```
 
-Here `+a` gives `1`, that's compared with `b + 1` in `case`, and the corresponding code is executed.
 در اینجا `+a` برابر با `1` است و وقتی با `b + 1` در `case` مقایسه می‌شود، کد متناظر اجرا می‌شود.
 
 ````
