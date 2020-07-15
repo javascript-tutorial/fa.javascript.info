@@ -87,7 +87,7 @@ alert('Too big');
 alert("I don't know such values");
 ```
 
-`‍‍‍‍`smart header="هر عبارتی می‌تواند به یک `switch/case` تبدیل شود"
+`‍‍‍‍```smart header="هر عبارتی می‌تواند به یک `switch/case` تبدیل شود"
 هم در `switch` و هم در `case` می‌توان از عبارت‌های قراردادی استفاده کرد.
 
 برای مثال:
