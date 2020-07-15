@@ -1,20 +1,22 @@
-To precisely match the functionality of `switch`, the `if` must use a strict comparison `'==='`.
+برای این که یک `if` دقیقا مانند `switch` عمل کند باید از مقایسه `'==='` استفاده کند:
 
-For given strings though, a simple `'=='` works too.
+برای stringها یک مساوی معمولی `'=='` هم کفایت می‌کند
 
 ```js no-beautify
-if(browser == 'Edge') {
+if (browser == 'Edge') {
   alert("You've got the Edge!");
-} else if (browser == 'Chrome'
- || browser == 'Firefox'
- || browser == 'Safari'
- || browser == 'Opera') {
-  alert( 'Okay we support these browsers too' );
+} else if (
+  browser == 'Chrome' ||
+  browser == 'Firefox' ||
+  browser == 'Safari' ||
+  browser == 'Opera'
+) {
+  alert('Okay we support these browsers too');
 } else {
-  alert( 'We hope that this page looks ok!' );
+  alert('We hope that this page looks ok!');
 }
 ```
 
-Please note: the construct `browser == 'Chrome' || browser == 'Firefox' …` is split into multiple lines for better readability.
+دقت داشته باشید که این کدها `browser == 'Chrome' || browser == 'Firefox' …` برای خوانایی بیشتر به چند خط تقسیم شده‌اند:
 
-But the `switch` construct is still cleaner and more descriptive.
+ولی `switch` تمیزتر و بهتر است.
