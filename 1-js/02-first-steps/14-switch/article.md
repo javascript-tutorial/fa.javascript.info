@@ -43,11 +43,11 @@ switch (a) {
     break;
 *!*
   case 4:
-    alert('Exactly!');
+    alert("Exactly!");
     break;
 */!*
   case 5:
-    alert( 'Too large' );
+    alert( "Too large" );
     break;
   default:
     alert( "I don't know such values" );
@@ -82,12 +82,12 @@ switch (a) {
 در مثال بالا هر سه `alert` به‌ترتیب اجرا خواهند شد:
 
 ```js
-alert("Exactly!");
-alert("Too big");
+alert('Exactly!');
+alert('Too big');
 alert("I don't know such values");
 ```
 
-``smart header="هر عبارتی می‌تواند به یک `switch/case` تبدیل شود"
+`‍‍‍‍`smart header="هر عبارتی می‌تواند به یک `switch/case` تبدیل شود"
 هم در `switch` و هم در `case` می‌توان از عبارت‌های قراردادی استفاده کرد.
 
 برای مثال:
@@ -104,7 +104,7 @@ switch (+a) {
 */!*
 
   default:
-    alert("این اجرا نمی‌شود");
+    alert('این اجرا نمی‌شود');
 }
 ```
 
