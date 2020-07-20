@@ -70,11 +70,7 @@ alert(height ?? 100); // 0
 
 ## اولویت‌ها
 
-<<<<<<< HEAD
 اولویت عملگر `??` عموما پایین است: `7` در جدول [MDN table](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence#Table).
-=======
-The precedence of the `??` operator is rather low: `5` in the [MDN table](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence#Table).
->>>>>>> ae1171069c2e50b932d030264545e126138d5bdc
 
 پس `??` پس از بسیاری از عملگرها وارد عمل می‌شود, البته پیش از `=` و `?`.
 
