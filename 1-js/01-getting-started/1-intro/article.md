@@ -208,7 +208,15 @@
 
 - جاوا اِسکریپت در ابتدا برای مرورگرها ساخته شده بود ولی در حال حاضر در محیط‌های متفاوتی قابلیت اجرا دارد.  
 
+<<<<<<< HEAD
   
+=======
+- [CoffeeScript](http://coffeescript.org/) is a "syntactic sugar" for JavaScript. It introduces shorter syntax, allowing us to write clearer and more precise code. Usually, Ruby devs like it.
+- [TypeScript](http://www.typescriptlang.org/) is concentrated on adding "strict data typing" to simplify the development and support of complex systems. It is developed by Microsoft.
+- [Flow](http://flow.org/) also adds data typing, but in a different way. Developed by Facebook.
+- [Dart](https://www.dartlang.org/) is a standalone language that has its own engine that runs in non-browser environments (like mobile apps), but also can be transpiled to JavaScript. Developed by Google.
+- [Brython](https://brython.info/) is a Python transpiler to JavaScript that allow to write application in pure Python without JavaScript.
+>>>>>>> 58f6599df71b8d50417bb0a52b1ebdc995614017
 
 - جاوا اِسکریپت در شرایط حاضر موقعیت مشخص و منحصر بفردی در زبان‌های تحت مرورگرها دارد که تطابق کاملی با HTML و CSS را دارا می‌باشد.  
 
