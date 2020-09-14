@@ -34,7 +34,11 @@ On the other hand, it's important to understand differences when migrating old s
 
 ## "var" has no block scope
 
+<<<<<<< HEAD
 `var` variables are either function-wide or global, they are visible through blocks.
+=======
+Variables, declared with `var`, are either function-scoped or global-scoped. They are visible through blocks.
+>>>>>>> ff152b126ec70a9de919bfdc1913215539d37187
 
 For instance:
 
@@ -54,11 +58,13 @@ The same thing for loops: `var` cannot be block- or loop-local:
 
 ```js
 for (var i = 0; i < 10; i++) {
+  var one = 1;
   // ...
 }
 
 *!*
-alert(i); // 10, "i" is visible after loop, it's a global variable
+alert(i);   // 10, "i" is visible after loop, it's a global variable
+alert(one); // 1, "one" is visible after loop, it's a global variable
 */!*
 ```
 
@@ -77,7 +83,7 @@ sayHi();
 alert(phrase); // Error: phrase is not defined
 ```
 
-As we can see, `var` pierces through `if`, `for` or other code blocks. That's because a long time ago in JavaScript blocks had no Lexical Environments. And `var` is a remnant of that.
+As we can see, `var` pierces through `if`, `for` or other code blocks. That's because a long time ago in JavaScript, blocks had no Lexical Environments, and `var` is a remnant of that.
 
 ## "var" tolerates redeclarations
 
@@ -194,11 +200,11 @@ sayHi();
 
 Because all `var` declarations are processed at the function start, we can reference them at any place. But variables are undefined until the assignments.
 
-In both examples above `alert` runs without an error, because the variable `phrase` exists. But its value is not yet assigned, so it shows `undefined`.
+In both examples above, `alert` runs without an error, because the variable `phrase` exists. But its value is not yet assigned, so it shows `undefined`.
 
-### IIFE
+## IIFE
 
-As in the past there was only `var`, and it has no block-level visibility, programmers invented a way to emulate it. What they did was called "immediately-invoked function expressions" (abbreviated as IIFE).
+In the past, as there was only `var`, and it has no block-level visibility, programmers invented a way to emulate it. What they did was called "immediately-invoked function expressions" (abbreviated as IIFE).
 
 That's not something we should use nowadays, but you can find them in old scripts.
 
@@ -207,22 +213,22 @@ An IIFE looks like this:
 ```js run
 (function() {
 
-  let message = "Hello";
+  var message = "Hello";
 
   alert(message); // Hello
 
 })();
 ```
 
-Here a Function Expression is created and immediately called. So the code executes right away and has its own private variables.
+Here, a Function Expression is created and immediately called. So the code executes right away and has its own private variables.
 
-The Function Expression is wrapped with parenthesis `(function {...})`, because when JavaScript meets `"function"` in the main code flow, it understands it as the start of a Function Declaration. But a Function Declaration must have a name, so this kind of code will give an error:
+The Function Expression is wrapped with parenthesis `(function {...})`, because when JavaScript engine encounters `"function"` in the main code, it understands it as the start of a Function Declaration. But a Function Declaration must have a name, so this kind of code will give an error:
 
 ```js run
-// Try to declare and immediately call a function
+// Tries to declare and immediately call a function
 function() { // <-- Error: Function statements require a function name
 
-  let message = "Hello";
+  var message = "Hello";
 
   alert(message); // Hello
 
@@ -268,8 +274,13 @@ In all the above cases we declare a Function Expression and run it immediately. 
 
 There are two main differences of `var`:
 
+<<<<<<< HEAD
 1. Variables have no block scope, they are visible minimum at the function level.
 2. Variable declarations are processed at function start.
+=======
+1. `var` variables have no block scope; their visibility is scoped to current function, or global, if declared outside function.
+2. `var` declarations are processed at function start (script start for globals).
+>>>>>>> ff152b126ec70a9de919bfdc1913215539d37187
 
 There's one more very minor difference related to the global object, that we'll cover in the next chapter.
 

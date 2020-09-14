@@ -54,7 +54,34 @@ n = 12.345;
 
 ## رشته کاراکترها
 
+<<<<<<< HEAD
 یک رشته کاراکتر در جاوا اسکریپت باید در بین کوتِیشِن‌ها محصور شوند.
+=======
+## BigInt
+
+In JavaScript, the "number" type cannot represent integer values larger than <code>(2<sup>53</sup>-1)</code> (that's `9007199254740991`), or less than <code>-(2<sup>53</sup>-1)</code> for negatives. It's a technical limitation caused by their internal representation.
+
+For most purposes that's quite enough, but sometimes we need really big numbers, e.g. for cryptography or microsecond-precision timestamps.
+
+`BigInt` type was recently added to the language to represent integers of arbitrary length.
+
+A `BigInt` value is created by appending `n` to the end of an integer:
+
+```js
+// the "n" at the end means it's a BigInt
+const bigInt = 1234567890123456789012345678901234567890n;
+```
+
+As `BigInt` numbers are rarely needed, we don't cover them here, but devoted them a separate chapter <info:bigint>. Read it when you need such big numbers.
+
+```smart header="Compatibility issues"
+Right now `BigInt` is supported in Firefox/Chrome/Edge, but not in Safari/IE.
+```
+
+## String
+
+A string in JavaScript must be surrounded by quotes.
+>>>>>>> ff152b126ec70a9de919bfdc1913215539d37187
 
 ```js
 let str = "Hello";
@@ -94,7 +121,11 @@ alert( "the result is ${1 + 2}" ); // the result is ${1 + 2} (double quotes do n
 ```smart header="نوع داده‌ای برای کاراکترها وجود ندارد"
 در زبان‌هایی مانند C و یا Java نوع داده‌ای خاصی مختص به کاراکترها تحت عنوان `char` وجود دارد.
 
+<<<<<<< HEAD
 در جاوا اسکریپت چنین نوعی نداریم. فقط یک نوع داده برای رشته‌ها داریم که آن `string` است، که شامل یک یا چند کاراکتر می‌تواند باشد.
+=======
+In JavaScript, there is no such type. There's only one type: `string`. A string may consist of zero characters (be empty), one character or many of them.
+>>>>>>> ff152b126ec70a9de919bfdc1913215539d37187
 ```
 
 ## نوع Boolean
@@ -214,7 +245,18 @@ typeof alert // "function"  (3)
 
 ## خلاصه
 
+<<<<<<< HEAD
 در جاوا اسکریپت 7 نوع داده‌ی پایه‌ای داریم :
+=======
+- `number` for numbers of any kind: integer or floating-point, integers are limited by <code>±(2<sup>53</sup>-1)</code>.
+- `bigint` is for integer numbers of arbitrary length.
+- `string` for strings. A string may have zero or more characters, there's no separate single-character type.
+- `boolean` for `true`/`false`.
+- `null` for unknown values -- a standalone type that has a single value `null`.
+- `undefined` for unassigned values -- a standalone type that has a single value `undefined`.
+- `object` for more complex data structures.
+- `symbol` for unique identifiers.
+>>>>>>> ff152b126ec70a9de919bfdc1913215539d37187
 
 - `number` که شامل اعداد صحیح و اعداد اعشاری می‌شود.
 - `string` برای رشته کاراکترها. یک string می‌تواند یک یا چند کاراکتر داشته باشد. هیچ نوع داده‌ای تحت عنوان char در جاوا اسکریپت وجود ندارد.
