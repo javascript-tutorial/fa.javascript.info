@@ -54,9 +54,11 @@ n = 12.345;
 
 ## رشته کاراکترها
 
-<<<<<<< HEAD
+@@@needs translation@@@
+@@@old part@@@
 یک رشته کاراکتر در جاوا اسکریپت باید در بین کوتِیشِن‌ها محصور شوند.
-=======
+@@@old part@@@
+@@@new part@@@
 ## BigInt
 
 In JavaScript, the "number" type cannot represent integer values larger than <code>(2<sup>53</sup>-1)</code> (that's `9007199254740991`), or less than <code>-(2<sup>53</sup>-1)</code> for negatives. It's a technical limitation caused by their internal representation.
@@ -81,7 +83,8 @@ Right now `BigInt` is supported in Firefox/Chrome/Edge, but not in Safari/IE.
 ## String
 
 A string in JavaScript must be surrounded by quotes.
->>>>>>> ff152b126ec70a9de919bfdc1913215539d37187
+@@@new part@@@
+@@@needs translation@@@
 
 ```js
 let str = "Hello";
@@ -121,11 +124,14 @@ alert( "the result is ${1 + 2}" ); // the result is ${1 + 2} (double quotes do n
 ```smart header="نوع داده‌ای برای کاراکترها وجود ندارد"
 در زبان‌هایی مانند C و یا Java نوع داده‌ای خاصی مختص به کاراکترها تحت عنوان `char` وجود دارد.
 
-<<<<<<< HEAD
+@@@needs translation@@@
+@@@old part@@@
 در جاوا اسکریپت چنین نوعی نداریم. فقط یک نوع داده برای رشته‌ها داریم که آن `string` است، که شامل یک یا چند کاراکتر می‌تواند باشد.
-=======
+@@@old part@@@
+@@@new part@@@
 In JavaScript, there is no such type. There's only one type: `string`. A string may consist of zero characters (be empty), one character or many of them.
->>>>>>> ff152b126ec70a9de919bfdc1913215539d37187
+@@@new part@@@
+@@@needs translation@@@
 ```
 
 ## نوع Boolean
@@ -245,8 +251,8 @@ typeof alert // "function"  (3)
 
 ## خلاصه
 
-<<<<<<< HEAD
-در جاوا اسکریپت 7 نوع داده‌ی پایه‌ای داریم :
+@@@needs translation@@@
+@@@new part@@@
 =======
 - `number` for numbers of any kind: integer or floating-point, integers are limited by <code>±(2<sup>53</sup>-1)</code>.
 - `bigint` is for integer numbers of arbitrary length.
@@ -256,7 +262,10 @@ typeof alert // "function"  (3)
 - `undefined` for unassigned values -- a standalone type that has a single value `undefined`.
 - `object` for more complex data structures.
 - `symbol` for unique identifiers.
->>>>>>> ff152b126ec70a9de919bfdc1913215539d37187
+@@@new part@@@
+
+@@@old part@@@
+در جاوا اسکریپت 7 نوع داده‌ی پایه‌ای داریم :
 
 - `number` که شامل اعداد صحیح و اعداد اعشاری می‌شود.
 - `string` برای رشته کاراکترها. یک string می‌تواند یک یا چند کاراکتر داشته باشد. هیچ نوع داده‌ای تحت عنوان char در جاوا اسکریپت وجود ندارد.
@@ -265,6 +274,8 @@ typeof alert // "function"  (3)
 - `undefined` برای مقادیر تخصیص نیافته. یک نوع مستقل بوده که یک مقدار تحت عنوان `undefined` دارد.
 - `object` برای ذخیره ساختارهای پیچیده‌تر اطلاعات.
 - `symbol` برای شناسه‌های یکتا.
+@@@old part@@@
+@@@needs translation@@@
 
 عملگر `typeof` به شما اجازه می‌دهد نوع مقدار ذخیره شده در یک متغیر را تشخصی دهید.
 

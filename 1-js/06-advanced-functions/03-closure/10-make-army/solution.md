@@ -55,16 +55,9 @@ We can see that all `shooter` functions are created in the lexical environment, 
 
 As the result, all `shooter` functions get the same value from the outer lexical environment and that is, the last value, `i=10`.
 
-<<<<<<< HEAD
-The fix can be very simple:
-
-```js run
-function makeArmy() {
-=======
 ![](lexenv-makearmy-empty.svg)
 
 As you can see above, on each iteration of a `while {...} ` block, a new lexical environment is created. 
->>>>>>> ff152b126ec70a9de919bfdc1913215539d37187
 
 So, to fix a problem we can copy the value of `i` into a variable within the `while {...}` block, like this:
 
@@ -94,28 +87,15 @@ army[0](); // 0
 army[5](); // 5
 ```
 
-<<<<<<< HEAD
-Now it works correctly, because every time the code block in `for (..) {...}` is executed, a new Lexical Environment is created for it, with the corresponding value of `i`.
-
-So, the value of `i` now lives a little bit closer. Not in `makeArmy()` Lexical Environment, but in the Lexical Environment that corresponds the current loop iteration. A `shooter` gets the value exactly from the one where it was created.
-=======
 Here `let j = i` declares an "iteration-local" variable `j` and copies `i` into it. Primitives are copied "by value", so we actually get an independent copy of `i`, belonging to the current loop iteration.
 
 The shooters work correctly, because, the value of `i` now lives a little bit closer. Not in `makeArmy()` Lexical Environment, but in the Lexical Environment that corresponds the current loop iteration:
->>>>>>> ff152b126ec70a9de919bfdc1913215539d37187
 
 ![](lexenv-makearmy-while-fixed.svg)
 
 Such problem could also be avoided if we used `for` in the beginning, like this:
 
-<<<<<<< HEAD
-Another trick could be possible, let's see it for better understanding of the subject:
-
-
-```js run
-=======
 ```js run demo
->>>>>>> ff152b126ec70a9de919bfdc1913215539d37187
 function makeArmy() {
 
   let shooters = [];
