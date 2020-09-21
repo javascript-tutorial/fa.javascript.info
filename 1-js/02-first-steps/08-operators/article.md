@@ -373,8 +373,12 @@ counter++;
 - RIGHT SHIFT ( `>>` )
 - ZERO-FILL RIGHT SHIFT ( `>>>` )
 
+<<<<<<< HEAD
 این عملگرها به ندرت استفاده می‌شوند. برای درک آنها، باید به سطح زبان سیستم در نمایش اعداد برویم و اصلا این کار، کار بهینه‌ای در حال حاضر نیست و حتی به آنها هم در آینده‌ی نزدیک نیاز نداریم. اگر علاقه‌مند هستید میتوانید [Bitwise Operators](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators) را بخوانید. خیلی منطقی‌تر است که وقتی واقعا به آن نیازمند هستید آن را استفاده کنید. 
 ## تغییر در همان محل
+=======
+These operators are used very rarely, when we need to fiddle with numbers on the very lowest (bitwise) level. We won't need these operators any time soon, as web development has little use of them, but in some special areas, such as cryptography, they are useful. You can read the [Bitwise Operators](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators#Bitwise) chapter on MDN when a need arises.
+>>>>>>> e074a5f825a3d10b0c1e5e82561162f75516d7e3
 
 ما اغلب نیاز داریم تا یک عملگر را روی متغیری اعمال کنیم و مقدار جدید را در همان متغیر ذخیره کنیم.
 
