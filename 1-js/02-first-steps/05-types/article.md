@@ -253,7 +253,6 @@ typeof alert // "function"  (3)
 
 @@@needs translation@@@
 @@@new part@@@
-=======
 - `number` for numbers of any kind: integer or floating-point, integers are limited by <code>±(2<sup>53</sup>-1)</code>.
 - `bigint` is for integer numbers of arbitrary length.
 - `string` for strings. A string may have zero or more characters, there's no separate single-character type.
