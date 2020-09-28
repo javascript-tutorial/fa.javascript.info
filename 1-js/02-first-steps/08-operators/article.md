@@ -135,7 +135,11 @@ alert( +apples + +oranges ); // 5
 عملگرهای مختلفی در جاوا اسکریپت وجود دارد و هر کدام اولویت مربوط به خود را دارا می‌باشند. در جدول زیر عملگری که عدد بالاتری دارد اولویتش بالاتر است. همینطور اگر دو عملگر عدد یکسانی داشتند اولویت اجرا از چپ به راست (در کد) می‌باشد.
 
 
+<<<<<<< HEAD
 این یک قسمتی از [precedence table](https://developer.mozilla.org/en/JavaScript/Reference/operators/operator_precedence) است. (نیاز نیست این جدول را حفظ باشید اما توجه داشته باشید که عملگرهای unary از دودویی‌های مربوطشان بالاتر هستند):
+=======
+Here's an extract from the [precedence table](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence) (you don't need to remember this, but note that unary operators are higher than corresponding binary ones):
+>>>>>>> f489145731a45df6e369a3c063e52250f3f0061d
 
 | اولویت | نام | علامت |
 |------------|------|------|
