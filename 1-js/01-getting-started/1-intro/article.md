@@ -40,13 +40,11 @@
 
 مرورگرهای وب دارای موتوری داخلی برای اجرای جاوا اِسکریپت هستند، که گاهی آن را  **ماشین مجازی جاوا** **اِسکریپت** نیز می‌نامند.  
 
-<<<<<<< HEAD
-  
-=======
+@@@needs translation@@@
 - [V8](https://en.wikipedia.org/wiki/V8_(JavaScript_engine)) -- in Chrome and Opera.
 - [SpiderMonkey](https://en.wikipedia.org/wiki/SpiderMonkey) -- in Firefox.
 - ...There are other codenames like "Chakra" for IE, "ChakraCore" for Microsoft Edge, "Nitro" and "SquirrelFish" for Safari, etc.
->>>>>>> f489145731a45df6e369a3c063e52250f3f0061d
+@@@needs translation@@@
 
 موتورهای مختلف دارای **اسم رمز** خاص خود هستند، برای نمونه :  
 

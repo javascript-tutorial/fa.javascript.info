@@ -2,7 +2,8 @@
 
 [recent browser="new"]
 
-<<<<<<< HEAD
+@@@needs translation@@@
+@@@old part@@@
 عملگر nullish coalescing `??` یک سینتکس کوتاه شده است انتخاب نخستین متغیر تعریف شده است.
 
 نتیجه‌ی گزاره‌ی `a ?? b` برابر است با:
@@ -23,7 +24,8 @@ x = a !== null && a !== undefined ? a : b;
 ما می‌خواهیم که نام کاربر را نمایش دهیم: یکی از سه متغیر بالا, یا عبارت "ناشناس" به شرطی که چیزی تعریف نشده باشد.
 
 از عملگر `??` برای انتخاب اولین متغیر تعریف شده استفاده می‌کنیم:
-=======
+@@@old part@@@
+@@@new part@@@
 Here, in this article, we'll say that an expression is "defined" when it's neither `null` nor `undefined`.
 
 The nullish coalescing operator is written as two question marks `??`.
@@ -68,18 +70,22 @@ Let's say we have a user's data in variables `firstName`, `lastName` or `nickNam
 We'd like to display the user name using one of these variables, or show "Anonymous" if all of them are undefined.
 
 Let's use the `??` operator for that:
->>>>>>> f489145731a45df6e369a3c063e52250f3f0061d
+@@@new part@@@
+@@@needs translation@@@
 
 ```js run
 let firstName = null;
 let lastName = null;
 let nickName = "Supercoder";
 
-<<<<<<< HEAD
+@@@needs translation@@@
+@@@old part@@@
 // نخستین مقداری که null یا undefined نیست را نمایش می‌دهد
-=======
+@@@old part@@@
+@@@new part@@@
 // shows the first defined value:
->>>>>>> f489145731a45df6e369a3c063e52250f3f0061d
+@@@new part@@@
+@@@needs translation@@@
 *!*
 alert(firstName ?? lastName ?? nickName ?? "ناشناس"); // Supercoder
 */!*
@@ -89,7 +95,8 @@ alert(firstName ?? lastName ?? nickName ?? "ناشناس"); // Supercoder
 
 عملگر یا `||` هم می‌تواند به همان شکل عملگر `??` استفاده شود. در حقیقت ما می‌توانیم عملگر `??` را با عملگر `||` در کد بالا جایگزین کنیم و همان نتیجه را بگیریم. همانطور که در بخش قبلی توضیح داده شد [previous chapter](info:logical-operators#or-finds-the-first-truthy-value).
 
-<<<<<<< HEAD
+@@@needs translation@@@
+@@@old part@@@
 تفاوت ارزشمند این دو عبارت است از:
 
 - `||` نخستین مقدار _truthy_ را باز می‌گرداند.
@@ -98,7 +105,8 @@ alert(firstName ?? lastName ?? nickName ?? "ناشناس"); // Supercoder
 این موضوع به خصوص هنگامی که می‌خواهیم بین `null/undefined` و `0` تفاوت داشته باشیم خودش را نشان می‌دهد.
 
 برای نمونه در نظر بگیرید:
-=======
+@@@old part@@@
+@@@new part@@@
 The OR `||` operator can be used in the same way as `??`, as it was described in the [previous chapter](info:logical-operators#or-finds-the-first-truthy-value).
 
 For example, in the code above we could replace `??` with `||` and still get the same result:
@@ -107,7 +115,8 @@ For example, in the code above we could replace `??` with `||` and still get the
 let firstName = null;
 let lastName = null;
 let nickName = "Supercoder";
->>>>>>> f489145731a45df6e369a3c063e52250f3f0061d
+@@@new part@@@
+@@@needs translation@@@
 
 // shows the first truthy value:
 *!*
@@ -115,11 +124,13 @@ alert(firstName || lastName || nickName || "Anonymous"); // Supercoder
 */!*
 ```
 
-<<<<<<< HEAD
+@@@needs translation@@@
+@@@old part@@@
 در این‌جا به `height` مقدار `100` را در صورتی که مقدار تعریف شده‌ای نداشته باشد نسبت می‌دهیم.
 
 مقایسه با `||`:
-=======
+@@@old part@@@
+@@@new part@@@
 The OR `||` operator exists since the beginning of JavaScript, so developers were using it for such purposes for a long time.
 
 On the other hand, the nullish coalescing operator `??` was added only recently, and the reason for that was that people weren't quite happy with `||`.
@@ -133,7 +144,8 @@ In other words, `||` doesn't distinguish between `false`, `0`, an empty string `
 In practice though, we may want to use default value only when the variable is `null/undefined`. That is, when the value is really unknown/not set.
 
 For example, consider this:
->>>>>>> f489145731a45df6e369a3c063e52250f3f0061d
+@@@new part@@@
+@@@needs translation@@@
 
 ```js run
 let height = 0;
@@ -142,13 +154,15 @@ alert(height || 100); // 100
 alert(height ?? 100); // 0
 ```
 
-<<<<<<< HEAD
+@@@needs translation@@@
+@@@old part@@@
 در این‌جا, `height || 100` با مقدار صفر همان‌گونه برخورد میکنه که با `null`، `undefined` و یا هر مقدار falsy دیگری. پس صفر تبدیل به `100` می‌شود.
 
 عبارت `height ?? 100` مقدار `100` را در صورتی باز می‌گرداند که `height` دقیقا `null` و یا `undefined` باشد. پس صفر، "همانی که هست، می‌ماند".
 
     این‌که کدام رویکرد بهتر است، به موضوع ما بستگی دارد. اگر مقدار صفر برای `height` قابل قبول است، بهتر است از `??` استفاده کنیم.
-=======
+@@@old part@@@
+@@@new part@@@
 Here, we have a zero height.
 
 - The `height || 100` checks `height` for being a falsy value, and it really is.
@@ -157,21 +171,25 @@ Here, we have a zero height.
     - so the result is `height` "as is", that is `0`.
 
 If we assume that zero height is a valid value, that shouldn't be replaced with the default, then `??` does just the right thing.
->>>>>>> f489145731a45df6e369a3c063e52250f3f0061d
+@@@new part@@@
+@@@needs translation@@@
 
 ## اولویت‌ها
 
-<<<<<<< HEAD
+@@@needs translation@@@
+@@@old part@@@
 اولویت عملگر `??` عموما پایین است: `7` در جدول [MDN table](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence#Table).
 
 پس `??` پس از بسیاری از عملگرها وارد عمل می‌شود, البته پیش از `=` و `?`.
 
 اگر تصمیم به استفاده از `??` در یک عبارت پیچیده گرفتید, حتما از پرانتز استفاده کنید:
-=======
+@@@old part@@@
+@@@new part@@@
 The precedence of the `??` operator is rather low: `5` in the [MDN table](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence#Table). So `??` is evaluated before `=` and `?`, but after most other operations, such as `+`, `*`.
 
 So if we'd like to choose a value with `??` in an expression with other operators, consider adding parentheses:
->>>>>>> f489145731a45df6e369a3c063e52250f3f0061d
+@@@new part@@@
+@@@needs translation@@@
 
 ```js run
 let height = null;
@@ -183,7 +201,8 @@ let area = (height ?? 100) * (width ?? 50);
 alert(area); // 5000
 ```
 
-<<<<<<< HEAD
+@@@needs translation@@@
+@@@old part@@@
 در غیر این صورت, اگر پرانتز را فراموش کنیم, `*` اولویت بالاتری نسبت به `??` دارد . زودتر اجرا می‌شود.
 
 این‌گونه خواهیم داشت:
@@ -196,7 +215,8 @@ let area = height ?? 100 * width ?? 50;
 هم‌چنین یک محدودیت سطح زبان (language-level) نیز برای این موضوع داریم.
 
 **برای احتیاط, به کار بردن `??` همراه با `&&` و `||` ممنوع است.**
-=======
+@@@old part@@@
+@@@new part@@@
 Otherwise, if we omit parentheses, then as `*` has the higher precedence than `??`, it would execute first, leading to incorrect results.
 
 ```js
@@ -210,7 +230,8 @@ let area = height ?? (100 * width) ?? 50;
 ### Using ?? with && or ||
 
 Due to safety reasons, JavaScript forbids using `??` together with `&&` and `||` operators, unless the precedence is explicitly specified with parentheses.
->>>>>>> f489145731a45df6e369a3c063e52250f3f0061d
+@@@new part@@@
+@@@needs translation@@@
 
 کد زیر یک خطای نگارشی (سینتکس) به ما خواهد داد:
 
@@ -218,11 +239,14 @@ Due to safety reasons, JavaScript forbids using `??` together with `&&` and `||`
 let x = 1 && 2 ?? 3; // Syntax error خطای نگارشی
 ```
 
-<<<<<<< HEAD
+@@@needs translation@@@
+@@@old part@@@
 این محدودیت قابل بحث است, اما برای جلوگیری از اشتباهات برنامه‌نویسان به زبان اضافه شده است, که به مرور مردم از `??` به جای `||` استفاده خواهند کرد.
-=======
+@@@old part@@@
+@@@new part@@@
 The limitation is surely debatable, but it was added to the language specification with the purpose to avoid programming mistakes, when people start to switch to `??` from `||`.
->>>>>>> f489145731a45df6e369a3c063e52250f3f0061d
+@@@new part@@@
+@@@needs translation@@@
 
 از پرانتز برای این کار استفاده کنید:
 
@@ -245,10 +269,13 @@ alert(x); // 2
   height = height ?? 100;
   ```
 
-<<<<<<< HEAD
+@@@needs translation@@@
+@@@old part@@@
 - عملگر `??` ترتیب اولویت پایینی دارد, البته بیشتر از `?` و `=`.
 - به کار بردن آن با `||` یا `&&` بدون به کار بردن پرانتز ممنوع است.
-=======
+@@@old part@@@
+@@@new part@@@
 - The operator `??` has a very low precedence, a bit higher than `?` and `=`, so consider adding parentheses when using it in an expression.
 - It's forbidden to use it with `||` or `&&` without explicit parentheses.
->>>>>>> f489145731a45df6e369a3c063e52250f3f0061d
+@@@new part@@@
+@@@needs translation@@@
