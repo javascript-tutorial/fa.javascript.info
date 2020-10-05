@@ -35,7 +35,7 @@ The result of `a ?? b` is:
 - if `a` isn't defined, then `b`.
 
 
-In other words, `??` returns the first argument if it's defined. Otherwise, the second one.
+In other words, `??` returns the first argument if it's not `null/undefined`. Otherwise, the second one.
 
 The nullish coalescing operator isn't anything completely new. It's just a nice syntax to get the first "defined" value of the two.
 
@@ -63,7 +63,7 @@ let user = "John";
 alert(user ?? "Anonymous"); // John
 ```
 
-We can also use a sequence of `??` to select the first defined value from a list.
+We can also use a sequence of `??` to select the first value from a list that isn't `null/undefined`.
 
 Let's say we have a user's data in variables `firstName`, `lastName` or `nickName`. All of them may be undefined, if the user decided not to enter a value.
 
@@ -133,9 +133,9 @@ alert(firstName || lastName || nickName || "Anonymous"); // Supercoder
 @@@new part@@@
 The OR `||` operator exists since the beginning of JavaScript, so developers were using it for such purposes for a long time.
 
-On the other hand, the nullish coalescing operator `??` was added only recently, and the reason for that was that people weren't quite happy with `||`.
+On the other hand, the nullish coalescing operator `??` was added to JavaScript only recently, and the reason for that was that people weren't quite happy with `||`.
 
-The subtle, yet important difference is that:
+The important difference between them is that:
 - `||` returns the first *truthy* value.
 - `??` returns the first *defined* value.
 
@@ -154,6 +154,7 @@ alert(height || 100); // 100
 alert(height ?? 100); // 0
 ```
 
+<<<<<<< HEAD
 @@@needs translation@@@
 @@@old part@@@
 در این‌جا, `height || 100` با مقدار صفر همان‌گونه برخورد میکنه که با `null`، `undefined` و یا هر مقدار falsy دیگری. پس صفر تبدیل به `100` می‌شود.
@@ -165,14 +166,20 @@ alert(height ?? 100); // 0
 @@@new part@@@
 Here, we have a zero height.
 
+=======
+>>>>>>> 181cc781ab6c55fe8c43887a0c060db7f93fb0ca
 - The `height || 100` checks `height` for being a falsy value, and it really is.
     - so the result is the second argument, `100`.
 - The `height ?? 100` checks `height` for being `null/undefined`, and it's not,
     - so the result is `height` "as is", that is `0`.
 
+<<<<<<< HEAD
 If we assume that zero height is a valid value, that shouldn't be replaced with the default, then `??` does just the right thing.
 @@@new part@@@
 @@@needs translation@@@
+=======
+If the zero height is a valid value, that shouldn't be replaced with the default, then `??` does just the right thing.
+>>>>>>> 181cc781ab6c55fe8c43887a0c060db7f93fb0ca
 
 ## اولویت‌ها
 
@@ -260,7 +267,11 @@ alert(x); // 2
 
 ## چکیده
 
+<<<<<<< HEAD
 - عملگر nullish coalescing `??` یک راه سریع برای مشخص کردن عبارت "تعریف شده (defined)" از یک لیست به کار می‌رود.
+=======
+- The nullish coalescing operator `??` provides a short way to choose the first "defined" value from a list.
+>>>>>>> 181cc781ab6c55fe8c43887a0c060db7f93fb0ca
 
   از آن برای تعیین کردن مقدار پیش‌فرض برای متغیرها استفاده می‌شود:
 
@@ -269,6 +280,7 @@ alert(x); // 2
   height = height ?? 100;
   ```
 
+<<<<<<< HEAD
 @@@needs translation@@@
 @@@old part@@@
 - عملگر `??` ترتیب اولویت پایینی دارد, البته بیشتر از `?` و `=`.
@@ -276,6 +288,9 @@ alert(x); // 2
 @@@old part@@@
 @@@new part@@@
 - The operator `??` has a very low precedence, a bit higher than `?` and `=`, so consider adding parentheses when using it in an expression.
+=======
+- The operator `??` has a very low precedence, only a bit higher than `?` and `=`, so consider adding parentheses when using it in an expression.
+>>>>>>> 181cc781ab6c55fe8c43887a0c060db7f93fb0ca
 - It's forbidden to use it with `||` or `&&` without explicit parentheses.
 @@@new part@@@
 @@@needs translation@@@
