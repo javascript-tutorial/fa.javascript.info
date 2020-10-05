@@ -154,7 +154,6 @@ alert(height || 100); // 100
 alert(height ?? 100); // 0
 ```
 
-<<<<<<< HEAD
 @@@needs translation@@@
 @@@old part@@@
 در این‌جا, `height || 100` با مقدار صفر همان‌گونه برخورد میکنه که با `null`، `undefined` و یا هر مقدار falsy دیگری. پس صفر تبدیل به `100` می‌شود.
@@ -166,20 +165,14 @@ alert(height ?? 100); // 0
 @@@new part@@@
 Here, we have a zero height.
 
-=======
->>>>>>> 181cc781ab6c55fe8c43887a0c060db7f93fb0ca
 - The `height || 100` checks `height` for being a falsy value, and it really is.
     - so the result is the second argument, `100`.
 - The `height ?? 100` checks `height` for being `null/undefined`, and it's not,
     - so the result is `height` "as is", that is `0`.
 
-<<<<<<< HEAD
-If we assume that zero height is a valid value, that shouldn't be replaced with the default, then `??` does just the right thing.
+If the zero height is a valid value, that shouldn't be replaced with the default, then `??` does just the right thing.
 @@@new part@@@
 @@@needs translation@@@
-=======
-If the zero height is a valid value, that shouldn't be replaced with the default, then `??` does just the right thing.
->>>>>>> 181cc781ab6c55fe8c43887a0c060db7f93fb0ca
 
 ## اولویت‌ها
 
@@ -267,11 +260,14 @@ alert(x); // 2
 
 ## چکیده
 
-<<<<<<< HEAD
+@@@needs translation@@@
+@@@old part@@@
 - عملگر nullish coalescing `??` یک راه سریع برای مشخص کردن عبارت "تعریف شده (defined)" از یک لیست به کار می‌رود.
-=======
+@@@old part@@@
+@@@new part@@@
 - The nullish coalescing operator `??` provides a short way to choose the first "defined" value from a list.
->>>>>>> 181cc781ab6c55fe8c43887a0c060db7f93fb0ca
+@@@new part@@@
+@@@needs translation@@@
 
   از آن برای تعیین کردن مقدار پیش‌فرض برای متغیرها استفاده می‌شود:
 
@@ -280,17 +276,13 @@ alert(x); // 2
   height = height ?? 100;
   ```
 
-<<<<<<< HEAD
 @@@needs translation@@@
 @@@old part@@@
 - عملگر `??` ترتیب اولویت پایینی دارد, البته بیشتر از `?` و `=`.
 - به کار بردن آن با `||` یا `&&` بدون به کار بردن پرانتز ممنوع است.
 @@@old part@@@
 @@@new part@@@
-- The operator `??` has a very low precedence, a bit higher than `?` and `=`, so consider adding parentheses when using it in an expression.
-=======
 - The operator `??` has a very low precedence, only a bit higher than `?` and `=`, so consider adding parentheses when using it in an expression.
->>>>>>> 181cc781ab6c55fe8c43887a0c060db7f93fb0ca
 - It's forbidden to use it with `||` or `&&` without explicit parentheses.
 @@@new part@@@
 @@@needs translation@@@
