@@ -146,8 +146,13 @@ alert( "Tea wanted: " + isTeaWanted ); // true
 بیتی (bitwise)
 عملگرهای بیتی با اعداد صحیح در سطح بیتی (مبنای ۲) کار می‌کنند (و زیاد کاربرد ندارند:). اگر علاقه دارید در مورد این نوع عملگرها بیشتر بدانید به [مستندات موزیلا](mdn:/JavaScript/Reference/Operators/Bitwise_Operators) مراجعه کنید.
 
+<<<<<<< HEAD
 سه‌تایی (ternary)
 تنها عملگری است که سه پارامتر می‌گیرد:: cond ? resultA : result اگر cond مقداری truthy باشد (در تبدیل به بولین معادل true باشد)، مقدار resultA را بر می‌گرداند، در غیر این صورت resultB.
+=======
+Bitwise
+: Bitwise operators work with 32-bit integers at the lowest, bit-level: see the [docs](mdn:/JavaScript/Guide/Expressions_and_Operators#Bitwise) when they are needed.
+>>>>>>> 0599d07b3c13ee25f583fc091cead3c17a7e7779
 
 عملگرهای منطقی (logical)
 عملگر «و» (&&): در صورتی که طرف چپ: falsy باشد همان را بر می‌گرداند و در غیر این صورت طرف راست را بر می‌گرداند (در صورت اوّل کلاً طرف راست بررسی نخواهد شد که truthy است یا falsy).

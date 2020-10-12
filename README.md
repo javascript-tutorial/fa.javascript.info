@@ -1,6 +1,10 @@
 # The Modern JavaScript Tutorial in Persian (Farsi)
 
+<<<<<<< HEAD
 This repository hosts the translation of <https://javascript.info> in Persian (Farsi).
+=======
+This repository hosts the English content of the Modern JavaScript Tutorial, published in [https://javascript.info](https://javascript.info).
+>>>>>>> 0599d07b3c13ee25f583fc091cead3c17a7e7779
 
 
 **That's how you can contribute:**
@@ -86,7 +90,13 @@ const text = 'Hola mundo';
 document.querySelector('.hola').innerHTML = text;
 ```
 
+<<<<<<< HEAD
 ### External Links
+=======
+  - `index.md` stands for a chapter
+  - `article.md` stands for an article
+  - `task.md` stands for a task (solution must be provided in `solution.md` file as well)
+>>>>>>> 0599d07b3c13ee25f583fc091cead3c17a7e7779
 
 If an external link is to Wikipedia, e.g. `https://en.wikipedia.org/wiki/JavaScript`, and a version of that article exists in your language that is of decent quality, link to that version instead.
 
