@@ -1,10 +1,10 @@
 # در آمدی بر جاوا اسکریپت 
 
-<<<<<<< HEAD
-  
-=======
+@@@needs translation@@@
+@@@new part@@@
 Let's see what's so special about JavaScript, what we can achieve with it, and what other technologies play well with it.
->>>>>>> 0599d07b3c13ee25f583fc091cead3c17a7e7779
+@@@new part@@@
+@@@needs translation@@@
 
 در اینجا به قابلیت‌های جاوا اِسکریپت، اینکه به واسطه آن چه کارهایی می‌توان انجام داد و چه تکنولوژی‌هایی با آن به خوبی کار می‌کنند، نگاهی می‌اندازیم.  
 
@@ -82,12 +82,15 @@ Let's see what's so special about JavaScript, what we can achieve with it, and w
 
   
 
-<<<<<<< HEAD
+@@@needs translation@@@
+@@@old part@@@
 ۲. سپس آن را به زبان ماشین ترجمه می‌کند (Compile).  
-=======
+@@@old part@@@
+@@@new part@@@
     There are ways to interact with camera/microphone and other devices, but they require a user's explicit permission. So a JavaScript-enabled page may not sneakily enable a web-camera, observe the surroundings and send the information to the [NSA](https://en.wikipedia.org/wiki/National_Security_Agency).
 - Different tabs/windows generally do not know about each other. Sometimes they do; for example when one window uses JavaScript to open the other one. But even in this case, JavaScript from one page may not access the other if they come from different sites (from a different domain, protocol or port).
->>>>>>> 0599d07b3c13ee25f583fc091cead3c17a7e7779
+@@@new part@@@
+@@@needs translation@@@
 
   
 
@@ -233,10 +236,10 @@ Let's see what's so special about JavaScript, what we can achieve with it, and w
 
 - زبان‌های مختلفی وجود دارند که به جاوا اِسکریپت تبدیل می‌شوند تا بتوانند ویژگی‌های مشخصی را فراهم کنند. که پیشنهاد می‌کنیم حداقل یکی از آنها را بعد از تسلط به جاوا اِسکریپت مطالعه نمائید.  
 
-<<<<<<< HEAD
- 
-=======
+@@@needs translation@@@
+@@@new part@@@
 - JavaScript was initially created as a browser-only language, but it is now used in many other environments as well.
 - Today, JavaScript has a unique position as the most widely-adopted browser language with full integration in HTML/CSS.
 - There are many languages that get "transpiled" to JavaScript and provide certain features. It is recommended to take a look at them, at least briefly, after mastering JavaScript.
->>>>>>> 0599d07b3c13ee25f583fc091cead3c17a7e7779
+@@@new part@@@
+@@@needs translation@@@
