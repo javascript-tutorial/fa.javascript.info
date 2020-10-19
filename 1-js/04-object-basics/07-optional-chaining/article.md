@@ -10,15 +10,22 @@
 
 برای مثال, بیاید یک شی(object) برای اطلاعات کاربران در نظر بگیریم. تعدادی از کاربران ما آدرس را در ویژگی `user.address` و خیابان را در ویژگی `user.address.street` دارند ولی تعدادی کمی از آن ها آدرس را ارائه نکرده‌اند.
 
+<<<<<<< HEAD
 در این صورت تلاش ما برای دستیابی به `user.address.street` با شکست مواجه خواهد شد
 
+=======
+As an example, consider objects for user data. Most of our users have addresses in `user.address` property, with the street `user.address.street`, but some did not provide them.
+
+In such case, when we attempt to get `user.address.street`, we may get an error:
+>>>>>>> d6e88647b42992f204f57401160ebae92b358c0d
 
 ```js run
-let user = {}; // the user without "address" property
+let user = {}; // a user without "address" property
 
 alert(user.address.street); // Error!
 ```
 
+<<<<<<< HEAD
 این یک خروجی قابل حدس است٬ جاوااسکریپت اینگونه کار میکند٬ ولی در مثال های عملی ترجیح میدهیم ‍``undefined`` دریافت کنیم به جای خطا.
 
 یا مثالی دیگر در توسعه وب٬ ما میخواهیم اطلاعاتی در مورد اِلمانی در صفحه را بگیریم٬ که ممکن بعضی اوقات وجود نداشته باشد :
@@ -26,34 +33,81 @@ alert(user.address.street); // Error!
 
 
 یا در توسعه وب٬ ما میخواهیم اطلاعاتی در مورد اِلمان در صفحه را بگیریم٬ ولی شاید وجود نداشته باشد :
+=======
+That's the expected result, JavaScript works like this. As `user.address` is `undefined`, the attempt to get `user.address.street` fails with an error. Although, in many practical cases we'd prefer to get `undefined` instead of an error here (meaning "no street").
+
+...And another example. In the web development, we may need the information about an element on the page. The element is returned by `document.querySelector('.elem')`, and the catch is again - that it sometimes doesn't exist:
+>>>>>>> d6e88647b42992f204f57401160ebae92b358c0d
 
 ```js run
-// Error if the result of querySelector(...) is null
-let html = document.querySelector('.my-element').innerHTML;
+// the result of the call document.querySelector('.elem') may be an object or null
+let html = document.querySelector('.elem').innerHTML; // error if it's null
 ```
 
+<<<<<<< HEAD
 
 
 قبل از اینکه  `?.`  در زبان وجود داشته باشد از عمگر `&&` برای کار در این مورد استفاده میشد. برای مثال :
+=======
+Once again, we may want to avoid the error in such case.
+
+How can we do this?
+
+The obvious solution would be to check the value using `if` or the conditional operator `?`, before accessing it, like this:
+
+```js
+let user = {};
+
+alert(user.address ? user.address.street : undefined);
+```
+
+...But that's quite inelegant. As you can see, the `user.address` is duplicated in the code. For more deeply nested properties, that becomes a problem.
+
+E.g. let's try getting `user.address.street.name`.
+
+We need to check both `user.address` and `user.address.street`:
+
+```js
+let user = {}; // user has no address
+
+alert(user.address ? user.address.street ? user.address.street.name : null : null);
+```
+
+That looks awful.
+
+Before the optional chaining `?.` was added to the language, people used the `&&` operator for such cases:
+>>>>>>> d6e88647b42992f204f57401160ebae92b358c0d
 
 ```js run
 let user = {}; // user has no address
 
-alert( user && user.address && user.address.street ); // undefined (no error)
+alert( user.address && user.address.street && user.address.street.name ); // undefined (no error)
 ```
 
+<<<<<<< HEAD
 AND کردن کل مسیر رسیدن به ویژگی ، وجود همه اجزا را تضمین می کند(اگر ارزیابی متوقف نشود) ، اما نوشتن آن دست و پا گیر است.
 
 
 ## زنجیره ای اختیاری
+=======
+AND'ing the whole path to the property ensures that all components exist (if not, the evaluation stops), but also isn't ideal.
+
+As you can see, the property names are still duplicated in the code. E.g. in the code above, `user.address` appears three times.
+
+And now, finally, the optional chaining comes to the rescue!
+>>>>>>> d6e88647b42992f204f57401160ebae92b358c0d
 
 زنجیره ای اختیاری `?.` ارزیابی را متوقف میکند  اگر مقدار قبل از قسمت  `?.`  برابر با `undefined` یا `null` باشد و مقدار `undefined` را برمیگرداند.
 
 **در ادامه این مقاله ، به اختصار خواهیم گفت چیزی وجود خواهد داشت اگر که `undefined` و `null`  نباشد.**
 
 
+<<<<<<< HEAD
 
 این یک مسیر امن برای دستیابی  `user.address.street` است :
+=======
+Here's the safe way to access `user.address.street` using `?.`:
+>>>>>>> d6e88647b42992f204f57401160ebae92b358c0d
 
 ```js run
 let user = {}; // user has no address
@@ -61,9 +115,15 @@ let user = {}; // user has no address
 alert( user?.address?.street ); // undefined (no error)
 ```
 
+<<<<<<< HEAD
 
 
 خواندن آدرس با  `user?.address` کار خواهد کرد حتی زمانی هم که  شی `user` وجود ندارد :
+=======
+The code is short and clean, there's no duplication at all.
+
+Reading the address with `user?.address` works even if `user` object doesn't exist:
+>>>>>>> d6e88647b42992f204f57401160ebae92b358c0d
 
 ```js run
 let user = null;
@@ -76,11 +136,19 @@ alert( user?.address.street ); // undefined
 
 در مثال بالا `user?.`  به `user` مقدار `null/undefined` خواهد داد.
 
+<<<<<<< HEAD
+=======
+In the example above, `user?.address.street` allows only `user` to be `null/undefined`.
+>>>>>>> d6e88647b42992f204f57401160ebae92b358c0d
 
 
 از طرف دیگر ، اگر ‍‍`user` وجود داشته باشد ، پس باید ویژگی `user.address` داشته باشد ، در غیر این صورت `user؟.address.street `در نقطه دوم خطا می دهد.
 
+<<<<<<< HEAD
 ```warn header="از زنجیر اختیاری بیش از حد استفاده تکنید"
+=======
+For example, if according to our coding logic `user` object must exist, but `address` is optional, then we should write `user.address?.street`, but not `user?.address?.street`.
+>>>>>>> d6e88647b42992f204f57401160ebae92b358c0d
 
 ما باید از `?.` فقط زمانی استفاده کنیم که عدم وجود چیزی اشکالی ندارد
 
@@ -99,8 +167,15 @@ alert( user?.address.street ); // undefined
 // ReferenceError: user is not defined
 user?.address;
 ```
+<<<<<<< HEAD
 باید تعریفی باشد( `let/const/var user `  ). زنجیره ای اختیاری فقط برای متغیرهای تعریف شده کار می کند.
 باید `let/const/var user `  وجود داشته باشد. زنجیره ای اختیاری فقط برای متغیرهای تعریف شده کار می کند.
+=======
+The variable must be declared (e.g. `let/const/var user` or as a function parameter). The optional chaining works only for declared variables.
+````
+
+## Short-circuiting
+>>>>>>> d6e88647b42992f204f57401160ebae92b358c0d
 
 ````
 
