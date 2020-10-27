@@ -10,23 +10,16 @@
 
 برای مثال, بیاید یک شی(object) برای اطلاعات کاربران در نظر بگیریم. تعدادی از کاربران ما آدرس را در ویژگی `user.address` و خیابان را در ویژگی `user.address.street` دارند ولی تعدادی کمی از آن ها آدرس را ارائه نکرده‌اند.
 
-<<<<<<< HEAD
 @@@needs translation@@@
 @@@old part@@@
 در این صورت تلاش ما برای دستیابی به `user.address.street` با شکست مواجه خواهد شد
 @@@old part@@@
 @@@new part@@@
 As an example, consider objects for user data. Most of our users have addresses in `user.address` property, with the street `user.address.street`, but some did not provide them.
+Most of our users have addresses in `user.address` property, with the street `user.address.street`, but some did not provide them.
 In such case, when we attempt to get `user.address.street`, we may get an error:
 @@@new part@@@
 @@@needs translation@@@
-=======
-As an example, let's say we have `user` objects that hold the information about our users. 
-
-Most of our users have addresses in `user.address` property, with the street `user.address.street`, but some did not provide them.
-
-In such case, when we attempt to get `user.address.street`, and the user happens to be without an address, we get an error:
->>>>>>> 2d5be7b7307b0a4a85e872d229e0cebd2d8563b5
 
 ```js run
 let user = {}; // a user without "address" property
@@ -34,7 +27,6 @@ let user = {}; // a user without "address" property
 alert(user.address.street); // Error!
 ```
 
-<<<<<<< HEAD
 @@@needs translation@@@
 @@@old part@@@
 این یک خروجی قابل حدس است٬ جاوااسکریپت اینگونه کار میکند٬ ولی در مثال های عملی ترجیح میدهیم ‍``undefined`` دریافت کنیم به جای خطا.
@@ -48,32 +40,23 @@ alert(user.address.street); // Error!
 @@@new part@@@
 That's the expected result, JavaScript works like this. As `user.address` is `undefined`, the attempt to get `user.address.street` fails with an error. Although, in many practical cases we'd prefer to get `undefined` instead of an error here (meaning "no street").
 
+In many practical cases we'd prefer to get `undefined` instead of an error here (meaning "no street").
+
 ...And another example. In the web development, we may need the information about an element on the page. The element is returned by `document.querySelector('.elem')`, and the catch is again - that it sometimes doesn't exist:
 @@@new part@@@
 @@@needs translation@@@
-=======
-That's the expected result. JavaScript works like this. As `user.address` is `undefined`, an attempt to get `user.address.street` fails with an error. 
-
-In many practical cases we'd prefer to get `undefined` instead of an error here (meaning "no street").
-
-...And another example. In the web development, we can get an object that corresponds to a web page element using a special method call, such as `document.querySelector('.elem')`, and it returns `null` when there's no such element.
->>>>>>> 2d5be7b7307b0a4a85e872d229e0cebd2d8563b5
 
 ```js run
 // document.querySelector('.elem') is null if there's no element
 let html = document.querySelector('.elem').innerHTML; // error if it's null
 ```
 
-<<<<<<< HEAD
 @@@needs translation@@@
 @@@old part@@@
 قبل از اینکه  `?.`  در زبان وجود داشته باشد از عمگر `&&` برای کار در این مورد استفاده میشد. برای مثال :
 @@@old part@@@
 @@@new part@@@
-Once again, we may want to avoid the error in such case.
-=======
 Once again, if the element doesn't exist, we'll get an error accessing `.innerHTML` of `null`. And in some cases, when the absence of the element is normal, we'd like to avoid the error and just accept `html = null` as the result.
->>>>>>> 2d5be7b7307b0a4a85e872d229e0cebd2d8563b5
 
 How can we do this?
 
@@ -99,13 +82,10 @@ alert(user.address ? user.address.street ? user.address.street.name : null : nul
 
 That's just awful, one may even have problems understanding such code. 
 
-<<<<<<< HEAD
 Before the optional chaining `?.` was added to the language, people used the `&&` operator for such cases:
+Don't even care to, as there's a better way to write it, using the `&&` operator:
 @@@new part@@@
 @@@needs translation@@@
-=======
-Don't even care to, as there's a better way to write it, using the `&&` operator:
->>>>>>> 2d5be7b7307b0a4a85e872d229e0cebd2d8563b5
 
 ```js run
 let user = {}; // user has no address
@@ -125,27 +105,22 @@ AND'ing the whole path to the property ensures that all components exist (if not
 
 As you can see, property names are still duplicated in the code. E.g. in the code above, `user.address` appears three times.
 
-<<<<<<< HEAD
 And now, finally, the optional chaining comes to the rescue!
 @@@new part@@@
 @@@needs translation@@@
 
+@@@needs translation@@@
+@@@old parts@@@
 زنجیره ای اختیاری `?.` ارزیابی را متوقف میکند  اگر مقدار قبل از قسمت  `?.`  برابر با `undefined` یا `null` باشد و مقدار `undefined` را برمیگرداند.
-=======
-That's why the optional chaining `?.` was added to the language. To solve this problem once and for all!
->>>>>>> 2d5be7b7307b0a4a85e872d229e0cebd2d8563b5
-
 **در ادامه این مقاله ، به اختصار خواهیم گفت چیزی وجود خواهد داشت اگر که `undefined` و `null`  نباشد.**
-
-<<<<<<< HEAD
-=======
+@@@old parts@@@
+@@@new parts@@@
 The optional chaining `?.` stops the evaluation if the part before `?.` is `undefined` or `null` and returns that part.
->>>>>>> 2d5be7b7307b0a4a85e872d229e0cebd2d8563b5
+@@@new parts@@@
+@@@needs translation@@@
 
 @@@needs translation@@@
 @@@old part@@@
-
-<<<<<<< HEAD
 این یک مسیر امن برای دستیابی  `user.address.street` است :
 @@@old part@@@
 @@@new part@@@
@@ -153,8 +128,6 @@ The optional chaining `?.` stops the evaluation if the part before `?.` is `unde
 In other words, `value?.prop`:
 - is the same as `value.prop` if `value` exists,
 - otherwise (when `value` is `undefined/null`) it returns that `value`.
-
->>>>>>> 2d5be7b7307b0a4a85e872d229e0cebd2d8563b5
 Here's the safe way to access `user.address.street` using `?.`:
 @@@new part@@@
 @@@needs translation@@@
@@ -187,18 +160,14 @@ alert( user?.address.street ); // undefined
 
 لطفا توجه داشته باشید : سینتکس `?.` مقدارهای قبلی را اختیاری میکند نه مقدارهای جلوی آن را.
 
-<<<<<<< HEAD
 در مثال بالا `user?.`  به `user` مقدار `null/undefined` خواهد داد.
 
 @@@needs translation@@@
 @@@new part@@@
 In the example above, `user?.address.street` allows only `user` to be `null/undefined`.
+E.g. in `user?.address.street.name` the `?.` allows `user` to be `null/undefined`, but it's all it does. Further properties are accessed in a regular way. If we want some of them to be optional, then we'll need to replace more `.` with `?.`.
 @@@new part@@@
 @@@needs translation@@@
-
-=======
-E.g. in `user?.address.street.name` the `?.` allows `user` to be `null/undefined`, but it's all it does. Further properties are accessed in a regular way. If we want some of them to be optional, then we'll need to replace more `.` with `?.`.
->>>>>>> 2d5be7b7307b0a4a85e872d229e0cebd2d8563b5
 
 از طرف دیگر ، اگر ‍‍`user` وجود داشته باشد ، پس باید ویژگی `user.address` داشته باشد ، در غیر این صورت `user؟.address.street `در نقطه دوم خطا می دهد.
 
