@@ -2,6 +2,7 @@
 
 This repository hosts the translation of <https://javascript.info> in Persian (Farsi).
 
+## Telegram Group: @jsforeveryone
 
 **That's how you can contribute:**
 
