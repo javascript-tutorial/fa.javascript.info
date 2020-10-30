@@ -4,63 +4,38 @@
 ###### زنجیره ای اختیاری روشی بدون خطا برای دستیابی به ویژگی های(properties) داخلی شی است حتی در زمانی که ویژگی میانی وجود نداشته باشد
 
 
-## مشکل
+## مشکل ویژگی‌های که وجود ندارند
 
 اگر به تازگی شروع به خواندن آموزش و یادگیری جاوا اسکریپت کرده اید ، شاید این مشکل هنوز شما را لمس نکرده اید ، اما این یک مشکل کاملاً رایج است.
 
-برای مثال, بیاید یک شی(object) برای اطلاعات کاربران در نظر بگیریم. تعدادی از کاربران ما آدرس را در ویژگی `user.address` و خیابان را در ویژگی `user.address.street` دارند ولی تعدادی کمی از آن ها آدرس را ارائه نکرده‌اند.
+برای مثال, بیاید یک شی(object) برای ذخیره کردن اطلاعات کاربرانمان در نظر بگیریم.  اکثر کاربران ما ویژگی(property) آدرس را در `user.address` و خیابان  را در `user.address.street` را دارند ولی بعضی از انان این اطلاعات را ارائه نکرده اند.
 
-@@@needs translation@@@
-@@@old part@@@
-در این صورت تلاش ما برای دستیابی به `user.address.street` با شکست مواجه خواهد شد
-@@@old part@@@
-@@@new part@@@
-As an example, consider objects for user data. Most of our users have addresses in `user.address` property, with the street `user.address.street`, but some did not provide them.
-Most of our users have addresses in `user.address` property, with the street `user.address.street`, but some did not provide them.
-In such case, when we attempt to get `user.address.street`, we may get an error:
-@@@new part@@@
-@@@needs translation@@@
+در همچین مثالی تلاش ما برای دریافت مقدار  `user.address.street`, برای کاربری که آدرس ندارد با خطا مواجه شود :
 
 ```js run
-let user = {}; // a user without "address" property
+let user = {}; // یک کاربر بدون ویژگی "address"
 
-alert(user.address.street); // Error!
+alert(user.address.street); // خطا
 ```
 
-@@@needs translation@@@
-@@@old part@@@
-این یک خروجی قابل حدس است٬ جاوااسکریپت اینگونه کار میکند٬ ولی در مثال های عملی ترجیح میدهیم ‍``undefined`` دریافت کنیم به جای خطا.
-
-یا مثالی دیگر در توسعه وب٬ ما میخواهیم اطلاعاتی در مورد اِلمانی در صفحه را بگیریم٬ که ممکن بعضی اوقات وجود نداشته باشد :
 
 
+این یک خروجی قابل حدس است٬ جاوااسکریپت اینگونه کار میکند٬تا زمانی که `user.address`  برابر با `undefined` است تلاش برای گرفتن آن با خطا مواجه میشود. ولی  در بسیاری از موارد عملی ، ما ترجیح می دهیم به جای خطا ، ‍``undefined``  را دریافت کنیم (به معنای "بدون خیابان").
 
-یا در توسعه وب٬ ما میخواهیم اطلاعاتی در مورد اِلمان در صفحه را بگیریم٬ ولی شاید وجود نداشته باشد :
-@@@old part@@@
-@@@new part@@@
-That's the expected result, JavaScript works like this. As `user.address` is `undefined`, the attempt to get `user.address.street` fails with an error. Although, in many practical cases we'd prefer to get `undefined` instead of an error here (meaning "no street").
-
-In many practical cases we'd prefer to get `undefined` instead of an error here (meaning "no street").
-
-...And another example. In the web development, we may need the information about an element on the page. The element is returned by `document.querySelector('.elem')`, and the catch is again - that it sometimes doesn't exist:
-@@@new part@@@
-@@@needs translation@@@
+یا مثالی دیگر در توسعه وب٬ ما میخواهیم اطلاعاتی در مورد اِلمانی در صفحه را بگیریم.این اِلمان  توسط این عبارت `document.querySelector('.elem')` گرفته میشود که ممکن است گاهی وجود نداشته باشد:
 
 ```js run
-// document.querySelector('.elem') is null if there's no element
-let html = document.querySelector('.elem').innerHTML; // error if it's null
+// document.querySelector('.elem') NULL خواهد شد اکر المنت وچود نداشته باشد
+let html = document.querySelector('.elem').innerHTML; // اگر مقدار NULL باشد خطا خواهد داد
 ```
 
-@@@needs translation@@@
-@@@old part@@@
-قبل از اینکه  `?.`  در زبان وجود داشته باشد از عمگر `&&` برای کار در این مورد استفاده میشد. برای مثال :
-@@@old part@@@
-@@@new part@@@
-Once again, if the element doesn't exist, we'll get an error accessing `.innerHTML` of `null`. And in some cases, when the absence of the element is normal, we'd like to avoid the error and just accept `html = null` as the result.
 
-How can we do this?
 
-The obvious solution would be to check the value using `if` or the conditional operator `?`, before accessing its property, like this:
+یکبار دیگر٬ اگر اِلمان وجود نداشته باشد ما نمیتوانیم با مقدار  NULL نمیتوانیم به  `.innerHTML` دسترسی داشته باشیم. و در بعضی موارد ، وقتی اِلمان طبیعی است ، ما می خواهیم از خطا جلوگیری کنیم و فقط "html = null" را قبول کنیم. 
+
+چگونه میتوانیم از این استفاده کنیم ؟
+
+راه‌حل روشن این است که مقدار آن را با `if` یا عمگر شرطی `?` بررسی کنیم قبل از اینکه  به ویژگی(property) آن دسترسی پیدا کنیم.
 
 ```js
 let user = {};
@@ -68,88 +43,64 @@ let user = {};
 alert(user.address ? user.address.street : undefined);
 ```
 
-It works, there's no error... But it's quite inelegant. As you can see, the `"user.address"` appears twice in the code. For more deeply nested properties, that becomes a problem as more repetitions are required.
+الان بدون خطا کار میکند... ولی اصلا زیبا نیست. همانطور که میبینید مقدار`"user.address"`  دوبار در کد تکرار شده است. برای دسترسی به ویژگی‌های(property) با تو در تویی زیاد نیاز به تکرار بیشتری لازم است و این مشکل ایجاد میکند. 
 
-E.g. let's try getting `user.address.street.name`.
+برای مثال بیاید مقدار  `user.address.street.name`. را بگیریم
 
-We need to check both `user.address` and `user.address.street`:
+ما باید هم  `user.address`  و    `user.address.street` را بررسی کنیم :
 
 ```js
-let user = {}; // user has no address
+let user = {}; // کاربر بدون آدرس
 
 alert(user.address ? user.address.street ? user.address.street.name : null : null);
 ```
 
-That's just awful, one may even have problems understanding such code. 
+این افتضاح است یک نفر حتی با درک این کد مشکل داشته باشد.
 
-Before the optional chaining `?.` was added to the language, people used the `&&` operator for such cases:
-Don't even care to, as there's a better way to write it, using the `&&` operator:
-@@@new part@@@
-@@@needs translation@@@
+قبل از اینکه زنجیره اختیاری به جاواسکریپت اضافه شود مردم از عملگر `&&` برای بعضی مواقع استفاده میکردند:
+
+نگران نباشید٬ راه های بهتری  هم هست میتوانیم از عملگر `&&` استفاده کنیم.
 
 ```js run
-let user = {}; // user has no address
+let user = {}; // کاربر بدون آدرس
 
-alert( user.address && user.address.street && user.address.street.name ); // undefined (no error)
+alert( user.address && user.address.street && user.address.street.name ); // undefined (بدون خطا)
 ```
 
-@@@needs translation@@@
-@@@old part@@@
 AND کردن کل مسیر رسیدن به ویژگی ، وجود همه اجزا را تضمین می کند(اگر ارزیابی متوقف نشود) ، اما نوشتن آن دست و پا گیر است.
+
+همانطور که میبنید نام ویژگی ها همچنان در کد تکرار میشوند. به طور مثال در قطعه کد بالا `user.address` سه بار تکرار شده است.
+
+و حالا در نهایت زنجیره اختیاری آمده است که ما را نجات دهد!
 
 
 ## زنجیره ای اختیاری
-@@@old part@@@
-@@@new part@@@
-AND'ing the whole path to the property ensures that all components exist (if not, the evaluation stops), but also isn't ideal.
 
-As you can see, property names are still duplicated in the code. E.g. in the code above, `user.address` appears three times.
-
-And now, finally, the optional chaining comes to the rescue!
-@@@new part@@@
-@@@needs translation@@@
-
-@@@needs translation@@@
-@@@old parts@@@
 زنجیره ای اختیاری `?.` ارزیابی را متوقف میکند  اگر مقدار قبل از قسمت  `?.`  برابر با `undefined` یا `null` باشد و مقدار `undefined` را برمیگرداند.
-**در ادامه این مقاله ، به اختصار خواهیم گفت چیزی وجود خواهد داشت اگر که `undefined` و `null`  نباشد.**
-@@@old parts@@@
-@@@new parts@@@
-The optional chaining `?.` stops the evaluation if the part before `?.` is `undefined` or `null` and returns that part.
-@@@new parts@@@
-@@@needs translation@@@
 
-@@@needs translation@@@
-@@@old part@@@
-این یک مسیر امن برای دستیابی  `user.address.street` است :
-@@@old part@@@
-@@@new part@@@
-=======
-In other words, `value?.prop`:
-- is the same as `value.prop` if `value` exists,
-- otherwise (when `value` is `undefined/null`) it returns that `value`.
-Here's the safe way to access `user.address.street` using `?.`:
-@@@new part@@@
-@@@needs translation@@@
+**در ادامه این مقاله ، به اختصار ، خواهیم گفت که اگر چیزی `null` و `undefined` نباشد ، "وجود دارد".**
+
+
+
+یا به عبارت دیگر  `value?.prop` :
+
+- برابر است با `value.prop` اگر `value‍` وجود داشته باشد
+
+- در غیر اینصورت (زمانی که `value` برابر با `undefined/null` است) مقدار `value` را برمیگرداند.
+
+   
+
+`.?` این یک دسترسی مطمئن به `user.address.street`  است.
 
 ```js run
-let user = {}; // user has no address
+let user = {}; // کاربر بدون آدرس
 
 alert( user?.address?.street ); // undefined (no error)
 ```
 
-@@@needs translation@@@
-@@@old part@@@
+حالا کد کوتاه و تمیز است و بدون هیچ تکرار اضافه‌ای
 
-
-خواندن آدرس با  `user?.address` کار خواهد کرد حتی زمانی هم که  شی `user` وجود ندارد :
-@@@old part@@@
-@@@new part@@@
-The code is short and clean, there's no duplication at all.
-
-Reading the address with `user?.address` works even if `user` object doesn't exist:
-@@@new part@@@
-@@@needs translation@@@
+خواندن ویژگی(property) آدرس با  `user?.address` کار خواهد کرد حتی زمانی هم که  شی(آبجکت) `user` وجود ندارد :
 
 ```js run
 let user = null;
@@ -162,29 +113,18 @@ alert( user?.address.street ); // undefined
 
 در مثال بالا `user?.`  به `user` مقدار `null/undefined` خواهد داد.
 
-@@@needs translation@@@
-@@@new part@@@
-In the example above, `user?.address.street` allows only `user` to be `null/undefined`.
-E.g. in `user?.address.street.name` the `?.` allows `user` to be `null/undefined`, but it's all it does. Further properties are accessed in a regular way. If we want some of them to be optional, then we'll need to replace more `.` with `?.`.
-@@@new part@@@
-@@@needs translation@@@
+در مثال بالا  `user?.address.street`  فقط به  `user‍`  اجازه میدهد که `null/undefined` باشد. مثلا در این کد `user?.address.street.name`  عبارت ‍`.?` اجازه میدهد که `user` برابر با `null/undefined`  باشد. این همه کاری است که انجام میدهد. ویژگی های جلویی به سبک معمولی به ویژگی ها دسترسی دارند.اگر ما میخواهیم بعضی از ویژگی ها را اختیاری کنیم میتوانیم تعداد بیشتری از `.` را با `.?` جایگزین کنیم
+
+
 
 از طرف دیگر ، اگر ‍‍`user` وجود داشته باشد ، پس باید ویژگی `user.address` داشته باشد ، در غیر این صورت `user؟.address.street `در نقطه دوم خطا می دهد.
 
-@@@needs translation@@@
-@@@old part@@@
 ```warn header="از زنجیر اختیاری بیش از حد استفاده تکنید"
-@@@old part@@@
-@@@new part@@@
-For example, if according to our coding logic `user` object must exist, but `address` is optional, then we should write `user.address?.street`, but not `user?.address?.street`.
-@@@new part@@@
-@@@needs translation@@@
-
-ما باید از `?.` فقط زمانی استفاده کنیم که عدم وجود چیزی اشکالی ندارد
-
-به عنوان مثال ، اگر مطابق منطق برنامه نویسی ما ، شی `user` باید وجود داشته باشد ولی `address` اختیاری است در آن شرایط استفاده از `user.address?.street` راه حل بهتری است ،
-
-بنابراین ، اگر تصادفاً به دلیل اشتباهی ‍`user`  برابر با `undefined` باشد، شاهد یک خطای برنامه نویسی در مورد آن خواهیم بود و آن را برطرف خواهیم کرد. در غیر این صورت ، خطاهای کد را می توان در مواردی که مناسب نیست ساکت کرد٬ و کار اشکال زدایی را سخت تر میکند.
+ما باید از `?.` فقط زمانی استفاده کنیم که عدم وجود چیزی اشکالی ندارد.
+برای مثال اگر طبق منطق و لاجیک ما باید شی(object)`user` وجود داشته باشد ولی `address` اختیاری است. 
+   پس ما باید اینگونه بنویسیم `user.address?.street` نه `user?.address?.street`
+   
+بنابراین ، اگر تصادفاً به دلیل اشتباهی ‍`user`  برابر با `undefined` باشد، شاهد یک خطای برنامه نویسی در مورد آن خواهیم بود و آن را برطرف خواهیم کرد. در غیر این صورت ، خطاهای کد را می توان در مواردی که مناسب نیست ساکت کرد٬ و این کار اشکال زدایی را سخت تر میکند.
 ```
 
 
@@ -197,22 +137,12 @@ For example, if according to our coding logic `user` object must exist, but `add
 // ReferenceError: user is not defined
 user?.address;
 ```
-@@@needs translation@@@
-@@@old part@@@
-باید تعریفی باشد( `let/const/var user `  ). زنجیره ای اختیاری فقط برای متغیرهای تعریف شده کار می کند.
-باید `let/const/var user `  وجود داشته باشد. زنجیره ای اختیاری فقط برای متغیرهای تعریف شده کار می کند.
-@@@old part@@@
-@@@new part@@@
-The variable must be declared (e.g. `let/const/var user` or as a function parameter). The optional chaining works only for declared variables.
-````
-
-## Short-circuiting
-@@@new part@@@
-@@@needs translation@@@
+باید متغیر تعریف شده باشد( `let/const/var user ` یا توابع  ). زنجیره ای اختیاری فقط برای متغیرهای تعریف شده کار می کند.
+	
 
 ````
-
 ## اتصال کوتاه
+
 همانطور که قبلا گفته شد عبارت `?.` فوراً ارزیابی را متوقف میکند(اتصال کوتاه) اگر عبارت سمت چپ آن وجود نداشته باشد.
 بنابراین ، اگر صدا زدن تابعی یا عوارض جانبی دیگری وجود داشته باشد ، اتفاق نمی‌افتد.
 
@@ -225,7 +155,7 @@ let x = 0;
 user?.sayHi(x++); // no "sayHi", so the execution doesn't reach x++
 
 alert(x); // 0, value not incremented
-```
+​```
 
 
 
@@ -237,7 +167,7 @@ alert(x); // 0, value not incremented
 
 در کد زیر٬ برخی از کاربران ما متد `admin` را دارند و برخی خیر :
 
-```js run
+​```js run
 let userAdmin = {
   admin() {
     alert("I am admin");
@@ -251,9 +181,9 @@ userAdmin.admin?.(); // I am admin
 */!*
 
 *!*
-userGuest.admin?.(); // nothing (no such method)
+userGuest.admin?.(); // هیچی (هیچ متدی نیست)
 */!*
-```
+​```
 
 در اینجا در هر دو خط ما ابتدا از `.`  (`user1.admin`) برای گرفتن ویژگی ‍`admin` استفاده میکنیم به خاطر اینکه شی ‍`user` حتما وجود دارد پس برای خواندن از آن مطمئن هستیم.
 
@@ -261,7 +191,7 @@ userGuest.admin?.(); // nothing (no such method)
 
 سینتکس برای حالت `?.[]` نیز کار میکند٬ اگر ما میخواهیم از براکت به جای نقطه برای دستیابی به ویژگی‌ها استفاده کنیم مشابه موارد قبلی ، اجازه می دهد تا با خیال راحت یک ویژگی را از یک شی که ممکن است وجود نداشته باشد،  را بخوانیم.
 
-```js run
+​```js run
 let user1 = {
   firstName: "John"
 };
@@ -274,29 +204,33 @@ alert( user1?.[key] ); // John
 alert( user2?.[key] ); // undefined
 
 alert( user1?.[key]?.something?.not?.existing); // undefined
-```
+​```
 
 
 
 همچنان ما میتوانیم از `?.` در  `delete` هم استفاده کنیم
 
-```js run
+​```js run
 delete user?.name; // delete user.name if user exists
-```
 
-````warn header="ما میتوانیم از`؟.` برای پاک کردن و خواندن مطمئن استفاده کنیم ولی نوشتن نه."
+​```
+​````warn header="ما میتوانیم از`؟.` برای پاک کردن و خواندن مطمئن استفاده کنیم ولی نوشتن نه."
 زنجیره اختیاری `?.` هیچ کاربردی برای سمت چپ مساوی ندارد.
 
 
 برای مثال:
-```js run
+​```js run
 let user = null;
 
 user?.name = "John"; // Error, doesn't work
 // because it evaluates to undefined = "John"
-```
+​```
 
 آنقدرها هم هوشمند نیست.
+
+````
+
+
 
 
 
@@ -311,8 +245,8 @@ user?.name = "John"; // Error, doesn't work
 
 همانطور که می بینیم ، همه آنها ساده و آسان برای استفاده هستند. `?.`  سمت چپ را از نظر `null/undefined` بررسی می کند و اجازه می دهد تا ارزیابی ادامه یابد اگر برابر با  `null/undefined`  نباشد.
 
-زنجیر `?.` امکان دسترسی به خواص تودرتو را فراهم میکند.
+زنجیر `?.` امکان دسترسی به خواص تودرتو را هم فراهم میکند.
 
-با این حال هنوز ما باید `?.` را با دقت اعمال کنیم ، فقط درصورتی قابل قبو است که سمت چپ ممکن است وجود نداشته باشد.
+با این حال هنوز ما باید `?.` را با دقت اعمال کنیم ، فقط درصورتی قابل قبول است که سمت چپ ممکن است وجود نداشته باشد.
 
 با این حال خطاهای برنامه نویسی را از ما مخفی نمیکند اگر آنها اتفاق بیافتند.
