@@ -360,7 +360,7 @@ function pow(x, n) {
   },
   "rules": {
     "no-console": 0,
-    "indent": ["warning", 2]
+    "indent": 2
   }
 }
 ```

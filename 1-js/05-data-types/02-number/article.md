@@ -401,8 +401,12 @@ alert( Math.pow(2, 10) ); // دو به توان ده = 1024
 
 برای نوشتن اعداد بزرگ
 
+<<<<<<< HEAD
 - حرف `"e"` را با تعداد صفرها به انتهای عدد اضافه کنید. مثل: `123e6` که `123` است با ۶ صفر. 
 - یک عدد منفی بعد `"e"` باعث تقسیم شدن عدد بر یک با تعداد صفر مشخص شده میشود.
+=======
+There are more functions and constants in `Math` object, including trigonometry, which you can find in the [docs for the Math object](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Math).
+>>>>>>> dccca58f268ad6d5a6f2160613a8ea3c5cd53a2d
 
 برای سیستم‌های عددی متفاوت:
 
