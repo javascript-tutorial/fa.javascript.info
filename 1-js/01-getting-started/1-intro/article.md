@@ -1,11 +1,5 @@
 # در آمدی بر جاوا اسکریپت 
 
-@@@needs translation@@@
-@@@new part@@@
-Let's see what's so special about JavaScript, what we can achieve with it, and what other technologies play well with it.
-@@@new part@@@
-@@@needs translation@@@
-
 در اینجا به قابلیت‌های جاوا اِسکریپت، اینکه به واسطه آن چه کارهایی می‌توان انجام داد و چه تکنولوژی‌هایی با آن به خوبی کار می‌کنند، نگاهی می‌اندازیم.  
 
 
@@ -44,25 +38,11 @@ Let's see what's so special about JavaScript, what we can achieve with it, and w
 
 مرورگرهای وب دارای موتوری داخلی برای اجرای جاوا اِسکریپت هستند، که گاهی آن را  **ماشین مجازی جاوا** **اِسکریپت** نیز می‌نامند.  
 
-@@@needs translation@@@
-- [V8](https://en.wikipedia.org/wiki/V8_(JavaScript_engine)) -- in Chrome and Opera.
-- [SpiderMonkey](https://en.wikipedia.org/wiki/SpiderMonkey) -- in Firefox.
-- ...There are other codenames like "Chakra" for IE, "ChakraCore" for Microsoft Edge, "Nitro" and "SquirrelFish" for Safari, etc.
-@@@needs translation@@@
-
 موتورهای مختلف دارای **اسم رمز** خاص خود هستند، برای نمونه :  
 
-  
-
-[V8](https://en.wikipedia.org/wiki/V8_(JavaScript_engine)) برای مرورگرهای کروم و اُپِرا 
-
-  
-
-[Spider Monkey](https://en.wikipedia.org/wiki/SpiderMonkey) برای مرورگر فایرفاکس  
-
-اسم رمزهای دیگری چون **Trident** ، **Chakra** برای نسخه‌های مختلف **IE** ، همینطور **ChakraCore** برای مرورگر اِج مایکروسافت، و **Nitro** ، **SquireFish** برای مرورگر سافاری وجود دارند.  
-
-  
+- [V8](https://en.wikipedia.org/wiki/V8_(JavaScript_engine)) برای مرورگرهای کروم و اُپِرا 
+- [SpiderMonkey](https://en.wikipedia.org/wiki/SpiderMonkey) برای مرورگر فایرفاکس  
+- اسم رمزهای دیگری چون **Trident** ، **Chakra** برای نسخه‌های مختلف **IE** ، همینطور **ChakraCore** برای مرورگر اِج مایکروسافت، و **Nitro** ، **SquireFish** برای مرورگر سافاری وجود دارند.  
 
 بخاطر سپردن این نام‌ها مفید هستند، چراکه در مقالات مختلف به آنها بر خواهید خورد، همینطور زمانیکه ما در این آموزش برای نمونه می‌گوییم ویژگی X توسط موتور **V8** پشتیبانی می‌شود، یعنی به احتمال زیاد در مرورگرهای کروم و اپرا پشتیبانی خواهد شد.  
 
@@ -70,29 +50,11 @@ Let's see what's so special about JavaScript, what we can achieve with it, and w
 
 **موتورها** **چگونه کار** **می‌کنند** 
 
-  
-
 موتورها پیچیده هستند، ولی اساس آنها ساده است.  
-
-  
-
-  
 
 ۱. موتور در ابتدا اِسکریپت را می‌خواند (Parse).  
 
-  
-
-@@@needs translation@@@
-@@@old part@@@
-۲. سپس آن را به زبان ماشین ترجمه می‌کند (Compile).  
-@@@old part@@@
-@@@new part@@@
-    There are ways to interact with camera/microphone and other devices, but they require a user's explicit permission. So a JavaScript-enabled page may not sneakily enable a web-camera, observe the surroundings and send the information to the [NSA](https://en.wikipedia.org/wiki/National_Security_Agency).
-- Different tabs/windows generally do not know about each other. Sometimes they do, for example when one window uses JavaScript to open the other one. But even in this case, JavaScript from one page may not access the other if they come from different sites (from a different domain, protocol or port).
-@@@new part@@@
-@@@needs translation@@@
-
-  
+۲. سپس آن را به زبان ماشین ترجمه می‌کند (Compile). 
 
 ۳. در انتها کدهای ماشین به سرعت اجرا می‌شوند. 
 
@@ -150,10 +112,8 @@ Let's see what's so special about JavaScript, what we can achieve with it, and w
 
   البته مرورگرهای جدید امکان کار با فایل‌ها را به کاربرها می‌دهند، به این صورت که مثلا از تَگ <input> استفاده شود.  
 
-  همچنین راه‌هایی برای تعامل با دوربین، میکروفون و دیگر دستگاه‌ها وجود دارد، اما استفاده از چنین مواردی به اجازه صریح از طرف کاربر نیاز دارد و نمی‌توان به صورت پنهانی از این قابلیت‌ها استفاده نمود.  
-
-  
-
+  همچنین راه‌هایی برای تعامل با دوربین، میکروفون و دیگر دستگاه‌ها وجود دارد، اما استفاده از چنین مواردی به اجازه صریح از طرف کاربر نیاز دارد و یک صفحه جاوا اسکریپت دار نمی‌تواند به صورت پنهانی دوربین را روشن کند اطلاعات اطرافش را جمع آوری کند و به [NSA](https://en.wikipedia.org/wiki/National_Security_Agency) یا سایر نهادهای اطلاعاتی ارسال کند. 
+ 
 - تب‌ها و پنجره‌ها بطور کلی در مورد یکدیگر چیزی نمی‌دانند. اما درشرایطی هم می‌دانند، بطور نمونه زمانی که یک پنجره برای باز نمودن پنجره دیگر از جاوا اِسکریپت استفاده می‌کند. اما حتی در این حالت هم ممکن است جاوا اِسکریپت به صفحات دیگر دسترسی نداشته باشد (اگر صفحات مذکور از دامنه، پروتکل یا پورت دیگری باشند).  
 
   به این موضوع Same Origin Policy گفته می‌شود. برای آنکه بتوان در این حالت کار کرد هر دو صفحه باید یک کد جاوا اِسکریپت مخصوصی داشته باشند تا بتوان این تبادل اطلاعات را انجام داد.   
@@ -204,42 +164,18 @@ Let's see what's so special about JavaScript, what we can achieve with it, and w
 
   
 
-نمونه‌هایی از این زبان‌ها :  
+نمونه‌هایی از این زبان‌ها : 
 
-  
-
-- [CoffeeScript](http://coffeescript.org/) : که سینتکس کوتاه‌تری را ارائه می‌کند و قابلیت نوشتن کدهایی تمیز و دقیق را بوجود می‌آورد.  
-
-  
-
-- [TypeScript](http://www.typescriptlang.org/) : که تمرکز اصلی خود را بر اضافه نمودن DataType ها قرار داده تا فرایند توسعه ساده‌تر شود و نرم‌افزار نهایی قابلیت‌های پیچیده‌تری را به اجرا در آورد. این زبان توسط مایکروسافت توسعه داده شده است.  
-
+- [CoffeeScript](http://coffeescript.org/) : که سینتکس کوتاه‌تری را ارائه می‌کند و قابلیت نوشتن کدهایی تمیز و دقیق را بوجود می‌آورد.که معمولا توسعه دهندگان زبان روبی به آن علاقه مند هستند. 
+- [TypeScript](http://www.typescriptlang.org/) : که تمرکز اصلی خود را بر اضافه نمودن DataType ها قرار داده تا فرایند توسعه ساده‌تر شود و نرم‌افزار نهایی قابلیت‌های پیچیده‌تری را به اجرا در آورد. این زبان توسط مایکروسافت توسعه داده شده است. 
+- [Flow](http://flow.org/) هم به شیوه دیگری DataType اضافه می کند. و توسط فیس بوک توسعه داده شده است.
 - [Dart](https://www.dartlang.org/) : که زبانی مستقل با موتور مربوط به خود بوده و در محیط‌های غیر مرورگری (مانند نرم‌افزارهای موبایل) کار می‌کند. این زبان در ابتدا توسط گوگل معرفی شد تا جایگزینی برای جاوا اِسکریپت باشد.  
-
-  
+- [Brython](https://brython.info/) یک ترانسپایلر پایتون به جاوا اسکریپت است که توسعه دهندگان را قادر می سازد برنامه هایی به زبان پایتون خالص بدون جاوا اسکریپت بنویسند.
 
 ## خلاصه 
 
-  
-
 - جاوا اِسکریپت در ابتدا برای مرورگرها ساخته شده بود ولی در حال حاضر در محیط‌های متفاوتی قابلیت اجرا دارد.  
-
-@@@needs translation@@@
-- [CoffeeScript](http://coffeescript.org/) is a "syntactic sugar" for JavaScript. It introduces shorter syntax, allowing us to write clearer and more precise code. Usually, Ruby devs like it.
-- [TypeScript](http://www.typescriptlang.org/) is concentrated on adding "strict data typing" to simplify the development and support of complex systems. It is developed by Microsoft.
-- [Flow](http://flow.org/) also adds data typing, but in a different way. Developed by Facebook.
-- [Dart](https://www.dartlang.org/) is a standalone language that has its own engine that runs in non-browser environments (like mobile apps), but also can be transpiled to JavaScript. Developed by Google.
-- [Brython](https://brython.info/) is a Python transpiler to JavaScript that allow to write application in pure Python without JavaScript.
-@@@needs translation@@@
-
 - جاوا اِسکریپت در شرایط حاضر موقعیت مشخص و منحصر بفردی در زبان‌های تحت مرورگرها دارد که تطابق کاملی با HTML و CSS را دارا می‌باشد.  
+- زبان‌های مختلفی وجود دارند که به جاوا اِسکریپت تبدیل می‌شوند تا بتوانند ویژگی‌های مشخصی را فراهم کنند. که پیشنهاد می‌کنیم حداقل یکی از آنها را بعد از تسلط به جاوا اِسکریپت مطالعه نمائید.
 
-- زبان‌های مختلفی وجود دارند که به جاوا اِسکریپت تبدیل می‌شوند تا بتوانند ویژگی‌های مشخصی را فراهم کنند. که پیشنهاد می‌کنیم حداقل یکی از آنها را بعد از تسلط به جاوا اِسکریپت مطالعه نمائید.  
 
-@@@needs translation@@@
-@@@new part@@@
-- JavaScript was initially created as a browser-only language, but it is now used in many other environments as well.
-- Today, JavaScript has a unique position as the most widely-adopted browser language with full integration in HTML/CSS.
-- There are many languages that get "transpiled" to JavaScript and provide certain features. It is recommended to take a look at them, at least briefly, after mastering JavaScript.
-@@@new part@@@
-@@@needs translation@@@
