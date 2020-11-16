@@ -88,13 +88,13 @@ AND کردن کل مسیر رسیدن به ویژگی ، وجود همه اجز�
 
 - در غیر اینصورت (زمانی که `value` برابر با `undefined/null` است) مقدار `value` را برمیگرداند.
 
-<<<<<<< HEAD
-   
-=======
+@@@needs translation@@@
+@@@new part@@@
 In other words, `value?.prop`:
 - is the same as `value.prop` if `value` exists,
 - otherwise (when `value` is `undefined/null`) it returns `undefined`.
->>>>>>> 99e59ba611ab11319ef9d0d66734b0bea2c3f058
+@@@new part@@@
+@@@needs translation@@@
 
 `.?` این یک دسترسی مطمئن به `user.address.street`  است.
 
