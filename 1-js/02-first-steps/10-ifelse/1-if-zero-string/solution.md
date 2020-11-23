@@ -1,8 +1,8 @@
-**Yes, it will.**
+**بله اجرا می شود.**
 
-Any string except an empty one (and `"0"` is not empty) becomes `true` in the logical context.
+هر رشته به جز رشته خالی (`"0"` خالی نیست!) از نظر منطقی true ارزیابی می شود.
 
-We can run and check:
+می توانیم این تکه کد را اجرا کنیم و مورد بالا را بررسی کنیم:
 
 ```js run
 if ("0") {
