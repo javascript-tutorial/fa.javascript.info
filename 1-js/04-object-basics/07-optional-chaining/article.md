@@ -6,7 +6,11 @@
 
 ## مشکل ویژگی‌های که وجود ندارند
 
+<<<<<<< HEAD
 اگر به تازگی شروع به خواندن آموزش و یادگیری جاوا اسکریپت کرده اید ، شاید این مشکل هنوز لمس نکرده اید ، اما این یک مشکل کاملاً رایج است.
+=======
+As an example, let's say we have `user` objects that hold the information about our users.
+>>>>>>> e1a3f634a47c119cf1ec7420c49fc0fc7172c0b5
 
 برای مثال, بیاید یک شی(object) برای ذخیره کردن اطلاعات کاربرانمان در نظر بگیریم.  اکثر کاربران ما ویژگی(property) آدرس را در `user.address` و خیابان  را در `user.address.street` را دارند ولی بعضی از انان این اطلاعات را ارائه نکرده اند.
 
@@ -18,6 +22,10 @@ let user = {}; // یک کاربر بدون ویژگی "address"
 alert(user.address.street); // خطا
 ```
 
+<<<<<<< HEAD
+=======
+That's the expected result. JavaScript works like this. As `user.address` is `undefined`, an attempt to get `user.address.street` fails with an error.
+>>>>>>> e1a3f634a47c119cf1ec7420c49fc0fc7172c0b5
 
 
 این یک خروجی قابل حدس است٬ جاوااسکریپت اینگونه کار میکند٬تا زمانی که `user.address`  برابر با `undefined` است تلاش برای گرفتن آن با خطا مواجه میشود. ولی  در بسیاری از موارد عملی ، ما ترجیح می دهیم به جای خطا ، ‍``undefined``  را دریافت کنیم (به معنای "بدون خیابان").
@@ -55,9 +63,13 @@ let user = {}; // کاربر بدون آدرس
 alert(user.address ? user.address.street ? user.address.street.name : null : null);
 ```
 
+<<<<<<< HEAD
 این افتضاح است یک نفر ممکن است حتی با درک این کد مشکل داشته باشد.
 
 قبل از اینکه زنجیره اختیاری به جاوااسکریپت اضافه شود مردم از عملگر `&&` برای بعضی مواقع استفاده میکردند:
+=======
+That's just awful, one may even have problems understanding such code.
+>>>>>>> e1a3f634a47c119cf1ec7420c49fc0fc7172c0b5
 
 نگران نباشید٬ راه های بهتری  هم هست میتوانیم از عملگر `&&` استفاده کنیم.
 
