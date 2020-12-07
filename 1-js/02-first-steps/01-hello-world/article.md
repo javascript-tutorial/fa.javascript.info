@@ -10,7 +10,13 @@
 
 برنامه‌های جاوا اسکریپت با کمک تگِ `<script>` می‌توانند در هر جایی از سند HTML می‌توانند قرار داده شوند.
 
+<<<<<<< HEAD
 برای نمونه :   
+=======
+JavaScript programs can be inserted almost anywhere into an HTML document using the `<script>` tag.
+
+For instance:
+>>>>>>> c56e6a57ac3497aab77128c5bfca13513980709b
 
 ```html run height=100
 <!DOCTYPE HTML>
