@@ -1,25 +1,22 @@
+# انیمیشن دایره با فراخوانی
+در تمرینِ <info:task/animate-circle> یک دایره با که انیمیشن گذاری بزرگ میشود نشان داده شده است.
 
-# Animated circle with callback
+حالا برای ما فقط یک دایره کافی نیست ما میخواهیم یک پیغام درون آن داشته باشیم. پیغام باید *بعد * از تمام شدن انیمیشن به نمایش دربیاید (دایره کامل بزرگ شود) در غیر اینصورت زننده و بدشکل خواهد بود.
+در راه حل داده شده برای تمرین تابع `showCircle(cx, cy, radius)` یک دایره رسم میکند ولی چیزی برای نشان دادن اتمام آن وجود ندارد.
 
-In the task <info:task/animate-circle> an animated growing circle is shown.
+یک آرگومانِ فراخوان به آن اضافه کنید که در زمان اتمام انیمیشن اجرا شود : `showCircle(cx, cy, raduis, callback)`.
+تابع `callback` باید `<div>` را به عنوان آرگومان بگیرد.
 
-Now let's say we need not just a circle, but to show a message inside it. The message should appear *after* the animation is complete (the circle is fully grown), otherwise it would look ugly.
-
-In the solution of the task, the function `showCircle(cx, cy, radius)` draws the circle, but gives no way to track when it's ready.
-
-Add a callback argument: `showCircle(cx, cy, radius, callback)` to be called when the animation is complete. The `callback` should receive the circle `<div>` as an argument.
-
-Here's the example:
+و یک مثال:
 
 ```js
 showCircle(150, 150, 100, div => {
-  div.classList.add('message-ball');
-  div.append("Hello, world!");
+    div.classList.add("message-ball");
+    div.append("Hello, world!");
 });
 ```
+پیش نمایش:
 
-Demo:
+[iframe src="solution" height=250]
 
-[iframe src="solution" height=260]
-
-Take the solution of the task <info:task/animate-circle> as the base.
+راه حل اراعه شده در تمرینِ <info:task/animate-circle> را به عنوان پایه استفاده کنید.
