@@ -24,14 +24,10 @@ If maintainers do not respond, or if you'd like to become a maintainer, write us
 
 Your name and the contribution size will appear in the "About project" page when the translation gets published.
 
-<<<<<<< HEAD
-P.S. The full list of languages can be found at <https://javascript.info/translate>.
-=======
 **You can edit the text in any editor.** The tutorial uses enhanced "markdown" format, easy to grasp. And if you want to see how it looks on-site, there's a server to run the tutorial locally at <https://github.com/javascript-tutorial/server>.
 
 The list of contributors is available at <https://javascript.info/about#contributors>.
->>>>>>> c56e6a57ac3497aab77128c5bfca13513980709b
-
+The full list of languages can be found at <https://javascript.info/translate>.
 ## Structure
 
 Every chapter, an article or a task resides in its own folder.
@@ -120,7 +116,6 @@ Some files, usually tasks, have YAML metadata at the top, delimited by `---`:
 ```md
 importance: 5
 
-<<<<<<< HEAD
 ---
 ...
 ```
@@ -142,8 +137,4 @@ Please don't translate or remove the `[#...]` part, it's for URL anchors.
 You can run the tutorial server locally to see how the translation looks.
 
 The server and install instructions are at <https://github.com/javascript-tutorial/server>. 
-=======
 ---  
-♥  
-Ilya Kantor @iliakan
->>>>>>> c56e6a57ac3497aab77128c5bfca13513980709b
