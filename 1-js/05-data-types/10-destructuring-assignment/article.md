@@ -1,83 +1,77 @@
-# Destructuring assignment
+# تخصیص ساختارشکنانه
 
-The two most used data structures in JavaScript are `Object` and `Array`.
+اشیا(ابجکت)و آرایه ها پرمصرفترین ساختار داده ها هستند.
 
-Objects allow us to create a single entity that stores data items by key, and arrays allow us to gather data items into an ordered collection.
+اشیا به ما اجازه میدهند که یک موجودیت که داده را با یک کلید ذخیره میکند٬ و آرایه ها به ما اجازه میدهند که داده ها را در یک مجموعه شماره گذاری شده ذخیره کنیم.
 
-But when we pass those to a function, it may need not an object/array as a whole, but rather individual pieces.
+اما زمانیکه ما آنها ره به یک تابع میدهیم٬ ممکن است یک شی یا آرایه را بطور کامل نخواهد٬ بلکه قسمت های جداگانه ای را بخواهد.
 
-*Destructuring assignment* is a special syntax that allows us to "unpack" arrays or objects into a bunch of variables, as sometimes that's more convenient. Destructuring also works great with complex functions that have a lot of parameters, default values, and so on.
+تخصیص ساختارشکنانه یک نوشتار خاص است که به ما اجازه میدهد آرایه ها یا اشیا را به تعدادی متغیر تبدیل کنیم٬ که گاهی اوقات کار کردن با آنها راحتتر شود.
+همچنین ساختارشکنی با توابع پیچیده که تعداد زیادی پارامتر٬ مقادیر پیشفرض و ... دارند.
 
-## Array destructuring
+## ساختار شکنی آرایه
 
-An example of how the array is destructured into variables:
+یک مثال از چگونگی ساختار شکنی آرایه ها:‌
 
 ```js
-// we have an array with the name and surname
-let arr = ["Ilya", "Kantor"]
+// یک آرایه شامل اسم و فامیل داریم
+let arr = ["Ilya", "Kantor"];
 
 *!*
-// destructuring assignment
-// sets firstName = arr[0]
-// and surname = arr[1]
+// تخصیص ساختارشکنانه
+// متغیر اول را به عضو اول آرایه اختصاص میدهد
+// و دومی را به دومی
 let [firstName, surname] = arr;
 */!*
 
 alert(firstName); // Ilya
-alert(surname);  // Kantor
+alert(surname); // Kantor
 ```
 
-Now we can work with variables instead of array members.
+حال میتوانی به جای کار کردن با آرایه از متغیرها استفاده کنیم.
 
-It looks great when combined with `split` or other array-returning methods:
+خیلی بهتر میشود که این را با `split` یا متد هایی که ارایه باز میگردانند ترکیب کنیم.
 
 ```js
 let [firstName, surname] = "Ilya Kantor".split(' ');
 ```
 
-````smart header="\"Destructuring\" does not mean \"destructive\"."
-It's called "destructuring assignment," because it "destructurizes" by copying items into variables. But the array itself is not modified.
+```
+به این تخصیص ساختارشکنانه میگویند٬ زیرا این ساختار را کپی کردن ایتم آیتم در متغیرها میشکند. ولی خود آرایه دست نخورده باقی میماند.
 
-It's just a shorter way to write:
+این فقط یک راه کوتاه تر برای نوشتن است.
 ```js
-// let [firstName, surname] = arr;
+//let [firstName, surname] = arr;
 let firstName = arr[0];
 let surname = arr[1];
 ```
-````
+```
 
-````smart header="Ignore elements using commas"
-Unwanted elements of the array can also be thrown away via an extra comma:
+```
+از المان هایی که نمیخواهیم میتوان با یک ویرگول اضافه چشمپوشی کرد.
 
 ```js run
 *!*
-// second element is not needed
-let [firstName, , title] = ["Julius", "Caesar", "Consul", "of the Roman Republic"];
+// نیازی به المان دوم نیست
+let [firstName, , title] = ["Julius", Cesar", "Counsul", "of the Rome Republic"];
 */!*
 
-alert( title ); // Consul
+alert(title); //Counsul
+```
+در قطعه کد بالا٬‌ از المان دوم آرایه چشمپوشی شده و سومی به `title` اختصاص داده شده است. همچنین از بقیه آیتم ها چشمپوشی شده است چون متغیری برای آنها وجود ندارد.
 ```
 
-In the code above, the second element of the array is skipped, the third one is assigned to `title`, and the rest of the array items is also skipped (as there are no variables for them).
-````
-
-````smart header="Works with any iterable on the right-side"
-
-...Actually, we can use it with any iterable, not only arrays:
-
+```
+در واقع ما میتوانیم از هر چیز پیمودنی دیگر استفاده کنیم. نه فقط آرایه ها.
+```
 ```js
-let [a, b, c] = "abc"; // ["a", "b", "c"]
+let [a ,b, c] = "abc"; // ["a", "b", "c"]
 let [one, two, three] = new Set([1, 2, 3]);
 ```
 
-````
-
-
-````smart header="Assign to anything at the left-side"
-
-We can use any "assignables" at the left side.
-
-For instance, an object property:
+```
+ما میتوانیم از هر چیز اختصاص دادنی در سمت چپ استفاده کنیم.
+```
 ```js run
 let user = {};
 [user.name, user.surname] = "Ilya Kantor".split(' ');
@@ -85,86 +79,81 @@ let user = {};
 alert(user.name); // Ilya
 ```
 
-````
+```
+در بخش قبل دیدیم که از متد [Object.entries(obj)](mdn:js/Object/entries) استفاده کردیم.
 
-````smart header="Looping with .entries()"
-
-In the previous chapter we saw the [Object.entries(obj)](mdn:js/Object/entries) method.
-
-We can use it with destructuring to loop over keys-and-values of an object:
-
+میتوانیم از ساختارشکنی برای چرخیدن روی کلید-و-مقدار های اشیا استفاده کنیم.
+```
 ```js run
 let user = {
-  name: "John",
-  age: 30
+    name: "john",
+    age: 30
 };
 
-// loop over keys-and-values
+// چرخیدن روی کلیدها و مقدارها
 *!*
-for (let [key, value] of Object.entries(user)) {
-*/!*
-  alert(`${key}:${value}`); // name:John, then age:30
+for(let [key, value] of Object.entries(user)){
+    */!*
+    alert(`${key}: ${value}`); // name:John, then age: 30
 }
 ```
 
-...And the same for a map:
-
+```
+و بطور مشابه برای پیمودن:
+```
 ```js run
 let user = new Map();
 user.set("name", "John");
 user.set("age", "30");
 
 *!*
-for (let [key, value] of user) {
+for(let [key, value] of user) {
 */!*
-  alert(`${key}:${value}`); // name:John, then age:30
+    alert(`${key}: ${value}`); // name: John, then age: 30
 }
 ```
-````
 
-```smart header="Swap variables trick"
-A well-known trick for swapping values of two variables:
-
+```
+یک ترفند خوب برای جابجا کردن مقادیر دو متغیر:‌
+```
 ```js run
 let guest = "Jane";
 let admin = "Pete";
 
-// Swap values: make guest=Pete, admin=Jane
+// جابجا کردن مقدارها
+// guest = Pete, admin= Jane
 [guest, admin] = [admin, guest];
 
 alert(`${guest} ${admin}`); // Pete Jane (successfully swapped!)
 ```
 
-Here we create a temporary array of two variables and immediately destructure it in swapped order.
-
-We can swap more than two variables this way.
 
 
-### The rest '...'
+### باقی ...
 
-If we want not just to get first values, but also to gather all that follows -- we can add one more parameter that gets "the rest" using three dots `"..."`:
+اگر بخواهیم فقط مقادیر اولیه را بگیریم٬ ولی بخواهیم همه مقادیر بعدی را بگیریم میتوانیم یک پارامتر٬ دیگر به نام باقی با استفاده از سه تا نقطه "..." اضافه کرد.
 
-```js run
-let [name1, name2, *!*...rest*/!*] = ["Julius", "Caesar", *!*"Consul", "of the Roman Republic"*/!*];
+```js
+let [name1, name2, *!*...rest*/!*] = ["Julius", "Caesar", *!*"Counsul", "of the Roman Republic"*/!*];
 
 alert(name1); // Julius
 alert(name2); // Caesar
 
 *!*
-// Note that type of `rest` is Array.
-alert(rest[0]); // Consul
+//
+alert(rest[0]); // Counsul
 alert(rest[1]); // of the Roman Republic
 alert(rest.length); // 2
 */!*
 ```
 
-The value of `rest` is the array of the remaining array elements. We can use any other variable name in place of `rest`, just make sure it has three dots before it and goes last in the destructuring assignment.
+مقدار `rest` یک آرایه از المان های باقیمانده است. میتوانیم هر نام دیگری برای متغیر `rest` استفاده کنیم٬ فقط مطمعن شوید که سه نقطه قبل از آن گذاشته اید و آخرین چیز در تخصیص ساختارشکنانه است.
 
-### Default values
+### مقادیر پیشفرض
 
-If there are fewer values in the array than variables in the assignment, there will be no error. Absent values are considered undefined:
+اگر تعداد مقادیر از تعداد متغیر های آرایه کمتر باشد خطایی ظاهر نمیشود. مقادیر غایب تعریف نشده فرض میشوند(undefined).
 
-```js run
+```js
 *!*
 let [firstName, surname] = [];
 */!*
@@ -172,381 +161,372 @@ let [firstName, surname] = [];
 alert(firstName); // undefined
 alert(surname); // undefined
 ```
+اگر بخواهیم یک مقدار پیشفرض تعریف کنیم میتوانیم با عملگر `=` آن را تعریف کنیم.
 
-If we want a "default" value to replace the missing one, we can provide it using `=`:
-
-```js run
+```js
 *!*
-// default values
+// مقادیر پیشفرض
 let [name = "Guest", surname = "Anonymous"] = ["Julius"];
 */!*
 
-alert(name);    // Julius (from array)
+alert(name); // Julius (from array)
 alert(surname); // Anonymous (default used)
 ```
 
-Default values can be more complex expressions or even function calls. They are evaluated only if the value is not provided.
+مقادیر پیشفرض میتوانند محاسبات پیچیده تر و هم چنین توابع باشند. آنها فقط زمانیکه مقداری وجود نداشته باشند محاسبه میشوند.
 
-For instance, here we use the `prompt` function for two defaults. But it will run only for the missing one:
-
-```js run
-// runs only prompt for surname
-let [name = prompt('name?'), surname = prompt('surname?')] = ["Julius"];
-
-alert(name);    // Julius (from array)
-alert(surname); // whatever prompt gets
-```
-
-
-
-## Object destructuring
-
-The destructuring assignment also works with objects.
-
-The basic syntax is:
+برای مثال٬ اینجا از تابع `prompt` برای مقدار پیشفرض استفاده میکنیم. اما این تابع فقط زمانیکه که مقداری وجود نداشته باشد اجرا میشود.
 
 ```js
-let {var1, var2} = {var1:…, var2:…}
+// تابع را فقط برای فامیل اجرا میکند
+let [name = prompt("name?"), surname = prompt("surname?")] = ["Julius"];
+
+alert(name); // Julius (from array)
+alert(surname); // Whatever prompt gets
 ```
 
-We have an existing object at the right side, that we want to split into variables. The left side contains a "pattern" for corresponding properties. In the simple case, that's a list of variable names in `{...}`.
+## ساختارشکنی اشیا
 
-For instance:
+تخصیص ساختارشکنانه همچنین روی اشیا نیز کار میکند.
 
-```js run
+نوشتار ساده آن به صورت زیر است.
+
+```js
+let {var1, var2} = {var1: ..., var2: ...};
+```
+
+یک شی تعریف شده در سمت راست داریم٬ که میخواهیم آن را متغیرها بشکنیم. سمت چپ یک شامل یک الگو برای ویژگی های تعریف شده است. در حالت ساده یک لیست از اسامی متغیرها بصورت `{...}` است.
+
+برای مثال:
+
+```js
 let options = {
-  title: "Menu",
-  width: 100,
-  height: 200
+    title: "Menu",
+    width: 100,
+    height: 200
 };
 
 *!*
 let {title, width, height} = options;
 */!*
 
-alert(title);  // Menu
-alert(width);  // 100
+alert(title); // Menu
+alert(width); // 100
 alert(height); // 200
 ```
 
-Properties `options.title`, `options.width` and `options.height` are assigned to the corresponding variables. The order does not matter. This works too:
+ویژگی های `options.title`٬ `options.width` و `options.height` به متغیرهای مساویشان اختصاص داده شدند. ترتیب مهم نیست. همچنین این نیز کار میکند.
 
 ```js
-// changed the order in let {...}
-let {height, width, title} = { title: "Menu", height: 200, width: 100 }
+// عوض کردن ترتیب در تعریف
+let {height, width, title} = {title: "Menu", height: 200, width: 100};
 ```
 
-The pattern on the left side may be more complex and specify the mapping between properties and variables.
+الگوی سمت راست میتواند پیچیده تر باشد مثلا پیمایش بین ویژگی ها و متغیر ها باشد.
 
-If we want to assign a property to a variable with another name, for instance, `options.width` to go into the variable named `w`, then we can set it using a colon:
+اگر بخواهیم ویژگیی را به متغیری با نام دیگیری اختصاص دهیم٬ مثلا `options.width` را به متغیری به نام `w` بدهیم٬ این کار با یک کولن(:) میتوانیم انجام دهیم.
 
-```js run
+```js
 let options = {
-  title: "Menu",
-  width: 100,
-  height: 200
+    title: "Menu",
+    width: 100,
+    height: 200
 };
 
 *!*
-// { sourceProperty: targetVariable }
-let {width: w, height: h, title} = options;
+// { sourceProperty: targetValue}
+let { width: 2, height: h, title} = options;
 */!*
 
 // width -> w
 // height -> h
 // title -> title
 
-alert(title);  // Menu
-alert(w);      // 100
-alert(h);      // 200
+alert(title); // Menu
+alert(w); // 100
+alert(h); // 200
 ```
 
-The colon shows "what : goes where". In the example above the property `width` goes to `w`, property `height` goes to `h`, and `title` is assigned to the same name.
+کولن نشان میدهد "چه چیزی:‌ کجا برود". در مثال بالا ویژگی `width` به `w` ٬ ویژگی `height` به `h` و ویژگی `title` به نامه مشابهش اختصاص داده شد.
 
-For potentially missing properties we can set default values using `"="`, like this:
+به خاطر ممکن بودن وجود نداشتن ویژگی میتوانیم مقدار پیشفرض را با `=` تعریف کنیم. بصورت زیر:
 
-```js run
+```js
 let options = {
-  title: "Menu"
+    title: "Menu"
 };
 
 *!*
-let {width = 100, height = 200, title} = options;
+let { wdith = 100, height = 200, title} = options;
 */!*
 
-alert(title);  // Menu
-alert(width);  // 100
+alert(title); // Menu
+alert(width); // 100
 alert(height); // 200
 ```
 
-Just like with arrays or function parameters, default values can be any expressions or even function calls. They will be evaluated if the value is not provided.
+مانند آرایه ها و پارامتر های توابع٬‌ مقادیر پیشفرض میتوانند هر محاسبه یا فراخوانی تابعی باشند. آنها فقط زمانی اجرا میشوند که مقداری وجود نداشته باشد.
 
-In the code below `prompt` asks for `width`, but not for `title`:
+در کد پایین `prompt` برای `width` سوال میپرسد ولی برای `title` نه:
 
-```js run
+```js
 let options = {
-  title: "Menu"
+    title: "Menu"
 };
 
 *!*
-let {width = prompt("width?"), title = prompt("title?")} = options;
+let { wdith = prompt("width?"), title = prompt("title?")} = options;
 */!*
 
-alert(title);  // Menu
-alert(width);  // (whatever the result of prompt is)
+alert(title); // Menu
+alert(width); // (Whatever the result of prompt is)
 ```
 
-We also can combine both the colon and equality:
+هم چنین میتوانیم کولن و مساوری را با هم  ترکیب کنیم.
 
-```js run
+```js
 let options = {
-  title: "Menu"
+    title: "Menu"
 };
 
 *!*
 let {width: w = 100, height: h = 200, title} = options;
 */!*
 
-alert(title);  // Menu
-alert(w);      // 100
-alert(h);      // 200
+alert(title); // Menu
+alert(w); // 100
+alert(h); // 200
 ```
 
-If we have a complex object with many properties, we can extract only what we need:
+اگر یک شی پیچیده با چندین ویژگی داشته باشیم میتوانیم فقط آنهایی که نیاز داریم را استخراج کنیم.
 
-```js run
+```js
 let options = {
-  title: "Menu",
-  width: 100,
-  height: 200
+    title: "Menu",
+    width: 100,
+    height: 200
 };
 
-// only extract title as a variable
-let { title } = options;
+// فقط تیتر را به عنوان متغیر اسختراج میکند
+let {title} = options;
+
+alert(title); // Menu
+```
+## الگوی باقی "..."
+
+اگر شی مان بیشتر از متغیرهایی که داریم ویژگی داشته باشد چی؟‌ آیا میتوانیم برخی از آنها را بگیریم و بقیه را به یک جای دیگر اختصاص دهیم؟
+
+میتوانیم از الگوی باقی استفاده کنیم٬ همانطور که در آرایه ها استفاده کردیم. در برخی مرورگر ها پشتیبانی نمیشو ولی در نسخه های جدید کاملا کار میکند.
+
+که به این صورت است:‌
+
+```js
+let options = {
+    title: "Menu",
+    height: 200,
+    width: 100
+};
+
+*!*
+// title = ویژگی با نام مشابه
+// rest = یک شی با باقی ویژگی های مانده
+let {title, ...rest} = options;
+*/!*
+
+// الان title="Menu", rest={height: 200, width: 100}
+alert(rest.height); // 200
+alert(rest.width); // 100
+```
+
+اگر از `let` نداشته باشیم چی؟ در مثال بالا همان جا که میخواستیم به متغیرها مقدار اختصاص دهیم تعریفشان نیز کردیم. `let {...} = {...}`.حتما٬ ما میتوانیم متغیر های تعریف شده را نیز استفاده کنیم. ولی یک نکته وجود دارد.
+
+این مورد کار نمیکند:
+```js
+let title, width, height;
+
+// خطا در این خط رخ میدهد
+{title, width, height} = {title: "Menu", width: 200, height: 100};
+```
+
+مشکل اینجاست که جاوااسکریپت با `{...}` در جریان اصلی کد(در یک عبارت دیگر) مانند یک یک بلوک مد رفتار میکند.  برخی بلوک کدها میتوانند در گروهی از جملات استفاده شوند٬ مانند این:
+
+```js
+{
+    // یک بلوک کد
+    let message = "Hello";
+    // ...
+    alert( message );
+}
+```
+
+اینجا جاوااسکریپت فرض میکند که یک بلوک کد داریم٬ این دلیل خطای رخ داده است. حال ما میخواهیم به جای آن ساختارشکنی کنیم.
+
+برای اینکه به جاوااسکریپت نشان دهیم این یک بلوک کد نیست٬ میتوانیم عبارتمان را در `(..._)` قرار دهیم.
+
+```js
+let title, wdith, height;
+
+// حال درست کار میکند
+*!*(*/!*{title, width, height} = {title: "Menu", width: 200, height: 100}*!*)*/!*;
 
 alert(title); // Menu
 ```
 
-### The rest pattern "..."
+## ساختارشکنی های تودرتو
 
-What if the object has more properties than we have variables? Can we take some and then assign the "rest" somewhere?
+اگر یک شی یا یک آرایه شامل اشیا یا آرایه های دیگری باشد٬ میتوانیم از الگوهای پیچیده تری در سمت چپ استفاده کنیم تا قسمت های عمیق تر را استخراج کنیم.
 
-We can use the rest pattern, just like we did with arrays. It's not supported by some older browsers (IE, use Babel to polyfill it), but works in modern ones.
-
-It looks like this:
+در کد زیر `options` در ویژگی هایش یک شی دیگر دارد به نام `size` و یک آرایه در ویژگی `items`. الگوی استفاده شده در سمت چپ تخصیص ساختار مشابهی برای استخراج مقادیر دارد:
 
 ```js run
 let options = {
-  title: "Menu",
-  height: 200,
-  width: 100
+    size: {
+        wdith: 200,
+        hieght: 100
+    },
+    items: ["Cake", "Donut"],
+    extra: true
 };
 
-*!*
-// title = property named title
-// rest = object with the rest of properties
-let {title, ...rest} = options;
-*/!*
-
-// now title="Menu", rest={height: 200, width: 100}
-alert(rest.height);  // 200
-alert(rest.width);   // 100
-```
-
-````smart header="Gotcha if there's no `let`"
-In the examples above variables were declared right in the assignment: `let {…} = {…}`. Of course, we could use existing variables too, without `let`. But there's a catch.
-
-This won't work:
-```js run
-let title, width, height;
-
-// error in this line
-{title, width, height} = {title: "Menu", width: 200, height: 100};
-```
-
-The problem is that JavaScript treats `{...}` in the main code flow (not inside another expression) as a code block. Such code blocks can be used to group statements, like this:
-
-```js run
-{
-  // a code block
-  let message = "Hello";
-  // ...
-  alert( message );
-}
-```
-
-So here JavaScript assumes that we have a code block, that's why there's an error. We want destructuring instead.
-
-To show JavaScript that it's not a code block, we can wrap the expression in parentheses `(...)`:
-
-```js run
-let title, width, height;
-
-// okay now
-*!*(*/!*{title, width, height} = {title: "Menu", width: 200, height: 100}*!*)*/!*;
-
-alert( title ); // Menu
-```
-````
-
-## Nested destructuring
-
-If an object or an array contain other nested objects and arrays, we can use more complex left-side patterns to extract deeper portions.
-
-In the code below `options` has another object in the property `size` and an array in the property `items`. The pattern at the left side of the assignment has the same structure to extract values from them:
-
-```js run
-let options = {
-  size: {
-    width: 100,
-    height: 200
-  },
-  items: ["Cake", "Donut"],
-  extra: true   
-};
-
-// destructuring assignment split in multiple lines for clarity
+// ساختارشکنی را در چند خط نوشتیم برای وضوح بیشتر
 let {
-  size: { // put size here
-    width,
-    height
-  },
-  items: [item1, item2], // assign items here
-  title = "Menu" // not present in the object (default value is used)
+    size: { // اندازه را در اینجا قرار میدهیم
+        width,
+        height
+    },
+    items: [item1, item2], // آیتم ها را اینجا مشخص میکنیم
+    title = "Menu" // در شیمان وجود ندارد پس از مقدار پیشفرض استفاده میکند
 } = options;
 
-alert(title);  // Menu
-alert(width);  // 100
+alert(title); // Menu
+alert(width); // 100
 alert(height); // 200
-alert(item1);  // Cake
-alert(item2);  // Donut
+alert(item1); // Cake
+alert(item2); // Donut
 ```
 
-All properties of `options` object except `extra` that is absent in the left part, are assigned to corresponding variables:
+تمام ویژگی های `options` به جز `extra` که در سمت چپ موجود نیست به متغیر مربوطه اختصاص داده شده اند.
 
-![](destructuring-complex.svg)
+![](destructurin-complex.svg)
 
-Finally, we have `width`, `height`, `item1`, `item2` and `title` from the default value.
+در آخر٬ `width`, `height`, `item1`, `item2`, `title` را از مقادیر پیشفرض داریم.
 
-Note that there are no variables for `size` and `items`, as we take their content instead.
+دقت کنید که هیچ متغیری برای `size` و `items` وجود ندارد. فقط محتوای آنها را گرفتیم.
 
-## Smart function parameters
 
-There are times when a function has many parameters, most of which are optional. That's especially true for user interfaces. Imagine a function that creates a menu. It may have a width, a height, a title, items list and so on.
+### پارامتر های هوشمندانه توابع
 
-Here's a bad way to write such function:
+گاهی اوقات توابعی هستند که چندین پارامتر میگیرند که اکثرا اختیاری هستند.که مخصوصا برای رابط کاربری هستند.تابعی را تصور کنید که یک منو میسازد. میتواند طول٬ عرض٬ تیتر٬ آیتم های لیست و ... باشد.
+
+این یک راه بد برای نوشتن چنین تابعی است: 
 
 ```js
-function showMenu(title = "Untitled", width = 200, height = 100, items = []) {
-  // ...
-}
+function showMenu(title = "undefined", width = 200, height = 100, items = []) {
+    // ...
+};
 ```
 
-In real-life, the problem is how to remember the order of arguments. Usually IDEs try to help us, especially if the code is well-documented, but still... Another problem is how to call a function when most parameters are ok by default.
+در عمل مشکل به یاد اوردن ترتیب پارامتر هاست. معمولا محیط برنامه نویسی تلاش میکنند به ما کمک کنند. مخصوصا زمانی که کد به خوبی نوشته شده باشد٬ ولی ... .مشکل دیگر این است چگونه تابعی که بیشتر پارامترهایش بطور پیشفرض درست هستند را صدا بزنیم.
 
-Like this?
+این شکلی ؟
 
 ```js
-// undefined where default values are fine
-showMenu("My Menu", undefined, undefined, ["Item1", "Item2"])
+//
+showMenu("My Menu", undefined, undefined, ["Item1", "Item2"]);
 ```
 
-That's ugly. And becomes unreadable when we deal with more parameters.
+این زشت است. و اگر پارامترها بیشتر شود ناخوانا میشود.
 
-Destructuring comes to the rescue!
+ساختارشکنی برای نجات ما می آید.
 
-We can pass parameters as an object, and the function immediately destructurizes them into variables:
+میتوانیم پارامترها را به صورت یک شی بدهیم و تابع به سرعت آن را به متغیرهای مختلف میشکند.
 
 ```js run
-// we pass object to function
+// شی را به تابه میدهیم
 let options = {
-  title: "My menu",
-  items: ["Item1", "Item2"]
+    title: "My Menu",
+    items: ["Item1", "Item2"]
 };
 
-// ...and it immediately expands it to variables
-function showMenu(*!*{title = "Untitled", width = 200, height = 100, items = []}*/!*) {
-  // title, items – taken from options,
-  // width, height – defaults used
-  alert( `${title} ${width} ${height}` ); // My Menu 200 100
-  alert( items ); // Item1, Item2
+// ...
+function showMenu(*!*{title = "undefined", width = 200, height = 100, items = []}*/!*) {
+    // تیتر و آیتمها از شی گرفته میشوند
+    // طول و عرض از مقادیر پیشفرض استفده میکنند
+    alert( `${title} ${width} ${hieght}` ); // My Menu 200 100
+    alert( items ); / Item1, Item2
 }
 
 showMenu(options);
 ```
 
-We can also use more complex destructuring with nested objects and colon mappings:
+هم چنین میتوانیم از ساختارشکنی های پیجیده تر با اشیا تودرتو و پیمایش با کولن استفاده کنیم:
 
 ```js run
-let options = {
-  title: "My menu",
-  items: ["Item1", "Item2"]
+let opitons = {
+    title: "My Menu",
+    items: ["Item1", "Item2"]
 };
 
 *!*
-function showMenu({
-  title = "Untitled",
-  width: w = 100,  // width goes to w
-  height: h = 200, // height goes to h
-  items: [item1, item2] // items first element goes to item1, second to item2
+function showMneu({
+    title = "undefined",
+    width: w = 100, // طول به w میرود
+    height: h = 200, // عرض به h میرود
+    items: [item1, item2] // در آیتمها اولی به item1و دومی به item2 میرود
 }) {
 */!*
-  alert( `${title} ${w} ${h}` ); // My Menu 100 200
-  alert( item1 ); // Item1
-  alert( item2 ); // Item2
-}
+    alert(`${title} ${w} ${h}); // My Menu 100 200
+    alert(item1); // Item1
+    alert(item2); // Item2
+};
 
 showMenu(options);
 ```
 
-The full syntax is the same as for a destructuring assignment:
+نوشتار کامل مشابه تخصیص ساختارشکنانه در قبل است.
+
 ```js
 function({
-  incomingProperty: varName = defaultValue
-  ...
+    incomingProperty: varName = defaultValue
+    ...
 })
 ```
 
-Then, for an object of parameters, there will be a variable `varName` for property `incomingProperty`, with `defaultValue` by default.
+سپس٬ برای یک شی از پارامترها٬ یک متغیر به نام `varName` برای ویژگی `incomingProperty`٬ با مقدار `defaultValue` برای مقدار پیشفرض تعریف میکند.
 
-Please note that such destructuring assumes that `showMenu()` does have an argument. If we want all values by default, then we should specify an empty object:
+لطفا به یاد داشته باشید که در این روش تابع یک اشیا به عنوان پارامتر میخواهد. اگر بخواهیم همه مقادیر به صورت پیشفرض تعریف شوند باید ک شی خالی به تابع بدهیم.
 
 ```js
-showMenu({}); // ok, all values are default
+showMenu({}); // درست است. تمام مقدار ها پیشفرض هستند
 
-showMenu(); // this would give an error
+showMenu(); // خطا رخ میدهد
 ```
 
-We can fix this by making `{}` the default value for the whole object of parameters:
+میتوانیم این مشکل را با درست کردن یک مقدار پیشفرض به صورت `{}` برای کل پارامتر حل کنیم.
 
 ```js run
-function showMenu({ title = "Menu", width = 100, height = 200 }*!* = {}*/!*) {
-  alert( `${title} ${width} ${height}` );
+function showMenu({title = "Menu", width = 100, height = 200, }*!* = {} */!*) {
+    alert(`${title} ${width} ${height}`);
 }
-
 showMenu(); // Menu 100 200
 ```
 
-In the code above, the whole arguments object is `{}` by default, so there's always something to destructurize.
+در کد بالا٬ کل آرگومان تابع یک شی خالی است پس همیشه یک شی برای ساختارشکنی وجود دارد.
 
-## Summary
+## خلاصه
 
-- Destructuring assignment allows for instantly mapping an object or array onto many variables.
-- The full object syntax:
+- ساختارشکنی به ما اجازه میدهد که سریعا اشیا و آرایه ها را به چند متغیر بشکنیم.
+- نوشتار کلی برای اشیا به صورت زیر است:
+    ```js 
+    let { prop: varName = default, ...rest} = object;
+    ```
+    این یعنی ویژگی `prop` باید به متغیر `varName` برود و اگر مقداری برای آن وجود نداشت آنگاه مقدار `default` باید استفاده شود.
+    ویژگی های شیمان که به متغیری اختصاص داده نشده اند در شیی به نام `rest` کپی میشوند.
+- نوشتار کلی برای آرایه ها بصورت زیر است:
     ```js
-    let {prop : varName = default, ...rest} = object
+    let [item1 = default, item2, ...rest] = array;
     ```
 
-    This means that property `prop` should go into the variable `varName` and, if no such property exists, then the `default` value should be used.
+    آیتم اول به `item1` میرود دومی به `item2` میرود و باقی مقادیر به آرایه به نام `rest` میروند.
 
-    Object properties that have no mapping are copied to the `rest` object.
-
-- The full array syntax:
-
-    ```js
-    let [item1 = default, item2, ...rest] = array
-    ```
-
-    The first item goes to `item1`; the second goes into `item2`, all the rest makes the array `rest`.
-
-- It's possible to extract data from nested arrays/objects, for that the left side must have the same structure as the right one.
+- این امکانپذیر است که داده ها را از اشیا یا آرایه های تودرتو استخراج کرد.برای اینکار باید در سمت چپ ساختاری دقیقا مشابه سمت چپ داشته باشیم.

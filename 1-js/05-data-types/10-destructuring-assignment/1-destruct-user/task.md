@@ -4,7 +4,7 @@ importance: 5
 
 # Destructuring assignment
 
-We have an object:
+در اینجا یک شی داریم:‌
 
 ```js
 let user = {
@@ -13,18 +13,18 @@ let user = {
 };
 ```
 
-Write the destructuring assignment that reads:
+یک تخصیص ساختارشکنانه بنویسید که این شرایطرا داشته باشد: 
 
-- `name` property into the variable `name`.
-- `years` property into the variable `age`.
-- `isAdmin` property into the variable `isAdmin` (false, if no such property)
+- `name` را متغیر اختصاص دهد `name`.
+- `years` را متغیر اختصاص دهد `age`.
+- `isAdmin` را متغیر اختصاص دهد `isAdmin` (false, اگر چنین ویژگی وجود نداشته باشد)
 
-Here's an example of the values after your assignment:
+این هم یک مثال از مقدار ها برای اختصاص دادن به متغیرها:‌
 
 ```js
 let user = { name: "John", years: 30 };
 
-// your code to the left side:
+// کدهایتان را زیر این خط بنویسید:
 // ... = user
 
 alert( name ); // John
