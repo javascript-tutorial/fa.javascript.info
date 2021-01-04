@@ -27,7 +27,6 @@ alert(user.address.street); // خطا
 
 @@@needs translation@@@
 @@@new parts@@@
-=======
 That's the expected result. JavaScript works like this. As `user.address` is `undefined`, an attempt to get `user.address.street` fails with an error.
 @@@new parts@@@
 @@@needs translation@@@
@@ -270,8 +269,11 @@ user?.name = "John"; // Error, doesn't work
 
 با این حال هنوز ما باید `?.` را با دقت اعمال کنیم ، فقط درصورتی قابل قبول است که سمت چپ ممکن است وجود نداشته باشد.
 
-<<<<<<< HEAD
+@@@needs translation@@@
+@@@old part@@@
 با این حال خطاهای برنامه نویسی را از ما مخفی نمیکند اگر آنها اتفاق بیافتند.
-=======
+@@@old part@@@
+@@@new part@@@
 Still, we should apply `?.` carefully, only where it's acceptable that the left part doesn't exist. So that it won't hide programming errors from us, if they occur.
->>>>>>> 039716de8a96f49b5fccd7aed5effff2e719dfe5
+@@@new part@@@
+@@@needs translation@@@

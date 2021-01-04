@@ -48,9 +48,11 @@ alert(test); // true, the variable lives after if
 */!*
 ```
 
-<<<<<<< HEAD
+@@@needs translation@@@
+@@@old part@@@
 If we used `let test` on the 2nd line, then it wouldn't be visible to `alert`. But `var` ignores code blocks, so we've got a global `test`.
-=======
+@@@old part@@@
+@@@new part@@@
 As `var` ignores code blocks, we've got a global variable `test`.
 
 If we used `let test` instead of `var test`, then the variable would only be visible inside `if`:
@@ -64,7 +66,8 @@ if (true) {
 alert(test); // ReferenceError: test is not defined
 */!*
 ```
->>>>>>> 039716de8a96f49b5fccd7aed5effff2e719dfe5
+@@@new part@@@
+@@@needs translation@@@
 
 The same thing for loops: `var` cannot be block- or loop-local:
 
