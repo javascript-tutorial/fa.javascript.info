@@ -374,6 +374,10 @@ alert( parseInt('2n9c', 36) ); // 123456
 تعدادی مثال:
 
 `Math.random()`
+<<<<<<< HEAD
+=======
+: Returns a random number from 0 to 1 (not including 1).
+>>>>>>> 039716de8a96f49b5fccd7aed5effff2e719dfe5
 
 : یک عدد تصادفی از بین ۰ تا ۱ برمی‌گرداند که شامل ۱ نمیشود.
 ```js run
@@ -390,6 +394,7 @@ alert( Math.min(1, 2) ); // 1
 ```
 
 `Math.pow(n, power)`
+<<<<<<< HEAD
 : عدد `n` را به توان داده شده می‌رساند.
 ```js run
 alert( Math.pow(2, 10) ); // دو به توان ده = 1024
@@ -398,6 +403,9 @@ alert( Math.pow(2, 10) ); // دو به توان ده = 1024
 توابع و ثوابت بیشتری در شئ `Math` وجود دارد، مثل روابط مثلثات که میتوانید در [docs for the Math](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Math) پیدا کنید.
 ## خلاصه
 
+=======
+: Returns `n` raised to the given power.
+>>>>>>> 039716de8a96f49b5fccd7aed5effff2e719dfe5
 
 برای نوشتن اعداد بزرگ
 
