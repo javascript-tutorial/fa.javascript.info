@@ -182,9 +182,13 @@
 - [Flow](http://flow.org/) also adds data typing, but in a different way. Developed by Facebook.
 - [Dart](https://www.dartlang.org/) is a standalone language that has its own engine that runs in non-browser environments (like mobile apps), but also can be transpiled to JavaScript. Developed by Google.
 - [Brython](https://brython.info/) is a Python transpiler to JavaScript that enables the writing of applications in pure Python without JavaScript.
+<<<<<<< HEAD
 - [Kotlin](https://kotlinlang.org/docs/js-overview.html) is a modern, concise and safe programming language that can target the browser or Node.
 @@@new part@@@
 @@@needs translation@@@
+=======
+- [Kotlin](https://kotlinlang.org/docs/reference/js-overview.html) is a modern, concise and safe programming language that can target the browser or Node.
+>>>>>>> 468e3552884851fcef331fbdfd58096652964b5f
 
 - جاوا اِسکریپت در ابتدا برای مرورگرها ساخته شده بود ولی در حال حاضر در محیط‌های متفاوتی قابلیت اجرا دارد.  
 - جاوا اِسکریپت در شرایط حاضر موقعیت مشخص و منحصر بفردی در زبان‌های تحت مرورگرها دارد که تطابق کاملی با HTML و CSS را دارا می‌باشد.  
