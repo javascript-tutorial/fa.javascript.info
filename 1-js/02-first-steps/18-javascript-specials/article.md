@@ -282,17 +282,11 @@ switch (age) {
     ```
 
 
-<<<<<<< HEAD
 - تابع‌ها می‌توانند دارای متغیّرهایی باشند که داخل خود تابع ساخته می‌شوند که به آن‌ها متغیّرهای محلّی می‌گوییم و این گونه متغیّرها فقط در داخل خود تابع دیده می‌شوند و فقط در آن‌جا به آن‌ها دسترسی داریم.
 - پارامترهای ورودی تابع می‌توانند مقدار پیش‌فرض بپذیرند: `function sum(a = 1, b = 2) {...}`
 - تابع‌ها همیشه چیزی را بر می‌گردانند. اگر داخل تابع اصلاً از دستور return استفاده نشده باشد، نتیجه می‌شود undefined.
 
 برای مشاهده‌ی جزئیات بیشتر <info:function-basics> و <info:function-expressions-arrows> را ببینید.
-=======
-- Functions may have local variables: those declared inside its body or its parameter list. Such variables are only visible inside the function.
-- Parameters can have default values: `function sum(a = 1, b = 2) {...}`.
-- Functions always return something. If there's no `return` statement, then the result is `undefined`.
->>>>>>> 468e3552884851fcef331fbdfd58096652964b5f
 
 ## هنوز خیلی مطلب باقی مانده است
 
