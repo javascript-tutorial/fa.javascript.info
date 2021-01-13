@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# Bound function as a method
+# بستن یک تابع به عنوان متد
 
-What will be the output?
+خروجی چه خواهد بود؟
 
 ```js
 function f() {

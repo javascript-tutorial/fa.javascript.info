@@ -2,13 +2,13 @@ importance: 5
 
 ---
 
-# Fix a function that loses "this"
+# تعمیر یک تابع که "this" را از دست داده
 
-The call to `askPassword()` in the code below should check the password and then call `user.loginOk/loginFail` depending on the answer.
+صدا زدن `askPassword()` در کد زیر باید به گونه ای باشد که کلمه عبور را بررسی کند و با توجه به جواب `user.loginOk/liginFail` را اجرا کند.
 
-But it leads to an error. Why?
+ولی این باعث بروز یک خطا میشود٬ چرا؟
 
-Fix the highlighted line for everything to start working right (other lines are not to be changed).
+خط های مشخص شده را درست کنید تا همه چیز برای شروع کار آماده شوند.(خط های دیگر نباید تغییر کنند)
 
 ```js run
 function askPassword(ok, fail) {
