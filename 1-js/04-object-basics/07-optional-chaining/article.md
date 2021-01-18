@@ -96,14 +96,18 @@ AND کردن کل مسیر رسیدن به ویژگی ، وجود همه اجز�
 
 یا به عبارت دیگر  `value?.prop` :
 
+<<<<<<< HEAD
 - برابر است با `value.prop` اگر `value‍` وجود داشته باشد
+=======
+The optional chaining `?.` stops the evaluation if the value before `?.` is `undefined` or `null` and returns `undefined`.
+>>>>>>> 3a0b3f4e31d4c4bbe90ed4c9c6e676a888ad8311
 
 - در غیر اینصورت (زمانی که `value` برابر با `undefined/null` است) مقدار `value` را برمیگرداند.
 
 @@@needs translation@@@
 @@@new part@@@
 In other words, `value?.prop`:
-- is the same as `value.prop` if `value` exists,
+- works as `value.prop`, if `value` exists,
 - otherwise (when `value` is `undefined/null`) it returns `undefined`.
 @@@new part@@@
 @@@needs translation@@@
@@ -129,7 +133,11 @@ alert( user?.address.street ); // undefined
 
 لطفا توجه داشته باشید : سینتکس `?.` مقدارهای قبلی را اختیاری میکند نه مقدارهای جلوی آن را.
 
+<<<<<<< HEAD
 در مثال بالا `user?.`  به `user` مقدار `null/undefined` خواهد داد.
+=======
+E.g. in `user?.address.street.name` the `?.` allows `user` to safely be `null/undefined` (and returns `undefined` in that case), but that's only for `user`. Further properties are accessed in a regular way. If we want some of them to be optional, then we'll need to replace more `.` with `?.`.
+>>>>>>> 3a0b3f4e31d4c4bbe90ed4c9c6e676a888ad8311
 
 در مثال بالا  `user?.address.street`  فقط به  `user‍`  اجازه میدهد که `null/undefined` باشد. مثلا در این کد `user?.address.street.name`  عبارت ‍`.?` اجازه میدهد که `user` برابر با `null/undefined`  باشد. این همه کاری است که انجام میدهد. ویژگی های جلویی به سبک معمولی به ویژگی ها دسترسی دارند.اگر ما میخواهیم بعضی از ویژگی ها را اختیاری کنیم میتوانیم تعداد بیشتری از `.` را با `.?` جایگزین کنیم
 
@@ -209,11 +217,18 @@ userGuest.admin?.(); // هیچی (هیچ متدی نیست)
 
 سینتکس برای حالت `?.[]` نیز کار میکند٬ اگر ما میخواهیم از براکت به جای نقطه برای دستیابی به ویژگی‌ها استفاده کنیم مشابه موارد قبلی ، اجازه می دهد تا با خیال راحت یک ویژگی را از یک شی که ممکن است وجود نداشته باشد،  را بخوانیم.
 
+<<<<<<< HEAD
 ​```js run
+=======
+```js run
+let key = "firstName";
+
+>>>>>>> 3a0b3f4e31d4c4bbe90ed4c9c6e676a888ad8311
 let user1 = {
   firstName: "John"
 };
 
+<<<<<<< HEAD
 let user2 = null; // فکر کنید کاربر احراز هویت نشده است
 
 let key = "firstName";
@@ -223,6 +238,13 @@ alert( user2?.[key] ); // undefined
 
 alert( user1?.[key]?.something?.not?.existing); // undefined
 ​```
+=======
+let user2 = null; 
+
+alert( user1?.[key] ); // John
+alert( user2?.[key] ); // undefined
+```
+>>>>>>> 3a0b3f4e31d4c4bbe90ed4c9c6e676a888ad8311
 
 
 
