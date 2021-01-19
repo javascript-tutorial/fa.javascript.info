@@ -12,21 +12,13 @@
 let billion = 1000000000;
 ```
 
-<<<<<<< HEAD
 اما در زندگی واقعی ما عموما از نوشتن رشته حرف با تعداد زیاد صفر خودداری میکنیم به خاطر اینکه به راحتی ممکن است خطا داشته باشیم و اشتباه بنویسیم. همینطور، ما تنبل هستیم! ما معمولا یه چیزی شبیه `"1bn"` مینویسیم به جای یک میلیارد یا  `"7.3bn"` برای هفت میلیارد و سیصد میلیون. این حقیقت برای اکثر اعداد بزرگ هم صحیح است.
-=======
-We also can use underscore `_` as the separator:
-
-```js
-let billion = 1_000_000_000;
-```
 
 Here the underscore `_` plays the role of the "syntactic sugar", it makes the number more readable. The JavaScript engine simply ignores `_` between digits, so it's exactly the same one billion as above.
 
 In real life though, we try to avoid writing long sequences of zeroes. We're too lazy for that. We'll try to write something like `"1bn"` for a billion or `"7.3bn"` for 7 billion 300 million. The same is true for most large numbers.
 
 In JavaScript, we can shorten a number by appending the letter `"e"` to it and specifying the zeroes count:
->>>>>>> 3a0b3f4e31d4c4bbe90ed4c9c6e676a888ad8311
 
 در جاوااسکریپت، ما یک عدد را براساس اضافه کردن حرف `"e"` به انتهای آن خلاصه میکنیم و با آن تعداد صفرها مشخص میشود.
 ```js run
@@ -35,18 +27,10 @@ let billion = 1e9;  // 1 billion, literally: 1 and 9 zeroes
 alert( 7.3e9 );  // 7.3 billions (same as 7300000000 or 7_300_000_000)
 ```
 
-<<<<<<< HEAD
 به زبانی دیگر، `"e"` عدد را در ۱ با تعداد صفر داده شده ضرب می‌کند.
 ```js
 1e3 = 1 * 1000
 1.23e6 = 1.23 * 1000000 
-=======
-In other words, `e` multiplies the number by `1` with the given zeroes count.
-
-```js
-1e3 = 1 * 1000 // e3 means *1000
-1.23e6 = 1.23 * 1000000 // e6 means *1000000
->>>>>>> 3a0b3f4e31d4c4bbe90ed4c9c6e676a888ad8311
 ```
 
 
@@ -143,11 +127,7 @@ alert( 123456..toString(36) ); // 2n9c
 : رند بالا: `۳.۱` میشود `۴`, و `-۱.۱` میشود `-۱`.
 
 `Math.round`
-<<<<<<< HEAD
 : رند کردن به نزدیک ترین عدد صحیح: `۳.۱` میشود `۳`, `۳.۶` میشود `۴` و `-۱.۱` میشود `-۱`.
-=======
-: Rounds to the nearest integer: `3.1` becomes `3`, `3.6` becomes `4`, the middle case: `3.5` rounds up to `4` too.
->>>>>>> 3a0b3f4e31d4c4bbe90ed4c9c6e676a888ad8311
 
 `Math.trunc` (توسط اینترنت اکسپلورر ساپورت نمیشود)
 : حذف کردن قسمت اعشاری بدون رند کردن: `۳.۱` میشود `۳`, `-۱.۱` میشود `-۱`.
