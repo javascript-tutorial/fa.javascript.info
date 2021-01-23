@@ -1,38 +1,38 @@
 
 # Polyfills
 
-The JavaScript language steadily evolves. New proposals to the language appear regularly, they are analyzed and, if considered worthy, are appended to the list at <https://tc39.github.io/ecma262/> and then progress to the [specification](http://www.ecma-international.org/publications/standards/Ecma-262.htm).
+زبان جاوااسکریپت پیوسته در حال تکامل است. پیشنهادهایی برای بهتر شدن آن به‌طور منظم صورت می‌گیرد، این پیشنهاد‌ها بررسی می‌شوند و اگر ارزشمند باشند، به لیست <https://tc39.github.io/ecma262/> اضافه می‌شوند و سپس به [specification](http://www.ecma-international.org/publications/standards/Ecma-262.htm) راه می‌یابند.
 
-Teams behind JavaScript engines have their own ideas about what to implement first. They may decide to implement proposals that are in draft and postpone things that are already in the spec, because they are less interesting or just harder to do.
+تیم‌های مسئول موتورهای جاوااسکریپت تصمیم می‌گیرند کدام یک را اول پیاده‌سازی کنند. ممکن است تصمیم بگیرند پیشنهادهایی که هنوز به‌صورت پیش‌نویس هستند را اول پیاده‌سازی کنند و چیزهایی که در spec هستند را به بعدتر موکول کنند. دلیلش هم می‌تواند این باشد که شاید بعضی جذابیت کمتری دارند یا انجام آن‌ها سخت‌تر است.
 
-So it's quite common for an engine to implement only the part of the standard.
+پس کاملا طبیعی است که یک موتور فقط بخشی از یک استاندارد را پیاده‌سازی کند.
 
-A good page to see the current state of support for language features is <https://kangax.github.io/compat-table/es6/> (it's big, we have a lot to study yet).
+یک صفحه‌ی خوب برای این که ببینید در حال حاضر چه چیزهایی پشتیبانی می‌شود اینجاست <https://kangax.github.io/compat-table/es6/> (خیلی بزرگ است، ما چیزهای زیادی برای مطالعه داریم).
 
-## Babel
+## بابِل
 
-When we use modern features of the language, some engines may fail to support such code. Just as said, not all features are implemented everywhere.
+وقتی از ویژگی‌های جدید یک زبان استفاده می‌کنیم، ممکن است برخی موتورها از این کدها پشتیبانی نکنند. همانطور که گفته شد، همه‌ی ویژگی‌ها همه جا پیاده‌سازی نمی‌شوند.
 
-Here Babel comes to the rescue.
+اینجاست که بابل به نجات ما می‌آید.
 
-[Babel](https://babeljs.io) is a [transpiler](https://en.wikipedia.org/wiki/Source-to-source_compiler). It rewrites modern JavaScript code into the previous standard.
+[بابل](https://babeljs.io) یک [کامپایلر بین زبانی](https://en.wikipedia.org/wiki/Source-to-source_compiler) است. بابل کد جاوااسکریپت مدرن را به استانداردهای قبلی‌اش تبدیل می‌کند.
 
-Actually, there are two parts in Babel:
+در بابل دو بخش وجود دارد:
 
-1. First, the transpiler program, which rewrites the code. The developer runs it on their own computer. It rewrites the code into the older standard. And then the code is delivered to the website for users. Modern project build systems like [webpack](http://webpack.github.io/) provide means to run transpiler automatically on every code change, so that it's very easy to integrate into development process.
+1. اولی برنامه‌ی کامپایلر بین زبانی است که کد را بازنویسی می‌کند. توسعه‌دهنده کد را روی کامپیوتر خودش اجرا می‌کند. و بابل کد را به استاندارد قبلی بازنویسی می‌کند و سپس کد برای مشاهده کاربر به وبسایت تحویل داده می‌شود. سیستم‌های مدرن برای build پروژه‌ها مثل [webpack](http://webpack.github.io/) این امکان را می‌دهند که کامپایلر بین‌زبانی در هر تغییر کد به‌صورت اتوماتیک اجرا شود. و به همین دلیل استفاده از آن‌ها در روند توسعه بسیار ساده است.
 
-2. Second, the polyfill.
+2. بخش دوم polyfill است.
 
-    New language features may include new built-in functions and syntax constructs.
-    The transpiler rewrites the code, transforming syntax constructs into older ones. But as for new built-in functions, we need to implement them. JavaScript is a highly dynamic language, scripts may add/modify any functions, so that they behave according to the modern standard.
+    ویژگی‌های جدید یک زبان ممکن است functionهای built-in جدید یا ساختارهای syntax جدید باشند.
+    transpiler کد را بازنویسی می‌کند. و ساختارهای syntax جدید را به ساختارهای قدیمی تبدیل می‌کند. ولی functionهای جدید باید پیاده‌سازی شوند. جاوااسکریپت یک زبان داینامیک است. اسکریپت‌ها ممکن است هر functionای را به کد اضافه کنند یا آن را اصلاح کنند تا متناسب با استاندارد مدرن رفتار کنند.
 
-    A script that updates/adds new functions is called "polyfill". It "fills in" the gap and adds missing implementations.
+    به اسکریپتی که function جدیدی اضافه می‌کند یا یک function را آپدیت می‌کند، polyfill گفته می‌شود. Polyfill جای خالی پیاده‌سازی را پر می‌کند.
 
-    Two interesting polyfills are:
-    - [core js](https://github.com/zloirock/core-js) that supports a lot, allows to include only needed features.
-    - [polyfill.io](http://polyfill.io) service that provides a script with polyfills, depending on the features and user's browser.
+    دو polyfill جالب:
+    - [core js](https://github.com/zloirock/core-js) که از چیزهای زیادی پشتیبانی می‌کند و این امکان را می‌دهد که فقط ویژگی‌های مورد نظر را اضافه کنیم.
+    - [polyfill.io](http://polyfill.io) سرویسی که یک اسکریپت به‌همراه polyfillها ارائه می‌دهد بسته به مرورگر و ویژگی‌های یک کاربر.
 
-So, if we're going to use modern language features, a transpiler and a polyfill are necessary.
+پس اگر می‌خواهیم از ویژگی‌های مدرن یک زبان استفاده کنیم، باید حتما از یک transpiler و از یک polyfill استفاده کنیم.
 
 ## Examples in the tutorial
 
