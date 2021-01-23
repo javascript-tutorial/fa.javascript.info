@@ -14,11 +14,17 @@ let billion = 1000000000;
 
 اما در زندگی واقعی ما عموما از نوشتن رشته حرف با تعداد زیاد صفر خودداری میکنیم به خاطر اینکه به راحتی ممکن است خطا داشته باشیم و اشتباه بنویسیم. همینطور، ما تنبل هستیم! ما معمولا یه چیزی شبیه `"1bn"` مینویسیم به جای یک میلیارد یا  `"7.3bn"` برای هفت میلیارد و سیصد میلیون. این حقیقت برای اکثر اعداد بزرگ هم صحیح است.
 
+Here the underscore `_` plays the role of the "syntactic sugar", it makes the number more readable. The JavaScript engine simply ignores `_` between digits, so it's exactly the same one billion as above.
+
+In real life though, we try to avoid writing long sequences of zeroes. We're too lazy for that. We'll try to write something like `"1bn"` for a billion or `"7.3bn"` for 7 billion 300 million. The same is true for most large numbers.
+
+In JavaScript, we can shorten a number by appending the letter `"e"` to it and specifying the zeroes count:
+
 در جاوااسکریپت، ما یک عدد را براساس اضافه کردن حرف `"e"` به انتهای آن خلاصه میکنیم و با آن تعداد صفرها مشخص میشود.
 ```js run
 let billion = 1e9;  // 1 billion, literally: 1 and 9 zeroes
 
-alert( 7.3e9 );  // 7.3 billions (7,300,000,000)
+alert( 7.3e9 );  // 7.3 billions (same as 7300000000 or 7_300_000_000)
 ```
 
 به زبانی دیگر، `"e"` عدد را در ۱ با تعداد صفر داده شده ضرب می‌کند.
@@ -374,6 +380,11 @@ alert( parseInt('2n9c', 36) ); // 123456
 تعدادی مثال:
 
 `Math.random()`
+@@@needs translation@@@
+@@@new part@@@
+: Returns a random number from 0 to 1 (not including 1).
+@@@new part@@@
+@@@needs translation@@@
 
 : یک عدد تصادفی از بین ۰ تا ۱ برمی‌گرداند که شامل ۱ نمیشود.
 ```js run
@@ -390,6 +401,8 @@ alert( Math.min(1, 2) ); // 1
 ```
 
 `Math.pow(n, power)`
+@@@needs translation@@@
+@@@old part@@@
 : عدد `n` را به توان داده شده می‌رساند.
 ```js run
 alert( Math.pow(2, 10) ); // دو به توان ده = 1024
@@ -397,12 +410,22 @@ alert( Math.pow(2, 10) ); // دو به توان ده = 1024
 
 توابع و ثوابت بیشتری در شئ `Math` وجود دارد، مثل روابط مثلثات که میتوانید در [docs for the Math](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Math) پیدا کنید.
 ## خلاصه
-
-
+@@@old part@@@
+@@@new part@@@
+: Returns `n` raised to the given power.
+@@@new part@@@
+@@@needs translation@@@
 برای نوشتن اعداد بزرگ
 
+@@@needs translation@@@
+@@@old part@@@
 - حرف `"e"` را با تعداد صفرها به انتهای عدد اضافه کنید. مثل: `123e6` که `123` است با ۶ صفر. 
 - یک عدد منفی بعد `"e"` باعث تقسیم شدن عدد بر یک با تعداد صفر مشخص شده میشود.
+@@@old part@@@
+@@@new part@@@
+There are more functions and constants in `Math` object, including trigonometry, which you can find in the [docs for the Math object](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Math).
+@@@new part@@@
+@@@needs translation@@@
 
 برای سیستم‌های عددی متفاوت:
 

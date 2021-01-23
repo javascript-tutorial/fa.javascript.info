@@ -180,7 +180,14 @@ alert( from ); // Ann
 showMessage("Ann");
 ```
 
+@@@needs translation@@@
+@@@old part@@@
 این یک خطا نیست. خروجی این فراخوانی `"Ann: undefined"` است. `text` نداریم پس پیش‌فرض این است که `text === undefined`.
+@@@old part@@@
+@@@new part@@@
+That's not an error. Such a call would output `"*Ann*: undefined"`. There's no `text`, so it's assumed that `text === undefined`.
+@@@new part@@@
+@@@needs translation@@@
 
 اگر ما میخواهیم یک پیش‌فرض `text` در این حالت استفاده بکنیم، میتوانیم بعد از `=` مشخصش کنیم:
 

@@ -59,7 +59,21 @@ alert(2 + 2 + '1' ); // "41" and not "221"
 
 تبدیل و الصاق رشته‌ها یکی از ویژگی‌های خاص عملگر + است. دیگر عملگرهای ریاضیاتی فقط با اعداد کار می‌کنند و همیشه operand خود را به number تبدیل می‌کنند.
 
+@@@needs translation@@@
+@@@old part@@@
 برای نمونه:
+@@@old part@@@
+@@@new part@@@
+```js run
+alert('1' + 2 + 2); // "122" and not "14"
+```
+Here, the first operand is a string, the compiler treats the other two operands as strings too. The `2` gets concatenated to `'1'`, so it's like `'1' + 2 = "12"` and `"12" + 2 = "122"`.
+
+The binary `+` is the only operator that supports strings in such a way. Other arithmetic operators work only with numbers and always convert their operands to numbers.
+
+Here's the demo for subtraction and division:
+@@@new part@@@
+@@@needs translation@@@
 
 ```js run
 alert( 2 - '1' ); // 1
@@ -134,8 +148,14 @@ alert( +apples + +oranges ); // 5
 
 عملگرهای مختلفی در جاوا اسکریپت وجود دارد و هر کدام اولویت مربوط به خود را دارا می‌باشند. در جدول زیر عملگری که عدد بالاتری دارد اولویتش بالاتر است. همینطور اگر دو عملگر عدد یکسانی داشتند اولویت اجرا از چپ به راست (در کد) می‌باشد.
 
-
+@@@needs translation@@@
+@@@old part@@@
 این یک قسمتی از [precedence table](https://developer.mozilla.org/en/JavaScript/Reference/operators/operator_precedence) است. (نیاز نیست این جدول را حفظ باشید اما توجه داشته باشید که عملگرهای unary از دودویی‌های مربوطشان بالاتر هستند):
+@@@old part@@@
+@@@new part@@@
+Here's an extract from the [precedence table](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence) (you don't need to remember this, but note that unary operators are higher than corresponding binary ones):
+@@@new part@@@
+@@@needs translation@@@
 
 | اولویت | نام | علامت |
 |------------|------|------|
@@ -373,8 +393,15 @@ counter++;
 - RIGHT SHIFT ( `>>` )
 - ZERO-FILL RIGHT SHIFT ( `>>>` )
 
+@@@needs translation@@@
+@@@old part@@@
 این عملگرها به ندرت استفاده می‌شوند. برای درک آنها، باید به سطح زبان سیستم در نمایش اعداد برویم و اصلا این کار، کار بهینه‌ای در حال حاضر نیست و حتی به آنها هم در آینده‌ی نزدیک نیاز نداریم. اگر علاقه‌مند هستید میتوانید [Bitwise Operators](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators) را بخوانید. خیلی منطقی‌تر است که وقتی واقعا به آن نیازمند هستید آن را استفاده کنید. 
 ## تغییر در همان محل
+@@@old part@@@
+@@@new part@@@
+These operators are used very rarely, when we need to fiddle with numbers on the very lowest (bitwise) level. We won't need these operators any time soon, as web development has little use of them, but in some special areas, such as cryptography, they are useful. You can read the [Bitwise Operators](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators#Bitwise) chapter on MDN when a need arises.
+@@@new part@@@
+@@@needs translation@@@
 
 ما اغلب نیاز داریم تا یک عملگر را روی متغیری اعمال کنیم و مقدار جدید را در همان متغیر ذخیره کنیم.
 

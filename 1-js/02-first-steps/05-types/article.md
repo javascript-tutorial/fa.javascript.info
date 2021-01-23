@@ -54,7 +54,40 @@ n = 12.345;
 
 ## رشته کاراکترها
 
+@@@needs translation@@@
+@@@old part@@@
 یک رشته کاراکتر در جاوا اسکریپت باید در بین کوتِیشِن‌ها محصور شوند.
+@@@old part@@@
+@@@new part@@@
+## BigInt
+
+In JavaScript, the "number" type cannot represent integer values larger than <code>(2<sup>53</sup>-1)</code> (that's `9007199254740991`), or less than <code>-(2<sup>53</sup>-1)</code> for negatives. It's a technical limitation caused by their internal representation.
+
+For most purposes that's quite enough, but sometimes we need really big numbers, e.g. for cryptography or microsecond-precision timestamps.
+
+`BigInt` type was recently added to the language to represent integers of arbitrary length.
+
+A `BigInt` value is created by appending `n` to the end of an integer:
+
+```js
+// the "n" at the end means it's a BigInt
+const bigInt = 1234567890123456789012345678901234567890n;
+```
+
+As `BigInt` numbers are rarely needed, we don't cover them here, but devoted them a separate chapter <info:bigint>. Read it when you need such big numbers.
+
+
+```smart header="Compatibility issues"
+Right now, `BigInt` is supported in Firefox/Chrome/Edge/Safari, but not in IE.
+```
+
+You can check [*MDN* BigInt compatibility table](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt#Browser_compatibility) to know which versions of a browser are supported.
+
+## String
+
+A string in JavaScript must be surrounded by quotes.
+@@@new part@@@
+@@@needs translation@@@
 
 ```js
 let str = "Hello";
@@ -94,7 +127,14 @@ alert( "the result is ${1 + 2}" ); // the result is ${1 + 2} (double quotes do n
 ```smart header="نوع داده‌ای برای کاراکترها وجود ندارد"
 در زبان‌هایی مانند C و یا Java نوع داده‌ای خاصی مختص به کاراکترها تحت عنوان `char` وجود دارد.
 
+@@@needs translation@@@
+@@@old part@@@
 در جاوا اسکریپت چنین نوعی نداریم. فقط یک نوع داده برای رشته‌ها داریم که آن `string` است، که شامل یک یا چند کاراکتر می‌تواند باشد.
+@@@old part@@@
+@@@new part@@@
+In JavaScript, there is no such type. There's only one type: `string`. A string may consist of zero characters (be empty), one character or many of them.
+@@@new part@@@
+@@@needs translation@@@
 ```
 
 ## نوع Boolean
@@ -214,6 +254,19 @@ typeof alert // "function"  (3)
 
 ## خلاصه
 
+@@@needs translation@@@
+@@@new part@@@
+- `number` for numbers of any kind: integer or floating-point, integers are limited by <code>±(2<sup>53</sup>-1)</code>.
+- `bigint` is for integer numbers of arbitrary length.
+- `string` for strings. A string may have zero or more characters, there's no separate single-character type.
+- `boolean` for `true`/`false`.
+- `null` for unknown values -- a standalone type that has a single value `null`.
+- `undefined` for unassigned values -- a standalone type that has a single value `undefined`.
+- `object` for more complex data structures.
+- `symbol` for unique identifiers.
+@@@new part@@@
+
+@@@old part@@@
 در جاوا اسکریپت 7 نوع داده‌ی پایه‌ای داریم :
 
 - `number` که شامل اعداد صحیح و اعداد اعشاری می‌شود.
@@ -223,6 +276,8 @@ typeof alert // "function"  (3)
 - `undefined` برای مقادیر تخصیص نیافته. یک نوع مستقل بوده که یک مقدار تحت عنوان `undefined` دارد.
 - `object` برای ذخیره ساختارهای پیچیده‌تر اطلاعات.
 - `symbol` برای شناسه‌های یکتا.
+@@@old part@@@
+@@@needs translation@@@
 
 عملگر `typeof` به شما اجازه می‌دهد نوع مقدار ذخیره شده در یک متغیر را تشخصی دهید.
 

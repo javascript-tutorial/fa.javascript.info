@@ -24,7 +24,7 @@ We've already seen some of these events:
 : Triggers after two clicks on the same element within a short timeframe. Rarely used nowadays.
 
 `contextmenu`
-: Triggers when when the right mouse button is pressed. There are other ways to open a context menu, e.g. using a special keyboard key, it triggers in that case also, so it's not exactly the mouse event.
+: Triggers when the right mouse button is pressed. There are other ways to open a context menu, e.g. using a special keyboard key, it triggers in that case also, so it's not exactly the mouse event.
 
 ...There are several other events too, we'll cover them later.
 
@@ -34,7 +34,7 @@ As you can see from the list above, a user action may trigger multiple events.
 
 For instance, a left-button click first triggers `mousedown`, when the button is pressed, then `mouseup` and `click` when it's released.
 
-In cases when a single action initiates multiple events, their order is fixed. That is, the handlers are called in the order `mousedown` -> `mouseup` -> `click`. 
+In cases when a single action initiates multiple events, their order is fixed. That is, the handlers are called in the order `mousedown` -> `mouseup` -> `click`.
 
 ```online
 Click the button below and you'll see the events. Try double-click too.
@@ -50,23 +50,23 @@ Also we can see the `button` property that allows to detect the mouse button, it
 
 Click-related events always have the `button` property, which allows to get the exact mouse button.
 
-We usually don't use it for `click` and `contextmenu` events, because the former happens only on left-click, and the latter -- only on right-click. 
+We usually don't use it for `click` and `contextmenu` events, because the former happens only on left-click, and the latter -- only on right-click.
 
-From the other hand, `mousedown` and `mouseup` handlers we may need `event.button`, because these events trigger on any button, so `button` allows to distinguish between "right-mousedown" and "left-mousedown".
+From the other hand, `mousedown` and `mouseup` handlers may need `event.button`, because these events trigger on any button, so `button` allows to distinguish between "right-mousedown" and "left-mousedown".
 
 The possible values of `event.button` are:
 
 | Button state | `event.button` |
 |--------------|----------------|
 | Left button (primary) | 0 |
-| Middle button (auxillary) | 1 |
+| Middle button (auxiliary) | 1 |
 | Right button (secondary) | 2 |
 | X1 button (back) | 3 |
 | X2 button (forward) | 4 |
 
 Most mouse devices only have the left and right buttons, so possible values are `0` or `2`. Touch devices also generate similar events when one taps on them.
 
-Also there's `event.buttons` property that has all currently pressed buttons as an integer, one bit per button. In practice this property is very rarely used, you can find details at [MDN](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/buttons) if you ever need it.
+Also there's `event.buttons` property that has all currently pressed buttons as an integer, one bit per button. In practice this property is very rarely used, you can find details at [MDN](mdn:/api/MouseEvent/buttons) if you ever need it.
 
 ```warn header="The outdated `event.which`"
 Old code may use `event.which` property that's an old non-standard way of getting a button, with possible values:
@@ -156,7 +156,7 @@ Move the mouse over the input field to see `clientX/clientY` (the example is in 
 
 Double mouse click has a side-effect that may be disturbing in some interfaces: it selects text.
 
-For instance, a double-click on the text below selects it in addition to our handler:
+For instance, double-clicking on the text below selects it in addition to our handler:
 
 ```html autorun height=50
 <span ondblclick="alert('dblclick')">Double-click me</span>

@@ -21,11 +21,20 @@
 
 - **MSDN**، کتابچه راهنما مایکروسافت با بسیاری اطلاعات که شامل جاوا اسکریپت (که اغلب با اسم JScript آورده شده). اگر کسی به سوالی خاص در Internet Explorer نیاز داشت، بهتر است که به <http://msdn.microsoft.com/> مراجعه کند.
 
+@@@needs translation@@@
+@@@old part@@@
 همینطور میتوانیم جستجوی اینترنتی با عباراتی مثل "RegExp MSDN" یا "RegExp MSDN jscript" را انجام دهیم.
+@@@old part@@@
+@@@new part@@@
 ## پشتیبانی از ویژگی‌ها (Features)
+- **MDN (Mozilla) JavaScript Reference** is the main manual with examples and other information. It's great to get in-depth information about individual language functions, methods etc.
+@@@new part@@@
+@@@needs translation@@@
 
 جاوا اسکریپت یک زبان برنامه‌نویسیت که به طور منظم به آن خواص جدیدی اضافه می‌شود. 
 
+@@@needs translation@@@
+@@@old part@@@
 برای دیدن پشتیبانی مرورگر و بقیه‌ی موتورها این‌ها را ببینید:
 
 - <http://caniuse.com> جدولی بر اساس پشتیبانی خواص. فرضاً برای دیدن اینکه کدام موتورها توابع مدرن  رمزنگاری را پشتیبانی میکند به <http://caniuse.com/#feat=cryptography> مراجعه کنید.
@@ -33,5 +42,10 @@
 - <https://kangax.github.io/compat-table> جدولی با ویژگی‌های زبان و موتورهایی که قابلیت پشتیبانی آنهارا دارند یا ندارند.
 
 تمام این منابع در توسعه و برنامه‌نویسی‌ در زندگی واقعی مفیدند چراکه بسیاری اطلاعات ارزشمند راجب جزئیات زبان، پشتیبانیشان و غیره را دارند.
+@@@old part@@@
+@@@new part@@@
+Although, it's often best to use an internet search instead. Just use "MDN [term]" in the query, e.g. <https://google.com/search?q=MDN+parseInt> to search for `parseInt` function.
+@@@new part@@@
+@@@needs translation@@@
 
 این صفحه را وقتی به اطلاعات دقیق یا یک ویژگی خاصی نیاز داشتید به یاد داشته باشید.

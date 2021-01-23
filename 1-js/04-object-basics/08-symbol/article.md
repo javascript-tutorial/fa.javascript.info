@@ -109,7 +109,7 @@ There will be no conflict between our and their identifiers, because symbols are
 
 ...But if we used a string `"id"` instead of a symbol for the same purpose, then there *would* be a conflict:
 
-```js run
+```js
 let user = { name: "John" };
 
 // Our script uses "id" property
@@ -121,7 +121,7 @@ user.id = "Their id value"
 // Boom! overwritten by another script!
 ```
 
-### Symbols in a literal
+### Symbols in an object literal
 
 If we want to use a symbol in an object literal `{...}`, we need square brackets around it.
 
@@ -133,7 +133,7 @@ let id = Symbol("id");
 let user = {
   name: "John",
 *!*
-  [id]: 123 // not "id: 123"
+  [id]: 123 // not "id": 123
 */!*
 };
 ```
