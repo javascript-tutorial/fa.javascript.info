@@ -57,7 +57,11 @@ alert( 2 + '1' ); // "21"
 alert(2 + 2 + '1' ); // "41" and not "221"
 ```
 
+<<<<<<< HEAD
 تبدیل و الصاق رشته‌ها یکی از ویژگی‌های خاص عملگر + است. دیگر عملگرهای ریاضیاتی فقط با اعداد کار می‌کنند و همیشه operand خود را به number تبدیل می‌کنند.
+=======
+Here, operators work one after another. The first `+` sums two numbers, so it returns `4`, then the next `+` adds the string `1` to it, so it's like `4 + '1' = '41'`.
+>>>>>>> 97ef86242f9f236b13152e1baf52a55c4db8728a
 
 @@@needs translation@@@
 @@@old part@@@
