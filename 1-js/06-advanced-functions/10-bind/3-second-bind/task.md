@@ -2,11 +2,11 @@ importance: 5
 
 ---
 
-# Second bind
+# بستن دوم
 
-Can we change `this` by additional binding?
+آیا میتواینم `this` را با یک بستن اضافه تغییر دهیم؟
 
-What will be the output?
+خروجی چه خواهد بود؟
 
 ```js no-beautify
 function f() {
@@ -17,3 +17,4 @@ f = f.bind( {name: "John"} ).bind( {name: "Ann" } );
 
 f();
 ```
+

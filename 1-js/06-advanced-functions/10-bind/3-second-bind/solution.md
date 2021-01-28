@@ -1,4 +1,4 @@
-The answer: **John**.
+جواب: **John**.
 
 ```js run no-beautify
 function f() {
@@ -10,6 +10,6 @@ f = f.bind( {name: "John"} ).bind( {name: "Pete"} );
 f(); // John
 ```
 
-The exotic [bound function](https://tc39.github.io/ecma262/#sec-bound-function-exotic-objects) object returned by `f.bind(...)` remembers the context (and arguments if provided) only at creation time. 
+شی عجیب [bound function](https://tc39.github.io/ecma262/#sec-bound-function-exotic-objects) را با `f.bind(...)` را برمیگرداند. به یاد داشته باشید که محتوا(و اگر آرگومان ها نیز آماده باشند) فقط بار اول اعمال میشوند.
 
-A function cannot be re-bound.
+یک تابع نمیواند دو بار بسته شود.

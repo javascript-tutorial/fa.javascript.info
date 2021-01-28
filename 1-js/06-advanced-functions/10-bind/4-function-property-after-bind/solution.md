@@ -1,3 +1,3 @@
-The answer: `undefined`.
+جواب: `undefined`.
 
-The result of `bind` is another object. It does not have the `test` property.
+خروجی `bind` یک شی دیگر است. این شی ویژگی `test` را ندارد.

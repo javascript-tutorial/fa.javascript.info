@@ -1,4 +1,4 @@
-The answer: `null`.
+جواب: `null`.
 
 
 ```js run
@@ -13,6 +13,6 @@ let user = {
 user.g();
 ```
 
-The context of a bound function is hard-fixed. There's just no way to further change it.
+محتوان تابع بسته شده تثبیت شده است. هیچ راهی برای تغییر آن وجود ندارد.
 
-So even while we run `user.g()`, the original function is called with `this=null`.
+پس زمانیکه `user.g()` را اجرا میکنیم٬ تابع اولیه با `this=null` صدا زده میشود.

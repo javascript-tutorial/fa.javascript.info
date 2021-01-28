@@ -1,9 +1,8 @@
+خطا رخ میدهد زیرا `ask` توابع `liginOk/loginFail` را بدون شی میگرد.
 
-The error occurs because `ask` gets functions `loginOk/loginFail` without the object.
+زمانیکه آن ها را صدا میزند٬ آنها طبیعتا `this=undefined` را فرض میکنند.
 
-When it calls them, they naturally assume `this=undefined`.
-
-Let's `bind` the context:
+اجازه دهید محتوا را `bind` کنیم:
 
 ```js run
 function askPassword(ok, fail) {
@@ -30,14 +29,14 @@ askPassword(user.loginOk.bind(user), user.loginFail.bind(user));
 */!*
 ```
 
-Now it works.
+حال این کار میکند.
 
-An alternative solution could be:
+راه حل جایگزین میتواند این باشد:
 ```js
 //...
 askPassword(() => user.loginOk(), () => user.loginFail());
 ```
 
-Usually that also works and looks good.
+معمولا این نیز کار میکند و خوب بنظر میرسد.
 
-It's a bit less reliable though in more complex situations where `user` variable might change *after* `askPassword` is called, but *before* the visitor answers and calls `() => user.loginOk()`. 
+این روش در موارد پیچیده تر مثلا زمانیکه مقادیر `user` *بعد از *‌صدا زدن `askPassword` و *قبل از* اینکه بازدید کننده جواب بدهد و `() => user.loginOk()` را صدا بزند کمتر قابل اعتماد است.
