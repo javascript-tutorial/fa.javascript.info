@@ -1,14 +1,14 @@
 
 
-1. یا یک پوشه بدهیم٬ که توابع فلشی خلاصه تر هستند
+1. Either use a wrapper function, an arrow to be concise:
 
     ```js 
     askPassword(() => user.login(true), () => user.login(false)); 
     ```
 
-    الان این `user` را از مقادیر بیرونی میگیرد و به صورت عادی اجرا میکند.
+    Now it gets `user` from outer variables and runs it the normal way.
 
-2. یا یک تابع جزی از `user.login` بسازیم که از `user` برای محتوا استفاده میکند و آرگومان اول را دارد:‌
+2. Or create a partial function from `user.login` that uses `user` as the context and has the correct first argument:
 
 
     ```js 

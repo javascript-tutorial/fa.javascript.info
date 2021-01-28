@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# بستن یک تابع به عنوان متد
+# Bound function as a method
 
-خروجی چه خواهد بود؟
+What will be the output?
 
 ```js
 function f() {
@@ -17,4 +17,3 @@ let user = {
 
 user.g();
 ```
-

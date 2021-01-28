@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# ویژگی تابع پس از بسته شدن
+# Function property after bind
 
-یک مقدار در ویژکی تابع وجود دارد. آیا پس از `bind` تغییر میکند؟‌چرا یا چرا نه؟
+There's a value in the property of a function. Will it change after `bind`? Why, or why not?
 
 ```js run
 function sayHi() {
@@ -17,7 +17,6 @@ let bound = sayHi.bind({
   name: "John"
 });
 
-alert( bound.test ); // خروجی چیست؟‌چرا؟
+alert( bound.test ); // what will be the output? why?
 */!*
 ```
-
