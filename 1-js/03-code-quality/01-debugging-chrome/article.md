@@ -1,196 +1,196 @@
-# Debugging in Chrome
+# اشکال‌زدایی در کروم
 
-Before writing more complex code, let's talk about debugging.
+قبل از نوشتن کدهای پیچیده‌تر، بیاید درمورد اشکال‌زدایی صحبت کنیم.
 
-[Debugging](https://en.wikipedia.org/wiki/Debugging) is the process of finding and fixing errors within a script. All modern browsers and most other environments support debugging tools -- a special UI in developer tools that makes debugging much easier. It also allows to trace the code step by step to see what exactly is going on.
+[اشکال‌زدایی](https://fa.wikipedia.org/wiki/اشکال%E2%80%8Cزدایی) فرآیند پیدا کردن و حل خطاهای درون یک اسکریپت است.
 
-We'll be using Chrome here, because it has enough features, most other browsers have a similar process.
+ما در این‌جا از کروم استفاده می‌کنیم، چون دارای امکانات کافی است، اکثر مرورگرهای دیگر نیز فرآیندی مشابه دارند.
 
-## The "Sources" panel
+## پنل «Sources»
 
-Your Chrome version may look a little bit different, but it still should be obvious what's there.
+این پنل در نسخهٔ کروم شما ممکن است کمی متفاوت به نظر برسد، اما همچنان این دستورالعمل می‌بایست واضح باشد.
 
-- Open the [example page](debugging/index.html) in Chrome.
-- Turn on developer tools with `key:F12` (Mac: `key:Cmd+Opt+I`).
-- Select the `Sources` panel.
+- در کروم [صفحهٔ نمونه](debugging/index.html) را باز کنید.
+- Developer tools را با `key:F12` (Mac: `key:Cmd+Opt+I`) باز کنید.
+- پنل `Sources` را انتخاب کنید.
 
-Here's what you should see if you are doing it for the first time:
+اگر برای اولین‌بار این کار را می‌کنید، احتمالاً چنین چیزی را ببینید:
 
 ![](chrome-open-sources.svg)
 
-The toggler button <span class="devtools" style="background-position:-172px -98px"></span> opens the tab with files.
+دکمهٔ مشخص‌شده <span class="devtools" style="background-position:-172px -98px"></span> تب همراه با فایل‌ها را باز می‌کند.
 
-Let's click it and select `index.html` and then `hello.js` in the tree view. Here's what should show up:
+بیایید آن را کلیک کنیم و `index.html` و سپس `hello.js` را در حالت درختی انتخاب کنیم. چنین چیزی باید نشان داده شود:
 
 ![](chrome-tabs.svg)
 
-The Sources panel has 3 parts:
+پنل sources سه بخش دارد:
 
-1. The **File Navigator** pane lists HTML, JavaScript, CSS and other files, including images that are attached to the page. Chrome extensions may appear here too.
-2. The **Code Editor** pane shows the source code.
-3. The **JavaScript Debugging** pane is for debugging, we'll explore it soon.
+1. بخش **File Navigator** فایل‌های اچ‌تی‌ام‌ال، جاوااسکریپت، سی‌اس‌اس و دیگر فایل‌ها را، شامل عکس‌های ضمیمه‌شده به صفحه را لیست می‌کند. افزونه‌های کروم نیز ممکن است در این بخش نشان داده شوند.
+2. بخش **Code Editor** کد منبع را نمایش می‌دهد.
+3. بخش **JavaScript Debugging** برای اشکال‌زدایی است، به‌زودی آن را بررسی می‌کنیم.
 
-Now you could click the same toggler <span class="devtools" style="background-position:-172px -122px"></span> again to hide the resources list and give the code some space.
+اکنون می‌توانید همان دکمه مشخص‌شده را دوباره کلیک کنید  <span class="devtools" style="background-position:-172px -122px"></span> تا لیست منابع مخفی شود و جا برای کد باز شود.
 
-## Console
+## کنسول
 
-If we press `Esc`, then a console opens below. We can type commands there and press `key:Enter` to execute.
+اگر دکمهٔ `Esc` را فشار دهید, یک کنسول در پایین باز می‌شود. ما می‌توانیم دستورات را در آنجا تایپ کنیم و  `key:Enter` را فشار دهیم تا اجرا شوند.
 
-After a statement is executed, its result is shown below.
+بعد از اجرای تکه‌کد، نتایج آن در زیر آن نمایش داده می‌شوند.
 
-For example, here `1+2` results in `3`, and `hello("debugger")` returns nothing, so the result is `undefined`:
+برای مثال، نتیجه `1+2` می‌شود `3`، و `hello("debugger")` چیزی را بر نمی‌گرداند، پس نتیجه `undefined` است:
 
 ![](chrome-sources-console.svg)
 
-## Breakpoints
+## بریک‌پوینت‌ها
 
-Let's examine what's going on within the code of the [example page](debugging/index.html). In `hello.js`, click at line number `4`. Yes, right on the `4` digit, not on the code.
+بیایید بررسی کنیم در کد [صفحهٔ نمونه](debugging/index.html) چه اتفاقی می‌افتد. در `hello.js`، روی خط شمارهٔ `4` کلیک کنید. بله، روی خود عدد `4` ، نه روی کد.
 
-Congratulations! You've set a breakpoint. Please also click on the number for line `8`.
+تبریک! شما یک بریک‌پونیت ست کردید. لطفاً روی عدد خط `8` هم کلیک کنید.
 
-It should look like this (blue is where you should click):
+باید چنین چیزی را ببینید: (بخش آبی جایی‌ست که باید کلیک کنید):
 
 ![](chrome-sources-breakpoint.svg)
 
-A *breakpoint* is a point of code where the debugger will automatically pause the JavaScript execution.
+یک *بریک‌پوینت* نقطه‌ای از کد است که اشکال‌زدا به صورت خودکار در آن‌جا اجرای کد جاوااسکریپت را متوقف می‌کند.
 
-While the code is paused, we can examine current variables, execute commands in the console etc. In other words, we can debug it.
+درحالی که اجرای کد متوقف شده است، ما می‌توانیم متغیرهای فعلی را بررسی کنیم، دستوراتی را در کنسول اجرا کنیم و غیره. به عبارتی دیگر، می‌توانیم آن را اشکال‌زدایی کنیم.
 
-We can always find a list of breakpoints in the right panel. That's useful when we have many breakpoints in various files. It allows us to:
-- Quickly jump to the breakpoint in the code (by clicking on it in the right panel).
-- Temporarily disable the breakpoint by unchecking it.
-- Remove the breakpoint by right-clicking and selecting Remove.
-- ...And so on.
+همیشه می‌توانیم لیستی از بریک‌پوینت‌ها را در پنل سمت راست پیدا کنیم. این پنل در زمانی که بریک‌پونیت‌های زیادی در فایل‌های مختلفی داریم، می‌تواند کارآمد باشد. این پنل به این امکان را می‌دهد تا:
+- سریعاً به مکان بریک‌پوینت در کد بپریم. (با کلیک‌کردن بر روی آن در پنل سمت راست).
+- به صورت موقت بریک‌پوینت را غیرفعال کنیم با آن‌چک کردن‌ش.
+- بریک‌پوینت را با راست کلیک و انتخاب کردن گزینه Remove حذف کنیم.
+- و دیگر موارد...
 
 ```smart header="Conditional breakpoints"
-*Right click* on the line number allows to create a *conditional* breakpoint. It only triggers when the given expression is truthy.
+*راست کلیک* بر روی شمارهٔ خط این امکان را می‌دهد تا یک بریک‌پوینت *شرطی* تعریف کنیم. این بریک‌پوینت تنها زمانی صدازده می‌شود که شرط تعیین‌شده درست باشد.
 
-That's handy when we need to stop only for a certain variable value or for certain function parameters.
+این امکان می‌تواند برای زمانی که نیاز داریم تا تنها برای یک متغیر خاص یا پارامترهای خاصی برای فانکشن توقف کنیم کارآمد باشد. 
 ```
 
-## Debugger command
+## دستور debugger
 
-We can also pause the code by using the `debugger` command in it, like this:
+ما همچنین می‌توانیم با استفاده از دستور  `debugger` کد را متوقف کنیم، مثلاً:
 
 ```js
 function hello(name) {
   let phrase = `Hello, ${name}!`;
 
 *!*
-  debugger;  // <-- the debugger stops here
+  debugger;  // <-- اشکال‌زدا اینجا توقف می‌کند
 */!*
 
   say(phrase);
 }
 ```
 
-That's very convenient when we are in a code editor and don't want to switch to the browser and look up the script in developer tools to set the breakpoint.
+این امکان در زمانی که در یک ویرایش‌گر کد هستیم و نمی‌خواهیم به مرورگر برویم و اسکریپت را در developer tools پیدا کنیم و بریک‌پوینت را ست کنیم  خیلی مناسب است.
 
 
-## Pause and look around
+## توقف و گَشتن
 
-In our example, `hello()` is called during the page load, so the easiest way to activate the debugger (after we've set the breakpoints) is to reload the page. So let's press `key:F5` (Windows, Linux) or `key:Cmd+R` (Mac).
+در مثال ما،  `hello()` در زمان بارگزاری صفحه صدا زده می‌شه، پس ساده‌ترین راه برای فعال‌کردن اشکال‌زدا (بعد از ست کردن بریک‌پوینت) بارگزاری مجدد صفحه‌ست. پس بیاید `key:F5` (Windows, Linux) یا `key:Cmd+R` (Mac) رو فشار بدیم.
 
-As the breakpoint is set, the execution pauses at the 4th line:
+همان‌طور که بریک‌پوینت ست شده، اجرای کد در خط چهارم متوقف می‌شه:
 
 ![](chrome-sources-debugger-pause.svg)
 
-Please open the informational dropdowns to the right (labeled with arrows). They allow you to examine the current code state:
+دراپ‌داون‌های سمت راست(مشخص‌شده با فلش) رو باز کنید. با استفاده از اون‌ها می‌تونید وضعیت فعلی کد رو بررسی کنید:
 
-1. **`Watch` -- shows current values for any expressions.**
+1. **`Watch` -- .نمایش مقادیر فعلی برای هر عبارت**
 
-    You can click the plus `+` and input an expression. The debugger will show its value at any moment, automatically recalculating it in the process of execution.
+    شما می‌تونید دکمه به‌علاوه  `+` رو فشار بدید و یک عبارت وارد کنید. اشکال‌زدا مقدار آن را در هر لحظه از فرآیند اجرا، به صورت خودکار دوباره محاسبه می‌کنه و نمایش خواهد داد.
 
-2. **`Call Stack` -- shows the nested calls chain.**
+2. **`Call Stack` -- .نمایش زنجیرهٔ صدازدن‌های تودرتو**
 
-    At the current moment the debugger is inside `hello()` call, called by a script in `index.html` (no function there, so it's called "anonymous").
+    در لحظهٔ فعلی اشکال‌زدا صدازدهشده توسط `hello()` است, که خود آن صدازده‌شده توسط اسکریپتی با نام `index.html` است. (هیچ تابعی وجود ندارد، پس «anonymous» نامیده می‌شود).
 
-    If you click on a stack item (e.g. "anonymous"), the debugger jumps to the corresponding code, and all its variables can be examined as well.
-3. **`Scope` -- current variables.**
+    اگر بر روی یک پشته کلیک کنید (مثلاً«anonymous»)، اشکال‌زدا به کد متناظر آن می‌پرد، و همهٔ متغیرهای آن می‌توانند بررسی شوند.
+3. **`Scope` -- متغیرهای فعلی**
 
-    `Local` shows local function variables. You can also see their values highlighted right over the source.
+    `Local` متغیرهای تابع محلی را نمایش می‌دهد. همچنین می‌توانید مقادیر آن‌ها را برجسته‌شده سمت راست منبع ببینید.
 
-    `Global` has global variables (out of any functions).
+    `Global` شامل متغیرهای سراسری می‌شود. (بیرون از توابع).
 
-    There's also `this` keyword there that we didn't study yet, but we'll do that soon.
+    همچنین کلیدواژهٔ `this` نیز در آن‌جا وجود دارد که ما هنوز یاد نگرفته‌ایم، ولی به‌زودی خواهیم گرفت.
 
-## Tracing the execution
+## ردیابی فرآیند اجرا
 
-Now it's time to *trace* the script.
+اکنون وقت آن است که اسکریپت را *ردیابی* کنیم.
 
-There are buttons for it at the top of the right panel. Let's engage them.
+دکمه‌هایی برای این‌کار در بالای پنل سمت راست وجود دارد. بیاید از آن‌ها استفاده کنیم.
 <!-- https://github.com/ChromeDevTools/devtools-frontend/blob/master/front_end/Images/src/largeIcons.svg -->
-<span class="devtools" style="background-position:-146px -168px"></span> -- "Resume": continue the execution, hotkey `key:F8`.
-: Resumes the execution. If there are no additional breakpoints, then the execution just continues and the debugger loses control.
+<span class="devtools" style="background-position:-146px -168px"></span> -- "Resume": فرآیند اجرا را ادامه می‌دهد، میانبر `key:F8`.
+:فرآیند اجرا را ادامه می‌دهد. اگر هیچ بریک‌پوینت دیگری نبود، تنها فرآیند اجرا ادامه پیدا می‌کند و اشکال‌زدا کنترل را از دست می‌دهد.
 
-    Here's what we can see after a click on it:
+    بعد از کلیک روی آن، چنین چیزی را می‌بینیم:
 
     ![](chrome-sources-debugger-trace-1.svg)
 
-    The execution has resumed, reached another breakpoint inside `say()` and paused there. Take a look at the "Call Stack" at the right. It has increased by one more call. We're inside `say()` now.
+    فرآیند اجرا ادامه پیدا کرده‌ست، به بریک‌پوینت دیگری درون  `say()` رسیده است و متوقف شده است. به «Call Stack» در سمت راست نگاه کنید. با یک صدازدن دیگر افزایش پیداکرده است. ما هم‌اکنون درون `say()` هستیم.
 
-<span class="devtools" style="background-position:-200px -190px"></span> -- "Step": run the next command, hotkey `key:F9`.
-: Run the next statement. If we click it now, `alert` will be shown.
+<span class="devtools" style="background-position:-200px -190px"></span> -- "Step": دستور بعدی را اجرا می‌کند, میانبر `key:F9`.
+: عبارت بعدی را اجرا می‌کند. اگر آن را کلیک کنیم، `alert` نمایش داده خواهد شد.
 
-    Clicking this again and again will step through all script statements one by one.
+    کلیک کردن دوباره و دوباره این، گام‌به‌گام همهٔ عبارات اسکریپت را اجرا می‌کند.
 
-<span class="devtools" style="background-position:-62px -192px"></span> -- "Step over": run the next command, but *don't go into a function*, hotkey `key:F10`.
-: Similar to the previous "Step" command, but behaves differently if the next statement is a function call. That is: not a built-in, like `alert`, but a function of our own.
+<span class="devtools" style="background-position:-62px -192px"></span> -- "Step over": دستور بعدی را اجرا می‌کند، اما *داخل یک تابع نمی‌شود*، میانبر `key:F10`.
+: شبیه دستور قبلی «step»، اما اگر عبارت بعدی یک تابع - که built-in نباشد، مانند `alert` باشد، بلکه یک تابع که خودمان آن را تعریف کرده باشیم - باشد، متقاوت رفتار می‌کند.
 
-    The "Step" command goes into it and pauses the execution at its first line, while "Step over" executes the nested function call invisibly, skipping the function internals.
+    دستور «step» وارد آن می‌شود و فرآیند اجرا را در خطر اول آن متوقف می‌کند، در حالی که دستور «step over» صدازدن‌های تودرتو تابع را نامرئی اجرا می‌کند، از تابع‌های داخلی رد می‌شود.
 
-    The execution is then paused immediately after that function.
+     سپس فرآیند اجرا بعد از آن تابع بلافاصله متوقف می‌شود.
 
-    That's good if we're not interested to see what happens inside the function call.
+    این دستور اگر نخواهیم ببینیم داخل تابع چه اتفاقی می‌افتد، می‌تواند مفید واقع شود.
 
-<span class="devtools" style="background-position:-4px -194px"></span> -- "Step into", hotkey `key:F11`.
-: That's similar to "Step", but behaves differently in case of asynchronous function calls. If you're only starting to learn JavaScript, then you can ignore the difference, as we don't have asynchronous calls yet.
+<span class="devtools" style="background-position:-4px -194px"></span> -- "Step into", میانبر `key:F11`.
+: شبیه «step», اما در صورتی که تابع ناهمگام باشد، متقاوت رفتار می‌کند. اگر تازه شروع به یادگیری   جاوااسکریپت کرده اید، می‌توانید این تفاوت را نادیده بگیرید، چون هنوز توابع ناهمگام را نمی‌دانیم.
 
-    For the future, just note that "Step" command ignores async actions, such as `setTimeout` (scheduled function call), that execute later. The "Step into" goes into their code, waiting for them if necessary. See [DevTools manual](https://developers.google.com/web/updates/2018/01/devtools#async) for more details.
+    برای آینده، به خاطر داشته باشید که دستور «Step» command عمل‌های ناهمگام را نادیده می‌گیرد، مانند `setTimeout` (زمان‌بندی صدازدن توابع), که بعداً اجرا می‌کند. دستور «Step into» وارد آن‌ها می‌شود، اگر نیاز باشد برای آن‌ها صبر می‌کند. [DevTools manual](https://developers.google.com/web/updates/2018/01/devtools#async) را برای اطلاعات بیشتر ببینید.
 
-<span class="devtools" style="background-position:-32px -194px"></span> -- "Step out": continue the execution till the end of the current function, hotkey `key:Shift+F11`.
-: Continue the execution and stop it at the very last line of the current function. That's handy when we accidentally entered a nested call using <span class="devtools" style="background-position:-200px -190px"></span>, but it does not interest us, and we want to continue to its end as soon as possible.
+<span class="devtools" style="background-position:-32px -194px"></span> -- "Step out": فرآیند اجرا را تا انتهای تابع فعلی ادامه می‌دهد, میانبر `key:Shift+F11`.
+: فرآیند اجرا را ادامه می‌دهد و در خط آخر تابع فعلی متوقف می‌شود. در زمانی که تصادفاً وارد یک تابع تودرتو شده‌ایم <span class="devtools" style="background-position:-200px -190px"></span>ولی علاقه‌ای به،  آن نداریم، و می‌خواهیم در سریع‌ترین زمان ممکن به آخر آن برسیم، کاربردی است.
 
 <span class="devtools" style="background-position:-61px -74px"></span> -- enable/disable all breakpoints.
-: That button does not move the execution. Just a mass on/off for breakpoints.
+: این دکمه فرآیند اجرا را تغییر نمی‌ده. فقط برای خاموش/روشن کردن بریک‌پوین‌ها به صورت کلی‌ست.
 
 <span class="devtools" style="background-position:-90px -146px"></span> -- enable/disable automatic pause in case of an error.
-: When enabled, and the developer tools is open, a script error automatically pauses the execution. Then we can analyze variables to see what went wrong. So if our script dies with an error, we can open debugger, enable this option and reload the page to see where it dies and what's the context at that moment.
+: زمانی که فعال باشد، و Developer tools باز باشد، در زمان وقوع خطا اسکریپت به صورت خودکار متوقف می‌شود. بعد از آن می‌توانیم متغیرها را تحلیل کنیم تا مشکل را پیدا کنیم. پس اگر اسکریپت ما با یک خطا از کار افتاد، می‌توانیم اشکال‌زدا را باز کنیم، این امکان را فعال کنیم و صفحه را مجدداً بارگزاری کنیم تا ببینیم مشکل در کجا بوده است و نوشته در آن لحظه چه بوده است.
 
 ```smart header="Continue to here"
-Right click on a line of code opens the context menu with a great option called "Continue to here".
+راست کلیک برروی یک خط کد  context menu را باز می‌کند همراه با امکانی عالی که  «Continue to here» نامیده می‌شود.
 
-That's handy when we want to move multiple steps forward to the line, but we're too lazy to set a breakpoint.
+هنگامی که می‌خواهیم چندین گام به جلو برویم، ولی خیلی تنبل هستیم تا یک بریک‌پوینت ست کنیم، کاربردی است.
 ```
 
-## Logging
+## رخدادنگاری
 
-To output something to console from our code, there's `console.log` function.
+برای برونداد چیزی به کنسول از کدمان، می‌توان از تابع  `console.log` استفاده کرد.
 
-For instance, this outputs values from `0` to `4` to console:
+برای مقال، این مقادیر `0` تا `4` را به کنسول برونداد می‌کند:
 
 ```js run
-// open console to see
+// کنسول را باز کنید تا ببینید
 for (let i = 0; i < 5; i++) {
   console.log("value,", i);
 }
 ```
 
-Regular users don't see that output, it is in the console. To see it, either open the Console panel of developer tools or press `key:Esc` while in another panel: that opens the console at the bottom.
+کاربران معمولی آن را نمی‌بینند، چون در کنسول است. برای دیدن آن، یا پنل کنسول را در developer tools باز کنید و یا دکمه  `key:Esc` را هنگامی که در یک پنل دیگر هستید بفشارید، کنسول در پایین صفحه باز می‌شود.
 
-If we have enough logging in our code, then we can see what's going on from the records, without the debugger.
+اگر به میزان کافی رخدادنگاری در کد داشته باشیم، می‌توانیم از سوابق ببینیم چه اتفاقی افتاده است، بدون نیاز به اشکال‌زدا.
 
-## Summary
+## خلاصه
 
-As we can see, there are three main ways to pause a script:
-1. A breakpoint.
-2. The `debugger` statements.
-3. An error (if dev tools are open and the button <span class="devtools" style="background-position:-90px -146px"></span> is "on").
+همان‌طور که می‌بینیم، سه راه اصلی برای متوقف کردن یک اسکریپت وجود دارد:
+1. یک بریک‌پوینت.
+2. عبارات  `debugger`.
+3. یک خطا (اگر dev tools باز باشد و دکمه <span class="devtools" style="background-position:-90px -146px"></span> «on» باشد).
 
-When paused, we can debug - examine variables and trace the code to see where the execution goes wrong.
+وقتی متوقف شد، می‌توانیم اشکال‌زدایی کنیم - بررسی توابع و ردیابی کد تا ببینیم کجای فرآیند اجرا به مشکل خورده است.
 
-There are many more options in developer tools than covered here. The full manual is at <https://developers.google.com/web/tools/chrome-devtools>.
+امکانات بسیار زیادتری در developer tools از چیزی که در این‌جا گفته شد وجود دارد. توضیحات کامل در <https://developers.google.com/web/tools/chrome-devtools> قابل دسترس است.
 
-The information from this chapter is enough to begin debugging, but later, especially if you do a lot of browser stuff, please go there and look through more advanced capabilities of developer tools.
+اطلاعات این بخش برای شروع اشکال‌زدایی کافی‌ست، اما بعداً، مخصوصاً اگر با مرورگر سر و کار دارید، لطفاً به آنجا بروید و قابلیت‌های پیشرفتهٔ بیشتری از developer tools را ببینید.
 
-Oh, and also you can click at various places of dev tools and just see what's showing up. That's probably the fastest route to learn dev tools. Don't forget about the right click and context menus!
+اوه، همچنین می‌توانید در بخش‌های مختلف dev tools کلیک کنید و ببینید چه اتفاقی می‌افتد. این احتمالاً سریع‌ترین روش برای یادگیری dev tools است. کلیک راست و context menuها را نیز فراموش نکنید!
