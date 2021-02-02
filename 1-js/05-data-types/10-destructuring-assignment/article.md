@@ -52,10 +52,10 @@ let surname = arr[1];
 ```js run
 *!*
 // نیازی به المان دوم نیست
-let [firstName, , title] = ["Julius", "Cesar", "Counsul", "of the Rome Republic"];
+let [firstName, , title] = ["Julius", "Caesar", "Consul", "of the Roman Republic"];
 */!*
 
-alert(title); //Counsul
+alert(title); //Consul
 ```
 ```
 در قطعه کد بالا٬‌ از المان دوم آرایه چشمپوشی شده و سومی به `title` اختصاص داده شده است. همچنین از بقیه آیتم ها چشمپوشی شده است چون متغیری برای آنها وجود ندارد.
@@ -145,14 +145,14 @@ alert(`${guest} ${admin}`); // Pete Jane (successfully swapped!)
 اگر بخواهیم فقط مقادیر اولیه را بگیریم٬ ولی بخواهیم همه مقادیر بعدی را بگیریم میتوانیم یک پارامتر٬ دیگر به نام باقی با استفاده از سه تا نقطه `"..."` اضافه کرد.
 
 ```js run
-let [name1, name2, *!*...rest*/!*] = ["Julius", "Caesar", *!*"Counsul", "of the Roman Republic"*/!*];
+let [name1, name2, *!*...rest*/!*] = ["Julius", "Caesar", *!*"Consul", "of the Roman Republic"*/!*];
 
 alert(name1); // Julius
 alert(name2); // Caesar
 
 *!*
 //
-alert(rest[0]); // Counsul
+alert(rest[0]); // Consul
 alert(rest[1]); // of the Roman Republic
 alert(rest.length); // 2
 */!*
