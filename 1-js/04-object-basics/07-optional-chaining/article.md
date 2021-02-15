@@ -217,9 +217,15 @@ userGuest.admin?.(); // هیچی (هیچ متدی نیست)
 */!*
 ​```
 
+<<<<<<< HEAD
 در اینجا در هر دو خط ما ابتدا از `.`  (`user1.admin`) برای گرفتن ویژگی ‍`admin` استفاده میکنیم به خاطر اینکه شی ‍`user` حتما وجود دارد پس برای خواندن از آن مطمئن هستیم.
 
 سپس `?.()` عبارت سمت چپ را بررسی میکند: اگر تابع ‍`admin` وجود داشته باشد آنرا اجرا میکند(برای ‍`user1`)  در غیر اینصورت(برای `user2`) محاسبات بدون خطا به متوقف میشود.
+=======
+Here, in both lines we first use the dot (`userAdmin.admin`) to get `admin` property, because we assume that the user object exists, so it's safe read from it.
+
+Then `?.()` checks the left part: if the admin function exists, then it runs (that's so for `userAdmin`). Otherwise (for `userGuest`) the evaluation stops without errors.
+>>>>>>> 7533c719fbf62ba57188d6d51fe4c038b282bd0c
 
 سینتکس برای حالت `?.[]` نیز کار میکند٬ اگر ما میخواهیم از براکت به جای نقطه برای دستیابی به ویژگی‌ها استفاده کنیم مشابه موارد قبلی ، اجازه می دهد تا با خیال راحت یک ویژگی را از یک شی که ممکن است وجود نداشته باشد،  را بخوانیم.
 
