@@ -17,11 +17,7 @@
 **MDN (Mozilla) JavaScript Reference** یک راهنما با مثال‌ها و اطلاعات دیگرست. خوب است که به عمق اطلاعات در مورد توابع زبان و متدها و غیره وارد شوید.
 میتوانید آنرا در <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference> پیدا کنید. 
 
-<<<<<<< HEAD
 اگرچه اغلب اوقات بهتر است که در عوض، یک جستجویی در اینترنت بکنید. در عبارت مورد جستجوی خود "MDN [موضوع مورد نظر]" را قرار دهید. مثلا؛ در جستجوی تابع `parseInt`، <https://google.com/search?q=MDN+parseInt>.
-=======
-Also, if you're developing for the browser, then there are other specifications covered in the [second part](info:browser-environment) of the tutorial.
->>>>>>> 7533c719fbf62ba57188d6d51fe4c038b282bd0c
 
 - **MSDN**، کتابچه راهنما مایکروسافت با بسیاری اطلاعات که شامل جاوا اسکریپت (که اغلب با اسم JScript آورده شده). اگر کسی به سوالی خاص در Internet Explorer نیاز داشت، بهتر است که به <http://msdn.microsoft.com/> مراجعه کند.
 

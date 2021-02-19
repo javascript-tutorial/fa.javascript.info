@@ -2,7 +2,6 @@
 
 [recent browser="new"]
 
-<<<<<<< HEAD
 @@@needs translation@@@
 @@@old part@@@
 عملگر nullish coalescing `??` یک سینتکس کوتاه شده است انتخاب نخستین متغیر تعریف شده است.
@@ -29,8 +28,6 @@ x = a !== null && a !== undefined ? a : b;
 @@@new part@@@
 Here, in this article, we'll say that an expression is "defined" when it's neither `null` nor `undefined`.
 
-=======
->>>>>>> 7533c719fbf62ba57188d6d51fe4c038b282bd0c
 The nullish coalescing operator is written as two question marks `??`.
 
 As it treats `null` and `undefined` similarly, we'll use a special term here, in this article. We'll say that an expression is "defined" when it's neither `null` nor `undefined`.
@@ -130,7 +127,6 @@ alert(firstName || lastName || nickName || "Anonymous"); // Supercoder
 */!*
 ```
 
-<<<<<<< HEAD
 @@@needs translation@@@
 @@@old part@@@
 در این‌جا به `height` مقدار `100` را در صورتی که مقدار تعریف شده‌ای نداشته باشد نسبت می‌دهیم.
@@ -138,10 +134,7 @@ alert(firstName || lastName || nickName || "Anonymous"); // Supercoder
 مقایسه با `||`:
 @@@old part@@@
 @@@new part@@@
-The OR `||` operator exists since the beginning of JavaScript, so developers were using it for such purposes for a long time.
-=======
 Historically, the OR `||` operator was there first. It exists since the beginning of JavaScript, so developers were using it for such purposes for a long time.
->>>>>>> 7533c719fbf62ba57188d6d51fe4c038b282bd0c
 
 On the other hand, the nullish coalescing operator `??` was added to JavaScript only recently, and the reason for that was that people weren't quite happy with `||`.
 
@@ -164,7 +157,6 @@ alert(height || 100); // 100
 alert(height ?? 100); // 0
 ```
 
-<<<<<<< HEAD
 @@@needs translation@@@
 @@@old part@@@
 در این‌جا, `height || 100` با مقدار صفر همان‌گونه برخورد میکنه که با `null`، `undefined` و یا هر مقدار falsy دیگری. پس صفر تبدیل به `100` می‌شود.
@@ -176,41 +168,29 @@ alert(height ?? 100); // 0
 @@@new part@@@
 Here, we have a zero height.
 
-- The `height || 100` checks `height` for being a falsy value, and it really is.
-    - so the result is the second argument, `100`.
-- The `height ?? 100` checks `height` for being `null/undefined`, and it's not,
-    - so the result is `height` "as is", that is `0`.
-
-If the zero height is a valid value, that shouldn't be replaced with the default, then `??` does just the right thing.
-@@@new part@@@
-@@@needs translation@@@
-
-## اولویت‌ها
-=======
 - The `height || 100` checks `height` for being a falsy value, and it's `0`, falsy indeed.
     - so the result of `||` is the second argument, `100`.
 - The `height ?? 100` checks `height` for being `null/undefined`, and it's not,
     - so the result is `height` "as is", that is `0`.
 
 In practice, the zero height is often a valid value, that shouldn't be replaced with the default. So `??` does just the right thing.
->>>>>>> 7533c719fbf62ba57188d6d51fe4c038b282bd0c
+@@@new part@@@
+@@@needs translation@@@
+
+## اولویت‌ها
 
 @@@needs translation@@@
 @@@old part@@@
 اولویت عملگر `??` عموما پایین است: `7` در جدول [MDN table](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence#Table).
 
-<<<<<<< HEAD
 پس `??` پس از بسیاری از عملگرها وارد عمل می‌شود, البته پیش از `=` و `?`.
 
 اگر تصمیم به استفاده از `??` در یک عبارت پیچیده گرفتید, حتما از پرانتز استفاده کنید:
 @@@old part@@@
 @@@new part@@@
-The precedence of the `??` operator is rather low: `5` in the [MDN table](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence#Table). So `??` is evaluated before `=` and `?`, but after most other operations, such as `+`, `*`.
-=======
 The precedence of the `??` operator is about the same as `||`, just a bit lower. It equals `5` in the [MDN table](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence#Table), while `||` is `6`.
 
 That means that, just like `||`, the nullish coalescing operator `??` is evaluated before `=` and `?`, but after most other operations, such as `+`, `*`.
->>>>>>> 7533c719fbf62ba57188d6d51fe4c038b282bd0c
 
 So if we'd like to choose a value with `??` in an expression with other operators, consider adding parentheses:
 @@@new part@@@
@@ -264,18 +244,14 @@ Due to safety reasons, JavaScript forbids using `??` together with `&&` and `||`
 let x = 1 && 2 ?? 3; // Syntax error خطای نگارشی
 ```
 
-<<<<<<< HEAD
 @@@needs translation@@@
 @@@old part@@@
 این محدودیت قابل بحث است, اما برای جلوگیری از اشتباهات برنامه‌نویسان به زبان اضافه شده است, که به مرور مردم از `??` به جای `||` استفاده خواهند کرد.
 @@@old part@@@
 @@@new part@@@
-The limitation is surely debatable, but it was added to the language specification with the purpose to avoid programming mistakes, when people start to switch to `??` from `||`.
+The limitation is surely debatable, it was added to the language specification with the purpose to avoid programming mistakes, when people start to switch from `||` to `??`.
 @@@new part@@@
 @@@needs translation@@@
-=======
-The limitation is surely debatable, it was added to the language specification with the purpose to avoid programming mistakes, when people start to switch from `||` to `??`.
->>>>>>> 7533c719fbf62ba57188d6d51fe4c038b282bd0c
 
 از پرانتز برای این کار استفاده کنید:
 
