@@ -15,29 +15,29 @@ alert("Hello");
 
 ## پِرامت
 
-The function `prompt` accepts two arguments:
+تابع `primpt` دو پارامتر دارد:
 
 ```js no-beautify
 result = prompt(title, [default]);
 ```
 
-It shows a modal window with a text message, an input field for the visitor, and the buttons OK/Cancel.
+این تابع یک پنجرهٔ modal  همراه با یک پیغام، یک فیلد ورودی برای بازدیدکننده، و دکمه‌های «OK/Cancel» را نمایش می‌دهد.
 
 `title`
-: The text to show the visitor.
+: پیغامی که به کاربر نمایش داده می‌شود.
 
 `default`
-: An optional second parameter, the initial value for the input field.
+: یک پارامتر دوم اختیاری، مقدار اولیه برای فیلد ورودی.
 
-```smart header="The square brackets in syntax `[...]`"
-The square brackets around `default` in the syntax above denote that the parameter is optional, not required.
+```smart header="براکت های در سینتکس `[...]`"
+براکت‌های اطراف `default`در سینتکس بالا اختیاری بودن پارامتر را مشخص می‌کند.
 ```
 
-The visitor can type something in the prompt input field and press OK. Then we get that text in the `result`. Or they can cancel the input by pressing Cancel or hitting the `key:Esc` key, then we get `null` as the `result`.
+بازدیدکننده می‌تواند چیزی را در فیلد ورودی پِرامت تایپ کند و دکمهٔ «OK» را بزند. سپس ما متن را در `result` دریافت می‌کنیم. یا بازکننده می‌تواند با زدن دکمهٔ «Cancel» یا فشردن `key:Esc` ورودی را کنسل کند،
 
-The call to `prompt` returns the text from the input field or `null` if the input was canceled.
+تابع `prompt` متن دریافتی از فیلد ورودی و یا `null` در صورت کنسل شدن را بر می‌گرداند.
 
-For instance:
+برای مثال:
 
 ```js run
 let age = prompt('How old are you?', 100);
@@ -45,16 +45,16 @@ let age = prompt('How old are you?', 100);
 alert(`You are ${age} years old!`); // You are 100 years old!
 ```
 
-````warn header="In IE: always supply a `default`"
-The second parameter is optional, but if we don't supply it, Internet Explorer will insert the text `"undefined"` into the prompt.
+````warn header="در اینترنت اکسپلورر: همیشه `default` را تعریف کنید."
+پارامتر دوم اختیاری است، اما اگر آن را تعریف نکنیم، اینترنت اکسپلورر متن `"undefined"` را درون آن قرار می‌دهد.
 
-Run this code in Internet Explorer to see:
+کد زیر را در اینترنت اکسپلورر اجرا کنید تا ببینید:
 
 ```js run
 let test = prompt("Test");
 ```
 
-So, for prompts to look good in IE, we recommend always providing the second argument:
+پس، برای خوب به نظر رسیدن پِرامت‌ها در اینترنت اکسپلورر، ما پیشنهاد می‌کنیم همیشه پارامتر دوم را تعریف کنید:
 
 ```js run
 let test = prompt("Test", ''); // <-- for IE
