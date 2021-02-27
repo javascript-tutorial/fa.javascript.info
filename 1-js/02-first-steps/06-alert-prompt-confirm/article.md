@@ -1,18 +1,18 @@
-# Interaction: alert, prompt, confirm
+# اثر متقابل:  alert، prompt، confirm
 
-As we'll be using the browser as our demo environment, let's see a couple of functions to interact with the user: `alert`, `prompt` and `confirm`.
+همانطور که از مرورگر به عنوان محیط آزمایشی خودمان استفده می‌کنیم، بگذارید چندتایی تابع با اثرمتقابل را بررسی کنیم:  `alert`، `prompt` و `confirm`. 
 
 ## alert
 
-This one we've seen already. It shows a message and waits for the user to press "OK".
+این یکی را قبلاً هم دیده‌ایم. یک پیغام نمایش می‌دهد و صبر می‌کند تا کاربر دکمهٔ «OK» را بزند.
 
-For example:
+برای مثال:
 
 ```js run
 alert("Hello");
 ```
 
-The mini-window with the message is called a *modal window*. The word "modal" means that the visitor can't interact with the rest of the page, press other buttons, etc, until they have dealt with the window. In this case -- until they press "OK".
+این پنجرهٔ کوچک همراه با پیغام یک *modal window* است. کلمهٔ «modal» به معنای آن است که بازدیدکننده نمی‌تواند با بقیهٔ صفحه تعامل کند، دکمه‌های دیگر را بزند و یا غیره، تا زمانی که با پنجرهٔ بازشده کارشان تمام شده باشد. در این مورد خاص -- تا زمانی که دکمهٔ «OK» را بزنند.
 
 ## prompt
 
