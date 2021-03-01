@@ -69,7 +69,7 @@ let test = prompt("Test", ''); // <-- for IE
 result = confirm(question);
 ```
 
-تابع `confirm` یک پنجرهٔ مُدال همراه با یک `سوال` و دو دکمهٔ OK و Cancel نمایش می‌دهد.
+تابع `confirm` یک پنجرهٔ modal همراه با یک `سوال` و دو دکمهٔ OK و Cancel نمایش می‌دهد.
 
 در صورتی که OK کلیک شود، نتیجه `true` و در غیر این‌صورت، نتیجه `false` خواهد شد.
 
@@ -81,24 +81,24 @@ let isBoss = confirm("Are you the boss?");
 alert( isBoss ); // true if OK is pressed
 ```
 
-## Summary
+## خلاصه
 
-We covered 3 browser-specific functions to interact with visitors:
+ما ۳ تابعٔ خاص مرورگر را که از طریق آن‌ها می‌توان با کاربر تعامل کرد را بررسی کردیم:
 
 `alert`
-: shows a message.
+: نمایش یک پیغام.
 
 `prompt`
-: shows a message asking the user to input text. It returns the text or, if Cancel button or `key:Esc` is clicked, `null`.
+: نمایش یک پیغام و درخواست از کاربر برای وارد کردن متن. این تابع متن را و یا اگر دکمهٔ Cancel یا `key:Esc` زده شود `null` را بر می‌گرداند.
 
 `confirm`
-: shows a message and waits for the user to press "OK" or "Cancel". It returns `true` for OK and `false` for Cancel/`key:Esc`.
+: نمایش یک پیغام و منتظرماندن برای کاربر تا دکمهٔ «OK» یا «Cancel» را فشار دهد. این تابع برای OK `true` و برای Cancel/`key:Esc` `false` را بر می‌گرداند.
 
-All these methods are modal: they pause script execution and don't allow the visitor to interact with the rest of the page until the window has been dismissed.
+همهٔ این توابع، مُدال هستند: آن‌ها اجرای اسکریپت را متوقف می‌کنند و به بازدیدکننده اجازه تعامل با بقیهٔ صفحه را تا زمانی که پنجره بسته شود نمی‌دهند.
 
-There are two limitations shared by all the methods above:
+دو محدودیت دربارهٔ همهٔ تابع‌های بالا وجود دارد:
 
-1. The exact location of the modal window is determined by the browser. Usually, it's in the center.
-2. The exact look of the window also depends on the browser. We can't modify it.
+1. مکان دقیق پنجرهٔ modal توسط مرورگر تعیین می‌شود. معمولاً در وسط صفحه قرار دارد.
+2. ظاهر دقیق پنجره نیز توسط مرورگر تعیین می‌شود. ما نمی‌توانیم آن را تغییر دهیم.
 
-That is the price for simplicity. There are other ways to show nicer windows and richer interaction with the visitor, but if "bells and whistles" do not matter much, these methods work just fine.
+این بهایی‌ست که برای سادگی می‌پردازیم. راه‌های دیگری برای نمایش پنجره‌های بهتر و غنی‌تر برای تعامل با بازدیدکننده نیز وجود دارد، ولی اگر «زرق و برق» برای‌تان مهم نیست، این توابع کار را به خوبی انجام می‌دهند.
