@@ -63,17 +63,17 @@ let test = prompt("Test", ''); // <-- for IE
 
 ## کانفرم
 
-The syntax:
+سینتکس کد:
 
 ```js
 result = confirm(question);
 ```
 
-The function `confirm` shows a modal window with a `question` and two buttons: OK and Cancel.
+تابع `confirm` یک پنجرهٔ مُدال همراه با یک `سوال` و دو دکمهٔ OK و Cancel نمایش می‌دهد.
 
-The result is `true` if OK is pressed and `false` otherwise.
+در صورتی که OK کلیک شود، نتیجه `true` و در غیر این‌صورت، نتیجه `false` خواهد شد.
 
-For example:
+برای مثال:
 
 ```js run
 let isBoss = confirm("Are you the boss?");
