@@ -1,9 +1,9 @@
-importance: 4
+اهمیت: 4
 
 ---
 
-# A simple page
+# یک صفحهٔ ساده
 
-Create a web-page that asks for a name and outputs it.
+یک صفحهٔ وب ساده بسازید که نام را درخواست می‌کند و آن را نمایش دهید.
 
 [demo]
