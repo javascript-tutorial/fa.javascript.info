@@ -1,44 +1,43 @@
-# Interaction: alert, prompt, confirm
+# تعاملی:  آلِرت، پِرامت، کانفرم
+همانطور که از مرورگر به عنوان محیط آزمایشی خودمان استفده می‌کنیم، بگذارید چندتایی تابع تعاملی را بررسی کنیم:  `alert`، `prompt` و `confirm`. 
 
-As we'll be using the browser as our demo environment, let's see a couple of functions to interact with the user: `alert`, `prompt` and `confirm`.
+## آلِرت
 
-## alert
+این یکی را قبلاً هم دیده‌ایم. یک پیغام نمایش می‌دهد و صبر می‌کند تا کاربر دکمهٔ «OK» را بزند.
 
-This one we've seen already. It shows a message and waits for the user to press "OK".
-
-For example:
+برای مثال:
 
 ```js run
 alert("Hello");
 ```
 
-The mini-window with the message is called a *modal window*. The word "modal" means that the visitor can't interact with the rest of the page, press other buttons, etc, until they have dealt with the window. In this case -- until they press "OK".
+این پنجرهٔ کوچک همراه با پیغام یک *modal window* است. کلمهٔ «modal» به معنای آن است که بازدیدکننده نمی‌تواند با بقیهٔ صفحه تعامل کند، دکمه‌های دیگر را بزند و یا غیره، تا زمانی که با پنجرهٔ بازشده کارش تمام شده باشد. در این مورد خاص -- تا زمانی که دکمهٔ «OK» را بزند.
 
-## prompt
+## پِرامت
 
-The function `prompt` accepts two arguments:
+تابع `primpt` دو پارامتر دارد:
 
 ```js no-beautify
 result = prompt(title, [default]);
 ```
 
-It shows a modal window with a text message, an input field for the visitor, and the buttons OK/Cancel.
+این تابع یک پنجرهٔ modal  همراه با یک پیغام، یک فیلد ورودی برای بازدیدکننده، و دکمه‌های «OK/Cancel» را نمایش می‌دهد.
 
 `title`
-: The text to show the visitor.
+: پیغامی که به کاربر نمایش داده می‌شود.
 
 `default`
-: An optional second parameter, the initial value for the input field.
+: یک پارامتر دوم اختیاری، مقدار اولیه برای فیلد ورودی.
 
-```smart header="The square brackets in syntax `[...]`"
-The square brackets around `default` in the syntax above denote that the parameter is optional, not required.
+```smart header="براکت های در سینتکس `[...]`"
+براکت‌های اطراف `default`در سینتکس بالا اختیاری بودن پارامتر را مشخص می‌کند.
 ```
 
-The visitor can type something in the prompt input field and press OK. Then we get that text in the `result`. Or they can cancel the input by pressing Cancel or hitting the `key:Esc` key, then we get `null` as the `result`.
+بازدیدکننده می‌تواند چیزی را در فیلد ورودی پِرامت تایپ کند و دکمهٔ «OK» را بزند. سپس ما متن را در `result` دریافت می‌کنیم. یا بازکننده می‌تواند با زدن دکمهٔ «Cancel» یا فشردن `key:Esc` ورودی را کنسل کند،
 
-The call to `prompt` returns the text from the input field or `null` if the input was canceled.
+تابع `prompt` متن دریافتی از فیلد ورودی و یا `null` در صورت کنسل شدن را بر می‌گرداند.
 
-For instance:
+برای مثال:
 
 ```js run
 let age = prompt('How old are you?', 100);
@@ -46,35 +45,35 @@ let age = prompt('How old are you?', 100);
 alert(`You are ${age} years old!`); // You are 100 years old!
 ```
 
-````warn header="In IE: always supply a `default`"
-The second parameter is optional, but if we don't supply it, Internet Explorer will insert the text `"undefined"` into the prompt.
+````warn header="در اینترنت اکسپلورر: همیشه `default` را تعریف کنید."
+پارامتر دوم اختیاری است، اما اگر آن را تعریف نکنیم، اینترنت اکسپلورر متن `"undefined"` را درون آن قرار می‌دهد.
 
-Run this code in Internet Explorer to see:
+کد زیر را در اینترنت اکسپلورر اجرا کنید تا ببینید:
 
 ```js run
 let test = prompt("Test");
 ```
 
-So, for prompts to look good in IE, we recommend always providing the second argument:
+پس، برای خوب به نظر رسیدن پِرامت‌ها در اینترنت اکسپلورر، ما پیشنهاد می‌کنیم همیشه پارامتر دوم را تعریف کنید:
 
 ```js run
 let test = prompt("Test", ''); // <-- for IE
 ```
 ````
 
-## confirm
+## کانفرم
 
-The syntax:
+سینتکس کد:
 
 ```js
 result = confirm(question);
 ```
 
-The function `confirm` shows a modal window with a `question` and two buttons: OK and Cancel.
+تابع `confirm` یک پنجرهٔ modal همراه با یک `سوال` و دو دکمهٔ OK و Cancel نمایش می‌دهد.
 
-The result is `true` if OK is pressed and `false` otherwise.
+در صورتی که OK کلیک شود، نتیجه `true` و در غیر این‌صورت، نتیجه `false` خواهد شد.
 
-For example:
+برای مثال:
 
 ```js run
 let isBoss = confirm("Are you the boss?");
@@ -82,24 +81,24 @@ let isBoss = confirm("Are you the boss?");
 alert( isBoss ); // true if OK is pressed
 ```
 
-## Summary
+## خلاصه
 
-We covered 3 browser-specific functions to interact with visitors:
+ما ۳ تابعٔ خاص مرورگر را که از طریق آن‌ها می‌توان با کاربر تعامل کرد را بررسی کردیم:
 
 `alert`
-: shows a message.
+: نمایش یک پیغام.
 
 `prompt`
-: shows a message asking the user to input text. It returns the text or, if Cancel button or `key:Esc` is clicked, `null`.
+: نمایش یک پیغام و درخواست از کاربر برای وارد کردن متن. این تابع متن را و یا اگر دکمهٔ Cancel یا `key:Esc` زده شود `null` را بر می‌گرداند.
 
 `confirm`
-: shows a message and waits for the user to press "OK" or "Cancel". It returns `true` for OK and `false` for Cancel/`key:Esc`.
+: نمایش یک پیغام و منتظرماندن برای کاربر تا دکمهٔ «OK» یا «Cancel» را فشار دهد. این تابع برای OK `true` و برای Cancel/`key:Esc` `false` را بر می‌گرداند.
 
-All these methods are modal: they pause script execution and don't allow the visitor to interact with the rest of the page until the window has been dismissed.
+همهٔ این توابع، مُدال هستند: آن‌ها اجرای اسکریپت را متوقف می‌کنند و به بازدیدکننده اجازه تعامل با بقیهٔ صفحه را تا زمانی که پنجره بسته شود نمی‌دهند.
 
-There are two limitations shared by all the methods above:
+دو محدودیت دربارهٔ همهٔ تابع‌های بالا وجود دارد:
 
-1. The exact location of the modal window is determined by the browser. Usually, it's in the center.
-2. The exact look of the window also depends on the browser. We can't modify it.
+1. مکان دقیق پنجرهٔ modal توسط مرورگر تعیین می‌شود. معمولاً در وسط صفحه قرار دارد.
+2. ظاهر دقیق پنجره نیز توسط مرورگر تعیین می‌شود. ما نمی‌توانیم آن را تغییر دهیم.
 
-That is the price for simplicity. There are other ways to show nicer windows and richer interaction with the visitor, but if "bells and whistles" do not matter much, these methods work just fine.
+این بهایی‌ست که برای سادگی می‌پردازیم. راه‌های دیگری برای نمایش پنجره‌های بهتر و غنی‌تر برای تعامل با بازدیدکننده نیز وجود دارد، ولی اگر «زرق و برق» برای‌تان مهم نیست، این توابع کار را به خوبی انجام می‌دهند.
