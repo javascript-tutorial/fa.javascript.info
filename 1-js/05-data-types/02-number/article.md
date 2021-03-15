@@ -150,37 +150,12 @@ alert( 123456..toString(36) ); // 2n9c
 
 ۱. ضرب و تقسیم
 
-<<<<<<< HEAD
-برای مثال، برای رند کردن عدد تا دومین رقم اعشاری، میتوانیم عدد را در ۱۰۰ ضرب کنیم، تابع رند کردن را صدا بزنیم و سپس دوباره تقسیم کنیم.
+برای مثال، برای رند کردن عدد تا دومین رقم اعشاری، میتوانیم عدد را در`۱۰۰` (یا یک توان بزرگ‌تر ۱۰) ضرب کنیم، تابع رند کردن را صدا بزنیم و سپس دوباره تقسیم کنیم.
   
 ```js run
 let num = 1.23456;
-=======
-    For example, to round the number to the 2nd digit after the decimal, we can multiply the number by `100` (or a bigger power of 10), call the rounding function and then divide it back.
-    ```js run
-    let num = 1.23456;
 
-    alert( Math.round(num * 100) / 100 ); // 1.23456 -> 123.456 -> 123 -> 1.23
-    ```
-
-2. The method [toFixed(n)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed) rounds the number to `n` digits after the point and returns a string representation of the result.
-
-    ```js run
-    let num = 12.34;
-    alert( num.toFixed(1) ); // "12.3"
-    ```
-
-    This rounds up or down to the nearest value, similar to `Math.round`:
-
-    ```js run
-    let num = 12.36;
-    alert( num.toFixed(1) ); // "12.4"
-    ```
-
-    Please note that result of `toFixed` is a string. If the decimal part is shorter than required, zeroes are appended to the end:
->>>>>>> e01998baf8f85d9d6cef9f1add6c81b901f16d69
-
-alert( Math.floor(num * 100) / 100 ); // 1.23456 -> 123.456 -> 123 -> 1.23
+alert( Math.round(num * 100) / 100 ); // 1.23456 -> 123.456 -> 123 -> 1.23
 ```
 ۲. تابع [toFixed(n)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed) عدد را تا رقم `n-ام` بعد اعشار رند میکند و سپس آن را به صورت رشته حرفی حرفی خروجی میدهد.    
     
@@ -189,13 +164,13 @@ alert( Math.floor(num * 100) / 100 ); // 1.23456 -> 123.456 -> 123 -> 1.23
 let num = 12.34;
 alert( num.toFixed(1) ); // "12.3"
 ```
-این عدد را به نزدیک ترین مقدار رند میکند مشابه:
-`Math.round`:
+این عدد را به نزدیک ترین مقدار رند میکند مشابه `Math.round`:
 
 ```js run
 let num = 12.36;
 alert( num.toFixed(1) ); // "12.4"
 ```
+
 توجه داشته باشید که مقدار `toFixed` یک رشته حرفی‌ست. اگر قسمت بعد اعشار کوچک‌ترین مقدار لازم است، صفر به آخر آن اضافه خواهد شد:
     
 ```js run
