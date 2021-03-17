@@ -2,9 +2,9 @@ importance: 2
 
 ---
 
-# Two functions – one object
+# دو تابع - یک شیء
 
-Is it possible to create functions `A` and `B` such as `new A()==new B()`?
+آیا امکان دارد که تابع های `A` و `B` را به گونه ای ساخت که `new A()==new B()`؟
 
 ```js no-beautify
 function A() { ... }
@@ -13,7 +13,7 @@ function B() { ... }
 let a = new A;
 let b = new B;
 
-alert( a == b ); // true
+alert( a == b ); // درست
 ```
 
-If it is, then provide an example of their code.
+اگر امکان دارد، پس یک مثال از کدهایشان تهیه کنید. 
