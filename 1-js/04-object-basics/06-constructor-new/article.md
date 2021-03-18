@@ -1,17 +1,17 @@
-# Constructor, operator "new"
+# سازنده ، اپراتور "new"
 
-The regular `{...}` syntax allows to create one object. But often we need to create many similar objects, like multiple users or menu items and so on.
+سینتکس معمولی {...} اجازه ساخت یک شیء را می دهد. اما غالبا ما نیاز داریم که شیء های متشابه زیادی ایجاد کنیم، مثل چند کاربر یا آیتم های منو و... 
 
-That can be done using constructor functions and the `"new"` operator.
+این می تواند با استفاده از تابع های سازنده و اپراتور `new` انجام شود.
 
-## Constructor function
+## تابع سازنده
 
-Constructor functions technically are regular functions. There are two conventions though:
+تابع های سازنده از لحاظ فنی همان تابع های معمولی هستند. با این حال دو قرارداد وجود دارد:
 
-1. They are named with capital letter first.
-2. They should be executed only with `"new"` operator.
+1. آنها با حرف بزرگ انگلیسی نامگذاری می شوند.
+2. آنها باید فقط با اپراتور `new` اجرا شوند.
 
-For instance:
+برای مثال:
 
 ```js run
 function User(name) {
@@ -24,21 +24,21 @@ let user = new User("Jack");
 */!*
 
 alert(user.name); // Jack
-alert(user.isAdmin); // false
+alert(user.isAdmin); // نادرست
 ```
 
-When a function is executed with `new`, it does the following steps:
+زمانی که یک تابع با `new` اجرا می شود، مراحل زیر را انجام می دهد:
 
-1. A new empty object is created and assigned to `this`.
-2. The function body executes. Usually it modifies `this`, adds new properties to it.
-3. The value of `this` is returned.
+1. یک شیء خالی جدید ساخته می شود و به `this` اختصاص می یابد.
+2. بدنه ی تابع اجرا می شود. معمولا `this` را تغییر می دهد، ویژگی های جدید را به آن اضافه می کند.
+3. مقدار `this` برگردانده می شود.
 
-In other words, `new User(...)` does something like:
+به عبارتی دیگر، `new User(...)` چیزی مانند این را انجام می دهد:
 
 ```js
 function User(name) {
 *!*
-  // this = {};  (implicitly)
+  // this = {};  (به صورت ضمنی)
 */!*
 
   // add properties to this
@@ -46,12 +46,12 @@ function User(name) {
   this.isAdmin = false;
 
 *!*
-  // return this;  (implicitly)
+  // return this;  (به صورت ضمنی)
 */!*
 }
 ```
 
-So `let user = new User("Jack")` gives the same result as:
+پس `let user = new User("Jack")` نتیجه مشابهی مانند کد زیر را می دهد:
 
 ```js
 let user = {
@@ -60,27 +60,28 @@ let user = {
 };
 ```
 
-Now if we want to create other users, we can call `new User("Ann")`, `new User("Alice")` and so on. Much shorter than using literals every time, and also easy to read.
+حالا اگر ما بخواهیم که user های دیگری بسازیم، می توانیم `new User("Ann")` ، `new User("Alice")` و ... را صدا بزنیم. این کار بسیار کوتاه تر از استفاده همیشگی از literal ها است، و همچنین برای خواندن آسان است.
 
-That's the main purpose of constructors -- to implement reusable object creation code.
+این هدف اصلی سازنده ها است -- پیاده سازی کد قابل استفاده مجدد ساخت شیء.
 
-Let's note once again -- technically, any function can be used as a constructor. That is: any function can be run with `new`, and it will execute the algorithm above. The "capital letter first" is a common agreement, to make it clear that a function is to be run with `new`.
+بیایید دوباره به این موضوع اشاره کنیم -- از لحاظ فنی، هر تابعی می تواند به عنوان سازنده استفاده شود. به این معنی که: هر تابعی می تواند با `new` اجرا شود، و الگوریتم بالا را اجرا کند. "حرف اول بزرگ انگلیسی" یک قرارداد عمومی است، تا اینکه یک تابع باید با `new` اجرا شود را شفاف سازی کند.
 
 ````smart header="new function() { ... }"
-If we have many lines of code all about creation of a single complex object, we can wrap them in constructor function, like this:
+اگر ما خطوط زیادی از کد که همه آنها مربوط به ساخت یک شیء پیچیده هستند را داشته باشیم، می توانیم آنها را درون تابع سازنده بپیچیم، به این صورت:
+
 
 ```js
 let user = new function() {
   this.name = "John";
   this.isAdmin = false;
 
-  // ...other code for user creation
-  // maybe complex logic and statements
-  // local variables etc
+  // ... کد های دیگر برای ساخت user
+  // شاید شامل منطق و دستورالعمل عجیبی باشد
+  // متغیرهای محلی و...
 };
 ```
 
-The constructor can't be called again, because it is not saved anywhere, just created and called. So this trick aims to encapsulate the code that constructs the single object, without future reuse.
+سازنده نمی تواند دوباره صدا زده شود، چون در جایی ذخیره نشده، فقط ساخته و صدا زده شده است. پس این ترفند، کپسول کردن کدی که یک شیء می سازد و در آینده استفاده نمی شود را مورد هدف قرار می دهد.
 ````
 
 ## Dual-syntax constructors: new.target
