@@ -64,7 +64,7 @@ let user = {
 
 این هدف اصلی سازنده ها است -- پیاده سازی کد قابل استفاده مجدد ساخت شیء.
 
-بیایید دوباره به این موضوع اشاره کنیم -- از لحاظ فنی، هر تابعی می تواند به عنوان سازنده استفاده شود. به این معنی که: هر تابعی می تواند با `new` اجرا شود، و الگوریتم بالا را اجرا کند. "حرف اول بزرگ انگلیسی" یک قرارداد عمومی است، تا اینکه یک تابع باید با `new` اجرا شود را شفاف سازی کند.
+بیایید دوباره به این موضوع اشاره کنیم -- از لحاظ فنی، هر تابعی می تواند به عنوان سازنده استفاده شود. به این معنی که: هر تابعی می تواند با `new` اجرا شود، و الگوریتم بالا را اجرا کند. "حرف اول بزرگ انگلیسی" یک قرارداد عمومی است، تا این موضوع را که یک تابع باید با `new` اجرا شود را شفاف سازی کند.
 
 ````smart header="new function() { ... }"
 اگر ما خطوط زیادی از کد که همه آنها مربوط به ساخت یک شیء پیچیده هستند را داشته باشیم، می توانیم آنها را درون تابع سازنده بپیچیم، به این صورت:
@@ -84,50 +84,50 @@ let user = new function() {
 سازنده نمی تواند دوباره صدا زده شود، چون در جایی ذخیره نشده، فقط ساخته و صدا زده شده است. پس این ترفند، کپسول کردن کدی که یک شیء می سازد و در آینده استفاده نمی شود را مورد هدف قرار می دهد.
 ````
 
-## Dual-syntax constructors: new.target
+## سازنده هایی با سینتکس دوگانه: new.target
 
-```smart header="Advanced stuff"
-The syntax from this section is rarely used, skip it unless you want to know everything.
+```smart header="مطالب پیشرفته"
+سینتکس این بخش به ندرت استفاده می شود، آن را از قلم بندازید مگر اینکه بخواهید همه چیز را بدانید.
 ```
 
-Inside a function, we can check whether it was called with `new` or without it, using a special `new.target` property.
+درون یک تابع، ما می توانیم چک کنیم که همراه با `new` صدا زده شده یا بدون آن، با استفاده از ویژگی `new.target`.
 
-It is undefined for regular calls and equals the function if called with `new`:
+آن(new.target) برای مواقعی که تابع به صورت معمولی صدا زده می شود undefined است و درصورتی که همراه با `new` صدا زده شود برابر با تابع است:
 
 ```js run
 function User() {
   alert(new.target);
 }
 
-// without "new":
+// بدون "new":
 *!*
 User(); // undefined
 */!*
 
-// with "new":
+// همراه با "new":
 *!*
 new User(); // function User { ... }
 */!*
 ```
 
-That can be used to allow both `new` and regular calls to work the same. That is, create the same object:
+از آن می  توان استفاده کرد تا هم صدا زدن تابع با `new` و هم صدا زدن معمولی تابع به یک شکل کار کنند. یعنی اینکه شیء متشابه بسازند:
 
 ```js run
 function User(name) {
-  if (!new.target) { // if you run me without new
-    return new User(name); // ...I will add new for you
+  if (!new.target) { // اگر تو مرا بدون new اجرا کنی
+    return new User(name); // ... من new را برای تو اضافه میکنم
   }
 
   this.name = name;
 }
 
-let john = User("John"); // redirects call to new User
+let john = User("John"); // فراخوانی را به new User هدایت میکند
 alert(john.name); // John
 ```
 
-This approach is sometimes used in libraries to make the syntax more flexible. So that people may call the function with or without `new`, and it still works.
+این شیوه بعضی اوقات درون کتابخانه ها استفاده می شود تا سینتکس را منعطف تر کند. با این روش شاید مردم تابع را همراه با یا بدون `new` صدا بزنند، و آن همچنان کار میکند.
 
-Probably not a good thing to use everywhere though, because omitting `new` makes it a bit less obvious what's going on. With `new` we all know that the new object is being created.
+اگرچه شاید خوب نباشد همه جا استفاده شود، چون حذف کردن `new` مقداری از واضح بودن اینکه چه چیزی در حال رخ دادن است کم میکند. همراه با `new` همه ما میدانیم که شیء جدیدی در حال ساخته شدن است.
 
 ## Return from constructors
 
