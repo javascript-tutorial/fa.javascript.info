@@ -129,55 +129,55 @@ alert(john.name); // John
 
 اگرچه شاید خوب نباشد همه جا استفاده شود، چون حذف کردن `new` مقداری از واضح بودن اینکه چه چیزی در حال رخ دادن است کم میکند. همراه با `new` همه ما میدانیم که شیء جدیدی در حال ساخته شدن است.
 
-## Return from constructors
+## برگرداندن از سازنده ها
 
-Usually, constructors do not have a `return` statement. Their task is to write all necessary stuff into `this`, and it automatically becomes the result.
+معمولا، سازنده ها دستور `return` ندارند. وظیفه آنها این است که تمام چیزهای ضروری را داخل `this` بریزند، و آن(this) تبدیل به نتیجه می شود.
 
-But if there is a `return` statement, then the rule is simple:
+اما اگر دستور `return` وجود داشته باشد، سپس قاعده ساده است:
 
-- If `return` is called with an object, then the object is returned instead of `this`.
-- If `return` is called with a primitive, it's ignored.
+- اگر `return` همراه با شیء صدا زده شود، سپس شیء به جای `this` برگردانده می شود.
+- اگر `return` همراه با یک primitive صدا شده شود، نادیده گرفته می شود.
 
-In other words, `return` with an object returns that object, in all other cases `this` is returned.
+به عبارتی دیگر، `return` همراه با یک شیء همان شیء را برمیگرداند، در دیگر موارد `this` برگردانده می شود.
 
-For instance, here `return` overrides `this` by returning an object:
+برای مثال، اینجا `return` با برگرداندن یک شیء `this` را نادیده میگیرد:
 
 ```js run
 function BigUser() {
 
   this.name = "John";
 
-  return { name: "Godzilla" };  // <-- returns this object
+  return { name: "Godzilla" };  // <-- این شیء را برمیگرداند
 }
 
-alert( new BigUser().name );  // Godzilla, got that object
+alert( new BigUser().name );  // Godzilla, آن شیء را نتیجه داد
 ```
 
-And here's an example with an empty `return` (or we could place a primitive after it, doesn't matter):
+و اینجا هم یک مثال با یک `return` خالی داریم (یا می توانستیم بعد از آن یک primitive بگذاریم، فرقی ندارد): 
 
 ```js run
 function SmallUser() {
 
   this.name = "John";
 
-  return; // <-- returns this
+  return; // <-- this را برمیگرداند
 }
 
 alert( new SmallUser().name );  // John
 ```
 
-Usually constructors don't have a `return` statement. Here we mention the special behavior with returning objects mainly for the sake of completeness.
+معمولا سازنده ها دستور `return` ندارند. اینجا ما این رفتار خاص برگرداندن شیء ها را تنها برای کامل بودن خاطر نشان کردیم.
 
-````smart header="Omitting parentheses"
-By the way, we can omit parentheses after `new`, if it has no arguments:
+````smart header="پنهان کردن پرانتزها"
+راستی، اگر هیچ آرگومانی در کار نباشد، ما می توانیم پرانترهای بعد از `new` را پنهان کنیم:
 
 ```js
-let user = new User; // <-- no parentheses
-// same as
+let user = new User; // <-- بدون پرانتر
+// مشابه است با
 let user = new User();
 ```
 
-Omitting parentheses here is not considered a "good style", but the syntax is permitted by specification.
+اینجا پنهان کردن پرانتزها به عنوان یک "سبک خوب" فرض نمی شود، اما سینتکس طبق خصوصیات مجاز است.
 ````
 
 ## Methods in constructor
