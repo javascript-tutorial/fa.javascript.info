@@ -1,4 +1,4 @@
-The answer is `2`, that's the first truthy value.
+جواب 2 است، آن(2) اولین مقدار truthy است.
 
 ```js run
 alert( null || 2 || undefined );
