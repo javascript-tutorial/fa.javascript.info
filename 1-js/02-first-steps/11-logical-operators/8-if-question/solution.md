@@ -1,19 +1,19 @@
-The answer: the first and the third will execute.
+جواب: اولی و سومی اجرا خواهند شد.
 
-Details:
+جزییات:
 
 ```js run
-// Runs.
-// The result of -1 || 0 = -1, truthy
+// اجرا می شود.
+// نتیجه 1- = 0 || 1-، truthy
 if (-1 || 0) alert( 'first' );
 
-// Doesn't run
+// اجرا نمی شود
 // -1 && 0 = 0, falsy
 if (-1 && 0) alert( 'second' );
 
-// Executes
-// Operator && has a higher precedence than ||
-// so -1 && 1 executes first, giving us the chain:
+// اجرا می شود
+// عملوند && اولویت بیشتری نسبت به || دارد
+// پس 1 && 1- اول اجرا می شود، و به ما زنجیره را می دهد: 
 // null || -1 && 1  ->  null || 1  ->  1
 if (null || -1 && 1) alert( 'third' );
 ```
