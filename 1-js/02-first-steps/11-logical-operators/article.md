@@ -1,47 +1,47 @@
-# Logical operators
+# عملگر های منطقی
 
-There are four logical operators in JavaScript: `||` (OR), `&&` (AND), `!` (NOT), `??` (Nullish Coalescing). Here we cover the first three, the `??` operator is in the next article.
+چهار عملگر منطقی در جاوااسکریپت وجود دارد: `||` (OR)، `&&` (AND)، `!` (NOT)، `??` (Nullish Coalescing). اینجا ما سه تای اول را پوشش می دهیم، عملگر `??` در مقاله بعدی است.
 
-Although they are called "logical", they can be applied to values of any type, not only boolean. Their result can also be of any type.
+با اینکه آنها "منطقی" نام برده می شوند، آنها می توانند روی هر نوع مقداری اعمال شوند، نه فقط نوع boolean. نتیجه آنها هم می تواند از هر نوعی باشد.
 
-Let's see the details.
+بیایید جزییات را ببینیم.
 
-## || (OR)
+## || (OR یا)
 
-The "OR" operator is represented with two vertical line symbols:
+عملگر "OR(یا)" با نماد دو خط عمود نمایش داده می شود:
 
 ```js
 result = a || b;
 ```
 
-In classical programming, the logical OR is meant to manipulate boolean values only. If any of its arguments are `true`, it returns `true`, otherwise it returns `false`.
+در برنامه نویسی کلاسیک، عملگر منطقی OR تنها با مقدارهای boolean کار می کرد. اگر هر کدام از آرگومان های آن `true` باشد، `ture` بر می گرداند، در غیر این صورت `false` بر می گرداند.
 
-In JavaScript, the operator is a little bit trickier and more powerful. But first, let's see what happens with boolean values.
+در جاوااسکریپت، این عملگر مقداری فوت و فن و قدرت بیشتری دارد. اما اول، بیایید ببینیم با مقدارهای boolean چه اتفاقی می افتد.
 
-There are four possible logical combinations:
+چهار ترکیب احتمالی منطقی وجود دارد:
 
 ```js run
-alert( true || true );   // true
-alert( false || true );  // true
-alert( true || false );  // true
-alert( false || false ); // false
+alert( true || true );   // true درست
+alert( false || true );  // true درست
+alert( true || false );  // true درست
+alert( false || false ); // false اشتباه
 ```
 
-As we can see, the result is always `true` except for the case when both operands are `false`.
+همانطور که می بینیم، نتیجه همیشه `true` است به جز موقعی که هر دو عملوند `false` باشند.
 
-If an operand is not a boolean, it's converted to a boolean for the evaluation.
+اگر یک عملوند boolean نباشد، برای ارزیابی به boolean تبدیل می شود.
 
-For instance, the number `1` is treated as `true`, the number `0` as `false`:
+برای مثال، با عدد `1` مانند `true` رفتار می شود، با عدد `0` مانند `false`:
 
 ```js run
-if (1 || 0) { // works just like if( true || false )
+if (1 || 0) { // همانند if( true || false ) کار میکند
   alert( 'truthy!' );
 }
 ```
 
-Most of the time, OR `||` is used in an `if` statement to test if *any* of the given conditions is `true`.
+اکثر اوقات، OR `||` به عنوان یک دستور `if` استفاده می شود تا بررسی شود که آیا *هر کدام* از شرط های داده شده `true` هست یا نه.
 
-For example:
+برای مثال:
 
 ```js run
 let hour = 9;
@@ -49,18 +49,18 @@ let hour = 9;
 *!*
 if (hour < 10 || hour > 18) {
 */!*
-  alert( 'The office is closed.' );
+  alert( 'اداره بسته است.' );
 }
 ```
 
-We can pass more conditions:
+ما می توانیم شرط های بیشتری قرار بدهیم:
 
 ```js run
 let hour = 12;
 let isWeekend = true;
 
 if (hour < 10 || hour > 18 || isWeekend) {
-  alert( 'The office is closed.' ); // it is the weekend
+  alert( 'The office is closed.' ); // آخر هفته است
 }
 ```
 
