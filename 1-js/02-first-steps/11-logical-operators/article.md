@@ -64,46 +64,46 @@ if (hour < 10 || hour > 18 || isWeekend) {
 }
 ```
 
-## OR "||" finds the first truthy value [#or-finds-the-first-truthy-value]
+## OR "||" اولین مقدار truthy را پیدا می کند [#or-finds-the-first-truthy-value]
 
-The logic described above is somewhat classical. Now, let's bring in the "extra" features of JavaScript.
+منطقی که بالا توصیف شد تا حدی کلاسیک است. الان، بیایید وارد ویژگی های "اضافه" جاوااسکریپت شویم.
 
-The extended algorithm works as follows.
+الگوریتم قابل تعمیم به صورت زیر عمل می کند.
 
-Given multiple OR'ed values:
+چند مقدار همراه با OR وارد می کنیم:
 
 ```js
 result = value1 || value2 || value3;
 ```
 
-The OR `||` operator does the following:
+عملگر OR `||` مراحل پایین را انجام می دهد:
 
-- Evaluates operands from left to right.
-- For each operand, converts it to boolean. If the result is `true`, stops and returns the original value of that operand.
-- If all operands have been evaluated (i.e. all were `false`), returns the last operand.
+- عملوند ها را از چپ به راست ارزیابی می کند.
+- هر عملوند را، تبدیل به boolean می کند. اگر نتیجه `true` باشد، متوقف می شود و مقدار اصلی عملوند را بر می گرداند.
+- اگر تمام عملوند ها ارزیابی شدند (یعنی تمام آنها `false` بودند)، عملوند آخر را بر می گرداند.
 
-A value is returned in its original form, without the conversion.
+هر مقدار با شکل اصلی خود و بدون تبدیل بر گردانده می شود.
 
-In other words, a chain of OR `||` returns the first truthy value or the last one if no truthy value is found.
+به عبارتی دیگر، یک زنجیره از OR `||` اولین مقدار truthy یا در صورتی که هیج مقدار truthy پیدا نشود آخرین مقدار را بر می گرداند.
 
-For instance:
+برای مثال:
 
 ```js run
-alert( 1 || 0 ); // 1 (1 is truthy)
+alert( 1 || 0 ); // 1 (1 truthy است)
 
-alert( null || 1 ); // 1 (1 is the first truthy value)
-alert( null || 0 || 1 ); // 1 (the first truthy value)
+alert( null || 1 ); // 1 (1 اولین مقدار truthy است)
+alert( null || 0 || 1 ); // 1 (اولین مقدار truthy)
 
-alert( undefined || null || 0 ); // 0 (all falsy, returns the last value)
+alert( undefined || null || 0 ); // 0 (همه falsy هستند، آخرین مقدار را بر می گرداند)
 ```
 
-This leads to some interesting usage compared to a "pure, classical, boolean-only OR".
+این باعث چند استفاده جالب نسبت به "OR خالص، کلاسیک، فقط-boolean" می شود.
 
-1. **Getting the first truthy value from a list of variables or expressions.**
+1. **گرفتن اولین مقدار truthy از یک لیست متغیرها یا عبارت ها.**
 
-    For instance, we have `firstName`, `lastName` and `nickName` variables, all optional (i.e. can be undefined or have falsy values).
+    برای مثال، ما متغیر های `firstName`، `lastName` و `nickName` داریم، همه آنها اختیاری هستند (یعنی می توانند undefined یا مقدارهای falsy داشته باشند).
 
-    Let's use OR `||` to choose the one that has the data and show it (or `"Anonymous"` if nothing set):
+    بیایید با استفاده از OR `||` متغیری که دارای داده است را انتخاب کنیم و آن را نمایش دهیم (یا اگر چیزی تنظیم نشده باشد `Anonymous` را):
 
     ```js run
     let firstName = "";
@@ -115,26 +115,26 @@ This leads to some interesting usage compared to a "pure, classical, boolean-onl
     */!*
     ```
 
-    If all variables were falsy, `"Anonymous"` would show up.
+    اگر تمام متغیرها falsy بودند، `"Anonymous"` نمایش داده می شد.
 
-2. **Short-circuit evaluation.**
+2. **ارزیابی گردش کوتاه.**
 
-    Another feature of OR `||` operator is the so-called "short-circuit" evaluation.
+    یکی دیگر از ویژگی های اپراتور OR `||` به اصطلاح ارزیابی "گردش کوتاه" است.
 
-    It means that `||` processes its arguments until the first truthy value is reached, and then the value is returned immediately, without even touching the other argument.
+    یعنی اینکه `||` روی آرگومان های خودش پردازش انجام می دهد تا زمانی که به اولین مقدار truthy برسد، و سپس آن مقدار بلافاصله بر گردانده می شود، بدون اینکه به بقیه آرگومان ها کاری داشته باشد.
 
-    That importance of this feature becomes obvious if an operand isn't just a value, but an expression with a side effect, such as a variable assignment or a function call.
+    اهمیت این ویژگی زمانی آشکار می شود که یک عملوند فقط یک مقدار ساده نباشد، بلکه یک عبارت با یک اثر جانبی باشد، مثل تخصیص متغیر یا صدا زدن تابع.
 
-    In the example below, only the second message is printed:
+    در مثال پایین، فقط پیام دوم چاپ می شود:
 
     ```js run no-beautify
-    *!*true*/!* || alert("not printed");
-    *!*false*/!* || alert("printed");
+    *!*true*/!* || alert("چاپ نمی شود");
+    *!*false*/!* || alert("چاپ می شود");
     ```
 
-    In the first line, the OR `||` operator stops the evaluation immediately upon seeing `true`, so the `alert` isn't run.
+    در خط اول، عملگر OR `||` به محض دیدن `true` ارزیابی را بلافاصله متوقف می کند، پس `alert` اجرا نمی شود.
 
-    Sometimes, people use this feature to execute commands only if the condition on the left part is falsy.
+    بعضی اوقات، افراد از این ویژگی استفاده می کنند تا دستوراتی را فقط اگر شرط سمت چپ falsy باشد اجرا کنند.
 
 ## && (AND)
 
