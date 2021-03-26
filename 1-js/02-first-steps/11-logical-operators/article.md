@@ -2,7 +2,7 @@
 
 چهار عملگر منطقی در جاوااسکریپت وجود دارد: `||` (OR)، `&&` (AND)، `!` (NOT)، `??` (Nullish Coalescing). اینجا ما سه تای اول را پوشش می دهیم، عملگر `??` در مقاله بعدی است.
 
-با اینکه آنها "منطقی" نام برده می شوند، آنها می توانند روی هر نوع مقداری اعمال شوند، نه فقط نوع boolean. نتیجه آنها هم می تواند از هر نوعی باشد.
+با اینکه آنها "منطقی" نام برده می شوند، می توانند روی هر نوع مقداری اعمال شوند، نه فقط نوع boolean. نتیجه آنها هم می تواند از هر نوعی باشد.
 
 بیایید جزییات را ببینیم.
 
@@ -248,42 +248,42 @@ if (x > 0) alert( 'بزرگ تر از صفر!' );
 ````
 
 
-## ! (NOT)
+## ! (NOT نفی)
 
-The boolean NOT operator is represented with an exclamation sign `!`.
+عملگر NOT(نفی) با یک علامت تعجب `!` نمایش داده می شود.
 
-The syntax is pretty simple:
+سینتکس بسیار ساده است:
 
 ```js
 result = !value;
 ```
 
-The operator accepts a single argument and does the following:
+عملگر یک آرگومان قبول می کند و مراحل زیر را انجام می دهد:
 
-1. Converts the operand to boolean type: `true/false`.
-2. Returns the inverse value.
+1. عملوند را به نوع boolean تبدیل می کند: `true/false`.
+2. مقدار معکوس را بر می گرداند.
 
-For instance:
+برای مثال:
 
 ```js run
 alert( !true ); // false
 alert( !0 ); // true
 ```
 
-A double NOT `!!` is sometimes used for converting a value to boolean type:
+بعضی اوقات NOT دوگانه `!!` برای تبدیل یک مقدار به نوع boolean استفاده می شود:
 
 ```js run
-alert( !!"non-empty string" ); // true
+alert( !!"string که خالی نیست" ); // true
 alert( !!null ); // false
 ```
 
-That is, the first NOT converts the value to boolean and returns the inverse, and the second NOT inverses it again. In the end, we have a plain value-to-boolean conversion.
+یعنی اینکه، اولین NOT مقدار را به boolean تبدیل می کند و معکوس آن را بر می گرداند، و دومین NOT دوباره آن را معکوس می کند. سرانجام، ما یک تبدیل ساده مقدار به boolean خواهیم داشت.
 
-There's a little more verbose way to do the same thing -- a built-in `Boolean` function:
+یک راه کلامی تر برای انجام کار مشابه وجود دارد -- تابع درون ساخت `Boolean`:
 
 ```js run
-alert( Boolean("non-empty string") ); // true
+alert( Boolean("string که خالی نیست") ); // true
 alert( Boolean(null) ); // false
 ```
 
-The precedence of NOT `!` is the highest of all logical operators, so it always executes first, before `&&` or `||`.
+اولویت NOT `!` بالاترین اولویت بین عملگر های منطقی دارد، بنابراین همیشه اول اجرا می شود، قبل از `&&` یا `||`.
