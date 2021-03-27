@@ -2,24 +2,24 @@ importance: 3
 
 ---
 
-# Check the login
+# login را بررسی کنید
 
-Write the code which asks for a login with `prompt`.
+کدی بنویسید که با `prompt` برای login درخواست کند.
 
-If the visitor enters `"Admin"`, then `prompt` for a password, if the input is an empty line or `key:Esc` -- show "Canceled", if it's another string -- then show "I don't know you".
+اگر بازدید کننده `"Admin"` وارد کند، سپس برای رمز عبور `prompt` کنید، اگر ورودی یک خط خالی یا `key:Esc` باشد -- "Canceled" را نمایش دهید، اگر رشته(string) دیگری باشد -- سپس "I don't know you" را نشان دهید.
 
-The password is checked as follows:
+رمز عبور به شکل زیر بررسی می شود:
 
-- If it equals "TheMaster", then show "Welcome!",
-- Another string -- show "Wrong password",
-- For an empty string or cancelled input, show "Canceled"
+- اگر برابر با "TheMaster" باشد، سپس "Welcome!" را نمایش دهید،
+- اگر رشته(string) دیگری باشد -- "Wrong password" را نمایش دهید،
+- اگر یک رشته(string) خالی یا ورودی cancelled باشد، "Canceled" را نمایش دهید
 
-The schema:
+طرح:
 
 ![](ifelse_task.svg)
 
-Please use nested `if` blocks. Mind the overall readability of the code.
+لطفا از بلوک های `if` تو در تو استفاده کنید. خوانایی کلی کد را در نظر بگیرید.
 
-Hint:  passing an empty input to a prompt returns an empty string `''`. Pressing `key:ESC` during a prompt returns `null`.
+راهنمایی جزیی:  رد کردن یک ورودی خالی به prompt یک رشته خالی `''` بر می گرداند. فشار دادن `key:ESC` در حین prompt `null` را بر می گرداند.
 
-[demo]
+[دمو]
