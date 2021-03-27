@@ -6,7 +6,7 @@
 
 بیایید جزییات را ببینیم.
 
-## || (OR یا)
+## || (OR)
 
 عملگر "OR(یا)" با نماد دو خط عمود نمایش داده می شود:
 
@@ -21,10 +21,10 @@ result = a || b;
 چهار ترکیب احتمالی منطقی وجود دارد:
 
 ```js run
-alert( true || true );   // true درست
-alert( false || true );  // true درست
-alert( true || false );  // true درست
-alert( false || false ); // false اشتباه
+alert( true || true );   // true
+alert( false || true );  // true
+alert( true || false );  // true
+alert( false || false ); // false
 ```
 
 همانطور که می بینیم، نتیجه همیشه `true` است به جز موقعی که هر دو عملوند `false` باشند.
@@ -60,7 +60,7 @@ let hour = 12;
 let isWeekend = true;
 
 if (hour < 10 || hour > 18 || isWeekend) {
-  alert( 'The office is closed.' ); // آخر هفته است
+  alert( 'اداره بسته است.' ); // آخر هفته است
 }
 ```
 
@@ -136,9 +136,9 @@ alert( undefined || null || 0 ); // 0 (همه falsy هستند، آخرین مق
 
     بعضی اوقات، افراد از این ویژگی استفاده می کنند تا دستوراتی را فقط اگر شرط سمت چپ falsy باشد اجرا کنند.
 
-## && (AND و)
+## && (AND)
 
-عملگر AND با دو ampersand `&&` نمایش داده می شود:
+عملگر AND(و) با دو ampersand `&&` نمایش داده می شود:
 
 ```js
 result = a && b;
@@ -147,10 +147,10 @@ result = a && b;
 در برنامه نویسی کلاسیک، AND اگر هر دو عملوند truthy باشند `true` را بر می گرداند و در غیر این صورت `false`:
 
 ```js run
-alert( true && true );   // true درست
-alert( false && true );  // false اشتباه
-alert( true && false );  // false اشتباه
-alert( false && false ); // false اشتباه
+alert( true && true );   // true
+alert( false && true );  // false
+alert( true && false );  // false
+alert( false && false ); // false
 ```
 
 یک مثال با `if`:
@@ -171,7 +171,6 @@ if (1 && 0) { // به عنوان true && false ارزیابی می شود
   alert( "کار نخواهد کرد، چون نتیجه falsy است" );
 }
 ```
-
 
 ## AND "&&" اولین مقدار falsy را پیدا می کند
 
@@ -248,7 +247,7 @@ if (x > 0) alert( 'بزرگ تر از صفر!' );
 ````
 
 
-## ! (NOT نفی)
+## ! (NOT)
 
 عملگر NOT(نفی) با یک علامت تعجب `!` نمایش داده می شود.
 
@@ -286,4 +285,4 @@ alert( Boolean("string که خالی نیست") ); // true
 alert( Boolean(null) ); // false
 ```
 
-اولویت NOT `!` بالاترین اولویت بین عملگر های منطقی دارد، بنابراین همیشه اول اجرا می شود، قبل از `&&` یا `||`.
+عملگر NOT `!` بالاترین اولویت را بین عملگر های منطقی دارد، بنابراین همیشه اول اجرا می شود، قبل از `&&` یا `||`.
