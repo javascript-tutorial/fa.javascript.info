@@ -2,18 +2,18 @@ importance: 4
 
 ---
 
-# Which values get shown by the "for" loop?
+# کدام مقدارها توسط حلقه "for" نمایش داده می شوند؟
 
-For each loop write down which values it is going to show. Then compare with the answer.
+برای هر حلقه یادداشت کنید که چه مقداری را نمایش خواهد داد. سپس با جواب مقایسه کنید.
 
-Both loops `alert` same values or not?
+هر دو حلقه مقدارهای مشابه را `alert` می کنند یا نه؟
 
-1. The postfix form:
+1. شکل پسوند:
 
     ```js
     for (let i = 0; i < 5; i++) alert( i );
     ```
-2. The prefix form:
+2. شکل پیشوند:
 
     ```js
     for (let i = 0; i < 5; ++i) alert( i );
