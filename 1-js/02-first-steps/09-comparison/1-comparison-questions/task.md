@@ -1,10 +1,11 @@
-importance: 5
+اهمیت: 5
 
 ---
 
-# Comparisons
+# مقایسه ها
 
 What will be the result for these expressions?
+نتیجه نهایی عبارت زیر چیست؟
 
 ```js no-beautify
 5 > 4
