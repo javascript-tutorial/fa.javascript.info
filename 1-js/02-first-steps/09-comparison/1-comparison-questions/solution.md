@@ -10,7 +10,6 @@ null == "\n0\n" → false
 null === +"\n0\n" → false
 ```
 
-Some of the reasons:
 دلیل پاسخ ها:
 
 1. true, نیاز به توضیح نداره
