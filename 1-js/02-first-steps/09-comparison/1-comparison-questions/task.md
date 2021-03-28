@@ -4,8 +4,7 @@
 
 # مقایسه ها
 
-What will be the result for these expressions?
-نتیجه نهایی عبارت زیر چیست؟
+نتیجه نهایی عبارت های زیر چیست؟
 
 ```js no-beautify
 5 > 4
