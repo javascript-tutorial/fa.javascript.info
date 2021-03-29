@@ -1,54 +1,54 @@
-# Loops: while and for
+# حلقه ها: while و for
 
-We often need to repeat actions.
+ما معمولا نیاز داریم که کارها رو تکرار کنیم.
 
-For example, outputting goods from a list one after another or just running the same code for each number from 1 to 10.
+برای مثال، از یک لیست کالاها را یکی پس از دیگری نمایش دهیم یا کد مشابهی رو برای هر عدد از 1 تا 10 اجرا کنیم.
 
-*Loops* are a way to repeat the same code multiple times.
+*حلقه ها* راهی برای تکرار یک کد برای چندین بار هستند.
 
-## The "while" loop
+## حلقه "while"
 
-The `while` loop has the following syntax:
+حلقه `while` سینتکس زیر را دارد:
 
 ```js
 while (condition) {
-  // code
-  // so-called "loop body"
+  // کد
+  // به اصطلاح "بدنه حلقه"
 }
 ```
 
-While the `condition` is truthy, the `code` from the loop body is executed.
+تا وقتی که `condition` برابر با truthy باشد، `کد` قسمت بدنه حلقه اجرا می شود. 
 
-For instance, the loop below outputs `i` while `i < 3`:
+برای مثال، حلقه پایین `i` را نمایش می دهد تا وقتی که `i < 3`:
 
 ```js run
 let i = 0;
-while (i < 3) { // shows 0, then 1, then 2
+while (i < 3) { // 0 را نمایش می دهد، سپس 1، سپس 2
   alert( i );
   i++;
 }
 ```
 
-A single execution of the loop body is called *an iteration*. The loop in the example above makes three iterations.
+یک بار اجرا شدن بدنه حلقه *یک تکرار* نامیده می شود. حلقه داخل مثال بالا سه تکرار می سازد.
 
-If `i++` was missing from the example above, the loop would repeat (in theory) forever. In practice, the browser provides ways to stop such loops, and in server-side JavaScript, we can kill the process.
+اگر `i++` از مثال بالا جا می ماند، حلقه (در تئوری) برای همیشه اجرا می شد. در عمل، مرورگر راه هایی را برای متوقف کردن چنین حلقه هایی مهیا می کند، و در جاوااسکریپت سمت سرور، ما می توانیم فرایند را نابود کنیم.
 
-Any expression or variable can be a loop condition, not just comparisons: the condition is evaluated and converted to a boolean by `while`.
+هر عبارت یا متغیری می تواند یک شرط حلقه باشد، نه فقط مقایسه ها: شرط توسط `while` ارزیابی می شود و به boolean تبدیل می شود.
 
-For instance, a shorter way to write `while (i != 0)` is `while (i)`:
+برای مثال، یک راه کوتاه تر برای نوشتن `while (i != 0)` `while (i)` است:
 
 ```js run
 let i = 3;
 *!*
-while (i) { // when i becomes 0, the condition becomes falsy, and the loop stops
+while (i) { // وقتی که i برابر با 0 شود، شرط falsy می شود، و حلقه متوقف می شود
 */!*
   alert( i );
   i--;
 }
 ```
 
-````smart header="Curly braces are not required for a single-line body"
-If the loop body has a single statement, we can omit the curly braces `{…}`:
+````smart header="آکولادها برای بدنه تک خطی الزامی نیستند"
+اگر بدنه حلقه یک دستور واحد داشته باشد، ما می توانیم آکولادها `{...}` را حذف کنیم:
 
 ```js run
 let i = 3;
