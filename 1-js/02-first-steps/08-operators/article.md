@@ -28,7 +28,63 @@
     alert( y - x ); // 2, binary minus subtracts values
     ```
 
+<<<<<<< HEAD
 در اصل در اینجا ما در مورد دو عملگر مجزا صحبت کردیم. اولی عملگر unary منفی کننده (که علامت عدد را برعکس می‌کرد) و دیگری عملگر تفریق binary (تفریق دو عدد از هم).
+=======
+    Formally, in the examples above we have two different operators that share the same symbol: the negation operator, a unary operator that reverses the sign, and the subtraction operator, a binary operator that subtracts one number from another.
+
+## Maths
+
+The following math operations are supported:
+
+- Addition `+`,
+- Subtraction `-`,
+- Multiplication `*`,
+- Division `/`,
+- Remainder `%`,
+- Exponentiation `**`.
+
+The first four are straightforward, while `%` and `**` need a few words about them.
+
+### Remainder %
+
+The remainder operator `%`, despite its appearance, is not related to percents.
+
+The result of `a % b` is the [remainder](https://en.wikipedia.org/wiki/Remainder) of the integer division of `a` by `b`.
+
+For instance:
+
+```js run
+alert( 5 % 2 ); // 1, a remainder of 5 divided by 2
+alert( 8 % 3 ); // 2, a remainder of 8 divided by 3
+```
+
+### Exponentiation **
+
+The exponentiation operator `a ** b` raises `a` to the power of `b`.
+
+In school maths, we write that as a<sup>b</sup>.
+
+For instance:
+
+```js run
+alert( 2 ** 2 ); // 2² = 4  
+alert( 2 ** 3 ); // 2³ = 8 
+alert( 2 ** 4 ); // 2⁴ = 16
+```
+
+Just like in maths, the exponentiation operator is defined for non-integer numbers as well. 
+
+For example, a square root is an exponentiation by ½:
+
+```js run
+alert( 4 ** (1/2) ); // 2 (power of 1/2 is the same as a square root)
+alert( 8 ** (1/3) ); // 2 (power of 1/3 is the same as a cubic root)
+```
+
+
+## String concatenation with binary +
+>>>>>>> 7b76185892aa9798c3f058256aed44a9fb413cc3
 
 ## تلفیق رشته‌ها، عملگر + binary
 
