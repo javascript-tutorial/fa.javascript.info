@@ -28,44 +28,41 @@
     alert( y - x ); // 2, binary minus subtracts values
     ```
 
-<<<<<<< HEAD
 در اصل در اینجا ما در مورد دو عملگر مجزا صحبت کردیم. اولی عملگر unary منفی کننده (که علامت عدد را برعکس می‌کرد) و دیگری عملگر تفریق binary (تفریق دو عدد از هم).
-=======
-    Formally, in the examples above we have two different operators that share the same symbol: the negation operator, a unary operator that reverses the sign, and the subtraction operator, a binary operator that subtracts one number from another.
 
-## Maths
+## ریاضیات
 
-The following math operations are supported:
+عملیات‌های ریاضی زیر پشتیبانی می‌شوند:
 
-- Addition `+`,
-- Subtraction `-`,
-- Multiplication `*`,
-- Division `/`,
-- Remainder `%`,
-- Exponentiation `**`.
+- جمع‌کردن `+`,
+- تفریق‌کردن `-`,
+- ضرب‌کردن `*`,
+- تقسیم‌کردن `/`,
+- باقی‌مانده `%`,
+- بتوان‌رساندن `**`.
 
-The first four are straightforward, while `%` and `**` need a few words about them.
+چهارتای اول سرراست هستند، در حالی که `%` و `**` نیاز به توضیح بیشتری دارند.
 
-### Remainder %
+### باقی‌مانده %
 
-The remainder operator `%`, despite its appearance, is not related to percents.
+عملگر باقی‌مانده `%`، بر خلاف ظاهرش، به درصد ارتباطی ندارد.
 
-The result of `a % b` is the [remainder](https://en.wikipedia.org/wiki/Remainder) of the integer division of `a` by `b`.
+نتیجهٔ `a % b` [باقی‌مانده](https://fa.wikipedia.org/wiki/%D8%A8%D8%A7%D9%82%DB%8C%E2%80%8C%D9%85%D8%A7%D9%86%D8%AF%D9%87) تقسیم `a` بر `b` است. 
 
-For instance:
+برای مثال:
 
 ```js run
-alert( 5 % 2 ); // 1, a remainder of 5 divided by 2
-alert( 8 % 3 ); // 2, a remainder of 8 divided by 3
+alert( 5 % 2 ); // ۱، باقی‌ماندهٔ تقسیم ۵ بر ۲
+alert( 8 % 3 ); // ۲، باقی‌ماندهٔ تقسیم ۸ بر ۳
 ```
 
-### Exponentiation **
+### بتوان‌رساندن **
 
-The exponentiation operator `a ** b` raises `a` to the power of `b`.
+عملگر بتوان‌رساندن `a**b` `a` را بتوانِ `b` می‌رساند.
 
-In school maths, we write that as a<sup>b</sup>.
+در ریاضیات مدرسه، ما آن را به صورت a<sup>b</sup> می‌نویسیم.
 
-For instance:
+برای مثال:
 
 ```js run
 alert( 2 ** 2 ); // 2² = 4  
@@ -73,18 +70,14 @@ alert( 2 ** 3 ); // 2³ = 8
 alert( 2 ** 4 ); // 2⁴ = 16
 ```
 
-Just like in maths, the exponentiation operator is defined for non-integer numbers as well. 
+درست مانند ریاضیات، عملگر بتوان‌رساندن برای اعداد غیر صحیح نیز تعریف می‌شود.
 
-For example, a square root is an exponentiation by ½:
+برای مثال، جذر(ریشهٔ دوم) یک عدد با بتوان‌رساندن آن به ½ به‌دست می‌آید: 
 
 ```js run
-alert( 4 ** (1/2) ); // 2 (power of 1/2 is the same as a square root)
-alert( 8 ** (1/3) ); // 2 (power of 1/3 is the same as a cubic root)
+alert( 4 ** (1/2) ); // 2 (بتوان ۱/۲ با جذر آن برابر است.)
+alert( 8 ** (1/3) ); // 2 (بتوان ۱/۳ با ریشهٔ سوم آن برابر است.)
 ```
-
-
-## String concatenation with binary +
->>>>>>> 7b76185892aa9798c3f058256aed44a9fb413cc3
 
 ## تلفیق رشته‌ها، عملگر + binary
 
