@@ -166,23 +166,23 @@ alert(i); // 3، قابل دیدن است، چون بیرون از حلقه تع
 ````
 
 
-### Skipping parts
+### قسمت های قابل جا انداختن
 
-Any part of `for` can be skipped.
+هر قسمت `for` را می توان از قلم انداخت.
 
-For example, we can omit `begin` if we don't need to do anything at the loop start.
+برای مثال، ما می توانیم `begin` را حذف کنیم اگر نیاز به انجام کاری در آغاز حلقه ندشته باشیم.
 
-Like here:
+مثل اینجا:
 
 ```js run
-let i = 0; // we have i already declared and assigned
+let i = 0; // ما i را داریم که از قبل تعریف شده و تخصیص داده شده است.
 
-for (; i < 3; i++) { // no need for "begin"
+for (; i < 3; i++) { // نیازی به "begin" نیست
   alert( i ); // 0, 1, 2
 }
 ```
 
-We can also remove the `step` part:
+همچنین ما می توانیم قسمت `step` را حذف کنیم:
 
 ```js run
 let i = 0;
@@ -192,17 +192,17 @@ for (; i < 3;) {
 }
 ```
 
-This makes the loop identical to `while (i < 3)`.
+این کار حلقه را شبیه `while (i < 3)` می کند.
 
-We can actually remove everything, creating an infinite loop:
+در واقع ما می توانیم همه چیز را حذف کنیم، یک حلقه بی نهایت بسازیم:
 
 ```js
 for (;;) {
-  // repeats without limits
+  // بدون محدودیت تکرار می شود
 }
 ```
 
-Please note that the two `for` semicolons `;` must be present. Otherwise, there would be a syntax error.
+لطفا در نظر داشته باشید که هر دو نقطه ویرگول `;` داخل `for` باید وجود داشته باشند. در غیر این صورت، یک ارور سینتکس به وجود خواهد آمد.
 
 ## Breaking the loop
 
