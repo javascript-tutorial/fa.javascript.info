@@ -82,85 +82,85 @@ do {
 
 این شکل از سینتکس باید فقط زمانی استفاده شود که شما بخواهید بدنه حلقه جدای از اینکه شرط truthy باشد **حداقل یک بار** اجرا شود. معمولا، شکل دیگر ترجیح داده می شود: `while(...) {...}`.
 
-## The "for" loop
+## حلقه "for"
 
-The `for` loop is more complex, but it's also the most commonly used loop.
+حلقه `for` پیچیده تر است، اما این حلقه بیشترین استفاده را هم دارد.
 
-It looks like this:
+اینطور به نظر می رسد:
 
 ```js
 for (begin; condition; step) {
-  // ... loop body ...
+  // ... بدنه حلقه ...
 }
 ```
 
-Let's learn the meaning of these parts by example. The loop below runs `alert(i)` for `i` from `0` up to (but not including) `3`:
+بیایید معنی این قسمت ها را با مثال یاد بگیریم. حلقه زیر `alert(i)` را برای هر `i` از `0` تا `3` (اما شامل نمی شود) اجرا می کند:
 
 ```js run
-for (let i = 0; i < 3; i++) { // shows 0, then 1, then 2
+for (let i = 0; i < 3; i++) { // 0 را نمایش می دهد، سپس 1، سپس 2
   alert(i);
 }
 ```
 
-Let's examine the `for` statement part-by-part:
+بیایید دستور `for` را قسمت به قسمت بازرسی کنیم:
 
-| part  |          |                                                                            |
+| قسمت  |          |                                                                            |
 |-------|----------|----------------------------------------------------------------------------|
-| begin | `i = 0`    | Executes once upon entering the loop.                                      |
-| condition | `i < 3`| Checked before every loop iteration. If false, the loop stops.              |
-| body | `alert(i)`| Runs again and again while the condition is truthy.                         |
-| step| `i++`      | Executes after the body on each iteration. |
+| begin(آغاز) | `i = 0`    | به محض ورود به حلقه اجرا می شود.                                      |
+| condition(شرط) | `i < 3`| قبل از هر تکرار حلقه بررسی می شود. اگر false باشد حلقه متوقف می شود.              |
+| body(بدنه) | `alert(i)`| تا زمانی که شرط truthy باشد همچنان اجرا می شود.                         |
+| step(قدم) | `i++`      | در هر تکرار بعد از بدنه اجرا می شود. |
 
-The general loop algorithm works like this:
+الگوریتم کلی حلقه مثل قسمت پایین کار می کند:
 
 ```
-Run begin
-→ (if condition → run body and run step)
-→ (if condition → run body and run step)
-→ (if condition → run body and run step)
+begin را اجرا کن
+→ (if condition → body را اجرا کن و step را اجرا کن)
+→ (if condition → body را اجرا کن و step را اجرا کن)
+→ (if condition → body را اجرا کن و step را اجرا کن)
 → ...
 ```
 
-That is, `begin` executes once, and then it iterates: after each `condition` test, `body` and `step` are executed.
+یعنی اینکه، `begin` یک بار اجرا می شود، و سپس این تکرار می شود: بعد از هر بار آزمایش `condition`، `body` و `step` اجرا می شوند. 
 
-If you are new to loops, it could help to go back to the example and reproduce how it runs step-by-step on a piece of paper.
+اگر شما در حلقه ها تازه وارد هستید، این می تواند کمک کند که به مثال برگردید و چگونگی اجرا شدن آن را مرحله به مرحله روی یک کاغذ بنویسید.
 
-Here's exactly what happens in our case:
+اینکه در این مورد ما چه اتفاقی می افتد اینجا آورده شده:
 
 ```js
 // for (let i = 0; i < 3; i++) alert(i)
 
-// run begin
+// begin را اجرا کن
 let i = 0
-// if condition → run body and run step
+// if condition → body را اجرا کن و step را اجرا کن
 if (i < 3) { alert(i); i++ }
-// if condition → run body and run step
+// if condition → body را اجرا کن و step را اجرا کن
 if (i < 3) { alert(i); i++ }
-// if condition → run body and run step
+// if condition → body را اجرا کن و step را اجرا کن
 if (i < 3) { alert(i); i++ }
-// ...finish, because now i == 3
+// ...پایان، چون حالا i == 3
 ```
 
-````smart header="Inline variable declaration"
-Here, the "counter" variable `i` is declared right in the loop. This is called an "inline" variable declaration. Such variables are visible only inside the loop.
+````smart header="تعریف درون خطی متغیر"
+اینجا، متغیر "شمارنده" `i` دقیقا داخل حلقه تعریف شده است. این یک تعریف "درون خطی" متغیر نامیده می شود. این چنین متغیرهایی تنها داخل حلقه قابل دیدن هستند.
 
 ```js run
 for (*!*let*/!* i = 0; i < 3; i++) {
   alert(i); // 0, 1, 2
 }
-alert(i); // error, no such variable
+alert(i); // ارور، چنین متغیری وجود ندارد
 ```
 
-Instead of defining a variable, we could use an existing one:
+به جای تعریف کردن یک متغیر، ما می توانستیم از یک متغیر موجود استفاده کنیم:
 
 ```js run
 let i = 0;
 
-for (i = 0; i < 3; i++) { // use an existing variable
+for (i = 0; i < 3; i++) { // استفاده از یک متغیر موجود
   alert(i); // 0, 1, 2
 }
 
-alert(i); // 3, visible, because declared outside of the loop
+alert(i); // 3، قابل دیدن است، چون بیرون از حلقه تعریف شده است
 ```
 
 ````
