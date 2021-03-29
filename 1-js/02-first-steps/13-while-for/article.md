@@ -58,19 +58,19 @@ while (i) alert(i--);
 ```
 ````
 
-## The "do..while" loop
+## حلقه "do..while"
 
-The condition check can be moved *below* the loop body using the `do..while` syntax:
+بررسی شرط با استفاده از سینتکس `do..while` می تواند به *پایین* بدنه حلقه منتقل شود.
 
 ```js
 do {
-  // loop body
+  // بدنه حلقه
 } while (condition);
 ```
 
-The loop will first execute the body, then check the condition, and, while it's truthy, execute it again and again.
+حلقه اول بدنه را اجرا می کند، سپس شرط را بررسی می کند، و تا وقتی که truthy باشد، دوباره و دوباره آن(بدنه) را اجرا می کند.
 
-For example:
+برای مثال:
 
 ```js run
 let i = 0;
@@ -80,7 +80,7 @@ do {
 } while (i < 3);
 ```
 
-This form of syntax should only be used when you want the body of the loop to execute **at least once** regardless of the condition being truthy. Usually, the other form is preferred: `while(…) {…}`.
+این شکل از سینتکس باید فقط زمانی استفاده شود که شما بخواهید بدنه حلقه جدای از اینکه شرط truthy باشد **حداقل یک بار** اجرا شود. معمولا، شکل دیگر ترجیح داده می شود: `while(...) {...}`.
 
 ## The "for" loop
 
