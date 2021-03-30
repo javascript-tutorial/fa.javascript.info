@@ -2,16 +2,16 @@ importance: 3
 
 ---
 
-# Output prime numbers
+# اعداد اول را خروجی بدهید
 
-An integer number greater than `1` is called a [prime](https://en.wikipedia.org/wiki/Prime_number) if it cannot be divided without a remainder by anything except `1` and itself.
+یک عدد صحیح بزرگ تر از 1 زمانی [اول](https://fa.wikipedia.org/wiki/عدد_اول) صدا زده می شود که نتوان آن را به هر چیزی بدون اینکه باقی مانده داشته باشد تقسیم کرد به جز `1` و خودش.
 
-In other words, `n > 1` is a prime if it can't be evenly divided by anything except `1` and `n`.
+به عبارتی دیگر، `n > 1` یک عدد اول است اگر نتواند با هیچ چیزی به جز `1` و `n` به صورت مساوی تقسیم شود.
 
-For example, `5` is a prime, because it cannot be divided without a remainder by `2`, `3` and `4`.
+برای مثال، `5` یک عدد اول است، چون نمی تواند بدون باقی مانده به `2`، `3` و `4` تقسیم شود.
 
-**Write the code which outputs prime numbers in the interval from `2` to `n`.**
+**کدی بنویسید که اعداد اول را در بازه `2` تا `n` خروجی بدهد**
 
-For `n = 10` the result will be `2,3,5,7`.
+برای `n = 10` نتیجه `7 ،5 ،3 ،2` خواهد بود.
 
-P.S. The code should work for any `n`, not be hard-tuned for any fixed value.
+ضمیمه: کد باید برای هر مقدار `n` کار کند، نه اینکه برای مقدار مشخصی تنظیم شده باشد.
