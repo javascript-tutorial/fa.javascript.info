@@ -233,28 +233,28 @@ alert( 'مجموع: ' + sum );
 
 ترکیب "حلقه بی نهایت + `break` در صورت نیاز" برای موقعیت هایی که یک شرط حلقه نباید در آغاز یا انتهای حلقه بررسی شود، بلکه در وسط یا حتی چند جای بدنه آن بررسی شود عالی است.
 
-## Continue to the next iteration [#continue]
+## ادامه دادن به تکرار بعدی [#continue]
 
-The `continue` directive is a "lighter version" of `break`. It doesn't stop the whole loop. Instead, it stops the current iteration and forces the loop to start a new one (if the condition allows).
+دستور `continue` یک "نسخه سبک تر" از `break` است. حلقه را متوقف نمی کند. در عوض، تکرار حال حاضر را متوقف می کند و حلقه را مجبور می کند که یک تکرار جدید را شروع کند (اگر شرط اجازه دهد).
 
-We can use it if we're done with the current iteration and would like to move on to the next one.
+ما می توانیم در صورتی که با تکرار حال حاضر کارمان تمام شده باشد و بخواهیم به تکرار بعدی برویم از آن استفاده کنیم.
 
-The loop below uses `continue` to output only odd values:
+حلقه پایین از `continue` فقط برای نشان دادن مقدارهای فرد استفاده می کند.
 
 ```js run no-beautify
 for (let i = 0; i < 10; i++) {
 
-  // if true, skip the remaining part of the body
+  // اگر true باشد، قسمت باقی مانده بدنه را از قلم بنداز
   *!*if (i % 2 == 0) continue;*/!*
 
-  alert(i); // 1, then 3, 5, 7, 9
+  alert(i); // 1، سپس 9 ،7 ،5 ،3
 }
 ```
 
-For even values of `i`, the `continue` directive stops executing the body and passes control to the next iteration of `for` (with the next number). So the `alert` is only called for odd values.
+برای مقدار های زوج `i`، دستور `continue` اجرا کردن بدنه را متوقف می کند و کنترل را به تکرار بعدی `for` می دهد (به همراه عدد بعدی). پس `alert` فقط برای مقدارهای فرد صدا زده می شود.
 
-````smart header="The `continue` directive helps decrease nesting"
-A loop that shows odd values could look like this:
+````smart header="دستور `continue` به کم کردن تو در تو بودن کمک می کند"
+یک حلقه که اعداد فرد را نمایش می دهد می توانست اینطور باشد:
 
 ```js run
 for (let i = 0; i < 10; i++) {
@@ -266,15 +266,15 @@ for (let i = 0; i < 10; i++) {
 }
 ```
 
-From a technical point of view, this is identical to the example above. Surely, we can just wrap the code in an `if` block instead of using `continue`.
+از دیدگاه فنی، این شبیه مثال بالا است. مسلما، ما می توانیم کد را داخل یک بلوک `if` بگذاریم به جای اینکه از `continue` استفاده کنیم.
 
-But as a side-effect, this created one more level of nesting (the `alert` call inside the curly braces). If the code inside of `if` is longer than a few lines, that may decrease the overall readability.
+اما به عنوان یک عارضه جانبی، یک سطح بیشتری از تو در تویی می سازد (صدا زدن `alert` داخل آکولادها). اگر کد داخل `if` بیشتر از چند خط باشد، ممکن است خوانایی کلی را کاهش دهد.
 ````
 
-````warn header="No `break/continue` to the right side of '?'"
-Please note that syntax constructs that are not expressions cannot be used with the ternary operator `?`. In particular, directives such as `break/continue` aren't allowed there.
+````warn header="ممنوعیت `break/continue` در سمت راست '?'"
+لطفا در نظر داشته باشید که ساختارهای سینتکس که عبارت نیستند نمی توانند با عملگر ternary `?` استفاده شوند. به خصوص، دستورهایی مثل `break/continue` مجاز نیستند.
 
-For example, if we take this code:
+برای مثال، اگر ما این کد را در نظر بگیریم:
 
 ```js
 if (i > 5) {
@@ -284,16 +284,16 @@ if (i > 5) {
 }
 ```
 
-...and rewrite it using a question mark:
+...و آن را با استفاده از علامت سوال دوباره بنویسیم:
 
 
 ```js no-beautify
-(i > 5) ? alert(i) : *!*continue*/!*; // continue isn't allowed here
+(i > 5) ? alert(i) : *!*continue*/!*; // continue اینجا مجاز نیست
 ```
 
-...it stops working: there's a syntax error.
+...متوقف می شود: چون یک ارور سینتکس وجود دارد.
 
-This is just another reason not to use the question mark operator `?` instead of `if`.
+این یک دلیل دیگری برای استفاده نکردن از عملگر علامت سوال `?` به جای `if` است.
 ````
 
 ## Labels for break/continue
