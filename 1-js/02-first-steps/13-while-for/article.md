@@ -296,102 +296,102 @@ if (i > 5) {
 این یک دلیل دیگری برای استفاده نکردن از عملگر علامت سوال `?` به جای `if` است.
 ````
 
-## Labels for break/continue
+## برچسب هایی برای break/continue
 
-Sometimes we need to break out from multiple nested loops at once.
+بعضی اوقات ما نیاز داریم که از چند حلقه تو در تو به یک باره خارج شویم.
 
-For example, in the code below we loop over `i` and `j`, prompting for the coordinates `(i, j)` from `(0,0)` to `(2,2)`:
+برای مثال، در کد پایین ما با `i` و `j` حلقه می زنیم، و برای مختصات های `(i, j)` از `(0,0)` تا  `(2,2)` prompt می کنیم:
 
 ```js run no-beautify
 for (let i = 0; i < 3; i++) {
 
   for (let j = 0; j < 3; j++) {
 
-    let input = prompt(`Value at coords (${i},${j})`, '');
+    let input = prompt(`مقدار در متخصات (${i},${j})`, '');
 
-    // what if we want to exit from here to Done (below)?
+    // اگر ما بخواهیم از اینجا به تمام (پایین) خارج شویم چه کار کنیم؟
   }
 }
 
-alert('Done!');
+alert('تمام!');
 ```
 
-We need a way to stop the process if the user cancels the input.
+ما به راهی نیاز داریم که فرایند را در صورتی که کاربر ورودی را لغو کند متوقف کنیم.
 
-The ordinary `break` after `input` would only break the inner loop. That's not sufficient -- labels, come to the rescue!
+`break` معمولی بعد از `input` فقط حلقه داخلی را می شکند. این کافی نیست -- برچسب ها، به کمک می آیند!
 
-A *label* is an identifier with a colon before a loop:
+یک *برچسب* مشخص کننده ای است که قبل از یک حلقه همراه دو نقطه می آید:
 ```js
 labelName: for (...) {
   ...
 }
 ```
 
-The `break <labelName>` statement in the loop below breaks out to the label:
+دستور `break <labelName>` در حلقه پایین به برچسب مورد نظر می رسد:
 
 ```js run no-beautify
 *!*outer:*/!* for (let i = 0; i < 3; i++) {
 
   for (let j = 0; j < 3; j++) {
 
-    let input = prompt(`Value at coords (${i},${j})`, '');
+    let input = prompt(`مقدار در مختصات (${i},${j})`, '');
 
-    // if an empty string or canceled, then break out of both loops
+    // اگر یک رشته خالی وارد شود یا لغو شود، سپس از هر دو حلقه خارج شو
     if (!input) *!*break outer*/!*; // (*)
 
-    // do something with the value...
+    // یک کاری با مقدار انجام بده...
   }
 }
-alert('Done!');
+alert('تمام!');
 ```
 
-In the code above, `break outer` looks upwards for the label named `outer` and breaks out of that loop.
+در کد بالا، `break outer` برای پیدا کردن برچسب `outer` بالا را جست و جو می کند و از آن حلقه خارج می شود.
 
-So the control goes straight from `(*)` to `alert('Done!')`.
+پس کنترل به صورت مسقیم از `(*)` به `alert('تمام!')` می رسد.
 
-We can also move the label onto a separate line:
+همچنین ما می توانیم برچسب را به یک خط جداگانه منتقل کنیم:
 
 ```js no-beautify
 outer:
 for (let i = 0; i < 3; i++) { ... }
 ```
 
-The `continue` directive can also be used with a label. In this case, code execution jumps to the next iteration of the labeled loop.
+دستور `continue` هم می تواند به همراه برچسب استفاده شود. در این مورد، اجرای کد به تکرار بعدی از حلقه برچسب زده شده می رود.
 
-````warn header="Labels do not allow to \"jump\" anywhere"
-Labels do not allow us to jump into an arbitrary place in the code.
+````warn header="برچسب ها اجازه \"پرش\" به جایی را نمی دهند"
+برچسب ها به ما اجازه نمی دهند که به جای دلخواهی از کد بپریم.
 
-For example, it is impossible to do this:
+برای مثال، این غیر ممکن است که این کار را انجام دهیم:
 ```js
-break label; // jump to the label below (doesn't work)
+break label; // پرش به برچسب پایین (کار نمی کند)
 
 label: for (...)
 ```
 
-A `break` directive must be inside a code block. Technically, any labelled code block will do, e.g.:
+یک دستور `break` باید در داخل بلوک کد باشد. از نظر فنی، می تواند هر بلوک برچسب زده شده کد باشد
 ```js
 label: {
   // ...
-  break label; // works
+  break label; // کار می کند
   // ...
 }
 ```
 
-...Although, 99.9% of the time `break` used is inside loops, as we've seen in the examples above.
+...اگرچه، %99.9 مواقع `break` در داخل حلقه ها استفاده می شود، همانطور که در مثال های بالا دیدیم.
 
-A `continue` is only possible from inside a loop.
+یک `continue` فقط در داخل حلقه می تواند باشد.
 ````
 
-## Summary
+## خلاصه
 
-We covered 3 types of loops:
+ما سه نوع حلقه را پوشش دادیم:
 
-- `while` -- The condition is checked before each iteration.
-- `do..while` -- The condition is checked after each iteration.
-- `for (;;)` -- The condition is checked before each iteration, additional settings available.
+- `while` -- شرط قبل از هر تکرار بررسی می شود.
+- `do..while` -- شرط بعد از هر تکرار بررسی می شود.
+- `for (;;)` -- شرط قبل از هر تکرار بررسی می شود، تنظیمات بیشتر هم ممکن است.
 
-To make an "infinite" loop, usually the `while(true)` construct is used. Such a loop, just like any other, can be stopped with the `break` directive.
+برای ساخت یک حلقه "بی نهایت"، معمولا ساختار `while(true)` استفاده می شود. چنین حلقه ای، درست مثل هر حلقه، می تواند با دستور `break` متوقف شود.
 
-If we don't want to do anything in the current iteration and would like to forward to the next one, we can use the `continue` directive.
+اگر ما نخواهیم که در تکرار حال حاضر کاری کنیم و دوست داشته باشیم که به تکرار بعدی برویم، می توانیم از دستور `continue` استفاده کنیم.
 
-`break/continue` support labels before the loop. A label is the only way for `break/continue` to escape a nested loop to go to an outer one.
+`break/continue` از برچسب های قبل از حلقه پشتیبانی می کنند. یک برچسب تنها راه `break/continue` برای فرار از یک حلقه تو در تو و رفتن به حلقه بیرونی است. 
