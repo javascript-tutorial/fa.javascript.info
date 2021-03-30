@@ -204,20 +204,20 @@ for (;;) {
 
 لطفا در نظر داشته باشید که هر دو نقطه ویرگول `;` داخل `for` باید وجود داشته باشند. در غیر این صورت، یک ارور سینتکس به وجود خواهد آمد.
 
-## Breaking the loop
+## شکستن حلقه
 
-Normally, a loop exits when its condition becomes falsy.
+به طور معمول، یک حلقه زمانی که شرط آن falsy شود متوقف می شود.
 
-But we can force the exit at any time using the special `break` directive.
+اما ما می توانیم با استفاده از دستور خاص `break` آن را در هر لحظه مجبور به توقف کنیم.
 
-For example, the loop below asks the user for a series of numbers, "breaking" when no number is entered:
+برای مثال، حلقه زیر از کاربر یک سری عدد درخواست می کند، و زمانی که هیچ عددی وارد نشد "می شکند":
 
 ```js run
 let sum = 0;
 
 while (true) {
 
-  let value = +prompt("Enter a number", '');
+  let value = +prompt("یک عدد وارد کنید", '');
 
 *!*
   if (!value) break; // (*)
@@ -226,12 +226,12 @@ while (true) {
   sum += value;
 
 }
-alert( 'Sum: ' + sum );
+alert( 'مجموع: ' + sum );
 ```
 
-The `break` directive is activated at the line `(*)` if the user enters an empty line or cancels the input. It stops the loop immediately, passing control to the first line after the loop. Namely, `alert`.
+دستور `break` اگر کاربر یک خط خالی وارد کند یا ورودی را لغو کند در خط `(*)` فعال می شود. حلقه را بلافاصله متوقف می کند، و کنترل را به اولین خط بعد از حلقه می سپارد. یعنی، `alert`.
 
-The combination "infinite loop + `break` as needed" is great for situations when a loop's condition must be checked not in the beginning or end of the loop, but in the middle or even in several places of its body.
+ترکیب "حلقه بی نهایت + `break` در صورت نیاز" برای موقعیت هایی که یک شرط حلقه نباید در آغاز یا انتهای حلقه بررسی شود، بلکه در وسط یا حتی چند جای بدنه آن بررسی شود عالی است.
 
 ## Continue to the next iteration [#continue]
 
