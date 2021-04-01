@@ -1,84 +1,84 @@
 # Function expressions
 
-In JavaScript, a function is not a "magical language structure", but a special kind of value.
+در جاوااسکریپت، تابع یک "ساختار جادویی زبان" نیست، بلکه یک نوع خاصی از مقدار است.
 
-The syntax that we used before is called a *Function Declaration*:
+سینتکسی که ما قبلا استفاده کردیم یک *Function Declaration* نامیده می شود:
 
 ```js
 function sayHi() {
-  alert( "Hello" );
+  alert( "سلام" );
 }
 ```
 
-There is another syntax for creating a function that is called a *Function Expression*.
+یک سینتکس دیگر هم برای ساخت تابع وجود دارد که *Function Expression* نامیده می شود.
 
-It looks like this:
+اینطور به نظر می رسد:
 
 ```js
 let sayHi = function() {
-  alert( "Hello" );
+  alert( "سلام" );
 };
 ```
 
-Here, the function is created and assigned to the variable explicitly, like any other value. No matter how the function is defined, it's just a value stored in the variable `sayHi`.
+اینجا، تابع ساخته شده است و مثل هر مقدار دیگری، صراحتا به متغیر تخصیص داده شده است. فرقی ندارد که تابع چگونه تعریف شده است، تابع فقط یک مقدار است که داخل متغیر `sayHi` ذخیره شده است.
 
-The meaning of these code samples is the same: "create a function and put it into the variable `sayHi`".
+معنی این مثال های کد یکسان است: "یک تابع بساز و آن را داخل متغیر `sayHi` بگذار".
 
-We can even print out that value using `alert`:
+ما حتی می توانیم آن مقدار را با استفاده از `alert` چاپ کنیم:
 
 ```js run
 function sayHi() {
-  alert( "Hello" );
+  alert( "سلام" );
 }
 
 *!*
-alert( sayHi ); // shows the function code
+alert( sayHi ); // کد تابع را نشان می دهد
 */!*
 ```
 
-Please note that the last line does not run the function, because there are no parentheses after `sayHi`. There are programming languages where any mention of a function name causes its execution, but JavaScript is not like that.
+لطفا در نظر داشته باشید که آخرین خط تابع را اجرا نمی کند، چون هیچ پرانتزی بعد از `sayHi` وجود ندارد. زبان های برنامه نویسی‏ای وجود دارند که هر اشاره‏ای به اسم تابع سبب اجرا شدن آن می شود، اما جاوااسکریپت اینطور نیست.
 
-In JavaScript, a function is a value, so we can deal with it as a value. The code above shows its string representation, which is the source code.
+در جاوااسکریپت، تابع یک مقدار است، پس ما می توانیم مثل یک مقدار با آن رفتار کنیم. کد بالا نمایش رشته‏ای آن را انجام می دهد، که همان کد منبع است.
 
-Surely, a function is a special value, in the sense that we can call it like `sayHi()`.
+مسلما، تابع یک مقدار خاص است، از آن جهت ما می توانیم آن را مثل `sayHi()` صدا بزنیم.
 
-But it's still a value. So we can work with it like with other kinds of values.
+اما تابع همچنان یک مقدار است. پس ما می توانیم با آن مثل انواع دیگر مقدارها کار کنیم.
 
-We can copy a function to another variable:
+ما می توانیم یک تابع را در یک متغیر دیگر کپی کنیم:
 
 ```js run no-beautify
-function sayHi() {   // (1) create
-  alert( "Hello" );
+function sayHi() {   // (1) ساختن
+  alert( "سلام" );
 }
 
-let func = sayHi;    // (2) copy
+let func = sayHi;    // (2) کپی کردن
 
-func(); // Hello     // (3) run the copy (it works)!
-sayHi(); // Hello    //     this still works too (why wouldn't it)
+func(); // سلام     // (3) کپی را اجرا می کنیم (کار می کند!)
+sayHi(); // سلام    //     هنوزم کار می کند (چرا نکند)
 ```
 
-Here's what happens above in detail:
+چیزی که بالا اتفاق می افتد با جزییات اینجا هست:
 
-1. The Function Declaration `(1)` creates the function and puts it into the variable named `sayHi`.
-2. Line `(2)` copies it into the variable `func`. Please note again: there are no parentheses after `sayHi`. If there were, then `func = sayHi()` would write  *the result of the call* `sayHi()` into `func`, not *the function* `sayHi` itself.
-3. Now the function can be called as both `sayHi()` and `func()`.
+1. Function Declaration `(1)` تابع را می سازد و آن را داخل متغیر `sayHi` قرار می دهد.
+2. خط `(2)` آن را داخل متغیر `func` کپی می کند. لطفا دوباره در نظر داشته باشید: هیچ پرانتزی بعد از `sayHi` وجود ندارد. اگر وجود داشت، سپس `func = sayHi()` *نتیجه صدا زدن* `sayHi()` را در `func` می نوشت، نه خود *تابع* `sayHi`.
+3. حالا تابع می تواند با `sayHi()` و `func()` صدا زده شود.
 
-Note that we could also have used a Function Expression to declare `sayHi`, in the first line:
+همچنین توجه داشته باشید که ما می توانستیم از یک Function Expression برای تعریف `sayHi` در خط اول، استفاده کنیم:
 
 ```js
 let sayHi = function() {
-  alert( "Hello" );
+  alert( "سلام" );
 };
 
 let func = sayHi;
 // ...
 ```
 
-Everything would work the same.
+همه چیز به همان شکل کار می کند.
 
 
-````smart header="Why is there a semicolon at the end?"
-You might wonder, why does Function Expression have a semicolon `;` at the end, but Function Declaration does not:
+````smart header="چرا یک نقطه ویرگول در انتها وجود دارد؟"
+شاید برای شما سوال باشد، چرا Function Expression در انتها نقطه ویرگول `;` دارد، اما Function Declaration ندارد:
 
 ```js
 function sayHi() {
@@ -90,9 +90,9 @@ let sayHi = function() {
 }*!*;*/!*
 ```
 
-The answer is simple:
-- There's no need for `;` at the end of code blocks and syntax structures that use them like `if { ... }`, `for {  }`, `function f { }` etc.
-- A Function Expression is used inside the statement: `let sayHi = ...;`, as a value. It's not a code block, but rather an assignment. The semicolon `;` is recommended at the end of statements, no matter what the value is. So the semicolon here is not related to the Function Expression itself, it just terminates the statement.
+جواب ساده است:
+- هیچ نیازی به `;` در انتهای بلوک‏های کد و ساختارهای سینتکس که از آنها مثل `if { ... }`، `for {  }`، `function f { }` و... استفاده می شود نیست.
+- یک Function Expression به عنوان یک مقدار، در داخل دستور استفاده می شود: `let sayHi = ...;`.این یک بلوک کد نیست، بلکه یک تخصیص دادن است. نقطه ویرگول `;` در انتهای دستورها پیشنهاد می شود، بدون توجه به اینکه مقدار چه چیزی باشد. پس نقطه ویرگول در اینجا به خود Function Expression مربوط نیست، فقط دستور را به پایان می رساند.
 ````
 
 ## Callback functions
