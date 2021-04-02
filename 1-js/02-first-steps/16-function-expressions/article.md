@@ -2,7 +2,7 @@
 
 در جاوااسکریپت، تابع یک "ساختار جادویی زبان" نیست، بلکه یک نوع خاصی از مقدار است.
 
-سینتکسی که ما قبلا استفاده کردیم یک *Function Declaration* نامیده می شود:
+سینتکسی که ما قبلا استفاده کردیم یک *Function Declaration* نامیده می‏شود:
 
 ```js
 function sayHi() {
@@ -10,9 +10,9 @@ function sayHi() {
 }
 ```
 
-یک سینتکس دیگر هم برای ساخت تابع وجود دارد که *Function Expression* نامیده می شود.
+یک سینتکس دیگر هم برای ساخت تابع وجود دارد که *Function Expression* نامیده می‏شود.
 
-اینطور به نظر می رسد:
+اینطور به نظر می‏رسد:
 
 ```js
 let sayHi = function() {
@@ -20,11 +20,11 @@ let sayHi = function() {
 };
 ```
 
-اینجا، تابع ساخته شده است و مثل هر مقدار دیگری، صراحتا به متغیر تخصیص داده شده است. فرقی ندارد که تابع چگونه تعریف شده است، تابع فقط یک مقدار است که داخل متغیر `sayHi` ذخیره شده است.
+اینجا، تابع ساخته شده و مثل هر مقدار دیگری، صراحتا به متغیر تخصیص داده شده است. فرقی ندارد که تابع چگونه تعریف شده، تابع فقط یک مقدار است که داخل متغیر `sayHi` ذخیره شده است.
 
-معنی این مثال های کد یکسان است: "یک تابع بساز و آن را داخل متغیر `sayHi` بگذار".
+معنی این مثال‏های کد یکسان است: "یک تابع بساز و آن را داخل متغیر `sayHi` بگذار".
 
-ما حتی می توانیم آن مقدار را با استفاده از `alert` چاپ کنیم:
+ما حتی می‏توانیم آن مقدار را با استفاده از `alert` چاپ کنیم:
 
 ```js run
 function sayHi() {
@@ -32,19 +32,19 @@ function sayHi() {
 }
 
 *!*
-alert( sayHi ); // کد تابع را نشان می دهد
+alert( sayHi ); // کد تابع را نشان می‏دهد
 */!*
 ```
 
-لطفا در نظر داشته باشید که آخرین خط تابع را اجرا نمی کند، چون هیچ پرانتزی بعد از `sayHi` وجود ندارد. زبان های برنامه نویسی‏ای وجود دارند که هر اشاره‏ای به اسم تابع سبب اجرا شدن آن می شود، اما جاوااسکریپت اینطور نیست.
+لطفا در نظر داشته باشید که آخرین خط تابع را اجرا نمی‏کند، چون هیچ پرانتزی بعد از `sayHi` وجود ندارد. زبان‏های برنامه نویسی‏ای وجود دارند که هر اشاره‏ای به اسم تابع سبب اجرا شدن آن می‏شود، اما جاوااسکریپت اینطور نیست.
 
-در جاوااسکریپت، تابع یک مقدار است، پس ما می توانیم مثل یک مقدار با آن رفتار کنیم. کد بالا نمایش رشته‏ای آن را انجام می دهد، که همان کد منبع است.
+در جاوااسکریپت، تابع یک مقدار است، پس ما می‏توانیم مثل یک مقدار با آن رفتار کنیم. کد بالا نمایش رشته‏ای آن را انجام می‏دهد، که همان کد منبع است.
 
-مسلما، تابع یک مقدار خاص است، از آن جهت ما می توانیم آن را مثل `sayHi()` صدا بزنیم.
+مسلما، تابع یک مقدار خاص است، به همین دلیل ما می‏توانیم آن را مثل `sayHi()` صدا بزنیم.
 
-اما تابع همچنان یک مقدار است. پس ما می توانیم با آن مثل انواع دیگر مقدارها کار کنیم.
+اما تابع همچنان یک مقدار است. پس ما می‏توانیم با آن مثل انواع دیگر مقدارها کار کنیم.
 
-ما می توانیم یک تابع را در یک متغیر دیگر کپی کنیم:
+ما می‏توانیم یک تابع را در یک متغیر دیگر کپی کنیم:
 
 ```js run no-beautify
 function sayHi() {   // (1) ساختن
@@ -53,17 +53,17 @@ function sayHi() {   // (1) ساختن
 
 let func = sayHi;    // (2) کپی کردن
 
-func(); // سلام     // (3) کپی را اجرا می کنیم (کار می کند!)
-sayHi(); // سلام    //     هنوزم کار می کند (چرا نکند)
+func(); // سلام     // (3) کپی را اجرا می‏کنیم (کار می‏کند!)
+sayHi(); // سلام    //     هنوزم کار می‏کند (چرا نکند)
 ```
 
-چیزی که بالا اتفاق می افتد با جزییات اینجا هست:
+چیزی که بالا اتفاق می‏افتد با جزییات اینجا هست:
 
-1. Function Declaration `(1)` تابع را می سازد و آن را داخل متغیر `sayHi` قرار می دهد.
-2. خط `(2)` آن را داخل متغیر `func` کپی می کند. لطفا دوباره در نظر داشته باشید: هیچ پرانتزی بعد از `sayHi` وجود ندارد. اگر وجود داشت، سپس `func = sayHi()` *نتیجه صدا زدن* `sayHi()` را در `func` می نوشت، نه خود *تابع* `sayHi`.
-3. حالا تابع می تواند با `sayHi()` و `func()` صدا زده شود.
+1. Function Declaration `(1)` تابع را می‏سازد و آن را داخل متغیر `sayHi` قرار می‏دهد.
+2. خط `(2)` آن را داخل متغیر `func` کپی می‏کند. لطفا دوباره در نظر داشته باشید: هیچ پرانتزی بعد از `sayHi` وجود ندارد. اگر وجود داشت، سپس `func = sayHi()` *نتیجه صدا زدن* `sayHi()` را در `func` می‏نوشت، نه خود *تابع* `sayHi`.
+3. حالا تابع می‏تواند با `sayHi()` و `func()` صدا زده شود.
 
-همچنین توجه داشته باشید که ما می توانستیم از یک Function Expression برای تعریف `sayHi` در خط اول، استفاده کنیم:
+همچنین توجه داشته باشید که ما می‏توانستیم از یک Function Expression برای تعریف `sayHi` در خط اول، استفاده کنیم:
 
 ```js
 let sayHi = function() {
@@ -74,7 +74,7 @@ let func = sayHi;
 // ...
 ```
 
-همه چیز به همان شکل کار می کند.
+همه چیز به همان شکل کار خواهد کرد.
 
 
 ````smart header="چرا یک نقطه ویرگول در انتها وجود دارد؟"
@@ -91,26 +91,26 @@ let sayHi = function() {
 ```
 
 جواب ساده است:
-- هیچ نیازی به `;` در انتهای بلوک‏های کد و ساختارهای سینتکس که از آنها مثل `if { ... }`، `for {  }`، `function f { }` و... استفاده می شود نیست.
-- یک Function Expression به عنوان یک مقدار، در داخل دستور استفاده می شود: `let sayHi = ...;`.این یک بلوک کد نیست، بلکه یک تخصیص دادن است. نقطه ویرگول `;` در انتهای دستورها پیشنهاد می شود، بدون توجه به اینکه مقدار چه چیزی باشد. پس نقطه ویرگول در اینجا به خود Function Expression مربوط نیست، فقط دستور را به پایان می رساند.
+- هیچ نیازی به `;` در انتهای بلوک‏های کد و ساختارهای سینتکس که از آنها مثل `if { ... }`، `for {  }`، `function f { }` و... استفاده می‏شود نیست.
+- یک Function Expression به عنوان یک مقدار، در داخل دستور استفاده می‏شود: `let sayHi = ...;`.این یک بلوک کد نیست، بلکه یک تخصیص دادن است. نقطه ویرگول `;` در انتهای دستورها پیشنهاد می‏شود، بدون توجه به اینکه مقدار چه چیزی باشد. پس نقطه ویرگول در اینجا به خود Function Expression مربوط نیست، فقط دستور را به پایان می‏رساند.
 ````
 
 ## Callback functions
 
-Let's look at more examples of passing functions as values and using function expressions.
+بیایید به مثال‏های بیشتری درباره استفاده کردن از تابع ها به عنوان مقدار و استفاده کردن از function expressions نگاه کنیم.
 
-We'll write a function `ask(question, yes, no)` with three parameters:
+ما یک تابع `ask(question, yes, no)` با سه پارامتر می‏نویسیم:
 
 `question`
-: Text of the question
+: متن سوال
 
 `yes`
-: Function to run if the answer is "Yes"
+: تابعی برای اجرا کردن اگر جواب "Yes" باشد
 
 `no`
-: Function to run if the answer is "No"
+: تابعی برای اجرا کردن اگر جواب "No" باشد
 
-The function should ask the `question` and, depending on the user's answer, call `yes()` or `no()`:
+تابع باید `question` را بپرسد، و بر اساس جواب کاربر، `yes()` یا `no()` را صدا بزند:
 
 ```js run
 *!*
@@ -121,24 +121,24 @@ function ask(question, yes, no) {
 */!*
 
 function showOk() {
-  alert( "You agreed." );
+  alert( "شما موافقت کردید." );
 }
 
 function showCancel() {
-  alert( "You canceled the execution." );
+  alert( "شما اجرا شدن را لغو کردید." );
 }
 
-// usage: functions showOk, showCancel are passed as arguments to ask
-ask("Do you agree?", showOk, showCancel);
+// نحوه استفاده: تابع‏های showOk، showCancel به عنوان آرگومان به ask داده شده‏اند
+ask("آیا موافق هستید؟", showOk, showCancel);
 ```
 
-In practice, such functions are quite useful. The major difference between a real-life `ask` and the example above is that real-life functions use more complex ways to interact with the user than a simple `confirm`. In the browser, such function usually draws a nice-looking question window. But that's another story.
+در عمل، چنین تابع هایی بسیار مفید هستند. تفاوت اصلی بین یک `ask` در زندگی واقعی و مثال بالا در این است که تابع‏ها در زندگی واقعی از راه‏های پیچیده‏تری نسبت به یک `confirm` ساده برای تعامل با کاربر استفاده استفاده می کنند. در مرورگر، چنین تابع‏هایی معمولا یک پنچره سوال زیبا را طرح می‏کنند. اما آن یک داستان دیگر است.
 
-**The arguments `showOk` and `showCancel` of `ask` are called *callback functions* or just *callbacks*.**
+**آرگومان‏های `showOk` و `showCancel` داخل `ask` *callback functions* یا فقط *callbacks* نامیده می‏شوند.**
 
-The idea is that we pass a function and expect it to be "called back" later if necessary. In our case, `showOk` becomes the callback for "yes" answer, and `showCancel` for "no" answer.
+ایده اینطور است که ما یک تابع را می‏دهیم و از آن توقع داریم که بعدا اگر نیاز شد "دوباره صدا زده شود". در مورد ما، `showOk` تبدیل به callback برای جواب "yes" می‏شود، و `showCancel` برای چواب "no".
 
-We can use Function Expressions to write the same function much shorter:
+ما می توانیم از Function Expressions برای نوشتن بسیار کوتاه‏تر همان تابع استفاده کنیم:
 
 ```js run no-beautify
 function ask(question, yes, no) {
@@ -148,23 +148,23 @@ function ask(question, yes, no) {
 
 *!*
 ask(
-  "Do you agree?",
-  function() { alert("You agreed."); },
-  function() { alert("You canceled the execution."); }
+  "آیا موافق هستید؟",
+  function() { alert("شما موافقت کردید."); },
+  function() { alert("شما اجرا شدن را لغو کردید."); }
 );
 */!*
 ```
 
-Here, functions are declared right inside the `ask(...)` call. They have no name, and so are called *anonymous*. Such functions are not accessible outside of `ask` (because they are not assigned to variables), but that's just what we want here.
+اینجا، تابع‏ها دقیقا درون صدا زدن `ask(...)` تعریف شده اند. آنها هیچ اسمی ندارند، و بنابراین *anonymous* نامیده می شود. چنین تابع هایی بیرون از `ask` قابل دسترسی نیستند (چون آنها به متغیری تخصیص داده نشده اند)، اما این چیزی است که ما اینجا می‏خواهیم.
 
-Such code appears in our scripts very naturally, it's in the spirit of JavaScript.
+چنین کدی در اسکریپت‏های ما به طور طبیعی نمایان می شوند، این در ذات جاوااسکریپت است.
 
-```smart header="A function is a value representing an \"action\""
-Regular values like strings or numbers represent the *data*.
+```smart header="یک تابع مقداری است که یک \"عمل\" را نمایش می‏دهد"
+مقدارهای معمولی مثل رشته‏ها یا عددها *داده* را نمایش می‏دهند.
 
-A function can be perceived as an *action*.
+یک تابع می‏تواند به عنوان یک *عمل* درک شود.
 
-We can pass it between variables and run when we want.
+ما می‏توانیم آن را بین متغیرها رد و بدل کنیم و هر زمان که بخواهیم اجرا کنیم.
 ```
 
 
