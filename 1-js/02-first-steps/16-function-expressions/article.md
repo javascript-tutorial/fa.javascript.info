@@ -168,13 +168,13 @@ ask(
 ```
 
 
-## Function Expression vs Function Declaration
+## Function Expression در مقابل Function Declaration
 
-Let's formulate the key differences between Function Declarations and Expressions.
+بیایید تفاوت‌های کلیدی بین Function Declarations و Expressions را فرمول بندی کنیم.
 
-First, the syntax: how to differentiate between them in the code.
+اول، سینتکس: چگونه داخل کد بین آنها فرق قائل شویم.
 
-- *Function Declaration:* a function, declared as a separate statement, in the main code flow.
+- *Function Declaration:* یک تابع است، که به عنوان یک دستور جدا، در کد اصلی تعریف می‎شود.
 
     ```js
     // Function Declaration
@@ -182,7 +182,7 @@ First, the syntax: how to differentiate between them in the code.
       return a + b;
     }
     ```
-- *Function Expression:* a function, created inside an expression or inside another syntax construct. Here, the function is created at the right side of the "assignment expression" `=`:
+- *Function Expression:* یک تابع است، که در داخل یک عبارت یا داخل یک ساختار سینتکس دیگر ساخته می‌شود. اینجا، تابع سمت راست "عبارت تخصیص دادن" `=` ساخته شده است.
 
     ```js
     // Function Expression
@@ -191,168 +191,168 @@ First, the syntax: how to differentiate between them in the code.
     };
     ```
 
-The more subtle difference is *when* a function is created by the JavaScript engine.
+تفاوت‌های نامحسوس بیشتر *زمانی* ایجاد می‌شوند که یک تابع توسط موتور جاوااسکریپت ساخته می‌شود.
 
-**A Function Expression is created when the execution reaches it and is usable only from that moment.**
+**یک Function Expression زمانی ساخته می‌شود که اجرا شدن به آن می‌رسد و فقط از همان لحظه قابل استفاده است.**
 
-Once the execution flow passes to the right side of the assignment `let sum = function…` -- here we go, the function is created and can be used (assigned, called, etc. ) from now on.
+بلافاصله که جریان اجرا شدن به سمت راست تخصیص دادن `let sum = function...` برسد -- د برو که رفتیم، تابع از آن لحظه ساخته شده و می‌تواند استفاده شود (تخصیص داده شود، صدا زده شود، و...).
 
-Function Declarations are different.
+Function Declarationها متفاوت هستند.
 
-**A Function Declaration can be called earlier than it is defined.**
+**یک Function Declaration می‌تواند زودتر از زمانی که تعریف شده باشد صدا شده شود.**
 
-For example, a global Function Declaration is visible in the whole script, no matter where it is.
+برای مثال، یک Function Declaration سراسری داخل کل اسکریپت قابل رویت است، هیچ فرقی ندارد که کجا باشد.
 
-That's due to internal algorithms. When JavaScript prepares to run the script, it first looks for global Function Declarations in it and creates the functions. We can think of it as an "initialization stage".
+این به دلیل الگوریتم‌های داخلی است. زمانی که جاوااسکریپت برای اجرای اسکریپت آماده می‌شود، اول به دنبال Function Declarationهای سراسری می‌گردد و تابع‌ها را می‌سازد. ما می‌توانیم به عنوان یک "مرحله مقداردهی اولیه" به آن فکر کنیم.
 
-And after all Function Declarations are processed, the code is executed. So it has access to these functions.
+و بعد از اینکه همه Function Declarationها پردازش شدند، کد اجرا می‌شود. پس به این تابع‌ها دسترسی دارد.
 
-For example, this works:
+برای مثال، این کار می‌کند:
 
 ```js run refresh untrusted
 *!*
-sayHi("John"); // Hello, John
+sayHi("John"); // سلام، John
 */!*
 
 function sayHi(name) {
-  alert( `Hello, ${name}` );
+  alert( `سلام، ${name}` );
 }
 ```
 
-The Function Declaration `sayHi` is created when JavaScript is preparing to start the script and is visible everywhere in it.
+Function Declaration `sayHi` زمانی که جاوااسکریپت برای شروع اسکریپت در حال آماده شدن است ساخته می‌شود و هرجایی داخل آن قابل رویت است.
 
-...If it were a Function Expression, then it wouldn't work:
+...اگر این یک Function Expression بود، سپس کار نمی‌کرد:
 
 ```js run refresh untrusted
 *!*
-sayHi("John"); // error!
+sayHi("John"); // ارور!
 */!*
 
-let sayHi = function(name) {  // (*) no magic any more
-  alert( `Hello, ${name}` );
+let sayHi = function(name) {  // (*) دیگر جادویی وجود ندارد
+  alert( `سلام، ${name}` );
 };
 ```
 
-Function Expressions are created when the execution reaches them. That would happen only in the line `(*)`. Too late.
+Function Expressionها زمانی که اجرا شدن به آنها می‌رسد ساخته می‌شوند. این فقط در خط `(*)` اتفاق می‌افتد. خیلی دیر است.
 
-Another special feature of Function Declarations is their block scope.
+یکی دیگر از ویژگی‌های Function Declaration ویژگی block scope آنها است.
 
-**In strict mode, when a Function Declaration is within a code block, it's visible everywhere inside that block. But not outside of it.**
+**در حالت سختگیرانه(strict mode)، زمانی که یک Function Declaration داخل یک بلوک کد است، همه جای آن بلوک قابل رویت است. اما نه خارج از آن.**
 
-For instance, let's imagine that we need to declare a function `welcome()` depending on the `age` variable that we get during runtime. And then we plan to use it some time later.
+برای مثال، بیایید تصور کنیم که می‌خواهیم یک تابع `welcome()` تعریف کنیم که به متغیر `age` بستگی دارد که آن را زمان اجرا دریافت می‌کنیم. و سپس می‌خواهیم از آن بعدا استفاده کنیم.
 
-If we use Function Declaration, it won't work as intended:
+اگر ما از Function Declaration استفاده کنیم، آن طور که در نظر داریم کار نمی‌کند:
 
 ```js run
-let age = prompt("What is your age?", 18);
+let age = prompt("سن شما چقدر است؟", 18);
 
-// conditionally declare a function
+// بر اساس شرط یک تابع تعریف کن
 if (age < 18) {
 
   function welcome() {
-    alert("Hello!");
+    alert("سلام!");
   }
 
 } else {
 
   function welcome() {
-    alert("Greetings!");
+    alert("درود!");
   }
 
 }
 
-// ...use it later
+// ...بعدا از آن استفاده کن
 *!*
-welcome(); // Error: welcome is not defined
+welcome(); // ارور: welcome تعریف نشده است
 */!*
 ```
 
-That's because a Function Declaration is only visible inside the code block in which it resides.
+دلیل آن این است که یک Function Declaration فقط داخل بلوک کدی که داخل آن مستقر است قابل رویت است.
 
-Here's another example:
+اینجا یک مثال دیگر داریم:
 
 ```js run
-let age = 16; // take 16 as an example
+let age = 16; // 16 را به عنوان یک مثال دریافت کنید
 
 if (age < 18) {
 *!*
-  welcome();               // \   (runs)
+  welcome();               // \   (اجرا می‌شود)
 */!*
                            //  |
   function welcome() {     //  |  
-    alert("Hello!");       //  |  Function Declaration is available
-  }                        //  |  everywhere in the block where it's declared
+    alert("سلام!");         //  |  Function Declaration در دسترس است
+  }                        //  |  هرجایی از بلوکی که داخل آن تعریف شده است
                            //  |
 *!*
-  welcome();               // /   (runs)
+  welcome();               // /   (اجرا می‌شود)
 */!*
 
 } else {
 
   function welcome() {    
-    alert("Greetings!");
+    alert("درود!");
   }
 }
 
-// Here we're out of curly braces,
-// so we can not see Function Declarations made inside of them.
+// اینجا ما بیرون از آکولادها هستیم،
+// پس ما نمی‌توانیم Function Declarationهایی که داخل آنها ساخته شده‌اند را رویت کنیم.
 
 *!*
-welcome(); // Error: welcome is not defined
+welcome(); // ارور: welcome تعریف نشده است
 */!*
 ```
 
-What can we do to make `welcome` visible outside of `if`?
+ما چه کاری می‌توانیم انجام دهیم تا `welcome` را بیرون از `if` قابل رویت کنیم؟
 
-The correct approach would be to use a Function Expression and assign `welcome` to the variable that is declared outside of `if` and has the proper visibility.
+رویکرد درست می‌تواند این باشد که از Function Expression استفاده کنیم و `welcome` را به متغیری تخصیص بدهیم که خارج از `if` تعریف شده باشد و قابل رویت باشد.
 
-This code works as intended:
+این کد به طوری که در نظر داریم کار می‌کند:
 
 ```js run
-let age = prompt("What is your age?", 18);
+let age = prompt("سن شما چقدر است؟", 18);
 
 let welcome;
 
 if (age < 18) {
 
   welcome = function() {
-    alert("Hello!");
+    alert("سلام!");
   };
 
 } else {
 
   welcome = function() {
-    alert("Greetings!");
+    alert("درود!");
   };
 
 }
 
 *!*
-welcome(); // ok now
+welcome(); // الان درست است
 */!*
 ```
 
-Or we could simplify it even further using a question mark operator `?`:
+یا حتی ما می‌توانیم آن را با استفاده از عملگر علامت سوال `?` ساده‌تر کنیم:
 
 ```js run
-let age = prompt("What is your age?", 18);
+let age = prompt("سن شما چقدر است؟", 18);
 
 let welcome = (age < 18) ?
-  function() { alert("Hello!"); } :
-  function() { alert("Greetings!"); };
+  function() { alert("سلام!"); } :
+  function() { alert("درود!"); };
 
 *!*
-welcome(); // ok now
+welcome(); // الان درست است
 */!*
 ```
 
 
-```smart header="When to choose Function Declaration versus Function Expression?"
-As a rule of thumb, when we need to declare a function, the first to consider is Function Declaration syntax. It gives more freedom in how to organize our code, because we can call such functions before they are declared.
+```smart header="چه زمانی Function Declaration را انتخاب کنیم و چه زمانی Function Expression؟"
+به عنوان یک قاعده کلی، زمانی که ما نیاز به تعریف یک تابع داریم، اولین چیزی که باید سراغ آن برویم سینتکس Function Declaration است. آن به ما آزادی بیشتری برای سازماندهی کردن کد مان به ما می‌دهد، چون ما می‌توانیم چنین تابع‌هایی را قبل از اینکه تعریف شوند صدا بزنیم.
 
-That's also better for readability, as it's easier to look up `function f(…) {…}` in the code than `let f = function(…) {…};`. Function Declarations are more "eye-catching".
+همچنین آن برای خوانایی نیز بهتر است، چون پیدا کردن `function f(...) {...}` در کد راحت تر است از `let f = function(...) {...}`. Function Declarationها "چشم نوازتر" هستند.
 
-...But if a Function Declaration does not suit us for some reason, or we need a conditional declaration (we've just seen an example), then Function Expression should be used.
+...اما اگر یک Function Declaration برای ما به دلایلی مناسب نبود، یا ما یک تعریف بر اساس شرط نیاز داشتیم (که به تازگی یک مثال از آن دیدیم)، سپس Function Expression باید استفاده شود.
 ```
 
 ## Summary
