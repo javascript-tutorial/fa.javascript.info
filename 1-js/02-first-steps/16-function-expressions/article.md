@@ -197,7 +197,7 @@ ask(
 
 بلافاصله که جریان اجرا شدن به سمت راست تخصیص دادن `let sum = function...` برسد -- د برو که رفتیم، تابع از آن لحظه ساخته شده و می‌تواند استفاده شود (تخصیص داده شود، صدا زده شود، و...).
 
-Function Declarationها متفاوت هستند.
+Function Declarations متفاوت هستند.
 
 **یک Function Declaration می‌تواند زودتر از زمانی که تعریف شده باشد صدا شده شود.**
 
@@ -205,7 +205,7 @@ Function Declarationها متفاوت هستند.
 
 این به دلیل الگوریتم‌های داخلی است. زمانی که جاوااسکریپت برای اجرای اسکریپت آماده می‌شود، اول به دنبال Function Declarationهای سراسری می‌گردد و تابع‌ها را می‌سازد. ما می‌توانیم به عنوان یک "مرحله مقداردهی اولیه" به آن فکر کنیم.
 
-و بعد از اینکه همه Function Declarationها پردازش شدند، کد اجرا می‌شود. پس به این تابع‌ها دسترسی دارد.
+و بعد از اینکه همه Function Declarations پردازش شدند، کد اجرا می‌شود. پس به این تابع‌ها دسترسی دارد.
 
 برای مثال، این کار می‌کند:
 
@@ -233,7 +233,7 @@ let sayHi = function(name) {  // (*) دیگر جادویی وجود ندارد
 };
 ```
 
-Function Expressionها زمانی که اجرا شدن به آنها می‌رسد ساخته می‌شوند. این فقط در خط `(*)` اتفاق می‌افتد. خیلی دیر است.
+Function Expressions زمانی که اجرا شدن به آنها می‌رسد ساخته می‌شوند. این فقط در خط `(*)` اتفاق می‌افتد. خیلی دیر است.
 
 یکی دیگر از ویژگی‌های Function Declaration ویژگی block scope آنها است.
 
@@ -355,14 +355,14 @@ welcome(); // الان درست است
 ...اما اگر یک Function Declaration برای ما به دلایلی مناسب نبود، یا ما یک تعریف بر اساس شرط نیاز داشتیم (که به تازگی یک مثال از آن دیدیم)، سپس Function Expression باید استفاده شود.
 ```
 
-## Summary
+## خلاصه
 
-- Functions are values. They can be assigned, copied or declared in any place of the code.
-- If the function is declared as a separate statement in the main code flow, that's called a "Function Declaration".
-- If the function is created as a part of an expression, it's called a "Function Expression".
-- Function Declarations are processed before the code block is executed. They are visible everywhere in the block.
-- Function Expressions are created when the execution flow reaches them.
+- تابع‌ها مقدار هستند. آنها می‌توانند هرجای کد تخصیص داده شوند، کپی شوند یا تعریف شوند.
+- اگر تابع به عنوان یک دستور جداگانه در جریان کد اصلی تعریف شده باشد، یک "Function Declaration" نامیده می‌شود.
+- اگر تابع به عنوان بخشی از یک عبارت ساخته شده باشد، یک "Function Expression" نامیده می‌شود.
+- Function Declarations قبل از اینکه بلوک کد اجرا شود پردازش می‌شوند. آنها از هرجای بلوک قابل رویت هستند.
+- Function Expressions زمانی که جریان اصلی به آنها می‌رسد ساخته می‌شوند.
 
-In most cases when we need to declare a function, a Function Declaration is preferable, because it is visible prior to the declaration itself. That gives us more flexibility in code organization, and is usually more readable.
+در اکثر موارد زمانی که ما می‌خواهیم یک تابع تعریف کنیم، یک Function Declaration ترجیح داده می‌شود، چون قبل از اینکه تعریف شود قابل رویت است. آن به ما انعطاف بیشتری برای سازماندهی کد می‌دهد، و معمولا خواناتر است.
 
-So we should use a Function Expression only when a Function Declaration is not fit for the task. We've seen a couple of examples of that in this chapter, and will see more in the future.
+پس ما باید فقط زمانی از Function Expression استفاده کنیم که Function Declaration برای کار مناسب نباشد. ما یک جفت مثال از آن در این فصل دیدیم، و در آینده بیشتر خواهیم دید.
