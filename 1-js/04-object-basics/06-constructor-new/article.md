@@ -1,17 +1,17 @@
-# Constructor, operator "new"
+# سازنده، عملگر "new"
 
-The regular `{...}` syntax allows to create one object. But often we need to create many similar objects, like multiple users or menu items and so on.
+سینتکس معمولی {...} اجازه ساخت یک شیء را می دهد. اما غالبا ما نیاز داریم که شیء های متشابه زیادی ایجاد کنیم، مثل چند کاربر یا آیتم های منو و... 
 
-That can be done using constructor functions and the `"new"` operator.
+این می تواند با استفاده از تابع های سازنده و عملگر `new` انجام شود.
 
-## Constructor function
+## تابع سازنده
 
-Constructor functions technically are regular functions. There are two conventions though:
+تابع های سازنده از لحاظ فنی همان تابع های معمولی هستند. با این حال دو قرارداد وجود دارد:
 
-1. They are named with capital letter first.
-2. They should be executed only with `"new"` operator.
+1. آنها با حرف بزرگ انگلیسی نامگذاری می شوند.
+2. آنها باید فقط با عملگر `new` اجرا شوند.
 
-For instance:
+برای مثال:
 
 ```js run
 function User(name) {
@@ -24,34 +24,34 @@ let user = new User("Jack");
 */!*
 
 alert(user.name); // Jack
-alert(user.isAdmin); // false
+alert(user.isAdmin); // نادرست
 ```
 
-When a function is executed with `new`, it does the following steps:
+زمانی که یک تابع با `new` اجرا می شود، مراحل زیر را انجام می دهد:
 
-1. A new empty object is created and assigned to `this`.
-2. The function body executes. Usually it modifies `this`, adds new properties to it.
-3. The value of `this` is returned.
+1. یک شیء خالی جدید ساخته می شود و به `this` اختصاص می یابد.
+2. بدنه ی تابع اجرا می شود. معمولا `this` را تغییر می دهد، ویژگی های جدید را به آن اضافه می کند.
+3. مقدار `this` برگردانده می شود.
 
-In other words, `new User(...)` does something like:
+به عبارتی دیگر، `new User(...)` چیزی مانند این را انجام می دهد:
 
 ```js
 function User(name) {
 *!*
-  // this = {};  (implicitly)
+  // this = {};  (به صورت ضمنی)
 */!*
 
-  // add properties to this
+  // ویژگی ها را به this اضافه میکند
   this.name = name;
   this.isAdmin = false;
 
 *!*
-  // return this;  (implicitly)
+  // return this;  (به صورت ضمنی)
 */!*
 }
 ```
 
-So `let user = new User("Jack")` gives the same result as:
+پس `let user = new User("Jack")` نتیجه مشابهی مانند کد زیر را می دهد:
 
 ```js
 let user = {
@@ -60,132 +60,132 @@ let user = {
 };
 ```
 
-Now if we want to create other users, we can call `new User("Ann")`, `new User("Alice")` and so on. Much shorter than using literals every time, and also easy to read.
+حالا اگر ما بخواهیم که user های دیگری بسازیم، می توانیم `new User("Ann")`، `new User("Alice")` و ... را صدا بزنیم. این کار بسیار کوتاه تر از استفاده همیشگی از literal ها است، و همچنین برای خواندن آسان است.
 
-That's the main purpose of constructors -- to implement reusable object creation code.
+این هدف اصلی سازنده ها است -- پیاده سازی کد قابل استفاده مجدد ساخت شیء.
 
-Let's note once again -- technically, any function can be used as a constructor. That is: any function can be run with `new`, and it will execute the algorithm above. The "capital letter first" is a common agreement, to make it clear that a function is to be run with `new`.
+بیایید دوباره به این موضوع اشاره کنیم -- از لحاظ فنی، هر تابعی می تواند به عنوان سازنده استفاده شود. به این معنی که: هر تابعی می تواند با `new` اجرا شود، و الگوریتم بالا را اجرا کند. "حرف اول بزرگ انگلیسی" یک قرارداد عمومی است، تا این موضوع را که یک تابع باید با `new` اجرا شود را شفاف سازی کند.
 
 ````smart header="new function() { ... }"
-If we have many lines of code all about creation of a single complex object, we can wrap them in constructor function, like this:
+اگر ما خطوط زیادی از کد که همه آنها مربوط به ساخت یک شیء پیچیده هستند را داشته باشیم، می توانیم آنها را درون تابع سازنده بپیچیم، به این صورت:
 
 ```js
 let user = new function() {
   this.name = "John";
   this.isAdmin = false;
 
-  // ...other code for user creation
-  // maybe complex logic and statements
-  // local variables etc
+  // ... کد های دیگر برای ساخت user
+  // شاید شامل منطق و دستورالعمل پیچیده ای باشد
+  // متغیرهای محلی و...
 };
 ```
 
-The constructor can't be called again, because it is not saved anywhere, just created and called. So this trick aims to encapsulate the code that constructs the single object, without future reuse.
+سازنده نمی تواند دوباره صدا زده شود، چون در جایی ذخیره نشده، فقط ساخته و صدا زده شده است. پس این ترفند، کپسول کردن کدی که یک شیء می سازد و در آینده استفاده نمی شود را مورد هدف قرار می دهد.
 ````
 
-## Dual-syntax constructors: new.target
+## سازنده هایی با سینتکس دوگانه: new.target
 
-```smart header="Advanced stuff"
-The syntax from this section is rarely used, skip it unless you want to know everything.
+```smart header="مطالب پیشرفته"
+سینتکس این بخش به ندرت استفاده می شود، آن را از قلم بندازید مگر اینکه بخواهید همه چیز را بدانید.
 ```
 
-Inside a function, we can check whether it was called with `new` or without it, using a special `new.target` property.
+درون یک تابع، ما می توانیم چک کنیم که همراه با `new` صدا زده شده یا بدون آن، با استفاده از ویژگی `new.target`.
 
-It is undefined for regular calls and equals the function if called with `new`:
+آن(new.target) برای مواقعی که تابع به صورت معمولی صدا زده می شود undefined است و درصورتی که همراه با `new` صدا زده شود برابر با تابع است:
 
 ```js run
 function User() {
   alert(new.target);
 }
 
-// without "new":
+// بدون "new":
 *!*
 User(); // undefined
 */!*
 
-// with "new":
+// همراه با "new":
 *!*
 new User(); // function User { ... }
 */!*
 ```
 
-That can be used to allow both `new` and regular calls to work the same. That is, create the same object:
+از آن می  توان استفاده کرد تا هم صدا زدن تابع با `new` و هم صدا زدن معمولی تابع به یک شکل کار کنند. یعنی اینکه شیء متشابه بسازند:
 
 ```js run
 function User(name) {
-  if (!new.target) { // if you run me without new
-    return new User(name); // ...I will add new for you
+  if (!new.target) { // اگر تو مرا بدون new اجرا کنی
+    return new User(name); // ... من new را برای تو اضافه میکنم
   }
 
   this.name = name;
 }
 
-let john = User("John"); // redirects call to new User
+let john = User("John"); // فراخوانی را به new User هدایت میکند
 alert(john.name); // John
 ```
 
-This approach is sometimes used in libraries to make the syntax more flexible. So that people may call the function with or without `new`, and it still works.
+این شیوه بعضی اوقات درون کتابخانه ها استفاده می شود تا سینتکس را منعطف تر کند. با این روش شاید مردم تابع را همراه با یا بدون `new` صدا بزنند، و آن همچنان کار میکند.
 
-Probably not a good thing to use everywhere though, because omitting `new` makes it a bit less obvious what's going on. With `new` we all know that the new object is being created.
+اگرچه شاید خوب نباشد همه جا استفاده شود، چون حذف کردن `new` مقداری از واضح بودن اینکه چه چیزی در حال رخ دادن است کم میکند. همراه با `new` همه ما میدانیم که شیء جدیدی در حال ساخته شدن است.
 
-## Return from constructors
+## برگرداندن از سازنده ها
 
-Usually, constructors do not have a `return` statement. Their task is to write all necessary stuff into `this`, and it automatically becomes the result.
+معمولا، سازنده ها دستور `return` ندارند. وظیفه آنها این است که تمام چیزهای ضروری را داخل `this` بریزند، و آن(this) تبدیل به نتیجه می شود.
 
-But if there is a `return` statement, then the rule is simple:
+اما اگر دستور `return` وجود داشته باشد، سپس قاعده ساده است:
 
-- If `return` is called with an object, then the object is returned instead of `this`.
-- If `return` is called with a primitive, it's ignored.
+- اگر `return` همراه با شیء صدا زده شود، سپس شیء به جای `this` برگردانده می شود.
+- اگر `return` همراه با یک primitive صدا شده شود، نادیده گرفته می شود.
 
-In other words, `return` with an object returns that object, in all other cases `this` is returned.
+به عبارتی دیگر، `return` همراه با یک شیء همان شیء را برمیگرداند، در دیگر موارد `this` برگردانده می شود.
 
-For instance, here `return` overrides `this` by returning an object:
+برای مثال، اینجا `return` با برگرداندن یک شیء `this` را نادیده میگیرد:
 
 ```js run
 function BigUser() {
 
   this.name = "John";
 
-  return { name: "Godzilla" };  // <-- returns this object
+  return { name: "Godzilla" };  // <-- این شیء را برمیگرداند
 }
 
-alert( new BigUser().name );  // Godzilla, got that object
+alert( new BigUser().name );  // Godzilla, آن شیء را نتیجه داد
 ```
 
-And here's an example with an empty `return` (or we could place a primitive after it, doesn't matter):
+و اینجا هم یک مثال با یک `return` خالی داریم (یا می توانستیم بعد از آن یک primitive بگذاریم، فرقی ندارد): 
 
 ```js run
 function SmallUser() {
 
   this.name = "John";
 
-  return; // <-- returns this
+  return; // <-- this را برمیگرداند
 }
 
 alert( new SmallUser().name );  // John
 ```
 
-Usually constructors don't have a `return` statement. Here we mention the special behavior with returning objects mainly for the sake of completeness.
+معمولا سازنده ها دستور `return` ندارند. اینجا ما این رفتار خاص برگرداندن شیءها را تنها برای کامل بودن خاطر نشان کردیم.
 
-````smart header="Omitting parentheses"
-By the way, we can omit parentheses after `new`, if it has no arguments:
+````smart header="پنهان کردن پرانتزها"
+راستی، اگر هیچ آرگومانی در کار نباشد، ما می توانیم پرانترهای بعد از `new` را حذف کنیم:
 
 ```js
-let user = new User; // <-- no parentheses
-// same as
+let user = new User; // <-- بدون پرانتز
+// مشابه است با
 let user = new User();
 ```
 
-Omitting parentheses here is not considered a "good style", but the syntax is permitted by specification.
+اینجا حذف کردن پرانتزها به عنوان یک "سبک خوب" فرض نمی شود، اما سینتکس طبق خصوصیات مجاز است.
 ````
 
-## Methods in constructor
+## متدها در سازنده
 
-Using constructor functions to create objects gives a great deal of flexibility. The constructor function may have parameters that define how to construct the object, and what to put in it.
+استفاده از تابع های سازنده برای ساخت شیءها انعطاف زیادی به ما میدهد. تابع سازنده ممکن است پارامترهایی داشته باشد که تعیین میکند چگونه شیء ساخته شود، و چه چیزی داخل آن قرار داده شود.
 
-Of course, we can add to `this` not only properties, but methods as well.
+قطعا ما می توانیم علاوه بر ویژگی ها، متدها را هم به `this` اضافه کنیم.
 
-For instance, `new User(name)` below creates an object with the given `name` and the method `sayHi`:
+برای مثال، `new User(name)` که در زیر قرار دارد یک شیء میسازد که به آن `name` و متد `sayHi` داده شده است:
 
 ```js run
 function User(name) {
@@ -210,19 +210,19 @@ john = {
 */
 ```
 
-To create complex objects, there's a more advanced syntax, [classes](info:classes), that we'll cover later.
+برای ساخت شیءهای پیچیده، یک سینتکس پیشرفته تر، [کلاس ها](info:classes)، وجود دارد که ما بعدا آن را پوشش می دهیم.
 
-## Summary
+## خلاصه
 
-- Constructor functions or, briefly, constructors, are regular functions, but there's a common agreement to name them with capital letter first.
-- Constructor functions should only be called using `new`. Such a call implies a creation of empty `this` at the start and returning the populated one at the end.
+- تابع های سازنده، یا به اختصار، سازنده ها، تابع هایی معمولی هستند، اما یک توافق عمومی وجود دارد که آنها را با حرف بزرگ انگلیسی نامگذاری کنیم.
+- تابع های سازنده باید تنها با `new` صدا زده شوند. چنین صدا زدنی به ساخت یک `this` خالی در آغاز و برگرداندن پر شده ی آن در پایان اشاره می کند.
 
-We can use constructor functions to make multiple similar objects.
+ما می توانیم از تابع های سازنده برای ساخت چند شیء متشابه استفاده کنیم.
 
-JavaScript provides constructor functions for many built-in language objects: like `Date` for dates, `Set` for sets and others that we plan to study.
+جاوااسکریپت تابع های سازنده را برای بسیاری از شیءهایی که درون زبان ساخته شده اند فراهم میکند: مثل `Date` برای زمان ها، `Set` برای set ها و بقیه که ما مطالعه آنها را در نظر داریم.
 
-```smart header="Objects, we'll be back!"
-In this chapter we only cover the basics about objects and constructors. They are essential for learning more about data types and functions in the next chapters.
+```smart header="شیءها، ما بر می گردیم!"
+در این فصل ما فقط اصول اولیه را برای شیءها و سازنده ها را پوشش می دهیم. آنها برای یادگیری بیشتر درباره انواع داده و تابع ها در فصل های آینده ضروری هستند.
 
-After we learn that, in the chapter <info:object-oriented-programming> we return to objects and cover them in-depth, including inheritance and classes.
+بعد از اینکه آن را یاد گرفتیم، در فصل <info:object-oriented-programming> (برنامه نویسی شیءگرا) به شیءها بر می گردیم و آنها را به صورت عمیق پوشش می دهیم، که شامل وراثت و کلاس ها هم می شود.
 ```

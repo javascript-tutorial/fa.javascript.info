@@ -51,7 +51,7 @@ user.sayHi();
 
 When `new User("John")` is called:
 1. A new object is created.
-2. The `constructor` runs with the given argument and assigns `this.name` to it.
+2. The `constructor` runs with the given argument and assigns it to `this.name`.
 
 ...Then we can call object methods, such as `user.sayHi()`.
 
@@ -110,7 +110,7 @@ alert(typeof User); // function
 alert(User === User.prototype.constructor); // true
 
 // The methods are in User.prototype, e.g:
-alert(User.prototype.sayHi); // alert(this.name);
+alert(User.prototype.sayHi); // the code of the sayHi method
 
 // there are exactly two methods in the prototype
 alert(Object.getOwnPropertyNames(User.prototype)); // constructor, sayHi

@@ -2,15 +2,15 @@ importance: 5
 
 ---
 
-# Create new Calculator
+# ماشین حساب جدید بسازید
 
-Create a constructor function `Calculator` that creates objects with 3 methods:
+یک تابع سازنده `Calculator` بسازید که شیء هایی با 3 متد ایجاد می کند.
 
-- `read()` asks for two values using `prompt` and remembers them in object properties.
-- `sum()` returns the sum of these properties.
-- `mul()` returns the multiplication product of these properties.
+- `read()` با استفاده از `prompt` برای دو مقدار درخواست می کند و آنها را در ویژگی های خود به خاطر می سپارد.
+- `sum()` مجموع این ویژگی ها را بر می گرداند.
+- `mul()` حاصل ضرب این ویژگی ها را بر می گرداند.
 
-For instance:
+برای مثال:
 
 ```js
 let calculator = new Calculator();
@@ -20,4 +20,4 @@ alert( "Sum=" + calculator.sum() );
 alert( "Mul=" + calculator.mul() );
 ```
 
-[demo]
+[دمو]

@@ -30,10 +30,11 @@ Here, in this article, we'll say that an expression is "defined" when it's neith
 
 The nullish coalescing operator is written as two question marks `??`.
 
+As it treats `null` and `undefined` similarly, we'll use a special term here, in this article. We'll say that an expression is "defined" when it's neither `null` nor `undefined`.
+
 The result of `a ?? b` is:
 - if `a` is defined, then `a`,
 - if `a` isn't defined, then `b`.
-
 
 In other words, `??` returns the first argument if it's not `null/undefined`. Otherwise, the second one.
 
@@ -45,29 +46,31 @@ We can rewrite `result = a ?? b` using the operators that we already know, like 
 result = (a !== null && a !== undefined) ? a : b;
 ```
 
+Now it should be absolutely clear what `??` does. Let's see where it helps.
+
 The common use case for `??` is to provide a default value for a potentially undefined variable.
 
-For example, here we show `Anonymous` if `user` isn't defined:
+For example, here we show `user` if defined, otherwise `Anonymous`:
 
 ```js run
 let user;
 
-alert(user ?? "Anonymous"); // Anonymous
+alert(user ?? "Anonymous"); // Anonymous (user not defined)
 ```
 
-Of course, if `user` had any value except `null/undefined`, then we would see it instead:
+Here's the example with `user` assigned to a name:
 
 ```js run
 let user = "John";
 
-alert(user ?? "Anonymous"); // John
+alert(user ?? "Anonymous"); // John (user defined)
 ```
 
 We can also use a sequence of `??` to select the first value from a list that isn't `null/undefined`.
 
-Let's say we have a user's data in variables `firstName`, `lastName` or `nickName`. All of them may be undefined, if the user decided not to enter a value.
+Let's say we have a user's data in variables `firstName`, `lastName` or `nickName`. All of them may be not defined, if the user decided not to enter a value.
 
-We'd like to display the user name using one of these variables, or show "Anonymous" if all of them are undefined.
+We'd like to display the user name using one of these variables, or show "Anonymous" if all of them aren't defined.
 
 Let's use the `??` operator for that:
 @@@new part@@@
@@ -131,7 +134,7 @@ alert(firstName || lastName || nickName || "Anonymous"); // Supercoder
 مقایسه با `||`:
 @@@old part@@@
 @@@new part@@@
-The OR `||` operator exists since the beginning of JavaScript, so developers were using it for such purposes for a long time.
+Historically, the OR `||` operator was there first. It exists since the beginning of JavaScript, so developers were using it for such purposes for a long time.
 
 On the other hand, the nullish coalescing operator `??` was added to JavaScript only recently, and the reason for that was that people weren't quite happy with `||`.
 
@@ -165,12 +168,12 @@ alert(height ?? 100); // 0
 @@@new part@@@
 Here, we have a zero height.
 
-- The `height || 100` checks `height` for being a falsy value, and it really is.
-    - so the result is the second argument, `100`.
+- The `height || 100` checks `height` for being a falsy value, and it's `0`, falsy indeed.
+    - so the result of `||` is the second argument, `100`.
 - The `height ?? 100` checks `height` for being `null/undefined`, and it's not,
     - so the result is `height` "as is", that is `0`.
 
-If the zero height is a valid value, that shouldn't be replaced with the default, then `??` does just the right thing.
+In practice, the zero height is often a valid value, that shouldn't be replaced with the default. So `??` does just the right thing.
 @@@new part@@@
 @@@needs translation@@@
 
@@ -185,7 +188,9 @@ If the zero height is a valid value, that shouldn't be replaced with the default
 اگر تصمیم به استفاده از `??` در یک عبارت پیچیده گرفتید, حتما از پرانتز استفاده کنید:
 @@@old part@@@
 @@@new part@@@
-The precedence of the `??` operator is rather low: `5` in the [MDN table](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence#Table). So `??` is evaluated before `=` and `?`, but after most other operations, such as `+`, `*`.
+The precedence of the `??` operator is about the same as `||`, just a bit lower. It equals `5` in the [MDN table](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence#Table), while `||` is `6`.
+
+That means that, just like `||`, the nullish coalescing operator `??` is evaluated before `=` and `?`, but after most other operations, such as `+`, `*`.
 
 So if we'd like to choose a value with `??` in an expression with other operators, consider adding parentheses:
 @@@new part@@@
@@ -244,7 +249,7 @@ let x = 1 && 2 ?? 3; // Syntax error خطای نگارشی
 این محدودیت قابل بحث است, اما برای جلوگیری از اشتباهات برنامه‌نویسان به زبان اضافه شده است, که به مرور مردم از `??` به جای `||` استفاده خواهند کرد.
 @@@old part@@@
 @@@new part@@@
-The limitation is surely debatable, but it was added to the language specification with the purpose to avoid programming mistakes, when people start to switch to `??` from `||`.
+The limitation is surely debatable, it was added to the language specification with the purpose to avoid programming mistakes, when people start to switch from `||` to `??`.
 @@@new part@@@
 @@@needs translation@@@
 

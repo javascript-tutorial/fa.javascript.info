@@ -5,7 +5,7 @@
 به‌خاطر شکلی که دارد، arrow functions نام گرفته است.
 
 ```js
-let func = (arg1, arg2, ...argN) => expression;
+let func = (arg1, arg2, ..., argN) => expression
 ```
 
 ...این کد یک تابع `func` می‌سازد که دو آرگومان `arg1..argN` می‌پذیرد و با استفاده از این دو آرگومان `expression` سمت راست را محاسبه می‌کند و نتیجه را برمی‌گرداند.
@@ -13,7 +13,7 @@ let func = (arg1, arg2, ...argN) => expression;
 به بیانی دیگر، این کد نسخه‌ی کوتاه‌شده کد زیر است:
 
 ```js
-let func = function (arg1, arg2, ...argN) {
+let func = function(arg1, arg2, ..., argN) {
   return expression;
 };
 ```

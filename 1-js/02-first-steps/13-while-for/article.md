@@ -1,54 +1,54 @@
-# Loops: while and for
+# حلقه ها: while و for
 
-We often need to repeat actions.
+ما معمولا نیاز داریم که کارها رو تکرار کنیم.
 
-For example, outputting goods from a list one after another or just running the same code for each number from 1 to 10.
+برای مثال، کالاهایی را از یک لیست یکی پس از دیگری نمایش دهیم یا کد مشابهی رو برای هر عدد از 1 تا 10 اجرا کنیم.
 
-*Loops* are a way to repeat the same code multiple times.
+*حلقه ها* راهی برای تکرار یک کد برای چندین بار هستند.
 
-## The "while" loop
+## حلقه "while"
 
-The `while` loop has the following syntax:
+حلقه `while` سینتکس زیر را دارد:
 
 ```js
 while (condition) {
-  // code
-  // so-called "loop body"
+  // کد
+  // به اصطلاح "بدنه حلقه"
 }
 ```
 
-While the `condition` is truthy, the `code` from the loop body is executed.
+تا وقتی که `condition` truthy باشد، `کد` قسمت بدنه حلقه اجرا می شود. 
 
-For instance, the loop below outputs `i` while `i < 3`:
+برای مثال، حلقه پایین `i` را تا وقتی که `i < 3` باشد، نمایش می دهد:
 
 ```js run
 let i = 0;
-while (i < 3) { // shows 0, then 1, then 2
+while (i < 3) { // 0 را نمایش می دهد، سپس 1، سپس 2
   alert( i );
   i++;
 }
 ```
 
-A single execution of the loop body is called *an iteration*. The loop in the example above makes three iterations.
+یک بار اجرا شدن بدنه حلقه را *یک تکرار* می نامند. حلقه داخل مثال بالا سه تکرار می سازد.
 
-If `i++` was missing from the example above, the loop would repeat (in theory) forever. In practice, the browser provides ways to stop such loops, and in server-side JavaScript, we can kill the process.
+اگر `i++` از مثال بالا جا می ماند، حلقه (در تئوری) برای همیشه اجرا می شد. در عمل، مرورگر راه هایی را برای متوقف کردن چنین حلقه هایی مهیا می کند، و در جاوااسکریپت سمت سرور، ما می توانیم فرایند را نابود کنیم.
 
-Any expression or variable can be a loop condition, not just comparisons: the condition is evaluated and converted to a boolean by `while`.
+هر عبارت یا متغیری می تواند یک شرط حلقه باشد، نه فقط مقایسه ها: شرط توسط `while` ارزیابی می شود و به boolean تبدیل می شود.
 
-For instance, a shorter way to write `while (i != 0)` is `while (i)`:
+برای مثال، یک راه کوتاه تر برای نوشتن `while (i != 0)` `while (i)` است:
 
 ```js run
 let i = 3;
 *!*
-while (i) { // when i becomes 0, the condition becomes falsy, and the loop stops
+while (i) { // وقتی که i برابر با 0 شود، شرط falsy شده، و حلقه متوقف می شود
 */!*
   alert( i );
   i--;
 }
 ```
 
-````smart header="Curly braces are not required for a single-line body"
-If the loop body has a single statement, we can omit the curly braces `{…}`:
+````smart header="آکولادها برای بدنه تک خطی الزامی نیستند"
+اگر بدنه حلقه یک دستور واحد داشته باشد، ما می توانیم آکولادها `{...}` را حذف کنیم:
 
 ```js run
 let i = 3;
@@ -58,19 +58,19 @@ while (i) alert(i--);
 ```
 ````
 
-## The "do..while" loop
+## حلقه "do..while"
 
-The condition check can be moved *below* the loop body using the `do..while` syntax:
+بررسی شرط با استفاده از سینتکس `do..while` می تواند به *پایین* بدنه حلقه منتقل شود.
 
 ```js
 do {
-  // loop body
+  // بدنه حلقه
 } while (condition);
 ```
 
-The loop will first execute the body, then check the condition, and, while it's truthy, execute it again and again.
+حلقه اول بدنه را اجرا می کند، سپس شرط را بررسی می کند، و تا وقتی که truthy باشد، دوباره و دوباره آن(بدنه) را اجرا می کند.
 
-For example:
+برای مثال:
 
 ```js run
 let i = 0;
@@ -80,109 +80,109 @@ do {
 } while (i < 3);
 ```
 
-This form of syntax should only be used when you want the body of the loop to execute **at least once** regardless of the condition being truthy. Usually, the other form is preferred: `while(…) {…}`.
+این شکل از سینتکس باید فقط زمانی استفاده شود که شما بخواهید بدنه حلقه جدای از اینکه شرط truthy باشد **حداقل یک بار** اجرا شود. معمولا، شکل دیگر ترجیح داده می شود: `while(...) {...}`.
 
-## The "for" loop
+## حلقه "for"
 
-The `for` loop is more complex, but it's also the most commonly used loop.
+حلقه `for` پیچیده تر است، اما این حلقه بیشترین استفاده را هم دارد.
 
-It looks like this:
+اینطور به نظر می رسد:
 
 ```js
 for (begin; condition; step) {
-  // ... loop body ...
+  // ... بدنه حلقه ...
 }
 ```
 
-Let's learn the meaning of these parts by example. The loop below runs `alert(i)` for `i` from `0` up to (but not including) `3`:
+بیایید معنی این قسمت ها را با مثال یاد بگیریم. حلقه زیر `alert(i)` را برای هر `i` از `0` تا `3` (خود 3 شامل نمی شود) اجرا می کند:
 
 ```js run
-for (let i = 0; i < 3; i++) { // shows 0, then 1, then 2
+for (let i = 0; i < 3; i++) { // 0 را نمایش می دهد، سپس 1، سپس 2
   alert(i);
 }
 ```
 
-Let's examine the `for` statement part-by-part:
+بیایید شرح `for` را قسمت به قسمت بررسی کنیم:
 
-| part  |          |                                                                            |
+| قسمت  |          |                                                                            |
 |-------|----------|----------------------------------------------------------------------------|
-| begin | `i = 0`    | Executes once upon entering the loop.                                      |
-| condition | `i < 3`| Checked before every loop iteration. If false, the loop stops.              |
-| body | `alert(i)`| Runs again and again while the condition is truthy.                         |
-| step| `i++`      | Executes after the body on each iteration. |
+| begin(آغاز) | `i = 0`    | به محض ورود به حلقه اجرا می شود.                                      |
+| condition(شرط) | `i < 3`| قبل از هر تکرار حلقه بررسی می شود. اگر false باشد حلقه متوقف می شود.              |
+| body(بدنه) | `alert(i)`| تا زمانی که شرط truthy باشد همچنان اجرا می شود.                         |
+| step(قدم) | `i++`      | در هر تکرار بعد از بدنه اجرا می شود. |
 
-The general loop algorithm works like this:
+الگوریتم کلی حلقه مثل قسمت پایین کار می کند:
 
 ```
-Run begin
-→ (if condition → run body and run step)
-→ (if condition → run body and run step)
-→ (if condition → run body and run step)
+begin را اجرا کن
+→ (if condition → body را اجرا کن و step را اجرا کن)
+→ (if condition → body را اجرا کن و step را اجرا کن)
+→ (if condition → body را اجرا کن و step را اجرا کن)
 → ...
 ```
 
-That is, `begin` executes once, and then it iterates: after each `condition` test, `body` and `step` are executed.
+یعنی اینکه، `begin` یک بار اجرا می شود، و سپس این تکرار می شود: بعد از هر بار آزمایش `condition`، `body` و `step` اجرا می شوند. 
 
-If you are new to loops, it could help to go back to the example and reproduce how it runs step-by-step on a piece of paper.
+اگر شما تازه با حلقه ها آشنا شدید، به مثال برگردید و مراحل اجرای آن را مرحله به مرحله روی یک کاغذ بازتولید کنید.
 
-Here's exactly what happens in our case:
+در مورد ما، دقیقا این اتفاق می افتد:
 
 ```js
 // for (let i = 0; i < 3; i++) alert(i)
 
-// run begin
+// begin را اجرا کن
 let i = 0
-// if condition → run body and run step
+// if condition → body را اجرا کن و step را اجرا کن
 if (i < 3) { alert(i); i++ }
-// if condition → run body and run step
+// if condition → body را اجرا کن و step را اجرا کن
 if (i < 3) { alert(i); i++ }
-// if condition → run body and run step
+// if condition → body را اجرا کن و step را اجرا کن
 if (i < 3) { alert(i); i++ }
-// ...finish, because now i == 3
+// ...پایان، چون حالا i == 3
 ```
 
-````smart header="Inline variable declaration"
-Here, the "counter" variable `i` is declared right in the loop. This is called an "inline" variable declaration. Such variables are visible only inside the loop.
+````smart header="تعریف درون خطی متغیر"
+اینجا، متغیر "شمارنده" `i` دقیقا داخل حلقه تعریف شده است. این یک تعریف "درون خطی" متغیر نامیده می شود. این چنین متغیرهایی تنها داخل حلقه قابل رویت هستند.
 
 ```js run
 for (*!*let*/!* i = 0; i < 3; i++) {
   alert(i); // 0, 1, 2
 }
-alert(i); // error, no such variable
+alert(i); // ارور، چنین متغیری وجود ندارد
 ```
 
-Instead of defining a variable, we could use an existing one:
+ما می توانستیم به جای تعریف کردن یک متغیر، از یک متغیر موجود استفاده کنیم:
 
 ```js run
 let i = 0;
 
-for (i = 0; i < 3; i++) { // use an existing variable
+for (i = 0; i < 3; i++) { // استفاده از یک متغیر موجود
   alert(i); // 0, 1, 2
 }
 
-alert(i); // 3, visible, because declared outside of the loop
+alert(i); // 3، قابل دیدن است، چون بیرون از حلقه تعریف شده است
 ```
 
 ````
 
 
-### Skipping parts
+### قسمت های قابل جا انداختن
 
-Any part of `for` can be skipped.
+هر قسمت `for` را می توان از قلم انداخت.
 
-For example, we can omit `begin` if we don't need to do anything at the loop start.
+برای مثال، اگر نیاز به انجام کاری در آغاز حلقه نداشته باشیم می توانیم `begin` را حذف کنیم.
 
-Like here:
+مثل اینجا:
 
 ```js run
-let i = 0; // we have i already declared and assigned
+let i = 0; // ما i را داریم که از قبل تعریف شده و تخصیص داده شده است.
 
-for (; i < 3; i++) { // no need for "begin"
+for (; i < 3; i++) { // نیازی به "begin" نیست
   alert( i ); // 0, 1, 2
 }
 ```
 
-We can also remove the `step` part:
+همچنین ما می توانیم قسمت `step` را حذف کنیم:
 
 ```js run
 let i = 0;
@@ -192,32 +192,32 @@ for (; i < 3;) {
 }
 ```
 
-This makes the loop identical to `while (i < 3)`.
+این کار حلقه را برابر با `while (i < 3)` می کند.
 
-We can actually remove everything, creating an infinite loop:
+در واقع ما می توانیم همه چیز را حذف کنیم، یک حلقه بی نهایت بسازیم:
 
 ```js
 for (;;) {
-  // repeats without limits
+  // بدون محدودیت تکرار می شود
 }
 ```
 
-Please note that the two `for` semicolons `;` must be present. Otherwise, there would be a syntax error.
+لطفا در نظر داشته باشید که هر دو نقطه ویرگول `;` داخل `for` باید وجود داشته باشند. در غیر این صورت، یک سینتکس ارور به وجود خواهد آمد.
 
-## Breaking the loop
+## متوقف کردن حلقه
 
-Normally, a loop exits when its condition becomes falsy.
+به طور معمول، یک حلقه زمانی که شرط آن falsy شود متوقف می شود.
 
-But we can force the exit at any time using the special `break` directive.
+اما ما می توانیم با استفاده از دستور خاص `break` آن را در هر لحظه مجبور به توقف کنیم.
 
-For example, the loop below asks the user for a series of numbers, "breaking" when no number is entered:
+برای مثال، حلقه زیر از کاربر یک سری عدد درخواست می کند، و زمانی که هیچ عددی وارد نشد "متوقف می شود":
 
 ```js run
 let sum = 0;
 
 while (true) {
 
-  let value = +prompt("Enter a number", '');
+  let value = +prompt("یک عدد وارد کنید", '');
 
 *!*
   if (!value) break; // (*)
@@ -226,35 +226,35 @@ while (true) {
   sum += value;
 
 }
-alert( 'Sum: ' + sum );
+alert( 'مجموع: ' + sum );
 ```
 
-The `break` directive is activated at the line `(*)` if the user enters an empty line or cancels the input. It stops the loop immediately, passing control to the first line after the loop. Namely, `alert`.
+اگر کاربر یک خط خالی وارد کند یا ورودی را لغو کند دستور `break` در خط `(*)` فعال می شود. حلقه را بلافاصله متوقف می کند، و کنترل را به اولین خط بعد از حلقه می سپارد. یعنی، `alert`.
 
-The combination "infinite loop + `break` as needed" is great for situations when a loop's condition must be checked not in the beginning or end of the loop, but in the middle or even in several places of its body.
+ترکیب "حلقه بی نهایت + `break` در صورت نیاز" برای موقعیت هایی که یک شرط حلقه نباید در آغاز یا انتهای حلقه بررسی شود، بلکه در وسط یا حتی چند جای بدنه آن بررسی شود عالی است.
 
-## Continue to the next iteration [#continue]
+## ادامه دادن به تکرار بعدی [#continue]
 
-The `continue` directive is a "lighter version" of `break`. It doesn't stop the whole loop. Instead, it stops the current iteration and forces the loop to start a new one (if the condition allows).
+دستور `continue` یک "نسخه سبک تر" از `break` است. حلقه را متوقف نمی کند. در عوض، تکرار حال حاضر را متوقف می کند و حلقه را مجبور می کند که یک تکرار جدید را شروع کند (اگر شرط اجازه دهد).
 
-We can use it if we're done with the current iteration and would like to move on to the next one.
+ما می توانیم در صورتی که با تکرار حال حاضر کارمان تمام شده باشد و بخواهیم به تکرار بعدی برویم از آن استفاده کنیم.
 
-The loop below uses `continue` to output only odd values:
+حلقه پایین از `continue` فقط برای نشان دادن مقدارهای فرد استفاده می کند.
 
 ```js run no-beautify
 for (let i = 0; i < 10; i++) {
 
-  // if true, skip the remaining part of the body
+  // اگر true باشد، قسمت باقی مانده بدنه را از قلم بنداز
   *!*if (i % 2 == 0) continue;*/!*
 
-  alert(i); // 1, then 3, 5, 7, 9
+  alert(i); // 1، سپس 9 ،7 ،5 ،3
 }
 ```
 
-For even values of `i`, the `continue` directive stops executing the body and passes control to the next iteration of `for` (with the next number). So the `alert` is only called for odd values.
+برای مقدار های زوج `i`، دستور `continue` اجرا کردن بدنه را متوقف می کند و کنترل را به تکرار بعدی `for` می دهد (به همراه عدد بعدی). پس `alert` فقط برای مقدارهای فرد صدا زده می شود.
 
-````smart header="The `continue` directive helps decrease nesting"
-A loop that shows odd values could look like this:
+````smart header="دستور `continue` به کم کردن تو در تو بودن کمک می کند"
+یک حلقه که اعداد فرد را نمایش می دهد می توانست اینطور باشد:
 
 ```js run
 for (let i = 0; i < 10; i++) {
@@ -266,15 +266,15 @@ for (let i = 0; i < 10; i++) {
 }
 ```
 
-From a technical point of view, this is identical to the example above. Surely, we can just wrap the code in an `if` block instead of using `continue`.
+از دیدگاه فنی، این شبیه مثال بالا است. مسلما، ما می توانیم کد را داخل یک بلوک `if` بگذاریم به جای اینکه از `continue` استفاده کنیم.
 
-But as a side-effect, this created one more level of nesting (the `alert` call inside the curly braces). If the code inside of `if` is longer than a few lines, that may decrease the overall readability.
+اما به عنوان یک عارضه جانبی، یک سطح بیشتری از تو در تویی می سازد (صدا زدن `alert` داخل آکولادها). اگر کد داخل `if` بیشتر از چند خط باشد، ممکن است خوانایی کلی را کاهش دهد.
 ````
 
-````warn header="No `break/continue` to the right side of '?'"
-Please note that syntax constructs that are not expressions cannot be used with the ternary operator `?`. In particular, directives such as `break/continue` aren't allowed there.
+````warn header="ممنوعیت `break/continue` در سمت راست '?'"
+لطفا در نظر داشته باشید که ساختارهای سینتکس که عبارت نیستند نمی توانند با عملگر ternary `?` استفاده شوند. به خصوص، دستورهایی مثل `break/continue` مجاز نیستند.
 
-For example, if we take this code:
+برای مثال، اگر ما این کد را در نظر بگیریم:
 
 ```js
 if (i > 5) {
@@ -284,103 +284,114 @@ if (i > 5) {
 }
 ```
 
-...and rewrite it using a question mark:
+...و آن را با استفاده از علامت سوال دوباره بنویسیم:
 
 
 ```js no-beautify
-(i > 5) ? alert(i) : *!*continue*/!*; // continue isn't allowed here
+(i > 5) ? alert(i) : *!*continue*/!*; // continue اینجا مجاز نیست
 ```
 
-...it stops working: there's a syntax error.
+...متوقف می شود: چون یک سینتکس ارور وجود دارد.
 
-This is just another reason not to use the question mark operator `?` instead of `if`.
+این یک دلیل دیگری برای استفاده نکردن از عملگر علامت سوال `?` به جای `if` است.
 ````
 
-## Labels for break/continue
+## برچسب هایی برای break/continue
 
-Sometimes we need to break out from multiple nested loops at once.
+بعضی اوقات ما نیاز داریم که از چند حلقه تو در تو به یک باره خارج شویم.
 
-For example, in the code below we loop over `i` and `j`, prompting for the coordinates `(i, j)` from `(0,0)` to `(2,2)`:
+برای مثال، در کد پایین ما با `i` و `j` حلقه می زنیم، و برای مختصات های `(i, j)` از `(0,0)` تا  `(2,2)` prompt می کنیم:
 
 ```js run no-beautify
 for (let i = 0; i < 3; i++) {
 
   for (let j = 0; j < 3; j++) {
 
-    let input = prompt(`Value at coords (${i},${j})`, '');
+    let input = prompt(`مقدار در متخصات (${i},${j})`, '');
 
-    // what if we want to exit from here to Done (below)?
+    // اگر ما بخواهیم از اینجا به تمام (پایین) خارج شویم چه کار کنیم؟
   }
 }
 
-alert('Done!');
+alert('تمام!');
 ```
 
-We need a way to stop the process if the user cancels the input.
+ما به راهی نیاز داریم که فرایند را در صورتی که کاربر ورودی را لغو کند متوقف کنیم.
 
-The ordinary `break` after `input` would only break the inner loop. That's not sufficient--labels, come to the rescue!
+`break` معمولی بعد از `input` فقط حلقه داخلی را متوقف می کند. این کافی نیست -- برچسب ها، به کمک می آیند!
 
-A *label* is an identifier with a colon before a loop:
+یک *برچسب* مشخص کننده ای است که قبل از یک حلقه همراه دو نقطه می آید:
 ```js
 labelName: for (...) {
   ...
 }
 ```
 
-The `break <labelName>` statement in the loop below breaks out to the label:
+دستور `break <labelName>` در حلقه پایین به برچسب مورد نظر می رسد:
 
 ```js run no-beautify
 *!*outer:*/!* for (let i = 0; i < 3; i++) {
 
   for (let j = 0; j < 3; j++) {
 
-    let input = prompt(`Value at coords (${i},${j})`, '');
+    let input = prompt(`مقدار در مختصات (${i},${j})`, '');
 
-    // if an empty string or canceled, then break out of both loops
+    // اگر یک رشته خالی وارد شود یا لغو شود، سپس از هر دو حلقه خارج شو
     if (!input) *!*break outer*/!*; // (*)
 
-    // do something with the value...
+    // یک کاری با مقدار انجام بده...
   }
 }
-alert('Done!');
+alert('تمام!');
 ```
 
-In the code above, `break outer` looks upwards for the label named `outer` and breaks out of that loop.
+در کد بالا، `break outer` برای پیدا کردن برچسب `outer` بالا را جست و جو می کند و از آن حلقه خارج می شود.
 
-So the control goes straight from `(*)` to `alert('Done!')`.
+پس کنترل به صورت مسقیم از `(*)` به `alert('تمام!')` می رسد.
 
-We can also move the label onto a separate line:
+همچنین ما می توانیم برچسب را به یک خط جداگانه منتقل کنیم:
 
 ```js no-beautify
 outer:
 for (let i = 0; i < 3; i++) { ... }
 ```
 
-The `continue` directive can also be used with a label. In this case, code execution jumps to the next iteration of the labeled loop.
+دستور `continue` هم می تواند به همراه برچسب استفاده شود. در این مورد، اجرای کد به تکرار بعدی از حلقه برچسب زده شده می رود.
 
-````warn header="Labels do not allow to \"jump\" anywhere"
-Labels do not allow us to jump into an arbitrary place in the code.
+````warn header="برچسب ها اجازه \"پرش\" به جایی را نمی دهند"
+برچسب ها به ما اجازه نمی دهند که به جای دلخواهی از کد بپریم.
 
-For example, it is impossible to do this:
+برای مثال، انجام دادن این کار غیر ممکن است:
 ```js
-break label; // doesn't jumps to the label below
+break label; // پرش به برچسب پایین (کار نمی کند)
 
 label: for (...)
 ```
 
-A call to `break/continue` is only possible from inside a loop and the label must be somewhere above the directive.
+یک دستور `break` باید در داخل بلوک کد باشد. از نظر فنی، آن بلوک می تواند هر بلوک کد برچسب زده باشد
+```js
+label: {
+  // ...
+  break label; // کار می کند
+  // ...
+}
+```
+
+...اگرچه، %99.9 مواقع `break` در داخل حلقه ها استفاده می شود، همانطور که در مثال های بالا دیدیم.
+
+یک `continue` فقط می تواند در داخل حلقه باشد.
 ````
 
-## Summary
+## خلاصه
 
-We covered 3 types of loops:
+ما سه نوع حلقه را پوشش دادیم:
 
-- `while` -- The condition is checked before each iteration.
-- `do..while` -- The condition is checked after each iteration.
-- `for (;;)` -- The condition is checked before each iteration, additional settings available.
+- `while` -- شرط قبل از هر تکرار بررسی می شود.
+- `do..while` -- شرط بعد از هر تکرار بررسی می شود.
+- `for (;;)` -- شرط قبل از هر تکرار بررسی می شود، تنظیمات بیشتر هم ممکن است.
 
-To make an "infinite" loop, usually the `while(true)` construct is used. Such a loop, just like any other, can be stopped with the `break` directive.
+برای ساخت یک حلقه "بی نهایت"، معمولا ساختار `while(true)` استفاده می شود. چنین حلقه ای، درست مثل هر حلقه، می تواند با دستور `break` متوقف شود.
 
-If we don't want to do anything in the current iteration and would like to forward to the next one, we can use the `continue` directive.
+اگر ما نخواهیم که در تکرار حال حاضر کاری کنیم و دوست داشته باشیم که به تکرار بعدی برویم، می توانیم از دستور `continue` استفاده کنیم.
 
-`break/continue` support labels before the loop. A label is the only way for `break/continue` to escape a nested loop to go to an outer one.
+`break/continue` از برچسب های قبل از حلقه پشتیبانی می کنند. یک برچسب تنها راه `break/continue` برای فرار از یک حلقه تو در تو و رفتن به حلقه بیرونی است. 

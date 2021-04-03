@@ -2,26 +2,26 @@ importance: 5
 
 ---
 
-# Create new Accumulator
+# جمع کننده ی جدید بسازید
 
-Create a constructor function `Accumulator(startingValue)`.
+یک تابع سازنده `Accumulator(startingValue)` بسازید.
 
-Object that it creates should:
+شیء ای که می سازد باید:
 
-- Store the "current value" in the property `value`. The starting value is set to the argument of the constructor `startingValue`.
-- The `read()` method should use `prompt` to read a new number and add it to `value`.
+- "مقدار حال حاضر" را در ویژگی `value` ذخیره کند. مقدار آغازین در آرگومان `startingValue` سازنده قرار می گیرد. 
+- متد `read()` باید از `prompt` برای خواندن یک عدد جدید استفاده کند و آن را به `value` اضافه کند.
 
-In other words, the `value` property is the sum of all user-entered values with the initial value  `startingValue`.
+به عبارتی دیگر، ویژگی `value` حاصلِ جمع تمام مقدارهایی که کاربر وارد کرده با مقدار اولیه ی `startingValue` است.
 
-Here's the demo of the code:
+اینجا نسخه دموی کد وجود دارد:
 
 ```js
-let accumulator = new Accumulator(1); // initial value 1
+let accumulator = new Accumulator(1); // مقدار اولیه 1
 
-accumulator.read(); // adds the user-entered value
-accumulator.read(); // adds the user-entered value
+accumulator.read(); // مقداری که کاربر وارد کرده را اضافه می کند
+accumulator.read(); // مقداری که کاربر وارد کرده را اضافه می کند
 
-alert(accumulator.value); // shows the sum of these values
+alert(accumulator.value); // مجموع این مقدارها را نشان می دهد
 ```
 
-[demo]
+[دمو]

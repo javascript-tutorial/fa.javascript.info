@@ -1,11 +1,11 @@
-JavaScript-code:
+کد جاوااسکریپت:
 
 ```js demo run
 let name = prompt("What is your name?", "");
 alert(name);
 ```
 
-The full page:
+کل صفحه:
 
 ```html
 <!DOCTYPE html>

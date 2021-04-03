@@ -2,8 +2,8 @@ importance: 5
 
 ---
 
-# Output even numbers in the loop
+# اعداد زوج را در حلقه خروجی بدهید
 
-Use the `for` loop to output even numbers from `2` to `10`.
+از حلقه `for` برای خروجی دادن اعداد زوج بین `2` و `10` استفاده کنید.
 
-[demo]
+[دمو]

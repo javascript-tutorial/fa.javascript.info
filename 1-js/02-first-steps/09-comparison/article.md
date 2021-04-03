@@ -1,103 +1,104 @@
-# Comparisons
+# مقایسه ها
 
-We know many comparison operators from maths.
+عملگرهای مقایسه ای زیادی  را از ریاضی می شناسیم.
 
-In JavaScript they are written like this:
+در جاوااسکریپت آن ها را مانند شکل زیر می نویسم:
 
-- Greater/less than: <code>a &gt; b</code>, <code>a &lt; b</code>.
-- Greater/less than or equals: <code>a &gt;= b</code>, <code>a &lt;= b</code>.
-- Equals: `a == b`, please note the double equality sign `==` means the equality test, while a single one `a = b` means an assignment.
-- Not equals. In maths the notation is <code>&ne;</code>, but in JavaScript it's written as <code>a != b</code>.
+- بزرگ تر / کوچک تر: <code>a &gt; b</code>، <code>a &lt; b</code>.
+- بزرگ تر / کوچک تر یا مساوی: <code>a &gt;= b</code>، <code>a &lt;= b</code>.
+- برابر یا مساوی: `a == b`، توجه کنید که علامت مساوی دوتایی (double equlity) `==` به معنای تست برابری است، در حالی که یک مساوی `a = b` مقدار سمت راست را در متغیر سمت چپ می ریزد.(asign).
+- نا برابری: در ریاضی علامت نابرابری <code>&ne;</code> است، اما در جاوااسکریپت ما از علامت <code>a != b</code> استفاده می کنیم.
 
-In this article we'll learn more about different types of comparisons, how JavaScript makes them, including important peculiarities.
+در این مقاله ما بیشتر درباره تفاوت انواع مقایسه ها، چطور جاوااسکریپت آنها را انجام می دهد، به همراه رفتارهای عجیب و مهم این زبان.
 
-At the end you'll find a good recipe to avoid "JavaScript quirks"-related issues.
+در انتها شما می توانید به راحتی از از مشکلات مربوط به علامت ها (quirks) دوری کنید.
 
-## Boolean is the result
+## ‌نتیجه یک boolean است
 
-All comparison operators return a boolean value:
+تمام عملگرهای مقایسه ای یک مقدار از نوع boolean برمی گردانند:
 
-- `true` -- means "yes", "correct" or "the truth".
-- `false` -- means "no", "wrong" or "not the truth".
+- `true` -- به معنای "بله" و "درست" است.
+- `false` -- به معنای "نه" و "غلط" است.
 
-For example:
+برای مثال:‌
 
 ```js run
-alert( 2 > 1 );  // true (correct)
-alert( 2 == 1 ); // false (wrong)
-alert( 2 != 1 ); // true (correct)
+alert( 2 > 1 );  // true (درست)
+alert( 2 == 1 ); // false (غلط)
+alert( 2 != 1 ); // true (درست)
 ```
 
-A comparison result can be assigned to a variable, just like any value:
+نتیجه یک مقایسه می تواند داخل یک متغیر ذخیره شود، دقیقا مانند هر مقدار دیگری:
 
 ```js run
 let result = 5 > 4; // assign the result of the comparison
 alert( result ); // true
 ```
 
-## String comparison
+## مقایسه رشته ها (string)
 
-To see whether a string is greater than another, JavaScript uses the so-called "dictionary" or "lexicographical" order.
+برای این که متوجه شموی که آیا یک رشته بزرگ تر از رشته ی دیگر هست یا نه، جاوااسکریپت از یک مفهوم به نام "dictionary" یا "lexicographical order" استفاده می کند.
 
-In other words, strings are compared letter-by-letter.
+به عبارت دیگر، رشته ها حرف به حرف با یکدیگر مقایسه می شوند.
 
-For example:
+برای مثال:
 
 ```js run
 alert( 'Z' > 'A' ); // true
 alert( 'Glow' > 'Glee' ); // true
 alert( 'Bee' > 'Be' ); // true
 ```
+let result = 5 > 4; // assign the result of the comparison
+alert( result ); // true
 
-The algorithm to compare two strings is simple:
+الگوریتمی که برای مقایسه دو رشته استفاده می شود بسیار ساده است:
 
-1. Compare the first character of both strings.
-2. If the first character from the first string is greater (or less) than the other string's, then the first string is greater (or less) than the second. We're done.
-3. Otherwise, if both strings' first characters are the same, compare the second characters the same way.
-4. Repeat until the end of either string.
-5. If both strings end at the same length, then they are equal. Otherwise, the longer string is greater.
+1. اولین کاراکتر هر دو رشته را با هم مقایسه کن.
+2. اگر اولین کاراکتر رشته اول بزرگ تر (یا کوچک تر) از اولین حرف رشته دیگر بود، آنگاه رشته اول بزرگ تر ( یا کوچک تر) از رشته دوم است و الگوریتم به پایان می رسد.
+3. در غیر این صورت، اگر هر دو کاراکتر مانند هم بودند، حرف دوم رشته ها را به روش مرحله قبل با هم مقایسه می کند.
+4. این عمل را تا پایان یکی از رشته ها ادامه می دهد.
+5. اگر هر دو رشته با هم به پایان برسند، در آن صورت آن ها مساوی هستند. در غیر این صورت، رشته بزرگتر بزرگ تر است.
 
-In the first example above, the comparison `'Z' > 'A'` gets to a result at the first step.
+در مثال بالا، مقایسه `'Z' > 'A'` در اولین مرحله به نتیجه می رسد.
 
-The second comparison `'Glow'` and `'Glee'` needs more steps as strings are compared character-by-character:
+درحالی که رشته های `'Glow'` و `'Glee'` حرف به حرف با هم مقایسه می شوند:
 
-1. `G` is the same as `G`.
-2. `l` is the same as `l`.
-3. `o` is greater than `e`. Stop here. The first string is greater.
+1. `G` دقیقا مانند `G` است.
+2. `l` دقیقا مانند `l` است.
+3. `o` از `e`بزرگ تر است. الگوریتم در این جا به پایان می رسد و نتیجه می گیرد که رشته اول بزرگ تر است.
 
-```smart header="Not a real dictionary, but Unicode order"
-The comparison algorithm given above is roughly equivalent to the one used in dictionaries or phone books, but it's not exactly the same.
+```smart header="از نظر تکنیکی بر اساس یک دیکشنری عمل نمی کند ولی کد های یونی (unicode) آن مرتب شده اند."
+ترتیب و ارزشی که در الگوریتم مقایسه بالا به هر حرف داده می شود، تقریبا مانند دیکشنری ها یا کتاب های تلفن است، اما نه دقیقا مشابه آن ها.
 
-For instance, case matters. A capital letter `"A"` is not equal to the lowercase `"a"`. Which one is greater? The lowercase `"a"`. Why? Because the lowercase character has a greater index in the internal encoding table JavaScript uses (Unicode). We'll get back to specific details and consequences of this in the chapter <info:string>.
+برای مثال، بزرگ یا کوچکیه حروف اهمیت دارند. حرف `"A"` بزرگ با حرف `"a"` کوچک برابر نیست. حتما می پرسید کدام یک بزرگ تر است؟ جواب حرف `"a"` کوچک است. چرا؟ به دلیل اینکه حرف "a" کوچک دارای شماره بزرگتری در جدول encoding ٔداخلی خود جاوااسکریپت دارد. (Unicode). ما بعدا در فصل رشته ها به این موضوع مفصل می پردازیم. <info:string>.
 ```
+## مقایسه انواع متفاوت داده با یکدیگر
 
-## Comparison of different types
+وقتی که مقادیر با نوع های متفاوت را در جاوااسکریپت با یکدیگر مقایسه می کنید، جاوااسکریپت مقادیر را به نوع داده Number تبدیل می کند.
 
-When comparing values of different types, JavaScript converts the values to numbers.
-
-For example:
+برای مثال:
 
 ```js run
-alert( '2' > 1 ); // true, string '2' becomes a number 2
-alert( '01' == 1 ); // true, string '01' becomes a number 1
+alert( '2' > 1 ); // true، رشته '2' به عدد 2 تبدیل می شود.
+alert( '01' == 1 ); // true، رشته '01' به عدد 1 تبدیل می شود.
 ```
 
-For boolean values, `true` becomes `1` and `false` becomes `0`.
+برای مقادیر از نوع boolean، `true` به `1` و `false` به `0` تبدیل می شود.
 
-For example:
+برای مثال:
 
 ```js run
 alert( true == 1 ); // true
 alert( false == 0 ); // true
 ```
 
-````smart header="A funny consequence"
-It is possible that at the same time:
+````smart header="یک اتفاق جالب"
+این امکان وجود دارد که همزمان:
 
-- Two values are equal.
-- One of them is `true` as a boolean and the other one is `false` as a boolean.
+- دو مقدار با هم مساوی باشند.
+- یکی از آن ها در نوع boolean `false` است و دیگری `true`.
 
-For example:
+برای مثال:
 
 ```js run
 let a = 0;
@@ -109,67 +110,67 @@ alert( Boolean(b) ); // true
 alert(a == b); // true!
 ```
 
-From JavaScript's standpoint, this result is quite normal. An equality check converts values using the numeric conversion (hence `"0"` becomes `0`), while the explicit `Boolean` conversion uses another set of rules.
+از نظر جاوااسکریپت، این تنیجه کاملا عادی است. علامت برابری (equality) = مقادیر را به number تبدیل کرده و سپس آن ها را با یکدیگر مقایسه می کند.(به همین دلیل `"0"` به `0` تبدیل می شود.) اما تبدیل آن ها به صورت جداگانه به `Boolean` از قانون های دیگری استفاده می کند.
 ````
 
-## Strict equality
+## برابری سختگیرانه
 
-A regular equality check `==` has a problem. It cannot differentiate `0` from `false`:
+یک علامت مقایسه برابری معمولی `==` یک مشکل دارد. این عملگر بین `0` و `false` تفاوتی قائل نمی شود:
 
 ```js run
 alert( 0 == false ); // true
 ```
 
-The same thing happens with an empty string:
+دقیقا همین اتفاق برای یک رشته خالی هم می افتد:
 
 ```js run
 alert( '' == false ); // true
 ```
 
-This happens because operands of different types are converted to numbers by the equality operator `==`. An empty string, just like `false`, becomes a zero.
+دلیل این اتفاق این است که مقادیر با نوع های متفاوت به نوع number توسط عملگر `==` تبدیل می شوند و یک رشته خالی دقیقا مانند مقدار `false` به صفر تبدیل می شود.
 
-What to do if we'd like to differentiate `0` from `false`?
+سوال اینجاست که ما چطور می توانیم بین `false` و `0` تفاوت ایجاد کنیم؟
 
-**A strict equality operator `===` checks the equality without type conversion.**
+**عملگر مقایسه برابری سخت گیرانه (strict equality operator) `===` برابری را بدون تبدیل به نوع number انجام می دهد.**
 
-In other words, if `a` and `b` are of different types, then `a === b` immediately returns `false` without an attempt to convert them.
+به عبارت دیگر، اگر نوع متغیر های `a` و `b` با یکدیگر متفاوت باشد، در این صورت عملیات `a === b` بالافاصله مقدار `false` را برمی گرداند و عمل تغییر نوع داده را انجام نمی دهد.
 
-Let's try it:
+بیاید امتحان کنیم:
 
 ```js run
-alert( 0 === false ); // false, because the types are different
+alert( 0 === false ); // false، به خاطر اینکه نوع آن ها با یکدیگر متفاوت است.
 ```
 
-There is also a "strict non-equality" operator `!==` analogous to `!=`.
+یک علامت "مقایسه نابرابری سختگیرانه" (strict non-equality operator) `!==` هم وجود دارد در کنار عملگر مقایسه نابرابری `!=`.
 
-The strict equality operator is a bit longer to write, but makes it obvious what's going on and leaves less room for errors.
+نوع سختگیرانه این عملگرها در زمان نوشتن کمی طولانی تر می شوند، اما به وضوح مشخص می کند که چه اتفاقی در پشت پرده در حال افتادن است و احتمال خطا را کاهش می دهد.
 
-## Comparison with null and undefined
+## مقایسه با مقادیر null و undefined
 
-There's a non-intuitive behavior when `null` or `undefined` are compared to other values.
+در زمان مقایسه مقادیر متفاوت با `null` و `undefined` یک رفتار غیر قابل پیش بینی اتفاق می افتد.
 
-For a strict equality check `===`
-: These values are different, because each of them is a different type.
+در زمان استفاده از عملگر برابری سختگیرانه `===`
+: این دو مقدار با یکدیگر نا برابرند به دلیل اینکه از دو نوع متفاوت هستند.
 
     ```js run
     alert( null === undefined ); // false
     ```
 
-For a non-strict check `==`
-: There's a special rule. These two are a "sweet couple": they equal each other (in the sense of `==`), but not any other value.
+در زمان استفاده از عملگر برابری غیر سختگیرانه `==`
+: یک قانون خاص وجود دارد. تنها این دو با هم برابرند و نه با هیچ مقدار دیگری
 
     ```js run
     alert( null == undefined ); // true
     ```
 
-For maths and other comparisons `< > <= >=`
-: `null/undefined` are converted to numbers: `null` becomes `0`, while `undefined` becomes `NaN`.
+برای ریاضی و دیگر مقایسه ها `< > <= >=`
+: `null/undefined` به عدد تبدیل می شوند: `null` تبدیل به `0` می شود در حالی که `undefined` به `NaN`.
 
-Now let's see some funny things that happen when we apply these rules. And, what's more important, how to not fall into a trap with them.
+حال بگذارید چند اتفاق با مزه و جالب که با اعمال این قانون ها می افتند را ببینیم. و مهم تر از همه ببینیم که چگونه داخل این تله ها نیفتیم.
 
-### Strange result: null vs 0
+### نتایج عجیب: 0 در مقابل null
 
-Let's compare `null` with a zero:
+مقایسه مقدار `null` با صفر:
 
 ```js run
 alert( null > 0 );  // (1) false
@@ -177,15 +178,15 @@ alert( null == 0 ); // (2) false
 alert( null >= 0 ); // (3) *!*true*/!*
 ```
 
-Mathematically, that's strange. The last result states that "`null` is greater than or equal to zero", so one of the comparisons above it must be correct, but they are both false.
+از نظر ریاضی، این ۳ عبارت با هم هم خوانی ندارند. عبارت آخر مشخص می کند که "`null` بزرگ تر  یا مساوی 0" است، پس منتطقا یکی از دو عبارت اول باید true باشند درحالی که هر دو false هستند.
 
-The reason is that an equality check `==` and comparisons `> < >= <=` work differently. Comparisons convert `null` to a number, treating it as `0`. That's why (3) `null >= 0` is true and (1) `null > 0` is false.
+دلیل این اتفاق این است که عملگر `==` و `> < >= <=` متفاوت با یکدیگر عمل می کنند. علامت های مقایسه ای مقدار `null` را به یک عدد تبدیل می کنند، و با آن مانند عدد `0` رفتار می کنند. به همین دلیل عبارت (۳) true است و عبارت (۱) false.
 
-On the other hand, the equality check `==` for `undefined` and `null` is defined such that, without any conversions, they equal each other and don't equal anything else. That's why (2) `null == 0` is false.
+از طرفی ، عملگر `==` مقادیر `undefined` و `null` را با هم برابر و نابرابر با هر مقدار دیگری در نظر می گیرد، به همین دلیل عبارت شماره (۲) false است.
 
-### An incomparable undefined
+### undefiend غیرقابل مقایسه
 
-The value `undefined` shouldn't be compared to other values:
+مقدار `undefined` نباید با دیگر مقادیر مقایسه شود:
 
 ```js run
 alert( undefined > 0 ); // false (1)
@@ -193,24 +194,24 @@ alert( undefined < 0 ); // false (2)
 alert( undefined == 0 ); // false (3)
 ```
 
-Why does it dislike zero so much? Always false!
+به نظر شما چرا `undefiend` انقدر از صفر بدش می آید که در تمام حالات false برمی گرداند!
 
-We get these results because:
+دلیل این نتایج:
 
-- Comparisons `(1)` and `(2)` return `false` because `undefined` gets converted to `NaN` and `NaN` is a special numeric value which returns `false` for all comparisons.
-- The equality check `(3)` returns `false` because `undefined` only equals `null`, `undefined`, and no other value.
+- در عبارت شماره `(1)` و `(2)` مقدار `undefined` به مقدار `NaN` تبدیل می شود که یک نوع خاص از number ها است که در تمام مقایسه ها `false` برمی گرداند.
+- در عبارت `(3)` عملگر `==`، `false` برمی گرداند زیرا `undefined` تنها برابر `null` بوده و نابرابر با هر مقدار دیگری.
 
-### Avoid problems
+### اجتناب از مشکلات
 
-Why did we go over these examples? Should we remember these peculiarities all the time? Well, not really. Actually, these tricky things will gradually become familiar over time, but there's a solid way to avoid problems with them:
+چرا ما این مثال ها را بررسی کردیم؟ آیا ما این رفتار های عجیب را باید همیشه به خاطر داشته باشیم؟ در حقیقت نیازی به این موضوع نیست. زیرا در گذر زمان و به صورت تدریجی این رفتار های برای شما آشنا می شوند، اما یک راه حل کاربردی و مطمئن برای دوری از این مشکلات وجود دارد:
 
-- Treat any comparison with `undefined/null` except the strict equality `===` with exceptional care.
-- Don't use comparisons `>= > < <=` with a variable which may be `null/undefined`, unless you're really sure of what you're doing. If a variable can have these values, check for them separately.
+- با احتیاط و ملاحظه از `undefined/null` در مقایسه های خود استفاده کنید به جزء زمانی که از عملگر `===` استفاده می کنید.
+- از علامت های مقایسه ای `>= > < <=` برای مقایسه مقادیری که ممکن از `undefined/null` شوند استفاده نکنید مگر اینکه واقعا متوجه عواقب کارهای خود هستید. اگر متغیری می تواند این مقادیر را داشته باشد، آن ها را به صورت جداگانه بررسی کنید.
 
-## Summary
+## خلاصه
 
-- Comparison operators return a boolean value.
-- Strings are compared letter-by-letter in the "dictionary" order.
-- When values of different types are compared, they get converted to numbers (with the exclusion of a strict equality check).
-- The values `null` and `undefined` equal `==` each other and do not equal any other value.
-- Be careful when using comparisons like `>` or `<` with variables that can occasionally be `null/undefined`. Checking for `null/undefined` separately is a good idea.
+- عملگرهای مقایسه یک مقدار boolean را برمی گردانند.
+- رشته ها به صورت حرف به حرف با توجه به ترتیب حروف در "دیکشنری" با هم مقایسه می شوند.
+- وقتی که مقادیری با نوع های متفاوت با یکدیگر مقایسه می شوند، به نوع number تبدیل می شوند (بدون در نظر گرفتن حالت استفاده از عملگر === ).
+- مقادیری `null` و `undefined` با یکدیگر برابر `==` و با هر مقدار دیگری نابرابرند.
+- زمانی که از علامت ها `>` یا `<` برای مقایسه متغیر هایی که می توانند مقدار `null/undefined` داشته باشند استفاده می کنید، مراقب باشید. بررسی برای مقارید `null/undefined` به صورت جداگانه کار بسیار پسندیده ای است.

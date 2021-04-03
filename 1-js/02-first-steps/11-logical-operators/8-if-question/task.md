@@ -2,11 +2,11 @@ importance: 5
 
 ---
 
-# A question about "if"
+# یک سوال درباره "if"
 
-Which of these `alert`s are going to execute?
+کدام یک از `alert`ها اجرا خواهد شد؟
 
-What will the results of the expressions be inside `if(...)`?
+نتیجه عبارت های داخل `if(...)` چه خواهد بود؟
 
 ```js
 if (-1 || 0) alert( 'first' );

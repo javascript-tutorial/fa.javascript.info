@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# What's the result of OR?
+# نتیجه OR چیست؟
 
-What is the code below going to output?
+کد پایین چه چیزی را خروجی خواهد داد؟
 
 ```js
 alert( null || 2 || undefined );
