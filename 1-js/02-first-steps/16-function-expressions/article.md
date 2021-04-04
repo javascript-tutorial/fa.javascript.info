@@ -1,4 +1,4 @@
-# Function expressions
+# اعلان تابع Expression
 
 در جاوااسکریپت، تابع یک "ساختار جادویی زبان" نیست، بلکه یک نوع خاصی از مقدار است.
 
@@ -95,7 +95,7 @@ let sayHi = function() {
 - یک Function Expression به عنوان یک مقدار، در داخل دستور استفاده می‌شود: `let sayHi = ...;`.این یک بلوک کد نیست، بلکه یک تخصیص دادن است. نقطه ویرگول `;` در انتهای دستورها پیشنهاد می‌شود، بدون توجه به اینکه مقدار چه چیزی باشد. پس نقطه ویرگول در اینجا به خود Function Expression مربوط نیست، فقط دستور را به پایان می‌رساند.
 ````
 
-## Callback functions
+## تابع‌های Callback
 
 بیایید به مثال‌های بیشتری درباره استفاده کردن از تابع ها به عنوان مقدار و استفاده کردن از function expressions نگاه کنیم.
 
@@ -168,7 +168,7 @@ ask(
 ```
 
 
-## Function Expression در مقابل Function Declaration
+## اعلان تابع Expression در مقابل تابع Declaration
 
 بیایید تفاوت‌های کلیدی بین Function Declarations و Expressions را فرمول بندی کنیم.
 
