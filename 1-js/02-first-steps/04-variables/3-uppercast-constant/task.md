@@ -1,4 +1,4 @@
-اهمیت : 4
+importance : 4
 
 ---
 
@@ -12,13 +12,13 @@ const birthday = '18.04.1982';
 const age = someCode(birthday);
 ```
 
-ما در اینجا یک ثابت با نام `birthday` داریم و ثابتی دیگر با نام `age` که با کمک کدهای دیگر و به واسطه `birthday` محاسبه می‌شود.
+ما در اینجا یک ثابت با نام `birthday` داریم و ثابتی دیگر با نام `age` که با کمک کدهای دیگر از `birthday` محاسبه می‌شود (برای کوتاه شدن ارائه نشده‌است، و همچنین به دلیل اینکه جزییات اینجا اهمیت ندارند).
 
-آیا نوشتن `birthday` با حروف بزرگ درست است ؟ برای `age` چطور ؟
+آیا نوشتن `birthday` با حروف بزرگ درست است؟ برای `age` چطور؟
 
 ```js
-const BIRTHDAY = '18.04.1982'; // make uppercase?
+const BIRTHDAY = '18.04.1982'; // با حروف بزرگ؟
 
-const AGE = someCode(BIRTHDAY); // make uppercase?
+const AGE = someCode(BIRTHDAY); // با حروف بزرگ؟
 ```
 
