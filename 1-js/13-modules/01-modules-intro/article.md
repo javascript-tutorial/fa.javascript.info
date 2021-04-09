@@ -1,32 +1,32 @@
 
-# Modules, introduction
+# ماژول ها، معرفی
 
-As our application grows bigger, we want to split it into multiple files, so called "modules". A module may contain a class or a library of functions for a specific purpose.
+با بزرگ تر شدن پروژه، ما سعی می کنیم که آن را به فایل های متفاوتی به نام ماژول (modules) تقسیم بندی کنیم. یک ماژول می تواند شامل یک کلاس یا کتابخانه از توابع برای یک هدف خاص باشد.
 
-For a long time, JavaScript existed without a language-level module syntax. That wasn't a problem, because initially scripts were small and simple, so there was no need.
+تا مدت ها، جاوااسکریپت سینتکسی برای نوشتن ماژول ها در سطح زبان نداشت.
 
-But eventually scripts became more and more complex, so the community invented a variety of ways to organize code into modules, special libraries to load modules on demand.
+اما با گذر زمان اسکریپت ها بیشتر و بیشتر پیچیپده شدند،‌ در نتیجه برنامه نویسان روش های متفاوتی برای مرتب و ماژول بندی کردن کد خود و کتابخانه های خاص برای بارگذاری ماژول ها در زمان نیاز ابداع کردند.
 
-To name some (for historical reasons):
+این ها نمونه هایی از این کتابخانه ها است (این بخش صرفا جنبه تاریخی دارد):
 
-- [AMD](https://en.wikipedia.org/wiki/Asynchronous_module_definition) -- one of the most ancient module systems, initially implemented by the library [require.js](http://requirejs.org/).
-- [CommonJS](http://wiki.commonjs.org/wiki/Modules/1.1) -- the module system created for Node.js server.
-- [UMD](https://github.com/umdjs/umd) -- one more module system, suggested as a universal one, compatible with AMD and CommonJS.
+- [AMD](https://en.wikipedia.org/wiki/Asynchronous_module_definition) -- یکی از قدیمی ترین سیستم های ماژول بندی، که اولین بار توسط کتابخانه [require.js](http://requirejs.org/) پیاده سازی شد .
+- [CommonJS](http://wiki.commonjs.org/wiki/Modules/1.1) -- سیستم ماژول بندی که برای سرورها Node.js درست شد.
+- [UMD](https://github.com/umdjs/umd) -- یک سیستم ماژول بندی که به عنوان یک سیستم جهانی شناخته شده و با هردو سیستم AMD و CommonJS همخوانی دارد.
 
-Now all these slowly become a part of history, but we still can find them in old scripts.
+همه این سیستم ها کم کم تبدیل به بخشی از تاریخ شدند اما هنوز هم می توان آن ها را در اسکریپت های قدیمی مشاهده کرد.
 
-The language-level module system appeared in the standard in 2015, gradually evolved since then, and is now supported by all major browsers and in Node.js. So we'll study the modern JavaScript modules from now on.
+سیستم ماژول بندی در سطح زبان در استاندار سال 2015 مشاهده شد، از آن موقع کم کم پیشرفت کرده و در حال حاضر توسط تمامی مرورگرهای اصلی و Nodejs پشتیبانی می شود. در نتیجه از اینجا به بعد ما درباره سیستم ماژول بندی مدرن در جاوااسکریپت صحبت می کنیم.
 
-## What is a module?
+## ماژول چیست؟
 
-A module is just a file. One script is one module. As simple as that.
+ماژول در اصل یک فایل است. هر اسکریپت یک ماژول است. به همین سادگی.
 
-Modules can load each other and use special directives `export` and `import` to interchange functionality, call functions of one module from another one:
+ماژول ها می توانند یکدیگر را لود کرده و به وسیله توابع خاصی مانند `export` و `import` بین هم تابع و کارایی رد و بدل کنند، به وسیله صدا زدن تابعی از یک ماژول در یک ماژول دیگر:
 
-- `export` keyword labels variables and functions that should be accessible from outside the current module.
-- `import` allows the import of functionality from other modules.
+- `export` این کلید واژه متغیرها و توابعی را مشخص می کند که باید بیرون از این ماژول قابل دسترسی باشند.
+- `import` به ما اجازه ایمپورت کردن و استفاده از توانایی های دیگر ماژول ها را می دهد.
 
-For instance, if we have a file `sayHi.js` exporting a function:
+برای مثال، اگر ما یک فایل با نام `sayHi.js` داشته باشیم که یک تابع را اکسپورت:
 
 ```js
 // 📁 sayHi.js
@@ -35,69 +35,69 @@ export function sayHi(user) {
 }
 ```
 
-...Then another file may import and use it:
+...در این حالت یک فایل دیگر می تواند این ماژول را ایمپورت کرده و از این تابع استفاده کند:
 
 ```js
 // 📁 main.js
 import {sayHi} from './sayHi.js';
 
-alert(sayHi); // function...
+alert(sayHi); // تابع...
 sayHi('John'); // Hello, John!
 ```
 
-The `import` directive loads the module by path `./sayHi.js` relative to the current file, and assigns exported function `sayHi` to the corresponding variable.
+تابع `import` ماژول را بر اساس مسیر `./sayHi.js` که بر مبنای فایل فعلی است، بارگذاری کرده، سپس تابع اکسپورت شده `sayHi` را به متغیر مناسب اختصاص می دهد.
 
-Let's run the example in-browser.
+بگذارید تا این مثال را در مرورگر امتحان کنیم.
 
-As modules support special keywords and features, we must tell the browser that a script should be treated as a module, by using the attribute `<script type="module">`.
+از آن جایی که ماژول ها از کلیدواژه ها و امکانات خاصی استفاده می کنند، ما باید به وسیله مشخصه `<script type="module">` به مرورگر بگوییم که این اسکریپت یک ماژول است.
 
-Like this:
+مانند مثال زیر: 
 
 [codetabs src="say" height="140" current="index.html"]
 
-The browser automatically fetches and evaluates the imported module (and its imports if needed), and then runs the script.
+مرورگر به صورت خودکار ماژول ایمپورت شده (و ماژول هایی که این ماژول به آن وابسته است) را دریافت و بررسی میکند، سپس اسکریپت را اجرا می کند.
 
-```warn header="Modules work only via HTTP(s), not in local files"
-If you try to open a web-page locally, via `file://` protocol, you'll find that `import/export` directives don't work. Use a local web-server, such as [static-server](https://www.npmjs.com/package/static-server#getting-started) or use the "live server" capability of your editor, such as VS Code [Live Server Extension](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) to test modules.
+```warn header="ماژول ها تنها در پروتکل  HTTP(s) قابل استفاده اند، و در فایل های محلی نمی توان از آن ها استفاده کرد."
+اگر سعی کنید که یک صفحه وب را به صورت محلی، از طریق پروتکل `file://` باز کنید، توابع `import/export` کار نمی کنند. برای این کار از یک وب سرور لوکال استفاده کنید، مانند [static-server](https://www.npmjs.com/package/static-server#getting-started) یا از قابلیت "سرور زنده" ویرایشگر متن خود استفاده کنید، مانند VS Code [Live Server Extension](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) برای تست ماژول خود.
 ```
 
-## Core module features
+## امکانات اصلی ماژول ها
 
-What's different in modules, compared to "regular" scripts?
+چه مواردی در ماژول ها با اسکریپت های "معمولی" متفاوت است؟
 
-There are core features, valid both for browser and server-side JavaScript.
+بعضی از این امکانات، در هر دو محیط مرورگر و سرور معتبر هستند.
 
-### Always "use strict"
+### حالت "use strict" به صورت پیش فرض فعال است.
 
-Modules always `use strict`, by default. E.g. assigning to an undeclared variable will give an error.
+در ماژول ها حالت `use strict` به صورت پیش فرض فعال است، برای مثال اختصاص دادن مقدار به یک متغیر که از قبل تعریف نشده است باعث بوجود آمدن خطا می شود.
 
 ```html run
 <script type="module">
-  a = 5; // error
+  a = 5; // خطا
 </script>
 ```
 
-### Module-level scope
+### محدوده/اسکوپ سطح ماژول
 
-Each module has its own top-level scope. In other words, top-level variables and functions from a module are not seen in other scripts.
+هر ماژول اسکوپ سطح بالای خود را دارد. به عبارت دیگر، توابع و متغیر های سطح بالا در یک ماژول قابل دسترسی توسط اسکریپت های دیگر نیستند.
 
-In the example below, two scripts are imported, and `hello.js` tries to use `user` variable declared in `user.js`, and fails:
+در مثال پایین، دو اسکریپت ایمپورت شده اند، و `hello.js` سعی در استفاده از متغیر `user` که در فایل `user.js` تعریف شده است، کرده و شکست خورده است.
 
 [codetabs src="scopes" height="140" current="index.html"]
 
-Modules are expected to `export` what they want to be accessible from outside and `import` what they need.
+در موقع کار با ماژول ها انتظار می رود که هر چیزی که قرار است از بیرون قابل دسترسی باشد `export` و هر چیزی که آن ها در اسکریپت خود نیاز دارند `import` شود.
 
-So we should import `user.js` into `hello.js` and get the required functionality from it instead of relying on global variables.
+در نتیجه ما باید `user.js` را در `hello.js` ایمپورت کرده و قابلیت مورد نظر خود را از آن دریافت کنیم به جای اینکه به متغیرهای جهانی اطمینان کنیم.
 
-This is the correct variant:
+این نمونه درست این کد است:
 
 [codetabs src="scopes-working" height="140" current="hello.js"]
 
-In the browser, independent top-level scope also exists for each `<script type="module">`:
+در مرورگر، یک اسکوپ سطح بالا ی مستقل هم برای هر تگ `<script type="module">` وجود دارد:
 
 ```html run
 <script type="module">
-  // The variable is only visible in this module script
+  // متغیر تنها در اسکریپت ماژول قابل دسترسی است.
   let user = "John";
 </script>
 
@@ -108,15 +108,15 @@ In the browser, independent top-level scope also exists for each `<script type="
 </script>
 ```
 
-If we really need to make a window-level global variable, we can explicitly assign it to `window` and access as `window.user`. But that's an exception requiring a good reason.
+اگر واقعا نیاز داریم که یک متغیر جهانی در سطح پنجره مرورگر ایجاد کنیم، نیاز است که به صورت جداگانه و اختصاصی آن متغیر را به `window` اختصاص دهیم و از طریق `window.user` به آن دسترسی پیدا کنیم. اما باید توجه کنیم که این یک استثنا است و برای انجام آن به دلیل موجهی نیاز است.
 
-### A module code is evaluated only the first time when imported
+### کد یک ماژول تنها اولین بار که به اسکریپت ما ایمپورت شده، ارزیابی می شود.
 
-If the same module is imported into multiple other places, its code is executed only the first time, then exports are given to all importers.
+اگر یک ماژول مشابه در چندین مکان مختلف ایمپورت شود، کد آن تنها در مرتبه اول اجرا می شود، بعد از آن نتیجه به تمامی مکان های دیگر اکسپورت می شود.
 
-That has important consequences. Let's look at them using examples:
+این رفتار عواقب مهمی دارد. بگذارید تا آن ها را در مثال بررسی کنیم:
 
-First, if executing a module code brings side-effects, like showing a message, then importing it multiple times will trigger it only once -- the first time:
+اول از همه، اگر اجرای کد ما باعث افتادن یک سری اتفاقات شود، مانند نشان دادن یک پیغام ، در این صورت چندین بار ایمپورت کردن کد تنها باعث یک بار اجرا شدن این پیغام می شود. ---- تنها بار اول.
 
 ```js
 // 📁 alert.js
@@ -124,20 +124,20 @@ alert("Module is evaluated!");
 ```
 
 ```js
-// Import the same module from different files
+// ایمپورت کردن یک ماژول مشابه در دو فایل متفاوت
 
 // 📁 1.js
-import `./alert.js`; // Module is evaluated!
+import `./alert.js`; // ماژول ارزیابی و اجرا می شود.
 
 // 📁 2.js
-import `./alert.js`; // (shows nothing)
+import `./alert.js`; // (پیغامی نمایش داده نمی شود.)
 ```
 
-In practice, top-level module code is mostly used for initialization, creation of internal data structures, and if we want something to be reusable -- export it.
+در عمل، ماژول های سطح بالا در اغلب موارد برای اختصاص دادن مقادیر مختلف، درست کردن ساختمان های داده داخلی، و زمانی که می خواهیم از چیزی چند مرتبه استفاده کنیم ---- آن را اکسپورت می کنیم.
 
-Now, a more advanced example.
+خب، حال با هم یک مثال پیشرفته تر را می بینیم.
 
-Let's say, a module exports an object:
+فرض می کنیم که یک ماژول یک آبجکت را اکسپورت می کند:
 
 ```js
 // 📁 admin.js
@@ -146,9 +146,9 @@ export let admin = {
 };
 ```
 
-If this module is imported from multiple files, the module is only evaluated the first time, `admin` object is created, and then passed to all further importers.
+اگر این ماژول چند مرتبه در چند فایل ایمپورت شود، ماژول تنها در مرتبه اول ارزیابی می شود، این به این معناست که آبجکت `admin` یک بار درست شده، و سپس به جاهای دیگر ایمپورت می شود.
 
-All importers get exactly the one and only `admin` object:
+همه مکانهایی که ماژول ایمپورت شده است، دقیقا یک و تنها یک آبجکت `admin` دریافت می کنند.
 
 ```js
 // 📁 1.js
@@ -160,16 +160,16 @@ import {admin} from './admin.js';
 alert(admin.name); // Pete
 
 *!*
-// Both 1.js and 2.js imported the same object
-// Changes made in 1.js are visible in 2.js
+// هر دو فایل ‍1.js و 2.js یک آبجکت مشابه را ایمپورت می کنند.
+// هر تغییری که در فایل 1.js ایجاد شود، در فایل 2.js نیز قابل مشاهده است.
 */!*
 ```
 
-So, let's reiterate -- the module is executed only once. Exports are generated, and then they are shared between importers, so if something changes the `admin` object, other modules will see that.
+پس بیایید دوباره امتحان کنیم -- ماژول تنها یک مرتبه اجرا می شود. اکسپورت های تولید شده، بین ایمپورت کننده ها به اشتراک گذاشته می شوند، در نتیجه اگر چیزی آبجکت `admin` را تغییر دهد، بقیه ماژول ها هم متوجه این تغییر می شوند.
 
-Such behavior allows us to *configure* modules on first import. We can setup its properties once, and then in further imports it's ready.
+این رفتار به ما اجازه می دهد که در اولین بار که ماژول را ایمپورت می کنیم، *تنظیم* هم کنیم. ما می توانیم یکبار مشخصات(properties) را تنظیم کرده و در ایمپورت ها و ماژول های بعدی از آن استفاده کنیم.
 
-For instance, the `admin.js` module may provide certain functionality, but expect the credentials to come into the `admin` object from outside:
+برای مثال، ماژول `admin.js` ممکن است یک سری قابلیت ها به ما بدهد، اما از ما انتظار دارد که یک سری متغیر ها از بیرون آبجکت `admin` به آن پاس دهیم;
 
 ```js
 // 📁 admin.js
@@ -180,7 +180,7 @@ export function sayHi() {
 }
 ```
 
-In `init.js`, the first script of our app, we set `admin.name`. Then everyone will see it, including calls made from inside `admin.js` itself:
+در ‍`init.js`، اولین اسکریپت اپلیکیشن ما، مقدار `admin.name` را مشخص می کند. از این به بعد همه می توانند این تغییر را ببینند، از جمله فراخوانی هایی که در خود فایل `admin.js` هستند:
 
 ```js
 // 📁 init.js
@@ -188,7 +188,7 @@ import {admin} from './admin.js';
 admin.name = "Pete";
 ```
 
-Another module can also see `admin.name`:
+ماژول های دیگر هم `admin.name` را می توانند ببینند:
 
 ```js
 // 📁 other.js
@@ -199,25 +199,25 @@ alert(admin.name); // *!*Pete*/!*
 sayHi(); // Ready to serve, *!*Pete*/!*!
 ```
 
-### import.meta
+### شئ import.meta
 
-The object `import.meta` contains the information about the current module.
+آبجکت ‍`import.meta` دارای یک سری اطلاعات درباره ماژول فعلی است.
 
-Its content depends on the environment. In the browser, it contains the url of the script, or a current webpage url if inside HTML:
+اطلاعات آن بستگی به محیطی که در آن اجرا می شود، دارد. در مروگر، شامل آدرس اسکریپت است، و یا آدزس صفحه فعلی اگر داخل فایل HTML باشد:
 
 ```html run height=0
 <script type="module">
-  alert(import.meta.url); // script url (url of the html page for an inline script)
+  alert(import.meta.url); // آدرس اسکریپت(آدرس صفحه html برای اسکریپت های inline)
 </script>
 ```
 
-### In a module, "this" is undefined
+### در یک ماژول، "this" تعریف نشده است
 
-That's kind of a minor feature, but for completeness we should mention it.
+این یک قابلیت جزئی است، اما برای کامل بودن آموزش به آن اشاره می کنیم.
 
-In a module, top-level `this` is undefined.
+در یک ماژول، ‍`this` سطح بالا undefined است.
 
-Compare it to non-module scripts, where `this` is a global object:
+مقایسه آن با اسکریپت های غیر ماژول، که در آن ها `this` آبجکت جهانی است:
 
 ```html run height=0
 <script>
@@ -229,66 +229,66 @@ Compare it to non-module scripts, where `this` is a global object:
 </script>
 ```
 
-## Browser-specific features
+## قابلیت های مخصوص محیط مرورگر
 
-There are also several browser-specific differences of scripts with `type="module"` compared to regular ones.
+اسکریپت ها از نوع ماژول نسبت به انواع معمولی آن تفاوت هایی مخصوص محیط مرورگر هم دارند.
 
-You may want skip this section for now if you're reading for the first time, or if you don't use JavaScript in a browser.
+اگر این اولین بار است که این آموزش را می خوانید، یا از جاوااسکریپت در مرورگر استفاده نمی کنید، می توانید این بخش را رد کنید.
 
-### Module scripts are deferred
+### اسکریپت های ماژولی به تعویق افتاده اند. (deferred)
 
-Module scripts are *always* deferred, same effect as `defer` attribute (described in the chapter [](info:script-async-defer)), for both external and inline scripts.
+اسکریپت ها از نوع ماژول *همیشه* به تعویق افتاده اند، دقیقا مانند خصوصیت `defer` (در فصل [] (info:script-async-defer) توضیح داده شده است.)، برای هر دو نوع اکسترنال و اینلاین.
 
-In other words:
-- downloading external module scripts `<script type="module" src="...">` doesn't block HTML processing, they load in parallel with other resources.
-- module scripts wait until the HTML document is fully ready (even if they are tiny and load faster than HTML), and then run.
-- relative order of scripts is maintained: scripts that go first in the document, execute first.
+به عبارت دیگر:
+- دانلود اسکریپت های از نوع ماژول خارجی (external) ‍`<script type="module" src="...">` جلوی پردازش HTML را نمی گیردند، این اسکریپت ها موازی با دیگر منابع بارگیری می شوند.
+- اسکریپت های ماژولی تا بارگیری کامل اسناد HTML صبر می کنند (حتی با وجود اینکه این اسکریپت ها کوچک بوده و سریع تر از HTML بارگیری می شوند)، و سپس اجرا می شوند.
+- اسکریپت ها به همان ترتیبی که نوشته می شوند، اجرا می شوند: اسکریپتی که در فایل ها اول آمده است، اول اجرا می شود.
 
-As a side-effect, module scripts always "see" the fully loaded HTML-page, including HTML elements below them.
+به همین خاطر، اسکریپت های ماژولی همیشه صفحه HTML کامل بارگیری شده را "می بینند"، از جمله عناصری که در متن جلو تر از آن ها قرار دارند.
 
-For instance:
+برای مثال:
 
 ```html run
 <script type="module">
 *!*
-  alert(typeof button); // object: the script can 'see' the button below
+  alert(typeof button); // آبجکت: اسکریپت می تواند دکمه ای که زیر آن هست را "ببیند".
 */!*
-  // as modules are deferred, the script runs after the whole page is loaded
+  // به دلیل اینکه ماژول ها به تعویق افتاده اند، اسکریپت بعد از بارگیری کل صفحه اجرا می شود.
 </script>
 
-Compare to regular script below:
+در مقایسه با اسکریپت معمولی زیر:
 
 <script>
 *!*
-  alert(typeof button); // button is undefined, the script can't see elements below
+  alert(typeof button); // دکمه undefined است، به دلیل اینکه اسکریپت نمی تواند عناصر زیر را ببیند.
 */!*
-  // regular scripts run immediately, before the rest of the page is processed
+  // اسکریپت های معمولی بالافاصله قبل از اینکه بقیه صفحه پردازش شود، اجرا می شوند.
 </script>
 
 <button id="button">Button</button>
 ```
 
-Please note: the second script actually runs before the first! So we'll see `undefined` first, and then `object`.
+توجه کنید که: اسکریپت دوم در حقیقت قبل از اولی اجرا می شود! در نتیجه ما ابتدا `undefined` و سپس `object` را می بینیم.
 
-That's because modules are deferred, so we wait for the document to be processed. The regular script runs immediately, so we see its output first.
+این پدیده به این خاطر است که ماژول ها به تعویق افتاده هستند، در نتیجه ابتدا صبر می کند تا تمام سند بارگیری شود. اسکریپت های معمولی بالافاصله اجرا می شوند. در نتیجه ما خروجی آن را ابتدا مشاهده می کنیم.
 
-When using modules, we should be aware that the HTML page shows up as it loads, and JavaScript modules run after that, so the user may see the page before the JavaScript application is ready. Some functionality may not work yet. We should put "loading indicators", or otherwise ensure that the visitor won't be confused by that.
+وقتی که از ماژول ها استفاده می کنیم، باید به این نکته توجه کنیم که صفحات HTML همان طور که بارگیری می شوند، به کاربر نشان داده می شوند و ماژول های جاوااسکریپت بعد از آن اجرا می شوند، پس کاربر صفحه را قبل از اینکه برنامه جاوااسکریپت اجرا شود، می بیند. بعضی از قابلیت ها ممکن است که کار نکنند. ما باید از یک "مشخص کننده مقدار بارگیری شده" استفاده کنیم، یا مطمئن شویم که این پدیده باعث سردرگم شدن کاربر نمی شود.
 
-### Async works on inline scripts
+### Async در اسکریپت های اینلاین معتبر است.
 
-For non-module scripts, the `async` attribute only works on external scripts. Async scripts run immediately when ready, independently of other scripts or the HTML document.
+در اسکریپت های غیر ماژولی، مشخصه `async` تنها در اسکریپت های اکسترنال کار می کنند. اسکریپت های غیر ترتیبی به محض آماده شدن، اجرا می شوند، بدون توجه به اسکریپت های دیگر یا کد های HTML.
 
-For module scripts, it works on inline scripts as well.
+برای اسکریپت های ماژولی، در حالت اینلاین هم معتبر است.
 
-For example, the inline script below has `async`, so it doesn't wait for anything.
+برای مثال،‌ اسکریپت اینلاین زیر `async` دارد، در نتیجه برای هیچ چیزی صبر نمی کند.
 
-It performs the import (fetches `./analytics.js`) and runs when ready, even if the HTML document is not finished yet, or if other scripts are still pending.
+اسکریپت، ایمپورت (fetche `./analytics.js`) را انجام می دهد و وقتی که آماده شد، اجرا می شود. حتی اگر سند HTML یا دیگر اسکریپت ها آماده نباشند.
 
-That's good for functionality that doesn't depend on anything, like counters, ads, document-level event listeners.
+این رفتار برای قابلیت هایی که به هیچ چیز دیگری وابسته نیستند، خوب هست، مانند شمارنده ها، تبلیغات، event listener های در سطح سند.
 
 ```html
-<!-- all dependencies are fetched (analytics.js), and the script runs -->
-<!-- doesn't wait for the document or other <script> tags -->
+<!-- همه وابستگی ها دریافت شده(analytics.js)، و اسکریپت اجرا می شود. -->
+<!-- برای دیگر سندها یا تگ های <script> منتظر نمی شود. -->
 <script *!*async*/!* type="module">
   import {counter} from './analytics.js';
 
@@ -296,95 +296,95 @@ That's good for functionality that doesn't depend on anything, like counters, ad
 </script>
 ```
 
-### External scripts
+### اسکریپت های اکسترنال
 
-External scripts that have `type="module"` are different in two aspects:
+اسکریپت های اکسترنال که از نوع module ‍‍`type="module"` هستند، دو خصوصیت متفاوت دارند:
 
-1. External scripts with the same `src` run only once:
+1. اسکریپت های اکسترنال با `src` مشابه تنها یک مرتبه اجرا می شوند:
     ```html
-    <!-- the script my.js is fetched and executed only once -->
+    <!-- اسکریپت my.js تنها یکبار دریافت و اجرا می شود -->
     <script type="module" src="my.js"></script>
     <script type="module" src="my.js"></script>
     ```
 
-2. External scripts that are fetched from another origin (e.g. another site) require [CORS](mdn:Web/HTTP/CORS) headers, as described in the chapter <info:fetch-crossorigin>. In other words, if a module script is fetched from another origin, the remote server must supply a header `Access-Control-Allow-Origin` allowing the fetch.
+2. اسکریپت های اکسترنالی که از یک منبع دیگر (مانند یک سایت دیگر) دریافت شده اند. به [CORS](mdn:Web/HTTP/CORS) header نیاز دارند، همانگونه که در فصل <info:fetch-crossorigin> توضیح داده شد. به عبارت دیگر، اگر یک اسکریپت ماژولی از یک منبع دیگر دریافت شده باشد، سرور دیگر باید هدر `Access-Control-Allow-Origin` را ست کرده باشد تا دریافت امکان پذیر باشد.
     ```html
-    <!-- another-site.com must supply Access-Control-Allow-Origin -->
-    <!-- otherwise, the script won't execute -->
+    <!-- یک سایت دیگر مانند another-site.com باید Access-Control-Allow-Origin را فراهم کرده باشد. -->
+    <!-- در غیر این صورت، اسکریپت اجرا نخواهد شد. -->
     <script type="module" src="*!*http://another-site.com/their.js*/!*"></script>
     ```
 
-    That ensures better security by default.
+    این قابلیت به صورت پیش فرض باعث افزایش امنیت می شود.
 
-### No "bare" modules allowed
+### ماژول های "bare" غیر مجاز هستند.
 
-In the browser, `import` must get either a relative or absolute URL. Modules without any path are called "bare" modules. Such modules are not allowed in `import`.
+در مرورگر، `import` باید یک لینک رلتیو یا ابسولوت دریافت کند. ماژول هایی که هیچونه آدرسی یا مسیری ندارند را "bare" یا برهنه می نامیم. چنین ماژول هایی در ‍`import` مجاز نیستند.
 
-For instance, this `import` is invalid:
+برای مثال، `import` زیر مجاز نیست:
 ```js
 import {sayHi} from 'sayHi'; // Error, "bare" module
-// the module must have a path, e.g. './sayHi.js' or wherever the module is
+// ماژول باید یک مسیر داشته باشد، برای مثال ‍'./sayHi.js' یا هر ماژولی که هست.
 ```
 
-Certain environments, like Node.js or bundle tools allow bare modules, without any path, as they have their own ways for finding modules and hooks to fine-tune them. But browsers do not support bare modules yet.
+بعضی محیط ها مانند Node.js یا ابزارهای bundle اجازه استفاده از ماژول های برهنه را می دهند، بدون هیچ مسیری ، به این دلیل که این محیط ها روش های دیگری برای پیدا کردن ماژول ها و هوک ها و تنظیم آن ها دارند. اما مرورگر ها در حال حاضر از ماژول های برهنه پشتیبانی نمی کنند.
 
-### Compatibility, "nomodule"
+### سازگاری، "nomodule"
 
-Old browsers do not understand `type="module"`. Scripts of an unknown type are just ignored. For them, it's possible to provide a fallback using the `nomodule` attribute:
+مرورگرهای قدیمی منظور را از `type="module"` نمی فهمند. اسکریپت هایی از نوع ناشناخته نادیده گرفته می شوند. برای این موارد این امکان وجود دارد که یک حالت استثنا به وسیله `nomodule` تعریف کنید:
 
 ```html run
 <script type="module">
-  alert("Runs in modern browsers");
+  alert("اجرا در مرورگرهای مدرن");
 </script>
 
 <script nomodule>
-  alert("Modern browsers know both type=module and nomodule, so skip this")
-  alert("Old browsers ignore script with unknown type=module, but execute this.");
+  alert("مرورگرهای مدرن هر دو مورد type=modeule و nomodule را می فهمند، پس از این مورد در می شوند.")
+  alert("مرورگرهای قدیمی اسکریپت از نوع ناشناخته را نادیده می گیرند type=module اما این مورد را اجرا می کنند.");
 </script>
 ```
 
-## Build tools
+## ابزارهای ساخت
 
-In real-life, browser modules are rarely used in their "raw" form. Usually, we bundle them together with a special tool such as [Webpack](https://webpack.js.org/) and deploy to the production server.
+در زندگی واقعی، ماژول های مرورگر به ندرت در حالت "خام" خود استفاده می شوند. معمولا، ما این اسکریپت ها را با ابزارهایی مانند [Webpack](https://webpack.js.org/) با هم استفاده می کنیم و در سرور نهایی اعمال می کنیم.
 
-One of the benefits of using bundlers -- they give more control over how modules are resolved, allowing bare modules and much more, like CSS/HTML modules.
+یکی از مزایای استفاده از باندلرها -- اینها به ما کنترل بیشتر بر روی اینکه ماژول ها چگونه اجرا می شوند، می دهد، اجازه اجرا شدن ماژول های برهنه و بسیار کارهای دیگر، مانند ماژول های CSS/HTML.
 
-Build tools do the following:
+ابزارهای ساخت کارهای زیر را انجام می دهند:
 
-1. Take a "main" module, the one intended to be put in `<script type="module">` in HTML.
-2. Analyze its dependencies: imports and then imports of imports etc.
-3. Build a single file with all modules (or multiple files, that's tunable), replacing native `import` calls with bundler functions, so that it works. "Special" module types like HTML/CSS modules are also supported.
-4. In the process, other transformations and optimizations may be applied:
-    - Unreachable code removed.
-    - Unused exports removed ("tree-shaking").
-    - Development-specific statements like `console` and `debugger` removed.
-    - Modern, bleeding-edge JavaScript syntax may be transformed to older one with similar functionality using [Babel](https://babeljs.io/).
-    - The resulting file is minified (spaces removed, variables replaced with shorter names, etc).
+1. ماژول "اصلی"، همان ماژولی که قرار است توی `<script type="module">` در HTML قرار بگیرد را بردار.
+2. وابستگی های آن را بررسی کن: importهای آن و سپس importهای importهای آن و تا به آخر.
+3. یک فایل با تمام ماژول ها بساز(یا چند فایل، این مورد قابل تنظیم است)، جایگزینی ‍`import` های صدا زده شده با توابع باندلر، تا این کار شدنی باشد. ماژول های "خاص" مانند ماژول های HTML/CSS هم پشتیبانی می شوند.
+4. در حین عملیات، تبدیل ها و ارتقاهای دیگری هم ممکن است انجام شود:
+    - کدهایی که هیچ وقت اجرا نمی شوند، حذف می شوند.
+    - exportهایی که استفاده نمی شوند، پاک می شوند.("tree-shaking").
+    - عباراتی که مخصوص زمان توسعه نرم افزار هستند مانند `console` و `debugger` حذف می شوند.
+    - سینتکس و املای مدرن جاوااسکریپت ممکن است به نمونه های قدیمی با عملکرد مشابه توسط [Babel](https://babeljs.io/) تبدیل شوند.
+    - فایل نهایی فشرده می شود. (فاصله های پاک می شوند، متغیرها با نام های کوتاه تر جایگزین می شوند و غیره)
 
-If we use bundle tools, then as scripts are bundled together into a single file (or few files), `import/export` statements inside those scripts are replaced by special bundler functions. So the resulting "bundled" script does not contain any `import/export`, it doesn't require `type="module"`, and we can put it into a regular script:
+اگر ما از ابزارهای باندل استفاده کنیم، در این صورت تمام اسکریپت ها با هم در یک فایل ( یا تعداد کمی فایل ) جمع می شوند، عبارات `import/export` داخل اسکریپت ها با توابع خاص باندلر ها جایگزین می شوند. در نتیجه اسکریپت باندل نهایی هیچ عبارت `import/export` ندارد، این اسکریپت نیازی به `type="module"` ندارد، و ما می توانیم آن را در یک اسکریپت معمولی بگذاریم.
 
 ```html
-<!-- Assuming we got bundle.js from a tool like Webpack -->
+<!-- با فرض اینکه ما bundle.js را از یک ابزار مانند Webpack گرفته ایم -->
 <script src="bundle.js"></script>
 ```
 
-That said, native modules are also usable. So we won't be using Webpack here: you can configure it later.
+با این حساب، ماژول ها بومی و نیتیو هم قابل استفاده هستند. در نتیجه ما از Webpack در اینجا استفاده نمی کنیم: شما می توانید آن را در آینده تنظیم کنید.
 
-## Summary
+## خلاصه
 
-To summarize, the core concepts are:
+برای خلاصه کردن، مفاهیم اصلی اینها هستند:
 
-1. A module is a file. To make `import/export` work, browsers need `<script type="module">`. Modules have several differences:
-    - Deferred by default.
-    - Async works on inline scripts.
-    - To load external scripts from another origin (domain/protocol/port), CORS headers are needed.
-    - Duplicate external scripts are ignored.
-2. Modules have their own, local top-level scope and interchange functionality via `import/export`.
-3. Modules always `use strict`.
-4. Module code is executed only once. Exports are created once and shared between importers.
+1. هر ماژول یک فایل است. برای اینکه عبارات `import/export` کار بکنند، مرورگرها نیاز به `<script type="module">` دارند. ماژول های چندین تفاوت با اسکریپت های معمولی دارند:
+    - به صورت پیش فرض به تعویق افتاده (Deferred) هستند.
+    - در اسکریپت های inline Async جواب می دهد.
+    - برای بارگزاری اسکریپت های خارجی(external) از منابع دیگر (دامنه/پروتکل/پورت)، هدر های CORS نیاز هستند.
+    - اسکریپت های مشابه external نادیده گرفته می شوند.
+2. ماژول های اسکوپ سطح بالای خود را دارند و از طریق عبارات ‍`import/export` کارایی های خود را با دیگر اسکریپت های به اشتراک می گذارند.
+3. ماژول ها همیشه در حالت ‍`use strict` هستند.
+4. کد ماژول ها تنها یک مرتبه اجرا می شوند. Exportها تنها یک مرتبه ساخته شده و سپس بین تمام importer ها به اشتراک گذاشته می شوند.
 
-When we use modules, each module implements the functionality and exports it. Then we use `import` to directly import it where it's needed. The browser loads and evaluates the scripts automatically.
+وقتی که ما از یک ماژول استفاده می کنیم، هر ماژول یک کارایی را بوجود آورده و ان را اکسپورت می کند. سپس ما از عبارت `import` برای مستقیما ایمپورت کردن ماژول به جایی که به آن نیاز داریم، استفاده می کنیم. مرورگر به صورت خودکار اسکریپت را بارگذاری و ارزیابی می کند.
 
-In production, people often use bundlers such as [Webpack](https://webpack.js.org) to bundle modules together for performance and other reasons.
+در زمان انتشار، برنامه نویسان معمولا از باندل هایی مانند [Webpack](https://webpack.js.org) برای جمع کردن ماژول ها در کنار هم و بالا بردن کارایی و چند دلیل دیگر استفاده می کنند.
 
-In the next chapter we'll see more examples of modules, and how things can be exported/imported.
+در فصل بعد ما مثال های بیشتری از ماژول ها را می بینیم، و اینکه چگونه آن ها اکسپورت/ایمپورت می شوند.
