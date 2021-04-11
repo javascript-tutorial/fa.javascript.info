@@ -64,36 +64,29 @@ n = 12.345;
 
 ما در فصل <info:number> بیشتر درباره کار کردن با اعداد خواهیم دید.
 
-## رشته کاراکترها
-
-@@@needs translation@@@
-@@@old part@@@
-یک رشته کاراکتر در جاوا اسکریپت باید در بین کوتِیشِن‌ها محصور شوند.
-@@@old part@@@
-@@@new part@@@
 ## BigInt
 
-In JavaScript, the "number" type cannot represent integer values larger than <code>(2<sup>53</sup>-1)</code> (that's `9007199254740991`), or less than <code>-(2<sup>53</sup>-1)</code> for negatives. It's a technical limitation caused by their internal representation.
+در جاوااسکریپت، نوع "number" نمی‌تواند مقدارهای صحیح بیشتر از <code>(2<sup>53</sup>-1)</code> (برابر با `9007199254740991`) یا اعداد منفی کمتر از <code>-(2<sup>53</sup>-1)</code> را نشان دهد. این یک محدودیت فنی است که توسط نمایش درون زبانی آنها ایجاد شده است.
 
-For most purposes that's quite enough, but sometimes we need really big numbers, e.g. for cryptography or microsecond-precision timestamps.
+آن مقدار برای بیشتر کارها کافی است، اما گاهی به اعداد بسیار بزرگ نیاز داریم، برای مثال در کریپتوگرافی یا timestamps با دقت میکرو ثانیه.
 
-`BigInt` type was recently added to the language to represent integers of arbitrary length.
+نوع `BigInt` برای نمایش دادن اعداد صحیح که طول دلخواهی دارند به تازگی به زبان اضافه شده است.
 
-A `BigInt` value is created by appending `n` to the end of an integer:
+یک مقدار `BigInt` با اضافه کردن `n` به آخر یک عدد صحیح ایجاد می‌شود:
 
 ```js
-// the "n" at the end means it's a BigInt
+// حرف "n" در آخر به معنای BigInt یودن آن است
 const bigInt = 1234567890123456789012345678901234567890n;
 ```
 
-As `BigInt` numbers are rarely needed, we don't cover them here, but devoted them a separate chapter <info:bigint>. Read it when you need such big numbers.
+به دلیل اینکه اعداد `BigInt` به ندرت نیاز می‌شوند، ما آنها را اینجا پوشش نمی‌دهیم، اما یک فصل <info:bigint> جدا به آنها اختصاص دادیم. زمانی که به چنین اعداد بزرگی نیاز داشتید آن را بخوانید.
 
 
-```smart header="Compatibility issues"
-Right now, `BigInt` is supported in Firefox/Chrome/Edge/Safari, but not in IE.
+```smart header="مشکلات سازگاری"
+در حال حاضر، `BigInt` در Firefox/Chrome/Edge/Safari پشتیبانی می‌شوند، اما در IE خیر.
 ```
 
-You can check [*MDN* BigInt compatibility table](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt#Browser_compatibility) to know which versions of a browser are supported.
+شما می‌توانید [جدول سازگاری BigInt در *MDN*](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt#Browser_compatibility) را برای اینکه بدانید کدام نسخه از مرورگرها پشتیبانی می‌شوند، بررسی کنید.
 
 ## String
 
