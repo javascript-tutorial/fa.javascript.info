@@ -121,7 +121,6 @@ alert( `the result is *!*${1 + 2}*/!*` ); // the result is 3
 عبارتی که در `${…}` قرار می‌گیرد اجرا شده و نتیجه آن در رشته مورد نظر قرار می‌گیرد. ما می‌توانیم هر چیزی را درون آن قرار دهیم: یک متغیر مثل `name` یا بک عبارت محاسباتی مثل `1 + 2` یا حتی چیزی پیچیده‌تر.
 
 توجه داشته باشید که این فقط می‌تواند در Backticks انجام شود. quote های دیگر این قابلیت تعبیه کردن را ندارند:
-
 ```js run
 alert( "the result is ${1 + 2}" ); // the result is ${1 + 2} (double quotes do nothing)
 ```
@@ -134,28 +133,28 @@ alert( "the result is ${1 + 2}" ); // the result is ${1 + 2} (double quotes do n
 در جاوااسکریپت، چنین نوعی وجود ندارد. تنها یک نوع وجود دارد: `string`. یک رشته شاید شامل صفر کاراکتر (خالی)، یک کاراکتر یا تعداد زیادی کاراکتر باشد.
 ```
 
-## نوع Boolean
+## Boolean (نوع منطقی)
 
 نوع Boolean فقط یکی از دو مقدار `true` و `false` را شامل می‌شود.
 
-این نوع معمولا برای ذخیره مقدار yes یا no استفاده می‌شود. `true` به معنی yes و `false` به معنی no می‎‌باشد.
+این نوع معمولا برای ذخیره مقدار yes یا no استفاده می‌شود. `true` به معنی "بله، درست" و `false` به معنی "خیر، نادرست" می‎‌باشد.
 
-برای نمونه :
+برای نمونه:
 
 ```js
-let nameFieldChecked = true; // yes, name field is checked
-let ageFieldChecked = false; // no, age field is not checked
+let nameFieldChecked = true; // بله، قسمت نام تیک خورده است
+let ageFieldChecked = false; // خیر، قسمت سن تیک نخورده است
 ```
 
-مقدار Booealn معمولا به عنوان یک نتیجه‌ی مقایسه بدست می‌آیند :
+مقدارهای Boolean به عنوان یک نتیجه‌ی مقایسه هم بدست می‌آیند:
 
 ```js run
 let isGreater = 4 > 1;
 
-alert( isGreater ); // true (the comparison result is "yes")
+alert( isGreater ); // true (نتیجه مقایسه "بله" است)
 ```
 
-در مورد Boolean ها در بخش‌های بعدی صحبت خواهیم کرد.
+ما booleans را با جزییات بیشتر در فصل <info:logical-operators> بررسی می‌کنیم.
 
 ## مقدار "null"
 
