@@ -1,15 +1,15 @@
 
-Backtick ها می‌توانند عبارات جاوا اسکریپتی را در یک رشته کاراکتر قرار دهند.
+Backticks عبارت داخل `{...}$` را در رشته قرار می‌دهد.
 
 ```js run
 let name = "Ilya";
 
-// the expression is a number 1
+// عبارت عدد 1 است
 alert( `hello ${1}` ); // hello 1
 
-// the expression is a string "name"
+// عبارت رشته‌ی "name" است
 alert( `hello ${"name"}` ); // hello name
 
-// the expression is a variable, embed it
+// عبارت یک متغیر است، آن را داخل رشته قرار می‌دهد
 alert( `hello ${name}` ); // hello Ilya
 ```
