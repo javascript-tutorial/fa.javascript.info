@@ -247,42 +247,65 @@ alert( c ); // 0
 
 ولی نباید به این شکل برنامه‌نویسی کنیم چراکه کدهای ما را ناخوانا و نامرتب می‌کند.
 
-## عملگر باقی مانده %
+### مقداردهی زنجیره‌ای
 
-
-این عملگر بر خلاف ظاهرش، مربوط به درصد نمی‌باشد. 
-
-نتیجه محاسبه‌ی a % b برابر خواهد بود با باقی‌مانده‌ی تقسیم عدد a بر b.
-
-برای نمونه:
+یک ویژگی جالب دیگر قابلیت زنجیره‌ای کردن مقداردهی‌ها است:
 
 ```js run
-alert( 5 % 2 ); // 1 is a remainder of 5 divided by 2
-alert( 8 % 3 ); // 2 is a remainder of 8 divided by 3
-alert( 6 % 3 ); // 0 is a remainder of 6 divided by 3
+let a, b, c;
+
+*!*
+a = b = c = 2 + 2;
+*/!*
+
+alert( a ); // 4
+alert( b ); // 4
+alert( c ); // 4
 ```
 
-## عملگر توان **
+مقداردهی‌های زنجیره‌ای از راست به چپ ارزیابی می‌شوند. ابتدا، راست ترین عبارت `2 + 2` ارزیابی شده و سپس به متغیرهای سمت چپ تخصیص داده می‌شود: `c`، `b` و `a`. سرانجام، تمام متغیرها یک مقدار دارند.
 
-این عملگر اخیرا به جاوا اسکریپت اضافه شد. 
+یک بار دیگر ذکر می‌کنیم، بهتر است که برای خوانایی، چنین کدی را به چند خط تقسیم کنید:
 
-برای عدد طبیعی b ، نتیجه محاسبه a ** b برابر خواهد بود با به تعداد b عدد a ضرب در خودش می‌شود.
+```js
+c = 2 + 2;
+b = c;
+a = c;
+```
+این کد برای خواندن راحت‌تر است، مخصوصا وقتی به سرعت با چشم‌مان کد را بررسی می‌کنیم.
 
-برای نمونه:
+## Modify-in-place
 
-```js run
-alert( 2 ** 2 ); // 4  (2 * 2)
-alert( 2 ** 3 ); // 8  (2 * 2 * 2)
-alert( 2 ** 4 ); // 16 (2 * 2 * 2 * 2)
+We often need to apply an operator to a variable and store the new result in that same variable.
+
+For example:
+
+```js
+let n = 2;
+n = n + 5;
+n = n * 2;
 ```
 
-این عملگر برای اعداد غیر صحیح نیز کار می‌کند.
-
-برای نمونه:
+This notation can be shortened using the operators `+=` and `*=`:
 
 ```js run
-alert( 4 ** (1/2) ); // 2 (power of 1/2 is the same as a square root, that's maths)
-alert( 8 ** (1/3) ); // 2 (power of 1/3 is the same as a cubic root)
+let n = 2;
+n += 5; // now n = 7 (same as n = n + 5)
+n *= 2; // now n = 14 (same as n = n * 2)
+
+alert( n ); // 14
+```
+
+Short "modify-and-assign" operators exist for all arithmetical and bitwise operators: `/=`, `-=`, etc.
+
+Such operators have the same precedence as a normal assignment, so they run after most other calculations:
+
+```js run
+let n = 2;
+
+n *= 3 + 5;
+
+alert( n ); // 16  (right part evaluated first, same as n *= 8)
 ```
 
 ## عملگر افزایش/کاهش 
