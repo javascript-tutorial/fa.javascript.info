@@ -274,11 +274,11 @@ a = c;
 ```
 این کد برای خواندن راحت‌تر است، مخصوصا وقتی به سرعت با چشم‌مان کد را بررسی می‌کنیم.
 
-## Modify-in-place
+## تغییر دادن در محل
 
-We often need to apply an operator to a variable and store the new result in that same variable.
+ما اغلب اوقات نیاز داریم که یک عملگر را روی متغیری اعمال کنیم و نتیجه جدید را داخل همان متغیر ذخیره کنیم.
 
-For example:
+برای مثال:
 
 ```js
 let n = 2;
@@ -286,7 +286,7 @@ n = n + 5;
 n = n * 2;
 ```
 
-This notation can be shortened using the operators `+=` and `*=`:
+این شکل کد نویسی می‌تواند با استفاده از عملگرهای `=+` و `=*` کوتاه شود:
 
 ```js run
 let n = 2;
@@ -296,9 +296,9 @@ n *= 2; // now n = 14 (same as n = n * 2)
 alert( n ); // 14
 ```
 
-Short "modify-and-assign" operators exist for all arithmetical and bitwise operators: `/=`, `-=`, etc.
+عملگرهای کوتاه "تغییر و مقداردهی" برای همه‌ی عملگرهای محاسباتی و bitwise وجود دارند: `=/`، `=-` و غیره.
 
-Such operators have the same precedence as a normal assignment, so they run after most other calculations:
+چنین عملگرهایی اولویتی مشابه با عملگر مقداردهی معمولی دارند، پس آنها بعد از اکثر عملیات‌ها اجرا می‌شوند:
 
 ```js run
 let n = 2;
