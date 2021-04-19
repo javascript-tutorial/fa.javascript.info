@@ -48,7 +48,11 @@ height = height !== undefined && height !== null ? height : 100;
 
 فیچر‌ها و امکانات جدید یک زبان می‌توانند علاوه بر syntax و عملگرهای جدید، تابع‌های جدید نیز باشند.
 
+<<<<<<< HEAD
 برای مثال `Math.trunc(n)` یک تابع است که بخش دهدهی یک عدد را حذف می‌کند. مانند `Math.trunc(1.23) = 1`.
+=======
+For example, `Math.trunc(n)` is a function that "cuts off" the decimal part of a number, e.g `Math.trunc(1.23)` returns `1`.
+>>>>>>> 6ab384f2512902d74e4b0ff5a6be60e48ab52e96
 
 در برخی از موتورهای (خیلی قدیمی) جاوااسکریپت تابع `Math.trunc` وجود ندارد و چنین کدی اجرا نمی‌شود.
 
