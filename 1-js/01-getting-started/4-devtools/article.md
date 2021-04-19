@@ -8,14 +8,7 @@
 
 بسیاری از توسعه‌دهندگان از Chrome و Firefox استفاده می‌کنند چراکه بهترین developer tools را دارا هستند. دیگر مرورگرها نیز developer tools ارائه می‌کنند که بعضا دارای ویژگی‌های خاصی نیز هستند، ولی معمولا این تلاش سایز مرورگرها برای پیشی گرفتن از Chrome و Firefox هست. در نتیجه معمولا توسعه‌دهندگان یک مرورگر را به عنوان مرورگر محبوب خود انتخاب می‌کنند و در صورتی که مشکلی خاصِ یک مرورگر وجود داشت، از مرورگری دیگر برای آن مورد خاص استفاده می‌کنند. 
 
-@@@needs translation@@@
-@@@old part@@@
 ابزارهای توسعه (developer tools) قدرتمند هستند. آنها ویژگی‌های بسیاری دارند. برای شروع یاد می‌گیریم که چطور آنها را باز کنیم و به خطاها نگاهی می‌اندازیم، همینطور دستورات جاوا اسکریپت را اجرا می‌‌کنیم. 
-@@@old part@@@
-@@@new part@@@
-Developer tools are potent, they have many features. To start, we'll learn how to open them, look at errors, and run JavaScript commands.
-@@@new part@@@
-@@@needs translation@@@
 
 ## Google Chrome
 
