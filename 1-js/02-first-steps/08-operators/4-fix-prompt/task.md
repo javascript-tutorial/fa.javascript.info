@@ -2,13 +2,13 @@ importance: 5
 
 ---
 
-# Fix the addition
+# جمع زدن را درست کنید
 
-Here's a code that asks the user for two numbers and shows their sum.
+اینجا یک کد داریم که از کاربر دو عدد درخواست می‌کند و مجموع آنها را نمایش می‌دهد.
 
-It works incorrectly. The output in the example below is `12` (for default prompt values).
+این کد اشتباه کار می‌کند. خروجی مثال پایین `12` است (برای مقدارهای پیش فرض prompt).
 
-Why? Fix it. The result should be `3`.
+چرا؟ آن را درست کنید. نتیجه باید `3` باشد.
 
 ```js run
 let a = prompt("First number?", 1);
