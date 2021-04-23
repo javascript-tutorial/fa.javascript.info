@@ -2,55 +2,29 @@
 
 [recent browser="new"]
 
-@@@needs translation@@@
-@@@old part@@@
-عملگر nullish coalescing `??` یک سینتکس کوتاه شده است انتخاب نخستین متغیر تعریف شده است.
+عملگر nullish coalescing با دو علامت سوال `??` نوشته می‌شود.
 
-نتیجه‌ی گزاره‌ی `a ?? b` برابر است با:
+چون که این عملگر با `null` و `undefined` به طور یکسان رفتار می‌کند، ما در این فصل از یک اصطلاح خاص استفاده می‌کنیم. می‌گوییم که یک عبارت "تعریف شده" است هرگاه که نه `null` باشد و نه `undefined`.
 
-- `a` به شرطی که `null` یا `undefined` نباشد,
-- `b`, در غیر این صورت.
+نتیجه‌ی `a ?? b` برابر با:
+- اگر `a` تعریف شده باشد، پس `a` است،
+- اگر `a` تعریف شده نباشد، پس `b` است.
 
-پس, `x = a ?? b` یک معادل کوتاه شده برای عبارت زیر است:
+به عبارتی دیگر، `??` اولین آرگومان را اگر `null/undefined` نباشد برمی‌گرداند. در غیر این صورت، آرگومان دوم برگردانده می‌شود.
 
-```js
-x = a !== null && a !== undefined ? a : b;
-```
+عملگر nullish coalescing چیز کاملا جدیدی نیست. این عملگر تنها یک سینتکس برای گرفتن اولین مقدار "تعریف شده" از بین دو مقدار است.
 
-حال به بررسی یک نمونه‌ی طولانی می‌پردازیم.
-
-تصور کنین که ما یک کاربر داریم و متغیرهای, `firstName`, `lastName` یا `nickName` را برای نام، نام خانوادگی و نام مستعار داریم. همه‌ی آن‌ها ممکن است که تعریف نشده باشند(undefined) به شرطی که کاربر آن‌ها را وارد نکرده باشد.
-
-ما می‌خواهیم که نام کاربر را نمایش دهیم: یکی از سه متغیر بالا, یا عبارت "ناشناس" به شرطی که چیزی تعریف نشده باشد.
-
-از عملگر `??` برای انتخاب اولین متغیر تعریف شده استفاده می‌کنیم:
-@@@old part@@@
-@@@new part@@@
-Here, in this article, we'll say that an expression is "defined" when it's neither `null` nor `undefined`.
-
-The nullish coalescing operator is written as two question marks `??`.
-
-As it treats `null` and `undefined` similarly, we'll use a special term here, in this article. We'll say that an expression is "defined" when it's neither `null` nor `undefined`.
-
-The result of `a ?? b` is:
-- if `a` is defined, then `a`,
-- if `a` isn't defined, then `b`.
-
-In other words, `??` returns the first argument if it's not `null/undefined`. Otherwise, the second one.
-
-The nullish coalescing operator isn't anything completely new. It's just a nice syntax to get the first "defined" value of the two.
-
-We can rewrite `result = a ?? b` using the operators that we already know, like this:
+ما می‌توانیم `result = a ?? b` را با استفاده از اپراتورهایی که از قبل می‌شناسیم دوباره به این شکل بنویسیم:
 
 ```js
 result = (a !== null && a !== undefined) ? a : b;
 ```
 
-Now it should be absolutely clear what `??` does. Let's see where it helps.
+حالا باید کاملا روشن باشد که `??` چه کاری انجام می‌دهد. بیایید ببینیم این عملگر کجا کمک‌مان می‌کند.
 
-The common use case for `??` is to provide a default value for a potentially undefined variable.
+یک مورد متداول برای استفاده از `??` تعیین کردن مقداری پیش فرض برای متغیری است که شاید تعریف نشده باشد.
 
-For example, here we show `user` if defined, otherwise `Anonymous`:
+برای مثال، اینجا نشان می‌دهیم که `user` تعریف شده است، در غیر این صورت `Anonymous` است:
 
 ```js run
 let user;
@@ -58,7 +32,7 @@ let user;
 alert(user ?? "Anonymous"); // Anonymous (user not defined)
 ```
 
-Here's the example with `user` assigned to a name:
+در این مثال یک اسم به `user` تخصیص داده شده است:
 
 ```js run
 let user = "John";
@@ -66,31 +40,22 @@ let user = "John";
 alert(user ?? "Anonymous"); // John (user defined)
 ```
 
-We can also use a sequence of `??` to select the first value from a list that isn't `null/undefined`.
+همچنین می‌توانیم از دنباله‌ی `??` برای انتخاب کردن اولین مقدار در یک لیست که `null/undefined` نباشد استفاده کنیم.
 
-Let's say we have a user's data in variables `firstName`, `lastName` or `nickName`. All of them may be not defined, if the user decided not to enter a value.
+فرض کنیم که داده‌ی کاربری را در متغیرهای `firstName`، `lastName` یا `nickName` ذخیره کرده‌ایم. اگر کاربر تصمیم به وارد نکردن مقداری گرفته باشد، ممکن است همه آنها تعریف شده نباشند.
 
-We'd like to display the user name using one of these variables, or show "Anonymous" if all of them aren't defined.
+ما می‌خواهیم اسم کاربر را با استفاده از این متغیرها نمایش دهیم، یا اگر هیچ کدام تعریف شده نباشند "Anonymous" را نمایش  دهیم.
 
-Let's use the `??` operator for that:
-@@@new part@@@
-@@@needs translation@@@
+بیایید برای این کار از عملگر `??` استفاده کنیم:
 
 ```js run
 let firstName = null;
 let lastName = null;
 let nickName = "Supercoder";
 
-@@@needs translation@@@
-@@@old part@@@
-// نخستین مقداری که null یا undefined نیست را نمایش می‌دهد
-@@@old part@@@
-@@@new part@@@
-// shows the first defined value:
-@@@new part@@@
-@@@needs translation@@@
+// اولین مقدار تعریف شده را نمایش می‌دهد:
 *!*
-alert(firstName ?? lastName ?? nickName ?? "ناشناس"); // Supercoder
+alert(firstName ?? lastName ?? nickName ?? "Anonymous"); // Supercoder
 */!*
 ```
 
