@@ -61,30 +61,14 @@ alert(firstName ?? lastName ?? nickName ?? "Anonymous"); // Supercoder
 
 ## مقایسه با ||
 
-عملگر یا `||` هم می‌تواند به همان شکل عملگر `??` استفاده شود. در حقیقت ما می‌توانیم عملگر `??` را با عملگر `||` در کد بالا جایگزین کنیم و همان نتیجه را بگیریم. همانطور که در بخش قبلی توضیح داده شد [previous chapter](info:logical-operators#or-finds-the-first-truthy-value).
+عملگرِ "یا" `||` می‌تواند درست مانند عملگر `??` استفاده شود، همانطور که در [بخش قبلی](info:logical-operators#or-finds-the-first-truthy-value) توضیح داده شد.
 
-@@@needs translation@@@
-@@@old part@@@
-تفاوت ارزشمند این دو عبارت است از:
-
-- `||` نخستین مقدار _truthy_ را باز می‌گرداند.
-- `??` نخستین مقدار _defined_ را باز می‌گرداند.
-
-این موضوع به خصوص هنگامی که می‌خواهیم بین `null/undefined` و `0` تفاوت داشته باشیم خودش را نشان می‌دهد.
-
-برای نمونه در نظر بگیرید:
-@@@old part@@@
-@@@new part@@@
-The OR `||` operator can be used in the same way as `??`, as it was described in the [previous chapter](info:logical-operators#or-finds-the-first-truthy-value).
-
-For example, in the code above we could replace `??` with `||` and still get the same result:
+برای مثال ما می‌توانیم عملگر `??` را با عملگر `||` در کد بالا جایگزین کنیم و همان نتیجه را بگیریم:
 
 ```js run
 let firstName = null;
 let lastName = null;
 let nickName = "Supercoder";
-@@@new part@@@
-@@@needs translation@@@
 
 // shows the first truthy value:
 *!*
@@ -92,28 +76,19 @@ alert(firstName || lastName || nickName || "Anonymous"); // Supercoder
 */!*
 ```
 
-@@@needs translation@@@
-@@@old part@@@
-در این‌جا به `height` مقدار `100` را در صورتی که مقدار تعریف شده‌ای نداشته باشد نسبت می‌دهیم.
+از لحاظ تاریخی، عملگرِ یا `||` اول وجود پیدا کرد. این عملگر از اولین روزهای جاوااسکریپت وجود داشت، بنابراین توسعه دهندگان به مدت طولانی برای چنین کارهایی از این عملگر استفاده می‌کردند.
 
-مقایسه با `||`:
-@@@old part@@@
-@@@new part@@@
-Historically, the OR `||` operator was there first. It exists since the beginning of JavaScript, so developers were using it for such purposes for a long time.
+از طرفی دیگر، عملگر nullish coalescing `??` به تازگی به جاوااسکریپت اضافه شد و دلیل آن هم این بود که افراد خیلی از `||` راضی نبودند.
 
-On the other hand, the nullish coalescing operator `??` was added to JavaScript only recently, and the reason for that was that people weren't quite happy with `||`.
+مهم‌ترین تفاوت بین آنها موارد زیر هستند:
+- عملگر `||` اولین مقدار *truthy* را برمی‌گرداند.
+- عملگر `??` اولین مقدار *تعریف شده* را برمی‌گرداند.
 
-The important difference between them is that:
-- `||` returns the first *truthy* value.
-- `??` returns the first *defined* value.
+به عبارتی دیگر، عملگر `||` تفاوت بین `false`، `0`، یک رشته خالی `""` و `null/undefined` را تشخیص نمی‌دهد. آنها همگی شبیه یکدیگر هستند -- مقدارهای falsy. اگر هر کدام از اینها اولین آرگومان عملگر `||` باشند، ما آرگومان دوم را به عنوان نتیجه دریافت می‌کنیم.
 
-In other words, `||` doesn't distinguish between `false`, `0`, an empty string `""` and `null/undefined`. They are all the same -- falsy values. If any of these is the first argument of `||`, then we'll get the second argument as the result.
+اما در عمل، ممکن است بخواهیم مقداری پیش فرض را فقط در صورتی که متغیر `null/undefined` باشد استفاده کنیم. یعنی زمانی که مقدار واقعا ناشناخته یا تخصیص داده نشده باشد.
 
-In practice though, we may want to use default value only when the variable is `null/undefined`. That is, when the value is really unknown/not set.
-
-For example, consider this:
-@@@new part@@@
-@@@needs translation@@@
+برای مثال، کد زیر را در نظر بگیرید:
 
 ```js run
 let height = 0;
@@ -122,25 +97,12 @@ alert(height || 100); // 100
 alert(height ?? 100); // 0
 ```
 
-@@@needs translation@@@
-@@@old part@@@
-در این‌جا, `height || 100` با مقدار صفر همان‌گونه برخورد میکنه که با `null`، `undefined` و یا هر مقدار falsy دیگری. پس صفر تبدیل به `100` می‌شود.
+- عبارت `height || 100` متغیر `height` را برای اینکه مقداری falsy است یا نه بررسی می‌کند، که در واقع falsy است.
+    - بنابراین نتیجه‌ی عملگر `||` آرگومان دوم است، `100`.
+- عبارت `height ?? 100` متغیر `height` را برای اینکه `null/undefined` است یا نه بررسی می‌کند، که هیچکدام نیست.
+    - بنابراین نتیجه متغیر `height` "همانطور که هست" است، یعنی `0`.
 
-عبارت `height ?? 100` مقدار `100` را در صورتی باز می‌گرداند که `height` دقیقا `null` و یا `undefined` باشد. پس صفر، "همانی که هست، می‌ماند".
-
-    این‌که کدام رویکرد بهتر است، به موضوع ما بستگی دارد. اگر مقدار صفر برای `height` قابل قبول است، بهتر است از `??` استفاده کنیم.
-@@@old part@@@
-@@@new part@@@
-Here, we have a zero height.
-
-- The `height || 100` checks `height` for being a falsy value, and it's `0`, falsy indeed.
-    - so the result of `||` is the second argument, `100`.
-- The `height ?? 100` checks `height` for being `null/undefined`, and it's not,
-    - so the result is `height` "as is", that is `0`.
-
-In practice, the zero height is often a valid value, that shouldn't be replaced with the default. So `??` does just the right thing.
-@@@new part@@@
-@@@needs translation@@@
+در عمل، مقدار صفر height معمولا یک مقدار قابل قبول است، که نباید با مقدار پیش فرض جابجا شود. پس عملگر `??` کار درست را اینجا انجام می‌دهد.
 
 ## اولویت‌ها
 
