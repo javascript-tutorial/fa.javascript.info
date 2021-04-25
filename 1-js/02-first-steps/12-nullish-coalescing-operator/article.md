@@ -110,7 +110,6 @@ alert(height ?? 100); // 0
 
 این یعنی که درست مانند `||`، عملگر nullish coalescing `??` قبل از `=` و `?` ارزیابی می‌شود، اما بعد از بیشتر عملیات‌ها مانند `+`، `-` ارزیابی می‌شود.
 
-So if we'd like to choose a value with `??` in an expression with other operators, consider adding parentheses:
 پس اگر بخواهیم مقداری را با استفاده از `??` در یک عبارت که عملگرهای دیگر هم وجود دارند انتخاب کنیم، باید اضافه کردن پرانتر را در نظر بگیریم:
 
 ```js run
@@ -133,26 +132,17 @@ let area = height ?? 100 * width ?? 50;
 let area = height ?? (100 * width) ?? 50;
 ```
 
-### Using ?? with && or ||
+### استفاده از ?? همراه با || و &&
 
-Due to safety reasons, JavaScript forbids using `??` together with `&&` and `||` operators, unless the precedence is explicitly specified with parentheses.
-@@@new part@@@
-@@@needs translation@@@
+به دلایل امنیتی، جاوااسکریپت استفاده از `??` را همراه با عملگرهای `&&` و `||` منع می‌کند، مگر اینکه اولویت استفاده صراحتا با پرانتز مشخص شده باشد.
 
-کد زیر یک خطای نگارشی (سینتکس) به ما خواهد داد:
+کد زیر یک خطای سینتکس به ما خواهد داد:
 
 ```js run
-let x = 1 && 2 ?? 3; // Syntax error خطای نگارشی
+let x = 1 && 2 ?? 3; // Syntax error
 ```
 
-@@@needs translation@@@
-@@@old part@@@
-این محدودیت قابل بحث است, اما برای جلوگیری از اشتباهات برنامه‌نویسان به زبان اضافه شده است, که به مرور مردم از `??` به جای `||` استفاده خواهند کرد.
-@@@old part@@@
-@@@new part@@@
-The limitation is surely debatable, it was added to the language specification with the purpose to avoid programming mistakes, when people start to switch from `||` to `??`.
-@@@new part@@@
-@@@needs translation@@@
+این محدودیت قطعا قابل بحث است و با این هدف به خصوصیات زبان اضافه شد که وقتی افراد از `||` به `??` روی می‌آورند، از اشتباهات برنامه نویسی جلوگیری شود.
 
 از پرانتز برای این کار استفاده کنید:
 
@@ -164,31 +154,16 @@ let x = (1 && 2) ?? 3; // به درستی کار می‌کند
 alert(x); // 2
 ```
 
-## چکیده
+## خلاصه
 
-@@@needs translation@@@
-@@@old part@@@
-- عملگر nullish coalescing `??` یک راه سریع برای مشخص کردن عبارت "تعریف شده (defined)" از یک لیست به کار می‌رود.
-@@@old part@@@
-@@@new part@@@
-- The nullish coalescing operator `??` provides a short way to choose the first "defined" value from a list.
-@@@new part@@@
-@@@needs translation@@@
+- عملگر nullish coalescing `??` راه کوتاهی برای انتخاب اولین مقدار "تعریف شده" از یک لیست را فراهم می‌کند.
 
   از آن برای تعیین کردن مقدار پیش‌فرض برای متغیرها استفاده می‌شود:
 
   ```js
-  // ست کردن height به 100, اگر برابر null یا undefined باشد
+  // set height=100, if height is null or undefined
   height = height ?? 100;
   ```
 
-@@@needs translation@@@
-@@@old part@@@
-- عملگر `??` ترتیب اولویت پایینی دارد, البته بیشتر از `?` و `=`.
-- به کار بردن آن با `||` یا `&&` بدون به کار بردن پرانتز ممنوع است.
-@@@old part@@@
-@@@new part@@@
-- The operator `??` has a very low precedence, only a bit higher than `?` and `=`, so consider adding parentheses when using it in an expression.
-- It's forbidden to use it with `||` or `&&` without explicit parentheses.
-@@@new part@@@
-@@@needs translation@@@
+- عملگر `??` اولویت بسیار پایینی دارد و فقط از `?` و `=` بالاتر است، پس هنگام استفاده از آن در یک عبارت اضافه کردن پرانتز را در نظر بگیرید.
+- استفاده کردن از این عملگر همراه با `||` یا `&&` بدون استفاده کردن از پرانتز ممنوع است.
