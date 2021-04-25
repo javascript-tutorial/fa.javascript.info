@@ -1,10 +1,10 @@
 # توابع (Functions)
 
+اغلب اوقات ما نیاز داریم یک مجموعه‌ای از دستورها را در خیلی از جاهای کد چندین بار اجرا کنیم.
 
-اغلب اوقات ما نیاز داریم یک مجموعه‌ای از دستورهارا در خیلی از جاهای کد چندین بار اجرا کنیم.
-برای مثال، میخواهیم که پیغامی زیبا برای کسی که وارد صفحه‌ای میشود یا خارج می‌شود یا جاهایی دیگر بفرستیم.
+برای مثال، می‌خواهیم که پیغامی زیبا برای کسی که وارد صفحه‌ای می‌شود یا خارج می‌شود یا جاهایی دیگر نمایش دهیم.
 
-توابع بلوک‌های ساختمانی اصلی یک برنامه‌ند. آنها به کد اجازه‌ی فراخوانی شدن چند باره را بدون تکرار می‌دهند.
+توابع بلوک‌های ساختمانی اصلی یک برنامه‌اند. آنها به کد اجازه‌ی فراخوانی شدن چند باره را بدون تکرار می‌دهند.
 
 ما مثال‌هایی از توابع درون سیستمی مثل `alert(message)`، `prompt(message, default)` و `confirm(question)` را دیده‌ایم. اما میتوانیم توابع خودمان را هم بسازیم.
 
@@ -12,7 +12,7 @@
 
 برای ساختن یک تابع ما به تعریف کردن تابع نیاز خواهیم داشت.‌(*function declaration*)
 
-چیزی شبیه:
+چیزی شبیه کد پایین:
 
 ```js
 function showMessage() {
@@ -20,7 +20,8 @@ function showMessage() {
 }
 ```
 
-کلمه‌ی `function` اول می‌آید، سپس اسم تابع و سپس لیستی از پارامترها داخل پرانتز (در مثال بالا داخل پرانتزها خالی‌ست) و در نهایت کد تابع، با نام بدنه‌ی تابع، که توسط دو براکت محصور شده است.
+کلمه‌ی کلیدی `function` اول می‌آید، سپس *اسم تابع* و سپس لیستی از *پارامترها* داخل پرانتز (با کاما جدا می‌شوند، در مثال بالا داخل پرانتزها خالی‌ست) و در نهایت کد تابع، با نام "بدنه‌ی تابع"، که توسط دو براکت محصور شده است.
+
 ```js
 function name(parameters) {
   ...body...
@@ -41,6 +42,7 @@ showMessage();
 showMessage();
 */!*
 ```
+
 فراخوانی `showMessage()` کد درون تابع را اجرا می‌کند. در اینجا ما پیغام را دوبار خواهیم دید.
 
 این مثال یکی از اهداف اصلی توابع را نشان می‌دهد: اجتناب از کد تکراری.
@@ -83,6 +85,7 @@ showMessage(); // Hello, John
 ```
 
 تابع دسترسی کامل به متغیر بیرونی دارد. همینطور میتواند آنرا تغییر هم بدهد.
+
 برای مثال:
 
 ```js run
@@ -102,7 +105,7 @@ showMessage();
 alert( userName ); // *!*Bob*/!*, the value was modified by the function
 ```
 
-متغیر بیرونی فقط در مواقعی مورد استفاده قرار میگیرد که متغیر محلی‌ای وجود نداشته باشد. در صورت فراموش کردن `let` ممکن است یک تغییر گاه‌به‌گاهی صورت بگیرد.
+متغیر بیرونی فقط در مواقعی مورد استفاده قرار می‌گیرد که متغیر محلی‌ای وجود نداشته باشد.
 
 اگر یک متغیر هم‌نام در درون تابع تعریف شود، جانشین متغیر بیرونی می‌شود. برای مثال، در کد زیر، تابع از متغیر محلی `userName` استفاده می‌کند و متغیر بیرونی نادیده گرفته می‌شود:
 
@@ -134,7 +137,7 @@ alert( userName ); // *!*John*/!*, unchanged, the function did not access the ou
 
 ## پارامترها
 
-ما میتوانیم اطلاعات دلخواهی را به توابع با کمک پارامترها پاس بدهیم. (همچنین به آنها آرگومان‌های تابع گفته می‌شود.)
+ما می‌توانیم اطلاعات دلخواهی را به توابع با کمک پارامترها پاس بدهیم. (همچنین به آنها *آرگومان‌های تابع* گفته می‌شود.)
 
 در مثال زیر، تابع دو پارامتر دارد: `from` و `text`.
 
@@ -150,7 +153,9 @@ showMessage('Ann', "What's up?"); // Ann: What's up? (**)
 ```
 
 وقتی تابع در خطوط `(*)` و `(**)` صدا زده می‌شود، مقادیر داده شده در متغیرهای محلی `from` و `text` کپی می‌شوند. سپس، تابع از آنها استفاده می‌کند.
-مثالی دیگر: یک متغیر `from` داریم و به تابع پاس میدهیم. توجه کنید: تابع، `from` را تغییر می‌دهد، اما تغییر در بیرون دیده نمی‌شود، چراکه تابع همیشه یک کپی از مقدار آن را میگیرد:
+
+مثالی دیگر: یک متغیر `from` داریم و به تابع پاس می‌دهیم. توجه کنید: تابع، `from` را تغییر می‌دهد، اما تغییر در بیرون دیده نمی‌شود، چراکه تابع همیشه یک کپی از مقدار آن را می‌گیرد:
+
 
 ```js run
 function showMessage(from, text) {
@@ -174,22 +179,15 @@ alert( from ); // Ann
 
 اگر پارامتری فراهم نشده باشد، مقادیر آن `undefined` می‌شوند.
 
-برای مثال، تابع `showMessage(from, text)`، میتواند با یک آرگومان صدا زده شود:
+برای مثال، تابع `showMessage(from, text)`، می‌تواند با یک آرگومان صدا زده شود:
 
 ```js
 showMessage("Ann");
 ```
 
-@@@needs translation@@@
-@@@old part@@@
 این یک خطا نیست. خروجی این فراخوانی `"Ann: undefined"` است. `text` نداریم پس پیش‌فرض این است که `text === undefined`.
-@@@old part@@@
-@@@new part@@@
-That's not an error. Such a call would output `"*Ann*: undefined"`. There's no `text`, so it's assumed that `text === undefined`.
-@@@new part@@@
-@@@needs translation@@@
 
-اگر ما میخواهیم یک پیش‌فرض `text` در این حالت استفاده بکنیم، میتوانیم بعد از `=` مشخصش کنیم:
+اگر ما بخواهیم یک مقدار "پیش‌فرض" برای `text` در این حالت استفاده کنیم، می‌توانیم آن را بعد از `=` مشخصش کنیم:
 
 ```js run
 function showMessage(from, *!*text = "no text given"*/!*) {
@@ -199,9 +197,9 @@ function showMessage(from, *!*text = "no text given"*/!*) {
 showMessage("Ann"); // Ann: no text given
 ```
 
-حالا اگر `text` پارامتر پاس داده نشود، مقدار `"no text given"` را می‌گیرد.
+حالا اگر پارامتر `text` پاس داده نشود، مقدار `"no text given"` را می‌گیرد.
 
-اینجا `"no text given"` یک رشته‌ی حرفی‌ست، اما میتواند عبارت پیچیده‌تری باشد، که تنها در حالتی ارزیابی و مقداردهی می‌شود که پارامتری وجود نداشته باشد. همچنین، این هم ممکن است:
+اینجا `"no text given"` یک رشته است، اما می‌تواند عبارت پیچیده‌تری باشد، که تنها در حالتی ارزیابی و مقداردهی می‌شود که پارامتری وجود نداشته باشد. بنابراین این هم ممکن است:
 
 ```js run
 function showMessage(from, text = anotherFunction()) {
@@ -211,40 +209,53 @@ function showMessage(from, text = anotherFunction()) {
 ```
 
 ```smart header="ارزیابی پارامترهای پیش‌فرض"
+در جاوااسکریپت، یک پارامتر پیش‌فرض هربار که تابع بدون پارامتر مریوطه صدا زده بشود، ارزیابی می‌شود.
 
-در جاوااسکریپت، یک پارامتر پیش‌فرض هربار که تابع صدا زده می‌شود، بدون پارامتر مربوطه، محاسبه می‌شود. در مثال بالا،  `anotherFunction()` هربار که `showMessage()` صدا زده می‌شود، فراخوانی می‌شود بدون توجه به پارامتر `text`. این در زبان‌های دیگری مثل پایتون فرق دارد که هر پارامتر پیش‌فرضی فقط یک بار در مقداردهی اولیه ارزیابی می‌شود.
+در مثال بالا، `anotherFunction()` هربار که `showMessage()` بدون پارامتر `text` صدا زده بشود، فراخوانی می‌شود.
 ```
 
-````smart header="پارامترهای پیش‌فرض قدیمی"
-ورژن‌های قدیمی جاوااسکریپت از پارامترهای پیش‌فرض پشتیبانی نمیکردند. بنابراین برای پشتیبانی راه‌های فرعی‌ای وجود داشت که میتوانید در کد‌های قدیمی بیابید.
+### Alternative default parameters
 
-برای نمونه، یک آزمون ساده برای بررسی `undefined`:
+Sometimes it makes sense to set default values for parameters not in the function declaration, but at a later stage, during its execution.
 
-```js
-function showMessage(from, text) {
+To check for an omitted parameter, we can compare it with `undefined`:
+
+```js run
+function showMessage(text) {
 *!*
   if (text === undefined) {
-    text = 'no text given';
+    text = 'empty message';
   }
 */!*
 
-  alert( from + ": " + text );
+  alert(text);
 }
+
+showMessage(); // empty message
 ```
 
-...Or the `||` operator:
+...Or we could use the `||` operator:
 
 ```js
-function showMessage(from, text) {
-  // if text is falsy then text gets the "default" value
-  text = text || 'no text given';
+// if text parameter is omitted or "" is passed, set it to 'empty'
+function showMessage(text) {
+  text = text || 'empty';
   ...
 }
 ```
 
+Modern JavaScript engines support the [nullish coalescing operator](info:nullish-coalescing-operator) `??`, it's better when falsy values, such as `0`, are considered regular:
 
-````
+```js run
+// if there's no "count" parameter, show "unknown"
+function showCount(count) {
+  alert(count ?? "unknown");
+}
 
+showCount(0); // 0
+showCount(null); // unknown
+showCount(); // unknown
+```
 
 ## بازگردانی مقدار یک (Returning a value)
 
