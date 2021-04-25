@@ -104,24 +104,14 @@ alert(height ?? 100); // 0
 
 در عمل، مقدار صفر height معمولا یک مقدار قابل قبول است، که نباید با مقدار پیش فرض جابجا شود. پس عملگر `??` کار درست را اینجا انجام می‌دهد.
 
-## اولویت‌ها
+## اولویت
 
-@@@needs translation@@@
-@@@old part@@@
-اولویت عملگر `??` عموما پایین است: `7` در جدول [MDN table](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence#Table).
+اولویت عملگر `??` تقریبا برابر با عملگر `||` است، اما کمتر. اولویت آن در [جدول MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence#Table) برابر با `5` است، در حالی که اولویت `||` برابر با `6` است.
 
-پس `??` پس از بسیاری از عملگرها وارد عمل می‌شود, البته پیش از `=` و `?`.
-
-اگر تصمیم به استفاده از `??` در یک عبارت پیچیده گرفتید, حتما از پرانتز استفاده کنید:
-@@@old part@@@
-@@@new part@@@
-The precedence of the `??` operator is about the same as `||`, just a bit lower. It equals `5` in the [MDN table](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence#Table), while `||` is `6`.
-
-That means that, just like `||`, the nullish coalescing operator `??` is evaluated before `=` and `?`, but after most other operations, such as `+`, `*`.
+این یعنی که درست مانند `||`، عملگر nullish coalescing `??` قبل از `=` و `?` ارزیابی می‌شود، اما بعد از بیشتر عملیات‌ها مانند `+`، `-` ارزیابی می‌شود.
 
 So if we'd like to choose a value with `??` in an expression with other operators, consider adding parentheses:
-@@@new part@@@
-@@@needs translation@@@
+پس اگر بخواهیم مقداری را با استفاده از `??` در یک عبارت که عملگرهای دیگر هم وجود دارند انتخاب کنیم، باید اضافه کردن پرانتر را در نظر بگیریم:
 
 ```js run
 let height = null;
@@ -133,29 +123,13 @@ let area = (height ?? 100) * (width ?? 50);
 alert(area); // 5000
 ```
 
-@@@needs translation@@@
-@@@old part@@@
-در غیر این صورت, اگر پرانتز را فراموش کنیم, `*` اولویت بالاتری نسبت به `??` دارد . زودتر اجرا می‌شود.
-
-این‌گونه خواهیم داشت:
+در غیر این صورت، اگر پرانتر را حذف کنیم، چون `*` اولویت بالاتری نسبت به `??` دارد پس اول اجرا می‌شود و به نتیجه نادرستی منجر می‌شود.
 
 ```js
-// احتمالا نتیجه‌ی نادرست می‌دهد
-let area = height ?? 100 * width ?? 50;
-```
-
-هم‌چنین یک محدودیت سطح زبان (language-level) نیز برای این موضوع داریم.
-
-**برای احتیاط, به کار بردن `??` همراه با `&&` و `||` ممنوع است.**
-@@@old part@@@
-@@@new part@@@
-Otherwise, if we omit parentheses, then as `*` has the higher precedence than `??`, it would execute first, leading to incorrect results.
-
-```js
-// without parentheses
+// بدون پرانتر
 let area = height ?? 100 * width ?? 50;
 
-// ...works the same as this (probably not what we want):
+// ...عبارت بالا مثل عبارت پایین عمل می‌کند (که احتمالا چیزی نیست که ما بخواهیم)
 let area = height ?? (100 * width) ?? 50;
 ```
 
