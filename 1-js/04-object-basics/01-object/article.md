@@ -11,16 +11,16 @@
 
 ![](object.svg)
 
-An empty object ("empty cabinet") can be created using one of two syntaxes:
+یک شیء خالی ("قفسه خالی") می‌تواند با استفاده از دو سینتکس ساخته شود:
 
 ```js
-let user = new Object(); // "object constructor" syntax
-let user = {};  // "object literal" syntax
+let user = new Object(); // "سینتکس "سازنده شیء
+let user = {};  // "object literal" سینتکس
 ```
 
 ![](object-user-empty.svg)
 
-Usually, the figure brackets `{...}` are used. That declaration is called an *object literal*.
+معمولا، سینتکس آکولاد استفاده می‌شود. تعریف به این صورت، *شیء لیترال* نامیده می‌شود.
 
 ## Literals and properties
 
