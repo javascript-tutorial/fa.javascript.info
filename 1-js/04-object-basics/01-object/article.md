@@ -1,13 +1,13 @@
 
-# Objects
+# شیءها
 
-As we know from the chapter <info:types>, there are eight data types in JavaScript. Seven of them are called "primitive", because their values contain only a single thing (be it a string or a number or whatever).
+همانطور که از فصل <info:types> می‌دانیم، 8 نوع داده در جاوااسکریپت وجود دارد. 7 مورد "اولیه یا اصلی" نامیده می‌شوند، به این دلیل که مقدارهای آنها فقط دارای یک چیز است (رشته یا عدد یا هر چیزی).
 
-In contrast, objects are used to store keyed collections of various data and more complex entities. In JavaScript, objects penetrate almost every aspect of the language. So we must understand them first before going in-depth anywhere else.
+در مقابل، شیءها برای ذخیره‌سازی مجموعه‌ای از داده‌های گوناگون و چیزهای پیچیده‌تر استفاده می‌شوند. در جاوااسکریپت، شیءها تقریبا به تمام جنبه‌های زبان نفوذ کرده‌اند. پس ما باید قبل از اینکه عمیقا به موضوع دیگری وارد شویم شیءها را بشناسیم.
 
-An object can be created with figure brackets `{…}` with an optional list of *properties*. A property is a "key: value" pair, where `key` is a string (also called a "property name"), and `value` can be anything.
+یک شیء می‌تواند با آکولادها `{...}` و همراه یک لیست اختیاری از *ویژگی‌ها(property)* ساخته شود. یک ویژگی یعنی یک جفت از "key: value"، که در آن `key` یک رشته است (به آن "اسم ویژگی" هم می‌گویند) و `value` هر چیزی می‌تواند باشد.
 
-We can imagine an object as a cabinet with signed files. Every piece of data is stored in its file by the key. It's easy to find a file by its name or add/remove a file.
+می‌توانیم یک شیء را به عنوان یک قفسه‌ی دارای پرونده‌های علامت‌دار فرض کنیم. هر داده در پرونده‌ی خودش توسط key ذخیره شده است. پیدا کردن یا حذف/اضافه کردن یک پرونده با اسم آن راحت است.
 
 ![](object.svg)
 
