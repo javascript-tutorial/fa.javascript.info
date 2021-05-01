@@ -11,7 +11,7 @@
 
 ![](object.svg)
 
-یک شیء خالی ("قفسه خالی") می‌تواند با استفاده از دو سینتکس ساخته شود:
+یک شیء خالی یا empty ("قفسه خالی") می‌تواند با استفاده از دو سینتکس ساخته شود:
 
 ```js
 let user = new Object(); // "سینتکس "سازنده شیء
@@ -40,7 +40,7 @@ let user = {     // an object
 1. اولین ویژگی، اسم `"name"` و مقدار `"John"` را دارد.
 2. دومین ویژگی، اسم `"age"` و مقدار `30` را دارد.
 
-شیء `user` حاصل می‌تواند به عنوان یک قفسه با دو پرونده‌ی علامت دار با برچسب‌های "name" و "age" فرض شود.
+شیء `user` بدست آمده می‌تواند به عنوان یک قفسه با دو پرونده‌ی علامت دار با برچسب‌های "name" و "age" فرض شود.
 
 ![user object](object-user.svg)
 
@@ -54,7 +54,7 @@ alert( user.name ); // John
 alert( user.age ); // 30
 ```
 
-مقدار می‌تواند هر چیزی باشد. بیایید مقداری از نوع boolean اضافه کنیم:
+مقدار می‌تواند هر چیزی باشد. بیایید یک مقدار از نوع boolean اضافه کنیم:
 
 ```js
 user.isAdmin = true;
@@ -92,48 +92,48 @@ let user = {
 ```
 به این کامای "دنباله‌دار" یا "معلق" می‌گویند. این کاما اضافه/حذف/کار کردن با ویژگی‌ها را آسان‌تر می‌کند، چون همه‌ی خطوط یکسان می‌شوند.
 
-## Square brackets
+## براکت‌ها
 
-For multiword properties, the dot access doesn't work:
+برای ویژگی‌های چند کلمه‌ای، دسترسی داشتن با نقطه ممکن نیست:
 
 ```js run
-// this would give a syntax error
+// این یک ارور سینتکسی می‌دهد
 user.likes birds = true
 ```
 
-JavaScript doesn't understand that. It thinks that we address `user.likes`, and then gives a syntax error when comes across unexpected `birds`.
+جاوااسکریپت چنین چیزی را متوجه نمی‌شود. فکر می‌کند ما `user.likes` را مد نظر داریم، و سپس وقتی با کلمه غیرمنتظره‌ی `birds` روبرو می‌شود ارور سینتکسی می‌دهد.
 
-The dot requires the key to be a valid variable identifier. That implies: contains no spaces, doesn't start with a digit and doesn't include special characters (`$` and `_` are allowed).
+نقطه نیاز دارد که key یک شناسه‌ی معتبر متغیر باشد. به این معنی که: هیچ فاصله‌ای بین آن نباشد، با عدد شروع نشود و شامل کاراکترهای خاص نباشد (`$` و `_` مجاز هستند).
 
-There's an alternative "square bracket notation" that works with any string:
+یک شیوه‌ی جایگزین به نام "براکت" وجود دارد که با هر رشته‌ای کار می‌کند:
 
 ```js run
 let user = {};
 
-// set
+// ایجاد کردن
 user["likes birds"] = true;
 
-// get
+// دریافت کردن
 alert(user["likes birds"]); // true
 
-// delete
+// حذف کردن
 delete user["likes birds"];
 ```
 
-Now everything is fine. Please note that the string inside the brackets is properly quoted (any type of quotes will do).
+حالا همه چیز درست است. لطفا در نظر داشته باشید که رشته درون براکت‌ها به درستی درون کوتیشن قرار گرفته باشد (هر نوع کوتیشنی قابل قبول است).
 
-Square brackets also provide a way to obtain the property name as the result of any expression -- as opposed to a literal string -- like from a variable as follows:
+براکت‌ها، بدست آوردن اسم ویژگی از نتیجه‌ی یک عبارت را هم فراهم می‌کنند، یعنی یک رشته‌ی ثابت نباشد، مثلا از یک متغیر که به این شکل انجام می‌گیرد:
 
 ```js
 let key = "likes birds";
 
-// same as user["likes birds"] = true;
+// user["likes birds"] = true; :مشابه با
 user[key] = true;
 ```
 
-Here, the variable `key` may be calculated at run-time or depend on the user input. And then we use it to access the property. That gives us a great deal of flexibility.
+اینجا، متغیر `key` شاید هنگام اجرای کد بدست آید یا وابسته به چیزی که کاربر وارد می‌کند باشد. سپس ما از آن برای دسترسی به ویژگی استفاده می‌کنیم. استفاده از براکت به ما انعطاف خیلی زیادی می‌دهد.
 
-For instance:
+برای مثال:
 
 ```js run
 let user = {
@@ -147,7 +147,7 @@ let key = prompt("What do you want to know about the user?", "name");
 alert( user[key] ); // John (if enter "name")
 ```
 
-The dot notation cannot be used in a similar way:
+نقطه نمی‌تواند به این شکل استفاده شود:
 
 ```js run
 let user = {
