@@ -7,7 +7,7 @@
 
 یک شیء می‌تواند با آکولادها `{...}` و همراه یک لیست اختیاری از *ویژگی‌ها(property)* ساخته شود. یک ویژگی یعنی یک جفت از "key: value"، که در آن `key` یک رشته است (به آن "اسم ویژگی" هم می‌گویند) و `value` هر چیزی می‌تواند باشد.
 
-می‌توانیم یک شیء را به عنوان یک قفسه‌ی دارای پرونده‌های علامت‌دار فرض کنیم. هر داده در پرونده‌ی خودش توسط key ذخیره شده است. پیدا کردن یا حذف/اضافه کردن یک پرونده با اسم آن راحت است.
+می‌توانیم یک شیء را به عنوان یک قفسه‌ی دارای پرونده‌های علامت‌دار فرض کنیم. هر داده در پرونده‌ی خودش توسط key ذخیره شده است. پیدا کردن یا حذف/اضافه کردن یک پرونده با اسم آن راحت می‌شود.
 
 ![](object.svg)
 
@@ -20,11 +20,11 @@ let user = {};  // "سینتکس "شیء لیترال
 
 ![](object-user-empty.svg)
 
-معمولا، سینتکس آکولاد استفاده می‌شود. تعریف به این صورت، *شیء لیتِرال* نامیده می‌شود.
+معمولا، سینتکس آکولاد استفاده می‌شود. به این شکل تعریف کردن را *شیء لیتِرال* می‌نامند.
 
-## Literals and properties
+## لیترال‌ها و ویژگی‌ها
 
-We can immediately put some properties into `{...}` as "key: value" pairs:
+ما می‌توانیم بلافاصله ویژگی‌هایی را به صورت جفت‌هایی از "key: value" داخل `{...}` قرار دهیم:
 
 ```js
 let user = {     // an object
@@ -33,28 +33,28 @@ let user = {     // an object
 };
 ```
 
-A property has a key (also known as "name" or "identifier") before the colon `":"` and a value to the right of it.
+یک ویژگی، قبل از `":"` دارای یک key (همچنین به عنوان "اسم" یا "شناسه" هم شناخته می‌شود) و یک مقدار در سمت راست دو نقطه است.
 
-In the `user` object, there are two properties:
+در شیء `user`، دو ویژگی وجود دارد:
 
-1. The first property has the name `"name"` and the value `"John"`.
-2. The second one has the name `"age"` and the value `30`.
+1. اولین ویژگی، اسم `"name"` و مقدار `"John"` را دارد.
+2. دومین ویژگی، اسم `"age"` و مقدار `30` را دارد.
 
-The resulting `user` object can be imagined as a cabinet with two signed files labeled "name" and "age".
+شیء `user` حاصل می‌تواند به عنوان یک قفسه با دو پرونده‌ی علامت دار با برچسب‌های "name" و "age" فرض شود.
 
 ![user object](object-user.svg)
 
-We can add, remove and read files from it any time.
+ما می‌توانیم در هر زمانی پرونده‌ها را اضافه یا کم کنیم یا آنها را بخوانیم.
 
-Property values are accessible using the dot notation:
+مقدارهای ویژگی‌ها با استفاده از نقطه قابل دسترسی هستند:
 
 ```js
-// get property values of the object:
+// مقدارهای ویژگی‌های شیء را دریافت کنید:
 alert( user.name ); // John
 alert( user.age ); // 30
 ```
 
-The value can be of any type. Let's add a boolean one:
+مقدار می‌تواند هر چیزی باشد. بیایید مقداری از نوع boolean اضافه کنیم:
 
 ```js
 user.isAdmin = true;
@@ -62,7 +62,7 @@ user.isAdmin = true;
 
 ![user object 2](object-user-isadmin.svg)
 
-To remove a property, we can use `delete` operator:
+برای حذف یک ویژگی، از عملگر `delete` استفاده می‌کنیم:
 
 ```js
 delete user.age;
@@ -70,27 +70,27 @@ delete user.age;
 
 ![user object 3](object-user-delete.svg)
 
-We can also use multiword property names, but then they must be quoted:
+همچنین می‌توانیم از اسم‌های چند کلمه‌ای برای ویژگی استفاده کنیم، اما آنها باید درون کوتیشن قرار بگیرند:
 
 ```js
 let user = {
   name: "John",
   age: 30,
-  "likes birds": true  // multiword property name must be quoted
+  "likes birds": true  // اسم‌های چند کلمه‌ایِ ویژگی باید درون کوتیشن باشند
 };
 ```
 
 ![](object-user-props.svg)
 
 
-The last property in the list may end with a comma:
+آخرین ویژگی درون لیست هم می‌تواند با کاما پایان یابد:
 ```js
 let user = {
   name: "John",
   age: 30*!*,*/!*
 }
 ```
-That is called a "trailing" or "hanging" comma. Makes it easier to add/remove/move around properties, because all lines become alike.
+به این کامای "دنباله‌دار" یا "معلق" می‌گویند. این کاما اضافه/حذف/کار کردن با ویژگی‌ها را آسان‌تر می‌کند، چون همه‌ی خطوط یکسان می‌شوند.
 
 ## Square brackets
 
