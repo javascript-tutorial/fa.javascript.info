@@ -27,9 +27,9 @@ let user = {};  // "سینتکس "شیء لیترال
 ما می‌توانیم بلافاصله ویژگی‌هایی را به صورت جفت‌هایی از "key: value" داخل `{...}` قرار دهیم:
 
 ```js
-let user = {     // an object
-  name: "John",  // by key "name" store value "John"
-  age: 30        // by key "age" store value 30
+let user = {     // یک شیء
+  name: "John",  // را ذخیره کنید "John" مقدار "name" توسط
+  age: 30        // مقدار 30 را ذخیره کنید "age" توسط
 };
 ```
 
@@ -127,7 +127,7 @@ delete user["likes birds"];
 ```js
 let key = "likes birds";
 
-// user["likes birds"] = true; :مشابه با
+// user["likes birds"] = true; مشابه است با
 user[key] = true;
 ```
 
@@ -141,10 +141,10 @@ let user = {
   age: 30
 };
 
-let key = prompt("What do you want to know about the user?", "name");
+let key = prompt("چه چیزی را می‌خواهید درباره کاربر بدانید؟", "name");
 
-// access by variable
-alert( user[key] ); // John (if enter "name")
+// دسترسی توسط متغیر
+alert( user[key] ); // John :وارد شود "name" اگر
 ```
 
 نقطه نمی‌تواند به این شکل استفاده شود:
@@ -159,40 +159,40 @@ let key = "name";
 alert( user.key ) // undefined
 ```
 
-### Computed properties
+### ویژگی‌های محاسباتی
 
-We can use square brackets in an object literal, when creating an object. That's called *computed properties*.
+ما می‌توانیم زمانی که یک شیء لیترال تعریف می‌کنیم، از براکت‌ها درون آن استفاده کنیم. این کار سبب ایجاد *ویژگی‌های محاسباتی* می‌شود.
 
-For instance:
+برای مثال:
 
 ```js run
-let fruit = prompt("Which fruit to buy?", "apple");
+let fruit = prompt("فصد خرید کدام میوه را دارید؟", "apple");
 
 let bag = {
 *!*
-  [fruit]: 5, // the name of the property is taken from the variable fruit
+  [fruit]: 5, // گرفته می‌شود fruit اسم ویژگی از متغیر
 */!*
 };
 
-alert( bag.apple ); // 5 if fruit="apple"
+alert( bag.apple ); // 5 :باشد fruit="apple" اگر
 ```
 
-The meaning of a computed property is simple: `[fruit]` means that the property name should be taken from `fruit`.
+معنی ویژگی محاسباتی ساده است: `[fruit]` به این معنی است که اسم ویژگی باید از متغیر `fruit` گرفته شود.
 
-So, if a visitor enters `"apple"`, `bag` will become `{apple: 5}`.
+بنابراین اگر یک بازدیدکننده `"apple"` را وارد کند، `bag` اینگونه خواهد شد: `{apple: 5}`.
 
-Essentially, that works the same as:
+در اصل، کد بالا مانند کد پایین کار می‌کند:
 ```js run
-let fruit = prompt("Which fruit to buy?", "apple");
+let fruit = prompt("قصد خرید چه میوه‌ای دارید؟", "apple");
 let bag = {};
 
-// take property name from the fruit variable
+// گرفته می‌شود fruit اسم ویژگی از متغیر
 bag[fruit] = 5;
 ```
 
-...But looks nicer.
+...اما زیباتر به نظر می‌رسد.
 
-We can use more complex expressions inside square brackets:
+ما می‌توانیم از عبارات پیچیده‌تری درون براکت استفاده کنیم:
 
 ```js
 let fruit = 'apple';
@@ -201,9 +201,9 @@ let bag = {
 };
 ```
 
-Square brackets are much more powerful than the dot notation. They allow any property names and variables. But they are also more cumbersome to write.
+براکت‌ها قدرت بسیار بیشتری نسبت به نقطه دارند. آنها هر نوع اسم ویژگی و متغیر را ممکن می‌سازند. اما آنها برای نوشتن سخت‌تر هستند.
 
-So most of the time, when property names are known and simple, the dot is used. And if we need something more complex, then we switch to square brackets.
+پس اکثر اوقات، زمانی که اسم‌های ویژگی‌ها شناخته شده و ساده هستند، نقطه استفاده می‌شود. اگر ما به چیزی پیچیده‌تر نیاز داشته باشیم، سپس به سراغ براکت‌ها می‌رویم.
 
 ## Property value shorthand
 
