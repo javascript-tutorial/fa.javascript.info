@@ -20,7 +20,7 @@ let user = {};  // "سینتکس "شیء لیترال
 
 ![](object-user-empty.svg)
 
-معمولا، سینتکس آکولاد استفاده می‌شود. به این شکل تعریف کردن را *شیء لیتِرال* می‌نامند.
+معمولا، سینتکس آکولاد استفاده می‌شود. یک شیء که به این صورت تعریف شده باشد را *شیء لیتِرال* می‌نامند.
 
 ## لیترال‌ها و ویژگی‌ها
 
@@ -166,7 +166,7 @@ alert( user.key ) // undefined
 برای مثال:
 
 ```js run
-let fruit = prompt("فصد خرید کدام میوه را دارید؟", "apple");
+let fruit = prompt("قصد خرید کدام میوه را دارید؟", "apple");
 
 let bag = {
 *!*
@@ -205,18 +205,18 @@ let bag = {
 
 پس اکثر اوقات، زمانی که اسم‌های ویژگی‌ها شناخته شده و ساده هستند، نقطه استفاده می‌شود. اگر ما به چیزی پیچیده‌تر نیاز داشته باشیم، سپس به سراغ براکت‌ها می‌رویم.
 
-## Property value shorthand
+## نوشتن مختصر مقدار ویژگی
 
-In real code we often use existing variables as values for property names.
+در کدنویسی واقعی معمولا نیاز داریم که از متغیرهای موجود به عنوان مقدار برای ویژگی‌ها استفاده کنیم.
 
-For instance:
+برای مثال:
 
 ```js run
 function makeUser(name, age) {
   return {
     name: name,
     age: age,
-    // ...other properties
+    // ...ویژگی‌های دیگر
   };
 }
 
@@ -224,27 +224,27 @@ let user = makeUser("John", 30);
 alert(user.name); // John
 ```
 
-In the example above, properties have the same names as variables. The use-case of making a property from a variable is so common, that there's a special *property value shorthand* to make it shorter.
+در مثال بالا، وِیژگی‌ها اسمی مشابه با متغیرها دارند. این موضوع که یک ویژگی را از یک متغیر بسازیم بسیار رایج است، به همین دلیل یک *خلاصه‌نویسی مقدار ویژگی* برای کوتاه‌تر کردن آن وجود دارد.
 
-Instead of `name:name` we can just write `name`, like this:
+به جای `name: name` می‌توانیم فقط بنویسیم `name`، مثل کد پایین:
 
 ```js
 function makeUser(name, age) {
 *!*
   return {
-    name, // same as name: name
-    age,  // same as age: age
+    name, // name: name مشابه با
+    age,  // age: age مشابه با
     // ...
   };
 */!*
 }
 ```
 
-We can use both normal properties and shorthands in the same object:
+ما می‌توانیم در یک شیء، هم از خلاصه‌نویسی استفاده کنیم هم از ویژگی‌های نرمال:
 
 ```js
 let user = {
-  name,  // same as name:name
+  name,  // name: name مشابه با
   age: 30
 };
 ```
