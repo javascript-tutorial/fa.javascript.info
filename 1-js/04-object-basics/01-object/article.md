@@ -295,50 +295,50 @@ alert(obj.__proto__); // [object Object] - مقدار یک شیء است و آن
 
 ما طبیعت `__proto__` را در [فصل‌های بعد](info:prototype-inheritance) پوشش می‌دهیم و [راه‌هایی](info:prototype-methods) را برای درست کردن چنین رفتاری پیشنهاد می‌کنیم.
 
-## Property existence test, "in" operator
+## بررسی موجودیت ویژگی با عملگر "in"
 
-A notable feature of objects in JavaScript, compared to many other languages, is that it's possible to access any property. There will be no error if the property doesn't exist!
+یک ویژگی شایان ذکر شیءها در جاوااسکریپت، در مقایسه با بسیاری از زبان‌های دیگر، این است که امکان دسترسی به هر ویژگی‌ای وجود دارد. اگر آن ویژگی وجود نداشته باشد هیچ اروری دریافت نمی‌کنیم.
 
-Reading a non-existing property just returns `undefined`. So we can easily test whether the property exists:
+خواندن یک ویژگی که وجود ندارد فقط مقدار `undefined` را برمی‌گرداند. پس ما می‌توانیم به آسانی بررسی کنیم که ویژگی وجود دارد یا نه:
 
 ```js run
 let user = {};
 
-alert( user.noSuchProperty === undefined ); // true means "no such property"
+alert( user.noSuchProperty === undefined ); // "به معنای این است که "چنین ویژگی‌ای وجود ندارد true
 ```
 
-There's also a special operator `"in"` for that.
+برای انجام این کار عملگر مخصوص `"in"` هم وجود دارد.
 
-The syntax is:
+سینتکس آن اینگونه است:
 ```js
 "key" in object
 ```
 
-For instance:
+برای مثال:
 
 ```js run
 let user = { name: "John", age: 30 };
 
-alert( "age" in user ); // true, user.age exists
-alert( "blabla" in user ); // false, user.blabla doesn't exist
+alert( "age" in user ); // true وجود دارد پس user.age
+alert( "blabla" in user ); // false وجود ندارد پس user.blabla
 ```
 
-Please note that on the left side of `in` there must be a *property name*. That's usually a quoted string.
+لطفا در نظر داشته باشید که در سمت چپ `in` باید *اسم ویژگی* وجود داشته باشد که معمولا یک رشته درون کوتیشن است.
 
-If we omit quotes, that means a variable, it should contain the actual name to be tested. For instance:
+اگر ما کوتیشن را حذف کنیم، به منظور متغیر است، باید اسم واقعی برای بررسی استفاده شود. برای مثال:
 
 ```js run
 let user = { age: 30 };
 
 let key = "age";
-alert( *!*key*/!* in user ); // true, property "age" exists
+alert( *!*key*/!* in user ); // true وجود دارد پس "age" ویژگی
 ```
 
-Why does the `in` operator exist? Isn't it enough to compare against `undefined`?
+چرا عملگر `in` باید وجود داشته باشد؟ آیا اینکه با `undefined` مقایسه انجام شود کافی نیست؟
 
-Well, most of the time the comparison with `undefined` works fine. But there's a special case when it fails, but `"in"` works correctly.
+بیشتر اوقات انجام مقایسه با `undefined` به درستی کار می‌کند. اما یک مورد خاص است که این کار با شکست مواجه می‌شود اما `"in"` به درستی کار می‌کند.
 
-It's when an object property exists, but stores `undefined`:
+آن مورد زمانی است که یک ویژگی شیء موجود باشد، اما `undefined` را ذخیره کرده باشد:
 
 ```js run
 let obj = {
