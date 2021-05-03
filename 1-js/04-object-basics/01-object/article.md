@@ -3,7 +3,7 @@
 
 همانطور که از فصل <info:types> می‌دانیم، 8 نوع داده در جاوااسکریپت وجود دارد. 7 مورد "اولیه یا اصلی" نامیده می‌شوند، به این دلیل که مقدارهای آنها فقط دارای یک چیز است (رشته یا عدد یا هر چیزی).
 
-در مقابل، شیءها برای ذخیره‌سازی مجموعه‌ای از داده‌های گوناگون و چیزهای پیچیده‌تر استفاده می‌شوند. در جاوااسکریپت، شیءها تقریبا به تمام جنبه‌های زبان نفوذ کرده‌اند. پس ما باید قبل از اینکه عمیقا به موضوع دیگری وارد شویم شیءها را بشناسیم.
+در مقابل، شیءها (object) برای ذخیره‌سازی مجموعه‌ای از داده‌های گوناگون و چیزهای پیچیده‌تر استفاده می‌شوند. در جاوااسکریپت، شیءها تقریبا به تمام جنبه‌های زبان نفوذ کرده‌اند. پس ما باید قبل از اینکه عمیقا به موضوع دیگری وارد شویم شیءها را بشناسیم.
 
 یک شیء می‌تواند با آکولادها `{...}` و همراه یک لیست اختیاری از *ویژگی‌ها(property)* ساخته شود. یک ویژگی یعنی یک جفت از "key: value"، که در آن `key` یک رشته است (به آن "اسم ویژگی" هم می‌گویند) و `value` هر چیزی می‌تواند باشد.
 
@@ -388,13 +388,13 @@ for (let key in user) {
 
 همچنین ما می‌توانستیم به جای `key` از اسمی دیگر برای متغیر استفاده کنیم. برای مثال، `"for (let prop in obj)"` هم خیلی استفاده می‌شود.
 
-### Ordered like an object
+### مرتب مثل یک شیء
 
-Are objects ordered? In other words, if we loop over an object, do we get all properties in the same order they were added? Can we rely on this?
+آیا شیءها مرتب هستند؟ به عبارتی دیگر، اگر ما داخل یک شیء حلقه بزنیم، آیا تمام ویژگی‌های آن را با ترتیبی که اضافه شدند دریافت می‌کنیم؟ آیا می‌توانیم به این موضوع اتکا کنیم؟
 
-The short answer is: "ordered in a special fashion": integer properties are sorted, others appear in creation order. The details follow.
+جواب کوتاه این است: "مرتب شده به طوری خاص": ویژگی‌هایی که عدد صحیح هستند مرتب شده‌اند، بقیه‌ی آنها به ترتیبی که ساخته می‌شوند هستند. در ادامه به جزئیات می‌پردازیم.
 
-As an example, let's consider an object with the phone codes:
+به عنوان مثال، بیایید یک شیء حاوی کدهای تلفن را فرض کنیم:
 
 ```js run
 let codes = {
@@ -412,48 +412,48 @@ for (let code in codes) {
 */!*
 ```
 
-The object may be used to suggest a list of options to the user. If we're making a site mainly for German audience then we probably want `49` to be the first.
+این شیء ممکن است برای پیشنهاد دادن لیستی از گزینه‌ها به کاربر استفاده شود. اگر ما در حال ساخت سایتی که به طور عمده برای آلمانی‌ها است باشیم پس احتمالا می‌خواهیم که `49` اولین گزینه باشد.
 
-But if we run the code, we see a totally different picture:
+اما اگر ما کد را اجرا کنیم، نتیجه‌ای کاملا متفاوت می‌بینیم:
 
-- USA (1) goes first
-- then Switzerland (41) and so on.
+- USA (1) اولین خواهد بود.
+- سپس Switzerland (41) و همینطور ادامه پیدا می‌کند.
 
-The phone codes go in the ascending sorted order, because they are integers. So we see `1, 41, 44, 49`.
+کدهای تلفن با ترتیب صعودی مرتب می‌شوند، چون آنها اعداد صحیح هستند. پس ما `1، 41، 44، 49` را خواهیم دید.
 
-````smart header="Integer properties? What's that?"
-The "integer property" term here means a string that can be converted to-and-from an integer without a change.
+````smart header="ویژگی‌های عدد صحیح؟ داستان از چه قرار است؟"
+عبارت "ویژگی عدد صحیح" در اینجا به معنی رشته‌ای است که می‌تواند بدون تغییر، به عدد صحیح تبدیل شود و برعکس.
 
-So, "49" is an integer property name, because when it's transformed to an integer number and back, it's still the same. But "+49" and "1.2" are not:
+بنابراین "49" یک اسمِ ویژگیِ صحیح است، چون زمانی که به یک عدد صحیح تبدیل می‌شود و برعکس، هنوز یکسان است. اما "+49" و "1.2" اینطور نیستند:
 
 ```js run
-// Math.trunc is a built-in function that removes the decimal part
-alert( String(Math.trunc(Number("49"))) ); // "49", same, integer property
-alert( String(Math.trunc(Number("+49"))) ); // "49", not same "+49" ⇒ not integer property
-alert( String(Math.trunc(Number("1.2"))) ); // "1", not same "1.2" ⇒ not integer property
+// یک تابع است که درون زبان ساخته شده و قسمت اعشاری را حذف می‌کند Math.trunc
+alert( String(Math.trunc(Number("49"))) ); // "49", یکسان است، پس ویژگی‌ای صحیح است
+alert( String(Math.trunc(Number("+49"))) ); // "49", با "49+" مشابه نیست، پس ویژگی‌ای صحیح هم نیست
+alert( String(Math.trunc(Number("1.2"))) ); // "1", با "1.2" مشابه نیست، پس ویژگی‌ای صحیح هم نیست
 ```
 ````
 
-...On the other hand, if the keys are non-integer, then they are listed in the creation order, for instance:
+...از سویی دیگر، اگر keyها عدد صحیح نباشند، به ترتیب ساخته شدن مرتب می‌شوند، برای مثال:
 
 ```js run
 let user = {
   name: "John",
   surname: "Smith"
 };
-user.age = 25; // add one more
+user.age = 25; // یک ویژگی دیگر اضافه می‌کنیم
 
 *!*
-// non-integer properties are listed in the creation order
+// ویژگی‌های غیر صحیح با ترتیب ساخته شدن مرتب می‌شوند
 */!*
 for (let prop in user) {
   alert( prop ); // name, surname, age
 }
 ```
 
-So, to fix the issue with the phone codes, we can "cheat" by making the codes non-integer. Adding a plus `"+"` sign before each code is enough.
+بنابراین، برای حل مشکل کدهای تلفن، ما می‌توانیم با ساخت کدهای غیر صحیح "تقلب کنیم". اضافه کردن علامت مثبت `"+"` قبل از هر کد کافی است.
 
-Like this:
+مثل این:
 
 ```js run
 let codes = {
@@ -469,34 +469,34 @@ for (let code in codes) {
 }
 ```
 
-Now it works as intended.
+حالا این کد همانطور که انتظار می‌رفت کار می‌کند.
 
-## Summary
+## خلاصه
 
-Objects are associative arrays with several special features.
+شیءها آرایه‌هایی شرکت‌پذیر با چند خصوصیت خاص هستند.
 
-They store properties (key-value pairs), where:
-- Property keys must be strings or symbols (usually strings).
-- Values can be of any type.
+آنها ویژگی‌ها (جفت‌های key-value) را ذخیره می‌کنند که:
+- keyهای ویژگی‌ها باید رشته یا symbol باشند (معمولا رشته).
+- مقدارها می‌توانند از هر نوعی باشند.
 
-To access a property, we can use:
-- The dot notation: `obj.property`.
-- Square brackets notation `obj["property"]`. Square brackets allow to take the key from a variable, like `obj[varWithKey]`.
+برای دسترسی داشتن به یک ویژگی، ما می‌توانیم از این روش‌ها استفاده کنیم:
+- نقطه: `obj.property`.
+- براکت `obj["property"]`. براکت‌ها به ما اجازه می‌دهند که key را از یک متغیر بگیریم، مثلا: `obj[varWithKey]`.
 
-Additional operators:
-- To delete a property: `delete obj.prop`.
-- To check if a property with the given key exists: `"key" in obj`.
-- To iterate over an object: `for (let key in obj)` loop.
+عملگرهای اضافی:
+- برای حذف یک ویژگی: `delete obj.prop`.
+- برای بررسی موجودیت ویژگی با key داده شده: `"key" in obj`.
+- برای حلقه زدن درون یک شیء: حلقه‌ی `for (let key in obj)`.
 
-What we've studied in this chapter is called a "plain object", or just `Object`.
+چیزی که ما در این فصل آموختیم "شیء ساده" یا فقط `شیء` نامیده می‌شود.
 
-There are many other kinds of objects in JavaScript:
+در جاوااسکریپت شیءهای بسیار گوناگون دیگری وجود دارند:
 
-- `Array` to store ordered data collections,
-- `Date` to store the information about the date and time,
-- `Error` to store the information about an error.
-- ...And so on.
+- `Array` برای ذخیره کردن مجموعه‌ای از داده به صورت مرتب،
+- `Date` برای ذخیره کردن اطلاعاتی درباره تاریخ و زمان،
+- `Error` برای ذخیره کردن اطلاعات درباره‌ی یک ارور.
+- ...و غیره.
 
-They have their special features that we'll study later. Sometimes people say something like "Array type" or "Date type", but formally they are not types of their own, but belong to a single "object" data type. And they extend it in various ways.
+هر کدام از آنها خصوصیات خاص خود را دارند که بعدا آنها را می‌آموزیم. بعضی اوقات افراد چیزهایی مانند "نوع Array" یا "نوع Date" را به زبان می‌آورند، اما به طور رسمی آنها نوعی از خود نیستند، اما به نوع "object" تعلق دارند. و آنها این را با راه‌های مختلف گسترش می‌دهند.
 
-Objects in JavaScript are very powerful. Here we've just scratched the surface of a topic that is really huge. We'll be closely working with objects and learning more about them in further parts of the tutorial.
+شیءها در جاوااسکریپت بسیار قدرتمند هستند. اینجا ما فقط مقدار کمی از مبحثی که بسیار بزرگ است را یاد گرفتیم. ما خیلی با شیءها کار خواهیم کرد و چیزهای جدیدی را درباره آنها در بخش‌های بعدی این آموزش یاد خواهیم گرفت.
