@@ -352,7 +352,7 @@ alert( "test" in obj ); // !می‌دهد، پس ویژگی وجود دارد tr
 
 در کد بالا، ویژگی `obj.test` به طور فنی وجود دارد. پس عملگر `in` درست کار می‌کند.
 
-Situations like this happen very rarely, because `undefined` should not be explicitly assigned. We mostly use `null` for "unknown" or "empty" values. So the `in` operator is an exotic guest in the code.
+موقعیت‌هایی شبیه به این به ندرت اتفاق می‌افتند، چون `undefined` نباید به صراحت به عنوان مقدار استفاده شود. ما معمولا از `null` برای متغیرهای "ناشناخته" یا "خالی" استفاده می‌کنیم. پس عملگر `in` مانند یک مهمان خارجی در کد است.
 
 
 ## The "for..in" loop
