@@ -250,14 +250,14 @@ let user = {
 ```
 
 
-## Property names limitations
+## محدودیت اسم‌های ویژگی‌ها
 
-As we already know, a variable cannot have a name equal to one of language-reserved words like "for", "let", "return" etc.
+همانطور که از قبل می‌دانیم، یک متغیر نمی‌تواند اسمی برابر با کلماتی که توسط زبان رزرو شده‌اند داشته باشد مانند "for" و "let"، "return" و غیره.
 
-But for an object property, there's no such restriction:
+اما برای ویژگی یک شیء، چنین محدودیتی وجود ندارد:
 
 ```js run
-// these properties are all right
+// این ویژگی‌ها قابل قبول هستند
 let obj = {
   for: 1,
   let: 2,
@@ -267,33 +267,33 @@ let obj = {
 alert( obj.for + obj.let + obj.return );  // 6
 ```
 
-In short, there are no limitations on property names. They can be any strings or symbols (a special type for identifiers, to be covered later).
+به طور خلاصه، هیچ محدودیتی برای اسم‌های ویژگی‌ها وجود ندارد. آنها می‌توانند هر رشته‌ای یا symbol (یک نوع داده خاص برای شناسه‌ها، بعدا آنها را یاد می‌گیریم) باشند.
 
-Other types are automatically converted to strings.
+انواع دیگر به طور خودکار به رشته تبدیل می‌شوند.
 
-For instance, a number `0` becomes a string `"0"` when used as a property key:
+برای مثال، عدد `0` زمانی که به عنوان یک اسم ویژگی استفاده می‌شود، به رشته `"0"` تبدیل می‌شود.
 
 ```js run
 let obj = {
-  0: "test" // same as "0": "test"
+  0: "test" // "0": "test" مشابه با
 };
 
-// both alerts access the same property (the number 0 is converted to string "0")
+// به یک ویژگی دسترسی خواهند داشت (عدد 0 به رشته "0" تبدیل می‌شود) alert هر دو
 alert( obj["0"] ); // test
-alert( obj[0] ); // test (same property)
+alert( obj[0] ); // test (ویژگی یکسان)
 ```
 
-There's a minor gotcha with a special property named `__proto__`. We can't set it to a non-object value:
+یک مشکل جزئی با یک ویژگی خاص به نام `__proto__` وجود دارد. ما نمی‌توانیم مقداری که شیء نباشد را برابر با آن قرار دهیم:
 
 ```js run
 let obj = {};
-obj.__proto__ = 5; // assign a number
-alert(obj.__proto__); // [object Object] - the value is an object, didn't work as intended
+obj.__proto__ = 5; // مقداردهی یک عدد
+alert(obj.__proto__); // [object Object] - مقدار یک شیء است و آن طور که انتظار می‌رفت کار نکرد
 ```
 
-As we see from the code, the assignment to a primitive `5` is ignored.
+همانطور که در کد بالا دیدیم، برابر قرار دادن با یک مقدار اصلی(primitive) یعنی `5` نادیده گرفته شد.
 
-We'll cover the special nature of `__proto__` in [subsequent chapters](info:prototype-inheritance), and suggest the [ways to fix](info:prototype-methods) such behavior.
+ما طبیعت `__proto__` را در [فصل‌های بعد](info:prototype-inheritance) پوشش می‌دهیم و [راه‌هایی](info:prototype-methods) را برای درست کردن چنین رفتاری پیشنهاد می‌کنیم.
 
 ## Property existence test, "in" operator
 
