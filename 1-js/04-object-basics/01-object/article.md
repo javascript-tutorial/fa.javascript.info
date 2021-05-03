@@ -345,12 +345,12 @@ let obj = {
   test: undefined
 };
 
-alert( obj.test ); // it's undefined, so - no such property?
+alert( obj.test ); // است، پس یعنی چنین متغیری نداریم؟ undefined برابر با
 
-alert( "test" in obj ); // true, the property does exist!
+alert( "test" in obj ); // !می‌دهد، پس ویژگی وجود دارد true خروجی
 ```
 
-In the code above, the property `obj.test` technically exists. So the `in` operator works right.
+در کد بالا، ویژگی `obj.test` به طور فنی وجود دارد. پس عملگر `in` درست کار می‌کند.
 
 Situations like this happen very rarely, because `undefined` should not be explicitly assigned. We mostly use `null` for "unknown" or "empty" values. So the `in` operator is an exotic guest in the code.
 
