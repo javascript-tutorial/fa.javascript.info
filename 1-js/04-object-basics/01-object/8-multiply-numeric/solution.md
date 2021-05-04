@@ -1,6 +1,6 @@
 ``` js run
 
-// before the call
+// قبل از صدا زدن
 let menu = {
   width: 200,
   height: 300,
