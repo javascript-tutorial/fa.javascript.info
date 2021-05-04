@@ -1,60 +1,60 @@
 
-# Objects
+# شیءها
 
-As we know from the chapter <info:types>, there are eight data types in JavaScript. Seven of them are called "primitive", because their values contain only a single thing (be it a string or a number or whatever).
+همانطور که از فصل <info:types> می‌دانیم، 8 نوع داده در جاوااسکریپت وجود دارد. 7 مورد "اولیه یا اصلی" نامیده می‌شوند، به این دلیل که مقدارهای آنها فقط دارای یک چیز است (رشته یا عدد یا هر چیزی).
 
-In contrast, objects are used to store keyed collections of various data and more complex entities. In JavaScript, objects penetrate almost every aspect of the language. So we must understand them first before going in-depth anywhere else.
+در مقابل، شیءها (objects) برای ذخیره‌سازی مجموعه‌ای از داده‌های گوناگون و چیزهای پیچیده‌تر استفاده می‌شوند. در جاوااسکریپت، شیءها تقریبا به تمام جنبه‌های زبان نفوذ کرده‌اند. پس ما باید قبل از اینکه عمیقا به موضوع دیگری وارد شویم شیءها را بشناسیم.
 
-An object can be created with figure brackets `{…}` with an optional list of *properties*. A property is a "key: value" pair, where `key` is a string (also called a "property name"), and `value` can be anything.
+یک شیء می‌تواند با آکولادها `{...}` و همراه یک لیست اختیاری از *ویژگی‌ها(property)* ساخته شود. یک ویژگی یعنی یک جفت از "key: value"، که در آن `key` یک رشته است (به آن "اسم ویژگی" هم می‌گویند) و `value` هر چیزی می‌تواند باشد.
 
-We can imagine an object as a cabinet with signed files. Every piece of data is stored in its file by the key. It's easy to find a file by its name or add/remove a file.
+می‌توانیم یک شیء را به عنوان یک قفسه‌ی دارای پرونده‌های علامت‌دار فرض کنیم. هر داده در پرونده‌ی خودش توسط کلید (key) ذخیره شده است. پیدا کردن یا حذف/اضافه کردن یک پرونده با اسم آن راحت می‌شود.
 
 ![](object.svg)
 
-An empty object ("empty cabinet") can be created using one of two syntaxes:
+یک شیء خالی ("قفسه خالی") می‌تواند با استفاده از دو سینتکس ساخته شود:
 
 ```js
-let user = new Object(); // "object constructor" syntax
-let user = {};  // "object literal" syntax
+let user = new Object(); // "object constructor" سینتکس
+let user = {};  // "object literal" سینتکس
 ```
 
 ![](object-user-empty.svg)
 
-Usually, the figure brackets `{...}` are used. That declaration is called an *object literal*.
+معمولا، سینتکس آکولاد استفاده می‌شود. یک شیء که به این صورت تعریف شده باشد را *شیء لیتِرال* می‌نامند.
 
-## Literals and properties
+## لیترال‌ها و ویژگی‌ها
 
-We can immediately put some properties into `{...}` as "key: value" pairs:
+ما می‌توانیم بلافاصله ویژگی‌هایی را به صورت جفت‌هایی از "کلید: مقدار" (key: value) داخل `{...}` قرار دهیم:
 
 ```js
-let user = {     // an object
-  name: "John",  // by key "name" store value "John"
-  age: 30        // by key "age" store value 30
+let user = {     // یک شیء
+  name: "John",  // را ذخیره کنید "John" مقدار "name" توسط
+  age: 30        // مقدار 30 را ذخیره کنید "age" توسط
 };
 ```
 
-A property has a key (also known as "name" or "identifier") before the colon `":"` and a value to the right of it.
+یک ویژگی، قبل از `":"` دارای یک کلید (همچنین به عنوان "اسم" یا "شناسه" هم شناخته می‌شود) و یک مقدار در سمت راست دو نقطه است.
 
-In the `user` object, there are two properties:
+در شیء `user`، دو ویژگی وجود دارد:
 
-1. The first property has the name `"name"` and the value `"John"`.
-2. The second one has the name `"age"` and the value `30`.
+1. اولین ویژگی، اسم `"name"` و مقدار `"John"` را دارد.
+2. دومین ویژگی، اسم `"age"` و مقدار `30` را دارد.
 
-The resulting `user` object can be imagined as a cabinet with two signed files labeled "name" and "age".
+شیء `user` بدست آمده می‌تواند به عنوان یک قفسه با دو پرونده‌ی علامت دار با برچسب‌های "name" و "age" فرض شود.
 
 ![user object](object-user.svg)
 
-We can add, remove and read files from it any time.
+ما می‌توانیم در هر زمانی پرونده‌ها را اضافه یا کم کنیم یا آنها را بخوانیم.
 
-Property values are accessible using the dot notation:
+مقدارهای ویژگی‌ها با استفاده از نقطه قابل دسترسی هستند:
 
 ```js
-// get property values of the object:
+// مقدارهای ویژگی‌های شیء را دریافت کنید:
 alert( user.name ); // John
 alert( user.age ); // 30
 ```
 
-The value can be of any type. Let's add a boolean one:
+مقدار می‌تواند هر چیزی باشد. بیایید یک مقدار از نوع boolean اضافه کنیم:
 
 ```js
 user.isAdmin = true;
@@ -62,7 +62,7 @@ user.isAdmin = true;
 
 ![user object 2](object-user-isadmin.svg)
 
-To remove a property, we can use `delete` operator:
+برای حذف یک ویژگی، از عملگر `delete` استفاده می‌کنیم:
 
 ```js
 delete user.age;
@@ -70,70 +70,70 @@ delete user.age;
 
 ![user object 3](object-user-delete.svg)
 
-We can also use multiword property names, but then they must be quoted:
+همچنین می‌توانیم از اسم‌های چند کلمه‌ای برای ویژگی استفاده کنیم، اما آنها باید درون کوتیشن قرار بگیرند:
 
 ```js
 let user = {
   name: "John",
   age: 30,
-  "likes birds": true  // multiword property name must be quoted
+  "likes birds": true  // اسم‌های چند کلمه‌ایِ ویژگی باید درون کوتیشن باشند
 };
 ```
 
 ![](object-user-props.svg)
 
 
-The last property in the list may end with a comma:
+آخرین ویژگی درون لیست هم می‌تواند با کاما پایان یابد:
 ```js
 let user = {
   name: "John",
   age: 30*!*,*/!*
 }
 ```
-That is called a "trailing" or "hanging" comma. Makes it easier to add/remove/move around properties, because all lines become alike.
+به این کامای "دنباله‌دار" یا "معلق" می‌گویند. این کاما اضافه/حذف/کار کردن با ویژگی‌ها را آسان‌تر می‌کند، چون همه‌ی خطوط یکسان می‌شوند.
 
-## Square brackets
+## براکت‌ها
 
-For multiword properties, the dot access doesn't work:
+برای ویژگی‌های چند کلمه‌ای، دسترسی داشتن با نقطه ممکن نیست:
 
 ```js run
-// this would give a syntax error
+// این یک ارور سینتکسی می‌دهد
 user.likes birds = true
 ```
 
-JavaScript doesn't understand that. It thinks that we address `user.likes`, and then gives a syntax error when comes across unexpected `birds`.
+جاوااسکریپت چنین چیزی را متوجه نمی‌شود. فکر می‌کند ما `user.likes` را مد نظر داریم، و سپس وقتی با کلمه غیرمنتظره‌ی `birds` روبرو می‌شود ارور سینتکسی می‌دهد.
 
-The dot requires the key to be a valid variable identifier. That implies: contains no spaces, doesn't start with a digit and doesn't include special characters (`$` and `_` are allowed).
+نقطه نیاز دارد که کلید، یک شناسه‌ی معتبر متغیر باشد. به این معنی که: هیچ فاصله‌ای بین آن نباشد، با عدد شروع نشود و شامل کاراکترهای خاص نباشد (`$` و `_` مجاز هستند).
 
-There's an alternative "square bracket notation" that works with any string:
+یک شیوه‌ی جایگزین به نام "براکت" وجود دارد که با هر رشته‌ای کار می‌کند:
 
 ```js run
 let user = {};
 
-// set
+// ایجاد کردن
 user["likes birds"] = true;
 
-// get
+// دریافت کردن
 alert(user["likes birds"]); // true
 
-// delete
+// حذف کردن
 delete user["likes birds"];
 ```
 
-Now everything is fine. Please note that the string inside the brackets is properly quoted (any type of quotes will do).
+حالا همه چیز درست است. لطفا در نظر داشته باشید که رشته درون براکت‌ها به درستی درون کوتیشن قرار گرفته باشد (هر نوع کوتیشنی قابل قبول است).
 
-Square brackets also provide a way to obtain the property name as the result of any expression -- as opposed to a literal string -- like from a variable as follows:
+براکت‌ها، بدست آوردن اسم ویژگی از نتیجه‌ی یک عبارت را هم فراهم می‌کنند، یعنی یک رشته‌ی ثابت نباشد، مثلا از یک متغیر که به این شکل انجام می‌گیرد:
 
 ```js
 let key = "likes birds";
 
-// same as user["likes birds"] = true;
+// user["likes birds"] = true; مشابه است با
 user[key] = true;
 ```
 
-Here, the variable `key` may be calculated at run-time or depend on the user input. And then we use it to access the property. That gives us a great deal of flexibility.
+اینجا، متغیر `key` شاید هنگام اجرای کد بدست آید یا وابسته به چیزی که کاربر وارد می‌کند باشد. سپس ما از آن برای دسترسی به ویژگی استفاده می‌کنیم. استفاده از براکت به ما انعطاف خیلی زیادی می‌دهد.
 
-For instance:
+برای مثال:
 
 ```js run
 let user = {
@@ -141,13 +141,13 @@ let user = {
   age: 30
 };
 
-let key = prompt("What do you want to know about the user?", "name");
+let key = prompt("چه چیزی را می‌خواهید درباره کاربر بدانید؟", "name");
 
-// access by variable
-alert( user[key] ); // John (if enter "name")
+// دسترسی توسط متغیر
+alert( user[key] ); // John :وارد شود "name" اگر
 ```
 
-The dot notation cannot be used in a similar way:
+نقطه نمی‌تواند به همان شکل استفاده شود:
 
 ```js run
 let user = {
@@ -159,40 +159,40 @@ let key = "name";
 alert( user.key ) // undefined
 ```
 
-### Computed properties
+### ویژگی‌های محاسباتی
 
-We can use square brackets in an object literal, when creating an object. That's called *computed properties*.
+ما می‌توانیم زمانی که یک شیء لیترال تعریف می‌کنیم، از براکت‌ها درون آن استفاده کنیم. این کار سبب ایجاد *ویژگی‌های محاسباتی* می‌شود.
 
-For instance:
+برای مثال:
 
 ```js run
-let fruit = prompt("Which fruit to buy?", "apple");
+let fruit = prompt("قصد خرید کدام میوه را دارید؟", "apple");
 
 let bag = {
 *!*
-  [fruit]: 5, // the name of the property is taken from the variable fruit
+  [fruit]: 5, // گرفته می‌شود fruit اسم ویژگی از متغیر
 */!*
 };
 
-alert( bag.apple ); // 5 if fruit="apple"
+alert( bag.apple ); // 5 :باشد fruit="apple" اگر
 ```
 
-The meaning of a computed property is simple: `[fruit]` means that the property name should be taken from `fruit`.
+معنی ویژگی محاسباتی ساده است: `[fruit]` به این معنی است که اسم ویژگی باید از متغیر `fruit` گرفته شود.
 
-So, if a visitor enters `"apple"`, `bag` will become `{apple: 5}`.
+بنابراین اگر یک بازدیدکننده `"apple"` را وارد کند، `bag` اینگونه خواهد شد: `{apple: 5}`.
 
-Essentially, that works the same as:
+در اصل، کد بالا مانند کد پایین کار می‌کند:
 ```js run
-let fruit = prompt("Which fruit to buy?", "apple");
+let fruit = prompt("قصد خرید چه میوه‌ای دارید؟", "apple");
 let bag = {};
 
-// take property name from the fruit variable
+// گرفته می‌شود fruit اسم ویژگی از متغیر
 bag[fruit] = 5;
 ```
 
-...But looks nicer.
+...اما زیباتر به نظر می‌رسد.
 
-We can use more complex expressions inside square brackets:
+ما می‌توانیم از عبارات پیچیده‌تری درون براکت استفاده کنیم:
 
 ```js
 let fruit = 'apple';
@@ -201,22 +201,22 @@ let bag = {
 };
 ```
 
-Square brackets are much more powerful than the dot notation. They allow any property names and variables. But they are also more cumbersome to write.
+براکت‌ها قدرت بسیار بیشتری نسبت به نقطه دارند. آنها هر نوع اسم ویژگی و متغیر را ممکن می‌سازند. اما آنها برای نوشتن سخت‌تر هستند.
 
-So most of the time, when property names are known and simple, the dot is used. And if we need something more complex, then we switch to square brackets.
+پس اکثر اوقات، زمانی که اسم‌های ویژگی‌ها شناخته شده و ساده هستند، نقطه استفاده می‌شود. اگر ما به چیزی پیچیده‌تر نیاز داشته باشیم، سپس به سراغ براکت‌ها می‌رویم.
 
-## Property value shorthand
+## خلاصه نویسی مقدار ویژگی
 
-In real code we often use existing variables as values for property names.
+در کدنویسی واقعی معمولا نیاز داریم که از متغیرهای موجود به عنوان مقدار برای ویژگی‌ها استفاده کنیم.
 
-For instance:
+برای مثال:
 
 ```js run
 function makeUser(name, age) {
   return {
     name: name,
     age: age,
-    // ...other properties
+    // ...ویژگی‌های دیگر
   };
 }
 
@@ -224,40 +224,40 @@ let user = makeUser("John", 30);
 alert(user.name); // John
 ```
 
-In the example above, properties have the same names as variables. The use-case of making a property from a variable is so common, that there's a special *property value shorthand* to make it shorter.
+در مثال بالا، وِیژگی‌ها اسمی مشابه با متغیرها دارند. این موضوع که یک ویژگی را از یک متغیر بسازیم بسیار رایج است، به همین دلیل یک *خلاصه‌نویسیِ مقدارِ ویژگی* برای کوتاه‌تر کردن آن وجود دارد.
 
-Instead of `name:name` we can just write `name`, like this:
+به جای `name: name` می‌توانیم فقط بنویسیم `name`، مثل کد پایین:
 
 ```js
 function makeUser(name, age) {
 *!*
   return {
-    name, // same as name: name
-    age,  // same as age: age
+    name, // name: name مشابه با
+    age,  // age: age مشابه با
     // ...
   };
 */!*
 }
 ```
 
-We can use both normal properties and shorthands in the same object:
+ما می‌توانیم در یک شیء، هم از خلاصه‌نویسی استفاده کنیم هم از ویژگی‌های نرمال:
 
 ```js
 let user = {
-  name,  // same as name:name
+  name,  // name: name مشابه با
   age: 30
 };
 ```
 
 
-## Property names limitations
+## محدودیت اسم‌های ویژگی‌ها
 
-As we already know, a variable cannot have a name equal to one of language-reserved words like "for", "let", "return" etc.
+همانطور که از قبل می‌دانیم، یک متغیر نمی‌تواند اسمی برابر با کلماتی که توسط زبان رزرو شده‌اند داشته باشد مانند "for" و "let"، "return" و غیره.
 
-But for an object property, there's no such restriction:
+اما برای ویژگی یک شیء، چنین محدودیتی وجود ندارد:
 
 ```js run
-// these properties are all right
+// این ویژگی‌ها قابل قبول هستند
 let obj = {
   for: 1,
   let: 2,
@@ -267,107 +267,107 @@ let obj = {
 alert( obj.for + obj.let + obj.return );  // 6
 ```
 
-In short, there are no limitations on property names. They can be any strings or symbols (a special type for identifiers, to be covered later).
+به طور خلاصه، هیچ محدودیتی برای اسم‌های ویژگی‌ها وجود ندارد. آنها می‌توانند هر رشته‌ای یا symbol (یک نوع داده خاص برای شناسه‌ها، بعدا آنها را یاد می‌گیریم) باشند.
 
-Other types are automatically converted to strings.
+انواع دیگر به طور خودکار به رشته تبدیل می‌شوند.
 
-For instance, a number `0` becomes a string `"0"` when used as a property key:
+برای مثال، عدد `0` زمانی که به عنوان یک اسم ویژگی استفاده می‌شود، به رشته `"0"` تبدیل می‌شود.
 
 ```js run
 let obj = {
-  0: "test" // same as "0": "test"
+  0: "test" // "0": "test" مشابه با
 };
 
-// both alerts access the same property (the number 0 is converted to string "0")
+// به یک ویژگی دسترسی خواهند داشت (عدد 0 به رشته "0" تبدیل می‌شود) alert هر دو
 alert( obj["0"] ); // test
-alert( obj[0] ); // test (same property)
+alert( obj[0] ); // test (ویژگی یکسان)
 ```
 
-There's a minor gotcha with a special property named `__proto__`. We can't set it to a non-object value:
+یک مشکل جزئی با یک ویژگی خاص به نام `__proto__` وجود دارد. ما نمی‌توانیم مقداری که شیء نباشد را برابر با آن قرار دهیم:
 
 ```js run
 let obj = {};
-obj.__proto__ = 5; // assign a number
-alert(obj.__proto__); // [object Object] - the value is an object, didn't work as intended
+obj.__proto__ = 5; // مقداردهی یک عدد
+alert(obj.__proto__); // [object Object] - مقدار یک شیء است و آن طور که انتظار می‌رفت کار نکرد
 ```
 
-As we see from the code, the assignment to a primitive `5` is ignored.
+همانطور که در کد بالا دیدیم، برابر قرار دادن با یک مقدار اصلی(primitive) یعنی `5` نادیده گرفته شد.
 
-We'll cover the special nature of `__proto__` in [subsequent chapters](info:prototype-inheritance), and suggest the [ways to fix](info:prototype-methods) such behavior.
+ما طبیعت `__proto__` را در [فصل‌های بعد](info:prototype-inheritance) پوشش می‌دهیم و [راه‌هایی](info:prototype-methods) را برای درست کردن چنین رفتاری پیشنهاد می‌کنیم.
 
-## Property existence test, "in" operator
+## بررسی موجودیت ویژگی با عملگر "in"
 
-A notable feature of objects in JavaScript, compared to many other languages, is that it's possible to access any property. There will be no error if the property doesn't exist!
+یک خصوصیت شایان ذکر شیءها در جاوااسکریپت، در مقایسه با بسیاری از زبان‌های دیگر، این است که امکان دسترسی به هر ویژگی‌ای وجود دارد. اگر آن ویژگی وجود نداشته باشد هیچ اروری دریافت نمی‌کنیم.
 
-Reading a non-existing property just returns `undefined`. So we can easily test whether the property exists:
+خواندن ویژگی‌ای که وجود ندارد فقط مقدار `undefined` را برمی‌گرداند. پس ما می‌توانیم به آسانی بررسی کنیم که ویژگی وجود دارد یا نه:
 
 ```js run
 let user = {};
 
-alert( user.noSuchProperty === undefined ); // true means "no such property"
+alert( user.noSuchProperty === undefined ); // "به معنای این است که "چنین ویژگی‌ای وجود ندارد true
 ```
 
-There's also a special operator `"in"` for that.
+برای انجام این کار عملگر مخصوص `"in"` هم وجود دارد.
 
-The syntax is:
+سینتکس آن اینگونه است:
 ```js
 "key" in object
 ```
 
-For instance:
+برای مثال:
 
 ```js run
 let user = { name: "John", age: 30 };
 
-alert( "age" in user ); // true, user.age exists
-alert( "blabla" in user ); // false, user.blabla doesn't exist
+alert( "age" in user ); // true وجود دارد پس user.age
+alert( "blabla" in user ); // false وجود ندارد پس user.blabla
 ```
 
-Please note that on the left side of `in` there must be a *property name*. That's usually a quoted string.
+لطفا در نظر داشته باشید که در سمت چپ `in` باید *اسم ویژگی* وجود داشته باشد که معمولا یک رشته درون کوتیشن است.
 
-If we omit quotes, that means a variable, it should contain the actual name to be tested. For instance:
+اگر ما کوتیشن را حذف کنیم، مانند متغیر فرض می‌شود، پس باید اسم واقعی برای بررسی استفاده شود. برای مثال:
 
 ```js run
 let user = { age: 30 };
 
 let key = "age";
-alert( *!*key*/!* in user ); // true, property "age" exists
+alert( *!*key*/!* in user ); // true وجود دارد پس "age" ویژگی
 ```
 
-Why does the `in` operator exist? Isn't it enough to compare against `undefined`?
+چرا عملگر `in` باید وجود داشته باشد؟ آیا اینکه با `undefined` مقایسه انجام شود کافی نیست؟
 
-Well, most of the time the comparison with `undefined` works fine. But there's a special case when it fails, but `"in"` works correctly.
+بیشتر اوقات انجام مقایسه با `undefined` به درستی کار می‌کند. اما برای یک مورد خاص این کار با شکست مواجه می‌شود ولی `"in"` به درستی کار می‌کند.
 
-It's when an object property exists, but stores `undefined`:
+آن مورد زمانی است که یک ویژگی شیء موجود باشد، اما `undefined` را در خود ذخیره کرده باشد:
 
 ```js run
 let obj = {
   test: undefined
 };
 
-alert( obj.test ); // it's undefined, so - no such property?
+alert( obj.test ); // است، پس یعنی چنین متغیری نداریم؟ undefined خروجی
 
-alert( "test" in obj ); // true, the property does exist!
+alert( "test" in obj ); // !می‌دهد، بنابراین ویژگی وجود دارد true خروجی
 ```
 
-In the code above, the property `obj.test` technically exists. So the `in` operator works right.
+در کد بالا، ویژگی `obj.test` به طور فنی وجود دارد. پس عملگر `in` درست کار می‌کند.
 
-Situations like this happen very rarely, because `undefined` should not be explicitly assigned. We mostly use `null` for "unknown" or "empty" values. So the `in` operator is an exotic guest in the code.
+موقعیت‌هایی شبیه به این به ندرت اتفاق می‌افتند، چون `undefined` نباید به صراحت برای مقداردهی استفاده شود. ما معمولا از `null` برای متغیرهای "ناشناخته" یا "خالی" استفاده می‌کنیم. در نتیجه عملگر `in` در کد مانند یک غریبه است.
 
 
-## The "for..in" loop
+## حلقه‌ی "for..in"
 
-To walk over all keys of an object, there exists a special form of the loop: `for..in`. This is a completely different thing from the `for(;;)` construct that we studied before.
+برای گردش در بین تمام ویژگی‌های یک شیء، شکل خاصی از حلقه وجود دارد: `for..in`. این حلقه کاملا متفاوت از ساختار `(;;)for` که قبلا آموختیم است.
 
-The syntax:
+سینتکس:
 
 ```js
 for (key in object) {
-  // executes the body for each key among object properties
+  // بدنه برای هر کدام از کلیدهای مابین ویژگی‌های شیء اجرا می‌شود
 }
 ```
 
-For instance, let's output all properties of `user`:
+برای مثال، بیایید تمام ویژگی‌های `user` را نمایش دهیم:
 
 ```js run
 let user = {
@@ -377,24 +377,24 @@ let user = {
 };
 
 for (let key in user) {
-  // keys
+  // کلیدها
   alert( key );  // name, age, isAdmin
-  // values for the keys
+  // مقدارهای کلیدها
   alert( user[key] ); // John, 30, true
 }
 ```
 
-Note that all "for" constructs allow us to declare the looping variable inside the loop, like `let key` here.
+در نظر داشته باشید که تمام ساختارهای "for" به ما اجازه تعریف متغیر ایجادکننده‌ی حلقه را داخل حلقه می‌دهند، `let key` اینجا به عنوان مثال صدق می‌کند.
 
-Also, we could use another variable name here instead of `key`. For instance, `"for (let prop in obj)"` is also widely used.
+همچنین ما می‌توانستیم به جای `key` از اسمی دیگر برای متغیر استفاده کنیم. برای مثال، `"for (let prop in obj)"` هم خیلی استفاده می‌شود.
 
-### Ordered like an object
+### مرتب شده مثل یک شیء
 
-Are objects ordered? In other words, if we loop over an object, do we get all properties in the same order they were added? Can we rely on this?
+آیا شیءها مرتب هستند؟ به عبارتی دیگر، اگر ما داخل یک شیء حلقه بزنیم، آیا تمام ویژگی‌های آن را با ترتیبی که اضافه شدند دریافت می‌کنیم؟ آیا می‌توانیم به این موضوع اتکا کنیم؟
 
-The short answer is: "ordered in a special fashion": integer properties are sorted, others appear in creation order. The details follow.
+جواب کوتاه این است: "مرتب شده به طوری خاص": ویژگی‌هایی که عدد صحیح هستند مرتب شده‌اند، بقیه‌ی آنها به ترتیبی که ساخته می‌شوند هستند. در ادامه به جزئیات می‌پردازیم.
 
-As an example, let's consider an object with the phone codes:
+به عنوان مثال، بیایید یک شیء حاوی کدهای تلفن را فرض کنیم:
 
 ```js run
 let codes = {
@@ -412,48 +412,48 @@ for (let code in codes) {
 */!*
 ```
 
-The object may be used to suggest a list of options to the user. If we're making a site mainly for German audience then we probably want `49` to be the first.
+این شیء ممکن است برای پیشنهاد دادن لیستی از گزینه‌ها به کاربر استفاده شود. اگر ما در حال ساخت سایتی که به طور عمده برای آلمانی‌ها است باشیم پس احتمالا می‌خواهیم که `49` اولین گزینه باشد.
 
-But if we run the code, we see a totally different picture:
+اما اگر ما کد را اجرا کنیم، نتیجه‌ای کاملا متفاوت می‌بینیم:
 
-- USA (1) goes first
-- then Switzerland (41) and so on.
+- USA (1) اولین خواهد بود.
+- سپس Switzerland (41) و همینطور ادامه پیدا می‌کند.
 
-The phone codes go in the ascending sorted order, because they are integers. So we see `1, 41, 44, 49`.
+کدهای تلفن با ترتیب صعودی مرتب می‌شوند، چون آنها اعداد صحیح هستند. پس ما `49 ،44 ،41 ،1` را خواهیم دید.
 
-````smart header="Integer properties? What's that?"
-The "integer property" term here means a string that can be converted to-and-from an integer without a change.
+````smart header="ویژگی‌های عدد صحیح؟ داستان از چه قرار است؟"
+عبارت "ویژگی عدد صحیح" در اینجا به معنی رشته‌ای است که می‌تواند بدون تغییر، به عدد صحیح تبدیل شود و برعکس.
 
-So, "49" is an integer property name, because when it's transformed to an integer number and back, it's still the same. But "+49" and "1.2" are not:
+بنابراین "49" یک اسمِ ویژگیِ صحیح است، چون زمانی که به یک عدد صحیح تبدیل می‌شود و برعکس، هنوز یکسان است. اما "49+" و "1.2" اینطور نیستند:
 
 ```js run
-// Math.trunc is a built-in function that removes the decimal part
-alert( String(Math.trunc(Number("49"))) ); // "49", same, integer property
-alert( String(Math.trunc(Number("+49"))) ); // "49", not same "+49" ⇒ not integer property
-alert( String(Math.trunc(Number("1.2"))) ); // "1", not same "1.2" ⇒ not integer property
+// یک تابع است که درون زبان ساخته شده و قسمت اعشاری را حذف می‌کند Math.trunc
+alert( String(Math.trunc(Number("49"))) ); // "49", یکسان است، پس ویژگی‌ای صحیح است
+alert( String(Math.trunc(Number("+49"))) ); // "49", با "49+" مشابه نیست، پس ویژگی‌ای صحیح هم نیست
+alert( String(Math.trunc(Number("1.2"))) ); // "1", با "1.2" مشابه نیست، پس ویژگی‌ای صحیح هم نیست
 ```
 ````
 
-...On the other hand, if the keys are non-integer, then they are listed in the creation order, for instance:
+...از سویی دیگر، اگر کلیدها عدد صحیح نباشند، به ترتیب ساخته شدن مرتب می‌شوند، برای مثال:
 
 ```js run
 let user = {
   name: "John",
   surname: "Smith"
 };
-user.age = 25; // add one more
+user.age = 25; // یک ویژگی دیگر اضافه می‌کنیم
 
 *!*
-// non-integer properties are listed in the creation order
+// ویژگی‌های غیر صحیح با ترتیب ساخته شدن مرتب می‌شوند
 */!*
 for (let prop in user) {
   alert( prop ); // name, surname, age
 }
 ```
 
-So, to fix the issue with the phone codes, we can "cheat" by making the codes non-integer. Adding a plus `"+"` sign before each code is enough.
+بنابراین، برای حل مشکل کدهای تلفن، ما می‌توانیم با ساخت کدهای غیر صحیح "تقلب کنیم". اضافه کردن علامت مثبت `"+"` قبل از هر کد کافی است.
 
-Like this:
+مثل این:
 
 ```js run
 let codes = {
@@ -469,34 +469,34 @@ for (let code in codes) {
 }
 ```
 
-Now it works as intended.
+حالا این کد همانطور که انتظار می‌رفت کار می‌کند.
 
-## Summary
+## خلاصه
 
-Objects are associative arrays with several special features.
+شیءها آرایه‌هایی شرکت‌پذیر با چند خصوصیت خاص هستند.
 
-They store properties (key-value pairs), where:
-- Property keys must be strings or symbols (usually strings).
-- Values can be of any type.
+آنها ویژگی‌ها (جفت‌های کلید-مقدار) را ذخیره می‌کنند که:
+- کلیدهای ویژگی‌ها باید رشته یا symbol باشند (معمولا رشته).
+- مقدارها می‌توانند از هر نوعی باشند.
 
-To access a property, we can use:
-- The dot notation: `obj.property`.
-- Square brackets notation `obj["property"]`. Square brackets allow to take the key from a variable, like `obj[varWithKey]`.
+برای دسترسی داشتن به یک ویژگی، ما می‌توانیم از این روش‌ها استفاده کنیم:
+- نقطه: `obj.property`.
+- براکت `obj["property"]`. براکت‌ها به ما اجازه می‌دهند که key را از یک متغیر بگیریم، مثلا: `obj[varWithKey]`.
 
-Additional operators:
-- To delete a property: `delete obj.prop`.
-- To check if a property with the given key exists: `"key" in obj`.
-- To iterate over an object: `for (let key in obj)` loop.
+عملگرهای اضافی:
+- برای حذف یک ویژگی: `delete obj.prop`.
+- برای بررسی موجودیت ویژگی با اسم داده شده: `"key" in obj`.
+- برای حلقه زدن درون یک شیء: حلقه‌ی `for (let key in obj)`.
 
-What we've studied in this chapter is called a "plain object", or just `Object`.
+چیزی که ما در این فصل آموختیم "شیء ساده" یا فقط `شیء` نامیده می‌شود.
 
-There are many other kinds of objects in JavaScript:
+در جاوااسکریپت شیءهای بسیار گوناگون دیگری وجود دارند:
 
-- `Array` to store ordered data collections,
-- `Date` to store the information about the date and time,
-- `Error` to store the information about an error.
-- ...And so on.
+- `Array` برای ذخیره کردن مجموعه‌ای از داده به صورت مرتب،
+- `Date` برای ذخیره کردن اطلاعاتی درباره تاریخ و زمان،
+- `Error` برای ذخیره کردن اطلاعات درباره‌ی یک ارور.
+- ...و غیره.
 
-They have their special features that we'll study later. Sometimes people say something like "Array type" or "Date type", but formally they are not types of their own, but belong to a single "object" data type. And they extend it in various ways.
+هر کدام از آنها خصوصیات خاص خود را دارند که بعدا آنها را می‌آموزیم. بعضی اوقات افراد چیزهایی مانند "نوع Array" یا "نوع Date" را به زبان می‌آورند، اما به طور رسمی آنها یک نوع خاص نیستند، بلکه به یک نوع «object» تعلق دارند و آن را به روش‌های مختلف گسترش می‌دهند.
 
-Objects in JavaScript are very powerful. Here we've just scratched the surface of a topic that is really huge. We'll be closely working with objects and learning more about them in further parts of the tutorial.
+شیءها در جاوااسکریپت بسیار قدرتمند هستند. اینجا ما فقط مقدار کمی از مبحثی که بسیار بزرگ است را یاد گرفتیم. ما خیلی با شیءها کار خواهیم کرد و چیزهای جدیدی را درباره آنها در بخش‌های بعدی این آموزش یاد خواهیم گرفت.

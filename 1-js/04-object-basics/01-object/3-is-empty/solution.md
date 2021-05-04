@@ -1,4 +1,4 @@
-Just loop over the object and `return false` immediately if there's at least one property.
+فقط درون شیء حلقه بزنید تا اگر حداقل یک ویژگی وجود داشته باشد `return false` را انجام دهد.
 
 ```js
 function isEmpty(obj) {

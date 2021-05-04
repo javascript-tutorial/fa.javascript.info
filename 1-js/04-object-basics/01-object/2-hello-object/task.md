@@ -2,13 +2,13 @@ importance: 5
 
 ---
 
-# Hello, object
+# سلام شیء
 
-Write the code, one line for each action:
+کد را بنویسید، هر خط کد برای یک عمل:
 
-1. Create an empty object `user`.
-2. Add the property `name` with the value `John`.
-3. Add the property `surname` with the value `Smith`.
-4. Change the value of the `name` to `Pete`.
-5. Remove the property `name` from the object.
+1. یک شیء خالی `user` بسازید.
+2. ویژگی `name` را با مقدار `John` به آن اضافه کنید.
+3. ویژگی `surname` را با مقدار `Smith` به آن اضافه کنید.
+4. مقدار `name` را به `Pete` تغییر دهید.
+5. ویژگی `name` را از شیء حذف کنید.
 
