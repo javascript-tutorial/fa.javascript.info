@@ -2,14 +2,14 @@ importance: 3
 
 ---
 
-# Multiply numeric property values by 2
+# مقدارهای عددیِ ویژگی‌ها را در 2 ضرب کنید
 
-Create a function `multiplyNumeric(obj)` that multiplies all numeric property values of `obj` by `2`.
+یک تابع `multiplyNumeric(obj)` بسازید که تمام مقدارهای عددیِ ویژگی‌های `obj` را در `2` ضرب می‌کند.
 
-For instance:
+برای مثال:
 
 ```js
-// before the call
+// قبل از صدا زدن
 let menu = {
   width: 200,
   height: 300,
@@ -18,7 +18,7 @@ let menu = {
 
 multiplyNumeric(menu);
 
-// after the call
+// بعد از صدا زدن
 menu = {
   width: 400,
   height: 600,
@@ -26,8 +26,8 @@ menu = {
 };
 ```
 
-Please note that `multiplyNumeric` does not need to return anything. It should modify the object in-place.
+لطفا در نظر داشته باشید که لازم نیست `multiplyNumeric` چیزی را برگرداند. بلکه باید شیء را در محل تغییر دهد.
 
-P.S. Use `typeof` to check for a number here.
+پی نوشت: اینجا از `typeof` برای بررسی عدد بودن استفاده کنید.
 
 
