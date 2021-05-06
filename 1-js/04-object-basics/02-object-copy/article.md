@@ -70,35 +70,35 @@ let admin = user;
 admin.name = 'Pete'; // "admin" تغییر داده شده توسط مرجع
 */!*
 
-alert(*!*user.name*/!*); // 'Pete'، هم قابل مشاهده هستند "user" تغییرات توسط مرجع
+alert(*!*user.name*/!*); // 'Pete' :هم قابل مشاهده هستند "user" تغییرات توسط مرجع
 ```
 
 درست مانند این است که ما یک کمد با دو کلید داشته باشیم و با استفاده از یکی از کلیدها (`admin`) آن را باز کنیم و درون آن تغییراتی انجام دهیم. سپس، اگر بعدا از کلید دیگر (`user`) استفاده کردیم، هنوز هم کمد یکسانی را باز کرده‌ایم و به محتوای تغییر داده شده دسترسی داریم.
 
-## Comparison by reference
+## مقایسه توسط مرجع
 
-Two objects are equal only if they are the same object.
+دو شیء تنها در حالتی که یک شیء یکسان باشند برابر هستند.
 
-For instance, here `a` and `b` reference the same object, thus they are equal:
+برای مثال، اینجا `a` و `b` به یک شیء یکسان رجوع می‌کنند، بنابراین برابر هستند:
 
 ```js run
 let a = {};
-let b = a; // copy the reference
+let b = a; // کپی کردن مرجع
 
-alert( a == b ); // true, both variables reference the same object
+alert( a == b ); // true :هر دو متغیر به شیء یکسان رجوع می‌کنند پس
 alert( a === b ); // true
 ```
 
-And here two independent objects are not equal, even though they look alike (both are empty):
+در کد پایین دو شیء مستقل داریم و با اینکه مشابه بنظر می‌رسند اما برابر نیستند (هر دو خالی هستند):
 
 ```js run
 let a = {};
-let b = {}; // two independent objects
+let b = {}; // دو شیء مستقل
 
 alert( a == b ); // false
 ```
 
-For comparisons like `obj1 > obj2` or for a comparison against a primitive `obj == 5`, objects are converted to primitives. We'll study how object conversions work very soon, but to tell the truth, such comparisons are needed very rarely -- usually they appear as a result of a programming mistake.
+برای مقایسه‌هایی مانند `obj1 > obj2` یا مقایسه شیء با یک مقدار اصلی `obj == 5`، شیءها به مقدارهای اصلی تبدیل می‌شوند. ما چگونگی تبدیل شیءها را به زودی مطالعه می‌کنیم، اما اگر بخواهیم حقیقت را بگوییم، چنین تبدیل‌هایی به ندرت نیاز می‌شوند -- آنها معمولا به عنوان نتیجه‌ی یک اشتباه برنامه‌نویسی ظاهر می‌شوند. 
 
 ## Cloning and merging, Object.assign [#cloning-and-merging-object-assign]
 
