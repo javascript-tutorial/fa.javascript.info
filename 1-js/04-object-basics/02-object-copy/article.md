@@ -1,29 +1,29 @@
-# Object references and copying
+# مرجع شیء و کپی کردن
 
-One of the fundamental differences of objects versus primitives is that objects are stored and copied "by reference", whereas primitive values: strings, numbers, booleans, etc -- are always copied "as a whole value".
+یکی از تفاوت‌های اساسی بین شیءها و مقدارهای اصلی(primitives) این است که شیءها "توسط مرجع" ذخیره و کپی می‌شوند، در حالی که مقدارهای اصلی مانند رشته‌ها، اعداد، مقدارهای boolean و غیره، همیشه "به عنوان یک مقدار کلی" ذخیره می‌شوند.
 
-That's easy to understand if we look a bit under the hood of what happens when we copy a value.
+اگر ما بدانیم زمانی که مقداری را کپی می‌کنیم چه اتفاقی می‌افتد، این موضوع را بهتر متوجه می‌شویم.
 
-Let's start with a primitive, such as a string.
+بیایید با یک مقدار اصلی مانند رشته شروع کنیم.
 
-Here we put a copy of `message` into `phrase`:
+اینجا ما یک کپی از `message` را درون `phrase` قرار می‌دهیم:
 
 ```js
 let message = "Hello!";
 let phrase = message;
 ```
 
-As a result we have two independent variables, each one storing the string `"Hello!"`.
+در نتیجه ما دو متغیر مستقل داریم که هر کدام رشته‌ی `"Hello!"` را ذخیره می‌کنند.
 
 ![](variable-copy-value.svg)
 
-Quite an obvious result, right?
+نتیجه خیلی بدیهی است نه؟
 
-Objects are not like that.
+شیءها اینگونه نیستند.
 
-**A variable assigned to an object stores not the object itself, but its "address in memory" -- in other words "a reference" to it.**
+**متغیری که یک شیء به آن تخصیص داده شده باشد خود شیء را ذخیره نمی‌کند، بلکه "آدرس آن در حافظه" را ذخیره می‌کند. به عبارتی دیگر "یک مرجع" را ذخیره می‌کنند.**
 
-Let's look at an example of such a variable:
+بیایید به مثالی از چنین متغیری نگاه کنیم:
 
 ```js
 let user = {
@@ -31,35 +31,35 @@ let user = {
 };
 ```
 
-And here's how it's actually stored in memory:
+اینکه در واقع چگونه ذخیره می‌شود را اینجا گفتیم:
 
 ![](variable-contains-reference.svg)
 
-The object is stored somewhere in memory (at the right of the picture), while the `user` variable (at the left) has a "reference" to it.
+شیء در جایی از حافظه ذخیره شده است (سمت راست تصویر)، در حالی که متغیر `user` (سمت چپ) به شیء "رجوع می‌کند".
 
-We may think of an object variable, such as `user`, as like a sheet of paper with the address of the object on it.
+می‌توانیم به متغیری که شیءای را ذخیره می‌کند، مانند `user`، به عنوان یک ورق کاغذ که شامل آدرس شیء است نگاه کنیم.
 
-When we perform actions with the object, e.g. take a property `user.name`, the JavaScript engine looks at what's at that address and performs the operation on the actual object.
+زمانی که ما با شیء کاری انجام می‌دهیم، برای مثال یک ویژگی را می‌گیریم `user.name`، موتور جاوااسکریپت به آدرس نگاه می‌کند که چه چیزی درون آن قرار دارد و عملیات را روی شیء واقعی انجام می‌دهد.
 
-Now here's why it's important.
+حال دلیل اهمیت آن اینجا آمده است.
 
-**When an object variable is copied, the reference is copied, but the object itself is not duplicated.**
+**زمانی که یک متغیر حاوی شیء کپی می‌شود، مرجع آن کپی شده‌است نه خود شیء.**
 
-For instance:
+برای مثال:
 
 ```js no-beautify
 let user = { name: "John" };
 
-let admin = user; // copy the reference
+let admin = user; // کپی شدن مرجع
 ```
 
-Now we have two variables, each storing a reference to the same object:
+حالا ما دو متغیر داریم که هر کدام یک مرجع به شیء یکسان را ذخیره می‌کنند:
 
 ![](variable-copy-reference.svg)
 
-As you can see, there's still one object, but now with two variables that reference it.
+همانطور که می‌بینید، هنوز یک شیء وجود دارد، اما حالا دو متغیر داریم که به آن رجوع می‌کنند.
 
-We can use either variable to access the object and modify its contents:
+برای دسترسی به شیء و تغییر محتوای آن می‌توانیم از هر دو متغیر استفاده کنیم:
 
 ```js run
 let user = { name: 'John' };
@@ -67,13 +67,13 @@ let user = { name: 'John' };
 let admin = user;
 
 *!*
-admin.name = 'Pete'; // changed by the "admin" reference
+admin.name = 'Pete'; // "admin" تغییر داده شده توسط مرجع
 */!*
 
-alert(*!*user.name*/!*); // 'Pete', changes are seen from the "user" reference
+alert(*!*user.name*/!*); // 'Pete'، هم قابل مشاهده هستند "user" تغییرات توسط مرجع
 ```
 
-It's as if we had a cabinet with two keys and used one of them (`admin`) to get into it and make changes. Then, if we later use another key (`user`), we are still opening the same cabinet and can access the changed contents.
+درست مانند این است که ما یک کمد با دو کلید داشته باشیم و با استفاده از یکی از کلیدها (`admin`) آن را باز کنیم و درون آن تغییراتی انجام دهیم. سپس، اگر بعدا از کلید دیگر (`user`) استفاده کردیم، هنوز هم کمد یکسانی را باز کرده‌ایم و به محتوای تغییر داده شده دسترسی داریم.
 
 ## Comparison by reference
 
