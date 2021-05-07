@@ -100,17 +100,17 @@ alert( a == b ); // false
 
 برای مقایسه‌هایی مانند `obj1 > obj2` یا مقایسه شیء با یک مقدار اصلی `obj == 5`، شیءها به مقدارهای اصلی تبدیل می‌شوند. ما چگونگی تبدیل شیءها را به زودی مطالعه می‌کنیم، اما اگر بخواهیم حقیقت را بگوییم، چنین تبدیل‌هایی به ندرت نیاز می‌شوند -- آنها معمولا به عنوان نتیجه‌ی یک اشتباه برنامه‌نویسی ظاهر می‌شوند. 
 
-## Cloning and merging, Object.assign [#cloning-and-merging-object-assign]
+## کپی و ادغام کردن، Object.assign [#cloning-and-merging-object-assign]
 
-So, copying an object variable creates one more reference to the same object.
+پس کپی کردن یک متغیر حاوی شیء باعث ساخت یک مرجع اضافی به همان شیء می‌شود.
 
-But what if we need to duplicate an object? Create an independent copy, a clone?
+اما اگر ما نیاز داشته باشیم که چند نسخه از یک شیء بسازیم چه کار کنیم؟ ساخت یک کپی مستقل، یک شیء مشابه؟
 
-That's also doable, but a little bit more difficult, because there's no built-in method for that in JavaScript. But there is rarely a need -- copying by reference is good most of the time.
+این هم شدنی است، اما کمی سخت‌تر است، چون هیچ متد درون‌سازی برای چنین کاری در جاوااسکریپت وجود ندارد. اما نیاز به انجام چنین کاری کم پیش می‌آید و کپی کردن مرجع اکثر اوقات کار مناسبی است.
 
-But if we really want that, then we need to create a new object and replicate the structure of the existing one by iterating over its properties and copying them on the primitive level.
+اگر واقعا چنین چیزی را بخواهیم، باید یک شیء جدید بسازیم و ساختار شیءای که از قبل موجود است را با حلقه زدن بین ویژگی‌های آن و کپی کردن آنها در سطح مقدارهای اصلی، در شیء جدید کپی کنیم.
 
-Like this:
+مانند این کد:
 
 ```js run
 let user = {
@@ -119,34 +119,34 @@ let user = {
 };
 
 *!*
-let clone = {}; // the new empty object
+let clone = {}; // شیء خالی جدید
 
-// let's copy all user properties into it
+// را درون آن کپی کنیم user بیایید تمام ویژگی‌های
 for (let key in user) {
   clone[key] = user[key];
 }
 */!*
 
-// now clone is a fully independent object with the same content
-clone.name = "Pete"; // changed the data in it
+// حال شیء کپی شده یک شیء کاملا مستقل با محتوای یکسان است
+clone.name = "Pete"; // تغییر دادن داده‌ی درون آن
 
-alert( user.name ); // still John in the original object
+alert( user.name ); // است John هنوز در شیء اصلی برابر با
 ```
 
-Also we can use the method [Object.assign](mdn:js/Object/assign) for that.
+همچنین ما می‌توانیم از متد [Object.assign](mdn:js/Object/assign) برای این کار استفاده کنیم.
 
-The syntax is:
+سینتکس آن اینگونه است:
 
 ```js
 Object.assign(dest, [src1, src2, src3...])
 ```
 
-- The first argument `dest` is a target object.
-- Further arguments `src1, ..., srcN` (can be as many as needed) are source objects.
-- It copies the properties of all source objects `src1, ..., srcN` into the target `dest`. In other words, properties of all arguments starting from the second are copied into the first object.
-- The call returns `dest`.
+- اولین آرگومان `dest` همان شیء مقصود است.
+- آرگومان‌های بعدی `src1, ..., srcN` (ممکن است هر تعدادی باشد) شیءها منبع هستند.
+- این متد ویژگی‌های تمام شیءها منبع `src1, ..., srcN` را درون `dest` کپی می‌کند. به عبارتی دیگر، ویژگی‌های تمام آرگومان‌های بعد از دومین آرگومان، درون شیء اول کپی می‌شوند.
+- متد صدازده شده `dest` را برمی‌گرداند.
 
-For instance, we can use it to merge several objects into one:
+برای مثال، می‌توانیم از این متد برای ادغام چند شیء و ریختن آنها درون یک شیء استفاده کنیم:
 ```js
 let user = { name: "John" };
 
@@ -154,24 +154,24 @@ let permissions1 = { canView: true };
 let permissions2 = { canEdit: true };
 
 *!*
-// copies all properties from permissions1 and permissions2 into user
+// کپی می‌کند user درون permissions2 و permissions1 تمام ویژگی‌ها را از
 Object.assign(user, permissions1, permissions2);
 */!*
 
-// now user = { name: "John", canView: true, canEdit: true }
+// user = { name: "John", canView: true, canEdit: true } :حالا داریم
 ```
 
-If the copied property name already exists, it gets overwritten:
+اگر ویژگی کپی‌شده از قبل وجود داشته باشد، دوباره مقداردهی می‌شود:
 
 ```js run
 let user = { name: "John" };
 
 Object.assign(user, { name: "Pete" });
 
-alert(user.name); // now user = { name: "Pete" }
+alert(user.name); // user = { name: "Pete" } :حالا داریم
 ```
 
-We also can use `Object.assign` to replace `for..in` loop for simple cloning:
+همچنین می‌توانیم برای کپی کردن‌های ساده از `Object.assign` به جای حلقه‌ی `for..in` استفاده کنیم:
 
 ```js
 let user = {
@@ -184,9 +184,9 @@ let clone = Object.assign({}, user);
 */!*
 ```
 
-It copies all properties of `user` into the empty object and returns it.
+تمام ویژگی‌های `user` درون شیء خالی کپی و برگردانده می‌شوند.
 
-There are also other methods of cloning an object, e.g. using the [spread syntax](info:rest-parameters-spread) `clone = {...user}`, covered later in the tutorial.
+همچنین متدهای دیگری برای کپی یک شیء وجود دارد مانند استفاده کردن از [سینتکس spread](info:rest-parameters-spread) `clone = {...user}` که بعدا در این آموزش پوشش داده می‌شود.
 
 ## Nested cloning
 
