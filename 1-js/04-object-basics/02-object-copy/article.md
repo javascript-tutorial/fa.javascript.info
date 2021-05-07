@@ -188,11 +188,11 @@ let clone = Object.assign({}, user);
 
 همچنین متدهای دیگری برای کپی یک شیء وجود دارد مانند استفاده کردن از [سینتکس spread](info:rest-parameters-spread) `clone = {...user}` که بعدا در این آموزش پوشش داده می‌شود.
 
-## Nested cloning
+## کپی کردن تو در تو
 
-Until now we assumed that all properties of `user` are primitive. But properties can be references to other objects. What to do with them?
+تا اینجا ما فرض کردیم که تمام ویژگی‌های `user` مقدارهای اصلی هستند. اما ویژگی ‌ها می‌توانند به شیءهای دیگر رجوع کنند. با آنها چه کار کنیم؟
 
-Like this:
+مانند این کد:
 ```js run
 let user = {
   name: "John",
@@ -205,9 +205,9 @@ let user = {
 alert( user.sizes.height ); // 182
 ```
 
-Now it's not enough to copy `clone.sizes = user.sizes`, because the `user.sizes` is an object, it will be copied by reference. So `clone` and `user` will share the same sizes:
+اینجا کپی کردن `clone.sizes = user.sizes` کافی است، چون `user.sized` یک شیء است و توسط مرجع کپی می‌شود. پس `clone` و `user` سایزهای یکسانی را مشترک می‌شوند:
 
-Like this:
+مثل این:
 
 ```js run
 let user = {
@@ -220,21 +220,21 @@ let user = {
 
 let clone = Object.assign({}, user);
 
-alert( user.sizes === clone.sizes ); // true, same object
+alert( user.sizes === clone.sizes ); // true :شیءهای یکسان پس
 
-// user and clone share sizes
-user.sizes.width++;       // change a property from one place
-alert(clone.sizes.width); // 51, see the result from the other one
+// سایزهای مشترک دارند clone و user
+user.sizes.width++;       // یک ویژگی را از یک جا تغییر دهید
+alert(clone.sizes.width); // 51 :نتیجه را از جای دیگر ببینید
 ```
 
-To fix that, we should use a cloning loop that examines each value of `user[key]` and, if it's an object, then replicate its structure as well. That is called a "deep cloning".
+برای رفع این اشکال، ما باید از یک حلقه‌ی کپی‌کردن استفاده کنیم که هر مقدار `user[key]` را بررسی می‌کند و اگر شیء بود، سپس ساختار آن را هم کپی می‌کند. به این کار "کپی‌کردن عمیق" می‌گویند.
 
-We can use recursion to implement it. Or, to not reinvent the wheel, take an existing implementation, for instance [_.cloneDeep(obj)](https://lodash.com/docs#cloneDeep) from the JavaScript library [lodash](https://lodash.com).
+ما می‌توانیم از بازگشت برای پیاده‌سازی آن استفاده کنیم. یا برای اینکه دوباره کاری نکنیم، از چیزی که قبلا پیاده‌سازی شده استفاده کنیم، برای مثال [_.cloneDeep(obj)](https://lodash.com/docs#cloneDeep) از کتابخانه‌ی [lodash](https://lodash.com).
 
-````smart header="Const objects can be modified"
-An important side effect of storing objects as references is that an object declared as `const` *can* be modified.
+````smart header="شیءهای ثابت (const) می‌توانند تغییر کنند"
+یک از عارضه‌های جانبی مهم ذخیره شدن شیءها به عنوان مرجع، این است که شیءای که به عنوان `const` تعریف شده است *می‌تواند* تغییر کند.
 
-For instance:
+برای مثال:
 
 ```js run
 const user = {
@@ -248,17 +248,17 @@ user.name = "Pete"; // (*)
 alert(user.name); // Pete
 ```
 
-It might seem that the line `(*)` would cause an error, but it does not. The value of `user` is constant, it must always reference the same object, but properties of that object are free to change.
+شاید به نظر برسد که خط `(*)` باعث ارور شود، اما اینطور نیست. مقدار `user` ثابت است و همیشه باید به شیء یکسان رجوع کند، اما ویژگی‌های آن شیء برای تغییر آزاد هستند.
 
-In other words, the `const user` gives an error only if we try to set `user=...` as a whole.
+به عبارتی دیگر، اگر ما سعی کنیم که عبارت `user=...` را به طور کل تغییر دهیم `const user` باعث ارور می‌شود.
 
-That said, if we really need to make constant object properties, it's also possible, but using totally different methods. We'll mention that in the chapter <info:property-descriptors>.
+با این حال، اگر ما واقعا نیاز به ساخت شیء ثابت داشته باشیم، می‌توانیم این کار را انجام دهیم، اما با روش‌های کاملا متفاوت. آنها را در فصل <info:property-descriptors> بیان می‌کنیم.
 ````
 
-## Summary
+## خلاصه
 
-Objects are assigned and copied by reference. In other words, a variable stores not the "object value", but a "reference" (address in memory) for the value. So copying such a variable or passing it as a function argument copies that reference, not the object itself.
+شیءها توسط مرجع تخصیص داده و کپی می‌شوند. به عبارتی دیگر، یک متغیر "مقدار حاوی شیء" را دخیره نمی‌کند، بلکه یک "مرجع" (آدرس درون حافظه) را به عنوان مقدار ذخیره می‌کند. پس کپی کردن چنین متغیری یا رد کردن آن به عنوان یک آرگومان تابع آن مرجع را کپی می‌کند نه خود شیء را.
 
-All operations via copied references (like adding/removing properties) are performed on the same single object.
+تمام عملیات‌ها (مانند اضافه/کم کردن ویژگی‌ها) از طریق مرجع کپی‌شده روی شیء یکسان انجام می‌شوند.
 
-To make a "real copy" (a clone) we can use `Object.assign` for the so-called "shallow copy" (nested objects are copied by reference) or a "deep cloning" function, such as [_.cloneDeep(obj)](https://lodash.com/docs#cloneDeep).
+برای اینکه یک "کپی واقعی" (یک مشبه) را بسازیم می‌توانیم از `Object.assign` برای "کپی‌های سطحی" (شیءهای تو در تو توسط مرجع کپی می‌شوند) یا از تابع "کپی عمیق" استفاده کنیم، مانند [_.cloneDeep(obj)](https://lodash.com/docs#cloneDeep).
