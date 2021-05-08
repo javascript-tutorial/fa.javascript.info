@@ -1,29 +1,29 @@
-# Object references and copying
+# مراجع شیء و کپی کردن
 
-One of the fundamental differences of objects versus primitives is that objects are stored and copied "by reference", whereas primitive values: strings, numbers, booleans, etc -- are always copied "as a whole value".
+یکی از تفاوت‌های اساسی بین شیءها و مقدارهای اصلی(primitives) این است که شیءها "توسط مرجع" ذخیره و کپی می‌شوند، در حالی که مقدارهای اصلی مانند رشته‌ها، اعداد، مقدارهای boolean و غیره، همیشه "به عنوان یک مقدار کلی" ذخیره می‌شوند.
 
-That's easy to understand if we look a bit under the hood of what happens when we copy a value.
+اگر ما بدانیم زمانی که مقداری را کپی می‌کنیم چه اتفاقی می‌افتد، این موضوع را بهتر متوجه می‌شویم.
 
-Let's start with a primitive, such as a string.
+بیایید با یک مقدار اصلی مانند رشته شروع کنیم.
 
-Here we put a copy of `message` into `phrase`:
+اینجا ما یک کپی از `message` را درون `phrase` قرار می‌دهیم:
 
 ```js
 let message = "Hello!";
 let phrase = message;
 ```
 
-As a result we have two independent variables, each one storing the string `"Hello!"`.
+در نتیجه ما دو متغیر مستقل داریم که هر کدام رشته‌ی `"Hello!"` را ذخیره می‌کنند.
 
 ![](variable-copy-value.svg)
 
-Quite an obvious result, right?
+نتیجه خیلی بدیهی است نه؟
 
-Objects are not like that.
+شیءها اینگونه نیستند.
 
-**A variable assigned to an object stores not the object itself, but its "address in memory" -- in other words "a reference" to it.**
+**متغیری که یک شیء به آن تخصیص داده شده باشد خود شیء را ذخیره نمی‌کند، بلکه "آدرس آن در حافظه" را ذخیره می‌کند. به عبارتی دیگر "یک مرجع" را ذخیره می‌کنند.**
 
-Let's look at an example of such a variable:
+بیایید به مثالی از چنین متغیری نگاه کنیم:
 
 ```js
 let user = {
@@ -31,35 +31,35 @@ let user = {
 };
 ```
 
-And here's how it's actually stored in memory:
+اینکه در واقع چگونه ذخیره می‌شود را اینجا گفتیم:
 
 ![](variable-contains-reference.svg)
 
-The object is stored somewhere in memory (at the right of the picture), while the `user` variable (at the left) has a "reference" to it.
+شیء در جایی از حافظه ذخیره شده است (سمت راست تصویر)، در حالی که متغیر `user` (سمت چپ) به شیء "رجوع می‌کند".
 
-We may think of an object variable, such as `user`, as like a sheet of paper with the address of the object on it.
+می‌توانیم به متغیری که شیءای را ذخیره می‌کند، مانند `user`، به عنوان یک ورق کاغذ که شامل آدرس شیء است نگاه کنیم.
 
-When we perform actions with the object, e.g. take a property `user.name`, the JavaScript engine looks at what's at that address and performs the operation on the actual object.
+زمانی که ما با شیء کاری انجام می‌دهیم، برای مثال یک ویژگی را می‌گیریم `user.name`، موتور جاوااسکریپت به آدرس نگاه می‌کند که چه چیزی درون آن قرار دارد و عملیات را روی شیء واقعی انجام می‌دهد.
 
-Now here's why it's important.
+حال دلیل اهمیت آن اینجا آمده است.
 
-**When an object variable is copied, the reference is copied, but the object itself is not duplicated.**
+**زمانی که یک متغیر حاوی شیء کپی می‌شود، مرجع آن کپی شده‌است نه خود شیء.**
 
-For instance:
+برای مثال:
 
 ```js no-beautify
 let user = { name: "John" };
 
-let admin = user; // copy the reference
+let admin = user; // کپی شدن مرجع
 ```
 
-Now we have two variables, each storing a reference to the same object:
+حالا ما دو متغیر داریم که هر کدام یک مرجع به شیء یکسان را ذخیره می‌کنند:
 
 ![](variable-copy-reference.svg)
 
-As you can see, there's still one object, but now with two variables that reference it.
+همانطور که می‌بینید، هنوز یک شیء وجود دارد، اما حالا دو متغیر داریم که به آن رجوع می‌کنند.
 
-We can use either variable to access the object and modify its contents:
+برای دسترسی به شیء و تغییر محتوای آن می‌توانیم از هر دو متغیر استفاده کنیم:
 
 ```js run
 let user = { name: 'John' };
@@ -67,50 +67,50 @@ let user = { name: 'John' };
 let admin = user;
 
 *!*
-admin.name = 'Pete'; // changed by the "admin" reference
+admin.name = 'Pete'; // "admin" تغییر داده شده توسط مرجع
 */!*
 
-alert(*!*user.name*/!*); // 'Pete', changes are seen from the "user" reference
+alert(*!*user.name*/!*); // 'Pete' :هم قابل مشاهده هستند "user" تغییرات توسط مرجع
 ```
 
-It's as if we had a cabinet with two keys and used one of them (`admin`) to get into it and make changes. Then, if we later use another key (`user`), we are still opening the same cabinet and can access the changed contents.
+درست مانند این است که ما یک کمد با دو کلید داشته باشیم و با استفاده از یکی از کلیدها (`admin`) آن را باز کنیم و درون آن تغییراتی انجام دهیم. سپس، اگر بعدا از کلید دیگر (`user`) استفاده کردیم، هنوز هم کمد یکسانی را باز کرده‌ایم و به محتوای تغییر داده شده دسترسی داریم.
 
-## Comparison by reference
+## مقایسه توسط مرجع
 
-Two objects are equal only if they are the same object.
+دو شیء تنها در حالتی که یک شیء یکسان باشند برابر هستند.
 
-For instance, here `a` and `b` reference the same object, thus they are equal:
+برای مثال، اینجا `a` و `b` به یک شیء یکسان رجوع می‌کنند، بنابراین برابر هستند:
 
 ```js run
 let a = {};
-let b = a; // copy the reference
+let b = a; // کپی کردن مرجع
 
-alert( a == b ); // true, both variables reference the same object
+alert( a == b ); // true :هر دو متغیر به شیء یکسان رجوع می‌کنند پس
 alert( a === b ); // true
 ```
 
-And here two independent objects are not equal, even though they look alike (both are empty):
+در کد پایین دو شیء مستقل داریم و با اینکه مشابه بنظر می‌رسند اما برابر نیستند (هر دو خالی هستند):
 
 ```js run
 let a = {};
-let b = {}; // two independent objects
+let b = {}; // دو شیء مستقل
 
 alert( a == b ); // false
 ```
 
-For comparisons like `obj1 > obj2` or for a comparison against a primitive `obj == 5`, objects are converted to primitives. We'll study how object conversions work very soon, but to tell the truth, such comparisons are needed very rarely -- usually they appear as a result of a programming mistake.
+برای مقایسه‌هایی مانند `obj1 > obj2` یا مقایسه شیء با یک مقدار اصلی `obj == 5`، شیءها به مقدارهای اصلی تبدیل می‌شوند. ما چگونگی تبدیل شیءها را به زودی مطالعه می‌کنیم، اما اگر بخواهیم حقیقت را بگوییم، چنین تبدیل‌هایی به ندرت نیاز می‌شوند -- آنها معمولا به عنوان نتیجه‌ی یک اشتباه برنامه‌نویسی ظاهر می‌شوند. 
 
-## Cloning and merging, Object.assign [#cloning-and-merging-object-assign]
+## کپی و ادغام کردن، Object.assign [#cloning-and-merging-object-assign]
 
-So, copying an object variable creates one more reference to the same object.
+پس کپی کردن یک متغیر حاوی شیء باعث ساخت یک مرجع اضافی به همان شیء می‌شود.
 
-But what if we need to duplicate an object? Create an independent copy, a clone?
+اما اگر ما نیاز داشته باشیم که چند نسخه از یک شیء بسازیم چه کار کنیم؟ ساخت یک کپی مستقل، یک شیء مشابه؟
 
-That's also doable, but a little bit more difficult, because there's no built-in method for that in JavaScript. But there is rarely a need -- copying by reference is good most of the time.
+این هم شدنی است، اما کمی سخت‌تر است، چون هیچ متد درون‌سازی برای چنین کاری در جاوااسکریپت وجود ندارد. اما نیاز به انجام چنین کاری کم پیش می‌آید و کپی کردن مرجع اکثر اوقات کار مناسبی است.
 
-But if we really want that, then we need to create a new object and replicate the structure of the existing one by iterating over its properties and copying them on the primitive level.
+اگر واقعا چنین چیزی را بخواهیم، باید یک شیء جدید بسازیم و ساختار شیءای که از قبل موجود است را با حلقه زدن بین ویژگی‌های آن و کپی کردن آنها در سطح مقدارهای اصلی، در شیء جدید کپی کنیم.
 
-Like this:
+مانند این کد:
 
 ```js run
 let user = {
@@ -119,34 +119,34 @@ let user = {
 };
 
 *!*
-let clone = {}; // the new empty object
+let clone = {}; // شیء خالی جدید
 
-// let's copy all user properties into it
+// را درون آن کپی کنیم user بیایید تمام ویژگی‌های
 for (let key in user) {
   clone[key] = user[key];
 }
 */!*
 
-// now clone is a fully independent object with the same content
-clone.name = "Pete"; // changed the data in it
+// حال شیء کپی شده یک شیء کاملا مستقل با محتوای یکسان است
+clone.name = "Pete"; // تغییر دادن داده‌ی درون آن
 
-alert( user.name ); // still John in the original object
+alert( user.name ); // است John هنوز در شیء اصلی برابر با
 ```
 
-Also we can use the method [Object.assign](mdn:js/Object/assign) for that.
+همچنین ما می‌توانیم از متد [Object.assign](mdn:js/Object/assign) برای این کار استفاده کنیم.
 
-The syntax is:
+سینتکس آن اینگونه است:
 
 ```js
 Object.assign(dest, [src1, src2, src3...])
 ```
 
-- The first argument `dest` is a target object.
-- Further arguments `src1, ..., srcN` (can be as many as needed) are source objects.
-- It copies the properties of all source objects `src1, ..., srcN` into the target `dest`. In other words, properties of all arguments starting from the second are copied into the first object.
-- The call returns `dest`.
+- اولین آرگومان `dest` همان شیء مقصود است.
+- آرگومان‌های بعدی `src1, ..., srcN` (ممکن است هر تعدادی باشد) شیءها منبع هستند.
+- این متد ویژگی‌های تمام شیءها منبع `src1, ..., srcN` را درون `dest` کپی می‌کند. به عبارتی دیگر، ویژگی‌های تمام آرگومان‌های بعد از دومین آرگومان، درون شیء اول کپی می‌شوند.
+- متد صدازده شده `dest` را برمی‌گرداند.
 
-For instance, we can use it to merge several objects into one:
+برای مثال، می‌توانیم از این متد برای ادغام چند شیء و ریختن آنها درون یک شیء استفاده کنیم:
 ```js
 let user = { name: "John" };
 
@@ -154,24 +154,24 @@ let permissions1 = { canView: true };
 let permissions2 = { canEdit: true };
 
 *!*
-// copies all properties from permissions1 and permissions2 into user
+// کپی می‌کند user درون permissions2 و permissions1 تمام ویژگی‌ها را از
 Object.assign(user, permissions1, permissions2);
 */!*
 
-// now user = { name: "John", canView: true, canEdit: true }
+// user = { name: "John", canView: true, canEdit: true } :حالا داریم
 ```
 
-If the copied property name already exists, it gets overwritten:
+اگر ویژگی کپی‌شده از قبل وجود داشته باشد، دوباره مقداردهی می‌شود:
 
 ```js run
 let user = { name: "John" };
 
 Object.assign(user, { name: "Pete" });
 
-alert(user.name); // now user = { name: "Pete" }
+alert(user.name); // user = { name: "Pete" } :حالا داریم
 ```
 
-We also can use `Object.assign` to replace `for..in` loop for simple cloning:
+همچنین می‌توانیم برای کپی کردن‌های ساده از `Object.assign` به جای حلقه‌ی `for..in` استفاده کنیم:
 
 ```js
 let user = {
@@ -184,15 +184,15 @@ let clone = Object.assign({}, user);
 */!*
 ```
 
-It copies all properties of `user` into the empty object and returns it.
+تمام ویژگی‌های `user` درون شیء خالی کپی و برگردانده می‌شوند.
 
-There are also other methods of cloning an object, e.g. using the [spread syntax](info:rest-parameters-spread) `clone = {...user}`, covered later in the tutorial.
+همچنین متدهای دیگری برای کپی یک شیء وجود دارد مانند استفاده کردن از [سینتکس spread](info:rest-parameters-spread) `clone = {...user}` که بعدا در این آموزش پوشش داده می‌شود.
 
-## Nested cloning
+## کپی کردن تو در تو
 
-Until now we assumed that all properties of `user` are primitive. But properties can be references to other objects. What to do with them?
+تا اینجا ما فرض کردیم که تمام ویژگی‌های `user` مقدارهای اصلی هستند. اما ویژگی ‌ها می‌توانند به شیءهای دیگر رجوع کنند. با آنها چه کار کنیم؟
 
-Like this:
+مانند این کد:
 ```js run
 let user = {
   name: "John",
@@ -205,9 +205,9 @@ let user = {
 alert( user.sizes.height ); // 182
 ```
 
-Now it's not enough to copy `clone.sizes = user.sizes`, because the `user.sizes` is an object, it will be copied by reference. So `clone` and `user` will share the same sizes:
+اینجا کپی کردن `clone.sizes = user.sizes` کافی است، چون `user.sized` یک شیء است و توسط مرجع کپی می‌شود. پس `clone` و `user` سایزهای یکسانی را مشترک می‌شوند:
 
-Like this:
+مثل این:
 
 ```js run
 let user = {
@@ -220,21 +220,21 @@ let user = {
 
 let clone = Object.assign({}, user);
 
-alert( user.sizes === clone.sizes ); // true, same object
+alert( user.sizes === clone.sizes ); // true :شیءهای یکسان پس
 
-// user and clone share sizes
-user.sizes.width++;       // change a property from one place
-alert(clone.sizes.width); // 51, see the result from the other one
+// سایزهای مشترک دارند clone و user
+user.sizes.width++;       // یک ویژگی را از یک جا تغییر دهید
+alert(clone.sizes.width); // 51 :نتیجه را از جای دیگر ببینید
 ```
 
-To fix that, we should use a cloning loop that examines each value of `user[key]` and, if it's an object, then replicate its structure as well. That is called a "deep cloning".
+برای رفع این اشکال، ما باید از یک حلقه‌ی کپی‌کردن استفاده کنیم که هر مقدار `user[key]` را بررسی می‌کند و اگر شیء بود، سپس ساختار آن را هم کپی می‌کند. به این کار "کپی‌کردن عمیق" می‌گویند.
 
-We can use recursion to implement it. Or, to not reinvent the wheel, take an existing implementation, for instance [_.cloneDeep(obj)](https://lodash.com/docs#cloneDeep) from the JavaScript library [lodash](https://lodash.com).
+ما می‌توانیم از بازگشت برای پیاده‌سازی آن استفاده کنیم. یا برای اینکه دوباره کاری نکنیم، از چیزی که قبلا پیاده‌سازی شده استفاده کنیم، برای مثال [_.cloneDeep(obj)](https://lodash.com/docs#cloneDeep) از کتابخانه‌ی [lodash](https://lodash.com).
 
-````smart header="Const objects can be modified"
-An important side effect of storing objects as references is that an object declared as `const` *can* be modified.
+````smart header="شیءهای ثابت (const) می‌توانند تغییر کنند"
+یک از عارضه‌های جانبی مهم ذخیره شدن شیءها به عنوان مرجع، این است که شیءای که به عنوان `const` تعریف شده است *می‌تواند* تغییر کند.
 
-For instance:
+برای مثال:
 
 ```js run
 const user = {
@@ -248,17 +248,17 @@ user.name = "Pete"; // (*)
 alert(user.name); // Pete
 ```
 
-It might seem that the line `(*)` would cause an error, but it does not. The value of `user` is constant, it must always reference the same object, but properties of that object are free to change.
+شاید به نظر برسد که خط `(*)` باعث ارور شود، اما اینطور نیست. مقدار `user` ثابت است و همیشه باید به شیء یکسان رجوع کند، اما ویژگی‌های آن شیء برای تغییر آزاد هستند.
 
-In other words, the `const user` gives an error only if we try to set `user=...` as a whole.
+به عبارتی دیگر، اگر ما سعی کنیم که عبارت `user=...` را به طور کل تغییر دهیم `const user` باعث ارور می‌شود.
 
-That said, if we really need to make constant object properties, it's also possible, but using totally different methods. We'll mention that in the chapter <info:property-descriptors>.
+با این حال، اگر ما واقعا نیاز به ساخت شیء ثابت داشته باشیم، می‌توانیم این کار را انجام دهیم، اما با روش‌های کاملا متفاوت. آنها را در فصل <info:property-descriptors> بیان می‌کنیم.
 ````
 
-## Summary
+## خلاصه
 
-Objects are assigned and copied by reference. In other words, a variable stores not the "object value", but a "reference" (address in memory) for the value. So copying such a variable or passing it as a function argument copies that reference, not the object itself.
+شیءها توسط مرجع تخصیص داده و کپی می‌شوند. به عبارتی دیگر، یک متغیر "مقدار حاوی شیء" را دخیره نمی‌کند، بلکه یک "مرجع" (آدرس درون حافظه) را به عنوان مقدار ذخیره می‌کند. پس کپی کردن چنین متغیری یا رد کردن آن به عنوان یک آرگومان تابع آن مرجع را کپی می‌کند نه خود شیء را.
 
-All operations via copied references (like adding/removing properties) are performed on the same single object.
+تمام عملیات‌ها (مانند اضافه/کم کردن ویژگی‌ها) از طریق مرجع کپی‌شده روی شیء یکسان انجام می‌شوند.
 
-To make a "real copy" (a clone) we can use `Object.assign` for the so-called "shallow copy" (nested objects are copied by reference) or a "deep cloning" function, such as [_.cloneDeep(obj)](https://lodash.com/docs#cloneDeep).
+برای اینکه یک "کپی واقعی" (یک مشبه) را بسازیم می‌توانیم از `Object.assign` برای "کپی‌های سطحی" (شیءهای تو در تو توسط مرجع کپی می‌شوند) یا از تابع "کپی عمیق" استفاده کنیم، مانند [_.cloneDeep(obj)](https://lodash.com/docs#cloneDeep).
