@@ -1,6 +1,6 @@
-# Object methods, "this"
+# متدهای شیء، "this"
 
-Objects are usually created to represent entities of the real world, like users, orders and so on:
+شیءها معمولا برای نمایش چیزهایی که در دنیای واقعی هستند ساخته می‌شوند، مانند کاربرها، سفارشات و غیره:
 
 ```js
 let user = {
@@ -9,9 +9,9 @@ let user = {
 };
 ```
 
-And, in the real world, a user can *act*: select something from the shopping cart, login, logout etc.
+و در دنیای واقعی، یک کاربر می‌تواند *کاری انجام دهد* برای مثال چیزی را از سبد خرید اتخاب کند، وارد سایت شود، از سایت خارج شود و غیره.
 
-Actions are represented in JavaScript by functions in properties.
+اعمال در جاوااسکریپت توسط تابع‌های درون ویژگی‌ها نمایش داده می‌شوند.
 
 ## Method examples
 
