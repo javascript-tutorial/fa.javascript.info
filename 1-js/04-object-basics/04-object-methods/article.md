@@ -65,12 +65,12 @@ user.sayHi(); // !سلام
 
 مبحث OOP بسیار بزرگ و به نوبه خود یک علم جذاب است. چگونه چیزهای موجود را به درستی انتخاب کنیم؟ چگونه تعامل بین آنها را سازماندهی کنیم؟ به آن معماری نرم‌افزار می‌گویند و در مورد این موضوع کتاب‌های عالی‌ای وجود دارد مانند: "Design Patterns: Elements of Reusable Object-Oriented Software" توسط E. Gamma، R. Helm، R. Johnson، J. Vissides یا "Object-Oriented Analysis and Design with Applications" توسط G. Booch و غیره.
 ```
-### Method shorthand
+### خلاصه‌نویسی متد
 
-There exists a shorter syntax for methods in an object literal:
+یک سینتکس کوتاه‌تر برای متدها در شیءهای لیترال وجود دارد:
 
 ```js
-// these objects do the same
+// این شیءها کار یکسانی انجام می‌دهند
 
 user = {
   sayHi: function() {
@@ -78,19 +78,19 @@ user = {
   }
 };
 
-// method shorthand looks better, right?
+// خلاصه‌نویسی متد بهتر به نظر می‌رسد نه؟
 user = {
 *!*
-  sayHi() { // same as "sayHi: function(){...}"
+  sayHi() { // یکسان است "sayHi: function(){...}" با
 */!*
     alert("Hello");
   }
 };
 ```
 
-As demonstrated, we can omit `"function"` and just write `sayHi()`.
+همانطور که نشان داده شد، ما می‌توانیم `"function"` را حذف کنیم و فقط `sayHi()` را بنویسیم.
 
-To tell the truth, the notations are not fully identical. There are subtle differences related to object inheritance (to be covered later), but for now they do not matter. In almost all cases the shorter syntax is preferred.
+حقیقتا این دو روش کاملا یکسان نیستند. تفاوت‌هایی جزئی و مربوط به وراثت شیء (بعدا آن را می‌آموزیم) وجود دارند، اما آنها الان مهم نیستند. تقریبا در تمام موارد سینتکس کوتاه‌تر ترجیح داده می‌شود.
 
 ## "this" in methods
 
