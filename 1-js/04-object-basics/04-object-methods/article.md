@@ -13,9 +13,9 @@ let user = {
 
 اعمال در جاوااسکریپت توسط تابع‌های درون ویژگی‌ها نمایش داده می‌شوند.
 
-## Method examples
+## مثال‌هایی از متد
 
-For a start, let's teach the `user` to say hello:
+برای شروع، بیایید به `user` یاد بدهیم که سلام بگوید:
 
 ```js run
 let user = {
@@ -25,22 +25,22 @@ let user = {
 
 *!*
 user.sayHi = function() {
-  alert("Hello!");
+  alert("سلام!");
 };
 */!*
 
-user.sayHi(); // Hello!
+user.sayHi(); // !سلام
 ```
 
-Here we've just used a Function Expression to create a function and assign it to the property `user.sayHi` of the object.
+اینجا ما از Function Expression برای ساخت یک تابع استفاده کردیم و آن را به ویژگی `user.sayHi` شیء تخصیص دادیم.
 
-Then we can call it as `user.sayHi()`. The user can now speak!
+سپس می‌توانیم آن را با `user.sayHi()` صدا بزنیم. حالا user می‌تواند صحبت کند!
 
-A function that is a property of an object is called its *method*.
+تابعی که یک ویژگی از شیءای باشد *متد* نامیده می‌شود.
 
-So, here we've got a method `sayHi` of the object `user`.
+پس اینجا ما یک متد `sayHi` از شیء `user` داریم.
 
-Of course, we could use a pre-declared function as a method, like this:
+قطعا ما می‌توانستیم از تابعی که قبلا تعریف شده است استفاده کنیم، مثل اینجا:
 
 ```js run
 let user = {
@@ -48,22 +48,22 @@ let user = {
 };
 
 *!*
-// first, declare
+// اول تعریف می‌کنیم
 function sayHi() {
-  alert("Hello!");
+  alert("سلام!");
 };
 
-// then add as a method
+// سپس به عنوان متد آن را اضافه می‌کنیم
 user.sayHi = sayHi;
 */!*
 
-user.sayHi(); // Hello!
+user.sayHi(); // !سلام
 ```
 
-```smart header="Object-oriented programming"
-When we write our code using objects to represent entities, that's called [object-oriented programming](https://en.wikipedia.org/wiki/Object-oriented_programming), in short: "OOP".
+```smart header="برنامه‌نویسی شیءگرا"
+زمانی که ما با استفاده از شیء برای نمایش چیزهای موجود کد می‌نویسیم، به آن [برنامه‌نویسی شیءگرا](https://en.wikipedia.org/wiki/Object-oriented_programming) می‌گویند، یا به طور خلاصه: "OOP".
 
-OOP is a big thing, an interesting science of its own. How to choose the right entities? How to organize the interaction between them? That's architecture, and there are great books on that topic, like "Design Patterns: Elements of Reusable Object-Oriented Software" by E. Gamma, R. Helm, R. Johnson, J. Vissides or "Object-Oriented Analysis and Design with Applications" by G. Booch, and more.
+مبحث OOP بسیار بزرگ و به نوبه خود یک علم جذاب است. چگونه چیزهای موجود را به درستی انتخاب کنیم؟ چگونه تعامل بین آنها را سازماندهی کنیم؟ به آن معماری نرم‌افزار می‌گویند و در مورد این موضوع کتاب‌های عالی‌ای وجود دارد مانند: "Design Patterns: Elements of Reusable Object-Oriented Software" توسط E. Gamma، R. Helm، R. Johnson، J. Vissides یا "Object-Oriented Analysis and Design with Applications" توسط G. Booch و غیره.
 ```
 ### Method shorthand
 
