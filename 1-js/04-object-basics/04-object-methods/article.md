@@ -167,11 +167,11 @@ admin.sayHi(); // TypeError: Cannot read property 'name' of null
 
 اگر ما از `this.name` به جای `user.name` درون `alert` استفاده می‌کردیم، کد کار می‌کرد.
 
-## "this" is not bound
+## "this" محدود نیست
 
-In JavaScript, keyword `this` behaves unlike most other programming languages. It can be used in any function, even if it's not a method of an object.
+در جاوااسکریپت، کلمه کلیدی `this` متفاوت از بیشتر زبان‌های برنامه‌نویسی دیگر رفتار می‌کند. این کلمه می‌تواند در هر تابعی استفاده شود، حتی اگر آن تابع متدی از یک شیء نباشد.
 
-There's no syntax error in the following example:
+در مثال پایین هیچ ارور سینتکسی وجود ندارد:
 
 ```js
 function sayHi() {
@@ -179,9 +179,9 @@ function sayHi() {
 }
 ```
 
-The value of `this` is evaluated during the run-time, depending on the context.
+مقدار `this` هنگام اجراشدن برنامه ارزیابی می‌شود، با وابستگی به زمینه‌ی استفاده.
 
-For instance, here the same function is assigned to two different objects and has different "this" in the calls:
+برای مثال، اینجا تابع یکسانی به دو شیء متفاوت تخصیص داده شده است و "this" متفاوتی هنگام صدازدن دارد.
 
 ```js run
 let user = { name: "John" };
@@ -192,20 +192,20 @@ function sayHi() {
 }
 
 *!*
-// use the same function in two objects
+// استفاده از تابعی یکسان در دو شیء
 user.f = sayHi;
 admin.f = sayHi;
 */!*
 
-// these calls have different this
-// "this" inside the function is the object "before the dot"
+// متقاوتی دارند this این صدازدن‌ها
+// درون تابع همان شیء "قبل نقطه" است "this"
 user.f(); // John  (this == user)
 admin.f(); // Admin  (this == admin)
 
-admin['f'](); // Admin (dot or square brackets access the method – doesn't matter)
+admin['f'](); // Admin (نقطه یا براکت‌ها به متد دسترسی دارند - مسئله‌ی مهمی نیست)
 ```
 
-The rule is simple: if `obj.f()` is called, then `this` is `obj` during the call of `f`. So it's either `user` or `admin` in the example above.
+قاعده ساده است: اگر `obj.f()` صدا زده شود، سپس در حین صدازدن `f`، `this` برابر با `obj` است. پس در مثال بالا یا برابر با `user` است یا `admin`.
 
 ````smart header="Calling without an object: `this == undefined`"
 We can even call the function without an object at all:
