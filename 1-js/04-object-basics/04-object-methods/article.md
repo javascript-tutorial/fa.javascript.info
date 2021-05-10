@@ -92,17 +92,17 @@ user = {
 
 حقیقتا این دو روش کاملا یکسان نیستند. تفاوت‌هایی جزئی و مربوط به وراثت شیء (بعدا آن را می‌آموزیم) وجود دارند، اما آنها الان مهم نیستند. تقریبا در تمام موارد سینتکس کوتاه‌تر ترجیح داده می‌شود.
 
-## "this" in methods
+## "this" در متدها
 
-It's common that an object method needs to access the information stored in the object to do its job.
+اینکه یک متد شیء نیازمند دسترسی به اطلاعات ذخیره‌شده در آن شیء باشد تا کارش را انجام دهد یک چیز رایج است.
 
-For instance, the code inside `user.sayHi()` may need the name of the `user`.
+برای مثال، کد درون `user.sayHi()` شاید به اسم `user` احتیاج داشته باشد.
 
-**To access the object, a method can use the `this` keyword.**
+**برای دسترسی به شیء، متد می‌تواند از کلمه کلیدی `this` استفاده کند.**
 
-The value of `this` is the object "before dot", the one used to call the method.
+مقدار `this` شیء "قبل از نقطه" است، همان شیءای که برای صدازدن متد استفاده شده است. 
 
-For instance:
+برای مثال:
 
 ```js run
 let user = {
@@ -111,7 +111,7 @@ let user = {
 
   sayHi() {
 *!*
-    // "this" is the "current object"
+    // همان "شیء کنونی" است "this"
     alert(this.name);
 */!*
   }
@@ -121,9 +121,9 @@ let user = {
 user.sayHi(); // John
 ```
 
-Here during the execution of `user.sayHi()`, the value of `this` will be `user`.
+اینجا، در حین اجراشدن `user.sayHi()`، مقدار `this` برابر با `user` خواهد بود.
 
-Technically, it's also possible to access the object without `this`, by referencing it via the outer variable:
+به طور فنی، امکان دسترسی به شیء بدون `this` هم وجود دارد، با مراجعه به آن به وسیله‌ی متغیر بیرونی:
 
 ```js
 let user = {
@@ -132,16 +132,16 @@ let user = {
 
   sayHi() {
 *!*
-    alert(user.name); // "user" instead of "this"
+    alert(user.name); // "this" به جای "user"
 */!*
   }
 
 };
 ```
 
-...But such code is unreliable. If we decide to copy `user` to another variable, e.g. `admin = user` and overwrite `user` with something else, then it will access the wrong object.
+...اما چنین کدی قابل اطمینان نیست. اگر ما تصمیم بگیریم که `user` را در متغیر دیگری کپی کنیم، برای مثال `admin = user` و `user` را با چیز دیگری عوض کنیم، سپس به شیء اشتباهی دسترسی خواهد داشت.
 
-That's demonstrated below:
+این موضوع در کد پایین نشان داده شده:
 
 ```js run
 let user = {
@@ -150,7 +150,7 @@ let user = {
 
   sayHi() {
 *!*
-    alert( user.name ); // leads to an error
+    alert( user.name ); // باعث یک ارور می‌شود
 */!*
   }
 
@@ -158,14 +158,14 @@ let user = {
 
 
 let admin = user;
-user = null; // overwrite to make things obvious
+user = null; // بازنویسی برای روشن کردن مطلب
 
 *!*
 admin.sayHi(); // TypeError: Cannot read property 'name' of null
 */!*
 ```
 
-If we used `this.name` instead of `user.name` inside the `alert`, then the code would work.
+اگر ما از `this.name` به جای `user.name` درون `alert` استفاده می‌کردیم، کد کار می‌کرد.
 
 ## "this" is not bound
 
