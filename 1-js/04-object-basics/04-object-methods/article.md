@@ -225,14 +225,14 @@ sayHi(); // undefined
 معمولا چنین صدازدنی یک ارور برنامه‌نویسی است. اگر `this` درون یک تابع باشد، انتظار می‌رود که در زمینه‌ی شیء صدا زده شود.
 ````
 
-```smart header="The consequences of unbound `this`"
-If you come from another programming language, then you are probably used to the idea of a "bound `this`", where methods defined in an object always have `this` referencing that object.
+```smart header="عواقب `this` بدون محدودیت"
+اگر شما از یک زبان برنامه‌نویسی دیگری میایید، پس شما احتمالا به نظریه "`this` محدود" عادت کرده‌اید، که متدهای تعریف‌شده درون یک شیء همیشه دارای یک `this` هستند که به همان شیء رجوع می‌کند.
 
-In JavaScript `this` is "free", its value is evaluated at call-time and does not depend on where the method was declared, but rather on what object is "before the dot".
+در جاوااسکریپت `this` "آزاد" است، مقدار آن هنگام صدا زدن ارزیابی می‌شود و به اینکه متد کجا تعریف شده بستگی ندارد و بلکه به اینکه شیء "قبل از نقطه" چه باشد بستگی دارد.
 
-The concept of run-time evaluated `this` has both pluses and minuses. On the one hand, a function can be reused for different objects. On the other hand, the greater flexibility creates more possibilities for mistakes.
+اینکه `this` هنگام اجراشدن ارزیابی می‌شود فواید و زیان‌هایی دارد. از طرفی، یک تابع می‌تواند برای شیءهای متفاوت استفاده شود. از طرفی دیگر، هر چقدر اعطاف بیشتر باشد احتمالات برای اشتباهات هم بیشتر می‌شود.
 
-Here our position is not to judge whether this language design decision is good or bad. We'll understand how to work with it, how to get benefits and avoid problems.
+اینجا ما به دنبال این نیستیم که درباره خوب یا بد بودن طراحی این زبان قضاوت کنیم. ما چگونه کارکردن با آن، چگونه سود بردن از آن و چگونگی جلوگیری از مشکلات را یاد می‌گیریم.
 ```
 
 ## Arrow functions have no "this"
