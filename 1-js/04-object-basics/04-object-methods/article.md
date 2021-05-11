@@ -207,8 +207,8 @@ admin['f'](); // Admin (نقطه یا براکت‌ها به متد دسترسی
 
 قاعده ساده است: اگر `obj.f()` صدا زده شود، سپس در حین صدازدن `f`، `this` برابر با `obj` است. پس در مثال بالا یا برابر با `user` است یا `admin`.
 
-````smart header="Calling without an object: `this == undefined`"
-We can even call the function without an object at all:
+````smart header="صدازدن بدون شیء: `this == undefined`"
+ما حتی می‌توانیم تابع را بدون هیچ شیءای صدا بزنیم:
 
 ```js run
 function sayHi() {
@@ -218,11 +218,11 @@ function sayHi() {
 sayHi(); // undefined
 ```
 
-In this case `this` is `undefined` in strict mode. If we try to access `this.name`, there will be an error.
+در این مورد `this` در حالت سخت‌گیرانه (strict mode) برابر با `undefined` است. اگر ما تلاش کنیم که به `this.name` دسترسی پیدا کنیم، یک ارور به وجود می‌آید.
 
-In non-strict mode the value of `this` in such case will be the *global object* (`window` in a browser, we'll get to it later in the chapter [](info:global-object)). This is a historical behavior that `"use strict"` fixes.
+در حالت غیر سخت‌گیرانه در چنین موردی مقدار `this` برابر است با *global object* (در مرورگر `window` است، ما در فصل [](info:global-object) به سراغ آن می‌رویم). این یک رفتار تاریخی است که `"use strict"` آن را درست می‌کند.
 
-Usually such call is a programming error. If there's `this` inside a function, it expects to be called in an object context.
+معمولا چنین صدازدنی یک ارور برنامه‌نویسی است. اگر `this` درون یک تابع باشد، انتظار می‌رود که در زمینه‌ی شیء صدا زده شود.
 ````
 
 ```smart header="The consequences of unbound `this`"
