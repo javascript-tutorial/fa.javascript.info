@@ -2,17 +2,17 @@ importance: 5
 
 ---
 
-# Create a calculator
+# یک ماشین‌حساب بسازید
 
-Create an object `calculator` with three methods:
+یک شیء `calculator` با سه متد بسازید:
 
-- `read()` prompts for two values and saves them as object properties.
-- `sum()` returns the sum of saved values.
-- `mul()` multiplies saved values and returns the result.
+- `read()` برای دو مقدار prompt می‌کند و آنها را به عنوان ویژگی‌های شیء ذخیره می‌کند.
+- `sum()` مجموع مقدارهای ذخیره‌شده را برمی‌گرداند.
+- `mul()` مقدارهای ذخیره‌شده را ضرب می‌کند و نتیجه را برمی‌گرداند.
 
 ```js
 let calculator = {
-  // ... your code ...
+  // ... کد شما ...
 };
 
 calculator.read();
@@ -20,5 +20,4 @@ alert( calculator.sum() );
 alert( calculator.mul() );
 ```
 
-[demo]
-
+[دمو]

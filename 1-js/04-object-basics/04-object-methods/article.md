@@ -1,6 +1,6 @@
-# Object methods, "this"
+# متدهای شیء، "this"
 
-Objects are usually created to represent entities of the real world, like users, orders and so on:
+شیءها معمولا برای نمایش چیزهایی که در دنیای واقعی هستند ساخته می‌شوند، مانند کاربرها، سفارشات و غیره:
 
 ```js
 let user = {
@@ -9,13 +9,13 @@ let user = {
 };
 ```
 
-And, in the real world, a user can *act*: select something from the shopping cart, login, logout etc.
+و در دنیای واقعی، یک کاربر می‌تواند *کاری انجام دهد* برای مثال چیزی را از سبد خرید اتخاب کند، وارد سایت شود، از سایت خارج شود و غیره.
 
-Actions are represented in JavaScript by functions in properties.
+اعمال در جاوااسکریپت توسط تابع‌های درون ویژگی‌ها نمایش داده می‌شوند.
 
-## Method examples
+## مثال‌هایی از متد
 
-For a start, let's teach the `user` to say hello:
+برای شروع، بیایید به `user` یاد بدهیم که سلام کند:
 
 ```js run
 let user = {
@@ -25,22 +25,22 @@ let user = {
 
 *!*
 user.sayHi = function() {
-  alert("Hello!");
+  alert("سلام!");
 };
 */!*
 
-user.sayHi(); // Hello!
+user.sayHi(); // !سلام
 ```
 
-Here we've just used a Function Expression to create a function and assign it to the property `user.sayHi` of the object.
+اینجا ما از Function Expression برای ساخت یک تابع استفاده کردیم و آن را به ویژگی `user.sayHi` شیء تخصیص دادیم.
 
-Then we can call it as `user.sayHi()`. The user can now speak!
+سپس می‌توانیم آن را با `user.sayHi()` صدا بزنیم. حالا user می‌تواند صحبت کند!
 
-A function that is a property of an object is called its *method*.
+تابعی که یک ویژگی از شیءای باشد *متد* آن نامیده می‌شود.
 
-So, here we've got a method `sayHi` of the object `user`.
+پس اینجا ما یک متد `sayHi` از شیء `user` داریم.
 
-Of course, we could use a pre-declared function as a method, like this:
+قطعا ما می‌توانستیم از تابعی که قبلا تعریف شده است استفاده کنیم، مثل اینجا:
 
 ```js run
 let user = {
@@ -48,29 +48,29 @@ let user = {
 };
 
 *!*
-// first, declare
+// اول تعریف می‌کنیم
 function sayHi() {
-  alert("Hello!");
+  alert("سلام!");
 };
 
-// then add as a method
+// سپس به عنوان متد آن را اضافه می‌کنیم
 user.sayHi = sayHi;
 */!*
 
-user.sayHi(); // Hello!
+user.sayHi(); // !سلام
 ```
 
-```smart header="Object-oriented programming"
-When we write our code using objects to represent entities, that's called [object-oriented programming](https://en.wikipedia.org/wiki/Object-oriented_programming), in short: "OOP".
+```smart header="برنامه‌نویسی شیءگرا"
+زمانی که ما با استفاده از شیء برای نمایش چیزهای موجود کد می‌نویسیم، به آن [برنامه‌نویسی شیءگرا](https://en.wikipedia.org/wiki/Object-oriented_programming) می‌گویند، یا به طور خلاصه: "OOP".
 
-OOP is a big thing, an interesting science of its own. How to choose the right entities? How to organize the interaction between them? That's architecture, and there are great books on that topic, like "Design Patterns: Elements of Reusable Object-Oriented Software" by E. Gamma, R. Helm, R. Johnson, J. Vissides or "Object-Oriented Analysis and Design with Applications" by G. Booch, and more.
+مبحث OOP بسیار بزرگ و به نوبه خود یک علم جذاب است. چگونه چیزهای موجود را به درستی انتخاب کنیم؟ چگونه تعامل بین آنها را سازماندهی کنیم؟ به آن معماری نرم‌افزار می‌گویند و در مورد این موضوع کتاب‌های عالی‌ای وجود دارد مانند: "Design Patterns: Elements of Reusable Object-Oriented Software" توسط E. Gamma، R. Helm، R. Johnson، J. Vissides یا "Object-Oriented Analysis and Design with Applications" توسط G. Booch و غیره.
 ```
-### Method shorthand
+### خلاصه‌نویسی متد
 
-There exists a shorter syntax for methods in an object literal:
+یک سینتکس کوتاه‌تر برای متدها در شیءهای لیترال وجود دارد:
 
 ```js
-// these objects do the same
+// این شیءها کار یکسانی انجام می‌دهند
 
 user = {
   sayHi: function() {
@@ -78,31 +78,31 @@ user = {
   }
 };
 
-// method shorthand looks better, right?
+// خلاصه‌نویسی متد بهتر به نظر می‌رسد نه؟
 user = {
 *!*
-  sayHi() { // same as "sayHi: function(){...}"
+  sayHi() { // یکسان است "sayHi: function(){...}" با
 */!*
     alert("Hello");
   }
 };
 ```
 
-As demonstrated, we can omit `"function"` and just write `sayHi()`.
+همانطور که نشان داده شد، ما می‌توانیم `"function"` را حذف کنیم و فقط `sayHi()` را بنویسیم.
 
-To tell the truth, the notations are not fully identical. There are subtle differences related to object inheritance (to be covered later), but for now they do not matter. In almost all cases the shorter syntax is preferred.
+حقیقتا این دو روش کاملا یکسان نیستند. تفاوت‌هایی جزئی و مربوط به وراثت شیء (بعدا آن را می‌آموزیم) وجود دارند، اما آنها الان مهم نیستند. تقریبا در تمام موارد سینتکس کوتاه‌تر ترجیح داده می‌شود.
 
-## "this" in methods
+## "this" در متدها
 
-It's common that an object method needs to access the information stored in the object to do its job.
+اینکه یک متد شیء نیازمند دسترسی به اطلاعات ذخیره‌شده در آن شیء باشد تا کارش را انجام دهد یک چیز رایج است.
 
-For instance, the code inside `user.sayHi()` may need the name of the `user`.
+برای مثال، کد درون `user.sayHi()` شاید به اسم `user` احتیاج داشته باشد.
 
-**To access the object, a method can use the `this` keyword.**
+**برای دسترسی به شیء، متد می‌تواند از کلمه کلیدی `this` استفاده کند.**
 
-The value of `this` is the object "before dot", the one used to call the method.
+مقدار `this` شیء "قبل از نقطه" است، همان شیءای که برای صدازدن متد استفاده شده است. 
 
-For instance:
+برای مثال:
 
 ```js run
 let user = {
@@ -111,7 +111,7 @@ let user = {
 
   sayHi() {
 *!*
-    // "this" is the "current object"
+    // همان "شیء کنونی" است "this"
     alert(this.name);
 */!*
   }
@@ -121,9 +121,9 @@ let user = {
 user.sayHi(); // John
 ```
 
-Here during the execution of `user.sayHi()`, the value of `this` will be `user`.
+اینجا، در حین اجراشدن `user.sayHi()`، مقدار `this` برابر با `user` خواهد بود.
 
-Technically, it's also possible to access the object without `this`, by referencing it via the outer variable:
+به طور فنی، امکان دسترسی به شیء بدون `this` هم وجود دارد، با مراجعه به آن به وسیله‌ی متغیر بیرونی:
 
 ```js
 let user = {
@@ -132,16 +132,16 @@ let user = {
 
   sayHi() {
 *!*
-    alert(user.name); // "user" instead of "this"
+    alert(user.name); // "this" به جای "user"
 */!*
   }
 
 };
 ```
 
-...But such code is unreliable. If we decide to copy `user` to another variable, e.g. `admin = user` and overwrite `user` with something else, then it will access the wrong object.
+...اما چنین کدی قابل اطمینان نیست. اگر ما تصمیم بگیریم که `user` را در متغیر دیگری کپی کنیم، برای مثال `admin = user` و `user` را با چیز دیگری عوض کنیم، سپس به شیء اشتباهی دسترسی خواهد داشت.
 
-That's demonstrated below:
+این موضوع در کد پایین نشان داده شده:
 
 ```js run
 let user = {
@@ -150,7 +150,7 @@ let user = {
 
   sayHi() {
 *!*
-    alert( user.name ); // leads to an error
+    alert( user.name ); // باعث یک ارور می‌شود
 */!*
   }
 
@@ -158,20 +158,20 @@ let user = {
 
 
 let admin = user;
-user = null; // overwrite to make things obvious
+user = null; // بازنویسی کنید تا چیزها را واضح کنید
 
 *!*
 admin.sayHi(); // TypeError: Cannot read property 'name' of null
 */!*
 ```
 
-If we used `this.name` instead of `user.name` inside the `alert`, then the code would work.
+اگر ما از `this.name` به جای `user.name` درون `alert` استفاده می‌کردیم، کد کار می‌کرد.
 
-## "this" is not bound
+## "this" محدود نیست
 
-In JavaScript, keyword `this` behaves unlike most other programming languages. It can be used in any function, even if it's not a method of an object.
+در جاوااسکریپت، کلمه کلیدی `this` متفاوت از بیشتر زبان‌های برنامه‌نویسی دیگر رفتار می‌کند. این کلمه می‌تواند در هر تابعی استفاده شود، حتی اگر آن تابع متدی از یک شیء نباشد.
 
-There's no syntax error in the following example:
+در مثال پایین هیچ سینتکس اروری وجود ندارد:
 
 ```js
 function sayHi() {
@@ -179,9 +179,9 @@ function sayHi() {
 }
 ```
 
-The value of `this` is evaluated during the run-time, depending on the context.
+مقدار `this` هنگام اجراشدن برنامه ارزیابی می‌شود، با وابستگی به زمینه‌ی استفاده.
 
-For instance, here the same function is assigned to two different objects and has different "this" in the calls:
+برای مثال، اینجا تابع یکسانی به دو شیء متفاوت تخصیص داده شده است و "this" متفاوتی هنگام صدازدن دارد.
 
 ```js run
 let user = { name: "John" };
@@ -192,23 +192,23 @@ function sayHi() {
 }
 
 *!*
-// use the same function in two objects
+// استفاده از تابعی یکسان در دو شیء
 user.f = sayHi;
 admin.f = sayHi;
 */!*
 
-// these calls have different this
-// "this" inside the function is the object "before the dot"
+// متقاوتی دارند this این صدازدن‌ها
+// درون تابع همان شیء "قبل نقطه" است "this"
 user.f(); // John  (this == user)
 admin.f(); // Admin  (this == admin)
 
-admin['f'](); // Admin (dot or square brackets access the method – doesn't matter)
+admin['f'](); // Admin (نقطه یا براکت‌ها به متد دسترسی دارند - مسئله‌ی مهمی نیست)
 ```
 
-The rule is simple: if `obj.f()` is called, then `this` is `obj` during the call of `f`. So it's either `user` or `admin` in the example above.
+قاعده ساده است: اگر `obj.f()` صدا زده شود، سپس در حین صدازدن `f`، `this` برابر با `obj` است. پس در مثال بالا یا برابر با `user` است یا `admin`.
 
-````smart header="Calling without an object: `this == undefined`"
-We can even call the function without an object at all:
+````smart header="صدازدن بدون شیء: `this == undefined`"
+ما حتی می‌توانیم تابع را بدون هیچ شیءای صدا بزنیم:
 
 ```js run
 function sayHi() {
@@ -218,28 +218,28 @@ function sayHi() {
 sayHi(); // undefined
 ```
 
-In this case `this` is `undefined` in strict mode. If we try to access `this.name`, there will be an error.
+در این مورد `this` در حالت سخت‌گیرانه (strict mode) برابر با `undefined` است. اگر ما تلاش کنیم که به `this.name` دسترسی پیدا کنیم، یک ارور به وجود می‌آید.
 
-In non-strict mode the value of `this` in such case will be the *global object* (`window` in a browser, we'll get to it later in the chapter [](info:global-object)). This is a historical behavior that `"use strict"` fixes.
+در حالت غیر سخت‌گیرانه در چنین موردی مقدار `this` برابر است با *global object* (در مرورگر `window` است، ما در فصل [](info:global-object) به سراغ آن می‌رویم). این یک رفتار تاریخی است که `"use strict"` آن را درست می‌کند.
 
-Usually such call is a programming error. If there's `this` inside a function, it expects to be called in an object context.
+معمولا چنین صدازدنی یک ارور برنامه‌نویسی است. اگر `this` درون یک تابع باشد، انتظار می‌رود که در زمینه‌ی شیء صدا زده شود.
 ````
 
-```smart header="The consequences of unbound `this`"
-If you come from another programming language, then you are probably used to the idea of a "bound `this`", where methods defined in an object always have `this` referencing that object.
+```smart header="عواقب `this` بدون محدودیت"
+اگر شما از یک زبان برنامه‌نویسی دیگری میایید، پس شما احتمالا به نظریه "`this` محدود" عادت کرده‌اید، که متدهای تعریف‌شده درون یک شیء همیشه دارای یک `this` هستند که به همان شیء رجوع می‌کند.
 
-In JavaScript `this` is "free", its value is evaluated at call-time and does not depend on where the method was declared, but rather on what object is "before the dot".
+در جاوااسکریپت `this` "آزاد" است، مقدار آن هنگام صدا زدن ارزیابی می‌شود و به اینکه متد کجا تعریف شده بستگی ندارد و بلکه به اینکه شیء "قبل از نقطه" چه باشد بستگی دارد.
 
-The concept of run-time evaluated `this` has both pluses and minuses. On the one hand, a function can be reused for different objects. On the other hand, the greater flexibility creates more possibilities for mistakes.
+اینکه `this` هنگام اجراشدن ارزیابی می‌شود فواید و زیان‌هایی دارد. از طرفی، یک تابع می‌تواند برای شیءهای متفاوت استفاده شود. از طرفی دیگر، هر چقدر اعطاف بیشتر باشد احتمالات برای اشتباهات هم بیشتر می‌شود.
 
-Here our position is not to judge whether this language design decision is good or bad. We'll understand how to work with it, how to get benefits and avoid problems.
+اینجا ما به دنبال این نیستیم که درباره خوب یا بد بودن طراحی این زبان قضاوت کنیم. ما چگونه کارکردن با آن، چگونه سود بردن از آن و چگونگی جلوگیری از مشکلات را یاد می‌گیریم.
 ```
 
-## Arrow functions have no "this"
+## تابع‌های Arrow "this" ندارند
 
-Arrow functions are special: they don't have their "own" `this`. If we reference `this` from such a function, it's taken from the outer "normal" function.
+Arrow functionها خاص هستند: آنها از "خودشان" `this` ندارند. اگر ما از `this` در چنین تابعی استفاده کنیم، مقدار آن از تابع "معمولی" بیرونی گرفته می‌شود.
 
-For instance, here `arrow()` uses `this` from the outer `user.sayHi()` method:
+برای مثال، اینجا `arrow()` از `this` متد بیرونی `user.sayHi()` استفاده می‌کند:
 
 ```js run
 let user = {
@@ -253,18 +253,18 @@ let user = {
 user.sayHi(); // Ilya
 ```
 
-That's a special feature of arrow functions, it's useful when we actually do not want to have a separate `this`, but rather to take it from the outer context. Later in the chapter <info:arrow-functions> we'll go more deeply into arrow functions.
+این یک ویژگی خاص arrow functionها است، و زمانی که ما نمی‌خواهیم یک `this` جداگانه داشته باشیم بلکه آن را از محتوای بالاتر بگیریم، از آن استفاده می‌کنیم. بعدا در فصل <info:arrow-functions> ما در arrow functionها عمیق‌تر می‌شویم.
 
 
-## Summary
+## خلاصه
 
-- Functions that are stored in object properties are called "methods".
-- Methods allow objects to "act" like `object.doSomething()`.
-- Methods can reference the object as `this`.
+- تابع‌هایی که در ویژگی‌های شیءها ذخیره می‌شوند "متد" نامیده می‌شوند.
+- متدها به شیءها اجازه می‌دهند که "کاری انجام دهند" مثل `object.doSomething()`.
+- متدها می‌توانند با `this` به شیء رجوع کنند.
 
-The value of `this` is defined at run-time.
-- When a function is declared, it may use `this`, but that `this` has no value until the function is called.
-- A function can be copied between objects.
-- When a function is called in the "method" syntax: `object.method()`, the value of `this` during the call is `object`.
+مقدار `this` هنگام اجرا تعریف می‌شود.
+- هنگامی که یک تابع تعریف می‌شود، ممکن است از `this` استفاده کند، اما آن `this` تا زمانی که تابع صدا زده نشود مقداری ندارد.
+- یک تابع می‌تواند بین شیءها کپی شود.
+- زمانی که یک تابع با سینتکس "متد" صدا زده می‌شود: `object.method()`، مقدار `this` در حین صدازدن برابر با `object` است.
 
-Please note that arrow functions are special: they have no `this`. When `this` is accessed inside an arrow function, it is taken from outside.
+لطفا در نظر داشته باشید که arrow functionها خاص هستند: آنها `this` ندارند. زمانی که به `this` درون یک arrow function دسترسی پیدا می‌کنیم، مقدار آن از بیرون تابع گرفته می‌شود.
