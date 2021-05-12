@@ -158,7 +158,7 @@ let user = {
 
 
 let admin = user;
-user = null; // بازنویسی برای روشن کردن مطلب
+user = null; // بازنویسی کنید تا چیزها را واضح کنید
 
 *!*
 admin.sayHi(); // TypeError: Cannot read property 'name' of null
