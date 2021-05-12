@@ -235,11 +235,11 @@ sayHi(); // undefined
 اینجا ما به دنبال این نیستیم که درباره خوب یا بد بودن طراحی این زبان قضاوت کنیم. ما چگونه کارکردن با آن، چگونه سود بردن از آن و چگونگی جلوگیری از مشکلات را یاد می‌گیریم.
 ```
 
-## Arrow functions have no "this"
+## Arrow functionها "this" ندارند
 
-Arrow functions are special: they don't have their "own" `this`. If we reference `this` from such a function, it's taken from the outer "normal" function.
+Arrow functionها خاص هستند: آنها از "خودشان" `this` ندارند. اگر ما از `this` در چنین تابعی استفاده کنیم، مقدار آن از تابع "معمولی" بیرونی گرفته می‌شود.
 
-For instance, here `arrow()` uses `this` from the outer `user.sayHi()` method:
+برای مثال، اینجا `arrow()` از `this` متد بیرونی `user.sayHi()` استفاده می‌کند:
 
 ```js run
 let user = {
@@ -253,18 +253,18 @@ let user = {
 user.sayHi(); // Ilya
 ```
 
-That's a special feature of arrow functions, it's useful when we actually do not want to have a separate `this`, but rather to take it from the outer context. Later in the chapter <info:arrow-functions> we'll go more deeply into arrow functions.
+این یک ویژگی خاص arrow functionها است، و زمانی که ما نمی‌خواهیم یک `this` جداگانه داشته باشیم بلکه آن را از محتوای بالاتر بگیریم، از آن استفاده می‌کنیم. بعدا در فصل <info:arrow-functions> ما در arrow functionها عمیق‌تر می‌شویم.
 
 
 ## Summary
 
-- Functions that are stored in object properties are called "methods".
-- Methods allow objects to "act" like `object.doSomething()`.
-- Methods can reference the object as `this`.
+- تابع‌هایی که در ویژگی‌های شیءها ذخیره می‌شوند "متد" نامیده می‌شوند.
+- متدها به شیءها اجازه می‌دهند که "کاری انجام دهند" مثل `object.doSomething()`.
+- متدها می‌توانند با `this` به شیء رجوع کنند.
 
-The value of `this` is defined at run-time.
-- When a function is declared, it may use `this`, but that `this` has no value until the function is called.
-- A function can be copied between objects.
-- When a function is called in the "method" syntax: `object.method()`, the value of `this` during the call is `object`.
+مقدار `this` هنگام اجرا تعریف می‌شود.
+- هنگامی که یک تابع تعریف می‌شود، ممکن است از `this` استفاده کند، اما آن `this` تا زمانی که تابع صدا زده نشود مقداری ندارد.
+- یک تابع می‌تواند بین شیءها کپی شود.
+- زمانی که یک تابع با سینتکس "متد" صدا زده می‌شود: `object.method()`، مقدار `this` در حین صدازدن برابر با `object` است.
 
-Please note that arrow functions are special: they have no `this`. When `this` is accessed inside an arrow function, it is taken from outside.
+لطفا در نظر داشته باشید که arrow functionها خاص هستند: آنها `this` ندارند. زمانی که به `this` درون یک arrow function دسترسی پیدا می‌کنیم، مقدار آن از بیرون تابع گرفته می‌شود.
