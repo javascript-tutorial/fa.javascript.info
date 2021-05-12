@@ -1,6 +1,6 @@
-**Answer: an error.**
+**جواب: یک ارور**
 
-Try it:
+آن را امتحان کنید:
 ```js run
 function makeUser() {
   return {
@@ -14,26 +14,26 @@ let user = makeUser();
 alert( user.ref.name ); // Error: Cannot read property 'name' of undefined
 ```
 
-That's because rules that set `this` do not look at object definition. Only the moment of call matters.
+دلیلش این است که قواعدی که `this` را تشکیل می‌دهند به تعریف شیء نگاه نمی‌کنند. فقط لحظه‌ی صدازدن مهم است.
 
-Here the value of `this` inside `makeUser()` is `undefined`, because it is called as a function, not as a method with "dot" syntax.
+اینجا مقدار `this` درون `makeUser()` برابر با `undefined` است، چون به عنوان تابع صدا زده شده است نه به عنوان یک متد با سینتکس نقطه.
 
-The value of `this` is one for the whole function, code blocks and object literals do not affect it.
+مقدار `this` برای تمام تابع یکی است و بلوک‌های کد و شیءهای لیترال روی آن تاثیری نمی‌گذارند.
 
-So `ref: this` actually takes current `this` of the function.
+بنابراین `ref: this` در واقع `this` کنونی تابع را می‌گیرد.
 
-We can rewrite the function and return the same `this` with `undefined` value: 
+ما می‌توانیم تابع را بازنویسی کنیم و `this` یکسان را با مقدار `undefined` برگردانیم:
 
 ```js run
 function makeUser(){
-  return this; // this time there's no object literal
+  return this; // این بار هیچ شیء لیترالی وجود ندارد
 }
 
 alert( makeUser().name ); // Error: Cannot read property 'name' of undefined
 ```
-As you can see the result of `alert( makeUser().name )` is the same as the result of `alert( user.ref.name )` from the previous example.
+همانطور که می‌بینید نتیجه `alert( makeUser().name )` با نتیجه `alert( user.ref.name )` از مثال قبل یکسان است.
 
-Here's the opposite case:
+کد پایین متضاد قبلی است:
 
 ```js run
 function makeUser() {
@@ -52,4 +52,4 @@ let user = makeUser();
 alert( user.ref().name ); // John
 ```
 
-Now it works, because `user.ref()` is a method. And the value of `this` is set to the object before dot `.`.
+حالا کار می‌کند، چون `user.ref()` یک متد است. مقدار `this` برابر با شیء قبل از نقطه `.` است.
