@@ -4,28 +4,28 @@
 
 وقتی چیزی دیگر مورد نیاز نباشد چه اتفاقی می‌افتد؟ موتور جاوااسکریپت چگونه این را تشخیص می‌دهد و پاک می‌کند؟
 
-## Reachability
+## قابلیت دسترسی
 
-The main concept of memory management in JavaScript is *reachability*.
+مفهوم اصلی مدیریت حافظه در جاوااسکریپت *قابلیت دسترسی* است.
 
-Simply put, "reachable" values are those that are accessible or usable somehow. They are guaranteed to be stored in memory.
+به بیان ساده، مقدارهای "قابل دسترس" مقدارهایی هستند که به نحوی بتوان به آنها دسترسی داشت یا از آنها استفاده کرد. ذخیره‌شدن آنها در حافظه تضمین شده است.
 
-1. There's a base set of inherently reachable values, that cannot be deleted for obvious reasons.
+1. یک مجموعه از مقدارهایی که به طور ذاتی قابل دسترس هستند وجود دارد که نمی‌توانند به دلیل‌هایی واضح حذف شوند.
 
-    For instance:
+    برای مثال:
 
-    - The currently executing function, its local variables and parameters.
-    - Other functions on the current chain of nested calls, their local variables and parameters.
-    - Global variables.
-    - (there are some other, internal ones as well)
+    - تابعی که در حال اجرا باشد، متغیرهای محلی و پارامترهای آن.
+    - تابع‌های دیگر در زنجیره‌ی کنونیِ صدازدن های تو در تو، متغیرهای محلی و پارامترهای آن.
+    - متغیرهای global.
+    - (چند مورد دیگر هم هستند، همچنین موردهای داخلی)
 
-    These values are called *roots*.
+    این مقدارها *ریشه* نامیده می‌شوند.
 
-2. Any other value is considered reachable if it's reachable from a root by a reference or by a chain of references.
+2. هر مقدار دیگری قابل دسترس فرض می‌شود اگر از یک ریشه توسط یک مرجع یا زنجیره‎ای از مراجع قابل دسترس باشد.
 
-    For instance, if there's an object in a global variable, and that object has a property referencing another object, *that* object is considered reachable. And those that it references are also reachable. Detailed examples to follow.
+    برای مثال، اگر یک شیء در متغیری global وجود داشته باشد، و آن شیء یک ویژگی داشته باشد که به شیءای دیگر رجوع می‌کند، *آن* شیء قابل دسترس فرض می‌شود. و آنهایی که این شیء به آنها رجوع می‌کند هم قابل دسترس هستند. مثال‌های دارای جزئیات در ادامه آمده است.
 
-There's a background process in the JavaScript engine that is called [garbage collector](https://en.wikipedia.org/wiki/Garbage_collection_(computer_science)). It monitors all objects and removes those that have become unreachable.
+یک فرایند پشت پرده در موتور جاوااسکریپت وجود دارد به نام [زباله جمع‌کن](https://en.wikipedia.org/wiki/Garbage_collection_(computer_science)). این فرایند تمام شیءها را زیر نظر می‌گیرد و آنهایی که غیر قابل دسترس شده‌اند را پاک می‌کند.
 
 ## A simple example
 
