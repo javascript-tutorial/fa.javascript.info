@@ -27,12 +27,12 @@
 
 یک فرایند پشت پرده در موتور جاوااسکریپت وجود دارد به نام [زباله جمع‌کن](https://en.wikipedia.org/wiki/Garbage_collection_(computer_science)). این فرایند تمام شیءها را زیر نظر می‌گیرد و آنهایی که غیر قابل دسترس شده‌اند را پاک می‌کند.
 
-## A simple example
+## یک مثال ساده
 
-Here's the simplest example:
+اینجا ساده‌ترین مثال را داریم:
 
 ```js
-// user has a reference to the object
+// به شیء رجوع می‌کند user
 let user = {
   name: "John"
 };
@@ -40,9 +40,9 @@ let user = {
 
 ![](memory-user-john.svg)
 
-Here the arrow depicts an object reference. The global variable `"user"` references the object `{name: "John"}` (we'll call it John for brevity). The `"name"` property of John stores a primitive, so it's painted inside the object.
+اینجا، کمان یک مرجع شیء را نشان می‌دهد. متغیر global `"user"` به شیء `{name: "John"}` رجوع می‌کند (برای اختصار به آن John می‌گوییم). ویژگی `"name"` از John یک مقدار اصلی را ذخیره می‌کند، پس درون آن نقش بسته است.
 
-If the value of `user` is overwritten, the reference is lost:
+اگر مقدار `user` بازنویسی شود، مرجع از دست می‌رود:
 
 ```js
 user = null;
@@ -50,7 +50,7 @@ user = null;
 
 ![](memory-user-john-lost.svg)
 
-Now John becomes unreachable. There's no way to access it, no references to it. Garbage collector will junk the data and free the memory.
+حال John غیر قابل دسترس شده است. هیج راه و مرجعی برای دسترسی به آن وجود ندارد. زباله جمع‌کن داده را دور می‌اندازد و حافظه را آزاد می‌کند.
 
 ## Two references
 
