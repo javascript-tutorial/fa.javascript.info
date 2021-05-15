@@ -127,25 +127,25 @@ delete family.mother.husband;
 
 ![](family-no-father-2.svg)
 
-## Unreachable island
+## جزیره‌ی غیر قابل دسترس
 
-It is possible that the whole island of interlinked objects becomes unreachable and is removed from the memory.
+اینکه تمام جزیره‌ی شیءهای بهم پیوسته غیر قابل دسترس شوند و از حافظه پاک شوند ممکن است.
 
-The source object is the same as above. Then:
+شیء منبع مانند شیء بالا است. پس:
 
 ```js
 family = null;
 ```
 
-The in-memory picture becomes:
+تصویر درون حافظه به تصویر زیر تبدیل می‌شود:
 
 ![](family-no-family.svg)
 
-This example demonstrates how important the concept of reachability is.
+این مثال اهمیت زیاد مفهوم قابلیت دسترسی را نشان می‌دهد.
 
-It's obvious that John and Ann are still linked, both have incoming references. But that's not enough.
+این واضح است که John و Ann هنوزم هم بهم پیوسته هستند و هر دو مرجع‌های ورودی دارند. اما این کافی نیست.
 
-The former `"family"` object has been unlinked from the root, there's no reference to it any more, so the whole island becomes unreachable and will be removed.
+شیء سابق `"family"` از ریشه پیوندش را از دست داده است و دیگر هیچ مرجعی به آن وجود ندارد، پس تمام جزیره غیر قابل دسترس و پاک می‌شود.
 
 ## Internal algorithms
 
