@@ -76,9 +76,9 @@ user = null;
 
 ...سپس شیء هنوز توسط متغیر global `admin` قابل دسترس است، پس در حافظه وجود دارد. اگر ما `admin` را هم بازنویسی کنیم، سپس این شیء حذف می‌شود.
 
-## Interlinked objects
+## شیءهای بهم پیوسته
 
-Now a more complex example. The family:
+حالا یک مثال پیچیده‌تر. خانواده:
 
 ```js
 function marry(man, woman) {
@@ -98,15 +98,15 @@ let family = marry({
 });
 ```
 
-Function `marry` "marries" two objects by giving them references to each other and returns a new object that contains them both.
+تابع `marry` دو شیء را با دادن مرجع‌های آنها به یکدیگر "بهم پیوند می‌زند" و یک شیء جدید که شامل هر دو است را برمی‌گرداند.
 
-The resulting memory structure:
+ساختار حافظه حاصل:
 
 ![](family.svg)
 
-As of now, all objects are reachable.
+از هم اکنون، تمام شیءها قابل دسترس هستند.
 
-Now let's remove two references:
+حال بیایید دو مرجع را حذف کنیم:
 
 ```js
 delete family.father;
@@ -115,15 +115,15 @@ delete family.mother.husband;
 
 ![](family-delete-refs.svg)
 
-It's not enough to delete only one of these two references, because all objects would still be reachable.
+اینکه فقط یکی از دو مرجع را حذف کنیم کافی نیست، چون تمام شیءها هنوز قابل دسترس هستند.
 
-But if we delete both, then we can see that John has no incoming reference any more:
+اما اگر ما هر دو را حذف کنیم، آن گاه می‌بینیم که John دیگر هیچ مرجع ورودی ندارد:
 
 ![](family-no-father.svg)
 
-Outgoing references do not matter. Only incoming ones can make an object reachable. So, John is now unreachable and will be removed from the memory with all its data that also became unaccessible.
+مرجع‌های خروجی مهم نیستند. تنها مرجع‌های ورودی می‌توانند یک شیء را قابل دسترس کنند. پس John حالا غیر قابل دسترس شده است و همراه با تمام داده‌اش که آنها هم غیر قابل دسترس شده اند، از حافظه پاک می‌شود.
 
-After garbage collection:
+بعد از جمع‌آوری زباله:
 
 ![](family-no-father-2.svg)
 
