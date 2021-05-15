@@ -52,12 +52,12 @@ user = null;
 
 حال John غیر قابل دسترس شده است. هیج راه و مرجعی برای دسترسی به آن وجود ندارد. زباله جمع‌کن داده را دور می‌اندازد و حافظه را آزاد می‌کند.
 
-## Two references
+## دو مرجع
 
-Now let's imagine we copied the reference from `user` to `admin`:
+حال بیایید تصور کنیم که مرجع را از `user` در `admin` کپی کردیم:
 
 ```js
-// user has a reference to the object
+// دارای مرجعی به شیء است user
 let user = {
   name: "John"
 };
@@ -69,12 +69,12 @@ let admin = user;
 
 ![](memory-user-john-admin.svg)
 
-Now if we do the same:
+حال اگر دوباره کار مشابه را انجام دهیم:
 ```js
 user = null;
 ```
 
-...Then the object is still reachable via `admin` global variable, so it's in memory. If we overwrite `admin` too, then it can be removed.
+...سپس شیء هنوز توسط متغیر global `admin` قابل دسترس است، پس در حافظه وجود دارد. اگر ما `admin` را هم بازنویسی کنیم، سپس این شیء حذف می‌شود.
 
 ## Interlinked objects
 
