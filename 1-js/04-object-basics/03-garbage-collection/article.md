@@ -185,28 +185,28 @@ family = null;
 
 این مفهوم کلی چگونگی کار کردن جمع‌آوری زباله است. موتورهای جاوااسکریپت بهینه‌سازی‌های زیادی را اعمال می‌کنند تا آن را سریع‌تر کنند و روی اجراشدن برنامه تاثیری نگذارد.
 
-Some of the optimizations:
+بعضی از بهینه‌سازی‌ها:
 
-- **Generational collection** -- objects are split into two sets: "new ones" and "old ones". Many  objects appear, do their job and die fast, they can be cleaned up aggressively. Those that survive for long enough, become "old" and are examined less often.
-- **Incremental collection** -- if there are many objects, and we try to walk and mark the whole object set at once, it may take some time and introduce visible delays in the execution. So the engine tries to split the garbage collection into pieces. Then the pieces are executed one by one, separately. That requires some extra bookkeeping between them to track changes, but we have many tiny delays instead of a big one.
-- **Idle-time collection** -- the garbage collector tries to run only while the CPU is idle, to reduce the possible effect on the execution.
+- **جمع‌آوری نسلی** -- شیءها به دو دسته تقسیم می‌شوند: "جدیدها" و " قدیمی‌ها". بسیاری از شیءها به وجود می‌آیند، کارشان را انجام می‌دهند و به سرعت می‌میرند، آنها می‌توانند به سرعت پاک می‌شوند. شیءهایی که برای مدت زیاد باقی می‌مانند، "قدیمی" می‌شوند و کمتر بررسی می‌شوند.
+- **جمع‌آوری افزایشی** -- اگر شیءهای زیادی وجود داشته باشند و ما تلاش کنیم که یک باره برویم و تمام دسته شیء را علامت گذاری کنیم، ممکن است این کار زمان ببرد و اختلال‌های قابل رویت را در اجرا ایجاد کند. پس موتور سعی می‌کند که جمع‌آوری زباله را به چند بخش تقسیم کند. سپس هر بخش یکی یکی به صورت جداگانه انجام می‌شود. این کار برای دنبال کردن تغییرات به ثبت کردن بیشتری نیاز دارد، اما ما به جای اختلالی بزرگ اختلال‌های خیلی کوچک را خواهیم داشت.
+- **جمع‌آوری زمان بیکاری** -- زباله جمع‌کن سعی می‌کند که فقط زمانی که پردازنده (CPU) بیکار است کار خود را انجام دهد تا تاثیر ممکن روی اجراشدن را کاهش دهد.
 
-There exist other optimizations and flavours of garbage collection algorithms. As much as I'd like to describe them here, I have to hold off, because different engines implement different tweaks and techniques. And, what's even more important, things change as engines develop, so studying deeper "in advance", without a real need is probably not worth that. Unless, of course, it is a matter of pure interest, then there will be some links for you below.
+بهینه‌سازی و روش‌های دیگری هم برای الگوریتم‌های جمع‌آوری زباله وجود دارد. همان قدر که دوست دارم آنها را اینجا توضیح دهم، نباید ادامه دهم، چون موتورهای مختلف تکنیک و فن‌های مختلفی را پیاده‌سازی می‌کنند. و این حتی مهم تر است که همانطور که موتورهای پیشرفت می‌کنند چیزهایی هم تغییر می‌کنند، پس مطالعه‌ی عمیق‌تر "پیشرفته" بدون نیاز واقعی احتمالا نمی‌ارزد. مگر اینکه، موضوع کاملا مربوط به علاقه باشد که در این صورت لینک‌هایی برای شما در پایین قرار داده شده است.
 
-## Summary
+## خلاصه
 
-The main things to know:
+چیزهای مهم که باید بدانیم:
 
-- Garbage collection is performed automatically. We cannot force or prevent it.
-- Objects are retained in memory while they are reachable.
-- Being referenced is not the same as being reachable (from a root): a pack of interlinked objects can become unreachable as a whole.
+- جمع‌آوری زباله به صورت خودکار انجام می‌شود. ما نمی‌توانیم آن را مجبور یا از آن جلوگیری کنیم.
+- شیءها تا زمانی که قابل دسترس باشند در حافظه باقی می‌مانند.
+- مرجع بودن با قابل دسترس بودن (از یک ریشه) یکسان نیست : یک دسته‌ی شیءهای بهم پیوسته می‌توانند به طور کامل غیر قابل دسترس شوند.
 
-Modern engines implement advanced algorithms of garbage collection.
+موتورهای مدرن الگوریتم‌های پیشرفته‌ی جمع‌آوری زباله را پیاده‌سازی می‌کنند.
 
-A general book "The Garbage Collection Handbook: The Art of Automatic Memory Management" (R. Jones et al) covers some of them.
+کتاب کلی "The Garbage Collection Handbook: The Art of Automatic Memory Management" (R. Jones و بقیه افراد) بعضی از آنها را پوشش می‌دهد.
 
-If you are familiar with low-level programming, the more detailed information about V8 garbage collector is in the article [A tour of V8: Garbage Collection](http://jayconrod.com/posts/55/a-tour-of-v8-garbage-collection).
+اگر شما با برنامه‌نویسی سطح پایین آشنایی دارید، اطلاعاتی با جزییات درباره زباله جمع‌کن V8 در این مقاله است [A tour of V8: Garbage Collection](http://jayconrod.com/posts/55/a-tour-of-v8-garbage-collection).
 
-[V8 blog](https://v8.dev/) also publishes articles about changes in memory management from time to time. Naturally, to learn the garbage collection, you'd better prepare by learning about V8 internals in general and read the blog of [Vyacheslav Egorov](http://mrale.ph) who worked as one of V8 engineers. I'm saying: "V8", because it is best covered with articles in the internet. For other engines, many approaches are similar, but garbage collection differs in many aspects.
-
-In-depth knowledge of engines is good when you need low-level optimizations. It would be wise to plan that as the next step after you're familiar with the language.  
+[V8 بلاگ](https://v8.dev/) هم هر چند گاهی مقاله‌هایی درباره تغییرات مدیریت حافظه منتشر می‌کند. طبیعتا، برای یادگیری جمع‌آوری زباله، شما بهتر است به طور کلی با یاد گرفتن چیزهای داخلی V8 آماده شوید و بلاگ [Vyacheslav Egorov](http://mrale.ph) که یکی از مهندس‌های V8 بود را بخوانید. من می‌گویم: "V8" چون مقاله‌های زیادی درباره آن در اینترنت وجود دارد. برای موتورهای دیگر، بیشتر روش‌ها مشابه هستند، اما جمع‌آوری زباله در جنبه‌های زیادی متفاوت است.
+ 
+اگر شما بهینه‌سازی‌های سطح پایین را نیاز دارید، دانایی عمیق موتورها چیز خوبی است. این کار عاقلانه‌ای است که بعد از آشنایی با زبان برای آن برنامه‌ریزی کنید.
