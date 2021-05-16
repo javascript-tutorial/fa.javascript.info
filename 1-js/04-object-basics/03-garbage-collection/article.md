@@ -147,14 +147,14 @@ family = null;
 
 شیء سابق `"family"` از ریشه پیوندش را از دست داده است و دیگر هیچ مرجعی به آن وجود ندارد، پس تمام جزیره غیر قابل دسترس و پاک می‌شود.
 
-## Internal algorithms
+## الگوریتم داخلی
 
-The basic garbage collection algorithm is called "mark-and-sweep".
+الگوریتم پایه جمع‌آوری زباله "علامت گذاری و جارو کردن" نامیده می‌شود.
 
-The following "garbage collection" steps are regularly performed:
+مراحل "جمع‌آوری زباله" پایین به طور منظم انجام می‌شوند:
 
-- The garbage collector takes roots and "marks" (remembers) them.
-- Then it visits and "marks" all references from them.
+- زباله جمع‌کن ریشه‌ها را می‌گیرد و آنها را "علامت گذاری" می‌کند (به خاطر می‌سپارد).
+- سپس بازبینی می‌کند و تمام مرجع‌هایی که از آنها است را "علامت گذاری می‌کند".
 - Then it visits marked objects and marks *their* references. All visited objects are remembered, so as not to visit the same object twice in the future.
 - ...And so on until every reachable (from the roots) references are visited.
 - All objects except marked ones are removed.
