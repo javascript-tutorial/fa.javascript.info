@@ -149,41 +149,41 @@ family = null;
 
 ## الگوریتم داخلی
 
-الگوریتم پایه جمع‌آوری زباله "علامت گذاری و جارو کردن" نامیده می‌شود.
+الگوریتم پایه‌ی جمع‌آوری زباله "علامت گذاری و جارو کردن" نامیده می‌شود.
 
 مراحل "جمع‌آوری زباله" پایین به طور منظم انجام می‌شوند:
 
 - زباله جمع‌کن ریشه‌ها را می‌گیرد و آنها را "علامت گذاری" می‌کند (به خاطر می‌سپارد).
-- سپس بازبینی می‌کند و تمام مرجع‌هایی که از آنها است را "علامت گذاری می‌کند".
-- Then it visits marked objects and marks *their* references. All visited objects are remembered, so as not to visit the same object twice in the future.
-- ...And so on until every reachable (from the roots) references are visited.
-- All objects except marked ones are removed.
+- سپس از تمام مرجع‌های آنها بازدید می‌کند و آنها را "علامت گذاری می‌کند".
+- سپس از شیءهای علامت گذاری شده بازدید می‌کند و مرجع‌های *آنها* را علامت گذاری می‌کند. تمام شیءهای بازدید شده به خاطر سپرده می‌شوند تا در آینده دوباره از شیء یکسانی بازدید نشود.
+- ...و این فرایند تا زمانی که از تمام مرجع‌های قابل دسترس (از ریشه‌ها) بازدید شود.
+- تمام شیءها به جز آنهایی که علامت گذاری شده‌اند پاک می‌شوند.
 
-For instance, let our object structure look like this:
+برای مثال، بیایید فرض کنیم ساختار شیء ما اینگونه باشد:
 
 ![](garbage-collection-1.svg)
 
-We can clearly see an "unreachable island" to the right side. Now let's see how "mark-and-sweep" garbage collector deals with it.
+می‌توانیم به وضوح یک "جزیره‌ی غیر قابل دسترس" را در سمت راست ببینیم. حال بیایید ببینیم زباله جمع‌کنِ "علامت گذار و جارو کننده" چگونه با آن برخورد می‌کند.
 
-The first step marks the roots:
+اولین مرحله علامت گذاری ریشه‌ها است:
 
 ![](garbage-collection-2.svg)
 
-Then their references are marked:
+سپس مرجع‌های آنها علامت گذاری می‌شود:
 
 ![](garbage-collection-3.svg)
 
-...And their references, while possible:
+...و تا جایی که ممکن باشد، مرجع‌های آنها:
 
 ![](garbage-collection-4.svg)
 
-Now the objects that could not be visited in the process are considered unreachable and will be removed:
+حالا شیءهایی که نمی‌توان حین فرایند از آنها بازدید شود غیر قابل دسترس فرض می‌شوند و پاک می‌شوند:
 
 ![](garbage-collection-5.svg)
 
-We can also imagine the process as spilling a huge bucket of paint from the roots, that flows through all references and marks all reachable objects. The unmarked ones are then removed.
+همچنین می‌توانیم فرایند را اینگونه فرض کنیم که یک سطل رنگ بسیار بزرگ از ریشه ریخته می‌شود که بین تمام مرجع‌ها جریان می‌یابد و تمام شیءهای قابل دسترس را علامت گذاری می‌کند. سپس شیءهایی که علامت گذاری نشده‌اند پاک می‌شوند.
 
-That's the concept of how garbage collection works. JavaScript engines apply many optimizations to make it run faster and not affect the execution.
+این مفهوم کلی چگونگی کار کردن جمع‌آوری زباله است. موتورهای جاوااسکریپت بهینه‌سازی‌های زیادی را اعمال می‌کنند تا آن را سریع‌تر کنند و روی اجراشدن برنامه تاثیری نگذارد.
 
 Some of the optimizations:
 
