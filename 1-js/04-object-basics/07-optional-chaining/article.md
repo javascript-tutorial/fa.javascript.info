@@ -72,46 +72,27 @@ alert( user.address && user.address.street && user.address.street.name ); // und
 
 به همین دلیل زنجیره‌ی اختیاری `.?` به زبان اضافه شد. تا این مشکل را برای همیشه برطرف کند!
 
-## زنجیره ای اختیاری
+## زنجیره‌ی اختیاری
 
-زنجیره ای اختیاری `?.` ارزیابی را متوقف میکند  اگر مقدار قبل از قسمت  `?.`  برابر با `undefined` یا `null` باشد و مقدار `undefined` را برمیگرداند.
+زنجیره‌ی اختیاری `.?` اگر مقدار قبل از قسمت `?.` برابر با `undefined` یا `null` باشد ارزیابی را متوقف می‌کند و مقدار `undefined` را برمی‌گرداند.
 
-**در ادامه این مقاله ، به اختصار ، خواهیم گفت که اگر چیزی `null` و `undefined` نباشد ، "وجود دارد".**
+**در ادامه این مقاله، برای اختصار، خواهیم گفت که اگر چیزی `null` و `undefined` نباشد، "وجود دارد".**
 
+یا به عبارت دیگر  `value?.prop`:
+- اگر `value` وجود داشته باشد، مثل `value.prop` کار می‌کند،
+- در غیر اینصورت (زمانی که `value` برابر با `undefined/null` است) مقدار `undefined` را برمی‌گرداند.
 
-
-یا به عبارت دیگر  `value?.prop` :
-
-@@@needs translation@@@
-@@@old part@@@
-- برابر است با `value.prop` اگر `value‍` وجود داشته باشد
-@@@old part@@@
-@@@new part@@@
-The optional chaining `?.` stops the evaluation if the value before `?.` is `undefined` or `null` and returns `undefined`.
-@@@new part@@@
-@@@needs translation@@@
-
-- در غیر اینصورت (زمانی که `value` برابر با `undefined/null` است) مقدار `value` را برمیگرداند.
-
-@@@needs translation@@@
-@@@new part@@@
-In other words, `value?.prop`:
-- works as `value.prop`, if `value` exists,
-- otherwise (when `value` is `undefined/null`) it returns `undefined`.
-@@@new part@@@
-@@@needs translation@@@
-
-`.?` این یک دسترسی مطمئن به `user.address.street`  است.
+کد پایین راهی مطمئن برای دسترسی به `user.address.street` با استفاده از `.?` است:
 
 ```js run
-let user = {}; // کاربر بدون آدرس
+let user = {}; // کاربر آدرسی ندارد
 
-alert( user?.address?.street ); // undefined (no error)
+alert( user?.address?.street ); // undefined (بدون خطا)
 ```
 
-حالا کد کوتاه و تمیز است و بدون هیچ تکرار اضافه‌ای
+حالا کد کوتاه و تمیز است، بدون هیچ تکرار اضافه‌ای.
 
-خواندن ویژگی(property) آدرس با  `user?.address` کار خواهد کرد حتی زمانی هم که  شی(آبجکت) `user` وجود ندارد :
+خواندن ویژگی آدرس با `user?.address` حتی زمانی هم که شیء `user` وجود ندارد هم کار خواهد کرد:
 
 ```js run
 let user = null;
@@ -120,45 +101,28 @@ alert( user?.address ); // undefined
 alert( user?.address.street ); // undefined
 ```
 
-لطفا توجه داشته باشید : سینتکس `?.` مقدارهای قبلی را اختیاری میکند نه مقدارهای جلوی آن را.
+لطفا توجه داشته باشید: سینتکس `.?` مقدارهای قبلی را اختیاری می‌کند نه مقدارهای جلوی آن را.
 
-@@@needs translation@@@
-@@@old part@@@
-در مثال بالا `user?.`  به `user` مقدار `null/undefined` خواهد داد.
-@@@old part@@@
-@@@new part@@@
-E.g. in `user?.address.street.name` the `?.` allows `user` to safely be `null/undefined` (and returns `undefined` in that case), but that's only for `user`. Further properties are accessed in a regular way. If we want some of them to be optional, then we'll need to replace more `.` with `?.`.
-@@@new part@@@
-@@@needs translation@@@
+مثلا در `user?.address.street.name` عبارت ‍`.?` اجازه می‌دهد که `user` برابر با `null/undefined` باشد (و در این صورت `undefined` را برمی‌گرداند)، اما این موضوع فقط برای `user` صادق است. به ویژگی‌های جلویی با سبک معمولی دسترسی پیدا می‌شود. اگر ما می‌خواهیم بعضی از ویژگی‌ها را اختیاری کنیم می‌توانیم تعداد بیشتری از `.` را با `.?` جایگزین کنیم.
 
-در مثال بالا  `user?.address.street`  فقط به  `user‍`  اجازه میدهد که `null/undefined` باشد. مثلا در این کد `user?.address.street.name`  عبارت ‍`.?` اجازه میدهد که `user` برابر با `null/undefined`  باشد. این همه کاری است که انجام میدهد. ویژگی های جلویی به سبک معمولی به ویژگی ها دسترسی دارند.اگر ما میخواهیم بعضی از ویژگی ها را اختیاری کنیم میتوانیم تعداد بیشتری از `.` را با `.?` جایگزین کنیم
+```warn header="از زنجیره‌ی اختیاری بیش از حد استفاده نکنید"
+ما باید از `.?` فقط زمانی استفاده کنیم که عدم وجود چیزی اشکالی ندارد.
 
-
-
-از طرف دیگر ، اگر ‍‍`user` وجود داشته باشد ، پس باید ویژگی `user.address` داشته باشد ، در غیر این صورت `user؟.address.street `در نقطه دوم خطا می دهد.
-
-```warn header="از زنجیر اختیاری بیش از حد استفاده تکنید"
-ما باید از `?.` فقط زمانی استفاده کنیم که عدم وجود چیزی اشکالی ندارد.
-برای مثال اگر طبق منطق و لاجیک ما باید شی(object)`user` وجود داشته باشد ولی `address` اختیاری است. 
-   پس ما باید اینگونه بنویسیم `user.address?.street` نه `user?.address?.street`
+برای مثال، اگر طبق منطق کد ما باید شیء `user` وجود داشته باشد ولی `address` اختیاری باشد، پس ما باید اینگونه بنویسیم `user.address?.street` نه `user?.address?.street`.
    
-بنابراین ، اگر تصادفاً به دلیل اشتباهی ‍`user`  برابر با `undefined` باشد، شاهد یک خطای برنامه نویسی در مورد آن خواهیم بود و آن را برطرف خواهیم کرد. در غیر این صورت ، خطاهای کد را می توان در مواردی که مناسب نیست ساکت کرد٬ و این کار اشکال زدایی را سخت تر میکند.
+بنابراین، اگر تصادفاً به دلیل اشتباهی ‍`user` برابر با `undefined` باشد، شاهد یک خطای برنامه‌نویسی در مورد آن خواهیم بود و آن را برطرف خواهیم کرد. در غیر این صورت، خطاهای کد را می توان در مواردی که مناسب نیست ساکت کرد، و این کار اشکال‌زدایی را سخت‌تر می‌کند.
 ```
 
-
-
-````warn header="متغیر قبل از ؟. باید تعریف شده باشد" اگر متغیر user به هیچ وجه وجود نداشته باشد `user?.anything` خطا خواهد داد
-
-
+````warn header="متغیر قبل از `.?` باید تعریف شده باشد"
+اگر متغیر `user` کلا وجود نداشته باشد `user?.anything` خطا می‌دهد:
 
 ```js run
 // ReferenceError: user is not defined
 user?.address;
 ```
-باید متغیر تعریف شده باشد( `let/const/var user ` یا توابع  ). زنجیره ای اختیاری فقط برای متغیرهای تعریف شده کار می کند.
-	
-
+باید متغیر تعریف شده باشد (برای مثال: `let/const/var user` یا به عنوان یک پارامتر تابع). زنجیره‌ی اختیاری فقط برای متغیرهای تعریف شده کار می‌کند.
 ````
+
 ## اتصال کوتاه
 
 همانطور که قبلا گفته شد عبارت `?.` فوراً ارزیابی را متوقف میکند(اتصال کوتاه) اگر عبارت سمت چپ آن وجود نداشته باشد.
