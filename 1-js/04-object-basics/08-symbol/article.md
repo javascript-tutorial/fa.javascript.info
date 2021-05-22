@@ -1,31 +1,31 @@
 
-# Symbol type
+# نوع سمبل
 
-By specification, object property keys may be either of string type, or of symbol type. Not numbers, not booleans, only strings or symbols, these two types.
+با توجه به خصوصیات زبان، کلیدهای ویژگی‌های شیء می‌توانند یا از نوع رشته باشند، یا از نوع سمبل (symbol). نه از نوع اعداد و نه boolean، فقط رشته یا سمبل، همین دو نوع.
 
-Till now we've been using only strings. Now let's see the benefits that symbols can give us.
+تا اینجا ما فقط از رشته‌ها استفاده می‌کردیم. حال بیایید مزایایی که سمبل‌ها به ما می‌دهند را ببینیم.
 
-## Symbols
+## سمبل‌ها (Symbols)
 
-A "symbol" represents a unique identifier.
+یک "سمبل" نشان دهنده‌ی شناسه‌ای یکتا است.
 
-A value of this type can be created using `Symbol()`:
+یک مقدار از این نوع می‌تواند با استفاده از `Symbol()` ساخته شود:
 
 ```js
-// id is a new symbol
+// یک سمبل جدید است id
 let id = Symbol();
 ```
 
-Upon creation, we can give symbol a description (also called a symbol name), mostly useful for debugging purposes:
+بعد از ساختن، می‌توانیم به سمبل یک سری توضیحات بدهیم (همچنین به آن اسم سمبل هم می‌گویند)، که اکثرا برای رفع خطا استفاده می‌شود:
 
 ```js
-// id is a symbol with the description "id"
+// است "id" یک سمبل به همراه توضیحات id
 let id = Symbol("id");
 ```
 
-Symbols are guaranteed to be unique. Even if we create many symbols with the same description, they are different values. The description is just a label that doesn't affect anything.
+سمبل‌ها برای یکتا بودن تضمین‌شده هستند. حتی اگر ما چند سمبل را با توضیحات یکسان بسازیم، آنها مقدارهایی متفاوت هستند. توضیحات فقط یک برچسب است که روی چیزی تاثیر نمی‌گذارد.
 
-For instance, here are two symbols with the same description -- they are not equal:
+برای مثال، اینجا دو سمبل با توضیحات یکسان داریم -- آنها برابر نیستند:
 
 ```js run
 let id1 = Symbol("id");
@@ -36,12 +36,12 @@ alert(id1 == id2); // false
 */!*
 ```
 
-If you are familiar with Ruby or another language that also has some sort of "symbols" -- please don't be misguided. JavaScript symbols are different.
+اگر شما با Ruby یا زبان دیگری که یک جورایی "سمبل" دارد آشنایی دارید -- لطفا گمراه نشوید. سمبل‌های جاوااسکریپت متفاوت هستند.
 
-````warn header="Symbols don't auto-convert to a string"
-Most values in JavaScript support implicit conversion to a string. For instance, we can `alert` almost any value, and it will work. Symbols are special. They don't auto-convert.
+````warn header="سمبل‌ها به صورت خودکار به رشته تبدیل نمی‌شوند"
+اکثر مقدارهای در جاوااسکریپت تبدیل به رشته به صورت ضمنی را انجام می‌دهند. برای مثال، ما می‌توانیم هر مقداری را `alert` کنیم، و این کار خواهد کرد. سمبل‌ها خاص هستند. آنها به صورت خودکار تبدیل نمی‌شوند.
 
-For instance, this `alert` will show an error:
+برای مثال، این `alert` یک ارور را نمایش می‌دهد:
 
 ```js run
 let id = Symbol("id");
@@ -50,17 +50,17 @@ alert(id); // TypeError: Cannot convert a Symbol value to a string
 */!*
 ```
 
-That's a "language guard" against messing up, because strings and symbols are fundamentally different and should not accidentally convert one into another.
+این موضوع یک "گارد زبان" در برابر خرابکاری کردن است، چون رشته‌ها و سمبل‌ها از پایه متفاوت هستند و نباید به صورت تصادفی به یکدیگر تبدیل شوند.
 
-If we really want to show a symbol, we need to explicitly call `.toString()` on it, like here:
+اگر ما واقعا نیاز داریم که یک سمبل را نمایش دهیم، باید به طور ضمنی همراه آن `.toString()` را هم صدا بزنیم، مثل اینجا:
 ```js run
 let id = Symbol("id");
 *!*
-alert(id.toString()); // Symbol(id), now it works
+alert(id.toString()); // Symbol(id)، حالا کار می‌کند
 */!*
 ```
 
-Or get `symbol.description` property to show the description only:
+یا فقط ویژگی `symbol.description` را برای نمایش توضیحات دریافت کنیم:
 ```js run
 let id = Symbol("id");
 *!*
