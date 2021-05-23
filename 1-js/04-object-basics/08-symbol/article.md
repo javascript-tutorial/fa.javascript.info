@@ -70,16 +70,16 @@ alert(id.description); // id
 
 ````
 
-## "Hidden" properties
+## ویژگی‌های "مخفی"
 
-Symbols allow us to create "hidden" properties of an object, that no other part of code can accidentally access or overwrite.
+سمبل‌ها به ما این امکان را می‌دهند که در یک شیء ویژگی‌های "مخفی" بسازیم، که هیچ کجای کد نتواند به صورت تصادفی به آن دسترسی داشته باشد یا آن را تغییر دهد.
 
-For instance, if we're working with `user` objects, that belong to a third-party code. We'd like to add identifiers to them.
+برای مثال، اگر ما در حال کار کردن با شیءهای `user` که متعلق به یک شخص ثالث است باشیم. ما می‌خواهیم شناسه‌هایی به آنها اضافه کنیم.
 
-Let's use a symbol key for it:
+بیایید از یک کلید سمبلی برای این کار استفاده کنیم:
 
 ```js run
-let user = { // belongs to another code
+let user = { // به یک کد دیگر تعلق دارد
   name: "John"
 };
 
@@ -87,38 +87,38 @@ let id = Symbol("id");
 
 user[id] = 1;
 
-alert( user[id] ); // we can access the data using the symbol as the key
+alert( user[id] ); // می‌توانیم با استفاده سمبل به عنوان کلید به داده دسترسی داشته باشیم
 ```
 
-What's the benefit of using `Symbol("id")` over a string `"id"`?
+مزیت استفاده از `Symbol("id")` به جای رشته `"id"` چیست؟
 
-As `user` objects belongs to another code, and that code also works with them, we shouldn't just add any fields to it. That's unsafe. But a symbol cannot be accessed accidentally, the third-party code probably won't even see it, so it's probably all right to do.
+به دلیل اینکه شیءهای `user` به کد دیگری تعلق دارند، آن کد هم با آنها کار می‌کند، ما نباید همینجوری به آن چیزی اضافه کنیم. این کار ایمن نیست. اما نمی‌توان به طور تصادفی به یک سمبل دسترسی پیدا کرد، کد شخص ثالث احتمالا آن را نمی‌بیند، پس انجام دادن این کار احتمالا مشکلی ندارد.
 
-Also, imagine that another script wants to have its own identifier inside `user`, for its own purposes. That may be another JavaScript library, so that the scripts are completely unaware of each other.
+همچنین تصور کنید که یک اسکریپت دیگر بنا به دلایلی، بخواهد شناسه خودش را درون `user` داشته باشد. ممکن است یک کتابخانه‌ی جاوااسکریپت دیگر باشد، پس اسکریپت‌ها از یکدیگر بی‌خبر هستند.
 
-Then that script can create its own `Symbol("id")`, like this:
+سپس آن اسکریپت می‌تواند `Symbol("id")` خودش را بسازد، مثل این:
 
 ```js
 // ...
 let id = Symbol("id");
 
-user[id] = "Their id value";
+user[id] = "آنها id مقدار";
 ```
 
-There will be no conflict between our and their identifiers, because symbols are always different, even if they have the same name.
+هیچ تعارضی بین شناسه ما و آنها وجود نخواهد داشت، چون سمبل‌ها همیشه متفاوت هستند، حتی اگر اسم یکسانی داشته باشند.
 
-...But if we used a string `"id"` instead of a symbol for the same purpose, then there *would* be a conflict:
+...اما اگر ما از رشته `"id"` به جای سمبل برای مقصود مشابه استفاده می‌کردیم، آنگاه تعارضی *وجود داشت*:
 
 ```js
 let user = { name: "John" };
 
-// Our script uses "id" property
-user.id = "Our id value";
+// استفاده می‌کند "id" اسکریپت ما از ویژگی
+user.id = "ما id مقدار";
 
-// ...Another script also wants "id" for its purposes...
+// ...می‌خواهد "id" یک اسکریپت دیگر هم بنا به دلیلی...
 
-user.id = "Their id value"
-// Boom! overwritten by another script!
+user.id = "آنها id مقدار"
+// !بوم! توسط یک اسکریپت دیگر بازنویسی شد
 ```
 
 ### Symbols in an object literal
