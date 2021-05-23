@@ -121,11 +121,11 @@ user.id = "آنها id مقدار"
 // !بوم! توسط یک اسکریپت دیگر بازنویسی شد
 ```
 
-### Symbols in an object literal
+### سمبل‌ها در یک شیء لیترال
 
-If we want to use a symbol in an object literal `{...}`, we need square brackets around it.
+اگر ما بخواهیم از یک سمبل در شیء لیترال `{...}` استفاده کنیم، باید دور آن براکت قرار دهیم.
 
-Like this:
+مثل این:
 
 ```js
 let id = Symbol("id");
@@ -133,11 +133,11 @@ let id = Symbol("id");
 let user = {
   name: "John",
 *!*
-  [id]: 123 // not "id": 123
+  [id]: 123 // "id": 123 نه
 */!*
 };
 ```
-That's because we need the value from the variable `id` as the key, not the string "id".
+به این دلیل که ما به مقدار متغیر `id` به عنوان کلید نیاز داریم، نه رشته‌ی "id".
 
 ### Symbols are skipped by for..in
 
