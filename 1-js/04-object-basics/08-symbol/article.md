@@ -139,11 +139,11 @@ let user = {
 ```
 به این دلیل که ما به مقدار متغیر `id` به عنوان کلید نیاز داریم، نه رشته‌ی "id".
 
-### Symbols are skipped by for..in
+### سمبل‌ها توسط for..in رد می‌شوند
 
-Symbolic properties do not participate in `for..in` loop.
+ویژگی‌های سمبلی در حلقه `for..in` شرکت نمی‌کنند.
 
-For instance:
+برای مثال:
 
 ```js run
 let id = Symbol("id");
@@ -154,16 +154,16 @@ let user = {
 };
 
 *!*
-for (let key in user) alert(key); // name, age (no symbols)
+for (let key in user) alert(key); // name, age (بدون سمبل)
 */!*
 
-// the direct access by the symbol works
-alert( "Direct: " + user[id] );
+// دسترسی مستقیم به سمبل کار می‌کند
+alert( "به طور مستقیم: " + user[id] );
 ```
 
-`Object.keys(user)` also ignores them. That's a part of the general "hiding symbolic properties" principle. If another script or a library loops over our object, it won't unexpectedly access a symbolic property.
+همچنین `Object.keys(user)` هم آنها را نادیده می‌گیرد. این یک بخش از اصل کلی "مخفی‌سازی ویژگی‌های سمبلی" است. اگر یک اسکریپت یا کتابخانه دیگر در شیء ما حلقه بزند، به تصادفی به ویژگی سمبلی ما دسترسی نخواهد داشت.
 
-In contrast, [Object.assign](mdn:js/Object/assign) copies both string and symbol properties:
+در مقابل، [Object.assign](mdn:js/Object/assign) هم ویژگی‌های رشته و هم سمبل را کپی می‌کند:
 
 ```js run
 let id = Symbol("id");
@@ -176,7 +176,7 @@ let clone = Object.assign({}, user);
 alert( clone[id] ); // 123
 ```
 
-There's no paradox here. That's by design. The idea is that when we clone an object or merge objects, we usually want *all* properties to be copied (including symbols like `id`).
+هیچ تناقضی اینجا وجود ندارد. طراحی آن اینگونه است. زمانی که ما یک شیء را شبیه‌سازی می‌کنیم یا شیءها را ادغام می‌کنیم، معمولا می‌خواهیم که *تمام* ویژگی‌ها کپی شوند (شامل سمبل‌هایی مثل `id`).
 
 ## Global symbols
 
