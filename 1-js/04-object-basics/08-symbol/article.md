@@ -178,35 +178,35 @@ alert( clone[id] ); // 123
 
 هیچ تناقضی اینجا وجود ندارد. طراحی آن اینگونه است. زمانی که ما یک شیء را شبیه‌سازی می‌کنیم یا شیءها را ادغام می‌کنیم، معمولا می‌خواهیم که *تمام* ویژگی‌ها کپی شوند (شامل سمبل‌هایی مثل `id`).
 
-## Global symbols
+## سمبل‌های Global
 
-As we've seen, usually all symbols are different, even if they have the same name. But sometimes we want same-named symbols to be same entities. For instance, different parts of our application want to access symbol `"id"` meaning exactly the same property.
+همانطور که دیدیم، معمولا تمام سمبل‌ها متفاوت هستند، حتی اگر اسم یکسان داشته باشند. اما گاهی اوقات ما می‌خواهیم که سمبل‌های هم نام با یکدیگر برابر باشند. برای مثال، قسمت‌های مختلف برنامه ما می‌خواهند به سمبل `"id"` که ویژگی یکسانی است دسترسی داشته باشند.
 
-To achieve that, there exists a *global symbol registry*. We can create symbols in it and access them later, and it guarantees that repeated accesses by the same name return exactly the same symbol.
+برای بدست آوردن آن، یک *دفتر ثبت سمبل global* وجود دارد. ما می‌توانیم سمبل‌ها را درون آن بسازیم و بعدا به آن دسترسی داشته باشیم، و تضمین می‌کند که دسترسی تکراری با استفاده از یک اسم به ما دقیقا سمبل یکسان را برمی‌گرداند.
 
-In order to read (create if absent) a symbol from the registry, use `Symbol.for(key)`.
+برای خواندن (یا در صورت ناموجود بودن، ساختن) یک سمبل از دفتر ثبت، از `Symbol.for(key)` استفاده کنید.
 
-That call checks the global registry, and if there's a symbol described as `key`, then returns it, otherwise creates a new symbol `Symbol(key)` and stores it in the registry by the given `key`.
+این صدازدن دفتر ثبت global را بررسی می‌کند، و اگر یک سمبل توصیف شده به عنوان `key` موجود باشد، آن را برمی‌گرداند، در غیر این صورت یک سمبل جدید `Symbol(key)` می‌سازد و آن را در دفتر ثبت با استفاده از `key` داده شده ذخیره می‌کند.
 
-For instance:
+برای مثال:
 
 ```js run
-// read from the global registry
-let id = Symbol.for("id"); // if the symbol did not exist, it is created
+// global خواندن از دفتر ثبت
+let id = Symbol.for("id"); // اگر سمبل وجود نداشته باشد، ساخته می‌شود
 
-// read it again (maybe from another part of the code)
+// دوباره آن را می‌خواند (شاید از یک جای دیگر کد باشد)
 let idAgain = Symbol.for("id");
 
-// the same symbol
+// سمبل یکسان
 alert( id === idAgain ); // true
 ```
 
-Symbols inside the registry are called *global symbols*. If we want an application-wide symbol, accessible everywhere in the code -- that's what they are for.
+سمبل‌های درون دفتر ثبت *سمبل‌های global* نامیده می‌شوند. اگر ما یک سمبل در تمام سطح برنامه بخواهیم که در همه جای کد قابل دسترس باشد -- این سمبل‌ها مناسب هستند.
 
-```smart header="That sounds like Ruby"
-In some programming languages, like Ruby, there's a single symbol per name.
+```smart header="به نظر می‌رسد مثل Ruby باشد"
+در بعضی از زبان‌های برنامه‌نویسی، مثل Ruby، به ازای هر اسم فقط یک سمبل وجود دارد.
 
-In JavaScript, as we can see, that's right for global symbols.
+در جاوااسکریپت، همانطور که می‌بینیم، برای سمبل‌های global این موضوع صدق می‌کند.
 ```
 
 ### Symbol.keyFor
