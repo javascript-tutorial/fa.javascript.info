@@ -1,31 +1,31 @@
 
-# Symbol type
+# نوع سمبل (Symbol type)
 
-By specification, object property keys may be either of string type, or of symbol type. Not numbers, not booleans, only strings or symbols, these two types.
+با توجه به خصوصیات زبان، کلیدهای ویژگی‌های شیء می‌توانند یا از نوع رشته باشند، یا از نوع سمبل (symbol). نه از نوع اعداد و نه boolean، فقط رشته یا سمبل، همین دو نوع.
 
-Till now we've been using only strings. Now let's see the benefits that symbols can give us.
+تا اینجا ما فقط از رشته‌ها استفاده می‌کردیم. حال بیایید مزایایی که سمبل‌ها به ما می‌دهند را ببینیم.
 
-## Symbols
+## سمبل‌ها (Symbols)
 
-A "symbol" represents a unique identifier.
+یک «سمبل» نشان دهنده‌ی شناسه‌ای یکتا است.
 
-A value of this type can be created using `Symbol()`:
+یک مقدار از این نوع می‌تواند با استفاده از `Symbol()` ساخته شود:
 
 ```js
-// id is a new symbol
+// یک سمبل جدید است id
 let id = Symbol();
 ```
 
-Upon creation, we can give symbol a description (also called a symbol name), mostly useful for debugging purposes:
+بعد از ساختن، می‌توانیم به سمبل یک سری توضیحات بدهیم (همچنین به آن اسم سمبل هم می‌گویند)، که اکثرا برای رفع خطا استفاده می‌شود:
 
 ```js
-// id is a symbol with the description "id"
+// است "id" یک سمبل به همراه توضیحات id
 let id = Symbol("id");
 ```
 
-Symbols are guaranteed to be unique. Even if we create many symbols with the same description, they are different values. The description is just a label that doesn't affect anything.
+سمبل‌ها برای یکتا بودن تضمین‌شده هستند. حتی اگر ما چند سمبل را با توضیحات یکسان بسازیم، آنها مقدارهایی متفاوت هستند. توضیحات فقط یک برچسب است که روی چیزی تاثیر نمی‌گذارد.
 
-For instance, here are two symbols with the same description -- they are not equal:
+برای مثال، اینجا دو سمبل با توضیحات یکسان داریم -- آنها برابر نیستند:
 
 ```js run
 let id1 = Symbol("id");
@@ -36,12 +36,12 @@ alert(id1 == id2); // false
 */!*
 ```
 
-If you are familiar with Ruby or another language that also has some sort of "symbols" -- please don't be misguided. JavaScript symbols are different.
+اگر شما با Ruby یا زبان دیگری که یک جورایی "سمبل" دارد آشنایی دارید -- لطفا گمراه نشوید. سمبل‌های جاوااسکریپت متفاوت هستند.
 
-````warn header="Symbols don't auto-convert to a string"
-Most values in JavaScript support implicit conversion to a string. For instance, we can `alert` almost any value, and it will work. Symbols are special. They don't auto-convert.
+````warn header="سمبل‌ها به صورت خودکار به رشته تبدیل نمی‌شوند"
+اکثر مقدارهای در جاوااسکریپت تبدیل به رشته به صورت ضمنی را انجام می‌دهند. برای مثال، ما می‌توانیم هر مقداری را `alert` کنیم، و این کار خواهد کرد. سمبل‌ها خاص هستند. آنها به صورت خودکار تبدیل نمی‌شوند.
 
-For instance, this `alert` will show an error:
+برای مثال، این `alert` یک ارور را نمایش می‌دهد:
 
 ```js run
 let id = Symbol("id");
@@ -50,17 +50,17 @@ alert(id); // TypeError: Cannot convert a Symbol value to a string
 */!*
 ```
 
-That's a "language guard" against messing up, because strings and symbols are fundamentally different and should not accidentally convert one into another.
+این موضوع یک "گارد زبان" در برابر خرابکاری کردن است، چون رشته‌ها و سمبل‌ها از پایه متفاوت هستند و نباید به صورت تصادفی به یکدیگر تبدیل شوند.
 
-If we really want to show a symbol, we need to explicitly call `.toString()` on it, like here:
+اگر ما واقعا نیاز داریم که یک سمبل را نمایش دهیم، باید به طور ضمنی همراه آن `.toString()` را هم صدا بزنیم، مثل اینجا:
 ```js run
 let id = Symbol("id");
 *!*
-alert(id.toString()); // Symbol(id), now it works
+alert(id.toString()); // Symbol(id)، حالا کار می‌کند
 */!*
 ```
 
-Or get `symbol.description` property to show the description only:
+یا فقط ویژگی `symbol.description` را برای نمایش توضیحات دریافت کنیم:
 ```js run
 let id = Symbol("id");
 *!*
@@ -70,16 +70,16 @@ alert(id.description); // id
 
 ````
 
-## "Hidden" properties
+## ویژگی‌های «مخفی»
 
-Symbols allow us to create "hidden" properties of an object, that no other part of code can accidentally access or overwrite.
+سمبل‌ها به ما این امکان را می‌دهند که در یک شیء ویژگی‌های "مخفی" بسازیم، که هیچ کجای کد نتواند به صورت تصادفی به آن دسترسی داشته باشد یا آن را تغییر دهد.
 
-For instance, if we're working with `user` objects, that belong to a third-party code. We'd like to add identifiers to them.
+برای مثال، اگر ما در حال کار کردن با شیءهای `user` که متعلق به یک شخص ثالث است باشیم. ما می‌خواهیم شناسه‌هایی به آنها اضافه کنیم.
 
-Let's use a symbol key for it:
+بیایید از یک کلید سمبلی برای این کار استفاده کنیم:
 
 ```js run
-let user = { // belongs to another code
+let user = { // به یک کد دیگر تعلق دارد
   name: "John"
 };
 
@@ -87,45 +87,45 @@ let id = Symbol("id");
 
 user[id] = 1;
 
-alert( user[id] ); // we can access the data using the symbol as the key
+alert( user[id] ); // می‌توانیم با استفاده سمبل به عنوان کلید به داده دسترسی داشته باشیم
 ```
 
-What's the benefit of using `Symbol("id")` over a string `"id"`?
+مزیت استفاده از `Symbol("id")` به جای رشته `"id"` چیست؟
 
-As `user` objects belongs to another code, and that code also works with them, we shouldn't just add any fields to it. That's unsafe. But a symbol cannot be accessed accidentally, the third-party code probably won't even see it, so it's probably all right to do.
+به دلیل اینکه شیءهای `user` به کد دیگری تعلق دارند، آن کد هم با آنها کار می‌کند، ما نباید همینجوری به آن چیزی اضافه کنیم. این کار ایمن نیست. اما نمی‌توان به طور تصادفی به یک سمبل دسترسی پیدا کرد، کد شخص ثالث احتمالا آن را نمی‌بیند، پس انجام دادن این کار احتمالا مشکلی ندارد.
 
-Also, imagine that another script wants to have its own identifier inside `user`, for its own purposes. That may be another JavaScript library, so that the scripts are completely unaware of each other.
+همچنین تصور کنید که یک اسکریپت دیگر بنا به دلایلی، بخواهد شناسه خودش را درون `user` داشته باشد. ممکن است یک کتابخانه‌ی جاوااسکریپت دیگر باشد، پس اسکریپت‌ها از یکدیگر بی‌خبر هستند.
 
-Then that script can create its own `Symbol("id")`, like this:
+سپس آن اسکریپت می‌تواند `Symbol("id")` خودش را بسازد، مثل این:
 
 ```js
 // ...
 let id = Symbol("id");
 
-user[id] = "Their id value";
+user[id] = "آنها id مقدار";
 ```
 
-There will be no conflict between our and their identifiers, because symbols are always different, even if they have the same name.
+هیچ تعارضی بین شناسه ما و آنها وجود نخواهد داشت، چون سمبل‌ها همیشه متفاوت هستند، حتی اگر اسم یکسانی داشته باشند.
 
-...But if we used a string `"id"` instead of a symbol for the same purpose, then there *would* be a conflict:
+...اما اگر ما از رشته `"id"` به جای سمبل برای مقصود مشابه استفاده می‌کردیم، آنگاه تعارضی *وجود داشت*:
 
 ```js
 let user = { name: "John" };
 
-// Our script uses "id" property
-user.id = "Our id value";
+// استفاده می‌کند "id" اسکریپت ما از ویژگی
+user.id = "ما id مقدار";
 
-// ...Another script also wants "id" for its purposes...
+// ...می‌خواهد "id" یک اسکریپت دیگر هم بنا به دلیلی...
 
-user.id = "Their id value"
-// Boom! overwritten by another script!
+user.id = "آنها id مقدار"
+// !بوم! توسط یک اسکریپت دیگر بازنویسی شد
 ```
 
-### Symbols in an object literal
+### سمبل‌ها در یک شیء لیترال
 
-If we want to use a symbol in an object literal `{...}`, we need square brackets around it.
+اگر ما بخواهیم از یک سمبل در شیء لیترال `{...}` استفاده کنیم، باید دور آن براکت قرار دهیم.
 
-Like this:
+مثل این:
 
 ```js
 let id = Symbol("id");
@@ -133,17 +133,17 @@ let id = Symbol("id");
 let user = {
   name: "John",
 *!*
-  [id]: 123 // not "id": 123
+  [id]: 123 // "id": 123 نه
 */!*
 };
 ```
-That's because we need the value from the variable `id` as the key, not the string "id".
+به این دلیل که ما به مقدار متغیر `id` به عنوان کلید نیاز داریم، نه رشته‌ی "id".
 
-### Symbols are skipped by for..in
+### سمبل‌ها توسط for..in رد می‌شوند
 
-Symbolic properties do not participate in `for..in` loop.
+ویژگی‌های سمبلی در حلقه `for..in` شرکت نمی‌کنند.
 
-For instance:
+برای مثال:
 
 ```js run
 let id = Symbol("id");
@@ -154,16 +154,16 @@ let user = {
 };
 
 *!*
-for (let key in user) alert(key); // name, age (no symbols)
+for (let key in user) alert(key); // name, age (بدون سمبل)
 */!*
 
-// the direct access by the symbol works
-alert( "Direct: " + user[id] );
+// دسترسی مستقیم به سمبل کار می‌کند
+alert( "به طور مستقیم: " + user[id] );
 ```
 
-`Object.keys(user)` also ignores them. That's a part of the general "hiding symbolic properties" principle. If another script or a library loops over our object, it won't unexpectedly access a symbolic property.
+همچنین `Object.keys(user)` هم آنها را نادیده می‌گیرد. این یک بخش از اصل کلی «مخفی‌سازی ویژگی‌های سمبلی» است. اگر یک اسکریپت یا کتابخانه دیگر در شیء ما حلقه بزند، به تصادفی به ویژگی سمبلی ما دسترسی نخواهد داشت.
 
-In contrast, [Object.assign](mdn:js/Object/assign) copies both string and symbol properties:
+در مقابل، [Object.assign](mdn:js/Object/assign) هم ویژگی‌های رشته و هم سمبل را کپی می‌کند:
 
 ```js run
 let id = Symbol("id");
@@ -176,60 +176,60 @@ let clone = Object.assign({}, user);
 alert( clone[id] ); // 123
 ```
 
-There's no paradox here. That's by design. The idea is that when we clone an object or merge objects, we usually want *all* properties to be copied (including symbols like `id`).
+هیچ تناقضی اینجا وجود ندارد. طراحی آن اینگونه است. زمانی که ما یک شیء را شبیه‌سازی می‌کنیم یا شیءها را ادغام می‌کنیم، معمولا می‌خواهیم که *تمام* ویژگی‌ها کپی شوند (شامل سمبل‌هایی مثل `id`).
 
-## Global symbols
+## سمبل‌های Global
 
-As we've seen, usually all symbols are different, even if they have the same name. But sometimes we want same-named symbols to be same entities. For instance, different parts of our application want to access symbol `"id"` meaning exactly the same property.
+همانطور که دیدیم، معمولا تمام سمبل‌ها متفاوت هستند، حتی اگر اسم یکسان داشته باشند. اما گاهی اوقات ما می‌خواهیم که سمبل‌های هم نام با یکدیگر برابر باشند. برای مثال، قسمت‌های مختلف برنامه ما می‌خواهند به سمبل `"id"` که ویژگی یکسانی است دسترسی داشته باشند.
 
-To achieve that, there exists a *global symbol registry*. We can create symbols in it and access them later, and it guarantees that repeated accesses by the same name return exactly the same symbol.
+برای بدست آوردن آن، یک *رجیستری ثبت سمبل global* وجود دارد. ما می‌توانیم سمبل‌ها را درون آن بسازیم و بعدا به آن دسترسی داشته باشیم، و تضمین می‌کند که دسترسی تکراری با استفاده از یک اسم به ما دقیقا سمبل یکسان را برمی‌گرداند.
 
-In order to read (create if absent) a symbol from the registry, use `Symbol.for(key)`.
+برای خواندن (یا در صورت ناموجود بودن، ساختن) یک سمبل از رجیستری ثبت، از `Symbol.for(key)` استفاده کنید.
 
-That call checks the global registry, and if there's a symbol described as `key`, then returns it, otherwise creates a new symbol `Symbol(key)` and stores it in the registry by the given `key`.
+این صدازدن رجیستری ثبت global را بررسی می‌کند، و اگر یک سمبل توصیف شده به عنوان `key` موجود باشد، آن را برمی‌گرداند، در غیر این صورت یک سمبل جدید `Symbol(key)` می‌سازد و آن را در رجیستری ثبت با استفاده از `key` داده شده ذخیره می‌کند.
 
-For instance:
+برای مثال:
 
 ```js run
-// read from the global registry
-let id = Symbol.for("id"); // if the symbol did not exist, it is created
+// global خواندن از رجیستری ثبت
+let id = Symbol.for("id"); // اگر سمبل وجود نداشته باشد، ساخته می‌شود
 
-// read it again (maybe from another part of the code)
+// دوباره آن را می‌خواند (شاید از یک جای دیگر کد باشد)
 let idAgain = Symbol.for("id");
 
-// the same symbol
+// سمبل یکسان
 alert( id === idAgain ); // true
 ```
 
-Symbols inside the registry are called *global symbols*. If we want an application-wide symbol, accessible everywhere in the code -- that's what they are for.
+سمبل‌های درون رجیستری ثبت *سمبل‌های global* نامیده می‌شوند. اگر ما یک سمبل در تمام سطح برنامه بخواهیم که در همه جای کد قابل دسترس باشد -- این سمبل‌ها مناسب هستند.
 
-```smart header="That sounds like Ruby"
-In some programming languages, like Ruby, there's a single symbol per name.
+```smart header="به نظر می‌رسد مثل Ruby باشد"
+در بعضی از زبان‌های برنامه‌نویسی، مثل Ruby، به ازای هر اسم فقط یک سمبل وجود دارد.
 
-In JavaScript, as we can see, that's right for global symbols.
+در جاوااسکریپت، همانطور که می‌بینیم، برای سمبل‌های global این موضوع صدق می‌کند.
 ```
 
-### Symbol.keyFor
+### متد Symbol.keyFor
 
-For global symbols, not only `Symbol.for(key)` returns a symbol by name, but there's a reverse call: `Symbol.keyFor(sym)`, that does the reverse: returns a name by a global symbol.
+برای سمبل‌های global، نه تنها `Symbol.for(key)` یک سمبل را بر اساس اسم برمی‌گرداند، بلکه یک عمل برعکس هم وجود دارد: `Symbol.keyFor(sym)`، که کار برعکس را انجام می‌دهد: یک اسم را بر اساس یک سمبل global برمی‌گرداند.
 
-For instance:
+برای مثال:
 
 ```js run
-// get symbol by name
+// گرفتن سمبل بر اساس اسم
 let sym = Symbol.for("name");
 let sym2 = Symbol.for("id");
 
-// get name by symbol
+// گرفتن اسم بر اساس سمبل
 alert( Symbol.keyFor(sym) ); // name
 alert( Symbol.keyFor(sym2) ); // id
 ```
 
-The `Symbol.keyFor` internally uses the global symbol registry to look up the key for the symbol. So it doesn't work for non-global symbols. If the symbol is not global, it won't be able to find it and returns `undefined`.
+متد `Symbol.keyFor` درون خود از رجیستری ثبت سمبل global برای پیدا کردن کلید (key) سمبل استفاده می‌کند. پس برای سمبل‌های غیر global کار نمی‌کند. اگر سمبل global نباشد، قادر به پیدا کردن آن نخواهد بود و `undefined` را برمی‌گرداند.
 
-That said, any symbols have `description` property.
+همانطور که گفته شد، هر سمبل ویژگی `description` را دارد.
 
-For instance:
+برای مثال:
 
 ```js run
 let globalSymbol = Symbol.for("name");
@@ -241,37 +241,37 @@ alert( Symbol.keyFor(localSymbol) ); // undefined, not global
 alert( localSymbol.description ); // name
 ```
 
-## System symbols
+## سمبل‌های سیستمی
 
-There exist many "system" symbols that JavaScript uses internally, and we can use them to fine-tune various aspects of our objects.
+تعداد زیادی سمبل "سیستمی" وجود دارد که جاوااسکریپت درون خود از آنها استفاده می‌کند، و ما می‌توانیم از آنها برای ایجاد تغییرات کوچک در جنبه‌های متنوع شیءها استفاده کنیم.
 
-They are listed in the specification in the [Well-known symbols](https://tc39.github.io/ecma262/#sec-well-known-symbols) table:
+آنها در مشخصات زبان در جدول [سمبل‌های شناخته‌شده](https://tc39.github.io/ecma262/#sec-well-known-symbols) لیست شده‌اند:
 
 - `Symbol.hasInstance`
 - `Symbol.isConcatSpreadable`
 - `Symbol.iterator`
 - `Symbol.toPrimitive`
-- ...and so on.
+- ...و غیره.
 
-For instance, `Symbol.toPrimitive` allows us to describe object to primitive conversion. We'll see its use very soon.
+برای مثال، `Symbol.toPrimitive` به ما امکان توصیف تبدیل شیء به مقدار اصلی (primitive) را می‌دهد. ما کاربرد آن را به زودی می‌بینیم.
 
-Other symbols will also become familiar when we study the corresponding language features.
+شما با بقیه سمبل‌ها هم زمانی که ویژگی زبان مربوط به آنها را مطالعه کنیم آشنا می‌شوید.
 
-## Summary
+## خلاصه
 
-`Symbol` is a primitive type for unique identifiers.
+`Symbol` یک نوع مقدار اصلی (primitive) برای شناسه‌های یکتا است.
 
-Symbols are created with `Symbol()` call with an optional description (name).
+سمبل‌ها با صدازدن `Symbol()` به همراه توضیحات (اسم) اختیاری ساخته می‌شوند.
 
-Symbols are always different values, even if they have the same name. If we want same-named symbols to be equal, then we should use the global registry: `Symbol.for(key)` returns (creates if needed) a global symbol with `key` as the name. Multiple calls of `Symbol.for` with the same `key` return exactly the same symbol.
+سمبل‌ها همیشه مقدارهای متفاوت دارند، حتی اگر اسم یکسان داشته باشند. اگر بخواهیم که سمبل‌های همنام برابر باشند، باید از رجیستری ثبت global استفاده کنیم: `Symbol.for(key)` یک سمبل global را با استفاده از `key` به عنوان اسم برمی‌گرداند (اگر نیاز باشد آن را می‌سازد). چند مرتبه صدازدن `Symbol.for` با `key` یکسان دقیقا سمبل یکسان را برمی‌گرداند.
 
-Symbols have two main use cases:
+سمبل‌ها در دو مورد زیاد استفاده می‌شوند:
 
-1. "Hidden" object properties.
-    If we want to add a property into an object that "belongs" to another script or a library, we can create a symbol and use it as a property key. A symbolic property does not appear in `for..in`, so it won't be accidentally processed together with other properties. Also it won't be accessed directly, because another script does not have our symbol. So the property will be protected from accidental use or overwrite.
+1. ویژگی‌های «مخفی» شیء.
+    اگر ما بخواهیم یک ویژگی را درون یک شیء که به اسکریپت یا کتابخانه دیگری "تعلق دارد" اضافه کنیم، می‌توانیم یک سمبل بسازیم و از آن به عنوان کلید ویژگی استفاده کنیم. یک ویژگی سمبلی در `for..in` نمایان نمی‌شود، پس با ویژگی‌های دیگر به طور تصادفی روی آن فرایندی انجام نمی‌گیرد. همچنین دسترسی مستقیم به آن وجود ندارد، چون اسکریپت دیگر سمبل ما را ندارد. پس ویژگی از استفاده یا بازنویسی تصادفی در امان می‌ماند.
 
-    So we can "covertly" hide something into objects that we need, but others should not see, using symbolic properties.
+    پس ما می‌توانیم با استفاده از ویژگی‌های سمبلی، به صورت "مخفیانه" چیزی را که نیاز داریم درون شیءها پنهان کنیم، اما بقیه آن را نباید ببینند.
 
-2. There are many system symbols used by JavaScript which are accessible as `Symbol.*`. We can use them to alter some built-in behaviors. For instance, later in the tutorial we'll use `Symbol.iterator` for [iterables](info:iterable), `Symbol.toPrimitive` to setup [object-to-primitive conversion](info:object-toprimitive) and so on.
+2. سمبل‌های سیستمی زیادی وجود دارند که توسط جاوااسکریپت استفاده می‌شوند و با `Symbol.*` قابل دسترس هستند. ما می‌توانیم از آنها برای تغییر بعضی از رفتارهای درون زبان استفاده کنیم. برای مثال، بعدا در همین آموزش ما از `Symbol.iterator` برای [قابل تکرارها (iterables)](info:iterable)، `Symbol.toPrimitive` برای ایجاد [تبدیل شیء به مقدار اصلی](info:object-toprimitive) و غیره استفاده خواهیم کرد.
 
-Technically, symbols are not 100% hidden. There is a built-in method [Object.getOwnPropertySymbols(obj)](mdn:js/Object/getOwnPropertySymbols) that allows us to get all symbols. Also there is a method named [Reflect.ownKeys(obj)](mdn:js/Reflect/ownKeys) that returns *all* keys of an object including symbolic ones. So they are not really hidden. But most libraries, built-in functions and syntax constructs don't use these methods.
+از لحاظ فنی، سمبل‌ها 100% مخفی نیستند. یک متد درون‌ساخت [Object.getOwnPropertySymbols(obj)](mdn:js/Object/getOwnPropertySymbols) وجود دارد که به ما امکان دریافت تمام سمبل‌ها را می‌دهد. همچنین یک متد به نام [Reflect.ownKeys(obj)](mdn:js/Reflect/ownKeys) وجود دارد که *تمام* کلیدهای یک شیء که شامل کلیدهای سمبلی هم هست را برمی‌گرداند. پس آنها در واقع پنهان نیستند. اما اکثر کتابخانه‌ها، توابع درون‌ساخت و ساختارهای سینتکس از این متدها استفاده نمی‌کنند.
