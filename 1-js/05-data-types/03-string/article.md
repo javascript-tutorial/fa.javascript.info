@@ -4,20 +4,20 @@
 
 فرمت درونی برای رشته‌ها همیشه [UTF-16](https://en.wikipedia.org/wiki/UTF-16) است، و به رمزگذاری صفحه بستگی ندارد.
 
-## Quotes
+## کوتیشن‌ها
 
-Let's recall the kinds of quotes.
+بیایید انواع کوتیشن‌ها را یادآوری کنیم.
 
-Strings can be enclosed within either single quotes, double quotes or backticks:
+رشته‌ها می‌توانند در کوتیشن‌های تکی، دوتایی یا backtickها محصور شوند:
 
 ```js
-let single = 'single-quoted';
-let double = "double-quoted";
+let single = 'کوتیشن تکی';
+let double = "کوتیشن دوتایی";
 
-let backticks = `backticks`;
+let backticks = `هاbacktick`;
 ```
 
-Single and double quotes are essentially the same. Backticks, however, allow us to embed any expression into the string, by wrapping it in `${…}`:
+کوتیشن‌های تکی و دوتایی اساسا یکسان هستند. اگرچه، backtickها، با پیچیدن هر عبارتی در `{...}$`، به ما اجازه می‌دهند که آن عبارت را درون رشته قرار دهیم:
 
 ```js run
 function sum(a, b) {
@@ -27,30 +27,30 @@ function sum(a, b) {
 alert(`1 + 2 = ${sum(1, 2)}.`); // 1 + 2 = 3.
 ```
 
-Another advantage of using backticks is that they allow a string to span multiple lines:
+یکی دیگر از مزایای استفاده از backtickها این است که اجازه می‌دهند تا رشته را در چند خط بنویسیم:
 
 ```js run
-let guestList = `Guests:
+let guestList = `مهمان‌ها:
  * John
  * Pete
  * Mary
 `;
 
-alert(guestList); // a list of guests, multiple lines
+alert(guestList); // لیستی از مهمان‌ها، در چند خط
 ```
 
-Looks natural, right? But single or double quotes do not work this way.
+طبیعی به نظر می‌رسد نه؟ اما کوتیشن‌های تکی یا دوتایی این چنین کار نمی‌کنند.
 
-If we use them and try to use multiple lines, there'll be an error:
+اگر ما با استفاده از آنها تلاش کنیم در چند خط بنویسیم، یک ارور به وجود خواهد آمد:
 
 ```js run
 let guestList = "Guests: // Error: Unexpected token ILLEGAL
   * John";
 ```
 
-Single and double quotes come from ancient times of language creation when the need for multiline strings was not taken into account. Backticks appeared much later and thus are more versatile.
+کوتیشن‌های تکی و دوتایی از زمان بسیار قدیم در زبان وجود داشتند زمانی که نیاز به رشته‌های چند خطی خیلی به چشم نمی‌آمد. Backtickها بعدها به وجود آمدند و به این ترتیب چند کاره هستند.
 
-Backticks also allow us to specify a "template function" before the first backtick. The syntax is: <code>func&#96;string&#96;</code>. The function `func` is called automatically, receives the string and embedded expressions and can process them. This is called "tagged templates". This feature makes it easier to implement custom templating, but is rarely used in practice. You can read more about it in the [manual](mdn:/JavaScript/Reference/Template_literals#Tagged_templates).
+Backtickها به ما اجازه می‌دهند که یک "تابع الگو" قبل از backtick اول مشخص کنیم. سینتکس اینگونه است: <code>func&#96;string&#96;</code>. تابع `func` به طور خودکار صدا زده می‌شود، رشته را دریافت می‌کند و عبارات را ایجاد می‌کند و می‌تواند با آنها فرایندی انجام دهد. به این "الگوهای برچسب گذاری شده" می‌گویند. این ویژگی پیاده‌سازی الگوهای سفارشی را آسان‌تر می‌کند، اما در عمل خیلی کم استفاده می‌شود. می‌توانید درباره آن در [کتاب راهنما](mdn:/JavaScript/Reference/Template_literals#Tagged_templates) بیشتر بخوانید.
 
 ## Special characters
 
