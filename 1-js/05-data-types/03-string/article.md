@@ -52,75 +52,75 @@ let guestList = "Guests: // Error: Unexpected token ILLEGAL
 
 Backtickها به ما اجازه می‌دهند که یک "تابع الگو" قبل از backtick اول مشخص کنیم. سینتکس اینگونه است: <code>func&#96;string&#96;</code>. تابع `func` به طور خودکار صدا زده می‌شود، رشته را دریافت می‌کند و عبارات را ایجاد می‌کند و می‌تواند با آنها فرایندی انجام دهد. به این "الگوهای برچسب گذاری شده" می‌گویند. این ویژگی پیاده‌سازی الگوهای سفارشی را آسان‌تر می‌کند، اما در عمل خیلی کم استفاده می‌شود. می‌توانید درباره آن در [کتاب راهنما](mdn:/JavaScript/Reference/Template_literals#Tagged_templates) بیشتر بخوانید.
 
-## Special characters
+## کاراکترهای خاص
 
-It is still possible to create multiline strings with single and double quotes by using a so-called "newline character", written as `\n`, which denotes a line break:
+اینکه با کوتیشن‌های تکی و دوتایی رشته‌های چند خطی بسازیم، با استفاده از "کاراکتر خط جدید"، که به صورت `\n` نوشته می‌شود، امکان پذیر است که یک خط جدید را مشخص می‌کند:
 
 ```js run
-let guestList = "Guests:\n * John\n * Pete\n * Mary";
+let guestList = "مهمان‌ها:\n * John\n * Pete\n * Mary";
 
-alert(guestList); // a multiline list of guests
+alert(guestList); // لیستی چند خطی از مهمان‌ها
 ```
 
-For example, these two lines are equal, just written differently:
+برای مثال، این دو خط برابر هستند، فقط به طور متفاوتی نوشته شده‌اند:
 
 ```js run
-let str1 = "Hello\nWorld"; // two lines using a "newline symbol"
+let str1 = "Hello\nWorld"; // "ایجاد دو خط با استفاده از "نماد خط جدید
 
-// two lines using a normal newline and backticks
+// هاbacktick ایجاد دو خط با استفاده از خط جدید و 
 let str2 = `Hello
 World`;
 
 alert(str1 == str2); // true
 ```
 
-There are other, less common "special" characters.
+کاراکترهای "خاص" دیگر و غیر متداول هم هستند.
 
-Here's the full list:
+لیست کامل آنها:
 
-| Character | Description |
+| کاراکتر | توضیحات |
 |-----------|-------------|
-|`\n`|New line|
-|`\r`|Carriage return: not used alone. Windows text files use a combination of two characters `\r\n` to represent a line break. |
-|`\'`, `\"`|Quotes|
+|`\n`|خط جدید|
+|`\r`|Carriage return: به تنهایی استفاده نمی‌شود. فایل‌های متنی ویندوز از ترکیب دو کاراکتر `\r\n` برای نمایش یک خط جدید استفاده می‌کند. |
+|`\'`, `\"`|کوتیشن‌ها|
 |`\\`|Backslash|
 |`\t`|Tab|
-|`\b`, `\f`, `\v`| Backspace, Form Feed, Vertical Tab -- kept for compatibility, not used nowadays. |
-|`\xXX`|Unicode character with the given hexadecimal Unicode `XX`, e.g. `'\x7A'` is the same as `'z'`.|
-|`\uXXXX`|A Unicode symbol with the hex code `XXXX` in UTF-16 encoding, for instance `\u00A9` -- is a Unicode for the copyright symbol `©`. It must be exactly 4 hex digits. |
-|`\u{X…XXXXXX}` (1 to 6 hex characters)|A Unicode symbol with the given UTF-32 encoding. Some rare characters are encoded with two Unicode symbols, taking 4 bytes. This way we can insert long codes. |
+|`\b`, `\f`, `\v`| Backspace, Form Feed, Vertical Tab -- برای سازگاری نگه داشته شده‌اند، امروزی استفاده نمی‌شوند. |
+|`\xXX`|کاراکتر Unicode همراه با Unicode بر پایه 16 (hexadecimal) داده شده، برای مثال `'\x7a'` برابر است با `'z'`.|
+|`\uXXXX`|یک نماد Unicode با کدی بر پایه 16 (hex) `XXXX` با کدگذاری UTF-16، برای مثال `\u009A` که یک Unicode برای نماد کپی‌رایت است `©`. باید دقیقا 4 رقم hex داشته باشد. |
+|`\u{X…XXXXXX}` (1 تا 6 کاراکتر hex)|یک نماد Unicode با کدگذاری UTF-32 است. بعضی از کاراکترهای کمیاب با دو نماد Unicode کدگذاری می‌شوند و 4 بایت حجم می‌گیرند. به این روش می‌تونیم کدهای طولانی را جایگذاری کنیم. |
 
-Examples with Unicode:
+مثال‌هایی با Unicode:
 
 ```js run
 alert( "\u00A9" ); // ©
-alert( "\u{20331}" ); // 佫, a rare Chinese hieroglyph (long Unicode)
-alert( "\u{1F60D}" ); // 😍, a smiling face symbol (another long Unicode)
+alert( "\u{20331}" ); // 佫 ،(طولانی Unicode) یک حرف کمیاب چینی
+alert( "\u{1F60D}" ); // 😍 ،(طولانی دیگر Unicode یک) یک نماد صورت خندان
 ```
 
-All special characters start with a backslash character `\`. It is also called an "escape character".
+تمام کاراکترهای خاص با یک کاراکتر backslash `\` شروع می‌شوند. همچنین به آن "کاراکتر فرار (escape)" هم می‌گویند.
 
-We might also use it if we wanted to insert a quote into the string.
+اگر بخواهیم یک کوتیشن را درون رشته‌ای قرار دهیم ممکن است از آن استفاده کنیم.
 
-For instance:
+برای مثال:
 
 ```js run
 alert( 'I*!*\'*/!*m the Walrus!' ); // *!*I'm*/!* the Walrus!
 ```
 
-As you can see, we have to prepend the inner quote by the backslash `\'`, because otherwise it would indicate the string end.
+همانطور که می‌بینید، باید قبل از کوتیشن داخلی backslash `\` بیاریم، وگرنه در غیر این صورت کوتیشن پایان رشته را نمایش می‌دهد.
 
-Of course, only the quotes that are the same as the enclosing ones need to be escaped. So, as a more elegant solution, we could switch to double quotes or backticks instead:
+قطعا فقط کوتیشن‌هایی که با کوتیشن‌های پایانی یکسان هستند باید فراری شوند. پس، به عنوان یک راه حل زیباتر، به جای آن می‌توانیم به کوتیشن‌های دوتایی یا backtickها سوییچ کنیم:
 
 ```js run
 alert( `I'm the Walrus!` ); // I'm the Walrus!
 ```
 
-Note that the backslash `\` serves for the correct reading of the string by JavaScript, then disappears. The in-memory string has no `\`. You can clearly see that in `alert` from the examples above.
+در نظر داشته باشید که backslash `\` برای خوانایی درست رشته توسط جاوااسکریپت به کار برده می‌شود، سپس محو می‌شود. رشته‌ای که درون حافظه است `\` ندارد. می‌توانید این موضوع را به صراحت در `alert` مثال بالایی ببینید.
 
-But what if we need to show an actual backslash `\` within the string?
+اما اگر نیاز به نمایش یک backslash `\` واقعی در بین رشته داشته باشیم چه کار کنیم؟
 
-That's possible, but we need to double it like `\\`:
+این کار شدنی است و ما باید آن را دو برابر کنیم مثل `\\`:
 
 ```js run
 alert( `The backslash: \\` ); // The backslash: \
