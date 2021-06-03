@@ -126,53 +126,53 @@ alert( `I'm the Walrus!` ); // I'm the Walrus!
 alert( `The backslash: \\` ); // The backslash: \
 ```
 
-## String length
+## طول رشته
 
-The `length` property has the string length:
+ویژگی `length` دارای طول رشته است:
 
 ```js run
 alert( `My\n`.length ); // 3
 ```
 
-Note that `\n` is a single "special" character, so the length is indeed `3`.
+در نظر داشته باشید که `\n` یک کاراکتر "خاص" مفرد است، پس طول در واقع `3` است.
 
-```warn header="`length` is a property"
-People with a background in some other languages sometimes mistype by calling `str.length()` instead of just `str.length`. That doesn't work.
+```warn header="`length` یک ویژگی است"
+بعضی اوقات افرادی که زمینه‌ای در بعضی زبان‌های برنامه نویسی دیگر دارند اشتباها `str.length()` را به جای نوشتن `str.length` صدا می‌زنند. اینگونه کار نمی‌کند.
 
-Please note that `str.length` is a numeric property, not a function. There is no need to add parenthesis after it.
+لطفا در نظر داشته باشید که `str.length` یک ویژگی عددی است نه یک تابع. نیازی به اضافه کردن پرانتر بعد از آن نیست.
 ```
 
-## Accessing characters
+## دسترسی داشتن به کاراکترها
 
-To get a character at position `pos`, use square brackets `[pos]` or call the method [str.charAt(pos)](mdn:js/String/charAt). The first character starts from the zero position:
+برای دریافت یک کاراکتر در موقعیت `pos`، از براکت‌ها استفاده کنید یا متد [str.charAt(pos)](mdn:js/String/charAt) را صدا بزنید. اولین کاراکتر از موقعیت صفر شروع می‌شود:
 
 ```js run
 let str = `Hello`;
 
-// the first character
+// اولین کاراکتر
 alert( str[0] ); // H
 alert( str.charAt(0) ); // H
 
-// the last character
+// آخرین کاراکتر
 alert( str[str.length - 1] ); // o
 ```
 
-The square brackets are a modern way of getting a character, while `charAt` exists mostly for historical reasons.
+براکت‌ها روش مدرن دریافت کاراکتر هستند، در حالی که `charAt` بنا به دلایلی مربوط به تاریخچه زبان وجود دارد.
 
-The only difference between them is that if no character is found, `[]` returns `undefined`, and `charAt` returns an empty string:
+تنها تفاوت میان آنها این است که اگر کاراکتری پیدا نشود، `[]` مقدار `undefined` را برمی‌گرداند، و `charAt` یک رشته خالی را برمی‌گرداند:
 
 ```js run
 let str = `Hello`;
 
 alert( str[1000] ); // undefined
-alert( str.charAt(1000) ); // '' (an empty string)
+alert( str.charAt(1000) ); // '' (یک رشته خالی)
 ```
 
-We can also iterate over characters using `for..of`:
+همچنین ما می‌توانیم با استفاده از `for..of` در رشته حلقه بزنیم:
 
 ```js run
 for (let char of "Hello") {
-  alert(char); // H,e,l,l,o (char becomes "H", then "e", then "l" etc)
+  alert(char); // H، e، l، l، o، (و غیره "l" سپس ،"e" سپس ،"H" می‌شود char)
 }
 ```
 
