@@ -203,16 +203,16 @@ alert( str ); // hi
 
 در بخش‌های بعدی مثال‌های بیشتری از این خواهیم دید.
 
-## Changing the case
+## تغییر بزرگی و کوچکی حروف
 
-Methods [toLowerCase()](mdn:js/String/toLowerCase) and [toUpperCase()](mdn:js/String/toUpperCase) change the case:
+متدهای [toLowerCase()](mdn:js/String/toLowerCase) و [toUpperCase()](mdn:js/String/toUpperCase) بزرگی و کوچکی حروف را تغییر می‌دهند:
 
 ```js run
 alert( 'Interface'.toUpperCase() ); // INTERFACE
 alert( 'Interface'.toLowerCase() ); // interface
 ```
 
-Or, if we want a single character lowercased:
+یا اگر بخواهیم یک کاراکتر را با حرف کوچک بنویسیم اینگونه عمل می‌کنیم:
 
 ```js
 alert( 'Interface'[0].toLowerCase() ); // 'i'
