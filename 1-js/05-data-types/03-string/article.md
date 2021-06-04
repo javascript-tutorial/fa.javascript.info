@@ -212,7 +212,7 @@ alert( 'Interface'.toUpperCase() ); // INTERFACE
 alert( 'Interface'.toLowerCase() ); // interface
 ```
 
-یا اگر بخواهیم یک کاراکتر را با حرف کوچک بنویسیم اینگونه عمل می‌کنیم:
+یا اگر بخواهیم یک کاراکتر را به حرف کوچک آن تبدیل کنیم اینگونه عمل می‌کنیم:
 
 ```js
 alert( 'Interface'[0].toLowerCase() ); // 'i'
