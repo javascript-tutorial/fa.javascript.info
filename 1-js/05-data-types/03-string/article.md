@@ -176,32 +176,32 @@ for (let char of "Hello") {
 }
 ```
 
-## Strings are immutable
+## رشته‌ها تغییرناپذیر هستند
 
-Strings can't be changed in JavaScript. It is impossible to change a character.
+رشته‌ها در جاوااسکریپت نمی‌توانند تغییر کنند. اینکه یک کاراکتر را تغییر دهیم غیر ممکن است.
 
-Let's try it to show that it doesn't work:
+بیایید برای نشان دادن اینکه کار نخواهد کرد امتحانش کنیم:
 
 ```js run
 let str = 'Hi';
 
-str[0] = 'h'; // error
-alert( str[0] ); // doesn't work
+str[0] = 'h'; // ارور می‌دهد
+alert( str[0] ); // کار نمی‌کند
 ```
 
-The usual workaround is to create a whole new string and assign it to `str` instead of the old one.
+یک راه حل این است که رشته‌ای کاملا جدید بسازیم و `str` را به جای رشته‌ی قدیمی برابر با آن قرار دهیم.
 
-For instance:
+برای مثال:
 
 ```js run
 let str = 'Hi';
 
-str = 'h' + str[1]; // replace the string
+str = 'h' + str[1]; // رشته را جایگزین می‌کنیم
 
 alert( str ); // hi
 ```
 
-In the following sections we'll see more examples of this.
+در بخش‌های بعدی مثال‌های بیشتری از این خواهیم دید.
 
 ## Changing the case
 
