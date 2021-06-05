@@ -218,30 +218,30 @@ alert( 'Interface'.toLowerCase() ); // interface
 alert( 'Interface'[0].toLowerCase() ); // 'i'
 ```
 
-## Searching for a substring
+## جستجو برای یک زیر رشته
 
-There are multiple ways to look for a substring within a string.
+چند راه برای گشتن به دنبال یک زیر رشته در یک رشته وجود دارد.
 
-### str.indexOf
+### متد str.indexOf
 
-The first method is [str.indexOf(substr, pos)](mdn:js/String/indexOf).
+متد اول [str.indexOf(substr, pos)](mdn:js/String/indexOf) است.
 
-It looks for the `substr` in `str`, starting from the given position `pos`, and returns the position where the match was found or `-1` if nothing can be found.
+این متد به دنبال `substr` درون `str` می‌گردد، و از موقعیت `pos` داده شده شروع می‌کند، و موقعیتی که زیر رشته مورد نظر پیدا شد یا اگر چیزی پیدا نشد `-1` را برمی‌گرداند.
 
-For instance:
+برای مثال:
 
 ```js run
 let str = 'Widget with id';
 
-alert( str.indexOf('Widget') ); // 0, because 'Widget' is found at the beginning
-alert( str.indexOf('widget') ); // -1, not found, the search is case-sensitive
+alert( str.indexOf('Widget') ); // 0 ،در شروع رشته پیدا شد 'Widget' چون
+alert( str.indexOf('widget') ); // -1 ،چیزی پیدا نشد، جستجو به بزرگی یا کوچکی حروف حساس است
 
-alert( str.indexOf("id") ); // 1, "id" is found at the position 1 (..idget with id)
+alert( str.indexOf("id") ); // 1 ،(است id دارای ..idget) در موقعیت 1 پیدا شد "id"
 ```
 
-The optional second parameter allows us to start searching from a given position.
+پارامتر اختیاری دوم به ما اجازه جستجو از موقعیت داده شده را می‌دهد.
 
-For instance, the first occurrence of `"id"` is at position `1`. To look for the next occurrence, let's start the search from position `2`:
+برای مثال، اولین `"id"` که وجود دارد در موقعیت `1` است. برای پیدا کردن بعدی، بیایید جستجو را از موقعیت `2` شروع کنیم:
 
 ```js run
 let str = 'Widget with id';
@@ -249,12 +249,12 @@ let str = 'Widget with id';
 alert( str.indexOf('id', 2) ) // 12
 ```
 
-If we're interested in all occurrences, we can run `indexOf` in a loop. Every new call is made with the position after the previous match:
+اگر ما مشتاق این هستیم که تمام آنها را پیدا کنیم، می‌توانیم `indexOf` را دورن یک حلقه اجرا کنیم. تمام صدازدن‌های جدید با موقعیتی بعد از موقعیت زیر رشته‌ی پیدا شده قبلی انجام می‌شود:
 
 ```js run
 let str = 'As sly as a fox, as strong as an ox';
 
-let target = 'as'; // let's look for it
+let target = 'as'; // بیایید به دنبال آن بگردیم
 
 let pos = 0;
 while (true) {
@@ -262,11 +262,11 @@ while (true) {
   if (foundPos == -1) break;
 
   alert( `Found at ${foundPos}` );
-  pos = foundPos + 1; // continue the search from the next position
+  pos = foundPos + 1; // جستجو را از موقعیت بعدی ادامه بده
 }
 ```
 
-The same algorithm can be layed out shorter:
+الگوریتم یکسان را می‌توان کوتاه‌تر نوشت:
 
 ```js run
 let str = "As sly as a fox, as strong as an ox";
