@@ -280,25 +280,25 @@ while ((pos = str.indexOf(target, pos + 1)) != -1) {
 */!*
 ```
 
-```smart header="`str.lastIndexOf(substr, position)`"
-There is also a similar method [str.lastIndexOf(substr, position)](mdn:js/String/lastIndexOf) that searches from the end of a string to its beginning.
+```smart header="`متد str.lastIndexOf(substr, position)`"
+یک متد مشابه [str.lastIndexOf(substr, position)](mdn:js/String/lastIndexOf) هم وجود دارد که از انتهای رشته تا آغاز آن جستجو می‌کند.
 
-It would list the occurrences in the reverse order.
+این متد زیر رشته‌های پیدا شده را با ترتیب برعکس لیست می‌کند.
 ```
 
-There is a slight inconvenience with `indexOf` in the `if` test. We can't put it in the `if` like this:
+یک چیز ناخوشایند در رابطه با `indexOf` در `if` وجود دارد. ما نمی‌توانیم آن را اینگونه درون `if` بگذاریم:
 
 ```js run
 let str = "Widget with id";
 
 if (str.indexOf("Widget")) {
-    alert("We found it"); // doesn't work!
+    alert("We found it"); // !کار نمی‌کند
 }
 ```
 
-The `alert` in the example above doesn't show because `str.indexOf("Widget")` returns `0` (meaning that it found the match at the starting position). Right, but `if` considers `0` to be `false`.
+در مثال بالا `alert` نمایش نمی‌دهد زیرا `str.indexOf("Widget")` مقدار `0` را برمی‌کرداند (به این معنی که زیر رشته مورد نظر را در موقعیت آغازین پیدا کرد). درست است، اما `if` مقدار `0` را با `false` برابر فرض می‌کند.
 
-So, we should actually check for `-1`, like this:
+بنابراین، ما باید در واقع `-1` را بررسی کنیم، به این شکل:
 
 ```js run
 let str = "Widget with id";
@@ -306,7 +306,7 @@ let str = "Widget with id";
 *!*
 if (str.indexOf("Widget") != -1) {
 */!*
-    alert("We found it"); // works now!
+    alert("We found it"); // !حالا کار می‌کند
 }
 ```
 
