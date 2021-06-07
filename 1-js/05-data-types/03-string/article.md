@@ -310,13 +310,13 @@ if (str.indexOf("Widget") != -1) {
 }
 ```
 
-#### The bitwise NOT trick
+### ترفند bitwise NOT
 
-One of the old tricks used here is the [bitwise NOT](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_NOT) `~` operator. It converts the number to a 32-bit integer (removes the decimal part if exists) and then reverses all bits in its binary representation.
+یکی از ترفندهای قدیمی که اینجا استفاده می‌شود عملگر [bitwise NOT](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_NOT) `~` است. این عملگر عدد را به یک عدد صحیح 32 بیتی تبدیل می‌کند (و بخش اعشاری را در صورت وجود حذف می‌کند) و سپس تمام بیت‌ها را در نمایش دودویی خودش معکوس می‌کند.
 
-In practice, that means a simple thing: for 32-bit integers `~n` equals `-(n+1)`.
+در عمل، این به معنی یک چیز ساده است: برای اعداد صحیح 32 بیتی `~n` برابر است با `-(n+1)`.
 
-For instance:
+برای مثال:
 
 ```js run
 alert( ~2 ); // -3, the same as -(2+1)
@@ -327,27 +327,27 @@ alert( ~-1 ); // 0, the same as -(-1+1)
 */!*
 ```
 
-As we can see, `~n` is zero only if `n == -1` (that's for any 32-bit signed integer `n`).
+همانطور که می‌بینیم، `~n` تنها فقط وقتی که `n == -1` باشد برابر با صفر است (برای هر عدد صحیح 32 بیتی تخصیص داده شده‌ی `n`).
 
-So, the test `if ( ~str.indexOf("...") )` is truthy only if the result of `indexOf` is not `-1`. In other words, when there is a match.
+بنابراین، آزمایش `if ( ~str.indexOf("...") )` فقط زمانی که نتیجه `indexOf` برابر با `-1` نباشد truthy است. به عبارتی دیگر، زمانی که یک زیر رشته پیدا شود.
 
-People use it to shorten `indexOf` checks:
+افراد از آن برای کوتاه کردن بررسی `indexOf` استفاده می‌کنند:
 
 ```js run
 let str = "Widget";
 
 if (~str.indexOf("Widget")) {
-  alert( 'Found it!' ); // works
+  alert( 'Found it!' ); // کار می‌کند
 }
 ```
 
-It is usually not recommended to use language features in a non-obvious way, but this particular trick is widely used in old code, so we should understand it.
+اینکه از ویژگی‌های زبان با روشی که واضح نباشد استفاده کنیم معمولا پیشنهاد نمی‌شود، اما این ترفند مخصوص در کدهای قدیمی بسیار استفاده می‌شود، پس ما باید آن را متوجه شویم.
 
-Just remember: `if (~str.indexOf(...))` reads as "if found".
+فقط به یاد داشته باشید: `if (~str.indexOf(...))` به صورت «اگر پیدا شد» خوانده می‌شود.
 
-To be precise though, as big numbers are truncated to 32 bits by `~` operator, there exist other numbers that give `0`, the smallest is `~4294967295=0`. That makes such check correct only if a string is not that long.
+اگر بخواهیم دقیق باشیم، همانطور که اعداد بزرگ هم توسط عملگر `~` 32 بیتی می‌شوند، اعداد دیگری هم وجود دارند که نتیجه `0` را می‌دهند، کوچک‌ترین آنها `~4294967295=0` است. این روش چنین بررسی‌ای را فقط زمانی که رشته آنقدر طولانی نباشد به درستی انجام می‌دهد.
 
-Right now we can see this trick only in the old code, as modern JavaScript provides `.includes` method (see below).
+در حال حاضر ما این روش را فقط در کدهای قدیمی می‌بینیم، چون جاوااسکریپت مدرن متد `.includes` را فراهم کرده است (قسمت پایینی).
 
 ### includes, startsWith, endsWith
 
