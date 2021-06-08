@@ -349,11 +349,11 @@ if (~str.indexOf("Widget")) {
 
 در حال حاضر ما این روش را فقط در کدهای قدیمی می‌بینیم، چون جاوااسکریپت مدرن متد `.includes` را فراهم کرده است (قسمت پایینی).
 
-### includes, startsWith, endsWith
+### متدهای includes، startsWith، endsWith
 
-The more modern method [str.includes(substr, pos)](mdn:js/String/includes) returns `true/false` depending on whether `str` contains `substr` within.
+متد مدرن‌تر [str.includes(substr, pos)](mdn:js/String/includes) با وابستگی به اینکه رشته `str` درون خودش دارای زیر رشته‌ی `substr` است یا نه مقدار `true/false` را برمی‌گرداند.
 
-It's the right choice if we need to test for the match, but don't need its position:
+اگر نیاز داشته باشیم که وجود یک زیر رشته را بررسی کنیم، اما به موقعیت آن نیازی نداریم این متد انتخاب مناسبی است:
 
 ```js run
 alert( "Widget with id".includes("Widget") ); // true
@@ -361,18 +361,18 @@ alert( "Widget with id".includes("Widget") ); // true
 alert( "Hello".includes("Bye") ); // false
 ```
 
-The optional second argument of `str.includes` is the position to start searching from:
+آرگومان دوم و اختیاری `str.includes` موقعیتی است که جستجو از آن شروع می‌شود:
 
 ```js run
 alert( "Widget".includes("id") ); // true
-alert( "Widget".includes("id", 3) ); // false, from position 3 there is no "id"
+alert( "Widget".includes("id", 3) ); // false وجود ندارد پس "id" از موقعیت 3 هیج
 ```
 
-The methods [str.startsWith](mdn:js/String/startsWith) and [str.endsWith](mdn:js/String/endsWith) do exactly what they say:
+متدهای [str.startsWith](mdn:js/String/startsWith)(بررسی شروع شدن رشته با یک زیر رشته) و [str.endsWith](mdn:js/String/endsWith)(بررسی پایان یافتن رشته با یک زیر رشته) دقیقا کاری را که می‌گویند انجام می‌دهند:
 
 ```js run
-alert( "Widget".startsWith("Wid") ); // true, "Widget" starts with "Wid"
-alert( "Widget".endsWith("get") ); // true, "Widget" ends with "get"
+alert( "Widget".startsWith("Wid") ); // true شروع می‌شود پس "Wid" با "Widget"
+alert( "Widget".endsWith("get") ); // true پایان می‌یابد پس "get" با "Widget"
 ```
 
 ## Getting a substring
