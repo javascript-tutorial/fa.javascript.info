@@ -375,88 +375,90 @@ alert( "Widget".startsWith("Wid") ); // true شروع می‌شود پس "Wid" �
 alert( "Widget".endsWith("get") ); // true پایان می‌یابد پس "get" با "Widget"
 ```
 
-## Getting a substring
+## گرفتن یک زیر رشته
 
 There are 3 methods in JavaScript to get a substring: `substring`, `substr` and `slice`.
+در جاوااسکریپت 3 متد برای گرفتن یک زیر رشته وجود دارد: `substring`، `substr` و `slice`.
 
 `str.slice(start [, end])`
-: Returns the part of the string from `start` to (but not including) `end`.
+: قسمتی از رشته را از موقعیت `start` تا `end` (شامل `end` نمی‌شود) را برمی‌گرداند.
 
-    For instance:
+    برای مثال:
 
     ```js run
     let str = "stringify";
-    alert( str.slice(0, 5) ); // 'strin', the substring from 0 to 5 (not including 5)
-    alert( str.slice(0, 1) ); // 's', from 0 to 1, but not including 1, so only character at 0
+    alert( str.slice(0, 5) ); // 'strin' :زیر رشته از 0 تا 5 (شامل 5 نمی‌شود)
+    alert( str.slice(0, 1) ); // 's' :از 0 تا 1، اما شامل 1 نمی‌شود، پس فقط کاراکتری که در 0 است
     ```
 
-    If there is no second argument, then `slice` goes till the end of the string:
+    اگر هیچ آرگومان دومی در کار نباشد، سپس `slice` تا آخر رشته می‌رود:
 
     ```js run
     let str = "st*!*ringify*/!*";
-    alert( str.slice(2) ); // 'ringify', from the 2nd position till the end
+    alert( str.slice(2) ); // 'ringify' :از موقعیت دوم تا آخر
     ```
 
-    Negative values for `start/end` are also possible. They mean the position is counted from the string end:
+    مقدارهای منفی برای `start/end` هم ممکن هستند. آنها به این معنی هستند که موقعیت از آخر رشته شمارش می‌شود:
 
     ```js run
     let str = "strin*!*gif*/!*y";
 
-    // start at the 4th position from the right, end at the 1st from the right
+    // از موقعیت 4 از سمت راست شروع می‌شود، در موقعیت 1 از سمت راست پایان می‌یابد
     alert( str.slice(-4, -1) ); // 'gif'
     ```
 
 `str.substring(start [, end])`
-: Returns the part of the string *between* `start` and `end`.
+: قسمتی از رشته *بین* `start` و `end` را برمی‌گرداند.
 
-    This is almost the same as `slice`, but it allows `start` to be greater than `end`.
+    این متد تقریبا مشابه با `slice` است، اما این اجازه را می‌دهد که `start` بیشتر از `end` باشد.
 
-    For instance:
+    برای مثال:
 
     ```js run
     let str = "st*!*ring*/!*ify";
 
-    // these are same for substring
+    // یکسان هستند substring این دو برای
     alert( str.substring(2, 6) ); // "ring"
     alert( str.substring(6, 2) ); // "ring"
 
-    // ...but not for slice:
-    alert( str.slice(2, 6) ); // "ring" (the same)
-    alert( str.slice(6, 2) ); // "" (an empty string)
+    // ...اینطور نیست slice اما برای
+    alert( str.slice(2, 6) ); // "ring" (یکسان است)
+    alert( str.slice(6, 2) ); // "" (یک رشته خالی)
 
     ```
 
-    Negative arguments are (unlike slice) not supported, they are treated as `0`.
+    آرگومان‌های منفی (برخلاف slice) پشتیبانی نمی‌شوند، با آنها مانند `0` رفتار می‎شود.
 
 `str.substr(start [, length])`
-: Returns the part of the string from `start`, with the given `length`.
+: قسمتی از رشته از `start`، تا `length` (طول) داده شده را برمی‌گرداند.
 
-    In contrast with the previous methods, this one allows us to specify the `length` instead of the ending position:
+    در تضاد با متدهای قبلی، این متد به ما اجازه می‌دهد که به جای موقعیت پایانی `length` (طول) را تعیین کنیم:
 
     ```js run
     let str = "st*!*ring*/!*ify";
-    alert( str.substr(2, 4) ); // 'ring', from the 2nd position get 4 characters
+    alert( str.substr(2, 4) ); // 'ring' :از موقعیت دوم 4 کاراکتر را بگیر
     ```
 
-    The first argument may be negative, to count from the end:
+    اولین آرگومان می‌تواند برای شمارش از آخر، منفی باشد:
+    
 
     ```js run
     let str = "strin*!*gi*/!*fy";
-    alert( str.substr(-4, 2) ); // 'gi', from the 4th position get 2 characters
+    alert( str.substr(-4, 2) ); // 'gi' :از موقعیت چهارم 2 کاراکتر را بگیر
     ```
 
-Let's recap these methods to avoid any confusion:
+بیایید این دو متد را برای جلوگیری از هر گمراهی خلاصه کنیم:
 
-| method | selects... | negatives |
+| متد | انتخاب می‌کند... | منفی‌ها |
 |--------|-----------|-----------|
-| `slice(start, end)` | from `start` to `end` (not including `end`) | allows negatives |
-| `substring(start, end)` | between `start` and `end` | negative values mean `0` |
-| `substr(start, length)` | from `start` get `length` characters | allows negative `start` |
+| `slice(start, end)` | از `start` تا `end` (شامل `end` نمی‌شود) | منفی‌ها مجازند |
+| `substring(start, end)` | بین `start` و `end` | مقدار منفی به معنای `0` است |
+| `substr(start, length)` | از `start` به تعداد `length` کاراکتر می‌گیرد | `start` منفی مجاز است |
 
-```smart header="Which one to choose?"
-All of them can do the job. Formally, `substr` has a minor drawback: it is described not in the core JavaScript specification, but in Annex B, which covers browser-only features that exist mainly for historical reasons. So, non-browser environments may fail to support it. But in practice it works everywhere.
+```smart header="کدام را انتخاب کنیم؟"
+تمام آنها می‌توانند کار را انجام دهند. به طور رسمی، `substr` یک اشکال جزئی دارد: این متد در هسته مشخصات جاوااسکریپت تعریف نشده است، اما در Annex B تعریف شده، که فقط ویژگی‌های مختص به مرورگر را پوشش می‌دهد که به دلایلی مربوط به تاریخچه زبان وجود دارد. پس محیط‌هایی که مرورگر نباشند ممکن است از آن پشتیبانی نکنند. اما در عمل این متد همه‌جا کار می‌کند.
 
-Of the other two variants, `slice` is a little bit more flexible, it allows negative arguments and shorter to write. So, it's enough to remember solely `slice` of these three methods.
+از بین دو متد دیگر، `slice` مقداری قابل انعطاف‌تر است، و آرگومان‌های منفی را مجاز می‌داند و برای نوشتن کوتاه‌تر است. پس فقط به یاد داشتن `slice` از بین این سه متد کافی است.
 ```
 
 ## Comparing strings
