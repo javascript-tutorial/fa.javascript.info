@@ -377,7 +377,6 @@ alert( "Widget".endsWith("get") ); // true پایان می‌یابد پس "get"
 
 ## گرفتن یک زیر رشته
 
-There are 3 methods in JavaScript to get a substring: `substring`, `substr` and `slice`.
 در جاوااسکریپت 3 متد برای گرفتن یک زیر رشته وجود دارد: `substring`، `substr` و `slice`.
 
 `str.slice(start [, end])`
