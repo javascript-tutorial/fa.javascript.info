@@ -460,54 +460,54 @@ alert( "Widget".endsWith("get") ); // true پایان می‌یابد پس "get"
 از بین دو متد دیگر، `slice` مقداری قابل انعطاف‌تر است، و آرگومان‌های منفی را مجاز می‌داند و برای نوشتن کوتاه‌تر است. پس فقط به یاد داشتن `slice` از بین این سه متد کافی است.
 ```
 
-## Comparing strings
+## مقایسه رشته‌ها
 
-As we know from the chapter <info:comparison>, strings are compared character-by-character in alphabetical order.
+همانطور که از فصل <info:comparison> (مقایسه‌ها) می‌دانیم، رشته‌ها با ترتیب الفبایی کاراکتر به کاراکتر مقایسه می‌شوند.
 
-Although, there are some oddities.
+گرچه، جزییاتی وجود دارد.
 
-1. A lowercase letter is always greater than the uppercase:
+1. یک حرف کوچک انگلیسی همیشه از حرف بزرگ، بزرگتر است:
 
     ```js run
     alert( 'a' > 'Z' ); // true
     ```
 
-2. Letters with diacritical marks are "out of order":
+2. حروفی که علامت دارند "بدون ترتیب" هستند:
 
     ```js run
     alert( 'Österreich' > 'Zealand' ); // true
     ```
 
-    This may lead to strange results if we sort these country names. Usually people would expect `Zealand` to come after `Österreich` in the list.
+    اگر ما اسم این کشورها را مرتب کنیم این موضوع ممکن است باعث ایجاد نتایج عجیب شود. معمولا مردم توقع داشند که `Zealand` بعد از `Österreich` در لیست بیاید.
 
-To understand what happens, let's review the internal representation of strings in JavaScript.
+برای فهمیدن اینکه چه چیزی رخ می‌دهد، بیایید نمایش داخلی رشته‌ها را در جاوااسکریپت مرور کنیم.
 
-All strings are encoded using [UTF-16](https://en.wikipedia.org/wiki/UTF-16). That is: each character has a corresponding numeric code. There are special methods that allow to get the character for the code and back.
+تمام رشته‌ها با استفاده از [UTF-16](https://en.wikipedia.org/wiki/UTF-16) کدگذاری شده‌اند. یعنی اینکه: هر کاراکتر یک کد عددی متناظر دارد. متدهای خاصی هستند که گرفتن کد از کاراکتر و برعکس را ممکن می‌سازند.
 
 `str.codePointAt(pos)`
-: Returns the code for the character at position `pos`:
+: کد کاراکتر را در موقعیت `pos` برمی‌گرداند:
 
     ```js run
-    // different case letters have different codes
+    // حروف با بزرگی یا کوچکی متفاوت کدهای متفاوت دارند
     alert( "z".codePointAt(0) ); // 122
     alert( "Z".codePointAt(0) ); // 90
     ```
 
 `String.fromCodePoint(code)`
-: Creates a character by its numeric `code`
+: یک کاراکتر با استفاده از `کد` عددی آن می‌سازد:
 
     ```js run
     alert( String.fromCodePoint(90) ); // Z
     ```
 
-    We can also add Unicode characters by their codes using `\u` followed by the hex code:
+    همچنین ما می‌توانیم کاراکترهای Unicode را از طریق کد آنها با استفاده از `\u` که بعد از آن کد hex می‌آید اضافه کنیم:
 
     ```js run
-    // 90 is 5a in hexadecimal system
+    // 5a عدد 90 در سیستم عددی بر پایه 16 برابر است با
     alert( '\u005a' ); // Z
     ```
 
-Now let's see the characters with codes `65..220` (the latin alphabet and a little bit extra) by making a string of them:
+حال بیایید با ساختن یک رشته از کاراکترهایی که کد `65..220` دارند آنها را نگاه بیاندازیم (حروف الفبای لاتین و کمی بیشتر):
 
 ```js run
 let str = '';
@@ -520,14 +520,14 @@ alert( str );
 // ¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜ
 ```
 
-See? Capital characters go first, then a few special ones, then lowercase characters, and `Ö` near the end of the output.
+می‌بینید؟ کاراکترهای حروف بزرگ اول هستند، سپس چند حرف خاص، سپس کارکترهای حروف کوچک، و `Ö` نزدیک به پایان خروجی است.
 
-Now it becomes obvious why `a > Z`.
+حالا واضح شد که چرا `a > Z`.
 
-The characters are compared by their numeric code. The greater code means that the character is greater. The code for `a` (97) is greater than the code for `Z` (90).
+کاراکترها از طریق کدهای عددی خود مقایسه می‌شوند. کد بزرگتر به معنای بزرگتر بودن کاراکتر است. کد `a` (97) بزرگتر از کد `Z` (90) است.
 
-- All lowercase letters go after uppercase letters because their codes are greater.
-- Some letters like `Ö` stand apart from the main alphabet. Here, it's code is greater than anything from `a` to `z`.
+- تمام حروف کوچک انگلیسی بعد از حروف بزرگ واقع هستند چون کدهای آنها بزرگتر هستند.
+- بعضی از حروف مانند `Ö` از حروف الفبای اصلی جدا هستند. اینجا، کد آن از هر چیزی بین `a` تا `z` بزرگتر است.
 
 ### Correct comparisons [#correct-comparisons]
 
