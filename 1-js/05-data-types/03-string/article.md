@@ -529,29 +529,29 @@ alert( str );
 - تمام حروف کوچک انگلیسی بعد از حروف بزرگ واقع هستند چون کدهای آنها بزرگتر هستند.
 - بعضی از حروف مانند `Ö` از حروف الفبای اصلی جدا هستند. اینجا، کد آن از هر چیزی بین `a` تا `z` بزرگتر است.
 
-### Correct comparisons [#correct-comparisons]
+### مقایسه‌های صحیح [#correct-comparisons]
 
-The "right" algorithm to do string comparisons is more complex than it may seem, because alphabets are different for different languages.
+الگوریتم "درست" برای انجام مقایسه رشته‌ها پیچیده‌تر از چیزی است که بنظر می‌آید، چون الفبا برای زبان‌های مختلف متفاوت است.
 
-So, the browser needs to know the language to compare.
+پس، مرورگر نیاز دارد که زبان را برای مقایسه کردن بداند.
 
-Luckily, all modern browsers (IE10- requires the additional library [Intl.js](https://github.com/andyearnshaw/Intl.js/)) support the internationalization standard [ECMA-402](http://www.ecma-international.org/ecma-402/1.0/ECMA-402.pdf).
+خوشبختانه، تمام مرورگرهای مدرن (IE10 به کتابخانه اضافی [Intl.js](https://github.com/andyearnshaw/Intl.js/) احتیاج دارد) از استاندارد بین‌المللی‌کردن [ECMA-402](http://www.ecma-international.org/ecma-402/1.0/ECMA-402.pdf) پشتیبانی می‌کنند.
 
-It provides a special method to compare strings in different languages, following their rules.
+این استاندارد یک متد خاص را برای مقایسه رشته‌ها در زبان‌های مختلف را مهیا می‌کند که از قوانین خودشان پیروی می‌شود.
 
-The call [str.localeCompare(str2)](mdn:js/String/localeCompare) returns an integer indicating whether `str` is less, equal or greater than `str2` according to the language rules:
+صدازدن [str.localeCompare(str2)](mdn:js/String/localeCompare) یک عدد صحیح را برمی‌گرداند که نشان می‌دهد آیا `str` با توجه به قوانین زبان، کمتر، مساوی یا برابر از `str2` هست یا نه:
 
-- Returns a negative number if `str` is less than `str2`.
-- Returns a positive number if `str` is greater than `str2`.
-- Returns `0` if they are equivalent.
+- اگر `str` کمتر از `str2` باشد یک عدد منفی برمی‌گرداند.
+- اگر `str` بزرگتر از `str2` باشد یک عدد مثبت برمی‌گرداند.
+- اگر آنها برابر باشند `0` را برمی‌گرداند.
 
-For instance:
+برای مثال:
 
 ```js run
 alert( 'Österreich'.localeCompare('Zealand') ); // -1
 ```
 
-This method actually has two additional arguments specified in [the documentation](mdn:js/String/localeCompare), which allows it to specify the language (by default taken from the environment, letter order depends on the language) and setup additional rules like case sensitivity or should `"a"` and `"á"` be treated as the same etc.
+این متد دو آرگومان اضافی دارد که در [مستندات](mdn:js/String/localeCompare) مشخص شده‌اند که به ما اجازه می‌دهند تا زبان را مشخص کنیم (به طور پیش‌فرض از شرایط فعلی بدست می‌آید، ترتیب حروف به زبان بستگی دارد) و قوانین اضافی را ایجاد کنیم مثل حساسیت بزرگی یا کوچکی حرف یا اینکه به یک صورت با `"a"` و `"á"` رفتار شود و غیره.
 
 ## Internals, Unicode
 
