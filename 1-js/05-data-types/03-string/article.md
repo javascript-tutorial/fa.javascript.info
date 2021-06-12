@@ -553,55 +553,55 @@ alert( 'Österreich'.localeCompare('Zealand') ); // -1
 
 این متد دو آرگومان اضافی دارد که در [مستندات](mdn:js/String/localeCompare) مشخص شده‌اند که به ما اجازه می‌دهند تا زبان را مشخص کنیم (به طور پیش‌فرض از شرایط فعلی بدست می‌آید، ترتیب حروف به زبان بستگی دارد) و قوانین اضافی را ایجاد کنیم مثل حساسیت بزرگی یا کوچکی حرف یا اینکه به یک صورت با `"a"` و `"á"` رفتار شود و غیره.
 
-## Internals, Unicode
+## داخلی‌ها، Unicode
 
-```warn header="Advanced knowledge"
-The section goes deeper into string internals. This knowledge will be useful for you if you plan to deal with emoji, rare mathematical of hieroglyphs characters or other rare symbols.
+```warn header="اطلاعات پیشرفته"
+این بخش بیشتر درون رشته‌ها پیش می‌رود. این اطلاعات در صورتی که شما قصد داشته باشید با اموجی، کاراکترهای تصویری نادر ریاضی یا نشانه‌های نادر دیگر کار کنید برای شما مفید خواهد بود.
 
-You can skip the section if you don't plan to support them.
+اگر قصد فرا گرفتن آنها را ندارید می‌توانید از این بخش بگذرید.
 ```
 
-### Surrogate pairs
+### جفت‌های جایگیر
 
-All frequently used characters have 2-byte codes. Letters in most european languages, numbers, and even most hieroglyphs, have a 2-byte representation.
+تمام کاراکترهایی که اکثر اوقات استفاده می‌شوند کدهای 2 بایتی دارند. حروف در اکثر زبان‌های اروپایی، اعداد، و حتی اکثر حروف تصویری، یک نمایش 2 بایتی دارند.
 
-But 2 bytes only allow 65536 combinations and that's not enough for every possible symbol. So rare symbols are encoded with a pair of 2-byte characters called "a surrogate pair".
+اما 2 بایت فقط 65536 ترکیب را ممکن می‌سازد و این مقدار برای هر نشانه موجود کافی نیست. پس نشانه‌های نادر با جفتی از کاراکترهای 2 بایتی که "جفت جایگیر" (surrogate pair) هم نامیده می‌شوند کدگذاری می‌شوند.
 
-The length of such symbols is `2`:
+طول چنین نشانه‌هایی `2` است:
 
 ```js run
-alert( '𝒳'.length ); // 2, MATHEMATICAL SCRIPT CAPITAL X
-alert( '😂'.length ); // 2, FACE WITH TEARS OF JOY
-alert( '𩷶'.length ); // 2, a rare Chinese hieroglyph
+alert( '𝒳'.length ); // 2، X اسکریپت ریاضی حرف بزرگ 
+alert( '😂'.length ); // 2، صورت با اشک شوق
+alert( '𩷶'.length ); // 2، یک حرف تصویری نادر چینی
 ```
 
-Note that surrogate pairs did not exist at the time when JavaScript was created, and thus are not correctly processed by the language!
+در نظر داشته باشید که جفت‌های جایگیر زمانی که جاوااسکریپت ساخته شد وجود نداشتند، و به این دلیل در حال حاضر توسط زبان به درستی پردازش نمی‌شوند!
 
-We actually have a single symbol in each of the strings above, but the `length` shows a length of `2`.
+ما در واقع در هر یک از رشته‌های بالا یک نشانه مفرد داریم، اما `length` طول `2` را نشان می‌دهد.
 
-`String.fromCodePoint` and `str.codePointAt` are few rare methods that deal with surrogate pairs right. They recently appeared in the language. Before them, there were only [String.fromCharCode](mdn:js/String/fromCharCode) and [str.charCodeAt](mdn:js/String/charCodeAt). These methods are actually the same as `fromCodePoint/codePointAt`, but don't work with surrogate pairs.
+`String.fromCodePoint` و `str.codePointAt` دو متد نادر هستند که با جفت‌های جایگیر به درستی کار می‌کنند. آنها اخیرا به زبان اضافه شدند. قبل آنها، فقط [String.fromCharCode](mdn:js/String/fromCharCode) و [str.charCodeAt](mdn:js/String/charCodeAt) وجود داشتند. این متدها در واقع با `fromCodePoint/codePointAt` یکی هستند، اما با جفت‌های جایگیر کار نمی‌کنند.
 
-Getting a symbol can be tricky, because surrogate pairs are treated as two characters:
+گرفتن یک نشانه می‌تواند آسان نباشد، چون با جفت‌های جایگیر مثل دو کاراکتر رفتار می‌شود:
 
 ```js run
-alert( '𝒳'[0] ); // strange symbols...
-alert( '𝒳'[1] ); // ...pieces of the surrogate pair
+alert( '𝒳'[0] ); // ...نشانه‌های عجیب
+alert( '𝒳'[1] ); // قطعه‌هایی از جفت جایگیر...
 ```
 
-Note that pieces of the surrogate pair have no meaning without each other. So the alerts in the example above actually display garbage.
+توجه کنید که قطعه‌های جفت جایگیر بدون یکدیگر هیچ معنی‌ای ندارند. پس alertها در مثال بالا در واقع چیزهای بدرد نخور نمایش می‌دهند.
 
-Technically, surrogate pairs are also detectable by their codes: if a character has the code in the interval of `0xd800..0xdbff`, then it is the first part of the surrogate pair. The next character (second part) must have the code in interval `0xdc00..0xdfff`. These intervals are reserved exclusively for surrogate pairs by the standard.
+به طور فنی، جفت‌های جایگیر هم با کدهای خود قابل شناسایی هستند: اگر یک کاراکتر کدی در فاصله `0xd800..0xdbff` داشته باشد، پس قطعه اول یک جفت جایگیر است. کاراکتر بعدی (قطعه دوم) باید کدی در فاصله `0xdc00..0xdfff` داشته باشد. این بازه‌ها به طور اختصاصی برای جفت‌های جایگیر رزرو شده‌اند.
 
-In the case above:
+در مورد بالایی:
 
 ```js run
-// charCodeAt is not surrogate-pair aware, so it gives codes for parts
+// جفت‌های جایگیر را نمی‌شناسد، پس کدهای قطعه‌ها را به ما می‌دهد charCodeAt
 
 alert( '𝒳'.charCodeAt(0).toString(16) ); // d835, between 0xd800 and 0xdbff
 alert( '𝒳'.charCodeAt(1).toString(16) ); // dcb3, between 0xdc00 and 0xdfff
 ```
 
-You will find more ways to deal with surrogate pairs later in the chapter <info:iterable>. There are probably special libraries for that too, but nothing famous enough to suggest here.
+شما راه‌های بیشتری را برای کارکردن با جفت‌های جایگیر را در فصل <info:iterable> می‌آموزید. همچنین احتمالا کتابخانه‌های خاصی برای آنها وجود دارد، اما هیج کدام به اندازه کافی معروف نیستند تا اینجا معرفی شوند.
 
 ### Diacritical marks and normalization
 
