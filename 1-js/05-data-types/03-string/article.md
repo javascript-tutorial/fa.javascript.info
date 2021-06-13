@@ -603,52 +603,52 @@ alert( '𝒳'.charCodeAt(1).toString(16) ); // dcb3, between 0xdc00 and 0xdfff
 
 شما راه‌های بیشتری را برای کارکردن با جفت‌های جایگیر را در فصل <info:iterable> می‌آموزید. همچنین احتمالا کتابخانه‌های خاصی برای آنها وجود دارد، اما هیج کدام به اندازه کافی معروف نیستند تا اینجا معرفی شوند.
 
-### Diacritical marks and normalization
+### نشانه‌های تفکیک کننده و عادی‌سازی
 
-In many languages there are symbols that are composed of the base character with a mark above/under it.
+در بسیاری از زبان‌ها نشانه‌هایی وجود دارند که ترکیبی از یک کاراکتر پایه و یک علامت در بالا/پایین آن هستند.
 
-For instance, the letter `a` can be the base character for: `àáâäãåā`. Most common "composite" character have their own code in the UTF-16 table. But not all of them, because there are too many possible combinations.
+برای مثال، حرف `a` حرف پایه برای `àáâäãåā` است. اکثر کاراکترهای «ترکیب‌شده» متداول کد خود را در جدول UTF-16 دارند. اما نه همه آنها، چون ترکیبات ممکن بسیار زیادی وجود دارد.
 
-To support arbitrary compositions, UTF-16 allows us to use several Unicode characters: the base character followed by one or many "mark" characters that "decorate" it.
+برای پشتیبانی از ترکیبات دلخواه، UTF-16 به ما اجازه می‌دهد که از چند کاراکتر Unicode استفاده کنیم: کاراکتر پایه که بعد از آن یک یا چند کاراکتر «علامت» می‌آید که آن را «زیبا می‌کند».
 
-For instance, if we have `S` followed by the special "dot above" character (code `\u0307`), it is shown as Ṡ.
+برای مثال، اگر ما یک حرف `S` داشته باشیم که بعد از آن کاراکتر خاص «نقطه بالا» آمده باشد (کد `\u0307`)، به صورت Ṡ نمایش داده می‌شود.
 
 ```js run
 alert( 'S\u0307' ); // Ṡ
 ```
 
-If we need an additional mark above the letter (or below it) -- no problem, just add the necessary mark character.
+اگر ما نیاز به یک علامت اضافی در بالای حرف داشته باشیم (یا پایین آن)، مشکلی نیست، فقط کاراکتر علامت مورد نیاز را اضافه می‌کنیم.
 
-For instance, if we append a character "dot below" (code `\u0323`), then we'll have "S with dots above and below": `Ṩ`.
+برای مثال، اگر ما یک کاراکتر «نقطه پایین» (کد `\u0323`) را ضمیمه کنیم، سپس ما «حرف S با نقطه‌هایی در بالا و پایین آن» خوهیم داشت: `Ṩ`.
 
-For example:
+برای مثال:
 
 ```js run
 alert( 'S\u0307\u0323' ); // Ṩ
 ```
 
-This provides great flexibility, but also an interesting problem: two characters may visually look the same, but be represented with different Unicode compositions.
+این روش انعطاف زیادی را مهیا می‌کند، اما یک مشکل جالب هم دارد: دو کاراکتر ممکن است که ظاهر یکسانی داشته باشند، اما با ترکیبات Unicode متفاوت نمایش داده شوند.
 
-For instance:
+برای مثال:
 
 ```js run
-let s1 = 'S\u0307\u0323'; // Ṩ, S + dot above + dot below
-let s2 = 'S\u0323\u0307'; // Ṩ, S + dot below + dot above
+let s1 = 'S\u0307\u0323'; // Ṩ ،نقطه بالا + نقطه پایین + S
+let s2 = 'S\u0323\u0307'; // Ṩ ،نقطه پایین + نقطه بالا + S
 
 alert( `s1: ${s1}, s2: ${s2}` );
 
-alert( s1 == s2 ); // false though the characters look identical (?!)
+alert( s1 == s2 ); // (!؟)می‌شود false با اینکه کاراکترها مشابه هستند اما
 ```
 
-To solve this, there exists a "Unicode normalization" algorithm that brings each string to the single "normal" form.
+برای رفع این مشکل، یک الگوریتم «عادی‌سازی Unicode» وجود دارد که هر رشته را به یک شکل «عادی» درمی‌آورد.
 
-It is implemented by [str.normalize()](mdn:js/String/normalize).
+این الگوریتم با [str.normalize()](mdn:js/String/normalize) پیاده‌سازی می‌شود.
 
 ```js run
 alert( "S\u0307\u0323".normalize() == "S\u0323\u0307".normalize() ); // true
 ```
 
-It's funny that in our situation `normalize()` actually brings together a sequence of 3 characters to one: `\u1e68` (S with two dots).
+موضوع بامزه‌ای است که در این مورد ما `normalize()` در واقع یک دنباله از 3 کاراکتر را به یک کاراکتر تبدیل می‌کند: `\u1e68` (S به همراه دو نقطه).
 
 ```js run
 alert( "S\u0307\u0323".normalize().length ); // 1
@@ -656,9 +656,9 @@ alert( "S\u0307\u0323".normalize().length ); // 1
 alert( "S\u0307\u0323".normalize() == "\u1e68" ); // true
 ```
 
-In reality, this is not always the case. The reason being that the symbol `Ṩ` is "common enough", so UTF-16 creators included it in the main table and gave it the code.
+در واقعیت، همیشه این مورد پیش نمی‌آید. به دلیل اینکه نماد `Ṩ` «به اندازه کافی متداول» است، پس سازندگان UTF-16 آن را در جدول اصلی آوردند و به آن یک کد دادند.
 
-If you want to learn more about normalization rules and variants -- they are described in the appendix of the Unicode standard: [Unicode Normalization Forms](http://www.unicode.org/reports/tr15/), but for most practical purposes the information from this section is enough.
+اگر شما می‌خواهید درباره قوانین و انواع عادی‌سازی بدانید، آنها در ضمیمه استاندارد Unicode تعریف شده‌اند: [شکل‌های عادی‌سازی Unicode](http://www.unicode.org/reports/tr15/)، اما برای اکثر کارهای عملی و کاربردی اطلاعات این بخش کافی است.
 
 ## Summary
 
