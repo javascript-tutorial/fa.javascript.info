@@ -2,13 +2,13 @@ importance: 5
 
 ---
 
-# Truncate the text
+# کوتاه کردن متن
 
-Create a function `truncate(str, maxlength)` that checks the length of the `str` and, if it exceeds `maxlength` -- replaces the end of `str` with the ellipsis character `"…"`, to make its length equal to `maxlength`.
+یک تابع `truncate(str, maxlength)` بسازید که طول `str` را بررسی می‌کند و اگر از `maxlength` بیشتر باشد، پایان رشته `str` را با کاراکتر حذف `"…"` جایگذاری کند، تا طول آن برابر با `maxlength` شود.
 
-The result of the function should be the truncated (if needed) string.
+نتیجه تابع باید رشته کوتاه‌شده باشد (در سورت نیاز).
 
-For instance:
+برای مثال:
 
 ```js
 truncate("What I'd like to tell on this topic is:", 20) = "What I'd like to te…"
