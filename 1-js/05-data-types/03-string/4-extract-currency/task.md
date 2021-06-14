@@ -2,13 +2,13 @@ importance: 4
 
 ---
 
-# Extract the money
+# استخراج پول
 
-We have a cost in the form `"$120"`. That is: the dollar sign goes first, and then the number.
+ما یک قیمت در شکل `"$120"` داریم. به این معنی که علامت دلار اول می‌آید، و سپس عدد.
 
-Create a function `extractCurrencyValue(str)` that would extract the numeric value from such string and return it. 
+یک تابع `extractCurrencyValue(str)` بسازید که مقدار عددی را از چنین رشته‌ای بیرون می‌کند و آن را برمی‌گرداند.
 
-The example:
+مثال:
 
 ```js
 alert( extractCurrencyValue('$120') === 120 ); // true
