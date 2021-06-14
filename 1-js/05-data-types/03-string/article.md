@@ -660,21 +660,21 @@ alert( "S\u0307\u0323".normalize() == "\u1e68" ); // true
 
 اگر شما می‌خواهید درباره قوانین و انواع عادی‌سازی بدانید، آنها در ضمیمه استاندارد Unicode تعریف شده‌اند: [شکل‌های عادی‌سازی Unicode](http://www.unicode.org/reports/tr15/)، اما برای اکثر کارهای عملی و کاربردی اطلاعات این بخش کافی است.
 
-## Summary
+## خلاصه
 
-- There are 3 types of quotes. Backticks allow a string to span multiple lines and embed expressions `${…}`.
-- Strings in JavaScript are encoded using UTF-16.
-- We can use special characters like `\n` and insert letters by their Unicode using `\u...`.
-- To get a character, use: `[]`.
-- To get a substring, use: `slice` or `substring`.
-- To lowercase/uppercase a string, use: `toLowerCase/toUpperCase`.
-- To look for a substring, use: `indexOf`, or `includes/startsWith/endsWith` for simple checks.
-- To compare strings according to the language, use: `localeCompare`, otherwise they are compared by character codes.
+- 3 نوع کوتیشن وجود دارد. Backtickها به ما این امکان را می‌دهند که رشته را به چند خط تقسیم کنیم و عبارت‌هایی را درون رشته جایگذاری کنیم `${…}`.
+- رشته‌ها در جاوااسکریپت با استفاده از UTF-16 کدگذاری شده‌اند.
+- ما می‌توانیم از کاراکترهای خاص مانند `\n` استفاده کنیم و حروف را از طریق کد Unicode آنها با استفاده از `\u...` بنویسیم.
+- برای گرفتن یک کاراکتر، از `[]` استفاده کنید.
+- برای گرفتن یک زیر رشته از `slice` یا `substring` استفاده کنید.
+- برای تغییر بزرگی یا کوچکی حروف انگلیسی یک رشته، از `toLowerCase/toUpperCase` استفاده کنید.
+- برای گشتن به دنبال یک زیر رشته از `indexOf` یا برای بررسی‌های ساده از `includes/startsWith/endsWith` استفاده کنید.
+- برای مقایسه رشته‌ها با توجه به زبان آنها، از `localeCompare` استفاده کنید، در غیر این صورت آنها توسط کدهای کاراکتر مقایسه می‌شوند.
 
-There are several other helpful methods in strings:
+چند متد دیگر هم برای رشته‌ها وجود دارد:
 
-- `str.trim()` -- removes ("trims") spaces from the beginning and end of the string.
-- `str.repeat(n)` -- repeats the string `n` times.
-- ...and more to be found in the [manual](mdn:js/String).
+- `str.trim()` -- فاصله را از ابتدا و انتهای رشته حذف می‌کند («می‌تراشد»).
+- `str.repeat(n)` -- رشته را `n` بار تکرار می‌کند.
+- ...و متدهای بیشتری در [مستندات](mdn:js/String) وجود دارند.
 
-Strings also have methods for doing search/replace with regular expressions. But that's big topic, so it's explained in a separate tutorial section <info:regular-expressions>.
+رشته‌ها متدهایی را برای جستجو/جایگزین‌کردن عبارات با قاعده (regular expression) دارند. اما این یک بحث بزرگ است، پس در یک قسمت جدای این آموزش <info:regular-expressions> توضیح داده شده است.
