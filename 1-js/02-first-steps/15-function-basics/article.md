@@ -20,10 +20,14 @@ function showMessage() {
 }
 ```
 
+<<<<<<< HEAD
 کلمه‌ی کلیدی `function` اول می‌آید، سپس *اسم تابع* و سپس لیستی از *پارامترها* داخل پرانتز (با کاما جدا می‌شوند، در مثال بالا داخل پرانتزها خالی‌ست) و در نهایت کد تابع، با نام "بدنه‌ی تابع"، که توسط دو براکت محصور شده است.
+=======
+The `function` keyword goes first, then goes the *name of the function*, then a list of *parameters* between the parentheses (comma-separated, empty in the example above, we'll see examples later) and finally the code of the function, also named "the function body", between curly braces.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```js
-function name(parameters) {
+function name(parameter1, parameter2, ... parameterN) {
   ...body...
 }
 ```
@@ -137,25 +141,26 @@ alert( userName ); // *!*John*/!*, unchanged, the function did not access the ou
 
 ## پارامترها
 
+<<<<<<< HEAD
 ما می‌توانیم اطلاعات دلخواهی را به توابع با کمک پارامترها پاس بدهیم. (همچنین به آنها *آرگومان‌های تابع* گفته می‌شود.)
+=======
+We can pass arbitrary data to functions using parameters.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 در مثال زیر، تابع دو پارامتر دارد: `from` و `text`.
 
 ```js run
-function showMessage(*!*from, text*/!*) { // arguments: from, text
+function showMessage(*!*from, text*/!*) { // parameters: from, text
   alert(from + ': ' + text);
 }
 
-*!*
-showMessage('Ann', 'Hello!'); // Ann: Hello! (*)
-showMessage('Ann', "What's up?"); // Ann: What's up? (**)
-*/!*
+*!*showMessage('Ann', 'Hello!');*/!* // Ann: Hello! (*)
+*!*showMessage('Ann', "What's up?");*/!* // Ann: What's up? (**)
 ```
 
 وقتی تابع در خطوط `(*)` و `(**)` صدا زده می‌شود، مقادیر داده شده در متغیرهای محلی `from` و `text` کپی می‌شوند. سپس، تابع از آنها استفاده می‌کند.
 
 مثالی دیگر: یک متغیر `from` داریم و به تابع پاس می‌دهیم. توجه کنید: تابع، `from` را تغییر می‌دهد، اما تغییر در بیرون دیده نمی‌شود، چراکه تابع همیشه یک کپی از مقدار آن را می‌گیرد:
-
 
 ```js run
 function showMessage(from, text) {
@@ -175,9 +180,27 @@ showMessage(from, "Hello"); // *Ann*: Hello
 alert( from ); // Ann
 ```
 
+<<<<<<< HEAD
 ## مقادیر پیش‌فرض
 
 اگر پارامتری فراهم نشده باشد، مقادیر آن `undefined` می‌شوند.
+=======
+When a value is passed as a function parameter, it's also called an *argument*.
+
+In other words, to put these terms straight:
+
+- A parameter is the variable listed inside the parentheses in the function declaration (it's a declaration time term)
+- An argument is the value that is passed to the function when it is called (it's a call time term).
+
+We declare functions listing their parameters, then call them passing arguments.
+
+In the example above, one might say: "the function `sayMessage` is declared with two parameters, then called with two arguments: `from` and `"Hello"`".
+
+
+## Default values
+
+If a function is called, but an argument is not provided, then the corresponding value becomes `undefined`.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 برای مثال، تابع `showMessage(from, text)`، می‌تواند با یک آرگومان صدا زده شود:
 
@@ -185,9 +208,15 @@ alert( from ); // Ann
 showMessage("Ann");
 ```
 
+<<<<<<< HEAD
 این یک خطا نیست. خروجی این فراخوانی `"Ann: undefined"` است. `text` نداریم پس پیش‌فرض این است که `text === undefined`.
 
 اگر ما بخواهیم یک مقدار "پیش‌فرض" برای `text` در این حالت استفاده کنیم، می‌توانیم آن را بعد از `=` مشخصش کنیم:
+=======
+That's not an error. Such a call would output `"*Ann*: undefined"`. As the value for `text` isn't passed, it becomes `undefined`.
+
+We can specify the so-called "default" (to use if omitted) value for a parameter in the function declaration, using `=`:
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```js run
 function showMessage(from, *!*text = "no text given"*/!*) {
@@ -211,19 +240,33 @@ function showMessage(from, text = anotherFunction()) {
 ```smart header="ارزیابی پارامترهای پیش‌فرض"
 در جاوااسکریپت، یک پارامتر پیش‌فرض هربار که تابع بدون پارامتر مریوطه صدا زده بشود، ارزیابی می‌شود.
 
+<<<<<<< HEAD
 در مثال بالا، `anotherFunction()` هربار که `showMessage()` بدون پارامتر `text` صدا زده بشود، فراخوانی می‌شود.
+=======
+In the example above, `anotherFunction()` isn't called at all, if the `text` parameter is provided.
+
+On the other hand, it's independently called every time when `text` is missing.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 ```
 
 ### پارامترهای پیش‌فرض جایگزین
 
+<<<<<<< HEAD
 گاهی اوقات این منطقی است که مقدارهای پیش‌فرض پارامترها را در تعریف تابع قرار ندهیم بلکه در مرحله بعدی یعنی حین اجرا شدن آن قرار دهیم.
 
 برای بررسی یک پارامتر حذف شده، می‌توانیم آن را با `undefined` مقایسه کنیم:
+=======
+Sometimes it makes sense to assign default values for parameters not in the function declaration, but at a later stage.
+
+We can check if the parameter is passed during the function execution, by comparing it with `undefined`:
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```js run
 function showMessage(text) {
+  // ...
+
 *!*
-  if (text === undefined) {
+  if (text === undefined) { // if the parameter is missing
     text = 'empty message';
   }
 */!*
@@ -234,21 +277,29 @@ function showMessage(text) {
 showMessage(); // empty message
 ```
 
+<<<<<<< HEAD
 ...یا می‌توانستیم از عملگر `||` استفاده کنیم:
+=======
+...Or we could use the `??` operator:
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```js
-// if text parameter is omitted or "" is passed, set it to 'empty'
 function showMessage(text) {
+  // if text is undefined or otherwise falsy, set it to 'empty'
   text = text || 'empty';
   ...
 }
 ```
 
+<<<<<<< HEAD
 موتورهای جاوااسکریپت مدرن از [عملگر nullish coalescing](info:nullish-coalescing-operator) `??` پشتیبانی می‌کنند، این عملگر زمانی که مقدارهای falsy مثل `0` معمولی فرض می‌شوند، بهتر است:
+=======
+Modern JavaScript engines support the [nullish coalescing operator](info:nullish-coalescing-operator) `??`, it's better when most falsy values, such as `0`, should be considered "normal":
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```js run
-// if there's no "count" parameter, show "unknown"
 function showCount(count) {
+  // if count is undefined or null, show "unknown"
   alert(count ?? "unknown");
 }
 

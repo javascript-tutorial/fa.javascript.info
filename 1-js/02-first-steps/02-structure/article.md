@@ -43,7 +43,11 @@ alert(3 +
 + 2);
 ```
 
+<<<<<<< HEAD
 خروجی این کد `6` خواهد بود به این دلیل که جاوا اسکریپت Semicolon ـی در انتهای هر Line Break قرار نمی‌دهد. همانطور که مشخص است زمانیکه `"+"` در انتهای هر خط قرار می‌گیرد، عبارت کامل نمی‌شود و در نتیجه به Semicolon نیازی نیست.
+=======
+The code outputs `6` because JavaScript does not insert semicolons here. It is intuitively obvious that if the line ends with a plus `"+"`, then it is an "incomplete expression", so a semicolon there would be incorrect. And in this case, that works as intended.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 **اما شرایطی نیز وجود دارد که جاوا اسکریپت در تشخیص نیاز به Semicolon دچار خطا می‌شود.**
 
@@ -53,39 +57,62 @@ alert(3 +
 اگر واقعا به دنبال دیدن چنین خطایی هستید کد زیر را آزمایش کنید :
 
 ```js run
-[1, 2].forEach(alert)
+alert("Hello");
+
+[1, 2].forEach(alert);
 ```
 
+<<<<<<< HEAD
 فعلا نیازی نیست تا معنی [] و foreach را متوجه شوید. در آینده با آنها آشنا خواهیم شد. فعلا در نظر داشته باشید که نتیجه‌ی این کد نمایش عدد `1` و `2` است.
 
 حال بیایید `alert` را پیش از این کد قرار دهیم و در انتهای آن semicolon قرار ندهیم.
 
+=======
+No need to think about the meaning of the brackets `[]` and `forEach` yet. We'll study them later. For now, just remember the result of running the code: it shows `Hello`, then `1`, then `2`.
+
+Now let's remove the semicolon after the `alert`:
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```js run no-beautify
-alert("There will be an error")
+alert("Hello")
 
-[1, 2].forEach(alert)
+[1, 2].forEach(alert);
 ```
 
+<<<<<<< HEAD
 حال اگر کد را اجرا کنیم فقط `alert` اول را خواهیم دید و سپس با خطا مواجه می‌شویم.
 
 اما اگر انتهای `alert` اول یک semicolon قرار دهیم همه چیز دوباره درست کار خواهد کرد :
 
 ```js run
 alert("All fine now");
+=======
+The difference compared to the code above is only one character: the semicolon at the end of the first line is gone.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
-[1, 2].forEach(alert)  
-```
+If we run this code, only the first `Hello` shows (and there's an error, you may need to open the console to see it). There are no numbers any more.
 
+<<<<<<< HEAD
 دلیل وقوع این خطا آن است که جاوا اسکریپت پیش از براکت‌ها `[...]` semicolon در نظر نمی‌گیرد.
 از آنجایی که semicolon به صورت خودکار در انتهای alert اول قرار داده نمی‌شود، تمام کد به عنوان یک Statement در نظر گرفته می‌شود. موتور جاوا اسکریپت کد را به این شکل خواهد دید :
 
+=======
+That's because JavaScript does not assume a semicolon before square brackets `[...]`. So, the code in the last example is treated as a single statement.
+
+Here's how the engine sees it:
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```js run no-beautify
-alert("There will be an error")[1, 2].forEach(alert)
+alert("Hello")[1, 2].forEach(alert);
 ```
 
+<<<<<<< HEAD
 این خطا ممکن است در شرایط مشابه نیز بوجود آید.
+=======
+Looks weird, right? Such merging in this case is just wrong. We need to put a semicolon after `alert` for the code to work correctly.
+
+This can happen in other situations also.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 ````
 
 ما توصیه می‌کنیم که semicolon را در انتهای هر Statement قرار دهید، حتی اگر در خطوط جداگانه‌ای قرار دارند. این اصل به شکل گسترده‌ای در جامعه برنامه‌نویسان جاوا اسکریپت جا افتاده است.

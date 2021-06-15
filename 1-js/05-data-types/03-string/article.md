@@ -526,8 +526,13 @@ alert( str );
 
 کاراکترها از طریق کدهای عددی خود مقایسه می‌شوند. کد بزرگتر به معنای بزرگتر بودن کاراکتر است. کد `a` (97) بزرگتر از کد `Z` (90) است.
 
+<<<<<<< HEAD
 - تمام حروف کوچک انگلیسی بعد از حروف بزرگ واقع هستند چون کدهای آنها بزرگتر هستند.
 - بعضی از حروف مانند `Ö` از حروف الفبای اصلی جدا هستند. اینجا، کد آن از هر چیزی بین `a` تا `z` بزرگتر است.
+=======
+- All lowercase letters go after uppercase letters because their codes are greater.
+- Some letters like `Ö` stand apart from the main alphabet. Here, its code is greater than anything from `a` to `z`.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ### مقایسه‌های صحیح [#correct-comparisons]
 

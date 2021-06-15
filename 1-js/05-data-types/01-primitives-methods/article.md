@@ -39,8 +39,13 @@ john.sayHi(); // Hi buddy!
 
 ## یک داده‌ ابتدایی به عنوان یک شئ
 
+<<<<<<< HEAD
 تناقضی که سازنده جاوااسکریپت با آن مواجه شده:
 -خیلی کارها هستند که یک نفر بخواهد با داده‌های ابتدایی مثل رشته حروف یا اعداد انجام دهد که اگر دسترسی به آنها به عنوان تابع باشد عالی میشود.
+=======
+- There are many things one would want to do with a primitive like a string or a number. It would be great to access them using methods.
+- Primitives must be as fast and lightweight as possible.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 راه حال، اندکی عجیب به نظر میرسد:
 ۱. داده‌های ابتدایی هنوز داده‌های ابتدایی هستند. همانطور خواسته شده، یک مقدار واحد.
