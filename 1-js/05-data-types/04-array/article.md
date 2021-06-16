@@ -1,12 +1,12 @@
-# Arrays
+# آرایه‌ها
 
-Objects allow you to store keyed collections of values. That's fine.
+شیءها به شما اجازه می‌دهند که مجموعه‌ای کلیددار از مقدارها را ذخیره کنید. این چیز خوبی است.
 
-But quite often we find that we need an *ordered collection*, where we have a 1st, a 2nd, a 3rd element and so on. For example, we need that to store a list of something: users, goods, HTML elements etc.
+اما بسیار پیش می‌آید که ما به یک *مجموعه‌ی مرتب* نیاز داشته باشیم، که دارای یک المان اول، دوم، سوم و غیره باشیم. برای مثال، ما نیاز داریم که یک لیست از چیزی را ذخیره کنیم: کاربران، کالاها، المان‌های HTML و غیره.
 
-It is not convenient to use an object here, because it provides no methods to manage the order of elements. We can’t insert a new property “between” the existing ones. Objects are just not meant for such use.
+اینکه اینجا از یک شیء استفاده کنیم خوب نیست، چون هیچ روشی برای کنترل کردن ترتیب المان‌ها فراهم نمی‌کند. ما نمی‌توانیم یک ویژگی جدید را «بین» ویژگی‌های جدید اضافه کنیم. شیءها برای چنین موردی ساخته نشده‌اند.
 
-There exists a special data structure named `Array`, to store ordered collections.
+یک ساختار داده خاص به نام `Array` وجود دارد که برای ذخیره مجموعه‌های مرتب استفاده می‌شود.
 
 ## Declaration
 
