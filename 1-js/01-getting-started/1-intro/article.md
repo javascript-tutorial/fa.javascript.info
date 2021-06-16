@@ -36,13 +36,7 @@
 [موتور جاوااِسکریپت](https://en.wikipedia.org/wiki/JavaScript_engine)
  وجود داشته باشد، این زبان قابلیت اجرا شدن را داراست.  
 
-<<<<<<< HEAD
 مرورگرهای وب دارای موتوری داخلی برای اجرای جاوا اِسکریپت هستند، که گاهی آن را  **ماشین مجازی جاوا** **اِسکریپت** نیز می‌نامند.  
-=======
-- [V8](https://en.wikipedia.org/wiki/V8_(JavaScript_engine)) -- in Chrome and Opera.
-- [SpiderMonkey](https://en.wikipedia.org/wiki/SpiderMonkey) -- in Firefox.
-- ...There are other codenames like "Chakra" for IE, "JavaScriptCore", "Nitro" and "SquirrelFish" for Safari, etc.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 موتورهای مختلف دارای **اسم رمز** خاص خود هستند، برای نمونه :  
 
