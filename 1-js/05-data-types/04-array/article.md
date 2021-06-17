@@ -8,24 +8,24 @@
 
 یک ساختار داده خاص به نام `Array` وجود دارد که برای ذخیره مجموعه‌های مرتب استفاده می‌شود.
 
-## Declaration
+## تعریف کردن
 
-There are two syntaxes for creating an empty array:
+برای ساخت یک آرایه خالی دو سینتکس وجود دارد:
 
 ```js
 let arr = new Array();
 let arr = [];
 ```
 
-Almost all the time, the second syntax is used. We can supply initial elements in the brackets:
+تقریبا همیشه، سینتکس دوم استفاده می‌شود. ما می‌توانیم المان‌هایی اولیه را درون براکت‌ها قرار دهیم:
 
 ```js
 let fruits = ["Apple", "Orange", "Plum"];
 ```
 
-Array elements are numbered, starting with zero.
+المان‌های آرایه عددگذاری شده‌اند که از صفر شروع می‌شود.
 
-We can get an element by its number in square brackets:
+ما می‌توانیم یک المان را با استفاده از عددش درون براکت‌ها دریافت کنیم:
 
 ```js run
 let fruits = ["Apple", "Orange", "Plum"];
@@ -35,19 +35,19 @@ alert( fruits[1] ); // Orange
 alert( fruits[2] ); // Plum
 ```
 
-We can replace an element:
+می‌توانیم یک المان را جایگزین کنیم:
 
 ```js
 fruits[2] = 'Pear'; // now ["Apple", "Orange", "Pear"]
 ```
 
-...Or add a new one to the array:
+...یا یک المان جدید را به آرایه اضافه کنیم:
 
 ```js
 fruits[3] = 'Lemon'; // now ["Apple", "Orange", "Pear", "Lemon"]
 ```
 
-The total count of the elements in the array is its `length`:
+تعداد کل المان‌های درون آرایه در `length` آن است:
 
 ```js run
 let fruits = ["Apple", "Orange", "Plum"];
@@ -55,7 +55,7 @@ let fruits = ["Apple", "Orange", "Plum"];
 alert( fruits.length ); // 3
 ```
 
-We can also use `alert` to show the whole array.
+همچنین ما می‌توانیم از `alert` برای نشان دادن کل آرایه استفاده کنیم.
 
 ```js run
 let fruits = ["Apple", "Orange", "Plum"];
@@ -63,24 +63,24 @@ let fruits = ["Apple", "Orange", "Plum"];
 alert( fruits ); // Apple,Orange,Plum
 ```
 
-An array can store elements of any type.
+یک آرایه می‌تواند المان‌هایی از هر نوع را ذخیره کند.
 
-For instance:
+برای مثال:
 
 ```js run no-beautify
-// mix of values
+// ترکیبی از مقدارها
 let arr = [ 'Apple', { name: 'John' }, true, function() { alert('hello'); } ];
 
-// get the object at index 1 and then show its name
+// آن name دریافت شیء در ایندکس 1 و سپس نمایش
 alert( arr[1].name ); // John
 
-// get the function at index 3 and run it
+// دریافت تابع در ایندکس 3 و اجرا کردن آن
 arr[3](); // hello
 ```
 
 
-````smart header="Trailing comma"
-An array, just like an object, may end with a comma:
+````smart header="کامای دنباله‌دار"
+یک آرایه، درست مانند یک شیء، می‌تواند با یک کاما پایان یاید:
 ```js
 let fruits = [
   "Apple",
@@ -89,7 +89,7 @@ let fruits = [
 ];
 ```
 
-The "trailing comma" style makes it easier to insert/remove items, because all lines become alike.
+سبک «کامای دنباله‌دار» اضافه/حذف کردن المان را آسان‌تر می‌کند، چون همه خطوط مشابه می‌شوند.
 ````
 
 
