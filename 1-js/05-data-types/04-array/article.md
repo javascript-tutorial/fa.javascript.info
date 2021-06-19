@@ -93,53 +93,53 @@ let fruits = [
 ````
 
 
-## Methods pop/push, shift/unshift
+## متدهای pop/push، shift/unshift
 
-A [queue](https://en.wikipedia.org/wiki/Queue_(abstract_data_type)) is one of the most common uses of an array. In computer science, this means an ordered collection of elements which supports two operations:
+یک [صف](https://fa.wikipedia.org/wiki/صف_(نوع_داده_انتزاعی)) یکی از متداول‌ترین استفاده‌ها از یک آرایه است. در علوم کامپیوتر، آرایه به معنای یک مجموعه مرتب‌شده از المان‌ها است که دو عملیات را پشتیبانی می‌کند:
 
-- `push` appends an element to the end.
-- `shift` get an element from the beginning, advancing the queue, so that the 2nd element becomes the 1st.
+- `push` یک المان را به آخر اضافه می‌کند.
+- `shift` یک المان را از آغاز برمی‌دارد، صف را پیش می‌برد، پس المان دوم به المان اول تبدیل می‌شود.
 
 ![](queue.svg)
 
-Arrays support both operations.
+آرایه‌ها هر دو عملیات را پشیبانی می‌کنند.
 
-In practice we need it very often. For example, a queue of messages that need to be shown on-screen.
+خیلی پیش می‌آید که در عمل به آن نیاز داشته باشیم. برای مثال، یک صف از پیام‌ها که باید روی صفحه نمایش داده شوند.
 
-There's another use case for arrays -- the data structure named [stack](https://en.wikipedia.org/wiki/Stack_(abstract_data_type)).
+آرایه‌ها یک مورد استفاده دیگر هم دارند که یک ساختار داده به نام [پشته](https://fa.wikipedia.org/wiki/پشته) است.
 
-It supports two operations:
+پشته دو عملیات را پشتیبانی می‌کند:
 
-- `push` adds an element to the end.
-- `pop` takes an element from the end.
+- `push` یک المان را به آخر اضافه می‌کند.
+- `pop` یک المان را از آخر برمی‌دارد.
 
-So new elements are added or taken always from the "end".
+پس المان‌های جدید یا اضافه می‌شوند یا همیشه از «آخر» برداشته می‌شوند.
 
-A stack is usually illustrated as a pack of cards: new cards are added to the top or taken from the top:
+یک پشته معمولا به عنوان یک بسته‌ای از کارت‌ها فرض می‎شود: کارت‌های جدید به بالا اضافه می‌شوند یا از بالا برداشته می‌شوند:
 
 ![](stack.svg)
 
-For stacks, the latest pushed item is received first, that's also called LIFO (Last-In-First-Out) principle. For queues, we have FIFO (First-In-First-Out).
+برای پشته‌ها، آخرین چیزی که اضافه شده باشد اول دریافت می‌شود، همچنین به آن LIFO (Last-In-First-Out) هم گفته می‌شود. برای صف‌ها، ما FIFO (First-In-First-Out) را داریم.
 
-Arrays in JavaScript can work both as a queue and as a stack. They allow you to add/remove elements both to/from the beginning or the end.
+آرایه‌ها در جاوااسکریپت می‌توانند هم به عنوان یک صف و هم به عنوان یک پشته کار کنند. آنها به شما اجازه می‌دهند که المان‌ها را به/از آغاز یا پایان اضافه/حذف کنید.
 
-In computer science the data structure that allows this, is called [deque](https://en.wikipedia.org/wiki/Double-ended_queue).
+در علوم کامپیوتر ساختار داده‌ای که همچنین چیزی را ممکن می‌کند، [صف دو طرفه](https://en.wikipedia.org/wiki/Double-ended_queue) نامیده می‌شود.
 
-**Methods that work with the end of the array:**
+**متدهایی که با انتهای آرایه کار می‌کنند:**
 
 `pop`
-: Extracts the last element of the array and returns it:
+: آخرین المان از آرایه را خارج می‌کند و آن را برمی‌گرداند:
 
     ```js run
     let fruits = ["Apple", "Orange", "Pear"];
 
-    alert( fruits.pop() ); // remove "Pear" and alert it
+    alert( fruits.pop() ); // می‌کند alert را حذف می‌کند و آن را "Pear"
 
     alert( fruits ); // Apple, Orange
     ```
 
 `push`
-: Append the element to the end of the array:
+: المان را به انتهای آرایه اضافه می‌کند:
 
     ```js run
     let fruits = ["Apple", "Orange"];
@@ -149,23 +149,23 @@ In computer science the data structure that allows this, is called [deque](https
     alert( fruits ); // Apple, Orange, Pear
     ```
 
-    The call `fruits.push(...)` is equal to `fruits[fruits.length] = ...`.
+    صدا زدن `friuts.push(...)` برابر است با `fruits[fruits.length] = ...`.
 
-**Methods that work with the beginning of the array:**
+**متدهایی که با آغاز آرایه کار می‌کنند:**
 
 `shift`
-: Extracts the first element of the array and returns it:
+: اولین المان آرایه را خارج می‌کند و آن را برمی‌گرداند:
 
     ```js run
     let fruits = ["Apple", "Orange", "Pear"];
 
-    alert( fruits.shift() ); // remove Apple and alert it
+    alert( fruits.shift() ); // می‌کند alert را حذف می‌کند و آن را "Apple"
 
     alert( fruits ); // Orange, Pear
     ```
 
 `unshift`
-: Add the element to the beginning of the array:
+: المان را به آغاز آرایه اضافه می‌کند:
 
     ```js run
     let fruits = ["Orange", "Pear"];
@@ -175,7 +175,7 @@ In computer science the data structure that allows this, is called [deque](https
     alert( fruits ); // Apple, Orange, Pear
     ```
 
-Methods `push` and `unshift` can add multiple elements at once:
+متدهای `push` و `unshift` می‌توانند چند المان را یک جا اضافه کنند:
 
 ```js run
 let fruits = ["Apple"];
