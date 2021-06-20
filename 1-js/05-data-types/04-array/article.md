@@ -187,53 +187,53 @@ fruits.unshift("Pineapple", "Lemon");
 alert( fruits );
 ```
 
-## Internals
+## اجزای داخلی
 
-An array is a special kind of object. The square brackets used to access a property `arr[0]` actually come from the object syntax. That's essentially the same as `obj[key]`, where `arr` is the object, while numbers are used as keys.
+یک آرایه نوع خاصی از یک شیء است. براکت‌ها که برای دسترسی به یک ویژگی `arr[0]` استفاده می‌شوند در واقع از سینتکس شیء آمده‌اند. اساسا شبیه به `obj[key]` است، که در آن `arr` شیء است، درحالی که اعداد به عنوان کلیدها استفاده می‌شوند.
 
-They extend objects providing special methods to work with ordered collections of data and also the `length` property. But at the core it's still an object.
+آنها شیءها را با فراهم کردن متدهای خاصی برای کارکردن با مجموعه‌های مرتب شده‌ی داده و ویژگی `length` گسترده می‌کنند. اما در ریشه و ذات هنوز یک شیء هستند.
 
-Remember, there are only eight basic data types in JavaScript (see the [Data types](info:types) chapter for more info). Array is an object and thus behaves like an object.
+به یاد داشته باشید، فقط 8 نوع داده ساده در جاوااسکریپت وجود دارد (برای اطلاعات بیشتر فصل [انواع داده](info:types) را ببینید). آرایه یک شیء است و به همین دلیل مانند یک شیء عمل می‌کند.
 
-For instance, it is copied by reference:
+برای مثال، آرایه توسط مرجع کپی می‌شود:
 
 ```js run
-let fruits = ["Banana"]
+let fruits = ["موز"]
 
-let arr = fruits; // copy by reference (two variables reference the same array)
+let arr = fruits; کپی شدن توسط مرجع (دو متغیر به آرایه مشابهی رجوع می‌کنند)
 
 alert( arr === fruits ); // true
 
-arr.push("Pear"); // modify the array by reference
+arr.push("گلابی"); // تغییر دادن آرایه با استفاده از مرجع
 
-alert( fruits ); // Banana, Pear - 2 items now
+alert( fruits ); // حال دارای 2 المان است - موز، گلابی
 ```
 
-...But what makes arrays really special is their internal representation. The engine tries to store its elements in the contiguous memory area, one after another, just as depicted on the illustrations in this chapter, and there are other optimizations as well, to make arrays work really fast.
+اما چیزی که باعث می‌شود آرایه‌ها خاص باشند نمایش داخلی آنها است. موتور سعی می‌کند که المان‌های آرایه را در ناحیه‌ای پیوسته در حافظه ذخیره کند، یکی پس از دیگری، درست همانطور که در تصاویر این فصل  نشان داده شد، و بهینه‌سازی‌هایی هم وجود دارد، برای اینکه آرایه‌ها را بسیار سریع کنند.
 
-But they all break if we quit working with an array as with an "ordered collection" and start working with it as if it were a regular object.
+اما اگر ما از کار کردن با آرایه به عنوان یک «مجموعه مرتب شده» دست بکشیم و شروع به کار کردن به عنوان یک شیء معمولی کنیم، بهینه‌سازی‌ها متوقف می‌شوند.
 
-For instance, technically we can do this:
+برای مثال، به طور فنی می‌توانیم همچین کاری کنیم:
 
 ```js
-let fruits = []; // make an array
+let fruits = []; // یک آرایه بسازیم
 
-fruits[99999] = 5; // assign a property with the index far greater than its length
+fruits[99999] = 5; // مقداردهی به یک ویژگی با ایندکسی بسیار بیشتر از طول آرایه
 
-fruits.age = 25; // create a property with an arbitrary name
+fruits.age = 25; // ساخت یک ویژگی با یک اسم دلخواه
 ```
 
-That's possible, because arrays are objects at their base. We can add any properties to them.
+این کار قابل انجام است، چون آرایه‌ها در ذات خود شیء هستند. ما می‌توانیم هر ویژگی‌ای را به آنها اضافه کنیم.
 
-But the engine will see that we're working with the array as with a regular object. Array-specific optimizations are not suited for such cases and will be turned off, their benefits disappear.
+اما موتور خواهد دید که ما با آرایه به عنوان یک شیء معمولی کار می‌کنیم. بهینه‌سازی‌های مخصوص آرایه برای چنین موارد استفاده‌ای مناسب نیستند و غیر فعال خواهند شد و فواید آنها هم از بین خواهند رفت.
 
-The ways to misuse an array:
+راه‌های استفاده نامناسب با یک آرایه:
 
-- Add a non-numeric property like `arr.test = 5`.
-- Make holes, like: add `arr[0]` and then `arr[1000]` (and nothing between them).
-- Fill the array in the reverse order, like `arr[1000]`, `arr[999]` and so on.
+- اضافه کردن یک ویژگی غیر عددی مانند `arr.test = 5`.
+- ایجاد فضای خالی، مانند: اضافه کردن `arr[0]` و سپس `arr[1000]` (اضافه نکردن چیزی بین آنها).
+- پر کردن آرایه با ترتیب برعکس، مثل `arr[1000]`، `arr[999]` و غیره.
 
-Please think of arrays as special structures to work with the *ordered data*. They provide special methods for that. Arrays are carefully tuned inside JavaScript engines to work with contiguous ordered data, please use them this way. And if you need arbitrary keys, chances are high that you actually require a regular object `{}`.
+لطفا به آرایه‌ها به عنوان یک ساختار خاص برای کارکردن با *داده مرتب شده* نگاه کنید. آنها متدهای خاصی را برای این موضوع فراهم می‌کنند. آرایه‌ها با حساسیت به داخل موتورهای جاوااسکریپت برای کارکردن با داده مرتب شده‌ی متوالی راه یافته‌اند، لطفا از آنها در همین راه استفاده کنید. اگر به کلیدهای دلخواه نیاز دارید، به احتمال زیاد شما در واقع به یک شیء معمولی `{}` احتیاج دارید.
 
 ## Performance
 
