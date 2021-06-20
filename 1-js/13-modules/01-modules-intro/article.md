@@ -57,13 +57,8 @@ sayHi('John'); // Hello, John!
 
 مرورگر به صورت خودکار ماژول ایمپورت شده (و ماژول هایی که این ماژول به آن وابسته است) را دریافت و بررسی میکند، سپس اسکریپت را اجرا می کند.
 
-<<<<<<< HEAD
 ```warn header="ماژول ها تنها در پروتکل  HTTP(s) قابل استفاده اند، و در فایل های محلی نمی توان از آن ها استفاده کرد."
 اگر سعی کنید که یک صفحه وب را به صورت محلی، از طریق پروتکل `file://` باز کنید، توابع `import/export` کار نمی کنند. برای این کار از یک وب سرور لوکال استفاده کنید، مانند [static-server](https://www.npmjs.com/package/static-server#getting-started) یا از قابلیت "سرور زنده" ویرایشگر متن خود استفاده کنید، مانند VS Code [Live Server Extension](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) برای تست ماژول خود.
-=======
-```warn header="Modules work only via HTTP(s), not locally"
-If you try to open a web-page locally, via `file://` protocol, you'll find that `import/export` directives don't work. Use a local web-server, such as [static-server](https://www.npmjs.com/package/static-server#getting-started) or use the "live server" capability of your editor, such as VS Code [Live Server Extension](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) to test modules.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 ```
 
 ## امکانات اصلی ماژول ها
@@ -74,11 +69,7 @@ If you try to open a web-page locally, via `file://` protocol, you'll find that 
 
 ### حالت "use strict" به صورت پیش فرض فعال است.
 
-<<<<<<< HEAD
 در ماژول ها حالت `use strict` به صورت پیش فرض فعال است، برای مثال اختصاص دادن مقدار به یک متغیر که از قبل تعریف نشده است باعث بوجود آمدن خطا می شود.
-=======
-Modules always work in strict mode. E.g. assigning to an undeclared variable will give an error.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```html run
 <script type="module">
@@ -90,38 +81,24 @@ Modules always work in strict mode. E.g. assigning to an undeclared variable wil
 
 هر ماژول اسکوپ سطح بالای خود را دارد. به عبارت دیگر، توابع و متغیر های سطح بالا در یک ماژول قابل دسترسی توسط اسکریپت های دیگر نیستند.
 
-<<<<<<< HEAD
 در مثال پایین، دو اسکریپت ایمپورت شده اند، و `hello.js` سعی در استفاده از متغیر `user` که در فایل `user.js` تعریف شده است، کرده و شکست خورده است.
 
 [codetabs src="scopes" height="140" current="index.html"]
 
 در موقع کار با ماژول ها انتظار می رود که هر چیزی که قرار است از بیرون قابل دسترسی باشد `export` و هر چیزی که آن ها در اسکریپت خود نیاز دارند `import` شود.
 
-در نتیجه ما باید `user.js` را در `hello.js` ایمپورت کرده و قابلیت مورد نظر خود را از آن دریافت کنیم به جای اینکه به متغیرهای جهانی اطمینان کنیم.
-=======
-In the example below, two scripts are imported, and `hello.js` tries to use `user` variable declared in `user.js`. It fails, because it's a separate module (you'll see the error in the console):
+- `user.js` باید متغیر `user` را اکسپورت کند.
+- `hello.js` باید آن را از ماژول `user.js` ایمپورت کند.
 
-[codetabs src="scopes" height="140" current="index.html"]
-
-Modules should `export` what they want to be accessible from outside and `import` what they need.
-
-- `user.js` should export the `user` variable.
-- `hello.js` should import it from `user.js` module.
-
-In other words, with modules we use import/export instead of relying on global variables.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+به عبارتی دیگر، در ماژول‌ها ما از import/export به جای متغیرهای سراسری (global) استفاده می‌کنیم.
 
 این نمونه درست این کد است:
 
 [codetabs src="scopes-working" height="140" current="hello.js"]
 
-<<<<<<< HEAD
 در مرورگر، یک اسکوپ سطح بالا ی مستقل هم برای هر تگ `<script type="module">` وجود دارد:
-=======
-In the browser, if we talk about HTML pages, independent top-level scope also exists for each `<script type="module">`.
 
-Here are two scripts on the same page, both `type="module"`. They don't see each other's top-level variables:
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+اینجا دو اسکریپت در یک صفحه وجود دارد، هر دو از نوع `type="module"` هستند. آن‌ها متغیرهای سطح بالا(top-level) هم را نمی‌بینند:
 
 ```html run
 <script type="module">
@@ -136,31 +113,21 @@ Here are two scripts on the same page, both `type="module"`. They don't see each
 </script>
 ```
 
-<<<<<<< HEAD
-اگر واقعا نیاز داریم که یک متغیر جهانی در سطح پنجره مرورگر ایجاد کنیم، نیاز است که به صورت جداگانه و اختصاصی آن متغیر را به `window` اختصاص دهیم و از طریق `window.user` به آن دسترسی پیدا کنیم. اما باید توجه کنیم که این یک استثنا است و برای انجام آن به دلیل موجهی نیاز است.
-=======
 ```smart
-In the browser, we can make a variable window-level global by explicitly assigning it to a `window` property, e.g. `window.user = "John"`. 
+در مرورگر، ما می‌توانیم یک متغیر window-level گلوبال بسازیم با اختصاص دادن آن صریحاً به یک مقدار `window`، برای مثال: `windows.user = "John"`.
 
-Then all scripts will see it, both with `type="module"` and without it. 
+پس همه اسکریپت‌ها آن را خواهند دید، هم با `type="module"` و هم بدون آن. 
 
-That said, making such global variables is frowned upon. Please try to avoid them.
+گرچه به این روش اشاره شد، ولی استفاده از چنین متغیرهای گلوبالی توصیه‌شده نیست. لطفاً تلاش کنید که از آن استفاده نکنید.
 ```
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ### کد یک ماژول تنها اولین بار که به اسکریپت ما ایمپورت شده، ارزیابی می شود.
 
-<<<<<<< HEAD
 اگر یک ماژول مشابه در چندین مکان مختلف ایمپورت شود، کد آن تنها در مرتبه اول اجرا می شود، بعد از آن نتیجه به تمامی مکان های دیگر اکسپورت می شود.
 
-این رفتار عواقب مهمی دارد. بگذارید تا آن ها را در مثال بررسی کنیم:
-=======
-If the same module is imported into multiple other modules, its code is executed only once, upon the first import. Then its exports are given to all further importers.
+این رفتار عواقب مهمی دارد، که باید از آن‌ها آگاه باشیم.
 
-The one-time evaluation has important consequences, that we should be aware of. 
-
-Let's see a couple of examples.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+ بگذارید تا آن ها را در مثال بررسی کنیم:
 
 اول از همه، اگر اجرای کد ما باعث افتادن یک سری اتفاقات شود، مانند نشان دادن یک پیغام ، در این صورت چندین بار ایمپورت کردن کد تنها باعث یک بار اجرا شدن این پیغام می شود. ---- تنها بار اول.
 
@@ -179,17 +146,11 @@ import `./alert.js`; // ماژول ارزیابی و اجرا می شود.
 import `./alert.js`; // (پیغامی نمایش داده نمی شود.)
 ```
 
-<<<<<<< HEAD
-در عمل، ماژول های سطح بالا در اغلب موارد برای اختصاص دادن مقادیر مختلف، درست کردن ساختمان های داده داخلی، و زمانی که می خواهیم از چیزی چند مرتبه استفاده کنیم ---- آن را اکسپورت می کنیم.
+ایمپورت دوم چیزی را نشان نمی‌دهد، چون ماژول پیش از این ارزیابی شده است.
+
+یک قانون وجود دارد: ماژول‌های top-level باید برای مقداردهی اولیه استفاده شوند، ساختن ساختارهای داده‌ای داخلی. اگر ما نیاز به ساخت چیزی داریم که چندین بار آن را فراخوانی کنیم - باید آن را به عنوان یک تابع اکسپورت کنیم، مانند کاری که با `sayHi` در بالا کردیم.
 
 خب، حال با هم یک مثال پیشرفته تر را می بینیم.
-=======
-The second import shows nothing, because the module has already been evaluated.
-
-There's a rule: top-level module code should be used for initialization, creation of module-specific internal data structures. If we need to make something callable multiple times - we should export it as a function, like we did with `sayHi` above.
-
-Now, let's consider a deeper example.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 فرض می کنیم که یک ماژول یک آبجکت را اکسپورت می کند:
 
@@ -214,38 +175,25 @@ import {admin} from './admin.js';
 alert(admin.name); // Pete
 
 *!*
-<<<<<<< HEAD
 // هر دو فایل ‍1.js و 2.js یک آبجکت مشابه را ایمپورت می کنند.
 // هر تغییری که در فایل 1.js ایجاد شود، در فایل 2.js نیز قابل مشاهده است.
 */!*
 ```
 
-پس بیایید دوباره امتحان کنیم -- ماژول تنها یک مرتبه اجرا می شود. اکسپورت های تولید شده، بین ایمپورت کننده ها به اشتراک گذاشته می شوند، در نتیجه اگر چیزی آبجکت `admin` را تغییر دهد، بقیه ماژول ها هم متوجه این تغییر می شوند.
+همانطور که می‌بینید، وقتی `1.js` مقدار `name` را در `admin` ایمپورت شده تغییر می‌دهد، سپس `2.js` می‌تواند مقدار جدید `admin.name` را ببیند.
 
-این رفتار به ما اجازه می دهد که در اولین بار که ماژول را ایمپورت می کنیم، *تنظیم* هم کنیم. ما می توانیم یکبار مشخصات(properties) را تنظیم کرده و در ایمپورت ها و ماژول های بعدی از آن استفاده کنیم.
+این دقیقاً به خاطر این است که ماژول فقط یک بار اجرا شده است. اکسپورت‌ها تولیدشده‌اند، و سپس بین ایمپورت‌ها به اشتراک گذاشته‌شده‌اند، پس اگر چیزی شی `admin` را تغییر دهد، بقیهٔ ماژول‌ها هم آن را می‌بینند.
+
+**چنین رفتاری در واقع خیلی مفید است، چون به ما اجازه می‌دهد تا ماژول‌ها را *کافیگ* کنیم.**
+
+به عبارتی دیگر، یک ماژول می‌تواند عملکردی عمومی ارائه‌دهد که نیاز به راه‌اندازی دارد. برای مثال احراز هویت نیازمند مدارک است. پس می‌تواند یک شی configuration اکسپورت کند و انتظار داشته باشد تا کد بیرونی آن را مقداردهی کند.
+
+اینجا الگوی کلاسیک را می‌بینید:
+1. یک ماژول مقادیر قابل کافیگ‌شدن را اکسپورت می‌کند، مثلاً: یک شی قابل کانفیگ
+2. در ایمپورت اول، آن را مقداردهی می‌کنیم، در مقادیر آن می‌نویسیم. برنامهٔ top-level ما آن را انجام می‌دهد.
+3. ایمپورت‌های آتی از ماژول استفاده می‌کنند.
 
 برای مثال، ماژول `admin.js` ممکن است یک سری قابلیت ها به ما بدهد، اما از ما انتظار دارد که یک سری متغیر ها از بیرون آبجکت `admin` به آن پاس دهیم;
-=======
-// Both 1.js and 2.js reference the same admin object
-// Changes made in 1.js are visible in 2.js
-*/!*
-```
-
-As you can see, when `1.js` changes the `name` property in the imported `admin`, then `2.js` can see the new `admin.name`.
-
-That's exactly because the module is executed only once. Exports are generated, and then they are shared between importers, so if something changes the `admin` object, other modules will see that.
-
-**Such behavior is actually very convenient, because it allows us to *configure* modules.**
-
-In other words, a module can provide a generic functionality that needs a setup. E.g. authentication needs credentials. Then it can export a configuration object expecting the outer code to assign to it.
-
-Here's the classical pattern:
-1. A module exports some means of configuration, e.g. a configuration object.
-2. On the first import we initialize it, write to its properties. The top-level application script may do that.
-3. Further imports use the module.
-
-For instance, the `admin.js` module may provide certain functionality (e.g. authentication), but expect the credentials to come into the `config` object from outside:
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```js
 // 📁 admin.js
@@ -256,13 +204,9 @@ export function sayHi() {
 }
 ```
 
-<<<<<<< HEAD
-در ‍`init.js`، اولین اسکریپت اپلیکیشن ما، مقدار `admin.name` را مشخص می کند. از این به بعد همه می توانند این تغییر را ببینند، از جمله فراخوانی هایی که در خود فایل `admin.js` هستند:
-=======
-Here, `admin.js` exports the `config` object (initially empty, but may have default properties too).
+در اینجا، `admin.js` ‍شی `config` را اسکپورت می‌کند (مقدار اولیه خالی، ولی ممکن مقادیر پیش‌فرض نیز داشته باشد).
 
-Then in `init.js`, the first script of our app, we import `config` from it and set `config.user`:
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+سپس در `init.js`، اولین اسکریپت برنامهٔ ما، ما `config` را از این ایمپورت می‌کنیم و `config.user` را مقداردهی می‌کنیم.
 
 ```js
 // 📁 init.js
@@ -270,13 +214,9 @@ import {config} from './admin.js';
 config.user = "Pete";
 ```
 
-<<<<<<< HEAD
-ماژول های دیگر هم `admin.name` را می توانند ببینند:
-=======
-...Now the module `admin.js` is configured. 
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+...حالا ماژول `admin.js` کانفیگ‌شده است.
 
-Further importers can call it, and it correctly shows the current user:
+ایمپورت‌های آتی می‌توانند آن را فراخوانی کنند، و آن به درستی شی user فعلی را نمایش می‌دهد:
 
 ```js
 // 📁 another.js
@@ -285,29 +225,17 @@ import {sayHi} from './admin.js';
 sayHi(); // Ready to serve, *!*Pete*/!*!
 ```
 
-<<<<<<< HEAD
-### شئ import.meta
-=======
 
-### import.meta
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+### شئ import.meta
 
 آبجکت ‍`import.meta` دارای یک سری اطلاعات درباره ماژول فعلی است.
 
-<<<<<<< HEAD
 اطلاعات آن بستگی به محیطی که در آن اجرا می شود، دارد. در مروگر، شامل آدرس اسکریپت است، و یا آدزس صفحه فعلی اگر داخل فایل HTML باشد:
 
 ```html run height=0
 <script type="module">
-  alert(import.meta.url); // آدرس اسکریپت(آدرس صفحه html برای اسکریپت های inline)
-=======
-Its content depends on the environment. In the browser, it contains the URL of the script, or a current webpage URL if inside HTML:
-
-```html run height=0
-<script type="module">
-  alert(import.meta.url); // script URL
-  // for an inline script - the URL of the current HTML-page
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+  alert(import.meta.url); // آدرس اسکریپت
+  // برای یک اسکریپت این‌لاین - آدرس صفحهٔ فعلی HTML
 </script>
 ```
 
