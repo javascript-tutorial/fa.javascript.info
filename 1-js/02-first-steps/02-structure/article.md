@@ -8,7 +8,9 @@ Statement ها دستورات و کدهایی هستند که باعث وقوع 
 
 پیش از این Statement ـی دیده‌ایم : `alert('Hello, world')` که پیام Hello, world را نمایش می‌داد.
 
-ما به هر تعداد Statement ـی که بخواهیم می‌توانیم در کدهای خود داشته باشیم. Statement ها از طریق semicolon (سِمی‌کالِن) از هم تفکیک می‌شوند. ‌برای نمونه ما در اینجا می‌توانیم عبارت "Hello World" را در دو Alert داشته باشیم :
+ما به هر تعداد Statement ـی که بخواهیم می‌توانیم در کدهای خود داشته باشیم. Statement ها از طریق semicolon (سِمی‌کالِن) از هم تفکیک می‌شوند.
+
+ ‌برای نمونه ما در اینجا می‌توانیم عبارت "Hello World" را در دو Alert داشته باشیم :
 
 ```js run no-beautify
 alert('Hello'); alert('World');
@@ -43,11 +45,7 @@ alert(3 +
 + 2);
 ```
 
-<<<<<<< HEAD
 خروجی این کد `6` خواهد بود به این دلیل که جاوا اسکریپت Semicolon ـی در انتهای هر Line Break قرار نمی‌دهد. همانطور که مشخص است زمانیکه `"+"` در انتهای هر خط قرار می‌گیرد، عبارت کامل نمی‌شود و در نتیجه به Semicolon نیازی نیست.
-=======
-The code outputs `6` because JavaScript does not insert semicolons here. It is intuitively obvious that if the line ends with a plus `"+"`, then it is an "incomplete expression", so a semicolon there would be incorrect. And in this case, that works as intended.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 **اما شرایطی نیز وجود دارد که جاوا اسکریپت در تشخیص نیاز به Semicolon دچار خطا می‌شود.**
 
@@ -62,16 +60,10 @@ alert("Hello");
 [1, 2].forEach(alert);
 ```
 
-<<<<<<< HEAD
 فعلا نیازی نیست تا معنی [] و foreach را متوجه شوید. در آینده با آنها آشنا خواهیم شد. فعلا در نظر داشته باشید که نتیجه‌ی این کد نمایش عدد `1` و `2` است.
 
 حال بیایید `alert` را پیش از این کد قرار دهیم و در انتهای آن semicolon قرار ندهیم.
 
-=======
-No need to think about the meaning of the brackets `[]` and `forEach` yet. We'll study them later. For now, just remember the result of running the code: it shows `Hello`, then `1`, then `2`.
-
-Now let's remove the semicolon after the `alert`:
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```js run no-beautify
 alert("Hello")
@@ -79,45 +71,24 @@ alert("Hello")
 [1, 2].forEach(alert);
 ```
 
-<<<<<<< HEAD
-حال اگر کد را اجرا کنیم فقط `alert` اول را خواهیم دید و سپس با خطا مواجه می‌شویم.
+تفاوت در مقایسه با کد بالا فقط یک کاراکتر است: semicolon انتهای خط اول دیگر وجود ندارد.
 
-اما اگر انتهای `alert` اول یک semicolon قرار دهیم همه چیز دوباره درست کار خواهد کرد :
+حال اگر کد را اجرا کنیم فقط `Hello` اول را خواهیم دید و سپس با خطا مواجه می‌شویم. هیچ عددی دیگر وجود ندارد.
 
-```js run
-alert("All fine now");
-=======
-The difference compared to the code above is only one character: the semicolon at the end of the first line is gone.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+دلیل وقوع این خطا آن است که جاوا اسکریپت پیش از براکت‌ها `[...]` semicolon در نظر نمی‌گیرد. از آنجایی که semicolon به صورت خودکار در انتهای alert اول قرار داده نمی‌شود، تمام کد به عنوان یک Statement در نظر گرفته می‌شود.
 
-If we run this code, only the first `Hello` shows (and there's an error, you may need to open the console to see it). There are no numbers any more.
-
-<<<<<<< HEAD
-دلیل وقوع این خطا آن است که جاوا اسکریپت پیش از براکت‌ها `[...]` semicolon در نظر نمی‌گیرد.
-از آنجایی که semicolon به صورت خودکار در انتهای alert اول قرار داده نمی‌شود، تمام کد به عنوان یک Statement در نظر گرفته می‌شود. موتور جاوا اسکریپت کد را به این شکل خواهد دید :
-
-=======
-That's because JavaScript does not assume a semicolon before square brackets `[...]`. So, the code in the last example is treated as a single statement.
-
-Here's how the engine sees it:
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+ موتور جاوا اسکریپت کد را به این شکل خواهد دید :
 
 ```js run no-beautify
 alert("Hello")[1, 2].forEach(alert);
 ```
 
-<<<<<<< HEAD
-این خطا ممکن است در شرایط مشابه نیز بوجود آید.
-=======
-Looks weird, right? Such merging in this case is just wrong. We need to put a semicolon after `alert` for the code to work correctly.
+عجیب به نظر می‌رسد، نه؟ چنین ادغامی در این مورد اشتباه است. ما باید یک semicolon بعد از `alert` قرار دهیم تا کد درست کار کند.
 
-This can happen in other situations also.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+این اتفاق می‌تواند در موقعیت‌های دیگری نیز بیفتد.
 ````
 
-ما توصیه می‌کنیم که semicolon را در انتهای هر Statement قرار دهید، حتی اگر در خطوط جداگانه‌ای قرار دارند. این اصل به شکل گسترده‌ای در جامعه برنامه‌نویسان جاوا اسکریپت جا افتاده است.
-یکبار دیگر تکرار می‌کنیم : این امکان وجود دارد که در اکثر مواقع semicolon را قرار ندهید. ولی قرار دادن آن امن‌تر است، مخصوصا برای تازه‌کارها.
-
+ما توصیه می‌کنیم که semicolon را در انتهای هر Statement قرار دهید، حتی اگر در خطوط جداگانه‌ای قرار دارند. این اصل به شکل گسترده‌ای در جامعه برنامه‌نویسان جاوا اسکریپت جا افتاده است. یکبار دیگر تکرار می‌کنیم : این *امکان وجود دارد* که در اکثر مواقع semicolon را قرار ندهید. ولی قرار دادن آن امن‌تر است، مخصوصا برای تازه‌کارها.
 
 ## Comments [#code-comments]
 
@@ -130,7 +101,6 @@ Comment ها می‌توانند در هر جایی از اسکریپت قرار
 از محلی که `//` را قرار می‌دهیم، تا انتهای خط نادیده گرفته خواهد شد. همینطور Comment می‌تواند به دنبال یک Statement بیاید.
 
 مانند :
-
 ```js run
 // This comment occupies a line of its own
 alert('Hello');
@@ -150,7 +120,9 @@ alert('Hello');
 alert('World');
 ```
 
-همانطور که گفتیم دستوراتی که در Comment قرار می‌گیرند اجرا نمی‌شوند، از این رو گاهی اوقات از این روش برای غیر فعال کردن بخشی از کد می‌توان استفاده نمود.
+همانطور که گفتیم دستوراتی که در Comment قرار می‌گیرند اجرا نمی‌شوند،
+
+ از این رو گاهی اوقات از این روش برای غیر فعال کردن بخشی از کد می‌توان استفاده نمود.
 
 ```js run
 /* Commenting out the code
