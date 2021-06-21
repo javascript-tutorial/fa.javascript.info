@@ -25,7 +25,11 @@
 }
 ```
 
+<<<<<<< HEAD
 این کار یک تگ `<script src="...">` جدید و پویا با `src` داده شده میسازد و به سند اضافه میکند. مرورگر به صورت خودکار این کار را انجام میدهد و در زمان تمام شدن کار آن را اجرا میکند.
+=======
+It inserts into the document a new, dynamically created, tag `<script src="…">` with the given `src`. The browser automatically starts loading it and executes when complete.
+>>>>>>> 8558fa8f5cfb16ef62aa537d323e34d9bef6b4de
 
 میتوانیم به این صورت از این تابع استفادع کنیم
 

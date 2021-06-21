@@ -22,7 +22,11 @@
 
 ## ترنسپایلرها
 
+<<<<<<< HEAD
 یک [ترنسپایلر](https://en.wikipedia.org/wiki/Source-to-source_compiler) در واقع قطعه‌ای نرم‌افزار است که می‌تواند کد مدرن و جدید را parse کند ("بخواند و بفهمد") و سپس همان کد را با syntax قدیمی بازنویسی کند به‌طوری که خروجی کد یکسان باشد.
+=======
+A [transpiler](https://en.wikipedia.org/wiki/Source-to-source_compiler) is a special piece of software that translates source code to another source code. It can parse ("read and understand") modern code and rewrite it using older syntax constructs, so that it'll also work in outdated engines.
+>>>>>>> 8558fa8f5cfb16ef62aa537d323e34d9bef6b4de
 
 برای مثال جاوااسکریپت تا سال ۲۰۲۰ "nullish coalescing عملگر" `??` را نداشت. و اگر کاربری از یک مرورگر منسوخ‌شده استفاده کند، ممکن است کدی مانند `height = height ?? 100` را متوجه نشود.
 
