@@ -23,7 +23,7 @@ function showMessage() {
 کلمه‌ی کلیدی `function` اول می‌آید، سپس *اسم تابع* و سپس لیستی از *پارامترها* داخل پرانتز (با کاما جدا می‌شوند، در مثال بالا داخل پرانتزها خالی‌ست) و در نهایت کد تابع، با نام "بدنه‌ی تابع"، که توسط دو براکت محصور شده است.
 
 ```js
-function name(parameters) {
+function name(parameter1, parameter2, ... parameterN) {
   ...body...
 }
 ```
@@ -137,25 +137,22 @@ alert( userName ); // *!*John*/!*, unchanged, the function did not access the ou
 
 ## پارامترها
 
-ما می‌توانیم اطلاعات دلخواهی را به توابع با کمک پارامترها پاس بدهیم. (همچنین به آنها *آرگومان‌های تابع* گفته می‌شود.)
+ما می‌توانیم اطلاعات دلخواهی را به توابع با کمک پارامترها پاس بدهیم.
 
 در مثال زیر، تابع دو پارامتر دارد: `from` و `text`.
 
 ```js run
-function showMessage(*!*from, text*/!*) { // arguments: from, text
+function showMessage(*!*from, text*/!*) { // parameters: from, text
   alert(from + ': ' + text);
 }
 
-*!*
-showMessage('Ann', 'Hello!'); // Ann: Hello! (*)
-showMessage('Ann', "What's up?"); // Ann: What's up? (**)
-*/!*
+*!*showMessage('Ann', 'Hello!');*/!* // Ann: Hello! (*)
+*!*showMessage('Ann', "What's up?");*/!* // Ann: What's up? (**)
 ```
 
 وقتی تابع در خطوط `(*)` و `(**)` صدا زده می‌شود، مقادیر داده شده در متغیرهای محلی `from` و `text` کپی می‌شوند. سپس، تابع از آنها استفاده می‌کند.
 
 مثالی دیگر: یک متغیر `from` داریم و به تابع پاس می‌دهیم. توجه کنید: تابع، `from` را تغییر می‌دهد، اما تغییر در بیرون دیده نمی‌شود، چراکه تابع همیشه یک کپی از مقدار آن را می‌گیرد:
-
 
 ```js run
 function showMessage(from, text) {
@@ -174,6 +171,18 @@ showMessage(from, "Hello"); // *Ann*: Hello
 // the value of "from" is the same, the function modified a local copy
 alert( from ); // Ann
 ```
+
+وقتی یک مقدار به عنوان یک پارامتر تابع پاس داده می‌شود، به آن *آرگومان* نیز می‌گویند.
+
+به عبارتی دیگر، بگذارید این مقررات را تعیین کنیم:
+
+- یک پارامتر یک متغیر لیست شده درون پرانتز‌های تعریف تابع (در زمان تعریف تابع) است.
+- یک آرگومان مقداری‌ست که به تابع موقع صدازدن آن پاس داده شده است.
+
+ما توابع را با پارامترهای‌شان تعریف می‌کنیم، و سپس آن‌ها را با آرگومان‌هایشان صدا می‌زنیم.
+
+در مثال بالا، می‌توانید بگویید: «تابع ‍`sayMessage` با دو پارامتر تعریف شده، پس با دو آرگومان صدا زده می‌شود: `from` و `Hello`».
+
 
 ## مقادیر پیش‌فرض
 
@@ -212,6 +221,8 @@ function showMessage(from, text = anotherFunction()) {
 در جاوااسکریپت، یک پارامتر پیش‌فرض هربار که تابع بدون پارامتر مریوطه صدا زده بشود، ارزیابی می‌شود.
 
 در مثال بالا، `anotherFunction()` هربار که `showMessage()` بدون پارامتر `text` صدا زده بشود، فراخوانی می‌شود.
+
+از سوی دیگر، این به طور مستقل فراخوانی می‌شود وقتی `text` وجود نداشته باشد.
 ```
 
 ### پارامترهای پیش‌فرض جایگزین
@@ -222,8 +233,10 @@ function showMessage(from, text = anotherFunction()) {
 
 ```js run
 function showMessage(text) {
+  // ...
+
 *!*
-  if (text === undefined) {
+  if (text === undefined) { // if the parameter is missing
     text = 'empty message';
   }
 */!*
@@ -237,8 +250,8 @@ showMessage(); // empty message
 ...یا می‌توانستیم از عملگر `||` استفاده کنیم:
 
 ```js
-// if text parameter is omitted or "" is passed, set it to 'empty'
 function showMessage(text) {
+  // if text is undefined or otherwise falsy, set it to 'empty'
   text = text || 'empty';
   ...
 }
@@ -247,8 +260,8 @@ function showMessage(text) {
 موتورهای جاوااسکریپت مدرن از [عملگر nullish coalescing](info:nullish-coalescing-operator) `??` پشتیبانی می‌کنند، این عملگر زمانی که مقدارهای falsy مثل `0` معمولی فرض می‌شوند، بهتر است:
 
 ```js run
-// if there's no "count" parameter, show "unknown"
 function showCount(count) {
+  // if count is undefined or null, show "unknown"
   alert(count ?? "unknown");
 }
 
