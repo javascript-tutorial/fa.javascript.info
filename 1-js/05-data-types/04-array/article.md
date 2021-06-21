@@ -235,45 +235,45 @@ fruits.age = 25; // ساخت یک ویژگی با یک اسم دلخواه
 
 لطفا به آرایه‌ها به عنوان یک ساختار خاص برای کارکردن با *داده مرتب شده* نگاه کنید. آنها متدهای خاصی را برای این موضوع فراهم می‌کنند. آرایه‌ها با حساسیت به داخل موتورهای جاوااسکریپت برای کارکردن با داده مرتب شده‌ی متوالی راه یافته‌اند، لطفا از آنها در همین راه استفاده کنید. اگر به کلیدهای دلخواه نیاز دارید، به احتمال زیاد شما در واقع به یک شیء معمولی `{}` احتیاج دارید.
 
-## Performance
+## عملکرد
 
-Methods `push/pop` run fast, while `shift/unshift` are slow.
+متدهای `push/pop` سربع اجرا می‌شوند، در حالی که `shift/unshift` کند هستند.
 
 ![](array-speed.svg)
 
-Why is it faster to work with the end of an array than with its beginning? Let's see what happens during the execution:
+چرا کارکردن با انتهای آرایه از آغاز آن سریع‌تر است؟ بیایید ببینیم در طی اجراشدن چه اتفاقی می‌افتد:
 
 ```js
-fruits.shift(); // take 1 element from the start
+fruits.shift(); // یک المان را از آغاز از بین ببر
 ```
 
-It's not enough to take and remove the element with the number `0`. Other elements need to be renumbered as well.
+اینکه المان با عدد `0` را بگیریم و ازبین ببریم کافی نیست. بقیه المان‌ها هم نیاز دارند که دوباره شماره گذاری شوند.
 
-The `shift` operation must do 3 things:
+عملیات `shift` باید 3 کار انجام دهد:
 
-1. Remove the element with the index `0`.
-2. Move all elements to the left, renumber them from the index `1` to `0`, from `2` to `1` and so on.
-3. Update the `length` property.
+1. المان دارای ایندکس `0` را ازبین ببرد.
+2. تمام المان‌ها را به سمت چپ حرکت دهد، آنها را از ایندکس `1` به `0`، از `2` به `1` و غیره دوباره شماره گذاری کند.
+3. ویژگی `length` را بروز کند.
 
 ![](array-shift.svg)
 
-**The more elements in the array, the more time to move them, more in-memory operations.**
+**هر چقدر المان‌های بیشتری داخل آرایه باشند، زمان بیشتری برای حرکت آنها نیاز است و عملیات درون حافظه هم بیشتر می‌شود.**
 
-The similar thing happens with `unshift`: to add an element to the beginning of the array, we need first to move existing elements to the right, increasing their indexes.
+روند مشابهی برای `unshift` اتفاق می‌افتد: برای اضافه کردن یک المان به آغاز آرایه، ما باید اول المان‌های موجود را به سمت راست حرکت دهیم و ایندکس آنها را افزایش دهیم.
 
-And what's with `push/pop`? They do not need to move anything. To extract an element from the end, the `pop` method cleans the index and shortens `length`.
+درباره `push/pop` چطور؟ آنها نیازی به حرکت دادن چیزی ندارند. برای استخراج یک المان از انتهای آرایه، متد `pop` ایندکس را پاک می‌کند و `length` را کوتاه می‌کند.
 
-The actions for the `pop` operation:
+اقدامات برای عملیات `pop`:
 
 ```js
-fruits.pop(); // take 1 element from the end
+fruits.pop(); // یک المان را از انتها ازبین ببر
 ```
 
 ![](array-pop.svg)
 
-**The `pop` method does not need to move anything, because other elements keep their indexes. That's why it's blazingly fast.**
+**متد `pop` نیازی به حرکت دادن چیزی ندارد، چون المان‌های دیگر ایندکس‌های خود را نگه می‌دارند. به همین دلیل این متد بسیار بسیار سریع است.**
 
-The similar thing with the `push` method.
+روند مشابهی هم برای متد `push` اتفاق می‌افتد.
 
 ## Loops
 
