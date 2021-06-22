@@ -275,9 +275,9 @@ fruits.pop(); // یک المان را از انتها ازبین ببر
 
 روند مشابهی هم برای متد `push` اتفاق می‌افتد.
 
-## Loops
+## حلقه‌ها
 
-One of the oldest ways to cycle array items is the `for` loop over indexes:
+یکی از قدیمی‌ترین راه‌ها برای چرخش بین المان‌های آرایه استفاده از حلقه `for` برای ایندکس‌ها است:
 
 ```js run
 let arr = ["Apple", "Orange", "Pear"];
@@ -289,20 +289,20 @@ for (let i = 0; i < arr.length; i++) {
 }
 ```
 
-But for arrays there is another form of loop, `for..of`:
+اما برای آرایه‌ها شکل دیگری از حلقه وجود دارد، `for..of`:
 
 ```js run
 let fruits = ["Apple", "Orange", "Plum"];
 
-// iterates over array elements
+// حلقه‌زدن بین المان‌ها آرایه
 for (let fruit of fruits) {
   alert( fruit );
 }
 ```
 
-The `for..of` doesn't give access to the number of the current element, just its value, but in most cases that's enough. And it's shorter.
+حلقه `for..of` به عدد المان کنونی دسترسی نمی‌دهد، فقط مقدار آن، اما در بیشتر موارد همین کافی است. و کوتاه‌تر هم است.
 
-Technically, because arrays are objects, it is also possible to use `for..in`:
+از لحاظ فنی، به دلیل اینکه آرایه‌ها شیء هستند، استفاده از `for..in` هم ممکن است:
 
 ```js run
 let arr = ["Apple", "Orange", "Pear"];
@@ -314,15 +314,15 @@ for (let key in arr) {
 }
 ```
 
-But that's actually a bad idea. There are potential problems with it:
+اما در واقع این ایده مناسب نیست. مشکلاتی ممکن است همراه با آن رخ دهد:
 
-1. The loop `for..in` iterates over *all properties*, not only the numeric ones.
+1. حلقه `for..in` بین *تمام ویژگی‌ها* حلقه می‌زند، نه فقط ویژگی‌های عددی.
 
-    There are so-called "array-like" objects in the browser and in other environments, that *look like arrays*. That is, they have `length` and indexes properties, but they may also have other non-numeric properties and methods, which we usually don't need. The `for..in` loop will list them though. So if we need to work with array-like objects, then these "extra" properties can become a problem.
+    شیءهایی «آرایه مانند» در مرورگر و در دیگر محیط‌ها وجود دارند، که *مانند آرایه به نظر می‌رسند*. یعنی اینکه آنها دارای `length` و ویژگی‌های ایندکسی هستند، اما ممکن است ویژگی‌ها و متدهای غیر عددی دیگری هم داشته باشند، که ما معمولا نیازی به آنها نداریم. حلقه `for..in` آنها را لیست می‌کند. پس اگر ما نیاز به کارکردن با شیءهای آرایه مانند داشته باشیم، ویژگی‌های اضافی ممکن است تبدیل به مشکل شوند.
 
-2. The `for..in` loop is optimized for generic objects, not arrays, and thus is 10-100 times slower. Of course, it's still very fast. The speedup may only matter in bottlenecks. But still we should be aware of the difference.
+2. حلقه `for..in` برای شیءهای معمولی بهینه‌سازی شده است، نه آرایه‌ها، و به همین دلیل 10 تا 100 برابر کندتر است. قطعا هنوز خیلی سریع است. پر سرعت بودن ممکن است فقط در تنگناها مهم باشد. اما با این حال باید از تفاوت آنها مطلع باشیم.
 
-Generally, we shouldn't use `for..in` for arrays.
+به طور کلی ما نباید از `for..in` برای آرایه‌ها استفاده کنیم.
 
 
 ## A word about "length"
