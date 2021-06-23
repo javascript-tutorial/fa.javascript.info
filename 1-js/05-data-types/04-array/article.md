@@ -325,11 +325,11 @@ for (let key in arr) {
 به طور کلی ما نباید از `for..in` برای آرایه‌ها استفاده کنیم.
 
 
-## A word about "length"
+## سخنی درباره "length"
 
-The `length` property automatically updates when we modify the array. To be precise, it is actually not the count of values in the array, but the greatest numeric index plus one.
+ویژگی `length` زمانی که ما تغییری در آرایه ایجاد می‌کنیم، به صورت خودکار بروز می‌شود. اگر بخواهیم دقیق باشیم، در واقع این ویژگی برابر با تعداد مقدارها در آرایه نیست، بلکه برابر با بزرگ‌ترین ایندکس عددی به علاوه یک است.
 
-For instance, a single element with a large index gives a big length:
+برای مثال، یک المان با ایندکس بزرگ مسبب ایجاد یک length بزرگ می‌شود:
 
 ```js run
 let fruits = [];
@@ -338,48 +338,48 @@ fruits[123] = "Apple";
 alert( fruits.length ); // 124
 ```
 
-Note that we usually don't use arrays like that.
+توجه داشته باشید که ما معمولا از آرایه‌ها به این صورت استفاده نمی‌کنیم.
 
-Another interesting thing about the `length` property is that it's writable.
+یک چیز جالب دیگر درباره ویژگی `length` این است که قابل نوشتن است.
 
-If we increase it manually, nothing interesting happens. But if we decrease it, the array is truncated. The process is irreversible, here's the example:
+اگر آن را به طور دستی افزایش دهیم، چیز جالبی اتفاق نمی‌افتد. اما اگر آن را کم کنیم، آرایه بریده می‌شود. این فرایند قابل بازگشت نیست، برای مثال:
 
 ```js run
 let arr = [1, 2, 3, 4, 5];
 
-arr.length = 2; // truncate to 2 elements
+arr.length = 2; // تا 2 المان بریده شد
 alert( arr ); // [1, 2]
 
-arr.length = 5; // return length back
-alert( arr[3] ); // undefined: the values do not return
+arr.length = 5; // را برگرداندیم length مقدار
+alert( arr[3] ); // undefined :مقدارها برنمی‌گردند
 ```
 
-So, the simplest way to clear the array is: `arr.length = 0;`.
+بنابراین، ساده‌ترین راه برای پاک کردن آرایه `arr.length = 0` است.
 
 
-## new Array() [#new-array]
+## سازنده new Array() [#new-array]
 
-There is one more syntax to create an array:
+یک سینتکس دیگر برای ساخت آرایه وجود دارد:
 
 ```js
 let arr = *!*new Array*/!*("Apple", "Pear", "etc");
 ```
 
-It's rarely used, because square brackets `[]` are shorter. Also there's a tricky feature with it.
+این سینتکس به ندرت استفاده می‌شود چون استفاده از براکت‌ها کوتاه‌تر است. همچنین یک خاصیت فریبنده همراه آن وجود دارد.
 
-If `new Array` is called with a single argument which is a number, then it creates an array *without items, but with the given length*.
+اگر `new Array` همراه با یک آرگومان که عدد است صدا زده شود، سپس یک آرایه *بدون المان، اما با طول داده شده* ساخته می‌شود.
 
-Let's see how one can shoot themself in the foot:
+بیایید ببینیم چگونه یک شخص ناخواسته شرایط را برای خود بدتر می‌کند:
 
 ```js run
-let arr = new Array(2); // will it create an array of [2] ?
+let arr = new Array(2); آیا یک آرایه با 2 المان ساخته می‌شود؟
 
-alert( arr[0] ); // undefined! no elements.
+alert( arr[0] ); // undefined !المانی وجود ندارد
 
 alert( arr.length ); // length 2
 ```
 
-To avoid such surprises, we usually use square brackets, unless we really know what we're doing.
+برای اینکه از چنین سوپرایزهایی جلوگیری کنیم، باید از براکت‌ها استفاده کنیم، مگر اینکه واقعا بدانیم در حال انجام چه کاری هستیم.
 
 ## Multidimensional arrays
 
