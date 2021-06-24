@@ -381,9 +381,9 @@ alert( arr.length ); // length 2
 
 برای اینکه از چنین سوپرایزهایی جلوگیری کنیم، باید از براکت‌ها استفاده کنیم، مگر اینکه واقعا بدانیم در حال انجام چه کاری هستیم.
 
-## Multidimensional arrays
+## آرایه‌های چند بعدی
 
-Arrays can have items that are also arrays. We can use it for multidimensional arrays, for example to store matrices:
+آرایه‌ها می‌توانند المان‌هایی داشته باشند که خودشان هم آرایه هستند. ما می‌توانیم از آن برای آرایه‌های چند بعدی استفاده کنیم، برای مثال ذخیره کردن ماتریس‌ها:
 
 ```js run
 let matrix = [
@@ -392,14 +392,14 @@ let matrix = [
   [7, 8, 9]
 ];
 
-alert( matrix[1][1] ); // 5, the central element
+alert( matrix[1][1] ); // 5 ،المان مرکزی
 ```
 
-## toString
+## متد toString
 
-Arrays have their own implementation of `toString` method that returns a comma-separated list of elements.
+آرایه‌ها پیاده‌سازی خود را از متد `toString` دارند که یک لیستی از المان‌ها که توسط کاما جدا شده‌اند را برمی‌گرداند.
 
-For instance:
+برای مثال:
 
 
 ```js run
@@ -409,7 +409,7 @@ alert( arr ); // 1,2,3
 alert( String(arr) === '1,2,3' ); // true
 ```
 
-Also, let's try this:
+بیایید این را هم امتحان کنیم:
 
 ```js run
 alert( [] + 1 ); // "1"
@@ -417,9 +417,9 @@ alert( [1] + 1 ); // "11"
 alert( [1,2] + 1 ); // "1,21"
 ```
 
-Arrays do not have `Symbol.toPrimitive`, neither a viable `valueOf`, they implement only `toString` conversion, so here `[]` becomes an empty string, `[1]` becomes `"1"` and `[1,2]` becomes `"1,2"`.
+آرایه‌ها نه `Symbol.toPrimitive` دارند و نه یک `valueOf` مناسب، آنها فقط تبدیل `toString` را پیاده‌سازی می‌کنند، پس اینجا `[]` به یک رشته خالی تبدیل می‌شود، `[1]` به `"1"` تبدیل می‌شود و `[1,2]` به `"1,2"` تبدیل می‌شود.
 
-When the binary plus `"+"` operator adds something to a string, it converts it to a string as well, so the next step looks like this:
+زمانی که عملگر مثبت دوگانه `"+"` چیزی را به یک رشته اضافه می‌کند، آن را هم به یک رشته تبدیل می‌کند، پس مرحله بعد اینگونه به نظر می‌رسد:
 
 ```js run
 alert( "" + 1 ); // "1"
@@ -427,52 +427,52 @@ alert( "1" + 1 ); // "11"
 alert( "1,2" + 1 ); // "1,21"
 ```
 
-## Don't compare arrays with ==
+## آرایه‌ها را با استفاده از == مقایسه نکنید
 
-Arrays in JavaScript, unlike some other programming languages, shouldn't be compared with operator `==`.
+آرایه‌ها در جاوااسکریپت، بر خلاف زبان‌های برنامه‌نویسی دیگر، نباید با عملگر `==` مقایسه شوند.
 
-This operator has no special treatment for arrays, it works with them as with any objects.
+این عملگر نحوه برخورد خاصی برای آرایه‌ها ندارد و با آنها مانند شیءها رفتار می‌کند.
 
-Let's recall the rules:
+بیایید قوانین را یادآوری کنیم:
 
-- Two objects are equal `==` only if they're references to the same object.
-- If one of the arguments of `==` is an object, and the other one is a primitive, then the object gets converted to primitive, as explained in the chapter <info:object-toprimitive>.
-- ...With an exception of `null` and `undefined` that equal `==` each other and nothing else.
+- دو شیء با `==` فقط زمانی برابر هستند که مرجع آنها به یک شیء باشد.
+- اگر یکی از آرگومان‌های `==` شیء باشد و دیگری یک مقدار اصلی (primitive) باشد، سپس شیء به مقدار اصلی تبدیل می‌شود، همانطور که در فصل <info:object-toprimitive> توضیح داده شد.
+- ...به استثنای `null` و `undefined` که با `==` برابر هستند اما با چیز دیگری برابر نیستند.
 
-The strict comparison `===` is even simpler, as it doesn't convert types. 
+مقایسه سخت‌گیرانه `===` حتی ساده‌تر است چون نوع مقدارها را تبدیل نمی‌کند.
 
-So, if we compare arrays with `==`, they are never the same, unless we compare two variables that reference exactly the same array.
+پس اگر ما آرایه‌ها را با `==` مقایسه کنیم، آنها هیچ وقت برابر نیستند، مگر اینکه دو متغیر را که به یک آرایه رجوع می‌کنند را مقایسه کنیم.
 
-For example:
+برای مثال:
 ```js run
 alert( [] == [] ); // false
 alert( [0] == [0] ); // false
 ```
 
-These arrays are technically different objects. So they aren't equal. The `==` operator doesn't do item-by-item comparison.
+این آرایه‌ها به طور فنی شیءهای متفاوت هستند. پس  آنها برابر نیستند. عملگر `==` المان به المان مقایسه نمی‌کند.
 
-Comparison with primitives may give seemingly strange results as well:
+مقایسه با مقدارهای اصلی هم ظاهرا می‌تواند نتایج عجیبی بدهد:
 
 ```js run
 alert( 0 == [] ); // true
 
 alert('0' == [] ); // false
 ```
+ 
+اینجا در هر دو مورد، ما یک مقدار اصلی را با یک شیء آرایه‌ای مقایسه می‌کنیم. پس آرایه `[]` برای انجام مقایسه به مقدار اصلی و سپس به یک رشته خالی `''` تبدیل می‌شود.
 
-Here, in both cases, we compare a primitive with an array object. So the array `[]` gets converted to primitive for the purpose of comparison and becomes an empty string `''`. 
-
-Then the comparison process goes on with the primitives, as described in the chapter <info:type-conversions>:
+سپس فرایند مقایسه با مقدارهای اصلی پیش می‌رود، همانطور که در فصل <info:type-conversions> توضیح داده شد:
 
 ```js run
-// after [] was converted to ''
-alert( 0 == '' ); // true, as '' becomes converted to number 0
+// بعد از اینکه [] به '' تبدیل شد
+alert( 0 == '' ); // true ،چون '' به عدد 0 تبدیل شد
 
-alert('0' == '' ); // false, no type conversion, different strings
+alert('0' == '' ); // false ،هیچ تبدیلی رخ نداد، رشته‌ها متفاوت هستند
 ```
 
-So, how to compare arrays?
+پس، چگونه آرایه‌ها را مقایسه کنیم؟
 
-That's simple: don't use the `==` operator. Instead, compare them item-by-item in a loop or using iteration methods explained in the next chapter.
+کاری ندارد: از عملگر `==` استفاده نکنید. به جای آن، آنها را در یک حلقه یا با استفاده از متدهای حلقه‌زدن که در فصل بعد توضیح داده شده‌اند، المان به المان مقایسه کنید.
 
 ## Summary
 
