@@ -2,7 +2,6 @@
 
 ما می‌توانیم تمام جمع‌های ممکن را حساب کنیم.
 
-The simplest way is to take every element and calculate sums of all subarrays starting from it.
 ساده‌ترین راه حل این است که تمام المان‌ها را دریافت کنیم و از آن المان به بعد، حاصل جمع تمامی زیرآرایه‌ها را حساب کنیم.
 
 برای مثال، برای `[11 ,9- ,3 ,2 ,1-]`:
