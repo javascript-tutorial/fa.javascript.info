@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# Calling in an array context
+# صدازدن در محتوای یک آرایه
 
-What is the result? Why?
+نتیجه چه خواهد بود؟ چرا؟
 
 ```js
 let arr = ["a", "b"];
