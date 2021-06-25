@@ -1,43 +1,44 @@
-# The slow solution
+# راه حل کند
 
-We can calculate all possible subsums.
+ما می‌توانیم تمام جمع‌های ممکن را حساب کنیم.
 
 The simplest way is to take every element and calculate sums of all subarrays starting from it.
+ساده‌ترین راه حل این است که تمام المان‌ها را دریافت کنیم و از آن المان به بعد، حاصل جمع تمامی زیرآرایه‌ها را حساب کنیم.
 
-For instance, for `[-1, 2, 3, -9, 11]`:
+برای مثال، برای `[11 ,9- ,3 ,2 ,1-]`:
 
 ```js no-beautify
-// Starting from -1:
+// -1 شروع از:
 -1
 -1 + 2
 -1 + 2 + 3
 -1 + 2 + 3 + (-9)
 -1 + 2 + 3 + (-9) + 11
 
-// Starting from 2:
+// 2 شروع از:
 2
 2 + 3
 2 + 3 + (-9)
 2 + 3 + (-9) + 11
 
-// Starting from 3:
+// 3 شروع از:
 3
 3 + (-9)
 3 + (-9) + 11
 
-// Starting from -9
+// -9 شروع از:
 -9
 -9 + 11
 
-// Starting from -11
+// -11 شروع از:
 -11
 ```
 
-The code is actually a nested loop: the external loop over array elements, and the internal counts subsums starting with the current element.
+در واقع کد یک حلقه تو در تو است: حلقه بیرونی در المان‌های آرایه حلقه می‌زند، و حلقه داخلی تمام جمع‌ها را حساب می‌کند که از المان کنونی شروع می‌شوند.
 
 ```js run
 function getMaxSubSum(arr) {
-  let maxSum = 0; // if we take no elements, zero will be returned
+  let maxSum = 0; // اگر هیچ المانی نگیریم، صفر برگردانده می‌شود
 
   for (let i = 0; i < arr.length; i++) {
     let sumFixedStart = 0;
@@ -57,25 +58,25 @@ alert( getMaxSubSum([1, 2, 3]) ); // 6
 alert( getMaxSubSum([100, -9, 2, -3, 5]) ); // 100
 ```
 
-The solution has a time complexity of [O(n<sup>2</sup>)](https://en.wikipedia.org/wiki/Big_O_notation). In other words, if we increase the array size 2 times, the algorithm will work 4 times longer.
+این راه حل یک پیچیدگی زمانی [O(n<sup>2</sup>)](https://fa.wikipedia.org/wiki/نماد_O_بزرگ) دارد، به عبارتی دیگر، اگر ما اندازه آرایه را دو برابر کنیم، الگوریتم 4 برابر بیشتر زمان می‌برد.
 
-For big arrays (1000, 10000 or more items) such algorithms can lead to a serious sluggishness.
+برای آرایه‌های بزرگ (1000، 10000 یا المان‌های بیشتر) چنین الگوریتمی می‌تواند باعث سستی جدی شود.
 
-# Fast solution
+# راه حل سریع
 
-Let's walk the array and keep the current partial sum of elements in the variable `s`. If `s` becomes negative at some point, then assign `s=0`. The maximum of all such `s` will be the answer.
+بیایید در آرایه پیش برویم و حاصل جمع کنونی المان‌ها را در متغیر `s` نگه داریم. اگر `s` در جایی منفی شود، سپس `s=0` را مقداردهی می‌کنیم. بیشترین مقدار چنین `s`هایی جواب خواهد بود.
 
-If the description is too vague, please see the code, it's short enough:
+اگر توضیحات خیلی مبهم است، لطفا به کد نگاه کنید، به اندازه کافی کوتاه است:
 
 ```js run
 function getMaxSubSum(arr) {
   let maxSum = 0;
   let partialSum = 0;
 
-  for (let item of arr) { // for each item of arr
-    partialSum += item; // add it to partialSum
-    maxSum = Math.max(maxSum, partialSum); // remember the maximum
-    if (partialSum < 0) partialSum = 0; // zero if negative
+  for (let item of arr) { // برای هر المان آرایه
+    partialSum += item; // اضافه کن partialSum آن را به
+    maxSum = Math.max(maxSum, partialSum); // بیشترین مقدار را یه یاد بسپر
+    if (partialSum < 0) partialSum = 0; // اگر منفی بود برابر با منفی شود
   }
 
   return maxSum;
@@ -89,6 +90,6 @@ alert( getMaxSubSum([1, 2, 3]) ); // 6
 alert( getMaxSubSum([-1, -2, -3]) ); // 0
 ```
 
-The algorithm requires exactly 1 array pass, so the time complexity is O(n).
+الگوریتم دقیقا به 1 آرایه نیاز دارد، پس پیچیدگی زمان O(n) است.
 
-You can find more detail information about the algorithm here: [Maximum subarray problem](http://en.wikipedia.org/wiki/Maximum_subarray_problem). If it's still not obvious why that works, then please trace the algorithm on the examples above, see how it works, that's better than any words.
+شما می‌توانید اطلاعات بیشتری درباره الگوریتم را اینجا پیدا کنید: [مسئله زیرآرایه بیشینه](http://en.wikipedia.org/wiki/Maximum_subarray_problem). اگر هنوز هم برای شما مشخص نیست که چرا کار می‌کند، لطفا الگوریتم را در مثال بالا دنبال کنید، ببینید چگونه کار می‌کند، این کار بهتر از حرفی است.
