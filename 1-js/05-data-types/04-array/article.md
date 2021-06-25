@@ -474,39 +474,39 @@ alert('0' == '' ); // false ،هیچ تبدیلی رخ نداد، رشته‌ه�
 
 کاری ندارد: از عملگر `==` استفاده نکنید. به جای آن، آنها را در یک حلقه یا با استفاده از متدهای حلقه‌زدن که در فصل بعد توضیح داده شده‌اند، المان به المان مقایسه کنید.
 
-## Summary
+## خلاصه
 
-Array is a special kind of object, suited to storing and managing ordered data items.
+آرایه یک نوع خاصی از شیء است که برای ذخیره و مدیریت داده‌های مرتب مناسب است.
 
-- The declaration:
+- نحوه تعریف کردن:
 
     ```js
-    // square brackets (usual)
+    // براکت‌ها (معمولا)
     let arr = [item1, item2...];
 
-    // new Array (exceptionally rare)
+    // new Array (به ندرت)
     let arr = new Array(item1, item2...);
     ```
 
-    The call to `new Array(number)` creates an array with the given length, but without elements.
+    صدا زدن `new Array(number)` یک آرایه با طول داده شده می‌سازد، اما بدون المان.
 
-- The `length` property is the array length or, to be precise, its last numeric index plus one. It is auto-adjusted by array methods.
-- If we shorten `length` manually, the array is truncated.
+- ویژگی `length` طول آرایه است، یا اگر بخواهیم دقیق باشیم، برابر با آخرین ایندکس به علاوه یک است. این ویژگی به طور خودکار توسط متدهای آرایه تنظیم می‌شود.
+- اگر ما به طور دستی `length` را کوتاه کنیم، آرایه بریده می‌شود.
 
-We can use an array as a deque with the following operations:
+ما می‌توانیم از یک آرایه با عملیات‌های زیر به عنوان یک صف دو طرفه استفاده کنیم:
 
-- `push(...items)` adds `items` to the end.
-- `pop()` removes the element from the end and returns it.
-- `shift()` removes the element from the beginning and returns it.
-- `unshift(...items)` adds `items` to the beginning.
+- `push(...items)` اضافه می‌کند `items` را به انتهای آرایه.
+- `pop()` المان را از آخر حذف می‌کند و آن را برمی‌گرداند.
+- `shift()` - المان را از آغاز حذف می‌کند و آن را برمی‌گرداند.
+- `unshift(...items)` اضافه می‌کند `items` را به آغاز آرایه.
 
-To loop over the elements of the array:
-  - `for (let i=0; i<arr.length; i++)` -- works fastest, old-browser-compatible.
-  - `for (let item of arr)` -- the modern syntax for items only,
-  - `for (let i in arr)` -- never use.
+برای حلقه‌زدن در المان‌های آرایه:
+  - `for (let i=0; i<arr.length; i++)` -- سریع کار می‌کند و با مرورگرهای قدیمی سازگار است،
+  - `for (let item of arr)` -- سینتکسی مدرن که فقط برای المان‌ها استفاده می‌شود،
+  - `for (let i in arr)` -- هیچ وقت از این استفاده نکنید.
 
-To compare arrays, don't use the `==` operator (as well as `>`, `<` and others), as they have no special treatment for arrays. They handle them as any objects, and it's not what we usually want.
+برای مقایسه آرایه‌ها، از عملگر `==` (همینطور `>`، `<` و بقیه) استفاده نکنید، چون آنها با آرایه‌ها به طور خاص رفتار نمی‌کنند. با آرایه‌ها به عنوان شیء کار می‌کنند و این چیزی نیست که ما معمولا می‌خواهیم.
 
-Instead you can use `for..of` loop to compare arrays item-by-item.
+به جای آن، می‌توانیم از حلقه `for..of` برای مقایسه المان به المان آرایه‌ها استفاده کنیم.
 
-We will continue with arrays and study more methods to add, remove, extract elements and sort arrays in the next chapter <info:array-methods>.
+ما آرایه‌ها را ادامه می‌دهیم و در فصل بعدی <info:array-methods> متدهای بیشتری برای اضافه کردن، حذف کردن، استخراج سازی المان‌ها و مرتب کردن آرایه‌ها یاد می‌گیریم
