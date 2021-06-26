@@ -10,7 +10,7 @@ function sumInput() {
 
     let value = prompt("لطفا یک عدد وارد کنید.", 0);
 
-    // آیا باید متوقف کنیم؟
+    // باید لغو کنیم؟
     if (value === "" || value === null || !isFinite(value)) break;
 
     numbers.push(+value);
@@ -25,4 +25,3 @@ function sumInput() {
 
 alert( sumInput() ); 
 ```
-
