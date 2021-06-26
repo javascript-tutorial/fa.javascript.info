@@ -2,18 +2,18 @@ importance: 3
 
 ---
 
-# Is array copied?
+# آیا آرایه کپی شده است؟
 
-What is this code going to show?
+این کد چه چیزی نشان خواهد داد؟
 
 ```js
 let fruits = ["Apples", "Pear", "Orange"];
 
-// push a new value into the "copy"
+// یک مقدار جدید را به «کپی» اضافه کردیم
 let shoppingCart = fruits;
 shoppingCart.push("Banana");
 
-// what's in fruits?
+// چه چیزی وجود دارد؟ fruits در آرایه
 alert( fruits.length ); // ?
 ```
 

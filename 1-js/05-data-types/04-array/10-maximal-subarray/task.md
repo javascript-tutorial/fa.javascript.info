@@ -2,29 +2,29 @@ importance: 2
 
 ---
 
-# A maximal subarray
+# بزرگ‌ترین زیرآرایه
 
-The input is an array of numbers, e.g. `arr = [1, -2, 3, 4, -9, 6]`.
+ورودی یک آرایه از اعداد است، برای مثال `arr = [1, -2, 3, 4, -9, 6]`.
 
-The task is: find the contiguous subarray of `arr` with the maximal sum of items.
+کاری که باید انجام شود: زیرآرایه متوالی از `arr` را پیدا کنید که بیشترین مقدار جمع المان‌ها را دارد.
 
-Write the function `getMaxSubSum(arr)` that will return that sum.
+تابع `getMaxSubSum(arr)` را بنویسید که مقدار جمع را برگرداند.
 
-For instance:
+برای مثال:
 
 ```js
-getMaxSubSum([-1, *!*2, 3*/!*, -9]) == 5 (the sum of highlighted items)
+getMaxSubSum([-1, *!*2, 3*/!*, -9]) == 5 (جمع المان‌های برجسته)
 getMaxSubSum([*!*2, -1, 2, 3*/!*, -9]) == 6
 getMaxSubSum([-1, 2, 3, -9, *!*11*/!*]) == 11
 getMaxSubSum([-2, -1, *!*1, 2*/!*]) == 3
 getMaxSubSum([*!*100*/!*, -9, 2, -3, 5]) == 100
-getMaxSubSum([*!*1, 2, 3*/!*]) == 6 (take all)
+getMaxSubSum([*!*1, 2, 3*/!*]) == 6 (همه را انتخاب می‌کنیم)
 ```
 
-If all items are negative, it means that we take none (the subarray is empty), so the sum is zero:
+اگر تمام المان‌ها منفی باشند، به این معنی است که هیچ کدام را انتخاب نمی‌کنیم (زیرآرایه خالی است)، پس جمع برابر با صفر است:
 
 ```js
 getMaxSubSum([-1, -2, -3]) = 0
 ```
 
-Please try to think of a fast solution: [O(n<sup>2</sup>)](https://en.wikipedia.org/wiki/Big_O_notation) or even O(n) if you can.
+لطفا سعی کنید یک راه حل سریع پیدا کنید: [O(n<sup>2</sup>)](https://fa.wikipedia.org/wiki/نماد_O_بزرگ) یا حتی O(n) اگر می‌توانید.
