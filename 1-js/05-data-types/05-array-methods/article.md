@@ -1,17 +1,17 @@
-# Array methods
+# متدهای آرایه
 
-Arrays provide a lot of methods. To make things easier, in this chapter they are split into groups.
+آرایه‌ها متدهای زیادی را فراهم می‌کنند. برای ساده‌سازی، در این فصل متدها به چند گروه تقسیم شده‌اند.
 
-## Add/remove items
+## اضافه/حذف کردن عضوها
 
-We already know methods that add and remove items from the beginning or the end:
+ما از قبل متدهایی که در آغاز یا انتهای آرایه چیزی را حذف یا اضافه می‌کنند را می‌شناسیم:
 
-- `arr.push(...items)` -- adds items to the end,
-- `arr.pop()` -- extracts an item from the end,
-- `arr.shift()` -- extracts an item from the beginning,
-- `arr.unshift(...items)` -- adds items to the beginning.
+- `arr.push(...items)` -- المان‌ها را به انتها اضافه می‌کند،
+- `arr.pop()` -- یک المان را از انتها خارج می‌کند،
+- `arr.shift()` -- یک المان را از آغاز خارج می‌کند،
+- `arr.unshift(...items)` -- یک المان را به آغاز اضافه می‌کند.
 
-Here are a few others.
+اینجا چند متد دیگر داریم.
 
 ### splice
 
