@@ -13,16 +13,16 @@
 
 اینجا چند متد دیگر داریم.
 
-### splice
+### متد splice
 
-How to delete an element from the array?
+چطور یک المان را از آرایه حذف کنیم؟
 
-The arrays are objects, so we can try to use `delete`:
+آرایه‌ها شیء هستند، پس می‌توانیم از `delete` استفاده کنیم:
 
 ```js run
 let arr = ["I", "go", "home"];
 
-delete arr[1]; // remove "go"
+delete arr[1]; // "go" حذف
 
 alert( arr[1] ); // undefined
 
@@ -30,82 +30,82 @@ alert( arr[1] ); // undefined
 alert( arr.length ); // 3
 ```
 
-The element was removed, but the array still has 3 elements, we can see that `arr.length == 3`.
+المان حذف شد، اما آرایه هنوز هم 3 عضو دارد که می‌توانیم آن را با `arr.length == 3` ببینیم.
 
-That's natural, because `delete obj.key` removes a value by the `key`. It's all it does. Fine for objects. But for arrays we usually want the rest of elements to shift and occupy the freed place. We expect to have a shorter array now.
+این چیز طبیعی است چون `delete obj.key` یک مقدار را با استفاده از `key` حذف می‌کند. به طور کلی کارش همین است. برای شیءها مناسب است. اما برای آرایه‌ها ما معمولا می‌خواهیم که بقیه المان‌ها پخش شوند و فضای آزاد شده را اشغال کنند. توقع داریم که الان آرایه‌ای کوتاه‌تر داشته باشیم.
 
-So, special methods should be used.
+بنابراین متدهای خاص باید استفاده شوند.
 
-The [arr.splice](mdn:js/Array/splice) method is a swiss army knife for arrays. It can do everything: insert, remove and replace elements.
+متد [arr.splice](mdn:js/Array/splice) یک شمشیر ارتشی سوئیسی برای آرایه‌ها است. می‌تواند هر کاری کند: اضافه کند، حذف کند و المان‌ها را جایگزین کند.
 
-The syntax is:
+سینتکس آن اینگونه است:
 
 ```js
 arr.splice(start[, deleteCount, elem1, ..., elemN])
 ```
 
-It modifies `arr` starting from the index `start`: removes `deleteCount` elements and then inserts `elem1, ..., elemN` at their place. Returns the array of removed elements.
+این متد `arr` را از ایندکس `start` تغییر می‌دهد: به تعداد `deleteCount` المان حذف می‌کند و سپس `elem1, ..., elemN` را در مکان خودشان اضافه می‌کند. آرایه‌ای از المان‌های حذف شده را برمی‌گرداند.
 
-This method is easy to grasp by examples.
+این متد را با مثال به راحتی متوجه می‌شوید.
 
-Let's start with the deletion:
+بیایید با حذف کردن شروع کنیم:
 
 ```js run
 let arr = ["I", "study", "JavaScript"];
 
 *!*
-arr.splice(1, 1); // from index 1 remove 1 element
+arr.splice(1, 1); // از ایندکس 1 به تعداد 1 المان حذف کن
 */!*
 
 alert( arr ); // ["I", "JavaScript"]
 ```
 
-Easy, right? Starting from the index `1` it removed `1` element.
+راحت است، نه؟ از ایندکس `1` به تعداد `1` المان حذف کرد.
 
-In the next example we remove 3 elements and replace them with the other two:
+در مثال بعد ما 3 المان را حذف و آنها را با دو المان جایگزین می‌کنیم:
 
 ```js run
 let arr = [*!*"I", "study", "JavaScript",*/!* "right", "now"];
 
-// remove 3 first elements and replace them with another
+// سه المان ابتدایی را حذف کن و آنها را با المان‌های دیگر جایگزین کن
 arr.splice(0, 3, "Let's", "dance");
 
 alert( arr ) // now [*!*"Let's", "dance"*/!*, "right", "now"]
 ```
 
-Here we can see that `splice` returns the array of removed elements:
+اینجا می‌بینیم که `splice` آرایه‌ای از المان‌های حذف شده را برمی‌گرداند:
 
 ```js run
 let arr = [*!*"I", "study",*/!* "JavaScript", "right", "now"];
 
-// remove 2 first elements
+// دو المان اول را حذف کن
 let removed = arr.splice(0, 2);
 
 alert( removed ); // "I", "study" <-- array of removed elements
 ```
 
-The `splice` method is also able to insert the elements without any removals. For that we need to set `deleteCount` to `0`:
+متد `splice` همچنین قادر به اضافه کردن المان بدون هیچ حذفیاتی است. برای این کار باید `deleteCount` را `0` بگذاریم:
 
 ```js run
 let arr = ["I", "study", "JavaScript"];
 
-// from index 2
-// delete 0
-// then insert "complex" and "language"
+// از ایندکس 2
+// به تعداد 0 حذف کن
+// را اضافه کن "language" و "complex" سپس
 arr.splice(2, 0, "complex", "language");
 
 alert( arr ); // "I", "study", "complex", "language", "JavaScript"
 ```
 
-````smart header="Negative indexes allowed"
-Here and in other array methods, negative indexes are allowed. They specify the position from the end of the array, like here:
+````smart header="ایندکس‌های منفی مجاز هستند"
+اینجا و در دیگر متدهای آرایه، ایندکس‌های منفی قابل استفاده هستند. آنها موقعیت را از انتهای آرایه مشخص می‌کنند، مثل اینجا:
 
 ```js run
 let arr = [1, 2, 5];
 
-// from index -1 (one step from the end)
-// delete 0 elements,
-// then insert 3 and 4
+// از ایندکس 1- (یک قدم قبل از انتها)
+// به تعداد 0 المان حذف کن،
+// سپس 3 و 4 را اضافه کن
 arr.splice(-1, 0, 3, 4);
 
 alert( arr ); // 1,2,3,4,5
