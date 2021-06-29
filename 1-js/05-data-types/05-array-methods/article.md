@@ -112,31 +112,31 @@ alert( arr ); // 1,2,3,4,5
 ```
 ````
 
-### slice
+### متد slice
 
-The method [arr.slice](mdn:js/Array/slice) is much simpler than similar-looking `arr.splice`.
+متد [arr.slice](mdn:js/Array/slice) از متد `arr.splice` که از لحاظ ظاهری شبیه به آن است بسیار ساده‌تر است.
 
-The syntax is:
+سینتکس اینگونه است:
 
 ```js
 arr.slice([start], [end])
 ```
 
-It returns a new array copying to it all items from index `start` to `end` (not including `end`). Both `start` and `end` can be negative, in that case position from array end is assumed.
+این متد یک آرایه جدید که تمام المان‌ها را از ایندکس `start` تا `end` (شامل خود `end` نمی‌شود) کپی می‌کند، برمی‌گرداند. `start` و `end` هر دو می‌توانند منفی باشند، که در این صورت موقعیت از انتهای آرایه حساب می‌شود.
 
-It's similar to a string method `str.slice`, but instead of substrings it makes subarrays.
+این متد شبیه متد رشته `str.slice` است، اما به جای زیر رشته، زیر آرایه ایجاد می‌کند.
 
-For instance:
+برای مثال:
 
 ```js run
 let arr = ["t", "e", "s", "t"];
 
-alert( arr.slice(1, 3) ); // e,s (copy from 1 to 3)
+alert( arr.slice(1, 3) ); // e,s (کپی کردن از 1 تا 3)
 
-alert( arr.slice(-2) ); // s,t (copy from -2 till the end)
+alert( arr.slice(-2) ); // s,t (کپی کردن از 2- تا انتها)
 ```
 
-We can also call it without arguments: `arr.slice()` creates a copy of `arr`. That's often used to obtain a copy for further transformations that should not affect the original array.
+همچنین می‌توانیم آن را بدون آرگومان هم صدا بزنیم: `arr.slice()` که یک کپی از `arr` می‌سازد. معمولا از این روش برای ایجاد یک کپی با هدف اینکه تغییرات آینده روی آرایه اصلی تاثیری نگذارد استفاده می‌کنند.
 
 ### concat
 
