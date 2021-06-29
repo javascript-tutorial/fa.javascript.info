@@ -138,38 +138,38 @@ alert( arr.slice(-2) ); // s,t (کپی کردن از 2- تا انتها)
 
 همچنین می‌توانیم آن را بدون آرگومان هم صدا بزنیم: `arr.slice()` که یک کپی از `arr` می‌سازد. معمولا از این روش برای ایجاد یک کپی با هدف اینکه تغییرات آینده روی آرایه اصلی تاثیری نگذارد استفاده می‌کنند.
 
-### concat
+### متد concat
 
-The method [arr.concat](mdn:js/Array/concat) creates a new array that includes values from other arrays and additional items.
+متد [arr.concat](mdn:js/Array/concat) یک آرایه جدید می‌سازد که حاوی مقدارهای آرایه‌های دیگر و المان‌های اضافی است.
 
-The syntax is:
+سینتکس آن اینگونه است:
 
 ```js
 arr.concat(arg1, arg2...)
 ```
 
-It accepts any number of arguments -- either arrays or values.
+این متد به هر تعدادی آرگومان می‌پذیرد -- چه آرایه باشند چه مقدار.
 
-The result is a new array containing items from `arr`, then `arg1`, `arg2` etc.
+نتیجه آن یک آرایه جدید حاوی المان‌های `arr`، سپس `arg1`، `arg2` و غیره.
 
-If an argument `argN` is an array, then all its elements are copied. Otherwise, the argument itself is copied.
+اگر آرگومان `argN` یک آرایه باشد، سپس تمام المان‌های آن کپی می‌شود. در غیر این صورت، خود آرگومان کپی می‌شود.
 
-For instance:
+برای مثال:
 
 ```js run
 let arr = [1, 2];
 
-// create an array from: arr and [3,4]
+// و [3,4] arr :ساخت یک آرایه از
 alert( arr.concat([3, 4]) ); // 1,2,3,4
 
-// create an array from: arr and [3,4] and [5,6]
+// و [3,4] و [5,6] arr :ساخت یک آرایه از
 alert( arr.concat([3, 4], [5, 6]) ); // 1,2,3,4,5,6
 
-// create an array from: arr and [3,4], then add values 5 and 6
+// و [3,4]، سپس اضافه کردن مقدارهای 5 و 6 arr :ساخت یک آرایه از
 alert( arr.concat([3, 4], 5, 6) ); // 1,2,3,4,5,6
 ```
 
-Normally, it only copies elements from arrays. Other objects, even if they look like arrays, are added as a whole:
+به طور معمول، این متد فقط المان‌ها را از آرایه‌ها کپی می‌کند. بقیه شیءها، حتی اگر شبیه آرایه باشند، به طور کلی اضافه می‌شوند:
 
 ```js run
 let arr = [1, 2];
@@ -182,7 +182,7 @@ let arrayLike = {
 alert( arr.concat(arrayLike) ); // 1,2,[object Object]
 ```
 
-...But if an array-like object has a special `Symbol.isConcatSpreadable` property, then it's treated as an array by `concat`: its elements are added instead:
+...اما اگر یک شیء شبیه به آرایه یک ویژگی `Symbol.isConcatSpreadable` داشته باشد، سپس `concat` با آن به عنوان یک آرایه رفتار می‌کند: در عوض المان‌های آن اضافه می‌شوند:
 
 ```js run
 let arr = [1, 2];
