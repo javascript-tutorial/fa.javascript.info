@@ -199,25 +199,25 @@ let arrayLike = {
 alert( arr.concat(arrayLike) ); // 1,2,something,else
 ```
 
-## Iterate: forEach
+## حلقه زدن: forEach
 
-The [arr.forEach](mdn:js/Array/forEach) method allows to run a function for every element of the array.
+متد [arr.forEach](mdn:js/Array/forEach) به ما این امکان را می‌دهد که یک تابع را روی تمام المان‌های آرایه اجرا کنیم.
 
-The syntax:
+سینتکس اینگونه است:
 ```js
 arr.forEach(function(item, index, array) {
-  // ... do something with item
+  // ... با المان کاری انجام دهید
 });
 ```
 
-For instance, this shows each element of the array:
+برای مثال، این کد هر المان آرایه را نشان می‌دهد:
 
 ```js run
-// for each element call alert
+// را صدا بزن alert برای هر المان
 ["Bilbo", "Gandalf", "Nazgul"].forEach(alert);
 ```
 
-And this code is more elaborate about their positions in the target array:
+و این کد درباره موقعیت آنها در آرایه مورد نظر جزئیات بیشتری دارد:
 
 ```js run
 ["Bilbo", "Gandalf", "Nazgul"].forEach((item, index, array) => {
@@ -225,7 +225,7 @@ And this code is more elaborate about their positions in the target array:
 });
 ```
 
-The result of the function (if it returns any) is thrown away and ignored.
+نتیجه تابع (اگر چیزی برگرداند) نادیده گرفته و دور ریخته می‌شود.
 
 
 ## Searching in array
