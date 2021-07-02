@@ -228,19 +228,19 @@ arr.forEach(function(item, index, array) {
 نتیجه تابع (اگر چیزی برگرداند) نادیده گرفته و دور ریخته می‌شود.
 
 
-## Searching in array
+## جستجو در آرایه
 
-Now let's cover methods that search in an array.
+حال بیایید متدهایی را بخوانیم که در آرایه جستجو می‌کنند.
 
-### indexOf/lastIndexOf and includes
+### متدهای indexOf/lastIndexOf and includes
 
-The methods [arr.indexOf](mdn:js/Array/indexOf), [arr.lastIndexOf](mdn:js/Array/lastIndexOf) and [arr.includes](mdn:js/Array/includes) have the same syntax and do essentially the same as their string counterparts, but operate on items instead of characters:
+متدهای [arr.indexOf](mdn:js/Array/indexOf)، [arr.lastIndexOf](mdn:js/Array/lastIndexOf) و [arr.includes](mdn:js/Array/includes) سینتکس مشابه دارند و اساسا همان کار همتایان خود در رشته‌ها را انجام می‌دهند، اما به جای کاراکترها با المان‌ها کار دارند:
 
-- `arr.indexOf(item, from)` -- looks for `item` starting from index `from`, and returns the index where it was found, otherwise `-1`.
-- `arr.lastIndexOf(item, from)` -- same, but looks for from right to left.
-- `arr.includes(item, from)` -- looks for `item` starting from index `from`, returns `true` if found.
+- `arr.indexOf(item, from)` -- با شروع از ایندکس `from` به دنبال `item` می‌گردد و ایندکسی که المان در آن پیدا شد را برمی‌گرداند، در غیر این صورت `1-`.
+- `arr.lastIndexOf(item, from)` -- شبیه متد بالا، اما از راست به چپ جستجو می‌کند.
+- `arr.includes(item, from)` -- با شروع از ایندکس `from` به دنبال `item` می‌گردد، اگر پیدا کند `true` را برمی‌گرداند.
 
-For instance:
+برای مثال:
 
 ```js run
 let arr = [1, 0, false];
@@ -252,16 +252,16 @@ alert( arr.indexOf(null) ); // -1
 alert( arr.includes(1) ); // true
 ```
 
-Note that the methods use `===` comparison. So, if we look for `false`, it finds exactly `false` and not the zero.
+توجه داشته باشید که متدها از مقایسه `===` استفاده می‌کنند. پس اگر ما به دنبال `false` باشیم، متد دقیقا `false` را پیدا می‌کند و نه صفر را.
 
-If we want to check for inclusion, and don't want to know the exact index, then `arr.includes` is preferred.
+اگر ما می‌خواهیم شامل بودن را بررسی کنیم و به دنبال ایندکس دقیق نیستیم، پس `arr.includes` ترجیح داده می‌شود.
 
-Also, a very minor difference of `includes` is that it correctly handles `NaN`, unlike `indexOf/lastIndexOf`:
+همچنین، یک تفاوت بسیار کوچک `includes` این است که این متد به درستی `NaN` را کنترل می‌کند، درست برعکس `indexOf/lastIndexOf`:
 
 ```js run
 const arr = [NaN];
-alert( arr.indexOf(NaN) ); // -1 (should be 0, but === equality doesn't work for NaN)
-alert( arr.includes(NaN) );// true (correct)
+alert( arr.indexOf(NaN) ); // -1 (کار نمی‌کند NaN باید 0 باشد، اما برابری === برای)
+alert( arr.includes(NaN) );// true (درست است)
 ```
 
 ### find and findIndex
