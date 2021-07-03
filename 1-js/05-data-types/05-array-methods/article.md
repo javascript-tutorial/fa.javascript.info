@@ -264,29 +264,29 @@ alert( arr.indexOf(NaN) ); // -1 (کار نمی‌کند NaN باید 0 باشد
 alert( arr.includes(NaN) );// true (درست است)
 ```
 
-### find and findIndex
+### متدهای find and findIndex
 
-Imagine we have an array of objects. How do we find an object with the specific condition?
+تصور کنید که یک آرایه‌ای از شیءها داریم. چگونه باید یک شیء با شرطی مشخص را پیدا کنیم؟
 
-Here the [arr.find(fn)](mdn:js/Array/find) method comes in handy.
+اینجاست که متد [arr.find(fn)](mdn:js/Array/find) بدرد می‌خورد.
 
-The syntax is:
+سینتکس آن اینگونه است:
 ```js
 let result = arr.find(function(item, index, array) {
-  // if true is returned, item is returned and iteration is stopped
-  // for falsy scenario returns undefined
+  // برگردانده شود، المان برگردانده می‌شود و حلقه‌ی تکرار متوقف می‌شود true اگر مقدار
+  // برگردانده می‌شود undefined مقدار falsy برای سناریوهای
 });
 ```
 
-The function is called for elements of the array, one after another:
+تابع برای المان‌های آرایه، یکی پس از دیگری، صدا زده می‌شود:
 
-- `item` is the element.
-- `index` is its index.
-- `array` is the array itself.
+- `item` المان است.
+- `index` ایندکس آن است.
+- `array` خود آرایه است.
 
-If it returns `true`, the search is stopped, the `item` is returned. If nothing found, `undefined` is returned.
+اگر `true` برگرداند، جستجو متوقف می‎شود، `item` برگردانده می‌شود. اگر چیزی پیدا نشود، `undefined` برگردانده می‌شود.
 
-For example, we have an array of users, each with the fields `id` and `name`. Let's find the one with `id == 1`:
+برای مثال، ما یک آرایه‌ای از کاربران داریم، که هر کدام دارای `id` و `name` هستند. بیایید کاربری که `id == 1` داشته باشد را پیدا کنیم:
 
 ```js run
 let users = [
@@ -300,11 +300,11 @@ let user = users.find(item => item.id == 1);
 alert(user.name); // John
 ```
 
-In real life arrays of objects is a common thing, so the `find` method is very useful.
+در واقعیت، آرایه‌هایی از شیءها چیز متداولی است، پس متد `find` بسیار مفید است.
 
-Note that in the example we provide to `find` the function `item => item.id == 1` with one argument. That's typical, other arguments of this function are rarely used.
+توجه داشته باشید که در مثال بالا ما تابع `item => item.id == 1` را همراه با یک آرگومان برای `find` در نظر گرفتیم. این چیز معمولی است، بقیه آرگومان‌های این تابع به ندرت استفاده می‌شوند.
 
-The [arr.findIndex](mdn:js/Array/findIndex) method is essentially the same, but it returns the index where the element was found instead of the element itself and `-1` is returned when nothing is found.
+متد [arr.findIndex](mdn:js/Array/findIndex) اساسا یکسان است، اما به جای خود المان ایندکسی که المان در آن پیدا شد را برمی‌گرداند و اگر چیزی پیدا نشد `1-` را برمی‌گرداند.
 
 ### filter
 
