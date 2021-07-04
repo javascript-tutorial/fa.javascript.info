@@ -306,22 +306,22 @@ alert(user.name); // John
 
 متد [arr.findIndex](mdn:js/Array/findIndex) اساسا یکسان است، اما به جای خود المان ایندکسی که المان در آن پیدا شد را برمی‌گرداند و اگر چیزی پیدا نشد `1-` را برمی‌گرداند.
 
-### filter
+### متد filter
 
-The `find` method looks for a single (first) element that makes the function return `true`.
+متد `find` برای یک (اولین) المان که باعث شود تابع `true` برگرداند، جستجو می‌کند.
 
-If there may be many, we can use [arr.filter(fn)](mdn:js/Array/filter).
+اگر ممکن باشد تعداد بیشتری موجود باشند، می‌توانیم از [arr.filter(fn)](mdn:js/Array/filter) استفاده کنیم.
 
-The syntax is similar to `find`, but `filter` returns an array of all matching elements:
+سینتکس آن مشابه `find` است اما `filter` یک آرایه از المان‌های منطبق را برمی‌گرداند:
 
 ```js
 let results = arr.filter(function(item, index, array) {
-  // if true item is pushed to results and the iteration continues
-  // returns empty array if nothing found
+  // باشد المان به نتیجه‌ها اضافه می‌شود و حلقه تکرار ادامه پیدا می‌کند true اگر
+  // اگر چیزی پیدا نشود یک آرایه خالی برمی‌گرداند
 });
 ```
 
-For instance:
+برای مثال:
 
 ```js run
 let users = [
@@ -330,7 +330,7 @@ let users = [
   {id: 3, name: "Mary"}
 ];
 
-// returns array of the first two users
+// آرایه شامل دو کاربر اول را برمی‌گرداند
 let someUsers = users.filter(item => item.id < 3);
 
 alert(someUsers.length); // 2
