@@ -336,25 +336,25 @@ let someUsers = users.filter(item => item.id < 3);
 alert(someUsers.length); // 2
 ```
 
-## Transform an array
+## تغییر شکل دادن آرایه
 
-Let's move on to methods that transform and reorder an array.
+بیایید به سراغ متدهایی برویم که یک آرایه را تغییر شکل و نظم دوباره می‌دهند.
 
-### map
+### متد map
 
-The [arr.map](mdn:js/Array/map) method is one of the most useful and often used.
+متد [arr.map](mdn:js/Array/map) یکی از پرکاربردترین و متدوال‌ترین متدهاست.
 
-It calls the function for each element of the array and returns the array of results.
+این متد یک تابع را برای هر المان آرایه صدا می‌زند و آرایه‌ای از نتیجه را برمی‌گرداند.
 
-The syntax is:
+سینتکس آن اینگونه است:
 
 ```js
 let result = arr.map(function(item, index, array) {
-  // returns the new value instead of item
+  // به جای المان، مقدار جدید را برمی‌گرداند
 });
 ```
 
-For instance, here we transform each element into its length:
+برای مثال، ما هر المان را به طول آن تغییر می‌دهیم:
 
 ```js run
 let lengths = ["Bilbo", "Gandalf", "Nazgul"].map(item => item.length);
