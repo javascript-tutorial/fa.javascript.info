@@ -365,39 +365,40 @@ alert(lengths); // 5,7,6
 
 صدازدن [arr.sort()](mdn:js/Array/sort) آرایه را *در محل* با تغییر دادن ترتیب المان‌ها، مرتب می‌کند.
 
-It also returns the sorted array, but the returned value is usually ignored, as `arr` itself is modified.
+همچنین این متد آرایه مرتب شده را برمی‌گرداند، اما همانطور که خود `arr` تغییر داده می‌شود، مقدار برگردانده شده معمولا نادیده گرفته می‌شود.
 
-For instance:
+برای مثال:
 
 ```js run
 let arr = [ 1, 2, 15 ];
 
-// the method reorders the content of arr
+// را دوباره ترتیب بندی می‌کند arr این متد
 arr.sort();
 
 alert( arr );  // *!*1, 15, 2*/!*
 ```
 
-Did you notice anything strange in the outcome?
+چیز عجیبی را در نتیجه متوجه شدید؟
 
-The order became `1, 15, 2`. Incorrect. But why?
+ترتیب المان‌ها `1, 15, 2` شد. این اشتباه است. اما چرا؟
 
-**The items are sorted as strings by default.**
+**المان‌ها به صورت پیشفرض به عنوان رشته مرتب می‌شوند.**
 
-Literally, all elements are converted to strings for comparisons. For strings, lexicographic ordering is applied and indeed `"2" > "15"`.
+به طور کلی، تمام المان‌ها برای انجام مقایسه به رشته تبدیل می‌شوند. برای رشته‌ها، ترتیب‌بندی لفت‌نامه‌ای اعمال می‌شود و در این صورت `"2" > "15"` است.
 
-To use our own sorting order, we need to supply a function as the argument of `arr.sort()`.
+برای استفاده از ترتیب‌بندی خودمان، ما نیاز داریم که یک تابع را به عنوان آرگومان `arr.sort()` قرار دهیم.
 
 The function should compare two arbitrary values and return:
+تابع باید دو مقدار دلخواه را مقایسه کند و چیزی را برگرداند:
 ```js
 function compare(a, b) {
-  if (a > b) return 1; // if the first value is greater than the second
-  if (a == b) return 0; // if values are equal
-  if (a < b) return -1; // if the first value is less than the second
+  if (a > b) return 1; // اگر مقدار اول بزرگتر از دومی باشد
+  if (a == b) return 0; // اگر مقدارها برابر باشند
+  if (a < b) return -1; // اگر مقدار اول کمتر از دومی باشد
 }
 ```
 
-For instance, to sort as numbers:
+برای مثال، برای مرتب کردن به عنوان اعداد:
 
 ```js run
 function compareNumeric(a, b) {
@@ -415,13 +416,13 @@ arr.sort(compareNumeric);
 alert(arr);  // *!*1, 2, 15*/!*
 ```
 
-Now it works as intended.
+حالا همانطور که انتظار می‌رفت کار می‌کند.
 
-Let's step aside and think what's happening. The `arr` can be array of anything, right? It may contain numbers or strings or objects or whatever. We have a set of *some items*. To sort it, we need an *ordering function* that knows how to compare its elements. The default is a string order.
+بیایید کمی عقب بمانیم و ببینیم چه چیزی در حال اتفاق افتادن است. `arr` می‌تواند آرایه‌ای از هر چیزی باشد نه؟ ممکن است شامل اعداد یا رشته‌ها یا شیءها یا هرچیز دیگری باشد. ما دسته‌ای از *چیزها* داریم. برای مرتب کردن آن، ما به یک *تابع مرتب‌کننده* که می‌داند چگونه المان‌های دسته را مقایسه کند، نیاز داریم. ترتیب رشته‌ای پیش‌فرض است.
 
-The `arr.sort(fn)` method implements a generic sorting algorithm. We don't need to care how it internally works (an optimized [quicksort](https://en.wikipedia.org/wiki/Quicksort) or [Timsort](https://en.wikipedia.org/wiki/Timsort) most of the time). It will walk the array, compare its elements using the provided function and reorder them, all we need is to provide the `fn` which does the comparison.
+متد `arr.sort(fn)` یک الگوریتم مرتب‌سازی کلی را پیاده‌سازی می‌کند. ما نیازی نداریم که بدانیم درون آن چه اتفاقی می‌افتد (اکثر اوقات از یک [مرتب‌سازی سریع](https://fa.wikipedia.org/wiki/مرتب%E2%80%8Cسازی_سریع) یا [Timsort](https://fa.wikipedia.org/wiki/مرتب%E2%80%8Cسازی_تیم) بهینه‌شده استفاده می‌شود). این متد آرایه را طی می‌کند، المان‌های آن را با استفاده از تابع فراهم شده مقایسه می‌کند و آنها را مرتب می‌کند، تمام آن چیزی که ما نیاز داریم این است که یک `fn` فراهم کنیم که مقایسه را انجام دهد.
 
-By the way, if we ever want to know which elements are compared -- nothing prevents from alerting them:
+راستی، اگر ما بخواهیم بدانیم که کدام المان‌ها مقایسه می‌شوند -- چیزی ما را از alert کردن آنها متوقف نمی‌کند:
 
 ```js run
 [1, -2, 15, 2, 0, 8].sort(function(a, b) {
@@ -430,12 +431,12 @@ By the way, if we ever want to know which elements are compared -- nothing preve
 });
 ```
 
-The algorithm may compare an element with multiple others in the process, but it tries to make as few comparisons as possible.
+الگوریتم ممکن است یک المان را با چند المان دیگر در حین فرایند مقایسه کند، اما تلاش می‌کند که تا جایی که می‌تواند مقایسه‌های کمی انجام دهد.
 
-````smart header="A comparison function may return any number"
-Actually, a comparison function is only required to return a positive number to say "greater" and a negative number to say "less".
+````smart header="یک تابع مقایسه می‌تواند هر عددی برگرداند"
+در واقع یک تابع مقایسه فقط نیاز دارد که یک عدد مثبت را برای اینکه بگوید «بزرگتر» است برگرداند و یک عدد منفی را برای گفتن «کمتر» است.
 
-That allows to write shorter functions:
+این ویژگی سبب می‌شود که تابع‌های کوتاه‌تری نوشته شود:
 
 ```js run
 let arr = [ 1, 2, 15 ];
@@ -446,29 +447,29 @@ alert(arr);  // *!*1, 2, 15*/!*
 ```
 ````
 
-````smart header="Arrow functions for the best"
-Remember [arrow functions](info:arrow-functions-basics)? We can use them here for neater sorting:
+````smart header="توابع پیکانی بهترین‌اند"
+[تابع‌های پیکانی](info:arrow-functions-basics) را به یاد دارید؟ ما می‌توانیم از آنها برای مرتب‌سازی تمیزتر استفاده کنیم:
 
 ```js
 arr.sort( (a, b) => a - b );
 ```
 
-This works exactly the same as the longer version above.
+این کد دقیقا مانند نسخه طولانی‌تر بالایی کار می‌کند.
 ````
 
-````smart header="Use `localeCompare` for strings"
-Remember [strings](info:string#correct-comparisons) comparison algorithm? It compares letters by their codes by default.
+````smart header="برای رشته‌ها از `localeCompare` استفاده کنید"
+الگوریتم مقایسه [رشته‌ها](info:string#correct-comparisons) را به یاد دارید؟ این الگوریتم به صورت پیش‌فرض حروف را با کدهای آنها مقایسه می‌کند.
 
-For many alphabets, it's better to use `str.localeCompare` method to correctly sort letters, such as `Ö`.
+برای بساری از حروف الفبا، بهتر است از متد `str.localeCompare` برای مرتب‌کردن صحیح حروف استفاده شود، مانند `Ö`.
 
-For example, let's sort a few countries in German:
+برای مثال، بیایید چند کشور را به زبان آلمانی مرتب کنیم:
 
 ```js run
 let countries = ['Österreich', 'Andorra', 'Vietnam'];
 
-alert( countries.sort( (a, b) => a > b ? 1 : -1) ); // Andorra, Vietnam, Österreich (wrong)
+alert( countries.sort( (a, b) => a > b ? 1 : -1) ); // Andorra, Vietnam, Österreich (اشتباه است)
 
-alert( countries.sort( (a, b) => a.localeCompare(b) ) ); // Andorra,Österreich,Vietnam (correct!)
+alert( countries.sort( (a, b) => a.localeCompare(b) ) ); // Andorra,Österreich,Vietnam (درست است!)
 ```
 ````
 
