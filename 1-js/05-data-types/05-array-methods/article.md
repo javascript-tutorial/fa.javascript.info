@@ -361,9 +361,9 @@ let lengths = ["Bilbo", "Gandalf", "Nazgul"].map(item => item.length);
 alert(lengths); // 5,7,6
 ```
 
-### sort(fn)
+### متد sort(fn)
 
-The call to [arr.sort()](mdn:js/Array/sort) sorts the array *in place*, changing its element order.
+صدازدن [arr.sort()](mdn:js/Array/sort) آرایه را *در محل* با تغییر دادن ترتیب المان‌ها، مرتب می‌کند.
 
 It also returns the sorted array, but the returned value is usually ignored, as `arr` itself is modified.
 
