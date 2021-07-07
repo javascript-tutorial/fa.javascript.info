@@ -473,11 +473,11 @@ alert( countries.sort( (a, b) => a.localeCompare(b) ) ); // Andorra,Österreich,
 ```
 ````
 
-### reverse
+### متد reverse
 
-The method [arr.reverse](mdn:js/Array/reverse) reverses the order of elements in `arr`.
+متد [arr.reverse](mdn:js/Array/reverse) ترتیب المان‌ها را `arr` برعکس می‌کند.
 
-For instance:
+برای مثال:
 
 ```js run
 let arr = [1, 2, 3, 4, 5];
@@ -486,15 +486,15 @@ arr.reverse();
 alert( arr ); // 5,4,3,2,1
 ```
 
-It also returns the array `arr` after the reversal.
+همچنین این متد ارایه `arr` را بعد از برعکس شدن برمی‌گرداند.
 
-### split and join
+### متدهای split and join
 
-Here's the situation from real life. We are writing a messaging app, and the person enters the comma-delimited list of receivers: `John, Pete, Mary`. But for us an array of names would be much more comfortable than a single string. How to get it?
+یک موقعیت در زندگی واقعی را می‌گوییم. ما در حال نوشتن یک برنامه پیام‌رسان هستیم و شخص لیستی از دریافت کنندگان که با کاما جدا شده‌اند را وارد می‌کند: `John, Pete, Mary`. اما یک آرایه‌ای از اسم‌ها بسیار راحت‌تر از یک رشته خواهد بود. چگونه آن را دریافت کنیم؟
 
-The [str.split(delim)](mdn:js/String/split) method does exactly that. It splits the string into an array by the given delimiter `delim`.
+متد [str.split(delim)](mdn:js/String/split) دقیقا همین کار را انجام می‌دهد. این متد رشته را با استفاده از جداکننده‌ی داده شده `delim` به یک آرایه تقسیم می‌کند.
 
-In the example below, we split by a comma followed by space:
+در مثال بالا، ما توسط یک کاما که بعد آن space می‌آید رشته را جدا می‌کنیم:
 
 ```js run
 let names = 'Bilbo, Gandalf, Nazgul';
@@ -502,11 +502,11 @@ let names = 'Bilbo, Gandalf, Nazgul';
 let arr = names.split(', ');
 
 for (let name of arr) {
-  alert( `A message to ${name}.` ); // A message to Bilbo  (and other names)
+  alert( `A message to ${name}.` ); // A message to Bilbo  (و بقیه اسم‌ها)
 }
 ```
 
-The `split` method has an optional second numeric argument -- a limit on the array length. If it is provided, then the extra elements are ignored. In practice it is rarely used though:
+متد `split` یک آرگومان اختیاری دوم هم دارد -- یک محدودیت برای طول آرایه. اگر این آرگومان اضافه شود، سپس المان‌های دیگر نادیده گرفته می‌شوند. گرچه در عمل به ندرت استفاده می‌شود:
 
 ```js run
 let arr = 'Bilbo, Gandalf, Nazgul, Saruman'.split(', ', 2);
@@ -514,8 +514,8 @@ let arr = 'Bilbo, Gandalf, Nazgul, Saruman'.split(', ', 2);
 alert(arr); // Bilbo, Gandalf
 ```
 
-````smart header="Split into letters"
-The call to `split(s)` with an empty `s` would split the string into an array of letters:
+````smart header="جداکردن به حروف"
+صدا زدن `split(s)` با یک `s` خالی رشته را به آرایه‌ای از حروف جدا می‌کند:
 
 ```js run
 let str = "test";
@@ -524,14 +524,14 @@ alert( str.split('') ); // t,e,s,t
 ```
 ````
 
-The call [arr.join(glue)](mdn:js/Array/join) does the reverse to `split`. It creates a string of `arr` items joined by `glue` between them.
+صدا زدن [arr.join(glue)](mdn:js/Array/join) عمل برعکس `split` را انجام می‌هد. این متد یک رشته از `arr` می‌سازد که توسط `glue` المان‌ها متصل شده‌اند.
 
-For instance:
+برای مثال:
 
 ```js run
 let arr = ['Bilbo', 'Gandalf', 'Nazgul'];
 
-let str = arr.join(';'); // glue the array into a string using ;
+let str = arr.join(';'); // آرایه را با استفاده از ; به یک رشته تبدیل کنید
 
 alert( str ); // Bilbo;Gandalf;Nazgul
 ```
