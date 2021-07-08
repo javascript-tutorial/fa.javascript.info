@@ -536,15 +536,15 @@ let str = arr.join(';'); // آرایه را با استفاده از ; به یک
 alert( str ); // Bilbo;Gandalf;Nazgul
 ```
 
-### reduce/reduceRight
+### متد reduce/reduceRight
 
-When we need to iterate over an array -- we can use `forEach`, `for` or `for..of`.
+زمانی که ما نیاز داشته باشیم که در یک آرایه حلقه بزنیم، می‌توانیم از `forEach`، `for` یا `for..of` استفاده کنیم.
 
-When we need to iterate and return the data for each element -- we can use `map`.
+زمانی که ما نیاز داشته باشیم در المان‌ها حلقه بزنیم و داده را برای هر المان برگردانیم، می‌توانیم از `map` استفاده کنیم.
 
-The methods [arr.reduce](mdn:js/Array/reduce) and [arr.reduceRight](mdn:js/Array/reduceRight) also belong to that breed, but are a little bit more intricate. They are used to calculate a single value based on the array.
+متدهای [arr.reduce](mdn:js/Array/reduce) و [arr.reduceRight](mdn:js/Array/reduceRight) همچنین به این دسته تعلق دارند، اما کمی پیچیده‌تر هستند. آنها برای محاسبه یک مقدار بر اساس آرایه، استفاده می‌شوند.
 
-The syntax is:
+سینتکس اینگونه است:
 
 ```js
 let value = arr.reduce(function(accumulator, item, index, array) {
@@ -552,24 +552,24 @@ let value = arr.reduce(function(accumulator, item, index, array) {
 }, [initial]);
 ```
 
-The function is applied to all array elements one after another and "carries on" its result to the next call.
+تابع روی تمام المان‌های آرایه اعمال می‌شود و نتیجه خود را به فراخوانی بعدی «منتقل می‌کند».
 
-Arguments:
+آرگومان‌ها:
 
-- `accumulator` -- is the result of the previous function call, equals `initial` the first time (if `initial` is provided).
-- `item` -- is the current array item.
-- `index` -- is its position.
-- `array` -- is the array.
+- `accumulator` -- نتیجه قبلی فراخوانی تابع است، دفعه اول با `initial` برابر است (اگر `initial` وجود داشته باشد).
+- `item` -- المان کنونی آرایه است.
+- `index` -- موقعیت آن است.
+- `array` -- آرایه است.
 
-As function is applied, the result of the previous function call is passed to the next one as the first argument.
+همانطور که تابع اعمال می‌شود، نتیجه فراخوانی قبلی به عنوان آرگومان اول به فراخوانی بعدی منتقل می‌شود.
 
-So, the first argument is essentially the accumulator that stores the combined result of all previous executions. And at the end it becomes the result of `reduce`.
+بنابراین، اولین آرگومان اساسا همان حافظه‌ای است که نتیجه ترکیب شده تمام فراخوانی‌های قبلی را ذخیره کرده است. و در پایان تبدیل به نتیجه `reduce` می‌شود.
 
-Sounds complicated?
+بنظر پیچیده می‌آید؟
 
-The easiest way to grasp that is by example.
+راحت‌ترین راه برای فهمیدن این قضیه، توسط مثال است.
 
-Here we get a sum of an array in one line:
+اینجا ما حاصل جمع یک آرایه را در یک خط می‌گیریم:
 
 ```js run
 let arr = [1, 2, 3, 4, 5];
@@ -579,60 +579,60 @@ let result = arr.reduce((sum, current) => sum + current, 0);
 alert(result); // 15
 ```
 
-The function passed to `reduce` uses only 2 arguments, that's typically enough.
+تابعی که به `reduce` داده شد تنها از 2 آرگومان استفاده می‌کند که معمولا کافی است.
 
-Let's see the details of what's going on.
+بیایید جزئیات چیزی که در حال انجام است را ببینیم.
 
-1. On the first run, `sum` is the `initial` value (the last argument of `reduce`), equals `0`, and `current` is the first array element, equals `1`. So the function result is `1`.
-2. On the second run, `sum = 1`, we add the second array element (`2`) to it and return.
-3. On the 3rd run, `sum = 3` and we add one more element to it, and so on...
+1. در اجرای اول، `sum` برابر با مقدار `initial` است (آخرین آرگومان `reduce`)، که برابر با `0` است، و `current` اولین المان آرایه است، که برابر با `1` است. پس نتیجه تابع `1` است.
+2. در اجرای دوم، `sum = 1`، که ما المان دوم آرایه (`2`) را به آن اضافه و برمی‌گردانیم.
+3. در اجرای سوم، `sum = 3` و ما یک المان دیگر به آن اضافه می‌کنیم و...
 
-The calculation flow:
+گردش محاسبه:
 
 ![](reduce.svg)
 
-Or in the form of a table, where each row represents a function call on the next array element:
+یا به شکل یک جدول که هر ردیف نشان‌دهنده یک فراخوانی تابع روی المان بعدی آرایه است:
 
-|   |`sum`|`current`|result|
+|   |`sum`|`current`|نتیجه|
 |---|-----|---------|---------|
-|the first call|`0`|`1`|`1`|
-|the second call|`1`|`2`|`3`|
-|the third call|`3`|`3`|`6`|
-|the fourth call|`6`|`4`|`10`|
-|the fifth call|`10`|`5`|`15`|
+|فراخوانی اول|`0`|`1`|`1`|
+|فراخوانی دوم|`1`|`2`|`3`|
+|فراخوانی سوم|`3`|`3`|`6`|
+|فراخوانی چهارم|`6`|`4`|`10`|
+|فراخوانی پنجم|`10`|`5`|`15`|
 
-Here we can clearly see how the result of the previous call becomes the first argument of the next one.
+اینجا ما می‌توانیم به صورت شفاف ببینیم که نتیجه فراخوانی قبلی به اولین آرگومان فراخوانی بعدی تبدیل می‌شود.
 
-We also can omit the initial value:
+ما همچنین می‌توانیم مقدار اولیه را حذف کنیم:
 
 ```js run
 let arr = [1, 2, 3, 4, 5];
 
-// removed initial value from reduce (no 0)
+// حذف شد (بدون 0) reduce مقدار اولیه از
 let result = arr.reduce((sum, current) => sum + current);
 
 alert( result ); // 15
 ```
 
-The result is the same. That's because if there's no initial, then `reduce` takes the first element of the array as the initial value and starts the iteration from the 2nd element.
+نتیجه یکسان است. به دلیل اینکه اگر مقدار اولیه‌ای وجود نداشته باشد، سپس `reduce` اولین المان آرایه را به عنوان مقدار اولیه انتخاب می‌کند و حلقه‌زدن را از دومین المان شروع می‌کند.
 
-The calculation table is the same as above, minus the first row.
+جدول محاسبات مانند بالا است، منتها ردیف اول را ندارد.
 
-But such use requires an extreme care. If the array is empty, then `reduce` call without initial value gives an error.
+اما استفاده کردن به این صورت به دقت بسیار بالایی نیاز دارد. اگر آرایه خالی باشد، سپس فراخوانی `reduce` بدون مقدار اولیه ارور می‌دهد.
 
-Here's an example:
+یک مثال اینجا داریم:
 
 ```js run
 let arr = [];
 
 // Error: Reduce of empty array with no initial value
-// if the initial value existed, reduce would return it for the empty arr.
+// .آن را برای آرایه خالی برمی‌گرداند reduce ،اگر مقدار اولیه وجود داشت
 arr.reduce((sum, current) => sum + current);
 ```
 
-So it's advised to always specify the initial value.
+بنابراین توصیه می‌شود همیشه مقدار اولیه را تعیین کنید.
 
-The method [arr.reduceRight](mdn:js/Array/reduceRight) does the same, but goes from right to left.
+متد [arr.reduceRight](mdn:js/Array/reduceRight) کار یکسان را انجام می‌هد، اما از راست به چپ.
 
 
 ## Array.isArray
