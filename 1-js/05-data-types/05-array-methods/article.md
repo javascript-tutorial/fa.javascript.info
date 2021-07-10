@@ -635,18 +635,18 @@ arr.reduce((sum, current) => sum + current);
 متد [arr.reduceRight](mdn:js/Array/reduceRight) کار یکسان را انجام می‌هد، اما از راست به چپ.
 
 
-## Array.isArray
+##متد Array.isArray
 
-Arrays do not form a separate language type. They are based on objects.
+آرایه‌ها شکل جدیدی از انواع داده را شکل نمی‌دهند. آنها بر اساس شیءها هستند.
 
-So `typeof` does not help to distinguish a plain object from an array:
+بنابراین `typeof` برای تشخیص یک شیء ساده از آرایه کمکی نمی‌کند:
 
 ```js run
 alert(typeof {}); // object
-alert(typeof []); // same
+alert(typeof []); // یکسان
 ```
 
-...But arrays are used so often that there's a special method for that: [Array.isArray(value)](mdn:js/Array/isArray). It returns `true` if the `value` is an array, and `false` otherwise.
+...اما آرایه‌ها به دلیل اینکه اغلب اوقات استفاده می‌شوند، یک متد خاص برای این کار دارند: [Array.isArray(value)](mdn:js/Array/isArray). این متد اگر `value` یک آرایه باشد `true` برمی‌گرداند و در غیر این صورت `false`.
 
 ```js run
 alert(Array.isArray({})); // false
