@@ -388,7 +388,6 @@ alert( arr );  // *!*1, 15, 2*/!*
 
 برای استفاده از ترتیب‌بندی خودمان، ما نیاز داریم که یک تابع را به عنوان آرگومان `arr.sort()` قرار دهیم.
 
-The function should compare two arbitrary values and return:
 تابع باید دو مقدار دلخواه را مقایسه کند و چیزی را برگرداند:
 ```js
 function compare(a, b) {
