@@ -704,49 +704,49 @@ alert(soldiers[1].age); // 23
 
 صدازدن `users.filter(army.canJoin, army)` می‌تواند با `users.filter(user => army.canJoin(user))` جایگزین شود، که هردو یکسان هستند. نوع دوم بیشتر استفاده می‌شود، چون برای اکثر مردم مقداری قابل فهم‌تر است.
 
-## Summary
+## خلاصه
 
-A cheat sheet of array methods:
+برگ تقلبی از متدهای آرایه:
 
-- To add/remove elements:
-  - `push(...items)` -- adds items to the end,
-  - `pop()` -- extracts an item from the end,
-  - `shift()` -- extracts an item from the beginning,
-  - `unshift(...items)` -- adds items to the beginning.
-  - `splice(pos, deleteCount, ...items)` -- at index `pos` deletes `deleteCount` elements and inserts `items`.
-  - `slice(start, end)` -- creates a new array, copies elements from index `start` till `end` (not inclusive) into it.
-  - `concat(...items)` -- returns a new array: copies all members of the current one and adds `items` to it. If any of `items` is an array, then its elements are taken.
+- برای اضافه/حذف کردن المان‌ها:
+  - `push(...items)` -- المان‌ها را به آخر اضافه می‌کند،
+  - `pop()` -- یک المان را از آخر حذف می‌کند،
+  - `shift()` -- یک المان را از آغاز حذف می‌کند،
+  - `unshift(...items)` -- المان‌هایی را به آغاز اضافه می‌کند.
+  - `splice(pos, deleteCount, ...items)` -- در ایندکس `pos` به تعداد `deleteCount` المان حذف و `items` را اضافه می‌کند.
+  - `slice(start, end)` -- با ساختن یک آرایه جدید، المان‌ها را از ایندکس `start` تا `end` (شامل نمی‌شود) در آن کپی می‌کند.
+  - `concat(...items)` -- یک آرایه جدید را برمی‌گرداند: تمام عضوهای آرایه کنونی را کپی می‌کند و `items` را به آن اضافه می‌کند. اگر هر کدام از `items` آرایه باشد، سپس المان‌های آن اضافه می‌شوند.
 
-- To search among elements:
-  - `indexOf/lastIndexOf(item, pos)` -- look for `item` starting from position `pos`, return the index or `-1` if not found.
-  - `includes(value)` -- returns `true` if the array has `value`, otherwise `false`.
-  - `find/filter(func)` -- filter elements through the function, return first/all values that make it return `true`.
-  - `findIndex` is like `find`, but returns the index instead of a value.
+- برای جستجو در بین المان‌ها:
+  - `indexOf/lastIndexOf(item, pos)` -- با شروع از موقعیت `pos` به دنبال `item` می‌گردد، ایندکس آن را برمی‌گرداند و در صورتی که پیدا نشود `1-` را برمی‌گرداند.
+  - `includes(value)` -- اگر آرایه دارای `value` باشد، مقدار `true` را برمی‌گرداند در غیر این صورت `false`.
+  - `find/filter(func)` -- المان‌ها را از طریق تابع فیلتر می‌کند، اولین/تمام مقدارهایی که سبب می‌شوند تابع `true` برگرداند را برمی‌گرداند.
+  - `findIndex` مانند `find` است اما به جای مقدار ایندکس را برمی‌گرداند.
 
-- To iterate over elements:
-  - `forEach(func)` -- calls `func` for every element, does not return anything.
+- برای حلقه زدن در یک آرایه:
+  - `forEach(func)` -- برای تمام المان‌ها تابع `func` را صدا می‌زند، چیزی را برنمی‌گرداند.
 
-- To transform the array:
-  - `map(func)` -- creates a new array from results of calling `func` for every element.
-  - `sort(func)` -- sorts the array in-place, then returns it.
-  - `reverse()` -- reverses the array in-place, then returns it.
-  - `split/join` -- convert a string to array and back.
-  - `reduce/reduceRight(func, initial)` -- calculate a single value over the array by calling `func` for each element and passing an intermediate result between the calls.
+- برای تغییر شکل یک آرایه:
+  - `map(func)` -- از نتایج صدازدن `func` برای هر المان، یک آرایه جدید می‌سازد.
+  - `sort(func)` -- آرایه را در محل مرتب می‌کند، سپس آن را برمی‌گرداند.
+  - `reverse()` -- آرایه را در محل برعکس می‌کند، سپس آن را برمی‌گرداند.
+  - `split/join` -- یک رشته را به آرایه تبدیل می‌کند و برعکس.
+  - `reduce/reduceRight(func, initial)` -- با صدا زدن `func` برای هر المان و رد و بدل کردن یک نتیجه واسطه بین هر فراخوانی، یک مقدار مفرد را در آرایه محاسبه می‌کند.
 
-- Additionally:
-  - `Array.isArray(arr)` checks `arr` for being an array.
+- علاوه بر این:
+  - `Array.isArray(arr)` بررسی می‌کند که `arr` یک آرایه باشد.
 
-Please note that methods `sort`, `reverse` and `splice` modify the array itself.
+لطفا در نظر داشته باشید که متدهای `sort`، `reverse` و `splice` خود آرایه را تغییر می‌دهند.
 
-These methods are the most used ones, they cover 99% of use cases. But there are few others:
+متدهای ذکر شده بیشترین استفاده را دارند، آنها 99% موارد استفاده را پوشش می‌دهند. اما چند متد دیگر هم هست:
 
-- [arr.some(fn)](mdn:js/Array/some)/[arr.every(fn)](mdn:js/Array/every) check the array.
+- [arr.some(fn)](mdn:js/Array/some)/[arr.every(fn)](mdn:js/Array/every) آرایه را بررسی می‌کنند.
 
-  The function `fn` is called on each element of the array similar to `map`. If any/all results are `true`, returns `true`, otherwise `false`.
+  تابع `fn` رو تمام المان‌های آرایه صدا زده می‌شود درست شبیه `map`. اگر تمام نتایج `true` بود، مقدار `true` را برمی‌گرداند، در غیر این صورت `false`.
 
-  These methods behave sort of like `||` and `&&` operators: if `fn` returns a truthy value, `arr.some()` immediately returns `true` and stops iterating over the rest of items; if `fn` returns a falsy value, `arr.every()` immediately returns `false` and stops iterating over the rest of items as well.
+  این متدها تقریبا شبیه عملگرهای `||` و `&&` رفتار می‌کنند: اگر `fn` مقدار truthy را برگرداند، `arr.some()` درجا `true` را برمی‌گرداند و حلقه زدن روی بقیه المان‌ها را متوقف می‌کند؛ اگر `fn` یک مقدار falsy برگرداند، `arr.every()` فورا `false` را برمی‌گرداند و حلقه زدن در بقیه المان‌ها را متوقف می‌کند.
 
-  We can use `every` to compare arrays:
+  ما می‌توانیم از `every` برای مقایسه آرایه‌ها استفاده کنیم
   ```js run
   function arraysEqual(arr1, arr2) {
     return arr1.length === arr2.length && arr1.every((value, index) => value === arr2[index]);
@@ -755,16 +755,16 @@ These methods are the most used ones, they cover 99% of use cases. But there are
   alert( arraysEqual([1, 2], [1, 2])); // true
   ```
 
-- [arr.fill(value, start, end)](mdn:js/Array/fill) -- fills the array with repeating `value` from index `start` to `end`.
+- [arr.fill(value, start, end)](mdn:js/Array/fill) -- آرایه را با مقدار تکرار شونده `value` از ایندکس `start` تا `end` پر می‌کند.
 
-- [arr.copyWithin(target, start, end)](mdn:js/Array/copyWithin) -- copies its elements from position `start` till position `end` into *itself*, at position `target` (overwrites existing).
+- [arr.copyWithin(target, start, end)](mdn:js/Array/copyWithin) -- المان‌های خود را از موقعیت `start` تا موقعیت `end` در *خودش* و در موقعیت `target` کپی می‌کند (جایگزین المان موجود می‌شود).
 
-- [arr.flat(depth)](mdn:js/Array/flat)/[arr.flatMap(fn)](mdn:js/Array/flatMap) create a new flat array from a multidimensional array.
+- [arr.flat(depth)](mdn:js/Array/flat)/[arr.flatMap(fn)](mdn:js/Array/flatMap) آرایه‌ای یک دست را از آرایه‌ای چند بعدی می‌سازند.
 
-For the full list, see the [manual](mdn:js/Array).
+برای دیدن لیست کامل، از [راهنما](mdn:js/Array) استفاده کنید.
 
-From the first sight it may seem that there are so many methods, quite difficult to remember. But actually that's much easier.
+با اولین نگاه ممکن است به نظر برسد که متدهای بسیار زیادی وجود دارد و به حافظه سپردن آنها مشکل است. اما در واقع بسیار آسان‌تر است.
 
-Look through the cheat sheet just to be aware of them. Then solve the tasks of this chapter to practice, so that you have experience with array methods.
+برای داشتن شناخت از آنها به برگه تقلب نگاه بیاندازید. سپس تکلیف‌های این فصل را برای تمرین انجام دهید تا نسبت به متدهای آرایه تجربه بدست بیاورید.
 
-Afterwards whenever you need to do something with an array, and you don't know how -- come here, look at the cheat sheet and find the right method. Examples will help you to write it correctly. Soon you'll automatically remember the methods, without specific efforts from your side.
+پس از آن هر موقع که نیاز داشتید با یک آرایه کاری انجام دهید، و نمی‌دانید چگونه، به این صفحه بیایید، به برگه تقلب نگاهی بیاندازید و متد مناسب را پیدا کنید. مثال‌ها به شما در نوشتن درست آن کمک می‌کنند. به زودی به طور خودکار شما متدها را به حافظه می‌سپارید، بدون تلاش خاصی از جانب خودتان.
