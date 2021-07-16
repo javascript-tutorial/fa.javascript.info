@@ -654,25 +654,25 @@ alert(Array.isArray({})); // false
 alert(Array.isArray([])); // true
 ```
 
-## Most methods support "thisArg"
+## اکثر متدها از "thisArg" پشتیبانی می‌کنند
 
-Almost all array methods that call functions -- like `find`, `filter`, `map`, with a notable exception of `sort`, accept an optional additional parameter `thisArg`.
+تقریبا تمام متدهای آرایه که تابعی را صدا می‌زنند -- مانند `find`، `filter`، `map`، همچنین یک استثنا از `sort`، پارامتر اختیاری اضافی `thisArg` را قبول می‌کنند.
 
-That parameter is not explained in the sections above, because it's rarely used. But for completeness we have to cover it.
+این پارامتر به دلیل اینکه به ندرت استفاده می‌شود، در قسمت‌های بالایی گفته نشد. اما برای کامل بودن ما باید آن را پوشش دهیم.
 
-Here's the full syntax of these methods:
+سینتکس کامل این متدها در زیر آمده است:
 
 ```js
 arr.find(func, thisArg);
 arr.filter(func, thisArg);
 arr.map(func, thisArg);
 // ...
-// thisArg is the optional last argument
+// آرگومان اختیاری آخر است thisArg
 ```
 
-The value of `thisArg` parameter becomes `this` for `func`.
+مقدار `thisArg` برای `func` برابر با `this` خواهد بود.
 
-For example, here we use a method of `army` object as a filter, and `thisArg` passes the context:
+برای مثال، اینجا ما از متد شیء `army` به عنوان یک فیلتر استفاده می‌کنیم، و `thisArg` محتوا را رد و بدل می‌کند:
 
 ```js run
 let army = {
@@ -691,7 +691,7 @@ let users = [
 ];
 
 *!*
-// find users, for who army.canJoin returns true
+// برمی‌گرداند را پیدا کن true به ازای آنها army.canJoin هایی کهuser
 let soldiers = users.filter(army.canJoin, army);
 */!*
 
@@ -700,9 +700,9 @@ alert(soldiers[0].age); // 20
 alert(soldiers[1].age); // 23
 ```
 
-If in the example above we used `users.filter(army.canJoin)`, then `army.canJoin` would be called as a standalone function, with `this=undefined`, thus leading to an instant error.
+اگر در مثال بالا ما از `users.filter(army.canJoin)` استفاده می‌کردیم، سپس `army.canJoin` به عنوان یک تابع جداگانه صدا زده می‌شد که `this=undefined`، بنابراین درجا به یک ارور برمی‌خورد.
 
-A call to `users.filter(army.canJoin, army)` can be replaced with `users.filter(user => army.canJoin(user))`, that does the same. The latter is used more often, as it's a bit easier to understand for most people.
+صدازدن `users.filter(army.canJoin, army)` می‌تواند با `users.filter(user => army.canJoin(user))` جایگزین شود، که هردو یکسان هستند. نوع دوم بیشتر استفاده می‌شود، چون برای اکثر مردم مقداری قابل فهم‌تر است.
 
 ## Summary
 
