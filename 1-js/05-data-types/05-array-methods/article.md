@@ -700,7 +700,7 @@ alert(soldiers[0].age); // 20
 alert(soldiers[1].age); // 23
 ```
 
-اگر در مثال بالا ما از `users.filter(army.canJoin)` استفاده می‌کردیم، سپس `army.canJoin` به عنوان یک تابع جداگانه صدا زده می‌شد که `this=undefined`، بنابراین درجا به یک ارور برمی‌خورد.
+اگر در مثال بالا ما از `users.filter(army.canJoin)` استفاده می‌کردیم، سپس `army.canJoin` به عنوان یک تابع جداگانه صدا زده می‌شد که `this=undefined`، بنابراین درجا به یک ارور برمی‌خوردیم.
 
 صدازدن `users.filter(army.canJoin, army)` می‌تواند با `users.filter(user => army.canJoin(user))` جایگزین شود، که هردو یکسان هستند. نوع دوم بیشتر استفاده می‌شود، چون برای اکثر مردم مقداری قابل فهم‌تر است.
 
