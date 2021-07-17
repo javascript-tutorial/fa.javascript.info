@@ -2,17 +2,17 @@ importance: 4
 
 ---
 
-# Filter unique array members
+# عضوهای یکتای آرایه را جدا کنید
 
-Let `arr` be an array.
+فرض کنیم که `arr` یک آرایه است.
 
-Create a function `unique(arr)` that should return an array with unique items of `arr`.
+تابع `unique(arr)` را بنویسید که آرایه‌ای شامل المان‌های یکتای `arr` را برمی‌گرداند.
 
-For instance:
+برای مثال:
 
 ```js
 function unique(arr) {
-  /* your code */
+  /* کد شما */
 }
 
 let strings = ["Hare", "Krishna", "Hare", "Krishna",

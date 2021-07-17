@@ -11,7 +11,7 @@ let arr = [ john, pete, mary ];
 
 sortByName(arr);
 
-// now sorted is: [john, mary, pete]
+// [john, mary, pete] :حالا آرایه مرتب شده به این شکل است
 alert(arr[0].name); // John
 alert(arr[2].name); // Pete
 ```

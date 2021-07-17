@@ -2,11 +2,11 @@ importance: 5
 
 ---
 
-# Sort objects
+# مرتب‌سازی شیءها
 
-Write the function `sortByName(users)` that gets an array of objects with the `age` property and sorts them by `age`.
+تابع `sortByName(users)` را بنویسید که آرایه‌ای از شیءهای شامل `age` دریافت می‌کند و آنها را بر اساس `age` مرتب می‌کند.
 
-For instance:
+برای مثال:
 
 ```js no-beautify
 let john = { name: "John", age: 25 };

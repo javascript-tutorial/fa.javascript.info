@@ -2,11 +2,11 @@ importance: 5
 
 ---
 
-# Map to names
+# اسم‌ها را دریابید
 
-You have an array of `user` objects, each one has `user.name`. Write the code that converts it into an array of names.
+شما یک آرایه از شیءهای `user` دارید که هر کدام دارای `user.name` هستند. کدی بنویسید که آن را به آرایه‌ای از اسم‌ها تبدیل می‌کند.
 
-For instance:
+برای مثال:
 
 ```js no-beautify
 let john = { name: "John", age: 25 };
@@ -15,7 +15,7 @@ let mary = { name: "Mary", age: 28 };
 
 let users = [ john, pete, mary ];
 
-let names = /* ... your code */
+let names = /* ... کد شما */
 
 alert( names ); // John, Pete, Mary
 ```

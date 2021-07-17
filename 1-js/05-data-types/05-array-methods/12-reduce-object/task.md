@@ -2,13 +2,13 @@ importance: 4
 
 ---
 
-# Create keyed object from array
+# شیءهای کلیددار از آرایه بسازید
 
-Let's say we received an array of users in the form `{id:..., name:..., age... }`.
+بیایید فرض کنیم که ما یک آرایه از کاربران به شکل `{id:..., name:..., age:... }` دریافت کرده‌ایم.
 
-Create a function `groupById(arr)` that creates an object from it, with `id` as the key, and array items as values.
+یک تابع `groupById(arr)` بسازید که یک شیء از آن ایجاد می‌کند، که `id` به عنوان کلید و المان‌های آرایه به عنوان مقدار موجود هستند.
 
-For example:
+برای مثال:
 
 ```js
 let users = [
@@ -20,7 +20,7 @@ let users = [
 let usersById = groupById(users);
 
 /*
-// after the call we should have:
+// بعد از فراخوانی ما باید این را داشته باشیم:
 
 usersById = {
   john: {id: 'john', name: "John Smith", age: 20},
@@ -30,8 +30,8 @@ usersById = {
 */
 ```
 
-Such function is really handy when working with server data.
+چنین تابعی هنگام کار کردن با داده سرور خیلی به کار می‌آید.
 
-In this task we assume that `id` is unique. There may be no two array items with the same `id`.
+در این تکلیف ما فرض می‌کنیم که `id` یکتا است. هیچ دو المانی از آرایه وجود ندارد که `id` یکسانی داشته باشند.
 
-Please use array `.reduce` method in the solution.
+لطفا از متد `.reduce` در راه حل استفاده کنید.

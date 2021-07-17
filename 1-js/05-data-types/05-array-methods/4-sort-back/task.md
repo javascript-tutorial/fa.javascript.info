@@ -2,12 +2,12 @@ importance: 4
 
 ---
 
-# Sort in decreasing order
+# مرتب‌سازی با ترتیب نزولی
 
 ```js
 let arr = [5, 2, 1, -10, 8];
 
-// ... your code to sort it in decreasing order
+// ... کد شما برای مرتب کردن آرایه با ترتیب نزولی
 
 alert( arr ); // 8, 5, 2, 1, -10
 ```

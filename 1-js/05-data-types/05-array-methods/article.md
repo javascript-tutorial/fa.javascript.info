@@ -1,28 +1,28 @@
-# Array methods
+# متدهای آرایه
 
-Arrays provide a lot of methods. To make things easier, in this chapter they are split into groups.
+آرایه‌ها متدهای زیادی را فراهم می‌کنند. برای ساده‌سازی، در این فصل متدها به چند گروه تقسیم شده‌اند.
 
-## Add/remove items
+## اضافه/حذف کردن عضوها
 
-We already know methods that add and remove items from the beginning or the end:
+ما از قبل متدهایی که در آغاز یا انتهای آرایه چیزی را حذف یا اضافه می‌کنند را می‌شناسیم:
 
-- `arr.push(...items)` -- adds items to the end,
-- `arr.pop()` -- extracts an item from the end,
-- `arr.shift()` -- extracts an item from the beginning,
-- `arr.unshift(...items)` -- adds items to the beginning.
+- `arr.push(...items)` -- المان‌ها را به انتها اضافه می‌کند،
+- `arr.pop()` -- یک المان را از انتها خارج می‌کند،
+- `arr.shift()` -- یک المان را از آغاز خارج می‌کند،
+- `arr.unshift(...items)` -- یک المان را به آغاز اضافه می‌کند.
 
-Here are a few others.
+اینجا چند متد دیگر داریم.
 
-### splice
+### متد splice
 
-How to delete an element from the array?
+چطور یک المان را از آرایه حذف کنیم؟
 
-The arrays are objects, so we can try to use `delete`:
+آرایه‌ها شیء هستند، پس می‌توانیم از `delete` استفاده کنیم:
 
 ```js run
 let arr = ["I", "go", "home"];
 
-delete arr[1]; // remove "go"
+delete arr[1]; // "go" حذف
 
 alert( arr[1] ); // undefined
 
@@ -30,146 +30,146 @@ alert( arr[1] ); // undefined
 alert( arr.length ); // 3
 ```
 
-The element was removed, but the array still has 3 elements, we can see that `arr.length == 3`.
+المان حذف شد، اما آرایه هنوز هم 3 عضو دارد که می‌توانیم آن را با `arr.length == 3` ببینیم.
 
-That's natural, because `delete obj.key` removes a value by the `key`. It's all it does. Fine for objects. But for arrays we usually want the rest of elements to shift and occupy the freed place. We expect to have a shorter array now.
+این چیز طبیعی است چون `delete obj.key` یک مقدار را با استفاده از `key` حذف می‌کند. به طور کلی کارش همین است. برای شیءها مناسب است. اما برای آرایه‌ها ما معمولا می‌خواهیم که بقیه المان‌ها پخش شوند و فضای آزاد شده را اشغال کنند. توقع داریم که الان آرایه‌ای کوتاه‌تر داشته باشیم.
 
-So, special methods should be used.
+بنابراین متدهای خاص باید استفاده شوند.
 
-The [arr.splice](mdn:js/Array/splice) method is a swiss army knife for arrays. It can do everything: insert, remove and replace elements.
+متد [arr.splice](mdn:js/Array/splice) یک شمشیر ارتشی سوئیسی برای آرایه‌ها است. می‌تواند هر کاری کند: اضافه کند، حذف کند و المان‌ها را جایگزین کند.
 
-The syntax is:
+سینتکس آن اینگونه است:
 
 ```js
 arr.splice(start[, deleteCount, elem1, ..., elemN])
 ```
 
-It modifies `arr` starting from the index `start`: removes `deleteCount` elements and then inserts `elem1, ..., elemN` at their place. Returns the array of removed elements.
+این متد `arr` را از ایندکس `start` تغییر می‌دهد: به تعداد `deleteCount` المان حذف می‌کند و سپس `elem1, ..., elemN` را در مکان خودشان اضافه می‌کند. آرایه‌ای از المان‌های حذف شده را برمی‌گرداند.
 
-This method is easy to grasp by examples.
+این متد را با مثال به راحتی متوجه می‌شوید.
 
-Let's start with the deletion:
+بیایید با حذف کردن شروع کنیم:
 
 ```js run
 let arr = ["I", "study", "JavaScript"];
 
 *!*
-arr.splice(1, 1); // from index 1 remove 1 element
+arr.splice(1, 1); // از ایندکس 1 به تعداد 1 المان حذف کن
 */!*
 
 alert( arr ); // ["I", "JavaScript"]
 ```
 
-Easy, right? Starting from the index `1` it removed `1` element.
+راحت است، نه؟ از ایندکس `1` به تعداد `1` المان حذف کرد.
 
-In the next example we remove 3 elements and replace them with the other two:
+در مثال بعد ما 3 المان را حذف و آنها را با دو المان جایگزین می‌کنیم:
 
 ```js run
 let arr = [*!*"I", "study", "JavaScript",*/!* "right", "now"];
 
-// remove 3 first elements and replace them with another
+// سه المان ابتدایی را حذف کن و آنها را با المان‌های دیگر جایگزین کن
 arr.splice(0, 3, "Let's", "dance");
 
 alert( arr ) // now [*!*"Let's", "dance"*/!*, "right", "now"]
 ```
 
-Here we can see that `splice` returns the array of removed elements:
+اینجا می‌بینیم که `splice` آرایه‌ای از المان‌های حذف شده را برمی‌گرداند:
 
 ```js run
 let arr = [*!*"I", "study",*/!* "JavaScript", "right", "now"];
 
-// remove 2 first elements
+// دو المان اول را حذف کن
 let removed = arr.splice(0, 2);
 
 alert( removed ); // "I", "study" <-- array of removed elements
 ```
 
-The `splice` method is also able to insert the elements without any removals. For that we need to set `deleteCount` to `0`:
+متد `splice` همچنین قادر به اضافه کردن المان بدون هیچ حذفیاتی است. برای این کار باید `deleteCount` را `0` بگذاریم:
 
 ```js run
 let arr = ["I", "study", "JavaScript"];
 
-// from index 2
-// delete 0
-// then insert "complex" and "language"
+// از ایندکس 2
+// به تعداد 0 حذف کن
+// را اضافه کن "language" و "complex" سپس
 arr.splice(2, 0, "complex", "language");
 
 alert( arr ); // "I", "study", "complex", "language", "JavaScript"
 ```
 
-````smart header="Negative indexes allowed"
-Here and in other array methods, negative indexes are allowed. They specify the position from the end of the array, like here:
+````smart header="ایندکس‌های منفی مجاز هستند"
+اینجا و در دیگر متدهای آرایه، ایندکس‌های منفی قابل استفاده هستند. آنها موقعیت را از انتهای آرایه مشخص می‌کنند، مثل اینجا:
 
 ```js run
 let arr = [1, 2, 5];
 
-// from index -1 (one step from the end)
-// delete 0 elements,
-// then insert 3 and 4
+// از ایندکس 1- (یک قدم قبل از انتها)
+// به تعداد 0 المان حذف کن،
+// سپس 3 و 4 را اضافه کن
 arr.splice(-1, 0, 3, 4);
 
 alert( arr ); // 1,2,3,4,5
 ```
 ````
 
-### slice
+### متد slice
 
-The method [arr.slice](mdn:js/Array/slice) is much simpler than similar-looking `arr.splice`.
+متد [arr.slice](mdn:js/Array/slice) از متد `arr.splice` که از لحاظ ظاهری شبیه به آن است بسیار ساده‌تر است.
 
-The syntax is:
+سینتکس اینگونه است:
 
 ```js
 arr.slice([start], [end])
 ```
 
-It returns a new array copying to it all items from index `start` to `end` (not including `end`). Both `start` and `end` can be negative, in that case position from array end is assumed.
+این متد یک آرایه جدید که تمام المان‌ها را از ایندکس `start` تا `end` (شامل خود `end` نمی‌شود) کپی می‌کند، برمی‌گرداند. `start` و `end` هر دو می‌توانند منفی باشند، که در این صورت موقعیت از انتهای آرایه حساب می‌شود.
 
-It's similar to a string method `str.slice`, but instead of substrings it makes subarrays.
+این متد شبیه متد رشته `str.slice` است، اما به جای زیر رشته، زیر آرایه ایجاد می‌کند.
 
-For instance:
+برای مثال:
 
 ```js run
 let arr = ["t", "e", "s", "t"];
 
-alert( arr.slice(1, 3) ); // e,s (copy from 1 to 3)
+alert( arr.slice(1, 3) ); // e,s (کپی کردن از 1 تا 3)
 
-alert( arr.slice(-2) ); // s,t (copy from -2 till the end)
+alert( arr.slice(-2) ); // s,t (کپی کردن از 2- تا انتها)
 ```
 
-We can also call it without arguments: `arr.slice()` creates a copy of `arr`. That's often used to obtain a copy for further transformations that should not affect the original array.
+همچنین می‌توانیم آن را بدون آرگومان هم صدا بزنیم: `arr.slice()` که یک کپی از `arr` می‌سازد. معمولا از این روش برای ایجاد یک کپی با هدف اینکه تغییرات آینده روی آرایه اصلی تاثیری نگذارد استفاده می‌کنند.
 
-### concat
+### متد concat
 
-The method [arr.concat](mdn:js/Array/concat) creates a new array that includes values from other arrays and additional items.
+متد [arr.concat](mdn:js/Array/concat) یک آرایه جدید می‌سازد که حاوی مقدارهای آرایه‌های دیگر و المان‌های اضافی است.
 
-The syntax is:
+سینتکس آن اینگونه است:
 
 ```js
 arr.concat(arg1, arg2...)
 ```
 
-It accepts any number of arguments -- either arrays or values.
+این متد به هر تعدادی آرگومان می‌پذیرد -- چه آرایه باشند چه مقدار.
 
-The result is a new array containing items from `arr`, then `arg1`, `arg2` etc.
+نتیجه آن یک آرایه جدید حاوی المان‌های `arr`، سپس `arg1`، `arg2` و غیره.
 
-If an argument `argN` is an array, then all its elements are copied. Otherwise, the argument itself is copied.
+اگر آرگومان `argN` یک آرایه باشد، سپس تمام المان‌های آن کپی می‌شود. در غیر این صورت، خود آرگومان کپی می‌شود.
 
-For instance:
+برای مثال:
 
 ```js run
 let arr = [1, 2];
 
-// create an array from: arr and [3,4]
+// و [3,4] arr :ساخت یک آرایه از
 alert( arr.concat([3, 4]) ); // 1,2,3,4
 
-// create an array from: arr and [3,4] and [5,6]
+// و [3,4] و [5,6] arr :ساخت یک آرایه از
 alert( arr.concat([3, 4], [5, 6]) ); // 1,2,3,4,5,6
 
-// create an array from: arr and [3,4], then add values 5 and 6
+// و [3,4]، سپس اضافه کردن مقدارهای 5 و 6 arr :ساخت یک آرایه از
 alert( arr.concat([3, 4], 5, 6) ); // 1,2,3,4,5,6
 ```
 
-Normally, it only copies elements from arrays. Other objects, even if they look like arrays, are added as a whole:
+به طور معمول، این متد فقط المان‌ها را از آرایه‌ها کپی می‌کند. بقیه شیءها، حتی اگر شبیه آرایه باشند، به طور کلی اضافه می‌شوند:
 
 ```js run
 let arr = [1, 2];
@@ -182,7 +182,7 @@ let arrayLike = {
 alert( arr.concat(arrayLike) ); // 1,2,[object Object]
 ```
 
-...But if an array-like object has a special `Symbol.isConcatSpreadable` property, then it's treated as an array by `concat`: its elements are added instead:
+...اما اگر یک شیء شبیه به آرایه یک ویژگی `Symbol.isConcatSpreadable` داشته باشد، سپس `concat` با آن به عنوان یک آرایه رفتار می‌کند: در عوض المان‌های آن اضافه می‌شوند:
 
 ```js run
 let arr = [1, 2];
@@ -199,25 +199,25 @@ let arrayLike = {
 alert( arr.concat(arrayLike) ); // 1,2,something,else
 ```
 
-## Iterate: forEach
+## حلقه زدن: forEach
 
-The [arr.forEach](mdn:js/Array/forEach) method allows to run a function for every element of the array.
+متد [arr.forEach](mdn:js/Array/forEach) به ما این امکان را می‌دهد که یک تابع را روی تمام المان‌های آرایه اجرا کنیم.
 
-The syntax:
+سینتکس اینگونه است:
 ```js
 arr.forEach(function(item, index, array) {
-  // ... do something with item
+  // ... با المان کاری انجام دهید
 });
 ```
 
-For instance, this shows each element of the array:
+برای مثال، این کد هر المان آرایه را نشان می‌دهد:
 
 ```js run
-// for each element call alert
+// را صدا بزن alert برای هر المان
 ["Bilbo", "Gandalf", "Nazgul"].forEach(alert);
 ```
 
-And this code is more elaborate about their positions in the target array:
+و این کد درباره موقعیت آنها در آرایه مورد نظر جزئیات بیشتری دارد:
 
 ```js run
 ["Bilbo", "Gandalf", "Nazgul"].forEach((item, index, array) => {
@@ -225,22 +225,22 @@ And this code is more elaborate about their positions in the target array:
 });
 ```
 
-The result of the function (if it returns any) is thrown away and ignored.
+نتیجه تابع (اگر چیزی برگرداند) نادیده گرفته و دور ریخته می‌شود.
 
 
-## Searching in array
+## جستجو در آرایه
 
-Now let's cover methods that search in an array.
+حال بیایید متدهایی را بخوانیم که در آرایه جستجو می‌کنند.
 
-### indexOf/lastIndexOf and includes
+### متدهای indexOf/lastIndexOf and includes
 
-The methods [arr.indexOf](mdn:js/Array/indexOf), [arr.lastIndexOf](mdn:js/Array/lastIndexOf) and [arr.includes](mdn:js/Array/includes) have the same syntax and do essentially the same as their string counterparts, but operate on items instead of characters:
+متدهای [arr.indexOf](mdn:js/Array/indexOf)، [arr.lastIndexOf](mdn:js/Array/lastIndexOf) و [arr.includes](mdn:js/Array/includes) سینتکس مشابه دارند و اساسا همان کار همتایان خود در رشته‌ها را انجام می‌دهند، اما به جای کاراکترها با المان‌ها کار دارند:
 
-- `arr.indexOf(item, from)` -- looks for `item` starting from index `from`, and returns the index where it was found, otherwise `-1`.
-- `arr.lastIndexOf(item, from)` -- same, but looks for from right to left.
-- `arr.includes(item, from)` -- looks for `item` starting from index `from`, returns `true` if found.
+- `arr.indexOf(item, from)` -- با شروع از ایندکس `from` به دنبال `item` می‌گردد و ایندکسی که المان در آن پیدا شد را برمی‌گرداند، در غیر این صورت `1-`.
+- `arr.lastIndexOf(item, from)` -- شبیه متد بالا، اما از راست به چپ جستجو می‌کند.
+- `arr.includes(item, from)` -- با شروع از ایندکس `from` به دنبال `item` می‌گردد، اگر پیدا کند `true` را برمی‌گرداند.
 
-For instance:
+برای مثال:
 
 ```js run
 let arr = [1, 0, false];
@@ -252,41 +252,41 @@ alert( arr.indexOf(null) ); // -1
 alert( arr.includes(1) ); // true
 ```
 
-Note that the methods use `===` comparison. So, if we look for `false`, it finds exactly `false` and not the zero.
+توجه داشته باشید که متدها از مقایسه `===` استفاده می‌کنند. پس اگر ما به دنبال `false` باشیم، متد دقیقا `false` را پیدا می‌کند و نه صفر را.
 
-If we want to check for inclusion, and don't want to know the exact index, then `arr.includes` is preferred.
+اگر ما می‌خواهیم شامل بودن را بررسی کنیم و به دنبال ایندکس دقیق نیستیم، پس `arr.includes` ترجیح داده می‌شود.
 
-Also, a very minor difference of `includes` is that it correctly handles `NaN`, unlike `indexOf/lastIndexOf`:
+همچنین، یک تفاوت بسیار کوچک `includes` این است که این متد به درستی `NaN` را کنترل می‌کند، درست برعکس `indexOf/lastIndexOf`:
 
 ```js run
 const arr = [NaN];
-alert( arr.indexOf(NaN) ); // -1 (should be 0, but === equality doesn't work for NaN)
-alert( arr.includes(NaN) );// true (correct)
+alert( arr.indexOf(NaN) ); // -1 (کار نمی‌کند NaN باید 0 باشد، اما برابری === برای)
+alert( arr.includes(NaN) );// true (درست است)
 ```
 
-### find and findIndex
+### متدهای find and findIndex
 
-Imagine we have an array of objects. How do we find an object with the specific condition?
+تصور کنید که یک آرایه‌ای از شیءها داریم. چگونه باید یک شیء با شرطی مشخص را پیدا کنیم؟
 
-Here the [arr.find(fn)](mdn:js/Array/find) method comes in handy.
+اینجاست که متد [arr.find(fn)](mdn:js/Array/find) بدرد می‌خورد.
 
-The syntax is:
+سینتکس آن اینگونه است:
 ```js
 let result = arr.find(function(item, index, array) {
-  // if true is returned, item is returned and iteration is stopped
-  // for falsy scenario returns undefined
+  // برگردانده شود، المان برگردانده می‌شود و حلقه‌ی تکرار متوقف می‌شود true اگر مقدار
+  // برگردانده می‌شود undefined مقدار falsy برای سناریوهای
 });
 ```
 
-The function is called for elements of the array, one after another:
+تابع برای المان‌های آرایه، یکی پس از دیگری، صدا زده می‌شود:
 
-- `item` is the element.
-- `index` is its index.
-- `array` is the array itself.
+- `item` المان است.
+- `index` ایندکس آن است.
+- `array` خود آرایه است.
 
-If it returns `true`, the search is stopped, the `item` is returned. If nothing found, `undefined` is returned.
+اگر `true` برگرداند، جستجو متوقف می‎شود، `item` برگردانده می‌شود. اگر چیزی پیدا نشود، `undefined` برگردانده می‌شود.
 
-For example, we have an array of users, each with the fields `id` and `name`. Let's find the one with `id == 1`:
+برای مثال، ما یک آرایه‌ای از کاربران داریم، که هر کدام دارای `id` و `name` هستند. بیایید کاربری که `id == 1` داشته باشد را پیدا کنیم:
 
 ```js run
 let users = [
@@ -300,28 +300,28 @@ let user = users.find(item => item.id == 1);
 alert(user.name); // John
 ```
 
-In real life arrays of objects is a common thing, so the `find` method is very useful.
+در واقعیت، آرایه‌هایی از شیءها چیز متداولی است، پس متد `find` بسیار مفید است.
 
-Note that in the example we provide to `find` the function `item => item.id == 1` with one argument. That's typical, other arguments of this function are rarely used.
+توجه داشته باشید که در مثال بالا ما تابع `item => item.id == 1` را همراه با یک آرگومان برای `find` در نظر گرفتیم. این چیز معمولی است، بقیه آرگومان‌های این تابع به ندرت استفاده می‌شوند.
 
-The [arr.findIndex](mdn:js/Array/findIndex) method is essentially the same, but it returns the index where the element was found instead of the element itself and `-1` is returned when nothing is found.
+متد [arr.findIndex](mdn:js/Array/findIndex) اساسا یکسان است، اما به جای خود المان ایندکسی که المان در آن پیدا شد را برمی‌گرداند و اگر چیزی پیدا نشد `1-` را برمی‌گرداند.
 
-### filter
+### متد filter
 
-The `find` method looks for a single (first) element that makes the function return `true`.
+متد `find` برای یک (اولین) المان که باعث شود تابع `true` برگرداند، جستجو می‌کند.
 
-If there may be many, we can use [arr.filter(fn)](mdn:js/Array/filter).
+اگر ممکن باشد تعداد بیشتری موجود باشند، می‌توانیم از [arr.filter(fn)](mdn:js/Array/filter) استفاده کنیم.
 
-The syntax is similar to `find`, but `filter` returns an array of all matching elements:
+سینتکس آن مشابه `find` است اما `filter` یک آرایه از المان‌های منطبق را برمی‌گرداند:
 
 ```js
 let results = arr.filter(function(item, index, array) {
-  // if true item is pushed to results and the iteration continues
-  // returns empty array if nothing found
+  // باشد المان به نتیجه‌ها اضافه می‌شود و حلقه تکرار ادامه پیدا می‌کند true اگر
+  // اگر چیزی پیدا نشود یک آرایه خالی برمی‌گرداند
 });
 ```
 
-For instance:
+برای مثال:
 
 ```js run
 let users = [
@@ -330,74 +330,74 @@ let users = [
   {id: 3, name: "Mary"}
 ];
 
-// returns array of the first two users
+// آرایه شامل دو کاربر اول را برمی‌گرداند
 let someUsers = users.filter(item => item.id < 3);
 
 alert(someUsers.length); // 2
 ```
 
-## Transform an array
+## تغییر شکل دادن آرایه
 
-Let's move on to methods that transform and reorder an array.
+بیایید به سراغ متدهایی برویم که یک آرایه را تغییر شکل و نظم دوباره می‌دهند.
 
-### map
+### متد map
 
-The [arr.map](mdn:js/Array/map) method is one of the most useful and often used.
+متد [arr.map](mdn:js/Array/map) یکی از پرکاربردترین و متدوال‌ترین متدهاست.
 
-It calls the function for each element of the array and returns the array of results.
+این متد یک تابع را برای هر المان آرایه صدا می‌زند و آرایه‌ای از نتیجه را برمی‌گرداند.
 
-The syntax is:
+سینتکس آن اینگونه است:
 
 ```js
 let result = arr.map(function(item, index, array) {
-  // returns the new value instead of item
+  // به جای المان، مقدار جدید را برمی‌گرداند
 });
 ```
 
-For instance, here we transform each element into its length:
+برای مثال، ما هر المان را به طول آن تغییر می‌دهیم:
 
 ```js run
 let lengths = ["Bilbo", "Gandalf", "Nazgul"].map(item => item.length);
 alert(lengths); // 5,7,6
 ```
 
-### sort(fn)
+### متد sort(fn)
 
-The call to [arr.sort()](mdn:js/Array/sort) sorts the array *in place*, changing its element order.
+صدازدن [arr.sort()](mdn:js/Array/sort) آرایه را *در محل* با تغییر دادن ترتیب المان‌ها، مرتب می‌کند.
 
-It also returns the sorted array, but the returned value is usually ignored, as `arr` itself is modified.
+همچنین این متد آرایه مرتب شده را برمی‌گرداند، اما همانطور که خود `arr` تغییر داده می‌شود، مقدار برگردانده شده معمولا نادیده گرفته می‌شود.
 
-For instance:
+برای مثال:
 
 ```js run
 let arr = [ 1, 2, 15 ];
 
-// the method reorders the content of arr
+// را دوباره ترتیب بندی می‌کند arr این متد
 arr.sort();
 
 alert( arr );  // *!*1, 15, 2*/!*
 ```
 
-Did you notice anything strange in the outcome?
+چیز عجیبی را در نتیجه متوجه شدید؟
 
-The order became `1, 15, 2`. Incorrect. But why?
+ترتیب المان‌ها `1, 15, 2` شد. این اشتباه است. اما چرا؟
 
-**The items are sorted as strings by default.**
+**المان‌ها به صورت پیشفرض به عنوان رشته مرتب می‌شوند.**
 
-Literally, all elements are converted to strings for comparisons. For strings, lexicographic ordering is applied and indeed `"2" > "15"`.
+به طور کلی، تمام المان‌ها برای انجام مقایسه به رشته تبدیل می‌شوند. برای رشته‌ها، ترتیب‌بندی لفت‌نامه‌ای اعمال می‌شود و در این صورت `"2" > "15"` است.
 
-To use our own sorting order, we need to supply a function as the argument of `arr.sort()`.
+برای استفاده از ترتیب‌بندی خودمان، ما نیاز داریم که یک تابع را به عنوان آرگومان `arr.sort()` قرار دهیم.
 
-The function should compare two arbitrary values and return:
+تابع باید دو مقدار دلخواه را مقایسه کند و چیزی را برگرداند:
 ```js
 function compare(a, b) {
-  if (a > b) return 1; // if the first value is greater than the second
-  if (a == b) return 0; // if values are equal
-  if (a < b) return -1; // if the first value is less than the second
+  if (a > b) return 1; // اگر مقدار اول بزرگتر از دومی باشد
+  if (a == b) return 0; // اگر مقدارها برابر باشند
+  if (a < b) return -1; // اگر مقدار اول کمتر از دومی باشد
 }
 ```
 
-For instance, to sort as numbers:
+برای مثال، برای مرتب کردن به عنوان اعداد:
 
 ```js run
 function compareNumeric(a, b) {
@@ -415,13 +415,13 @@ arr.sort(compareNumeric);
 alert(arr);  // *!*1, 2, 15*/!*
 ```
 
-Now it works as intended.
+حالا همانطور که انتظار می‌رفت کار می‌کند.
 
-Let's step aside and think what's happening. The `arr` can be array of anything, right? It may contain numbers or strings or objects or whatever. We have a set of *some items*. To sort it, we need an *ordering function* that knows how to compare its elements. The default is a string order.
+بیایید کمی عقب بمانیم و ببینیم چه چیزی در حال اتفاق افتادن است. `arr` می‌تواند آرایه‌ای از هر چیزی باشد نه؟ ممکن است شامل اعداد یا رشته‌ها یا شیءها یا هرچیز دیگری باشد. ما دسته‌ای از *چیزها* داریم. برای مرتب کردن آن، ما به یک *تابع مرتب‌کننده* که می‌داند چگونه المان‌های دسته را مقایسه کند، نیاز داریم. ترتیب رشته‌ای پیش‌فرض است.
 
-The `arr.sort(fn)` method implements a generic sorting algorithm. We don't need to care how it internally works (an optimized [quicksort](https://en.wikipedia.org/wiki/Quicksort) or [Timsort](https://en.wikipedia.org/wiki/Timsort) most of the time). It will walk the array, compare its elements using the provided function and reorder them, all we need is to provide the `fn` which does the comparison.
+متد `arr.sort(fn)` یک الگوریتم مرتب‌سازی کلی را پیاده‌سازی می‌کند. ما نیازی نداریم که بدانیم درون آن چه اتفاقی می‌افتد (اکثر اوقات از یک [مرتب‌سازی سریع](https://fa.wikipedia.org/wiki/مرتب%E2%80%8Cسازی_سریع) یا [Timsort](https://fa.wikipedia.org/wiki/مرتب%E2%80%8Cسازی_تیم) بهینه‌شده استفاده می‌شود). این متد آرایه را طی می‌کند، المان‌های آن را با استفاده از تابع فراهم شده مقایسه می‌کند و آنها را مرتب می‌کند، تمام آن چیزی که ما نیاز داریم این است که یک `fn` فراهم کنیم که مقایسه را انجام دهد.
 
-By the way, if we ever want to know which elements are compared -- nothing prevents from alerting them:
+راستی، اگر ما بخواهیم بدانیم که کدام المان‌ها مقایسه می‌شوند -- چیزی ما را از alert کردن آنها متوقف نمی‌کند:
 
 ```js run
 [1, -2, 15, 2, 0, 8].sort(function(a, b) {
@@ -430,12 +430,12 @@ By the way, if we ever want to know which elements are compared -- nothing preve
 });
 ```
 
-The algorithm may compare an element with multiple others in the process, but it tries to make as few comparisons as possible.
+الگوریتم ممکن است یک المان را با چند المان دیگر در حین فرایند مقایسه کند، اما تلاش می‌کند که تا جایی که می‌تواند مقایسه‌های کمی انجام دهد.
 
-````smart header="A comparison function may return any number"
-Actually, a comparison function is only required to return a positive number to say "greater" and a negative number to say "less".
+````smart header="یک تابع مقایسه می‌تواند هر عددی برگرداند"
+در واقع یک تابع مقایسه فقط نیاز دارد که یک عدد مثبت را برای اینکه بگوید «بزرگتر» است برگرداند و یک عدد منفی را برای گفتن «کمتر» است.
 
-That allows to write shorter functions:
+این ویژگی سبب می‌شود که تابع‌های کوتاه‌تری نوشته شود:
 
 ```js run
 let arr = [ 1, 2, 15 ];
@@ -446,37 +446,37 @@ alert(arr);  // *!*1, 2, 15*/!*
 ```
 ````
 
-````smart header="Arrow functions for the best"
-Remember [arrow functions](info:arrow-functions-basics)? We can use them here for neater sorting:
+````smart header="توابع پیکانی بهترین‌اند"
+[تابع‌های پیکانی](info:arrow-functions-basics) را به یاد دارید؟ ما می‌توانیم از آنها برای مرتب‌سازی تمیزتر استفاده کنیم:
 
 ```js
 arr.sort( (a, b) => a - b );
 ```
 
-This works exactly the same as the longer version above.
+این کد دقیقا مانند نسخه طولانی‌تر بالایی کار می‌کند.
 ````
 
-````smart header="Use `localeCompare` for strings"
-Remember [strings](info:string#correct-comparisons) comparison algorithm? It compares letters by their codes by default.
+````smart header="برای رشته‌ها از `localeCompare` استفاده کنید"
+الگوریتم مقایسه [رشته‌ها](info:string#correct-comparisons) را به یاد دارید؟ این الگوریتم به صورت پیش‌فرض حروف را با کدهای آنها مقایسه می‌کند.
 
-For many alphabets, it's better to use `str.localeCompare` method to correctly sort letters, such as `Ö`.
+برای بساری از حروف الفبا، بهتر است از متد `str.localeCompare` برای مرتب‌کردن صحیح حروف استفاده شود، مانند `Ö`.
 
-For example, let's sort a few countries in German:
+برای مثال، بیایید چند کشور را به زبان آلمانی مرتب کنیم:
 
 ```js run
 let countries = ['Österreich', 'Andorra', 'Vietnam'];
 
-alert( countries.sort( (a, b) => a > b ? 1 : -1) ); // Andorra, Vietnam, Österreich (wrong)
+alert( countries.sort( (a, b) => a > b ? 1 : -1) ); // Andorra, Vietnam, Österreich (اشتباه است)
 
-alert( countries.sort( (a, b) => a.localeCompare(b) ) ); // Andorra,Österreich,Vietnam (correct!)
+alert( countries.sort( (a, b) => a.localeCompare(b) ) ); // Andorra,Österreich,Vietnam (درست است!)
 ```
 ````
 
-### reverse
+### متد reverse
 
-The method [arr.reverse](mdn:js/Array/reverse) reverses the order of elements in `arr`.
+متد [arr.reverse](mdn:js/Array/reverse) ترتیب المان‌ها را `arr` برعکس می‌کند.
 
-For instance:
+برای مثال:
 
 ```js run
 let arr = [1, 2, 3, 4, 5];
@@ -485,15 +485,15 @@ arr.reverse();
 alert( arr ); // 5,4,3,2,1
 ```
 
-It also returns the array `arr` after the reversal.
+همچنین این متد ارایه `arr` را بعد از برعکس شدن برمی‌گرداند.
 
-### split and join
+### متدهای split and join
 
-Here's the situation from real life. We are writing a messaging app, and the person enters the comma-delimited list of receivers: `John, Pete, Mary`. But for us an array of names would be much more comfortable than a single string. How to get it?
+یک موقعیت در زندگی واقعی را می‌گوییم. ما در حال نوشتن یک برنامه پیام‌رسان هستیم و شخص لیستی از دریافت کنندگان که با کاما جدا شده‌اند را وارد می‌کند: `John, Pete, Mary`. اما یک آرایه‌ای از اسم‌ها بسیار راحت‌تر از یک رشته خواهد بود. چگونه آن را دریافت کنیم؟
 
-The [str.split(delim)](mdn:js/String/split) method does exactly that. It splits the string into an array by the given delimiter `delim`.
+متد [str.split(delim)](mdn:js/String/split) دقیقا همین کار را انجام می‌دهد. این متد رشته را با استفاده از جداکننده‌ی داده شده `delim` به یک آرایه تقسیم می‌کند.
 
-In the example below, we split by a comma followed by space:
+در مثال بالا، ما توسط یک کاما که بعد آن space می‌آید رشته را جدا می‌کنیم:
 
 ```js run
 let names = 'Bilbo, Gandalf, Nazgul';
@@ -501,11 +501,11 @@ let names = 'Bilbo, Gandalf, Nazgul';
 let arr = names.split(', ');
 
 for (let name of arr) {
-  alert( `A message to ${name}.` ); // A message to Bilbo  (and other names)
+  alert( `A message to ${name}.` ); // A message to Bilbo  (و بقیه اسم‌ها)
 }
 ```
 
-The `split` method has an optional second numeric argument -- a limit on the array length. If it is provided, then the extra elements are ignored. In practice it is rarely used though:
+متد `split` یک آرگومان اختیاری دوم هم دارد -- یک محدودیت برای طول آرایه. اگر این آرگومان اضافه شود، سپس المان‌های دیگر نادیده گرفته می‌شوند. گرچه در عمل به ندرت استفاده می‌شود:
 
 ```js run
 let arr = 'Bilbo, Gandalf, Nazgul, Saruman'.split(', ', 2);
@@ -513,8 +513,8 @@ let arr = 'Bilbo, Gandalf, Nazgul, Saruman'.split(', ', 2);
 alert(arr); // Bilbo, Gandalf
 ```
 
-````smart header="Split into letters"
-The call to `split(s)` with an empty `s` would split the string into an array of letters:
+````smart header="جداکردن به حروف"
+صدا زدن `split(s)` با یک `s` خالی رشته را به آرایه‌ای از حروف جدا می‌کند:
 
 ```js run
 let str = "test";
@@ -523,27 +523,27 @@ alert( str.split('') ); // t,e,s,t
 ```
 ````
 
-The call [arr.join(glue)](mdn:js/Array/join) does the reverse to `split`. It creates a string of `arr` items joined by `glue` between them.
+صدا زدن [arr.join(glue)](mdn:js/Array/join) عمل برعکس `split` را انجام می‌هد. این متد یک رشته از `arr` می‌سازد که توسط `glue` المان‌ها متصل شده‌اند.
 
-For instance:
+برای مثال:
 
 ```js run
 let arr = ['Bilbo', 'Gandalf', 'Nazgul'];
 
-let str = arr.join(';'); // glue the array into a string using ;
+let str = arr.join(';'); // آرایه را با استفاده از ; به یک رشته تبدیل کنید
 
 alert( str ); // Bilbo;Gandalf;Nazgul
 ```
 
-### reduce/reduceRight
+### متد reduce/reduceRight
 
-When we need to iterate over an array -- we can use `forEach`, `for` or `for..of`.
+زمانی که ما نیاز داشته باشیم که در یک آرایه حلقه بزنیم، می‌توانیم از `forEach`، `for` یا `for..of` استفاده کنیم.
 
-When we need to iterate and return the data for each element -- we can use `map`.
+زمانی که ما نیاز داشته باشیم در المان‌ها حلقه بزنیم و داده را برای هر المان برگردانیم، می‌توانیم از `map` استفاده کنیم.
 
-The methods [arr.reduce](mdn:js/Array/reduce) and [arr.reduceRight](mdn:js/Array/reduceRight) also belong to that breed, but are a little bit more intricate. They are used to calculate a single value based on the array.
+متدهای [arr.reduce](mdn:js/Array/reduce) و [arr.reduceRight](mdn:js/Array/reduceRight) همچنین به این دسته تعلق دارند، اما کمی پیچیده‌تر هستند. آنها برای محاسبه یک مقدار بر اساس آرایه، استفاده می‌شوند.
 
-The syntax is:
+سینتکس اینگونه است:
 
 ```js
 let value = arr.reduce(function(accumulator, item, index, array) {
@@ -551,24 +551,24 @@ let value = arr.reduce(function(accumulator, item, index, array) {
 }, [initial]);
 ```
 
-The function is applied to all array elements one after another and "carries on" its result to the next call.
+تابع روی تمام المان‌های آرایه اعمال می‌شود و نتیجه خود را به فراخوانی بعدی «منتقل می‌کند».
 
-Arguments:
+آرگومان‌ها:
 
-- `accumulator` -- is the result of the previous function call, equals `initial` the first time (if `initial` is provided).
-- `item` -- is the current array item.
-- `index` -- is its position.
-- `array` -- is the array.
+- `accumulator` -- نتیجه قبلی فراخوانی تابع است، دفعه اول با `initial` برابر است (اگر `initial` وجود داشته باشد).
+- `item` -- المان کنونی آرایه است.
+- `index` -- موقعیت آن است.
+- `array` -- آرایه است.
 
-As function is applied, the result of the previous function call is passed to the next one as the first argument.
+همانطور که تابع اعمال می‌شود، نتیجه فراخوانی قبلی به عنوان آرگومان اول به فراخوانی بعدی منتقل می‌شود.
 
-So, the first argument is essentially the accumulator that stores the combined result of all previous executions. And at the end it becomes the result of `reduce`.
+بنابراین، اولین آرگومان اساسا همان حافظه‌ای است که نتیجه ترکیب شده تمام فراخوانی‌های قبلی را ذخیره کرده است. و در پایان تبدیل به نتیجه `reduce` می‌شود.
 
-Sounds complicated?
+بنظر پیچیده می‌آید؟
 
-The easiest way to grasp that is by example.
+راحت‌ترین راه برای فهمیدن این قضیه، توسط مثال است.
 
-Here we get a sum of an array in one line:
+اینجا ما حاصل جمع یک آرایه را در یک خط می‌گیریم:
 
 ```js run
 let arr = [1, 2, 3, 4, 5];
@@ -578,74 +578,74 @@ let result = arr.reduce((sum, current) => sum + current, 0);
 alert(result); // 15
 ```
 
-The function passed to `reduce` uses only 2 arguments, that's typically enough.
+تابعی که به `reduce` داده شد تنها از 2 آرگومان استفاده می‌کند که معمولا کافی است.
 
-Let's see the details of what's going on.
+بیایید جزئیات چیزی که در حال انجام است را ببینیم.
 
-1. On the first run, `sum` is the `initial` value (the last argument of `reduce`), equals `0`, and `current` is the first array element, equals `1`. So the function result is `1`.
-2. On the second run, `sum = 1`, we add the second array element (`2`) to it and return.
-3. On the 3rd run, `sum = 3` and we add one more element to it, and so on...
+1. در اجرای اول، `sum` برابر با مقدار `initial` است (آخرین آرگومان `reduce`)، که برابر با `0` است، و `current` اولین المان آرایه است، که برابر با `1` است. پس نتیجه تابع `1` است.
+2. در اجرای دوم، `sum = 1`، که ما المان دوم آرایه (`2`) را به آن اضافه و برمی‌گردانیم.
+3. در اجرای سوم، `sum = 3` و ما یک المان دیگر به آن اضافه می‌کنیم و...
 
-The calculation flow:
+گردش محاسبه:
 
 ![](reduce.svg)
 
-Or in the form of a table, where each row represents a function call on the next array element:
+یا به شکل یک جدول که هر ردیف نشان‌دهنده یک فراخوانی تابع روی المان بعدی آرایه است:
 
-|   |`sum`|`current`|result|
+|   |`sum`|`current`|نتیجه|
 |---|-----|---------|---------|
-|the first call|`0`|`1`|`1`|
-|the second call|`1`|`2`|`3`|
-|the third call|`3`|`3`|`6`|
-|the fourth call|`6`|`4`|`10`|
-|the fifth call|`10`|`5`|`15`|
+|فراخوانی اول|`0`|`1`|`1`|
+|فراخوانی دوم|`1`|`2`|`3`|
+|فراخوانی سوم|`3`|`3`|`6`|
+|فراخوانی چهارم|`6`|`4`|`10`|
+|فراخوانی پنجم|`10`|`5`|`15`|
 
-Here we can clearly see how the result of the previous call becomes the first argument of the next one.
+اینجا ما می‌توانیم به صورت شفاف ببینیم که نتیجه فراخوانی قبلی به اولین آرگومان فراخوانی بعدی تبدیل می‌شود.
 
-We also can omit the initial value:
+ما همچنین می‌توانیم مقدار اولیه را حذف کنیم:
 
 ```js run
 let arr = [1, 2, 3, 4, 5];
 
-// removed initial value from reduce (no 0)
+// حذف شد (بدون 0) reduce مقدار اولیه از
 let result = arr.reduce((sum, current) => sum + current);
 
 alert( result ); // 15
 ```
 
-The result is the same. That's because if there's no initial, then `reduce` takes the first element of the array as the initial value and starts the iteration from the 2nd element.
+نتیجه یکسان است. به دلیل اینکه اگر مقدار اولیه‌ای وجود نداشته باشد، سپس `reduce` اولین المان آرایه را به عنوان مقدار اولیه انتخاب می‌کند و حلقه‌زدن را از دومین المان شروع می‌کند.
 
-The calculation table is the same as above, minus the first row.
+جدول محاسبات مانند بالا است، منتها ردیف اول را ندارد.
 
-But such use requires an extreme care. If the array is empty, then `reduce` call without initial value gives an error.
+اما استفاده کردن به این صورت به دقت بسیار بالایی نیاز دارد. اگر آرایه خالی باشد، سپس فراخوانی `reduce` بدون مقدار اولیه ارور می‌دهد.
 
-Here's an example:
+یک مثال اینجا داریم:
 
 ```js run
 let arr = [];
 
 // Error: Reduce of empty array with no initial value
-// if the initial value existed, reduce would return it for the empty arr.
+// .آن را برای آرایه خالی برمی‌گرداند reduce ،اگر مقدار اولیه وجود داشت
 arr.reduce((sum, current) => sum + current);
 ```
 
-So it's advised to always specify the initial value.
+بنابراین توصیه می‌شود همیشه مقدار اولیه را تعیین کنید.
 
-The method [arr.reduceRight](mdn:js/Array/reduceRight) does the same, but goes from right to left.
+متد [arr.reduceRight](mdn:js/Array/reduceRight) کار یکسان را انجام می‌هد، اما از راست به چپ.
 
 
-## Array.isArray
+##متد Array.isArray
 
-Arrays do not form a separate language type. They are based on objects.
+آرایه‌ها شکل جدیدی از انواع داده را شکل نمی‌دهند. آنها بر اساس شیءها هستند.
 
-So `typeof` does not help to distinguish a plain object from an array:
+بنابراین `typeof` برای تشخیص یک شیء ساده از آرایه کمکی نمی‌کند:
 
 ```js run
 alert(typeof {}); // object
-alert(typeof []); // same
+alert(typeof []); // یکسان
 ```
 
-...But arrays are used so often that there's a special method for that: [Array.isArray(value)](mdn:js/Array/isArray). It returns `true` if the `value` is an array, and `false` otherwise.
+...اما آرایه‌ها به دلیل اینکه اغلب اوقات استفاده می‌شوند، یک متد خاص برای این کار دارند: [Array.isArray(value)](mdn:js/Array/isArray). این متد اگر `value` یک آرایه باشد `true` برمی‌گرداند و در غیر این صورت `false`.
 
 ```js run
 alert(Array.isArray({})); // false
@@ -653,25 +653,25 @@ alert(Array.isArray({})); // false
 alert(Array.isArray([])); // true
 ```
 
-## Most methods support "thisArg"
+## اکثر متدها از "thisArg" پشتیبانی می‌کنند
 
-Almost all array methods that call functions -- like `find`, `filter`, `map`, with a notable exception of `sort`, accept an optional additional parameter `thisArg`.
+تقریبا تمام متدهای آرایه که تابعی را صدا می‌زنند -- مانند `find`، `filter`، `map`، همچنین یک استثنا از `sort`، پارامتر اختیاری اضافی `thisArg` را قبول می‌کنند.
 
-That parameter is not explained in the sections above, because it's rarely used. But for completeness we have to cover it.
+این پارامتر به دلیل اینکه به ندرت استفاده می‌شود، در قسمت‌های بالایی گفته نشد. اما برای کامل بودن ما باید آن را پوشش دهیم.
 
-Here's the full syntax of these methods:
+سینتکس کامل این متدها در زیر آمده است:
 
 ```js
 arr.find(func, thisArg);
 arr.filter(func, thisArg);
 arr.map(func, thisArg);
 // ...
-// thisArg is the optional last argument
+// آرگومان اختیاری آخر است thisArg
 ```
 
-The value of `thisArg` parameter becomes `this` for `func`.
+مقدار `thisArg` برای `func` برابر با `this` خواهد بود.
 
-For example, here we use a method of `army` object as a filter, and `thisArg` passes the context:
+برای مثال، اینجا ما از متد شیء `army` به عنوان یک فیلتر استفاده می‌کنیم، و `thisArg` محتوا را رد و بدل می‌کند:
 
 ```js run
 let army = {
@@ -690,7 +690,7 @@ let users = [
 ];
 
 *!*
-// find users, for who army.canJoin returns true
+// برمی‌گرداند را پیدا کن true به ازای آنها army.canJoin هایی کهuser
 let soldiers = users.filter(army.canJoin, army);
 */!*
 
@@ -699,53 +699,53 @@ alert(soldiers[0].age); // 20
 alert(soldiers[1].age); // 23
 ```
 
-If in the example above we used `users.filter(army.canJoin)`, then `army.canJoin` would be called as a standalone function, with `this=undefined`, thus leading to an instant error.
+اگر در مثال بالا ما از `users.filter(army.canJoin)` استفاده می‌کردیم، سپس `army.canJoin` به عنوان یک تابع جداگانه صدا زده می‌شد که `this=undefined`، بنابراین درجا به یک ارور برمی‌خوردیم.
 
-A call to `users.filter(army.canJoin, army)` can be replaced with `users.filter(user => army.canJoin(user))`, that does the same. The latter is used more often, as it's a bit easier to understand for most people.
+صدازدن `users.filter(army.canJoin, army)` می‌تواند با `users.filter(user => army.canJoin(user))` جایگزین شود، که هردو یکسان هستند. نوع دوم بیشتر استفاده می‌شود، چون برای اکثر مردم مقداری قابل فهم‌تر است.
 
-## Summary
+## خلاصه
 
-A cheat sheet of array methods:
+برگ تقلبی از متدهای آرایه:
 
-- To add/remove elements:
-  - `push(...items)` -- adds items to the end,
-  - `pop()` -- extracts an item from the end,
-  - `shift()` -- extracts an item from the beginning,
-  - `unshift(...items)` -- adds items to the beginning.
-  - `splice(pos, deleteCount, ...items)` -- at index `pos` deletes `deleteCount` elements and inserts `items`.
-  - `slice(start, end)` -- creates a new array, copies elements from index `start` till `end` (not inclusive) into it.
-  - `concat(...items)` -- returns a new array: copies all members of the current one and adds `items` to it. If any of `items` is an array, then its elements are taken.
+- برای اضافه/حذف کردن المان‌ها:
+  - `push(...items)` -- المان‌ها را به آخر اضافه می‌کند،
+  - `pop()` -- یک المان را از آخر حذف می‌کند،
+  - `shift()` -- یک المان را از آغاز حذف می‌کند،
+  - `unshift(...items)` -- المان‌هایی را به آغاز اضافه می‌کند.
+  - `splice(pos, deleteCount, ...items)` -- در ایندکس `pos` به تعداد `deleteCount` المان حذف و `items` را اضافه می‌کند.
+  - `slice(start, end)` -- با ساختن یک آرایه جدید، المان‌ها را از ایندکس `start` تا `end` (شامل نمی‌شود) در آن کپی می‌کند.
+  - `concat(...items)` -- یک آرایه جدید را برمی‌گرداند: تمام عضوهای آرایه کنونی را کپی می‌کند و `items` را به آن اضافه می‌کند. اگر هر کدام از `items` آرایه باشد، سپس المان‌های آن اضافه می‌شوند.
 
-- To search among elements:
-  - `indexOf/lastIndexOf(item, pos)` -- look for `item` starting from position `pos`, return the index or `-1` if not found.
-  - `includes(value)` -- returns `true` if the array has `value`, otherwise `false`.
-  - `find/filter(func)` -- filter elements through the function, return first/all values that make it return `true`.
-  - `findIndex` is like `find`, but returns the index instead of a value.
+- برای جستجو در بین المان‌ها:
+  - `indexOf/lastIndexOf(item, pos)` -- با شروع از موقعیت `pos` به دنبال `item` می‌گردد، ایندکس آن را برمی‌گرداند و در صورتی که پیدا نشود `1-` را برمی‌گرداند.
+  - `includes(value)` -- اگر آرایه دارای `value` باشد، مقدار `true` را برمی‌گرداند در غیر این صورت `false`.
+  - `find/filter(func)` -- المان‌ها را از طریق تابع فیلتر می‌کند، اولین/تمام مقدارهایی که سبب می‌شوند تابع `true` برگرداند را برمی‌گرداند.
+  - `findIndex` مانند `find` است اما به جای مقدار ایندکس را برمی‌گرداند.
 
-- To iterate over elements:
-  - `forEach(func)` -- calls `func` for every element, does not return anything.
+- برای حلقه زدن در یک آرایه:
+  - `forEach(func)` -- برای تمام المان‌ها تابع `func` را صدا می‌زند، چیزی را برنمی‌گرداند.
 
-- To transform the array:
-  - `map(func)` -- creates a new array from results of calling `func` for every element.
-  - `sort(func)` -- sorts the array in-place, then returns it.
-  - `reverse()` -- reverses the array in-place, then returns it.
-  - `split/join` -- convert a string to array and back.
-  - `reduce/reduceRight(func, initial)` -- calculate a single value over the array by calling `func` for each element and passing an intermediate result between the calls.
+- برای تغییر شکل یک آرایه:
+  - `map(func)` -- از نتایج صدازدن `func` برای هر المان، یک آرایه جدید می‌سازد.
+  - `sort(func)` -- آرایه را در محل مرتب می‌کند، سپس آن را برمی‌گرداند.
+  - `reverse()` -- آرایه را در محل برعکس می‌کند، سپس آن را برمی‌گرداند.
+  - `split/join` -- یک رشته را به آرایه تبدیل می‌کند و برعکس.
+  - `reduce/reduceRight(func, initial)` -- با صدا زدن `func` برای هر المان و رد و بدل کردن یک نتیجه واسطه بین هر فراخوانی، یک مقدار مفرد را در آرایه محاسبه می‌کند.
 
-- Additionally:
-  - `Array.isArray(arr)` checks `arr` for being an array.
+- علاوه بر این:
+  - `Array.isArray(arr)` بررسی می‌کند که `arr` یک آرایه باشد.
 
-Please note that methods `sort`, `reverse` and `splice` modify the array itself.
+لطفا در نظر داشته باشید که متدهای `sort`، `reverse` و `splice` خود آرایه را تغییر می‌دهند.
 
-These methods are the most used ones, they cover 99% of use cases. But there are few others:
+متدهای ذکر شده بیشترین استفاده را دارند، آنها 99% موارد استفاده را پوشش می‌دهند. اما چند متد دیگر هم هست:
 
-- [arr.some(fn)](mdn:js/Array/some)/[arr.every(fn)](mdn:js/Array/every) check the array.
+- [arr.some(fn)](mdn:js/Array/some)/[arr.every(fn)](mdn:js/Array/every) آرایه را بررسی می‌کنند.
 
-  The function `fn` is called on each element of the array similar to `map`. If any/all results are `true`, returns `true`, otherwise `false`.
+  تابع `fn` رو تمام المان‌های آرایه صدا زده می‌شود درست شبیه `map`. اگر تمام نتایج `true` بود، مقدار `true` را برمی‌گرداند، در غیر این صورت `false`.
 
-  These methods behave sort of like `||` and `&&` operators: if `fn` returns a truthy value, `arr.some()` immediately returns `true` and stops iterating over the rest of items; if `fn` returns a falsy value, `arr.every()` immediately returns `false` and stops iterating over the rest of items as well.
+  این متدها تقریبا شبیه عملگرهای `||` و `&&` رفتار می‌کنند: اگر `fn` مقدار truthy را برگرداند، `arr.some()` درجا `true` را برمی‌گرداند و حلقه زدن روی بقیه المان‌ها را متوقف می‌کند؛ اگر `fn` یک مقدار falsy برگرداند، `arr.every()` فورا `false` را برمی‌گرداند و حلقه زدن در بقیه المان‌ها را متوقف می‌کند.
 
-  We can use `every` to compare arrays:
+  ما می‌توانیم از `every` برای مقایسه آرایه‌ها استفاده کنیم
   ```js run
   function arraysEqual(arr1, arr2) {
     return arr1.length === arr2.length && arr1.every((value, index) => value === arr2[index]);
@@ -754,16 +754,16 @@ These methods are the most used ones, they cover 99% of use cases. But there are
   alert( arraysEqual([1, 2], [1, 2])); // true
   ```
 
-- [arr.fill(value, start, end)](mdn:js/Array/fill) -- fills the array with repeating `value` from index `start` to `end`.
+- [arr.fill(value, start, end)](mdn:js/Array/fill) -- آرایه را با مقدار تکرار شونده `value` از ایندکس `start` تا `end` پر می‌کند.
 
-- [arr.copyWithin(target, start, end)](mdn:js/Array/copyWithin) -- copies its elements from position `start` till position `end` into *itself*, at position `target` (overwrites existing).
+- [arr.copyWithin(target, start, end)](mdn:js/Array/copyWithin) -- المان‌های خود را از موقعیت `start` تا موقعیت `end` در *خودش* و در موقعیت `target` کپی می‌کند (جایگزین المان موجود می‌شود).
 
-- [arr.flat(depth)](mdn:js/Array/flat)/[arr.flatMap(fn)](mdn:js/Array/flatMap) create a new flat array from a multidimensional array.
+- [arr.flat(depth)](mdn:js/Array/flat)/[arr.flatMap(fn)](mdn:js/Array/flatMap) آرایه‌ای یک دست را از آرایه‌ای چند بعدی می‌سازند.
 
-For the full list, see the [manual](mdn:js/Array).
+برای دیدن لیست کامل، از [راهنما](mdn:js/Array) استفاده کنید.
 
-From the first sight it may seem that there are so many methods, quite difficult to remember. But actually that's much easier.
+با اولین نگاه ممکن است به نظر برسد که متدهای بسیار زیادی وجود دارد و به حافظه سپردن آنها مشکل است. اما در واقع بسیار آسان‌تر است.
 
-Look through the cheat sheet just to be aware of them. Then solve the tasks of this chapter to practice, so that you have experience with array methods.
+برای داشتن شناخت از آنها به برگه تقلب نگاه بیاندازید. سپس تکلیف‌های این فصل را برای تمرین انجام دهید تا نسبت به متدهای آرایه تجربه بدست بیاورید.
 
-Afterwards whenever you need to do something with an array, and you don't know how -- come here, look at the cheat sheet and find the right method. Examples will help you to write it correctly. Soon you'll automatically remember the methods, without specific efforts from your side.
+پس از آن هر موقع که نیاز داشتید با یک آرایه کاری انجام دهید، و نمی‌دانید چگونه، به این صفحه بیایید، به برگه تقلب نگاهی بیاندازید و متد مناسب را پیدا کنید. مثال‌ها به شما در نوشتن درست آن کمک می‌کنند. به زودی به طور خودکار شما متدها را به حافظه می‌سپارید، بدون تلاش خاصی از جانب خودتان.

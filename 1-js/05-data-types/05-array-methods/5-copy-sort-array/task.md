@@ -2,11 +2,11 @@ importance: 5
 
 ---
 
-# Copy and sort array
+# کپی و مرتب کردن آرایه
 
-We have an array of strings `arr`. We'd like to have a sorted copy of it, but keep `arr` unmodified.
+ما آرایه‌ای از رشته‌ها `arr` داریم. ما می‌خواهیم یک کپی مرتب شده از آن را داشته باشیم اما `arr` را تغییر ندهیم.
 
-Create a function `copySorted(arr)` that returns such a copy.
+یک تابع `copySorted(arr)` بسازید که چنین کپی‌ای را برگرداند.
 
 ```js
 let arr = ["HTML", "JavaScript", "CSS"];
@@ -14,5 +14,5 @@ let arr = ["HTML", "JavaScript", "CSS"];
 let sorted = copySorted(arr);
 
 alert( sorted ); // CSS, HTML, JavaScript
-alert( arr ); // HTML, JavaScript, CSS (no changes)
+alert( arr ); // HTML, JavaScript, CSS (بدون تغییر)
 ```

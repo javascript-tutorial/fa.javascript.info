@@ -2,11 +2,11 @@ importance: 3
 
 ---
 
-# Shuffle an array
+# آرایه را بُر بزنید
 
-Write the function `shuffle(array)` that shuffles (randomly reorders) elements of the array.
+تابع `shuffle(array)` را بنویسید که المان‌های آرایه را بُر می‌زند (به طور تصادفی ترتیب‌بندی می‌کند).
 
-Multiple runs of `shuffle` may lead to different orders of elements. For instance:
+هر بار فراخوانی `shuffle` ممکن است به ترتیب متفاوتی از المان‌ها منجر شود. برای مثال:
 
 ```js
 let arr = [1, 2, 3];
@@ -22,4 +22,4 @@ shuffle(arr);
 // ...
 ```
 
-All element orders should have an equal probability. For instance, `[1,2,3]` can be reordered as `[1,2,3]` or `[1,3,2]` or `[3,1,2]` etc, with equal probability of each case.
+ترتیب تمام المان‌ها باید احتمال برابر داشته باشند. برای مثال، `[1,2,3]` می‌تواند به شکل `[1,2,3]` یا `[1,3,2]` یا `[3,1,2]` و... مرتب شود که احتمال هر مورد برابر است.
