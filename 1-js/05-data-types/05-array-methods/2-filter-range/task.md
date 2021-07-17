@@ -2,21 +2,21 @@ importance: 4
 
 ---
 
-# Filter range
+# جداسازی توسط حدود
 
-Write a function `filterRange(arr, a, b)` that gets an array `arr`, looks for elements with values higher or equal to `a` and lower or equal to `b` and return a result as an array.
+یک تابع `filterRange(arr, a, b)` بنویسید که یک آرایه `arr` دریافت می‌کند، به دنبال المان‌های بزرگتر یا مساوی `a` و کوچکتر یا مساوی `b` می‌گردد و نتیجه را به شکل آرایه برمی‌گرداند.
 
-The function should not modify the array. It should return the new array.
+تابع نباید آرایه داده شده را تغییر دهد. باید آرایه جدید را برگرداند.
 
-For instance:
+برای مثال:
 
 ```js
 let arr = [5, 3, 8, 1];
 
 let filtered = filterRange(arr, 1, 4); 
 
-alert( filtered ); // 3,1 (matching values)
+alert( filtered ); // 3,1 (مقدارهای مورد نظر)
 
-alert( arr ); // 5,3,8,1 (not modified)
+alert( arr ); // 5,3,8,1 (تغییر داده نشده)
 ```
 
