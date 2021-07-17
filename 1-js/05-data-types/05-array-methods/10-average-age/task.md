@@ -2,13 +2,13 @@ importance: 4
 
 ---
 
-# Get average age
+# دریافت میانگین سن
 
-Write the function `getAverageAge(users)` that gets an array of objects with property `age` and returns the average age.
+تابع `getAverageAge(users)` بنویسید که آرایه‌ای از اشیای دارای ویژگی `age` می‌گیرد و میانگین سن را برمی‌گرداند.
 
-The formula for the average is `(age1 + age2 + ... + ageN) / N`.
+فرمول میانگین به این صورت است: `(age1 + age2 + ... + ageN) / N`.
 
-For instance:
+برای مثال:
 
 ```js no-beautify
 let john = { name: "John", age: 25 };
