@@ -2,13 +2,13 @@ importance: 5
 
 ---
 
-# Translate border-left-width to borderLeftWidth
+# عبارت border-left-width را به borderLeftWidth تغییر دهید
 
-Write the function `camelize(str)` that changes dash-separated words like "my-short-string" into camel-cased "myShortString".
+تابع `camelize(str)` را بنویسید که کلمه‌های جدا شده توسط خط تیره مانند "my-short-string" را به عبارت camel-cased مانند "myShortString" تبدیل می‌کند.
 
-That is: removes all dashes, each word after dash becomes uppercased.
+یعنی اینکه تمام خط تیره‌ها را حذف کند و هر کلمه بعد از خط تیره با حرف بزرگ شروع شود.
 
-Examples:
+مثال‌ها:
 
 ```js
 camelize("background-color") == 'backgroundColor';
@@ -16,4 +16,4 @@ camelize("list-style-image") == 'listStyleImage';
 camelize("-webkit-transition") == 'WebkitTransition';
 ```
 
-P.S. Hint: use `split` to split the string into an array, transform it and `join` back.
+پی نوشت: راهنمایی: از `split` برای تبدیل رشته به آرایه استفاده کنید، آن را تغییر شکل دهید و با `join` آنها را پیوند بزنید.
