@@ -15,7 +15,7 @@ function filterRangeInPlace(arr, a, b) {
 
 let arr = [5, 3, 8, 1];
 
-filterRangeInPlace(arr, 1, 4); // تمام اعداد به جز 1 تا 4 را حذف کردیم
+filterRangeInPlace(arr, 1, 4); // تمام اعداد به جز 1 تا 4 را حذف کرد
 
 alert( arr ); // [3, 1]
 
