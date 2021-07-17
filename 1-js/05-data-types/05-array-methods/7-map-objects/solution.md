@@ -25,9 +25,9 @@ alert( usersMapped[0].id ); // 1
 alert( usersMapped[0].fullName ); // John Smith
 ```
 
-Please note that in the arrow functions we need to use additional brackets. 
+لطفا در نظر داشته باشید که در تابع‌های کمانی ما باید از پرانتزهای اضافی استفاده کنیم.
 
-We can't write like this:
+نمی‌توانیم اینگونه بنویسیم:
 ```js
 let usersMapped = users.map(user => *!*{*/!*
   fullName: `${user.name} ${user.surname}`,
@@ -35,9 +35,9 @@ let usersMapped = users.map(user => *!*{*/!*
 });
 ```
 
-As we remember, there are two arrow functions: without body `value => expr` and with body `value => {...}`.
+همانطور که به یاد داریم، دو نوع تابع کمانی وجود دارد: بدون بدنه `value => expr` و همراه با بدنه `value => {...}`.
 
-Here JavaScript would treat `{` as the start of function body, not the start of the object. The workaround is to wrap them in the "normal" brackets:
+اینجا جاوااسکریپت با `}` به عنوان آغاز بدنه تابع رفتار می‌کند نه آغاز شیء. راه حل در پیچیدن آنها درون یک «پرانتر» است:
 
 ```js
 let usersMapped = users.map(user => *!*({*/!*
@@ -46,6 +46,6 @@ let usersMapped = users.map(user => *!*({*/!*
 }));
 ```
 
-Now fine.
+حالا درست است.
 
 
