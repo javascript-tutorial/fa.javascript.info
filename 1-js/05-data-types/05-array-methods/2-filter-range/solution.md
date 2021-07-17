@@ -1,6 +1,6 @@
 ``` js run
 function filterRange(arr, a, b) {
-  // برای خوانایی بهتر به دور عبارت براکت اضافه کردیم
+  // برای خوانایی بهتر به دور عبارت، پرانتز اضافه کردیم
   return arr.filter(item => (a <= item && item <= b));
 }
 
