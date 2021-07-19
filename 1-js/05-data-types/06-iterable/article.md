@@ -8,13 +8,13 @@
 اگر یک شیء به طور فنی آرایه نباشد، اما یک مجموعه (لیست یا دسته) از چیزها را نشان دهد، `for..of` یک سینتکس عالی برای حلقه‌زدن درون آن است، پس بیایید ببینیم چگونه چنین کاری را انجام دهیم.
 
 
-## Symbol.iterator
+## ویژگی Symbol.iterator
 
-We can easily grasp the concept of iterables by making one of our own.
+ما می‌توانیم به راحتی مفهوم حلقه‌پذیرها را با ایجاد حلقه‌پذیر خودمان درک کنیم.
 
-For instance, we have an object that is not an array, but looks suitable for `for..of`.
+برای مثال، ما یک شیء داریم که آرایه نیست، اما برای استفاده در `for..of` مناسب است.
 
-Like a `range` object that represents an interval of numbers:
+مانند یک شیء `range` که بازه‌ای از اعداد را نشان می‌دهد:
 
 ```js
 let range = {
@@ -22,18 +22,18 @@ let range = {
   to: 5
 };
 
-// We want the for..of to work:
+// :کار کند for..of می‌خواهیم که
 // for(let num of range) ... num=1,2,3,4,5
 ```
 
-To make the `range` object iterable (and thus let `for..of` work) we need to add a method to the object named `Symbol.iterator` (a special built-in symbol just for that).
+برای اینکه شیء `range` را حلقه‌پذیر کنیم (و به این ترتیب بگذاریم `for..of` کار کند) ما نیاز داریم که یک متد به اسم `Symbol.iterator` را به شیء اضافه کنیم ( یک سمبل خاص درون ساخت که فقط برای این کار است).
 
-1. When `for..of` starts, it calls that method once (or errors if not found). The method must return an *iterator* -- an object with the method `next`.
-2. Onward, `for..of` works *only with that returned object*.
-3. When `for..of` wants the next value, it calls `next()` on that object.
-4. The result of `next()` must have the form `{done: Boolean, value: any}`, where `done=true`  means that the iteration is finished, otherwise `value` is the next value.
+1. زمانی که `for..of` شروع می‌شود، متد را یک بار صدا می‌زند (یا اگر پیدا نشود ارور می‌دهد). متد باید یک *حلقه‌زننده* را برگرداند -- شیءای که متد `next` را دارد.
+2. همینطور رو به جلو، `for..of` *تنها با شیء برگردانده شده* کار می‌کند.
+3. زمانی که `for..of` مقدار بعدی را نیاز دارد، روی آن شیء `next()` را صدا می‌زند.
+4. نتیجه `next()` باید به شکل `{done: Boolean, value: any}` باشد که `done=true` به معنی پایان حلقه‌زدن است، در غیر این صورت `value` مقدار بعدی خواهد بود.
 
-Here's the full implementation for `range` with remarks:
+اینجا پیاده‌سازی کامل را برای `range` به همراه اظهارات داریم:
 
 ```js run
 let range = {
@@ -41,18 +41,18 @@ let range = {
   to: 5
 };
 
-// 1. call to for..of initially calls this
+// 1. ابتدا این متد صدا زده می‌شود for..of با استفاده از
 range[Symbol.iterator] = function() {
 
-  // ...it returns the iterator object:
-  // 2. Onward, for..of works only with this iterator, asking it for next values
+  // :این متد شیء حلقه‌زننده را برمی‌گرداند...
+  // 2. فقط با این حلقه‌زننده کار می‌کند، که از آن مقدار بعدی را درخواست می‌کند for..of ،همینطور رو به جلو
   return {
     current: this.from,
     last: this.to,      
 
-    // 3. next() is called on each iteration by the for..of loop
+    // 3. فراخوانی می‌شود for..of در هر دور حلقه توسط next()
     next() {
-      // 4. it should return the value as an object {done:.., value :...}
+      // 4. برگرداند {done:..., value:...} این متد باید مقدار را به عنوان یک شیء
       if (this.current <= this.last) {
         return { done: false, value: this.current++ };
       } else {
@@ -62,22 +62,22 @@ range[Symbol.iterator] = function() {
   };
 };
 
-// now it works!
+// !حالا کار می‌کند
 for (let num of range) {
   alert(num); // 1, then 2, 3, 4, 5
 }
 ```
 
-Please note the core feature of iterables: separation of concerns.
+لطفا خاصیت اصلی حلقه‌پذیرها را در نظر داشته باشید: تفکیک وظایف.
 
-- The `range` itself does not have the `next()` method.
-- Instead, another object, a so-called "iterator" is created by the call to `range[Symbol.iterator]()`, and its `next()` generates values for the iteration.
+- شیء `range` به خودی خود دارای متد `next()` نیست.
+- به جای آن، شیء دیگری که به آن «حلقه‌زننده» هم می‌گویند با فراخوانی `range[Symbol.iterator]()` و متد `next()` آن، مقدارها را برای حلقه‌زدن ایجاد می‌کند.
 
-So, the iterator object is separate from the object it iterates over.
+بنابراین، شیء حلقه‌زننده از شیءای که در آن حلقه می‌زند جدا است.
 
-Technically, we may merge them and use `range` itself as the iterator to make the code simpler.
+به طور فنی، ما می‌توانیم آنها را ترکیب کنیم و از خود `range` به عنوان حلقه‌زننده استفاده کنیم تا کد ساده‌تر شود.
 
-Like this:
+مانند این:
 
 ```js run
 let range = {
@@ -103,16 +103,16 @@ for (let num of range) {
 }
 ```
 
-Now `range[Symbol.iterator]()` returns the `range` object itself:  it has the necessary `next()` method and remembers the current iteration progress in `this.current`. Shorter? Yes. And sometimes that's fine too.
+حالا `range[Symbol.iterator]()` خود شیء `range` را برمی‌گرداند: این شیء دارای متد مورد نیاز `next()` است و فرایند کنونی حلقه‌زدن را در `this.current` به خاطر می‌سپارد. کوتاه‌تر است؟ بله. و گاهی اوقات این هم خوب است.
 
-The downside is that now it's impossible to have two `for..of` loops running over the object simultaneously: they'll share the iteration state, because there's only one iterator -- the object itself. But two parallel for-ofs is a rare thing, even in async scenarios.
+اما امتیازی منفی وجود دارد: حالا غیر ممکن است که دو حلقه `for..of` بتوانند به طور همزمان در شیء حلقه بزنند چون آنها وضعیت حلقه‌زدن را به اشتراک می‌گذارند و آن هم به دلیل اینکه تنها یک حلقه‌زننده وجود دارد -- خود شیءها. اما دو for-of همزمان به ندرت پیش می‌آید، حتی در سناریوهای async (همگام‌سازی).
 
-```smart header="Infinite iterators"
-Infinite iterators are also possible. For instance, the `range` becomes infinite for `range.to = Infinity`. Or we can make an iterable object that generates an infinite sequence of pseudorandom numbers. Also can be useful.
+```smart header="حلقه‌زننده‌های بی‌نهایت"
+حلقه‌زننده‌های بی‌نهایت هم ممکن است ایجاد شوند. برای مثل، `range` به ازای `range.to = Infinity` بی‌نهایت می‌شود. یا ما می‌توانیم یک شیء حلقه‌پذیر را که یک دنباله بی‌نهایت از شبه اعداد ایجاد می‌کند بسازیم. می‌تواند مفید هم باشد.
 
-There are no limitations on `next`, it can return more and more values, that's normal.
+هیچ محدودیتی برای `next` وجود ندارد، این متد می‌تواند مقدارهای بیشتر و بیشتری برگرداند و این عادی است.
 
-Of course, the `for..of` loop over such an iterable would be endless. But we can always stop it using `break`.
+قطعا، حلقه `for..of` درون چنین حلقه‌پذیری پایان‌ناپذیر خواهد بود. اما می‌توانیم آن را همیشه با `break` متوقف کنیم.
 ```
 
 
