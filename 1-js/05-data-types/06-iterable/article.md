@@ -116,20 +116,20 @@ for (let num of range) {
 ```
 
 
-## String is iterable
+## رشته حلقه‌پذیر است
 
-Arrays and strings are most widely used built-in iterables.
+آرایه‌ها و رشته‌ها به عنوان حلقه‌پذیرهای درون ساخت بیشترین استفاده را دارند.
 
-For a string, `for..of` loops over its characters:
+برای یک رشته، `for..of` در کاراکترهای آن حلقه می‌زند:
 
 ```js run
 for (let char of "test") {
-  // triggers 4 times: once for each character
+  // چهار بار اجرا می‌شود: یک بار برای هر کاراکتر
   alert( char ); // t, then e, then s, then t
 }
 ```
 
-And it works correctly with surrogate pairs!
+و با جفت‌های جایگیر به درستی کار می‌کند!
 
 ```js run
 let str = '𝒳😂';
@@ -138,16 +138,16 @@ for (let char of str) {
 }
 ```
 
-## Calling an iterator explicitly
+## صدا زدن یک حلقه‌زننده به طور ضمنی
 
-For deeper understanding, let's see how to use an iterator explicitly.
+برای فهم عمیق‌تر، بیایید ببینیم چگونه از حلقه‌زننده به طور ضمنی استفاده کنیم.
 
-We'll iterate over a string in exactly the same way as `for..of`, but with direct calls. This code creates a string iterator and gets values from it "manually":
+ما در یک رشته دقیقا به همان روش `for..of` حلقه می‌زنیم، اما با فراخوانی‌های مستقیم. این کد یک حلقه‌زننده برای رشته ایجاد می‌کند و مقدارها را از آن به صورت «دستی» دریافت می‌کند:
 
 ```js run
 let str = "Hello";
 
-// does the same as
+// کار مشابهی با حلقه پایین انجام می‌دهد
 // for (let char of str) alert(char);
 
 *!*
@@ -157,11 +157,11 @@ let iterator = str[Symbol.iterator]();
 while (true) {
   let result = iterator.next();
   if (result.done) break;
-  alert(result.value); // outputs characters one by one
+  alert(result.value); // هر کاراکتر را یکی یکی نشان می‌دهد
 }
 ```
 
-That is rarely needed, but gives us more control over the process than `for..of`. For instance, we can split the iteration process: iterate a bit, then stop, do something else, and then resume later.
+این روش به ندرت نیاز می‌شود، اما نسبت به `for..of` به ما کنترل بیشتری بر روی فرایند می‌دهد. برای مثال، ما می‌توانیم فرایند حلقه‌زدن را بشکافیم: مقداری حلقه بزنیم، سپس متوقف شویم، کاری انجام دهیم و بعدا ادامه دهیم.
 
 ## Iterables and array-likes [#array-like]
 
