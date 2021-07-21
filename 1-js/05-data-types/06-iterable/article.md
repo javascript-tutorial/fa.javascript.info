@@ -288,20 +288,20 @@ alert( str.slice(1, 3) ); // چرت و پرت (دو قطعه از جفت‌ها�
 ```
 
 
-## Summary
+## خلاصه
 
-Objects that can be used in `for..of` are called *iterable*.
+شیءهایی که بتوانند در `for..of` استفاده شوند، *حلقه‌پذیر* نامیده می‌شوند.
 
-- Technically, iterables must implement the method named `Symbol.iterator`.
-    - The result of `obj[Symbol.iterator]()` is called an *iterator*. It handles further iteration process.
-    - An iterator must have the method named `next()` that returns an object `{done: Boolean, value: any}`, here `done:true` denotes the end of the iteration process, otherwise the `value` is the next value.
-- The `Symbol.iterator` method is called automatically by `for..of`, but we also can do it directly.
-- Built-in iterables like strings or arrays, also implement `Symbol.iterator`.
-- String iterator knows about surrogate pairs.
+- به طور فنی، حلقه‌پذیرها باید متدی به اسم `Symbol.iterator` را پیاده‌سازی کنند.
+    - نتیجه فراخوانی `obj[Symbol.iterator]()` باید یک حلقه‌زننده باشد که فرایند حلقه‌زدن‌های بعدی را مدیریت می‌کند.
+    - یک حلقه‌زننده باید متدی به نام `next()` داشته باشد که یک شیء به صورت `{done: Boolean, value: any}` را برمی‌گرداند، اینجا `done:true` نشان دهنده پایان فرایند حلقه‌زدن است، در غیر این صورت `value` مقدار بعدی است.
+- متد `Symbol.iterator` توسط `for..of` به صورت خودکار صدا زده می‌شود اما ما می‌توانیم به طور مستقیم این کار را انجام دهیم.
+- حلقه‌پذیرهای داخلی مانند رشته‌ها یا آرایه‌ها هم `Symbol.iterator` را پیاده‌سازی می‌کنند.
+- حلقه‌زننده رشته‌ای از جفت‌های جایگیر آگاه است.
 
 
-Objects that have indexed properties and `length` are called *array-like*. Such objects may also have other properties and methods, but lack the built-in methods of arrays.
+شیءهایی که دارای ویژگی‌های ایندکسی و `length` هستند *شبه آرایه* نامیده می‌شوند. چنین شیءهایی ممکن است ویژگی‌ها و متدهای دیگری هم داشته باشند اما متدهای آرایه را ندارند.
 
-If we look inside the specification -- we'll see that most built-in methods assume that they work with iterables or array-likes instead of "real" arrays, because that's more abstract.
+اگر ما به خصوصیات زبان نگاهی بیاندازیم -- خواهیم دید که بیشتر متدهای درون‌ساخت، فرض می‌کنند که به جای آرایه‌های «واقعی» با حلقه‌پذیرها یا شبه آرایه‌ها کار می‌کنند چون اینگونه کوتاه‌تر است.
 
-`Array.from(obj[, mapFn, thisArg])` makes a real `Array` from an iterable or array-like `obj`, and we can then use array methods on it. The optional arguments `mapFn` and `thisArg` allow us to apply a function to each item.
+`Array.from(obj[, mapFn, thisArg])` یک آرایه واقعی از یک حلقه‌پذیر یا شبه آرایه‌ی `obj` می‌سازد و سپس می‌توانیم بر روی آن از متدهای آرایه‌استفاده کنیم. آرگومان اختیاری `mapFn` و `thisArg` به ما اجازه اعمال یک تابع بر روی هر یک از المان‌ها را می‌دهند.
