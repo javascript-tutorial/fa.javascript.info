@@ -195,11 +195,11 @@ for (let item of arrayLike) {}
 
 حلقه‌پذیرها و شبه آرایه‌ها هر دو معمولا *آرایه نیستند*، آنها دارای متدهای `push`، `pop` و... نیستند. اگر ما یک شیء داشته باشیم و بخواهیم با آن مانند یک آرایه کار کنیم، این موضوع خوب نیست. مثلا ما بخواهیم در `range` از متدهای آرایه استفاده کنیم. چگونه این کار را انجام دهیم؟
 
-## Array.from
+## متد Array.from
 
-There's a universal method [Array.from](mdn:js/Array/from) that takes an iterable or array-like value and makes a "real" `Array` from it. Then we can call array methods on it.
+یک متد کلی [Array.from](mdn:js/Array/from) وجود دارد که یک حلقه‌پذیر یا شبه آرایه می‌گیرد و یک آرایه واقعی از آن تشکیل می‌دهد. سپس ما متدهای آرایه را روی آن استفاده می‌کنیم.
 
-For instance:
+برای مثل:
 
 ```js run
 let arrayLike = {
@@ -211,43 +211,43 @@ let arrayLike = {
 *!*
 let arr = Array.from(arrayLike); // (*)
 */!*
-alert(arr.pop()); // World (method works)
+alert(arr.pop()); // World (متد کار کرد)
 ```
 
-`Array.from` at the line `(*)` takes the object, examines it for being an iterable or array-like, then makes a new array and copies all items to it.
+`Array.from` در خط `(*)` شیء را می‌گیرد، آن را برای اینکه حلقه‌پذیر یا شبه آرایه باشد بررسی می‌کند، سپس یک آرایه جدید می‌سازد و تمام المان‌ها را در آن کپی می‌کند.
 
-The same happens for an iterable:
+اتفاق مشابهی برای حلقه‌پذیر می‌افتد:
 
 ```js
-// assuming that range is taken from the example above
+// از مثال بالا گرفته شده است range فرض می‌کنیم که
 let arr = Array.from(range);
-alert(arr); // 1,2,3,4,5 (array toString conversion works)
+alert(arr); // 1,2,3,4,5 (آرایه کار می‌کند toString تبدیل)
 ```
 
-The full syntax for `Array.from` also allows us to provide an optional "mapping" function:
+سینتکس کامل برای `Array.from` به اجازه فراهم کردن یک تابع «طراحی» هم می‌دهد:
 ```js
 Array.from(obj[, mapFn, thisArg])
 ```
 
-The optional second argument `mapFn` can be a function that will be applied to each element before adding it to the array, and `thisArg` allows us to set `this` for it.
+آرگومان اختیاری دوم `mapFn` می‌تواند تابعی باشد که روی تمام المان‌ها قبل از اینکه به آرایه اضافه شوند اعمال می‌شود و `thisArg` اجازه می‌دهد که برای آن `this` قرار دهیم.
 
-For instance:
+برای مثال:
 
 ```js
-// assuming that range is taken from the example above
+// از مثال بالا گرفته شده است range فرض می‌کنیم
 
-// square each number
+// به توان 2 رساندن هر عدد
 let arr = Array.from(range, num => num * num);
 
 alert(arr); // 1,4,9,16,25
 ```
 
-Here we use `Array.from` to turn a string into an array of characters:
+اینجا ما از `Array.from` برای تبدیل یک رشته به آرایه‌ای از کاراکترها استفاده می‌کنیم:
 
 ```js run
 let str = '𝒳😂';
 
-// splits str into array of characters
+// به آرایه‌ای از کاراکترها str تقسیم
 let chars = Array.from(str);
 
 alert(chars[0]); // 𝒳
@@ -255,14 +255,14 @@ alert(chars[1]); // 😂
 alert(chars.length); // 2
 ```
 
-Unlike `str.split`, it relies on the iterable nature of the string and so, just like `for..of`, correctly works with surrogate pairs.
+برخلاف `str.split`، این روش بر اساس طبیعت حلقه‌پذیری رشته کار می‌کند و به همین دلیل، درست مانند `for..of`، با جفت‌های جایگیر به درستی کار می‌کند.
 
-Technically here it does the same as:
+از لحاظ فنی اینجا هم کار مشابهی را انجام می‌دهد:
 
 ```js run
 let str = '𝒳😂';
 
-let chars = []; // Array.from internally does the same loop
+let chars = []; // هم از درون این حلقه را اجرا می‌کند Array.from
 for (let char of str) {
   chars.push(char);
 }
@@ -270,9 +270,9 @@ for (let char of str) {
 alert(chars);
 ```
 
-...But it is shorter.    
+...اما این کوتاه‌تر است.
 
-We can even build surrogate-aware `slice` on it:
+ما حتی می‌توانیم یک `slice` که از جفت‌های جایگیر آگاه است را روی آن بسازیم:
 
 ```js run
 function slice(str, start, end) {
@@ -283,8 +283,8 @@ let str = '𝒳😂𩷶';
 
 alert( slice(str, 1, 3) ); // 😂𩷶
 
-// the native method does not support surrogate pairs
-alert( str.slice(1, 3) ); // garbage (two pieces from different surrogate pairs)
+// متد اصلی از جفت‌های جایگیر پشتیبانی نمی‌کند
+alert( str.slice(1, 3) ); // چرت و پرت (دو قطعه از جفت‌های جایگیر متفاوت)
 ```
 
 
