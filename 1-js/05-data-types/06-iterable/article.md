@@ -163,37 +163,37 @@ while (true) {
 
 این روش به ندرت نیاز می‌شود، اما نسبت به `for..of` به ما کنترل بیشتری بر روی فرایند می‌دهد. برای مثال، ما می‌توانیم فرایند حلقه‌زدن را بشکافیم: مقداری حلقه بزنیم، سپس متوقف شویم، کاری انجام دهیم و بعدا ادامه دهیم.
 
-## Iterables and array-likes [#array-like]
+## حلقه‌پذیرها و شبه آرایه‌ها [#array-like]
 
-Two official terms look similar, but are very different. Please make sure you understand them well to avoid the confusion.
+دو اصطلاح رسمی که شبیه به هم هستند اما بسیار تفاوت دارند. لطفا مطمئن شوید که آنها را به خوبی متوجه می‌شوید تا از گیج‌شدن دور بمانید.
 
-- *Iterables* are objects that implement the `Symbol.iterator` method, as described above.
-- *Array-likes* are objects that have indexes and `length`, so they look like arrays.
+- *حلقه‌پذیرها* شیءهایی هستند که متد `Symbol.iterator` را پیاده‌سازی می‌کنند، درست مانند چیزی که بالا گفته شد.
+- *شبه آرایه‌ها* شیءهایی هستند که دارای ایندکس و `length` هستند، پس آنها شبیه آرایه بنظر می‌رسند.
 
-When we use JavaScript for practical tasks in a browser or any other environment, we may meet objects that are iterables or array-likes, or both.
+زمانی که ما از جاوااسکریپت برای انجام کارهایی در مرورگر یا هر محیط دیگری استفاده می‌کنیم، ممکن است با شیءهایی روبرو شویم که هم حلقه‌پذیر هستند و هم شبه آرایه و یا هر دو.
 
-For instance, strings are both iterable (`for..of` works on them) and array-like (they have numeric indexes and `length`).
+برای مثال، رشته‌ها هم حلقه‌پذیر هستند (`for..of` روی آنها کار می‌کند) و هم شبه آرایه هستند (آنها ایندکس عددی و `length` دارند).
 
-But an iterable may be not array-like. And vice versa an array-like may be not iterable.
+اما یک حلقه‌پذیر ممکن است شبه آرایه نباشد. برعکس آن هم ممکن است یعنی یک شبه آرایه ممکن است حلقه‌پذیر نباشد.
 
-For example, the `range` in the example above is iterable, but not array-like, because it does not have indexed properties and `length`.
+برای مثال، در مثال بالا `range` حلقه‌پذیر است اما شبه آرایه نیست، چون ویژگی‌های ایندکسی و `length` ندارد.
 
-And here's the object that is array-like, but not iterable:
+اینجا هم یک شیء داریم که شبه آرایه است اما حلقه‌پذیر نیست:
 
 ```js run
-let arrayLike = { // has indexes and length => array-like
+let arrayLike = { // است => شبه آرایه length دارای ایندکس و
   0: "Hello",
   1: "World",
   length: 2
 };
 
 *!*
-// Error (no Symbol.iterator)
+// (وجود ندارد Symbol.iterator) ارور
 for (let item of arrayLike) {}
 */!*
 ```
 
-Both iterables and array-likes are usually *not arrays*, they don't have `push`, `pop` etc. That's rather inconvenient if we have such an object and want to work with it as with an array. E.g. we would like to work with `range` using array methods. How to achieve that?
+حلقه‌پذیرها و شبه آرایه‌ها هر دو معمولا *آرایه نیستند*، آنها دارای متدهای `push`، `pop` و... نیستند. اگر ما یک شیء داشته باشیم و بخواهیم با آن مانند یک آرایه کار کنیم، این موضوع خوب نیست. مثلا ما بخواهیم در `range` از متدهای آرایه استفاده کنیم. چگونه این کار را انجام دهیم؟
 
 ## Array.from
 
