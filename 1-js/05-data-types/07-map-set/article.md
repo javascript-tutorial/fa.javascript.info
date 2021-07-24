@@ -33,8 +33,8 @@ map.set(true, 'bool1'); // boolean یک کلید
 
 // شیء را به یاد دارید؟ شیء کلیدها را به رشته تبدیل می‌کرد
 // :نوع را حفظ می‌کند، پس این دو تفاوت دارند Map
-alert( map.get(1)   ); // '1عدد'
-alert( map.get('1') ); // '1رشته'
+alert( map.get(1)   ); // 'num1'
+alert( map.get('1') ); // 'str1'
 
 alert( map.size ); // 3
 ```
