@@ -1,50 +1,50 @@
 
-# Map and Set
+# ساختارهای Map and Set
 
-Till now, we've learned about the following complex data structures:
+تا حالا ما درباره ساختارهای داده پیچیده زیر آشنا شدیم:
 
-- Objects are used for storing keyed collections.
-- Arrays are used for storing ordered collections.
+- شیءها برای ذخیره‌سازی مجموعه‌های کلیددار استفاده می‌شوند.
+- آرایه‌ها برای ذخیره‌سازی مجموعه‌های ترتیبی استفاده می‌شوند.
 
-But that's not enough for real life. That's why `Map` and `Set` also exist.
+اما این در زندگی واقعی کافی نیستند. به همین دلیل است که `Map` و `Set` وجود دارند.
 
-## Map
+## ساختار Map
 
-[Map](mdn:js/Map) is a collection of keyed data items, just like an `Object`. But the main difference is that `Map` allows keys of any type.
+[Map](mdn:js/Map) مجموعه‌ای از داده‌های کلیددار است، درست مانند `Object`. اما تفاوت اصلی آنها این است که `Map` اجازه می‌دهد که کلیدها از هر نوعی باشند.
 
-Methods and properties are:
+متدها و ویژگی‌های آن:
 
-- `new Map()` -- creates the map.
-- `map.set(key, value)` -- stores the value by the key.
-- `map.get(key)` -- returns the value by the key, `undefined` if `key` doesn't exist in map.
-- `map.has(key)` -- returns `true` if the `key` exists, `false` otherwise.
-- `map.delete(key)` -- removes the value by the key.
-- `map.clear()` -- removes everything from the map.
-- `map.size` -- returns the current element count.
+- `new Map()` -- map را می‌سازد.
+- `map.set(key, value)` -- value را به واسطه key ذخیره می‌کند.
+- `map.get(key)` -- مقدار را به واسطه key برمی‌گرداند، اگر `key` در map وجود نداشته باشد `undefined` برگردانده می‌شود.
+- `map.has(key)` -- اگر `key` وجود داشته باشد `true` برگردانده می‌شود، در غیر این صورت `false`.
+- `map.delete(key)` -- مقدار را به واسطه key حذف می‌کند.
+- `map.clear()` -- همه چیز را از map حذف می‌کند.
+- `map.size` -- تعداد المان‌های کنونی را برمی‌گرداند.
 
-For instance:
+برای مثال:
 
 ```js run
 let map = new Map();
 
-map.set('1', 'str1');   // a string key
-map.set(1, 'num1');     // a numeric key
-map.set(true, 'bool1'); // a boolean key
+map.set('1', 'str1');   // یک کلید رشته‌ای
+map.set(1, 'num1');     // یک کلید عددی
+map.set(true, 'bool1'); // boolean یک کلید
 
-// remember the regular Object? it would convert keys to string
-// Map keeps the type, so these two are different:
-alert( map.get(1)   ); // 'num1'
-alert( map.get('1') ); // 'str1'
+// شیء را به یاد دارید؟ شیء کلیدها را به رشته تبدیل می‌کرد
+// :نوع را حفظ می‌کند، پس این دو تفاوت دارند Map
+alert( map.get(1)   ); // '1عدد'
+alert( map.get('1') ); // '1رشته'
 
 alert( map.size ); // 3
 ```
 
-As we can see, unlike objects, keys are not converted to strings. Any type of key is possible.
+همانطور که می‌بینیم، برخلاف شیءها، کلیدها به رشته تبدیل نمی‌شوند. هر نوع از کلید امکان‌پذیر است.
 
-```smart header="`map[key]` isn't the right way to use a `Map`"
-Although `map[key]` also works, e.g. we can set `map[key] = 2`, this is treating `map` as a plain JavaScript object, so it implies all corresponding limitations (only string/symbol keys and so on).
+```smart header="`map[key]` راه درستی برای استفاده از `Map` نیست"
+اگرچه `map[key]` هم کار می‌کند، برای مثال ما می‌توانیم بنویسیم `map[key]` = 2`، این کار یعنی با `map` مانند یک شیء ساده جاوااسکریپت کار کنیم، پس باعث ایجاد تمام محدودیت‌های متناظر می‌شود (فقط کلیدهای رشته‌ای/سمبلی مجاز خواهد بود و دیگر محدودیت‌ها).
 
-So we should use `map` methods: `set`, `get` and so on.
+پس ما باید از متدهای `map` استفاده کنیم: `set`، `get` و...
 ```
 
 **Map can also use objects as keys.**
