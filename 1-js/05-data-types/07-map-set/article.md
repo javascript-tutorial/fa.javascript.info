@@ -47,51 +47,51 @@ alert( map.size ); // 3
 پس ما باید از متدهای `map` استفاده کنیم: `set`، `get` و...
 ```
 
-**Map can also use objects as keys.**
+**ساختار Map می‌تواند از شیءها هم به عنوان کلید استفاده کند.**
 
-For instance:
+برای مثال:
 
 ```js run
 let john = { name: "John" };
 
-// for every user, let's store their visits count
+// بیایید برای هر کاربر تعداد دفعات بازدیدشان را ذخیره کنیم
 let visitsCountMap = new Map();
 
-// john is the key for the map
+// کلید است map برای john
 visitsCountMap.set(john, 123);
 
 alert( visitsCountMap.get(john) ); // 123
 ```
 
-Using objects as keys is one of the most notable and important `Map` features. The same does not count for `Object`. String as a key in `Object` is fine, but we can't use another `Object` as a key in `Object`.
+استفاده از شیءها به عنوان کلید یکی از ویژگی‌های مهم و قابل توجه `Map` است. چنین چیزی برای `Object` ممکن نیست. رشته به عنوان کلید در `Object` مشکلی ندارد، اما ما نمی‌توانیم از یک `Object` دیگر به عنوان کلید در `Object` استفاده کنیم.
 
-Let's try:
+بیایید امتحان کنیم:
 
 ```js run
 let john = { name: "John" };
 let ben = { name: "Ben" };
 
-let visitsCountObj = {}; // try to use an object
+let visitsCountObj = {}; // استفاده از یک شیء
 
-visitsCountObj[ben] = 234; // try to use ben object as the key
-visitsCountObj[john] = 123; // try to use john object as the key, ben object will get replaced
+visitsCountObj[ben] = 234; // به عنوان کلید ben استفاده از شیء
+visitsCountObj[john] = 123; // می‌شود ben به عنوان کلید که جایگزین شیء john استفاده از شیء
 
 *!*
-// That's what got written!
+// !این چیزی است که نوشته شده
 alert( visitsCountObj["[object Object]"] ); // 123 
 */!*
 ```
 
-As `visitsCountObj` is an object, it converts all `Object` keys, such as `john` and `ben` above, to same string `"[object Object]"`. Definitely not what we want.
+به دلیل این که `visitsCountObj` یک شیء است، تمام کلیدهای `Object` مانند `john` و `ben` در بالا را به رشته `"[object Object]"` تبدیل می‌کند. قطعا چیزی نیست که ما بخواهیم.
 
-```smart header="How `Map` compares keys"
-To test keys for equivalence, `Map` uses the algorithm [SameValueZero](https://tc39.github.io/ecma262/#sec-samevaluezero). It is roughly the same as strict equality `===`, but the difference is that `NaN` is considered equal to `NaN`. So `NaN` can be used as the key as well.
+```smart header="چگونگی مقایسه کلیدها در `Map`"
+برای آزمایش برابری کلیدها، `Map` از الگوریتم [SameValueZero](https://tc39.github.io/ecma262/#sec-samevaluezero) استفاده می‌کند. این الگوریتم تقریبا با مقایسه برابری سخت‌گیرانه `===` یکسان است، اما تفاوت این است که `NaN` با `NaN` یکسان فرض می‌شود. پس `NaN` هم می‌تواند به عنوان کلید استفاده شود.
 
-This algorithm can't be changed or customized.
+این الگوریتم نمی‌تواند تغییر داده یا شخصی‌سازی شود.
 ```
 
-````smart header="Chaining"
-Every `map.set` call returns the map itself, so we can "chain" the calls:
+````smart header="زنجیره‌ای"
+تمام `map.set`ها خود map را برمی‌گردانند، پس ما می‌توانیم فراخوانی‌ها را «زنجیره‌ای» انجام دهیم:
 
 ```js
 map.set('1', 'str1')
