@@ -91,7 +91,7 @@ alert( visitsCountObj["[object Object]"] ); // 123
 ```
 
 ````smart header="زنجیره‌ای"
-تمام `map.set`ها خود map را برمی‌گردانند، پس ما می‌توانیم فراخوانی‌ها را «زنجیره‌ای» انجام دهیم:
+تمام `map.set`ها خود map را برمی‌گردانند، پس ما می‌توانیم فراخوانی‌ها را به صورت «زنجیره‌ای» انجام دهیم:
 
 ```js
 map.set('1', 'str1')
@@ -101,15 +101,15 @@ map.set('1', 'str1')
 ````
 
 
-## Iteration over Map
+## حلقه زدن در Map
 
-For looping over a `map`, there are 3 methods:
+برای حلقه زدن در `map` 3 متد وجود دارد:
 
-- `map.keys()` -- returns an iterable for keys,
-- `map.values()` -- returns an iterable for values,
-- `map.entries()` -- returns an iterable for entries `[key, value]`, it's used by default in `for..of`.
+- `map.keys()` -- یک حلقه‌پذیر برای کلیدها برمی‌گرداند،
+- `map.values()` -- یک حلقه‌پذیر برای مقدارها برمی‌گرداند،
+- `map.entries()` -- یک حلقه‌پذیر برای برای اطلاعات به شکل `[key, value]` برمی‌گرداند که به صورت پیش‌فرض در `for..of` استفاده می‌شود.
 
-For instance:
+برای مثال:
 
 ```js run
 let recipeMap = new Map([
@@ -118,41 +118,41 @@ let recipeMap = new Map([
   ['onion',    50]
 ]);
 
-// iterate over keys (vegetables)
+// در کلیدها حلقه بزن (سبزیجات)
 for (let vegetable of recipeMap.keys()) {
   alert(vegetable); // cucumber, tomatoes, onion
 }
 
-// iterate over values (amounts)
+// در مقدارها حلقه بزن (میزان آنها)
 for (let amount of recipeMap.values()) {
   alert(amount); // 500, 350, 50
 }
 
-// iterate over [key, value] entries
-for (let entry of recipeMap) { // the same as of recipeMap.entries()
-  alert(entry); // cucumber,500 (and so on)
+// حلقه بزن [key, value] در اطلاعات به شکل
+for (let entry of recipeMap) { // recipeMap.entries() مشابه با
+  alert(entry); // (و بقیه اطلاعات) cucumber,500
 }
 ```
 
-```smart header="The insertion order is used"
-The iteration goes in the same order as the values were inserted. `Map` preserves this order, unlike a regular `Object`.
+```smart header="ترتیب درج کردن استفاده می‌شود"
+حلقه زدن با همان ترتیبی که مقدارها اضافه شده‌اند انجام می‌شود. برخلاف یک `Object` معمولی، `Map` این ترتیب را حفظ می‌کند.
 ```
 
-Besides that, `Map` has a built-in `forEach` method, similar to `Array`:
+علاوه بر آن، `Map` یک متد `forEach` درون‌ساخت هم دارد، درست شبیه به `Array`:
 
 ```js
-// runs the function for each (key, value) pair
+// اجرا می‌شود (key,value) تابع برای هر جفت
 recipeMap.forEach( (value, key, map) => {
-  alert(`${key}: ${value}`); // cucumber: 500 etc
+  alert(`${key}: ${value}`); // و غیره cucumber: 500
 });
 ```
 
-## Object.entries: Map from Object
+## متد Object.entries: ایجاد Map از Object
 
-When a `Map` is created, we can pass an array (or another iterable) with key/value pairs for initialization, like this:
+زمانی که یک `Map` ساخته می‌شود، ما می‌توانیم برای مقداردهی اولیه، یک آرایه (یا هر حلقه‌پذیر دیگری) را با جفت‌های کلید/مقدار در آن بنویسیم، مثل اینجا:
 
 ```js run
-// array of [key, value] pairs
+// [key, value] آرایه‌ای از جفت‌های
 let map = new Map([
   ['1',  'str1'],
   [1,    'num1'],
@@ -162,9 +162,9 @@ let map = new Map([
 alert( map.get('1') ); // str1
 ```
 
-If we have a plain object, and we'd like to create a `Map` from it, then we can use built-in method [Object.entries(obj)](mdn:js/Object/entries) that returns an array of key/value pairs for an object exactly in that format.
+اگر ما یک شیء ساده داریم و بخواهیم از آن یک `Map` بسازیم، می‌توانیم از متد درون‌ساخت [Object.entries(obj)](mdn:js/Object/entries) استفاده کنیم که برای یک شیء آرایه‌ای از جفت‌های کلید/مقدار را دقیقا در همان فرمت برمی‌گرداند.
 
-So we can create a map from an object like this:
+بنابراین ما می‌توانیم به این صورت از شیء یک map بسازیم:
 
 ```js run
 let obj = {
@@ -179,7 +179,7 @@ let map = new Map(Object.entries(obj));
 alert( map.get('name') ); // John
 ```
 
-Here, `Object.entries` returns the array of key/value pairs: `[ ["name","John"], ["age", 30] ]`. That's what `Map` needs.
+اینجا `Object.entries` یک آرایه از جفت‌های کلید/مقدار برمی‌گرداند: `[ ["name","John"], ["age", 30] ]`. این چیزی است که `Map` نیاز دارد.
 
 
 ## Object.fromEntries: Object from Map
