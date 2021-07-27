@@ -182,11 +182,11 @@ alert( map.get('name') ); // John
 اینجا `Object.entries` یک آرایه از جفت‌های کلید/مقدار برمی‌گرداند: `[ ["name","John"], ["age", 30] ]`. این چیزی است که `Map` نیاز دارد.
 
 
-## Object.fromEntries: Object from Map
+## متد Object.fromEntries: ایجاد Object از Map
 
-We've just seen how to create `Map` from a plain object with `Object.entries(obj)`.
+ما به تازگی دیدیم که چگونه از یک شیء ساده با استفاده از `Object.entries(obj)` یک `Map` بسازیم.
 
-There's `Object.fromEntries` method that does the reverse: given an array of `[key, value]` pairs, it creates an object from them:
+متد `Object.fromEntries` کار برعکس آن را انجام می‌دهد: با دادن یک آرایه از جفت‌های `[key, value]` به آن، یک شیء از آنها می‌سازد:
 
 ```js run
 let prices = Object.fromEntries([
@@ -195,16 +195,16 @@ let prices = Object.fromEntries([
   ['meat', 4]
 ]);
 
-// now prices = { banana: 1, orange: 2, meat: 4 }
+// prices = { banana: 1, orange: 2, meat: 4 } حالا داریم
 
 alert(prices.orange); // 2
 ```
 
-We can use `Object.fromEntries` to get a plain object from `Map`.
+می‌توانیم از `Object.fromEntries` برای ساخت یک شیء ساده از `Map` استفاده کنیم.
 
-E.g. we store the data in a `Map`, but we need to pass it to a 3rd-party code that expects a plain object.
+برای مثال ما داده را در یک `Map` دخیره می‌کنیم اما نیاز داریم که آن را به یک کد شخص ثالث بدهیم که یک شیء ساده را قبول می‌کند.
 
-Here we go:
+شروع می‌کنیم:
 
 ```js run
 let map = new Map();
@@ -213,23 +213,23 @@ map.set('orange', 2);
 map.set('meat', 4);
 
 *!*
-let obj = Object.fromEntries(map.entries()); // make a plain object (*)
+let obj = Object.fromEntries(map.entries()); // ساخت یک شیء ساده (*)
 */!*
 
-// done!
+// !انجام شد
 // obj = { banana: 1, orange: 2, meat: 4 }
 
 alert(obj.orange); // 2
 ```
 
-A call to `map.entries()` returns an iterable of key/value pairs, exactly in the right format for `Object.fromEntries`.
+فراخونی `map.entries()` یک حلقه‌پذیر از جفت‌های کلید/مقدار برمی‌گرداند، دقیقا در شکل مناسب برای `Object.fromEntries`.
 
-We could also make line `(*)` shorter:
+همچنین می‌توانیم خط `(*)` را کوتاه‌تر کنیم:
 ```js
-let obj = Object.fromEntries(map); // omit .entries()
+let obj = Object.fromEntries(map); // را حذف کردیم .entries()
 ```
 
-That's the same, because `Object.fromEntries` expects an iterable object as the argument. Not necessarily an array. And the standard iteration for `map` returns same key/value pairs as `map.entries()`. So we get a plain object with same key/values as the `map`.
+این دو یکسان هستند چون `Object.fromEntries` یک شیء حلقه‌پذیر را به عنوان آرگومان می‌پذیرد. نباید لزوما یک آرایه باشد. یک حلقه‌زدن استاندارد در `map` جفت‌های کلید/مقدار یکسان با `map.entries()` را برمی‌گرداند. بنابراین ما شیء ساده‌ای با کلید/مقدارهای یکسان با `map` دریافت می‌کنیم.
 
 ## Set
 
