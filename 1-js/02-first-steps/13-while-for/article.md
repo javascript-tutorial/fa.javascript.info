@@ -377,7 +377,11 @@ label: {
 }
 ```
 
+<<<<<<< HEAD
 ...اگرچه، %99.9 مواقع `break` در داخل حلقه ها استفاده می شود، همانطور که در مثال های بالا دیدیم.
+=======
+...Although, 99.9% of the time `break` is used inside loops, as we've seen in the examples above.
+>>>>>>> ef8d576821ff28c69bfb7410dc79fd216b0a315b
 
 یک `continue` فقط می تواند در داخل حلقه باشد.
 ````
