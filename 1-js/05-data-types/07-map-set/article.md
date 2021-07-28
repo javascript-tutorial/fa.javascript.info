@@ -231,24 +231,24 @@ let obj = Object.fromEntries(map); // را حذف کردیم .entries()
 
 این دو یکسان هستند چون `Object.fromEntries` یک شیء حلقه‌پذیر را به عنوان آرگومان می‌پذیرد. نباید لزوما یک آرایه باشد. یک حلقه‌زدن استاندارد در `map` جفت‌های کلید/مقدار یکسان با `map.entries()` را برمی‌گرداند. بنابراین ما شیء ساده‌ای با کلید/مقدارهای یکسان با `map` دریافت می‌کنیم.
 
-## Set
+## ساختار Set
 
-A `Set` is a special type collection - "set of values" (without keys), where each value may occur only once.
+یک `Set` مجموعه‌ای خاص است - «دسته‌ای از مقدارها» (بدون کلید) که هر مقدار تنها یک بار در آن واقع می‌شود.
 
-Its main methods are:
+متدهای اصلی آن:
 
-- `new Set(iterable)` -- creates the set, and if an `iterable` object is provided (usually an array), copies values from it into the set.
-- `set.add(value)` -- adds a value, returns the set itself.
-- `set.delete(value)` -- removes the value, returns `true` if `value` existed at the moment of the call, otherwise `false`.
-- `set.has(value)` -- returns `true` if the value exists in the set, otherwise `false`.
-- `set.clear()` -- removes everything from the set.
-- `set.size` -- is the elements count.
+- `new Set(iterable)` -- set را ایجاد می‌کند و اگر یک شیء حلقه‌پذیر داده شود (معمولا یک آرایه)، مقدارها را از آن درون set کپی می‌کند.
+- `set.add(value)` -- یک مقدار اضافه می‌کند و خود set را برمی‌گرداند.
+- `set.delete(value)` -- مقدار را حذف می‌کند و اگر `value` هنگام فراخوانی وجود داشته باشد `true` را برمی‌گرداند، در غیر این صورت `false`.
+- `set.has(value)` -- اگر مقدار در set وجود داشته باشد `true` را برمی‌گرداند، در غیر این صورت `false`.
+- `set.clear()` -- همه چیز را از set حذف می‌کند.
+- `set.size` -- برابر با تعداد المان‌ها است.
 
-The main feature is that repeated calls of `set.add(value)` with the same value don't do anything. That's the reason why each value appears in a `Set` only once.
+ویژگی اصلی این اصت که فراخوانی‌های پی‌در‌پی `set.add(value)` با مقداری یکسان، کاری انجام نمی‌دهد. به همین دلیل است که هر مقدار تنها یک بار در `Set` واقع می‌شوند.
 
-For example, we have visitors coming, and we'd like to remember everyone. But repeated visits should not lead to duplicates. A visitor must be "counted" only once.
+برای مثال، ما بازدیدکنندگانی داریم و می‌خواهیم همه افراد را به یاد بسپاریم. اما بازدیدهای تکراری نباید حساب شوند. یک بازدیدکننده باید تنها یک بار «شمرده شود».
 
-`Set` is just the right thing for that:
+`Set` ساختار کاملا مناسبی برای این کار است:
 
 ```js run
 let set = new Set();
@@ -257,47 +257,47 @@ let john = { name: "John" };
 let pete = { name: "Pete" };
 let mary = { name: "Mary" };
 
-// visits, some users come multiple times
+// بازدیدها، بعضی از کاربران چندبار مراجعه می‌کنند
 set.add(john);
 set.add(pete);
 set.add(mary);
 set.add(john);
 set.add(mary);
 
-// set keeps only unique values
+// تنها مقدارهای یکتا را نگه می‌دارد set
 alert( set.size ); // 3
 
 for (let user of set) {
-  alert(user.name); // John (then Pete and Mary)
+  alert(user.name); // John (Mary و Pete سپس)
 }
 ```
 
-The alternative to `Set` could be an array of users, and the code to check for duplicates on every insertion using [arr.find](mdn:js/Array/find). But the performance would be much worse, because this method walks through the whole array checking every element. `Set` is much better optimized internally for uniqueness checks.
+جایگزین `Set` می‌تواند آرایه‌ای از کاربران و کدی برای بررسی تکراری بودن کاربر در هر بار اضافه کردن با استفاده از [arr.find](mdn:js/Array/find) باشد. اما عملکرد کد ممکن است بسیار بد باشد چون این متد تمام آرایه و هر المان را بررسی می‌کند. `Set` برای بررسی یکتا بودن از درون بسیار بهینه‌تر است.
 
-## Iteration over Set
+## حلقه‌زدن در Set
 
-We can loop over a set either with `for..of` or using `forEach`:
+ما می‌توانیم در set هم با `for..of` و هم با استفاده از `forEach` حلقه بزنیم:
 
 ```js run
 let set = new Set(["oranges", "apples", "bananas"]);
 
 for (let value of set) alert(value);
 
-// the same with forEach:
+// :forEach کار مشابه با استفاده از
 set.forEach((value, valueAgain, set) => {
   alert(value);
 });
 ```
 
-Note the funny thing. The callback function passed in `forEach` has 3 arguments: a `value`, then *the same value* `valueAgain`, and then the target object. Indeed, the same value appears in the arguments twice.
+یک چیز جالب را در نظر داشته باشید. تابعی که به `forEach` داده شده 3 آرگومان دارد: یک `value`، سپس *مقدار یکسان* `valueAgain` و سپس شیء مورد نظر. در واقع، مقداری یکسان دو بار در آرگومان ظاهر می‌شود.
 
-That's for compatibility with `Map` where the callback passed `forEach` has three arguments. Looks a bit strange, for sure. But may help to replace `Map` with `Set` in certain cases with ease, and vice versa.
+این به دلیل سازگاری با `Map` است که تابع داده شده به `forEach` دارای 3 آرگومان است. قطعا کمی عجیب به نظر می‌رسد. اما می‌تواند به جایگزینی `Map` با `Set` و برعکس در بعضی موارد کمک کند.
 
-The same methods `Map` has for iterators are also supported:
+همچنین متدهای مشابهی که `Map` هم برای حلقه‌زننده‌ها دارد، پشتیبانی می‌شوند:
 
-- `set.keys()` -- returns an iterable object for values,
-- `set.values()` -- same as `set.keys()`, for compatibility with `Map`,
-- `set.entries()` -- returns an iterable object for entries `[value, value]`, exists for compatibility with `Map`.
+- `set.keys()` -- یک شیء حلقه‌پذیر برای مقدارها را برمی‌گرداند،
+- `set.values()` -- با `set.keys()` یکسان است، برای سازگاری با `Map`
+- `set.entries()` -- یک شیء حلقه‌پذیر را برای اطلاعات به شکل `[value, value]` برمی‌گرداند، برای سازگاری با `Map` وجود دارد.
 
 ## Summary
 
