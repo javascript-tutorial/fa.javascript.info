@@ -299,34 +299,34 @@ set.forEach((value, valueAgain, set) => {
 - `set.values()` -- با `set.keys()` یکسان است، برای سازگاری با `Map`
 - `set.entries()` -- یک شیء حلقه‌پذیر را برای اطلاعات به شکل `[value, value]` برمی‌گرداند، برای سازگاری با `Map` وجود دارد.
 
-## Summary
+## خلاصه
 
-`Map` -- is a collection of keyed values.
+`Map` -- یک مجموعه از مقدارهای کلیددار است.
 
-Methods and properties:
+متدها و ویژگی‌های آن:
 
-- `new Map([iterable])` -- creates the map, with optional `iterable` (e.g. array) of `[key,value]` pairs for initialization.
-- `map.set(key, value)` -- stores the value by the key, returns the map itself.
-- `map.get(key)` -- returns the value by the key, `undefined` if `key` doesn't exist in map.
-- `map.has(key)` -- returns `true` if the `key` exists, `false` otherwise.
-- `map.delete(key)` -- removes the value by the key, returns `true` if `key` existed at the moment of the call, otherwise `false`.
-- `map.clear()` -- removes everything from the map.
-- `map.size` -- returns the current element count.
+- `new Map([iterable])` -- map را می‌سازد، برای مقداردهی اولیه از `iterable`(حلقه‌پذیر) اختیاری (مانند آرایه) از جفت‌های `[key,value]` می‌توان استفاده کرد.
+- `map.set(key, value)` -- مقدار را به واسطه کلید ذخیره می‌کند، خود map را برمی‌گرداند.
+- `map.get(key)` -- مقدار را به واسطه کلید برمی‌گرداند، اگر `key` در map وجود نداشته باشد `undefined` برمی‌گرداند.
+- `map.has(key)` -- اگر `key` وجود داشته باشد `true` برمی‌گرداند، در غیر این صورت `false`.
+- `map.delete(key)` -- مقدار را به واسطه کلید حذف می‌کند، اگر `key` در لحظه فراخوانی وجود داشته باشد `true` برمی‌گرداند، در غیر این صورت `false`.
+- `map.clear()` -- همه چیز را از map حذف می‌کند.
+- `map.size` -- تعداد المان‌ها را برمی‌گرداند.
 
-The differences from a regular `Object`:
+تفاوت آن با `Object` معمولی:
 
-- Any keys, objects can be keys.
-- Additional convenient methods, the `size` property.
+- هر کلیدی ممکن است، شیءها هم می‌توانند کلید باشند.
+- متدهای خوب بیشتر، ویژگی `size`
 
-`Set` -- is a collection of unique values.
+`Set` -- یک مجموعه از مقدارهای یکتا است.
 
-Methods and properties:
+متدها و ویژگی‌های آن:
 
-- `new Set([iterable])` -- creates the set, with optional `iterable` (e.g. array) of values for initialization.
-- `set.add(value)` -- adds a value (does nothing if `value` exists), returns the set itself.
-- `set.delete(value)` -- removes the value, returns `true` if `value` existed at the moment of the call, otherwise `false`.
-- `set.has(value)` -- returns `true` if the value exists in the set, otherwise `false`.
-- `set.clear()` -- removes everything from the set.
-- `set.size` -- is the elements count.
+- `new Set([iterable])` -- set را ایجاد می‌کند، برای مقداردهی اولیه می‌توان از `iterable`(حلقه‌پذیر مانند آرایه) شامل مقدارها استفاده کرد.
+- `set.add(value)` -- یک مقدار را اضافه می‌کند (اگر `value` وجود داشته باشد کاری نمی‌کند)، خود set را برمی‌گرداند.
+- `set.delete(value)` -- مقدار را حذف می‌کند، اگر `value` هنگام فراخوانی وجود داشته باشد `true` را برمی‌گرداند، در غیر این صورت `false`.
+- `set.has(value)` -- اگر مقدار در set وجود داشته باشد `true` را برمی‌گرداند، در غیر این صورت `false`.
+- `set.clear()` -- همه چیز را از set حذف می‌کند.
+- `set.size` -- برابر با تعداد المان‌ها است.
 
-Iteration over `Map` and `Set` is always in the insertion order, so we can't say that these collections are unordered, but we can't reorder elements or directly get an element by its number.
+حلقه‌زدن در `Map` و `Set` همیشه با ترتیب اضافه‌کردن انجام می‌شود، پس ما نمی‌توانیم بگوییم این مجموعه‌ها نامرتب هستند اما نمی‌توانیم المان‌ها را دوباره مرتب کنیم یا به صورت مستقیم یک المان را با استفاده از عدد آن دریافت کنیم.
