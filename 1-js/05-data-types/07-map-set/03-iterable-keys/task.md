@@ -2,11 +2,11 @@ importance: 5
 
 ---
 
-# Iterable keys
+# کلیدهای حلقه‌پذیر
 
-We'd like to get an array of `map.keys()` in a variable and then apply array-specific methods to it, e.g. `.push`.
+ما می‌خواهیم یک آرایه از `map.keys()` را دورن یک متغیر دیافت کنیم و سپس متدهای مخصوص آرایه را روی آن اعمال کنیم مانند `.push`.
 
-But that doesn't work:
+اما کار نمی‌کند:
 
 ```js run
 let map = new Map();
@@ -17,8 +17,8 @@ let keys = map.keys();
 
 *!*
 // Error: numbers.push is not a function
-keys.push("more");
+keys.push("بیشتر");
 */!*
 ```
 
-Why? How can we fix the code to make `keys.push` work?
+چرا؟ چگونه می‌توانیم کد را درست کنیم تا `keys.push` کار کند؟
