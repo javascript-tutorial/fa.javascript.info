@@ -24,11 +24,7 @@ let message;
 let message;
 
 *!*
-<<<<<<< HEAD
-message = 'Hello'; // رشته را ذخیره کن
-=======
-message = 'Hello'; // store the string 'Hello' in the variable named message
->>>>>>> ef8d576821ff28c69bfb7410dc79fd216b0a315b
+message = 'Hello'; // رشته «Hello» را در متغیر message ذخیره کن
 */!*
 ```
 

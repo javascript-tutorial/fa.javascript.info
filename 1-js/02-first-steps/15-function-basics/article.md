@@ -181,11 +181,7 @@ alert( from ); // Ann
 
 ما توابع را با پارامترهای‌شان تعریف می‌کنیم، و سپس آن‌ها را با آرگومان‌هایشان صدا می‌زنیم.
 
-<<<<<<< HEAD
 در مثال بالا، می‌توانید بگویید: «تابع ‍`sayMessage` با دو پارامتر تعریف شده، پس با دو آرگومان صدا زده می‌شود: `from` و `Hello`».
-=======
-In the example above, one might say: "the function `showMessage` is declared with two parameters, then called with two arguments: `from` and `"Hello"`".
->>>>>>> ef8d576821ff28c69bfb7410dc79fd216b0a315b
 
 
 ## مقادیر پیش‌فرض
