@@ -24,7 +24,7 @@ let message;
 let message;
 
 *!*
-message = 'Hello'; // رشته را ذخیره کن
+message = 'Hello'; // رشته «Hello» را در متغیر message ذخیره کن
 */!*
 ```
 
