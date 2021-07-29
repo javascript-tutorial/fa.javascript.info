@@ -17,7 +17,7 @@ let keys = map.keys();
 
 *!*
 // Error: numbers.push is not a function
-keys.push("بیشتر");
+keys.push("more");
 */!*
 ```
 
