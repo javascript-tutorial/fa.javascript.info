@@ -123,7 +123,7 @@ for (let vegetable of recipeMap.keys()) {
   alert(vegetable); // cucumber, tomatoes, onion
 }
 
-// در مقدارها حلقه بزن (میزان آنها)
+// در مقدارها حلقه بزن (میزان آن‌ها)
 for (let amount of recipeMap.values()) {
   alert(amount); // 500, 350, 50
 }
