@@ -1,44 +1,44 @@
-# WeakMap and WeakSet
+# ساختارهای WeakMap و WeakSet
 
-As we know from the chapter <info:garbage-collection>, JavaScript engine keeps a value in memory while it is "reachable" and can potentially be used.
+همانطور که از فصل <info:garbage-collection> می‌دانیم، موتور جاوااسکریپت تا زمانی که یک مقدار «قابل دسترس» باشد و ممکن باشد استفاده شود، آن را در حافظه نگه می‌دارد.
 
-For instance:
+برای مثال:
 ```js
 let john = { name: "John" };
 
-// the object can be accessed, john is the reference to it
+// به آن رجوع می‌کند john ،می‌توان به شیء دسترسی پیدا کرد
 
-// overwrite the reference
+// بازنویسی مرجع
 john = null;
 
 *!*
-// the object will be removed from memory
+// شیء از حافظه پاک می‌شود
 */!*
 ```
 
-Usually, properties of an object or elements of an array or another data structure are considered reachable and kept in memory while that data structure is in memory.
+معمولا ویژگی‌های یک شیء یا المان‌های یک آرایه یا ساختارهای دیگر داده تا زمانی که در حافظه باشد، قابل دسترس فرض و در حافظه حفظ می‌شوند.
 
-For instance, if we put an object into an array, then while the array is alive, the object will be alive as well, even if there are no other references to it.
+برای مثال، اگر ما یک شیء را درون یک آرایه بگذاریم، سپس تا زمانی که آرایه زنده باشد، شیء هم زنده خواهد بود، حتی اگر هیچ رجوع دیگری به آن نباشد.
 
-Like this:
+مانند اینجا:
 
 ```js
 let john = { name: "John" };
 
 let array = [ john ];
 
-john = null; // overwrite the reference
+john = null; // بازنویسی مرجع
 
 *!*
-// the object previously referenced by john is stored inside the array
-// therefore it won't be garbage-collected
-// we can get it as array[0]
+// به آن رجوع می‌شد، درون آرایه ذخیره شده است john شیءای که قبلا توسط
+// به همین دلیل زباله‌روبی نمی‌شود
+// آن را دریافت کنیم array[0] می‌توانیم با
 */!*
 ```
 
-Similar to that, if we use an object as the key in a regular `Map`, then while the `Map` exists, that object exists as well. It occupies memory and may not be garbage collected.
+مشابه همین مورد، اگر ما از شیءای به عنوان کلید در یک `Map` معمولی استفاده کنیم، سپس تا زمانی که `Map` وجود داشته باشد، آن شیء هم وجود خواهد داشت. این شیء حافظه را اشغال می‌کند و زباله‌روبی نمی‌شود.
 
-For instance:
+برای مثال:
 
 ```js
 let john = { name: "John" };
@@ -46,17 +46,17 @@ let john = { name: "John" };
 let map = new Map();
 map.set(john, "...");
 
-john = null; // overwrite the reference
+john = null; // بازنویسی مرجع
 
 *!*
-// john is stored inside the map,
-// we can get it by using map.keys()
+// ،ذخیره شده است map درون john
+// آن را دریافت کنیم map.keys() می‌توانیم با استفاده از
 */!*
 ```
 
-`WeakMap` is fundamentally different in this aspect. It doesn't prevent garbage-collection of key objects.
+`WeakMap` به صورت اساسی از این جنبه تفاوت دارد. این ساختار از زباله‌روبی کلیدهایی که شیء هستند جلوگیری نمی‌کند.
 
-Let's see what it means on examples.
+بیایید با مثال‌ها ببینیم که به چه معنی است.
 
 ## WeakMap
 
