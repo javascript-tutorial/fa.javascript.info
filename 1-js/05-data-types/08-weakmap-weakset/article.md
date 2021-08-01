@@ -58,24 +58,24 @@ john = null; // بازنویسی مرجع
 
 بیایید با مثال‌ها ببینیم که به چه معنی است.
 
-## WeakMap
+## ساختار WeakMap
 
-The first difference between `Map` and `WeakMap` is that keys must be objects, not primitive values:
+اولین تفاوت بین `Map` و `WeakMap` این است که کلیدها باید شیء باشند نه مقدار اولیه:
 
 ```js run
 let weakMap = new WeakMap();
 
 let obj = {};
 
-weakMap.set(obj, "ok"); // works fine (object key)
+weakMap.set(obj, "ok"); // به درستی کار می‌کند (کلید از نوع شیء)
 
 *!*
-// can't use a string as the key
-weakMap.set("test", "Whoops"); // Error, because "test" is not an object
+// نمی‌توان از رشته به عنوان کلید استفاده کرد
+weakMap.set("test", "Whoops"); // شیء نیست "test" ارور می‌دهد چون
 */!*
 ```
 
-Now, if we use an object as the key in it, and there are no other references to that object -- it will be removed from memory (and from the map) automatically.
+حالا اگر ما بخواهیم از شیء به عنوان کلید در آن استفاده کنیم و هیچ رجوع دیگری به شیء نباشد -- این شیء به طور خودکار از حافظه پاک می‌شود (همچنین از map).
 
 ```js
 let john = { name: "John" };
@@ -83,27 +83,27 @@ let john = { name: "John" };
 let weakMap = new WeakMap();
 weakMap.set(john, "...");
 
-john = null; // overwrite the reference
+john = null; // بازنویسی مرجع
 
-// john is removed from memory!
+// !از حافظه پاک شد john
 ```
 
-Compare it with the regular `Map` example above. Now if `john` only exists as the key of `WeakMap` -- it will be automatically deleted from the map (and memory).
+با `Map` معمولی در مثال بالا مقایسه کنید. حالا اگر `john` فقط به عنوان کلید `WeakMap` وجود داشته باشد -- به صورت خودکار از map (و حافظه) پاک می‌شود.
 
-`WeakMap` does not support iteration and methods `keys()`, `values()`, `entries()`, so there's no way to get all keys or values from it.
+ساختار `WeakMap` از حلقه‌زدن و متدهای `keys()`، `values()`، `entries()` پشتیبانی نمی‌کند، پس هیچ راهی برای گرفتن تمام کلیدها یا مقدارها نیست.
 
-`WeakMap` has only the following methods:
+`WeakMap` فقط متدهای زیر دارد:
 
 - `weakMap.get(key)`
 - `weakMap.set(key, value)`
 - `weakMap.delete(key)`
 - `weakMap.has(key)`
 
-Why such a limitation? That's for technical reasons. If an object has lost all other references (like `john` in the code above), then it is to be garbage-collected automatically. But technically it's not exactly specified *when the cleanup happens*.
+چرا چنین محدودیت‌هایی وجود دارد؟ به خاطر دلایل فنی. اگر یک شیء تمام رجوع‌های دیگر به خود را از دست بدهد (مانند `john` در کد بالا)، سپس باید به طور خودکار زباله‌روبی شود. اما از لحاظ فنی مشخص نیست که *زباله‌روبی چه زمانی اتفاق می‌افتد*.
 
-The JavaScript engine decides that. It may choose to perform the memory cleanup immediately or to wait and do the cleaning later when more deletions happen. So, technically, the current element count of a `WeakMap` is not known. The engine may have cleaned it up or not, or did it partially. For that reason, methods that access all keys/values are not supported.
+موتور جاوااسکریپت درباره آن تصمیم می‌گیرد. ممکن است پاک‌سازی حافظه را بلافاصله انجام دهد یا صبر کند تا حذف‌های بیشتری رخ دهند. پس به طور فنی، تعداد کنونی المان‌های `WeakMap` معلوم نیست. موتور ممکن است آن را پاک کرده باشد یا این کار را در چند قسمت انجام دهد. به این دلیل، متدهایی که به تمام کلیدها/مقدارها دسترسی پیدا می‌کنند، پشتیبانی نمی‌شوند.
 
-Now, where do we need such a data structure?
+حالا ما کجا به چنین ساختار داده‌ای احتیاج داریم؟
 
 ## Use case: additional data
 
