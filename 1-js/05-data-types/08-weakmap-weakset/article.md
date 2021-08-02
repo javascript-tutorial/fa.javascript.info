@@ -105,66 +105,66 @@ john = null; // بازنویسی مرجع
 
 حالا ما کجا به چنین ساختار داده‌ای احتیاج داریم؟
 
-## Use case: additional data
+## کاربرد: داده اضافی
 
-The main area of application for `WeakMap` is an *additional data storage*.
+حوزه اصلی کاربرد `WeakMap` یک *حافظه داده اضافی* است.
 
-If we're working with an object that "belongs" to another code, maybe even a third-party library, and would like to store some data associated with it, that should only exist while the object is alive - then `WeakMap` is exactly what's needed.
+اگر در حال کار کردن با شیءای هستیم که به کد دیگری «تعلق دارد»، شاید یک کتابخانه شخص ثالث، و بخواهیم داده‌هایی که به آن تخصیص داده شده را ذخیره کنیم که فقط تا زمانی که شیء زنده است وجود داشته باشند، سپس `WeakMap` دقیقا چیزی است که نیاز داریم.
 
-We put the data to a `WeakMap`, using the object as the key, and when the object is garbage collected, that data will automatically disappear as well.
+ما با استفاده از شیء به عنوان کلید، داده را در یک `WeakMap` قرار می‌دهیم و زمانی که شیء زباله‌روبی شد، داده هم به طور خودکار ناپدید می‌شود.
 
 ```js
-weakMap.set(john, "secret documents");
-// if john dies, secret documents will be destroyed automatically
+weakMap.set(john, "مستندات مخفی");
+// ازبین برود، مستندات مخفی هم به طور خودکار نابود می‌شوند john اگر
 ```
 
-Let's look at an example.
+بیایید یک مثال ببینیم.
 
-For instance, we have code that keeps a visit count for users. The information is stored in a map: a user object is the key and the visit count is the value. When a user leaves (its object gets garbage collected), we don't want to store their visit count anymore.
+برای مثال، ما کدی داریم که تعداد بازدید را برای کاربران ذخیره می‌کند. اطلاعات درون یک map ذخیره شده است: یک شیء user کلید است و تعداد بازدید مقدار است. زمانی که کاربر خارج شود (شیء آن زباله‌روبی شود)، ما دیگر نمی‌خواهیم تعداد بازدید آنها را داشته باشیم.
 
-Here's an example of a counting function with `Map`:
+یک مثال از تابع شمارنده با استفاده از `Map`:
 
 ```js
 // 📁 visitsCount.js
-let visitsCountMap = new Map(); // map: user => visits count
+let visitsCountMap = new Map(); // map: user => تعداد بازدید
 
-// increase the visits count
+// افزایش تعداد بازدید
 function countUser(user) {
   let count = visitsCountMap.get(user) || 0;
   visitsCountMap.set(user, count + 1);
 }
 ```
 
-And here's another part of the code, maybe another file using it:
+و اینجا قسمت دیگری از کد را داریم، شاید یک فایل دیگر از آن استفاده کند:
 
 ```js
 // 📁 main.js
 let john = { name: "John" };
 
-countUser(john); // count his visits
+countUser(john); // را می‌شمارد john تعداد بازدید
 
-// later john leaves us
+// ما را ترک کند john بعدا که
 john = null;
 ```
 
-Now, `john` object should be garbage collected, but remains in memory, as it's a key in `visitsCountMap`.
+حالا، شیء `john` باید زباله‌روبی شود اما در حافظه می‌ماند، به دلیل اینکه در `visitsCountMap` کلید است.
 
-We need to clean `visitsCountMap` when we remove users, otherwise it will grow in memory indefinitely. Such cleaning can become a tedious task in complex architectures.
+ما نیاز داریم که `visitsCountMap` را زمانی که کاربران را حذف می‌کنیم پاک کنیم، در غیر این صورت به طور نامحدود در حافظه گسترده‌تر می‌شود. چنین پاک کردنی در معماری‌های پیچیده کاری خسته‎کننده می‌شود.
 
-We can avoid it by switching to `WeakMap` instead:
+می‌توانیم با استفاده از `WeakMap` از این موضوع دوری کنیم:
 
 ```js
 // 📁 visitsCount.js
-let visitsCountMap = new WeakMap(); // weakmap: user => visits count
+let visitsCountMap = new WeakMap(); // weakmap: user => تعداد بازدید
 
-// increase the visits count
+// افزایش تعداد بازدید
 function countUser(user) {
   let count = visitsCountMap.get(user) || 0;
   visitsCountMap.set(user, count + 1);
 }
 ```
 
-Now we don't have to clean `visitsCountMap`. After `john` object becomes unreachable, by all means except as a key of `WeakMap`, it gets removed from memory, along with the information by that key from `WeakMap`.
+حالا ما حتما نباید `visitsCountMap` را تمیز کنیم. بعد از اینکه شیء `john` غیرقابل دسترس شود، یعنی به جز کلید `WeakMap` هیچ رجوعی نداشته باشد، همراه با اطلاعاتی که کلید آنها این شیء بود، از حافظه پاک می‌شوند.
 
 ## Use case: caching
 
