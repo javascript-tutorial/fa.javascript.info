@@ -166,20 +166,20 @@ function countUser(user) {
 
 حالا ما حتما نباید `visitsCountMap` را تمیز کنیم. بعد از اینکه شیء `john` غیرقابل دسترس شود، یعنی به جز کلید `WeakMap` هیچ رجوعی نداشته باشد، همراه با اطلاعاتی که کلید آنها این شیء بود، از حافظه پاک می‌شوند.
 
-## Use case: caching
+## کاربرد: کَش کردن (caching)
 
-Another common example is caching. We can store ("cache") results from a function, so that future calls on the same object can reuse it.
+یکی دیگر از مثال‌های متداول کَش کردن است. ما می‌توانیم نتایج یک تابع را ذخیره («کَش») کنیم تا فراخوانی‌های آینده که شیء یکسانی را می‌گیرند، دوباره از آن استفاده کنند.
 
-To achieve that, we can use `Map` (not optimal scenario):
+برای این کار، ما می‌توانیم از `Map` استفاده کنیم (این سناریو بهینه نیست):
 
 ```js run
 // 📁 cache.js
 let cache = new Map();
 
-// calculate and remember the result
+// نتیجه را محاسبه و ذخیره کن
 function process(obj) {
   if (!cache.has(obj)) {
-    let result = /* calculations of the result for */ obj;
+    let result = obj /* محاسبات نتیجه برای */;
 
     cache.set(obj, result);
   }
@@ -188,26 +188,27 @@ function process(obj) {
 }
 
 *!*
-// Now we use process() in another file:
+// :در فایل دیگری استفاده کنیم process() حالا می‌توانیم از
 */!*
 
 // 📁 main.js
-let obj = {/* let's say we have an object */};
+let obj = {/* فرض می‌کنیم یک شیء داریم */};
 
-let result1 = process(obj); // calculated
 
-// ...later, from another place of the code...
-let result2 = process(obj); // remembered result taken from cache
+let result1 = process(obj); // محاسبه شد
 
-// ...later, when the object is not needed any more:
+// ...بعدا، از یک جای دیگر کد...
+let result2 = process(obj); // نتیجه ذخیره شده از کَش گرفته می‌شود
+
+// :بعدا، زمانی که شیء دیگر نیاز نباشد...
 obj = null;
 
-alert(cache.size); // 1 (Ouch! The object is still in cache, taking memory!)
+alert(cache.size); // 1 (!ای وای! شیء هنوز در کش موجود است و حافظه را اشغال می‌کند)
 ```
 
-For multiple calls of `process(obj)` with the same object, it only calculates the result the first time, and then just takes it from `cache`. The downside is that we need to clean `cache` when the object is not needed any more.
+برای چند فراخوانی `process(obj)` همراه با شیء یکسان، تنها نتیجه را اولین بار محاسبه می‌کند و سپس آن را از `cache` می‌گیرد. ویژگی منفی این است که زمانی که شیء دیگر احتیاج نباشد، ما باید `cache` را از آن تمیز کنیم.
 
-If we replace `Map` with `WeakMap`, then this problem disappears. The cached result will be removed from memory automatically after the object gets garbage collected.
+اگر ما `Map` را با `WeakMap` جایگزین کنیم، سپس این مشکل ایجاد نمی‌شود. نتیجه کش‌شده بعد از اینکه شیء زباله‌روبی شد، از حافظه به طور خودکار حذف می‌شود.
 
 ```js run
 // 📁 cache.js
@@ -215,10 +216,10 @@ If we replace `Map` with `WeakMap`, then this problem disappears. The cached res
 let cache = new WeakMap();
 */!*
 
-// calculate and remember the result
+// نتیجه را محاسبه و ذخیره کن
 function process(obj) {
   if (!cache.has(obj)) {
-    let result = /* calculate the result for */ obj;
+    let result = obj /* محاسبات نتیجه برای */;
 
     cache.set(obj, result);
   }
@@ -227,17 +228,17 @@ function process(obj) {
 }
 
 // 📁 main.js
-let obj = {/* some object */};
+let obj = {/* شیء */};
 
 let result1 = process(obj);
 let result2 = process(obj);
 
-// ...later, when the object is not needed any more:
+// :بعدا، زمانی که شیء دیگر نیاز نباشد...
 obj = null;
 
-// Can't get cache.size, as it's a WeakMap,
-// but it's 0 or soon be 0
-// When obj gets garbage collected, cached data will be removed as well
+// است WeakMap را دریافت کرد، چون یک  cache.size نمی‌توان
+// اما یا 0 است یا به زودی 0 می‌شود
+// زباله‌روبی شود، داده کش‌شده هم پاک می‌شود obj زمانی که
 ```
 
 ## WeakSet
