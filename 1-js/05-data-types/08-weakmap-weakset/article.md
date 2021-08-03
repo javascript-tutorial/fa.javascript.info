@@ -241,17 +241,17 @@ obj = null;
 // زباله‌روبی شود، داده کش‌شده هم پاک می‌شود obj زمانی که
 ```
 
-## WeakSet
+## ساختار WeakSet
 
-`WeakSet` behaves similarly:
+`WeakSet` هم رفتار مشابهی دارد:
 
-- It is analogous to `Set`, but we may only add objects to `WeakSet` (not primitives).
-- An object exists in the set while it is reachable from somewhere else.
-- Like `Set`, it supports `add`, `has` and `delete`, but not `size`, `keys()` and no iterations.
+- این ساختار مانند `Set` است اما فقط می‌توانیم شیءها را به `WeakSet` اضافه کنیم (نه مقدارهای اصلی).
+- یک شیء تا زمانی که از جایی دیگر قابل دسترس باشد در set وجود خواهد داشت.
+- مانند `Set`، این ساختار از `add`، `has` و `delete` پشتیبانی می‌کند اما `size` و `keys()` ندارد و نمی‌توان در آن حلقه زد.
 
-Being "weak", it also serves as additional storage. But not for arbitrary data, rather for "yes/no" facts. A membership in `WeakSet` may mean something about the object.
+به دلیل اینکه "weak(ضعیف)" است، به عنوان حافظه اضافی هم نقشش را ایفا می‌کند. اما نه برای هر داده دلخواهی، بلکه ترجیحا برای گزاره‌های «بله/خیر» استفاده می‌شود. اینکه یک شیء در `WeakSet` وجود داشته باشد، ممکن است به معنای چیزی درباره آن باشد.
 
-For instance, we can add users to `WeakSet` to keep track of those who visited our site:
+برای مثال، ما می‌توانیم کاربران را به `WeakSet` اضافه کنیم تا پیگیری کنیم که چه کسی سایت ما را دیده است:
 
 ```js run
 let visitedSet = new WeakSet();
@@ -260,33 +260,33 @@ let john = { name: "John" };
 let pete = { name: "Pete" };
 let mary = { name: "Mary" };
 
-visitedSet.add(john); // John visited us
-visitedSet.add(pete); // Then Pete
-visitedSet.add(john); // John again
+visitedSet.add(john); // سایت ما را دید John
+visitedSet.add(pete); // Pete سپس
+visitedSet.add(john); // John و دوباره
 
-// visitedSet has 2 users now
+// الان 2 کاربر دارد visitedSet
 
-// check if John visited?
+// سایت را دیده است؟ John چک می‌کنیم که آیا
 alert(visitedSet.has(john)); // true
 
-// check if Mary visited?
+// سایت را دیده است؟ Mary چک می‌کنیم که آیا
 alert(visitedSet.has(mary)); // false
 
 john = null;
 
-// visitedSet will be cleaned automatically
+// به طور خودکار تمیز می‌شود visitedSet
 ```
 
-The most notable limitation of `WeakMap` and `WeakSet` is the absence of iterations, and the inability to get all current content. That may appear inconvenient, but does not prevent `WeakMap/WeakSet` from doing their main job -- be an "additional" storage of data for objects which are stored/managed at another place.
+بزرگ‌ترین محدودیت `WeakMap` و `WeakSet` این است که نمی‌توان در آن حلقه زد و تمام محتوای حال حاضر را گرفت. این موضوع ممکن است اذیت کننده باشد اما باعث نمی‌شود که `WeakMap/WeakSet` کار اصلی خودشان را انجام ندهند -- اینکه یک حافظه «اضافیِ» داده، برای شیءهایی باشند که در جایی دیگر ذخیره/مدیریت می‌شوند.
 
 ## Summary
 
-`WeakMap` is `Map`-like collection that allows only objects as keys and removes them together with associated value once they become inaccessible by other means.
+`WeakMap` یک مجموعه شبیه `Map` است که فقط شیءها را به عنوان کلید قبول می‌کند و همان شیء و داده‌های تخصیص داده شده به آن را زمانی که شیء از طرق دیگر غیر قابل دسترس شود، حذف می‌کند.
 
-`WeakSet` is `Set`-like collection that stores only objects and removes them once they become inaccessible by other means.
+`WeakSet` یک مجموعه شبیه `Set` است که فقط شیءها را ذخیره می‌کند و زمانی که آنها از طرق دیگر غیر قابل دسترس شوند، حذف‌شان می‌کند.
 
-Their main advantages are that they have weak reference to objects, so they can easily be removed by garbage collector.
+فایده‌های اصلی‌شان این است که یک رجوع ضعیف به شیءها دارند، پس شیءها به راحتی می‌توانند با زباله‌روبی ازبین بروند.
 
-That comes at the cost of not having support for `clear`, `size`, `keys`, `values`...
+اما به این قیمت که از `clear`، `size`، `keys`، `values` و... پشتیبانی نمی‌کنند.
 
-`WeakMap` and `WeakSet` are used as "secondary" data structures in addition to the "primary" object storage. Once the object is removed from the primary storage, if it is only found as the key of `WeakMap` or in a `WeakSet`, it will be cleaned up automatically.
+`WeakMap` و `WeakSet` به عنوان ساختار داده‌های «ثانویه» در کنار حافظه شیء «اصلی» استفاده می‌شوند. زمانی که شیء از حافظه اصلی حذف شود و فقط به عنوان کلید `WeakMap` یا عضوی در `WeakSet` باشد، به طور خودکار حذف می‌شود.
