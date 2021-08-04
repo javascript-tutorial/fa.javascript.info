@@ -1,4 +1,4 @@
-Let's store read messages in `WeakSet`:
+بیایید پیام‌های خوانده شده را در `WeakSet` ذخیره کنیم:
 
 ```js run
 let messages = [
@@ -9,35 +9,35 @@ let messages = [
 
 let readMessages = new WeakSet();
 
-// two messages have been read
+// دو پیام خوانده شد
 readMessages.add(messages[0]);
 readMessages.add(messages[1]);
-// readMessages has 2 elements
+// دو المان دارد readMessages
 
-// ...let's read the first message again!
+// !بیایید اولین پیام را دوباره بخوانیم...
 readMessages.add(messages[0]);
-// readMessages still has 2 unique elements
+// همچنان دو المان یکتا دارد readMessages
 
-// answer: was the message[0] read?
+// خوانده شده است؟ message جواب: آیا
 alert("Read message 0: " + readMessages.has(messages[0])); // true
 
 messages.shift();
-// now readMessages has 1 element (technically memory may be cleaned later)
+// یک المان دارد (از لحاظ فنی، حافظه ممکن است بعدا از آن المان تمیز شود) readMessages حالا
 ```
 
-The `WeakSet` allows to store a set of messages and easily check for the existence of a message in it.
+ساختار `WeakSet` به ما این امکان را می‌دهد که یک دسته از پیام‌ها را ذخیره کنیم و به راحتی بررسی کنیم که پیامی درون آن هست یا نه.
 
-It cleans up itself automatically. The tradeoff is that we can't iterate over it,  can't get "all read messages" from it directly. But we can do it by iterating over all messages and filtering those that are in the set.
+این ساختار به طور خودکار محتوای دورنش را پاک می‌کند. اما بدی آن این است که ما نمی‌توانیم درون آن حلقه بزنیم، نمی‌توانیم به طور مستقیم «تمام پیام‌های خوانده شده» را از آن بگیریم. اما می‌توانیم این کار را با حلقه‌زدن درون تمام پیام‌ها و جداسازی آن‌هایی که درون set هستند، انجام دهیم.
 
-Another, different solution could be to add a property like `message.isRead=true` to a message after it's read. As messages objects are managed by another code, that's generally discouraged, but we can use a symbolic property to avoid conflicts.
+یک راه حل متفاوت دیگر می‌تواند اضافه کردن ویژگی `message.isRead=true` به پیام، بعد از اینکه خوانده شد باشد. به دلیل اینکه شیءهای پیام‌ها توسط کد دیگری انجام می‌شود، این کار توصیه نمی‌شود اما می‌توانیم از ویژگی سمبلی برای جلوگیری از تناقضات استفاده کنیم.
 
-Like this:
+مثلا اینگونه:
 ```js
-// the symbolic property is only known to our code
+// ویژگی سمبلی تنها در کد ما شناخته شده است
 let isRead = Symbol("isRead");
 messages[0][isRead] = true;
 ```
 
-Now third-party code probably won't see our extra property.
+حالا کد شخص ثالث احتمالا ویژگی اضافی ما را نخواهد دید.
 
-Although symbols allow to lower the probability of problems, using `WeakSet` is better from the architectural point of view.
+اگرچه سمبل‌ها به ما این امکان را می‌دهند که از احتمال بروز مشکل را کم کنیم، استفاده از `WeakSet` از نظر معماری بهتر است.
