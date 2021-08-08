@@ -1,19 +1,19 @@
 
-# Object.keys, values, entries
+# متدهای Object.keys، values، entries
 
-Let's step away from the individual data structures and talk about the iterations over them.
+بیایید از ساختار داده‌های منحصر به فرد دور شویم و درباره حلقه‌زدن در آنها حرف بزنیم.
 
-In the previous chapter we saw methods `map.keys()`, `map.values()`, `map.entries()`.
+در فصل قبل ما متدهای `map.keys()`، `map.values()`، `map.entries()` را دیدیدم.
 
-These methods are generic, there is a common agreement to use them for data structures. If we ever create a data structure of our own, we should implement them too.
+این متدها کلی هستند و یک توافق عمومی برای استفاده از آنها در ساختارهای داده وجود دارد. اگر ما هر زمان بخواهیم ساختار داده‌ی خودمان را بسازیم، باشد آنها را نیز پیاده‌سازی کنیم.
 
-They are supported for:
+این‌ها برای ساختارهای زیر پشتیبانی می‌شوند:
 
 - `Map`
 - `Set`
 - `Array`
 
-Plain objects also support similar methods, but the syntax is a bit different.
+شیءهای ساده هم متدهای مشابه را پشتیبانی می‌کنند اما سینتکس آن کمی فرق دارد.
 
 ## Object.keys, values, entries
 
