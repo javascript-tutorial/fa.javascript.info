@@ -15,28 +15,28 @@
 
 شیءهای ساده هم متدهای مشابه را پشتیبانی می‌کنند اما سینتکس آن کمی فرق دارد.
 
-## Object.keys, values, entries
+## متدهای Object.keys، values، entries
 
-For plain objects, the following methods are available:
+برای شیءهای ساده، متدهای زیر موجود هستند:
 
-- [Object.keys(obj)](mdn:js/Object/keys) -- returns an array of keys.
-- [Object.values(obj)](mdn:js/Object/values) -- returns an array of values.
-- [Object.entries(obj)](mdn:js/Object/entries) -- returns an array of `[key, value]` pairs.
+- [Object.keys(obj)](mdn:js/Object/keys) -- آرایه‌ای از کلیدها برمی‌گرداند.
+- [Object.values(obj)](mdn:js/Object/values) -- آرایه‌ای از مقدارها برمی‌گرداند.
+- [Object.entries(obj)](mdn:js/Object/entries) -- آرایه‌ای از `[key, value]` برمی‌گرداند.
 
-Please note the distinctions (compared to map for example):
+لطفا تفاوت‌ها را در نظر داشته باشید (برای مثال در مقایسه با map):
 
-|             | Map              | Object       |
+|             | Map              | شیء       |
 |-------------|------------------|--------------|
-| Call syntax | `map.keys()`  | `Object.keys(obj)`, but not `obj.keys()` |
-| Returns     | iterable    | "real" Array                     |
+| سینتکس فراخوانی | `map.keys()`  | `Object.keys(obj)`، اما `obj.keys()` نه |
+| برمی‌گرداند     | حلقه‌پذیر    | آرایه «واقعی»                     |
 
-The first difference is that we have to call `Object.keys(obj)`, and not `obj.keys()`.
+اولین تفاوت این است که ما باید `Object.keys(obj)` را صدا بزنیم نه `obj.keys()`.
 
-Why so? The main reason is flexibility. Remember, objects are a base of all complex structures in JavaScript. So we may have an object of our own like `data` that implements its own `data.values()` method. And we still can call `Object.values(data)` on it.
+اما چرا؟ دلیل اصلی آن انعطاف‌پذیری است. به یاد داشته باشید، شیءها پایه تمام ساختارهای پیچیده در جاوااسکریپت هستند. پس ما می‌توانیم خودمان یک شیء مانند `data` داشته باشیم که متد `data.keys()` خودش را پیاده‌سازی کند. و ما همچنان می‌توانیم `Object.values(data)` را برای آن فراخوانی کنیم.
 
-The second difference is that `Object.*` methods return "real" array objects, not just an iterable. That's mainly for historical reasons.
+تفاوت دوم این است که متدهای `Object.*` شیءهای «واقعی» آرایه را برمی‌گردانند نه فقط یک حلقه‌پذیر. این موضوع دلایل تاریخی دارد.
 
-For instance:
+برای مثال:
 
 ```js
 let user = {
@@ -49,7 +49,7 @@ let user = {
 - `Object.values(user) = ["John", 30]`
 - `Object.entries(user) = [ ["name","John"], ["age",30] ]`
 
-Here's an example of using `Object.values` to loop over property values:
+اینجا یک مثال از استفاده کردن از `Object.values` برای حلقه‌زدن درون مقدارهای ویژگی‌ها داریم:
 
 ```js run
 let user = {
@@ -57,16 +57,16 @@ let user = {
   age: 30
 };
 
-// loop over values
+// حلقه‌زدن در مقدارها
 for (let value of Object.values(user)) {
-  alert(value); // John, then 30
+  alert(value); // سپس 30 ،John
 }
 ```
 
-```warn header="Object.keys/values/entries ignore symbolic properties"
-Just like a `for..in` loop, these methods ignore properties that use `Symbol(...)` as keys.
+```warn header="متد Object.keys/values/entries ویژگی‌های سمبلی را نادیده می‌گیرد"
+درست مانند یک حلقه `for..in`، این متدها ویژگی‌هایی که از `Symbol(...)` به عنوان کلید استفاده می‌کنند را نادیده می‌گیرند.
 
-Usually that's convenient. But if we want symbolic keys too, then there's a separate method [Object.getOwnPropertySymbols](mdn:js/Object/getOwnPropertySymbols) that returns an array of only symbolic keys. Also, there exist a method [Reflect.ownKeys(obj)](mdn:js/Reflect/ownKeys) that returns *all* keys.
+معمولا این موضوع مشکلی ایجاد نمی‌کند. اما اگر ما کلیدهای سمبلی را هم بخواهیم، یک متد جداگانه [Object.getOwnPropertySymbols](mdn:js/Object/getOwnPropertySymbols) هم وجود دارد که یک آرایه از کلیدهای سمبلی را برمی‌گرداند. همچنین یک متد [Reflect.ownKeys(obj)](mdn:js/Reflect/ownKeys) وجود دارد که *تمام* کلیدها را برمی‌گرداند.
 ```
 
 
