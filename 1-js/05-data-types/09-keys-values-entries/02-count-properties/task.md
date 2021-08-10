@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# Count properties
+# ویژگی‌ها را بشمارید
 
-Write a function `count(obj)` that returns the number of properties in the object:
+یک تابع `count(obj)` بنویسید که تعداد ویژگی‌های درون شیء را برمی‌گرداند:
 
 ```js
 let user = {
@@ -15,7 +15,7 @@ let user = {
 alert( count(user) ); // 2
 ```
 
-Try to make the code as short as possible.
+سعی کنید تا جایی که می‌توانید کد را کوتاه بنویسید.
 
-P.S. Ignore symbolic properties, count only "regular" ones.
+پی‌نوشت: ویژگی‌های سمبلی را نادیده بگیرید، فقط ویژگی‌های «معمولی» را بشمارید.
 
