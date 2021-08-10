@@ -2,15 +2,15 @@ importance: 5
 
 ---
 
-# Sum the properties
+# ویژگی‌ها را جمع بزنید
 
-There is a `salaries` object with arbitrary number of salaries. 
+یک شیء `salaries` داریم که تعداد دلخواهی از حقوق‌ها را شامل می‌شود.
 
-Write the function `sumSalaries(salaries)` that returns the sum of all salaries using `Object.values` and the `for..of` loop.
+تابع `sumSalaries(salaries)` بنویسید که جمع تمام حقوق‌ها را با استفاده از `Object.values` و حلقه `for..of` برگرداند.
 
-If `salaries` is empty, then the result must be `0`.
+اگر `salaries` خالی باشد، نتیجه باید `0` باشد.
 
-For instance:
+برای مثال:
 
 ```js
 let salaries = {
