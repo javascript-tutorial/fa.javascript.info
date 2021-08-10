@@ -70,17 +70,17 @@ for (let value of Object.values(user)) {
 ```
 
 
-## Transforming objects
+## تغییر شکل دادن شیءها
 
-Objects lack many methods that exist for arrays, e.g. `map`, `filter` and others.
+شیءها تعداد زیادی از متدهایی که برای آرایه وجود دارد را ندارند، مانند `map`، `filter` و بقیه آنها.
 
-If we'd like to apply them, then we can use `Object.entries` followed by `Object.fromEntries`:
+اگر ما بخواهیم آنها را اعمال کنیم، می‌توانیم از متد `Object.entries` و سپس از `Object.fromEntries` استفاده کنیم:
 
-1. Use `Object.entries(obj)` to get an array of key/value pairs from `obj`.
-2. Use array methods on that array, e.g. `map`, to transform these key/value pairs.
-3. Use `Object.fromEntries(array)` on the resulting array to turn it back into an object.
+1. از `Object.entries(obj)` برای گرفتن آرایه‌ای از جفت‌های کلید/مقدار از `obj` استفاده کنید.
+2. برای تغییر شکل دادن این جفت‌های کلید/مقدار، از متدهای آرایه روی آن آرایه استفاده کنید، برای مثال `map`.
+3. از `Object.fromEntries(array)` بر روی آرایه حاصل برای برگرداندن آن به یک شیء استفاده کنید.
 
-For example, we have an object with prices, and would like to double them:
+برای مثال، ما یک شیء حاوی قیمت‌ها را داریم و می‌خواهیم آنها را دو برابر کنیم:
 
 ```js run
 let prices = {
@@ -91,8 +91,8 @@ let prices = {
 
 *!*
 let doublePrices = Object.fromEntries(
-  // convert prices to array, map each key/value pair into another pair
-  // and then fromEntries gives back the object
+  // هر جفت را به جفت جدید دیگری تبدیل می‌کنیم map قیمت‌ها را به یک آرایه تبدیل می‌کنیم و با استفاده از
+  // شیء را بازمی‌گرداند fromEntries و سپس متد
   Object.entries(prices).map(entry => [entry[0], entry[1] * 2])
 );
 */!*
@@ -100,4 +100,4 @@ let doublePrices = Object.fromEntries(
 alert(doublePrices.meat); // 8
 ```
 
-It may look difficult at first sight, but becomes easy to understand after you use it once or twice. We can make powerful chains of transforms this way.
+ممکن است در نگاه اول سخت بنظر برسد اما بعد از اینکه یکی دوبار از آن استفاده کنید فهم آن راحت می‌شود. ما می‌توانیم زنجیره‌های قدرتمندی از تغییر شکل دادن را با این روش بسازیم.
