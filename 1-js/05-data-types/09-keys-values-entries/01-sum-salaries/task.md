@@ -6,7 +6,7 @@ importance: 5
 
 یک شیء `salaries` داریم که تعداد دلخواهی از حقوق‌ها را شامل می‌شود.
 
-تابع `sumSalaries(salaries)` بنویسید که جمع تمام حقوق‌ها را با استفاده از `Object.values` و حلقه `for..of` برگرداند.
+تابع `sumSalaries(salaries)` بنویسید که جمع تمام حقوق‌ها را با استفاده از `Object.values` و حلقه‌ی `for..of` برگرداند.
 
 اگر `salaries` خالی باشد، نتیجه باید `0` باشد.
 
@@ -21,4 +21,3 @@ let salaries = {
 
 alert( sumSalaries(salaries) ); // 650
 ```
-
