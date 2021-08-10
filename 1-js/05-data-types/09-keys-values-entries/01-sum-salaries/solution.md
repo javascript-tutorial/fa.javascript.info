@@ -9,6 +9,6 @@ function sumSalaries(salaries) {
   return sum; // 650
 }
 ```
-Or, optionally, we could also get the sum using `Object.values` and `reduce`:
+یا اگر می‌خواستیم، می‌توانستیم جمع را با استفاده از `Object.values` و `reduce` محاسبه کنیم:
 
 `Object.values(salaries).reduce((a, b) => a + b) // 650`
