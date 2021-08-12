@@ -1,75 +1,75 @@
-# Date and time
+# تاریخ و زمان
 
-Let's meet a new built-in object: [Date](mdn:js/Date). It stores the date, time and provides methods for date/time management.
+بیایید یک شیء درون‌ساخت جدید را بشناسیم: [Date](mdn:js/Date). این شیء تاریخ و زمان را ذخیره می‌کند و متدهایی را برای مدیریت تاریخ/زمان فراهم می‌کند.
 
-For instance, we can use it to store creation/modification times, to measure time, or just to print out the current date.
+برای مثال، ما می‌توانیم از آن برای ذخیره‌سازی زمان ساختن/تغییردادن، اندازه‌گیری زمان یا فقط برای نمایش دادن زمان کنونی استفاده کنیم.
 
-## Creation
+## ایجاد
 
-To create a new `Date` object call `new Date()` with one of the following arguments:
+برای ایجاد یک شیء `Date` جدید باید `new Date()` را با یکی از آرگومان‌های زیر صدا بزنیم:
 
 `new Date()`
-: Without arguments -- create a `Date` object for the current date and time:
+: بدون آرگومان -- یک شیء `Date` برای تاریخ و زمان کنونی می‌سازد:
 
     ```js run
     let now = new Date();
-    alert( now ); // shows current date/time
+    alert( now ); // تاریخ/زمان کنونی را نمایش می‌دهد
     ```
 
 `new Date(milliseconds)`
-: Create a `Date` object with the time equal to number of milliseconds (1/1000 of a second) passed after the Jan 1st of 1970 UTC+0.
+: یک شیء `Date` با زمانی برابر با تعداد میلی‌ثانیه‌هایی (milliseconds، 1/1000 ثانیه) که از اول ژانویه سال 1970 میلادی با UTC+0 گذشته است می‌سازد.
 
     ```js run
-    // 0 means 01.01.1970 UTC+0
+    // 01.01.1970 UTC+0 صفر یعنی
     let Jan01_1970 = new Date(0);
     alert( Jan01_1970 );
 
-    // now add 24 hours, get 02.01.1970 UTC+0
+    // 02.01.1970 UTC+0 :حالا 24 ساعت اضافه می‌کنیم و تاریخی که دریافت می‌کنیم 
     let Jan02_1970 = new Date(24 * 3600 * 1000);
     alert( Jan02_1970 );
     ```
 
-    An integer number representing the number of milliseconds that has passed since the beginning of 1970 is called a *timestamp*.
+    عدد صحیحی که تعداد میلی‌ثانیه‌های گذشته از شروع 1970 را نمایش می‌دهد را *مُهرزمانی* می‌گویند.
 
-    It's a lightweight numeric representation of a date. We can always create a date from a timestamp using `new Date(timestamp)` and convert the existing `Date` object to a timestamp using the `date.getTime()` method (see below).
+    مهرزمانی یک نمایش آسان از تاریخ است. ما همیشه می‌توانیم با استفاده از `new Date(timestamp)` یک تاریخ را از یک مهرزمانی بسازیم و شیء `Date` موجود را با استفاده از متد `date.getTime()` به مهرزمانی تبدیل کنیم (ادامه متن را ببینید).
 
-    Dates before 01.01.1970 have negative timestamps, e.g.:
+    :تاریخ‌های قبل از 01.01.1970 مهرزمانی منفی دارند، برای مثال
     ```js run
-    // 31 Dec 1969
+    // سی و یک دسامبر 1969
     let Dec31_1969 = new Date(-24 * 3600 * 1000);
     alert( Dec31_1969 );
     ```
 
 `new Date(datestring)`
-: If there is a single argument, and it's a string, then it is parsed automatically. The algorithm is the same as `Date.parse` uses, we'll cover it later.
+: اگر یک آرگومان تنها وجود داشته باشد که رشته است، سپس به طور خودکار تجزیه می‌شود. الگوریتم آن با `Date.parse` یکسان است، ما آن را بعدا یاد می‌گیریم.
 
     ```js run
     let date = new Date("2017-01-26");
     alert(date);
-    // The time is not set, so it's assumed to be midnight GMT and
-    // is adjusted according to the timezone the code is run in
-    // So the result could be
+    // باشد GMT زمان تنظیم نشده است پس فرض می‌شود که نیمه شب
+    // و با توجه به منطقه‌زمانی‌ای که کد در آن اجرا می‌شود تنظیم می‌شود
+    // :پس نتیجه می‌تواند این باشد
     // Thu Jan 26 2017 11:00:00 GMT+1100 (Australian Eastern Daylight Time)
-    // or
+    // یا
     // Wed Jan 25 2017 16:00:00 GMT-0800 (Pacific Standard Time)
     ```
 
 `new Date(year, month, date, hours, minutes, seconds, ms)`
-: Create the date with the given components in the local time zone. Only the first two arguments are obligatory.
+: یک تاریخ با مؤلفه‎های داده شده در منطقه‌زمانی محلی می‌سازد. فقط دو آرگومان اول ضروری هستند.
 
-    - The `year` must have 4 digits: `2013` is okay, `98` is not.
-    - The `month` count starts with `0` (Jan), up to `11` (Dec).
-    - The `date` parameter is actually the day of month, if absent then `1` is assumed.
-    - If `hours/minutes/seconds/ms` is absent, they are assumed to be equal `0`.
+    - پارامتر `year` باشد حتما 4 رقم باشد: `2013` خوب است ولی `98` نه.
+    - شمارش پارامتر `month` از `0` (ژانویه) تا `11` (دسامبر) است.
+    - پارامتر `date` در واقع روز ماه است، اگر وارد نشود `1` فرض می‌شود.
+    - اگر `hours/minutes/seconds/ms` وارد نشوند،برای آنها `0` در نظر گرفته می‌شود.
 
-    For instance:
+    برای مثال:
 
     ```js
-    new Date(2011, 0, 1, 0, 0, 0, 0); // 1 Jan 2011, 00:00:00
-    new Date(2011, 0, 1); // the same, hours etc are 0 by default
+    new Date(2011, 0, 1, 0, 0, 0, 0); // اول ژانویه 2011، ساعت 00:00:00
+    new Date(2011, 0, 1); // یکسان است، ساعت و بقیه پارامترها به طور پیش‌فرض 0 هستند
     ```
 
-    The maximal precision is 1 ms (1/1000 sec):
+    :بیشترین دقت 1 میلی‌ثانیه (1/1000 ثانیه) است
 
     ```js run
     let date = new Date(2011, 0, 1, 2, 3, 4, 567);
