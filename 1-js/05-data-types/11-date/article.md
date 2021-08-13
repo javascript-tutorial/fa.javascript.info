@@ -76,59 +76,59 @@
     alert( date ); // 1.01.2011, 02:03:04.567
     ```
 
-## Access date components
+## دسترسی به اجزاء تاریخ
 
-There are methods to access the year, month and so on from the `Date` object:
+متدهایی برای دسترسی به سال، ماه و بقیه اجزاء در شیء `Date` وجود دارد:
 
 [getFullYear()](mdn:js/Date/getFullYear)
-: Get the year (4 digits)
+: دریافت سال (4 رقم)
 
 [getMonth()](mdn:js/Date/getMonth)
-: Get the month, **from 0 to 11**.
+: دریافت ماه، **از 0 تا 11**.
 
 [getDate()](mdn:js/Date/getDate)
-: Get the day of month, from 1 to 31, the name of the method does look a little bit strange.
+: دریافت روز ماه، از 1 تا 31، اسم متد واقعا کمی عجیب بنظر می‌رسد.
 
-[getHours()](mdn:js/Date/getHours), [getMinutes()](mdn:js/Date/getMinutes), [getSeconds()](mdn:js/Date/getSeconds), [getMilliseconds()](mdn:js/Date/getMilliseconds)
-: Get the corresponding time components.
+[getHours()](mdn:js/Date/getHours)، [getMinutes()](mdn:js/Date/getMinutes)، [getSeconds()](mdn:js/Date/getSeconds)، [getMilliseconds()](mdn:js/Date/getMilliseconds)
+: جزء متناظر با خود را دریافت می‌کنند یعنی به ترتیب: ساعت، دقیقه، ثانیه و میلی‌ثانیه.
 
-```warn header="Not `getYear()`, but `getFullYear()`"
-Many JavaScript engines implement a non-standard method `getYear()`. This method is deprecated. It returns 2-digit year sometimes. Please never use it. There is `getFullYear()` for the year.
+```warn header="متد `getYear()` درست نیست بلکه `getFullYear()` درست است"
+بسیاری از موتورهای جاوااسکریپت یک متد غیر استاندارد `getYear()` را پیاده‌سازی می‌کنند. این متد منسوخ شده است. بعضی اوقات یک سال 2 رقمی را برمی‌گرداند. لطفا هیچ‌وقت از آن استفاده نکنید. متد `getFullYear()` برای سال وجود دارد.
 ```
 
-Additionally, we can get a day of week:
+علاوه بر این، ما می‌توانیم روز هفته را هم دریافت کنیم:
 
 [getDay()](mdn:js/Date/getDay)
-: Get the day of week, from `0` (Sunday) to `6` (Saturday). The first day is always Sunday, in some countries that's not so, but can't be changed.
+: دریافت روز هفته، از `0` (Sunday، یکشنبه) تا `6` (Saturday، شنبه). اولین روز همیشه Sunday (یکشنبه) است و در بعضی از کشورها اینگونه نیست اما نمی‌توان آن را تغییر داد.
 
-**All the methods above return the components relative to the local time zone.**
+**تمام متدهای بالا اجزاء را با توجه به منطقه زمانی محلی برمی‌گردانند.**
 
-There are also their UTC-counterparts, that return day, month, year and so on for the time zone UTC+0: [getUTCFullYear()](mdn:js/Date/getUTCFullYear), [getUTCMonth()](mdn:js/Date/getUTCMonth), [getUTCDay()](mdn:js/Date/getUTCDay). Just insert the `"UTC"` right after `"get"`.
+همچنین نقطه مقابل آنها در UTC هم وجود دارد که روز، ماه، سال و بقیه را برای منطقه زمانی UTC+0 برمی‌گرداند: [getUTCFullYear()](mdn:js/Date/getUTCFullYear)، [getUTCMonth()](mdn:js/Date/getUTCMonth)، [getUTCDay()](mdn:js/Date/getUTCDay). فقط `"UTC"` را بعد از `"get"` اضافه کنید.
 
-If your local time zone is shifted relative to UTC, then the code below shows different hours:
+اگر منطقه زمانی شما نسبت به UTC متفاوت باشد، کد پایین ساعت‌های متفاوت را نشان می‌دهد:
 
 ```js run
-// current date
+// تاریخ کنونی
 let date = new Date();
 
-// the hour in your current time zone
+// ساعت در منطقه زمانی کنونی شما
 alert( date.getHours() );
 
-// the hour in UTC+0 time zone (London time without daylight savings)
+// (زمان شهر لندن بدون ساعت تابستانی) UTC+0 ساعت در منطقه زمانی
 alert( date.getUTCHours() );
 ```
 
-Besides the given methods, there are two special ones that do not have a UTC-variant:
+علاوه بر متدهای داده شده، دو متد خاص هم وجود دارند که نوع UTC برای آنها وجود ندارد:
 
 [getTime()](mdn:js/Date/getTime)
-: Returns the timestamp for the date -- a number of milliseconds passed from the January 1st of 1970 UTC+0.
+: مهرزمانی را برای تاریخ برمی‌گرداند -- عددی برابر با میلی‌ثانیه‌هایی که از اول ژانویه 1970 میلادی با UTC+0 گذشته است.
 
 [getTimezoneOffset()](mdn:js/Date/getTimezoneOffset)
-: Returns the difference between UTC and the local time zone, in minutes:
+: تقاوت بین UTC و منطقه زمانی محلی را به دقیقه برمی‌گرداند.
 
     ```js run
-    // if you are in timezone UTC-1, outputs 60
-    // if you are in timezone UTC+3, outputs -180
+    // باشید، خروجی 60 می‌دهد UTC-1 اگر شما در منطقه زمانی
+    // باشید، خروجی 180- می‌دهد UTC+3 اگر در منطقه زمانی
     alert( new Date().getTimezoneOffset() );
 
     ```
