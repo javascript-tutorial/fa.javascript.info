@@ -133,9 +133,9 @@ alert( date.getUTCHours() );
 
     ```
 
-## Setting date components
+## تنظیم کردن اجزاء تاریخ
 
-The following methods allow to set date/time components:
+متدهای زیر به اجازه تنظیم کردن اجزاء تاریخ را می‌دهند:
 
 - [`setFullYear(year, [month], [date])`](mdn:js/Date/setFullYear)
 - [`setMonth(month, [date])`](mdn:js/Date/setMonth)
@@ -144,22 +144,21 @@ The following methods allow to set date/time components:
 - [`setMinutes(min, [sec], [ms])`](mdn:js/Date/setMinutes)
 - [`setSeconds(sec, [ms])`](mdn:js/Date/setSeconds)
 - [`setMilliseconds(ms)`](mdn:js/Date/setMilliseconds)
-- [`setTime(milliseconds)`](mdn:js/Date/setTime) (sets the whole date by milliseconds since 01.01.1970 UTC)
+- [`setTime(milliseconds)`](mdn:js/Date/setTime) (تمام تاریخ را توسط میلی‌ثانیه‌های گذشته از 01.01.1970 UTC+0 تنظیم می‌کند)
 
-Every one of them except `setTime()` has a UTC-variant, for instance: `setUTCHours()`.
+تمام آنها به جز `setTime()` یک نوع UTC دارند، برای مثال: `setUTCHours()`.
 
-As we can see, some methods can set multiple components at once, for example `setHours`. The components that are not mentioned are not modified.
+همانطور که می‌بینیم، بعضی از متدها می‌توانند چند جزء را همزمان تنظیم کنند، برای مثال `setHours`. اجزائی که ذکر نشوند تغییر داده نمی‌شوند.
 
-For instance:
+برای مثال:
 
 ```js run
 let today = new Date();
 
 today.setHours(0);
-alert(today); // still today, but the hour is changed to 0
-
+alert(today); // .هنوز امروز است اما ساعت به 0 تغییر داده شد
 today.setHours(0, 0, 0, 0);
-alert(today); // still today, now 00:00:00 sharp.
+alert(today); // .هنوز هم امروز است، الان ساعت دقیقا 00:00:00 است
 ```
 
 ## Autocorrection
