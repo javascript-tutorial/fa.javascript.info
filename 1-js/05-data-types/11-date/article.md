@@ -135,7 +135,7 @@ alert( date.getUTCHours() );
 
 ## تنظیم کردن اجزاء تاریخ
 
-متدهای زیر به اجازه تنظیم کردن اجزاء تاریخ را می‌دهند:
+متدهای زیر به ما اجازه تنظیم کردن اجزاء تاریخ را می‌دهند:
 
 - [`setFullYear(year, [month], [date])`](mdn:js/Date/setFullYear)
 - [`setMonth(month, [date])`](mdn:js/Date/setMonth)
