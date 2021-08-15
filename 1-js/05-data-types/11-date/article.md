@@ -232,33 +232,33 @@ let end = new Date(); // اندازه‌گیری زمان را به پایان �
 alert( `حلقه ${end - start} میلی‌ثانیه طول کشید` );
 ```
 
-## Date.now()
+## متد Date.now()
 
-If we only want to measure time, we don't need the `Date` object.
+اگر ما فقط بخواهیم که زمان را اندازه‌گیری کنیم، احتیاجی به شیء `Date` نداریم.
 
-There's a special method `Date.now()` that returns the current timestamp.
+یک متد خاص `Date.now()` وجود دارد که مهرزمانی کنونی را برمی‌گرداند.
 
-It is semantically equivalent to `new Date().getTime()`, but it doesn't create an intermediate `Date` object. So it's faster and doesn't put pressure on garbage collection.
+از لحاظ معنا برابر با `new Date().getTime()` است اما یک شیء واسطه `Date` نمی‌سازد. پس سریع‌تر است و به زباله‌روبی فشاری وارد نمی‌کند.
 
-It is used mostly for convenience or when performance matters, like in games in JavaScript or other specialized applications.
+اغلب اوقات برای راحتی یا زمانی که عملکرد اهمیت دارد استفاده می‌شود، مانند بازی‌های جاوااسکریپت یا برنامه‌های تخصصی دیگر.
 
-So this is probably better:
+پس احتمالا این بهتر است:
 
 ```js run
 *!*
-let start = Date.now(); // milliseconds count from 1 Jan 1970
+let start = Date.now(); // تعداد میلی‌ثانیه‌ها از اول ژانویه 1970
 */!*
 
-// do the job
+// کارتان را انجام دهید
 for (let i = 0; i < 100000; i++) {
   let doSomething = i * i * i;
 }
 
 *!*
-let end = Date.now(); // done
+let end = Date.now(); // تمام
 */!*
 
-alert( `The loop took ${end - start} ms` ); // subtract numbers, not dates
+alert( `The loop took ${end - start} ms` ); // اعداد را از هم کم کنید نه تاریخ‌ها را
 ```
 
 ## Benchmarking
