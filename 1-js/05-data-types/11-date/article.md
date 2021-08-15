@@ -161,20 +161,20 @@ today.setHours(0, 0, 0, 0);
 alert(today); // .هنوز هم امروز است، الان ساعت دقیقا 00:00:00 است
 ```
 
-## Autocorrection
+## تصحیح خودکار
 
-The *autocorrection* is a very handy feature of `Date` objects. We can set out-of-range values, and it will auto-adjust itself.
+*تصحیح خودکار* یک خاصیت بسیار کاربردی شیءهای `Date` است. ما می‌توانیم مقدارهای خارج از محدوده را قرار دهیم و شیء `Date` به طور خودکار خودش را تنظیم می‌کند.
 
-For instance:
+برای مثال:
 
 ```js run
 let date = new Date(2013, 0, *!*32*/!*); // 32 Jan 2013 ?!?
-alert(date); // ...is 1st Feb 2013!
+alert(date); // !برابر است با اول فوریه 2013...
 ```
 
-Out-of-range date components are distributed automatically.
+اجزاء خارج از محدوده تاریخ به طور خودکار توزیع می‌شوند.
 
-Let's say we need to increase the date "28 Feb 2016" by 2 days. It may be "2 Mar" or "1 Mar" in case of a leap-year. We don't need to think about it. Just add 2 days. The `Date` object will do the rest:
+بیایید فرض کنیم که ما نیاز داریم تاریخ «28 فوریه 2016» را دو روز به جلو ببریم. ممکن است برابر با «دوم مارس» یا اگر سال کبیسه باشد «اول مارس» شود. ما نیازی نداریم که به آن فکر کنیم. فقط 2 روز به آن اضافه کنید. شیء `Date` بقیه کار را انجام می‌دهد:
 
 ```js run
 let date = new Date(2016, 1, 28);
@@ -182,54 +182,54 @@ let date = new Date(2016, 1, 28);
 date.setDate(date.getDate() + 2);
 */!*
 
-alert( date ); // 1 Mar 2016
+alert( date ); // اول مارس 2016
 ```
 
-That feature is often used to get the date after the given period of time. For instance, let's get the date for "70 seconds after now":
+این ویژگی اغلب برای دریافت تاریخ بعد از مدت زمان داده شده استفاده می‌شود. برای مثال بیایید تاریخ «70 ثانیه پس از الان» را دریافت کنیم:
 
 ```js run
 let date = new Date();
 date.setSeconds(date.getSeconds() + 70);
 
-alert( date ); // shows the correct date
+alert( date ); // تاریخ درست را نمایش می‌دهد
 ```
 
-We can also set zero or even negative values. For example:
+همچنین ما می‌توانیم صفر یا مقدارهای منفی را قرار بدهیم. برای مثال:
 
 ```js run
-let date = new Date(2016, 0, 2); // 2 Jan 2016
+let date = new Date(2016, 0, 2); // دوم ژانویه 2016
 
-date.setDate(1); // set day 1 of month
+date.setDate(1); // روز اول ماه را تنظیم کنید
 alert( date );
 
-date.setDate(0); // min day is 1, so the last day of the previous month is assumed
-alert( date ); // 31 Dec 2015
+date.setDate(0); // کمترین روز 1 است، پس آخرین روز ماه قبل فرض می‌شود
+alert( date ); // سی و یک دسامبر 2015
 ```
 
-## Date to number, date diff
+## تبدیل تاریخ به عدد، تقاوت تاریخ
 
-When a `Date` object is converted to number, it becomes the timestamp same as `date.getTime()`:
+زمانی که یک شیء `Date` به عدد تبدیل می‌شود، در واقع به مهرزمانی تبدیل می‌شود درست مانند `date.getTime()`:
 
 ```js run
 let date = new Date();
-alert(+date); // the number of milliseconds, same as date.getTime()
+alert(+date); // date.getTime() تعداد میلی‌ثانیه‌ها، مانند
 ```
 
-The important side effect: dates can be subtracted, the result is their difference in ms.
+اثر جانبی مهم: تاریخ‌ها می‌توانند از هم کم شوند، نتیجه برابر با تفاوت آنها در میلی‌ثانیه است.
 
-That can be used for time measurements:
+می‌توان از آن برای اندازه‌گیری زمان استفاده کرد:
 
 ```js run
-let start = new Date(); // start measuring time
+let start = new Date(); // شروع به اندازه‌گیری زمان
 
-// do the job
+// کارتان را انجام دهید
 for (let i = 0; i < 100000; i++) {
   let doSomething = i * i * i;
 }
 
-let end = new Date(); // end measuring time
+let end = new Date(); // اندازه‌گیری زمان را به پایان برسانید
 
-alert( `The loop took ${end - start} ms` );
+alert( `حلقه ${end - start} میلی‌ثانیه طول کشید` );
 ```
 
 ## Date.now()
