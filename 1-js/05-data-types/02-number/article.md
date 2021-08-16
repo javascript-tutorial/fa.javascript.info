@@ -4,11 +4,7 @@
 
 1. اعداد معمولی در جاوااسکریپت با فرمت 64 بیتی [IEEE-754](https://en.wikipedia.org/wiki/IEEE_754-2008_revision) ذخیره می‌شوند، همچنین با "اعداد اعشاری با دقت یک صدم" هم شناخته می‌شوند. ما اکثر اوقات از این اعداد استفاده می‌کنیم، و درباره آنها در این فصل صحبت خواهیم کرد.
 
-<<<<<<< HEAD
 2. اعداد BigInt، برای نمایش اعدادی با طول دلخواه استفاده می‌شوند. آنها بعضی اوقات مورد نیاز هستند، چون اعداد معمولی نمی‌توانند از <code>2<sup>53</sup></code> بیشتر یا از <code>-2<sup>53</sup></code> کمتر باشند. چون bigintها در چند حوزه خاص استفاده می‌شوند، ما به آنها یک فصل خاص <info:bigint> اختصاص می‌دهیم.
-=======
-2. BigInt numbers, to represent integers of arbitrary length. They are sometimes needed, because a regular number can't safely exceed <code>2<sup>53</sup></code> or be less than <code>-2<sup>53</sup></code>. As bigints are used in few special areas, we devote them a special chapter <info:bigint>.
->>>>>>> 4d01fc20d4d82358e61518a31efe80dec9bb2602
 
 پس اینجا درباره اعداد معمولی صحبت می‌کنیم. بیایید دانش‌مان درباره آنها را گسترش دهیم.
 

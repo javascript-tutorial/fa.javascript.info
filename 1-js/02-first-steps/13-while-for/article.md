@@ -106,17 +106,10 @@ for (let i = 0; i < 3; i++) { // 0 را نمایش می دهد، سپس 1، سپ
 
 | قسمت  |          |                                                                            |
 |-------|----------|----------------------------------------------------------------------------|
-<<<<<<< HEAD
 | begin(آغاز) | `i = 0`    | به محض ورود به حلقه اجرا می شود.                                      |
 | condition(شرط) | `i < 3`| قبل از هر تکرار حلقه بررسی می شود. اگر false باشد حلقه متوقف می شود.              |
 | body(بدنه) | `alert(i)`| تا زمانی که شرط truthy باشد همچنان اجرا می شود.                         |
 | step(قدم) | `i++`      | در هر تکرار بعد از بدنه اجرا می شود. |
-=======
-| begin | `let i = 0`    | Executes once upon entering the loop.                                      |
-| condition | `i < 3`| Checked before every loop iteration. If false, the loop stops.              |
-| body | `alert(i)`| Runs again and again while the condition is truthy.                         |
-| step| `i++`      | Executes after the body on each iteration. |
->>>>>>> 4d01fc20d4d82358e61518a31efe80dec9bb2602
 
 الگوریتم کلی حلقه مثل قسمت پایین کار می کند:
 
