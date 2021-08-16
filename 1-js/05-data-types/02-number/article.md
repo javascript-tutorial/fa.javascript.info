@@ -4,7 +4,11 @@
 
 1. اعداد معمولی در جاوااسکریپت با فرمت 64 بیتی [IEEE-754](https://en.wikipedia.org/wiki/IEEE_754-2008_revision) ذخیره می‌شوند، همچنین با "اعداد اعشاری با دقت یک صدم" هم شناخته می‌شوند. ما اکثر اوقات از این اعداد استفاده می‌کنیم، و درباره آنها در این فصل صحبت خواهیم کرد.
 
+<<<<<<< HEAD
 2. اعداد BigInt، برای نمایش اعدادی با طول دلخواه استفاده می‌شوند. آنها بعضی اوقات مورد نیاز هستند، چون اعداد معمولی نمی‌توانند از <code>2<sup>53</sup></code> بیشتر یا از <code>-2<sup>53</sup></code> کمتر باشند. چون bigintها در چند حوزه خاص استفاده می‌شوند، ما به آنها یک فصل خاص <info:bigint> اختصاص می‌دهیم.
+=======
+2. BigInt numbers, to represent integers of arbitrary length. They are sometimes needed, because a regular number can't safely exceed <code>2<sup>53</sup></code> or be less than <code>-2<sup>53</sup></code>. As bigints are used in few special areas, we devote them a special chapter <info:bigint>.
+>>>>>>> 4d01fc20d4d82358e61518a31efe80dec9bb2602
 
 پس اینجا درباره اعداد معمولی صحبت می‌کنیم. بیایید دانش‌مان درباره آنها را گسترش دهیم.
 
@@ -53,7 +57,11 @@ let ms = 0.000001;
 let ms = 1e-6; // شش صفر در چپ ۱ 
 ```
 
+<<<<<<< HEAD
 اگر ما تعداد صفرهای `0.000001` را بشماریم، شش تا از آنها موجودست. بنابراین طبعا می‌شود `1e-6`.
+=======
+If we count the zeroes in `0.000001`, there are 6 of them. So naturally it's `1e-6`.
+>>>>>>> 4d01fc20d4d82358e61518a31efe80dec9bb2602
 
 به زبانی دیگر، یک عدد منفی بعد `"e"`، به معنی  تقسیم بر یک با تعداد صفرهای داده شده است.
 
@@ -328,7 +336,11 @@ let num = +prompt("Enter a number", '');
 alert( isFinite(num) );
 ```
 
+<<<<<<< HEAD
 توجه داشته باشید که رشته حرفی‌ای که در آن فقط یک جای خالی باشد یا کلا خالی باشد، به عنوان صفر در همه‌ی توابع عددی از جمله `isFinite` در نظر گرفته میشود.
+=======
+Please note that an empty or a space-only string is treated as `0` in all numeric functions including `isFinite`.
+>>>>>>> 4d01fc20d4d82358e61518a31efe80dec9bb2602
 
 ```smart header="مقایسه کنید با `Object.is`"
 
