@@ -378,30 +378,30 @@ Modern JavaScript engines perform many optimizations. They may tweak results of 
 The great pack of articles about V8 can be found at <http://mrale.ph>.
 ```
 
-## Date.parse from a string
+## تجزیه رشته به تاریخ با Date.parse
 
-The method [Date.parse(str)](mdn:js/Date/parse) can read a date from a string.
+متد [Date.parse(str)](mdn:js/Date/parse) می‌تواند یک تاریخ را از یک رشته بخواند.
 
-The string format should be: `YYYY-MM-DDTHH:mm:ss.sssZ`, where:
+شکل رشته باید به این فرمت باشد: `YYYY-MM-DDTHH:mm:ss.sssZ`، با این شرایط:
 
-- `YYYY-MM-DD` -- is the date: year-month-day.
-- The character `"T"` is used as the delimiter.
-- `HH:mm:ss.sss` -- is the time: hours, minutes, seconds and milliseconds.
-- The optional `'Z'` part denotes the time zone in the format `+-hh:mm`. A single letter `Z` would mean UTC+0.
+- `YYYY-MM-DD` -- تاریخ است: روز-ماه-سال
+- کاراکتر `"T"` به عنوان جداکننده استفاده می‌شود.
+- `HH:mm:ss.sss` -- زمان است: میلی‌ثانیه‌ها، ثانیه‌ها، دقیقه‌ها و ساعت‌ها.
+- قسمت اختیاری `'Z'` نشان‌دهنده منطقه زمانی به شکل `+-hh:mm` است. حرف تنهای `Z` به معنای UTC+0 است.
 
-Shorter variants are also possible, like `YYYY-MM-DD` or `YYYY-MM` or even `YYYY`.
+انواع کوتاه‌تر رشته هم وجود دارند مثل `YYYY-MM-DD` یا `YYYY-MM` یا حتی `YYYY`.
 
-The call to `Date.parse(str)` parses the string in the given format and returns the timestamp (number of milliseconds from 1 Jan 1970 UTC+0). If the format is invalid, returns `NaN`.
+فراخوانی `Date.parse(str)` رشته را به فرمت داده شده تجزیه می‌کند و مهرزمانی (تعداد میلی‌ثانیه‌های گذشته از اول ژانویه 1970 با UTC+0) را برمی‌گرداند. اگر فرمت قابل قبول نباشد، `NaN` را برمی‌گرداند.
 
-For instance:
+برای مثال:
 
 ```js run
 let ms = Date.parse('2012-01-26T13:51:50.417-07:00');
 
-alert(ms); // 1327611110417  (timestamp)
+alert(ms); // 1327611110417  (مهرزمانی)
 ```
 
-We can instantly create a `new Date` object from the timestamp:
+ما بلافاصله می‌توانیم از مهرزمانی یک شیء `new Date` بسازیم:
 
 ```js run
 let date = new Date( Date.parse('2012-01-26T13:51:50.417-07:00') );
