@@ -261,33 +261,33 @@ let end = Date.now(); // تمام
 alert( `The loop took ${end - start} ms` ); // اعداد را از هم کم کنید نه تاریخ‌ها را
 ```
 
-## Benchmarking
+## بِنچمارک‌گیری (Benchmarking)
 
-If we want a reliable benchmark of CPU-hungry function, we should be careful.
+اگر ما یک بنچمارک قابل اطمینان از تابعی که پردازنده (CPU) را خیلی مشغول می‌کند بخواهیم، باشد مراقب باشیم.
 
-For instance, let's measure two functions that calculate the difference between two dates: which one is faster?
+برای مثال، بیایید دو تابع که تفاوت بین دو تاریخ را محاسبه می‌کنند را اندازه‌گیری کنیم: کدام یک از آنها سریع‌تر است؟
 
-Such performance measurements are often called "benchmarks".
+چنین اندازه‌گیری‌های عملکردی را «بِبنچمارک» می‌گویند.
 
 ```js
-// we have date1 and date2, which function faster returns their difference in ms?
+// را داریم، کدام تابع تفاوت آنها به میلی‌ثانیه را سریع‌تر برمی‌گرداند؟ date2 و date1 ما
 function diffSubtract(date1, date2) {
   return date2 - date1;
 }
 
-// or
+// یا
 function diffGetTime(date1, date2) {
   return date2.getTime() - date1.getTime();
 }
 ```
 
-These two do exactly the same thing, but one of them uses an explicit `date.getTime()` to get the date in ms, and the other one relies on a date-to-number transform. Their result is always the same.
+این دو تابع دقیقا یک کار را انجام می‌دهند اما یکی از آنها برای گرفتن تاریخ به میلی‌ثانیه از متد صریح `date.getTime()` استفاده می‌کند، و دیگری به تبدیل تاریخ به عدد متکی است. نتیجه آنها همیشه یکسان است.
 
-So, which one is faster?
+خب، کدام یک سریع‌تر است؟
 
-The first idea may be to run them many times in a row and measure the time difference. For our case, functions are very simple, so we have to do it at least 100000 times.
+ایده اول می‌تواند این باشد که آنها را چند بار متوالی اجرا کند و تفاوت زمان را اندازه بگیرد. در مورد ما، تابع‌ها خیلی ساده هستند، پس ما باید حداقل این کار را 100000 بار انجام دهیم.
 
-Let's measure:
+بیایید اندازه بگیریم:
 
 ```js run
 function diffSubtract(date1, date2) {
@@ -311,19 +311,19 @@ alert( 'Time of diffSubtract: ' + bench(diffSubtract) + 'ms' );
 alert( 'Time of diffGetTime: ' + bench(diffGetTime) + 'ms' );
 ```
 
-Wow! Using `getTime()` is so much faster! That's because there's no type conversion, it is much easier for engines to optimize.
+عجب! استفاده از `getTime()` خیلی سریع‌تر است! به این دلیل که هیچ تبدیلی برای نوع انجام نمی‌شود و از لحاظ بهینه‌سازی برای موتورها خیلی سریع‌تر است.
 
-Okay, we have something. But that's not a good benchmark yet.
+خب این از هیچی بهتر است. اما هنوز یک بنچمارک خوب نیست.
 
-Imagine that at the time of running `bench(diffSubtract)` CPU was doing something in parallel, and it was taking resources. And by the time of running `bench(diffGetTime)` that work has finished.
+فرض کنید که در حین اجرای `bench(diffSubtract)` پردازنده همزمان درحال انجام کاری بود و منابع اشغال می‌شدند. و تا قبل از اجرای `bech(diffGetTime)` آن کار تمام می‌شد. 
 
-A pretty real scenario for a modern multi-process OS.
+یک سناریو کاملا واقعی برای یک سیستم‌عامل چند وظیفه‌ای مدرن.
 
-As a result, the first benchmark will have less CPU resources than the second. That may lead to wrong results.
+در نتیجه، بنچمارک اول منابع پردازنده کمتری نسبت به دومی در اختیار خواهد داشت. اینگونه ممکن است نتایج اشتباه پدید بیایند.
 
-**For more reliable benchmarking, the whole pack of benchmarks should be rerun multiple times.**
+**برای بنچمارک قابل اطمینان‌تر، تمام بنچمارک‌ها باشد برای چند بار دوباره اجرا شوند.**
 
-For example, like this:
+برای مثال، اینگونه:
 
 ```js run
 function diffSubtract(date1, date2) {
@@ -347,7 +347,7 @@ let time1 = 0;
 let time2 = 0;
 
 *!*
-// run bench(diffSubtract) and bench(diffGetTime) each 10 times alternating
+// را به طور متناوب 10 بار اجرا کن bench(diffSubtract) و bench(diffGetTime) هر کدام از
 for (let i = 0; i < 10; i++) {
   time1 += bench(diffSubtract);
   time2 += bench(diffGetTime);
@@ -358,24 +358,24 @@ alert( 'Total time for diffSubtract: ' + time1 );
 alert( 'Total time for diffGetTime: ' + time2 );
 ```
 
-Modern JavaScript engines start applying advanced optimizations only to "hot code" that executes many times (no need to optimize rarely executed things). So, in the example above, first executions are not well-optimized. We may want to add a heat-up run:
+موتورهای مدرن جاوااسکریپت فقط روی «کدهای خاص» که به تعداد زیادی اجرا می‌شوند، بهینه‌سازی‌های پیشرفته را اعمال می‌کنند (نیازی به بهینه‌سازی چیزهایی که کم اجرا می‌شوند نیست). پس در مثال بالا، اجراهای اولیه کد خوب بهینه‌سازی نمی‌شوند. شاید بخواهیم یک اجرای آماده‌سازی اضافه کنیم:
 
 ```js
-// added for "heating up" prior to the main loop
+// برای «آماده‌سازی» قبل از حلقه اصلی اضافه شدند
 bench(diffSubtract);
 bench(diffGetTime);
 
-// now benchmark
+// حالا بنچمارک
 for (let i = 0; i < 10; i++) {
   time1 += bench(diffSubtract);
   time2 += bench(diffGetTime);
 }
 ```
 
-```warn header="Be careful doing microbenchmarking"
-Modern JavaScript engines perform many optimizations. They may tweak results of "artificial tests" compared to "normal usage", especially when we benchmark something very small, such as how an operator works, or a built-in function. So if you seriously want to understand performance, then please study how the JavaScript engine works. And then you probably won't need microbenchmarks at all.
+```warn header="در حین انجام بنچمارک‌های کوچک مراقب باشید"
+موتورهای مدرن جاوااسکریپت بهینه‌سازی‌های زیادی انجام می‌دهند. آنها ممکن است نتایج «آزمایش‌های ساختگی» را نسبت به «استفاده معمولی» تغییر دهند، مخصوصا زمانی که ما از چیزی بسیار کوچک مانند اینکه یک عملگر یا یک تابع درون‌ساخت چگونه کار می‌کند را بنچمارک بگیریم. پس اگر به طور جدی می‌خواهید عملکرد را متوجه شوید، لطفا درباره اینکه موتورهای جاوااسکریپت چگونه کار می‌کنند مطالعه کنید. سپس ممکن است کلا به بنچمارک‌های کوچک احتیاجی نداشته باشید.
 
-The great pack of articles about V8 can be found at <http://mrale.ph>.
+می‌توانید یک دسته از مقاله‌های عالی درباره V8 را در <http://mrale.ph> پیدا کنید.
 ```
 
 ## تجزیه رشته به تاریخ با Date.parse
