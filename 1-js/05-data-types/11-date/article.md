@@ -409,24 +409,24 @@ let date = new Date( Date.parse('2012-01-26T13:51:50.417-07:00') );
 alert(date);  
 ```
 
-## Summary
+## خلاصه
 
-- Date and time in JavaScript are represented with the [Date](mdn:js/Date) object. We can't create "only date" or "only time": `Date` objects always carry both.
-- Months are counted from zero (yes, January is a zero month).
-- Days of week in `getDay()` are also counted from zero (that's Sunday).
-- `Date` auto-corrects itself when out-of-range components are set. Good for adding/subtracting days/months/hours.
-- Dates can be subtracted, giving their difference in milliseconds. That's because a `Date` becomes the timestamp when converted to a number.
-- Use `Date.now()` to get the current timestamp fast.
+- تاریخ و زمان در جاوااسکریپت با شیء [Date](mdn:js/Date) نمایش داده می‌شوند. ما نمی‌توانیم «فقط تاریخ» یا «فقط زمان» ایجاد کنیم: شیءهای `Date` همیشه هر دو را دارند.
+- ماه‌ها از صفر شمرده می‌شوند (بله، ژانویه ماه صفر است).
+- روزهای هفته در `getDay()` هم از صفر شمرده می‌شوند (که می‌شود یکشنبه).
+- شیء `Date` زمانی که اجزاء خارج از محدوده تنظیم شوند، خودش را به طور خودکار تصحیح می‌کند. این ویژگی برای اضافه‌کردن/کم‌کردن روزها/ماه‌ها/ساعت‌ها خوب است.
+- تاریخ‌ها می‌توانند از هم کم شوند که برابر با تفاوت آنها به میلی‌ثانیه است. به این دلیل که یک `Date` زمانی که به عدد تبدیل می‌شود، در واقع به مهرزمانی تبدیل می‌شود.
+- برای گرفتن سریع مهرزمانی کنونی از `Date.now()` استفاده کنید.
 
-Note that unlike many other systems, timestamps in JavaScript are in milliseconds, not in seconds.
+در نظر داشته باشید که برخلاف بسیاری از سیستم‌های دیگر، مهرزمانی در جاوااسکریپت به میلی‌ثانیه است نه ثانیه.
 
-Sometimes we need more precise time measurements. JavaScript itself does not have a way to measure time in microseconds (1 millionth of a second), but most environments provide it. For instance, browser has [performance.now()](mdn:api/Performance/now) that gives the number of milliseconds from the start of page loading with microsecond precision (3 digits after the point):
+بعضی اوقات ما به اندازه‌گیری‌های دقیق‌تر زمان نیاز داریم. خود جاوااسکریپت راهی برای اندازه‌گیری زمان به میلی‌ثانیه ندارد اما اکثر محیط‌های اجرا آن را مهیا می‌کنند. برای مثال، مرورگر [performance.now()](mdn:api/Performance/now) را دارد که تعداد میلی‌ثانیه‌ها را با دقت میکروثانیه (3 رقم بعد از اعشار) از شروع بارگیری صفحه می‌دهد:
 
 ```js run
-alert(`Loading started ${performance.now()}ms ago`);
-// Something like: "Loading started 34731.26000000001ms ago"
-// .26 is microseconds (260 microseconds)
-// more than 3 digits after the decimal point are precision errors, only the first 3 are correct
+alert(`بارگیری ${performance.now()} میلی‌ثانیه پیش شروع شد`);
+// «چیزی شبیه به این: «بارگیری 34731.26000000001 میلی‌ثانیه پیش شروع شد
+// قسمت 26. میکروثانیه است (260 میکروثانیه)
+// بیشتر از 3 رقم بعد از اعشار ارورهای دقت اندازه‌گیری است، فقط 3 رقم اول درست هستند
 ```
 
-Node.js has `microtime` module and other ways. Technically, almost any device and environment allows to get more precision, it's just not in `Date`.
+محیط Node.js ماژول `microtime` و راه‌های دیگری دارد. به طور فنی، تقریبا هر دستگاه و محیطی به ما امکان گرفتن دقت بیشتر را می‌دهد فقط در `Date` وجود ندارد.
