@@ -1,20 +1,20 @@
-To get the number of milliseconds till tomorrow, we can from "tomorrow 00:00:00" substract the current date.
+برای گرفتن تعداد میلی‌ثانیه‌ها تا فردا، می‌توانیم از «فردا 00:00:00» تاریخ کنونی را کم کنیم.
 
-First, we generate that "tomorrow", and then do it:
+اول، ما «فردا» را ایجاد می‌کنیم و سپس این کار را انجام می‌دهیم:
 
 ```js run
 function getSecondsToTomorrow() {
   let now = new Date();
 
-  // tomorrow date
+  // تاریخ فردا
   let tomorrow = new Date(now.getFullYear(), now.getMonth(), *!*now.getDate()+1*/!*);
 
-  let diff = tomorrow - now; // difference in ms
-  return Math.round(diff / 1000); // convert to seconds
+  let diff = tomorrow - now; // تفاضل در میلی‌ثانیه
+  return Math.round(diff / 1000); // تبدیل به ثانیه
 }
 ```
 
-Alternative solution:
+راه حل جایگزین:
 
 ```js run
 function getSecondsToTomorrow() {
@@ -29,4 +29,4 @@ function getSecondsToTomorrow() {
 }
 ```
 
-Please note that many countries have Daylight Savings Time (DST), so there may be days with 23 or 25 hours. We may want to treat such days separately.
+لطفا در نظر داشته باشید که بسیاری از کشورها ساعت تابستانی دارند (DST)، پس ممکن است بعضی از روزها 23 یا 25 ساعت داشته باشند. شاید بهتر است با چنین روزهایی متفاوت رفتار کنیم.
