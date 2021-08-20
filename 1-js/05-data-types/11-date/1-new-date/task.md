@@ -2,8 +2,8 @@ importance: 5
 
 ---
 
-# Create a date
+# یک تاریخ بسازید
 
-Create a `Date` object for the date: Feb 20, 2012, 3:12am. The time zone is local.
+یک شیء `Date` برای این تاریخ بسازید: 20 فوریه 2012، ساعت 3:12 قبل از ظهر. منطقه زمانی محلی است.
 
-Show it using `alert`.
+با استفاده از `alert` آن را نمایش دهید.

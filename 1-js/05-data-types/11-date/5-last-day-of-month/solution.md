@@ -1,4 +1,4 @@
-Let's create a date using the next month, but pass zero as the day:
+بیایید یک تاریخ با استفاده از ماه بعد بسازیم اما برای روز 0 را قرار دهیم:
 ```js run
 function getLastDayOfMonth(year, month) {
   let date = new Date(year, month + 1, 0);
@@ -10,4 +10,4 @@ alert( getLastDayOfMonth(2012, 1) ); // 29
 alert( getLastDayOfMonth(2013, 1) ); // 28
 ```
 
-Normally, dates start from 1, but technically we can pass any number, the date will autoadjust itself. So when we pass 0, then it means "one day before 1st day of the month", in other words: "the last day of the previous month".
+به صورت طبیعی، روزها از 1 شروع می‌شوند اما از لحاظ فنی ما می‌توانیم هر عددی را قرار دهیم، شیء date به طور خودکار خودش را تنظیم می‌کند. پس زمانی که ما 0 قرار می‌دهیم، به این معنی است که «یک روز قبل از اولین روز ماه» یا به عبارتی دیگر: «آخرین روز ماه قبل».
