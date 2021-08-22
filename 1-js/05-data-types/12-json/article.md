@@ -1,10 +1,10 @@
-# JSON methods, toJSON
+# متدهای JSON، toJSON
 
-Let's say we have a complex object, and we'd like to convert it into a string, to send it over a network, or just to output it for logging purposes.
+بیایید فرض کنیم یک شیء پیچیده داریم و می‌خواهیم آن را به رشته تبدیل کنیم تا آن را به یک شبکه بفرستیم یا فقط آن را به قصد ثبت کردن خروجی بگیریم.
 
-Naturally, such a string should include all important properties.
+به طور طبیعی، چنین رشته‌ای باید تمام ویژگی‌های مهم شیء را داشته باشد.
 
-We could implement the conversion like this:
+ما می‌توانیم این تبدیل را اینگونه پیاده‌سازی کنیم:
 
 ```js run
 let user = {
@@ -21,9 +21,9 @@ let user = {
 alert(user); // {name: "John", age: 30}
 ```
 
-...But in the process of development, new properties are added, old properties are renamed and removed. Updating such `toString` every time can become a pain. We could try to loop over properties in it, but what if the object is complex and has nested objects in properties? We'd need to implement their conversion as well.
+...اما در فرایند توسعه، ویژگی‌های جدید اضافه و ویژگی‌های قدیمی دوباره نامگذاری و حذف می‌شوند. بروزرسانی `toString` هر بار می‌تواند طاقت‌فرسا باشد. ما می‌توانیم در ویژگی‌های آن حلقه بزنیم اما اگر شیء پیچیده باشد و شیءهای تودرتو را در ویژگی‌ها داشته باشد چیکار کنیم؟ ما باید تبدیل آنها را هم پیاده‌سازی کنیم.
 
-Luckily, there's no need to write the code to handle all this. The task has been solved already.
+خوشبختانه نیازی به نوشتن کدی برای کنترل تمام اینها نیست. از قبل این مشکل حل شده است.
 
 ## JSON.stringify
 
