@@ -25,16 +25,16 @@ alert(user); // {name: "John", age: 30}
 
 خوشبختانه نیازی به نوشتن کدی برای کنترل تمام اینها نیست. از قبل این مشکل حل شده است.
 
-## JSON.stringify
+## متد JSON.stringify
 
-The [JSON](http://en.wikipedia.org/wiki/JSON) (JavaScript Object Notation) is a general format to represent values and objects. It is described as in [RFC 4627](http://tools.ietf.org/html/rfc4627) standard. Initially it was made for JavaScript, but many other languages have libraries to handle it as well.  So it's easy to use JSON for data exchange when the client uses JavaScript and the server is written on Ruby/PHP/Java/Whatever.
+[JSON](http://fa.wikipedia.org/wiki/جی%E2%80%8Cسان) (نشانه‌گذاری شیء جاوااسکریپت، جِی‌سان) یک فرمت کلی برای نمایش مقدارها و شیءها است. جِی‌سان در استاندارد [RFC 4627](http://tools.ietf.org/html/rfc4627) شرح داده شده است. در ابتدا برای جاوااسکریپت ساخته شد اما بسیاری از زبان‌های دیگر هم کتابخانه‌هایی برای بکاربردن آن دارند. پس هنگامی که سمت کاربر سایت از جاوااسکریپت و سمت سرور با زبان‌های Ruby/PHP/Java/یا هر چیز دیگر نوشته شده باشد، استفاده از جی‌سان برای رد و بدل کردن داده آسان است.
 
-JavaScript provides methods:
+جاوااسکریپت متدهای زیر را دارد:
 
-- `JSON.stringify` to convert objects into JSON.
-- `JSON.parse` to convert JSON back into an object.
+- `JSON.stringify` برای تبدیل شیءها به جی‌سان.
+- `JSON.parse` برای تبدیل جی‌سان به یک شیء.
 
-For instance, here we `JSON.stringify` a student:
+برای مثال، اینجا ما متد `JSON.stringify` را روی یک دانشجو اجرا می‌کنیم:
 ```js run
 let student = {
   name: 'John',
@@ -48,11 +48,11 @@ let student = {
 let json = JSON.stringify(student);
 */!*
 
-alert(typeof json); // we've got a string!
+alert(typeof json); // !ما یک رشته داریم
 
 alert(json);
 *!*
-/* JSON-encoded object:
+/* :شیء کدگذاری شده جی‌سان
 {
   "name": "John",
   "age": 30,
@@ -64,35 +64,35 @@ alert(json);
 */!*
 ```
 
-The method `JSON.stringify(student)` takes the object and converts it into a string.
+متد `JSON.stringify(student)`شیء را دریافت می‌کند و آن را به رشته تبدیل می‌کند.
 
-The resulting `json` string is called a *JSON-encoded* or *serialized* or *stringified* or *marshalled* object. We are ready to send it over the wire or put into a plain data store.
+رشته `json` حاصل را شیء *جی‌سان کدگذاری شده* یا *سریالی‌شده* یا *مرتب‌شده* می‌گویند. ما برای فرستادن آن به جایی یا قرار دادن آن در یک انبارِ داده آماده هستیم. 
 
 
-Please note that a JSON-encoded object has several important differences from the object literal:
+لطفا در نظر داشته باشید که یک شیء جی‌سان کدگذاری شده با شیء لیترال چند تفاوت مهم دارد:
 
-- Strings use double quotes. No single quotes or backticks in JSON. So `'John'` becomes `"John"`.
-- Object property names are double-quoted also. That's obligatory. So `age:30` becomes `"age":30`.
+- رشته‌ها از کوتیشن دوتایی استفاده می‌کنند. کوتیشن‌های تکی یا backtickها در جی‌سان جایی ندارند. پس `'John'` به `"John"` تبدیل می‌شود.
+- اسم ویژگی‌های شیء هم کوتیشن دوتایی می‌گیرند. این کار لازم است. پس `age:30` به `"age":30` تبدیل می‌شود.
 
-`JSON.stringify` can be applied to primitives as well.
+متد `JSON.stringify` می‌تواند روی مقدارهای اولیه هم اجرا شود.
 
-JSON supports following data types:
+جی‌سان از انواع داده  زیر پشتیبانی می‌کند:
 
-- Objects `{ ... }`
-- Arrays `[ ... ]`
-- Primitives:
-    - strings,
-    - numbers,
-    - boolean values `true/false`,
+- شیءها `{ ... }`
+- آرایه‌ها `[ ... ]`
+- مقدارهای اولیه:
+    - رشته‌ها،
+    - اعداد،
+    - مقدارهای boolean `true/false`،
     - `null`.
 
-For instance:
+برای مثال:
 
 ```js run
-// a number in JSON is just a number
+// یک عدد در جی‌سان تنها یک عدد است
 alert( JSON.stringify(1) ) // 1
 
-// a string in JSON is still a string, but double-quoted
+// یک رشته در جی‌سان هنوز هم یک رشته است اما کوتیشن دوتایی می‌گیرد
 alert( JSON.stringify('test') ) // "test"
 
 alert( JSON.stringify(true) ); // true
@@ -100,31 +100,31 @@ alert( JSON.stringify(true) ); // true
 alert( JSON.stringify([1, 2, 3]) ); // [1,2,3]
 ```
 
-JSON is data-only language-independent specification, so some JavaScript-specific object properties are skipped by `JSON.stringify`.
+جی‌سان مشخصه‌ای است که فقط با داده سر و کار دارد و از زبان مستقل است، پس بعضی از ویژگی‌های شیء مخصوص جاوااسکریپت توسط `JSON.stringify` نادیده گرفته می‌شوند.
 
-Namely:
+برای مثال:
 
-- Function properties (methods).
-- Symbolic keys and values.
-- Properties that store `undefined`.
+- ویژگی‌های تابعی (متدها).
+- مقدارها و ویژگی‌های سمبلی (symbolic).
+- ویژگی‌هایی که `undefined` را در خود ذخیره دارند.
 
 ```js run
 let user = {
-  sayHi() { // ignored
+  sayHi() { // نادیده‌گرفته می‌شود
     alert("Hello");
   },
-  [Symbol("id")]: 123, // ignored
-  something: undefined // ignored
+  [Symbol("id")]: 123, // نادیده‌گرفته می‌شود
+  something: undefined // نادیده‌گرفته می‌شود
 };
 
-alert( JSON.stringify(user) ); // {} (empty object)
+alert( JSON.stringify(user) ); // {} (شیء خالی)
 ```
 
-Usually that's fine. If that's not what we want, then soon we'll see how to customize the process.
+معمولا این موضوع مشکلی ندارد. اگر این چیزی نیست که ما بخواهیم، به زودی خواهیم دید که چگونه فرایند را شخصی‌سازی کنیم.
 
-The great thing is that nested objects are supported and converted automatically.
+یک چیز عالی این است که شیءهای تودرتو هم پشتیبانی و به طور خودکار تبدیل می‌شوند.
 
-For instance:
+برای مثال:
 
 ```js run
 let meetup = {
@@ -138,7 +138,7 @@ let meetup = {
 };
 
 alert( JSON.stringify(meetup) );
-/* The whole structure is stringified:
+/* :تمام ساختار به رشته تبدیل شد
 {
   "title":"Conference",
   "room":{"number":23,"participants":["john","ann"]},
@@ -146,9 +146,9 @@ alert( JSON.stringify(meetup) );
 */
 ```
 
-The important limitation: there must be no circular references.
+محدودیت مهم این است: نباید هیچ مرجع دایره‌ای وجود داشته باشد.
 
-For instance:
+برای مثال:
 
 ```js run
 let room = {
@@ -160,15 +160,15 @@ let meetup = {
   participants: ["john", "ann"]
 };
 
-meetup.place = room;       // meetup references room
-room.occupiedBy = meetup; // room references meetup
+meetup.place = room;       // مراجعه می‌کند room به meetup
+room.occupiedBy = meetup; // مراجعه می‌کند meetup به room
 
 *!*
 JSON.stringify(meetup); // Error: Converting circular structure to JSON
 */!*
 ```
 
-Here, the conversion fails, because of circular reference: `room.occupiedBy` references `meetup`, and `meetup.place` references `room`:
+اینجا، فرایند تبدیل به دلیل مرجع دایره‌ای با شکست مواجه می‌شود: `room.occupiedBy` به `meetup` رجوع می‌کند و `meetup.place` به `room` رجوع می‌کند:
 
 ![](json-meetup.svg)
 
