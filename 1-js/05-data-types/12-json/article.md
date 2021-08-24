@@ -173,28 +173,28 @@ JSON.stringify(meetup); // Error: Converting circular structure to JSON
 ![](json-meetup.svg)
 
 
-## Excluding and transforming: replacer
+## مشمول نکردن و تغییر شکل دادن: تابع replacer
 
-The full syntax of `JSON.stringify` is:
+سینتکل کامل `JSON.stringify` اینگونه است:
 
 ```js
 let json = JSON.stringify(value[, replacer, space])
 ```
 
 value
-: A value to encode.
+: مقداری که کدگذاری می‌شود.
 
 replacer
-: Array of properties to encode or a mapping function `function(key, value)`.
+: یک آرایه از ویژگی‌هایی که باید کدگذاری شوند یا یک تابع `function(key, value)`.
 
 space
-: Amount of space to use for formatting
+: مقدار فاصله خالی که برای قالب‌بندی استفاده می‌شود.
 
-Most of the time, `JSON.stringify` is used with the first argument only. But if we need to fine-tune the replacement process, like to filter out circular references, we can use the second argument of `JSON.stringify`.
+اکثر اوقات، `JSON.stringify` تنها با آرگومان اول استفاده می‌شود. اما اگر ما بخواهیم که فرایند جایگزینی را بهتر کنیم، مثلا برای جداسازی مرجع‌های دایره‌ای، می‌توانیم از آرکومان دومِ `JSON.stringify` استفاده کنیم.
 
-If we pass an array of properties to it, only these properties will be encoded.
+اگر یک آرایه از ویژگی‌ها را به آن بدهیم، تنها این ویژگی‌ها کدگذاری می‌شوند.
 
-For instance:
+برای مثال:
 
 ```js run
 let room = {
@@ -204,18 +204,18 @@ let room = {
 let meetup = {
   title: "Conference",
   participants: [{name: "John"}, {name: "Alice"}],
-  place: room // meetup references room
+  place: room // مراجعه می‌کند room به meetup
 };
 
-room.occupiedBy = meetup; // room references meetup
+room.occupiedBy = meetup; // مراجعه می‌کند meetup به room
 
 alert( JSON.stringify(meetup, *!*['title', 'participants']*/!*) );
 // {"title":"Conference","participants":[{},{}]}
 ```
 
-Here we are probably too strict. The property list is applied to the whole object structure. So the objects in `participants` are empty, because `name` is not in the list.
+احتمالا اینجا ما بسیار سخت‌گیر هستیم. لیست ویژگی بر روی تمام ساختار شیء اعمال شده است. پس پس شیءهای درون `participants` خالی هستند چون `name` درون لیست نیست.
 
-Let's include in the list every property except `room.occupiedBy` that would cause the circular reference:
+بیایید تمام ویژگی‌ها را به جز `room.occupiedBy` که باعث مرجع دایره‌ای است را اضافه کنیم:
 
 ```js run
 let room = {
@@ -225,10 +225,10 @@ let room = {
 let meetup = {
   title: "Conference",
   participants: [{name: "John"}, {name: "Alice"}],
-  place: room // meetup references room
+  place: room // مراجعه می‌کند room به meetup
 };
 
-room.occupiedBy = meetup; // room references meetup
+room.occupiedBy = meetup; // مراجعه می‌کند meetup به room
 
 alert( JSON.stringify(meetup, *!*['title', 'participants', 'place', 'name', 'number']*/!*) );
 /*
@@ -240,13 +240,13 @@ alert( JSON.stringify(meetup, *!*['title', 'participants', 'place', 'name', 'num
 */
 ```
 
-Now everything except `occupiedBy` is serialized. But the list of properties is quite long.
+حالا همه چیز به جز `occupiedBy` سریالی شده‌اند. اما لیست ویژگی‌ها هنوز هم خیلی طولانی است.
 
-Fortunately, we can use a function instead of an array as the `replacer`.
+خوشبختانه، ما می‌توانیم از یک تابع به جای آرایه استفاده کنیم مانند `replacer`.
 
-The function will be called for every `(key, value)` pair and should return the "replaced" value, which will be used instead of the original one. Or `undefined` if the value is to be skipped.
+تابع بر روی هر جفت `(key, value)` صدا زده می‌شود و باید مقدار «جایگزین شده» را برگرداند که به جای مقدار اصلی استفاده می‌شود. یا اگر مقدار قرار است نادیده گرفته شود، `undefined` را برگرداند.
 
-In our case, we can return `value` "as is" for everything except `occupiedBy`. To ignore `occupiedBy`, the code below returns `undefined`:
+در این مورد ما، می‌توانیم `value` را برای همه چیز به جز `occupiedby` «همانطور که هست» برگردانیم. برای نادیده گرفتن `occupiedBy`، کد پایین `undefined` را برمی‌گرداند:
 
 ```js run
 let room = {
@@ -256,17 +256,17 @@ let room = {
 let meetup = {
   title: "Conference",
   participants: [{name: "John"}, {name: "Alice"}],
-  place: room // meetup references room
+  place: room // مراجعه می‌کند room به meetup
 };
 
-room.occupiedBy = meetup; // room references meetup
+room.occupiedBy = meetup; // مراجعه می‌کند meetup به room
 
 alert( JSON.stringify(meetup, function replacer(key, value) {
   alert(`${key}: ${value}`);
   return (key == 'occupiedBy') ? undefined : value;
 }));
 
-/* key:value pairs that come to replacer:
+/* جفت‌های کلید:مقدار که جایگزین می‌شوند
 :             [object Object]
 title:        Conference
 participants: [object Object],[object Object]
@@ -280,11 +280,11 @@ occupiedBy: [object Object]
 */
 ```
 
-Please note that `replacer` function gets every key/value pair including nested objects and array items. It is applied recursively. The value of `this` inside `replacer` is the object that contains the current property.
+لطفا در نظر داشته باشید که تابع `replacer` تمام جفت‌های کلید/مقدار شامل شیءهای تودرتو و المان‌های آرایه را دریافت می‌کند. این تابع به صورت بازگشتی اعمال می‌شود. مقدار `this` درون `replacer` شیءای است که ویژگی کنونی را در خود دارد.
 
-The first call is special. It is made using a special "wrapper object": `{"": meetup}`. In other words, the first `(key, value)` pair has an empty key, and the value is the target object as a whole. That's why the first line is `":[object Object]"` in the example above.
+اولین فراخوانی خاص است. این فراخوانی با استفاده از یک «شیء دربرگیرنده»: `{"":meetup}` ساخته می‌شود. به بیانی دیگر، اولین جفت `(key, value)` یک کلید خالی دارد و مقدار برابر با کل شیء مورد نظر است. به همین دلیل است که در مثال بالا، اولین خط `":[object Object]"` است.
 
-The idea is to provide as much power for `replacer` as possible: it has a chance to analyze and replace/skip even the whole object if necessary.
+ایده این موضوع این است که تا جایی که می‌شود به `replacer` قدرت داده شود: این تابع شانس این را دارد که اگر لازم بود حتی تمام شیء را تجزیه و تحلیل یا جایگزین کند/نادیده بگیرد.
 
 
 ## Formatting: space
