@@ -287,13 +287,13 @@ occupiedBy: [object Object]
 ایده این موضوع این است که تا جایی که می‌شود به `replacer` قدرت داده شود: این تابع شانس این را دارد که اگر لازم بود حتی تمام شیء را تجزیه و تحلیل یا جایگزین کند/نادیده بگیرد.
 
 
-## Formatting: space
+## قالب‌بندی: فاصله خالی
 
-The third argument of `JSON.stringify(value, replacer, space)` is the number of spaces to use for pretty formatting.
+آرگومان سوم `JSON.stringify(value, replacer, space)` تعداد فاصله خالی برای استفاده در قالب‌بندی شکیل است.
 
-Previously, all stringified objects had no indents and extra spaces. That's fine if we want to send an object over a network. The `space` argument is used exclusively for a nice output.
+قبلا تمام شیءهایی که تبدیل به رشته شده بودند هیچ تورفتگی و فاصله اضافی نداشتند. اگر بخواهیم یک شیء را به یک شبکه بفرستیم این موضوع مشکلی ندارد. آرگومان `space` خصوصا برای یک خروجی زیبا استفاده می‌شود.
 
-Here `space = 2` tells JavaScript to show nested objects on multiple lines, with indentation of 2 spaces inside an object:
+اینجا `space = 2` به جاوااسکریپت می‌گوید که شیءهای تودرتو را در چند خط و با 2 فاصله خالی تورفتگی درون یک شیء نشان بده:
 
 ```js run
 let user = {
@@ -306,7 +306,7 @@ let user = {
 };
 
 alert(JSON.stringify(user, null, 2));
-/* two-space indents:
+/* :با 2 فاصله خالی تورفتگی
 {
   "name": "John",
   "age": 25,
@@ -317,7 +317,7 @@ alert(JSON.stringify(user, null, 2));
 }
 */
 
-/* for JSON.stringify(user, null, 4) the result would be more indented:
+/* :نتیجه، تورفتگی بیشتری خواهد داشت JSON.stringify(user, null, 4) برای
 {
     "name": "John",
     "age": 25,
@@ -329,9 +329,9 @@ alert(JSON.stringify(user, null, 2));
 */
 ```
 
-The third argument can also be a string. In this case, the string is used for indentation instead of a number of spaces.
+آرگومان سوم رشته هم می‌تواند باشد. در این صورت، به جای تعداد فاصله خالی، آن رشته برای اعمال تورفتگی استفاده می‌شود.
 
-The `space` parameter is used solely for logging and nice-output purposes.
+پارامتر `space` صرفا برای اهدافی مانند خروجی زیبا استفاده می‌شود.
 
 ## Custom "toJSON"
 
