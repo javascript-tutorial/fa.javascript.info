@@ -333,11 +333,11 @@ alert(JSON.stringify(user, null, 2));
 
 پارامتر `space` صرفا برای اهدافی مانند خروجی زیبا استفاده می‌شود.
 
-## Custom "toJSON"
+## متد "toJSON" شخصی‌سازی شده
 
-Like `toString` for string conversion, an object may provide method `toJSON` for to-JSON conversion. `JSON.stringify` automatically calls it if available.
+مانند `toString` برای تبدیل به رشته، یک شیء می‌تواند متد `toJSON` را برای تبدیل به جی‌سان داشته باشد. اگر این متد موجود باشد، `JSON.stringify` به طور خودکار آن را صدا می‌زند.
 
-For instance:
+برای مثال:
 
 ```js run
 let room = {
@@ -362,9 +362,9 @@ alert( JSON.stringify(meetup) );
 */
 ```
 
-Here we can see that `date` `(1)` became a string. That's because all dates have a built-in `toJSON` method which returns such kind of string.
+اینجا می‌بینیم که `date` `(1)` به رشته تبدیل شد. به این دلیل که تمام تاریخ‌ها یک متد درونی `toJSON` دارند که چنین رشته‌ای را برمی‌گرداند.
 
-Now let's add a custom `toJSON` for our object `room`:
+حالا بیایید یک `toJSON` شخصی‌ساز به شیء `room` اضافه کنیم:
 
 ```js run
 let room = {
@@ -396,7 +396,7 @@ alert( JSON.stringify(meetup) );
 */
 ```
 
-As we can see, `toJSON` is used both for the direct call `JSON.stringify(room)` and when `room` is nested in another encoded object.
+همانطور که می‌بینیم، `toJSON` هم برای فراخوانی مستقیم `JSON.stringify(room)` استفاده می‌شود و هم زمانی که `room` در یک شیء کدگذاری شده دیگر به صورت تودرتو وجود دارد.
 
 
 ## JSON.parse
