@@ -1,18 +1,16 @@
-# Recursion and stack
+# بازگشت و پشته
 
-Let's return to functions and study them more in-depth.
+بیایید به توابع برگردیم و آنها را عمیق تر مطالعه کنیم.
 
-Our first topic will be *recursion*.
+اولین موضوع ما *بازگشت* خواهد بود.
 
-If you are not new to programming, then it is probably familiar and you could skip this chapter.
+اگر در برنامه نویسی تازه کار نیستید، احتمالاً این مبحث برای شما آشنا است و می توانید از این قسمت صرف نظر کنید.
 
-Recursion is a programming pattern that is useful in situations when a task can be naturally split into several tasks of the same kind, but simpler. Or when a task can be simplified into an easy action plus a simpler variant of the same task. Or, as we'll see soon, to deal with certain data structures.
+بازگشت یک الگوی برنامه نویسی است که در شرایطی مفید است که یک کار را می توان به طور طبیعی به چندین کار از یک نوع، اما ساده تر تقسیم کرد. یا وقتی می توان یک کار را به یک عمل آسان ساده کرد به علاوه یک نوع ساده تر از همان کار. یا همانطور که به زودی خواهیم دید، برای برخورد با ساختارهای داده خاصی.
 
-When a function solves a task, in the process it can call many other functions. A partial case of this is when a function calls *itself*. That's called *recursion*.
-
-## Two ways of thinking
-
-For something simple to start with -- let's write a function `pow(x, n)` that raises `x` to a natural power of `n`. In other words, multiplies `x` by itself `n` times.
+وقتی یک تابع یک کار را حل می کند، در این فرایند می تواند بسیاری از توابع دیگر را فراخوانی کند. یک حالت جزئی از این مورد زمانی است که یک تابع *خود* را فراخوانی می کند. که به آن *بازگشت* می گویند.
+## دو طرز فکر
+برای اینکه با یک چیز ساده شروع کنیم -- بیایید یک تابع `pow(x, n)`بنویسیم که `x` را به توان طبیعی `n` برساند. به عبارت دیگر ، `x` را `n` بار در خود ضرب می کند.
 
 ```js
 pow(2, 2) = 4
@@ -20,15 +18,15 @@ pow(2, 3) = 8
 pow(2, 4) = 16
 ```
 
-There are two ways to implement it.
+برای پیاده سازی آن دو راه وجود دارد.
 
-1. Iterative thinking: the `for` loop:
+1. تفکر تکرار: `for` حلقه:
 
     ```js run
     function pow(x, n) {
       let result = 1;
 
-      // multiply result by x n times in the loop
+      // نتیجه را با x n بار در حلقه ضرب کنید
       for (let i = 0; i < n; i++) {
         result *= x;
       }
@@ -39,7 +37,7 @@ There are two ways to implement it.
     alert( pow(2, 3) ); // 8
     ```
 
-2. Recursive thinking: simplify the task and call self:
+2. تفکر بازگشتی: کار را ساده کرده و خود را صدا میزند:
 
     ```js run
     function pow(x, n) {
@@ -53,9 +51,9 @@ There are two ways to implement it.
     alert( pow(2, 3) ); // 8
     ```
 
-Please note how the recursive variant is fundamentally different.
+لطفاً توجه داشته باشید که چگونه نوع بازگشتی اساساً متفاوت است.
 
-When `pow(x, n)` is called, the execution splits into two branches:
+زمانیکه `pow(x, n)` فراخوانی می شود، اجرا به دو شاخه تقسیم می شود:
 
 ```js
               if n==1  = x
@@ -65,15 +63,15 @@ pow(x, n) =
               else     = x * pow(x, n - 1)
 ```
 
-1. If `n == 1`, then everything is trivial. It is called *the base* of recursion, because it immediately produces the obvious result: `pow(x, 1)` equals `x`.
-2. Otherwise, we can represent `pow(x, n)` as `x * pow(x, n - 1)`. In maths, one would write <code>x<sup>n</sup> = x * x<sup>n-1</sup></code>. This is called *a recursive step*: we transform the task into a simpler action (multiplication by `x`) and a simpler call of the same task (`pow` with lower `n`). Next steps simplify it further and further until `n` reaches `1`.
+1. اگر `n == 1` ، پس همه چیز بی اهمیت است. به آن * پایه * بازگشت گفته می شود ، زیرا بلافاصله نتیجه واضح را ایجاد می کند: `pow (x، 1)` برابر `x`.
+2. در غیر این صورت ، ما می توانیم `pow (x، n)` را به عنوان `x * pow (x، n - 1)` نشان دهیم. در ریاضیات ، <code> x <sup> n </sup> = x * x <sup> n-1 </sup> </code> را می نویسید. این مرحله *یک مرحله بازگشتی *نامیده می شود: ما کار را به یک عمل ساده تر (ضرب در `x`) و یک فراخوانی ساده تر از همان کار (` pow` با `n` کمتر) تبدیل می کنیم. مراحل بعدی آن را بیشتر و بیشتر ساده می کند تا اینکه `n` به` 1` برسد.`.
 
-We can also say that `pow` *recursively calls itself* till `n == 1`.
+همچنین می توان گفت که `pow` * به صورت بازگشتی خود را * تا` n == 1` فراخوانی می کند.
 
 ![recursive diagram of pow](recursion-pow.svg)
 
 
-For example, to calculate `pow(2, 4)` the recursive variant does these steps:
+برای مثال، برای محاسبه `pow(2, 4)` نوع بازگشتی این مراحل را انجام میدهد:
 
 1. `pow(2, 4) = 2 * pow(2, 3)`
 2. `pow(2, 3) = 2 * pow(2, 2)`
