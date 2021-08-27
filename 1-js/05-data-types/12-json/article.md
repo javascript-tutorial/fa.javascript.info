@@ -399,25 +399,25 @@ alert( JSON.stringify(meetup) );
 همانطور که می‌بینیم، `toJSON` هم برای فراخوانی مستقیم `JSON.stringify(room)` استفاده می‌شود و هم زمانی که `room` در یک شیء کدگذاری شده دیگر به صورت تودرتو وجود دارد.
 
 
-## JSON.parse
+## متد JSON.parse
 
-To decode a JSON-string, we need another method named [JSON.parse](mdn:js/JSON/parse).
+برای برگرداندن کدگذاری یک رشته‌ی جی‌سان، ما به متد دیگری به نام [JSON.parse](mdn:js/JSON/parse) نیاز داریم.
 
-The syntax:
+سینتکس آن:
 ```js
 let value = JSON.parse(str, [reviver]);
 ```
 
-str
-: JSON-string to parse.
+پارامتر str
+: رشته‌ی جی‌سان برای تجزیه.
 
-reviver
-: Optional function(key,value) that will be called for each `(key, value)` pair and can transform the value.
+پارامتر reviver
+: تابع اختیاری function(key,value) که برای هر جفت `(key, value)` فراخوانی می‌شود و می‌تواند مقدار را تغییر شکل دهد.
 
-For instance:
+برای مثال:
 
 ```js run
-// stringified array
+// آرایه‌ای که رشته شده
 let numbers = "[0, 1, 2, 3]";
 
 numbers = JSON.parse(numbers);
@@ -425,7 +425,7 @@ numbers = JSON.parse(numbers);
 alert( numbers[1] ); // 1
 ```
 
-Or for nested objects:
+یا برای شیءهای تودرتو:
 
 ```js run
 let userData = '{ "name": "John", "age": 35, "isAdmin": false, "friends": [0,1,2,3] }';
@@ -435,25 +435,25 @@ let user = JSON.parse(userData);
 alert( user.friends[1] ); // 1
 ```
 
-The JSON may be as complex as necessary, objects and arrays can include other objects and arrays. But they must obey the same JSON format.
+جی‌سان ممکن است در صورت لزوم پیچیده باشد و شیءها و آرایه‌ها شامل شیءها و آرایه‌های دیگری هم باشند. اما آنها باید از یک فرمت جی‌سان مشابه تابعیت کنند.
 
-Here are typical mistakes in hand-written JSON (sometimes we have to write it for debugging purposes):
+اینجا چند اشتباه رایج در جی‌سان دست نویس را آوردیم (گاهی اوقات باید برای رفع خطا (Debugging) آن را بنویسیم):
 
 ```js
 let json = `{
-  *!*name*/!*: "John",                     // mistake: property name without quotes
-  "surname": *!*'Smith'*/!*,               // mistake: single quotes in value (must be double)
-  *!*'isAdmin'*/!*: false                  // mistake: single quotes in key (must be double)
-  "birthday": *!*new Date(2000, 2, 3)*/!*, // mistake: no "new" is allowed, only bare values
-  "friends": [0,1,2,3]              // here all fine
+  *!*name*/!*: "John",                     // اشتباه: اسم ویژگی بدون کوتیشن
+  "surname": *!*'Smith'*/!*,               // اشتباه: مقدار، کوتیشن تکی دارد (باید دوتایی باشد)
+  *!*'isAdmin'*/!*: false                  // اشتباه: کلید، کوتیشن تکی دارد (باشد دوتایی باشد)
+  "birthday": *!*new Date(2000, 2, 3)*/!*, // مجاز نیست، فقط مقدارهای خام مجازند "new" اشتباه: عملگر
+  "friends": [0,1,2,3]              // اینجا همه چیز درست است
 }`;
 ```
 
-Besides, JSON does not support comments. Adding a comment to JSON makes it invalid.
+به علاوه، جی‌سان از کامنت پشتیبانی نمی‌کند. اضافه کردن کامنت به جی‌سان آن را نامعتبر می‌کند.
 
-There's another format named [JSON5](http://json5.org/), which allows unquoted keys, comments etc. But this is a standalone library, not in the specification of the language.
+یک فرمت دیگر به نام [JSON5](http://json5.org/) وجود دارد که کلیدها بدون کوتیشن، کامنت و... را معتبر می‌داند. اما این جی‌سان یک کتابخانه مستقل است و در مشخصات زبان وجود ندارد.
 
-The regular JSON is that strict not because its developers are lazy, but to allow easy, reliable and very fast implementations of the parsing algorithm.
+دلیل اینکه جی‌سان معمولی انقدر سخت‌گیرانه است این نیست که توسعه دهندگان آن تنبل هستند، بلکه دلیلش این است که یک پیاده‌سازی آسان، مورد اطمینان و سریع از الگوریتم تجزیه را فراهم کند.
 
 ## Using reviver
 
