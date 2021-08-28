@@ -2,13 +2,13 @@ importance: 5
 
 ---
 
-# Exclude backreferences
+# مرجع‌های بازگشتی را حذف کنید
 
-In simple cases of circular references, we can exclude an offending property from serialization by its name.
+در موارد ساده‌ای از مرجع‌های دایره‌ای، ما می‌توانیم یک ویژگی متخلف را توسط اسم آن از سریالی کردن منع کنیم.
 
-But sometimes we can't just use the name, as it may be used both in circular references and normal properties. So we can check the property by its value.
+اما گاهی اوقات به دلیل اینکه ممکن است هم در مرجع‌های دایره‌ای و هم در ویژگی‌های عادی استفاده شده باشد، نمی‌توانیم از اسم آن استفاده کنیم. پس می‌توانیم ویژگی را با استفاده از مقدار آن بررسی کنیم.
 
-Write `replacer` function to stringify everything, but remove properties that reference `meetup`:
+تابع `replacer` بنویسید که هر چیزی را به رشته تبدیل کند اما ویژگی‌هایی که به `meetup` رجوع می‌کنند را حذف کند:
 
 ```js run
 let room = {
@@ -28,10 +28,10 @@ meetup.self = meetup;
 */!*
 
 alert( JSON.stringify(meetup, function replacer(key, value) {
-  /* your code */
+  /* کد شما */
 }));
 
-/* result should be:
+/* :نتیجه باید اینگونه باشد
 {
   "title":"Conference",
   "occupiedBy":[{"name":"John"},{"name":"Alice"}],
