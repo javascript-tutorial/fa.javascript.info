@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# Turn the object into JSON and back
+# شیء را به جی‌سان تبدیل کنید و برعکس
 
-Turn the `user` into JSON and then read it back into another variable.
+شیء `user` را به جی‌سان تبدیل کنید و سپس آن را در متغیر دیگری بخوانید.
 
 ```js
 let user = {
