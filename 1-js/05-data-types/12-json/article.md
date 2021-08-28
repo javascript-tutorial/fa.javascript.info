@@ -521,10 +521,10 @@ alert( schedule.meetups[1].date.getDate() ); // !کار می‌کند
 
 
 
-## Summary
+## خلاصه
 
-- JSON is a data format that has its own independent standard and libraries for most programming languages.
-- JSON supports plain objects, arrays, strings, numbers, booleans, and `null`.
-- JavaScript provides methods [JSON.stringify](mdn:js/JSON/stringify) to serialize into JSON and [JSON.parse](mdn:js/JSON/parse) to read from JSON.
-- Both methods support transformer functions for smart reading/writing.
-- If an object has `toJSON`, then it is called by `JSON.stringify`.
+- جی‌سان یک فرمت داده است که برای بیشتر زبان‌های برنامه‌نویسی، استاندارد و کتابخانه‌های مستقل خود را دارد.
+- جی‌سان از شیءهای ساده، آرایه‌ها، رشته‌ها، اعداد، بولین‌ها و `null` پشتیبانی می‌کند.
+- جاوااسکریپت متدهای [JSON.stringify](mdn:js/JSON/stringify) برای سریالی کردن به جی‌سان و [JSON.parse](mdn:js/JSON/parse) برای خواندن از جی‌سان را فراهم می‌کند.
+- هر دو متد از تابع‌های تغییر شکل دهنده برای خواندن/نوشتن هوشمندانه پشتیبانی می‌کنند.
+- اگر یک شیء متد `toJSON` داشته باشد، سپس این متد توسط `JSON.stringify` فراخوانی می‌شود.
