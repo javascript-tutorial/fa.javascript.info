@@ -455,20 +455,20 @@ let json = `{
 
 دلیل اینکه جی‌سان معمولی انقدر سخت‌گیرانه است این نیست که توسعه دهندگان آن تنبل هستند، بلکه دلیلش این است که یک پیاده‌سازی آسان، مورد اطمینان و سریع از الگوریتم تجزیه را فراهم کند.
 
-## Using reviver
+## استفاده از احیاکننده (reviver)
 
-Imagine, we got a stringified `meetup` object from the server.
+فرض کنید ما یک شیء `meetup` که به رشته تبدیل شده را از سرور گرفتیم.
 
-It looks like this:
+این شیء اینگونه بنظر می‌رسد:
 
 ```js
 // title: (meetup title), date: (meetup date)
 let str = '{"title":"Conference","date":"2017-11-30T12:00:00.000Z"}';
 ```
 
-...And now we need to *deserialize* it, to turn back into JavaScript object.
+...و حالا ما نیاز داریم که آن را از *سریالی بودن* خارج کنیم تا دوباره به یک شیء جاوااسکریپت تبدیل شود.
 
-Let's do it by calling `JSON.parse`:
+بیایید با فراخوانی `JSON.parse` این کار را انجام دهیم:
 
 ```js run
 let str = '{"title":"Conference","date":"2017-11-30T12:00:00.000Z"}';
@@ -476,15 +476,15 @@ let str = '{"title":"Conference","date":"2017-11-30T12:00:00.000Z"}';
 let meetup = JSON.parse(str);
 
 *!*
-alert( meetup.date.getDate() ); // Error!
+alert( meetup.date.getDate() ); // !ارور
 */!*
 ```
 
-Whoops! An error!
+ای وای! یک ارور!
 
-The value of `meetup.date` is a string, not a `Date` object. How could `JSON.parse` know that it should transform that string into a `Date`?
+مقدار `meetup.date` یک رشته است، نه یک شیء `Date`. متد `JSON.parse` از کجا بداند که باید آن رشته را به یک `Date` تبدیل کند؟
 
-Let's pass to `JSON.parse` the reviving function as the second argument, that returns all values "as is", but `date` will become a `Date`:
+بیایید به `JSON.parse` تابع احیاکننده (reviver) را به عنوان آرگومان دوم بدهیم که تمام مقدارهای را «همانطور که هستند» برگرداند اما `date` به یک شیء `Date` تبدیل خواهد شد:
 
 ```js run
 let str = '{"title":"Conference","date":"2017-11-30T12:00:00.000Z"}';
@@ -496,10 +496,10 @@ let meetup = JSON.parse(str, function(key, value) {
 });
 */!*
 
-alert( meetup.date.getDate() ); // now works!
+alert( meetup.date.getDate() ); // !حالا کار می‌کند
 ```
 
-By the way, that works for nested objects as well:
+در ضمن برای شیءهای تودرتو هم کار می‌کند:
 
 ```js run
 let schedule = `{
@@ -515,7 +515,7 @@ schedule = JSON.parse(schedule, function(key, value) {
 });
 
 *!*
-alert( schedule.meetups[1].date.getDate() ); // works!
+alert( schedule.meetups[1].date.getDate() ); // !کار می‌کند
 */!*
 ```
 
