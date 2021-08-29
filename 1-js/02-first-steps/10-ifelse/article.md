@@ -1,35 +1,35 @@
-# Conditional branching: if, '?'
+# انشعاب شرطی: if، '?'
 
-Sometimes, we need to perform different actions based on different conditions.
+بعضی اوقات، ما نیاز داریم که کارهای مختلفی را بر اساس شرایط مختلف انجام دهیم.
 
-To do that, we use the `if` statement and the conditional (ternary) operator which we will be referring to as the “question mark” operator `?` for simplicity.
+برای انجام این کار، ما از دستور `if` و عملگر شرطی (سه‌تایی) که ما برای سادگی به عنوان عملگر «علامت سوال» `?` به آن اشاره خواهیم کرد، استفاده می‌کنیم.
 
-## The "if" statement
+## دستور "if" 
 
-The `if(...)` statement evaluates a condition in parentheses and, if the result is `true`, executes a block of code.
+دستور `if(...)` شرطی را در پرانتزها ارزیابی می‌کند و اگر نتیجه آن `true` باشد، یک بلوک کد را اجرا می‌کند.
 
-For example:
+برای مثال:
 
 ```js run
-let year = prompt('In which year was ECMAScript-2015 specification published?', '');
+let year = prompt('در چه سالی مشخصات ECMAScript-2015 منتشر شد', '');
 
 *!*
-if (year == 2015) alert( 'You are right!' );
+if (year == 2015) alert( 'درست گفتید!' );
 */!*
 ```
 
-In the example above, the condition is a simple equality check (`year == 2015`), but it can be much more complex.
+در مثال بالا، شرط یک بررسی برابری ساده است (`year == 2015`) اما می‌تواند خیلی پیچیده‌تر باشد.
 
-If we want to execute more than one statement, we have to wrap our code block inside curly braces:
+اگر ما بخواهیم بیشتر از یک دستور را اجرا کنیم، باید کدمان را درون آکولاد قرار دهیم:
 
 ```js
 if (year == 2015) {
-  alert( "That's correct!" );
-  alert( "You're so smart!" );
+  alert( "درست است!" );
+  alert( "شما باهوش هستید!" );
 }
 ```
 
-We recommend wrapping your code block with curly braces `{}` every time you use an `if` statement, even if there is only one statement to execute. Doing so improves readability.
+ما پیشنهاد می‌کنیم که کدتان را هر بار که از دستور `if` استفاده می‌کنید، درون آکولاد `{}` بگذارید حتی اگر تنها یک دستور برای اجرا کردن دارید. انجام دادن این کار خوانایی را افزایش می‌دهد.
 
 ## Boolean conversion
 
