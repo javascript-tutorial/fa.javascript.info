@@ -11,7 +11,7 @@
 برای مثال:
 
 ```js run
-let year = prompt('در چه سالی مشخصات ECMAScript-2015 منتشر شد', '');
+let year = prompt('در چه سالی مشخصات ECMAScript-2015 منتشر شد؟', '');
 
 *!*
 if (year == 2015) alert( 'درست گفتید!' );
@@ -31,53 +31,53 @@ if (year == 2015) {
 
 ما پیشنهاد می‌کنیم که کدتان را هر بار که از دستور `if` استفاده می‌کنید، درون آکولاد `{}` بگذارید حتی اگر تنها یک دستور برای اجرا کردن دارید. انجام دادن این کار خوانایی را افزایش می‌دهد.
 
-## Boolean conversion
+## تبدیل به بولین
 
-The `if (…)` statement evaluates the expression in its parentheses and converts the result to a boolean.
+دستور `if (…)` عبارت درون پرانتزها را ارزیابی می‌کند و نتیجه را به بولین تبدیل می‌کند.
 
-Let's recall the conversion rules from the chapter <info:type-conversions>:
+بیایید قوانین تبدیل را از فصل <info:type-conversions> به یاد بیاریم:
 
-- A number `0`, an empty string `""`, `null`, `undefined`, and `NaN` all become `false`. Because of that they are called "falsy" values.
-- Other values become `true`, so they are called "truthy".
+- عدد `0`، یک رشته خالی `""`، `null`، `undefined` و `NaN` همگی به `false` تبدیل می‌شوند. به همین دلیل به آنها مقدارهای "falsy" می‌گویند.
+- مقدارهای دیگر به `true` تبدیل می‌شوند پس "truthy" نامیده می‌شوند.
 
-So, the code under this condition would never execute:
+پس کد زیر با این شرط هیچگاه اجرا نمی‌شود:
 
 ```js
-if (0) { // 0 is falsy
+if (0) { // است falsy ،مقدار 0
   ...
 }
 ```
 
-...and inside this condition -- it always will:
+...و درون با این شرط -- همیشه اجرا می‌شود:
 
 ```js
-if (1) { // 1 is truthy
+if (1) { // است truthy ،مقدار 1
   ...
 }
 ```
 
-We can also pass a pre-evaluated boolean value to `if`, like this:
+همچنین ما می‌توانیم یک مقدار بولین که از قبل ارزیابی شده است را به `if` بدهیم، مانند اینجا:
 
 ```js
-let cond = (year == 2015); // equality evaluates to true or false
+let cond = (year == 2015); // false است یا true برابری بعد از ارزیابی یا
 
 if (cond) {
   ...
 }
 ```
 
-## The "else" clause
+## عبارت "else"
 
-The `if` statement may contain an optional "else" block. It executes when the condition is falsy.
+دستور `if` ممکن است یک بلوک اختیاری "else" هم شامل شود. این بلوک زمانی که شرط falsy باشد اجرا می‌شود.
 
-For example:
+برای مثال:
 ```js run
-let year = prompt('In which year was the ECMAScript-2015 specification published?', '');
+let year = prompt('در چه سالی مشخصات ECMAScript-2015 منتشر شد؟', '');
 
 if (year == 2015) {
-  alert( 'You guessed it right!' );
+  alert( 'شما درست حدس زدید!' );
 } else {
-  alert( 'How can you be so wrong?' ); // any value except 2015
+  alert( 'چطور اشتباه گفتید؟' ); // هر مقداری به جز 2015
 }
 ```
 
