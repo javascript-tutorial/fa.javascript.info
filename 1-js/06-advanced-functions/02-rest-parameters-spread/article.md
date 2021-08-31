@@ -1,20 +1,20 @@
-# Rest parameters and spread syntax
+# پارامتر‌های اضافی و سینتکس گسترش
 
-Many JavaScript built-in functions support an arbitrary number of arguments.
+بسیاری از توابع جاوا‌اسکریپت از تعداد دلخواه آرگومان‌ها پشتیبانی می کنند.
 
-For instance:
+برای مثال:
 
-- `Math.max(arg1, arg2, ..., argN)` -- returns the greatest of the arguments.
-- `Object.assign(dest, src1, ..., srcN)` -- copies properties from `src1..N` into `dest`.
-- ...and so on.
+- `Math.max(arg1, arg2, ..., argN)` -- بزرگترین عدد میان آرگومان ها را برمی‌گرداد.
+- `Object.assign(dest, src1, ..., srcN)` -- رونوشت میکند `src1..N` را در `dest`.
+- ...و غیره.
 
-In this chapter we'll learn how to do the same. And also, how to pass arrays to such functions as parameters.
+در این فصل با نحوه انجام این کار آشنا می شویم. و همچنین نحوه انتقال آرایه به توابع به عنوان پارامتر(ها) را یاد خواهیم گرفت.
 
-## Rest parameters `...`
+## پارامتر‌های اضافی `...`
 
-A function can be called with any number of arguments, no matter how it is defined.
+یک تابع را می توان با هر تعداد آرگومان، صرف نظر از نحوه تعریف آن، فراخوانی کرد.
 
-Like here:
+مانند اینجا:
 ```js run
 function sum(a, b) {
   return a + b;
@@ -23,14 +23,14 @@ function sum(a, b) {
 alert( sum(1, 2, 3, 4, 5) );
 ```
 
-There will be no error because of "excessive" arguments. But of course in the result only the first two will be counted.
+به دلیل آرگومان‌های بیش از اندازه هیچ خطایی وجود نخواهد داشت. البته در نتیجه فقط دو مورد اول محاسبه خواند شد.
 
-The rest of the parameters can be included in the function definition by using three dots `...` followed by the name of the array that will contain them. The dots literally mean "gather the remaining parameters into an array".
+بقیه پارامترها را می توان با استفاده از سه نقطه `...` در قسمت تعریف تابع گنجاند و به دنبال آن نام آرایه ای که آنها را شامل است نوشت. نقاط به صورت تحت الفظی به معنی "جمع آوری پارامترهای باقی مانده (اضافی) در یک آرایه" است.
 
-For instance, to gather all arguments into array `args`:
+برای مثال، برای جمع آوری تمام آرگومان ها در آرایه `args`:
 
 ```js run
-function sumAll(...args) { // args is the name for the array
+function sumAll(...args) { // args نام آرایه است
   let sum = 0;
 
   for (let arg of args) sum += arg;
@@ -43,41 +43,41 @@ alert( sumAll(1, 2) ); // 3
 alert( sumAll(1, 2, 3) ); // 6
 ```
 
-We can choose to get the first parameters as variables, and gather only the rest.
+ما می توانیم اولین پارامترها را به عنوان متغیر دریافت کنیم و بقیه را جمع آوری کنیم.
 
-Here the first two arguments go into variables and the rest go into `titles` array:
+در اینجا دو آرگومان اول به متغیرها و بقیه به آرایه `title` تبدیل میشوند:
 
 ```js run
 function showName(firstName, lastName, ...titles) {
   alert( firstName + ' ' + lastName ); // Julius Caesar
 
-  // the rest go into titles array
-  // i.e. titles = ["Consul", "Imperator"]
-  alert( titles[0] ); // Consul
-  alert( titles[1] ); // Imperator
+  // پارامتر اضافی به آرایه "title" تبدیل می‌شود
+  // یعنی titles = ["مشاور", "امپراطور"]
+  alert( titles[0] ); // مشاور
+  alert( titles[1] ); // امپراطور
   alert( titles.length ); // 2
 }
 
-showName("Julius", "Caesar", "Consul", "Imperator");
+showName("پیام", "مرادی", "مشاور", "امپراطور");
 ```
 
-````warn header="The rest parameters must be at the end"
-The rest parameters gather all remaining arguments, so the following does not make sense and causes an error:
+````warn header="پارامتر های اضافی باید در انتها باشند"
+پارامترهای اضافی همه آرگومان های باقی مانده را جمع آوری می کنند، بنابراین موارد زیر منطقی نیستند و باعث ایجاد خطا می‌شوند:
 
 ```js
-function f(arg1, ...rest, arg2) { // arg2 after ...rest ?!
-  // error
+function f(arg1, ...rest, arg2) { // arg2 بعد از ...rest ?!
+  // ارور
 }
 ```
 
-The `...rest` must always be last.
+`...rest` همیشه باید در آخر باشد.
 ````
 
-## The "arguments" variable
+## متغیر "arguments"
 
-There is also a special array-like object named `arguments` that contains all arguments by their index.
+همچنین یک آبجکت آرایه مانند ویژه به نام `arguments` وجود دارد که شامل همه آرگومان ها بر اساس ترتیب فهرست آنها است.
 
-For instance:
+برای مثال:
 
 ```js run
 function showName() {
@@ -85,29 +85,29 @@ function showName() {
   alert( arguments[0] );
   alert( arguments[1] );
 
-  // it's iterable
+  // قابل تکرار است
   // for(let arg of arguments) alert(arg);
 }
 
-// shows: 2, Julius, Caesar
-showName("Julius", "Caesar");
+// نشان می‌دهد: 2, پیام, مرادی
+showName("پیام", "مرادی");
 
-// shows: 1, Ilya, undefined (no second argument)
-showName("Ilya");
+// نشان می‌دهد: 1, ایلیا, تعریف نشده (undefined) (آرگومان دوم وجود ندارد)
+showName("ایلیا");
 ```
 
-In old times, rest parameters did not exist in the language, and using `arguments` was the only way to get all arguments of the function. And it still works, we can find it in the old code.
+در زمان های قدیم، ویژگی پارامترهای اضافی در زبان جاوااسکریپت وجود نداشت و استفاده از "arguments" تنها راه بدست آوردن همه آرگومان‌های تابع بود. و هنوز کار می کند، می توانیم آن را در کد قدیمی پیدا کنیم.
 
-But the downside is that although `arguments` is both array-like and iterable, it's not an array. It does not support array methods, so we can't call `arguments.map(...)` for example.
+اما نکته منفی این است که اگرچه "arguments" هم آرایه مانند است و هم قابل تکرار  ، اما یک آرایه نیست. از متد‌های آرایه پشتیبانی نمی کند ، بنابراین نمی توانیم به عنوان مثال `arguments.map (...)` را فراخوانی کنیم.
 
-Also, it always contains all arguments. We can't capture them partially, like we did with rest parameters.
+همچنین همیشه شامل همه آرگومان‌ها است. ما نمی‌توانیم آنها را تا حد مشخصی به دست بیاوریم، مانند کاری که با پارامتر‌های اضافی کردیم.
 
-So when we need these features, then rest parameters are preferred.
+بنابراین وقتی به این ویژگی ها نیاز داریم، پارامترهای اضافی ترجیح داده می شود.
 
-````smart header="Arrow functions do not have `\"arguments\"`"
-If we access the `arguments` object from an arrow function, it takes them from the outer "normal" function.
+````smart header="توابع تک خطی آبجکت `\"arguments\"` ندارند"
+اگر از یک تابع تک خطی به آبجکت `arguments` دسترسی پیدا کنیم ، آنها را از تابع "عادی" بیرونی خارج می کند.
 
-Here's an example:
+در اینجا یک مثال وجود دارد:
 
 ```js run
 function f() {
@@ -118,49 +118,49 @@ function f() {
 f(1); // 1
 ```
 
-As we remember, arrow functions don't have their own `this`. Now we know they don't have the special `arguments` object either.
-````
+همانطور که به خاطر داریم ، توابع تک خطی از خود `this` ندارند. اکنون می دانیم که آنها آبجکت `argument` خاصی نیز ندارند.
+<!-- ```` -->
 
 
-## Spread syntax [#spread-syntax]
+## سینتکس گسترش [#spread-syntax]
 
-We've just seen how to get an array from the list of parameters.
+ما فقط نحوه گرفتن یک آرایه از لیست پارامترها را دیدیم.
 
-But sometimes we need to do exactly the reverse.
+اما گاهی اوقات ما باید دقیقاً برعکس عمل کنیم.
 
-For instance, there's a built-in function [Math.max](mdn:js/Math/max) that returns the greatest number from a list:
+برای مثال ، یک تابع داخلی [Math.max](mdn: js/Math/max) وجود دارد که بیشترین عدد را از یک لیست بر می گرداند:
 
 ```js run
 alert( Math.max(3, 5, 1) ); // 5
 ```
 
-Now let's say we have an array `[3, 5, 1]`. How do we call `Math.max` with it?
+حالا فرض کنید یک آرایه داریم `[3, 5, 1]`. چگونه با آن تابع `Math.max` را فراخوانی کنیم؟
 
-Passing it "as is" won't work, because `Math.max` expects a list of numeric arguments, not a single array:
+وارد کردن آن "همانطور که هست" کار نخواهد کرد ، زیرا `Math.max` لیستی از آرگومان های عددی را انتظار دارد ، نه یک آرایه واحد:
 
 ```js run
 let arr = [3, 5, 1];
 
 *!*
 alert( Math.max(arr) ); // NaN
-*/!*
+*/!*  
 ```
 
-And surely we can't manually list items in the code `Math.max(arr[0], arr[1], arr[2])`, because we may be unsure how many there are. As our script executes, there could be a lot, or there could be none. And that would get ugly.
+و مطمئناً ما نمی توانیم مواردی را در تابع `Math.max (arr [0] ، arr [1] ، arr [2])` به صورت دستی لیست کنیم ، زیرا ممکن است مطمئن نباشیم تعداد آنها چقدر است. همانطور که اسکریپت ما اجرا می شود ، ممکن است تعداد زیادی (آرگومان) وجود داشته باشد ، یا ممکن است وجود نداشته باشد. و این باعث زشتی کد ما می شود.
 
-*Spread syntax* to the rescue! It looks similar to rest parameters, also using `...`, but does quite the opposite.
+*سینتکس گسترش* برای نجات! شبیه به پارامتر های اضافی به نظر می‌رسد، همچنین از `...` استفاده می‌کند، اما کاملا متفاوت است.
 
-When `...arr` is used in the function call, it "expands" an iterable object `arr` into the list of arguments.
+هنگامی که از `...arr` در فراخوانی تابع استفاده میشود، یک آبجکت `arr` قابل تکرار را در لیست آرگومان ها قرار میدهد.  
 
-For `Math.max`:
+برای `Math.max`:
 
 ```js run
 let arr = [3, 5, 1];
 
-alert( Math.max(...arr) ); // 5 (spread turns array into a list of arguments)
+alert( Math.max(...arr) ); // 5 (سینتکس گسترش یک آرایه را به لیستی از آرگومان ها تبدیل می‌کند)
 ```
 
-We also can pass multiple iterables this way:
+همچنین می‌توان چند مورد (آبجکت) قابل تکرار را از این طریق به عنوان آرگومان به تابع انتقال داد:
 
 ```js run
 let arr1 = [1, -2, 3, 4];
@@ -169,7 +169,7 @@ let arr2 = [8, 3, -8, 1];
 alert( Math.max(...arr1, ...arr2) ); // 8
 ```
 
-We can even combine the spread syntax with normal values:
+حتی میتوان سینتکس گسترش را با مقادیر معمولی ترکیب کرد:
 
 
 ```js run
@@ -179,7 +179,7 @@ let arr2 = [8, 3, -8, 1];
 alert( Math.max(1, ...arr1, 2, ...arr2, 25) ); // 25
 ```
 
-Also, the spread syntax can be used to merge arrays:
+همچنین سینتکس گسترش می‌تواند برای ادغام آرایه ها استفاده شود:
 
 ```js run
 let arr = [3, 5, 1];
@@ -189,107 +189,107 @@ let arr2 = [8, 9, 15];
 let merged = [0, ...arr, 2, ...arr2];
 */!*
 
-alert(merged); // 0,3,5,1,2,8,9,15 (0, then arr, then 2, then arr2)
+alert(merged); // 0,3,5,1,2,8,9,15 (0, سپس arr, سپس 2, سپس arr2)
 ```
 
-In the examples above we used an array to demonstrate the spread syntax, but any iterable will do.
+در مثال های بالا ما از آرایه برای نشان دادن سینتکس گسترش استفاده کردیم، اما برای هر مورد قابل تکرار قابل استفاده است
 
-For instance, here we use the spread syntax to turn the string into array of characters:
+برای مثال، در اینجا از سینتکس گسترش برای تبدیل رشته به آرایه ای از کاراکتر ها استفاده میکنیم:
+
+```js run
+let str = "سلام";
+
+alert( [...str] ); // س، ل، ا، م
+```
+
+نحو گسترش به صورت داخلی از تکرارکنندگان برای جمع آوری المنت‌ها استفاده می کند ، همانطور که `for..of` این کار را انجام میدهد.
+
+بنابراین ، برای یک رشته ، `for..of`   کاراکترها را برمی گرداند و با استفاده از` ... str` به "H" ، "e" ، "l" ، "l" ، "o" ` تبدیل می‌شود. لیست کاراکترها به تنظیم کننده آرایه "[... str]" منتقل می شود.
+
+برای این کار خاص همچنین می توانیم از `Array.from` استفاده کنیم ، زیرا یک تکرار شونده (مانند یک رشته) را به یک آرایه تبدیل می کند:
 
 ```js run
 let str = "Hello";
 
-alert( [...str] ); // H,e,l,l,o
+// Array.from یک قابل تکرار را به آرایه تبدیل می‌کند
+alert( Array.from(str) ); // س، ل، ا، م
 ```
 
-The spread syntax internally uses iterators to gather elements, the same way as `for..of` does.
+نتیجه مانند نتیجه هنگام استفاده از `[...str]` است.
 
-So, for a string, `for..of` returns characters and `...str` becomes `"H","e","l","l","o"`. The list of characters is passed to array initializer `[...str]`.
+اما بین "Array.from (obj)" و "[... obj]" یک تفاوت ظریف وجود دارد:
 
-For this particular task we could also use `Array.from`, because it converts an iterable (like a string) into an array:
+- `Array.from` هم بر روی "آرایه مانند" و هم بر روی "تکرار شونده" کار می‌کند.
+- سینتکس گسترش فقط بر روی "تکرار شونده ها" کار می‌کند.
 
-```js run
-let str = "Hello";
-
-// Array.from converts an iterable into an array
-alert( Array.from(str) ); // H,e,l,l,o
-```
-
-The result is the same as `[...str]`.
-
-But there's a subtle difference between `Array.from(obj)` and `[...obj]`:
-
-- `Array.from` operates on both array-likes and iterables.
-- The spread syntax works only with iterables.
-
-So, for the task of turning something into an array, `Array.from` tends to be more universal.
+بنابراین ، برای تبدیل چیزی به یک آرایه ، Array.from بیشتر جهانی است.
 
 
-## Copy an array/object
+## کپی کردن یک آرایه/آبجکت
 
-Remember when we talked about `Object.assign()` [in the past](info:object-copy#cloning-and-merging-object-assign)?
+زمانی که ما در مورد `Object.assign()` [در گذشته صحبت کردیم را به یاد دارید](info:object-copy#cloning-and-merging-object-assign)?
 
-It is possible to do the same thing with the spread syntax.
+انجام همان کار با سینتکس گسترش امکان پذیز است.
 
 ```js run
 let arr = [1, 2, 3];
 
 *!*
-let arrCopy = [...arr]; // spread the array into a list of parameters
-                        // then put the result into a new array
+let arrCopy = [...arr]; // یک آرایه را به لیستی از پارامتر ها گسترش می‌دهد
+                        // سپس نتیجه را در یک آرایه جدید قرار می‌دهد
 */!*
 
-// do the arrays have the same contents?
+// آیا آریه ها محتوای یکسانی دارند؟
 alert(JSON.stringify(arr) === JSON.stringify(arrCopy)); // true
 
 // are the arrays equal?
-alert(arr === arrCopy); // false (not same reference)
+alert(arr === arrCopy); // false (مرجع یکسان نیست)
 
-// modifying our initial array does not modify the copy:
+// اصلاح آرایه اولیه باعث ایجاد تغییر در کپی نمی‌شود:
 arr.push(4);
 alert(arr); // 1, 2, 3, 4
 alert(arrCopy); // 1, 2, 3
 ```
 
-Note that it is possible to do the same thing to make a copy of an object:
+توجه داشته باشید که برای ایجاد یک کپی از یک آبجکت می توان همان کار را انجام داد:
 
 ```js run
 let obj = { a: 1, b: 2, c: 3 };
 
 *!*
-let objCopy = { ...obj }; // spread the object into a list of parameters
-                          // then return the result in a new object
+let objCopy = { ...obj }; // آبجکت را به لیستی از پارامتر ها گسترش می‌دهد
+                          // سپس نتیجه را در یک آبجکت جدید برمی‌گرداند
 */!*
 
-// do the objects have the same contents?
+// آیا آبجکت ها محتوای یکسانی دارند؟
 alert(JSON.stringify(obj) === JSON.stringify(objCopy)); // true
 
-// are the objects equal?
-alert(obj === objCopy); // false (not same reference)
+// آیا آبجکت ها برابر هستند؟
+alert(obj === objCopy); // false (مرجع یکسان نیست)
 
-// modifying our initial object does not modify the copy:
+// اصلاح آبجکت اولیه باعث تغییر در ایجاد تغییر در آبجکت کپی نمی‌شود:
 obj.d = 4;
 alert(JSON.stringify(obj)); // {"a":1,"b":2,"c":3,"d":4}
 alert(JSON.stringify(objCopy)); // {"a":1,"b":2,"c":3}
 ```
 
-This way of copying an object is much shorter than `let objCopy = Object.assign({}, obj)` or for an array `let arrCopy = Object.assign([], arr)` so we prefer to use it whenever we can.
+این روش کپی کردن یک آبجکت بسیار کوتاه‌تر از `let objCopy = Object.assign ({}، obj )` و یا برای یک آرایه `arrCopy = Object.assign ([]، arr )` است ، بنابراین ما ترجیح می دهیم هر زمان که میتوانیم از آن استفاده کنیم.
 
 
-## Summary
+## خلاصه
 
-When we see `"..."` in the code, it is either rest parameters or the spread syntax.
+هنگای که در کد `" ... "` را می‌بینیم، این عبارت یا پارامتر های اضافی است یا سینتکس گسترش.
 
-There's an easy way to distinguish between them:
+یک راه آسان برای تشخیص تمایز بین آنها وجود دارد:
 
-- When `...` is at the end of function parameters, it's "rest parameters" and gathers the rest of the list of arguments into an array.
-- When `...` occurs in a function call or alike, it's called a "spread syntax" and expands an array into a list.
+- وقتی `...` در انتهای پارامترهای تابع قرار دارد ، "پارامترهای اضافی" است و بقیه لیست آرگومان ها را در یک آرایه جمع آوری می کند.
+- وقتی `...` در فراخوانی یک تابع یا در موقعیت مانند آن نوشته می‌شود ، آن را" سینتکس گسترش "می نامند و یک آرایه را به یک لیست گسترش می دهد.
 
-Use patterns:
+از الگو ها استفاده کنید:
 
-- Rest parameters are used to create functions that accept any number of arguments.
-- The spread syntax is used to pass an array to functions that normally require a list of many arguments.
+- پارامتر‌های اضافی برای ایجاد توابعی که هر تعداد آرگومان را بپذیرند استفاده می شوند.
+- سینتکس گسترش برای انتقال یک آرایه به توابعی که معمولاً به لیست آرگومان های زیادی نیاز دارند ، استفاده می شود.
 
-Together they help to travel between a list and an array of parameters with ease.
+آنها با هم کمک می‌کنند به جابه‌جایی آسان بین یک لیست و یک آرایه از پارامتر‌ها
 
-All arguments of a function call are also available in "old-style" `arguments`: array-like iterable object.
+تمام آرگومان های یک فراخوانی تابع نیز در "سبک قدیمی" `arguments`: آبجکت آرایه مانند قابل تکرار موجود است
