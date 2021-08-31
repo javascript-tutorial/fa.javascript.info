@@ -81,37 +81,37 @@ if (year == 2015) {
 }
 ```
 
-## Several conditions: "else if"
+## چند شرط: "else if"
 
-Sometimes, we'd like to test several variants of a condition. The `else if` clause lets us do that.
+گاهی اوقات، ما می‌خواهیم که چند نوع از یک شرط را آزمایش کنیم. عبارت `else if` به امکان همچین کاری را می‌دهد.
 
-For example:
+برای مثال:
 
 ```js run
-let year = prompt('In which year was the ECMAScript-2015 specification published?', '');
+let year = prompt('در چه سالی مشخصات ECMAScript-2015 منتشر شد؟', '');
 
 if (year < 2015) {
-  alert( 'Too early...' );
+  alert( 'کم گفتید...' );
 } else if (year > 2015) {
-  alert( 'Too late' );
+  alert( 'زیاد گفتید' );
 } else {
-  alert( 'Exactly!' );
+  alert( 'دقیقا!' );
 }
 ```
 
-In the code above, JavaScript first checks `year < 2015`. If that is falsy, it goes to the next condition `year > 2015`. If that is also falsy, it shows the last `alert`.
+در کد بالا، جاوااسکریپت در ابتدا `year < 2015` را بررسی می‌کند. اگر falsy باشد، به شرط بعدی `year > 2015` می‌رود. اگر آن هم falsy باشد، `alert` آخر نمایش داده می‌شود.
 
-There can be more `else if` blocks. The final `else` is optional.
+بلوک‌های `else if` بیشتری هم می‌تواند وجود داشته باشد. `else` آخری اختیاری است.
 
-## Ternary operator '?'
+## عملگر سه‌گانه '?'
 
-Sometimes, we need to assign a variable depending on a condition.
+گاهی اوقات، ما نیاز داریم که بر اساس شرطی، یک متغیر را مقداردهی کنیم.
 
-For instance:
+برای مثال:
 
 ```js run no-beautify
 let accessAllowed;
-let age = prompt('How old are you?', '');
+let age = prompt('چند سال دارید؟', '');
 
 *!*
 if (age > 18) {
@@ -124,40 +124,40 @@ if (age > 18) {
 alert(accessAllowed);
 ```
 
-The so-called "ternary" or "question mark" operator lets us do that in a shorter and simpler way.
+عملگر «سه‌گانه» یا «علامت سوال» به ما اجازه انجام این کار با روشی کوتاه‌تر و ساده‌تر را می‌دهد.
 
-The operator is represented by a question mark `?`.  The formal term "ternary" means that the operator has three operands. It is actually the one and only operator in JavaScript which has that many.
+این عملگر با یک علامت سوال `?` نمایش داده می‌شود. عبارت رسمی «سه‌گانه» به معنی انی است که عملگر سه عملوند دارد. در واقع این عملگر، تنها عملگری در جاوااسکریپت است که این تعداد عملوند دارد.
 
-The syntax is:
+سینتکس آن:
 ```js
 let result = condition ? value1 : value2;
 ```
 
-The `condition` is evaluated: if it's truthy then `value1` is returned, otherwise -- `value2`.
+بعد از اینکه `condition` ارزیابی شود: اگر truthy باشد سپس `value1` برگردانده می‌شود، در غیر این صورت -- `value2`.
 
-For example:
+برای مثال:
 
 ```js
 let accessAllowed = (age > 18) ? true : false;
 ```
+ 
+به طور فنی، ما می‌توانیم پرانتزهای دور `age > 18` را حذف کنیم. عملگر علامت سوال اولویت پایینی دارد پس بعد از مقایسه `>` اجرا می‌شود.
 
-Technically, we can omit the parentheses around `age > 18`. The question mark operator has a low precedence, so it executes after the comparison `>`. 
-
-This example will do the same thing as the previous one:
+این مثال کار یکسانی با مثال قبل انجام می‌دهد:
 
 ```js
-// the comparison operator "age > 18" executes first anyway
-// (no need to wrap it into parentheses)
+// در هر صورت اول اجرا می‌شود "age > 18" عملگر مقایسه
+// (نیازی نیست که آن را درون پرانتز بگذاریم)
 let accessAllowed = age > 18 ? true : false;
 ```
 
-But parentheses make the code more readable, so we recommend using them.
+اما پرانتزها کد را خواناتر می‌کنند، پس ما پیشنهاد می‌کنیم که از آنها استفاده کنید.
 
 ````smart
-In the example above, you can avoid using the question mark operator because the comparison itself returns `true/false`:
+در مثال بالا، شما می‌توانید از عملگر علامت سوال استفاده نکنید چون خود مقایسه `true/false` برمی‌گرداند.
 
 ```js
-// the same
+// نتیجه یکسان است
 let accessAllowed = age > 18;
 ```
 ````
