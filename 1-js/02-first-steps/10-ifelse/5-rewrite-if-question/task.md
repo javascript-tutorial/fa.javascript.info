@@ -10,8 +10,8 @@ importance: 5
 let result;
 
 if (a + b < 4) {
-  result = 'پایین';
+  result = 'Below';
 } else {
-  result = 'بالا';
+  result = 'Over';
 }
 ```
