@@ -162,78 +162,78 @@ let accessAllowed = age > 18;
 ```
 ````
 
-## Multiple '?'
+## بیشتر از یک علامت سوال '?'
 
-A sequence of question mark operators `?` can return a value that depends on more than one condition.
+یک دنباله از عملگرهای علامت سوال `?` می‌تواند مقداری که به بیشتر از یک شرط بستگی دارد را برگرداند.
 
-For instance:
+برای مثال:
 ```js run
-let age = prompt('age?', 18);
+let age = prompt('سن شما؟', 18);
 
-let message = (age < 3) ? 'Hi, baby!' :
-  (age < 18) ? 'Hello!' :
-  (age < 100) ? 'Greetings!' :
-  'What an unusual age!';
+let message = (age < 3) ? 'سلام کوچولو!' :
+  (age < 18) ? 'سلام!' :
+  (age < 100) ? 'درود!' :
+  'چه سن غیر معمولی!';
 
 alert( message );
 ```
 
-It may be difficult at first to grasp what's going on. But after a closer look, we can see that it's just an ordinary sequence of tests:
+ممکن است در نگاه اول فهمیدن اینکه چه چیزی در حال رخ دادن است سخت باشد. اما بعد از یک نگاه دقیق‌تر، متوجه می‌شویم که فقط یک دنباله معمولی از آزمایش‌ها است:
 
-1. The first question mark checks whether `age < 3`.
-2. If true -- it returns `'Hi, baby!'`. Otherwise, it continues to the expression after the colon '":"', checking `age < 18`.
-3. If that's true -- it returns `'Hello!'`. Otherwise, it continues to the expression after the next colon '":"', checking `age < 100`.
-4. If that's true -- it returns `'Greetings!'`. Otherwise, it continues to the expression after the last colon '":"', returning `'What an unusual age!'`.
+1. اولین علامت سوال بررسی می‌کند که آیا `age < 3`.
+2. اگر درست باشد -- `'سلام کوچولو!'` برگردانده می‌شود. در غیر این صورت به عبارت بعد از دو نقطه '":"' می‌رود و `age < 18` را بررسی می‌کند
+3. اگر درست باشد -- `'سلام!'` را برمی‌گرداند. در غیر این صورت، به عبارت بعد از دو نقطه بعدی '":"' می‌رود و `age < 100` را بررسی می‌کند.
+4. اگر درست باشد -- `'درود!'` را برمی‌گرداند. در غیر این صورت، به عبارت بعد از آخرین '":"' می‌رود و `'چه سن غیر معمولی!'` را برمی‌گرداند.
 
-Here's how this looks using `if..else`:
+اگر از `if..else` استفاده می‌شد، اینگونه بنظر می‌رسید:
 
 ```js
 if (age < 3) {
-  message = 'Hi, baby!';
+  message = 'سلام کوچولو!';
 } else if (age < 18) {
-  message = 'Hello!';
+  message = 'سلام!';
 } else if (age < 100) {
-  message = 'Greetings!';
+  message = 'درود!';
 } else {
-  message = 'What an unusual age!';
+  message = 'چه سن غیر معمولی!';
 }
 ```
 
-## Non-traditional use of '?'
+## استفاده غیر سنتی از '?'
 
-Sometimes the question mark `?` is used as a replacement for `if`:
+بعضی اوقات علامت سوال `?` به عنوان جایگزینی برای `if` استفاده می‌شود:
 
 ```js run no-beautify
-let company = prompt('Which company created JavaScript?', '');
+let company = prompt('کدام کمپانی جاوااسکریپت را ساخت؟', '');
 
 *!*
 (company == 'Netscape') ?
-   alert('Right!') : alert('Wrong.');
+   alert('درست گفتید!') : alert('اشتباه گفتید.');
 */!*
 ```
 
-Depending on the condition `company == 'Netscape'`, either the first or the second expression after the `?` gets executed and shows an alert.
+با توجه به شرط `company == 'Netscape'`، عبارت اول یا دوم بعد از `?` اجرا می‌شود و یک alert را نمایش می‌دهد.
 
-We don't assign a result to a variable here. Instead, we execute different code depending on the condition.
+اینجا ما یک نتیجه را برابر با یک متغیر قرار نمی‌دهیم. به جای آن، ما کد مختلف را بسته به شرایط اجرا می‌کنیم.
 
-**It's not recommended to use the question mark operator in this way.**
+**استفاده از عملگر علامت سوال به این روش اصلا پیشنهاد نمی‌شود.**
 
-The notation is shorter than the equivalent `if` statement, which appeals to some programmers. But it is less readable.
+این روش نسبت به دستور یکسان `if` کوتاه‌تر است، که بعضی از برنامه‌نویسان را جذب می‌کند. اما خوانایی کمتری دارد.
 
-Here is the same code using `if` for comparison:
+اینجا همان کد را با استفاده از `if` برای مقایسه آورده‌ایم:
 
 ```js run no-beautify
-let company = prompt('Which company created JavaScript?', '');
+let company = prompt('کدام کمپانی جاوااسکریپت را ساخت؟', '');
 
 *!*
 if (company == 'Netscape') {
-  alert('Right!');
+  alert('درست گفتید!');
 } else {
-  alert('Wrong.');
+  alert('اشتباه گفتید.');
 }
 */!*
 ```
 
-Our eyes scan the code vertically. Code blocks which span several lines are easier to understand than a long, horizontal instruction set.
+چشمان ما کد را به صورت عمودی اسکن می‌کنند. بلوک‌های کد که در چند خط نوشته شده‌اند نسبت به یک مجموعه دستور طولانی و افقی، برای فهمیدن راحت‌تر هستند.
 
-The purpose of the question mark operator `?` is to return one value or another depending on its condition. Please use it for exactly that. Use `if` when you need to execute different branches of code.
+هدف عملگر علامت سوال `?` این است که یک مقدار یا مقدار دیگری را با توجه به شرایط آن برگرداند. لطفا دقیقا با همین هدف از آن استفاده کنید. زمانی که نیاز دارید شاخه‌های متفاوتی از کد را اجرا کنید از `if` استفاده کنید.
