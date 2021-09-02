@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# Rewrite 'if' into '?'
+# دستور 'if' را به '?' بازنویسی کنید
 
-Rewrite this `if` using the conditional operator `'?'`:
+این `if` را با استفاده از عملگر شرطی بازنویسی کنید:
 
 ```js
 let result;

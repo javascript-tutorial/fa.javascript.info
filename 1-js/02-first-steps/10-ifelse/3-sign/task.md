@@ -2,14 +2,14 @@ importance: 2
 
 ---
 
-# Show the sign
+# علامت را نشان دهید
 
-Using `if..else`, write the code which gets a number via `prompt` and then shows in `alert`:
+با استفاده از `if..else`، کدی بنویسید که با استفاده از `prompt` یک عدد می‌گیرد و سپس با `alert` یکی از اینها را نشان می‌دهد:
 
-- `1`, if the value is greater than zero,
-- `-1`, if less than zero,
-- `0`, if equals zero.
+- `1`، اگر مقدار بزرگ‌تر از صفر بود،
+- `-1`، اگر کمتر از صفر بود،
+- `0`، اگر برابر با صفر بود.
 
-In this task we assume that the input is always a number.
+در این تکلیف ما فرض می‌کنیم که ورودی همیشه یک عدد است.
 
-[demo src="if_sign"]
+[دمو src="if_sign"]
