@@ -273,7 +273,7 @@ alert(JSON.stringify(obj)); // {"a":1,"b":2,"c":3,"d":4}
 alert(JSON.stringify(objCopy)); // {"a":1,"b":2,"c":3}
 ```
 
-این روش کپی کردن یک شی بسیار کوتاه‌تر از `let objCopy = Object.assign({}, obj)` و یا برای یک آرایه `arrCopy = Object.assign([], arr)` است، بنابراین ما ترجیح می‌دهیم هر زمان که می‌توانیم از آن استفاده کنیم.
+این روش کپی کردن یک شی بسیار کوتاه‌تر از `let objCopy = Object.assign({}, obj)` و یا برای یک آرایه `let arrCopy = Object.assign([], arr)` است، بنابراین ما ترجیح می‌دهیم هر زمان که می‌توانیم از آن استفاده کنیم.
 
 
 ## خلاصه
