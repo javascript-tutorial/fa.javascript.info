@@ -1,7 +1,7 @@
 
 # محدوده متغیر، closure
 
-جاوااسکریپت یک زبان بسیار تابع محور است. این زبان به ما آزادی زیادی می‌دهد. یک تابع می‌تواند در هر لحظه ساخته شود، به عنوان آرگومان به تابع دیگری داده شود و سپس بعدا در یک جای کاملا متفاوت از کد فراخوانی شود.
+جاوااسکریپت یک زبان بسیار تابع‌محور است. این زبان به ما آزادی زیادی می‌دهد. یک تابع می‌تواند در هر لحظه ساخته شود، به عنوان آرگومان به تابع دیگری داده شود و سپس بعدا در یک جای کاملا متفاوت از کد فراخوانی شود.
 
 ما از قبل می‌دانیم که یک تابع می‌تواند به متغیرهای بیرون از خودش دسترسی داشته باشد (متغیرهای «بیرونی»).
 
@@ -19,17 +19,17 @@
 - `var` قدیمی چند تفاوت قابل توجه دارد که در مقاله <info:var> پوشش داده می‌شوند.
 ```
 
-## Code blocks
+## بلوک‌های کد
 
-If a variable is declared inside a code block `{...}`, it's only visible inside that block.
+اگر یک متغیر درون بلوک کد `{...}` تعریف شود، فقط درون همان بلوک قابل رویت است.
 
-For example:
+برای مثال:
 
 ```js run
 {
-  // do some job with local variables that should not be seen outside
+  // یک کار با متغیرهای محلی که از بیرون نباید شناخته شوند انجام دهید
 
-  let message = "Hello"; // only visible in this block
+  let message = "Hello"; // فقط درون این بلوک قابل رویت است
 
   alert(message); // Hello
 }
@@ -37,31 +37,31 @@ For example:
 alert(message); // Error: message is not defined
 ```
 
-We can use this to isolate a piece of code that does its own task, with variables that only belong to it:
+ما می‌توانیم از این خاصیت برای ایزوله کردن یک قطعه از کد که دارای متغیرهایی است که فقط به آن تعلق دارند و کار خودش را انجام می‌دهد استفاده کنیم:
 
 ```js run
 {
-  // show message
+  // نمایش پیام
   let message = "Hello";
   alert(message);
 }
 
 {
-  // show another message
+  // نمایش پیامی دیگر
   let message = "Goodbye";
   alert(message);
 }
 ```
 
-````smart header="There'd be an error without blocks"
-Please note, without separate blocks there would be an error, if we use `let` with the existing variable name:
+````smart header="بدون وجود بلوک‌ها ارور ایجاد خواهد شد"
+لطفا در نظر داشته باشید که بدون بلوک‌های جدا اگر ما از `let` همراه با یک متغیر موجود استفاده کنیم، یک ارور ایجاد خواهد شد.
 
 ```js run
-// show message
+// نمایش پیام
 let message = "Hello";
 alert(message);
 
-// show another message
+// نمایش پیامی دیگر
 *!*
 let message = "Goodbye"; // Error: variable already declared
 */!*
@@ -69,7 +69,7 @@ alert(message);
 ```
 ````
 
-For `if`, `for`, `while` and so on, variables declared in `{...}` are also only visible inside:
+برای `if`، `for`، `while` و بقیه، متغیرهایی که درون `{...}` تعریف شده باشند تنها درون آنها قابل رویت هستند:
 
 ```js run
 if (true) {
@@ -78,25 +78,25 @@ if (true) {
   alert(phrase); // Hello!
 }
 
-alert(phrase); // Error, no such variable!
+alert(phrase); // !ارور، چنین متغیری وجود ندارد
 ```
 
-Here, after `if` finishes, the `alert` below won't see the `phrase`, hence the error.
+اینجا، بعد از اینکه `if` تمام می‌شود، `alert` متغیر `phrase` را نمی‌بیند و به همین دلیل ارور ایجاد می‌شود.
 
-That's great, as it allows us to create block-local variables, specific to an `if` branch.
+این عالی است چون به ما اجازه می‌دهد که متغیرهایی در سطح بلوک محلی بسازیم که به یک شاخه `if` اختصاص دارند.
 
-The similar thing holds true for `for` and `while` loops:
+همین موضوع برای حلقه‌های `for` و `while` هم صادق است:
 
 ```js run
 for (let i = 0; i < 3; i++) {
-  // the variable i is only visible inside this for
-  alert(i); // 0, then 1, then 2
+  // قابل رویت است for فقط درون این حلقه i متغیر
+  alert(i); // اول 0، سپس 1، سپس 2
 }
 
-alert(i); // Error, no such variable
+alert(i); // ارور، چنین متغیری وجود ندارد
 ```
 
-Visually, `let i` is outside of `{...}`. But the `for` construct is special here: the variable, declared inside it, is considered a part of the block.
+از لحاظ ظاهری، `let i` بیرون از `{...}` است. اما اینجا ساختار `for` خاص است: متغیری که درون آن ساخته شود، جزئی از بلوک کد فرض می‌شود.
 
 ## Nested functions
 
