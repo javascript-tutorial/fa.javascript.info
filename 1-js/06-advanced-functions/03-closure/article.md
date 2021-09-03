@@ -34,7 +34,7 @@
   alert(message); // Hello
 }
 
-alert(message); // Error: message is not defined
+alert(message); // تعریف نشده است message :ارور
 ```
 
 ما می‌توانیم از این خاصیت برای ایزوله کردن یک قطعه از کد که دارای متغیرهایی است که فقط به آن تعلق دارند و کار خودش را انجام می‌دهد استفاده کنیم:
@@ -63,7 +63,7 @@ alert(message);
 
 // نمایش پیامی دیگر
 *!*
-let message = "Goodbye"; // Error: variable already declared
+let message = "Goodbye"; // ارور: متغیر از قبل تعریف شده است
 */!*
 alert(message);
 ```
