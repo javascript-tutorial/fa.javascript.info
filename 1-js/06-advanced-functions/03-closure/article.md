@@ -1,22 +1,22 @@
 
-# Variable scope, closure
+# محدوده متغیر، closure
 
-JavaScript is a very function-oriented language. It gives us a lot of freedom. A function can be created at any moment, passed as an argument to another function, and then called from a totally different place of code later.
+جاوااسکریپت یک زبان بسیار تابع محور است. این زبان به ما آزادی زیادی می‌دهد. یک تابع می‌تواند در هر لحظه ساخته شود، به عنوان آرگومان به تابع دیگری داده شود و سپس بعدا در یک جای کاملا متفاوت از کد فراخوانی شود.
 
-We already know that a function can access variables outside of it ("outer" variables).
+ما از قبل می‌دانیم که یک تابع می‌تواند به متغیرهای بیرون از خودش دسترسی داشته باشد (متغیرهای «بیرونی»).
 
-But what happens if outer variables change since a function is created? Will the function get newer values or the old ones?
+اما اگر متغیرهای بیرونی از زمانی که یک تابع ساخته شد تغییر کنند چه اتفاقی می‌افتد؟ آیا تابع مقدارهای جدید را دریافت می‌کند یا قدیمی‌ها را؟
 
-And what if a function is passed along as a parameter and called from another place of code, will it get access to outer variables at the new place?
+و اگر یک تابع به عنوان یک پارامتر رد و بدل شود و جای دیگری از کد فراخوانی شود، آیا به متغیرهای بیرونی در جای جدید دسترسی پیدا می‌کند؟
 
-Let's expand our knowledge to understand these scenarios and more complex ones.
+بیایید دانش خود را گسترده‌تر کنیم تا این سناریوها و پیچیده‌تر از اینها را درک کنیم.
 
-```smart header="We'll talk about `let/const` variables here"
-In JavaScript, there are 3 ways to declare a variable: `let`, `const` (the modern ones), and `var` (the remnant of the past).
+```smart header="اینجا ما درباره متغیرهای `let/const` حرف می‌زنیم"
+در جاوااسکریپت، 3 راه برای تعریف یک متغیر وجود دارد: `let`، `const` (این دو روش مدرن هستند) و `var` (که از گذشته باقی مانده است).
 
-- In this article we'll use `let` variables in examples.
-- Variables, declared with `const`, behave the same, so this article is about `const` too.
-- The old `var` has some notable differences, they will be covered in the article <info:var>.
+- در این مقاله ما از متغیرهای `let` در مثال‌ها استفاده می‌کنیم.
+- متغیرهایی که با `const` تعریف شوند، رفتار مشابهی دارند پس این مقاله درباره `const` هم هست.
+- `var` قدیمی چند تفاوت قابل توجه دارد که در مقاله <info:var> پوشش داده می‌شوند.
 ```
 
 ## Code blocks
