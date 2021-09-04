@@ -148,58 +148,58 @@ alert( counter() ); // 2
 
 درک چنین چیزهایی برای دانش کلی از جاوااسکریپت و سناریوهای پیچیده‌تر خوب است. پس بیایید کمی عمیق‌تر شویم.
 
-## Lexical Environment
+## محیط لغوی (Lexical Environment)
 
-```warn header="Here be dragons!"
-The in-depth technical explanation lies ahead.
+```warn header="مطالب ناشناخته‌ای وجود دارند!"
+توضیحات عمیق فنی را ادامه می‌خوانید.
 
-As far as I'd like to avoid low-level language details, any understanding without them would be lacking and incomplete, so get ready.
+هر چقدر که می‌خواهم از جزئیات سطح پایین زبان دوری کنم، هرگونه درکی بدون آنها کمبود دارد و کامل نیست، پس آماده باشید.
 ```
 
-For clarity, the explanation is split into multiple steps.
+برای واضح بودن، توضیحات به چند مرحله تقسیم شده‌اند.
 
-### Step 1. Variables
+### مرحله 1. متغیرها
 
-In JavaScript, every running function, code block `{...}`, and the script as a whole have an internal (hidden) associated object known as the *Lexical Environment*.
+در جاوااسکریپت، هر تابع در حال اجرا، بلوک کد `{...}` و تمام اسکریپت، یک شیء درونی (پنهان) اختصاص یافته دارد که به عنوان *محیط لغوی* شناخته می‌شود.
 
-The Lexical Environment object consists of two parts:
+شیء محیط لغوی شامل دو بخش است:
 
-1. *Environment Record* -- an object that stores all local variables as its properties (and some other information like the value of `this`).
-2. A reference to the *outer lexical environment*, the one associated with the outer code.
+1. *ذخایر محیط (Environment Record)* -- یک شیء که تمام متغیرهای محلی را به عنوان ویژگی‌های خود (و اطلاعات دیگری مانند مقدار `this`) ذخیره می‌کند.
+2. یک رجوع به *محیط لغوی بیرونی (outer)*، محیطی که به کد بیرونی اختصاص دارد.
 
-**A "variable" is just a property of the special internal object, `Environment Record`. "To get or change a variable" means "to get or change a property of that object".**
+**یک «متغیر» فقط یک ویژگی از شیء خاص درونی `Environment Record` است. «دریافت یا تغییر یک متغیر» به معنی «دریافت یا تغییر یک ویژگی از آن شیء» است.**
 
-In this simple code without functions, there is only one Lexical Environment:
+در این کد ساده که تابعی ندارد، تنها یک محیط لغوی وجود دارد:
 
 ![lexical environment](lexical-environment-global.svg)
 
-This is the so-called *global* Lexical Environment, associated with the whole script.
+این همان محیط لغوی *گلوبال* است که به تمام کد اختصاص یافته.
 
-On the picture above, the rectangle means Environment Record (variable store) and the arrow means the outer reference. The global Lexical Environment has no outer reference, that's why the arrow points to `null`.
+در تصویر بالا، مستطیل به معنای ذخایر محیط (ذخایر متغیر) است و کمان به معنی مرجع بیرونی. محیط لغوی گلوبال مرجع بیرونی ندارد و به همین دلیل است که کمان به `null` اشاره می‌کند.
 
-As the code starts executing and goes on, the Lexical Environment changes.
+همانطور که کد شروع به اجرا شدن می‌کند و ادامه می‌یابد، محیط لغوی تغییر می‌کند.
 
-Here's a little bit longer code:
+یک کد طولانی‌تر را اینجا داریم:
 
 ![lexical environment](closure-variable-phrase.svg)
 
-Rectangles on the right-hand side demonstrate how the global Lexical Environment changes during the execution:
+مستطیل‌های سمت راست نشان می‌دهند که محیط لغوی گلوبال در حین اجرا شدن چگونه تغییر می‌کند:
 
-1. When the script starts, the Lexical Environment is pre-populated with all declared variables.
-    - Initially, they are in the "Uninitialized" state. That's a special internal state, it means that the engine knows about the variable, but it cannot be referenced until it has been declared with `let`. It's almost the same as if the variable didn't exist.
-2. Then `let phrase` definition appears. There's no assignment yet, so its value is `undefined`. We can use the variable from this point forward.
-3. `phrase` is assigned a value.
-4. `phrase` changes the value.
+1. زمانی که اسکریپت شروع می‌کند، محیط لغوی از تمام متغیرهای تعریف شده پر می‌شود.
+    - در ابتدا، آنها در حالت «بدون مقدار اولیه (Uninitialized)» هستند. این یک حالت درونی خاص است و به این معنی است که موتور درباره متغیر آگاه است اما تا زمانی که با `let` تعریف شود نمی‌توان به آن رجوع کرد. تقریبا مانند این است که متغیر وجود ندارد.
+2. تعریف `let phrase` نمایان می‌شود. هنوز مقداردهی نشده است، پس مقدار آنها `undefined` است. ما می‌توانیم از اینجا به بعد از متغیر استفاده کنیم.
+3. `phrase` یک مقدار گرفته است.
+4. `phrase` مقدار را تغییر می‌دهد.
 
-Everything looks simple for now, right?
+تا اینجا همه چیز ساده بنظر می‌رسد نه؟
 
-- A variable is a property of a special internal object, associated with the currently executing block/function/script.
-- Working with variables is actually working with the properties of that object.
+- یک متغیر، ویژگی یک شیء خاص درونی است که به بلوک/تابع/اسکریپتی که در حال اجرا است اختصاص یافته.
+- کارکردن با متغیرها در واقع کارکردن با ویژگی‌های آن شیء است.
 
-```smart header="Lexical Environment is a specification object"
-"Lexical Environment" is a specification object: it only exists "theoretically" in the [language specification](https://tc39.es/ecma262/#sec-lexical-environments) to describe how things work. We can't get this object in our code and manipulate it directly.
+```smart header="محیط لغوی یک شیء درون مشخصات است"
+«محیط لغوی» یک شیء درون مشخصات است: این شیء فقط «به صورت تئوری» در [مشخصات زبان](https://tc39.es/ecma262/#sec-lexical-environments) وجود دارد تا چگونگی کارکردن چیزها را توصیف کند. ما نمی‌توانیم این شیء را در کدمان دریافت کنیم و آن را به صورت مستقیم دستکاری کنیم.
 
-JavaScript engines also may optimize it, discard variables that are unused to save memory and perform other internal tricks, as long as the visible behavior remains as described.
+ تا آنجایی که رفتار قابل مشاهده همانطور که توصیف شد باقی بماند، موتورهای جاوااسکریپت ممکن است آن را بهینه کنند مثلا برای صرفه‌جویی در اشغال حافظه متغیرهایی که استفاده نمی‌شوند را حذف کنند و ترفندهای درونی دیگری را اجرا کنند.
 ```
 
 ### Step 2. Function Declarations
