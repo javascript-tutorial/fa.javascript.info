@@ -98,33 +98,33 @@ alert(i); // ارور، چنین متغیری وجود ندارد
 
 از لحاظ ظاهری، `let i` بیرون از `{...}` است. اما اینجا ساختار `for` خاص است: متغیری که درون آن ساخته شود، جزئی از بلوک کد فرض می‌شود.
 
-## Nested functions
+## تابع‌های تودرتو
 
-A function is called "nested" when it is created inside another function.
+به تابعی که درون تابع دیگری ساخته شود «تودرتو» گفته می‌شود.
 
-It is easily possible to do this with JavaScript.
+این کار را به راحتی در جاوااسکریپت می‌توان انجام داد.
 
-We can use it to organize our code, like this:
+می‌توانیم از آن برای سازماندهی کد خود استفاده کنیم، مثلا اینگونه:
 
 ```js
 function sayHiBye(firstName, lastName) {
 
-  // helper nested function to use below
+  // تابع کمک کننده که پایین‌تر استفاده می‌شود
   function getFullName() {
     return firstName + " " + lastName;
   }
 
-  alert( "Hello, " + getFullName() );
-  alert( "Bye, " + getFullName() );
+  alert( "سلام " + getFullName() );
+  alert( "خداحافظ " + getFullName() );
 
 }
 ```
 
-Here the *nested* function `getFullName()` is made for convenience. It can access the outer variables and so can return the full name. Nested functions are quite common in JavaScript.
+اینجا تابع *تودرتو* `getFullName()` برای راحتی استفاده شده است. این تابع می‌تواند به متغیرهای بیرونی دسترسی داشته باشد پس می‌تواند اسم کامل را برگرداند. تابع‌های تودرتو در جاوااسکریپت بسیار رایج هستند.
 
-What's much more interesting, a nested function can be returned: either as a property of a new object or as a result by itself. It can then be used somewhere else. No matter where, it still has access to the same outer variables.
+یک چیز جالب‌تر این است که یک تابع تودرتو می‌تواند برگردانده شود: حالا یا به عنوان یک ویژگی از شیءای جدید یا خودش به عنوان نتیجه برگردانده شود. بعدا می‌تواند در جایی دیگر مورد استفاده قرار بگیرد. مهم نیست کجا باشد، هنوز هم به متغیرهای بیرونی یکسان دسترسی دارد.
 
-Below, `makeCounter` creates the "counter" function that returns the next number on each invocation:
+در کد پایین، `makeCounter` تابع «شمارنده» را می‌سازد که با هر بار فراخوانی عدد بعدی را برمی‌گرداند:
 
 ```js run
 function makeCounter() {
@@ -142,11 +142,11 @@ alert( counter() ); // 1
 alert( counter() ); // 2
 ```
 
-Despite being simple, slightly modified variants of that code have practical uses, for instance, as a [random number generator](https://en.wikipedia.org/wiki/Pseudorandom_number_generator) to generate random values for automated tests.
+علاوه بر اینکه ساده است، گونه‌هایی که نسبت به آن کد کمی تغییر کرده‌اند موارد استفاده کاربردی‌ای دارند، برای مثال یک [سازنده عدد تصادفی](https://fa.wikipedia.org/wiki/مولد_اعداد_شبه_تصادفی) تا برای آزمایش‌های خودکار مقدارهای تصادفی تولید کند.
 
-How does this work? If we create multiple counters, will they be independent? What's going on with the variables here?
+این چگونه کار می‌کند؟ اگر ما چند شمارنده بسازیم، آیا آنها مستقل خواهند بود؟ چه چیزی در حال رخ دادن روی متغیرها است؟
 
-Understanding such things is great for the overall knowledge of JavaScript and beneficial for more complex scenarios. So let's go a bit in-depth.
+درک چنین چیزهایی برای دانش کلی از جاوااسکریپت و سناریوهای پیچیده‌تر خوب است. پس بیایید کمی عمیق‌تر شویم.
 
 ## Lexical Environment
 
