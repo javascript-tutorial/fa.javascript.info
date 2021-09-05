@@ -202,21 +202,21 @@ alert( counter() ); // 2
  تا آنجایی که رفتار قابل مشاهده همانطور که توصیف شد باقی بماند، موتورهای جاوااسکریپت ممکن است آن را بهینه کنند مثلا برای صرفه‌جویی در اشغال حافظه متغیرهایی که استفاده نمی‌شوند را حذف کنند و ترفندهای درونی دیگری را اجرا کنند.
 ```
 
-### Step 2. Function Declarations
+### مرحله 2. Function Declaration
 
-A function is also a value, like a variable.
+یک تابع هم مانند یک متغیر، مقدار است.
 
-**The difference is that a Function Declaration is instantly fully initialized.**
+**تفاوت اینجاست که Function Declaration سریعا به طور کامل مقداردهی می‌شوند.**
 
-When a Lexical Environment is created, a Function Declaration immediately becomes a ready-to-use function (unlike `let`, that is unusable till the declaration).
+زمانی که یک محیط لغوی ساخته می‌شود، یک Function Declaration سریعا به یک تابع آماده استفاده تبدیل می‌شود (برخلاف `let` که تا زمان تعریف آن در کد غیر قابل استفاده است).
 
-That's why we can use a function, declared as Function Declaration, even before the declaration itself.
+به همین دلیل است که از تابعی که به صورت Function Declaration تعریف شده باشد، حتی قبل از رسیدن به تعریف آن می‌توانیم استفاده کنیم.
 
-For example, here's the initial state of the global Lexical Environment when we add a function:
+برای مثال، زمانی که ما یک تابع اضافه می‌کنیم وضعیت اولیه محیط لغوی گلوبال اینگونه است:
 
 ![](closure-function-declaration.svg)
 
-Naturally, this behavior only applies to Function Declarations, not Function Expressions where we assign a function to a variable, such as `let say = function(name)...`.
+طبیعتا، این رفتار فقط برای Function Declarations است نه برای اعلان تابع Expression که ما یک متغیر را برابر با یک تابع قرار می‌دهیم مانند `let say = function(name)...`.
 
 ### Step 3. Inner and outer Lexical Environment
 
