@@ -218,11 +218,11 @@ alert( counter() ); // 2
 
 طبیعتا، این رفتار فقط برای Function Declarations است نه برای اعلان تابع Expression که ما یک متغیر را برابر با یک تابع قرار می‌دهیم مانند `let say = function(name)...`.
 
-### Step 3. Inner and outer Lexical Environment
+### مرحله 3. محیط‌های لغوی درونی و بیرونی
 
-When a function runs, at the beginning of the call, a new Lexical Environment is created automatically to store local variables and parameters of the call.
+زمانی که یک تابع اجرا می‌شود، در ابتدای فراخوانی، به طور خودکار یک محیط لغوی جدید برای ذخیره متغیرهای محلی و پارامترهای فراخوانی ایجاد می‌شود.
 
-For instance, for `say("John")`, it looks like this (the execution is at the line, labelled with an arrow):
+برای مثال، برای `say("John)"` اینگونه بنظر می‌رسد (فرایند اجرا شدن در خطی است که با کمان نشانه گذاری شده است):
 
 <!--
     ```js
@@ -237,21 +237,21 @@ For instance, for `say("John")`, it looks like this (the execution is at the lin
 
 ![](lexical-environment-simple.svg)
 
-During the function call we have two Lexical Environments: the inner one (for the function call) and the outer one (global):
+در حین فراخوانی تابع ما دو محیط لغوی داریم: محیط درونی (برای فراخوانی تابع) و محیط بیرونی (گلوبال):
 
-- The inner Lexical Environment corresponds to the current execution of `say`. It has a single property: `name`, the function argument. We called `say("John")`, so the value of the `name` is `"John"`.
-- The outer Lexical Environment is the global Lexical Environment. It has the `phrase` variable and the function itself.
+- محیط لغوی درونی متناظر با فرایند اجرای کنونی `say` است. این محیط یک ویژگی دارد: `name` که همان آرگومان تابع است. ما `say("John")` را فراخوانی کردیم پس مقدار `name` برابر با `"John"` خواهد بود.
+- محیط لغوی بیرونی همان محیط لغوی گلوبال است. این محیط متغیر `phrase` و خود تابع را شامل می‌شود.
 
-The inner Lexical Environment has a reference to the `outer` one.
+محیط لغوی درونی یک رجوع به محیط `outer`(بیرونی) دارد.
 
-**When the code wants to access a variable -- the inner Lexical Environment is searched first, then the outer one, then the more outer one and so on until the global one.**
+**زمانی که کد می‌خواهد به یک متغیر دسترسی پیدا کند -- اول محیط لغوی درونی جستجو می‌شود، سپس محیط بیرونی، سپس محیط بیرونی‌تر و همینطور تا محیط لغوی گلوبال ادامه پیدا می‌کند**
 
-If a variable is not found anywhere, that's an error in strict mode (without `use strict`, an assignment to a non-existing variable creates a new global variable, for compatibility with old code).
+اگر متغیری جایی پیدا نشود، در حالت سخت‌گیرانه(strict mode) ارور ایجاد می‌شود (بدون `use strict`، برای سازگاری با کدهای قدیمی اگر یک متغیر که موجود نیست را برای مقداردهی استفاده کنیم، یک متغیر گلوبال جدید ساخته می‌شود).
 
-In this example the search proceeds as follows:
+در این مثال، جستجو اینگونه پیش می‌رود:
 
-- For the `name` variable, the `alert` inside `say` finds it immediately in the inner Lexical Environment.
-- When it wants to access `phrase`, then there is no `phrase` locally, so it follows the reference to the outer Lexical Environment and finds it there.
+- برای متغیر `name`، `alert` درون `say` بلافاصله آن را در محیط لغوی درونی پیدا می‌کند.
+- زمانی که می‌خواهد به `phrase` دسترسی پیدا کند، هیچ `phrase` محلی موجود نیست، پس به محیط لغوی بیرونی رجوع می‌کند و آن را آنجا پیدا می‌کند.
 
 ![lexical environment lookup](lexical-environment-simple-lookup.svg)
 
