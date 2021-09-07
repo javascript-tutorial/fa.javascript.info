@@ -256,9 +256,9 @@ alert( counter() ); // 2
 ![lexical environment lookup](lexical-environment-simple-lookup.svg)
 
 
-### Step 4. Returning a function
+### مرحله 4. برگرداندن یک تابع
 
-Let's return to the `makeCounter` example.
+بیایید به مثال `makeCounter` برگردیم.
 
 ```js
 function makeCounter() {
@@ -272,42 +272,42 @@ function makeCounter() {
 let counter = makeCounter();
 ```
 
-At the beginning of each `makeCounter()` call, a new Lexical Environment object is created, to store variables for this `makeCounter` run.
+در ابتدای هر فراخوانی `makeCounter`، یک شیء محیط لغوی جدید ساخته می‌شود تا متغیرها را برای این فراخوانیِ `makeCounter` ذخیره کند.
 
-So we have two nested Lexical Environments, just like in the example above:
+بنابراین ما دو محیط لغوی تودرتو داریم، درست مانند مثال بالا:
 
 ![](closure-makecounter.svg)
 
-What's different is that, during the execution of `makeCounter()`, a tiny nested function is created of only one line: `return count++`. We don't run it yet, only create.
+تفاوتی که وجود دارد این است که در حین اجرای `makeCounter`، یک تابع کوچک تودرتو فقط به خاطر یک خط ایجاد می‌شود: `return count++`. ما هنوز این را اجرا نمی‌کنیم فقط می‌سازیم.
 
-All functions remember the Lexical Environment in which they were made. Technically, there's no magic here: all functions have the hidden property named `[[Environment]]`, that keeps the reference to the Lexical Environment where the function was created:
+تمام تابع‌ها محیط لغوی‌ای که در آن ساخته شده‌اند را به یاد می‌سپارند. از لحاظ فنی، هیچ جادویی اینجا وجود ندارد: تمام تابع‌ها یک ویژگی پنهان `[[Environment]]` دارند که یک رجوع به محیط لغوی‌ای که تابع در آن ساخته شده است دارد:
 
 ![](closure-makecounter-environment.svg)
 
-So, `counter.[[Environment]]` has the reference to `{count: 0}` Lexical Environment. That's how the function remembers where it was created, no matter where it's called. The `[[Environment]]` reference is set once and forever at function creation time.
+بنابراین `counter.[[Environment]]` یک رجوع به محیط لغوی `{count: 0}` دارد. اینگونه است که تابع بدون توجه به اینکه کجا فراخوانی شده است، جایی که ساخته شده را به یاد می‌سپارد. مرجع `[[Environment]]` فقط یک بار و برای همیشه در زمان ساخت تابع تنظیم می‌شود.
 
-Later, when `counter()` is called, a new Lexical Environment is created for the call, and its outer Lexical Environment reference is taken from `counter.[[Environment]]`:
+بعدا، زمانی که `counter()` فراخوانی می‌شود، یک محیط لغوی جدید برای آن فراخوانی ایجاد می‌شود و مرجع محیط لغوی بیرونی آن از `counter.[[Environment]]` گرفته می‌شود:
 
 ![](closure-makecounter-nested-call.svg)
 
-Now when the code inside `counter()` looks for `count` variable, it first searches its own Lexical Environment (empty, as there are no local variables there), then the Lexical Environment of the outer `makeCounter()` call, where it finds and changes it.
+حالا زمانی که کد، درون `counter()` را برای متغیر `count` جستجو می‌کند، ابتدا محیط لغوی خودش را جستجو می‌کند (که به دلیل نبود متغیری محلی خالی است)، سپس محیط لغویِ فراخوانیِ بیرونیِ `makeCounter()` را جستجو و آنجا آن را پیدا می‌کند و تغییرش می‌دهد.
 
-**A variable is updated in the Lexical Environment where it lives.**
+**یک متغیر در محیط لغوی‌ای که وجود دارد تغییر می‌یابد.**
 
-Here's the state after the execution:
+بعد از اجرا شدن وضعیت اینگونه است:
 
 ![](closure-makecounter-nested-call-2.svg)
 
-If we call `counter()` multiple times, the `count` variable will be increased to `2`, `3` and so on, at the same place.
+اگر ما `counter()` را چند بار فراخوانی کنیم، متغیر `count` به `2`، `3` و بیشتر در جای یکسانی افزایش می‌یابد.
 
-```smart header="Closure"
-There is a general programming term "closure", that developers generally should know.
+```smart header="Closure(کلوژِر)"
+یک عبارت کلی برنامه‌نویسی به نام "closure" وجود دارد که به طور کلی توسعه‌دهندگان باید درباره آن بدانند.
 
-A [closure](https://en.wikipedia.org/wiki/Closure_(computer_programming)) is a function that remembers its outer variables and can access them. In some languages, that's not possible, or a function should be written in a special way to make it happen. But as explained above, in JavaScript, all functions are naturally closures (there is only one exception, to be covered in <info:new-function>).
+یک [closure](https://fa.wikipedia.org/wiki/بستار_(علوم_رایانه)) تابعی است که متغیرهای بیرون از خودش را به یاد دارد و می‌تواند به آنها دسترسی پیدا کند. در بعضی از زبان‌ها، این موضوع ممکن است یا باید یک تابع به گونه‌ای نوشته شود که این کار را انجام دهد. اما همانطور که در بالا توضیح داده شد، در جاوااسکریپت، تمام تابع‌ها به طور طبیعی closure هستند (تنها یک استثنا وجود دارد که در <info:new-function> پوشش می‌دهیم).
 
-That is: they automatically remember where they were created using a hidden `[[Environment]]` property, and then their code can access outer variables.
+این یعنی اینکه: آنها به طور خودکار جایی که ساخته شده‌اند را با استفاده از ویژگی پنهان `[[Environment]]` به یاد می‌سپارند و سپس کد آنها می‌تواند به متغیرهای بیرونی دسترسی پیدا کند.
 
-When on an interview, a frontend developer gets a question about "what's a closure?", a valid answer would be a definition of the closure and an explanation that all functions in JavaScript are closures, and maybe a few more words about technical details: the `[[Environment]]` property and how Lexical Environments work.
+زمانی که در مصاحبه کاری هستید و یک توسعه‌دهنده فرانت‌اند سوالی درباره اینکه «closure چیست؟» دریافت می‌کند، به عنوان یک پاسخ معتبر می‌توانید تعریف closure و یک توضیح درباره اینکه تمام تابع‌ها در جاوااسکریپت closure هستند را بگویید و شاید چند کلمه درباره جزییات فنی: ویژگی `[[Environment]]` و اینکه محیط لغوی چگونه کار می‌کند.
 ```
 
 ## Garbage collection
