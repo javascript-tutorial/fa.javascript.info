@@ -310,15 +310,15 @@ let counter = makeCounter();
 زمانی که در مصاحبه کاری هستید و یک توسعه‌دهنده فرانت‌اند سوالی درباره اینکه «closure چیست؟» دریافت می‌کند، به عنوان یک پاسخ معتبر می‌توانید تعریف closure و یک توضیح درباره اینکه تمام تابع‌ها در جاوااسکریپت closure هستند را بگویید و شاید چند کلمه درباره جزییات فنی: ویژگی `[[Environment]]` و اینکه محیط لغوی چگونه کار می‌کند.
 ```
 
-## Garbage collection
+## زباله‌روبی
 
-Usually, a Lexical Environment is removed from memory with all the variables after the function call finishes. That's because there are no references to it. As any JavaScript object, it's only kept in memory while it's reachable.
+معمولا یک محیط لغوی زمانی که فراخوانی تابع تمام می‌شود با تمام متغیرهای خود از حافظه پاک می‌شود. به این دلیل که هیچ رجوعی به آن وجود ندارد. مانند هر شیء جاوااسکریپت، فقط تا زمانی که قابل دستیابی باشد در حافظه نگهداری می‌شود.
 
-However, if there's a nested function that is still reachable after the end of a function, then it has `[[Environment]]` property that references the lexical environment.
+گرچه، اگر تابع‌ای تودرتو وجود داشته باشد که بعد از پایان یک تابع هنوز قابل دسترس باشد، پس یک ویژگی `[[Environment]]` دارد که به محیط لغوی رجوع می‌کند. 
 
-In that case the Lexical Environment is still reachable even after the completion of the function, so it stays alive.
+در این صورت محیط لغوی حتی بعد از تکمیل تابع هنوز قابل دسترس است پس از بین نمی‌رود.
 
-For example:
+برای مثال:
 
 ```js
 function f() {
@@ -329,11 +329,11 @@ function f() {
   }
 }
 
-let g = f(); // g.[[Environment]] stores a reference to the Lexical Environment
-// of the corresponding f() call
+let g = f(); // یک رجوع به محیط لغوی را ذخیره می‌کند g.[[Environment]]
+// است f() که همان محیط لغوی فراخوانی
 ```
 
-Please note that if `f()` is called many times, and resulting functions are saved, then all corresponding Lexical Environment objects will also be retained in memory. In the code below, all 3 of them:
+لطفا در نظر داشته باشید که اگر `f()` چند بار فراخوانی شود و تابع‌های برگردانده‌شده ذخیره شوند، سپس تمام شیءهای محیط لغوی متناظر هم در حافظه نگهداری می‌شود. در کد زیر هر 3تای آنها ذخیره می‌شود:
 
 ```js
 function f() {
@@ -342,14 +342,14 @@ function f() {
   return function() { alert(value); };
 }
 
-// 3 functions in array, every one of them links to Lexical Environment
-// from the corresponding f() run
+// در آرایه 3 تابع وجود دارد، هر کدام به محیط لغوی متصل هستند
+// f() محیطی از فراخوانی متناظر
 let arr = [f(), f(), f()];
 ```
 
-A Lexical Environment object dies when it becomes unreachable (just like any other object). In other words, it exists only while there's at least one nested function referencing it.
+یک شیء محیط لغوی زمانی که غیر قابل دسترس شود ازبین می‌رود (درست مانند هر شیء دیگری). به عبارتی دیگر، فقط تا زمانی که حداقل یک تابع تودرتو وجود داشته باشد که به آن رجوع کند وجود خواهد داشت.
 
-In the code below, after the nested function is removed, its enclosing Lexical Environment (and hence the `value`) is cleaned from memory:
+در کد زیر، بعد از اینکه تابع تودرتو حذف شود، محیط لغوی ضمیمه شده به آن (و از این رو `value`) از حافظه پاک می‌شود:
 
 ```js
 function f() {
@@ -360,9 +360,9 @@ function f() {
   }
 }
 
-let g = f(); // while g function exists, the value stays in memory
+let g = f(); // در حافظه می‌ماند value وجود داشته باشد، متغیر g تا زمانی که تابع
 
-g = null; // ...and now the memory is cleaned up
+g = null; // و حالا حافظه تمیز شده...
 ```
 
 ### Real-life optimizations
