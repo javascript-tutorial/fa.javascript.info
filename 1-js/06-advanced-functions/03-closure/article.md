@@ -365,24 +365,24 @@ let g = f(); // در حافظه می‌ماند value وجود داشته باش
 g = null; // و حالا حافظه تمیز شده...
 ```
 
-### Real-life optimizations
+### بهینه‌سازی در واقعیت
 
-As we've seen, in theory while a function is alive, all outer variables are also retained.
+همانطور که دیدیم، از لحاظ تئوری تا زمانی که یک تابع موجود است، تمام متغیرهای بیرونی هم حفظ می‌شوند.
 
-But in practice, JavaScript engines try to optimize that. They analyze variable usage and if it's obvious from the code that an outer variable is not used -- it is removed.
+اما در عمل، موتورهای جاوااسکریپت سعی می‌کنند که آن را بهینه کنند. آنها استفاده از متغیر را آنالیز می‌کنند و اگر از کد معلوم باشد که یک متغیر بیرونی استفاده نمی‌شود، آن را حذف می‌کنند.
 
-**An important side effect in V8 (Chrome, Edge, Opera) is that such variable will become unavailable in debugging.**
+**یک عارضه جانبی در موتور V8 (Chrome، Edge، Opera) این است که چنین متغیرهایی در دیباگ کردن غیر قابل دسترس می‌شوند.**
 
-Try running the example below in Chrome with the Developer Tools open.
+سعی کنید که مثال پایین را در Chrome بعد از بازکردن Developer Tools اجرا کنید.
 
-When it pauses, in the console type `alert(value)`.
+زمانی که متوقف می‌شود، در کنسول `alert(value)` را تایپ کنید.
 
 ```js run
 function f() {
   let value = Math.random();
 
   function g() {
-    debugger; // in console: type alert(value); No such variable!
+    debugger; // ؛ چنین متغیری وجود نداردalert(value) :در کنسول تایپ کنید
   }
 
   return g;
@@ -392,18 +392,18 @@ let g = f();
 g();
 ```
 
-As you could see -- there is no such variable! In theory, it should be accessible, but the engine optimized it out.
+همانطور که دیدید، چنین متغیری وجود نداشت! از لحاظ تئوری، باید قابل دسترس باشد، اما موتور با بهینه‌سازی آن را ازبین برد.
 
-That may lead to funny (if not such time-consuming) debugging issues. One of them -- we can see a same-named outer variable instead of the expected one:
+این موضوع ممکن است منجر به مشکل‌های جالب (شاید وقت‌گیر) در زمان دیباگ کردن شود. یک از آنها این است که امکان دارد ما یک متغیر که هم نام با متغیر مورد نظر ما است را ببینیم:
 
 ```js run global
-let value = "Surprise!";
+let value = "سوپرایز!";
 
 function f() {
-  let value = "the closest value";
+  let value = "value نزدیک ترین متغیر";
 
   function g() {
-    debugger; // in console: type alert(value); Surprise!
+    debugger; // !؛ سوپرایزalert(value) در کنسول: تایپ کنید
   }
 
   return g;
@@ -413,6 +413,6 @@ let g = f();
 g();
 ```
 
-This feature of V8 is good to know. If you are debugging with Chrome/Edge/Opera, sooner or later you will meet it.
+خوب است که درباره این خاصیت V8 بدانید. اگر در حال دیباگ کردن با Chrome/Edge/Opera باشید، به دیر یا زود با آن روبرو می‌شوید.
 
-That is not a bug in the debugger, but rather a special feature of V8. Perhaps it will be changed sometime. You can always check for it by running the examples on this page.
+این یک باگ در debugger نیست بلکه یک ویژگی خاص V8 است. شاید زمانی آن را تغییر دهند. شما همیشه می‌توانید با اجرای مثال‌های این صفحه آن را بررسی کنید.
