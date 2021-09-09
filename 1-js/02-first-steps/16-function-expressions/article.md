@@ -2,21 +2,21 @@
 
 در جاوااسکریپت، تابع یک "ساختار جادویی زبان" نیست، بلکه یک نوع خاصی از مقدار است.
 
-سینتکسی که ما قبلا استفاده کردیم یک *Function Declaration* نامیده می‌شود:
+دستوری که ما قبلا استفاده کردیم، *Function Declaration* نامیده می‌شود:
 
 ```js
 function sayHi() {
-  alert( "سلام" );
+  alert( "Hello" );
 }
 ```
 
-یک سینتکس دیگر هم برای ساخت تابع وجود دارد که *Function Expression* نامیده می‌شود.
+روش دیگری هم برای تعریف تابع وجود دارد که *Function Expression* نامیده می‌شود.
 
 اینطور به نظر می‌رسد:
 
 ```js
 let sayHi = function() {
-  alert( "سلام" );
+  alert( "Hello" );
 };
 ```
 
@@ -28,7 +28,7 @@ let sayHi = function() {
 
 ```js run
 function sayHi() {
-  alert( "سلام" );
+  alert( "Hello" );
 }
 
 *!*
