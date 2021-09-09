@@ -2,11 +2,11 @@ importance: 5
 
 ---
 
-# Counter object
+# شیء شمارنده
 
-Here a counter object is made with the help of the constructor function.
+اینجا یک شیء شمارنده با کمک تابع سازنده ساخته شده است.
 
-Will it work? What will it show?
+آیا کار می‌کند؟ چه چیزی را نمایش خواهد داد؟
 
 ```js
 function Counter() {
