@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# Does a function pickup latest changes?
+# آیا یک تابع آخرین تغییرات را دریافت می‌کند؟
 
-The function sayHi uses an external variable name. When the function runs, which value is it going to use?
+تابع sayHi از یک متغیر خارجی name استفاده می‌کند. زمانی که تابع اجرا می‌شود، کدام مقدار استفاده خواهد شد؟
 
 ```js
 let name = "John";
@@ -15,9 +15,8 @@ function sayHi() {
 
 name = "Pete";
 
-sayHi(); // what will it show: "John" or "Pete"?
+sayHi(); // ؟"Pete" یا "John" :چه چیزی نمایش خواهد داد
 ```
+چنین موقعیت‌هایی در توسعه هم سمت مرورگر و هم سمت سرور رایج هستند. ممکن است یک تابع قرار باشد بعد از اینکه ساخته شد اجرا شود، برای مثال بعد از اینکه کاربر کاری انجام داد یا بعد از یک درخواست شبکه.
 
-Such situations are common both in browser and server-side development. A function may be scheduled to execute later than it is created, for instance after a user action or a network request.
-
-So, the question is: does it pick up the latest changes?
+پس سوال این است: آیا این تابع آخرین تغییرات را دریافت می‌کند؟
