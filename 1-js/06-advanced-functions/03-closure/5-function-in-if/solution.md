@@ -1,3 +1,3 @@
-The result is **an error**.
+نتیجه **یک ارور** است.
 
-The function `sayHi` is declared inside the `if`, so it only lives inside it. There is no `sayHi` outside.
+تابع `sayHi` درون `if` تعریف شده است پس فقط درون آن وجود دارد. بیرون از آن `sayHi` نداریم.
