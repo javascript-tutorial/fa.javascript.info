@@ -2,9 +2,9 @@ importance: 4
 
 ---
 
-# Is variable visible?
+# آیا متغیر قابل رویت است؟
 
-What will be the result of this code?
+نتیجه این کد چه خواهد بود؟
 
 ```js
 let x = 1;
@@ -18,4 +18,4 @@ function func() {
 func();
 ```
 
-P.S. There's a pitfall in this task. The solution is not obvious.
+پی‌نوشت: یک تله در این تکلیف وجود دارد. راه حل بدیهی نیست.
