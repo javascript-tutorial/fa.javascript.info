@@ -1,7 +1,7 @@
 
-Surely it will work just fine.
+مسلما به درستی کار خواهد کرد.
 
-Both nested functions are created within the same outer Lexical Environment, so they share access to the same `count` variable:
+هر دو تابع تودرتو در محیط لغوی بیرونی یکسانی ساخته شده‌اند پس آنها به متغیر `count` یکسان دسترسی دارند:
 
 ```js run
 function Counter() {

@@ -2,11 +2,11 @@ importance: 5
 
 ---
 
-# Which variables are available?
+# کدام متغیرها در دسترس هستند؟
 
-The function `makeWorker` below makes another function and returns it. That new function can be called from somewhere else.
+تابع `makeWorker` پایین یک تابع دیگر می‌سازد و آن را برمی‌گرداند. تابع جدید می‌تواند در جایی دیگر فراخوانی شود.
 
-Will it have access to the outer variables from its creation place, or the invocation place, or both?
+این تابع به متغیرهای بیرون از جایی که ساخته شد دسترسی خواهد داشت یا جایی که فراخوانی می‌شود یا هر دو؟
 
 ```js
 function makeWorker() {
@@ -19,11 +19,11 @@ function makeWorker() {
 
 let name = "John";
 
-// create a function
+// ساخت یک تابع
 let work = makeWorker();
 
-// call it
-work(); // what will it show?
+// فراخوانی آن
+work(); // چه چیزی نمایش خواهد داد؟
 ```
 
-Which value it will show? "Pete" or "John"?
+کدام مقدار را نمایش خواهد داد؟ "Pete" یا "John"؟

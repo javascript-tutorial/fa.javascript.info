@@ -2,24 +2,24 @@ importance: 5
 
 ---
 
-# Filter through function
+# جداسازی از طریق تابع
 
-We have a built-in method `arr.filter(f)` for arrays. It filters all elements through the function `f`. If it returns `true`, then that element is returned in the resulting array.
+ما یک متد درون‌ساخت `arr.filter(f)` برای آرایه‌ها داریم. این متد تمام المان‌ها را از طریق `f` جداسازی می‌کند. اگر `true` برگرداند، سپس آن المان در آرایه حاصل برگردانده می‌شود.
 
-Make a set of "ready to use" filters:
+یک مجموعه از جداسازی‌های «آماده استفاده» بسازید:
 
-- `inBetween(a, b)` -- between `a` and `b` or equal to them (inclusively).
-- `inArray([...])` -- in the given array.
+- `inBetween(a, b)` -- بین `a` و `b` یا برابر با آنها (شامل آنها هم می‌شود).
+- `inArray([...])` -- در آرایه داده شده.
 
-The usage must be like this:
+طریقه استفاده از آنها باید اینگونه باشد:
 
-- `arr.filter(inBetween(3,6))` -- selects only values between 3 and 6.
-- `arr.filter(inArray([1,2,3]))` -- selects only elements matching with one of the members of `[1,2,3]`.
+- `arr.filter(inBetween(3,6))` -- تنها مقدارهای بین 3 و 6 را انتخاب کند.
+- `arr.filter(inArray([1,2,3]))` -- تنها المان‌هایی که با یکی از اعداد `[1,2,3]` برابر هستند را برگرداند.
 
-For instance:
+برای مثال:
 
 ```js
-/* .. your code for inBetween and inArray */
+/* .. inArray و inBetween کد شما برای */
 let arr = [1, 2, 3, 4, 5, 6, 7];
 
 alert( arr.filter(inBetween(3, 6)) ); // 3,4,5,6
