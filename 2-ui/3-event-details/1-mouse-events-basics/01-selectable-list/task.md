@@ -2,17 +2,17 @@ importance: 5
 
 ---
 
-# لیست انتخاب‌شونده
+# Selectable list
 
-یک لیست بسازید که عناصر آن قابل انتخاب باشند، مانند اپلیکیشن‌های مدیریت فایل.
+Create a list where elements are selectable, like in file-managers.
 
-- کلیک روی عنصر لیست فقط آن عنصر را انتخاب می‌کند. (کلاس `.selected` را اضافه کند)، بقیه عناصر باید لغو انتخاب شوند.
-- اگر که کلیک همراه با `key:Ctrl` (`key:Cmd` برای مک) باشد، پس عمل انتخاب یا لغو انتخاب فقط برای آن عنصر عمل کند، درحالی که بقیه عنصرها تغییری نکنند.
+- A click on a list element selects only that element (adds the class `.selected`), deselects all others.
+- If a click is made with `key:Ctrl` (`key:Cmd` for Mac), then the selection is toggled on the element, but other elements are not modified.
 
-دمو:
+The demo:
 
 [iframe border="1" src="solution" height=180]
 
-پی‌نوشت: برای این تکلیف می‌توانیم در نظر بگیریم که آیتم‌های داخل لیست فقط متن هستند، و نه تگ‌های تو در تو.
+P.S. For this task we can assume that list items are text-only. No nested tags.
 
-پی‌پی‌نوشت: از رفتار پیش‌فرض مرورگر که باعث انتخاب متن هنگام کلیک کردن می‌شود جلوگیری کنید.
+P.P.S. Prevent the native browser selection of the text on clicks.
