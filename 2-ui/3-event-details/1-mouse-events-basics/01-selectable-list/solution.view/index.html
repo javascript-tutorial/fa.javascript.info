@@ -1,62 +1,58 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
+	<head>
+		<meta charset="utf-8" />
+		<style>
+			.selected {
+				background: #0f0;
+			}
 
-<head>
-  <meta charset="utf-8">
-  <style>
-    .selected {
-      background: #0f0;
-    }
+			li {
+				cursor: pointer;
+			}
+		</style>
+	</head>
 
-    li {
-      cursor: pointer;
-    }
-  </style>
-</head>
+	<body>
+    
+		روی یک آیتم کلیک کنید تا انتخاب شود.
+		<br />
 
-<body>
+		<ul id="ul">
+			<li>کریستوفر رابین</li>
+			<li>وینی د پو</li>
+			<li>ببری</li>
+			<li>کانگا</li>
+			<li>خرگوش. فقط، خرگوش</li>
+		</ul>
 
-  Click on a list item to select it.
-  <br>
+		<script>
+			ul.onclick = function (event) {
+				if (event.target.tagName != 'LI') return
 
-  <ul id="ul">
-    <li>Christopher Robin</li>
-    <li>Winnie-the-Pooh</li>
-    <li>Tigger</li>
-    <li>Kanga</li>
-    <li>Rabbit. Just rabbit.</li>
-  </ul>
+				if (event.ctrlKey || event.metaKey) {
+					toggleSelect(event.target)
+				} else {
+					singleSelect(event.target)
+				}
+			}
 
-  <script>
-    ul.onclick = function(event) {
-      if (event.target.tagName != "LI") return;
+			// جلوگیری از انتخاب غیرضروری آیتم‌ها هنگام کلیک
+			ul.onmousedown = function () {
+				return false
+			}
 
-      if (event.ctrlKey || event.metaKey) {
-        toggleSelect(event.target);
-      } else {
-        singleSelect(event.target);
-      }
+			function toggleSelect(li) {
+				li.classList.toggle('selected')
+			}
 
-    }
-
-    // prevent unneeded selection of list elements on clicks
-    ul.onmousedown = function() {
-      return false;
-    };
-
-    function toggleSelect(li) {
-      li.classList.toggle('selected');
-    }
-
-    function singleSelect(li) {
-      let selected = ul.querySelectorAll('.selected');
-      for(let elem of selected) {
-        elem.classList.remove('selected');
-      }
-      li.classList.add('selected');
-    }
-
-  </script>
-
-</body>
+			function singleSelect(li) {
+				let selected = ul.querySelectorAll('.selected')
+				for (let elem of selected) {
+					elem.classList.remove('selected')
+				}
+				li.classList.add('selected')
+			}
+		</script>
+	</body>
 </html>
