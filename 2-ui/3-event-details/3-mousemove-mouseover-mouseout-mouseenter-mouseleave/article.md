@@ -1,78 +1,78 @@
-# Moving the mouse: mouseover/out, mouseenter/leave
+# حرکت موس: روی/بیرون‌از عنصر، ورود/خروج‌از عنصر
 
-Let's dive into more details about events that happen when the mouse moves between elements.
+اکنون درباره رویدادهایی که با حرکت موس بین عناصر صفحه اتفاق می‌افتد، بیشتر صحبت میکنیم.
 
-## Events mouseover/mouseout, relatedTarget
+## رویدادهای mouseover/mouseout, relatedTarget
 
-The `mouseover` event occurs when a mouse pointer comes over an element, and `mouseout` -- when it leaves.
+رویداد `mouseover` زمانی اتفاق می‌افتد که اشاره‌گر موس روی یک عنصر می‌رود, و `mouseout` -- زمانی که از روی آن بیرون می‌رود.
 
 ![](mouseover-mouseout.svg)
 
-These events are special, because they have property `relatedTarget`. This property complements `target`. When a mouse leaves one element for another, one of them becomes `target`, and the other one - `relatedTarget`.
+این‌ها رویدادهای خاصی هستند، زیرا یک خاصیت به نام `relatedTarget` دارند. این خاصیت به نوعی متمم `target` خواهد بود. زمانی که اشاره‌گر موس یک عنصر را با ورودی به عنصر دیگر ترک می‌کند، یکی از آن‌ها `target`، و دیگری `relatedTarget` خواهد بود.
 
-For `mouseover`:
+برای `mouseover`:
 
-- `event.target` -- is the element where the mouse came over.
-- `event.relatedTarget` -- is the element from which the mouse came (`relatedTarget` -> `target`).
+- `event.target` -- عنصری خواهدبود که اشاره‌گر موس روی آن رفته‌است.
+- `event.relatedTarget` -- عنصری خواهد بود که اشاره‌گر موس آنرا ترک کرده، به صورت: (`relatedTarget` -> `target`).
 
-For `mouseout` the reverse:
+برای `mouseout` برعکس است:
 
-- `event.target` -- is the element that the mouse left.
-- `event.relatedTarget` -- is the new under-the-pointer element, that mouse left for (`target` -> `relatedTarget`).
+- `event.target` -- عنصری خواهد بود که اشاره‌گر موس آنرا ترک‌کرده.
+- `event.relatedTarget` -- عنصری خواهد بود که زیر اشاره‌گر موس قرار می‌گیرد، به صورت: (`target` -> `relatedTarget`).
 
 ```online
-In the example below each face and its features are separate elements. When you move the mouse, you can see mouse events in the text area.
+در مثال زیر هر چهره و اجزای آن عناصر جداگانه هستند. زمانی که اشاره‌گر موس‌ را روی آن‌ها حرکت دهید، رویدادهایی که اتفاق می‌افتند را مشاهده خواهید کرد.
 
-Each event has the information about both `target` and `relatedTarget`:
+هر رویداد اطلاعاتی درباره هر دو `target` و `relatedTarget` دارد:
 
 [codetabs src="mouseoverout" height=280]
 ```
 
-```warn header="`relatedTarget` can be `null`"
-The `relatedTarget` property can be `null`.
+```warn header="`relatedTarget` می‌تواند `null` باشد"
+خاصیت `relatedTarget` می‌تواند است `null` باشد.
 
-That's normal and just means that the mouse came not from another element, but from out of the window. Or that it left the window.
+این عادی است و فقط به این معنی است که اشاره‌گر موس از عنصر دیگری نیامده، بلکه از خارج از پنجره مرورگر وارد شده. یا اینکه با خارج شدن، از پنجره مرورگر خارج شده.
 
-We should keep that possibility in mind when using `event.relatedTarget` in our code. If we access `event.relatedTarget.tagName`, then there will be an error.
+ما باید این احتمال را هنگام استفاده از `event.realtedTarget` در کد به یاد داشته باشیم. اگر ما سعی کنیم که `event.relatedTarget.tagName` دسترسی پیدا کنیم، با خطا مواجه خواهیم شد.
 ```
 
-## Skipping elements
+## پرش از روی عناصر
 
-The `mousemove` event triggers when the mouse moves. But that doesn't mean that every pixel leads to an event.
+رویداد `mousemove` زمانی اتفاق می‌افتد که اشاره‌گر موس حرکت کند. اما به این معنی نیست که برای هر پیکسل این رویداد اتفاق بیفتد.
 
-The browser checks the mouse position from time to time. And if it notices changes then triggers the events.
+مرورگر موقعیت اشاره‌گر موس را هرچند وقت بسیار کوتاه یکبار چک می‌کند. و اگر تغییری را ببیند رویداد را صدا می‌زند.
 
-That means that if the visitor is moving the mouse very fast then some DOM-elements may be skipped:
+به این معنی که اگر بازدیدکننده موس را سریع حرکت دهد، ممکن است بعضی از عناصر داخل DOM از قلم بیفتند:
 
 ![](mouseover-mouseout-over-elems.svg)
 
-If the mouse moves very fast from `#FROM` to `#TO` elements as painted above, then intermediate `<div>` elements (or some of them) may be skipped. The `mouseout` event may trigger on `#FROM` and then immediately `mouseover` on `#TO`.
+اگر که موس از `#FROM` سریعا به `#TO` حرکت کند، مانند شکل بالا، عناصر `<div>` وسطی (یا بعضی از آن‌ها) ممکن‌است از قلم بیفتند. رویداد `mouseout` ممکن است روی `#FROM` و بعد از آن سریعا `mouseover` روی `#TO` اتفاق بیفتد.
 
-That's good for performance, because there may be many intermediate elements. We don't really want to process in and out of each one.
+این برای کارایی برنامه خوب است، چون ممکن است از روی تعداد زیاد عنصر بین دو عنصر عبور کند. در عمل معمولا نمی‌خواهیم همه‌ای این ورود و خروج از تک تک عناصر را پردازش کنیم.
 
-On the other hand, we should keep in mind that the mouse pointer doesn't "visit" all elements along the way. It can "jump".
+از طرف دیگر، باید در نظر داشته باشیم که اشاره‌گر موس همیشه همه‌ی عناصر را در طول مسیر حرکتش "ملاقات" نمی‌کند. ممکن است "پرش" کند.
 
-In particular, it's possible that the pointer jumps right inside the middle of the page from out of the window. In that case `relatedTarget` is `null`, because it came from "nowhere":
+در حالت خاصی، ممکن است که اشاره‌گر موس از بیرون از پنجره مرورگر، دقیقا داخل یک عنصر پرش کند. در این حالت `realtedTarget` مقدار `null` خواهد داشت، چون اشاره‌گر عملا از "ناکجا آباد" آمده است:
 
 ![](mouseover-mouseout-from-outside.svg)
 
 ```online
-You can check it out "live" on a teststand below.
+می‌توانید این رفتار را به صورت زنده در قسمت آزمایشی زیر ببینید.
 
-Its HTML has two nested elements: the `<div id="child">` is inside the `<div id="parent">`. If you move the mouse fast over them, then maybe only the child div triggers events, or maybe the parent one, or maybe there will be no events at all.
+کد اچ‌تی‌ام‌ال دارای دو عنصر تو در تو است: عنصر `<div id="child">` داخل عنصر `<div id="parent">` قرار گرفته است. اگر که اشاره‌گر موس را سریعا روی آنها حرکت دهید، ممکن است که فقط عنصر فرزند رویداد را صدا بزند، یا شاید عنصر پدر، حتی ممکن است اصلا رویداد اتفاق نیفتد.
 
-Also move the pointer into the child `div`, and then move it out quickly down through the parent one. If the movement is fast enough, then the parent element is ignored. The mouse will cross the parent element without noticing it.
+همچنین اشاره‌گر را داخل `div` فرزند ببرید، و سپس آنرا از روی عنصر پدر، با پایین بردن اشاره‌گر از روی عنصر فرزند خارج کنید. اگر حرکت به اندازه کافی سریع باشد، عنصر پدر نادیده گرفته خواهد شد. اشاره‌گر موس از روی عنصر پدر بدون توجه به آن عبور می‌کند.
 
 [codetabs height=360 src="mouseoverout-fast"]
 ```
 
-```smart header="If `mouseover` triggered, there must be `mouseout`"
-In case of fast mouse movements, intermediate elements may be ignored, but one thing we know for sure: if the pointer "officially" entered an element (`mouseover` event generated), then upon leaving it we always get `mouseout`.
+```smart header="اگر `mouseover` اتفاق بیفتد, حتما `mouseout` اتفاق خواهد افتاد"
+در صورت حرکت سریع اشاره‌گر موس، عناصر بین حرکت ممکن است نادیده گرفته‌‌شوند، اما چیزی که از آن مطمئن هستیم این است که: اگر اشاره‌گر موس "رسما" وارد یک عنصر شود (رویداد `mouseover` اتفاق بیفتند)، هنگام ترک این عنصر همیشه رویداد `mouseout` نیز اتفاق خواهد افتاد.
 ```
 
-## Mouseout when leaving for a child
+## رویداد mouseout وقتی اشاره‌گر وارد عنصر فرزند می‌شود
 
-An important feature of `mouseout` -- it triggers, when the pointer moves from an element to its descendant, e.g. from `#parent` to `#child` in this HTML:
+یک ویژگی مهم `mouseout` این است که زمانی که از یک عنصر به فرزندان آن برویم، اتفاق می‌افتد. برای مثال در اچ‌تی‌ام‌ال زیر زمانی که از `#parent` به `#child` برویم:
 
 ```html
 <div id="parent">
@@ -80,44 +80,44 @@ An important feature of `mouseout` -- it triggers, when the pointer moves from a
 </div>
 ```
 
-If we're on `#parent` and then move the pointer deeper into `#child`, we get `mouseout` on `#parent`!
+اگر روی `#parent` باشیم و سپس اشاره‌گر موس را داخل‌تر و داخل `#child` ببریم، رویداد `mouseout` روی `#parent` اتفاق می‌افتد.
 
 ![](mouseover-to-child.svg)
 
-That may seem strange, but can be easily explained.
+ممکن‌ است عجیب باشد، اما به سادگی شرح داده می‌شود.
 
-**According to the browser logic, the mouse cursor may be only over a *single* element at any time -- the most nested one and top by z-index.**
+**با توجه به منطق مرورگر، اشاره گر موس این امکان را دارد که فقط بالای *یک* عنصر در یک زمان واحد باشد. داخلی‌ترین و بالاترین به واسطه z-index.**
 
-So if it goes to another element (even a descendant), then it leaves the previous one.
+پس اگر داخل یک عنصر دیگر (حتی فرزند) شود، پس از قبلی بیرون می‌رود.
 
-Please note another important detail of event processing.
+به این نکته دیگر درباره جزئیات پردازش رویدادها دقت کنید.
 
-The `mouseover` event on a descendant bubbles up. So, if `#parent` has `mouseover` handler, it triggers:
+رویداد `mouseover` زمانی که روی یک فرزند اتفاق بیفتد، به اطلاح بالا می‌رود. به این معنی که اگر `parent` یک کنترل‌کننده برای رویداد `mouseover` داشته باشد، فراخوانی ‌می‌شود:
 
 ![](mouseover-bubble-nested.svg)
 
 ```online
-You can see that very well in the example below: `<div id="child">` is inside the `<div id="parent">`. There are `mouseover/out` handlers on `#parent` element that output event details.
+در مثال زیر به خوبی می‌توانید ببینید: `<div id="child">` داخل `<div id="parent">` قرار دارد. برای رویدادهای `mouseover/out` کنترل‌کننده‌هایی روی `#parent` تعریف شده که جزئیاتی درباره رویداد را در خروجی نمایش می‌دهد.
 
-If you move the mouse from `#parent` to `#child`, you see two events on `#parent`:
-1. `mouseout [target: parent]` (left the parent), then
-2. `mouseover [target: child]` (came to the child, bubbled).
+اگر اشاره‌گر موس را از روی `#parent` حرکت دهید و روی `#child` ببرید، دو رویداد را روی `#parent` خواهید دید:
+1. `mouseout [target: parent]` (ترک پدر), سپس
+2. `mouseover [target: child]` (ورود به فرزند, اصطلاحا بالا رفته).
 
 [codetabs height=360 src="mouseoverout-child"]
 ```
 
-As shown, when the pointer moves from `#parent` element to `#child`, two handlers trigger on the parent element: `mouseout` and `mouseover`:
+همانطور که نشان داده‌شد، زمانی که اشاره‌گر موس از `#parent` بیرون و روی `#child` می‌رود، هر دو کنترل کننده پدر فراخوانده می‌شوند: `mouseout` و `mouseover`:
 
 ```js
 parent.onmouseout = function(event) {
-  /* event.target: parent element */
+  /* event.target: عنصر پدر */
 };
 parent.onmouseover = function(event) {
-  /* event.target: child element (bubbled) */
+  /* event.target: عنصر فرزند (اصطلاحا بالا رفته) */
 };
 ```
 
-**If we don't examine `event.target` inside the handlers, then it may seem that the mouse pointer left `#parent` element, and then immediately came back over it.**
+**اگر که `event.target` را داخل کنترل‌کننده‌ها بررسی نکنیم، به نظر می‌رسد که موس `#parent` را ترک‌ کرده و سپس سریعا روی آن برگشته است.**
 
 But that's not the case! The pointer is still over the parent, it just moved deeper into the child element.
 
