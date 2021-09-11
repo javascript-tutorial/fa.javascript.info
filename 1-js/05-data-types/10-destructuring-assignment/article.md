@@ -1,15 +1,15 @@
-# Destructuring assignment
+# مقداردهیِ مخربِ ساختار
 
-The two most used data structures in JavaScript are `Object` and `Array`.
+دو ساختار داده پر استفاده در جاوااسکریپت `Object` و `Array` هستند.
 
-- Objects allow us to create a single entity that stores data items by key. 
-- Arrays allow us to gather data items into an ordered list.
+- شیءها به ما این امکان را می‌دهند تا چیزی بسازیم که المان‌های داده را به واسطه کلید ذخیره کند.
+- آرایه‌ها به ما امکان جمع‌آوری المان‌های داده را در لیستی مرتب می‌دهند.
 
-Although, when we pass those to a function, it may need not an object/array as a whole. It may need individual pieces.
+اگرچه، زمانی که ما آنها را به تابع می‌دهیم، ممکن است که نیازی به کل یک شیء/آرایه نباشد. ممکن است تنها قطعه‌های تکی نیاز باشد.
+ 
+*مقداردهیِ مخربِ ساختار (Destructuring assignment)* یک سینتکس خاص است که به ما امکان می‌دهد تا آرایه‌ها یا شیءها را درون چند متغیر «پخش کنیم» چون بعضی اوقات این موضوع کار را راحت‌تر می‌کند.
 
-*Destructuring assignment* is a special syntax that allows us to "unpack" arrays or objects into a bunch of variables, as sometimes that's more convenient. 
-
-Destructuring also works great with complex functions that have a lot of parameters, default values, and so on. Soon we'll see that.
+تخریب ساختار همچنین با تابع‌های پیچیده که تعداد زیادی پارامتر، مقدارهای پیش‌فرض و... دارند هم به خوبی کار می‌کند. به زودی آن را خواهیم دید.
 
 ## Array destructuring
 
