@@ -119,28 +119,28 @@ parent.onmouseover = function(event) {
 
 **اگر که `event.target` را داخل کنترل‌کننده‌ها بررسی نکنیم، به نظر می‌رسد که موس `#parent` را ترک‌ کرده و سپس سریعا روی آن برگشته است.**
 
-But that's not the case! The pointer is still over the parent, it just moved deeper into the child element.
+اما این‌گونه نیست! اشاره‌گر موس هنوز روی عنصر پدر قراردارد، فقط وارد وارد عنصر فرزند  که داخلی‌تر است شده.
 
-If there are some actions upon leaving the parent element, e.g. an animation runs in `parent.onmouseout`, we usually don't want it when the pointer just goes deeper into `#parent`.
+اگر زمان خروج از عنصر پدر قرار است، کاری انجام شود، برای مثال انیمیشنی در زمان `parent.onmouseout` اجرا شود، معمولا نمیخواهیم که زمانی که موس داخل عناصر داخلی‌تر `#parent` می‌شود، این کار انجام شود.
 
-To avoid it, we can check `relatedTarget` in the handler and, if the mouse is still inside the element, then ignore such event.
+برای جلوگیری از این رفتار، ما `relatedTarget` را در کنترل کننده چک می‌کنیم. اگر که اشاره‌گر موس هنوز داخل عنصر بود، پس صرفا رویداد را نادیده می‌گیریم.
 
-Alternatively we can use other events: `mouseenter` and `mouseleave`, that we'll be covering now, as they don't have such problems.
+می‌توانیم از دو رویداد دیگر نیز استفاده کنیم: `mouseenter` و `mouseleave`، که اکنون به آنها می‌پردازیم،‌ چنین مشکلاتی را باعث نمی‌شوند.
 
-## Events mouseenter and mouseleave
+## رویدادهای mouseenter و mouseleave
 
-Events `mouseenter/mouseleave` are like `mouseover/mouseout`. They trigger when the mouse pointer enters/leaves the element.
+رویدادهای `mouseenter/mouseleave` مشابه `mouseover/mouseout` هستند. زمانی اتفاق می‌افتند که اشاره‌گر وارد یک عنصر، یا از آن خارج می‌شود.
 
-But there are two important differences:
+اما دو تفاوت اساسی وجود دارد:
 
-1. Transitions inside the element, to/from descendants, are not counted.
-2. Events `mouseenter/mouseleave` do not bubble.
+1. گذرهای داخل عنصر، از\به فرزندها در نظر گرفته ‌نمی‌شوند.
+2. رویداد‌های `mouseenter/mouseleave` به اصطلاح بالا نمی‌روند.
 
-These events are extremely simple.
+این رویدادها بسیار ساده هستند.
 
-When the pointer enters an element -- `mouseenter` triggers. The exact location of the pointer inside the element or its descendants doesn't matter.
+زمانی که اشاره‌گر موش وارد یک عنصر شود، ‍`mouseenter` اتفاق می‌افتد. محل دقیق اشاره‌گر داخل عنصر یا فرزندهای آن مهم نیست.
 
-When the pointer leaves an element -- `mouseleave` triggers.
+زمانی که اشاره‌گر از یک عنصر خارج شود، `mouseleave` اتفاق می‌افتد.
 
 ```online
 This example is similar to the one above, but now the top element has `mouseenter/mouseleave` instead of `mouseover/mouseout`.
