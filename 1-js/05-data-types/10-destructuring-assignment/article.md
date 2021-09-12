@@ -1,4 +1,4 @@
-# مقداردهیِ مخربِ ساختار
+# مقداردهیِ تجزیه‌کننده‌ی ساختار
 
 دو ساختار داده پر استفاده در جاوااسکریپت `Object` و `Array` هستند.
 
@@ -7,22 +7,22 @@
 
 اگرچه، زمانی که ما آنها را به تابع می‌دهیم، ممکن است که نیازی به کل یک شیء/آرایه نباشد. ممکن است تنها قطعه‌های تکی نیاز باشد.
  
-*مقداردهیِ مخربِ ساختار (Destructuring assignment)* یک سینتکس خاص است که به ما امکان می‌دهد تا آرایه‌ها یا شیءها را درون چند متغیر «پخش کنیم» چون بعضی اوقات این موضوع کار را راحت‌تر می‌کند.
+*مقداردهیِ تجزیه‌کننده‌ی ساختار (Destructuring assignment)* یک سینتکس خاص است که به ما امکان می‌دهد تا آرایه‌ها یا شیءها را درون چند متغیر «پخش کنیم» چون بعضی اوقات این موضوع کار را راحت‌تر می‌کند.
 
 تخریب ساختار همچنین با تابع‌های پیچیده که تعداد زیادی پارامتر، مقدارهای پیش‌فرض و... دارند هم به خوبی کار می‌کند. به زودی آن را خواهیم دید.
 
-## Array destructuring
+## تجزیه ساختار آرایه
 
-Here's an example of how an array is destructured into variables:
+کد پایین یک مثال از چگونگی تبدیل یک آرایه به چند متغیر است:
 
 ```js
-// we have an array with the name and surname
+// ما یک آرایه شامل نام و نام خانوادگی داریم
 let arr = ["John", "Smith"]
 
 *!*
-// destructuring assignment
-// sets firstName = arr[0]
-// and surname = arr[1]
+// مقداردهی تجزیه‌کننده‌ی ساختار
+// را قرار می‌دهد firstName = arr[0]
+// surname = arr[1] و
 let [firstName, surname] = arr;
 */!*
 
@@ -30,9 +30,9 @@ alert(firstName); // John
 alert(surname);  // Smith
 ```
 
-Now we can work with variables instead of array members.
+حالا ما می‌توانیم به جای اعداد آرایه با متغیرها کار کنیم.
 
-It looks great when combined with `split` or other array-returning methods:
+زمانی که با `split` یا متدهای دیگری که آرایه برمی‌گردانند عالی بنظر می‌رسد:
 
 ```js run
 let [firstName, surname] = "John Smith".split(' ');
@@ -40,12 +40,12 @@ alert(firstName); // John
 alert(surname);  // Smith
 ```
 
-As you can see, the syntax is simple. There are several peculiar details though. Let's see more examples, to better understand it.
+همانطور که می‌بینید، سینتکس ساده است. البته چند چیز ویژه در جزییات خود دارد. بیایید برای فهمیدن بهتر آن، مثال‌های بیشتری ببینیم.
 
-````smart header="\"Destructuring\" does not mean \"destructive\"."
-It's called "destructuring assignment," because it "destructurizes" by copying items into variables. But the array itself is not modified.
+````smart header="عبارت «تجزیه‌کننده‌ی ساختار» به معنی «مخرب» نیست."
+این سینتکس «مقداردهی تجزیه‌کننده‌ی ساختار» نامیده می‌شود چون با کپی کردن المان‌ها در چند متغیر «ساختار را تغییر می‌دهد». اما خود آرایه تغییر نمی‌کند.
 
-It's just a shorter way to write:
+فقط یک راه کوتاه‌تر برای نوشتن است:
 ```js
 // let [firstName, surname] = arr;
 let firstName = arr[0];
@@ -53,37 +53,37 @@ let surname = arr[1];
 ```
 ````
 
-````smart header="Ignore elements using commas"
-Unwanted elements of the array can also be thrown away via an extra comma:
+````smart header="از طریق استفاده از کاما المان‌ها را نادیده بگیرید"
+المان‌هایی که که نمی‌خواهیم را می‌توان با یک کامای اضافه دور انداخت:
 
 ```js run
 *!*
-// second element is not needed
+// به المان دوم نیاز نداریم
 let [firstName, , title] = ["Julius", "Caesar", "Consul", "of the Roman Republic"];
 */!*
 
 alert( title ); // Consul
 ```
 
-In the code above, the second element of the array is skipped, the third one is assigned to `title`, and the rest of the array items is also skipped (as there are no variables for them).
+در کد بالا، از المان دوم آرایه گذشتیم، المان سوم به `title` تخصیص داده شد و بقیه المان‌های آرایه هم نادیده گرفته شدند (به دلیل اینکه متغیری برای ذخیره آنها وجود ندارد).
 ````
 
-````smart header="Works with any iterable on the right-side"
+````smart header="با هر حلقه‌پذیری در سمت راست کار می‌کند"
 
-...Actually, we can use it with any iterable, not only arrays:
+...در واقع، ما می‌توانیم آن را با هر حلقه‌پذیری استفاده کنیم، نه فقط آرایه‌ها:
 
 ```js
 let [a, b, c] = "abc"; // ["a", "b", "c"]
 let [one, two, three] = new Set([1, 2, 3]);
 ```
-That works, because internally a destructuring assignment works by iterating over the right value. It's kind of syntax sugar for calling `for..of` over the value to the right of `=` and assigning the values.
+این کار می‌کند چون از درون، یک مقداردهی تجزیه‌کننده‌ی ساختار با حلقه زدن در مقدار سمت راست کار می‌کند. برای فراخوانی `for..of` در مقدار سمت راست `=` و تخصیص دادن مقدارها، به نوعی خوش سینتکس است.
 ````
 
 
-````smart header="Assign to anything at the left-side"
-We can use any "assignables" at the left side.
+````smart header="در سمت چپ به هر چیزی تخصیص دهید"
+ما می‌توانیم از «قابل مقداردهی‌ها» در سمت چپ استفاده کنیم.
 
-For instance, an object property:
+برای مثال، یک ویژگی شیء:
 ```js run
 let user = {};
 [user.name, user.surname] = "John Smith".split(' ');
@@ -94,10 +94,10 @@ alert(user.surname); // Smith
 
 ````
 
-````smart header="Looping with .entries()"
-In the previous chapter we saw the [Object.entries(obj)](mdn:js/Object/entries) method.
+````smart header="حلقه زدن با .entries()"
+در فصل قبل ما متد [Object.entries(obj)](mdn:js/Object/entries) را دیدیم.
 
-We can use it with destructuring to loop over keys-and-values of an object:
+می‌توانیم آن را با تجزیه‌کننده‌ی ساختار برای حلقه زدن در کلیدها و مقدارهای یک شیء استفاده کنیم:
 
 ```js run
 let user = {
@@ -105,7 +105,7 @@ let user = {
   age: 30
 };
 
-// loop over keys-and-values
+// حلقه زدن در کلیدها و مقدارها
 *!*
 for (let [key, value] of Object.entries(user)) {
 */!*
@@ -113,7 +113,7 @@ for (let [key, value] of Object.entries(user)) {
 }
 ```
 
-The similar code for a `Map` is simpler, as it's iterable:
+کد مشابه برای `Map` ساده‌تر است چون حلقه‌پذیر است:
 
 ```js run
 let user = new Map();
@@ -122,6 +122,7 @@ user.set("age", "30");
 
 *!*
 // Map iterates as [key, value] pairs, very convenient for destructuring
+// حلقه می‌سازد، برای تجزیه‌کننده‌ی ساختار بسیار مناسب است [key, value] با جفت‌های Map
 for (let [key, value] of user) {
 */!*
   alert(`${key}:${value}`); // name:John, then age:30
@@ -129,24 +130,24 @@ for (let [key, value] of user) {
 ```
 ````
 
-````smart header="Swap variables trick"
-There's a well-known trick for swapping values of two variables using a destructuring assignment:
+````smart header="ترفند مبادله متغیرها"
+یک ترفند معروف برای مبادله مقدارهای دو متغیر با استفاده از مقداردهی تجزیه‌کننده‌ی ساختار وجود دارد:
 
 ```js run
 let guest = "Jane";
 let admin = "Pete";
 
-// Let's swap the values: make guest=Pete, admin=Jane
+// guest=Pete، admin=Jane بیایید مقدارها را مبادله کنیم: کاری کنیم که
 *!*
 [guest, admin] = [admin, guest];
 */!*
 
-alert(`${guest} ${admin}`); // Pete Jane (successfully swapped!)
+alert(`${guest} ${admin}`); // Pete Jane (!با موفقیت مبادله شد)
 ```
 
-Here we create a temporary array of two variables and immediately destructure it in swapped order.
+اینجا ما یک آرایه موقتی از دو آرایه می‌سازیم و بلافاصله ساختار آن را نسبت به ترتیب مبادله تجزیه می‌کنیم.
 
-We can swap more than two variables this way.
+می‌توانیم از این راه بیشتر از دو متغیر را مبادله کنیم.
 ````
 
 ### The rest '...'
