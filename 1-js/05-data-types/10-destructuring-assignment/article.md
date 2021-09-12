@@ -121,11 +121,10 @@ user.set("name", "John");
 user.set("age", "30");
 
 *!*
-// Map iterates as [key, value] pairs, very convenient for destructuring
 // حلقه می‌سازد، برای تجزیه‌کننده‌ی ساختار بسیار مناسب است [key, value] با جفت‌های Map
 for (let [key, value] of user) {
 */!*
-  alert(`${key}:${value}`); // name:John, then age:30
+  alert(`${key}:${value}`); // age:30 سپس name:John
 }
 ```
 ````
@@ -150,40 +149,40 @@ alert(`${guest} ${admin}`); // Pete Jane (!با موفقیت مبادله شد)
 می‌توانیم از این راه بیشتر از دو متغیر را مبادله کنیم.
 ````
 
-### The rest '...'
+### رِست '...'
 
-Usually, if the array is longer than the list at the left, the "extra" items are omitted.
+معمولا، اگر آرایه طولانی‌تر از لیست سمت چپ باشد، المان‌های «اضافی» از قلم می‌افتند.
 
-For example, here only two items are taken, and the rest is just ignored:
+برای مثال، اینجا فقط دو المان دریافت می‌شود و بقیه نادیده گرفته می‌شوند:
 
 ```js run
 let [name1, name2] = ["Julius", "Caesar", "Consul", "of the Roman Republic"];
 
 alert(name1); // Julius
 alert(name2); // Caesar
-// Further items aren't assigned anywhere
+// المان‌های بعدی جایی ذخیره نمی‌شوند
 ```
 
-If we'd like also to gather all that follows -- we can add one more parameter that gets "the rest" using three dots `"..."`:
+اگر بخواهیم تمام المان‌های بعدی را دریافت کنیم -- می‌توانیم یک پارامتر دیگر اضافه کنیم که با استفاده از `"..."` «بقیه المان‌ها» را دریافت کند:
 
 ```js run
 let [name1, name2, *!*...rest*/!*] = ["Julius", "Caesar", *!*"Consul", "of the Roman Republic"*/!*];
 
 *!*
-// rest is array of items, starting from the 3rd one
+// آرایه‌ای از المان‌ها است که از المان سوم شروع می‌شود rest
 alert(rest[0]); // Consul
 alert(rest[1]); // of the Roman Republic
 alert(rest.length); // 2
 */!*
 ```
+ 
+مقدار `rest` آرایه‌ای از المان‌های باقی مانده است.
 
-The value of `rest` is the array of the remaining array elements. 
-
-We can use any other variable name in place of `rest`, just make sure it has three dots before it and goes last in the destructuring assignment.
+می‌توانیم از هر اسم دیگری به جای `rest` برای متغیر استفاده کنیم، فقط مطمئن شوید که قبل از آن سه نقطه وجود دارد و در انتهای مقداردهی تجزیه‌کننده‌ی ساختار قرار می‌گیرد.
 
 ```js run
 let [name1, name2, *!*...titles*/!*] = ["Julius", "Caesar", "Consul", "of the Roman Republic"];
-// now titles = ["Consul", "of the Roman Republic"]
+// titles = ["Consul", "of the Roman Republic"] حالا داریم
 ```
 
 ### Default values
