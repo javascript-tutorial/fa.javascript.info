@@ -8,7 +8,7 @@
 
 ![](mouseover-mouseout.svg)
 
-این‌ها رویدادهای خاصی هستند، زیرا یک خاصیت به نام `relatedTarget` دارند. این خاصیت به نوعی متمم `target` خواهد بود. زمانی که اشاره‌گر موس یک عنصر را با ورودی به عنصر دیگر ترک می‌کند، یکی از آن‌ها `target`، و دیگری `relatedTarget` خواهد بود.
+این‌ها رویدادهای خاصی هستند، زیرا یک خاصیت به نام `relatedTarget` دارند. این خاصیت به نوعی مکمل `target` خواهد بود. زمانی که اشاره‌گر موس یک عنصر را با ورودی به عنصر دیگر ترک می‌کند، یکی از آن‌ها `target`، و دیگری `relatedTarget` خواهد بود.
 
 برای `mouseover`:
 
@@ -143,29 +143,29 @@ parent.onmouseover = function(event) {
 زمانی که اشاره‌گر از یک عنصر خارج شود، `mouseleave` اتفاق می‌افتد.
 
 ```online
-This example is similar to the one above, but now the top element has `mouseenter/mouseleave` instead of `mouseover/mouseout`.
+این مثال شبیه بالایی است، اما عنصر پدر به رویدادهای `mouseenter/mouseleave` به جای `mouseover/mouseout` گوش می‌دهد.
 
-As you can see, the only generated events are the ones related to moving the pointer in and out of the top element. Nothing happens when the pointer goes to the child and back. Transitions between descendants are ignored
+همانطور که می‌بینید، تنها رویدادهایی که ایجاد می‌شوند،‌آنهایی هستند که به واسطه ورود و خروج اشاره‌گر موس از عنصر پدر اتفاق می‌افتند. زمانی که اشاره‌گر موس وارد عنصر فرزند و از آن خارج می‌شود اتفاقی نمی‌افتد. گذرهایی بین فرزندها اتفاق می‌افتد نادیده گرفته می‌شوند.
 
 [codetabs height=340 src="mouseleave"]
 ```
 
-## Event delegation
+## واگذاری رویداد
 
-Events `mouseenter/leave` are very simple and easy to use. But they do not bubble. So we can't use event delegation with them.
+رویدادهای `mouseenter/leave` بسیار ساده و برای استفاده ساده هستند. اما بالا نمی‌روند. پس نمی‌تواتیم برای آنها از واگذاری رویدادها استفاده کنیم.
 
-Imagine we want to handle mouse enter/leave for table cells. And there are hundreds of cells.
+تصور کنید که می‌خواهیم ورود/خروج اشاره‌گر موس برای سلول‌های جدول کنترل کنیم. و صدها سلول وجود دارد.
 
-The natural solution would be -- to set the handler on `<table>` and process events there. But `mouseenter/leave` don't bubble. So if such event happens on `<td>`, then only a handler on that `<td>` is able to catch it.
+طبیعتا راه حلی که ابتدا به ذهن می‌رسد این است که کنترل‌کننده را روی `<table>` تنظیم کنیم و رویدادها را درون آن پردازش کنیم. اما رویدادهای `mouseenter/leave` بالا نمی‌روند. پس اگر چنین رویدادی روی `<td>` اتفاق بیفتد، فقط کنترل‌کننده‌ای که روی آن `<td>` می‌تواند متوجه این رویداد شود.
 
-Handlers for `mouseenter/leave` on `<table>` only trigger when the pointer enters/leaves the table as a whole. It's impossible to get any information about transitions inside it.
+کنترل‌کننده‌هایی که برای `mouseenter/leave` روی `<table>` وجود دارند، تنها زمانی صدا زده‌ ‌می‌شوند که اشاره‌گر موس وارد/خارج جدول کلی شود. در این صورت گرفتن اطلاعات درباره گذرهایی که درون خود جدول اتفاق می‌افتد غیر ممکن خواهد بود.
 
-So, let's use `mouseover/mouseout`.
+پس، از `mouseover/mouseout` استفاده می‌کنیم.
 
-Let's start with simple handlers that highlight the element under mouse:
+با یک کنترل‌کننده ساده که تنها عنصر زیر اشاره‌گر موس را مشخص می‌کند شروع کنیم:
 
 ```js
-// let's highlight an element under the pointer
+// مشخص کردن عنصر زیر اشاره‌گر موس
 table.onmouseover = function(event) {
   let target = event.target;
   target.style.background = 'pink';
@@ -178,44 +178,44 @@ table.onmouseout = function(event) {
 ```
 
 ```online
-Here they are in action. As the mouse travels across the elements of this table, the current one is highlighted:
+در اینجا می‌توانید چیزی که اتفاق می‌افتد را ببینید. با حرکت اشاره‌گر موس روی عناصر این جدول، عنصر کنونی که زیر اشاره‌گر موس است مشخص می‌شود:
 
 [codetabs height=480 src="mouseenter-mouseleave-delegation"]
 ```
 
-In our case we'd like to handle transitions between table cells `<td>`: entering a cell and leaving it. Other transitions, such as inside the cell or outside of any cells, don't interest us. Let's filter them out.
+در این حالت ما می‌خواستیم که گذرهایی که بین سلول‌های جدول `<td>` اتفاق می‌افتد را کنترل کنیم: ورود به یک سلول جدول و خروج از آن. بقیه‌ی گذرها، مانند درون یک سلول، یا خارج هر سلول، به ما کمکی نمی‌کند. پس بیایید آنها را پالایش کنیم.
 
-Here's what we can do:
+کاری که می‌توانیم انجام دهیم این است:
 
-- Remember the currently highlighted `<td>` in a variable, let's call it `currentElem`.
-- On `mouseover` -- ignore the event if we're still inside the current `<td>`.
-- On `mouseout` -- ignore if we didn't leave the current `<td>`.
+- عنصر کنونی مشخص شده `<td>` را درون یک متغیر ذخیره کنیم. آنرا `currentElem` می‌نامیم.
+- در هنگام `mouseover`، رویداد را در صورتی که هنوز داخل عنصر `<td>` کنونی باشیم، نادیده می‌گیریم.
+- در هنگام `mouseout`، رویداد را در صورتی که عنصر `<td>` کنونی را ترک نکرده باشیم، نادیده می‌گیریم.
 
-Here's an example of code that accounts for all possible situations:
+این مثال تمام حالاتی که ممکن است اتفاق بیفتند حساب کرده است:
 
 [js src="mouseenter-mouseleave-delegation-2/script.js"]
 
-Once again, the important features are:
-1. It uses event delegation to handle entering/leaving of any `<td>` inside the table. So it relies on `mouseover/out` instead of `mouseenter/leave` that don't bubble and hence allow no delegation.
-2. Extra events, such as moving between descendants of `<td>` are filtered out, so that `onEnter/Leave` runs only if the pointer leaves or enters `<td>` as a whole.
+بار دیگر، ویژگی‌های مهم عبارت‌اند از:
+1. برای کنترل ورود/خروج اشاره‌گر موس از هر `<td>` درون جدول، از واگذاری رویداد استفاده می‌شود. پس از `mouseover/out` بجای `mouseenter/leave` برای این منظور استفاده می‌شود.
+2. رویدادهای اضافی، مانند حرکت موس بین فرزندهای خود `<td>` پالایش شده‌اند، به طوری که `onEnter/Leave` تنها زمانی اجرا می‌شوند که اشاره‌گر موس وارد/خارج کل `<td>` شود.
 
 ```online
-Here's the full example with all details:
+در اینجا مثال کاملی همراه با تمام جزئیات آمده است:
 
 [codetabs height=460 src="mouseenter-mouseleave-delegation-2"]
 
-Try to move the cursor in and out of table cells and inside them. Fast or slow -- doesn't matter. Only `<td>` as a whole is highlighted, unlike the example before.
+اشاره‌گر موس را رو و بیرون سلول‌های جدول ببرید. سریع یا آسان، اهمیتی ندارد. کل `<td>` مشخص خواهد شد، برخلاف مثالی که قبلا دیده بودیم.
 ```
 
-## Summary
+## خلاصه
 
-We covered events `mouseover`, `mouseout`, `mousemove`, `mouseenter` and `mouseleave`.
+ما درباره رویدادهای `mouseover`، `mouseout`، `mousemove`، `mouseenter` و `mouseleave` صحبت کردیم.
 
-These things are good to note:
+توجه به این نکات خوب است که:
 
-- A fast mouse move may skip intermediate elements.
-- Events `mouseover/out` and `mouseenter/leave` have an additional property: `relatedTarget`. That's the element that we are coming from/to, complementary to `target`.
+- یک حرکت سریع موس ممکن است باعث پرش از روی عناصر بین حرکت شود.
+- رویدادهای `mouseover/out` و `mouseenter/leave` یک خاصیت اضافی دارند: `relatedTarget`. که عنصری خواهد بود که وارد/خارج آن می‌شویم، و به نوعی مکمل `target` است.
 
-Events `mouseover/out` trigger even when we go from the parent element to a child element. The browser assumes that the mouse can be only over one element at one time -- the deepest one.
+رویدادهای `mouseover/out` زمانی که ما از عنصر پدر به فرزند برویم هم اتفاق می‌افتند. مرورگر فرض می‌کند که اشاره‌گر موس در یک زمان فقط می‌تواند روی یک عنصر باشد، داخلی‌ترین عنصر.
 
-Events `mouseenter/leave` are different in that aspect: they only trigger when the mouse comes in and out the element as a whole. Also they do not bubble.
+اما رویدادهای `mouseenter/leave‍` از این نظر متفاوت عمل می‌کنند: آنها فقط زمانی اتفاق می‌افتند که اشاره‌گر موس وارد یا یک عنصر به عنوان یک کل خارج شود. همچنین آنها اصطلاحا، بالا نمی‌روند.
