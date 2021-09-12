@@ -2,24 +2,24 @@ importance: 5
 
 ---
 
-# Improved tooltip behavior
+# رفتار یک تولتیپ پیشرفته
 
-Write JavaScript that shows a tooltip over an element with the attribute `data-tooltip`. The value of this attribute should become the tooltip text.
+کد جاوا اسکریپیتی بنویسید که یک تولتیپ را با استفاده از صفت `data-tooltip` بالای عنصر نمایش دهد. مقدار این صفت باید متن تولتیپ باشد.
 
-That's like the task <info:task/behavior-tooltip>, but here the annotated elements can be nested. The most deeply nested tooltip is shown.
+این تکلیف شبیه تکلیف <info:task/behavior-tooltip> است، اما عناصری که توضیح اضافه دارند، می‌توانند تو در تو باشند. به این صورت که داخلی‌ترین تولتیپ باید نمایش داده شود.
 
-Only one tooltip may show up at the same time.
+فقط یک تولتیپ می‌تواند در لحظه باید نمایان باشد.
 
-For instance:
+برای مثال:
 
 ```html
-<div data-tooltip="Here – is the house interior" id="house">
-  <div data-tooltip="Here – is the roof" id="roof"></div>
+<div data-tooltip="اینجا – نمای داخلی خانه است" id="house">
+  <div data-tooltip="اینجا – سقف است" id="roof"></div>
   ...
-  <a href="https://en.wikipedia.org/wiki/The_Three_Little_Pigs" data-tooltip="Read on…">Hover over me</a>
+  <a href="https://fa.wikipedia.org/wiki/%D8%B3%D9%87_%D8%AE%D9%88%DA%A9_%D9%81%D8%B3%D9%82%D9%84%DB%8C" data-tooltip="ادامه را بخوانید">اشاره‌گر را روی من بیار</a>
 </div>
 ```
 
-The result in iframe:
+نتیجه داخل iframe:
 
 [iframe src="solution" height=300 border=1]
