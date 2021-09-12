@@ -211,7 +211,7 @@ table.onmouseout = function(event) {
 
 ما درباره رویدادهای `mouseover`، `mouseout`، `mousemove`، `mouseenter` و `mouseleave` صحبت کردیم.
 
-توجه به این نکات خوب است که:
+خوب است به این نکات توجه کنیم:
 
 - یک حرکت سریع موس ممکن است باعث پرش از روی عناصر بین حرکت شود.
 - رویدادهای `mouseover/out` و `mouseenter/leave` یک خاصیت اضافی دارند: `relatedTarget`. که عنصری خواهد بود که وارد/خارج آن می‌شویم، و به نوعی مکمل `target` است.
