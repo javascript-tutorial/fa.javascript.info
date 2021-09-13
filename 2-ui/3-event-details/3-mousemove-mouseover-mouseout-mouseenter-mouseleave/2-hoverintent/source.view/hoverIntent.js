@@ -1,12 +1,12 @@
 'use strict';
 
-// Here's a brief sketch of the class
-// with things that you'll need anyway
+// طرح کوتاهی از کلاسی که باید بنویسید
+// با چیزهایی که به هر حال به آنها نیاز پیدا خواهید کرد
 class HoverIntent {
 
   constructor({
-    sensitivity = 0.1, // speed less than 0.1px/ms means "hovering over an element"
-    interval = 100, // measure mouse speed once per 100ms: calculate the distance between previous and next points
+    sensitivity = 0.1, // سرعتی کمتر از 0.1px/ms به این معنی است که "اشاره‌گر موس روی عنصر قرار گرفته"
+    interval = 100, // سرعت اشاره‌گر موس هر 100ms یکبار چک می‌شود: مسافت طی شده بین مختصات قبلی و کنونی محسابه شود
     elem,
     over,
     out
@@ -17,16 +17,16 @@ class HoverIntent {
     this.over = over;
     this.out = out;
 
-    // make sure "this" is the object in event handlers.
+    // مطمئن شویم که "this" در کنترل‌کننده‌های رویدادها وجود خواهد داشت
     this.onMouseMove = this.onMouseMove.bind(this);
     this.onMouseOver = this.onMouseOver.bind(this);
     this.onMouseOut = this.onMouseOut.bind(this);
 
-    // assign the handlers
+    // کنترل‌کننده‌ها را به عنصر متصل می‌کنیم
     elem.addEventListener("mouseover", this.onMouseOver);
     elem.addEventListener("mouseout", this.onMouseOut);
 
-    // continue from this point
+    // از اینجا شروع کنید
 
   }
 
@@ -44,8 +44,8 @@ class HoverIntent {
 
 
   destroy() {
-    /* your code to "disable" the functionality, remove all handlers */
-    /* it's needed for the tests to work */
+    /* کدی که برای "غیرفعال" کردن عملکرد تولتیپ می‌نویسید، همه کنترل‌کننده‌ها را از روی عنصر حذف کنید */
+    /* برای آزمایش راه حل شما نیاز است */
   }
 
 }
