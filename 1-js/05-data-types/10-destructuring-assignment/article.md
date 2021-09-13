@@ -185,9 +185,9 @@ let [name1, name2, *!*...titles*/!*] = ["Julius", "Caesar", "Consul", "of the Ro
 // titles = ["Consul", "of the Roman Republic"] حالا داریم
 ```
 
-### Default values
+### مقدارهای پیش‌فرض
 
-If the array is shorter than the list of variables at the left, there'll be no errors. Absent values are considered undefined:
+اگر آرایه از لیست متغیرهای سمت چپ کوتاه‌تر باشد، هیچ اروری ایجاد نمی‌شود. مقدارهای ناموجود undefined در نظر گرفته می‌شوند:
 
 ```js run
 *!*
@@ -198,31 +198,31 @@ alert(firstName); // undefined
 alert(surname); // undefined
 ```
 
-If we want a "default" value to replace the missing one, we can provide it using `=`:
+ما یک مقدار «پیش‌فرض» بخواهیم که جایگزین مقدار ناموجود شود، می‌توانیم با استفاده از `=` آن را فراهم کنیم:
 
 ```js run
 *!*
-// default values
+// مقدارهای پیش‌فرض
 let [name = "Guest", surname = "Anonymous"] = ["Julius"];
 */!*
 
-alert(name);    // Julius (from array)
-alert(surname); // Anonymous (default used)
+alert(name);    // Julius (از آرایه)
+alert(surname); // Anonymous (مقدار پیش‌فرض استفاده شد)
 ```
 
-Default values can be more complex expressions or even function calls. They are evaluated only if the value is not provided.
+مقدارهای پیش‌فرض می‌توانند عبارات پیچیده‌تر یا حتی فراخوانی تابع باشند. آنها فقط زمانی که مقدار وجود نداشته باشد ارزیابی می‌شوند.
 
-For instance, here we use the `prompt` function for two defaults:
+برای مثال، اینجا ما از تابع `prompt` برای دو مقدار پیش‌فرض استفاده کردیم:
 
 ```js run
-// runs only prompt for surname
+// اجرا می‌شود prompt تابع suname فقط برای
 let [name = prompt('name?'), surname = prompt('surname?')] = ["Julius"];
 
-alert(name);    // Julius (from array)
-alert(surname); // whatever prompt gets
+alert(name);    // Julius (از آرایه)
+alert(surname); // دریافت کند prompt هر چیزی که
 ```
 
-Please note: the `prompt` will run only for the missing value (`surname`).
+لطفا در نظر داشته باشید: `prompt` فقط برای مقدار ناموجود (`surname`) اجرا می‌شود.
 
 ## Object destructuring
 
