@@ -1,54 +1,54 @@
-// <td> under the mouse right now (if any)
+// <td> که هم اکنون زیر موس قرار دارد (در صورت وجود)
 let currentElem = null;
 
-table.onmouseover = function(event) {
-  // before entering a new element, the mouse always leaves the previous one
-  // if currentElem is set, we didn't leave the previous <td>,
-  // that's a mouseover inside it, ignore the event
+table.onmouseover = function (event) {
+  // قبل از ورود به عنصر جدید، اشاره‌گر موس همیشه قبلی را ترک می‌کند
+  // اگر currentElem مقدار داشته باشد، پس ما <td> قبلی را ترک نکرده‌ایم،
+  // که یعنی یک رویداد mouseover درون آن رخ داده، پس آنرا نادیده می‌گیریم.
   if (currentElem) return;
 
   let target = event.target.closest('td');
 
-  // we moved not into a <td> - ignore
+  // وارد یک <td> نشده پس آنرا نادیده می‌گیریم
   if (!target) return;
 
-  // moved into <td>, but outside of our table (possible in case of nested tables)
-  // ignore
+  // وارد یک <td> شده، اما نه درون جدول مورد نظر ما (در صورتی که جدول‌های تو در تو داشته باشیم این امکان وجود دارد)
+  // نادیده می‌گیریم
   if (!table.contains(target)) return;
 
-  // hooray! we entered a new <td>
+  // هوورا! ما وارد یک <td> جدید شدیم
   currentElem = target;
   onEnter(currentElem);
 };
 
 
-table.onmouseout = function(event) {
-  // if we're outside of any <td> now, then ignore the event
-  // that's probably a move inside the table, but out of <td>,
-  // e.g. from <tr> to another <tr>
+table.onmouseout = function (event) {
+  // اگر که ما اکنون بیرون هر یک از <td> باشیم، پس این رویداد را نادیده می‌گیریم
+  // احتمالا اشاره‌گر موس وارد یک جدول شده اما هنوز بیرون از <td> است،
+  // مثلا از یک <tr> به <tr> دیگر
   if (!currentElem) return;
 
-  // we're leaving the element – where to? Maybe to a descendant?
+  // ما در حال ترک عنصر هستیم، اما به کجا؟ شاید به یک فرزند؟
   let relatedTarget = event.relatedTarget;
 
   while (relatedTarget) {
-    // go up the parent chain and check – if we're still inside currentElem
-    // then that's an internal transition – ignore it
+    // زنجیره پدر-فرزندی را بالا می‌رویم و چک می‌کنیم که آیا هنوز داخل currentElem هستیم یا نه
+    // در این صورت این یک گذر داخلی است، که آنرا نادیده می‌گیریم
     if (relatedTarget == currentElem) return;
 
     relatedTarget = relatedTarget.parentNode;
   }
 
-  // we left the <td>. really.
+  // ما واقعا <td> را ترک کردیم
   onLeave(currentElem);
   currentElem = null;
 };
 
-// any functions to handle entering/leaving an element
+// هر تابعی برای کنترل ورود/خروج یک عنصر
 function onEnter(elem) {
   elem.style.background = 'pink';
 
-  // show that in textarea
+  // نمایش آن
   text.value += `over -> ${currentElem.tagName}.${currentElem.className}\n`;
   text.scrollTop = 1e6;
 }
@@ -56,7 +56,7 @@ function onEnter(elem) {
 function onLeave(elem) {
   elem.style.background = '';
 
-  // show that in textarea
+  // نمایش آن
   text.value += `out <- ${elem.tagName}.${elem.className}\n`;
   text.scrollTop = 1e6;
 }
