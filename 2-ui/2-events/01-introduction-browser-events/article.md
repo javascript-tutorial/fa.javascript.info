@@ -1,38 +1,38 @@
-# Introduction to browser events
+# درامدی بر رویدادهای مرورگر
 
-*An event* is a signal that something has happened. All DOM nodes generate such signals (but events are not limited to DOM).
+*یک رویداد* نشانه‌ای از چیزی است که اتفاق افتاده است. همه‌ی عناصر درخت DOM این نشانه‌ها را تولید می‌کنند (اما رویدادها محدود به درخت DOM نیستند).
 
-Here's a list of the most useful DOM events, just to take a look at:
+در اینجا صرفا برای آشنایی اولیه، لیستی از پرکاربردترین رویدادهای DOM اورده شده:
 
-**Mouse events:**
-- `click` -- when the mouse clicks on an element (touchscreen devices generate it on a tap).
-- `contextmenu` -- when the mouse right-clicks on an element.
-- `mouseover` / `mouseout` -- when the mouse cursor comes over / leaves an element.
-- `mousedown` / `mouseup` -- when the mouse button is pressed / released over an element.
-- `mousemove` -- when the mouse is moved.
+**رویدادهای موس:**
+- `click` -- زمانی که موس روی یک عنصر کلیک می‌کند (دستگاه‌های لمسی این رویدادها هنگام ضربه زدن ایجاد می‌کنند).
+- `contextmenu` -- زمانی که موس روی یک عنصر راست‌کلیک می‌کند.
+- `mouseover` / `mouseout` -- زمانی که اشاره‌گر موس روی/بیرون یک عنصر می‌رود..
+- `mousedown` / `mouseup` -- زمانی که کلید موس روی عنصر فشرده/رها می‌شود.
+- `mousemove` -- زمانی که اشاره‌گر موس حرکت می‌کند.
 
-**Keyboard events:**
-- `keydown` and `keyup` -- when a keyboard key is pressed and released.
+**رویدادهای صفحه‌کلید:**
+- `keydown` و `keyup` -- زمانی که یک کلید از صفحه‌کلید فشرده/رها می‌شود.
 
-**Form element events:**
-- `submit` -- when the visitor submits a `<form>`.
-- `focus` --  when the visitor focuses on an element, e.g. on an `<input>`.
+**رویدادهای عناصر form:**
+- `submit` -- زمانی که بازدیدکننده یک `<form>` را ثبت می‌کند.
+- `focus` -- زمانی بازدیدکننده روی یک عنصر تمرکز کند, برای مثال یک `<input>`.
 
-**Document events:**
-- `DOMContentLoaded` -- when the HTML is loaded and processed, DOM is fully built.
+**رویدادهای :**
+- `DOMContentLoaded` -- زمانی که سند HTML لود و پردازش شود، همچنین درخت DOM نیز کاملا تشکیل شده است.
 
-**CSS events:**
-- `transitionend` -- when a CSS-animation finishes.
+**رویدادهای CSS:**
+- `transitionend` -- زمانی که یک انیمیشن CSS تمام می‌شود.
 
-There are many other events. We'll get into more details of particular events in next chapters.
+رویدادهای متعدد دیگری نیز وجود دارد. درباره  جزئیات مخصوص به هرکدام از رویدادها در بخش‌های بعدی صحبت می‌کنیم.
 
-## Event handlers
+## کنترل‌کننده‌های رویدادها
 
-To react on events we can assign a *handler* -- a function that runs in case of an event.
+برای واکنش به این رویداد‌ها باید یک *کنترل‌کننده* به آن اختصاص دهیم -- یک تابع که در زمان اتفاق افتادن یک رویداد اجرا می‌شود.
 
-Handlers are a way to run JavaScript code in case of user actions.
+کنترل‌کننده‌ها یک روش برای اجرای کدهای JavaScript در جواب به رفتارهای کاربر هستند.
 
-There are several ways to assign a handler. Let's see them, starting from the simplest one.
+چندین راه برای اختصاص کنترل‌کننده‌ها وجود دارد. برای آشنا شدن با آنها، از ساده‌ترین روش شروع می‌کنیم.
 
 ### HTML-attribute
 
