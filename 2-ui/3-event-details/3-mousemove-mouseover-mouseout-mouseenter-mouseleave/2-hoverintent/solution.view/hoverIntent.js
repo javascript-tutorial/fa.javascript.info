@@ -3,7 +3,6 @@
 class HoverIntent {
 
   constructor({
-    
     sensitivity = 0.1, // سرعتی کمتر از 0.1px/ms به این معنی است که "اشاره‌گر موس روی عنصر قرار گرفته"
     interval = 100,    // سرعت موس هر 100ms یکبار اندازه‌گیری می‌شود
     elem,
