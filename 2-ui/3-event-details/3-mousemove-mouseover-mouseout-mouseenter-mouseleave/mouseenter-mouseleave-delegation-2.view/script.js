@@ -48,7 +48,7 @@ table.onmouseout = function (event) {
 function onEnter(elem) {
   elem.style.background = 'pink';
 
-  // نمایش آن
+  // نمایش آن در textarea
   text.value += `over -> ${currentElem.tagName}.${currentElem.className}\n`;
   text.scrollTop = 1e6;
 }
