@@ -6,7 +6,7 @@
   <style>
     body {
       height: 2000px;
-      /* the tooltip should work after page scroll too */
+      /* تولتیپ باید بعد از پیمایش صفحه هم کار کند */
     }
 
     .tooltip {
@@ -49,16 +49,16 @@
 <body>
 
 
-  <div data-tooltip="Here is the house interior" id="house">
-    <div data-tooltip="Here is the roof" id="roof"></div>
+  <div data-tooltip="این نمای داخلی خانه است" id="house">
+    <div data-tooltip="این سقف است" id="roof"></div>
+    
+    <p>روزی روزگاری مامان خوکه سه تا بچه کوچک داشت.</p>
 
-    <p>Once upon a time there was a mother pig who had three little pigs.</p>
+    <p>اون سه تا خوک کوچک انقدر بزرگ شدند که مادرشون به اونها گفت: "شما خیلی بزرگ شدید و دیگه نمی‌تونید اینجا زندگی کنید. باید برید و خونه‌های خودتون رو بسازید. اما مراقب باشید که گرگه شمارو شکار نکنه."</p>
+    
+    <p>سه خوک کوچک راه افتادند و رفتند. اونها به مادرشون گفتند: "ما مراقب هستیم تا گرگه مارو شکار نکنه."</p>
 
-    <p>The three little pigs grew so big that their mother said to them, "You are too big to live here any longer. You must go and build houses for yourselves. But take care that the wolf does not catch you."
-
-    <p>The three little pigs set off. "We will take care that the wolf does not catch us," they said.</p>
-
-    <p>Soon they met a man. <a href="https://en.wikipedia.org/wiki/The_Three_Little_Pigs" data-tooltip="Read on…">Hover over me</a></p>
+    <p>بعد از مدت کوتاهی مردی رو دیدند. <a href="https://fa.wikipedia.org/wiki/%D8%B3%D9%87_%D8%AE%D9%88%DA%A9_%D9%81%D8%B3%D9%82%D9%84%DB%8C" data-tooltip="ادامه را بخوانید">اشاره‌گر را روی من بیار</a></p>
 
   </div>
 
@@ -66,25 +66,25 @@
     let tooltip;
 
     document.onmouseover = function(event) {
-      // important: a fast-moving mouse may "jump" right to a child on an annotated node, skipping the parent
-      // so mouseover may happen on a child.
+      // نکته مهم: یک حرکت سریع اشاره‌گر موس ممکن است با نادیده گرفتن پدر، مستقیما روی خود فرزند "پرش" کند
+      // پس رویداد mouseover ممکن است روی فرزند اتفاق بیفتد.
 
       let anchorElem = event.target.closest('[data-tooltip]');
 
       if (!anchorElem) return;
 
-      // show tooltip and remember it
+      // نمایش تولتیپ و ذخیره کردن آن در یک متغیر
       tooltip = showTooltip(anchorElem, anchorElem.dataset.tooltip);
     }
 
     document.onmouseout = function() {
-      // it is possible that mouseout triggered, but we're still inside the element
-      // (its target was inside, and it bubbled)
-      // but in this case we'll have an immediate mouseover,
-      // so the tooltip will be destroyed and shown again
+      // ممکن است که mouseout اتفاق بیفتد ولی ما هنوز داخل عنصر باشیم.
+      // (یعنی که target داخل عنصر دیگری بوده، و رویداد بالا رفته است)
+      // اما در این صورت ما یک mouseover لحظه‌ای داریم،
+      // پس تولتیپ ازبین می‌رود و دوباره نمایش داده می‌شود
       //
-      // luckily, the "blinking" won't be visible,
-      // as both events happen almost at the same time
+      // خوشبختانه، این "چشمک زدن" معلوم نیست.
+      // چون هر دو رویداد تقریبا در یک زمان واحد اتفاق می‌افتند
       if (tooltip) {
         tooltip.remove();
         tooltip = false;
@@ -101,7 +101,7 @@
 
       let coords = anchorElem.getBoundingClientRect();
 
-      // position the tooltip over the center of the element
+      // نمایش تولتیپ وسط عنصر
       let left = coords.left + (anchorElem.offsetWidth - tooltipElem.offsetWidth) / 2;
       if (left < 0) left = 0;
 

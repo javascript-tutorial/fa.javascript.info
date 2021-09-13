@@ -3,8 +3,8 @@
 class HoverIntent {
 
   constructor({
-    sensitivity = 0.1, // speed less than 0.1px/ms means "hovering over an element"
-    interval = 100,    // measure mouse speed once per 100ms
+    sensitivity = 0.1, // سرعتی کمتر از 0.1px/ms به این معنی است که "اشاره‌گر موس روی عنصر قرار گرفته"
+    interval = 100,    // سرعت موس هر 100ms یکبار اندازه‌گیری می‌شود
     elem,
     over,
     out
@@ -15,12 +15,12 @@ class HoverIntent {
     this.over = over;
     this.out = out;
 
-    // make sure "this" is the object in event handlers.
+    // مطمئن شویم که "this" در کنترل‌کننده‌های رویدادها وجود خواهد داشت
     this.onMouseMove = this.onMouseMove.bind(this);
     this.onMouseOver = this.onMouseOver.bind(this);
     this.onMouseOut = this.onMouseOut.bind(this);
 
-    // and in time-measuring function (called from setInterval)
+    // و همچنین در تابع اندازه‌گیری زمان (که درون setInterval صدا زده می‌شود)
     this.trackSpeed = this.trackSpeed.bind(this);
 
     elem.addEventListener("mouseover", this.onMouseOver);
@@ -52,13 +52,13 @@ class HoverIntent {
   }
 
   onMouseOut(event) {
-    // if left the element
+    // اگر اشاره‌گر موس عنصر را ترک کند
     if (!event.relatedTarget || !elem.contains(event.relatedTarget)) {
       this.isOverElement = false;
       this.elem.removeEventListener('mousemove', this.onMouseMove);
       clearInterval(this.checkSpeedInterval);
       if (this.isHover) {
-        // if there was a stop over the element
+        // اگر روی عنصر یک توقف وجود داشته باشد
         this.out.call(this.elem, event);
         this.isHover = false;
       }
@@ -76,7 +76,7 @@ class HoverIntent {
     let speed;
 
     if (!this.lastTime || this.lastTime == this.prevTime) {
-      // cursor didn't move
+      // اشاره‌گر حرکتی نداشته
       speed = 0;
     } else {
       speed = Math.sqrt(
@@ -90,7 +90,7 @@ class HoverIntent {
       this.isHover = true;
       this.over.call(this.elem, event);
     } else {
-      // speed fast, remember new coordinates as the previous ones
+      // سرعت بالا، مختصات فعلی را برای اندازه‌گیری بعدی ذخیره می‌کنیم
       this.prevX = this.lastX;
       this.prevY = this.lastY;
       this.prevTime = this.lastTime;
