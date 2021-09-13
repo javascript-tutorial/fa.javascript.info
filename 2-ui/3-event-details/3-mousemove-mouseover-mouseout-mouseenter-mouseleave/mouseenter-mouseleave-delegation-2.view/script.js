@@ -56,7 +56,7 @@ function onEnter(elem) {
 function onLeave(elem) {
   elem.style.background = '';
 
-  // نمایش آن
+  // نمایش آن در textarea
   text.value += `out <- ${elem.tagName}.${elem.className}\n`;
   text.scrollTop = 1e6;
 }
