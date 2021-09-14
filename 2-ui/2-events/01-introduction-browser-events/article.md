@@ -195,62 +195,62 @@ document.body.setAttribute('onclick', function() { alert(1) });
 
 ## addEventListener
 
-The fundamental problem of the aforementioned ways to assign handlers -- we can't assign multiple handlers to one event.
+مشکل اساسی با روش‌هایی که در بالا درباره تعریف و اختصاص دادن کنترل‌کننده‌ها گفته شد، این است که نمی‌توانیم چند گنترل‌کننده‌ را به یک رویداد اختصاص دهیم.
 
-Let's say, one part of our code wants to highlight a button on click, and another one wants to show a message on the same click.
+فرض کنیم که یک قسمت از کد می‌خواهد که دکمه‌ای را هنگام کلیک شدن، هایلایت کند، و کد دیگری که می‌خواهد در زمان همان کلیک پیغامی را نمایش دهد.
 
-We'd like to assign two event handlers for that. But a new DOM property will overwrite the existing one:
+معمولا می‌خواهیم که دو کنترل‌کننده برای آن تعریف کنیم. ولی می‌دانیم که مقداردهی خاصیت DOM مقدار قبلی را رونویسی می‌کند:
 
 ```js no-beautify
 input.onclick = function() { alert(1); }
 // ...
-input.onclick = function() { alert(2); } // replaces the previous handler
+input.onclick = function() { alert(2); } // جایگزین کنترل‌کننده قبلی می‌شود
 ```
 
-Developers of web standards understood that long ago and suggested an alternative way of managing handlers using special methods `addEventListener` and `removeEventListener`. They are free of such a problem.
+توسعه‌دهندگان استاندارهای وب خیلی وقت پیش متوجه این موضوع شدند و یک راه حل جایگزین برای مدیریت کنترل‌کننده‌‌ها با استفاده از متد‌های مخصوص `addEventListener` و `removeEventListener` پیشنهاد دادند. این دو متد مشکل بالا را نخواهند داشت.
 
-The syntax to add a handler:
+سینتکس و چگونگی اضافه کردن یک کنترل‌کننده:
 
 ```js
 element.addEventListener(event, handler, [options]);
 ```
 
 `event`
-: Event name, e.g. `"click"`.
+: نام رویداد, برای مثال `"click"`.
 
 `handler`
-: The handler function.
+: تابع کنترل‌کننده.
 
 `options`
-: An additional optional object with properties:
-    - `once`: if `true`, then the listener is automatically removed after it triggers.
-    - `capture`: the phase where to handle the event, to be covered later in the chapter <info:bubbling-and-capturing>. For historical reasons, `options` can also be `false/true`, that's the same as `{capture: false/true}`.
-    - `passive`: if `true`, then the handler will not call `preventDefault()`, we'll explain that later in <info:default-browser-action>.
+: یک شئ  به عنوان ورودی اختیاری با خصوصیات زیر:
+    - `once`: اگر `true` باشد, کنترل‌کننده بعد از اولین اجرا از روی عنصر حذف می‌شود.
+    - `capture`: مرحله‌ای که کنترل‌کننده در آن عمل می‌کند, در این مورد در قسمت <info:bubbling-and-capturing> صبحت می‌شود. به دلایلی, `options` می‌تواند `false/true` باشد, که مشابه همان `{capture: false/true}` خواهد بود.
+    - `passive`: اگر `true` باشد, کنترل‌کننده تابع `preventDefault()` را صدا نخواهد زد، درباره این موضوع بعدا در قسمت <info:default-browser-action> صحبت خواهیم کرد.
 
-To remove the handler, use `removeEventListener`:
+برای حذف یک کنترل کننده از `removeEventListener`‌ استفاده می‌کنیم:
 
 ```js
 element.removeEventListener(event, handler, [options]);
 ```
 
-````warn header="Removal requires the same function"
-To remove a handler we should pass exactly the same function as was assigned.
+````warn header="حذف کردن دقیقا به همان تابع نیاز خواهد داشت"
+برای حذف یک کنترل‌کننده ما باید دقیقا همان تابعی که به عنوان کنترل‌کننده اختصاص داده بودیم را به تابع بدهیم.
 
-This doesn't work:
+کد زیر کار نمی‌کند:
 
 ```js no-beautify
-elem.addEventListener( "click" , () => alert('Thanks!'));
+elem.addEventListener( "click" , () => alert('ممنونم!'));
 // ....
-elem.removeEventListener( "click", () => alert('Thanks!'));
+elem.removeEventListener( "click", () => alert('ممنونم!'));
 ```
 
-The handler won't be removed, because `removeEventListener` gets another function -- with the same code, but that doesn't matter, as it's a different function object.
+کنترل‌کننده حذف نمی‌شود، چونکه `removeEventListener` تابع دیگری دریافت کرده. درست است که کدهای آنها مشابه است، اما مهم نیست، چرا که یک شئ‌تابع متفاوت است.
 
-Here's the right way:
+این روش درست است:
 
 ```js
 function handler() {
-  alert( 'Thanks!' );
+  alert( 'ممنون!' );
 }
 
 input.addEventListener("click", handler);
@@ -258,52 +258,52 @@ input.addEventListener("click", handler);
 input.removeEventListener("click", handler);
 ```
 
-Please note -- if we don't store the function in a variable, then we can't remove it. There's no way to "read back" handlers assigned by `addEventListener`.
+توجه کنید، اگر که ما تابع کنترل‌کننده‌را درون یک متغیر ذخیره نکنیم، نمی‌توانیم آنرا حذف کنیم. راهی برای "بازخوانی" کنترل‌کننده‌هایی که با `addEventListener` اختصاص داده‌ می‌شوند وجود ندارد.
 ````
 
-Multiple calls to `addEventListener` allow to add multiple handlers, like this:
+با چند بار صدا زدن `addEventListener` می‌توانیم چندین کنترل‌کننده برای یک رویداد اختصاص دهیم. مانند:
 
 ```html run no-beautify
-<input id="elem" type="button" value="Click me"/>
+<input id="elem" type="button" value="روی من کلیک کن"/>
 
 <script>
   function handler1() {
-    alert('Thanks!');
+    alert('ممنونم!');
   };
 
   function handler2() {
-    alert('Thanks again!');
+    alert('باز هم ممنونم!');
   }
 
 *!*
   elem.onclick = () => alert("Hello");
-  elem.addEventListener("click", handler1); // Thanks!
-  elem.addEventListener("click", handler2); // Thanks again!
+  elem.addEventListener("click", handler1); // ممنونم!
+  elem.addEventListener("click", handler2); // باز هم ممنونم!
 */!*
 </script>
 ```
 
-As we can see in the example above, we can set handlers *both* using a DOM-property and `addEventListener`. But generally we use only one of these ways.
+همانطور که در مثال‌های بالا میبینیم، می‌توانیم کنترل‌کننده‌ها را با *هر دو* روش استفاده از خاصیت DOM و `addEventListener` اختصاص دهیم. اما معمولا از یکی از این دو روش استفاده می‌کنیم.
 
-````warn header="For some events, handlers only work with `addEventListener`"
-There exist events that can't be assigned via a DOM-property. Only with `addEventListener`.
+````warn header="برای بعضی از رویدادها، کنترل‌کننده‌ها فقط با `addEventListener` کار می‌کنند"
+رویدادهایی وجود دارند که نمی‌توان با استفاده از خاصیت DOM برای آنها کنترل‌کننده اختصاص داد. فقط با `addEventListener`.
 
-For instance, the `DOMContentLoaded` event, that triggers when the document is loaded and DOM is built.
+برای مثال، رویداد `DOMContentLoaded` که زمانی اتفاق می‌افتد که سند بارگزاری شده و درخت DOM ساخته شده.
 
 ```js
-// will never run
+// هیچ‌وقت اجرا نمی‌شود
 document.onDOMContentLoaded = function() {
-  alert("DOM built");
+  alert("درخت DOM ساخته شد");
 };
 ```
 
 ```js
-// this way it works
+// با این روش کار می‌کند
 document.addEventListener("DOMContentLoaded", function() {
-  alert("DOM built");
+  alert("درخت DOM ساخته شد");
 });
 ```
-So `addEventListener` is more universal. Although, such events are an exception rather than the rule.
+پس رویداد `addEventListener` کلی‌تر است. هرچند, این چنین رویداد‌هایی بیشتر استثنا هستند تا یک قانون.
 ````
 
 ## Event object
