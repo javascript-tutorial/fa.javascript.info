@@ -34,97 +34,97 @@
 
 چندین راه برای اختصاص کنترل‌کننده‌ها وجود دارد. برای آشنا شدن با آنها، از ساده‌ترین روش شروع می‌کنیم.
 
-### HTML-attribute
+### صفت HTML
 
-A handler can be set in HTML with an attribute named `on<event>`.
+یک کنترل‌کننده می‌تواند درون HTML با یک صفتی به نام `on<event>` تعریف شود.
 
-For instance, to assign a `click` handler for an `input`, we can use `onclick`, like here:
+برای مثال اگر بخواهیم یک کنترل‌کننده `click` برای یک `input` اختصاص دهیم، مشابه مثال زیر از `onclick` استفاده می‌کنیم:
 
 ```html run
-<input value="Click me" *!*onclick="alert('Click!')"*/!* type="button">
+<input value="روی من کلیک کن" *!*onclick="alert('کلیک!')"*/!* type="button">
 ```
 
-On mouse click, the code inside `onclick` runs.
+در زمان کلیک موس، کدی که داخل `onclick` است اجرا خواهد شد.
 
-Please note that inside `onclick` we use single quotes, because the attribute itself is in double quotes. If we forget that the code is inside the attribute and use double quotes inside, like this:  `onclick="alert("Click!")"`, then it won't work right.
+توجه کنید که داخل `onclick` ما از سینگل کوتیشن استفاده کردیم، چون که خود صفت درون یک دابل‌کوتیشن تعریف شده. اگر فراموش کنیم که کد داخل یک صفت است و از دابل‌کوتیشن استفاده کنیم، مثل این: `onclick="alert("کلیک!")"`، کد ما کار نخواهد کرد.
 
-An HTML-attribute is not a convenient place to write a lot of code, so we'd better create a JavaScript function and call it there.
+صفت HTML جای آنچنان مناسبی برای نوشتن کد‌های طولانی نیست. پس بهتر است یک تابع جاوااسکریپت ایجاد کنیم و درون این صفت آنرا صدا بزنیم.
 
-Here a click runs the function `countRabbits()`:
+اینجا یک کلیک، تابع `countRabbits()` را فراخوانی می‌کند:
 
 ```html autorun height=50
 <script>
   function countRabbits() {
     for(let i=1; i<=3; i++) {
-      alert("Rabbit number " + i);
+      alert("تعداد خرگوش " + i);
     }
   }
 </script>
 
-<input type="button" *!*onclick="countRabbits()"*/!* value="Count rabbits!">
+<input type="button" *!*onclick="countRabbits()"*/!* value="خرگوش‌ها را بشمار!">
 ```
 
-As we know, HTML attribute names are not case-sensitive, so `ONCLICK` works as well as `onClick` and `onCLICK`... But usually attributes are lowercased: `onclick`.
+همانطور که می‌دانیم، صفت‌های HTML به بزرگی و کوچکی حروف (case-sensitive) وابسته نیستند، پس ‍`ONCLICK` مانند `onClick` و `onCLICK` کار می‌کند ... اما معمولا صفت‌ها با حروف کوچک نوشته می‌شوند، مانند: `onclick`.
 
-### DOM property
+### خاصیت DOM
 
-We can assign a handler using a DOM property `on<event>`.
+ما با استفاده از یک خاصیت DOM به نام `on<event>` می‌توانیم یک کنترل‌کننده تعریف کنیم.
 
-For instance, `elem.onclick`:
+برای مثال، `elem.onclick`:
 
 ```html autorun
-<input id="elem" type="button" value="Click me">
+<input id="elem" type="button" value="روی من کلیک کن">
 <script>
 *!*
   elem.onclick = function() {
-    alert('Thank you');
+    alert('ممنونم');
   };
 */!*
 </script>
 ```
 
-If the handler is assigned using an HTML-attribute then the browser reads it, creates a new function from the attribute content and writes it to the DOM property.
+اگر که کنترل‌کننده توسط یک صفت HTML تعریف‌شده باشد، مرورگر آنرا می‌خواند و یک تابع جدید از مقدار آن صفت ایجاد می‌کند و آنرا به خاصیت متناظر DOM اختصاص می‌دهد.
 
-So this way is actually the same as the previous one.
+پس این روش درواقع شبیه روش قبلی است.
 
-These two code pieces work the same:
+این دو قطعه کد همانند هم عمل می‌کنند:
 
 1. Only HTML:
 
     ```html autorun height=50
-    <input type="button" *!*onclick="alert('Click!')"*/!* value="Button">
+    <input type="button" *!*onclick="alert('کلیک!')"*/!* value="دکمه">
     ```
 2. HTML + JS:
 
     ```html autorun height=50
-    <input type="button" id="button" value="Button">
+    <input type="button" id="button" value="دکمه">
     <script>
     *!*
       button.onclick = function() {
-        alert('Click!');
+        alert('کلیک!');
       };
     */!*
     </script>
     ```
 
-In the first example, the HTML attribute is used to initialize the `button.onclick`, while in the second example -- the script, that's all the difference.
+در مثال اولی، ما از صفت HTML برای مقدار دهی به `button.onclick` استفاده کردیم، درصورتی که در مثال دوم، این کار با کد انجام شده. تنها تفاوتشان همین است.
 
-**As there's only one `onclick` property, we can't assign more than one event handler.**
+**از آنجایی که فقط یک خاصیت `onclick` روی عنصر وجود دارد، نمی‌توانیم بیشتر از یک کنترل‌کننده‌ برای این رویداد تعریف کنیم.**
 
-In the example below adding a handler with JavaScript overwrites the existing handler:
+در مثال زیر، وقتی که یک کنترل‌کننده توسط جاواسکریپت به عنصر اختصاص می‌دهیم، می‌بینیم که جایگزین کنترل‌کننده قبلی می‌شود.
 
 ```html run height=50 autorun
-<input type="button" id="elem" onclick="alert('Before')" value="Click me">
+<input type="button" id="elem" onclick="alert('قبل')" value="روی من کلیک کن">
 <script>
 *!*
-  elem.onclick = function() { // overwrites the existing handler
-    alert('After'); // only this will be shown
+  elem.onclick = function() { // کنترل‌کننده فعلی را رونویسی می‌کند
+    alert('بعد'); // فقط این پیام نمایش داده می‌شود
   };
 */!*
 </script>
 ```
 
-To remove a handler -- assign `elem.onclick = null`.
+برای برداشتن یا حذف یک کنترل کننده، می‌توانیم از `elem.onclick = null` استفاده کنیم.
 
 ## Accessing the element: this
 
