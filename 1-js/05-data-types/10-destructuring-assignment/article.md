@@ -354,13 +354,13 @@ let { title } = options;
 alert(title); // Menu
 ```
 
-### The rest pattern "..."
+### الگوری رست "..."
 
-What if the object has more properties than we have variables? Can we take some and then assign the "rest" somewhere?
+اگر شیء بیشتر از تعدادی که ما متغیر داریم ویژگی داشته باشد چه اتفاقی می‌افتد؟ آیا می‌توانیم بعضی از آنها را دریافت کنیم و «بقیه» را جایی دیگر ذخیره کنیم؟
 
-We can use the rest pattern, just like we did with arrays. It's not supported by some older browsers (IE, use Babel to polyfill it), but works in modern ones.
+می‌توانیم از الگوری رست استفاده کنیم، درست همانطور که با آرایه‌ها این کار را کردیم. این کار توسط بعضی از مرورگرهای قدیمی پشتیبانی نمی‌شود (IE، از Babel برای رفع این مشکل استفاده کنید) اما در مرورگرهای جدید کار می‌کند.
 
-It looks like this:
+اینگونه بنظر می‌رسد:
 
 ```js run
 let options = {
@@ -370,12 +370,12 @@ let options = {
 };
 
 *!*
-// title = property named title
-// rest = object with the rest of properties
+// title = title ویژگی‌ای به اسم 
+// rest = شیءای شامل بقیه ویژگی‌ها
 let {title, ...rest} = options;
 */!*
 
-// now title="Menu", rest={height: 200, width: 100}
+// title="Menu" ،rest={height: 200, width: 100} حالا داریم
 alert(rest.height);  // 200
 alert(rest.width);   // 100
 ```
