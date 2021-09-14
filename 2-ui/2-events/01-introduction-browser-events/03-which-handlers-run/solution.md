@@ -1,8 +1,8 @@
-The answer: `1` and `2`.
+جواب: `1` و `2`.
 
-The first handler triggers, because it's not removed by `removeEventListener`. To remove the handler we need to pass exactly the function that was assigned. And in the code a new function is passed, that looks the same, but is still another function.
+کنترل‌کننده اول اجرا می‌شود زیرا توسط `removeEventListener` حذف نمی‌شود. برای حذف کنترل‌کننده باید دقیقا خود تابعی که استفاده کردیم را به ورودی بدهیم. و در این کد یک تابع جدید به عنوان ورودی استفاده شده که فقط شبیه هستند، اما یک تابع نیستند.
 
-To remove a function object, we need to store a reference to it, like this:
+برای حذف یک شئ تابع باید آنرا در یک متغیر به عنوان مرجع ذخیره کنیم. مانند:
 
 ```js
 function handler() {
@@ -13,4 +13,4 @@ button.addEventListener("click", handler);
 button.removeEventListener("click", handler);
 ```
 
-The handler `button.onclick` works independently and in addition to `addEventListener`.
+کنترل‌کننده `button.onclick` جدا و علاوه بر `addEventListener` کار می‌کند.

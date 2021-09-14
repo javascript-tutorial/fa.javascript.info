@@ -2,12 +2,12 @@ importance: 4
 
 ---
 
-# Carousel
+# اسلایدر
 
-Create a "carousel" -- a ribbon of images that can be scrolled by clicking on arrows.
+یک "اسلایدر چرخشی" بسازید. نوار از عکس‌ها که با کلیک بر روی فلش‌ها پیمایش می‌شوند.
 
 [iframe height=200 src="solution"]
 
-Later we can add more features to it: infinite scrolling, dynamic loading etc.
+بعدا می‌توانیم امکانات دیگری به آن اضافه کنیم: پیمایش بی‌نهایت، بارگزاری پویا و ...
 
-P.S. For this task HTML/CSS structure is actually 90% of the solution.
+پی‌نوشت: برای این تکلیف ساختار HTML/CSS تقریبا 90% راه حل است.
