@@ -1,47 +1,47 @@
 
 # HTML/CSS
-First let's create HTML/CSS.
+اول باید که HTML/CSS را بسازیم.
 
-A menu is a standalone graphical component on the page, so it's better to put it into a single DOM element.
+منو یک جزء گرافیکی مستقل روی صفحه است. پس بهتر است که همه آنرا را درون یک عنصر DOM قرار دهیم.
 
-A list of menu items can be laid out as a list `ul/li`.
+یک لیست از آیتم‌های منو می‌تواند مانند لیستی از `ul/li` باشد.
 
-Here's the example structure:
+در اینجا یک ساختار نمونه آمده:
 
 ```html
 <div class="menu">
-  <span class="title">Sweeties (click me)!</span>
+  <span class="title">شیرینی‌ها (کلیک کنید)!</span>
   <ul>
-    <li>Cake</li>
-    <li>Donut</li>
-    <li>Honey</li>
+    <li>کیک</li>
+    <li>دونات</li>
+    <li>عسل</li>
   </ul>
 </div>
 ```
 
-We use `<span>` for the title, because `<div>` has an implicit `display:block` on it, and it will occupy 100% of the horizontal width.
+برای عنوان از `<spcan>` استفاده می‌کنیم، زیرا `<div>` از قبل یک ویژگی خاص `display: block` دارد و 100% عرض افقی را پر می‌کند.
 
-Like this:
-
-```html autorun height=50
-<div style="border: solid red 1px" onclick="alert(1)">Sweeties (click me)!</div>
-```
-
-So if we set `onclick` on it, then it will catch clicks to the right of the text.
-
-As `<span>` has an implicit `display: inline`, it occupies exactly enough place to fit all the text:
+مانند این:
 
 ```html autorun height=50
-<span style="border: solid red 1px" onclick="alert(1)">Sweeties (click me)!</span>
+<div style="border: solid red 1px" onclick="alert(1)">شیرینی‌ها (کلیک کنید)!</div>
 ```
 
-# Toggling the menu
+پس اگر `onclick` را روی آن تعریف کنیم، کلیک‌ها را در سمت راست متن نیز دریافت می‌کند.
 
-Toggling the menu should change the arrow and show/hide the menu list.
+در صورتی که `<span>` از قبل یک ویژگی خاص `display: inline‍` دارد، تنها فضای مورد نیاز متن را اشغال می‌کند:
 
-All these changes are perfectly handled by CSS. In JavaScript we should label the current state of the menu by adding/removing the class `.open`.
+```html autorun height=50
+<span style="border: solid red 1px" onclick="alert(1)">شیرینی‌ها (کلیک کنید)!</span>
+```
 
-Without it, the menu will be closed:
+# باز و بسته کردن منو
+
+باز و بسته کردن منو باید کمان‌ها را تغییر دهد و آیتم‌های درون لیست منو را نشان دهد یا مخفی کند.
+
+همه‌ی این تغییرات کاملا توسط CSS کنترل می‌شود. در جاوااسکریپت باید وضعیت باز و بسته رودن را با اضافه کردن یا حذف کردن کلاس `.open` مشخص کنیم.
+
+بدون این کلاس، منو بسته است:
 
 ```css
 .menu ul {
@@ -58,7 +58,7 @@ Without it, the menu will be closed:
 }
 ```
 
-...And with `.open` the arrow changes and the list shows up:
+... و با `.open` کمان‌ها تغییر می‌کنند و لیست نمایش داده می‌شود:
 
 ```css
 .menu.open .title::before {
