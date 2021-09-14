@@ -126,72 +126,72 @@
 
 برای برداشتن یا حذف یک کنترل کننده، می‌توانیم از `elem.onclick = null` استفاده کنیم.
 
-## Accessing the element: this
+## دسترسی به عنصر: this
 
-The value of `this` inside a handler is the element. The one which has the handler on it.
+مقدار `this` داخل یک کنترل‌کننده خود عنصر است. عنصری که کنترل‌کننده روی آن تعریف شده.
 
-In the code below `button` shows its contents using `this.innerHTML`:
+در کد زیر `button` محتویات خود را با `this.innerHTML` نمایش می‌دهد:
 
 ```html height=50 autorun
-<button onclick="alert(this.innerHTML)">Click me</button>
+<button onclick="alert(this.innerHTML)">روی من کلیک کن</button>
 ```
 
-## Possible mistakes
+## اشتباهات احتمالی
 
-If you're starting to work with events -- please note some subtleties.
+اگر که به تازگی می‌خواهید با رویدادها کار کنید، به این نکات مهم توجه کنید.
 
-We can set an existing function as a handler:
+ما می‌توانیم تابعی که از قبل تعریف شده و وجود دارد را به عنوان کنترل‌کننده استفاده کنیم.
 
 ```js
 function sayThanks() {
-  alert('Thanks!');
+  alert('ممنونم!');
 }
 
 elem.onclick = sayThanks;
 ```
 
-But be careful: the function should be assigned as `sayThanks`, not `sayThanks()`.
+اما مراقب باشید: تابع باید به صورت `sayThanks` به خاصیت DOM اختصاص یابد، نه به صورت `sayThanks()`.
 
 ```js
-// right
+// درست
 button.onclick = sayThanks;
 
-// wrong
+// اشتباه
 button.onclick = sayThanks();
 ```
 
-If we add parentheses, then `sayThanks()` becomes is a function call. So the last line actually takes the *result* of the function execution, that is `undefined` (as the function returns nothing), and assigns it to `onclick`. That doesn't work.
+اگر که ما پرانتزها را اضافه کنیم تابع `sayThanks()` صدا زده می‌شود. پس مورد دوم درواقع *خروجی* حاصل از اجرای تابع را، که `undefined` است (چون تابع چیزی را باز نمی‌گرداند)، به عنوان کنترل‌کننده به `onclick` اختصاص می‌دهد، که قاعدتا کار نمی‌کند.
 
-...On the other hand, in the markup we do need the parentheses:
+...از سوی دیگر، ما در کد HTML به پرانتز ها نیاز داریم:
 
 ```html
 <input type="button" id="button" onclick="sayThanks()">
 ```
 
-The difference is easy to explain. When the browser reads the attribute, it creates a handler function with body from the attribute content.
+توضیح و توجیه این تفاوت آسان است. زمانی که مرورگر مقدار صفت را می‌خواند، یک کنترل‌کننده با بدنه‌‌ای شامل محتویات آن صفت می‌سازد.
 
-So the markup generates this property:
+پس چیزی شبیه این خاصیت ایجاد می‌شود:
 ```js
 button.onclick = function() {
 *!*
-  sayThanks(); // <-- the attribute content goes here
+  sayThanks(); // <-- محتویات صفت اینجا قرار می‌گیرد
 */!*
 };
 ```
 
-**Don't use `setAttribute` for handlers.**
+**برای کنترل‌کننده‌ها از `setAttribute` استفاده نکنید.**
 
-Such a call won't work:
+این چنین فراخوانی‌ای کار نخواهد کرد:
 
 ```js run no-beautify
-// a click on <body> will generate errors,
-// because attributes are always strings, function becomes a string
+// یک کلیک روی <body> باعث بروز خطا می‌شود،
+// چون که صفت‌ها همیشه رشته هستند، و تابع تبدیل به رشته می‌شود
 document.body.setAttribute('onclick', function() { alert(1) });
 ```
 
-**DOM-property case matters.**
+**بزرگی و کوچکی حروف برای خاصیت‌های DOM اهمیت‌دارد.**
 
-Assign a handler to `elem.onclick`, not `elem.ONCLICK`, because DOM properties are case-sensitive.
+کنترل‌کننده‌ ‌را به `elem.onclick` اختصاص دهید، نه به `elem.ONCLICK`، چونکه خصوصیات عناصر DOM به بزرگی و کوچکی حروف حساس هستند.
 
 ## addEventListener
 
