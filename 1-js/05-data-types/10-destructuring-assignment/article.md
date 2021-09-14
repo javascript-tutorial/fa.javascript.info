@@ -224,19 +224,19 @@ alert(surname); // دریافت کند prompt هر چیزی که
 
 لطفا در نظر داشته باشید: `prompt` فقط برای مقدار ناموجود (`surname`) اجرا می‌شود.
 
-## Object destructuring
+## تجزیه ساختار شیء
 
-The destructuring assignment also works with objects.
+مقداردهی تجزیه‌کننده‌ی ساختار با شیءها هم کار می‌کند.
 
-The basic syntax is:
+سینتکس ساده آن اینگونه است:
 
 ```js
 let {var1, var2} = {var1:…, var2:…}
 ```
 
-We should have an existing object at the right side, that we want to split into variables. The left side contains an object-like "pattern" for corresponding properties. In the simplest case, that's a list of variable names in `{...}`.
+ما باید یک شیء موجود که می‌خواهیم آن را در چند متغیر پخش کنیم در سمت راست داشته باشیم. سمت چپ شامل یک «الگوی» شیء مانند برای ویژگی‌های متناظر می‌شود. در ساده‌ترین حالت، یک لیست از اسم‌های متغیر در `{...}` است.
 
-For instance:
+برای مثال:
 
 ```js run
 let options = {
@@ -253,19 +253,19 @@ alert(title);  // Menu
 alert(width);  // 100
 alert(height); // 200
 ```
+ 
+ویژگی‌های `options.title`، `options.width` و `options.height` به متغیرهای متناظر تخصیص داده شده‌اند.
 
-Properties `options.title`, `options.width` and `options.height` are assigned to the corresponding variables. 
-
-The order does not matter. This works too:
+ترتیب مهم نیست. اینگونه هم کار می‌کند:
 
 ```js
-// changed the order in let {...}
+// تغییر دادیم let {...} ترتیب را در
 let {height, width, title} = { title: "Menu", height: 200, width: 100 }
 ```
 
-The pattern on the left side may be more complex and specify the mapping between properties and variables.
+الگوی سمت راست ممکن است پیچیده‌تر باشد و رابطه بین ویژگی‌ها و متغیرها را تعیین کند.
 
-If we want to assign a property to a variable with another name, for instance, make `options.width` go into the variable named `w`, then we can set the variable name using a colon:
+اگر ما بخواهیم که یک ویژگی را به یک متغیر با نامی دیگر تخصیص بدهیم، برای مثل، کاری کنیم که `options.width` در متغیری به نام `w` ذخیره شود، می‌توانیم اسم متغیر یا با استفاده از دو نقطه تنظیم کنیم:
 
 ```js run
 let options = {
@@ -288,9 +288,9 @@ alert(w);      // 100
 alert(h);      // 200
 ```
 
-The colon shows "what : goes where". In the example above the property `width` goes to `w`, property `height` goes to `h`, and `title` is assigned to the same name.
+دو نقطه نشان می‌دهد که «چه چیزی : کجا ذخیره می‌شود». در مثال بالا ویژگی `width` درون `w`، ویژگی `height` درون `h` ذخیره و `title` به اسمی مشابه با خودش تخصیص داده می‌شود.
 
-For potentially missing properties we can set default values using `"="`, like this:
+برای ویژگی‌هایی که ممکن است موجود نباشند ما می‌توانیم با استفاده از `"="` مقدار پیش‌فرض قرار دهیم، مثلا اینگونه:
 
 ```js run
 let options = {
@@ -306,9 +306,9 @@ alert(width);  // 100
 alert(height); // 200
 ```
 
-Just like with arrays or function parameters, default values can be any expressions or even function calls. They will be evaluated if the value is not provided.
+درست مانند آرایه‌ها یا پارامترهای تابع، مقدارهای پیش‌فرض می‌توانند هر عبارتی یا حتی فراخوانی تابع باشند. اگر مقدار موجود نباشد، آنها ارزیابی می‌شوند.
 
-In the code below `prompt` asks for `width`, but not for `title`:
+در کد زیر `prompt` برای `width` درخواست می‌کند اما برای `title` نه:
 
 ```js run
 let options = {
@@ -320,10 +320,10 @@ let {width = prompt("width?"), title = prompt("title?")} = options;
 */!*
 
 alert(title);  // Menu
-alert(width);  // (whatever the result of prompt is)
+alert(width);  // (باشد prompt هر چیزی که نتیجه)
 ```
 
-We also can combine both the colon and equality:
+همچنین ما می‌توانیم دو نقطه و برابر قرار دادن را با هم ترکیب کنیم:
 
 ```js run
 let options = {
@@ -339,7 +339,7 @@ alert(w);      // 100
 alert(h);      // 200
 ```
 
-If we have a complex object with many properties, we can extract only what we need:
+اگر ما یک شیء پیچیده با تعداد زیادی ویژگی داشته باشیم، می‌توانیم فقط چیزی که نیاز داریم را استخراج کنیم:
 
 ```js run
 let options = {
@@ -348,7 +348,7 @@ let options = {
   height: 200
 };
 
-// only extract title as a variable
+// را به عنوان متغیر استخراج کنید title فقط
 let { title } = options;
 
 alert(title); // Menu
