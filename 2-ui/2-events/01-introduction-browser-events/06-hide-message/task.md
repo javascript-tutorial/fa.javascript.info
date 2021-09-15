@@ -2,12 +2,12 @@ importance: 5
 
 ---
 
-# Add a closing button
+# دکمه بسته‌شدن اضافه کنید
 
-There's a list of messages.
+لیستی از پیام‌ها موجود است.
 
-Use JavaScript to add a closing button to the right-upper corner of each message.
+با استفاده از جاوااسکریپت یک دکمه بستن به گوشه بالا راست هر پیام اضافه کنید.
 
-The result should look like this:
+نتیجه باید چنین چیزی باشد:
 
 [iframe src="solution" height=450]

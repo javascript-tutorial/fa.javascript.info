@@ -1,17 +1,17 @@
-The images ribbon can be represented as `ul/li` list of images `<img>`.
+نوار عکس‌ها را می‌توان به عنوان یک لیست `ul/li‍` شامل عکس‌ها `<img>` نشان داد.
 
-Normally, such a ribbon is wide, but we put a fixed-size `<div>` around to "cut" it, so that only a part of the ribbon is visible:
+معمولا، چنین نوار عریض است، اما ما یک `<div>` با سیز ثایت دور قرار می‌دهیم تا آنرا "ببریم". با اینکار فقط قستمی از آن نمایش داده می‌شود:
 
 ![](carousel1.svg)
 
-To make the list show horizontally we need to apply correct CSS properties for `<li>`, like `display: inline-block`.
+برا اینکه لیست را افقی نمایش دهیم باید خصوصیات CSS‌ درستی را برای `<li>` نسبت دهیم. مثلا `display: inline-block`.
 
-For `<img>` we should also adjust `display`, because by default it's `inline`. There's extra space reserved under `inline` elements for "letter tails", so we can use `display:block` to remove it.
+برای `<img>` باید `display` را تغییر دهیم. چرا که مقدار پیشفرض آن `inline` است. فضای رزورشده اضافی زیر عناصر `inline` قرار دارد (برای "letter tail" ها)، برای حذف آن می‌توانیم از `display:block` کمک بگیریم.
 
-To do the scrolling, we can shift `<ul>`. There are many ways to do it, for instance by changing `margin-left` or (better performance) use `transform: translateX()`:
+برای پیمایش کردن، می‌توانیم `<ul>` را تغییر مکان دهیم. راه‌های زیادی برای این کار وجود دارد. برای مثال عوض کردن مقدار `margin-left` یا (برای کارایی بالاتر) استفاده از `transform: translateX()‍`:
 
 ![](carousel2.svg)
 
-The outer `<div>` has a fixed width, so "extra" images are cut.
+‍`<div>` بیرونی طول ثابتی دارد. پس عکس‌های "اضافه" برش داده می‌شوند.
 
-The whole carousel is a self-contained "graphical component" on the page, so we'd better wrap it into a single `<div class="carousel">` and style things inside it.
+همه‌ی این اسلایدر یک حزء گرافیکی مستقل روی صحفه است. پس بهتر است آنرا درون یک `<div class="carousel">` قرار دهیم و اجزای درون آنرا استایل دهیم
