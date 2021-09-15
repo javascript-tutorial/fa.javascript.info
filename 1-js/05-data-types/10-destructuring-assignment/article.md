@@ -380,36 +380,36 @@ alert(rest.height);  // 200
 alert(rest.width);   // 100
 ```
 
-````smart header="Gotcha if there's no `let`"
-In the examples above variables were declared right in the assignment: `let {…} = {…}`. Of course, we could use existing variables too, without `let`. But there's a catch.
+````smart header="اگر `let` وجود نداشته باشد گرفتار می‌شویم"
+در مثال‌های بالا متغیرها دقیقا درون مقداردهی تعریف شدند: `let {…} = {…}`. قطعا ما می‌توانستیم بدون `let`، از متغیرهای موجود هم استفاده کنیم. اما یک مشکل وجود دارد.
 
-This won't work:
+این کار نمی‌کند:
 ```js run
 let title, width, height;
 
-// error in this line
+// در این خط ارور می‌گیریم
 {title, width, height} = {title: "Menu", width: 200, height: 100};
 ```
 
-The problem is that JavaScript treats `{...}` in the main code flow (not inside another expression) as a code block. Such code blocks can be used to group statements, like this:
+مشکل اینجاست که جاوااسکریپت در کد اصلی (نه درون یک عبارت دیگر) با `{...}` به عنوان یک بلوک کد رفتار می‌کند. چنین بلوک‌های کدی می‌توانند برای گروه‌بندی دستورات استفاده شوند، مثلا اینگونه:
 
 ```js run
 {
-  // a code block
-  let message = "Hello";
+  // یک بلوک کد
+  let message = "سلام";
   // ...
   alert( message );
 }
 ```
 
-So here JavaScript assumes that we have a code block, that's why there's an error. We want destructuring instead.
+پس اینجا جاوااسکریپت فرض می‌کند که ما یک بلوک کد داریم و به همین دلیل است که ارور ایجاد می‌شود. به جای آن ما تجزیه ساختار می‌خواهیم.
 
-To show JavaScript that it's not a code block, we can wrap the expression in parentheses `(...)`:
+برای اینکه به جاوااسکریپت نشان دهیم که این یک بلوک کد نیست، می‌توانیم عبارت را درون پرانتز `(...)` قرار دهیم:
 
 ```js run
 let title, width, height;
 
-// okay now
+// الان مناسب است
 *!*(*/!*{title, width, height} = {title: "Menu", width: 200, height: 100}*!*)*/!*;
 
 alert( title ); // Menu
