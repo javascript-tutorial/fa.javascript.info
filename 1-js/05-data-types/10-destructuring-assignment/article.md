@@ -457,11 +457,11 @@ alert(item2);  // Donut
 
 در نظر داشته باشید که هیچ متغیری برای `size` و `items` وجود ندارد چون به جای آنها، ما محتوایشان را می‌خواهیم.
 
-## Smart function parameters
+## پارامترهای هوشمند تابع
 
-There are times when a function has many parameters, most of which are optional. That's especially true for user interfaces. Imagine a function that creates a menu. It may have a width, a height, a title, items list and so on.
+بعضی اوقات پیش می‌آید که یک تابع پارامترهای زیادی داشته باشد که اکثر آنها الزامی نیستند. خصوصا برای رابط کاربری این اتفاق می‌افتد. یک تابع را تصور کنید که یک منو ایجاد می‌کند. این منو ممکن است دارای طول(width)، ارتفاع(height)، عنوان(title)، لیستی از کالاها و غیره باشد.
 
-Here's a bad way to write such function:
+این یک راه برای نوشتن چنین تابعی است:
 
 ```js
 function showMenu(title = "Untitled", width = 200, height = 100, items = []) {
@@ -469,32 +469,32 @@ function showMenu(title = "Untitled", width = 200, height = 100, items = []) {
 }
 ```
 
-In real-life, the problem is how to remember the order of arguments. Usually IDEs try to help us, especially if the code is well-documented, but still... Another problem is how to call a function when most parameters are ok by default.
+در واقعیت، مشکل این است که چگونه ترتیب آرگومان‌ها را به یاد بسپاریم. معمولا محیط‌های کدنویسی (IDE) سعی می‌کنند به ما کمک کنند، مخصوصا اگر کد، مستند خوبی داشته باشد اما باز هم... مشکل دیگری که وجود دارد این است که چگونه یک تابع را زمانی که اکثر پارامترها به صورت پیش‌فرض مشکلی ندارند فراخوانی کنیم.
 
-Like this?
+مثلا اینگونه؟
 
 ```js
-// undefined where default values are fine
+// می‌گذاریم undefined جایی که مقدارهای پیش‌فرض مشکلی ندارند
 showMenu("My Menu", undefined, undefined, ["Item1", "Item2"])
 ```
 
-That's ugly. And becomes unreadable when we deal with more parameters.
+این قشنگ نیست. و زمانی که با پارامترهای بیشتری سر و کار داشته باشیم خوانایی کمتری دارد.
 
-Destructuring comes to the rescue!
+تجزیه ساختار به نجات ما می‌آید!
 
-We can pass parameters as an object, and the function immediately destructurizes them into variables:
+ما می‌توانیم پارامترها را به عنوان شیء رد کنیم و تابع بلافاصله با تجزیه ساختار، آنها را در متغیرها پخش می‌کند:
 
 ```js run
-// we pass object to function
+// ما شیء را به تابع می‌دهیم
 let options = {
   title: "My menu",
   items: ["Item1", "Item2"]
 };
 
-// ...and it immediately expands it to variables
+// و تابع بلافاصله آن را در متغیرها پراکنده می‌کند...
 function showMenu(*!*{title = "Untitled", width = 200, height = 100, items = []}*/!*) {
-  // title, items – taken from options,
-  // width, height – defaults used
+  // ،از شیء گرفته شده‌اند title ،items
+  // ،مقدارهای پیش‌فرض استفاده شدند width ،height
   alert( `${title} ${width} ${height}` ); // My Menu 200 100
   alert( items ); // Item1, Item2
 }
@@ -502,7 +502,7 @@ function showMenu(*!*{title = "Untitled", width = 200, height = 100, items = []}
 showMenu(options);
 ```
 
-We can also use more complex destructuring with nested objects and colon mappings:
+همچنین می‌توانیم از تجزیه ساختار پیچیده‌تری همراه با شیءهای تودرتو و طراحی دو نقطه‌ای استفاده کنیم:
 
 ```js run
 let options = {
@@ -513,9 +513,9 @@ let options = {
 *!*
 function showMenu({
   title = "Untitled",
-  width: w = 100,  // width goes to w
-  height: h = 200, // height goes to h
-  items: [item1, item2] // items first element goes to item1, second to item2
+  width: w = 100,  // می‌رود w درون width
+  height: h = 200, // می‌رود h درون height
+  items: [item1, item2] // می‌رود item2 و دومی درون item1 درون items اولین المان
 }) {
 */!*
   alert( `${title} ${w} ${h}` ); // My Menu 100 200
@@ -526,7 +526,7 @@ function showMenu({
 showMenu(options);
 ```
 
-The full syntax is the same as for a destructuring assignment:
+سینتکس کامل برای یک مقداردهی تجزیه‌کننده‌ی ساختار یکسان است:
 ```js
 function({
   incomingProperty: varName = defaultValue
@@ -534,17 +534,17 @@ function({
 })
 ```
 
-Then, for an object of parameters, there will be a variable `varName` for property `incomingProperty`, with `defaultValue` by default.
+سپس به صورت پیش‌فرض، برای یک شیء شامل پارامترها، یک متغیر `varName` (اسم متغیر) برای ویژگی `incomingProperty` (ویژگی ورودی)، همراه با `defaultValue` وجود خواهد داشت.
 
-Please note that such destructuring assumes that `showMenu()` does have an argument. If we want all values by default, then we should specify an empty object:
+لطفا در نظر داشته باشید که چنین تجزیه ساختاری فرض می‌کند که `showMenu()` یک آرگومان دارد. اگر ما تمام مقدارهای پیش‌فرض را بخواهیم، پس باید یک شیء خالی مشخص کنیم:
 
 ```js
-showMenu({}); // ok, all values are default
+showMenu({}); // خب، تمام مقدارها پیش‌فرض هستند
 
-showMenu(); // this would give an error
+showMenu(); // این ارور خواهد داد
 ```
 
-We can fix this by making `{}` the default value for the whole object of parameters:
+ما می‌توانیم با قرار دادن `{}` به عنوان مقدار پیش‌فرض برای تمام شیء شامل پارامترها این مشکل را رفع کنیم:
 
 ```js run
 function showMenu({ title = "Menu", width = 100, height = 200 }*!* = {}*/!*) {
@@ -554,7 +554,7 @@ function showMenu({ title = "Menu", width = 100, height = 200 }*!* = {}*/!*) {
 showMenu(); // Menu 100 200
 ```
 
-In the code above, the whole arguments object is `{}` by default, so there's always something to destructurize.
+در کد بالا، تمام شیء آرگومان‌ها به صورت پیش‌فرض `{}` است پس همیشه چیزی برای تجزیه ساختار وجود دارد.
 
 ## Summary
 
