@@ -416,11 +416,11 @@ alert( title ); // Menu
 ```
 ````
 
-## Nested destructuring
+## تجزیه ساختار تودرتو
 
-If an object or an array contain other nested objects and arrays, we can use more complex left-side patterns to extract deeper portions.
+اگر یک شیء یا آرایه، شیء و آرایه‌های تودرتو دیگری را شامل شود، ما می‌توانیم از الگوری پیچیده‌تری در سمت چپ برای استخراج قسمت‌های عمیق‌تر استفاده کنیم.
 
-In the code below `options` has another object in the property `size` and an array in the property `items`. The pattern at the left side of the assignment has the same structure to extract values from them:
+در کد زیر `options` یک شیء دیگری درون ویژگی `size` و یک آرایه درون ویژگی `items` دارد. الگوی سمت چپ مقداردهی ساختار یکسانی برای استخراج مقدار از آنها را دارد:
 
 ```js run
 let options = {
@@ -432,14 +432,14 @@ let options = {
   extra: true   
 };
 
-// destructuring assignment split in multiple lines for clarity
+// مقداردهی تجزیه‌کننده‌ی ساختار برای واضح بودن در چند خط قرار گرفته است
 let {
-  size: { // put size here
+  size: { // را اینجا قرار دهید size
     width,
     height
   },
-  items: [item1, item2], // assign items here
-  title = "Menu" // not present in the object (default value is used)
+  items: [item1, item2], // را اینجا تخصیص دهید items
+  title = "Menu" // در شیء وجود ندارد (مقدار پیش‌فرض استفاده می‌شود)
 } = options;
 
 alert(title);  // Menu
@@ -449,13 +449,13 @@ alert(item1);  // Cake
 alert(item2);  // Donut
 ```
 
-All properties of `options` object except `extra` that is absent in the left part, are assigned to corresponding variables:
+تمام ویژگی‌های شیء `options` به جز `extra` که در سمت چپ وجود ندارد، به متغیرهای متناظر خود تخصیص داده شده‌اند:
 
 ![](destructuring-complex.svg)
 
-Finally, we have `width`, `height`, `item1`, `item2` and `title` from the default value.
+سرانجام، ما `width`، `height`، `item1`، `item2` و متغیر `title` را از مقدار پیش‌فرض داریم.
 
-Note that there are no variables for `size` and `items`, as we take their content instead.
+در نظر داشته باشید که هیچ متغیری برای `size` و `items` وجود ندارد چون به جای آنها، ما محتوایشان را می‌خواهیم.
 
 ## Smart function parameters
 
