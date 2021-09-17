@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# The maximal salary 
+# حقوق حداکثر
 
-There is a `salaries` object:
+یک شیء `salaries` داریم:
 
 ```js
 let salaries = {
@@ -14,9 +14,9 @@ let salaries = {
 };
 ```
 
-Create the function `topSalary(salaries)` that returns the name of the top-paid person.
+تابع `topSalary(salaries)` بسازید که اسم شخصی با بیشترین حقوق را برگرداند.
 
-- If `salaries` is empty, it should return `null`.
-- If there are multiple top-paid persons, return any of them.
+- اگر `salaries` خالی بود، باید `null` برگرداند.
+- اگر چند شخص با بیشترین حقوق وجود داشتند، یکی از آنها را برگرداند.
 
-P.S. Use `Object.entries` and destructuring to iterate over key/value pairs.
+پی‌نوشت: از `Object.entries` و تجزیه ساختار برای حلقه زدن در جفت‌های کلید/مقدار استفاده کنید.
