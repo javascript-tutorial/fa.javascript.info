@@ -556,24 +556,24 @@ showMenu(); // Menu 100 200
 
 در کد بالا، تمام شیء آرگومان‌ها به صورت پیش‌فرض `{}` است پس همیشه چیزی برای تجزیه ساختار وجود دارد.
 
-## Summary
+## خلاصه
 
-- Destructuring assignment allows for instantly mapping an object or array onto many variables.
-- The full object syntax:
+- مقداردهی تجزیه‌کننده‌ی ساختار به ما اجازه می‌دهد تا بلافاصله یک شیء یا آرایه را روی بسیاری از متغیرها ترسیم کنیم.
+- سینتکس کامل شیء:
     ```js
     let {prop : varName = default, ...rest} = object
     ```
 
-    This means that property `prop` should go into the variable `varName` and, if no such property exists, then the `default` value should be used.
+    این به این معنی است که ویژگی `prop` باید درون متغیر `varName` برود و اگر چنین ویژگی‌ای وجود نداشت، سپس مقدار `default` باید استفاده شود.
 
-    Object properties that have no mapping are copied to the `rest` object.
+    ویژگی‌های شیء که نقشی برای آنها وجود ندارد درون شیء `rest` کپی می‌شوند.
 
-- The full array syntax:
+- سینتکس کامل آرایه:
 
     ```js
     let [item1 = default, item2, ...rest] = array
     ```
 
-    The first item goes to `item1`; the second goes into `item2`, all the rest makes the array `rest`.
+    المان اول درون `item1` می‎رود؛ المان دوم درون `item2` می‌شود، تمام المان‌های باقی مانده آرایه `rest` را تشکیل می‌دهند.
 
-- It's possible to extract data from nested arrays/objects, for that the left side must have the same structure as the right one.
+- استخراج داده از آرایه/شیءهای تودرتو هم ممکن است، برای اینکار سمت چپ باید ساختار یکسانی با سمت راست داشته باشد.
