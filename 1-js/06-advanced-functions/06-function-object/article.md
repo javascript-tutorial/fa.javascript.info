@@ -122,7 +122,7 @@ function ask(question, ...handlers) {
 
 // برای جواب مثبت، هر دو کنترل‌کننده فراخوانی می‌شوند
 // برای جواب منفی، فقط دومی
-ask("Question?", () => alert('شما بله گفتید'), result => alert(result));
+ask("سوال؟", () => alert('شما بله گفتید'), result => alert(result));
 ```
 
 این یک مورد استفاده از [چندریختی](https://en.wikipedia.org/wiki/Polymorphism_(computer_science)) است -- رفتار متفاوت با آرگومان‌ها با توجه به نوع آنها یا در این مورد ما با توجه به `length`. این ایده در کتابخانه‌های جاوااسکریپت استفاده می‌شود.
