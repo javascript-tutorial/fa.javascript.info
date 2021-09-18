@@ -1,20 +1,20 @@
 
-# Function object, NFE
+# شیء تابع، NFE
 
-As we already know, a function in JavaScript is a value.
+همانطور که می‌دانیم، یک تابع در جاوااسکریپت یک مقدار است.
 
-Every value in JavaScript has a type. What type is a function?
+هر مقداری در جاوااسکریپت نوع دارد. تابع از چه نوعی است؟
 
-In JavaScript, functions are objects.
+در جاوااسکریپت، تابع‌ها شیء هستند.
 
-A good way to imagine functions is as callable "action objects". We can not only call them, but also treat them as objects: add/remove properties, pass by reference etc.
+یک راه خوب برای تصور کردن تابع‌ها، فکر کردن به آنها به عنوان «شیءهای عملکردی» قابل فراخوانی است. ما نه تنها می‌توانیم آنها را فرا بخوانیم بلکه می‌توانیم با آنها مانند شیءها رفتار کنیم: ویژگی‌ها را اضافه/حذف کنیم، آنها را توسط مرجع رد و بدل کنیم و غیره.
 
 
-## The "name" property
+## ویژگی "name"
 
-Function objects contain some useable properties.
+شیء تابع‌ها چند ویژگی قابل استفاده دارند.
 
-For instance, a function's name is accessible as the "name" property:
+برای مثال، اسم یک تابع با ویژگی "name" قابل دسترس است:
 
 ```js run
 function sayHi() {
@@ -24,29 +24,29 @@ function sayHi() {
 alert(sayHi.name); // sayHi
 ```
 
-What's kind of funny, the name-assigning logic is smart. It also assigns the correct name to a function even if it's created without one, and then immediately assigned:
+منطق مقداردهی اسم، هوشمندانه و جالب است. حتی زمانی که یک تابع بدون اسم ساخته و سریعا تخصیص داده شود، اسم درستی را برای مقداردهی استفاده می‌کند:
 
 ```js run
 let sayHi = function() {
   alert("Hi");
 };
 
-alert(sayHi.name); // sayHi (there's a name!)
+alert(sayHi.name); // sayHi (!یک اسم دارد)
 ```
 
-It also works if the assignment is done via a default value:
+اگر مقداردهی توسط یک مقدار پیش‌فرض انجام شود هم کار می‌کند:
 
 ```js run
 function f(sayHi = function() {}) {
-  alert(sayHi.name); // sayHi (works!)
+  alert(sayHi.name); // sayHi (!کار می‌کند)
 }
 
 f();
 ```
 
-In the specification, this feature is called a "contextual name". If the function does not provide one, then in an assignment it is figured out from the context.
+در مشخصات، این خاصیت «اسم زمینه‌ای» نامیده شده است. اگر تابع اسمی نداشته باشد، سپس در مقداردهی، از زمینه موجود پیدا می‌شود.
 
-Object methods have names too:
+متدهای شیءها هم اسم دارند:
 
 ```js run
 let user = {
@@ -65,21 +65,21 @@ alert(user.sayHi.name); // sayHi
 alert(user.sayBye.name); // sayBye
 ```
 
-There's no magic though. There are cases when there's no way to figure out the right name. In that case, the name property is empty, like here:
+اگرچه هیچ جادویی وجود ندارد. مواردی وجود دارند که راهی برای فهمیدن اسم درست وجود ندارد. در این صورت، ویژگی اسم (name) خالی است، مثل اینجا:
 
 ```js run
-// function created inside array
+// تابع درون آرایه ساخته شده است
 let arr = [function() {}];
 
-alert( arr[0].name ); // <empty string>
-// the engine has no way to set up the right name, so there is none
+alert( arr[0].name ); // <رشته خالی>
+// موتور راهی برای دریافت اسم درست ندارد، پس هیچی وجود ندارد
 ```
 
-In practice, however, most functions do have a name.
+اگرچه در عمل، اکثر تابع‌ها اسم دارند.
 
-## The "length" property
+## ویژگی "length"
 
-There is another built-in property "length" that returns the number of function parameters, for instance:
+یک ویژگی درون‌ساخت دیگر به نام "length" وجود دارد که تعداد پارامترهای تابع را برمی‌گرداند، برای مثال:
 
 ```js run
 function f1(a) {}
@@ -91,20 +91,20 @@ alert(f2.length); // 2
 alert(many.length); // 2
 ```
 
-Here we can see that rest parameters are not counted.
+اینجا می‌بینیم که پارامترهای رِست شمرده نمی‌شوند.
 
-The `length` property is sometimes used for [introspection](https://en.wikipedia.org/wiki/Type_introspection) in functions that operate on other functions.
+ویژگی `length` بعضی اوقات برای [درون‌نگری](https://en.wikipedia.org/wiki/Type_introspection) در تابع‌هایی که بر روی تابع‌های دیگر کاری انجام می‌دهند استفاده می‌شود.
 
-For instance, in the code below the `ask` function accepts a `question` to ask and an arbitrary number of `handler` functions to call.
+برای مثال، در کد زیر تابع `ask` یک `question` (سوال) برای پرسیدن و تعدادی تابع `handler` (کنترل‌کننده) برای فراخوانی دریافت می‌کند.
 
-Once a user provides their answer, the function calls the handlers. We can pass two kinds of handlers:
+زمانی که کاربر جواب خود را وارد کرد، تابع کنترل‌کننده‌ها را فراخوانی می‌کند. ما می‌توانیم دو نوع کنترل‌کننده را رد کنیم:
 
-- A zero-argument function, which is only called when the user gives a positive answer.
-- A function with arguments, which is called in either case and returns an answer.
+- یک تابع با صفر آرگومان که فقط زمانی که کاربر یک جواب مثبت می‌دهد فراخوانی شود.
+- یک تابع با چند آرگومان که در هر شرایطی فراخوانی می‌شود و یک جواب برمی‌گرداند.
 
-To call `handler` the right way, we examine the `handler.length` property.
+برای اینکه `handler` را به درستی فراخوانی کنیم، ویژگی `handler.length` را بررسی می‌کنیم.
 
-The idea is that we have a simple, no-arguments handler syntax for positive cases (most frequent variant), but are able to support universal handlers as well:
+ایده این است که ما یک سینتکس کنترل‌کننده ساده و بدون آرگومان برای موارد مثبت داریم (نوعی که بیشتر اتفاق می‌افتد) اما می‌توانیم کنترل‌کننده‌های کلی را هم پوشش دهیم:
 
 ```js run
 function ask(question, ...handlers) {
@@ -120,12 +120,12 @@ function ask(question, ...handlers) {
 
 }
 
-// for positive answer, both handlers are called
-// for negative answer, only the second one
-ask("Question?", () => alert('You said yes'), result => alert(result));
+// برای جواب مثبت، هر دو کنترل‌کننده فراخوانی می‌شوند
+// برای جواب منفی، فقط دومی
+ask("Question?", () => alert('شما بله گفتید'), result => alert(result));
 ```
 
-This is a particular case of so-called [polymorphism](https://en.wikipedia.org/wiki/Polymorphism_(computer_science)) -- treating arguments differently depending on their type or, in our case depending on the `length`. The idea does have a use in JavaScript libraries.
+این یک مورد استفاده از [چندریختی](https://en.wikipedia.org/wiki/Polymorphism_(computer_science)) است -- رفتار متفاوت با آرگومان‌ها با توجه به نوع آنها یا در این مورد ما با توجه به `length`. این ایده در کتابخانه‌های جاوااسکریپت استفاده می‌شود.
 
 ## Custom properties
 
