@@ -127,40 +127,40 @@ ask("سوال؟", () => alert('شما بله گفتید'), result => alert(resul
 
 این یک مورد استفاده از [چندریختی](https://en.wikipedia.org/wiki/Polymorphism_(computer_science)) است -- رفتار متفاوت با آرگومان‌ها با توجه به نوع آنها یا در این مورد ما با توجه به `length`. این ایده در کتابخانه‌های جاوااسکریپت استفاده می‌شود.
 
-## Custom properties
+## ویژگی‌های سفارشی
 
-We can also add properties of our own.
+ما می‌توانیم ویژگی‌هایی از خودمان را هم اضافه کنیم.
 
-Here we add the `counter` property to track the total calls count:
+اینجا می‌توانیم ویژگی `counter` را اضافه کنیم تا تعداد تمام فراخوانی‌ها را پیگیری کنیم:
 
 ```js run
 function sayHi() {
-  alert("Hi");
+  alert("سلام");
 
   *!*
-  // let's count how many times we run
+  // بیایید تعداد اجرا کردن را بشماریم
   sayHi.counter++;
   */!*
 }
-sayHi.counter = 0; // initial value
+sayHi.counter = 0; // مقدار اولیه
 
-sayHi(); // Hi
-sayHi(); // Hi
+sayHi(); // سلام
+sayHi(); // سلام
 
-alert( `Called ${sayHi.counter} times` ); // Called 2 times
+alert( `${sayHi.counter} بار فراخوانی شد` ); // دو بار فراخوانی شد
 ```
 
-```warn header="A property is not a variable"
-A property assigned to a function like `sayHi.counter = 0` does *not* define a local variable `counter` inside it. In other words, a property `counter` and a variable `let counter` are two unrelated things.
+```warn header="ویژگی متغیر نیست"
+یک ویژگی که به یک تابع تخصیص داده شود مانند `sayHi.counter = 0`، متغیر محلی `counter` را درون آن تعریف *نمی‌کند*. به عبارتی دیگر، یک ویژگی `counter` و متغیر `let counter` دو چیز غیر مرتبط هستند.
 
-We can treat a function as an object, store properties in it, but that has no effect on its execution. Variables never use function properties and vice versa. These are just parallel worlds.
+ما می‌توانیم با یک تابع به عنوان یک شیء رفتار کنیم، ویژگی‌هایی را درون آن ذخیره کنیم اما این موضوع روی اجرا شدن آن هیچ تاثیری ندارد. متغیرها هیچوقت از ویژگی‌های تابع استفاده نمی‌کنند و برعکس. اینها فقط دنیاهای موازی هستند.
 ```
 
-Function properties can replace closures sometimes. For instance, we can rewrite the counter function example from the chapter <info:closure> to use a function property:
+ویژگی‌های تابع می‌توانند بعضی اوقات جایگزین کلوژرها شوند. برای مثال، ما می‌توانیم مثال تابع شمارنده را از فصل <info:closure> بازنویسی کنیم تا از ویژگی تابع استفاده کند:
 
 ```js run
 function makeCounter() {
-  // instead of:
+  // :به جای این
   // let count = 0
 
   function counter() {
@@ -177,11 +177,11 @@ alert( counter() ); // 0
 alert( counter() ); // 1
 ```
 
-The `count` is now stored in the function directly, not in its outer Lexical Environment.
+`count` حالا در به صورت مستقیم در خود تابع ذخیره شده است نه در محیط لغوی بیرونی آن.
 
-Is it better or worse than using a closure?
+این روشِ استفاده از کلوژر بهتر است یا بدتر؟
 
-The main difference is that if the value of `count` lives in an outer variable, then external code is unable to access it. Only nested functions may modify it. And if it's bound to a function, then such a thing is possible:
+تفاوت اصلی این است که اگر مقدار `count` در یک متغیر بیرونی وجود داشته باشد، سپس کد بیرونی نمی‌تواند به آن دسترسی داشته باشد. تنها تابع‌های تودرتو ممکن است آن را تغییر دهند. و اگر فقط به یک تابع متصل باشد، سپس چنین چیزی امکان دارد:
 
 ```js run
 function makeCounter() {
@@ -203,7 +203,7 @@ alert( counter() ); // 10
 */!*
 ```
 
-So the choice of implementation depends on our aims.
+پس انتخاب نحوه پیاده‌سازی به اهداف ما بستگی دارد.
 
 ## Named Function Expression
 
