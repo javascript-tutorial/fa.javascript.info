@@ -205,75 +205,74 @@ alert( counter() ); // 10
 
 پس انتخاب نحوه پیاده‌سازی به اهداف ما بستگی دارد.
 
-## Named Function Expression
+## Function Expression نام‌گذاری شده
 
-Named Function Expression, or NFE, is a term for Function Expressions that have a name.
+Function Expression نام‌گذاری شده، یا NFE، یک عبارت برای Function Expressionهایی است که یک اسم دارند.
 
-For instance, let's take an ordinary Function Expression:
+برای مثال، بیایید یک Function Expression معمولی را فرض کنیم:
 
 ```js
 let sayHi = function(who) {
-  alert(`Hello, ${who}`);
+  alert(`${who} سلام،`);
 };
 ```
 
-And add a name to it:
+و یک اسم به آن بدهیم:
 
 ```js
 let sayHi = function *!*func*/!*(who) {
-  alert(`Hello, ${who}`);
+  alert(`سلام، ${who}`);
 };
 ```
 
-Did we achieve anything here? What's the purpose of that additional `"func"` name?
+آیا ما اینجا چیزی بدست آوردیم؟ هدف اسم اضافی `"func"` چیست؟
 
-First let's note, that we still have a Function Expression. Adding the name `"func"` after `function` did not make it a Function Declaration, because it is still created as a part of an assignment expression.
+در ابتدا بیایید این را در نظر بگیریم که ما هنوز هم یک Function Expression داریم. اضافه کردن اسم `"func"` بعد از `function` آن را تبدیل به Function Declaration نکرد چون هنوز هم به عنوان بخشی از یک مقداردهی ساخته شده است.
 
-Adding such a name also did not break anything.
+اضافه کردن چنین اسمی چیزی را خراب نکرد.
 
-The function is still available as `sayHi()`:
+تابع هنوز هم با `sayHi()` قابل دسترس است:
 
 ```js run
 let sayHi = function *!*func*/!*(who) {
-  alert(`Hello, ${who}`);
+  alert(`سلام، ${who}`);
 };
 
-sayHi("John"); // Hello, John
+sayHi("John"); // John ،سلام
 ```
 
-There are two special things about the name `func`, that are the reasons for it:
+دو چیز خاص درباره اسم `func` وجود دارد که دلیل‌هایی برای آن داریم:
 
-1. It allows the function to reference itself internally.
-2. It is not visible outside of the function.
+1. این اسم به تابع اجازه می‌دهد که به صورت درونی به خودش رجوع کند.
+2. این اسم بیرون از تابع قابل رویت نیست.
 
-For instance, the function `sayHi` below calls itself again with `"Guest"` if no `who` is provided:
+برای مثال، تابع `sayHi` پایین اگر هیچ مقداری برای `who` تعیین نشود، خودش را با `"Guest"` صدا می‌زند:
 
 ```js run
 let sayHi = function *!*func*/!*(who) {
   if (who) {
-    alert(`Hello, ${who}`);
+    alert(`سلام، ${who}`);
   } else {
 *!*
-    func("Guest"); // use func to re-call itself
+    func("Guest"); // از تابع برای اینکه خودش را دوباره صدا بزند استفاده کنید
 */!*
   }
 };
 
-sayHi(); // Hello, Guest
+sayHi(); // Guest ،سلام
 
-// But this won't work:
-func(); // Error, func is not defined (not visible outside of the function)
+// :اما این کار نخواهد کرد
+func(); // تعریف نشده است (بیرون از تابع قابل رویت نیست) func ،ارور
 ```
 
-Why do we use `func`? Maybe just use `sayHi` for the nested call?
+چرا ما از `func` استفاده می‌کنیم؟ شاید فقط از `sayHi` برای فراخوانی تودرتو باید استفاده کنیم؟
 
-
-Actually, in most cases we can:
+در واقع، در اکثر موارد ما می‌توانیم این کار را انجام دهیم:
 
 ```js
 let sayHi = function(who) {
   if (who) {
-    alert(`Hello, ${who}`);
+    alert(`سلام، ${who}`);
   } else {
 *!*
     sayHi("Guest");
@@ -282,15 +281,15 @@ let sayHi = function(who) {
 };
 ```
 
-The problem with that code is that `sayHi` may change in the outer code. If the function gets assigned to another variable instead, the code will start to give errors:
+مشکل این کد، امکان تغییر `sayHi` در کد بیرونی است. اگر تابع به یک متغیر دیگر تخصیص داده شود، کد شروع به ایجاد ارور می‌کند:
 
 ```js run
 let sayHi = function(who) {
   if (who) {
-    alert(`Hello, ${who}`);
+    alert(`سلام، ${who}`);
   } else {
 *!*
-    sayHi("Guest"); // Error: sayHi is not a function
+    sayHi("Guest"); // تابع نیست sayHi :ارور
 */!*
   }
 };
@@ -298,22 +297,22 @@ let sayHi = function(who) {
 let welcome = sayHi;
 sayHi = null;
 
-welcome(); // Error, the nested sayHi call doesn't work any more!
+welcome(); // !دیگر کار نمی‌کند sayHi ارور، فراخوانی تودرتوی
 ```
 
-That happens because the function takes `sayHi` from its outer lexical environment. There's no local `sayHi`, so the outer variable is used. And at the moment of the call that outer `sayHi` is `null`.
+دلیل بروز ارور این است که تابع `sayHi` را از محیط لغوی بیرونی دریافت می‌کند. هیچ `sayHi` محلی وجود ندارد پس متغیر بیرونی استفاده می‌شود. و در زمان فراخوانی `sayHi` بیرونی برابر با `null` است.
 
-The optional name which we can put into the Function Expression is meant to solve exactly these kinds of problems.
+اسم اختیاری که ما می‌توانیم در Function Expression قرار می‌دهیم قرار است که دقیقا این دسته از مشکلات را حل کند.
 
-Let's use it to fix our code:
+بیایید از آن برای رفع مشکل کد خود استفاده کنیم:
 
 ```js run
 let sayHi = function *!*func*/!*(who) {
   if (who) {
-    alert(`Hello, ${who}`);
+    alert(`سلام، ${who}`);
   } else {
 *!*
-    func("Guest"); // Now all fine
+    func("Guest"); // حالا همه چیز درست است
 */!*
   }
 };
@@ -321,17 +320,17 @@ let sayHi = function *!*func*/!*(who) {
 let welcome = sayHi;
 sayHi = null;
 
-welcome(); // Hello, Guest (nested call works)
+welcome(); // (فراخوانی تودرتو کار می‌کند) Guest ،سلام
 ```
 
-Now it works, because the name `"func"` is function-local. It is not taken from outside (and not visible there). The specification guarantees that it will always reference the current function.
+حالا کار می‌کند چون اسم `"func"` یک تابع محلی است. این اسم از بیرون دریافت نمی‌شود (و آنجا هم قابل رویت نیست). مشخصات زبان تضمین می‌کند که این اسم همیشه به تابع کنونی رجوع می‌کند.
 
-The outer code still has its variable `sayHi` or `welcome`. And `func` is an "internal function name", how the function can call itself internally.
+کد بیرونی هنوز هم متغیر `sayHi` یا `welcome` خود را دارد. و `func` یک «اسم تابع درونی» است، جوری که تابع می‌توانند از درون خودش را فراخوانی کند.
 
-```smart header="There's no such thing for Function Declaration"
-The "internal name" feature described here is only available for Function Expressions, not for Function Declarations. For Function Declarations, there is no syntax for adding an "internal" name.
+```smart header="چنین چیزی برای Function Declaration وجود ندارد"
+خصوصیت «اسم درونی» که اینجا توضیح داده شد فقط برای Function Expessionها قابل استفاده است نه برای Function Declarationها. برای Function Declarationها، سینتکسی برای اضاف کردن اسم «درونی» وجود ندارد.
 
-Sometimes, when we need a reliable internal name, it's the reason to rewrite a Function Declaration to Named Function Expression form.
+بعضی‌اوقات، نیاز به یک اسم درونی قابل، دلیلی برای نوشتن دوباره‌ی یک Function Declaration به Function Expression نام‌گذاری‌شده است.
 ```
 
 ## Summary
