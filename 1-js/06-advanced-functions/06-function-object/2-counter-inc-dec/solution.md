@@ -1,2 +1,2 @@
 
-The solution uses `count` in the local variable, but addition methods are written right into the `counter`. They share the same outer lexical environment and also can access the current `count`.
+راه‌حل از `count` در متغیر محلی استفاده می‌کند اما متدهای اضافی درست درون `counter` نوشته شده‌اند. آنها محیط لغوی بیرونی یکسان را به اشتراک می‌گذارند و همچنین می‌توانند به `count` کنونی دسترسی پیدا کنند.
