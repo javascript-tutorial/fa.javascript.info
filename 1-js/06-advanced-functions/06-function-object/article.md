@@ -333,20 +333,20 @@ welcome(); // (فراخوانی تودرتو کار می‌کند) Guest ،سل�
 بعضی‌اوقات، نیاز به یک اسم درونی قابل، دلیلی برای نوشتن دوباره‌ی یک Function Declaration به Function Expression نام‌گذاری‌شده است.
 ```
 
-## Summary
+## خلاصه
 
-Functions are objects.
+تابع‌ها شیء هستند.
 
-Here we covered their properties:
+اینجا ما ویژگی‌های آنها را پوشش دادیم:
 
-- `name` -- the function name. Exists not only when given in the function definition, but also for assignments and object properties.
-- `length` -- the number of arguments in the function definition. Rest parameters are not counted.
+- `name` -- اسم تابع. نه تنها در تعریف یک تابع وجود دارد، بلکه در مقداردهی‌ها و ویژگی‌های شیء هم موجود است.
+- `length` -- تعداد آرگومان‌ها در تعریف تابع. پارامترهای رست شمرده نمی‌شوند.
 
-If the function is declared as a Function Expression (not in the main code flow), and it carries the name, then it is called a Named Function Expression. The name can be used inside to reference itself, for recursive calls or such.
+اگر تابعی به عنوان Function Expression تعریف شود (نه در جریان اصلی کد)، و اسمی داشته باشد، سپس به آن یک Function Expression نام‌گذاری شده می‌گویند. اسم می‌تواند درون آن برای رجوع به خودش استفاده شود، مثلا برای فراخوانی‌های بازگشتی یا چنین چیزی.
 
-Also, functions may carry additional properties. Many well-known JavaScript libraries make great use of this feature.
+همچنین، تابع‌ها ممکن است ویژگی‌های اضافی هم داشته باشند. تعداد زیادی از کتابخانه‌های شناخته‌شده‌ی جاوااسکریپت از این خاصیت خیلی استفاده می‌کنند.
 
-They create a "main" function and attach many other "helper" functions to it. For instance, the [jQuery](https://jquery.com) library creates a function named `$`. The [lodash](https://lodash.com) library creates a function `_`, and then adds `_.clone`, `_.keyBy` and other properties to it (see the [docs](https://lodash.com/docs) when you want to learn more about them). Actually, they do it to lessen their pollution of the global space, so that a single library gives only one global variable. That reduces the possibility of naming conflicts.
+آنها یک تابع «اصلی» می‌سازند و تعداد زیادی از تابع‍‌های «کمکی» را به آن متصل می‌کنند. برای مثال، کتابخانه [jQuery](https://jquery.com) یک تابع به نام `$` می‌سازد. کتابخانه [lodash](https://lodash.com) یک تابع `_` می‌سازد و سپس ویژگی‌های `_.clone`، `_keyBy` و بقیه ویژگی‌ها را به آن اضافه می‌کند (زمانی که می‌خواهید درباره آنها بیشتر بدانید، [مستندات](https://lodash.com/docs) را ببینید). در واقع، آنها این کار را برای کاهش آلودگی فضای گلوبال انجام می‌دهند تا یک کتابخانه فقط یک متغیر گلوبال داشته باشد. این باعث کاهش احتمال وقوع تناقض در نام‌گذاری می‌شود.
 
 
-So, a function can do a useful job by itself and also carry a bunch of other functionality in properties.
+پس یک تابع، می‌تواند توسط خودش یک کار مفید انجام دهد و همچنین چند عملکرد مختلف را در ویژگی‌هایش داشته باشد.
