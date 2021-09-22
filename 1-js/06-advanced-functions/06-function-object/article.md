@@ -1,20 +1,20 @@
 
-# Function object, NFE
+# شیء تابع، NFE
 
-As we already know, a function in JavaScript is a value.
+همانطور که می‌دانیم، یک تابع در جاوااسکریپت یک مقدار است.
 
-Every value in JavaScript has a type. What type is a function?
+هر مقداری در جاوااسکریپت نوع دارد. تابع از چه نوعی است؟
 
-In JavaScript, functions are objects.
+در جاوااسکریپت، تابع‌ها شیء هستند.
 
-A good way to imagine functions is as callable "action objects". We can not only call them, but also treat them as objects: add/remove properties, pass by reference etc.
+یک راه خوب برای تصور کردن تابع‌ها، فکر کردن به آنها به عنوان «شیءهای عملکردی» قابل فراخوانی است. ما نه تنها می‌توانیم آنها را فرا بخوانیم بلکه می‌توانیم با آنها مانند شیءها رفتار کنیم: ویژگی‌ها را اضافه/حذف کنیم، آنها را توسط مرجع رد و بدل کنیم و غیره.
 
 
-## The "name" property
+## ویژگی "name"
 
-Function objects contain some useable properties.
+شیء تابع‌ها چند ویژگی قابل استفاده دارند.
 
-For instance, a function's name is accessible as the "name" property:
+برای مثال، اسم یک تابع با ویژگی "name" قابل دسترس است:
 
 ```js run
 function sayHi() {
@@ -24,29 +24,29 @@ function sayHi() {
 alert(sayHi.name); // sayHi
 ```
 
-What's kind of funny, the name-assigning logic is smart. It also assigns the correct name to a function even if it's created without one, and then immediately assigned:
+منطق مقداردهی اسم، هوشمندانه و جالب است. حتی زمانی که یک تابع بدون اسم ساخته و سریعا تخصیص داده شود، اسم درستی را برای مقداردهی استفاده می‌کند:
 
 ```js run
 let sayHi = function() {
   alert("Hi");
 };
 
-alert(sayHi.name); // sayHi (there's a name!)
+alert(sayHi.name); // sayHi (!یک اسم دارد)
 ```
 
-It also works if the assignment is done via a default value:
+اگر مقداردهی توسط یک مقدار پیش‌فرض انجام شود هم کار می‌کند:
 
 ```js run
 function f(sayHi = function() {}) {
-  alert(sayHi.name); // sayHi (works!)
+  alert(sayHi.name); // sayHi (!کار می‌کند)
 }
 
 f();
 ```
 
-In the specification, this feature is called a "contextual name". If the function does not provide one, then in an assignment it is figured out from the context.
+در مشخصات، این خاصیت «اسم زمینه‌ای» نامیده شده است. اگر تابع اسمی نداشته باشد، سپس در مقداردهی، از زمینه موجود پیدا می‌شود.
 
-Object methods have names too:
+متدهای شیءها هم اسم دارند:
 
 ```js run
 let user = {
@@ -65,21 +65,21 @@ alert(user.sayHi.name); // sayHi
 alert(user.sayBye.name); // sayBye
 ```
 
-There's no magic though. There are cases when there's no way to figure out the right name. In that case, the name property is empty, like here:
+اگرچه هیچ جادویی وجود ندارد. مواردی وجود دارند که راهی برای فهمیدن اسم درست وجود ندارد. در این صورت، ویژگی اسم (name) خالی است، مثل اینجا:
 
 ```js run
-// function created inside array
+// تابع درون آرایه ساخته شده است
 let arr = [function() {}];
 
-alert( arr[0].name ); // <empty string>
-// the engine has no way to set up the right name, so there is none
+alert( arr[0].name ); // <رشته خالی>
+// موتور راهی برای دریافت اسم درست ندارد، پس هیچی وجود ندارد
 ```
 
-In practice, however, most functions do have a name.
+اگرچه در عمل، اکثر تابع‌ها اسم دارند.
 
-## The "length" property
+## ویژگی "length"
 
-There is another built-in property "length" that returns the number of function parameters, for instance:
+یک ویژگی درون‌ساخت دیگر به نام "length" وجود دارد که تعداد پارامترهای تابع را برمی‌گرداند، برای مثال:
 
 ```js run
 function f1(a) {}
@@ -91,20 +91,20 @@ alert(f2.length); // 2
 alert(many.length); // 2
 ```
 
-Here we can see that rest parameters are not counted.
+اینجا می‌بینیم که پارامترهای رِست شمرده نمی‌شوند.
 
-The `length` property is sometimes used for [introspection](https://en.wikipedia.org/wiki/Type_introspection) in functions that operate on other functions.
+ویژگی `length` بعضی اوقات برای [درون‌نگری](https://en.wikipedia.org/wiki/Type_introspection) در تابع‌هایی که بر روی تابع‌های دیگر کاری انجام می‌دهند استفاده می‌شود.
 
-For instance, in the code below the `ask` function accepts a `question` to ask and an arbitrary number of `handler` functions to call.
+برای مثال، در کد زیر تابع `ask` یک `question` (سوال) برای پرسیدن و تعدادی تابع `handler` (کنترل‌کننده) برای فراخوانی دریافت می‌کند.
 
-Once a user provides their answer, the function calls the handlers. We can pass two kinds of handlers:
+زمانی که کاربر جواب خود را وارد کرد، تابع کنترل‌کننده‌ها را فراخوانی می‌کند. ما می‌توانیم دو نوع کنترل‌کننده را رد کنیم:
 
-- A zero-argument function, which is only called when the user gives a positive answer.
-- A function with arguments, which is called in either case and returns an answer.
+- یک تابع با صفر آرگومان که فقط زمانی که کاربر یک جواب مثبت می‌دهد فراخوانی شود.
+- یک تابع با چند آرگومان که در هر شرایطی فراخوانی می‌شود و یک جواب برمی‌گرداند.
 
-To call `handler` the right way, we examine the `handler.length` property.
+برای اینکه `handler` را به درستی فراخوانی کنیم، ویژگی `handler.length` را بررسی می‌کنیم.
 
-The idea is that we have a simple, no-arguments handler syntax for positive cases (most frequent variant), but are able to support universal handlers as well:
+ایده این است که ما یک سینتکس کنترل‌کننده ساده و بدون آرگومان برای موارد مثبت داریم (نوعی که بیشتر اتفاق می‌افتد) اما می‌توانیم کنترل‌کننده‌های کلی را هم پوشش دهیم:
 
 ```js run
 function ask(question, ...handlers) {
@@ -120,47 +120,47 @@ function ask(question, ...handlers) {
 
 }
 
-// for positive answer, both handlers are called
-// for negative answer, only the second one
-ask("Question?", () => alert('You said yes'), result => alert(result));
+// برای جواب مثبت، هر دو کنترل‌کننده فراخوانی می‌شوند
+// برای جواب منفی، فقط دومی
+ask("سوال؟", () => alert('شما بله گفتید'), result => alert(result));
 ```
 
-This is a particular case of so-called [polymorphism](https://en.wikipedia.org/wiki/Polymorphism_(computer_science)) -- treating arguments differently depending on their type or, in our case depending on the `length`. The idea does have a use in JavaScript libraries.
+این یک مورد استفاده از [چندریختی](https://en.wikipedia.org/wiki/Polymorphism_(computer_science)) است -- رفتار متفاوت با آرگومان‌ها با توجه به نوع آنها یا در این مورد ما با توجه به `length`. این ایده در کتابخانه‌های جاوااسکریپت استفاده می‌شود.
 
-## Custom properties
+## ویژگی‌های سفارشی
 
-We can also add properties of our own.
+ما می‌توانیم ویژگی‌هایی از خودمان را هم اضافه کنیم.
 
-Here we add the `counter` property to track the total calls count:
+اینجا می‌توانیم ویژگی `counter` را اضافه کنیم تا تعداد تمام فراخوانی‌ها را پیگیری کنیم:
 
 ```js run
 function sayHi() {
-  alert("Hi");
+  alert("سلام");
 
   *!*
-  // let's count how many times we run
+  // بیایید تعداد اجرا کردن را بشماریم
   sayHi.counter++;
   */!*
 }
-sayHi.counter = 0; // initial value
+sayHi.counter = 0; // مقدار اولیه
 
-sayHi(); // Hi
-sayHi(); // Hi
+sayHi(); // سلام
+sayHi(); // سلام
 
-alert( `Called ${sayHi.counter} times` ); // Called 2 times
+alert( `${sayHi.counter} بار فراخوانی شد` ); // دو بار فراخوانی شد
 ```
 
-```warn header="A property is not a variable"
-A property assigned to a function like `sayHi.counter = 0` does *not* define a local variable `counter` inside it. In other words, a property `counter` and a variable `let counter` are two unrelated things.
+```warn header="ویژگی متغیر نیست"
+یک ویژگی که به یک تابع تخصیص داده شود مانند `sayHi.counter = 0`، متغیر محلی `counter` را درون آن تعریف *نمی‌کند*. به عبارتی دیگر، یک ویژگی `counter` و متغیر `let counter` دو چیز غیر مرتبط هستند.
 
-We can treat a function as an object, store properties in it, but that has no effect on its execution. Variables never use function properties and vice versa. These are just parallel worlds.
+ما می‌توانیم با یک تابع به عنوان یک شیء رفتار کنیم، ویژگی‌هایی را درون آن ذخیره کنیم اما این موضوع روی اجرا شدن آن هیچ تاثیری ندارد. متغیرها هیچوقت از ویژگی‌های تابع استفاده نمی‌کنند و برعکس. اینها فقط دنیاهای موازی هستند.
 ```
 
-Function properties can replace closures sometimes. For instance, we can rewrite the counter function example from the chapter <info:closure> to use a function property:
+ویژگی‌های تابع می‌توانند بعضی اوقات جایگزین کلوژرها شوند. برای مثال، ما می‌توانیم مثال تابع شمارنده را از فصل <info:closure> بازنویسی کنیم تا از ویژگی تابع استفاده کند:
 
 ```js run
 function makeCounter() {
-  // instead of:
+  // :به جای این
   // let count = 0
 
   function counter() {
@@ -177,11 +177,11 @@ alert( counter() ); // 0
 alert( counter() ); // 1
 ```
 
-The `count` is now stored in the function directly, not in its outer Lexical Environment.
+`count` حالا در به صورت مستقیم در خود تابع ذخیره شده است نه در محیط لغوی بیرونی آن.
 
-Is it better or worse than using a closure?
+این روشِ استفاده از کلوژر بهتر است یا بدتر؟
 
-The main difference is that if the value of `count` lives in an outer variable, then external code is unable to access it. Only nested functions may modify it. And if it's bound to a function, then such a thing is possible:
+تفاوت اصلی این است که اگر مقدار `count` در یک متغیر بیرونی وجود داشته باشد، سپس کد بیرونی نمی‌تواند به آن دسترسی داشته باشد. تنها تابع‌های تودرتو ممکن است آن را تغییر دهند. و اگر فقط به یک تابع متصل باشد، سپس چنین چیزی امکان دارد:
 
 ```js run
 function makeCounter() {
@@ -203,77 +203,76 @@ alert( counter() ); // 10
 */!*
 ```
 
-So the choice of implementation depends on our aims.
+پس انتخاب نحوه پیاده‌سازی به اهداف ما بستگی دارد.
 
-## Named Function Expression
+## Function Expression نام‌گذاری شده
 
-Named Function Expression, or NFE, is a term for Function Expressions that have a name.
+Function Expression نام‌گذاری شده، یا NFE، یک عبارت برای Function Expressionهایی است که یک اسم دارند.
 
-For instance, let's take an ordinary Function Expression:
+برای مثال، بیایید یک Function Expression معمولی را فرض کنیم:
 
 ```js
 let sayHi = function(who) {
-  alert(`Hello, ${who}`);
+  alert(`${who} سلام،`);
 };
 ```
 
-And add a name to it:
+و یک اسم به آن بدهیم:
 
 ```js
 let sayHi = function *!*func*/!*(who) {
-  alert(`Hello, ${who}`);
+  alert(`سلام، ${who}`);
 };
 ```
 
-Did we achieve anything here? What's the purpose of that additional `"func"` name?
+آیا ما اینجا چیزی بدست آوردیم؟ هدف اسم اضافی `"func"` چیست؟
 
-First let's note, that we still have a Function Expression. Adding the name `"func"` after `function` did not make it a Function Declaration, because it is still created as a part of an assignment expression.
+در ابتدا بیایید این را در نظر بگیریم که ما هنوز هم یک Function Expression داریم. اضافه کردن اسم `"func"` بعد از `function` آن را تبدیل به Function Declaration نکرد چون هنوز هم به عنوان بخشی از یک مقداردهی ساخته شده است.
 
-Adding such a name also did not break anything.
+اضافه کردن چنین اسمی چیزی را خراب نکرد.
 
-The function is still available as `sayHi()`:
+تابع هنوز هم با `sayHi()` قابل دسترس است:
 
 ```js run
 let sayHi = function *!*func*/!*(who) {
-  alert(`Hello, ${who}`);
+  alert(`سلام، ${who}`);
 };
 
-sayHi("John"); // Hello, John
+sayHi("John"); // John ،سلام
 ```
 
-There are two special things about the name `func`, that are the reasons for it:
+دو چیز خاص درباره اسم `func` وجود دارد که دلیل‌هایی برای آن داریم:
 
-1. It allows the function to reference itself internally.
-2. It is not visible outside of the function.
+1. این اسم به تابع اجازه می‌دهد که به صورت درونی به خودش رجوع کند.
+2. این اسم بیرون از تابع قابل رویت نیست.
 
-For instance, the function `sayHi` below calls itself again with `"Guest"` if no `who` is provided:
+برای مثال، تابع `sayHi` پایین اگر هیچ مقداری برای `who` تعیین نشود، خودش را با `"Guest"` صدا می‌زند:
 
 ```js run
 let sayHi = function *!*func*/!*(who) {
   if (who) {
-    alert(`Hello, ${who}`);
+    alert(`سلام، ${who}`);
   } else {
 *!*
-    func("Guest"); // use func to re-call itself
+    func("Guest"); // از تابع برای اینکه خودش را دوباره صدا بزند استفاده کنید
 */!*
   }
 };
 
-sayHi(); // Hello, Guest
+sayHi(); // Guest ،سلام
 
-// But this won't work:
-func(); // Error, func is not defined (not visible outside of the function)
+// :اما این کار نخواهد کرد
+func(); // تعریف نشده است (بیرون از تابع قابل رویت نیست) func ،ارور
 ```
 
-Why do we use `func`? Maybe just use `sayHi` for the nested call?
+چرا ما از `func` استفاده می‌کنیم؟ شاید فقط از `sayHi` برای فراخوانی تودرتو باید استفاده کنیم؟
 
-
-Actually, in most cases we can:
+در واقع، در اکثر موارد ما می‌توانیم این کار را انجام دهیم:
 
 ```js
 let sayHi = function(who) {
   if (who) {
-    alert(`Hello, ${who}`);
+    alert(`سلام، ${who}`);
   } else {
 *!*
     sayHi("Guest");
@@ -282,15 +281,15 @@ let sayHi = function(who) {
 };
 ```
 
-The problem with that code is that `sayHi` may change in the outer code. If the function gets assigned to another variable instead, the code will start to give errors:
+مشکل این کد، امکان تغییر `sayHi` در کد بیرونی است. اگر تابع به یک متغیر دیگر تخصیص داده شود، کد شروع به ایجاد ارور می‌کند:
 
 ```js run
 let sayHi = function(who) {
   if (who) {
-    alert(`Hello, ${who}`);
+    alert(`سلام، ${who}`);
   } else {
 *!*
-    sayHi("Guest"); // Error: sayHi is not a function
+    sayHi("Guest"); // تابع نیست sayHi :ارور
 */!*
   }
 };
@@ -298,22 +297,22 @@ let sayHi = function(who) {
 let welcome = sayHi;
 sayHi = null;
 
-welcome(); // Error, the nested sayHi call doesn't work any more!
+welcome(); // !دیگر کار نمی‌کند sayHi ارور، فراخوانی تودرتوی
 ```
 
-That happens because the function takes `sayHi` from its outer lexical environment. There's no local `sayHi`, so the outer variable is used. And at the moment of the call that outer `sayHi` is `null`.
+دلیل بروز ارور این است که تابع `sayHi` را از محیط لغوی بیرونی دریافت می‌کند. هیچ `sayHi` محلی وجود ندارد پس متغیر بیرونی استفاده می‌شود. و در زمان فراخوانی `sayHi` بیرونی برابر با `null` است.
 
-The optional name which we can put into the Function Expression is meant to solve exactly these kinds of problems.
+اسم اختیاری که ما می‌توانیم در Function Expression قرار می‌دهیم قرار است که دقیقا این دسته از مشکلات را حل کند.
 
-Let's use it to fix our code:
+بیایید از آن برای رفع مشکل کد خود استفاده کنیم:
 
 ```js run
 let sayHi = function *!*func*/!*(who) {
   if (who) {
-    alert(`Hello, ${who}`);
+    alert(`سلام، ${who}`);
   } else {
 *!*
-    func("Guest"); // Now all fine
+    func("Guest"); // حالا همه چیز درست است
 */!*
   }
 };
@@ -321,33 +320,33 @@ let sayHi = function *!*func*/!*(who) {
 let welcome = sayHi;
 sayHi = null;
 
-welcome(); // Hello, Guest (nested call works)
+welcome(); // (فراخوانی تودرتو کار می‌کند) Guest ،سلام
 ```
 
-Now it works, because the name `"func"` is function-local. It is not taken from outside (and not visible there). The specification guarantees that it will always reference the current function.
+حالا کار می‌کند چون اسم `"func"` یک تابع محلی است. این اسم از بیرون دریافت نمی‌شود (و آنجا هم قابل رویت نیست). مشخصات زبان تضمین می‌کند که این اسم همیشه به تابع کنونی رجوع می‌کند.
 
-The outer code still has its variable `sayHi` or `welcome`. And `func` is an "internal function name", how the function can call itself internally.
+کد بیرونی هنوز هم متغیر `sayHi` یا `welcome` خود را دارد. و `func` یک «اسم تابع درونی» است، جوری که تابع می‌توانند از درون خودش را فراخوانی کند.
 
-```smart header="There's no such thing for Function Declaration"
-The "internal name" feature described here is only available for Function Expressions, not for Function Declarations. For Function Declarations, there is no syntax for adding an "internal" name.
+```smart header="چنین چیزی برای Function Declaration وجود ندارد"
+خصوصیت «اسم درونی» که اینجا توضیح داده شد فقط برای Function Expessionها قابل استفاده است نه برای Function Declarationها. برای Function Declarationها، سینتکسی برای اضاف کردن اسم «درونی» وجود ندارد.
 
-Sometimes, when we need a reliable internal name, it's the reason to rewrite a Function Declaration to Named Function Expression form.
+بعضی‌اوقات، نیاز به یک اسم درونی قابل، دلیلی برای نوشتن دوباره‌ی یک Function Declaration به Function Expression نام‌گذاری‌شده است.
 ```
 
-## Summary
+## خلاصه
 
-Functions are objects.
+تابع‌ها شیء هستند.
 
-Here we covered their properties:
+اینجا ما ویژگی‌های آنها را پوشش دادیم:
 
-- `name` -- the function name. Exists not only when given in the function definition, but also for assignments and object properties.
-- `length` -- the number of arguments in the function definition. Rest parameters are not counted.
+- `name` -- اسم تابع. نه تنها در تعریف یک تابع وجود دارد، بلکه در مقداردهی‌ها و ویژگی‌های شیء هم موجود است.
+- `length` -- تعداد آرگومان‌ها در تعریف تابع. پارامترهای رست شمرده نمی‌شوند.
 
-If the function is declared as a Function Expression (not in the main code flow), and it carries the name, then it is called a Named Function Expression. The name can be used inside to reference itself, for recursive calls or such.
+اگر تابعی به عنوان Function Expression تعریف شود (نه در جریان اصلی کد)، و اسمی داشته باشد، سپس به آن یک Function Expression نام‌گذاری شده می‌گویند. اسم می‌تواند درون آن برای رجوع به خودش استفاده شود، مثلا برای فراخوانی‌های بازگشتی یا چنین چیزی.
 
-Also, functions may carry additional properties. Many well-known JavaScript libraries make great use of this feature.
+همچنین، تابع‌ها ممکن است ویژگی‌های اضافی هم داشته باشند. تعداد زیادی از کتابخانه‌های شناخته‌شده‌ی جاوااسکریپت از این خاصیت خیلی استفاده می‌کنند.
 
-They create a "main" function and attach many other "helper" functions to it. For instance, the [jQuery](https://jquery.com) library creates a function named `$`. The [lodash](https://lodash.com) library creates a function `_`, and then adds `_.clone`, `_.keyBy` and other properties to it (see the [docs](https://lodash.com/docs) when you want to learn more about them). Actually, they do it to lessen their pollution of the global space, so that a single library gives only one global variable. That reduces the possibility of naming conflicts.
+آنها یک تابع «اصلی» می‌سازند و تعداد زیادی از تابع‍‌های «کمکی» را به آن متصل می‌کنند. برای مثال، کتابخانه [jQuery](https://jquery.com) یک تابع به نام `$` می‌سازد. کتابخانه [lodash](https://lodash.com) یک تابع `_` می‌سازد و سپس ویژگی‌های `_.clone`، `_keyBy` و بقیه ویژگی‌ها را به آن اضافه می‌کند (زمانی که می‌خواهید درباره آنها بیشتر بدانید، [مستندات](https://lodash.com/docs) را ببینید). در واقع، آنها این کار را برای کاهش آلودگی فضای گلوبال انجام می‌دهند تا یک کتابخانه فقط یک متغیر گلوبال داشته باشد. این باعث کاهش احتمال وقوع تناقض در نام‌گذاری می‌شود.
 
 
-So, a function can do a useful job by itself and also carry a bunch of other functionality in properties.
+پس یک تابع، می‌تواند توسط خودش یک کار مفید انجام دهد و همچنین چند عملکرد مختلف را در ویژگی‌هایش داشته باشد.
