@@ -1,13 +1,13 @@
-# Scheduling: setTimeout and setInterval
+# زمان‌بندی: setTimeout و setInterval
 
-We may decide to execute a function not right now, but at a certain time later. That's called "scheduling a call".
+شاید ما تصمیم بگیریم که یک تابع را همین الان اجرا نکنیم اما در زمان مشخصی در آینده اجرا کنیم. به این کار «زمان‌بندی فراخوانی» می‌گویند.
 
-There are two methods for it:
+دو متد برای آن وجود دارد:
 
-- `setTimeout` allows us to run a function once after the interval of time.
-- `setInterval` allows us to run a function repeatedly, starting after the interval of time, then repeating continuously at that interval.
+- `setTimeout` به ما اجازه می‌دهد تا یک تابع را بعد از مدتی یک بار اجرا کنیم.
+- `setInterval` به ما اجازه می‌دهد که یک تابع را به صورت تکرار شونده اجرا کنیم که بعد از آن مدت زمان فراخوانی شروع می‌شود و سپس به طور پیوسته با همان فاصله زمانی تکرار می‌شود.
 
-These methods are not a part of JavaScript specification. But most environments have the internal scheduler and provide these methods. In particular, they are supported in all browsers and Node.js.
+این متدها جزء مشخصات جاوااسکریپت نیستند. اما اکثر محیط‌ها زمان‌بند درونی دارند و این متدها را فراهم می‌کنند. خصوصا، این متدها در تمام مرورگرها و Node.js پشتیبانی می‌شوند.
 
 ## setTimeout
 
