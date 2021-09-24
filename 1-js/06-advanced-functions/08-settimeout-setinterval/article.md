@@ -77,32 +77,32 @@ setTimeout(sayHi(), 1000);
 این کار نمی‌کند چون `setTimeout` توقع رجوع به تابع را دارد. و اینجا `sayHi()` تابع را اجرا می‌کد و *نتیجه اجرا شدن آن* به `setTimeout` فرستاده می‌شود. در این مورد ما، نتیجه `sayHi()` برابر با `undefined` است (تابع چیزی را برنمی‌گرداند) پس چیزی زمان‌بندی نمی‌شود.
 ````
 
-### Canceling with clearTimeout
+### لغو کردن با clearTimeout
 
-A call to `setTimeout` returns a "timer identifier" `timerId` that we can use to cancel the execution.
+فراخوانی `setTimeout` یک «شناسه‌ی تایمر» `timerId` را برمی‌گرداند که ما می‌توانیم برای لغو کردن اجرا شدن از آن استفاده کنیم.
 
-The syntax to cancel:
+سینتکس برای لغو کردن:
 
 ```js
 let timerId = setTimeout(...);
 clearTimeout(timerId);
 ```
 
-In the code below, we schedule the function and then cancel it (changed our mind). As a result, nothing happens:
+در کد پایین، ما اجرای تابع را زمان‌بندی می‌کنیم و سپس آن را لغو می‌کنیم (تصمیم دیگری گرفتیم). در نتیجه، چیزی اتفاق نمی‌افتد:
 
 ```js run no-beautify
-let timerId = setTimeout(() => alert("never happens"), 1000);
-alert(timerId); // timer identifier
+let timerId = setTimeout(() => alert("هیچوقت رخ نمی‌دهد"), 1000);
+alert(timerId); // شناسه‌ی تایمر
 
 clearTimeout(timerId);
-alert(timerId); // same identifier (doesn't become null after canceling)
+alert(timerId); // (نمی‌شود null بعد از لغو کردن) شناسه یکسان
 ```
 
-As we can see from `alert` output, in a browser the timer identifier is a number. In other environments, this can be something else. For instance, Node.js returns a timer object with additional methods.
+همانطور که از خروجی `alert` می‌بینیم، در یک مرورگر، شناسه‌ی تایمر یک عدد است. در محیط‌های دیگر، این می‌تواند چیز دیگری باشد. برای مثال، Node.js یک شیء تایمر همراه با متدهای اضافی را برمی‌گرداند.
 
-Again, there is no universal specification for these methods, so that's fine.
+باز هم، مشخصات جامعی برای این متدها وجود ندارد پس مشکلی نیست.
 
-For browsers, timers are described in the [timers section](https://www.w3.org/TR/html5/webappapis.html#timers) of HTML5 standard.
+برای مرورگرها، تایمرها در [قسمت تایمرهای](https://www.w3.org/TR/html5/webappapis.html#timers) استاندارد HTML5 هستند.
 
 ## setInterval
 
