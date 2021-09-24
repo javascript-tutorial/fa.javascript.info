@@ -9,31 +9,31 @@
 
 این متدها جزء مشخصات جاوااسکریپت نیستند. اما اکثر محیط‌ها زمان‌بند درونی دارند و این متدها را فراهم می‌کنند. خصوصا، این متدها در تمام مرورگرها و Node.js پشتیبانی می‌شوند.
 
-## setTimeout
+## تابع setTimeout
 
-The syntax:
+سینتکس:
 
 ```js
 let timerId = setTimeout(func|code, [delay], [arg1], [arg2], ...)
 ```
 
-Parameters:
+پارامترها:
 
 `func|code`
-: Function or a string of code to execute.
-Usually, that's a function. For historical reasons, a string of code can be passed, but that's not recommended.
+: تابع یا رشته‌ای از کد برای اجرا.
+معمولا یک تابع است. بنا به دلایلی مربوط به گذشته، یک رشته از کد را هم می‌توان قرار داد اما پیشنهاد نمی‌شود.
 
 `delay`
-: The delay before run, in milliseconds (1000 ms = 1 second), by default 0.
+: میزان تاخیر قبل از اجرا، به میلی‌ثانیه (1000 میلی‌ثانیه = 1 ثانیه)، به طور پیش‌فرض 0 است.
 
 `arg1`, `arg2`...
-: Arguments for the function (not supported in IE9-)
+: آرگومان‌های تابع (در IE9- پشتیبانی نمی‌شود)
 
-For instance, this code calls `sayHi()` after one second:
+برای مثال، این کد `sayHi()` را بعد از یک ثانیه فرا می‌خواند:
 
 ```js run
 function sayHi() {
-  alert('Hello');
+  alert('سلام');
 }
 
 *!*
@@ -41,40 +41,40 @@ setTimeout(sayHi, 1000);
 */!*
 ```
 
-With arguments:
+با آرگومان‌ها:
 
 ```js run
 function sayHi(phrase, who) {
-  alert( phrase + ', ' + who );
+  alert( phrase + '، ' + who );
 }
 
 *!*
-setTimeout(sayHi, 1000, "Hello", "John"); // Hello, John
+setTimeout(sayHi, 1000, "سلام", "John"); // John ،سلام
 */!*
 ```
 
-If the first argument is a string, then JavaScript creates a function from it.
+اگر اولین آرگومان رشته باشد، سپس جاوااسکریپت یک تابع از آن می‌سازد.
 
-So, this will also work:
-
-```js run no-beautify
-setTimeout("alert('Hello')", 1000);
-```
-
-But using strings is not recommended, use arrow functions instead of them, like this:
+پس این کار می‌کند:
 
 ```js run no-beautify
-setTimeout(() => alert('Hello'), 1000);
+setTimeout("alert('سلام')", 1000);
 ```
 
-````smart header="Pass a function, but don't run it"
-Novice developers sometimes make a mistake by adding brackets `()` after the function:
+اما استفاده از رشته‌ها پیشنهاد نمی‌شود، به جای آنها از تابع‌های کمانی استفاده کنید، مانند اینجا:
+
+```js run no-beautify
+setTimeout(() => alert('سلام'), 1000);
+```
+
+````smart header="تابع را رد کنید، اما آن را فراخوانی نکنید"
+توسعه‌دهندگان بی‌تجربه گاهی اوقات با اضافه کردن پرانتز `()` بعد از تابع دچار اشتباه می‌شوند:
 
 ```js
-// wrong!
+// !اشتباه است
 setTimeout(sayHi(), 1000);
 ```
-That doesn't work, because `setTimeout` expects a reference to a function. And here `sayHi()` runs the function, and the *result of its execution* is passed to `setTimeout`. In our case the result of `sayHi()` is `undefined` (the function returns nothing), so nothing is scheduled.
+این کار نمی‌کند چون `setTimeout` توقع رجوع به تابع را دارد. و اینجا `sayHi()` تابع را اجرا می‌کد و *نتیجه اجرا شدن آن* به `setTimeout` فرستاده می‌شود. در این مورد ما، نتیجه `sayHi()` برابر با `undefined` است (تابع چیزی را برنمی‌گرداند) پس چیزی زمان‌بندی نمی‌شود.
 ````
 
 ### Canceling with clearTimeout
