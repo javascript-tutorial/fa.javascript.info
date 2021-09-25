@@ -104,32 +104,32 @@ alert(timerId); // (نمی‌شود null بعد از لغو کردن) شناسه
 
 برای مرورگرها، تایمرها در [قسمت تایمرهای](https://www.w3.org/TR/html5/webappapis.html#timers) استاندارد HTML5 هستند.
 
-## setInterval
+## تابع setInterval
 
-The `setInterval` method has the same syntax as `setTimeout`:
+تابع `setInterval` سینتکس مشابهی با `setTimeout` دارد:
 
 ```js
 let timerId = setInterval(func|code, [delay], [arg1], [arg2], ...)
 ```
 
-All arguments have the same meaning. But unlike `setTimeout` it runs the function not only once, but regularly after the given interval of time.
+تمام آرگومان‌ها معنی یکسانی دارند. اما برخلاف `setTimeout` تابع را نه تنها یک بار بلکه بعد از مدت زمان داده شده به طور منظم اجرا می‌کند.
 
-To stop further calls, we should call `clearInterval(timerId)`.
+برای متوقف کردن فراخوانی‌های بیشتر، ما باید `clearInterval(timerId)` را فراخوانی کنیم.
 
-The following example will show the message every 2 seconds. After 5 seconds, the output is stopped:
+مثال پایین پیام را هر 2 ثانیه نشان می‌دهد. بعد از 5 ثانیه، خروجی متوقف می‌شود:
 
 ```js run
-// repeat with the interval of 2 seconds
+// با فاصله 2 ثانیه تکرار می‌شود
 let timerId = setInterval(() => alert('tick'), 2000);
 
-// after 5 seconds stop
+// بعد از 5 ثانیه متوقف می‌شود
 setTimeout(() => { clearInterval(timerId); alert('stop'); }, 5000);
 ```
 
-```smart header="Time goes on while `alert` is shown"
-In most browsers, including Chrome and Firefox the internal timer continues "ticking" while showing `alert/confirm/prompt`.
+```smart header="هنگامی که `alert` نمایش داده می‌شود زمان می‌گذرد"
+در اکثر مرورگرها که شامل Chrome و Firefox هم می‌شود، تایمر درونی در حین نمایش `alert/confirm/prompt` به «تیک خوردن» ادامه می‌دهد.
 
-So if you run the code above and don't dismiss the `alert` window for some time, then the next `alert` will be shown immediately as you do it. The actual interval between alerts will be shorter than 2 seconds.
+بنابراین اگر شما کد بالا را اجرا کنید و برای چند ثانیه پنجره `alert` را رد نکنید، سپس `alert` بعدی بلافاصله بعد از اینکه آن را رد کنید نمایش داده می‌شود. فاصله زمانی واقعی بین alertها کوتاه‌تر از 2 ثانیه خواهد بود.
 ```
 
 ## Nested setTimeout
