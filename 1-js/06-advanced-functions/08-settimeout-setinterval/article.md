@@ -132,14 +132,14 @@ setTimeout(() => { clearInterval(timerId); alert('stop'); }, 5000);
 بنابراین اگر شما کد بالا را اجرا کنید و برای چند ثانیه پنجره `alert` را رد نکنید، سپس `alert` بعدی بلافاصله بعد از اینکه آن را رد کنید نمایش داده می‌شود. فاصله زمانی واقعی بین alertها کوتاه‌تر از 2 ثانیه خواهد بود.
 ```
 
-## Nested setTimeout
+## تابع setTimeout تودرتو
 
-There are two ways of running something regularly.
+دو راه برای انجام چیزی به طور منظم و پی در پی وجود دارد.
 
-One is `setInterval`. The other one is a nested `setTimeout`, like this:
+یکی از آنها `setInterval` است. راه دیگر یک `setTimeout` تودرتو است، مانند این:
 
 ```js
-/** instead of:
+/** :به جای این
 let timerId = setInterval(() => alert('tick'), 2000);
 */
 
@@ -151,21 +151,21 @@ let timerId = setTimeout(function tick() {
 }, 2000);
 ```
 
-The `setTimeout` above schedules the next call right at the end of the current one `(*)`.
+تابع `setTimeout` بالا فراخوانی بعدی را درست برای انتهای فراخوانی کنونی `(*)` زمان‌بندی می‌کند.
 
-The nested `setTimeout` is a more flexible method than `setInterval`. This way the next call may be scheduled differently, depending on the results of the current one.
+`setTimeout` تودرتو نسبت به `setInterval` انعطاف بیشتری دارد. در این روش بسته به نتایج فراخوانی کنونی، فراخوانی بعدی ممکن است زمان‌بندی متفاوتی داشته باشد.
 
-For instance, we need to write a service that sends a request to the server every 5 seconds asking for data, but in case the server is overloaded, it should increase the interval to 10, 20, 40 seconds...
+برای مثال، ما نیاز داریم که سرویسی بنویسیم تا هر 5 ثانیه یک درخواست به سرور بفرستد و برای داده درخواست کند اما در درصورتی که سرور شلوغ باشد، باید فاصله زمانی را به 10، 20، 40 ثانیه افزایش دهد...
 
-Here's the pseudocode:
+اینجا یک شبه کد داریم:
 ```js
 let delay = 5000;
 
 let timerId = setTimeout(function request() {
-  ...send request...
+  ...فرستادن درخواست...
 
-  if (request failed due to server overload) {
-    // increase the interval to the next run
+  if (درخواست به دلیل شلوغی سرور شکست خورد) {
+    // فاصله زمانی را در فراخوانی بعدی افزایش دهید
     delay *= 2;
   }
 
@@ -175,11 +175,11 @@ let timerId = setTimeout(function request() {
 ```
 
 
-And if the functions that we're scheduling are CPU-hungry, then we can measure the time taken by the execution and plan the next call sooner or later.
+و اگر تابع‌هایی که ما زمان‌بندی می‌کنیم از پردازنده زیاد استفاده می‌کنند، می‌توانیم زمانی که توسط یک بار اجرا شدن نیاز است را اندازه بگیریم و سپس فراخوانی بعدی را زودتر یا دیرتر زمان‌بندی کنیم.
 
-**Nested `setTimeout` allows to set the delay between the executions more precisely than `setInterval`.**
+**`setTimeout` تودرتو به ما اجازه می‌دهد که فاصله زمانی بین فراخوانی‌ها را نسبت به `setInterval` دقیق‌تر تنظیم کنیم.**
 
-Let's compare two code fragments. The first one uses `setInterval`:
+بیایید دو قطعه کد را مقایسه کنیم. اولی از `setInterval` استفاده می‌کند:
 
 ```js
 let i = 1;
@@ -188,7 +188,7 @@ setInterval(function() {
 }, 100);
 ```
 
-The second one uses nested `setTimeout`:
+دومی از `setTimeout` تودرتو استفاده می‌کند:
 
 ```js
 let i = 1;
@@ -198,41 +198,41 @@ setTimeout(function run() {
 }, 100);
 ```
 
-For `setInterval` the internal scheduler will run `func(i++)` every 100ms:
+در `setInterval` زمان‌بند داخلی `func(i++)` را هر 100 میلی‌ثانیه اجرا می‌کند:
 
 ![](setinterval-interval.svg)
 
-Did you notice?
+آیا متوجه شدید?
 
-**The real delay between `func` calls for `setInterval` is less than in the code!**
+**فاصله زمانی واقعی بین فراخوانی‌های `func` برای `setInterval` کمتر از زمان موجود در کد است!**
 
-That's normal, because the time taken by `func`'s execution "consumes" a part of the interval.
+این موضوع عادی است چون مدت زمانی که برای اجرای `func` صرف می‌شود بخشی از فاصله زمانی را «اشغال می‌کند».
 
-It is possible that `func`'s execution turns out to be longer than we expected and takes more than 100ms.
+ممکن است اجرای `func` از زمانی که ما توقع داشتیم بیشتر طول بکشد و بیشتر از 100 میلی‌ثانیه زمان ببرد.
 
-In this case the engine waits for `func` to complete, then checks the scheduler and if the time is up, runs it again *immediately*.
+در این صورت موتور صبر می‌کند تا اجرای `func` کامل شود سپس زمان‌بند را بررسی می‌کند و اگر زمان فراخوانی رسیده باشد، *بلافاصله* آن را دوباره اجرا می‌کند.
 
-In the edge case, if the function always executes longer than `delay` ms, then the calls will happen without a pause at all.
+در مورد حساس، اگر اجرای تابع همیشه بیشتر از `delay` میلی‌ثانیه طول بکشد، سپس فراخوانی‌ها بدون اندکی مکث رخ می‌دهند.
 
-And here is the picture for the nested `setTimeout`:
+و اینجا تصویری برای `setTimeout` تودوتو داریم:
 
 ![](settimeout-interval.svg)
 
-**The nested `setTimeout` guarantees the fixed delay (here 100ms).**
+**`setTimeout` تودرتو فاصله زمانی ثابت را تضمین می‌کند (اینجا 100 میلی‌ثانیه).**
 
-That's because a new call is planned at the end of the previous one.
+به این دلیل که فراخوانی جدید در انتهای فراخوانی قبلی زمان‌بندی می‌شود.
 
-````smart header="Garbage collection and setInterval/setTimeout callback"
-When a function is passed in `setInterval/setTimeout`, an internal reference is created to it and saved in the scheduler. It prevents the function from being garbage collected, even if there are no other references to it.
+````smart header="زباله‌روبی و فراخوانی setInterval/setTimeout"
+زمانی که یک تابع در `setInterval/setTimeout` قرار داده شد، یک رجوع درونی به آن ساخته می‌شود و در زمان‌بند ذخیره می‌شود. این رجوع تابع را از زباله‌روبی نجات می‌دهد حتی اگر هیچ رجوع دیگری به آن وجود نداشته باشد.
 
 ```js
-// the function stays in memory until the scheduler calls it
+// تابع تا زمانی که زمان‌بند آن را فراخوانی کند درون حافظه می‌ماند
 setTimeout(function() {...}, 100);
 ```
 
-For `setInterval` the function stays in memory until `clearInterval` is called.
+برای `setInterval` تابع تا زمانی که `clearInterval` فراخوانی شود درون حافظه می‌ماند.
 
-There's a side-effect. A function references the outer lexical environment, so, while it lives, outer variables live too. They may take much more memory than the function itself. So when we don't need the scheduled function anymore, it's better to cancel it, even if it's very small.
+یک عارضه جانبی وجود دارد. یک تابع به محیط لغوی بیرونی رجوع می‌کند پس، تا زمانی که تابع وجود داشته باشد، متغیرهای بیرونی هم وجود خواهند داشت. آنها حافظه بسیار بیشتری را نسبت به خود تابع اشغال می‌کنند. پس زمانی که دیگر نیازی به تابع زمان‌بندی شده نداریم، بهتر است که آن را لغو کنیم حتی اگر خیلی کوچک باشد.
 ````
 
 ## Zero delay setTimeout
