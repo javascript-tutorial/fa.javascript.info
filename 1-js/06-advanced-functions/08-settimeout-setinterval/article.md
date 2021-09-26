@@ -235,15 +235,15 @@ setTimeout(function() {...}, 100);
 یک عارضه جانبی وجود دارد. یک تابع به محیط لغوی بیرونی رجوع می‌کند پس، تا زمانی که تابع وجود داشته باشد، متغیرهای بیرونی هم وجود خواهند داشت. آنها حافظه بسیار بیشتری را نسبت به خود تابع اشغال می‌کنند. پس زمانی که دیگر نیازی به تابع زمان‌بندی شده نداریم، بهتر است که آن را لغو کنیم حتی اگر خیلی کوچک باشد.
 ````
 
-## Zero delay setTimeout
+## تابع setTimeout بدون تاخیر
 
-There's a special use case: `setTimeout(func, 0)`, or just `setTimeout(func)`.
+یک مورد استفاده خاص وجود دارد: `setTimeout(func, 0)` یا فقط `setTimeout(func)`.
 
-This schedules the execution of `func` as soon as possible. But the scheduler will invoke it only after the currently executing script is complete.
+این مورد اجرای `func` را برای نزدیک‌ترین موقع زمان‌بندی می‌کند. اما زمان‌بند آنرا بعد از اینکه اجرای اسکریپت کنونی تمام شد فرا می‌خواند.
 
-So the function is scheduled to run "right after" the current script.
+پس تابع زمان‌بندی می‌شود تا «درست بعد از» اسکریپت کنونی اجرا شود.
 
-For instance, this outputs "Hello", then immediately "World":
+برای مثال، این کد "Hello" را نمایش می‌دهد، سپس بلافاصله "World" را:
 
 ```js run
 setTimeout(() => alert("World"));
@@ -251,37 +251,37 @@ setTimeout(() => alert("World"));
 alert("Hello");
 ```
 
-The first line "puts the call into calendar after 0ms". But the scheduler will only "check the calendar" after the current script is complete, so `"Hello"` is first, and `"World"` -- after it.
+خط اول «فراخوانی را بعد از 0 میلی‌ثانیه در تقویم» می‌گذارد. اما زمان‌بند فقط بعد از اینکه اسکریپت کنونی کامل شد «تقویم را بررسی می‌کند» پس `"Hello"` اول می‌آید و `"World"` بعد از آن.
 
-There are also advanced browser-related use cases of zero-delay timeout, that we'll discuss in the chapter <info:event-loop>.
+همچنین موارد استفاده پیشرفته مربوط به مرورگر از زمان‌بندی با تاخیر 0 وجود دارند که ما در فصل <info:event-loop> به آنها می‌پردازیم.
 
-````smart header="Zero delay is in fact not zero (in a browser)"
-In the browser, there's a limitation of how often nested timers can run. The [HTML5 standard](https://html.spec.whatwg.org/multipage/timers-and-user-prompts.html#timers) says: "after five nested timers, the interval is forced to be at least 4 milliseconds.".
+````smart header="تاخیر صفر در واقع صفر نیست (در مرورگر)"
+در مرورگر، یک محدودیت برای اینکه تایمرهای تودرتو هر چند وقت یک بار می‌توانند اجرا شوند وجود دارد. [استاندارد HTML5](https://html.spec.whatwg.org/multipage/timers-and-user-prompts.html#timers) می‌گوید: «بعد از 5 تایمر تودرتو، فاصله زمانی ناچار می‌شود که حداقل 4 میلی‌ثانیه باشد.».
 
-Let's demonstrate what it means with the example below. The `setTimeout` call in it re-schedules itself with zero delay. Each call remembers the real time from the previous one in the `times` array. What do the real delays look like? Let's see:
+بیایید با مثال پایین نشان دهیم که این یعنی چه. فراخوانی `setTimeout` در مثال زیر خودش را با تاخیر صفر دوباره زمان‌بندی می‌کند. هر فراخوانی زمان واقعی گذشته از فراخوانی قبلی را در آرایه `times` ذخیره می‌کند. تاخیرهای واقعی چگونه بنظر می‌رسند؟ بیایید ببینیم:
 
 ```js run
 let start = Date.now();
 let times = [];
 
 setTimeout(function run() {
-  times.push(Date.now() - start); // remember delay from the previous call
+  times.push(Date.now() - start); // فاصله زمانی از فراخوانی قبلی را به یاد می‌سپارد
 
-  if (start + 100 < Date.now()) alert(times); // show the delays after 100ms
-  else setTimeout(run); // else re-schedule
+  if (start + 100 < Date.now()) alert(times); // فاصله‌های زمانی را بعد از 100 میلی‌ثانیه نشان می‌دهد
+  else setTimeout(run); // در غیر این صورت دوباره زمان‌بندی می‌کند
 });
 
-// an example of the output:
+// :مثالی از خروجی
 // 1,1,1,1,9,15,20,24,30,35,40,45,50,55,59,64,70,75,80,85,90,95,100
 ```
 
-First timers run immediately (just as written in the spec), and then we see `9, 15, 20, 24...`. The 4+ ms obligatory delay between invocations comes into play.
+ابتدا تایمرها بلافاصله اجرا می‌شوند (همانطور که در مشخصات نوشته شده) و سپس ما `...24 ,20 ,15 ,9` را می‌بینیم. فاصله زمانیِ اجباریِ بیشتر از 4 میلی‌ثانیه برای فراخوانی‌ها وارد بازی می‌شود.
 
-The similar thing happens if we use `setInterval` instead of `setTimeout`: `setInterval(f)` runs `f` few times with zero-delay, and afterwards with 4+ ms delay.
+همچین چیزی اگر ما از `setInterval` به جای `setTimeout` استفاده کنیم رخ می‌دهد: `setInterval(f0` تابع `f` را چند بار با تاخیر صفر اجرا می‌کند و بعد از آن با تاخیر بیشتر از 4 میلی‌ثانیه.
 
-That limitation comes from ancient times and many scripts rely on it, so it exists for historical reasons.
+این محدودیت از قدیم وجود داشته و اسکریپت‌های زیادی بر آن تکیه کرده اند پس بنا به دلایلی مربوط به گذشته هنوز هم وجود دارد.
 
-For server-side JavaScript, that limitation does not exist, and there exist other ways to schedule an immediate asynchronous job, like [setImmediate](https://nodejs.org/api/timers.html#timers_setimmediate_callback_args) for Node.js. So this note is browser-specific.
+برای جاوااسکریپت سمت سرور، این محدودیت وجود ندارد و راه‌های دیگری برای زمان‌بندی یک کار ناهمزمان بدون تاخیر وجود دارند مانند [setImmediate](https://nodejs.org/api/timers.html#timers_setimmediate_callback_args) برای Node.js. پس این نکته فقط برای مرورگر است.
 ````
 
 ## Summary
