@@ -106,7 +106,7 @@ alert(timerId); // (نمی‌شود null بعد از لغو کردن) شناسه
 
 ## تابع setInterval
 
-تابع `setInterval` سینتکس مشابهی با `setTimeout` دارد:
+روش `setInterval` سینتکس مشابهی با `setTimeout` دارد:
 
 ```js
 let timerId = setInterval(func|code, [delay], [arg1], [arg2], ...)
@@ -284,19 +284,19 @@ setTimeout(function run() {
 برای جاوااسکریپت سمت سرور، این محدودیت وجود ندارد و راه‌های دیگری برای زمان‌بندی یک کار ناهمزمان بدون تاخیر وجود دارند مانند [setImmediate](https://nodejs.org/api/timers.html#timers_setimmediate_callback_args) برای Node.js. پس این نکته فقط برای مرورگر است.
 ````
 
-## Summary
+## خلاصه
 
-- Methods `setTimeout(func, delay, ...args)` and `setInterval(func, delay, ...args)` allow us to run the `func` once/regularly after `delay` milliseconds.
-- To cancel the execution, we should call `clearTimeout/clearInterval` with the value returned by `setTimeout/setInterval`.
-- Nested `setTimeout` calls are a more flexible alternative to `setInterval`, allowing us to set the time *between* executions more precisely.
-- Zero delay scheduling with `setTimeout(func, 0)` (the same as `setTimeout(func)`) is used to schedule the call "as soon as possible, but after the current script is complete".
-- The browser limits the minimal delay for five or more nested calls of `setTimeout` or for `setInterval` (after 5th call) to 4ms. That's for historical reasons.
+- روش‌های `setTimeout(func, delay, ...args)` و `setInterval(func, delay, ...args)` به ما اجازه‌دهند تا `func` را یکبار/به طور منظم بعد از `delay` میلی‌ثانیه اجرا کنیم.
+- برای لغو کردن اجرا، ما باید `clearTimeout/clearInterval` را همراه با مقدار برگردانده شده توسط `setTimeout/setInterval` فراخوانی کنیم.
+- فراخوانی‌های تودرتوی `setTimeout` جایگزینی منعطف‌تر برای `setInterval` هستند که به ما اجازه می‌دند تا زمان *بین* اجرا شدن‌ها را دقیق‌تر تنظیم کنیم.
+- زمان‌بندی بدون تاخیر با `setTimeout(func, 0)` (مشابه با `setTimeout(func)`) برای اینکه فراخوانی را «در اسرع وقت اما بعد از اینکه اسکریپت کنونی کامل شد» زمان‌بندی کنیم استفاده می‌شود.
+- مرورگر برای پنج یا بیشتر از پنج فراخوانی تودرتوی `setTimeout` یا `setInterval` (بعد از فراخوانی پنجم) حداقل فاصله زمانی را به 4 میلی‌ثانیه محدود می‌کند. دلیل آن هم مربوط به گذشته است.
 
-Please note that all scheduling methods do not *guarantee* the exact delay.
+لطفا در نظر داشته باشید که روش‌های زمان‌بندی فاصله زمانی دقیق را *تضمین* نمی‌کنند.
 
-For example, the in-browser timer may slow down for a lot of reasons:
-- The CPU is overloaded.
-- The browser tab is in the background mode.
-- The laptop is on battery.
+برای مثال، تایمر درون مرورگر ممکن است به دلایل زیادی کند شود:
+- کارهای زیادی به پردازنده سپرده شده است.
+- تب (tab) مرورگر در حالت پس‌زمینه است.
+- لپ تاپ در حال استفاده از باتری است.
 
 All that may increase the minimal timer resolution (the minimal delay) to 300ms or even 1000ms depending on the browser and OS-level performance settings.
