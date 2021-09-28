@@ -79,54 +79,54 @@
 
 ## جلوگیری از بالارفتن
 
-A bubbling event goes from the target element straight up. Normally it goes upwards till `<html>`, and then to `document` object, and some events even reach `window`, calling all handlers on the path.
+یک ایونت بالارونده از عنصر هدف مستقیما به بالا حرکت می‌کند. معمولا تا `<html>` بالا می‌رود، سپس به شئ `document` می‌رسد. بعضی از رویدادها حتی به `window` هم می‌رسند، و همه کنترل‌کننده‌ها را در راه خودش صدا می‌زوند.
 
-But any handler may decide that the event has been fully processed and stop the bubbling.
+اما هر کنترل‌کننده‌ می‌تواند تصمیم بگیرد که رویداد کاملا پردازش شده و بالارفتن را متوقف کند.
 
-The method for it is `event.stopPropagation()`.
+متدی که برای این‌ کار استفاده می‌شود ‍`event.stopPropagation()` است.
 
-For instance, here `body.onclick` doesn't work if you click on `<button>`:
+برای مثال، اینجا `body.onclick` در صورتی که روی `<button>` کلیک شود عمل نمی‌کند:
 
 ```html run autorun height=60
-<body onclick="alert(`the bubbling doesn't reach here`)">
-  <button onclick="event.stopPropagation()">Click me</button>
+<body onclick="alert(`رویداد به اینجا نمی‌رسد`)">
+  <button onclick="event.stopPropagation()">کلیک کنید</button>
 </body>
 ```
 
 ```smart header="event.stopImmediatePropagation()"
-If an element has multiple event handlers on a single event, then even if one of them stops the bubbling, the other ones still execute.
+اگر که یک عنصر چند کنترل‌کننده برای یک رویداد داشته باشد، در صورتی که حتی یکی از آنها از بالارفتن رویداد جلوگیری کند، بقیه باز هم اجرا می‌شوند.
 
-In other words, `event.stopPropagation()` stops the move upwards, but on the current element all other handlers will run.
+به عبارت دیگر، `event.stopPropagation()` حرکت رو به بالا را متوقف می‌کند، اما روی همین عنصر فعلی، بقیه کنترل‌کننده‌ها اجرا می‌شوند.
 
-To stop the bubbling and prevent handlers on the current element from running, there's a method `event.stopImmediatePropagation()`. After it no other handlers execute.
+برای توقف بالارفتن و جلوگیری از اجرای بقیه کنترل‌کننده‌ها عنصر فعلی، یک متد به نام `event.stopImmediatePropagation()` وجود دارد. بعد از آن هیچ کنترل‌کننده دیگری اجرا نمی‌شود.
 ```
 
-```warn header="Don't stop bubbling without a need!"
-Bubbling is convenient. Don't stop it without a real need: obvious and architecturally well thought out.
+```warn header="اگر نیاز نیست، بالارفتن رویداد را متوقف نکنید‍‍‍!"
+رفتار بالارفتن ساده است. بدون یک نیاز واقعی آنرا متوقف نکنید: بدیهی و از نظر معماری خوب تدبیر شده باشد.
 
-Sometimes `event.stopPropagation()` creates hidden pitfalls that later may become problems.
+بعضی اوقات `event.stopPropagation()` یک مشکلی ایجاد می‌کند که ممکن است بعدا باعث وقوع دردسرهایی شود.
 
-For instance:
+برای مثال:
 
-1. We create a nested menu. Each submenu handles clicks on its elements and calls `stopPropagation` so that outer menu don't trigger.
-2. Later we decide to catch clicks on the whole window, to track users' behavior (where people click). Some analytic systems do that. Usually the code uses `document.addEventListener('click'…)` to catch all clicks.
-3. Our analytic won't work over the area where clicks are stopped by `stopPropagation`. Sadly, we've got a "dead zone".
+1. ما یک منوی تو در تو ایجاد می‌کنیم. هر زیرمنو کلیک‌ها را روی عناصر کنترل می‌کند و `stopPropagation` را صدا می‌زند پس منوی بیرونی فعال نمی‌شود.
+2. بعدا تصمیم می‌گیریم برای پی‌گیری رفتار کاربر (جایی که کاربر کلیک می‌کند) کلیک‌ها را روی کل پنجره دریافت کنیم. بعضی از سیستم‌های تحلیل این کار را انجام می‌دهند. معمولا کد از `document.addEventListener('click'…)` برای گرفتن همه کلیک ها استفاده می‌کند.
+3. سیستم تحلیل ما جایی که کلیک‌ها توسط `stopPropagation` متوقف می‌شوند کار نمی‌کند. متاسفانه ما یک "محدوده مرده" داریم.
 
-There's usually no real need to prevent the bubbling. A task that seemingly requires that may be solved by other means. One of them is to use custom events, we'll cover them later. Also we can write our data into the `event` object in one handler and read it in another one, so we can pass to handlers on parents information about the processing below.
+معمولا نیاز واقعی به جلوگیری از رفتار بالارفتن رویدادها نیست. کاری که ظاهرا نیاز به آن دارد، ممکن است با روش‌های دیگر قابل حل باشد. یکی از آنها استفاده از رویدادهای دستی است که بعدا به آنها می‌پردازیم. همچنین می‌توانیم در یک کنترل‌کننده اطلاعاتی را داخل شئ `event` بنویسیم و در کنترل‌کننده دیگری آن اطلاعات را بخوانیم. سپس آنرا به به کنترل‌کننده‌هایی که روی عناصر والد هستند بفرستیم. با اینکار.
 ```
 
 
-## Capturing
+## گرفتن
 
-There's another phase of event processing called "capturing". It is rarely used in real code, but sometimes can be useful.
+یک فاز دیگر در پردازش رویدادها وجود دارد به نام "گرفتن" یا "capturing". به ندرت در کد واقعی استفاده می‌شود، اما گاهی اوقات کارآمد است.
 
-The standard [DOM Events](http://www.w3.org/TR/DOM-Level-3-Events/) describes 3 phases of event propagation:
+[رویداد‌های DOM](http://www.w3.org/TR/DOM-Level-3-Events/) استاندارد سه فاز از انتشار رویداد معرفی می‌کنند:
 
-1. Capturing phase -- the event goes down to the element.
-2. Target phase -- the event reached the target element.
-3. Bubbling phase -- the event bubbles up from the element.
+1. فاز گرفتن -- رویداد پایین می‌رود تا به عنصر برسد.
+2. فاز هدف -- رویداد به عنصر هدف می‌رسد.
+3. فاز بالارفتن -- رویداد از عنصر بالا می‌رود.
 
-Here's the picture of a click on `<td>` inside a table, taken from the specification:
+این یک عکس از یک کلیک روی `<td>` داخل یک جدول است، که شامل مشخصات زیر است
 
 ![](eventflow.svg)
 
