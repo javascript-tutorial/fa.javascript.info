@@ -1,24 +1,24 @@
-# Bubbling and capturing
+# بالارفتن و گرفتن
 
-Let's start with an example.
+با یک مثال شروع می‌کنیم.
 
-This handler is assigned to `<div>`, but also runs if you click any nested tag like `<em>` or `<code>`:
+این کنترل‌کننده به `<div>` اختصاص داده شده، اما در صورتی که هر تگ داخل آنرا مانند `<em>` یا `<code>` کلیک کنید، باز هم اجرا می‌شود:
 
 ```html autorun height=60
-<div onclick="alert('The handler!')">
-  <em>If you click on <code>EM</code>, the handler on <code>DIV</code> runs.</em>
+<div onclick="alert('کنترل‌کننده!')">
+  <em>اگر روی <code>EM</code> کلیک کنید، کنترل‌کننده روی <code>DIV</code> اجرا می‌شود.</em>
 </div>
 ```
 
-Isn't it a bit strange? Why does the handler on `<div>` run if the actual click was on `<em>`?
+این رفتار کمی عجیب نیست؟ چرا کنترل‌کننده‌ی روی `<div>` باید زمانی که اجرا شود که کلیک در اصل روی `<em>` بوده است؟
 
-## Bubbling
+## بالا رفتن حبابی
 
-The bubbling principle is simple.
+رفتار بالارفتن حبابی ساده است.
 
-**When an event happens on an element, it first runs the handlers on it, then on its parent, then all the way up on other ancestors.**
+**وقتی که رویدادی روی یک عنصر اتفاق می‌افتد، اول کنترل‌کننده‌ها را روی خودش اجرا می‌کند، بعد روی عنصر پدرش اجرا می‌کند، و همینطور تا بالاترین اجداد آن.**
 
-Let's say we have 3 nested elements `FORM > DIV > P` with a handler on each of them:
+فرض کنیم که سه عنصر تو در تو به صورت ‍`FORM > DIV > P` با یک کنترل‌کننده روی هر کدام از آن‌ها داشته باشیم:
 
 ```html run autorun
 <style>
@@ -35,49 +35,49 @@ Let's say we have 3 nested elements `FORM > DIV > P` with a handler on each of t
 </form>
 ```
 
-A click on the inner `<p>` first runs `onclick`:
-1. On that `<p>`.
-2. Then on the outer `<div>`.
-3. Then on the outer `<form>`.
-4. And so on upwards till the `document` object.
+یک کلیک روی `<p>` اول باعث فراخوانی `onlick` به صورت زیر می‌شود:
+1. روی `<p>`.
+2. روی `<div>` بیرونی.
+3. روی `<form>` بیرونی.
+4. همینطور بالا می‌رود تا روی شئ `document` هم اجرا شود.
 
 ![](event-order-bubbling.svg)
 
-So if we click on `<p>`, then we'll see 3 alerts: `p` -> `div` -> `form`.
+پس اگر روی `<p>` کلیک کنیم، سه پیام به صورت روبرو مشاهده می‌کنیم: `p` -> `div` -> `form`.
 
-The process is called "bubbling", because events "bubble" from the inner element up through parents like a bubble in the water.
+این روند اصلاحا "بالارفتن حبابی" یا "bubbling" است، چون رویدادها از داخلی‌ترن عنصر تا عنصرهای والد مانند یک حباب در آب، بالا می‌روند.
 
-```warn header="*Almost* all events bubble."
-The key word in this phrase is "almost".
+```warn header="*تقریبا* همه رویدادها بالا می‌روند."
+کلمه کلیدی در این جمله "تقریبا" است.
 
-For instance, a `focus` event does not bubble. There are other examples too, we'll meet them. But still it's an exception, rather than a rule, most events do bubble.
+برای مثال، یک رویداد `focus` بالا نمی‌روند. مثال‌های دیگری نیز وجود دارد که با آنها آشنا خواهیم شد. با این حال این یک استثنا است تا یک قانون. بیشتر رویدادها بالا می‌روند.
 ```
 
 ## event.target
 
-A handler on a parent element can always get the details about where it actually happened.
+یک کنترل‌کننده روی یک عنصر والد همیشه می‌تواند جزئیاتی درباره اینکه رویداد درواقعیت کجا اتفاق افتاده است را بگیرد.
 
-**The most deeply nested element that caused the event is called a *target* element, accessible as `event.target`.**
+**عمیق‌ترین عنصری که باعث فراخوانی یک رویداد شده را عنصر *هدف* می‌نامند، که می‌توانیم با `event.target` به آن دسترسی یابیم.**
 
-Note the differences from `this` (=`event.currentTarget`):
+به تفاوت آن با `this` دقت کنید (=`event.currentTarget`):
 
-- `event.target` -- is the "target" element that initiated the event, it doesn't change through the bubbling process.
-- `this` -- is the "current" element, the one that has a currently running handler on it.
+- `event.target` -- عنصر "هدف" است که رویداد را برای اولین بار فراخوانی کرده، در طول روند بالارفتن تغییر نمی‌کند.
+- ‍`this` -- عنصر "فعلی" است، که رویداد در حال حاضر روی آن در حال اجرا است.
 
-For instance, if we have a single handler `form.onclick`, then it can "catch" all clicks inside the form. No matter where the click happened, it bubbles up to `<form>` and runs the handler.
+برای مثال، اگر فقط یک کنترل‌کننده روی `form.onclick` داشته باشیم، سپس می‌تواند همه کلیک‌های داخل فرم را "بگیرد". بدون توجه به اینکه کلیک کجا اتفاق افتاده، همه راه را تا `<form>` بالا می‌رود و کنترل‌کننده را اجرا می‌کند.
 
-In `form.onclick` handler:
+درون کنترل‌کننده `form.onclick`:
 
-- `this` (=`event.currentTarget`) is the `<form>` element, because the handler runs on it.
-- `event.target` is the actual element inside the form that was clicked.
+- `this` (=`event.currentTarget`) همان عنصر `<form>`‌ است، چون کنترل‌کننده روی آن اجرا شده.
+‍‍- `event.target` عنصری درون فرم که در اصل کلیک روی آن اتفاق افتاده.
 
-Check it out:
+ببینید:
 
 [codetabs height=220 src="bubble-target"]
 
-It's possible that `event.target` could equal `this` -- it happens when the click is made directly on the `<form>` element.
+امکان دارد که `event.target` همان `this` باشد -- زمانی این اتفاق می‌افتد که دقیقا روی خود `<form>` کلیک شود.
 
-## Stopping bubbling
+## جلوگیری از بالارفتن
 
 A bubbling event goes from the target element straight up. Normally it goes upwards till `<html>`, and then to `document` object, and some events even reach `window`, calling all handlers on the path.
 
