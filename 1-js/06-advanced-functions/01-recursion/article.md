@@ -1,14 +1,14 @@
-# Recursion and stack
+# بازگشت و استک
 
-Let's return to functions and study them more in-depth.
+بیایید برگردیم به تابع‌ها و آنها را عمیق‌تر مطالعه کنیم.
 
-Our first topic will be *recursion*.
+اولین موضوع ما *بازگشت (recursion)* خواهد بود.
 
-If you are not new to programming, then it is probably familiar and you could skip this chapter.
+اگر شما در برنامه‌نویسی تازه‌کار نیستید، احتمالا این برای شما آشنا است و می‌توانید این فصل را رد کنید.
 
-Recursion is a programming pattern that is useful in situations when a task can be naturally split into several tasks of the same kind, but simpler. Or when a task can be simplified into an easy action plus a simpler variant of the same task. Or, as we'll see soon, to deal with certain data structures.
+بازگشت یک الگوی برنامه‌نویسی است که در مواقعی که یک کار به طور طبیعی می‌تواند به چند کار از نوع یکسان اما ساده‌تر تقسیم شود کاربرد دارد. یا زمانی که کاری می‌تواند به عملی آسان به علاوه‌ی یک نوع ساده‌تر از همان کار ساده‌سازی شود. یا همانطور که به زودی خواهیم دید، برای کنار آمدن با بعضی از ساختارهای داده.
 
-When a function solves a task, in the process it can call many other functions. A partial case of this is when a function calls *itself*. That's called *recursion*.
+زمانی که یک تابع کاری را انجام می‌دهد، در فرایند آن، تابع می‌تواند تعداد زیادی از تابع‌های دیگر را فرا بخواند. یک مورد جرئی از این موضوع زمانی است که تابع *خودش* را فراخوانی می‌کند. به این عمل *بازگشت (recursion)* می‌گویند.
 
 ## Two ways of thinking
 
