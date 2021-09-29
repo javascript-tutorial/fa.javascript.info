@@ -10,9 +10,9 @@
 
 زمانی که یک تابع کاری را انجام می‌دهد، در فرایند آن، تابع می‌تواند تعداد زیادی از تابع‌های دیگر را فرا بخواند. یک مورد جرئی از این موضوع زمانی است که تابع *خودش* را فراخوانی می‌کند. به این عمل *بازگشت (recursion)* می‌گویند.
 
-## Two ways of thinking
+## دو طرز فکر
 
-For something simple to start with -- let's write a function `pow(x, n)` that raises `x` to a natural power of `n`. In other words, multiplies `x` by itself `n` times.
+برای اینکه با چیزی ساده شروع کنیم، بیایید بک تابع `pow(x, n)` بنویسیم که `x` را به توانی طبیعی از `n` می‌رساند. به عبارتی دیگر، `x` را `n` بار در خودش ضرب می‌کند.
 
 ```js
 pow(2, 2) = 4
@@ -20,15 +20,15 @@ pow(2, 3) = 8
 pow(2, 4) = 16
 ```
 
-There are two ways to implement it.
+دو راه برای پیاده‌سازی آن وجود دارد.
 
-1. Iterative thinking: the `for` loop:
+1. طرز فکر تکرارشونده: حلقه `for`:
 
     ```js run
     function pow(x, n) {
       let result = 1;
 
-      // multiply result by x n times in the loop
+      // ضرب می‌کند x بار در n را result در حلقه
       for (let i = 0; i < n; i++) {
         result *= x;
       }
@@ -39,7 +39,7 @@ There are two ways to implement it.
     alert( pow(2, 3) ); // 8
     ```
 
-2. Recursive thinking: simplify the task and call self:
+2. طرز فکر بازگشتی: کار را ساده کن و خودت را فراخوانی کن:
 
     ```js run
     function pow(x, n) {
@@ -53,9 +53,9 @@ There are two ways to implement it.
     alert( pow(2, 3) ); // 8
     ```
 
-Please note how the recursive variant is fundamentally different.
+لطفا در نظر داشته باشید که نوع بازگشتی از پایه تفاوت دارد.
 
-When `pow(x, n)` is called, the execution splits into two branches:
+زمانی که `pow(x, n)` فراخوانی می‌شود، اجرای آن به دو بخش تقسیم می‌شود:
 
 ```js
               if n==1  = x
@@ -65,27 +65,27 @@ pow(x, n) =
               else     = x * pow(x, n - 1)
 ```
 
-1. If `n == 1`, then everything is trivial. It is called *the base* of recursion, because it immediately produces the obvious result: `pow(x, 1)` equals `x`.
-2. Otherwise, we can represent `pow(x, n)` as `x * pow(x, n - 1)`. In maths, one would write <code>x<sup>n</sup> = x * x<sup>n-1</sup></code>. This is called *a recursive step*: we transform the task into a simpler action (multiplication by `x`) and a simpler call of the same task (`pow` with lower `n`). Next steps simplify it further and further until `n` reaches `1`.
+1. اگر `n == 1`، سپس همه چیز بدیهی می‎شود. به آن *پایه* بازگشت می‌گویند چون بلافاصله نتیجه واضحی را ایجاد می‌کند: `pow(x, 1)` برابر با `x` است.
+2. در غیر این صورت، ما می‌تونیم `pow(x, n)` را به عنوان نمایش دهیم. در ریاضیات، ممکن است کسی اینگونه <code>x<sup>n</sup> = x * x<sup>n-1</sup></code> بنویسد. به آن *مرحله بازگشتی* می‌گویند: ما می‌توانیم کار را به یک عمل ساده‌تر (ضرب در `x`) و یک فراخوانی ساده از کار یکسان (`pow` به همراه `n` کمتر) تبدیل کنیم. مرحله‌های بعدی آن را بیشتر و بیشتر ساده می‌کنند تا `n` به `1` برسد.
 
-We can also say that `pow` *recursively calls itself* till `n == 1`.
+ما همچنین می‌توانیم بگوییم که `pow` *به طور بازگشتی* تا زمانی که `n == 1` باشد خودش را فراخوانی می‌کند.
 
 ![recursive diagram of pow](recursion-pow.svg)
 
 
-For example, to calculate `pow(2, 4)` the recursive variant does these steps:
+برای مثال، برای محاسبه `pow(2, 4)` نوع بازگشتی این مراحل را می‌گذراند:
 
 1. `pow(2, 4) = 2 * pow(2, 3)`
 2. `pow(2, 3) = 2 * pow(2, 2)`
 3. `pow(2, 2) = 2 * pow(2, 1)`
 4. `pow(2, 1) = 2`
 
-So, the recursion reduces a function call to a simpler one, and then -- to even more simpler, and so on, until the result becomes obvious.
+پس بازگشت، یک فراخوانی تابع را به فراخوانی‌ای ساده‌تر تبدیل می‌کند و سپس، به چیزی ساده‌تر و همینطور ادامه پیدا می‌کند تا نتیجه واضح باشد.
 
-````smart header="Recursion is usually shorter"
-A recursive solution is usually shorter than an iterative one.
+````smart header="بازگشت معمولا کوتاه‌تر است"
+یک راه حل بازگشتی معمولا از راه حل تکرارشونده کوتاه‌تر است.
 
-Here we can rewrite the same using the conditional operator `?` instead of `if` to make `pow(x, n)` more terse and still very readable:
+اینجا می‌توانیم کدی یکسان را با استفاده از عملگر `?` به جای `if` بنویسیم تا `pow(x, n)` را در حالی که هنوز هم خوانا باشد کوتاه‌تر کنیم:
 
 ```js run
 function pow(x, n) {
@@ -94,11 +94,11 @@ function pow(x, n) {
 ```
 ````
 
-The maximal number of nested calls (including the first one) is called *recursion depth*. In our case, it will be exactly `n`.
+حداکثر تعداد فراخوانی‌های تودرتو (شامل اولی هم می‌شود) را *عمق بازگشت (recursion depth)* می‌گویند. در مورد ما، این تعداد دقیقا `n` خواهد بود.
 
-The maximal recursion depth is limited by JavaScript engine. We can rely on it being 10000, some engines allow more, but 100000 is probably out of limit for the majority of them. There are automatic optimizations that help alleviate this ("tail calls optimizations"), but they are not yet supported everywhere and work only in simple cases.
+عمق بازگشت حداکثری توسط موتور جاوااسکریپت محدود می‌شود. ما می‌توانیم به 10000 بودن آن اعتماد کنیم، بعضی از موتورها بیشتر را هم مجاز می‌دانند، اما 100000 احتمالا از محدودیت بیشتر آنها خارج است. بهینه‌سازی‌های خودکاری هستند که به کاهش این عدد کمک می‌کنند («بهینه‌سازی‌های فراخوانی‌های پی‌در‎پی») اما آنها هنوز در همه‌جا پشتیبانی نمی‌شوند و فقط در موارد ساده کار می‌کنند.
 
-That limits the application of recursion, but it still remains very wide. There are many tasks where recursive way of thinking gives simpler code, easier to maintain.
+این موضوع کاربرد بازگشت را محدود می‌کند اما هنوز هم بسیار گسترده است. کارهای زیادی هستند که طرز فکر بازگشتی، برای آنها کد ساده‌تر و راحت‌تری در نگهداری ارائه می‌دهد.
 
 ## The execution context and stack
 
