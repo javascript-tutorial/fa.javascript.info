@@ -100,30 +100,30 @@ function pow(x, n) {
 
 این موضوع کاربرد بازگشت را محدود می‌کند اما هنوز هم بسیار گسترده است. کارهای زیادی هستند که طرز فکر بازگشتی، برای آنها کد ساده‌تر و راحت‌تری در نگهداری ارائه می‌دهد.
 
-## The execution context and stack
+## زمینه‌ی اجرا و استک
 
-Now let's examine how recursive calls work. For that we'll look under the hood of functions.
+حالا بیایید بررسی کنیم که فراخوانی‌های بازگشتی چگونه کار می‌کنند. برای این کار ما به اتفاقات پشت پرده در تابع نگاه می‌اندازیم.
 
-The information about the process of execution of a running function is stored in its *execution context*.
+اطلاعاتی که درباره فرایند اجرای یک تابع درحال اجرا هستند در *زمینه‌ی اجرا* آن ذخیره می‌شوند.
 
-The [execution context](https://tc39.github.io/ecma262/#sec-execution-contexts) is an internal data structure that contains details about the execution of a function: where the control flow is now, the current variables, the value of `this` (we don't use it here) and few other internal details.
+[زمینه‌ی اجرا](https://tc39.github.io/ecma262/#sec-execution-contexts) یک ساختار داده داخلی است که جزئیاتی درباره اجرای تابع را شامل می‌شود: جایی که روند کنترل در آن است، متغیرهای کنونی، مقدار `this` (ما اینجا از آن استفاده نمی‌کنیم) و چند چیز داخلی دیگر.
 
-One function call has exactly one execution context associated with it.
+یک فراخوانی تابع دقیقا یک زمینه‌ی اجرا دارد که به آن اختصاص دارد.
 
-When a function makes a nested call, the following happens:
+زمانی که یک تابع فراخوانی تودرتو می‌سازد، موارد زیر اتفاق می‌افتند:
 
-- The current function is paused.
-- The execution context associated with it is remembered in a special data structure called *execution context stack*.
-- The nested call executes.
-- After it ends, the old execution context is retrieved from the stack, and the outer function is resumed from where it stopped.
+- تابع کنونی موقتا متوقف می‌شود.
+- زمینه‌ی اجرای اختصاص یافته به آن در یک ساختار داده خاص به نام *استک زمینه‌ی اجرا* ذخیره می‌شود.
+- فراخوانی تودرتو اجرا می‌شود.
+- بعد از اینکه پایان یافت، زمینه‌ی اجرا قبلی از استک دریافت می‌شود و تابع بیرونی از جایی که متوقف شده بود ادامه می‌یابد.
 
-Let's see what happens during the `pow(2, 3)` call.
+بیایید ببینیم در حین فراخوانی `pow(2, 3)` چه اتفاقی می‌افتد.
 
-### pow(2, 3)
+### تابع pow(2, 3)
 
-In the beginning of the call `pow(2, 3)` the execution context will store variables: `x = 2, n = 3`, the execution flow is at line `1` of the function.
+در ابتدای فراخوانی `pow(2, 3)` زمینه‌ی اجرا متغیرها را ذخیره می‌کند: `x = 2, n = 3`، مسیر اجرا حالا در خط `1` تابع قرار دارد.
 
-We can sketch it as:
+ما می‌توانیم آن را به این صورت نمایش دهیم:
 
 <ul class="function-execution-context-list">
   <li>
@@ -132,7 +132,7 @@ We can sketch it as:
   </li>
 </ul>
 
-That's when the function starts to execute. The condition `n == 1` is falsy, so the flow continues into the second branch of `if`:
+این زمانی است که تابع شروع به اجرا شدن می‌کند. شرط `n == 1` falsy است پس مسیر به شاخه دوم `if` ادامه می‌دهد:
 
 ```js run
 function pow(x, n) {
@@ -149,7 +149,7 @@ alert( pow(2, 3) );
 ```
 
 
-The variables are same, but the line changes, so the context is now:
+متغیرها یکسان هستند اما خط تغییر می‌کند پس زمینه الان اینگونه است:
 
 <ul class="function-execution-context-list">
   <li>
@@ -158,7 +158,7 @@ The variables are same, but the line changes, so the context is now:
   </li>
 </ul>
 
-To calculate `x * pow(x, n - 1)`, we need to make a subcall of `pow` with new arguments `pow(2, 2)`.
+برای محاسبه `x * pow(x, n - 1)`، ما باید یک زیرفراخوانی از `pow` با آرگومان‌های جدید `pow(2, 2)` بسازیم.
 
 ### pow(2, 2)
 
