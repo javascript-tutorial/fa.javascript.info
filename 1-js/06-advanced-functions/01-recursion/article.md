@@ -216,9 +216,9 @@ alert( pow(2, 3) );
 
 حالا 2 زمینه‌ی قدیمی وجود دارد و یک زمینه‌ی برای `pow(2, 1)` در حال اجرا است.
 
-### The exit
+### خروج
 
-During the execution of `pow(2, 1)`, unlike before, the condition `n == 1` is truthy, so the first branch of `if` works:
+در حین اجرای `pow(2, 1)` برخلاف قبل، شرط `n == 1` truthy است پس اولین شاخه `if` کار می‌کند:
 
 ```js
 function pow(x, n) {
@@ -232,9 +232,9 @@ function pow(x, n) {
 }
 ```
 
-There are no more nested calls, so the function finishes, returning `2`.
+فراخوانی‌های تودرتوی بیشتری وجود ندارد پس تابع کارش تمام می‌شود و `2` را برمی‌گرداند.
 
-As the function finishes, its execution context is not needed anymore, so it's removed from the memory. The previous one is restored off the top of the stack:
+همانطور که تابع به پایان می‌رسد، دیگر نیازی به زمینه‌ی اجرای آن نیست پس از حافظه حذف می‌شود. زمینه‌ی قبلی از بالای استک بازگردانده می‌شود:
 
 
 <ul class="function-execution-context-list">
@@ -248,9 +248,9 @@ As the function finishes, its execution context is not needed anymore, so it's r
   </li>
 </ul>
 
-The execution of `pow(2, 2)` is resumed. It has the result of the subcall `pow(2, 1)`, so it also can finish the evaluation of `x * pow(x, n - 1)`, returning `4`.
+فرایند اجرای `pow(2, 2)` ادامه می‌یابد. این فرایند دارای نتیجه زیرفراخوانی `pow(2, 1)` است پس می‌تواند ارزیابی `x * pow(x, n - 1)` را تمام کند و `4` را برگرداند.
 
-Then the previous context is restored:
+سپس زمینه‌ی قبلی بازگردانده می‌شود:
 
 <ul class="function-execution-context-list">
   <li>
@@ -259,15 +259,15 @@ Then the previous context is restored:
   </li>
 </ul>
 
-When it finishes, we have a result of `pow(2, 3) = 8`.
+زمانی که تمام شود، ما نتیجه `pow(2, 3) = 8` را داریم.
 
-The recursion depth in this case was: **3**.
+عمق بازگشت در این مورد **3** بود.
 
-As we can see from the illustrations above, recursion depth equals the maximal number of context in the stack.
+همانطور که از تصاویر بالا دیدیم، عمق بازگشت برابر با حداکثر تعداد زمینه‌ها در استک است.
 
-Note the memory requirements. Contexts take memory. In our case, raising to the power of `n` actually requires the memory for `n` contexts, for all lower values of `n`.
+نیازمندی‌های حافظه را در نظر داشته باشید. زمینه‌ها حافظه را اشغال می‌کنند. در این مورد ما، به توان `n` رساندن در واقع برای تمام مقدارهای کمتر از `n`، به تعداد `n` زمینه حافظه نیاز دارد.
 
-A loop-based algorithm is more memory-saving:
+یک الگوریتم بر پایه حلقه کمتر حافظه اشغال می‌کند:
 
 ```js
 function pow(x, n) {
@@ -281,13 +281,13 @@ function pow(x, n) {
 }
 ```
 
-The iterative `pow` uses a single context changing `i` and `result` in the process. Its memory requirements are small, fixed and do not depend on `n`.
+تابع `pow` تکرارشونده از زمینه‌ای استفاده می‌کند که در فرایند خود `i` و `result` را تغییر می‌دهد. نیازمندی‌های حافظه آن کوچک، ثابت و بدون وابستگی به `n` هستند.
 
-**Any recursion can be rewritten as a loop. The loop variant usually can be made more effective.**
+**تمام بازگشت‌ها می‌توانند به عنوان یک حلقه بازنویسی شوند. نوعی که با حلقه نوشته شده است ممکن است مفیدتر باشد.**
 
-...But sometimes the rewrite is non-trivial, especially when function uses different recursive subcalls depending on conditions and merges their results or when the branching is more intricate. And the optimization may be unneeded and totally not worth the efforts.
+...اما گاهی اوقات بازنویسی بدیهی نیست خصوصا زمانی که تابع با توجه به شروط از زیرفراخوانی‌های بازگشتی مختلف استفاده می‌کند و نتیجه‌های آنها را ادغام می‌کند یا زمانی که شاخه‌بندی پیچیده‌تر است. و بهینه‌سازی شاید نیاز نباشد و ارزش سختی آن را نداشته باشد.
 
-Recursion can give a shorter code, easier to understand and support. Optimizations are not required in every place, mostly we need a good code, that's why it's used.
+بازگشت می‌تواند کد کوتاه‌تری ایجاد کند و درک و پشتیبانی از آن راحت‌تر باشد. به بهینه‌سازی‌ها همه جا نیاز نیست. اکثر اوقات ما به کد خوب نیاز داریم و به همین دلیل است که بازگشت استفاده می‌شود.
 
 ## Recursive traversals
 
