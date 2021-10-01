@@ -104,7 +104,7 @@ function pow(x, n) {
 
 حالا بیایید بررسی کنیم که فراخوانی‌های بازگشتی چگونه کار می‌کنند. برای این کار ما به اتفاقات پشت پرده در تابع نگاه می‌اندازیم.
 
-اطلاعاتی که درباره فرایند اجرای یک تابع درحال اجرا هستند در *زمینه‌ی اجرا* آن ذخیره می‌شوند.
+اطلاعاتی که درباره فرایند اجرای یک تابع درحال اجرا هستند در *زمینه‌ی اجرا (execution context)* آن ذخیره می‌شوند.
 
 [زمینه‌ی اجرا](https://tc39.github.io/ecma262/#sec-execution-contexts) یک ساختار داده داخلی است که جزئیاتی درباره اجرای تابع را شامل می‌شود: جایی که روند کنترل در آن است، متغیرهای کنونی، مقدار `this` (ما اینجا از آن استفاده نمی‌کنیم) و چند چیز داخلی دیگر.
 
@@ -113,7 +113,7 @@ function pow(x, n) {
 زمانی که یک تابع فراخوانی تودرتو می‌سازد، موارد زیر اتفاق می‌افتند:
 
 - تابع کنونی موقتا متوقف می‌شود.
-- زمینه‌ی اجرای اختصاص یافته به آن در یک ساختار داده خاص به نام *استک زمینه‌ی اجرا* ذخیره می‌شود.
+- زمینه‌ی اجرای اختصاص یافته به آن در یک ساختار داده خاص به نام *استک زمینه‌ی اجرا (execution context stack)* ذخیره می‌شود.
 - فراخوانی تودرتو اجرا می‌شود.
 - بعد از اینکه پایان یافت، زمینه‌ی اجرا قبلی از استک دریافت می‌شود و تابع بیرونی از جایی که متوقف شده بود ادامه می‌یابد.
 
@@ -160,17 +160,17 @@ alert( pow(2, 3) );
 
 برای محاسبه `x * pow(x, n - 1)`، ما باید یک زیرفراخوانی از `pow` با آرگومان‌های جدید `pow(2, 2)` بسازیم.
 
-### pow(2, 2)
+### تابع pow(2, 2)
 
-To do a nested call, JavaScript remembers the current execution context in the *execution context stack*.
+برای اینکه یک فراخوانی تودرتو داشته باشیم، جاوااسکریپت زمینه‌ی اجرای کنونی را در *استک زمینه‌ی اجرا* به یاد می‌سپارد.
 
-Here we call the same function `pow`, but it absolutely doesn't matter. The process is the same for all functions:
+اینجا ما تابع یکسان `pow` را فراخوانی می‌کنیم اما این موضوع اصلا مهم نیست. فرایند برای تمام تابع‌ها یکسان است:
 
-1. The current context is "remembered" on top of the stack.
-2. The new context is created for the subcall.
-3. When the subcall is finished -- the previous context is popped from the stack, and its execution continues.
+1. زمینه‌ی کنونی در بالای استک «به خاطر سپرده می‌شود».
+2. زمینه‌ی جدید برای زیرفراخوانی ایجاد می‌شود.
+3. زمانی که زیرفراخوانی تمام شود، زمینه‌ی قبلی از استک بیرون می‌آید و اجرای آن ادامه پیدا می‌کند.
 
-Here's the context stack when we entered the subcall `pow(2, 2)`:
+زمانی که ما وارد زیرفراخوانی `pow(2, 2)` شدیم استک زمینه اینگونه خواهد بود:
 
 <ul class="function-execution-context-list">
   <li>
@@ -183,21 +183,21 @@ Here's the context stack when we entered the subcall `pow(2, 2)`:
   </li>
 </ul>
 
-The new current execution context is on top (and bold), and previous remembered contexts are below.
+زمینه‌ی اجرای کنونی در بخش بالایی (و پر رنگ) است و زمینه‌های حفظ شده قدیمی در بخش پایینی هستند.
 
-When we finish the subcall -- it is easy to resume the previous context, because it keeps both variables and the exact place of the code where it stopped.
+زمانی که ما زیرفراخوانی را به پایان رساندیم، ادامه دادن زمینه‌ی قبلی آسان است چون هر دو متغیر و محل دقیق کد که در آنجا متوقف شد را حفظ می‌کند.
 
 ```smart
-Here in the picture we use the word "line", as in our example there's only one subcall in line, but generally a single line of code may contain multiple subcalls, like `pow(…) + pow(…) + somethingElse(…)`.
+اینجا در تصویر ما از کلمه «خط(line)» استفاده کردیم چون در مثال ما فقط یک زیرفراخوانی در خط وجود دارد اما به طور کلی یک خط ممکن است چند زیرفراخوانی را شامل شود، مثلا `pow(…) + pow(…) + somethingElse(…)`.
 
-So it would be more precise to say that the execution resumes "immediately after the subcall".
+بنابراین اینکه بگوییم مسیر اجرا «بلافاصله بعد از زیرفراخوانی» ادامه می‌یابد دقیق‌تر است.
 ```
 
-### pow(2, 1)
+### تابع pow(2, 1)
 
-The process repeats: a new subcall is made at line `5`, now with arguments `x=2`, `n=1`.
+فرایند تکرار می‌شود: در خط `5` یک زیرفراخوانی جدید با آرگومان‌های `x=2`، `n=1` ایجاد می‌شود.
 
-A new execution context is created, the previous one is pushed on top of the stack:
+یک زمینه‌ی اجرای جدید ساخته می‌شود و زمینه‌ی قبلی در بالای استک قرار می‌گیرد:
 
 <ul class="function-execution-context-list">
   <li>
@@ -214,7 +214,7 @@ A new execution context is created, the previous one is pushed on top of the sta
   </li>
 </ul>
 
-There are 2 old contexts now and 1 currently running for `pow(2, 1)`.
+حالا 2 زمینه‌ی قدیمی وجود دارد و یک زمینه‌ی برای `pow(2, 1)` در حال اجرا است.
 
 ### The exit
 
