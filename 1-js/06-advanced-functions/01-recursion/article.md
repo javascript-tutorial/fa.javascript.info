@@ -289,11 +289,11 @@ function pow(x, n) {
 
 بازگشت می‌تواند کد کوتاه‌تری ایجاد کند و درک و پشتیبانی از آن راحت‌تر باشد. به بهینه‌سازی‌ها همه جا نیاز نیست. اکثر اوقات ما به کد خوب نیاز داریم و به همین دلیل است که بازگشت استفاده می‌شود.
 
-## Recursive traversals
+## پیمایش‌های بازگشتی
 
-Another great application of the recursion is a recursive traversal.
+یکی دیگر از کاربردهای عالی بازگشت پیمایش بازگشتی است.
 
-Imagine, we have a company. The staff structure can be presented as an object:
+تصور کنید، ما یک شرکت داریم. ساختار کارمندان می‌تواند به عنوان یک شیء نمایش داده شود:
 
 ```js
 let company = {
@@ -322,34 +322,34 @@ let company = {
 };
 ```
 
-In other words, a company has departments.
+به عبارتی دیگر، یک شرکت بخش‌های اداری دارد.
 
-- A department may have an array of staff. For instance, `sales` department has 2 employees: John and Alice.
-- Or a department may split into subdepartments, like `development` has two branches: `sites` and `internals`. Each of them has the own staff.
-- It is also possible that when a subdepartment grows, it divides into subsubdepartments (or teams).
+- یک بخش اداری ممکن است یک آرایه از کارمندان داشته باشد. برای مثال، بخش `sales`(فروش) 2 کارمند دارد: John و Alice.
+- یا بخش اداری ممکن است به زیربخش‌هایی تقسیم شود، مثل `dovelopment`(توسعه) که دو شاخه دارد: `sites`(سایت‌ها) و `internals`(داخلی). هر کدام از آنها کارمندان خودشان را دارند.
+- همچنین ممکن است که یک زیربخش رشد کند و به زیرزیربخش‌های اداری (یا تیم‌ها) تقسیم شود.
 
-    For instance, the `sites` department in the future may be split into teams for `siteA` and `siteB`. And they, potentially, can split even more. That's not on the picture, just something to have in mind.
+    برای مثال، بخش `sites` ممکن است در آینده به تیم‌های `siteA` و `siteB` تقسیم شود. و آنها، احتمال دارد، حتی بیشتر تقسیم شوند. این در تصویر وجود ندارد فقط چیزی است که در نظر داریم.
 
-Now let's say we want a function to get the sum of all salaries. How can we do that?
+حالا بیایید بگوییم که ما یک تابع می‌خواهیم تا جمع تمام حقوق‌ها را بدست بیارد. چگونه می‌توانیم این کار را کنیم؟
 
-An iterative approach is not easy, because the structure is not simple. The first idea may be to make a `for` loop over `company` with nested subloop over 1st level departments. But then we need more nested subloops to iterate over the staff in 2nd level departments like `sites`... And then another subloop inside those for 3rd level departments that might appear in the future? If we put 3-4 nested subloops in the code to traverse a single object, it becomes rather ugly.
+یک راه‌حل تکرارشونده راحت نیست چون ساختار ساده نیست. ایده اول می‌تواند این باشد که یک حلقه `for` همراه با زیرحلقه‌ای در بخش‌های اداری سطح اول برای `company` بسازیم. اما سپس ما برای حلقه زدن در کارمندان بخش‌های سطح دوم مانند `sites` به زیرحلقه‌های تودرتوی بیشتری نیاز داریم. و سپس یک زیرحلقه دیگر برای بخش‌های سطح سوم که ممکن است در آینده نمایان شوند؟ اگر ما 3 یا 4 زیرحلقه درون کد بگذاریم تا در یک شیء پیمایش کنیم، کد نسبتا زشت می‌شود.
 
-Let's try recursion.
+بیایید بازگشت را امتحان کنیم.
 
-As we can see, when our function gets a department to sum, there are two possible cases:
+همانطور که می‌بینیم، زمانی که تابع ما یک بخش اداری برای جمع زدن دارد، 2 حالت احتمالی وجود دارد:
 
-1. Either it's a "simple" department with an *array* of people -- then we can sum the salaries in a simple loop.
-2. Or it's *an object* with `N` subdepartments -- then we can make `N` recursive calls to get the sum for each of the subdeps and combine the results.
+1. یا یک بخش «ساده» با *آرایه‌ای* از اشخاص است که در این صورت می‌توانیم در یک حلقه ساده حقوق‌ها را جمع بزنیم.
+2. یا یک *شیء* یا `N` زیربخش است که در این صورت می‌توانیم `N` فراخوانی بازگشتی بسازیم تا مجموع را برای هر کدام از زیربخش‌ها بدست بیاریم و نتیجه‌ها را ادغام کنیم.
 
-The 1st case is the base of recursion, the trivial case, when we get an array.
+مورد اول پایه بازگشت است، مورد واضح و بدیهی، زمانی که ما یک آرایه داریم.
 
-The 2nd case when we get an object is the recursive step. A complex task is split into subtasks for smaller departments. They may in turn split again, but sooner or later the split will finish at (1).
+مورد دوم، زمانی که ما یک شیء داریم، مرحله بازگشتی است. یک کار پیچیده به چند کار ریز برای بخش‌های کوچکتر تقسیم شده است. آنها ممکن است دوباره تقسیم شوند اما دیر یا زود تقسیم شدن در (1) پایان می‌یابد.
 
-The algorithm is probably even easier to read from the code:
+الگوریتم در کد راحت‌تر خوانده می‌شود:
 
 
 ```js run
-let company = { // the same object, compressed for brevity
+let company = { // شیء یکسان است، برای ساده بودن فشرده شده است
   sales: [{name: 'John', salary: 1000}, {name: 'Alice', salary: 1600 }],
   development: {
     sites: [{name: 'Peter', salary: 2000}, {name: 'Alex', salary: 1800 }],
@@ -357,15 +357,15 @@ let company = { // the same object, compressed for brevity
   }
 };
 
-// The function to do the job
+// تابعی برای انجام کار
 *!*
 function sumSalaries(department) {
-  if (Array.isArray(department)) { // case (1)
-    return department.reduce((prev, current) => prev + current.salary, 0); // sum the array
-  } else { // case (2)
+  if (Array.isArray(department)) { // (1) مورد
+    return department.reduce((prev, current) => prev + current.salary, 0); // آرایه را جمع می‌زنیم
+  } else { // (2) مورد
     let sum = 0;
     for (let subdep of Object.values(department)) {
-      sum += sumSalaries(subdep); // recursively call for subdepartments, sum the results
+      sum += sumSalaries(subdep); // فراخوانی بازگشتی برای زیربخش‌ها، نتیجه‌ها را جمع می‌زند
     }
     return sum;
   }
@@ -375,18 +375,18 @@ function sumSalaries(department) {
 alert(sumSalaries(company)); // 7700
 ```
 
-The code is short and easy to understand (hopefully?). That's the power of recursion. It also works for any level of subdepartment nesting.
+این کد کوتاه و برای فهمیدن راحت است (امیدواریم). این قدرت بازگشت است. همچنین برای هر سطحی از تودرتویی زیربخش‌های اداری کار می‌کند.
 
-Here's the diagram of calls:
+اینجا نمودار فراخوانی‌ها را داریم:
 
 ![recursive salaries](recursive-salaries.svg)
 
-We can easily see the principle: for an object `{...}` subcalls are made, while arrays `[...]` are the "leaves" of the recursion tree, they give immediate result.
+می‌توانیم قاعده را به راحتی ببینیم: برای یک شیء `{...}` زیرفراخوانی ایجاد می‌شود در حالی که آرایه‌ها `[...]` «خروجی‌های« درخت بازگشت هستند و نتیجه فوری می‌دهند.
 
-Note that the code uses smart features that we've covered before:
+در نظر داشته باشید که کد از ویژگی‌های هوشمند که ما قبلا آنها را پوشش دادیم استفاده می‌کند:
 
-- Method `arr.reduce` explained in the chapter <info:array-methods> to get the sum of the array.
-- Loop `for(val of Object.values(obj))` to iterate over object values: `Object.values` returns an array of them.
+- متد `arr.reduce` در فصل <info:array-methods> توضیح داده شد که برای گرفتن مجموع آرایه است.
+- حلقه `for(val of Object.values(obj))` برای حلقه زدن در مقدارهای شیء: `Object.values` یک آرایه از آنها را برمی‌گرداند.
 
 
 ## Recursive structures
