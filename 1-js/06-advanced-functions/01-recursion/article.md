@@ -520,23 +520,23 @@ list.next = list.next.next;
 - همچنین می‌توانیم یک متغیر به نام `tail` که به المان آخر لیست رجوع می‌کند اضافه کنیم (و هر زمان که المانی اضافه/حذف می‌کنیم آن را اپدیت کنیم).
 - ...ساختار داده می‌تواند با توجه به نیازهای ما خیلی تنوع داشته باشد.
 
-## Summary
+## خلاصه
 
-Terms:
-- *Recursion*  is a programming term that means calling a function from itself. Recursive functions can be used to solve tasks in elegant ways.
+اصطلاحات:
+- *بازگشت* یک عبارت برنامه‌نویسی و به معنی فراخوانی یک تابع در خودش است. تابع‌های بازگشتی می‌توانند برای حل کردن مسائل با راه‌هایی عالی استفاده شوند.
 
-    When a function calls itself, that's called a *recursion step*. The *basis* of recursion is function arguments that make the task so simple that the function does not make further calls.
+    زمانی که یک تابع خودش را فراخوانی می‌کند، به آن *مرحله بازگشت* می‌گویند. *اساس* بازگشت، آرگومان‌های تابع هستند که کار را انقدر ساده می‌کنند که تابع دیگر فراخوانی‌های بیشتری انجام نمی‌دهد.
 
-- A [recursively-defined](https://en.wikipedia.org/wiki/Recursive_data_type) data structure is a data structure that can be defined using itself.
+- یک ساختار داده که به صورت [بازگشتی تعریف شده باشد](https://en.wikipedia.org/wiki/Recursive_data_type) ساختار داده‌ای است که می‌تواند با استفاده از خودش تعریف شود.
 
-    For instance, the linked list can be defined as a data structure consisting of an object referencing a list (or null).
+    برای مثال، لیست پیوندی می‌تواند به عنوان ساختار داده‌ای تعریف شود که شیءای رجوع‌کننده به یک لیست (یا هیچی) را شامل شود.
 
     ```js
     list = { value, next -> list }
     ```
 
-    Trees like HTML elements tree or the department tree from this chapter are also naturally recursive: they branch and every branch can have other branches.
+    درخت‌ها مانند المان‌های HTML یا درخت بخش اداری در این فصل هم به طور طبیعی بازگشتی هستند: آنها شاخه‌شاخه می‌شوند و هر شاخه می‌تواند شاخه‌های دیگر هم داشته باشد.
 
-    Recursive functions can be used to walk them as we've seen in the `sumSalary` example.
+    همانطور که در مثال `sumSalary` دیدیم تابع‌های بازگشتی می‌توانند برای پیمایش درون آنها استفاده شوند.
 
-Any recursive function can be rewritten into an iterative one. And that's sometimes required to optimize stuff. But for many tasks a recursive solution is fast enough and easier to write and support.
+هر تابع بازگشتی می‌تواند به صورت تکرارشونده بازنویسی شود. و گاهی اوقات برای بهینه کردن به آن نیاز است. اما برای بسیاری از کارها راه‌حل بازگشتی به اندازه کافی سریع و برای نوشتن و پشتیبانی کردن راحت‌تر است.
