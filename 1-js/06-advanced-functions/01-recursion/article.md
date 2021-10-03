@@ -389,48 +389,48 @@ alert(sumSalaries(company)); // 7700
 - حلقه `for(val of Object.values(obj))` برای حلقه زدن در مقدارهای شیء: `Object.values` یک آرایه از آنها را برمی‌گرداند.
 
 
-## Recursive structures
+## ساختارهای بازگشتی
 
-A recursive (recursively-defined) data structure is a structure that replicates itself in parts.
+یک ساختار داده بازگشتی (تعریف شده به صورت بازگشتی) ساختاری است که خودش را در اجزا تکرار می‌کند.
 
-We've just seen it in the example of a company structure above.
+ما به تازگی آن را بالاتر در مثال ساختار شرکت دیدیم.
 
-A company *department* is:
-- Either an array of people.
-- Or an object with *departments*.
+یک *بخش اداری* شرکت برابر است با:
+- یا آرایه‌ای از اشخاص.
+- یک شیءای شامل *بخش‌ها*.
 
-For web-developers there are much better-known examples: HTML and XML documents.
+برای توسعه‌دهندگان وب مثال‌های شناخته‌شده‌تر وجود دارد: مستندات HTML و XML.
 
-In the HTML document, an *HTML-tag* may contain a list of:
-- Text pieces.
-- HTML-comments.
-- Other *HTML-tags* (that in turn may contain text pieces/comments or other tags etc).
+در سند HTML، یک *برچسب HTML* ممکن است لیستی از این‌ها را شامل شود:
+- قسمت‌های متنی.
+- کامنت‌های HTML.
+- بقیه‌ی *برچسب‌های HTML* (که خودشان ممکن است شامل قسمت‌های متنی/کامنت‌ها یا برچسب‌های دیگر باشند).
 
-That's once again a recursive definition.
+این هم یک تعریف بازگشتی است.
 
-For better understanding, we'll cover one more recursive structure named "Linked list" that might be a better alternative for arrays in some cases.
+برای درک بهتر، ما یک ساختار بازگشتی دیگر به نام «لیست پیوندی (Linked list)» که ممکن است در بعضی موارد جایگزینی برای آرایه‌ها باشند را پوشش می‌دهیم.
 
-### Linked list
+### لیست پیوندی
 
-Imagine, we want to store an ordered list of objects.
+تصور کنید، ما می‌خواهیم یک لیست مرتب از شیءها را ذخیره کنیم.
 
-The natural choice would be an array:
+انتخاب طبیعی می‌تواند آرایه باشد:
 
 ```js
 let arr = [obj1, obj2, obj3];
 ```
 
-...But there's a problem with arrays. The "delete element" and "insert element" operations are expensive. For instance, `arr.unshift(obj)` operation has to renumber all elements to make room for a new `obj`, and if the array is big, it takes time. Same with `arr.shift()`.
+...اما یک مشکل با آرایه‌ها وجود دارد. عمل‌های «حذف المان» و «اضافه‌کردن المان» زحمت زیادی دارند. برای مثال، عمل `arr.unshift(obj)` برای اینکه جایی برای `obj` جدید ایجاد کند باید تمام المان‌ها را دوباره عددگذاری کند و اگر آرایه بزرگ باشد، این کار زمان می‌برد. همین مشکل برای `arr.shift()` هم وجود دارد.
 
-The only structural modifications that do not require mass-renumbering are those that operate with the end of array: `arr.push/pop`. So an array can be quite slow for big queues, when we have to work with the beginning.
+تنها تغییرات ساختاری که به عددگذاری دوباره عظیم نیازی ندارند آنهایی هستند که با انتهای آرایه کار انجام می‌دهند: `arr.push/pop`. پس زمانی که ما باید با آغاز آرایه کار کنیم، آرایه می‌تواند برای صف‌های طولانی بسیار کند باشد.
 
-Alternatively, if we really need fast insertion/deletion, we can choose another data structure called a [linked list](https://en.wikipedia.org/wiki/Linked_list).
+به منظور جایگزینی، اگر ما واقعا به حذف/اضافه کردن سریع احتیاج داریم، می‌توانیم یک ساختار داده دیگر به نام [لیست پیوندی (linked list)](https://fa.wikipedia.org/wiki/لیست_پیوندی) را انتخاب کنیم.
 
-The *linked list element* is recursively defined as an object with:
+*المان لیست پیوندی* به صورت بازگشتی به عنوان یک شیء شامل ویژگی‌های زیر تعریف می‌شود:
 - `value`.
-- `next` property referencing the next *linked list element* or `null` if that's the end.
+- `next` ویژگی‌ای که به *المان لیست پیوندی* بعدی رجوع می‌کند یا اگر آخر باشد به `null`.
 
-For instance:
+برای مثال:
 
 ```js
 let list = {
@@ -448,11 +448,11 @@ let list = {
 };
 ```
 
-Graphical representation of the list:
+نمایش گرافیکی لیست:
 
 ![linked list](linked-list.svg)
 
-An alternative code for creation:
+یک کد جایگزین برای ساختن آن:
 
 ```js no-beautify
 let list = { value: 1 };
@@ -462,9 +462,9 @@ list.next.next.next = { value: 4 };
 list.next.next.next.next = null;
 ```
 
-Here we can even more clearly see that there are multiple objects, each one has the `value` and `next` pointing to the neighbour. The `list` variable is the first object in the chain, so following `next` pointers from it we can reach any element.
+اینجا ما می‌توانیم حتی واضح‌تر ببینیم که چند شیء وجود دارند که هر کدام دارای `value` و `next` که به همسایه اشاره می‌کند هستند. متغیر `list` اولین شیء در زنجیره است پس با دنبال کردن اشاره‌گرهای `next` از آن می‌توانیم به هر المانی برسیم.
 
-The list can be easily split into multiple parts and later joined back:
+لیست می‌تواند به راحتی به چند قسمت تقسیم شود و بعدا دوباره بهم بپیوندد:
 
 ```js
 let secondList = list.next.next;
@@ -473,15 +473,15 @@ list.next.next = null;
 
 ![linked list split](linked-list-split.svg)
 
-To join:
+برای پیوند دادن:
 
 ```js
 list.next.next = secondList;
 ```
 
-And surely we can insert or remove items in any place.
+و قطعا ما می‌توانیم المان‌ها را در هر جایی حذف یا اضافه کنیم.
 
-For instance, to prepend a new value, we need to update the head of the list:
+برای مثال، برای اضافه کردن یک مقدار جدید به آغاز لیست، ما باید راس لیست را بروزرسانی کنیم:
 
 ```js
 let list = { value: 1 };
@@ -490,14 +490,14 @@ list.next.next = { value: 3 };
 list.next.next.next = { value: 4 };
 
 *!*
-// prepend the new value to the list
+// اضافه کردن مقدار جدید به آغاز لیست
 list = { value: "new item", next: list };
 */!*
 ```
 
 ![linked list](linked-list-0.svg)
 
-To remove a value from the middle, change `next` of the previous one:
+برای حذف یک مقدار از وسط، `next` قبلی را تغییر می‌دهیم:
 
 ```js
 list.next = list.next.next;
@@ -505,20 +505,20 @@ list.next = list.next.next;
 
 ![linked list](linked-list-remove-1.svg)
 
-We made `list.next` jump over `1` to value `2`. The value `1` is now excluded from the chain. If it's not stored anywhere else, it will be automatically removed from the memory.
+ما کاری کردیم که `list.next` از `1` به `2` بپرد. مقدار `1` حالا از زنجیره خارج شده است. اگر جایی دیگر ذخیره نشده باشد، به طور خودکار از حافظه پاک می‌شود.
 
-Unlike arrays, there's no mass-renumbering, we can easily rearrange elements.
+یرخلاف آرایه‌ها، هیچ عددگذاری دوباره عظیمی وجود ندارد و ما می‌توانیم به راحتی المان‌ها را دوباره تنظیم کنیم.
 
-Naturally, lists are not always better than arrays. Otherwise everyone would use only lists.
+به طور طبیعی، لیست‌ها همیشه از آرایه‌ها بهتر نیستند. در غیر این صورت همه از لیست‌ها استفاده می‌کردند.
 
-The main drawback is that we can't easily access an element by its number. In an array that's easy: `arr[n]` is a direct reference. But in the list we need to start from the first item and go `next` `N` times to get the Nth element.
+ضعف اصلی این است که ما نمی‌توانیم به راحتی با عدد یک المان به آن دسترسی پیدا کنیم. در یک آرایه کار راحتی است: `arr[n]` یک رجوع مستقیم است. اما در لیست ما باید از اولین المان شروع کنیم و به تعداد `N` بار به `next` برویم تا به المان Nاُم برسیم.
 
-...But we don't always need such operations. For instance, when we need a queue or even a [deque](https://en.wikipedia.org/wiki/Double-ended_queue) -- the ordered structure that must allow very fast adding/removing elements from both ends, but access to its middle is not needed.
+...اما همیشه به چنین کارهایی نیاز نداریم. برای مثال، زمانی که ما به یک صف یا حتی یک [صف دوطرفه](https://fa.wikipedia.org/wiki/صف_دوطرفه) نیاز داریم، ساختاری که باید اضافه/حذف کردن سریع را از هر دو انتها ممکن سازد اما دسترسی به وسط آن نیاز نیست.
 
-Lists can be enhanced:
-- We can add property `prev` in addition to `next` to reference the previous element, to move back easily.
-- We can also add a variable named `tail` referencing the last element of the list (and update it when adding/removing elements from the end).
-- ...The data structure may vary according to our needs.
+لیست‌ها می‌توانند پیشرفت کنند:
+- ما می‌توانیم ویژگی `prev` را در کنار `next` اضافه کنیم تا به المان قبلی رجوع کنیم و به راحتی به عقب برگردیم.
+- همچنین می‌توانیم یک متغیر به نام `tail` که به المان آخر لیست رجوع می‌کند اضافه کنیم (و هر زمان که المانی اضافه/حذف می‌کنیم آن را اپدیت کنیم).
+- ...ساختار داده می‌تواند با توجه به نیازهای ما خیلی تنوع داشته باشد.
 
 ## Summary
 
