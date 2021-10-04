@@ -2,8 +2,8 @@ importance: 5
 
 ---
 
-# Output a single-linked list in the reverse order
+# یک لیست پیوندی را با ترتیب برعکس نمایش دهید
 
-Output a single-linked list from the previous task <info:task/output-single-linked-list> in the reverse order.
+یک لیست پیوندی را از تمرین قبلی <info:task/output-single-linked-list> با ترتیب برعکس  نمایش دهید.
 
-Make two solutions: using a loop and using a recursion.
+دو راه‌حل بسازید: با استفاده از حلقه و با استفاده از بازگشت.
