@@ -1,6 +1,6 @@
-# Loop-based solution
+# راه‌حل بر اساس حلقه
 
-The loop-based variant of the solution:
+نوع حلقه‌ای راه‌حل:
 
 ```js run
 let list = {
@@ -30,7 +30,7 @@ function printList(list) {
 printList(list);
 ```
 
-Please note that we use a temporary variable `tmp` to walk over the list. Technically, we could use a function parameter `list` instead:
+لطفا در نظر داشته باشید که ما از متغیر موقتی `tmp` برای پیمایش در لیست استفاده می‌کنیم. از لحاظ فنی، ما می‌توانستیم از پارامتر `list` به جای آن استفاده کنیم:
 
 ```js
 function printList(list) {
@@ -43,15 +43,15 @@ function printList(list) {
 }
 ```
 
-...But that would be unwise. In the future we may need to extend a function, do something else with the list. If we change `list`, then we lose such ability.
+...اما این کار عاقلانه نیست. در آینده ممکن است تابعی ایجاد کنیم که کار دیگری با لیست انجام می‌دهد. اگر ما `list` را تغییر دهیم، سپس چنین امکانی را از دست می‌دهیم.
 
-Talking about good variable names, `list` here is the list itself. The first element of it. And it should remain like that. That's clear and reliable.
+درباره اسامی خوب متغیر حرف بزنیم، `list` اینجا خودش یک لیست است. اولین المان آن. و ممکن است همانطور بماند. این موضوع واضح و قابل اطمینان است.
 
-From the other side, the role of `tmp` is exclusively a list traversal, like `i` in the `for` loop.
+از سویی دیگر، نقش `tmp` فقط یک پیمایش لیست است مانند `i` در حلقه `for`.
 
-# Recursive solution
+# راه‌حل بازگشتی
 
-The recursive variant of `printList(list)` follows a simple logic: to output a list we should output the current element `list`, then do the same for `list.next`:
+نوع بازگشتی `printList(list)` از منطقی ساده پیروی می‌کند: برای نمایش یک لیست ما باید المان کنونی `list` را خروجی بگیریم سپس همین کار را برای `list.next` انجام دهیم:
 
 ```js run
 let list = {
@@ -70,10 +70,10 @@ let list = {
 
 function printList(list) {
 
-  alert(list.value); // output the current item
+  alert(list.value); // نمایش المان کنونی
 
   if (list.next) {
-    printList(list.next); // do the same for the rest of the list
+    printList(list.next); // انجام کار یکسان برای بقیه‌ی لیست
   }
 
 }
@@ -81,8 +81,8 @@ function printList(list) {
 printList(list);
 ```
 
-Now what's better?
+حالا کدام بهتر است؟
 
-Technically, the loop is more effective. These two variants do the same, but the loop does not spend resources for nested function calls.
+از لحاظ فنی، حلقه مفیدتر است. این دو نوع یک کار را انجام می‌دهند اما حلقه منابع را برای فراخوانی‌های تودرتوی تابع مصرف نمی‌کند.
 
-From the other side, the recursive variant is shorter and sometimes easier to understand.
+از سوی دیگر، نوع بازگشتی کوتاه‌تر است و بعضی اوقات برای فهمیدن راحت‌تر است.
