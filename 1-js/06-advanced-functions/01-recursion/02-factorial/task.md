@@ -2,17 +2,17 @@ importance: 4
 
 ---
 
-# Calculate factorial
+# فاکتوریل را حساب کنید
 
-The [factorial](https://en.wikipedia.org/wiki/Factorial) of a natural number is a number multiplied by `"number minus one"`, then by `"number minus two"`, and so on till `1`. The factorial of `n` is denoted as `n!`
+[فاکتوریل](https://en.wikipedia.org/wiki/Factorial) یک عدد طبیعی، عددی است که در `"عدد منهای یک"` ضرب می‌شود سپس در `"عدد منهای دو"` و همینطور تا `1` ادامه می‌یابد. فاکتوریل `n` به `n!` نشان داده می‌شود.
 
-We can write a definition of factorial like this:
+می‌توانیم یک تعریف مانند این برای فاکتوریل بنویسیم:
 
 ```js
 n! = n * (n - 1) * (n - 2) * ...*1
 ```
 
-Values of factorials for different `n`:
+مقدارهای فاکتوریل‌ها برای `n`های متفاوت:
 
 ```js
 1! = 1
@@ -22,10 +22,10 @@ Values of factorials for different `n`:
 5! = 5 * 4 * 3 * 2 * 1 = 120
 ```
 
-The task is to write a function `factorial(n)` that calculates `n!` using recursive calls.
+تکلیف این است که یک تابع `factorial(n)` بنویسیم که `n!` را با استفاده از فراخوانی‌های بازگشتی محاسبه می‌کند.
 
 ```js
 alert( factorial(5) ); // 120
 ```
 
-P.S. Hint: `n!` can be written as `n * (n-1)!` For instance: `3! = 3*2! = 3*2*1! = 6`
+پی‌نوشت: راهنمایی: `n!` می‌تواند به صورت `n * (n-1)!` نوشته شود، برای مثال: `3! = 3*2! = 3*2*1! = 6`.
