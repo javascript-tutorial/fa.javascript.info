@@ -1,30 +1,30 @@
 
-# The old "var"
+# کلمه "var" قدیمی
 
-```smart header="This article is for understanding old scripts"
-The information in this article is useful for understanding old scripts.
+```smart header="این مقاله برای فهمیدن اسکریپت‌های قدیمی است"
+اطلاعات این مقاله برای فهمیدن اسکریپت‌های قدیمی مفید است.
 
-That's not how we write new code.
+ما کدهای جدید را اینگونه نمی‌نویسیم.
 ```
 
-In the very first chapter about [variables](info:variables), we mentioned three ways of variable declaration:
+دقیقا در فصل اول درباره [متغیرها](info:variables)، ما سه راه تعریف متغیر را معرفی کردیم:
 
 1. `let`
 2. `const`
 3. `var`
 
-The `var` declaration is similar to `let`. Most of the time we can replace `let` by `var` or vice-versa and expect things to work:
+تعریف متغیر توسط `var` مانند `let` است. اکثر اوقات ما می‌توانیم `let` را با `var` جایگزین کنیم یا برعکس و توقع داشته باشیم که دستورات کار کنند:
 
 ```js run
-var message = "Hi";
-alert(message); // Hi
+var message = "سلام";
+alert(message); // سلام
 ```
 
-But internally `var` is a very different beast, that originates from very old times. It's generally not used in modern scripts, but still lurks in the old ones.
+اما از دورن، `var` گونه‌ای بسیار متفاوت است که از زمان‌های قدیم وجود دارد. به طور کلی در اسکریپت‌های جدید استفاده نمی‌شود ولی هنوز هم در اسکریپت‌های قدیمی کمین کرده است.
 
-If you don't plan on meeting such scripts you may even skip this chapter or postpone it.
+اگر شما قرار نیست چنین اسکریپت‌هایی را ببینید می‌توانید این فصل را رد کنید یا مطالعه آن را به عقب بندازید.
 
-On the other hand, it's important to understand differences when migrating old scripts from `var` to `let`, to avoid odd errors.
+از سویی دیگر، زمانی که اسکریپت‌های قدیمی را از `var` به `let` کوچ می‌دهیم، دانستن تفاوت‎ها برای جلوگیری از ارورهای عجیب مهم است.
 
 ## "var" has no block scope
 
