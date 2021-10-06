@@ -130,6 +130,13 @@ Some headers have `[#anchor]` at the end, e.g.
 
 Please don't translate or remove the `[#...]` part, it's for URL anchors.
 
+<div dir="rtl">
+    
+## نکات ترجمهٔ فارسی
+
+### نیم‌فاصله
+</div>
+
 ## Running locally
 
 You can run the tutorial server locally to see how the translation looks.
