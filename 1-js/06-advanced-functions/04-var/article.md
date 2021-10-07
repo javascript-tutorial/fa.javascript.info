@@ -87,22 +87,22 @@ alert(phrase); // ReferenceError: phrase is not defined
 
 همانطور که می‌بینیم، `var` از درون `if`، `for` یا بقیه بلوک‌های کد بیرون می‌آید. به این دلیل که در زمان‌های قدیم، بلوک‌ها در جاوااسکریپت محیط‌های لغوی نداشتند و `var` یک باقی‌مانده از آن است.
 
-## "var" tolerates redeclarations
+## کلمه "var" تعریف‌های دوباره را تحمل می‌کند
 
-If we declare the same variable with `let` twice in the same scope, that's an error:
+اگر ما با `let` متغیری یکسان را دوبار در محدوده بلوک یکسان تعریف کنیم، یک ارور ایجاد می‌شود:
 
 ```js run
 let user;
 let user; // SyntaxError: 'user' has already been declared
 ```
 
-With `var`, we can redeclare a variable any number of times. If we use `var` with an already-declared variable, it's just ignored:
+با `var` ما می‌توانیم یک متغیر را هر چند بار که بخواهیم دوباره تعریف کنیم. اگر ما از `var` همراه با یک متغیر از قبل تعریف شده استفاده کنیم، نادیده گرفته می‌شود:
 
 ```js run
 var user = "Pete";
 
-var user = "John"; // this "var" does nothing (already declared)
-// ...it doesn't trigger an error
+var user = "John"; // کاری انجام نمی‌دهد (از قبل تعریف شده) "var" این
+// ...اروری ایجاد نمی‌کند
 
 alert(user); // John
 ```
