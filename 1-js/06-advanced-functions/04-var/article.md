@@ -26,29 +26,29 @@ alert(message); // سلام
 
 از سویی دیگر، زمانی که اسکریپت‌های قدیمی را از `var` به `let` کوچ می‌دهیم، دانستن تفاوت‎ها برای جلوگیری از ارورهای عجیب مهم است.
 
-## "var" has no block scope
+## کلمه "var" محدوده بلوک ندارد
 
-Variables, declared with `var`, are either function-scoped or global-scoped. They are visible through blocks.
+متغیرهایی که با `var` تعریف شده‌اند، یا محدوده تابع دارند یا محدوده گلوبال. آن‌ها در این بلوک‌ها قابل رویت هستند.
 
-For instance:
+برای مثال:
 
 ```js run
 if (true) {
-  var test = true; // use "var" instead of "let"
+  var test = true; // استفاده کنید "var" از "let" به جای
 }
 
 *!*
-alert(test); // true, the variable lives after if
+alert(test); // true ،هم باقی می‌ماند if متغیر بعد از
 */!*
 ```
 
-As `var` ignores code blocks, we've got a global variable `test`.
+چون `var` بلوک‌های کد را نادیده می‌گیرد، ما یک متغیر گلوبال `test` خواهیم داشت.
 
-If we used `let test` instead of `var test`, then the variable would only be visible inside `if`:
+اگر ما به جای `var test` از `let test` استفاده می‌کردیم، سپس متغیر فقط درون `if` قابل رویت بود:
 
 ```js run
 if (true) {
-  let test = true; // use "let"
+  let test = true; // "let" استفاده از
 }
 
 *!*
@@ -56,7 +56,7 @@ alert(test); // ReferenceError: test is not defined
 */!*
 ```
 
-The same thing for loops: `var` cannot be block- or loop-local:
+همین مورد برای حلقه‌ها هم صدق می‌کند: `var` نمی‌تواند در محدوده بلوک حلقه باشد:
 
 ```js
 for (var i = 0; i < 10; i++) {
@@ -65,27 +65,27 @@ for (var i = 0; i < 10; i++) {
 }
 
 *!*
-alert(i);   // 10, "i" is visible after loop, it's a global variable
-alert(one); // 1, "one" is visible after loop, it's a global variable
+alert(i);   // 10 ،بعد از حلقه قابل رویت است چون یک متغیر گلوبال است "i"
+alert(one); // 1 ،بعد از حلقه قابل رویت است چون یک متغیر گلوبال است "one"
 */!*
 ```
 
-If a code block is inside a function, then `var` becomes a function-level variable:
+اگر یک بلوک کد درون تابع باشد، سپس `var` یک متغیر در سطح تابع می‌شود:
 
 ```js run
 function sayHi() {
   if (true) {
-    var phrase = "Hello";
+    var phrase = "سلام";
   }
 
-  alert(phrase); // works
+  alert(phrase); // کار می‌کند
 }
 
 sayHi();
 alert(phrase); // ReferenceError: phrase is not defined
 ```
 
-As we can see, `var` pierces through `if`, `for` or other code blocks. That's because a long time ago in JavaScript, blocks had no Lexical Environments, and `var` is a remnant of that.
+همانطور که می‌بینیم، `var` از درون `if`، `for` یا بقیه بلوک‌های کد بیرون می‌آید. به این دلیل که در زمان‌های قدیم، بلوک‌ها در جاوااسکریپت محیط‌های لغوی نداشتند و `var` یک باقی‌مانده از آن است.
 
 ## "var" tolerates redeclarations
 
