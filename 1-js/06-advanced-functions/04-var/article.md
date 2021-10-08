@@ -107,17 +107,17 @@ var user = "John"; // کاری انجام نمی‌دهد (از قبل تعری�
 alert(user); // John
 ```
 
-## "var" variables can be declared below their use
+## متغیرهای "var" می‌توانند پایین محل استفاده‌شان تعریف شوند
 
-`var` declarations are processed when the function starts (or script starts for globals).
+متغیرهای تعریف شده با `var` زمانی که اجرای تابع شروع می‌شود (یا برای متغیرهای گلوبال زمانی که اسکریپت شروع می‌شود) پردازش می‌شوند.
 
-In other words, `var` variables are defined from the beginning of the function, no matter where the definition is (assuming that the definition is not in the nested function).
+به عبارتی دیگر، متغیرهای `var` بدون توجه به محل تعریف آن‌ها، از زمانی که اجرای تابع شروع می‌شود تعریف می‌شوند (با فرض اینکه تعریف کردن درون تابع تودرتو نیست).
 
-So this code:
+پس این کد:
 
 ```js run
 function sayHi() {
-  phrase = "Hello";
+  phrase = "سلام";
 
   alert(phrase);
 
@@ -128,7 +128,7 @@ function sayHi() {
 sayHi();
 ```
 
-...Is technically the same as this (moved `var phrase` above):
+...از لحاظ فنی با این کد برابر است (عبارت `var phrase` را بالا بردیم):
 
 ```js run
 function sayHi() {
@@ -136,18 +136,18 @@ function sayHi() {
   var phrase;
 */!*
 
-  phrase = "Hello";
+  phrase = "سلام";
 
   alert(phrase);
 }
 sayHi();
 ```
 
-...Or even as this (remember, code blocks are ignored):
+...حتی با این هم برابر است (به یاد داشته باشید که بلوک‌های کد نادیده گرفته می‌شوند):
 
 ```js run
 function sayHi() {
-  phrase = "Hello"; // (*)
+  phrase = "سلام"; // (*)
 
   *!*
   if (false) {
@@ -160,52 +160,52 @@ function sayHi() {
 sayHi();
 ```
 
-People also call such behavior "hoisting" (raising), because all `var` are "hoisted" (raised) to the top of the function.
+افراد به آن «بالا بردن» هم می‌گویند چون تمام `var`ها به بالای تابع «سعود می‌کنند».
 
-So in the example above, `if (false)` branch never executes, but that doesn't matter. The `var` inside it is processed in the beginning of the function, so at the moment of `(*)` the variable exists.
+پس در مثال بالا، شاخه `if (false)` هیچوقت اجرا نمی‌شود اما اصلا مهم نیست. `var` که درون آن است در ابتدای اجرای تابع پردازش می‌شود پس هنگام اجرای `(*)` متغیر وجود دارد.
 
-**Declarations are hoisted, but assignments are not.**
+**تعریف متغیر بالا می‌رود اما مقداردهی‌ها نه.**
 
-That's best demonstrated with an example:
+این موضوع یک مثال بهتر نمایش داده می‌شود:
 
 ```js run
 function sayHi() {
   alert(phrase);  
 
 *!*
-  var phrase = "Hello";
+  var phrase = "سلام";
 */!*
 }
 
 sayHi();
 ```
 
-The line `var phrase = "Hello"` has two actions in it:
+خط `var phrase = "سلام"` در خودش دو کار انجام می‌دهد:
 
-1. Variable declaration `var`
-2. Variable assignment `=`.
+1. تعریف متغیر با `var`.
+2. مقداردهی متغیر با `=`.
 
-The declaration is processed at the start of function execution ("hoisted"), but the assignment always works at the place where it appears. So the code works essentially like this:
+تعریف متغیر در ابتدای اجرای تابع پردازش می‌شود («بالا می‌رود») اما مقداردهی همیشه در جایی که وجود دارد انجام می‌شود. پس کد بالا اساسا مانند کد پایین کار می‌کند:
 
 ```js run
 function sayHi() {
 *!*
-  var phrase; // declaration works at the start...
+  var phrase; // ...تعریف متغیر در ابتدا انجام می‌شود
 */!*
 
   alert(phrase); // undefined
 
 *!*
-  phrase = "Hello"; // ...assignment - when the execution reaches it.
+  phrase = "Hello"; // ...مقداردهی - زمانی که اجرا به آن می‌رسد
 */!*
 }
 
 sayHi();
 ```
 
-Because all `var` declarations are processed at the function start, we can reference them at any place. But variables are undefined until the assignments.
+چون تمام تعریف متغیرهای `var` در ابتدای تابع پردازش می‌شوند، ما می‌توانیم به آن‌ها در هر زمانی رجوع کنیم. اما متغیرها تا زمان مقداردهی برابر با undefined هستند.
 
-In both examples above, `alert` runs without an error, because the variable `phrase` exists. But its value is not yet assigned, so it shows `undefined`.
+در هر دو مثال بالا، `alert` بدون هیچ اروری اجرا می‌شود چون متغیر `phrase` وجود دارد. اما مقدار آن هنوز تخصیص داده نشده است پس `undefined` را نشان می‌شود.
 
 ## IIFE
 
