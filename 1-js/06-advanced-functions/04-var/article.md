@@ -207,81 +207,81 @@ sayHi();
 
 در هر دو مثال بالا، `alert` بدون هیچ اروری اجرا می‌شود چون متغیر `phrase` وجود دارد. اما مقدار آن هنوز تخصیص داده نشده است پس `undefined` را نشان می‌شود.
 
-## IIFE
+## روش IIFE
 
-In the past, as there was only `var`, and it has no block-level visibility, programmers invented a way to emulate it. What they did was called "immediately-invoked function expressions" (abbreviated as IIFE).
+در گذشته، چون فقط `var` وجود داشت و قابلیت رویت در بلوک کد را ندارد، برنامه‌نویسان برای تقلید آن راهی ایجاد کردند. کاری کردند را «فراخوانی بلافاصله‌ی function expressionها (immediately-invoked function expressions)» است (خلاصه شده به عنوان IIFE).
 
-That's not something we should use nowadays, but you can find them in old scripts.
+امروزه از این روش نباید استفاده کنیم اما می‌توانید آن‌ها را در اسکریپت‌های قدیمی پیدا کنید.
 
-An IIFE looks like this:
+یک IIFE اینگونه به نظر می‌رسد:
 
 ```js run
 (function() {
 
-  var message = "Hello";
+  var message = "سلام";
 
-  alert(message); // Hello
+  alert(message); // سلام
 
 })();
 ```
 
-Here, a Function Expression is created and immediately called. So the code executes right away and has its own private variables.
+اینجا، یک Function Expression ساخته شده و بلافاصله فراخوانی شده است. پس کد هر چه سریع‌تر اجرا می‌شود و متغیرهای مخصصوص خودش را دارد.
 
-The Function Expression is wrapped with parenthesis `(function {...})`, because when JavaScript engine encounters `"function"` in the main code, it understands it as the start of a Function Declaration. But a Function Declaration must have a name, so this kind of code will give an error:
+Function Expression درون پرانتز قرار گرفته است `(function {...})` چون زمانی که موتور جاوااسکریپت در کد اصلی با `"function"` مواجه می‌شود، آن را به عنوان ابتدای یک Function Declaration فرض می‌کند. اما یک Function Declaration باید اسم داشته باشد پس کدی به این شکل ارور ایجاد می‌کند:
 
 ```js run
-// Tries to declare and immediately call a function
+// سعی می‌کنیم یک تابع را تعریف و بلافاصله فراخوانی کنیم
 function() { // <-- SyntaxError: Function statements require a function name
 
-  var message = "Hello";
+  var message = "سلام";
 
-  alert(message); // Hello
+  alert(message); // سلام
 
 }();
 ```
 
-Even if we say: "okay, let's add a name", that won't work, as JavaScript does not allow Function Declarations to be called immediately:
+حتی اگر بگوییم: «مشکلی نیست، بیایید یک اسم اضافه کنیم» باز هم کار نمی‌کند چون جاوااسکریپت اجازه نمی‌دهد که Function Declarationها بلافاصله فراخوانی شوند:
 
 ```js run
-// syntax error because of parentheses below
+// به دلیل وجود پرانتزهای پایین ارور سینتکس دریافت می‌کنیم
 function go() {
 
-}(); // <-- can't call Function Declaration immediately
+}(); // <-- را بلافاصله فراخوانی کرد Function Declaration نمی‌توان
 ```
 
-So, the parentheses around the function is a trick to show JavaScript that the function is created in the context of another expression, and hence it's a Function Expression: it needs no name and can be called immediately.
+پس پرانتزهای دور تابع یک ترفند است تا به جاوااسکریپت نشان دهیم که تابع در زمینه‌ی عبارتی دیگر ساخته شده و از این رو یک Function Expression است: به اسم نیازی ندارد و می‌تواند بلافاصله فراخوانی شود.
 
-There exist other ways besides parentheses to tell JavaScript that we mean a Function Expression:
+برای اینکه به جاوااسکریپت بگوییم که منظورمان یک Function Expression است راه‌های دیگری در کنار پرانتزها وجود دارد:
 
 ```js run
-// Ways to create IIFE
+// IIFE راه‌هایی برای ایجاد
 
 (function() {
-  alert("Parentheses around the function");
+  alert("پرانتزهای دور تابع");
 }*!*)*/!*();
 
 (function() {
-  alert("Parentheses around the whole thing");
+  alert("پرانتزهای دور تمام عبارت");
 }()*!*)*/!*;
 
 *!*!*/!*function() {
-  alert("Bitwise NOT operator starts the expression");
+  alert("عملگر NOT بیتی عبارت را آغاز می‌کند");
 }();
 
 *!*+*/!*function() {
-  alert("Unary plus starts the expression");
+  alert("عملگر مثبت یگانه عبارت را آغاز می‌کند");
 }();
 ```
 
-In all the above cases we declare a Function Expression and run it immediately. Let's note again: nowadays there's no reason to write such code.
+در تمام موارد بالا ما یک Function Expression تعریف می‌کنیم و آن را بلافاصله فراخوانی می‌کنیم. بیایید دوباره به این موضوع توجه کنیم: امروزه هیج دلیلی برای نوشتن چنین کدی وجود ندارد.
 
-## Summary
+## خلاصه
 
-There are two main differences of `var` compared to `let/const`:
+بین `var` و `let/const` دو تفاوت اصلی وجود دارد:
 
-1. `var` variables have no block scope, their visibility is scoped to current function, or global, if declared outside function.
-2. `var` declarations are processed at function start (script start for globals).
+1. متغیرهای `var` محدودیت بلوک ندارند، قابلیت رویت آن‌ها یا محدود به تابع کنونی است یا اگر بیرون از تابع تعریف شده باشند محدود به گلوبال است.
+2. تعریف متغیر با `var` در ابتدای اجرای تابع پردازش می‌شود (یا برای متغیرهای گلوبال در ابتدای اسکریپت).
 
-There's one more very minor difference related to the global object, that we'll cover in the next chapter.
+یک تفاوت جزئی دیگر در رابطه با شیء گلوبال وجود دارد که در فصل بعدی آن را بیان می‌کنیم.
 
-These differences make `var` worse than `let` most of the time. Block-level variables is such a great thing. That's why `let` was introduced in the standard long ago, and is now a major way (along with `const`) to declare a variable.
+این تفاوت‌های در اکثر اوقات `var` را نسبت به `let` بدتر جلوه می‌دهند. متغیرهای سطح بلوک چیز خیلی خوبی هستند. به این دلیل است که خیلی قبل‌تر `let` در استاندارد معرفی شد و حالا برای تعریف متغیر روش اصلی است (در کنار `const`).
