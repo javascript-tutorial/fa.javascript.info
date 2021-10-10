@@ -1,6 +1,6 @@
-# Decorators and forwarding, call/apply
+# دکوراتورها و ارسال کردن، متدهای call/apply
 
-JavaScript gives exceptional flexibility when dealing with functions. They can be passed around, used as objects, and now we'll see how to *forward* calls between them and *decorate* them.
+هنگام کار کردن با تابع‌ها، جاوااسکریپت انعطاف‌پذیری بی‌نظیری را ارائه می‌دهد. تابع‌ها می‌توانند رد و بدل شوند، به عنوان شیء استفاده شوند و حالا ما خواهیم دید که چگونه فراخوانی‌ها را بین تابع‌ها *ارسال کنیم* و *رفتار* آن‌ها را *تغییر دهیم*.
 
 ## Transparent caching
 
