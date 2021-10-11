@@ -2,20 +2,20 @@
 
 هنگام کار کردن با تابع‌ها، جاوااسکریپت انعطاف‌پذیری بی‌نظیری را ارائه می‌دهد. تابع‌ها می‌توانند رد و بدل شوند، به عنوان شیء استفاده شوند و حالا ما خواهیم دید که چگونه فراخوانی‌ها را بین تابع‌ها *ارسال کنیم* و *رفتار* آن‌ها را *تغییر دهیم*.
 
-## Transparent caching
+## کش کردن پنهانی
 
-Let's say we have a function `slow(x)` which is CPU-heavy, but its results are stable. In other words, for the same `x` it always returns the same result.
+فرض کنیم تابع `slow(x)` را داریم که از پردازنده خیلی کار می‌کشد اما نتیجه‌های آن همیشه ثابت هستند. به عبارتی دیگر، برای `x` یکسان همیشه نتیجه‌ای یکسان را برمی‌گردند.
 
-If the function is called often, we may want to cache (remember) the results to avoid spending extra-time on recalculations.
+اگر تابع زیاد فراخوانی می‌شود، ممکن است بخواهیم که نتیجه‌ها را کَش کنیم (به یاد بسپاریم) تا از مصرف زمان اضافی برای محاسبات دوباره جلوگیری کنیم.
 
-But instead of adding that functionality into `slow()` we'll create a wrapper function, that adds caching. As we'll see, there are many benefits of doing so.
+اما به جای اینکه این قابلیت را به `slow(x)` اضافه کنیم یک تابع دربرگیرنده (wrapper) می‌سازیم که کش کردن را اضافه می‌کند. همانطور که خواهیم دید، مزایای زیادی از انجام این کار دریافت می‌کنیم.
 
-Here's the code, and explanations follow:
+کد اینگونه است و توضیحات به دنبال آن:
 
 ```js run
 function slow(x) {
-  // there can be a heavy CPU-intensive job here
-  alert(`Called with ${x}`);
+  // اینجا می‌تواند یک کاری که پردازنده را زیاد مشغول می‌کند وجود داشته باشد
+  alert(`با ${x} فراخوانی شد`);
   return x;
 }
 
@@ -23,43 +23,43 @@ function cachingDecorator(func) {
   let cache = new Map();
 
   return function(x) {
-    if (cache.has(x)) {    // if there's such key in cache
-      return cache.get(x); // read the result from it
+    if (cache.has(x)) {    // وجود داشت cache اگر چنین کلیدی در
+      return cache.get(x); // نتیجه را از آن بخوان
     }
 
-    let result = func(x);  // otherwise call func
+    let result = func(x);  // را فراخوانی کن func در غیر این صورت
 
-    cache.set(x, result);  // and cache (remember) the result
+    cache.set(x, result);  // و نتیجه را کش کن (به خاطر بسپار)
     return result;
   };
 }
 
 slow = cachingDecorator(slow);
 
-alert( slow(1) ); // slow(1) is cached and the result returned
-alert( "Again: " + slow(1) ); // slow(1) result returned from cache
+alert( slow(1) ); // کش شده و نتیجه آن برگردانده شد slow(1)
+alert( "Again: " + slow(1) ); // از کش برگردانده شد slow(1) نتیجه
 
-alert( slow(2) ); // slow(2) is cached and the result returned
-alert( "Again: " + slow(2) ); // slow(2) result returned from cache
+alert( slow(2) ); // کش شده و نتیجه آن برگردانده شد slow(2)
+alert( "Again: " + slow(2) ); // از کش برگردانده شد slow(2) نتیجه
 ```
 
-In the code above `cachingDecorator` is a *decorator*: a special function that takes another function and alters its behavior.
+در کد بالا `cachingDecorator` یک *دکوراتور* است: تابعی خاص که یک تابع دیگر را دریافت می‌کند و رفتار آن را تغییر می‌دهد. 
 
-The idea is that we can call `cachingDecorator` for any function, and it will return the caching wrapper. That's great, because we can have many functions that could use such a feature, and all we need to do is to apply `cachingDecorator` to them.
+ایده این است که ما می‌توانیم `cachingDecorator` را برای هر تابعی فراخوانی کنیم و این تابع، دربرگیرنده کش‌کننده را برمی‌گرداند. این عالی است چون ما می‌توانیم تابع‌های زیادی داشته باشیم که از چنین خاصیتی استفاده کنند و تنها کاری که ما باید انجام دهیم، اعمال `cachingDecorator` روی آن‌ها است.
 
-By separating caching from the main function code we also keep the main code simpler.
+با جدا کردن کش کردن از کد تابع اصلی، ما کد اصلی را هم ساده‌تر نگه داشتیم.
 
-The result of `cachingDecorator(func)` is a "wrapper": `function(x)` that "wraps" the call of `func(x)` into caching logic:
+نتیجه‌ی `cachingDecorator(func)` یک «دربرگیرنده» است: تابع `function(x)` که فراخوانی `func(x)` را در منطق کش کردن «می‌پوشاند»:
 
 ![](decorator-makecaching-wrapper.svg)
 
-From an outside code, the wrapped `slow` function still does the same. It just got a caching aspect added to its behavior.
+از یک کد بیرونی، تابع `slow` دربر گرفته شده کار یکسانی انجام می‌دهد. فقط یک جنبه کش کردن به رفتار این تابع اضافه شده است.
 
-To summarize, there are several benefits of using a separate `cachingDecorator` instead of altering the code of `slow` itself:
+برای خلاصه‌سازی، چند مزیت در استفاده کردن از یک `cachingDecorator` به صورت جداگانه به جای تغییر کد خود `slow` وجود دارد:
 
-- The `cachingDecorator` is reusable. We can apply it to another function.
-- The caching logic is separate, it did not increase the complexity of `slow` itself (if there was any).
-- We can combine multiple decorators if needed (other decorators will follow).
+- تابع `cachingDecorator` را می‌توان دوباره استفاده کرد. ما می‌توانیم آن را روی تابع دیگری هم اعمال کنیم.
+- منطق کش کردن جدا است، این منطق پیچیدگی خود `slow` را افزایش نداد (اگر وجود داشت).
+- اگر نیاز باشد ما می‌توانیم چند دکوراتور را ترکیب کنیم (دکوراتورهای دیگر دنبال خواهند کرد).
 
 ## Using "func.call" for the context
 
