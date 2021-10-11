@@ -332,11 +332,19 @@ function pow(x, n) {
 
 برخی از ابزارهای لینت کردن شناخته شده :
 
+<<<<<<< HEAD
 - [JSLint](http://www.jslint.com/) --یکی از اولین لینترها.
 - [JSHint](http://www.jshint.com/) -- تنظیمات بیشتری نسبت به JSLint.
 - [ESLint](http://eslint.org/) --شاید یکی از جدیدترین ها.
 
 همه‌ی آنها می‌توانند کارشان را انجام دهند. نویسنده از [ESLint](http://eslint.org/) استفاده میکند. 
+=======
+- [JSLint](https://www.jslint.com/) -- one of the first linters.
+- [JSHint](https://jshint.com/) -- more settings than JSLint.
+- [ESLint](https://eslint.org/) -- probably the newest one.
+
+All of them can do the job. The author uses [ESLint](https://eslint.org/).
+>>>>>>> 193319c963b9ba86ac7d9590f7261a36ecdcc4d2
 
 اکثر لینترها میتواند با ویرایشگرهای محبوب ادغام شوند : فقط کافیست پلاگین مربوطه رو نصب و سبک(style) را پیکربندی کنید.
 
@@ -366,7 +374,11 @@ function pow(x, n) {
 
 در اینجا دستورالعمل `"extends"`  نشان می‌دهد که پیکربندی براساس مجموعه تنظیمات "eslint: recommended" است. پس از آن، ما مشخصات خود را مشخص می‌کنیم.
 
+<<<<<<< HEAD
 همچنین می‌توان مجموعه قوانین سبک را از وب دانلود و به جای آن گسترش داد. برای اطلاعات بیشتر در مورد نصب ، به <http://eslint.org/docs/user-guide/getting-started> مراجعه کنید
+=======
+It is also possible to download style rule sets from the web and extend them instead. See <https://eslint.org/docs/user-guide/getting-started> for more details about installation.
+>>>>>>> 193319c963b9ba86ac7d9590f7261a36ecdcc4d2
 
 همچنین IDE های مشخصی linting داخلی دارند که راحت است اما به اندازه ESLint قابل تنظیم نیست.
 

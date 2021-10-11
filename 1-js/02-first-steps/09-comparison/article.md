@@ -4,10 +4,17 @@
 
 در جاوااسکریپت آن ها را مانند شکل زیر می نویسم:
 
+<<<<<<< HEAD
 - بزرگ تر / کوچک تر: <code>a &gt; b</code>، <code>a &lt; b</code>.
 - بزرگ تر / کوچک تر یا مساوی: <code>a &gt;= b</code>، <code>a &lt;= b</code>.
 - برابر یا مساوی: `a == b`، توجه کنید که علامت مساوی دوتایی (double equlity) `==` به معنای تست برابری است، در حالی که یک مساوی `a = b` مقدار سمت راست را در متغیر سمت چپ می ریزد.(asign).
 - نا برابری: در ریاضی علامت نابرابری <code>&ne;</code> است، اما در جاوااسکریپت ما از علامت <code>a != b</code> استفاده می کنیم.
+=======
+- Greater/less than: <code>a &gt; b</code>, <code>a &lt; b</code>.
+- Greater/less than or equals: <code>a &gt;= b</code>, <code>a &lt;= b</code>.
+- Equals: `a == b`, please note the double equality sign `==` means the equality test, while a single one `a = b` means an assignment.
+- Not equals: In maths the notation is <code>&ne;</code>, but in JavaScript it's written as <code>a != b</code>.
+>>>>>>> 193319c963b9ba86ac7d9590f7261a36ecdcc4d2
 
 در این مقاله ما بیشتر درباره تفاوت انواع مقایسه ها، چطور جاوااسکریپت آنها را انجام می دهد، به همراه رفتارهای عجیب و مهم این زبان.
 

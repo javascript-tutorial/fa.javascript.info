@@ -49,7 +49,11 @@ john.sayHi(); // Hi buddy!
 
 دربرگیرنده‌های اشیا برای هر نوع ابتدایی مختلف هستند به نام‌های: ‍`رشته حروف`،‍ `عدد`، `متغیر بولی` و `نماد`. بنابراین آنها مجموعه‌ای از توابع مختلفی را فراهم میسازند.
 
+<<<<<<< HEAD
 برای مثال، تابع [str.toUpperCase()](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/String/toUpperCase) که خروجی آن، حروف کاپیتال شده رشته حرف ورودی میباشد.
+=======
+The "object wrappers" are different for each primitive type and are called: `String`, `Number`, `Boolean`, `Symbol` and `BigInt`. Thus, they provide different sets of methods.
+>>>>>>> 193319c963b9ba86ac7d9590f7261a36ecdcc4d2
 
 روش کار به صورت زیر است:
 

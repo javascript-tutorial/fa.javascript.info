@@ -123,7 +123,11 @@ alert( undefined || null || 0 ); // 0 (همه falsy هستند، آخرین مق
 
     یعنی اینکه `||` روی آرگومان های خودش پردازش انجام می دهد تا زمانی که به اولین مقدار truthy برسد، و سپس آن مقدار بلافاصله بر گردانده می شود، بدون اینکه به بقیه آرگومان ها کاری داشته باشد.
 
+<<<<<<< HEAD
     اهمیت این ویژگی زمانی آشکار می شود که یک عملوند فقط یک مقدار ساده نباشد، بلکه یک عبارت با یک اثر جانبی باشد، مثل تخصیص متغیر یا صدا زدن تابع.
+=======
+    The importance of this feature becomes obvious if an operand isn't just a value, but an expression with a side effect, such as a variable assignment or a function call.
+>>>>>>> 193319c963b9ba86ac7d9590f7261a36ecdcc4d2
 
     در مثال پایین، فقط پیام دوم چاپ می شود:
 

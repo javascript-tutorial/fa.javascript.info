@@ -30,7 +30,14 @@
 
 تفاوت اصلی بین ویرایشگرهای سبک و IDE ها در آن است که IDE ها در سطح پروژه استفاده می‌‌شوند، در نتیجه در آغاز اطلاعات زیادی را بارگذاری می‌کنند، ساختار پروژه را تحلیل میکنند و موارد این‌چنینی. در زمانیکه بخواهیم روی یک فایل کار کنیم ویرایشگرهای سبک بسیار سریع‌تر هستند. 
 
+<<<<<<< HEAD
 در عمل ویرایشگرهای سبک دارای افزونه‌های متعددی هستند، مانند تحلیل‌کننده‌های سینتَکس (syntax)، تکمیل‌کننده های کد و غیره. به همین دلیل نمی‌تواند مرز دقیقی بین IDE و ویرایشگرهای سبک قائل بود. 
+=======
+- [Atom](https://atom.io/) (cross-platform, free).
+- [Sublime Text](http://www.sublimetext.com) (cross-platform, shareware).
+- [Notepad++](https://notepad-plus-plus.org/) (Windows, free).
+- [Vim](http://www.vim.org/) and [Emacs](https://www.gnu.org/software/emacs/) are also cool if you know how to use them.
+>>>>>>> 193319c963b9ba86ac7d9590f7261a36ecdcc4d2
 
 موارد زیر ارزش توجه را دارند : 
 

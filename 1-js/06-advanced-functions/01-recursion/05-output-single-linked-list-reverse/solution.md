@@ -33,7 +33,11 @@ printReverseList(list);
 
 # با استفاده از حلقه
 
+<<<<<<< HEAD
 روش حلقه کمی پیچیده‌تر از نمایش‌دادن به صورت مستقیم است.
+=======
+The loop variant is also a little bit more complicated than the direct output.
+>>>>>>> 193319c963b9ba86ac7d9590f7261a36ecdcc4d2
 
 هیچ راهی برای گرفتن آخرین مقدار `list` ما وجود ندارد. همچنین نمی‌توانیم «به عقب برگردیم».
 
