@@ -12,11 +12,8 @@
 
 اگر هنوز یک IDE انتخاب نکرده‌اید، موارد زیر را در نظر داشته باشید : 
 
+- [Visual Studio Code](https://code.visualstudio.com/) : رایگان - Cross Platform و همچنین تعدادی از قابلیت‌های IDE ها را دارد 
 - [WebStorm](http://www.jetbrains.com/webstorm/) برای توسعه Front End . کمپانی Jetbrains همینطور IDE های دیگری را برای زبان‌های دیگر ارائه می‌کند (که رایگان نیستند) 
-
-- [Netbeans](http://netbeans.org/) (رایگان) 
-
-این IDE ها اصطلاحا Cross Platform هستند. 
 
 همینطور برای Windows می‌توانید از Visual Studio استفاده کنید (منظور Visual Studio Code نیست). Visual Studio یک نرم افزار غیر رایگان است و فقط بر روی Windows کار می‌کند که برای توسعه پلتفرم dot net مناسب است. نسخه رایگان این نرم افزار [Visual Studio Community](https://www.visualstudio.com/vs/community/) نام دارد.  
 
@@ -30,36 +27,14 @@
 
 تفاوت اصلی بین ویرایشگرهای سبک و IDE ها در آن است که IDE ها در سطح پروژه استفاده می‌‌شوند، در نتیجه در آغاز اطلاعات زیادی را بارگذاری می‌کنند، ساختار پروژه را تحلیل میکنند و موارد این‌چنینی. در زمانیکه بخواهیم روی یک فایل کار کنیم ویرایشگرهای سبک بسیار سریع‌تر هستند. 
 
-<<<<<<< HEAD
 در عمل ویرایشگرهای سبک دارای افزونه‌های متعددی هستند، مانند تحلیل‌کننده‌های سینتَکس (syntax)، تکمیل‌کننده های کد و غیره. به همین دلیل نمی‌تواند مرز دقیقی بین IDE و ویرایشگرهای سبک قائل بود. 
-=======
-- [Atom](https://atom.io/) (cross-platform, free).
-- [Sublime Text](http://www.sublimetext.com) (cross-platform, shareware).
-- [Notepad++](https://notepad-plus-plus.org/) (Windows, free).
-- [Vim](http://www.vim.org/) and [Emacs](https://www.gnu.org/software/emacs/) are also cool if you know how to use them.
->>>>>>> 193319c963b9ba86ac7d9590f7261a36ecdcc4d2
 
-موارد زیر ارزش توجه را دارند : 
+موارد زیر ارزش توجه را دارند: 
 
-- [Visual Studio Code](https://code.visualstudio.com/) : رایگان - Cross Platform و همچنین تعدادی از قابلیت‌های IDE ها را دارد 
-
-- [Atom](https://atom.io/) : رایگان - Cross Platform 
-
-- [Sublime Text](http://www.sublimetext.com) : رایگان برای مدت محدود - Cross Platform 
-
-- [Notepad++](https://notepad-plus-plus.org/) : برای Windows - رایگان 
-
+- [Atom](https://atom.io/): رایگان - Cross Platform 
+- [Sublime Text](http://www.sublimetext.com): رایگان برای مدت محدود - Cross Platform 
+- [Notepad++](https://notepad-plus-plus.org/): برای Windows - رایگان 
 - [Vim](http://www.vim.org/) و [Emacs](https://www.gnu.org/software/emacs/) هم اگر با نحوه کارشان آشنا باشید خوب هستند. 
-
-## مورد علاقه‌های من 
-
-ترجیح نویسنده بر آن است که برای پروژه‌ها از IDE و برای کارهای سریع و ساده از ویرایشگرهای سبک استفاده کند. 
-
-من از این نرم‌افزارها استفاده می‌کنم : 
-
-- به عنوان IDE : برای توسعه JavaScript از [WebStorm](http://www.jetbrains.com/webstorm/) (در کار با زبان‌های دیگر از دیگر محصولات JetBrains استفاده می‌کنم) 
-
-- به عنوان یک ویرایشگر سبک : [Sublime Text](http://www.sublimetext.com) یا [Atom](https://atom.io/) 
 
 ## بیایید بحث نکنیم 
 

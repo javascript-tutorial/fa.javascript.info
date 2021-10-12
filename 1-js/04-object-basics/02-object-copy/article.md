@@ -133,11 +133,7 @@ clone.name = "Pete"; // تغییر دادن داده‌ی درون آن
 alert( user.name ); // است John هنوز در شیء اصلی برابر با
 ```
 
-<<<<<<< HEAD
-همچنین ما می‌توانیم از متد [Object.assign](mdn:js/Object/assign) برای این کار استفاده کنیم.
-=======
-Also we can use the method [Object.assign](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign) for that.
->>>>>>> 193319c963b9ba86ac7d9590f7261a36ecdcc4d2
+همچنین ما می‌توانیم از متد [Object.assign](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign) برای این کار استفاده کنیم.
 
 سینتکس آن اینگونه است:
 
