@@ -260,17 +260,30 @@ Please don't translate or remove the `[#...]` part, it's for URL anchors.
     
 جدول به ترتیب حروف الفبای انگلیسی است.
     
-| کلمۀ انگلیسی | ترجمۀ فارسی | توضیحات                                 |
+| کلمۀ انگلیسی | ترجمۀ فارسی | توضیحات           |
 |---------|---------|------------------------------|
+| argument | آرگومان |                            |
+| arrow function | تابع کمانی |                   |
+| binary | دوگانه، دودویی |                       |
 | boolean | boolean، بولین |                       |
+| class | کلاس |                                    |
+| constructor function | تابع سازنده |             |
+| decorator | دکوراتور |                           |
 | function | تابع |                                |
 | Function Declaration | Function Declaration |    |
 | Function Expression | Function Expression |      |
+| hashing function | تابع ترکیب‌سازی |            |
+| item (in arrays) | المان |                       |
+| key (in data structures) | کلید |                |
 | number | عدد |                                   |
 | object | شیء |                                   |
+| parameter | پارامتر |                            |
+| property (in objects) | ویژگی |                  |
 | reference | رجوع(کردن)، مرجع | معنی به جمله بستگی دارد |
 | string | رشته |                                  |
 | syntax | سینتکس |                                |
+| unary | یگانه |                                  |
+| value | مقدار |                                  |
 | wrapper | دربرگیرنده |                           |
 
 </div>
