@@ -209,41 +209,41 @@ alert( worker.slow(2) ); // کار می‌کند، تابع اصلی را فرا
 2. پس زمانی که `worker.slow(2)` اجرا می‌شود، دربرگیرنده `2` را به عنوان آرگومان دریافت می‌کند و `this=worker` است (همان شیء قبل از نقطه).
 3. درون دربرگیرنده، با فرض اینکه نتیجه هنوز کش نشده است، `func.call(this, x)` مقدار `this` کنونی (=`worker`) و آرگومان کنونی (`=2`) را در متد اصلی تنظیم می‌کند.
 
-## Going multi-argument
+## چند آرگومانی شدن
 
-Now let's make `cachingDecorator` even more universal. Till now it was working only with single-argument functions.
+حالا بیایید `cachingDecorator` را جامع‌تر کنیم. تا حالا فقط با تابع‌هایی که یک آرگومان داشتند کار می‌کرد.
 
-Now how to cache the multi-argument `worker.slow` method?
+حالا چگونه متد `worker.slow` که چند آرگومان دارد را کش کنیم؟
 
 ```js
 let worker = {
   slow(min, max) {
-    return min + max; // scary CPU-hogger is assumed
+    return min + max; // یک کاری که به پردازنده فشار می‌آورد
   }
 };
 
-// should remember same-argument calls
+// باید فراخوانی‌هایی که آرگومان‌های یکسانی دارند را یه خاطر بسپارد
 worker.slow = cachingDecorator(worker.slow);
 ```
 
-Previously, for a single argument `x` we could just `cache.set(x, result)` to save the result and `cache.get(x)` to retrieve it. But now we need to remember the result for a *combination of arguments* `(min,max)`. The native `Map` takes single value only as the key.
+قبلا، برای یک آرگومان می‌توانستیم از `cache.set(x, result)` برای ذخیره نتیجه و `cache.get(x)` برای دریافت آن استفاده کنیم. اما حالا باید نتیجه را برای *ترکیبی از آرگومان‌ها*`(min,max)` ذخیره کنیم. ساختار `Map` فقط یک مقدار را به عنوان کلید دریافت می‌کند.
 
-There are many solutions possible:
+چند راه‌حل احتمالی وجود دارد:
 
-1. Implement a new (or use a third-party) map-like data structure that is more versatile and allows multi-keys.
-2. Use nested maps: `cache.set(min)` will be a `Map` that stores the pair `(max, result)`. So we can get `result` as `cache.get(min).get(max)`.
-3. Join two values into one. In our particular case we can just use a string `"min,max"` as the `Map` key. For flexibility, we can allow to provide a *hashing function* for the decorator, that knows how to make one value from many.
+1. یک ساختار داده جدید شبیه map پیاده‌سازی کنیم (یا از شخص ثالث استفاده کنیم) که همه‌کاره است و چندکلیدی را ممکن می‌سازد.
+2. از mapهای پیچیده استفاده کنیم: `cache.set(min)` یک `Map` خواهد بود که جفت `(max, result)` را ذخیره می‌کند. پس ما می‌توانیم `result` را به صورت `cache.get(min).get(max)` دریافت کنیم.
+3. دو مقدار را به یک مقدار تبدیل کنیم. در این مورد خاص، می‌توانیم از رشته `"min,max"` به عنوان کلید `Map` استفاده کنیم. برای انعطاف پذیری، می‌توانیم یک *تابع ترکیب‌کننده(hashing function)* برای دکوراتور تعیین کنیم که می‌داند چگونه از چند مقدار یک مقدار بدست آورد.
 
-For many practical applications, the 3rd variant is good enough, so we'll stick to it.
+برای بسیاری از موارد عملی، نوع سوم به اندازه کافی مناسب است پس ما با همان کار می‌کنیم.
 
-Also we need to pass not just `x`, but all arguments in `func.call`. Let's recall that in a `function()` we can get a pseudo-array of its arguments as `arguments`, so `func.call(this, x)` should be replaced with `func.call(this, ...arguments)`.
+همچنین ما باید نه تنها `x` بلکه تمام آرگومان‌ها را در `func.call` قرار دهیم. بیایید یادآوری کنیم که در یک تابع `function()` می‌توانیم یک شبه‌آرایه از آرگومان‌های آن را با `arguments` دریافت کنیم پس `func.call(this, ...arguments)` باید جایگزین `func.call(this, x)` شود.
 
-Here's a more powerful `cachingDecorator`:
+اینجا یک `cachingDecorator` قدرتمندتر داریم:
 
 ```js run
 let worker = {
   slow(min, max) {
-    alert(`Called with ${min},${max}`);
+    alert(`فراخوانی شده با ${min},${max}`);
     return min + max;
   }
 };
@@ -273,16 +273,16 @@ function hash(args) {
 
 worker.slow = cachingDecorator(worker.slow, hash);
 
-alert( worker.slow(3, 5) ); // works
-alert( "Again " + worker.slow(3, 5) ); // same (cached)
+alert( worker.slow(3, 5) ); // کار می‌کند
+alert( "Again " + worker.slow(3, 5) ); // یکسان است (کش شده)
 ```
 
-Now it works with any number of arguments (though the hash function would also need to be adjusted to allow any number of arguments. An interesting way to handle this will be covered below).
+حالا این تابع با هر تعداد آرگومان کار می‌کند (گرچه تابع ترکیب‌کننده هم باید جوری تنظیم شود که هر تعداد آرگومان را قبول کند. یک راه جالب برای کنترل این موضوع پایین‌تر پوشش داده شده است).
 
-There are two changes:
+دو تفاوت وجود دارد:
 
-- In the line `(*)` it calls `hash` to create a single key from `arguments`. Here we use a simple "joining" function that turns arguments `(3, 5)` into the key `"3,5"`. More complex cases may require other hashing functions.
-- Then `(**)` uses `func.call(this, ...arguments)` to pass both the context and all arguments the wrapper got (not just the first one) to the original function.
+- در خط `(*)` این تابع، `hash` را فراخوانی می‌کند تا یک کلید را از `arguments` بسازد. اینجا ما از تابع ساده «پیوند دادن» استفاده کردیم که آرگومان‌های `(3, 5)` را به کلید `"3,5"` تبدیل می‌کند. موارد پیچیده‌تر ممکن است تابع‌های ترکیب‌کننده دیگری را نیاز داشته باشند.
+- سپس خط `(**)` برای اینکه زمینه و تمام آرگومان‌هایی که دربرگیرنده دریافت کرد (نه فقط اولی) را در تابع اصلی قرار دهد از `func.call(this, ...arguments)` استفاده می‌کند.
 
 ## func.apply
 
