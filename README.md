@@ -263,25 +263,42 @@ Please don't translate or remove the `[#...]` part, it's for URL anchors.
 | کلمۀ انگلیسی | ترجمۀ فارسی | توضیحات           |
 |---------|---------|------------------------------|
 | argument | آرگومان |                            |
+| array | آرایه |                                 |
 | arrow function | تابع کمانی |                   |
 | binary | دوگانه، دودویی |                       |
 | boolean | boolean، بولین |                       |
 | class | کلاس |                                    |
+| closure | کلوژر |                                |
 | constructor function | تابع سازنده |             |
 | decorator | دکوراتور |                           |
 | function | تابع |                                |
 | Function Declaration | Function Declaration |    |
 | Function Expression | Function Expression |      |
+| garbage collection | زباله‌روبی |               |
+| garbage collector | زباله جمع‌کن |              |
+| global | گلوبال |                               |
 | hashing function | تابع ترکیب‌سازی |            |
 | item (in arrays) | المان |                       |
+| iterable | حلقه‌پذیر |                           |
+| JSON | جی‌سان |                                  |
 | key (in data structures) | کلید |                |
+| lexical environment | محیط لغوی |                |
 | number | عدد |                                   |
 | object | شیء |                                   |
 | parameter | پارامتر |                            |
+| polyfill | پلیفیل |                              |
+| primitive (data type) | مقدار اصلی |             |
 | property (in objects) | ویژگی |                  |
+| recursion | بازگشت |                             |
 | reference | رجوع(کردن)، مرجع | معنی به جمله بستگی دارد |
+| rest parameter | پارامتر رست |                  |
+| spread syntax `...` | سینتکس اسپرد |            |
+| stack | پشته |                                   |
 | string | رشته |                                  |
+| symbol | سمبل | گاهی لازم است انگلیسی آن داخل پرانتز نوشته شود |
 | syntax | سینتکس |                                |
+| ternary | سه‌گانه |                              |
+| transpiler | ترنسپایلر |                         |
 | unary | یگانه |                                  |
 | value | مقدار |                                  |
 | wrapper | دربرگیرنده |                           |
