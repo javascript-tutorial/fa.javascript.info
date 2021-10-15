@@ -284,39 +284,39 @@ alert( "Again " + worker.slow(3, 5) ); // یکسان است (کش شده)
 - در خط `(*)` این تابع، `hash` را فراخوانی می‌کند تا یک کلید را از `arguments` بسازد. اینجا ما از تابع ساده «پیوند دادن» استفاده کردیم که آرگومان‌های `(3, 5)` را به کلید `"3,5"` تبدیل می‌کند. موارد پیچیده‌تر ممکن است تابع‌های ترکیب‌سازی دیگری را نیاز داشته باشند.
 - سپس خط `(**)` برای اینکه زمینه و تمام آرگومان‌هایی که دربرگیرنده دریافت کرد (نه فقط اولی) را در تابع اصلی قرار دهد از `func.call(this, ...arguments)` استفاده می‌کند.
 
-## func.apply
+## متد func.apply
 
-Instead of `func.call(this, ...arguments)` we could use `func.apply(this, arguments)`.
+می‌توانستیم به جای `func.call(this, ...arguments)` از `func.apply(this, arguments)` استفاده کنیم.
 
-The syntax of built-in method [func.apply](mdn:js/Function/apply) is:
+سینتکس متد درون‌ساخت [func.apply](mdn:js/Function/apply) اینگونه است:
 
 ```js
 func.apply(context, args)
 ```
 
-It runs the `func` setting `this=context` and using an array-like object `args` as the list of arguments.
+این متد با تنظیم کردن `this=context` و استفاده از شیء `args` به عنوان لیستی از آرگومان‌ها، تابع `func` را فراخوانی می‌کند.
 
-The only syntax difference between `call` and `apply` is that `call` expects a list of arguments, while `apply` takes an array-like object with them.
+تنها تفاوت بین `call` و `apply` این است که `call` لیستی از آرگومان‌ها را قبول می‌کند در حالی که `apply` یک شیء شبه‌آرایه که شامل آرگومان‌ها است را قبول می‌کند.
 
-So these two calls are almost equivalent:
+پس این دو فراخوانی تقریبا یکی هستند:
 
 ```js
 func.call(context, ...args);
 func.apply(context, args);
 ```
 
-They perform the same call of `func` with given context and arguments.
+آن‌ها فراخوانی یکسانی از `func` همراه با زمینه و آرگومان‌های داده شده را انجام می‌دهند.
 
-There's only a subtle difference regarding `args`:
+فقط یک تفاوت جزئی در مورد `args` وجود دارد:
 
-- The spread syntax `...` allows to pass *iterable* `args` as the list to `call`.
-- The `apply` accepts only *array-like* `args`.
+- سینتکس اسپرد `...` به ما اجازه می‌دهد تا `args` *حلقه‌پذیر* را به عنوان لیست در `call` قرار دهیم.
+- متد `apply` فقط `args` *شبه‌آرایه* را قبول می‌کند.
 
-...And for objects that are both iterable and array-like, such as a real array, we can use any of them, but `apply` will probably be faster, because most JavaScript engines internally optimize it better.
+...و برای شیءهایی که هم حلقه‌پذیر و هم شبه‌آرایه هستند، مانند آرایه واقعی، ما می‌توانیم هر یک از آن‌ها را استفاده کنیم اما احتمالا `apply` سریع‌تر باشد چون بیشتر موتورهای جاوااسکریپت آن را از دورن بهتر بهینه کرده‌اند.
 
-Passing all arguments along with the context to another function is called *call forwarding*.
+قرار دادن تمام آرگومان‌ها در کنار زمینه در تابعی دیگر را *ارسال کردن فراخوانی(call forwarding)* می‌گویند.
 
-That's the simplest form of it:
+این ساده‌ترین شکل از آن است:
 
 ```js
 let wrapper = function() {
@@ -324,7 +324,7 @@ let wrapper = function() {
 };
 ```
 
-When an external code calls such `wrapper`, it is indistinguishable from the call of the original function `func`.
+زمانی که یک کد بیرونی این `wrapper` را فراخوانی کند، نمی‌توان آن را از فراخوانی تابع اصلی `func` تشخیص داد.
 
 ## Borrowing a method [#method-borrowing]
 
