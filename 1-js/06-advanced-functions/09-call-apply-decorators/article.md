@@ -400,20 +400,20 @@ hash(1, 2);
 
 بعضی از دکوراتورها ممکن است ویژگی‌های خودشان را داشته باشند. مثلا یک دکوراتور می‌تواند تعداد دفعاتی که یک تابع فراخوانی شده و اجرای آن چقدر زمان برده است را محاسبه کند و از طریق ویژگی‌های دربرگیرنده این اطلاعات را در اختیار بگذارد.
 
-گرچه راهی برای ساخت دکوراتورایی که به ویژگی‌های تابع دسترسی داشته باشد وجود دارد اما این روش به استفاده از یک شیء `Proxy` خاص برای دربرگرفتن تابع نیاز دارد. ما این موضوع را بعدها در مقاله <info:proxy#proxy-apply> بررسی می‌کنیم.
+گرچه راهی برای ساخت دکوراتورهایی که به ویژگی‌های تابع دسترسی داشته باشد وجود دارد اما این روش به استفاده از یک شیء `Proxy` خاص برای دربرگرفتن تابع نیاز دارد. ما این موضوع را بعدها در مقاله <info:proxy#proxy-apply> بررسی می‌کنیم.
 
-## Summary
+## خلاصه
 
-*Decorator* is a wrapper around a function that alters its behavior. The main job is still carried out by the function.
+*دکوراتور* یک دربرگیرنده تابع است که رفتار آن را تغییر می‌دهد. کار اصلی هنوز توسط تابع انجام می‌شود. 
 
-Decorators can be seen as "features" or "aspects" that can be added to a function. We can add one or add many. And all this without changing its code!
+دکوراتورها می‌توانند به عنوان «خاصیت‌ها» یا «جنبه‌هایی» دیده شوند که می‌توانند به تابع اضافه شوند. ما می‌توانیم یک یا چند خاصیت اضافه کنیم. و همه این‌ها را بدون تغییر کد آن انجام دهیم.
 
-To implement `cachingDecorator`, we studied methods:
+برای پیاده‌سازی `cachingDecorator`، ما متدهای زیر را مطالعه کردیم:
 
-- [func.call(context, arg1, arg2...)](mdn:js/Function/call) -- calls `func` with given context and arguments.
-- [func.apply(context, args)](mdn:js/Function/apply) -- calls `func` passing `context` as `this` and array-like `args` into a list of arguments.
+- [func.call(context, arg1, arg2...)](mdn:js/Function/call) -- تابع `func` را همراه با زمینه و آرگومان‌های داده شده فرا می‌خواند.
+- [func.apply(context, args)](mdn:js/Function/apply) -- با تنظیم کردن `context` به عنوان `this` و شبه‌آرایه `args` درون لیستی از آرگومان‌ها، تابع `func` را فراخوانی می‌کند.
 
-The generic *call forwarding* is usually done with `apply`:
+*ارسال فراخوانی* به طور کل معمولا با `apply` انجام می‌شود:
 
 ```js
 let wrapper = function() {
@@ -421,6 +421,6 @@ let wrapper = function() {
 };
 ```
 
-We also saw an example of *method borrowing* when we take a method from an object and `call` it in the context of another object. It is quite common to take array methods and apply them to `arguments`. The alternative is to use rest parameters object that is a real array.
+همچنین یک مثال از *قرض‌گیری متد* دیدیم، زمانی که ما یک متد را از شیءای قرض می‌گیریم و آن را با زمینه‌ای از شیءای دیگر توسط `call` فراخوانی می‌کنیم. اینکه متدهای آرایه را دریافت کنیم و آن‌ها را روی `arguments` اعمال کنیم بسیار رایج است. استفاده از شیء پارامترهای رست، راه جایگزین و یک آرایه واقعی است.
 
-There are many decorators there in the wild. Check how well you got them by solving the tasks of this chapter.
+دکوراتورهای زیادی در واقعیت وجود دارد. با حل کردن تمرین‌های این فصل نشان دهید که چقدر آن‌ها را یاد گرفته‌اید.
