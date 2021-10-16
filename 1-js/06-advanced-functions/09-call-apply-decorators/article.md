@@ -326,9 +326,9 @@ let wrapper = function() {
 
 زمانی که یک کد بیرونی این `wrapper` را فراخوانی کند، نمی‌توان آن را از فراخوانی تابع اصلی `func` تشخیص داد.
 
-## Borrowing a method [#method-borrowing]
+## قرض گرفتن یک متد [#method-borrowing]
 
-Now let's make one more minor improvement in the hashing function:
+حالا بیایید یک پیشرفت جزئی دیگر در تابع ترکیب‌سازی ایجاد کنیم:
 
 ```js
 function hash(args) {
@@ -336,9 +336,9 @@ function hash(args) {
 }
 ```
 
-As of now, it works only on two arguments. It would be better if it could glue any number of `args`.
+اکنون، این تابع فقط روی دو آرگومان کار می‌کند. اگر این تابع بتواند هر تعداد `args` را به هم بچسباند بهتر می‌شد.
 
-The natural solution would be to use [arr.join](mdn:js/Array/join) method:
+راه‌حل طبیعی استفاده از متد [arr.join](mdn:js/Array/join) است:
 
 ```js
 function hash(args) {
@@ -346,9 +346,9 @@ function hash(args) {
 }
 ```
 
-...Unfortunately, that won't work. Because we are calling `hash(arguments)`, and `arguments` object is both iterable and array-like, but not a real array.
+...متاسفانه این روش کار نخواهد کرد. چون ما در حال فراخوانی `hash(arguments)` هستیم و شیء `arguments` هم حلقه‌پذیر است و هم شبه‌آرایه اما یک آرایه واقعی نیست.
 
-So calling `join` on it would fail, as we can see below:
+پس همانطور که در کد پایین می‌بینیم، فراخوانی `join` بر روی آن با شکست مواجه می‌شود:
 
 ```js run
 function hash() {
@@ -360,7 +360,7 @@ function hash() {
 hash(1, 2);
 ```
 
-Still, there's an easy way to use array join:
+اما هنوز یک راه آسان برای استفاده از پیوند دادن آرایه وجود دارد:
 
 ```js run
 function hash() {
@@ -372,25 +372,25 @@ function hash() {
 hash(1, 2);
 ```
 
-The trick is called *method borrowing*.
+این ترفند *قرض‌گیری متد (method borrowing)* نام دارد.
 
-We take (borrow) a join method from a regular array (`[].join`) and use `[].join.call` to run it in the context of `arguments`.
+ما متد پیوند دادن را از یک آرایه معمولی (قرض) می‌گیریم (`[].join`) و برای اجرای آن با زمینه `arguments` از `[].join.call` استفاده می‌کنیم.
 
-Why does it work?
+این چرا کار می‌کند؟
 
-That's because the internal algorithm of the native method `arr.join(glue)` is very simple.
+به دلیل اینکه الگوریتم داخلی متد نیتیو (native method) `arr.join(glue)` بسیار ساده است.
 
-Taken from the specification almost "as-is":
+این مراحل تقریبا «بدون تغییر» از مشخصات زبان برداشته شده است:
 
-1. Let `glue` be the first argument or, if no arguments, then a comma `","`.
-2. Let `result` be an empty string.
-3. Append `this[0]` to `result`.
-4. Append `glue` and `this[1]`.
-5. Append `glue` and `this[2]`.
-6. ...Do so until `this.length` items are glued.
-7. Return `result`.
+1. فرض کنیم که `glue` آرگومان اول باشد یا اگر آرگومانی وجود نداشت، پس یک کاما `","`.
+2. فرض کنیم `result` یک رشته خالی باشد.
+3. `this[0]` را به `result` اضافه کنید.
+4. `glue` و `this[1]` را اضافه کنید.
+5. `glue` و `this[2]` را اضافه کنید.
+6. ...تا زمانی که تعداد `this.length` المان به هم چسبیدند ادامه دهید.
+9. `result` را برگردانید.
 
-So, technically it takes `this` and joins `this[0]`, `this[1]` ...etc together. It's intentionally written in a way that allows any array-like `this` (not a coincidence, many methods follow this practice). That's why it also works with `this=arguments`.
+پس از لحاظ فنی این تابع `this` را دریافت می‌کند و `this[0]`، `this[1]` و بقیه را به هم پیوند می‌زند. این متد از قصد طوری نوشته شده است که هر `this` شبه‌آرایه را قبول کند (این اتفاقی نیست، بسیاری از متدها از این موضوع پیروی می‌کنند). به همین دلیل است که با `this=arguments` هم کار می‌کند.
 
 ## Decorators and function properties
 
