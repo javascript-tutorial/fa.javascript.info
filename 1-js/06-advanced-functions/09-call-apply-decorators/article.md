@@ -392,15 +392,15 @@ hash(1, 2);
 
 پس از لحاظ فنی این تابع `this` را دریافت می‌کند و `this[0]`، `this[1]` و بقیه را به هم پیوند می‌زند. این متد از قصد طوری نوشته شده است که هر `this` شبه‌آرایه را قبول کند (این اتفاقی نیست، بسیاری از متدها از این موضوع پیروی می‌کنند). به همین دلیل است که با `this=arguments` هم کار می‌کند.
 
-## Decorators and function properties
+## دکوراتورها و ویژگی‌های تابع
 
-It is generally safe to replace a function or a method with a decorated one, except for one little thing. If the original function had properties on it, like `func.calledCount` or whatever, then the decorated one will not provide them. Because that is a wrapper. So one needs to be careful if one uses them.
+به طور کلی اینکه یک تابع یا متد را با تابعی دکور شده جایگزین کنیم مشکلی ایجاد نمی‌کند به جز در موردی کوچک. اگر تابع اصلی ویژگی‌هایی درون خود داشته باشد، مثلا `func.calledCount` یا هر چیزی، سپس تابع دکور شده آن‌ها را فراهم نمی‌کند. چون یک دربرگیرنده است. پس اگر کسی از دکوراتورها استفاده کرد باید حواسش به این موضوع باشد.
 
-E.g. in the example above if `slow` function had any properties on it, then `cachingDecorator(slow)` is a wrapper without them.
+برای نمونه، در مثال بالا اگر تابع `slow` ویژگی‌ای درون خودش داشت، سپس `cachingDecorator(slow)` یک دربرگیرنده خواهد بود که آن ویژگی را ندارد.
 
-Some decorators may provide their own properties. E.g. a decorator may count how many times a function was invoked and how much time it took, and expose this information via wrapper properties.
+بعضی از دکوراتورها ممکن است ویژگی‌های خودشان را داشته باشند. مثلا یک دکوراتور می‌تواند تعداد دفعاتی که یک تابع فراخوانی شده و اجرای آن چقدر زمان برده است را محاسبه کند و از طریق ویژگی‌های دربرگیرنده این اطلاعات را در اختیار بگذارد.
 
-There exists a way to create decorators that keep access to function properties, but this requires using a special `Proxy` object to wrap a function. We'll discuss it later in the article <info:proxy#proxy-apply>.
+گرچه راهی برای ساخت دکوراتورایی که به ویژگی‌های تابع دسترسی داشته باشد وجود دارد اما این روش به استفاده از یک شیء `Proxy` خاص برای دربرگرفتن تابع نیاز دارد. ما این موضوع را بعدها در مقاله <info:proxy#proxy-apply> بررسی می‌کنیم.
 
 ## Summary
 
