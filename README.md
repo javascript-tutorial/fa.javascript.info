@@ -266,11 +266,17 @@ Please don't translate or remove the `[#...]` part, it's for URL anchors.
 | array | آرایه |                                 |
 | arrow function | تابع کمانی |                   |
 | binary | دوگانه، دودویی |                       |
+| block scope | محدودیت بلوک |                    |
 | boolean | boolean، بولین |                       |
 | class | کلاس |                                    |
 | closure | کلوژر |                                |
+| code block | بلوک کد |                           |
 | constructor function | تابع سازنده |             |
+| curly bracket | آکولاد |                          |
 | decorator | دکوراتور |                           |
+| execute | اجرا کردن |                            |
+| error | ارور |                                   |
+| evaluate | ارزیابی کردن |                       |
 | function | تابع |                                |
 | Function Declaration | Function Declaration |    |
 | Function Expression | Function Expression |      |
@@ -283,23 +289,32 @@ Please don't translate or remove the `[#...]` part, it's for URL anchors.
 | JSON | جی‌سان |                                  |
 | key (in data structures) | کلید |                |
 | lexical environment | محیط لغوی |                |
+| method (in data structures) | متد |              |
+| null | null |                                    |
 | number | عدد |                                   |
 | object | شیء |                                   |
+| operator | عملگر |                               |
 | parameter | پارامتر |                            |
 | polyfill | پلیفیل |                              |
 | primitive (data type) | مقدار اصلی |             |
 | property (in objects) | ویژگی |                  |
 | recursion | بازگشت |                             |
 | reference | رجوع(کردن)، مرجع | معنی به جمله بستگی دارد |
-| rest parameter | پارامتر رست |                  |
+| rest parameter `...` | پارامتر رست |            |
+| return | برگرداندن |                            |
+| scope | محدوده |                                |
+| specification | مشخصات زبان |                   |
 | spread syntax `...` | سینتکس اسپرد |            |
+| square bracket | براکت |                         |
 | stack | پشته |                                   |
 | string | رشته |                                  |
 | symbol | سمبل | گاهی لازم است انگلیسی آن داخل پرانتز نوشته شود |
 | syntax | سینتکس |                                |
+| task (exercise) | تمرین، تکلیف | منظور تمرین‌های انتهای مقاله است |
 | ternary | سه‌گانه |                              |
 | transpiler | ترنسپایلر |                         |
 | unary | یگانه |                                  |
+| undefined (data type) | undefined |              |
 | value | مقدار |                                  |
 | wrapper | دربرگیرنده |                           |
 
