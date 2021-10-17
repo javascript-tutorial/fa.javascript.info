@@ -6,7 +6,6 @@ importance: 5
 
 یک دکوراتور «جلوگیرنده» `throttle(f, ms)` بسازید که یک دربرگیرنده را برمی‌گرداند.
 
-When it's called multiple times, it passes the call to `f` at maximum once per `ms` milliseconds.
 زمانی که چند بار فراخوانی شد، فقط یک بار به ازای هر `ms` میلی‌ثانیه `f` را فرا می‌خواند.
 
 تفاوت این تابع با معلق‌کننده این است که کاملا یک دکوراتور متفاوت است:
