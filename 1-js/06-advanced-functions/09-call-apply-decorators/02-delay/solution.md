@@ -1,4 +1,4 @@
-The solution:
+راه‌حل:
 
 ```js
 function delay(f, ms) {
@@ -10,14 +10,14 @@ function delay(f, ms) {
 }
 ```
 
-Please note how an arrow function is used here. As we know, arrow functions do not have own `this` and `arguments`, so `f.apply(this, arguments)` takes `this` and `arguments` from the wrapper.
+لطفا به چگونگی استفاده از تابع کمانی در اینجا توجه کنید. همانطور که می‌دانیم، تابع‌های کمانی `this` و `arguments` خودشان را ندارند پس `f.apply(this, arguments)` مقدار `this` و `arguments` را از دربرگیرنده می‌گیرند.
 
-If we pass a regular function, `setTimeout` would call it without arguments and `this=window` (in-browser), so we'd need to write a bit more code to pass them from the wrapper:
+اگر ما یک تابع معمولی را قرار دهیم، `setTimeout` آن را بدون آرگومان‌ها و `this=window` (در مرورگر) فراخوانی خواهد کرد، پس ما باید کمی بیشتر کد بنویسیم تا آن‌ها از طریق دربرگیرنده رد و بدل کنیم: 
 
 ```js
 function delay(f, ms) {
 
-  // added variables to pass this and arguments from the wrapper inside setTimeout
+  // قرار دهیم setTimeout و آرگومان‌ها را از طریق دربرگیرنده درون this متغیرهایی اضافه کردیم تا
   return function(...args) {
     let savedThis = this;
     setTimeout(function() {

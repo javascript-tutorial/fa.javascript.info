@@ -2,52 +2,52 @@ importance: 5
 
 ---
 
-# Throttle decorator
+# دکوراتور جلوگیرنده
 
-Create a "throttling" decorator `throttle(f, ms)` -- that returns a wrapper.
+یک دکوراتور «جلوگیرنده» `throttle(f, ms)` بسازید که یک دربرگیرنده را برمی‌گرداند.
 
-When it's called multiple times, it passes the call to `f` at maximum once per `ms` milliseconds.
+زمانی که چند بار فراخوانی شد، فقط یک بار به ازای هر `ms` میلی‌ثانیه `f` را فرا می‌خواند.
 
-The difference with debounce is that it's completely different decorator:
-- `debounce` runs the function once after the "cooldown" period. Good for processing the final result.
-- `throttle` runs it not more often than given `ms` time. Good for regular updates that shouldn't be very often.
+تفاوت این تابع با معلق‌کننده این است که کاملا یک دکوراتور متفاوت است:
+- `debounce` تابع را بعد از مدت «آرام‌شدن» اجرا می‌کند. برای پردازش نتیجه نهایی خوب است.
+- `throttle` هر بار بعد از گذشت `ms` میلی‌ثانیه تابع را اجرا می‌کند. برای بروزرسانی‌های منظم که نباید زیاد انجام شوند خوب است.
 
-In other words, `throttle` is like a secretary that accepts phone calls, but bothers the boss (calls the actual `f`) not more often than once per `ms` milliseconds.
+به عبارتی دیگر، `throttle` مانند یک منشی است که تماس‌های تلفنی را می‌پذیرد اما پس از `ms` میلی‌ثانیه فقط یک بار مزاحم رئیس می‌شود (تابع واقعی `f` را فراخوانی می‌کند).
 
-Let's check the real-life application to better understand that requirement and to see where it comes from.
+بیایید کاربردی واقعی را بررسی کنیم تا این نیاز و دلیل وجود آن را بهتر متوجه شویم.
 
-**For instance, we want to track mouse movements.**
+**برای مثال، ما می‌خواهیم حرکت‌های موس را زیر نظر بگیریم.**
 
-In a browser we can setup a function to run at every mouse movement and get the pointer location as it moves. During an active mouse usage, this function usually runs very frequently, can be something like 100 times per second (every 10 ms).
-**We'd like to update some information on the web-page when the pointer moves.**
+در مرورگر می‌توانیم یک تابع را پیاده‌سازی کنیم تا با هر حرکت موس اجرا شود و همانطور که موس تکان می‌خورد موقعیت آن را دریافت کند. در حین استفاده از موس، این تابع معمولا به طور مکرر اجرا می‌شود و می‌تواند چیزی مثل 100 بار در ثانیه باشد (هر 10 میلی‌ثانیه).
+**ما می‌خواهیم زمانی که اشاره‌گر تکان می‌خورد اطلاعاتی را در صفحه وب بروزرسانی کنیم.**
 
-...But updating function `update()` is too heavy to do it on every micro-movement. There is also no sense in updating more often than once per 100ms.
+...اما بروزرسانی تابع `update()` در هر حرکت بسیار کوچک خیلی کار سنگینی است. دلیلی منطقی هم برای برورسانی آن زودتر از هر 100 میلی‌ثانیه وجود ندارد.
 
-So we'll wrap it into the decorator: use `throttle(update, 100)` as the function to run on each mouse move instead of the original `update()`. The decorator will be called often, but forward the call to `update()` at maximum once per 100ms.
+پس ما آن را درون یک دکوراتور قرار می‌دهیم: به جای تابع اصلی `update()` از `throttle(update, 100)` به عنوان تابع اجرایی در هر حرکت موس استفاده می‌کنیم. دکوراتور اکثر مواقع فرا خوانده می‌شود اما فراخوانی را هر 100 میلی‌ثانیه به `update()` ارسال می‌کند.
 
-Visually, it will look like this:
+از لحاظ بصری، اینگونه به نظر خواهد رسید:
 
-1. For the first mouse movement the decorated variant immediately passes the call to `update`. That's important, the user sees our reaction to their move immediately.
-2. Then as the mouse moves on, until `100ms` nothing happens. The decorated variant ignores calls.
-3. At the end of `100ms` -- one more `update` happens with the last coordinates.
-4. Then, finally, the mouse stops somewhere. The decorated variant waits until `100ms` expire and then runs `update` with last coordinates. So, quite important, the final mouse coordinates are processed.
+1. برای اولین حرکت موس تابع دکور شده بلافاصله فراخوانی را به `update` ارسال می‌کند. این مهم است که کاربر واکنش ما نسبت به حرکت خود به سرعت ببیند.
+2. سپس همانطور که موس حرکت می‌کند، تا قبل از `100ms` میلی‌ثانیه چیزی اتفاق نمی‌افتد. تابع دکوراتور فراخوانی‌ها را نادیده می‌گیرد.
+3. زمانی که `100ms` تمام می‌شود، یک بروزرسانی بیشتر `update` با آخرین مختصات اتفاق می‌افتد.
+4. سپس، بالاخره، موس جایی متوقف می‌شود. تابع دکور شده صبر می‌کند تا `100ms` تمام شود و سپس `update` را همراه با آخرین مختصات اجرا می‌کند. پس خیلی مهم است که آخرین مختصات موس پردازش شود.
 
-A code example:
+یک مثال از کد:
 
 ```js
 function f(a) {
   console.log(a);
 }
 
-// f1000 passes calls to f at maximum once per 1000 ms
+// منتقل می‌کند f فراخوانی‌ها را هر 1000 میلی‌ثانیه به f1000 تابع
 let f1000 = throttle(f, 1000);
 
 f1000(1); // shows 1
-f1000(2); // (throttling, 1000ms not out yet)
-f1000(3); // (throttling, 1000ms not out yet)
+f1000(2); // (از فراخوانی جلوگیری می‌کند، هنوز 1000 میلی‌ثانیه نشده است)
+f1000(3); // (از فراخوانی جلوگیری می‌کند، هنوز 1000 میلی‌ثانیه نشده است)
 
-// when 1000 ms time out...
-// ...outputs 3, intermediate value 2 was ignored
+// ...زمانی که 1000 میلی‌ثانیه تمام می‌شود
+// عدد 3 را نشان می‌دهد، مقدار میانی 2 نادیده گرفته شد...
 ```
 
-P.S. Arguments and the context `this` passed to `f1000` should be passed to the original `f`.
+پی‌نوشت: آرگومان‌ها و زمینه `this` که به `f1000` داده می‌شوند باید به `f` اصلی منتقل شوند.
