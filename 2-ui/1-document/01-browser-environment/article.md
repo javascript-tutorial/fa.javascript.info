@@ -17,7 +17,7 @@
 
 برای نمونه، ما اینجا به عنوان یک شئ سراسری استفاده‌ش میکنیم:
 
-```js run
+```js run global
 function sayHi() {
   alert("Hello");
 }
