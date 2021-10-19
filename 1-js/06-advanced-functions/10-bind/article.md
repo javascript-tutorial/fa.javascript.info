@@ -3,43 +3,43 @@ libs:
 
 ---
 
-# Function binding
+# پیوند تابع
 
-When passing object methods as callbacks, for instance to `setTimeout`, there's a known problem: "losing `this`".
+زمانی که متدهای تابع را به عنوان callback پاس می‌دهیم، برای مثال به `setTimeout`، یک مشکل شناخته شده وجود دارد: «از دست دادن `this`».
 
-In this chapter we'll see the ways to fix it.
+در این فصل ما راه‌هایی را برای رفع آن خواهیم دید.
 
-## Losing "this"
+## از دست دادن "this"
 
-We've already seen examples of losing `this`. Once a method is passed somewhere separately from the object -- `this` is lost.
+ما از قبل درباره از دست دادن `this` مثال‌هایی را دیده‌ایم. زمانی که یک متد جایی به غیر از شیء خودش پاس داده شود، `this` از دست می‌رود.
 
-Here's how it may happen with `setTimeout`:
+چیزی که ممکن است با `setTimeout` اتفاق بیافتد اینجا آورده شده:
 
 ```js run
 let user = {
   firstName: "John",
   sayHi() {
-    alert(`Hello, ${this.firstName}!`);
+    alert(`سلام، ${this.firstName}!`);
   }
 };
 
 *!*
-setTimeout(user.sayHi, 1000); // Hello, undefined!
+setTimeout(user.sayHi, 1000); // !undefined ،سلام
 */!*
 ```
 
-As we can see, the output shows not "John" as `this.firstName`, but `undefined`!
+همانطور که می‌بینیم، خروجی "John" را به عنوان `this.firstName` نشان نداد بلکه `undefined` را نمایش داد!
 
-That's because `setTimeout` got the function `user.sayHi`, separately from the object. The last line can be rewritten as:
+دلیلش این است که `setTimeout` تابع `user.sayHi` را جدای از شیء آن دریافت کرد. خط آخر می‌تواند اینگونه نوشته شود:
 
 ```js
 let f = user.sayHi;
-setTimeout(f, 1000); // lost user context
+setTimeout(f, 1000); // را از دست داد user زمینه
 ```
 
-The method `setTimeout` in-browser is a little special: it sets `this=window` for the function call (for Node.js, `this` becomes the timer object, but doesn't really matter here). So for `this.firstName` it tries to get `window.firstName`, which does not exist. In other similar cases, usually `this` just becomes `undefined`.
+روش `setTimeout` در مرورگر کمی خاص است: این تابع برای فراخوانی تابع `this=window` را تنظیم می‌کند (در Node.js، مقدار `this` شیء تایمر می‌شود اما اینجا خیلی مهم نیست). پس برای `this.firstName` این تابع تلاش می‌کند که `window.firstName` را دریافت کند، که وجود ندارد. در موارد مشابه دیگر، معمولا `this` برابر با `undefined` می‌شود.
 
-The task is quite typical -- we want to pass an object method somewhere else (here -- to the scheduler) where it will be called. How to make sure that it will be called in the right context?
+کاری که انجام می‌شود کاملا معمولی است، ما می‌خواهیم یک متد شیء را جایی دیگر (اینجا، به زمان‌بند) که فراخوانی خواهد شد پاس دهیم. چگونه مطمئن شویم که با زمینه درست فراخوانی می‌شود؟
 
 ## Solution 1: a wrapper
 
