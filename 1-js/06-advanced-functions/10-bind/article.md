@@ -41,57 +41,56 @@ setTimeout(f, 1000); // را از دست داد user زمینه
 
 کاری که انجام می‌شود کاملا معمولی است، ما می‌خواهیم یک متد شیء را جایی دیگر (اینجا، به زمان‌بند) که فراخوانی خواهد شد پاس دهیم. چگونه مطمئن شویم که با زمینه درست فراخوانی می‌شود؟
 
-## Solution 1: a wrapper
+## راه‌حل 1: دربرگیرنده
 
-The simplest solution is to use a wrapping function:
+ساده‌ترین راه‌حل استفاده از یک تابع دربرگیرنده است:
 
 ```js run
 let user = {
   firstName: "John",
   sayHi() {
-    alert(`Hello, ${this.firstName}!`);
+    alert(`سلام، ${this.firstName}!`);
   }
 };
 
 *!*
 setTimeout(function() {
-  user.sayHi(); // Hello, John!
+  user.sayHi(); // !John ،سلام
 }, 1000);
 */!*
 ```
 
-Now it works, because it receives `user` from the outer lexical environment, and then calls the method normally.
+حالا کار می‌کند، چون `user` را از محیط لغوی بیرونی دریافت می‌کند و سپس به طور معمولی متد را فراخوانی می‌کند.
 
-The same, but shorter:
+این یکسان اما کوتاه‌تر است:
 
 ```js
-setTimeout(() => user.sayHi(), 1000); // Hello, John!
+setTimeout(() => user.sayHi(), 1000); // !John ،سلام
 ```
 
-Looks fine, but a slight vulnerability appears in our code structure.
+مناسب بنظر می‌رسد اما یک آسیب‌پذیری جزئی ممکن است در ساختار کد ما نمایان شود.
 
-What if before `setTimeout` triggers (there's one second delay!) `user` changes value? Then, suddenly, it will call the wrong object!
-
+اگر قبل از اینکه `setTimeout` فعال شود (تاخیر یک ثانیه‌ای وجود دارد!) `user` مقدارش تغییر کند چه؟ سپس ناگهان، شیء اشتباهی را فراخوانی می‌کند!
 
 ```js run
 let user = {
   firstName: "John",
   sayHi() {
-    alert(`Hello, ${this.firstName}!`);
+    alert(`سلام، ${this.firstName}!`);
   }
 };
 
 setTimeout(() => user.sayHi(), 1000);
 
-// ...the value of user changes within 1 second
+// ...در حین 1 ثانیه تغییر می‌کند user مقدار
 user = {
-  sayHi() { alert("Another user in setTimeout!"); }
+  sayHi() { alert("!setTimeout دیگر در user یک"); }
 };
 
-// Another user in setTimeout!
+// !setTimeout دیگر در user یک
 ```
 
-The next solution guarantees that such thing won't happen.
+راه‌حل بعدی تضمین می‌کند که چنین چیزی اتفاق نیافتد.
 
 ## Solution 2: bind
 
