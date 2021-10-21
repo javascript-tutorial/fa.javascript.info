@@ -72,6 +72,7 @@ setTimeout(() => user.sayHi(), 1000); // !John ،سلام
 
 اگر قبل از اینکه `setTimeout` فعال شود (تاخیر یک ثانیه‌ای وجود دارد!) `user` مقدارش تغییر کند چه؟ سپس ناگهان، شیء اشتباهی را فراخوانی می‌کند!
 
+
 ```js run
 let user = {
   firstName: "John",
@@ -92,22 +93,22 @@ user = {
 
 راه‌حل بعدی تضمین می‌کند که چنین چیزی اتفاق نیافتد.
 
-## Solution 2: bind
+## راه‌حل 2: متد bind
 
-Functions provide a built-in method [bind](mdn:js/Function/bind) that allows to fix `this`.
+تابع‌ها یک متد درونی [bind](mdn:js/Function/bind) دارند که امکان ثابت کردن `this` را ایجاد می‌کند.
 
-The basic syntax is:
+سینتکس پایه‌ای آن:
 
 ```js
-// more complex syntax will come a little later
+// سینتکس پیچیده‌تر کمی بعدتر فرا می‌رسد
 let boundFunc = func.bind(context);
 ```
 
-The result of `func.bind(context)` is a special function-like "exotic object", that is callable as function and transparently passes the call to `func` setting `this=context`.
+نتیجه‌ی `func.bind(context)` یک «شیء بیگانه» تابع‌مانند خاص است که می‌تواند به عنوان تابع فراخوانی شود و به طور پنهانی فراخوانی را با تنظیم `this=context` به `func` منتقل کند.
 
-In other words, calling `boundFunc` is like `func` with fixed `this`.
+به عبارتی دیگر، فراخوانی `boundFunc` مانند `func` با `this` تثبیت شده است.
 
-For instance, here `funcUser` passes a call to `func` with `this=user`:
+برای مثال، اینجا `funcUser` فراخوانی را با `this=user` به `func` منتقل می‌کند:
 
 ```js run  
 let user = {
@@ -124,9 +125,9 @@ funcUser(); // John
 */!*
 ```
 
-Here `func.bind(user)` as a "bound variant" of `func`, with fixed `this=user`.
+اینجا `func.bind(user)` به عنوان «یک نوع پیوند زده شده» از `func` با `this=user` شناخته می‌شود.
 
-All arguments are passed to the original `func` "as is", for instance:
+تمام آرگومان‌ها «بدون تغییر» به تابع اصلی `func` منتقل می‌شوند، برای مثال:
 
 ```js run  
 let user = {
@@ -134,25 +135,25 @@ let user = {
 };
 
 function func(phrase) {
-  alert(phrase + ', ' + this.firstName);
+  alert(phrase + '، ' + this.firstName);
 }
 
-// bind this to user
+// پیوند بزن user این را به
 let funcUser = func.bind(user);
 
 *!*
-funcUser("Hello"); // Hello, John (argument "Hello" is passed, and this=user)
+funcUser("سلام"); // (this=user آرگومان «سلام» پاس داده شد و) John ،سلام
 */!*
 ```
 
-Now let's try with an object method:
+حالا بیایید با یک متد شیء امتحان کنیم:
 
 
 ```js run
 let user = {
   firstName: "John",
   sayHi() {
-    alert(`Hello, ${this.firstName}!`);
+    alert(`سلام، ${this.firstName}!`);
   }
 };
 
@@ -160,38 +161,38 @@ let user = {
 let sayHi = user.sayHi.bind(user); // (*)
 */!*
 
-// can run it without an object
-sayHi(); // Hello, John!
+// می‌توانیم آن را بدون شیء اجرا کنیم
+sayHi(); // !John ،سلام
 
-setTimeout(sayHi, 1000); // Hello, John!
+setTimeout(sayHi, 1000); // !John ،سلام
 
-// even if the value of user changes within 1 second
-// sayHi uses the pre-bound value which is reference to the old user object
+// در حین 1 ثانیه تغییر کند user حتی اگر مقدار
+// رجوع می‌کند user از مقداری که از قبل پیوند زده شده استفاده می‌کند که به شیء قدیمی sayHi تابع
 user = {
-  sayHi() { alert("Another user in setTimeout!"); }
+  sayHi() { alert("!setTimeout دیگر در user یک"); }
 };
 ```
 
-In the line `(*)` we take the method `user.sayHi` and bind it to `user`. The `sayHi` is a "bound" function, that can be called alone or passed to `setTimeout` -- doesn't matter, the context will be right.
+در خط `(*)` ما متد `user.sayHi` را دریافت می‌کنیم و آن را به `user` پیوند می‌زنیم. `sayHi` یک تابع «پیوند زده شده» است که می‌تواند به تنهایی فراخوانی شود یا به `setTimeout` فرستاده شود -- مهم نیست، زمینه همیشه درست خواهد بود.
 
-Here we can see that arguments are passed "as is", only `this` is fixed by `bind`:
+اینجا ما می‌توانیم ببینیم آرگومان‌هایی که پاس داده شدند «بدون تغییر» ماندند و فقط `this` توسط `bind` ثابت شده است:
 
 ```js run
 let user = {
   firstName: "John",
   say(phrase) {
-    alert(`${phrase}, ${this.firstName}!`);
+    alert(`${phrase}، ${this.firstName}!`);
   }
 };
 
 let say = user.say.bind(user);
 
-say("Hello"); // Hello, John ("Hello" argument is passed to say)
-say("Bye"); // Bye, John ("Bye" is passed to say)
+say("سلام"); // (پاس داده شد say آرگومان «سلام» به) !John ،سلام
+say("خداحافظ"); // (پاس داده شد say آرگومان «خداحافظ» به) !John ،خداحافظ
 ```
 
-````smart header="Convenience method: `bindAll`"
-If an object has many methods and we plan to actively pass it around, then we could bind them all in a loop:
+````smart header="روش راحت: `bindAll`"
+اگر یک شیء تعداد زیادی متد داشته باشد و ما بخواهیم که متد را در تابع‌ها رد و بدل کنیم، سپس می‌توانیم تمام متدها را با شیء در یک حلقه پیوند بزنیم:
 
 ```js
 for (let key in user) {
@@ -201,7 +202,7 @@ for (let key in user) {
 }
 ```
 
-JavaScript libraries also provide functions for convenient mass binding , e.g. [_.bindAll(object, methodNames)](http://lodash.com/docs#bindAll) in lodash.
+کتابخانه‌های جاوااسکریپت هم تابع‌هایی برای پیوند زدن گسترده و راحت ارائه می‌دهد، مانند [_.bindAll(object, methodNames)](http://lodash.com/docs#bindAll) در lodash.
 ````
 
 ## Partial functions
