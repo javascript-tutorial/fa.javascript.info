@@ -205,21 +205,21 @@ for (let key in user) {
 کتابخانه‌های جاوااسکریپت هم تابع‌هایی برای پیوند زدن گسترده و راحت ارائه می‌دهد، مانند [_.bindAll(object, methodNames)](http://lodash.com/docs#bindAll) در lodash.
 ````
 
-## Partial functions
+## تابع‌های جزئی
 
-Until now we have only been talking about binding `this`. Let's take it a step further.
+تا حالا ما فقط درباره پیوند زدن `this` صحبت کردیم. بیایید این موضوع را کمی جلوتر ببریم.
 
-We can bind not only `this`, but also arguments. That's rarely done, but sometimes can be handy.
+ما نه تنها توانایی پیوند زدن `this` را داریم، بلکه آرگومان‌ها را هم می‌توانیم پیوند بزنیم. این مورد به ندرت اتفاق می‌افتد اما گاهی بدرد می‌خورد.
 
-The full syntax of `bind`:
+سینتکس کامل `bind`:
 
 ```js
 let bound = func.bind(context, [arg1], [arg2], ...);
 ```
 
-It allows to bind context as `this` and starting arguments of the function.
+این سینتکس اجازه می‌دهد که زمینه را به عنوان `this` و آرگومان‌های ابتدایی تابع را پیوند بزنیم.
 
-For instance, we have a multiplication function `mul(a, b)`:
+برای مثال، ما یک تابع ضرب `mul(a, b)` داریم:
 
 ```js
 function mul(a, b) {
@@ -227,7 +227,7 @@ function mul(a, b) {
 }
 ```
 
-Let's use `bind` to create a function `double` on its base:
+بیایید برای ایجاد تابع `double` که بر پایه تابع ضرب است از `bind` استفاده کنیم:
 
 ```js run
 function mul(a, b) {
@@ -243,13 +243,13 @@ alert( double(4) ); // = mul(2, 4) = 8
 alert( double(5) ); // = mul(2, 5) = 10
 ```
 
-The call to `mul.bind(null, 2)` creates a new function `double` that passes calls to `mul`, fixing `null` as the context and `2` as the first argument. Further arguments are passed "as is".
+فراخوانی `mul.bind(null, 2)` یک تابع جدید `double` می‌سازد که با ثابت کردن `null` به عنوان زمینه و `2` به عنوان آرگومان اول، فراخوانی‌ها را به `mul` پاس می‌دهد. آرگومان‌های بعدی «بدون تغییر» پاس داده می‌شوند.
 
-That's called [partial function application](https://en.wikipedia.org/wiki/Partial_application) -- we create a new function by fixing some parameters of the existing one.
+این عمل، [کاربرد تابع جزئی](https://en.wikipedia.org/wiki/Partial_application) شناخته می‌شود -- ما با ثابت کردن بعضی از پارامترهای تابع موجود، تابعی جدید می‌سازیم. 
 
-Please note that we actually don't use `this` here. But `bind` requires it, so we must put in something like `null`.
+لطفا در نظر داشته باشید که در واقع اینجا از `this` استفاده نمی‌کنیم. اما `bind` آن را نیاز دارد پس ما باید چیزی مانند `null` را درون آن قرار دهیم.
 
-The function `triple` in the code below triples the value:
+تابع `triple` در کد پایین، مقدار را سه برابر می‌کند:
 
 ```js run
 function mul(a, b) {
@@ -265,13 +265,13 @@ alert( triple(4) ); // = mul(3, 4) = 12
 alert( triple(5) ); // = mul(3, 5) = 15
 ```
 
-Why do we usually make a partial function?
+چرا معمولا ما یک تابع جزئی (partial function) می‌سازیم؟
 
-The benefit is that we can create an independent function with a readable name (`double`, `triple`). We can use it and not provide the first argument every time as it's fixed with `bind`.
+مزیت موجود این است که ما می‌توانیم یک تابع مستقل با اسمی خوانا (`double`(دو برابر کردن)،  `triple`(سه برابر کردن)) بسازیم. می‌توانیم این تابع را استفاده کنیم و چون اولین آرگومان با `bind` ثابت شده است، هر بار آن را وارد نکنیم.
 
-In other cases, partial application is useful when we have a very generic function and want a less universal variant of it for convenience.
+در موارد دیگر، استفاده از تابع جزئی زمانی خوب است که ما یک تابع خیلی عمومی داریم و برای راحتی نوعی از آن را می‌خواهیم که کمتر جامع باشد.
 
-For instance, we have a function `send(from, to, text)`. Then, inside a `user` object we may want to use a partial variant of it: `sendTo(to, text)` that sends from the current user.
+برای مثال، ما تابع `send(from, to, text)` را داریم. سپس، شاید بخواهیم درون شیء `user` نوع جزئی آن را استفاده کنیم: `sendTo(to, text)` که از کاربر کنونی پیامی رابه کسی می‌فرستد.
 
 ## Going partial without context
 
