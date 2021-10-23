@@ -3,16 +3,16 @@ importance: 5
 ---
 
 # Partial application for login
+ 
+این تمرین نوع پیچیده‌تر <info:task/question-use-bind> است.
 
-The task is a little more complex variant of <info:task/question-use-bind>. 
+شیء `user` تغییر داده شد. حالا به جای دو تابع `loginOk/loginFail`، یک تابع `user.login(true/false)` دارد.
 
-The `user` object was modified. Now instead of two functions `loginOk/loginFail`, it has a single function `user.login(true/false)`.
-
-What should we pass `askPassword` in the code below, so that it calls `user.login(true)` as `ok` and `user.login(false)` as `fail`?
+برای اینکه `askPassword` در کد پایین، تابع `user.login(true)` را به عنوان `ok` و `user.login(false)` را به عنوان `fail` فراخوانی کند باید چه کار کنیم؟
 
 ```js
 function askPassword(ok, fail) {
-  let password = prompt("Password?", '');
+  let password = prompt("رمز؟", '');
   if (password == "rockstar") ok();
   else fail();
 }
@@ -21,7 +21,7 @@ let user = {
   name: 'John',
 
   login(result) {
-    alert( this.name + (result ? ' logged in' : ' failed to log in') );
+    alert( this.name + (result ? ' وارد شد' : ' نتوانست وارد شود') );
   }
 };
 
@@ -30,5 +30,5 @@ askPassword(?, ?); // ?
 */!*
 ```
 
-Your changes should only modify the highlighted fragment.
+تغییرات شما فقط باید قطعه برجسته شده را تغییر دهد.
 
