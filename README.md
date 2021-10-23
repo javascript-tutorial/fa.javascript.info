@@ -135,6 +135,8 @@ Please don't translate or remove the `[#...]` part, it's for URL anchors.
 ## نکات ترجمهٔ فارسی
 در این بخش، نکاتی مختص ترجمه به زبان فارسی را بررسی می‌کنیم. لطفاً قبل از خواندن این بخش، [نکات کلی ترجمه](#translation-tips) را مطالعه کنید.
     
+لغت‌نامه در انتها و بعد از تمام نکات قرار دارد.
+    
 ### نیم‌فاصله
 نیم‌فاصله، نویسه‌ای در استاندارد یونی‌کد است که برای حروفچینی کامپیوتری برخی خط‌ها همچون خط فارسی و خط‌های هندیک به‌کار می‌رود.[^1]
 برای خوانایی بهتر متن لطفاً از آن استفاده کنید اما اگر قصد انجام چنین کاری را ندارید، لطفاً در هیچ کجای متن از آن استفاده نکنید تا ترجمه‌ای یک‌دست داشته باشیم. 
@@ -268,6 +270,7 @@ Please don't translate or remove the `[#...]` part, it's for URL anchors.
 | binary | دوگانه، دودویی |                       |
 | block scope | محدودیت بلوک |                    |
 | boolean | boolean، بولین |                       |
+| callback | callback |                            |
 | class | کلاس |                                    |
 | closure | کلوژر |                                |
 | code block | بلوک کد |                           |
@@ -277,6 +280,7 @@ Please don't translate or remove the `[#...]` part, it's for URL anchors.
 | execute | اجرا کردن |                            |
 | error | ارور |                                   |
 | evaluate | ارزیابی کردن |                       |
+| framework | فریمورک |                           |
 | function | تابع |                                |
 | Function Declaration | Function Declaration |    |
 | Function Expression | Function Expression |      |
@@ -286,9 +290,11 @@ Please don't translate or remove the `[#...]` part, it's for URL anchors.
 | hashing function | تابع ترکیب‌سازی |            |
 | item (in arrays) | المان |                       |
 | iterable | حلقه‌پذیر |                           |
+| iteration(over) | حلقه زدن |                     |
 | JSON | جی‌سان |                                  |
 | key (in data structures) | کلید |                |
 | lexical environment | محیط لغوی |                |
+| loop over | حلقه زدن |                           |
 | method (in data structures) | متد |              |
 | null | null |                                    |
 | number | عدد |                                   |
