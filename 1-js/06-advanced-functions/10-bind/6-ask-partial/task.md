@@ -2,7 +2,7 @@ importance: 5
 
 ---
 
-# Partial application for login
+# کاربرد تابع جزئی برای وارد شدن
  
 این تمرین نوع پیچیده‌تر <info:task/question-use-bind> است.
 
