@@ -2,17 +2,17 @@ importance: 5
 
 ---
 
-# Fix a function that loses "this"
+# تابعی که "this" را از دست می‌دهد را تصحیح کنید
 
-The call to `askPassword()` in the code below should check the password and then call `user.loginOk/loginFail` depending on the answer.
+فراخوانی `askPassword()` در کد پایین باید رمز یا چک کند و سپس با توجه به جواب `user.loginOk/loginFail` را فراخوانی کند.
 
-But it leads to an error. Why?
+اما به ارور برمی‌خورد. چرا؟
 
-Fix the highlighted line for everything to start working right (other lines are not to be changed).
+خط برجسته شده را تصحیح کند تا همه چیز به درستی کار کند (بقیه خطوط نیازی به تغییر ندارند).
 
 ```js run
 function askPassword(ok, fail) {
-  let password = prompt("Password?", '');
+  let password = prompt("رمز؟", '');
   if (password == "rockstar") ok();
   else fail();
 }
@@ -21,11 +21,11 @@ let user = {
   name: 'John',
 
   loginOk() {
-    alert(`${this.name} logged in`);
+    alert(`${this.name} وارد شد`);
   },
 
   loginFail() {
-    alert(`${this.name} failed to log in`);
+    alert(`${this.name} نتوانست وارد شود`);
   },
 
 };
