@@ -273,15 +273,15 @@ alert( triple(5) ); // = mul(3, 5) = 15
 
 برای مثال، ما تابع `send(from, to, text)` را داریم. سپس، شاید بخواهیم درون شیء `user` نوع جزئی آن را استفاده کنیم: `sendTo(to, text)` که از کاربر کنونی پیامی رابه کسی می‌فرستد.
 
-## Going partial without context
+## بدون زمینه جزئی شدن
 
-What if we'd like to fix some arguments, but not the context `this`? For example, for an object method.
+اگر ما بخواهیم آرگومان‌هایی را ثابت کنیم اما زمینه `this` را نه چکار کنیم؟ برای مثال، برای متد شیء.
 
-The native `bind` does not allow that. We can't just omit the context and jump to arguments.
+متد `bind` این اجازه را نمی‌دهد. ما نمی‌توانیم زمینه را حذف کنیم و به آرگومان‌ها بپریم.
 
-Fortunately, a function `partial` for binding only arguments can be easily implemented.
+خوشبختانه، تابع `partial` برای اینکه فقط آرگومان‌ها را ثابت کنیم می‌تواند به راحتی پیاده‌سازی شود.
 
-Like this:
+مانند این:
 
 ```js run
 *!*
@@ -292,7 +292,7 @@ function partial(func, ...argsBound) {
 }
 */!*
 
-// Usage:
+// :کاربرد
 let user = {
   firstName: "John",
   say(time, phrase) {
@@ -300,29 +300,29 @@ let user = {
   }
 };
 
-// add a partial method with fixed time
+// اضافه کردن یک متد جزئی با زمان ثابت
 user.sayNow = partial(user.say, new Date().getHours() + ':' + new Date().getMinutes());
 
 user.sayNow("Hello");
-// Something like:
+// :چیزی مانند این
 // [10:00] John: Hello!
 ```
 
-The result of `partial(func[, arg1, arg2...])` call is a wrapper `(*)` that calls `func` with:
-- Same `this` as it gets (for `user.sayNow` call it's `user`)
-- Then gives it `...argsBound` -- arguments from the `partial` call (`"10:00"`)
-- Then gives it `...args` -- arguments given to the wrapper (`"Hello"`)
+نتیجه فراخوانی `partial(func[, arg1, arg2...])` یک دربرگیرنده `(*)` است که `func` را همراه با این‌ها فرا می‌خواند:
+- مقدار `this` یکسان با چیزی که دریافت می‌کند (برای فراخوانی `user.sayNow` برابر با `user` است)
+- سپس `...argsBound` را به آن می‌دهد -- آرگومان‌های حاصل از فراخوانی `partial` (`"10:00"`)
+- سپس `...args` را به آن می‌دهد -- آرگومان‌هایی که به دربرگیرنده داده شده‌اند (`"Hello"`)
 
-So easy to do it with the spread syntax, right?
+پس انجام دادن آن با سینتکس اسپرد راحت است نه؟
 
-Also there's a ready [_.partial](https://lodash.com/docs#partial) implementation from lodash library.
+همچنین یک پیاده‌سازی آماده [_.partial](https://lodash.com/docs#partial) از کتابخانه lodash وجود دارد.
 
 ## Summary
 
-Method `func.bind(context, ...args)` returns a "bound variant" of function `func` that fixes the context `this` and first arguments if given.
+متد `func.bind(context, ...args)` یک «نوع پیوند داده شده» از تابع `func` را برمی‌گرداند که زمینه `this` و اولین آرگومان‌های داده شده را ثابت می‌کند.
 
-Usually we apply `bind` to fix `this` for an object method, so that we can pass it somewhere. For example, to `setTimeout`.
+معمولا ما `bind` را برای ثابت کردن `this` در یک متد شیء بر روی آن اعمال می‌کنیم تا بتوانیم آن را جایی پاس دهیم. برای مثال به `setTimeout`.
 
-When we fix some arguments of an existing function, the resulting (less universal) function is called *partially applied* or *partial*.
+زمانی که ما چند آرگومان یک تابع موجود را ثابت می‌کنیم، تابع حاصل (که کمتر جامع است) را *به طور جزئی اعمال‌شده* یا *جزئی* می‌نامند.
 
-Partials are convenient when we don't want to repeat the same argument over and over again. Like if we have a `send(from, to)` function, and `from` should always be the same for our task, we can get a partial and go on with it.
+تابع‌های جزئی زمانی که ما نمی‌خواهیم آرگومان یکسانی را هر بار تکرار کنیم مناسب هستند. مثلا زمانی که ما تابع `send(from, to)` را داریم و `from` همیشه باید برای کار ما یکسان باشد، ما می‌توانیم از آن تابع جزئی بسازیم و از این تابع استفاده کنیم.
