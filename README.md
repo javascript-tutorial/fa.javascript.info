@@ -280,7 +280,7 @@ Please don't translate or remove the `[#...]` part, it's for URL anchors.
 | execute | اجرا کردن |                            |
 | error | ارور |                                   |
 | evaluate | ارزیابی کردن |                       |
-| framework | فریمورک |                           |
+| framework | فریم‌ورک |                           |
 | function | تابع |                                |
 | Function Declaration | Function Declaration |    |
 | Function Expression | Function Expression |      |
