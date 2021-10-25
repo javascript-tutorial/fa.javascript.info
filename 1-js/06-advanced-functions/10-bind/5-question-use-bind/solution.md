@@ -1,13 +1,13 @@
 
-The error occurs because `ask` gets functions `loginOk/loginFail` without the object.
+به دلیل اینکه `ask` تابع‌های `loginOk/loginFail` را بدون شیء دریافت می‌کند ارور ایجاد می‌شود.
 
-When it calls them, they naturally assume `this=undefined`.
+زمانی که این تابع آن‌ها را فرا می‌خواند، به طور طبیعی آن‌ها `this=undefined` را فرض می‌کنند.
 
-Let's `bind` the context:
+بیایید زمینه را با `bind` پیوند بزنیم:
 
 ```js run
 function askPassword(ok, fail) {
-  let password = prompt("Password?", '');
+  let password = prompt("رمز؟", '');
   if (password == "rockstar") ok();
   else fail();
 }
@@ -16,11 +16,11 @@ let user = {
   name: 'John',
 
   loginOk() {
-    alert(`${this.name} logged in`);
+    alert(`${this.name} وارد شد`);
   },
 
   loginFail() {
-    alert(`${this.name} failed to log in`);
+    alert(`${this.name} نتوانست وارد شود`);
   },
 
 };
@@ -30,14 +30,14 @@ askPassword(user.loginOk.bind(user), user.loginFail.bind(user));
 */!*
 ```
 
-Now it works.
+حالا کار می‌کند.
 
-An alternative solution could be:
+راه‌حل جایگزین می‌تواند این باشد:
 ```js
 //...
 askPassword(() => user.loginOk(), () => user.loginFail());
 ```
 
-Usually that also works and looks good.
+معمولا این راه‌حل هم کار می‌کند و ظاهر خوبی دارد.
 
-It's a bit less reliable though in more complex situations where `user` variable might change *after* `askPassword` is called, but *before* the visitor answers and calls `() => user.loginOk()`. 
+اگرچه این کد در موقعیت‌های پیچیده‌تر کمتر قابل اطمینان است، زمانی که متغیر `user` ممکن است *بعد از* اینکه `askPassword` فراخوانی شود و *قبل از* اینکه کاربر جواب بدهد و `() => user.loginOk()` را فرا بخواند، تغییر کند.

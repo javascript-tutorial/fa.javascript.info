@@ -1,14 +1,14 @@
 
 
-1. Either use a wrapper function, an arrow to be concise:
+1. برای کوتاه بودن یا از تابع دربرگیرنده استفاده کنید یا از تابع کمانی:
 
     ```js 
     askPassword(() => user.login(true), () => user.login(false)); 
     ```
 
-    Now it gets `user` from outer variables and runs it the normal way.
+    حالا `user` را از متغیرهای بیرونی دریافت می‌کند و به صورت معمولی آن را اجرا می‌شود.
 
-2. Or create a partial function from `user.login` that uses `user` as the context and has the correct first argument:
+2. یا یک تابع جزئی از `user.login` بسازید که از `user` به عنوان زمینه استفاده می‌کند و آرگومان اول درست را دارد:
 
 
     ```js 
