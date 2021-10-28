@@ -2,7 +2,7 @@
 
 بیایید از تابع‌های کمانی دوباره بازدید کنیم.
 
-تابع‌های کمانی فقط «کوتاه‌نویسی» برای نوشتن چیزهای کوچک نیستند. آن‌ها خاصیت‌هایی خاص و کاربردی دارند.
+تابع‌های کمانی فقط «کوتاه‌نویسی» برای نوشتن چیزهای کوچک نیستند. آن‌ها ویژگی‌هایی خاص و کاربردی دارند.
 
 جاوااسکریپت پر از موقعیت‌هایی است که ما نیاز به نوشتن یک تابع کوچک داریم تا جایی دیگر اجرا شود.
 
@@ -16,15 +16,15 @@
 
 و معمولا ما نمی‌خواهیم زمینه کنونی را درون چنین تابع‌هایی از دست دهیم. اینجا جایی است که تابع‌های کمانی بدرد می‌خورند.
 
-## Arrow functions have no "this"
+## تابع‌های کمانی "this" ندارند
 
-As we remember from the chapter <info:object-methods>, arrow functions do not have `this`. If `this` is accessed, it is taken from the outside.
+همانطور که از فصل <info:object-methods> به یاد داریم، تابع‌های کمانی `this` ندارند. اگر به `this` دسترسی پیدا کنیم، از بیرون دریافت می‌شود.
 
-For instance, we can use it to iterate inside an object method:
+برای مثال، ما می‌توانیم از آن برای حلقه زدن درون یک متد شیء استفاده کنیم:
 
 ```js run
 let group = {
-  title: "Our Group",
+  title: "گروه ما",
   students: ["John", "Pete", "Alice"],
 
   showList() {
@@ -39,19 +39,19 @@ let group = {
 group.showList();
 ```
 
-Here in `forEach`, the arrow function is used, so `this.title` in it is exactly the same as in the outer method `showList`. That is: `group.title`.
+اینجا درون `forEach`، تابع کمانی استفاده شده است پس `this.title` درون آن انگار دقیقا درون متد بیرونی `showList` است. یعنی: `group.title`.
 
-If we used a "regular" function, there would be an error:
+اگر ما یک تابع «معمولی» استفاده می‌کردیم، یک ارور دریافت می‌کردیم:
 
 ```js run
 let group = {
-  title: "Our Group",
+  title: "گروه ما",
   students: ["John", "Pete", "Alice"],
 
   showList() {
 *!*
     this.students.forEach(function(student) {
-      // Error: Cannot read property 'title' of undefined
+      // را خواند undefined از 'title' ارور: نمی‌توان ویژگی
       alert(this.title + ': ' + student);
     });
 */!*
@@ -61,19 +61,19 @@ let group = {
 group.showList();
 ```
 
-The error occurs because `forEach` runs functions with `this=undefined` by default, so the attempt to access `undefined.title` is made.
+به دلیل اینکه به طور پیش‌فرض `forEach` با `this=undefined` تابع را اجرا می‌کند ارور ایجاد می‌شود پس سعی می‌شود که `undefined.title` دریافت شود.
 
-That doesn't affect arrow functions, because they just don't have `this`.
+این موضوع روی تابع‌های کمانی تاثیری ندارد چون آن‌ها `this` ندارند.
 
-```warn header="Arrow functions can't run with `new`"
-Not having `this` naturally means another limitation: arrow functions can't be used as constructors. They can't be called with `new`.
+```warn header="تابع‌های کمانی نمی‌توانند با `new` اجرا شوند"
+نداشتن `this` به طور طبیعی به معنی محدودیت دیگری هم هست: تابع‌های کمانی نمی‌توانند به عنوان سازنده استفاده شوند. آن‌ها نمی‌توانند با `new` فراخوانی شوند.
 ```
 
-```smart header="Arrow functions VS bind"
-There's a subtle difference between an arrow function `=>` and a regular function called with `.bind(this)`:
+```smart header="تابع‌های کمانی در مقابل bind"
+یک تفاوت جزئی بین یک تابع کمانی `<=` و یک تابع معمولی که با `.bind(this)` فراخوانی شده وجود دارد:
 
-- `.bind(this)` creates a "bound version" of the function.
-- The arrow `=>` doesn't create any binding. The function simply doesn't have `this`. The lookup of `this` is made exactly the same way as a regular variable search: in the outer lexical environment.
+- `.bind(this)` یک «نسخه پیوند زده شده» از تابع را می‌سازد.
+- کمان `<=` چیزی را پیوند نمی‌زند. تابع حقیقتا `this` ندارد. جست‌و‌جوی `this` درست مانند جست‌و‌جوی یک متغیر معمولی انجام می‌شود: در محیط لغوی بیرونی.
 ```
 
 ## Arrows have no "arguments"
