@@ -1,20 +1,20 @@
-# Arrow functions revisited
+# بازدید دوباره از تابع‌های کمانی
 
-Let's revisit arrow functions.
+بیایید از تابع‌های کمانی دوباره بازدید کنیم.
 
-Arrow functions are not just a "shorthand" for writing small stuff. They have some very specific and useful features.
+تابع‌های کمانی فقط «کوتاه‌نویسی» برای نوشتن چیزهای کوچک نیستند. آن‌ها خاصیت‌هایی خاص و کاربردی دارند.
 
-JavaScript is full of situations where we need to write a small function that's executed somewhere else.
+جاوااسکریپت پر از موقعیت‌هایی است که ما نیاز به نوشتن یک تابع کوچک داریم تا جایی دیگر اجرا شود.
 
-For instance:
+برایی مثال:
 
-- `arr.forEach(func)` -- `func` is executed by `forEach` for every array item.
-- `setTimeout(func)` -- `func` is executed by the built-in scheduler.
-- ...there are more.
+- `arr.forEach(func)` -- `func` برای هر المان آرایه توسط `forEach` اجرا می‌شود.
+- `setTimeout(func)` -- `func` توسط زمان‌بند درونی اجرا می‌شود.
+- ...و چیزهای دیگر
 
-It's in the very spirit of JavaScript to create a function and pass it somewhere.
+اینکه تابعی را بسازیم و آن را جایی دیگر پاس دهیم در ذات جاوااسکریپت است.
 
-And in such functions we usually don't want to leave the current context. That's where arrow functions come in handy.
+و معمولا ما نمی‌خواهیم زمینه کنونی را درون چنین تابع‌هایی از دست دهیم. اینجا جایی است که تابع‌های کمانی بدرد می‌خورند.
 
 ## Arrow functions have no "this"
 
