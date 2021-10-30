@@ -76,13 +76,13 @@ group.showList();
 - کمان `<=` چیزی را پیوند نمی‌زند. تابع حقیقتا `this` ندارد. جست‌و‌جوی `this` درست مانند جست‌و‌جوی یک متغیر معمولی انجام می‌شود: در محیط لغوی بیرونی.
 ```
 
-## Arrows have no "arguments"
+## تابع‌های کمانی "arguments" ندارند
 
-Arrow functions also have no `arguments` variable.
+تابع‌های کمانی متغیر `arguments` هم ندارند.
 
-That's great for decorators, when we need to forward a call with the current `this` and `arguments`.
+زمانی که در دکوراتور ما باید یک فراخوانی را با `this` کنونی و `arguments` ارسال کنیم عالی است.
 
-For instance, `defer(f, ms)` gets a function and returns a wrapper around it that delays the call by `ms` milliseconds:
+برای مثال، `defer(f, ms)` یک تابع دریافت می‌کند و دربرگیرنده‌ای دور آن که فراخوانی را به اندازه `ms` میلی‌ثانیه تاخیر می‌اندازد را برمی‌گرداند:
 
 ```js run
 function defer(f, ms) {
@@ -92,14 +92,14 @@ function defer(f, ms) {
 }
 
 function sayHi(who) {
-  alert('Hello, ' + who);
+  alert('سلام، ' + who);
 }
 
 let sayHiDeferred = defer(sayHi, 2000);
-sayHiDeferred("John"); // Hello, John after 2 seconds
+sayHiDeferred("John"); // John ،بعد از دو ثانیه: سلام
 ```
 
-The same without an arrow function would look like:
+کد یکسان بدون تابع کمانی می‌تواند اینگونه باشد:
 
 ```js
 function defer(f, ms) {
@@ -112,15 +112,15 @@ function defer(f, ms) {
 }
 ```
 
-Here we had to create additional variables `args` and `ctx` so that the function inside `setTimeout` could take them.
+اینجا ما باید متغیرهای اضافی `args` و `ctx` را ایجاد می‌کردیم تا تابع درون `setTimeout` بتواند آن‌ها را دریافت کند.
 
-## Summary
+## خلاصه
 
-Arrow functions:
+تابع‌های کمانی:
 
-- Do not have `this`
-- Do not have `arguments`
-- Can't be called with `new`
-- They also don't have `super`, but we didn't study it yet. We will on the chapter <info:class-inheritance>
+- دارای `this` نیستند
+- دارای `arguments` نیستند
+- نمی‌توانند همراه با `new` فراخوانی شوند
+- همچنین آن‌ها `super` ندارند اما هنوز آن را نخوانده‌ایم. در فصل <info:class-inheritance> آن را خواهیم خواند
 
-That's because they are meant for short pieces of code that do not have their own "context", but rather work in the current one. And they really shine in that use case.
+به دلیل اینکه آن‌ها برای قطعه‌های کوتاهی از کد در نظر گرفته شده‌اند که «زمینه» خودشان را ندارند و در زمینه کنونی کار می‌کنند. و آن‌ها واقعا در این مورد استفاده می‌درخشند.
