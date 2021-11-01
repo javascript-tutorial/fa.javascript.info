@@ -64,7 +64,11 @@
 
   
 
+<<<<<<< HEAD
 ## جاوا اِسکریپت در مرورگر چه توانایی‌هایی دارد  ؟   
+=======
+JavaScript's abilities in the browser are limited for the sake of a user's safety. The aim is to prevent an evil webpage from accessing private information or harming the user's data.
+>>>>>>> 6989312841d843f2350803ab552d9082437be569
 
   
 
@@ -86,6 +90,7 @@
 
 - اِلِمان‌های HTML به صفحه اضافه نماید، محتوای فعلی را تغییر دهد و استایل‌ها را اصلاح کند.  
 
+<<<<<<< HEAD
 - با کابر در تعامل باشد، و نسبت به کلیک‌ها، فشردن دکمه‌ها و حرکت موس عکس‌العمل نشان دهد.  
 
 - درخواست‌ها مورد نظر را در سطح شبکه ارسال و دریافت کند، فایل آپلود و دانلود کند (که به این نوع تکنولوژی‌ها اصطلاحا [AJAX](https://en.wikipedia.org/wiki/Ajax_(programming)) و [COMET](https://en.wikipedia.org/wiki/Comet_(programming)) گفته می‌شود)  
@@ -151,6 +156,14 @@
 به همین دلیل جاوا اِسکریپت شایع‌ترین ابزار برای ساخت رابط‌های کاربری در مرورگر‌ها می‌باشد.  
 
   
+=======
+```compare
++ Full integration with HTML/CSS.
++ Simple things are done simply.
++ Supported by all major browsers and enabled by default.
+```
+JavaScript is the only browser technology that combines these three things.
+>>>>>>> 6989312841d843f2350803ab552d9082437be569
 
 ##  زبان‌هایی فراتر از جاوا اِسکریپت  
 
@@ -191,3 +204,9 @@
 - زبان‌های مختلفی وجود دارند که به جاوا اِسکریپت تبدیل می‌شوند تا بتوانند ویژگی‌های مشخصی را فراهم کنند. که پیشنهاد می‌کنیم حداقل یکی از آنها را بعد از تسلط به جاوا اِسکریپت مطالعه نمائید.
 
 
+<<<<<<< HEAD
+=======
+- JavaScript was initially created as a browser-only language, but it is now used in many other environments as well.
+- Today, JavaScript has a unique position as the most widely-adopted browser language, fully integrated with HTML/CSS.
+- There are many languages that get "transpiled" to JavaScript and provide certain features. It is recommended to take a look at them, at least briefly, after mastering JavaScript.
+>>>>>>> 6989312841d843f2350803ab552d9082437be569

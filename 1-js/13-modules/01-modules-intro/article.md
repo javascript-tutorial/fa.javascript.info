@@ -261,7 +261,11 @@ sayHi(); // Ready to serve, *!*Pete*/!*!
 
 اسکریپت ها از نوع ماژول نسبت به انواع معمولی آن تفاوت هایی مخصوص محیط مرورگر هم دارند.
 
+<<<<<<< HEAD
 اگر این اولین بار است که این آموزش را می خوانید، یا از جاوااسکریپت در مرورگر استفاده نمی کنید، می توانید این بخش را رد کنید.
+=======
+You may want to skip this section for now if you're reading for the first time, or if you don't use JavaScript in a browser.
+>>>>>>> 6989312841d843f2350803ab552d9082437be569
 
 ### اسکریپت های ماژولی به تعویق افتاده اند. (deferred)
 
