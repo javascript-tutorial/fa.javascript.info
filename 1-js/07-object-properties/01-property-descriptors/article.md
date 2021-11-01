@@ -7,34 +7,34 @@
 
 در این فصل ما درباره گزینه‌های اضافی پیکربندی مطالعه خواهیم کرد و در فصل بعد خواهیم دید که چگونه به طور پنهانی آن‌ها را به تابع‌های گیرنده/تنظیم‌کننده (getter/setter functions) تبدیل کنیم.
 
-## Property flags
+## پرچم‌های ویژگی
 
-Object properties, besides a **`value`**, have three special attributes (so-called "flags"):
+ویژگی‌های شیء، در کنار **`value`** دارای سه صفت (attribute) هم هستند (اصطلاحا «پرچم» یا flag هم می‌گویند):
 
-- **`writable`** -- if `true`, the value can be changed, otherwise it's read-only.
-- **`enumerable`** -- if `true`, then listed in loops, otherwise not listed.
-- **`configurable`** -- if `true`, the property can be deleted and these attributes can be modified, otherwise not.
+- **`writable`** -- اگر `true` باشد، مقدار می‌تواند تغییر کند، در غیر این صورت مقدار فقط برای خواندن است.
+- **`enumerable`** -- اگر `true` باشد، ویژگی در حلقه‌ها لیست می‌شود، در غیر این صورت لیست نمی‌شود.
+- **`configurable`** -- اگر `true` باشد، ویژگی می‌تواند حذف شود و این صفت‌ها می‌توانند تغییر کنند، در غیر این صورت هیچ‌کدام مقدور نیست.
 
-We didn't see them yet, because generally they do not show up. When we create a property "the usual way", all of them are `true`. But we also can change them anytime.
+چون این‌ها معمولا نمایان نمی‌شوند، هنوز آن‌ها را ندیدیم. زمانی که «از راه عادی» یک ویژگی ایجاد می‌کنیم، تمام آن‌ها `true` هستند. اما می‌توانیم هر زمان تغییرشان دهیم.
 
-First, let's see how to get those flags.
+اول بیایید ببینیم چگونه این پرچم‌ها بدست آوریم.
 
-The method [Object.getOwnPropertyDescriptor](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyDescriptor) allows to query the *full* information about a property.
+متد [Object.getOwnPropertyDescriptor](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyDescriptor) به ما اجازه می‌دهد تا اطلاعات *کاملی* درباره یک ویژگی بدست آوریم.
 
-The syntax is:
+سینتکس آن:
 ```js
 let descriptor = Object.getOwnPropertyDescriptor(obj, propertyName);
 ```
 
 `obj`
-: The object to get information from.
+: شیءای که از آن اطلاعات دریافت می‌کنیم.
 
 `propertyName`
-: The name of the property.
+: اسم ویژگی.
 
-The returned value is a so-called "property descriptor" object: it contains the value and all the flags.
+مقدار برگردانده شده، یک شیء به اصطلاح «توصیف‌کننده ویژگی(property descriptor)» است: این شیء شامل مقدار و تمام پرچم‌ها می‌شود.
 
-For instance:
+برای مثال:
 
 ```js run
 let user = {
@@ -44,7 +44,7 @@ let user = {
 let descriptor = Object.getOwnPropertyDescriptor(user, 'name');
 
 alert( JSON.stringify(descriptor, null, 2 ) );
-/* property descriptor:
+/* :توصیف‌کننده ویژگی
 {
   "value": "John",
   "writable": true,
@@ -54,23 +54,23 @@ alert( JSON.stringify(descriptor, null, 2 ) );
 */
 ```
 
-To change the flags, we can use [Object.defineProperty](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty).
+برای تغییر پرچم‌ها، می‌توانیم از [Object.defineProperty](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty) استفاده کنیم.
 
-The syntax is:
+سینتکس آن:
 
 ```js
 Object.defineProperty(obj, propertyName, descriptor)
 ```
 
 `obj`, `propertyName`
-: The object and its property to apply the descriptor.
+: شیء و ویژگی‌ای که توصیف‌کننده روی آن اعمال می‌شود.
 
 `descriptor`
-: Property descriptor object to apply.
+: شیء توصیف‌کننده ویژگی برای اعمال کردن.
 
-If the property exists, `defineProperty` updates its flags. Otherwise, it creates the property with the given value and flags; in that case, if a flag is not supplied, it is assumed `false`.
+اگر ویژگی وجود داشته باشد، `defineProperty` پرچم‌های آن را بروزرسانی می‌کند. در غیر این صورت، این متد ویژگی را همراه با مقدار و پرچم‌های داده شده ایجاد می‌کند؛ در این صورت، اگر پرچمی قرار داده نشود، `false` فرض می‌شود.
 
-For instance, here a property `name` is created with all falsy flags:
+برای مثال، اینجا ویژگی `name` با تمام پرچم‌های falsy ساخته شده است:
 
 ```js run
 let user = {};
@@ -96,9 +96,9 @@ alert( JSON.stringify(descriptor, null, 2 ) );
  */
 ```
 
-Compare it with "normally created" `user.name` above: now all flags are falsy. If that's not what we want then we'd better set them to `true` in `descriptor`.
+این خروجی را با `user.name` بالا «که به صورت عادی ساخته شده» مقایسه کنید: حالا تمام پرچم‌ها falsy هستند. اگر این چیزی که ما می‌خواهیم نیست، پس بهتر است درون `descriptor` آن‌ها را برابر با `true` قرار دهیم.
 
-Now let's see effects of the flags by example.
+حالا بیایید با استفاده از مثال تاثیر پرچم‌ها را ببینیم.
 
 ## Non-writable
 
