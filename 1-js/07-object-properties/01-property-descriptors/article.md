@@ -1,11 +1,11 @@
 
-# Property flags and descriptors
+# پرچم‌های ویژگی و توصیف‌کننده‌ها
 
-As we know, objects can store properties.
+همانطور که می‌دانیم، شیءها می‌توانند ویژگی‌هایی را ذخیره کنند.
 
-Until now, a property was a simple "key-value" pair to us. But an object property is actually a more flexible and powerful thing.
+تا حالا، یک ویژگی برای ما فقط جفتی ساده از «کلید-مقدار» بود. اما یک ویژگی شیء در واقع چیزی منعطف‌تر و قدرتمندتر است.
 
-In this chapter we'll study additional configuration options, and in the next we'll see how to invisibly turn them into getter/setter functions.
+در این فصل ما درباره گزینه‌های اضافی پیکربندی مطالعه خواهیم کرد و در فصل بعد خواهیم دید که چگونه به طور پنهانی آن‌ها را به تابع‌های گیرنده/تنظیم‌کننده (getter/setter functions) تبدیل کنیم.
 
 ## Property flags
 
