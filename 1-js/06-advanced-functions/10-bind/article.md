@@ -187,13 +187,8 @@ let user = {
 
 let say = user.say.bind(user);
 
-<<<<<<< HEAD
 say("سلام"); // (پاس داده شد say آرگومان «سلام» به) !John ،سلام
 say("خداحافظ"); // (پاس داده شد say آرگومان «خداحافظ» به) !John ،خداحافظ
-=======
-say("Hello"); // Hello, John! ("Hello" argument is passed to say)
-say("Bye"); // Bye, John! ("Bye" is passed to say)
->>>>>>> 6989312841d843f2350803ab552d9082437be569
 ```
 
 ````smart header="روش راحت: `bindAll`"

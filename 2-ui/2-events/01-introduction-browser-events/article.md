@@ -160,11 +160,7 @@ button.onclick = sayThanks;
 button.onclick = sayThanks();
 ```
 
-<<<<<<< HEAD
 اگر که ما پرانتزها را اضافه کنیم تابع `sayThanks()` صدا زده می‌شود. پس مورد دوم درواقع *خروجی* حاصل از اجرای تابع را، که `undefined` است (چون تابع چیزی را باز نمی‌گرداند)، به عنوان کنترل‌کننده به `onclick` اختصاص می‌دهد، که قاعدتا کار نمی‌کند.
-=======
-If we add parentheses, then `sayThanks()` becomes a function call. So the last line actually takes the *result* of the function execution, that is `undefined` (as the function returns nothing), and assigns it to `onclick`. That doesn't work.
->>>>>>> 6989312841d843f2350803ab552d9082437be569
 
 ...از سوی دیگر، ما در کد HTML به پرانتز ها نیاز داریم:
 
