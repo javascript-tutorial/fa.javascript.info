@@ -190,13 +190,13 @@ for (let key in user) alert(key); // name
 alert(Object.keys(user)); // name
 ```
 
-## Non-configurable
+## غیر قابل تنظیم
 
-The non-configurable flag (`configurable:false`) is sometimes preset for built-in objects and properties.
+پرچم غیر قابل تنظیم (`configurable:false`) بعضی اوقات برای شیءها و ویژگی‌های درون‌ساخت ارائه می‌شود.
 
-A non-configurable property can't be deleted, its attributes can't be modified.
+یک ویژگی غیر قابل تنظیم نمی‌تواند حذف شود و صفت‌های آن نمی‌توانند تغییر کنند.
 
-For instance, `Math.PI` is non-writable, non-enumerable and non-configurable:
+برای مثال، `Math.PI` غیر قابل نوشتن، غیر قابل شمارش و غیر قابل تنظیم است:
 
 ```js run
 let descriptor = Object.getOwnPropertyDescriptor(Math, 'PI');
@@ -211,28 +211,28 @@ alert( JSON.stringify(descriptor, null, 2 ) );
 }
 */
 ```
-So, a programmer is unable to change the value of `Math.PI` or overwrite it.
+پس یک برنامه‌نویس نمی‌تواند مقدار `Math.PI` را تغییر دهد یا آن را دوباره بنویسد.
 
 ```js run
-Math.PI = 3; // Error, because it has writable: false
+Math.PI = 3; // writable: false ارور، چون 
 
-// delete Math.PI won't work either
+// هم کار نمی‌کند Math.PI حذف
 ```
 
-We also can't change `Math.PI` to be `writable` again:
+همچنین ما نمی‌توانیم `Math.PI` را تغییر دهیم تا دوباره `writable`(قابل نوشتن) باشد:
 
 ```js run
-// Error, because of configurable: false
+// configurable: false ارور، چون
 Object.defineProperty(Math, "PI", { writable: true });
 ```
 
-There's absolutely nothing we can do with `Math.PI`.
+هیچ کاری نمی‌توانیم با `Math.PI` انجام دهیم.
 
-Making a property non-configurable is a one-way road. We cannot change it back with `defineProperty`.
+غیر قابل تنظیم کردن یک ویژگی راهی یک‌طرفه است. ما نمی‌توانیم آن را با `defineProperty` دوباره تغییر دهیم.
 
-**Please note: `configurable: false` prevents changes of property flags and its deletion, while allowing to change its value.**
+**لطفا در نظر داشته باشید: `configurable: false` از تغییرات پرچم‌های ویژگی و حذف آن جلوگیری می‌کند در حالی که تغییر مقدار آن مجاز است.**
 
-Here `user.name` is non-configurable, but we can still change it (as it's writable):
+اینجا `user.name` غیر قابل تنظیم است اما همچنان می‌توانیم آن را تغییر دهیم (چون قابل نوشتن است):
 
 ```js run
 let user = {
@@ -243,11 +243,11 @@ Object.defineProperty(user, "name", {
   configurable: false
 });
 
-user.name = "Pete"; // works fine
-delete user.name; // Error
+user.name = "Pete"; // به درستی کار می‌کند
+delete user.name; // ارور
 ```
 
-And here we make `user.name` a "forever sealed" constant, just like the built-in `Math.PI`:
+و اینجا ما کاری می‌کنیم که `user.name` برای همیشه «مهر و موم شده» بماند، درست مانند `Math.PI` درون‌ساخت:
 
 ```js run
 let user = {
@@ -259,17 +259,17 @@ Object.defineProperty(user, "name", {
   configurable: false
 });
 
-// won't be able to change user.name or its flags
-// all this won't work:
+// یا پرچم‌های آن را تغییر دهیم user.name نمی‌توانیم
+// :هیچ کدام این‌ها کار نخواهند کرد
 user.name = "Pete";
 delete user.name;
 Object.defineProperty(user, "name", { value: "Pete" });
 ```
 
-```smart header="The only attribute change possible: writable true -> false"
-There's a minor exception about changing flags.
+```smart header="تنها تغییر ممکن روی صفت: writable true -> false"
+یک استثنای کوچک درباره تغییر پرچم‌ها وجود دارد.
 
-We can change `writable: true` to `false` for a non-configurable property, thus preventing its value modification (to add another layer of protection). Not the other way around though.
+ما می‌توانیم برای یک ویژگی غیر قابل تنظیم `writable: true` را به `false` تغییر دهیم و به این ترتیب از تغییر مقدار آن جلوگیری کنیم (تا لایه‌ای دیگر از حفاظت را اضافه کنیم). اما برعکس آن ممکن نیست.
 ```
 
 ## Object.defineProperties
