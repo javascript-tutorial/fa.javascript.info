@@ -100,9 +100,9 @@ alert( JSON.stringify(descriptor, null, 2 ) );
 
 حالا بیایید با استفاده از مثال تاثیر پرچم‌ها را ببینیم.
 
-## Non-writable
+## غیر قابل نوشتن
 
-Let's make `user.name` non-writable (can't be reassigned) by changing `writable` flag:
+بیایید با تغییر دادن پرچم `writable` کاری کنیم که `user.name` غیر قابل نوشتن شود:
 
 ```js run
 let user = {
@@ -116,17 +116,17 @@ Object.defineProperty(user, "name", {
 });
 
 *!*
-user.name = "Pete"; // Error: Cannot assign to read only property 'name'
+user.name = "Pete"; // مقدار داد 'name' ارور: نمی‌توان به ویژگی فقط‌خواندنی
 */!*
 ```
 
-Now no one can change the name of our user, unless they apply their own `defineProperty` to override ours.
+حالا هیچ‌کس نمی‌تواند اسم کاربر ما را تغییر دهد، مگر اینکه `defineProperty` خودش را برای باطل کردن توصیف‌کننده‌ی ما اعمال کند.
 
-```smart header="Errors appear only in strict mode"
-In the non-strict mode, no errors occur when writing to non-writable properties and such. But the operation still won't succeed. Flag-violating actions are just silently ignored in non-strict.
+```smart header="ارورها فقط در حالت سخت‌گیرانه ایجاد می‌شوند"
+در حالت غیر سخت‌گیرانه، زمانی که ویژگی‌های غیر قابل نوشتن را تغییر و یا کاری مشابه انجام می‌دهیم اروری ایجاد نمی‌شود. اما همچنان این کار انجام نمی‌شود. در حالت غیر سخت‌گیرانه، کارهای نقص‌کننده‌ی پرچم بی سر و صدا نادیده گرفته می‌شوند.
 ```
 
-Here's the same example, but the property is created from scratch:
+اینجا مثالی مشابه داریم اما ویژگی از اول ایجاد شده است:
 
 ```js run
 let user = { };
@@ -134,7 +134,7 @@ let user = { };
 Object.defineProperty(user, "name", {
 *!*
   value: "John",
-  // for new properties we need to explicitly list what's true
+  // است true برای ویژگی‌های جدید ما باید به طور واضح لیست کنیم که چه چیزی
   enumerable: true,
   configurable: true
 */!*
