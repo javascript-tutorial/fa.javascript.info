@@ -7,7 +7,7 @@
 
 در این فصل ما درباره گزینه‌های اضافی پیکربندی مطالعه خواهیم کرد و در فصل بعد خواهیم دید که چگونه به طور پنهانی آن‌ها را به تابع‌های گیرنده/تنظیم‌کننده (getter/setter functions) تبدیل کنیم.
 
-## پرچم‌های ویژگی
+## پرچم‌های ویژگی (Property flags)
 
 ویژگی‌های شیء، در کنار **`value`** دارای سه صفت (attribute) هم هستند (اصطلاحا «پرچم» یا flag هم می‌گویند):
 
@@ -144,11 +144,11 @@ alert(user.name); // John
 user.name = "Pete"; // Error
 ```
 
-## Non-enumerable
+## غیر قابل شمارش
 
-Now let's add a custom `toString` to `user`.
+حالا بیایید یک `toString` سفارشی به `user` اضافه کنیم.
 
-Normally, a built-in `toString` for objects is non-enumerable, it does not show up in `for..in`. But if we add a `toString` of our own, then by default it shows up in `for..in`, like this:
+طبیعتا، یک `toString` درون‌ساخت برای شیءها غیر قابل شمارش است و در `for..in` ظاهر نمی‌شود. اما اگر ما `toString` خودمان را اضافه کنیم، سپس به طور پیش‌فرض درون `for..in` نمایش داده می‌شود، مثلا اینگونه:
 
 ```js run
 let user = {
@@ -158,11 +158,11 @@ let user = {
   }
 };
 
-// By default, both our properties are listed:
+// :به طور پیش‌فرض هر دو ویژگی ما لیست می‌شوند
 for (let key in user) alert(key); // name, toString
 ```
 
-If we don't like it, then we can set `enumerable:false`. Then it won't appear in a `for..in` loop, just like the built-in one:
+اگر ما نخواهیم که اینطور باشد، می‌توانیم `enumerable:false` را تنظیم کنیم. سپس این ویژگی درون حلقه `for..in` ظاهر نمی‌شود، درست مانند متد درون‌ساخت آن:
 
 ```js run
 let user = {
@@ -179,12 +179,12 @@ Object.defineProperty(user, "toString", {
 });
 
 *!*
-// Now our toString disappears:
+// :ما ظاهر نمی‌شود toString حالا
 */!*
 for (let key in user) alert(key); // name
 ```
 
-Non-enumerable properties are also excluded from `Object.keys`:
+ویژگی‌های غیر قابل شمارش از `Object.keys` هم حذف می‌شوند:
 
 ```js
 alert(Object.keys(user)); // name
