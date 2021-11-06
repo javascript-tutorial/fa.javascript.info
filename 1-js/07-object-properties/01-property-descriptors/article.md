@@ -272,11 +272,11 @@ Object.defineProperty(user, "name", { value: "Pete" });
 ما می‌توانیم برای یک ویژگی غیر قابل تنظیم `writable: true` را به `false` تغییر دهیم و به این ترتیب از تغییر مقدار آن جلوگیری کنیم (تا لایه‌ای دیگر از حفاظت را اضافه کنیم). اما برعکس آن ممکن نیست.
 ```
 
-## Object.defineProperties
+## متد Object.defineProperties
 
-There's a method [Object.defineProperties(obj, descriptors)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperties) that allows to define many properties at once.
+یک متد [Object.defineProperties(obj, descriptors)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperties) وجود دارد که امکان توصیف چند ویژگی با هم را ایجاد می‌کند.
 
-The syntax is:
+سینتکس آن:
 
 ```js
 Object.defineProperties(obj, {
@@ -286,7 +286,7 @@ Object.defineProperties(obj, {
 });
 ```
 
-For instance:
+برای مثال:
 
 ```js
 Object.defineProperties(user, {
@@ -296,19 +296,19 @@ Object.defineProperties(user, {
 });
 ```
 
-So, we can set many properties at once.
+پس ما می‌توانیم چند ویژگی را یک‌باره تنظیم کنیم.
 
-## Object.getOwnPropertyDescriptors
+## متد Object.getOwnPropertyDescriptors
 
-To get all property descriptors at once, we can use the method [Object.getOwnPropertyDescriptors(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyDescriptors).
+برای گرفتن تمام توصیف‌کننده‌های ویژگی با هم، می‌توانیم از متد [Object.getOwnPropertyDescriptors(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyDescriptors) استفاده کنیم.
 
-Together with `Object.defineProperties` it can be used as a "flags-aware" way of cloning an object:
+این متد همراه با `Object.defineProperties` می‌تواند به عنوان راهی «آگاه از پرچم‌ها» برای کپی کردن یک شیء استفاده شود:
 
 ```js
 let clone = Object.defineProperties({}, Object.getOwnPropertyDescriptors(obj));
 ```
 
-Normally when we clone an object, we use an assignment to copy properties, like this:
+طبیعتا زمانی که ما یک شیء را کپی می‌کنیم، از عملگر مقداردهی برای کپی کردن ویژگی‌ها استفاده می‌کنیم، مانند اینجا:
 
 ```js
 for (let key in user) {
@@ -316,34 +316,34 @@ for (let key in user) {
 }
 ```
 
-...But that does not copy flags. So if we want a "better" clone then `Object.defineProperties` is preferred.
+...اما این روش پرچم‌ها را کپی نمی‌کند. پس اگر ما کپی‌برداری «بهتری» بخواهیم `Object.defineProperties` ترجیح داده می‌شود.
 
-Another difference is that `for..in` ignores symbolic properties, but `Object.getOwnPropertyDescriptors` returns *all* property descriptors including symbolic ones.
+تفاوتی دیگر این است که `for..in` ویژگی‌های سمبلی (symbolic) را نادیده می‌گیرد، اما `Object.getOwnPropertyDescriptors` *تمام* توصیف‌کننده‌های ویژگی‌ها را برمی‌گرداند که شامل ویژگی‌های سمبلی هم می‌شود.
 
-## Sealing an object globally
+## مهر و موم کردن شیء به طور کلی
 
-Property descriptors work at the level of individual properties.
+توصیف‌کننده‌های ویژگی‌ها با ویژگی‌های جداگانه کار می‌کنند.
 
-There are also methods that limit access to the *whole* object:
+متدهایی هم هستند که دسترسی به *کل* شیء را محدود می‌کنند:
 
 [Object.preventExtensions(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/preventExtensions)
-: Forbids the addition of new properties to the object.
+: اضافه کردن ویژگی جدید به شیء را ممنون می‌کند.
 
 [Object.seal(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/seal)
-: Forbids adding/removing of properties. Sets `configurable: false` for all existing properties.
+: اضافه/حذف کردن ویژگی را ممنون می‌کند. `configurable: false` را برای تمام ویژگی‌های موجود تنظیم می‌کند.
 
 [Object.freeze(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze)
-: Forbids adding/removing/changing of properties. Sets `configurable: false, writable: false` for all existing properties.
+: اضافه/حذف/تغییر دادن ویژگی‌ها را ممنوع می‌کند. `configurable: false, writable: false` را برای تمام ویژگی‌های موجود تنظیم می‌کند.
 
-And also there are tests for them:
+همچنین آزمایش‌هایی هم برای آن‌ها وجود دارد:
 
 [Object.isExtensible(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/isExtensible)
-: Returns `false` if adding properties is forbidden, otherwise `true`.
+: اگر اضافه کردن ویژگی ممنوع باشد `false` برمی‌گرداند، در غیر این صورت `true`.
 
 [Object.isSealed(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/isSealed)
-: Returns `true` if adding/removing properties is forbidden, and all existing properties have `configurable: false`.
+: اگر اضافه/حذف کردن ویژگی ممنوع باشد و تمام ویژگی‌های موجود `configurable: false` را داشته باشند `true` برمی‌گرداند.
 
 [Object.isFrozen(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/isFrozen)
-: Returns `true` if adding/removing/changing properties is forbidden, and all current properties are `configurable: false, writable: false`.
+: اگر اضافه/حذف/تغییر دادن ویژگی‌ها ممنوع باشد و تمام ویژگی‌ها `configurable: false, writable: false` را داشته باشند `true` برمی‌گرداند.
 
-These methods are rarely used in practice.
+این متدها به ندرت در عمل استفاده می‌شوند.
