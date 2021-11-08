@@ -1,11 +1,11 @@
 
-# Property getters and setters
+# گیرنده و تنظیم‌کننده‌های ویژگی
 
-There are two kinds of object properties.
+ویژگی‌های شیء دو نوع هستند.
 
-The first kind is *data properties*. We already know how to work with them. All properties that we've been using until now were data properties.
+نوع اول *ویژگی‌های داده‌ای* هستند. ما از قبل می‌دانیم چگونه با آن‌ها کار کنیم. تمام ویژگی‌هایی که تا حالا استفاده می‌کردیم ویژگی‌های داده‌ای بودند.
 
-The second type of properties is something new. It's *accessor properties*. They are essentially functions that execute on getting and setting a value, but look like regular properties to an external code.
+نوع دوم ویژگی‌ها چیزی جدید است. این نوع *ویژگی‌های دسترسی* است. اساسا آن‌ها تابع‌هایی هستند که برای گرفتن و تنظیم‌کردن مقداری اجرا می‌شوند اما برای یک شیء خارجی مانند ویژگی‌های معمولی به نظر می‌رسند.
 
 ## Getters and setters
 
