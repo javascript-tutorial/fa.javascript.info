@@ -88,7 +88,7 @@ class HoverIntent {
     if (speed < this.sensitivity) {
       clearInterval(this.checkSpeedInterval);
       this.isHover = true;
-      this.over.call(this.elem, event);
+      this.over.call(this.elem);
     } else {
       // سرعت بالا، مختصات فعلی را برای اندازه‌گیری بعدی ذخیره می‌کنیم
       this.prevX = this.lastX;
