@@ -80,9 +80,15 @@ alert(str1 == str2); // true
 
 | کاراکتر | توضیحات |
 |-----------|-------------|
+<<<<<<< HEAD
 |`\n`|خط جدید|
 |`\r`|Carriage return: به تنهایی استفاده نمی‌شود. فایل‌های متنی ویندوز از ترکیب دو کاراکتر `\r\n` برای نمایش یک خط جدید استفاده می‌کند. |
 |`\'`, `\"`|کوتیشن‌ها|
+=======
+|`\n`|New line|
+|`\r`|In Windows text files a combination of two characters `\r\n` represents a new break, while on non-Windows OS it's just `\n`. That's for historical reasons, most Windows software also understands `\n`. |
+|`\'`, `\"`|Quotes|
+>>>>>>> 4541b7af7584014a676da731f6e8774da5e059f6
 |`\\`|Backslash|
 |`\t`|Tab|
 |`\b`, `\f`, `\v`| Backspace, Form Feed, Vertical Tab -- برای سازگاری نگه داشته شده‌اند، امروزه استفاده نمی‌شوند. |

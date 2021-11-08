@@ -73,9 +73,13 @@ Comment های قبل و بعد از اسکریپت
 <script src="/path/to/script.js"></script>
 ```
 
+<<<<<<< HEAD
 در اینجا `/path/to/script.js` ما از آدرس دهی مطلق استفاده کرده‌ایم (که از دایرکتوری ریشه است).
 
 امکان آدرس دهی به صورت نسبی هم وجود دارد. برای مثال `src="script.js"` به این معنی است که فایل `script.js` در دایرکتوری فعلی قرار دارد.
+=======
+Here, `/path/to/script.js` is an absolute path to the script from the site root. One can also provide a relative path from the current page. For instance, `src="script.js"`, just like `src="./script.js"`, would mean a file `"script.js"` in the current folder.
+>>>>>>> 4541b7af7584014a676da731f6e8774da5e059f6
 
 همینطور می‌توانیم از آدرس URL کامل استفاده کنیم :
 
