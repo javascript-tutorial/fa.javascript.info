@@ -275,6 +275,7 @@ Please don't translate or remove the `[#...]` part, it's for URL anchors.
 | closure | کلوژر |                                |
 | code block | بلوک کد |                           |
 | constructor function | تابع سازنده |             |
+| context | زمینه | گاهی لازم است انگلیسی آن داخل پرانتز نوشته شود |
 | curly bracket | آکولاد |                          |
 | decorator | دکوراتور |                           |
 | execute | اجرا کردن |                            |
@@ -286,6 +287,7 @@ Please don't translate or remove the `[#...]` part, it's for URL anchors.
 | Function Expression | Function Expression |      |
 | garbage collection | زباله‌روبی |               |
 | garbage collector | زباله جمع‌کن |              |
+| getter function | تابع گیرنده |                 |
 | global | گلوبال |                               |
 | hashing function | تابع ترکیب‌سازی |            |
 | item (in arrays) | المان |                       |
@@ -304,11 +306,14 @@ Please don't translate or remove the `[#...]` part, it's for URL anchors.
 | polyfill | پلیفیل |                              |
 | primitive (data type) | مقدار اصلی |             |
 | property (in objects) | ویژگی |                  |
+| property descriptor | توصیف‌کننده ویژگی |       |
+| property flag | پرچم ویژگی |                     |
 | recursion | بازگشت |                             |
 | reference | رجوع(کردن)، مرجع | معنی به جمله بستگی دارد |
 | rest parameter `...` | پارامتر رست |            |
 | return | برگرداندن |                            |
 | scope | محدوده |                                |
+| setter function | تابع تنظیم‌کننده |            |
 | specification | مشخصات زبان |                   |
 | spread syntax `...` | سینتکس اسپرد |            |
 | square bracket | براکت |                         |
