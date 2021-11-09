@@ -7,25 +7,25 @@
 
 نوع دوم ویژگی‌ها چیزی جدید است. این نوع *ویژگی‌های دسترسی* است. اساسا آن‌ها تابع‌هایی هستند که برای گرفتن و تنظیم‌کردن مقداری اجرا می‌شوند اما برای یک شیء خارجی مانند ویژگی‌های معمولی به نظر می‌رسند.
 
-## Getters and setters
+## گیرنده‌ها و تنظیم‌کننده‌ها
 
-Accessor properties are represented by "getter" and "setter" methods. In an object literal they are denoted by `get` and `set`:
+ویژگی‌های دسترسی توسط متدهای «گیرنده(getter)» و «تنظیم‌کننده(setter)» نمایش داده می‌شوند. در یک شیء لیترال، این متدها با `get` و `set` مشخص می‌شوند.
 
 ```js
 let obj = {
   *!*get propName()*/!* {
-    // getter, the code executed on getting obj.propName
+    // اجرا می‌شود obj.propName گیرنده، کد آن برای دریافت
   },
 
   *!*set propName(value)*/!* {
-    // setter, the code executed on setting obj.propName = value
+    // اجرا می‌شود obj.propName = value تنظیم‌کننده، کد آن برای تنظیم
   }
 };
 ```
 
-The getter works when `obj.propName` is read, the setter -- when it is assigned.
+گیرنده زمانی که `obj.propName` خوانده می‌شود کار می‌کند؛ تنظیم‌کننده زمانی که این ویژگی مقداردهی می‌شود.
 
-For instance, we have a `user` object with `name` and `surname`:
+برای مثال، ما یک شیء `user` حاوی `name` و `surname` داریم:
 
 ```js
 let user = {
@@ -34,7 +34,7 @@ let user = {
 };
 ```
 
-Now we want to add a `fullName` property, that should be `"John Smith"`. Of course, we don't want to copy-paste existing information, so we can implement it as an accessor:
+حالا می‌خواهیم یک ویژگی `fullName` اضافه کنیم که باید `"John Smith"` باشد. قطعا، نمی‌توانیم اطلاعات موجود را کپی‌پِیست کنیم پس آن را به عنوان یک دسترسی پیاده‌سازی کنیم:
 
 ```js run
 let user = {
@@ -53,9 +53,9 @@ alert(user.fullName); // John Smith
 */!*
 ```
 
-From the outside, an accessor property looks like a regular one. That's the idea of accessor properties. We don't *call* `user.fullName` as a function, we *read* it normally: the getter runs behind the scenes.
+از بیرون، یک ویژگی دسترسی مانند ویژگی‌ای معمولی به نظر می‌رسد. این ایده‌ی ویژگی‌های دسترسی است. ما `user.fullName` را به عنوان یک تابع *فراخوانی* نمی‌کنیم بلکه آن را به صورت عادی *دریافت* می‌کنیم:
 
-As of now, `fullName` has only a getter. If we attempt to assign `user.fullName=`, there will be an error:
+از حالا به بعد، `fullName` فقط یک گیرنده دارد. اگر ما بخواهیم `user.fullName` را مقداردهی کنیم، ارور ایجاد می‌شود:
 
 ```js run
 let user = {
@@ -65,11 +65,11 @@ let user = {
 };
 
 *!*
-user.fullName = "Test"; // Error (property has only a getter)
+user.fullName = "Test"; // ارور (ویژگی فقط گیرنده دارد)
 */!*
 ```
 
-Let's fix it by adding a setter for `user.fullName`:
+بیایید با اضافه کردن تنظیم‌کننده برای `user.fullName` این مشکل را برطرف کنیم:
 
 ```js run
 let user = {
@@ -87,14 +87,14 @@ let user = {
 */!*
 };
 
-// set fullName is executed with the given value.
+// همراه با مقدار داده شده اجرا می‌شود set fullName
 user.fullName = "Alice Cooper";
 
 alert(user.name); // Alice
 alert(user.surname); // Cooper
 ```
 
-As the result, we have a "virtual" property `fullName`. It is readable and writable.
+در نتیجه، ما یک ویژگی «مجازیِ» `fullName` داریم. هم قابل خواندن است و هم قابل نوشتن.
 
 ## Accessor descriptors
 
