@@ -96,20 +96,20 @@ alert(user.surname); // Cooper
 
 در نتیجه، ما یک ویژگی «مجازیِ» `fullName` داریم. هم قابل خواندن است و هم قابل نوشتن.
 
-## Accessor descriptors
+## توصیف‌کننده‌های دسترسی
 
-Descriptors for accessor properties are different from those for data properties.
+توصیف‌کننده‌های ویژگی‌های دسترسی نسبت به توصیف‌کننده‌های ویژگی‌های داده‌ای تفاوت دارند.
 
-For accessor properties, there is no `value` or `writable`, but instead there are `get` and `set` functions.
+برای ویژگی‌های دسترسی، `value` یا `writable` وجود ندارد اما به جای آن‌ها تابع‌های `get` و `set` وجود دارد.
 
-That is, an accessor descriptor may have:
+یعنی اینکه یک توصیف‌کننده دسترسی ممکن است این‌ها را داشته باشد:
 
-- **`get`** -- a function without arguments, that works when a property is read,
-- **`set`** -- a function with one argument, that is called when the property is set,
-- **`enumerable`** -- same as for data properties,
-- **`configurable`** -- same as for data properties.
+- **`get`** -- تابعی بدون آرگومان، زمانی که ویژگی‌ای خوانده شود کار می‌کند،
+- **`set`** -- تابعی با یک آرگومان، زمانی که ویژگی تنظیم می‌شود فراخوانی می‌شود،
+- **`enumerable`** -- مشابه به ویژگی‌های داده‌ای،
+- **`configurable`** -- مشابه به ویژگی‌های داده‌ای،
 
-For instance, to create an accessor `fullName` with `defineProperty`, we can pass a descriptor with `get` and `set`:
+برای مثال، برای ایجاد دسترسی `fullName` با استفاده از `defineProperty`، می‌توانیم توصیف‌کننده‌ای شامل `get` و `set` قرار دهیم:
 
 ```js run
 let user = {
@@ -134,13 +134,13 @@ alert(user.fullName); // John Smith
 for(let key in user) alert(key); // name, surname
 ```
 
-Please note that a property can be either an accessor (has `get/set` methods) or a data property (has a `value`), not both.
+لطفا در نظر داشته باشید که یک ویژگی یا می‌تواند دسترسی باشد (دارای متدهای `get/set` است) یا یک ویژگی داده‌ای (یک `value` دارد)، نه هر دو.
 
-If we try to supply both `get` and `value` in the same descriptor, there will be an error:
+اگر ما تلاش کنیم که هم `get` و هم `value` را داخل یک توصیف‌کننده قرار دهیم، ارور ایجاد می‌شود:
 
 ```js run
 *!*
-// Error: Invalid property descriptor.
+// ارور: توصیف‌کننده غیر قابل قبول ویژگی
 */!*
 Object.defineProperty({}, 'prop', {
   get() {
