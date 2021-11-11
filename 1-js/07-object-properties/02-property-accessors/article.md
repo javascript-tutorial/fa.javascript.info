@@ -151,11 +151,11 @@ Object.defineProperty({}, 'prop', {
 });
 ```
 
-## Smarter getters/setters
+## گیرنده/تنظیم‌کننده‌های هوشمندتر
 
-Getters/setters can be used as wrappers over "real" property values to gain more control over operations with them.
+گیرنده‌ها/تنظیم‌کننده‌ها می‌توانند به عنوان دربرگیرنده برای مقدار ویژگی‎های «واقعی» استفاده شوند تا کنترل بیشتری بر روی عملیات با آن‌ها داشته باشیم.
 
-For instance, if we want to forbid too short names for `user`, we can have a setter `name` and keep the value in a separate property `_name`:
+برای مثال، اگر ما بخواهیم اسم‌های خیلی کوتاه‌ها را برای `user` ممنوع کنیم، می‌توانیم یک تنظیم‌کننده `name` داشته باشیم و مقدار را درون ویژگی جداگانه‌ی `_name` ذخیره کنیم:
 
 ```js run
 let user = {
@@ -165,7 +165,7 @@ let user = {
 
   set name(value) {
     if (value.length < 4) {
-      alert("Name is too short, need at least 4 characters");
+      alert("اسم خیلی کوتاه است، حداقل به 4 کاراکتر نیاز دارد");
       return;
     }
     this._name = value;
@@ -175,12 +175,12 @@ let user = {
 user.name = "Pete";
 alert(user.name); // Pete
 
-user.name = ""; // Name is too short...
+user.name = ""; // ...اسم خیلی کوتاه است
 ```
 
-So, the name is stored in `_name` property, and the access is done via getter and setter.
+پس اسم در ویژگی `_name` ذخیره شده است و دسترسی گرفتن توسط گیرنده و تنظیم‌کننده انجام می‌گیرد.
 
-Technically, external code is able to access the name directly by using `user._name`. But there is a widely known convention that properties starting with an underscore `"_"` are internal and should not be touched from outside the object.
+از لحاظ فنی، کد بیرونی می‌تواند به صورت مستقیم با استفاده از `user._name` به اسم دسترسی پیدا کند. اما یک قرارداد شناخته شده وجود دارد که ویژگی‌هایی که با یک زیرخط (underscore) `"_"` شروع می‌شوند، داخلی هستند و نباید بیرون از شیء به آن‌ها کاری داشت.
 
 
 ## Using for compatibility
