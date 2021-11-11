@@ -183,11 +183,11 @@ user.name = ""; // ...اسم خیلی کوتاه است
 از لحاظ فنی، کد بیرونی می‌تواند به صورت مستقیم با استفاده از `user._name` به اسم دسترسی پیدا کند. اما یک قرارداد شناخته شده وجود دارد که ویژگی‌هایی که با یک زیرخط (underscore) `"_"` شروع می‌شوند، داخلی هستند و نباید بیرون از شیء به آن‌ها کاری داشت.
 
 
-## Using for compatibility
+## استفاده برای سازگاری
 
-One of the great uses of accessors is that they allow to take control over a "regular" data property at any moment by replacing it with a getter and a setter and tweak its behavior.
+یکی از بهترین کاربردهای دسترسی‌ها این است که آن‌ها به ما اجازه می‌دهند که در هر زمان یک ویژگی داده‌ای «معمولی» را از طریق جایگزین کردن آن با یک گیرنده و یک تنظیم‌کننده کنترل کنیم و رفتار آن را تغییر دهیم.
 
-Imagine we started implementing user objects using data properties `name` and `age`:
+تصور کنید که ما شروع به پیاده‌سازی شیءهایی مربوط به کاربران کردیم که شامل ویژگی‌های داده‌ای `name` و `age` هستند:
 
 ```js
 function User(name, age) {
@@ -200,7 +200,7 @@ let john = new User("John", 25);
 alert( john.age ); // 25
 ```
 
-...But sooner or later, things may change. Instead of `age` we may decide to store `birthday`, because it's more precise and convenient:
+...اما دیر یا زور، همه چیز ممکن است تغییر کند. به جای `age` ممکن است تصمیم بگیریم که `birthday` را ذخیره کنیم چون دقیق‌تر و مناسب‌تر است:
 
 ```js
 function User(name, birthday) {
@@ -211,13 +211,13 @@ function User(name, birthday) {
 let john = new User("John", new Date(1992, 6, 1));
 ```
 
-Now what to do with the old code that still uses `age` property?
+حالا با کد قدیمی که هنوز هم از ویژگی `age` استفاده می‌کند چه کار کنیم؟
 
-We can try to find all such places and fix them, but that takes time and can be hard to do if that code is used by many other people. And besides, `age` is a nice thing to have in `user`, right?
+می‌توانیم چنین جاهایی را در کد پیدا و آن‌ها را درست کنیم اما این کار زمان‌بر است و اگر آن کد توسط افراد دیگری در حال استفاده باشد ممکن است این کار سخت شود. و همچنین، `age` چیز خوبی است که در `user` داشته باشیم نه؟
 
-Let's keep it.
+بیایید آن را نگه داریم.
 
-Adding a getter for `age` solves the problem:
+اضافه کردن یک گیرنده برای `age` مشکل را حل می‌کند:
 
 ```js run no-beautify
 function User(name, birthday) {
@@ -225,7 +225,7 @@ function User(name, birthday) {
   this.birthday = birthday;
 
 *!*
-  // age is calculated from the current date and birthday
+  // از تاریخ کنونی و تاریخ تولد محاسبه می‌شود age
   Object.defineProperty(this, "age", {
     get() {
       let todayYear = new Date().getFullYear();
@@ -237,8 +237,8 @@ function User(name, birthday) {
 
 let john = new User("John", new Date(1992, 6, 1));
 
-alert( john.birthday ); // birthday is available
-alert( john.age );      // ...as well as the age
+alert( john.birthday ); // قابل دسترس است birthday
+alert( john.age );      // age درست مانند...
 ```
 
-Now the old code works too and we've got a nice additional property.
+حالا کد قدیمی هم کار می‌کند و ما یک ویژگی اضافی خوب گرفتیم.
