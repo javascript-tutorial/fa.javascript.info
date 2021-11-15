@@ -1,10 +1,10 @@
-# Prototypal inheritance
+# وراثت پروتوتایپی
 
-In programming, we often want to take something and extend it.
+در برنامه‌نویسی، اغلب اوقات ما می‌خواهیم که چیزی را دریافت کنیم و آن را گسترش دهیم.
 
-For instance, we have a `user` object with its properties and methods, and want to make `admin` and `guest` as slightly modified variants of it. We'd like to reuse what we have in `user`, not copy/reimplement its methods, just build a new object on top of it.
+برای مثال، ما یک شیء `user` همراه با ویژگی‌ها و متدهای آن داریم و می‌خواهیم `admin` و `guest` را به عنوان نمونه‌هایی از آن که تغییر کمی دارند بسازیم. ما می‌خواهیم چیزی را که در `user` داریم را دوباره استفاده کنیم، نه اینکه متدهای آن را کپی/دوباره پیاده‌سازی کنیم، فقط یک شیء جدید را بر اساس آن بسازیم.
 
-*Prototypal inheritance* is a language feature that helps in that.
+*وراثت پروتوتایپی(prototypal inheritance)* یک ویژگی زبان است که به این موضوع کمک می‌کند.
 
 ## [[Prototype]]
 
