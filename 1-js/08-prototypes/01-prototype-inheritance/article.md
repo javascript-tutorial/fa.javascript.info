@@ -6,17 +6,17 @@
 
 *وراثت پروتوتایپی(prototypal inheritance)* یک ویژگی زبان است که به این موضوع کمک می‌کند.
 
-## [[Prototype]]
+## ویژگی [[Prototype]]
 
-In JavaScript, objects have a special hidden property `[[Prototype]]` (as named in the specification), that is either `null` or references another object. That object is called "a prototype":
+در جاوااسکریپت، شیءها یک ویژگی پنهانی `[[Prototype]]` (دقیقا همانطور که در مشخصات زبان نام‌گذاری شده) دارند که یا `null` است یا به شیء دیگر رجوع می‌کند. آن شیء «یک پروتوتایپ» نامیده می‌شود:
 
 ![prototype](object-prototype-empty.svg)
 
-When we read a property from `object`, and it's missing, JavaScript automatically takes it from the prototype. In programming, this is called "prototypal inheritance". And soon we'll study many examples of such inheritance, as well as cooler language features built upon it.
+زمانی که ما یک شیء را از `object` می‌خوانیم و وجود ندارد، جاوااسکریپت به طور خودکار آن را از پروتوتایپ دریافت می‌کند. در برنامه‌نویسی، به این کار «وراثت پروتوتایپی» می‌گویند. و به زودی ما مثال‌های زیادی از چنین وراثتی را خواهیم دید، درست مانند خصوصیت‌های خفن‌تر زبان که بر اساس آن ساخته شده‌اند.
 
-The property `[[Prototype]]` is internal and hidden, but there are many ways to set it.
+ویژگی `[[Prototype]]` درونی و پنهان است اما راه‌هایی برای مقداردهی آن وجود دارد.
 
-One of them is to use the special name `__proto__`, like this:
+یکی از آن راه‌ها استفاده از نام خاص `__proto__` است، مثلا اینگونه:
 
 ```js run
 let animal = {
@@ -27,13 +27,13 @@ let rabbit = {
 };
 
 *!*
-rabbit.__proto__ = animal; // sets rabbit.[[Prototype]] = animal
+rabbit.__proto__ = animal; // را تنظیم می‌کند rabbit.[[Prototype]] = animal
 */!*
 ```
 
-Now if we read a property from `rabbit`, and it's missing, JavaScript will automatically take it from `animal`.
+حالا اگر ما ویژگی‌ای را از `rabbit` بخوانیم و وجود نداشته باشد، جاوااسکریپت به طور خودکار آن را از `animal` دریافت می‌کند.
 
-For instance:
+برای مثال:
 
 ```js
 let animal = {
@@ -47,31 +47,31 @@ let rabbit = {
 rabbit.__proto__ = animal; // (*)
 */!*
 
-// we can find both properties in rabbit now:
+// پیدا کنیم rabbit حالا می‌توانیم هر دو ویژگی را در
 *!*
 alert( rabbit.eats ); // true (**)
 */!*
 alert( rabbit.jumps ); // true
 ```
 
-Here the line `(*)` sets `animal` to be a prototype of `rabbit`.
+اینجا خط `(*)` شیء `animal` را به عنوان پروتوتایپ `rabbit` تنظیم می‌کند.
 
-Then, when `alert` tries to read property `rabbit.eats` `(**)`, it's not in `rabbit`, so JavaScript follows the `[[Prototype]]` reference and finds it in `animal` (look from the bottom up):
+سپس زمانی که `alert` سعی می‌کند تا ویژگی `rabbit.eats` `(**)` را بخواند، درون `rabbit` نیست پس جاوااسکریپت مرجع `[[Prototype]]` را دنبال می‌کند و ویژگی را درون `animal` پیدا می‌کند (از پایین به بالا نگاه کنید):
 
 ![](proto-animal-rabbit.svg)
 
-Here we can say that "`animal` is the prototype of `rabbit`" or "`rabbit` prototypically inherits from `animal`".
+اینجا می‌توانیم بگوییم که "`animal`" پروتوتایپ `rabbit` است یا "`rabbit`" به صورت پروتوتایپی از `animal` ارث‌بری کرده است.
 
-So if `animal` has a lot of useful properties and methods, then they become automatically available in `rabbit`. Such properties are called "inherited".
+بنابراین اگر `animal` تعداد زیادی ویژگی و متد مفید داشته باشد، سپس آن‌ها به طور خودکار درون `rabbit` هم موجود می‌شوند. چنین ویژگی‌هایی را «موروث یا به ارث‌رسیده» می‌گویند.
 
-If we have a method in `animal`, it can be called on `rabbit`:
+اگر ما یک متد درون `animal` داشته باشیم، می‌تواند با `rabbit` هم فراخوانی شود:
 
 ```js run
 let animal = {
   eats: true,
 *!*
   walk() {
-    alert("Animal walk");
+    alert("جانور راه می‌رود");
   }
 */!*
 };
@@ -81,23 +81,23 @@ let rabbit = {
   __proto__: animal
 };
 
-// walk is taken from the prototype
+// از پروتوتایپ برداشته شده است walk
 *!*
-rabbit.walk(); // Animal walk
+rabbit.walk(); // جانور راه می‌رود
 */!*
 ```
 
-The method is automatically taken from the prototype, like this:
+متد به طور خودکار از پروتوتایپ دریافت می‌شود، به این صورت:
 
 ![](proto-animal-rabbit-walk.svg)
 
-The prototype chain can be longer:
+زنجیره‌ی پروتوتایپ می‌تواند طولانی‌تر باشد:
 
 ```js run
 let animal = {
   eats: true,
   walk() {
-    alert("Animal walk");
+    alert("جانور راه می‌رود");
   }
 };
 
@@ -115,33 +115,33 @@ let longEar = {
 */!*
 };
 
-// walk is taken from the prototype chain
-longEar.walk(); // Animal walk
-alert(longEar.jumps); // true (from rabbit)
+// از رنجیره‌ی پروتوتایپ برداشته شده است walk
+longEar.walk(); // جانور راه می‌رود
+alert(longEar.jumps); // true (rabbit از)
 ```
 
 ![](proto-animal-rabbit-chain.svg)
 
-Now if we read something from `longEar`, and it's missing, JavaScript will look for it in `rabbit`, and then in `animal`.
+حالا اگر ما چیزی را از `longEar` بخوانیم و وجود نداشته باشد، جاوااسکریپت درون `rabbit` و سپس درون `animal` به دنبال آن می‌گردد.
 
-There are only two limitations:
+فقط دو محدودیت وجود دارد:
 
-1. The references can't go in circles. JavaScript will throw an error if we try to assign `__proto__` in a circle.
-2. The value of `__proto__` can be either an object or `null`. Other types are ignored.
+1. مرجع‌ها نمی‌توانند درون دایره قرار بگیرند. اگر ما تلاش کنیم که `__proto__` را درون یک دایره مقداردهی کنیم، جاوااسکریپت ارور ایجاد می‌کند.
+2. مقدار `__proto__` می‌تواند شیء یا `null` باشد. انواع دیگر داده نادیده گرفته می‌شوند.
 
-Also it may be obvious, but still: there can be only one `[[Prototype]]`. An object may not inherit from two others.
+همچنین ممکن است واضح باشد اما باز هم: فقط یک `[[Prototype]]` می‌تواند وجود داشته باشد. یک شیء نمی‌تواند از دو شیء دیگر ارث‌بری کند.
 
 
-```smart header="`__proto__` is a historical getter/setter for `[[Prototype]]`"
-It's a common mistake of novice developers not to know the difference between these two.
+```smart header="ویژگی `__proto__` یک getter/setter قدیمی برای `[[Prototype]]` است"
+این یک اشتباه توسعه‌دهندگان تازه‌وارد است که تفاوت میان این دو را ندانند.
 
-Please note that `__proto__` is *not the same* as the internal `[[Prototype]]` property. It's a getter/setter for `[[Prototype]]`. Later we'll see situations where it matters, for now let's just keep it in mind, as we build our understanding of JavaScript language.
+لطفا توجه کنید که `__proto__` با ویژگی درونی `[[Prototype]]` *یکسان نیست*. این ویژگی یک getter/setter برای `[[Prototype]]` است. بعدا ما موقعیت‌هایی را خواهیم دید که این موضوع اهمیت دارد، اما چون فهم خود را از زبان جاوااسکریپت می‌سازیم، بیایید فقط این را در ذهن خود داشته باشیم.
 
-The `__proto__` property is a bit outdated. It exists for historical reasons, modern JavaScript suggests that we should use `Object.getPrototypeOf/Object.setPrototypeOf` functions instead that get/set the prototype. We'll also cover these functions later.
+ویژگی `__proto__` کمی منسوخ شده است. بنا به دلایلی مربوط به گذشته هنوز وجود دارد، جاوااسکریپت مدرن پیشنهاد می‌کند که ما باید از تابع‌های `Object.getPrototypeOf/Object.setPrototypeOf` به جای آن دریافت/مقداردهی کردن پروتوتایپ استفاده کنیم. این تابع‌ها را هم در آینده پوشش می‌دهیم.
 
-By the specification, `__proto__` must only be supported by browsers. In fact though, all environments including server-side support `__proto__`, so we're quite safe using it.
+بر اساس مشخصات زبان، `__proto__` فقط باید توسط مرورگرها پشتیبانی شود. اگرچه در واقع تمام محیط‌ها شامل سمت سرور از `__proto__` پشتیبانی می‌کند، پس ما برای استفاده از آن به مشکلی بر نخواهیم خورد.
 
-As the `__proto__` notation is a bit more intuitively obvious, we use it in the examples.
+به دلیل اینکه نشان `__proto__` از لحاظ درک کردن کمی بیشتر واضح است، در مثال‌ها از آن استفاده می‌کنیم.
 ```
 
 ## Writing doesn't use prototype
