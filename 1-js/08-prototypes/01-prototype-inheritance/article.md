@@ -144,19 +144,19 @@ alert(longEar.jumps); // true (rabbit از)
 به دلیل اینکه نشان `__proto__` از لحاظ درک کردن کمی بیشتر واضح است، در مثال‌ها از آن استفاده می‌کنیم.
 ```
 
-## Writing doesn't use prototype
+## نوشتن از پروتوتایپ استفاده نمی‌کند
 
-The prototype is only used for reading properties.
+پروتوتایپ فقط برای خواندن ویژگی‌ها استفاده می‌شود.
 
-Write/delete operations work directly with the object.
+عمل‌های نوشتن/حذف کردن به صورت مستقیم با شیء کار می‌کنند.
 
-In the example below, we assign its own `walk` method to `rabbit`:
+در مثال پایین، ما متد `walk` را در خود `rabbit` مقداردهی می‌کنیم:
 
 ```js run
 let animal = {
   eats: true,
   walk() {
-    /* this method won't be used by rabbit */  
+    /* استفاده نخواهد شد rabbit این متد توسط */
   }
 };
 
@@ -173,13 +173,13 @@ rabbit.walk = function() {
 rabbit.walk(); // Rabbit! Bounce-bounce!
 ```
 
-From now on, `rabbit.walk()` call finds the method immediately in the object and executes it, without using the prototype:
+از این پس، فراخوانی `rabbit.walk()` بدون اینکه از پروتوتایپ استفاده کند، بلافاصله متد را در شیء پیدا و آن را اجرا می‌کند:
 
 ![](proto-animal-rabbit-walk-2.svg)
 
-Accessor properties are an exception, as assignment is handled by a setter function. So writing to such a property is actually the same as calling a function.
+ویژگی‌های اکسسر استثنا هستند، مقداردهی توسط تابع setter انجام می‌شود. پس نوشتن در چنین ویژگی‌ای در واقع با فراخوانی تابع یکسان است.
 
-For that reason `admin.fullName` works correctly in the code below:
+به همین دلیل `admin.fullName` در کد پایین به درستی کار می‌کند:
 
 ```js run
 let user = {
@@ -209,7 +209,7 @@ alert(admin.fullName); // Alice Cooper, state of admin modified
 alert(user.fullName); // John Smith, state of user protected
 ```
 
-Here in the line `(*)` the property `admin.fullName` has a getter in the prototype `user`, so it is called. And in the line `(**)` the property has a setter in the prototype, so it is called.
+اینجا در خط `(*)` ویژگی `admin.fullName` در پروتوتایپ `user` دارای یک getter است، پس این تابع فراخوانی می‌شود. و در خط `(**)` ویژگی در پروتوتایپ دارای یک setter است پس این تابع فراخوانی می‌شود.
 
 ## The value of "this"
 
