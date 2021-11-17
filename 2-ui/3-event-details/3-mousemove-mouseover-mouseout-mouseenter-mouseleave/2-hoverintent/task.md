@@ -2,30 +2,30 @@ importance: 5
 
 ---
 
-# "Smart" tooltip
+# تولتیپ "باهوش"
 
-Write a function that shows a tooltip over an element only if the visitor moves the mouse *to it*, but not *through it*.
+تابعی بنویسید که یک تولتیپ را فقط در صورتی نمایش دهد که کاربر اشاره‌گر موس را *داخل آن* ببرد و نه اینکه از روی آن *فقط عبور* کند.
 
-In other words, if the visitor moves the mouse to the element and stops there -- show the tooltip. And if they just moved the mouse through, then no need, who wants extra blinking?
+به عبارت دیگر، اگر که کاربر اشاره‌گر موس را روی عنصر ببرد و آنجا متوقف شود، تولتیپ نمایش داده شود. و اگر موس از روی عنصر عبور کرد، نیازی به نمایش تولتیپ نیست. چه کسی یک به تولتیپ لحظه‌ای نیاز دارد؟
 
-Technically, we can measure the mouse speed over the element, and if it's slow then we assume that it comes "over the element" and show the tooltip, if it's fast -- then we ignore it.
+از نظر فنی، می‌توانیم سرعت اشاره‌گر موس را روی عنصر اندازه بگیریم، و اگر آرام باشد فرض کنیم که اشاره‌گر "روی عنصر قرار گرفته" و تولتیپ را نمایش دهیم. اگر سریع بود، آنرا نادیده بگیریم.
 
-Make a universal object `new HoverIntent(options)` for it.
+برای این منظور یک شئ گلوبال به صورت `new HoverIntent(options)` بسازید.
 
-Its `options`:
-- `elem` -- element to track.
-- `over` -- a function to call if the mouse came to the element: that is, it moves slowly or stopped over it.
-- `out` -- a function to call when the mouse leaves the element (if `over` was called).
+خصوصیات `options`:
+- `elem` -- عنصری که می‌خواهیم حرکت اشاره‌گر را روی آن کنترل کنیم.
+- `over` -- تابعی که در صورت "قرار گرفتن اشاره‌گر روی عنصر" صدا زده می‌شود: که یعنی حرکت اشاره‌گر موس کند بوده، یا روی عنصر توقف کرده.
+- `out` -- تابعی که زمانی اشاره‌گر موس عنصر را ترک می‌کند صدا زده‌ می‌شود. (اگر تابع `over` صدا زده شده باشد).
 
-An example of using such object for the tooltip:
+یک مثال از چگونگی استفاده از چنین شئ برای تولتیپ این چنین خواهد بود:
 
 ```js
-// a sample tooltip
+// تولتیپ نمونه
 let tooltip = document.createElement('div');
 tooltip.className = "tooltip";
 tooltip.innerHTML = "Tooltip";
 
-// the object will track mouse and call over/out
+// این شئ حرکت اشاره‌گر موس را دنبال و توابع over/out را صدا می‌زند.
 new HoverIntent({
   elem,
   over() {
@@ -39,10 +39,10 @@ new HoverIntent({
 });
 ```
 
-The demo:
+دمو:
 
 [iframe src="solution" height=140]
 
-If you move the mouse over the "clock" fast then nothing happens, and if you do it slow or stop on them, then there will be a tooltip.
+اگر که اشاره‌گر موس را سریعا از روی "ساعت" حرکت دهید، اتفاقی نمی‌افتد، اگر چه در صورتی که حرکت اشاره‌گر موس آهسته باشد یا روی آن توقف کنید، یک تولتیپ نمایش داده می‌شود.
 
-Please note: the tooltip doesn't "blink" when the cursor moves between the clock subelements.
+توجه: تولتیپ نباید هنگامی که اشاره‌گر روی فرزندان ساعت حرکت می‌کند رفتار "چشمک زن" داشته باشد.

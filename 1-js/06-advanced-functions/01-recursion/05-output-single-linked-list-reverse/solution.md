@@ -1,8 +1,8 @@
-# Using a recursion
+# با استفاده از بازگشت
 
-The recursive logic is a little bit tricky here.
+اینجا منطق بازگشتی کمی مشکل است.
 
-We need to first output the rest of the list and *then* output the current one:
+ما نیاز داریم که اول بقیه لیست را نمایش دهیم و *سپس* لیست کنونی را نمایش دهیم:
 
 ```js run
 let list = {
@@ -31,13 +31,13 @@ function printReverseList(list) {
 printReverseList(list);
 ```
 
-# Using a loop
+# با استفاده از حلقه
 
-The loop variant is also a little bit more complicated then the direct output.
+روش حلقه کمی پیچیده‌تر از نمایش‌دادن به صورت مستقیم است.
 
-There is no way to get the last value in our `list`. We also can't "go back".
+هیچ راهی برای گرفتن آخرین مقدار `list` ما وجود ندارد. همچنین نمی‌توانیم «به عقب برگردیم».
 
-So what we can do is to first go through the items in the direct order and remember them in an array, and then output what we remembered in the reverse order:
+پس کاری که می‌توانیم کنیم این است که اول با ترتیب مستقیم در المان‌های پیمایش کنیم و آنها را در یک آرایه ذخیره کنیم و سپس چیزی که ذخیره کردیم را با ترتیب برعکس نمایش دهیم:
 
 ```js run
 let list = {
@@ -71,4 +71,4 @@ function printReverseList(list) {
 printReverseList(list);
 ```
 
-Please note that the recursive solution actually does exactly the same: it follows the list, remembers the items in the chain of nested calls (in the execution context stack), and then outputs them. 
+لطفا در نظر داشته باشید که راه‌حل بازگشتی کار یکسانی را انجام می‌دهد: لیست را دنبال می‌کند، المان‌ها را در زنجیره‌ای از فراخوانی‌های تودرتو ذخیره می‌کند (در پشته زمینه اجرا)، و سپس آنها را نمایش می‌دهد.

@@ -1,5 +1,5 @@
-The answer is: **Pete**.
+جواب: **Pete**.
 
-A function gets outer variables as they are now, it uses the most recent values.
+یک تابع متغیرهای بیرونی را همانطور که هستند دریافت می‌کند و از آخرین مقدارها استفاده می‌کند.
 
-Old variable values are not saved anywhere. When a function wants a variable, it takes the current value from its own Lexical Environment or the outer one.
+مقدارهای قدیمی متغیر جایی ذخیره نمی‌شوند. زمانی که تابعی یک متغیر را می‌خواهد، مقدار کنونی آن را از محیط لغوی خودش یا محیط بیرونی دریافت می‌کند.

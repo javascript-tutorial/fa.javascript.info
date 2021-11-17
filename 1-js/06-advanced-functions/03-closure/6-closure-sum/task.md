@@ -2,13 +2,13 @@ importance: 4
 
 ---
 
-# Sum with closures
+# با استفاده از کلوژرها جمع بزنید
 
-Write function `sum` that works like this: `sum(a)(b) = a+b`.
+تابع `sum` را بنویسید که اینگونه کار می‌کند: `sum(a)(b) = a+b`.
 
-Yes, exactly this way, using double parentheses (not a mistype).
+بله دقیقا به این شکل، با استفاده از دو پرانتز (اشتباه تایپی نیست).
 
-For instance:
+برای مثال:
 
 ```js
 sum(1)(2) = 3

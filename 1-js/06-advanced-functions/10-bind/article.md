@@ -3,112 +3,112 @@ libs:
 
 ---
 
-# Function binding
+# پیوند تابع
 
-When passing object methods as callbacks, for instance to `setTimeout`, there's a known problem: "losing `this`".
+زمانی که متدهای تابع را به عنوان callback پاس می‌دهیم، برای مثال به `setTimeout`، یک مشکل شناخته شده وجود دارد: «از دست دادن `this`».
 
-In this chapter we'll see the ways to fix it.
+در این فصل ما راه‌هایی را برای رفع آن خواهیم دید.
 
-## Losing "this"
+## از دست دادن "this"
 
-We've already seen examples of losing `this`. Once a method is passed somewhere separately from the object -- `this` is lost.
+ما از قبل درباره از دست دادن `this` مثال‌هایی را دیده‌ایم. زمانی که یک متد جایی به غیر از شیء خودش پاس داده شود، `this` از دست می‌رود.
 
-Here's how it may happen with `setTimeout`:
+چیزی که ممکن است با `setTimeout` اتفاق بیافتد اینجا آورده شده:
 
 ```js run
 let user = {
   firstName: "John",
   sayHi() {
-    alert(`Hello, ${this.firstName}!`);
+    alert(`سلام، ${this.firstName}!`);
   }
 };
 
 *!*
-setTimeout(user.sayHi, 1000); // Hello, undefined!
+setTimeout(user.sayHi, 1000); // !undefined ،سلام
 */!*
 ```
 
-As we can see, the output shows not "John" as `this.firstName`, but `undefined`!
+همانطور که می‌بینیم، خروجی "John" را به عنوان `this.firstName` نشان نداد بلکه `undefined` را نمایش داد!
 
-That's because `setTimeout` got the function `user.sayHi`, separately from the object. The last line can be rewritten as:
+دلیلش این است که `setTimeout` تابع `user.sayHi` را جدای از شیء آن دریافت کرد. خط آخر می‌تواند اینگونه نوشته شود:
 
 ```js
 let f = user.sayHi;
-setTimeout(f, 1000); // lost user context
+setTimeout(f, 1000); // را از دست داد user زمینه
 ```
 
-The method `setTimeout` in-browser is a little special: it sets `this=window` for the function call (for Node.js, `this` becomes the timer object, but doesn't really matter here). So for `this.firstName` it tries to get `window.firstName`, which does not exist. In other similar cases, usually `this` just becomes `undefined`.
+روش `setTimeout` در مرورگر کمی خاص است: این تابع برای فراخوانی تابع `this=window` را تنظیم می‌کند (در Node.js، مقدار `this` شیء تایمر می‌شود اما اینجا خیلی مهم نیست). پس برای `this.firstName` این تابع تلاش می‌کند که `window.firstName` را دریافت کند، که وجود ندارد. در موارد مشابه دیگر، معمولا `this` برابر با `undefined` می‌شود.
 
-The task is quite typical -- we want to pass an object method somewhere else (here -- to the scheduler) where it will be called. How to make sure that it will be called in the right context?
+کاری که انجام می‌شود کاملا معمولی است، ما می‌خواهیم یک متد شیء را جایی دیگر (اینجا، به زمان‌بند) که فراخوانی خواهد شد پاس دهیم. چگونه مطمئن شویم که با زمینه درست فراخوانی می‌شود؟
 
-## Solution 1: a wrapper
+## راه‌حل 1: دربرگیرنده
 
-The simplest solution is to use a wrapping function:
+ساده‌ترین راه‌حل استفاده از یک تابع دربرگیرنده است:
 
 ```js run
 let user = {
   firstName: "John",
   sayHi() {
-    alert(`Hello, ${this.firstName}!`);
+    alert(`سلام، ${this.firstName}!`);
   }
 };
 
 *!*
 setTimeout(function() {
-  user.sayHi(); // Hello, John!
+  user.sayHi(); // !John ،سلام
 }, 1000);
 */!*
 ```
 
-Now it works, because it receives `user` from the outer lexical environment, and then calls the method normally.
+حالا کار می‌کند، چون `user` را از محیط لغوی بیرونی دریافت می‌کند و سپس به طور معمولی متد را فراخوانی می‌کند.
 
-The same, but shorter:
+این یکسان اما کوتاه‌تر است:
 
 ```js
-setTimeout(() => user.sayHi(), 1000); // Hello, John!
+setTimeout(() => user.sayHi(), 1000); // !John ،سلام
 ```
 
-Looks fine, but a slight vulnerability appears in our code structure.
+مناسب بنظر می‌رسد اما یک آسیب‌پذیری جزئی ممکن است در ساختار کد ما نمایان شود.
 
-What if before `setTimeout` triggers (there's one second delay!) `user` changes value? Then, suddenly, it will call the wrong object!
+اگر قبل از اینکه `setTimeout` فعال شود (تاخیر یک ثانیه‌ای وجود دارد!) `user` مقدارش تغییر کند چه؟ سپس ناگهان، شیء اشتباهی را فراخوانی می‌کند!
 
 
 ```js run
 let user = {
   firstName: "John",
   sayHi() {
-    alert(`Hello, ${this.firstName}!`);
+    alert(`سلام، ${this.firstName}!`);
   }
 };
 
 setTimeout(() => user.sayHi(), 1000);
 
-// ...the value of user changes within 1 second
+// ...در حین 1 ثانیه تغییر می‌کند user مقدار
 user = {
-  sayHi() { alert("Another user in setTimeout!"); }
+  sayHi() { alert("!setTimeout دیگر در user یک"); }
 };
 
-// Another user in setTimeout!
+// !setTimeout دیگر در user یک
 ```
 
-The next solution guarantees that such thing won't happen.
+راه‌حل بعدی تضمین می‌کند که چنین چیزی اتفاق نیافتد.
 
-## Solution 2: bind
+## راه‌حل 2: متد bind
 
-Functions provide a built-in method [bind](mdn:js/Function/bind) that allows to fix `this`.
+تابع‌ها یک متد درونی [bind](mdn:js/Function/bind) دارند که امکان ثابت کردن `this` را ایجاد می‌کند.
 
-The basic syntax is:
+سینتکس پایه‌ای آن:
 
 ```js
-// more complex syntax will come a little later
+// سینتکس پیچیده‌تر کمی بعدتر فرا می‌رسد
 let boundFunc = func.bind(context);
 ```
 
-The result of `func.bind(context)` is a special function-like "exotic object", that is callable as function and transparently passes the call to `func` setting `this=context`.
+نتیجه‌ی `func.bind(context)` یک «شیء بیگانه» تابع‌مانند خاص است که می‌تواند به عنوان تابع فراخوانی شود و به طور پنهانی فراخوانی را با تنظیم `this=context` به `func` منتقل کند.
 
-In other words, calling `boundFunc` is like `func` with fixed `this`.
+به عبارتی دیگر، فراخوانی `boundFunc` مانند `func` با `this` تثبیت شده است.
 
-For instance, here `funcUser` passes a call to `func` with `this=user`:
+برای مثال، اینجا `funcUser` فراخوانی را با `this=user` به `func` منتقل می‌کند:
 
 ```js run  
 let user = {
@@ -125,9 +125,9 @@ funcUser(); // John
 */!*
 ```
 
-Here `func.bind(user)` as a "bound variant" of `func`, with fixed `this=user`.
+اینجا `func.bind(user)` به عنوان «یک نوع پیوند زده شده» از `func` با `this=user` شناخته می‌شود.
 
-All arguments are passed to the original `func` "as is", for instance:
+تمام آرگومان‌ها «بدون تغییر» به تابع اصلی `func` منتقل می‌شوند، برای مثال:
 
 ```js run  
 let user = {
@@ -135,25 +135,25 @@ let user = {
 };
 
 function func(phrase) {
-  alert(phrase + ', ' + this.firstName);
+  alert(phrase + '، ' + this.firstName);
 }
 
-// bind this to user
+// پیوند بزن user این را به
 let funcUser = func.bind(user);
 
 *!*
-funcUser("Hello"); // Hello, John (argument "Hello" is passed, and this=user)
+funcUser("سلام"); // (this=user آرگومان «سلام» پاس داده شد و) John ،سلام
 */!*
 ```
 
-Now let's try with an object method:
+حالا بیایید با یک متد شیء امتحان کنیم:
 
 
 ```js run
 let user = {
   firstName: "John",
   sayHi() {
-    alert(`Hello, ${this.firstName}!`);
+    alert(`سلام، ${this.firstName}!`);
   }
 };
 
@@ -161,38 +161,38 @@ let user = {
 let sayHi = user.sayHi.bind(user); // (*)
 */!*
 
-// can run it without an object
-sayHi(); // Hello, John!
+// می‌توانیم آن را بدون شیء اجرا کنیم
+sayHi(); // !John ،سلام
 
-setTimeout(sayHi, 1000); // Hello, John!
+setTimeout(sayHi, 1000); // !John ،سلام
 
-// even if the value of user changes within 1 second
-// sayHi uses the pre-bound value which is reference to the old user object
+// در حین 1 ثانیه تغییر کند user حتی اگر مقدار
+// رجوع می‌کند user از مقداری که از قبل پیوند زده شده استفاده می‌کند که به شیء قدیمی sayHi تابع
 user = {
-  sayHi() { alert("Another user in setTimeout!"); }
+  sayHi() { alert("!setTimeout دیگر در user یک"); }
 };
 ```
 
-In the line `(*)` we take the method `user.sayHi` and bind it to `user`. The `sayHi` is a "bound" function, that can be called alone or passed to `setTimeout` -- doesn't matter, the context will be right.
+در خط `(*)` ما متد `user.sayHi` را دریافت می‌کنیم و آن را به `user` پیوند می‌زنیم. `sayHi` یک تابع «پیوند زده شده» است که می‌تواند به تنهایی فراخوانی شود یا به `setTimeout` فرستاده شود -- مهم نیست، زمینه همیشه درست خواهد بود.
 
-Here we can see that arguments are passed "as is", only `this` is fixed by `bind`:
+اینجا ما می‌توانیم ببینیم آرگومان‌هایی که پاس داده شدند «بدون تغییر» ماندند و فقط `this` توسط `bind` ثابت شده است:
 
 ```js run
 let user = {
   firstName: "John",
   say(phrase) {
-    alert(`${phrase}, ${this.firstName}!`);
+    alert(`${phrase}، ${this.firstName}!`);
   }
 };
 
 let say = user.say.bind(user);
 
-say("Hello"); // Hello, John ("Hello" argument is passed to say)
-say("Bye"); // Bye, John ("Bye" is passed to say)
+say("سلام"); // (پاس داده شد say آرگومان «سلام» به) !John ،سلام
+say("خداحافظ"); // (پاس داده شد say آرگومان «خداحافظ» به) !John ،خداحافظ
 ```
 
-````smart header="Convenience method: `bindAll`"
-If an object has many methods and we plan to actively pass it around, then we could bind them all in a loop:
+````smart header="روش راحت: `bindAll`"
+اگر یک شیء تعداد زیادی متد داشته باشد و ما بخواهیم که آن را به صورت فعال پاس بدهیم، می‌توانیم تمام متدها را با شیء در یک حلقه پیوند بزنیم:
 
 ```js
 for (let key in user) {
@@ -202,24 +202,24 @@ for (let key in user) {
 }
 ```
 
-JavaScript libraries also provide functions for convenient mass binding , e.g. [_.bindAll(object, methodNames)](http://lodash.com/docs#bindAll) in lodash.
+کتابخانه‌های جاوااسکریپت هم تابع‌هایی برای پیوند زدن گسترده و راحت ارائه می‌دهد، مانند [_.bindAll(object, methodNames)](http://lodash.com/docs#bindAll) در lodash.
 ````
 
-## Partial functions
+## تابع‌های جزئی
 
-Until now we have only been talking about binding `this`. Let's take it a step further.
+تا حالا ما فقط درباره پیوند زدن `this` صحبت کردیم. بیایید این موضوع را کمی جلوتر ببریم.
 
-We can bind not only `this`, but also arguments. That's rarely done, but sometimes can be handy.
+ما نه تنها توانایی پیوند زدن `this` را داریم، بلکه آرگومان‌ها را هم می‌توانیم پیوند بزنیم. این مورد به ندرت اتفاق می‌افتد اما گاهی بدرد می‌خورد.
 
-The full syntax of `bind`:
+سینتکس کامل `bind`:
 
 ```js
 let bound = func.bind(context, [arg1], [arg2], ...);
 ```
 
-It allows to bind context as `this` and starting arguments of the function.
+این سینتکس اجازه می‌دهد که زمینه را به عنوان `this` و آرگومان‌های ابتدایی تابع را پیوند بزنیم.
 
-For instance, we have a multiplication function `mul(a, b)`:
+برای مثال، ما یک تابع ضرب `mul(a, b)` داریم:
 
 ```js
 function mul(a, b) {
@@ -227,7 +227,7 @@ function mul(a, b) {
 }
 ```
 
-Let's use `bind` to create a function `double` on its base:
+بیایید برای ایجاد تابع `double` که بر پایه تابع ضرب است از `bind` استفاده کنیم:
 
 ```js run
 function mul(a, b) {
@@ -243,13 +243,13 @@ alert( double(4) ); // = mul(2, 4) = 8
 alert( double(5) ); // = mul(2, 5) = 10
 ```
 
-The call to `mul.bind(null, 2)` creates a new function `double` that passes calls to `mul`, fixing `null` as the context and `2` as the first argument. Further arguments are passed "as is".
+فراخوانی `mul.bind(null, 2)` یک تابع جدید `double` می‌سازد که با ثابت کردن `null` به عنوان زمینه و `2` به عنوان آرگومان اول، فراخوانی‌ها را به `mul` پاس می‌دهد. آرگومان‌های بعدی «بدون تغییر» پاس داده می‌شوند.
 
-That's called [partial function application](https://en.wikipedia.org/wiki/Partial_application) -- we create a new function by fixing some parameters of the existing one.
+این عمل، [کاربرد تابع جزئی](https://en.wikipedia.org/wiki/Partial_application) شناخته می‌شود -- ما با ثابت کردن بعضی از پارامترهای تابع موجود، تابعی جدید می‌سازیم. 
 
-Please note that we actually don't use `this` here. But `bind` requires it, so we must put in something like `null`.
+لطفا در نظر داشته باشید که در واقع اینجا از `this` استفاده نمی‌کنیم. اما `bind` آن را نیاز دارد پس ما باید چیزی مانند `null` را درون آن قرار دهیم.
 
-The function `triple` in the code below triples the value:
+تابع `triple` در کد پایین، مقدار را سه برابر می‌کند:
 
 ```js run
 function mul(a, b) {
@@ -265,23 +265,23 @@ alert( triple(4) ); // = mul(3, 4) = 12
 alert( triple(5) ); // = mul(3, 5) = 15
 ```
 
-Why do we usually make a partial function?
+چرا معمولا ما یک تابع جزئی (partial function) می‌سازیم؟
 
-The benefit is that we can create an independent function with a readable name (`double`, `triple`). We can use it and not provide the first argument every time as it's fixed with `bind`.
+مزیت موجود این است که ما می‌توانیم یک تابع مستقل با اسمی خوانا (`double`(دو برابر کردن)،  `triple`(سه برابر کردن)) بسازیم. می‌توانیم این تابع را استفاده کنیم و چون اولین آرگومان با `bind` ثابت شده است، هر بار آن را وارد نکنیم.
 
-In other cases, partial application is useful when we have a very generic function and want a less universal variant of it for convenience.
+در موارد دیگر، استفاده از تابع جزئی زمانی خوب است که ما یک تابع خیلی عمومی داریم و برای راحتی نوعی از آن را می‌خواهیم که کمتر جامع باشد.
 
-For instance, we have a function `send(from, to, text)`. Then, inside a `user` object we may want to use a partial variant of it: `sendTo(to, text)` that sends from the current user.
+برای مثال، ما تابع `send(from, to, text)` را داریم. سپس، شاید بخواهیم درون شیء `user` نوع جزئی آن را استفاده کنیم: `sendTo(to, text)` که از کاربر کنونی پیامی رابه کسی می‌فرستد.
 
-## Going partial without context
+## بدون زمینه جزئی شدن
 
-What if we'd like to fix some arguments, but not the context `this`? For example, for an object method.
+اگر ما بخواهیم آرگومان‌هایی را ثابت کنیم اما زمینه `this` را نه چکار کنیم؟ برای مثال، برای متد شیء.
 
-The native `bind` does not allow that. We can't just omit the context and jump to arguments.
+متد `bind` این اجازه را نمی‌دهد. ما نمی‌توانیم زمینه را حذف کنیم و به آرگومان‌ها بپریم.
 
-Fortunately, a function `partial` for binding only arguments can be easily implemented.
+خوشبختانه، تابع `partial` برای اینکه فقط آرگومان‌ها را ثابت کنیم می‌تواند به راحتی پیاده‌سازی شود.
 
-Like this:
+مانند این:
 
 ```js run
 *!*
@@ -292,7 +292,7 @@ function partial(func, ...argsBound) {
 }
 */!*
 
-// Usage:
+// :کاربرد
 let user = {
   firstName: "John",
   say(time, phrase) {
@@ -300,29 +300,29 @@ let user = {
   }
 };
 
-// add a partial method with fixed time
+// اضافه کردن یک متد جزئی با زمان ثابت
 user.sayNow = partial(user.say, new Date().getHours() + ':' + new Date().getMinutes());
 
 user.sayNow("Hello");
-// Something like:
+// :چیزی مانند این
 // [10:00] John: Hello!
 ```
 
-The result of `partial(func[, arg1, arg2...])` call is a wrapper `(*)` that calls `func` with:
-- Same `this` as it gets (for `user.sayNow` call it's `user`)
-- Then gives it `...argsBound` -- arguments from the `partial` call (`"10:00"`)
-- Then gives it `...args` -- arguments given to the wrapper (`"Hello"`)
+نتیجه فراخوانی `partial(func[, arg1, arg2...])` یک دربرگیرنده `(*)` است که `func` را همراه با این‌ها فرا می‌خواند:
+- مقدار `this` یکسان با چیزی که دریافت می‌کند (برای فراخوانی `user.sayNow` برابر با `user` است)
+- سپس `...argsBound` را به آن می‌دهد -- آرگومان‌های حاصل از فراخوانی `partial` (`"10:00"`)
+- سپس `...args` را به آن می‌دهد -- آرگومان‌هایی که به دربرگیرنده داده شده‌اند (`"Hello"`)
 
-So easy to do it with the spread syntax, right?
+پس انجام دادن آن با سینتکس اسپرد راحت است نه؟
 
-Also there's a ready [_.partial](https://lodash.com/docs#partial) implementation from lodash library.
+همچنین یک پیاده‌سازی آماده [_.partial](https://lodash.com/docs#partial) از کتابخانه lodash وجود دارد.
 
 ## Summary
 
-Method `func.bind(context, ...args)` returns a "bound variant" of function `func` that fixes the context `this` and first arguments if given.
+متد `func.bind(context, ...args)` یک «نوع پیوند داده شده» از تابع `func` را برمی‌گرداند که زمینه `this` و اولین آرگومان‌های داده شده را ثابت می‌کند.
 
-Usually we apply `bind` to fix `this` for an object method, so that we can pass it somewhere. For example, to `setTimeout`.
+معمولا ما `bind` را برای ثابت کردن `this` در یک متد شیء بر روی آن اعمال می‌کنیم تا بتوانیم آن را جایی پاس دهیم. برای مثال به `setTimeout`.
 
-When we fix some arguments of an existing function, the resulting (less universal) function is called *partially applied* or *partial*.
+زمانی که ما چند آرگومان یک تابع موجود را ثابت می‌کنیم، تابع حاصل (که کمتر جامع است) را *به طور جزئی اعمال‌شده* یا *جزئی* می‌نامند.
 
-Partials are convenient when we don't want to repeat the same argument over and over again. Like if we have a `send(from, to)` function, and `from` should always be the same for our task, we can get a partial and go on with it.
+تابع‌های جزئی زمانی که ما نمی‌خواهیم آرگومان یکسانی را هر بار تکرار کنیم مناسب هستند. مثلا زمانی که ما تابع `send(from, to)` را داریم و `from` همیشه باید برای کار ما یکسان باشد، ما می‌توانیم از آن تابع جزئی بسازیم و از این تابع استفاده کنیم.

@@ -1,30 +1,30 @@
-# Arrow functions revisited
+# سرکشی دوباره از تابع‌های کمانی
 
-Let's revisit arrow functions.
+بیایید دوباره سری به تابع‌های کمانی بزنیم.
 
-Arrow functions are not just a "shorthand" for writing small stuff. They have some very specific and useful features.
+تابع‌های کمانی فقط «کوتاه‌نویسی» برای نوشتن چیزهای کوچک نیستند. آن‌ها ویژگی‌هایی خاص و کاربردی دارند.
 
-JavaScript is full of situations where we need to write a small function that's executed somewhere else.
+جاوااسکریپت پر از موقعیت‌هایی است که ما نیاز به نوشتن یک تابع کوچک داریم تا جایی دیگر اجرا شود.
 
-For instance:
+برایی مثال:
 
-- `arr.forEach(func)` -- `func` is executed by `forEach` for every array item.
-- `setTimeout(func)` -- `func` is executed by the built-in scheduler.
-- ...there are more.
+- `arr.forEach(func)` -- `func` برای هر المان آرایه توسط `forEach` اجرا می‌شود.
+- `setTimeout(func)` -- `func` توسط زمان‌بند درونی اجرا می‌شود.
+- ...و چیزهای دیگر
 
-It's in the very spirit of JavaScript to create a function and pass it somewhere.
+اینکه تابعی را بسازیم و آن را جایی دیگر پاس دهیم در ذات جاوااسکریپت است.
 
-And in such functions we usually don't want to leave the current context. That's where arrow functions come in handy.
+و معمولا ما نمی‌خواهیم زمینه کنونی را درون چنین تابع‌هایی از دست دهیم. اینجا جایی است که تابع‌های کمانی بدرد می‌خورند.
 
-## Arrow functions have no "this"
+## تابع‌های کمانی "this" ندارند
 
-As we remember from the chapter <info:object-methods>, arrow functions do not have `this`. If `this` is accessed, it is taken from the outside.
+همانطور که از فصل <info:object-methods> به یاد داریم، تابع‌های کمانی `this` ندارند. اگر به `this` دسترسی پیدا کنیم، از بیرون دریافت می‌شود.
 
-For instance, we can use it to iterate inside an object method:
+برای مثال، ما می‌توانیم از آن برای حلقه زدن درون یک متد شیء استفاده کنیم:
 
 ```js run
 let group = {
-  title: "Our Group",
+  title: "گروه ما",
   students: ["John", "Pete", "Alice"],
 
   showList() {
@@ -39,19 +39,19 @@ let group = {
 group.showList();
 ```
 
-Here in `forEach`, the arrow function is used, so `this.title` in it is exactly the same as in the outer method `showList`. That is: `group.title`.
+اینجا درون `forEach`، تابع کمانی استفاده شده است پس `this.title` درون آن انگار دقیقا درون متد بیرونی `showList` است. یعنی: `group.title`.
 
-If we used a "regular" function, there would be an error:
+اگر ما یک تابع «معمولی» استفاده می‌کردیم، یک ارور دریافت می‌کردیم:
 
 ```js run
 let group = {
-  title: "Our Group",
+  title: "گروه ما",
   students: ["John", "Pete", "Alice"],
 
   showList() {
 *!*
     this.students.forEach(function(student) {
-      // Error: Cannot read property 'title' of undefined
+      // را خواند undefined از 'title' ارور: نمی‌توان ویژگی
       alert(this.title + ': ' + student);
     });
 */!*
@@ -61,28 +61,28 @@ let group = {
 group.showList();
 ```
 
-The error occurs because `forEach` runs functions with `this=undefined` by default, so the attempt to access `undefined.title` is made.
+به دلیل اینکه به طور پیش‌فرض `forEach` با `this=undefined` تابع را اجرا می‌کند ارور ایجاد می‌شود پس سعی می‌شود که `undefined.title` دریافت شود.
 
-That doesn't affect arrow functions, because they just don't have `this`.
+این موضوع روی تابع‌های کمانی تاثیری ندارد چون آن‌ها `this` ندارند.
 
-```warn header="Arrow functions can't run with `new`"
-Not having `this` naturally means another limitation: arrow functions can't be used as constructors. They can't be called with `new`.
+```warn header="تابع‌های کمانی نمی‌توانند با `new` اجرا شوند"
+نداشتن `this` به طور طبیعی به معنی محدودیت دیگری هم هست: تابع‌های کمانی نمی‌توانند به عنوان سازنده استفاده شوند. آن‌ها نمی‌توانند با `new` فراخوانی شوند.
 ```
 
-```smart header="Arrow functions VS bind"
-There's a subtle difference between an arrow function `=>` and a regular function called with `.bind(this)`:
+```smart header="تابع‌های کمانی در مقابل bind"
+یک تفاوت جزئی بین یک تابع کمانی `<=` و یک تابع معمولی که با `.bind(this)` فراخوانی شده وجود دارد:
 
-- `.bind(this)` creates a "bound version" of the function.
-- The arrow `=>` doesn't create any binding. The function simply doesn't have `this`. The lookup of `this` is made exactly the same way as a regular variable search: in the outer lexical environment.
+- `.bind(this)` یک «نسخه پیوند زده شده» از تابع را می‌سازد.
+- کمان `<=` چیزی را پیوند نمی‌زند. تابع حقیقتا `this` ندارد. جست‌و‌جوی `this` درست مانند جست‌و‌جوی یک متغیر معمولی انجام می‌شود: در محیط لغوی بیرونی.
 ```
 
-## Arrows have no "arguments"
+## تابع‌های کمانی "arguments" ندارند
 
-Arrow functions also have no `arguments` variable.
+تابع‌های کمانی متغیر `arguments` هم ندارند.
 
-That's great for decorators, when we need to forward a call with the current `this` and `arguments`.
+زمانی که در دکوراتور ما باید یک فراخوانی را با `this` کنونی و `arguments` ارسال کنیم عالی است.
 
-For instance, `defer(f, ms)` gets a function and returns a wrapper around it that delays the call by `ms` milliseconds:
+برای مثال، `defer(f, ms)` یک تابع دریافت می‌کند و دربرگیرنده‌ای دور آن که فراخوانی را به اندازه `ms` میلی‌ثانیه تاخیر می‌اندازد را برمی‌گرداند:
 
 ```js run
 function defer(f, ms) {
@@ -92,14 +92,14 @@ function defer(f, ms) {
 }
 
 function sayHi(who) {
-  alert('Hello, ' + who);
+  alert('سلام، ' + who);
 }
 
 let sayHiDeferred = defer(sayHi, 2000);
-sayHiDeferred("John"); // Hello, John after 2 seconds
+sayHiDeferred("John"); // John ،بعد از دو ثانیه: سلام
 ```
 
-The same without an arrow function would look like:
+کد یکسان بدون تابع کمانی می‌تواند اینگونه باشد:
 
 ```js
 function defer(f, ms) {
@@ -112,15 +112,15 @@ function defer(f, ms) {
 }
 ```
 
-Here we had to create additional variables `args` and `ctx` so that the function inside `setTimeout` could take them.
+اینجا ما باید متغیرهای اضافی `args` و `ctx` را ایجاد می‌کردیم تا تابع درون `setTimeout` بتواند آن‌ها را دریافت کند.
 
-## Summary
+## خلاصه
 
-Arrow functions:
+تابع‌های کمانی:
 
-- Do not have `this`
-- Do not have `arguments`
-- Can't be called with `new`
-- They also don't have `super`, but we didn't study it yet. We will on the chapter <info:class-inheritance>
+- دارای `this` نیستند
+- دارای `arguments` نیستند
+- نمی‌توانند همراه با `new` فراخوانی شوند
+- همچنین آن‌ها `super` ندارند اما هنوز آن را نخوانده‌ایم. در فصل <info:class-inheritance> آن را خواهیم خواند
 
-That's because they are meant for short pieces of code that do not have their own "context", but rather work in the current one. And they really shine in that use case.
+به دلیل اینکه آن‌ها برای قطعه‌های کوتاهی از کد در نظر گرفته شده‌اند که «زمینه(context)» خودشان را ندارند و در زمینه کنونی کار می‌کنند. و آن‌ها واقعا در این مورد استفاده می‌درخشند.

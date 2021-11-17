@@ -4,7 +4,7 @@ importance: 5
 
 # Output a single-linked list
 
-Let's say we have a single-linked list (as described in the chapter <info:recursion>):
+بیایید فرض کنیم یک لیست پیوندی داریم (همانطور که در فصل <info:recursion> توضیح داده شد):
 
 ```js
 let list = {
@@ -22,8 +22,8 @@ let list = {
 };
 ```
 
-Write a function `printList(list)` that outputs list items one-by-one.
+تابع `printList(list)` را بنویسید که المان‌های لیست را یکی یکی نمایش دهد.
 
-Make two variants of the solution: using a loop and using recursion.
+دو نوع راه‌حل بنویسید: با استفاده از حلقه و با استفاده از بازگشت.
 
-What's better: with recursion or without it?
+کدام راه بهتر است: با بازگشت یا بدون آن؟

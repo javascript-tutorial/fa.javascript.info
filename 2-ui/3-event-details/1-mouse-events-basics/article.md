@@ -1,211 +1,211 @@
-# Mouse events
+# رویدادهای موس
 
-In this chapter we'll get into more details about mouse events and their properties.
+در این بخش به جزئیاتی درباره‌ی رویدادهای موس و خصوصیات آن‌ها می‌پردازیم.
 
-Please note: such events may come not only from "mouse devices", but are also from other devices, such as phones and tablets, where they are emulated for compatibility.
+توجه داشته باشید: این رویدادها نه تنها بواسطه "دستگاه‌های موس"، بلکه بواسطه دستگاه‌های شبیه‌سازی شده تلفن و تبلت نیز روی بدهند.
 
-## Mouse event types
+## انواع رویدادهای موس
 
-We've already seen some of these events:
+ما قبلا با چند مورد از این رویدادها آشنا شده‌ایم:
 
 `mousedown/mouseup`
-: Mouse button is clicked/released over an element.
+: دکمه موس کلیک/رها می‌شود.
 
 `mouseover/mouseout`
-: Mouse pointer comes over/out from an element.
+: اشاره‌گر موس روی/بیرون عنصر می‌رود.
 
 `mousemove`
-: Every mouse move over an element triggers that event.
+: هر حرکت موس روی عنصر این رویداد را فرامی‌خواند.
 
 `click`
-: Triggers after `mousedown` and then `mouseup` over the same element if the left mouse button was used.
+: درصورتی که کلید چپ موس استفاده شود، این رویداد بعد از `mousedown` و سپس `mouseup‍` روی یک عنصر فراخوانده می‌شود.
 
 `dblclick`
-: Triggers after two clicks on the same element within a short timeframe. Rarely used nowadays.
+: زمانی که دو کلیک روی یک عنصر در بازه زمانی کوتاهی انجام شود فراخوانده می‌شود. امروزه به ندرت استفاده می‌شود.
 
 `contextmenu`
-: Triggers when the right mouse button is pressed. There are other ways to open a context menu, e.g. using a special keyboard key, it triggers in that case also, so it's not exactly the mouse event.
+: زمانی که کلید راست موس فشرده روی یک عنصر فشرده شود فراخوانده می‌شود. راه‌های دیگری برای باز کردن منوی زمینه وجود دارد. برای مثال استفاده از یک کلید مخصوص در کیبورد این رویداد را نیز فراخوانی می‌کند، پس این دقیقا یک رویداد موس نیست.‌
 
-...There are several other events too, we'll cover them later.
+...چندین رویداد دیگر وجود دارند که بعدا آنهارا برسی می‌کنیم.
 
-## Events order
+## ترتیب رویدادها
 
-As you can see from the list above, a user action may trigger multiple events.
+همان‌طور که در لیست بالاهم مشاهده کردید، یک عمل کاربر می‌تواند باعث فراخوانی چند رویداد شود.
 
-For instance, a left-button click first triggers `mousedown`, when the button is pressed, then `mouseup` and `click` when it's released.
+برای مثال، یک کلیک چپ ابتدا `mousedown‍` را فراخوانی می‌کند، هنگامی که کلید فشرده می‌شود، سپس `mouseup‍` و `click` زمانی که کلید رها می‌شود.
 
-In cases when a single action initiates multiple events, their order is fixed. That is, the handlers are called in the order `mousedown` -> `mouseup` -> `click`.
+در مواقعی که یک عمل از سمت کاربر باعث فراخوانی چند رویداد شود، ترتیب آنها ثابت خواهد بود. به این معنی که کنترل‌کننده‌ها به ترتیب `mousedown` -> `mouseup` -> `click` صدا زده خواهند شد.
 
 ```online
-Click the button below and you'll see the events. Try double-click too.
+روی دکمه زیر کلیک کنید تا رویدادها را ببینید. دابل کلیک را هم امتحان کنید.
 
-On the teststand below all mouse events are logged, and if there is more than a 1 second delay between them they are separated by a horizontal ruler.
+در قسمت آزمایشی زیر همه رویدادها چاپ می‌شوند، و اگر بیش از ۱ ثانیه فاصله زمانی بین آنها باشد توسط یک خط افقی جدا می‌شوند.
 
-Also we can see the `button` property that allows to detect the mouse button, it's explained below.
+همچنین می‌توانیم یک خاصیت `button` مشاهده کنیم که به ما این امکان را می‌دهد تا کلید موس را شناسایی کنیم که در قسمت پایین شرح داده شده.
 
-<input onmousedown="return logMouse(event)" onmouseup="return logMouse(event)" onclick="return logMouse(event)" oncontextmenu="return logMouse(event)" ondblclick="return logMouse(event)" value="Click me with the right or the left mouse button" type="button"> <input onclick="logClear('test')" value="Clear" type="button"> <form id="testform" name="testform"> <textarea style="font-size:12px;height:150px;width:360px;"></textarea></form>
+<input onmousedown="return logMouse(event)" onmouseup="return logMouse(event)" onclick="return logMouse(event)" oncontextmenu="return logMouse(event)" ondblclick="return logMouse(event)" value="با کلید راست یا چپ موس روی من کلیک کنید" type="button"> <input onclick="logClear('test')" value="Clear" type="button"> <form id="testform" name="testform"> <textarea style="font-size:12px;height:150px;width:360px;"></textarea></form>
 ```
 
-## Mouse button
+## کلید موس
 
-Click-related events always have the `button` property, which allows to get the exact mouse button.
+رویدادهای مربوط به کلیک‌کردن همیشه یک خاصیت `button` خواهند داشت، که به ما این امکان را می‌دهد کلید موس را دقیقا تشخیص دهیم.
 
-We usually don't use it for `click` and `contextmenu` events, because the former happens only on left-click, and the latter -- only on right-click.
+ما معمولا این خاصیت را برای رویدادهای `click` و `contextmenu` استفاده نمی‌کنیم،‌ زیرا اولی فقط با کلیک چپ، و دومی با کلیک راست اتفاق می‌افتد.
 
-From the other hand, `mousedown` and `mouseup` handlers may need `event.button`, because these events trigger on any button, so `button` allows to distinguish between "right-mousedown" and "left-mousedown".
+از طرف دیگر، کنترل‌کننده‌های `mousedown` و `mouseup‍‍` ممکن است به `event.button` نیاز پیدا کنند، زیرا این رویدادها به واسطه هر کلیدی اتفاق می‌افتند، پس `button` این امکان را می‌دهد تا "کلیک کلید راست" و "کلیک کلید چپ" موس را تشخیص دهیم.
 
-The possible values of `event.button` are:
+مقادیر قابل قبول برای `event.button`:
 
-| Button state | `event.button` |
-|--------------|----------------|
-| Left button (primary) | 0 |
-| Middle button (auxiliary) | 1 |
-| Right button (secondary) | 2 |
-| X1 button (back) | 3 |
-| X2 button (forward) | 4 |
+| `event.button` | وضعیت کلید |
+|----------------|------------|
+| 0 | کلید چپ (اصلی) |
+| 1 | کلید وسط (کمکی) |
+| 2 | کلید راست (ثانوی) |
+| 3 | کلید X1 (عقب) |
+| 4 | کلید X2 (جلو) |
 
-Most mouse devices only have the left and right buttons, so possible values are `0` or `2`. Touch devices also generate similar events when one taps on them.
+بیشتر موس‌ها فقط کلید چپ و راست را دارند، پس مقادیر احتمالی `0` و `2` هستند. دستگاه‌های لمسی نیز هنگامی که روی آنها ضربه زده شود رفتار مشابهی‌ را ایجاد می‌کنند.
 
-Also there's `event.buttons` property that has all currently pressed buttons as an integer, one bit per button. In practice this property is very rarely used, you can find details at [MDN](mdn:/api/MouseEvent/buttons) if you ever need it.
+همچنین خصوصیت `event.buttons` همه کلیدهایی که هم اکنون فشرده شده‌اند را دارد، یک بیت به ازای هر کلید. در عمل این خصوصیت به ندرت استفاده می‌شود، در صورت نیاز، می‌توانید جزئیات بیشتری را [MDN](mdn:/api/MouseEvent/buttons) پیدا کنید.
 
-```warn header="The outdated `event.which`"
-Old code may use `event.which` property that's an old non-standard way of getting a button, with possible values:
+```warn header="`event.which` منسوخ شده"
+کدهای قدیمی احتمالا از خاصیت `event.which` استفاده کرده‌اند که یک روش غیر استاندارد برای گرفتن کلید ها است. مقادیر احتمالی به صورت زیر است:
 
-- `event.which == 1` – left button,
-- `event.which == 2` – middle button,
-- `event.which == 3` – right button.
+- `event.which == 1` – کلید چپ,
+- `event.which == 2` – کلید وسط,
+- `event.which == 3` – کلید راست.
 
-As of now, `event.which` is deprecated, we shouldn't use it.
+به دلیل اینکه ‍`event.which` منسوخ شده، نباید از از آن استفاده کنیم.
 ```
 
-## Modifiers: shift, alt, ctrl and meta
+## اصلاح‌کننده‌ها: shift, alt, ctrl و meta
 
-All mouse events include the information about pressed modifier keys.
+همه رویدادهای موس اطلاعاتی درباره کلیدهای اصلاح‌کننده دارند.
 
-Event properties:
+خصوصیات رویداد:
 
 - `shiftKey`: `key:Shift`
-- `altKey`: `key:Alt` (or `key:Opt` for Mac)
+- `altKey`: `key:Alt` (یا `key:Opt` برای مک)
 - `ctrlKey`: `key:Ctrl`
-- `metaKey`: `key:Cmd` for Mac
+- `metaKey`: `key:Cmd` برای مک
 
-They are `true` if the corresponding key was pressed during the event.
+مقادیر آنها در صورتی که کلید اشاره‌شده در حین رویداد فشرده شده بود، `true` است.
 
-For instance, the button below only works on `key:Alt+Shift`+click:
+برای مثال، کلید زیر تنها روی `key:Alt+Shift`+کلیک کار می‌کند:
 
 ```html autorun height=60
-<button id="button">Alt+Shift+Click on me!</button>
+<button id="button">روی من Alt+Shift+کلیک کنید</button>
 
 <script>
   button.onclick = function(event) {
 *!*
     if (event.altKey && event.shiftKey) {
 */!*
-      alert('Hooray!');
+      alert('هووورا!');
     }
   };
 </script>
 ```
 
-```warn header="Attention: on Mac it's usually `Cmd` instead of `Ctrl`"
-On Windows and Linux there are modifier keys `key:Alt`, `key:Shift` and `key:Ctrl`. On Mac there's one more: `key:Cmd`, corresponding to the property `metaKey`.
+```warn header="توجه: روی مک معمولا `Cmd`بجای`Ctrl`خواهد بود"
+روی ویندوز و لینوکس کلیدهای اصلاح‌کننده `key:Alt`, `key:Shift`و`key:Ctrl`وجود خواهد داشت. روی مک یک کلید دیگر نیز وجود دارد: `key:Cmd`, متناظر خاصیت `metaKey`.
 
-In most applications, when Windows/Linux uses `key:Ctrl`, on Mac `key:Cmd` is used.
+در بیشتر اپلیکیشن‌ها هنگامی که در ونیدوز/لینوکس از `key:Ctrl` استفاده می‌شود، روی مک `key:Cmd` خواهد بود.
 
-That is: where a Windows user presses `key:Ctrl+Enter` or `key:Ctrl+A`, a Mac user would press `key:Cmd+Enter` or `key:Cmd+A`, and so on.
+به این معنی که: وقتی یک کاربر ویندوز کلید `key:Ctrl+Enter` یا `key:Ctrl+A` را می‌فشارد، یک کاربر مک باید `key:Cmd+Enter` یا `key:Cmd+A` را فشار دهد، مشابه برای بقیه کلیدها.
 
-So if we want to support combinations like `key:Ctrl`+click, then for Mac it makes sense to use `key:Cmd`+click. That's more comfortable for Mac users.
+پس اگر میخواهیم ترکیبی مانند `key:Ctrl`+کلیک را پشتیبانی کنیم، پس برای مک باید از `key:Cmd`+کلیک استفاده کنیم. این ترکیب برای کاربران مک راحت‌تر خواهد بود.
 
-Even if we'd like to force Mac users to `key:Ctrl`+click -- that's kind of difficult. The problem is: a left-click with `key:Ctrl` is interpreted as a *right-click* on MacOS, and it generates the `contextmenu` event, not `click` like Windows/Linux.
+حتی اگر میخواستیم که کاربر مک را وادار کنیم که از `key:Ctrl`+کلیک استفاده کند، دشوار خواهد بود. مشکل این است که: یک چپ-کلیک با `key:Ctrl` همانند یک *right-click* شناخته می‌شود، و رویداد `contextmenu` اتفاق می‌افتد، نه اینکه مانند ویندوز/لینوکس رویداد `click` اتفاق بیفتد.
 
-So if we want users of all operating systems to feel comfortable, then together with `ctrlKey` we should check `metaKey`.
+پس اگر می‌خواهیم که کاربران همه سیستم‌های عامل احساس راحتی داشته باشند، پس همراه `ctrlKey` باید `metaKey` را نیز چک کنیم.
 
-For JS-code it means that we should check `if (event.ctrlKey || event.metaKey)`.
+در کد جاوااسکریپت به این معنی است که میخواهیم ‍`if (event.ctrlKey || event.metaKey)` را چک کنیم.
 ```
 
-```warn header="There are also mobile devices"
-Keyboard combinations are good as an addition to the workflow. So that if the visitor uses a keyboard -- they work. 
+```warn header="همچنین دستگاه‌های موبایل نیز وجود دارند"
+ترکیب‌های کلید‌های کیبورد به عنوان یک قابلیت اضافه خوب هستند. اگر کاربر از کیبورد استفاده کند، کار می‌کنند.
 
-But if their device doesn't have it -- then there should be a way to live without modifier keys.
+اما اگر دستگاه آنها کیبورد نداشته باشد، پس باید راهی برای زندگی کردن بدون از کلیدهای اصلاح‌کننده باشد.
 ```
 
-## Coordinates: clientX/Y, pageX/Y
+## مختصات: clientX/Y, pageX/Y
 
-All mouse events provide coordinates in two flavours:
+همه رویدادهای موس مختصاتی را به دو صورت در اختیار ما قرار می‌دهند:
 
-1. Window-relative: `clientX` and `clientY`.
-2. Document-relative: `pageX` and `pageY`.
+1. مربوط به پنجره: `clientX` و `clientY`.
+2. مربوط به سند: `pageX` و `pageY`.
 
-We already covered the difference between them in the chapter <info:coordinates>.
+ما قبلا درباره تفاوت آنها در بخش <info:coordinates> صحبت کرده‌ایم.
 
-In short, document-relative coordinates `pageX/Y` are counted from the left-upper corner of the document, and do not change when the page is scrolled, while `clientX/Y` are counted from the current window left-upper corner. When the page is scrolled, they change.
+به اختصار، مختصات مربوط به سند `pageX/Y` از گوشه‌ی بالا چپ سند محاسبه می‌شوند و زمانی که صفحه پیمایش شود تغییر نمی‌کنند، درصورتی که `clientX/Y` از گوشه بالا چپ پنجره فعلی شمرده می‌شوند. زمانی که صفحه پیمایش شود، تفییر می‌کنند.
 
-For instance, if we have a window of the size 500x500, and the mouse is in the left-upper corner, then `clientX` and `clientY` are `0`, no matter how the page is scrolled. 
+برای مثال، اگر یک پنجره با اندازه 500x500 داشته باشیم، و اشاره‌گر موس در گوشه بالا چپ باشد، پس `clientX` و `clientY` مقدار `0` خواهند داشت، بدون توجه به اینکه صفحه چقدر پیمایش شده باشد.
 
-And if the mouse is in the center, then `clientX` and `clientY` are `250`, no matter what place in the document it is. They are similar to `position:fixed` in that aspect.
+و اگر اشاره‌گر موس در وسط باشد، پس `clientX` و `clientY` مقدار `250` خواهند داشت بدون توجه به اینکه کجای سند قرار دارند. از این نظر مانند `position:fixed` هستند.
 
 ````online
-Move the mouse over the input field to see `clientX/clientY` (the example is in the `iframe`, so coordinates are relative to that `iframe`):
+موس را روی قسمت ورودی ببرید تا مقادیر `clientX/clientY` ببینید (مثال در `iframe` وجود دارد, پس مقادیر نسبت به آن `iframe` خواهند بود):
 
 ```html autorun height=50
-<input onmousemove="this.value=event.clientX+':'+event.clientY" value="Mouse over me">
+<input onmousemove="this.value=event.clientX+':'+event.clientY" value="موس را روی من ببر">
 ```
 ````
 
-## Preventing selection on mousedown
+## جلوگیری از انتخاب در هنگام mousedown
 
-Double mouse click has a side-effect that may be disturbing in some interfaces: it selects text.
+دابل کلیک موس یک اثر جانبی دارد که در بعضی از رابطه‌های کاربری مزاحم است: متن را انتخاب می‌کند.
 
-For instance, double-clicking on the text below selects it in addition to our handler:
+برای مثال، دابل کلیک کردن روی متن زیر آنرا انتخاب می‌کند که در کنترل‌کندده ما تعریف نشده:
 
 ```html autorun height=50
-<span ondblclick="alert('dblclick')">Double-click me</span>
+<span ondblclick="alert('dblclick')">من را دوبار کلیک کن</span>
 ```
 
-If one presses the left mouse button and, without releasing it, moves the mouse, that also makes the selection, often unwanted.
+اگر یک نفر کلید چپ موس را فشار دهد، بدون رها کردن آن، اشاره‌گر موس را جابجا کند، بیشتر اوقات متن را انتخاب می‌کند که ممکن است باب میل ما نباشد.
 
-There are multiple ways to prevent the selection, that you can read in the chapter <info:selection-range>.
+راه های مختلفی برای جلوگیری از آن انتخاب وجود دارد، که می‌توانید در بخش <info:selection-range> مشاهده کنید.
 
-In this particular case the most reasonable way is to prevent the browser action on `mousedown`. It prevents both these selections:
+منطقی‌ترین راه در این مورد به خصوص این است که از رفتار پیش‌فرض مرورگر هنگام `mousedown` جلوگیری کنیم. این کد از انتخاب هر دو این‌ها جلوگیری می‌کند:
 
 ```html autorun height=50
-Before...
-<b ondblclick="alert('Click!')" *!*onmousedown="return false"*/!*>
-  Double-click me
+قبل...
+<b ondblclick="alert('کلیک!')" *!*onmousedown="return false"*/!*>
+  من را دوبار کلیک کن
 </b>
-...After
+...بعد
 ```
 
-Now the bold element is not selected on double clicks, and pressing the left button on it won't start the selection.
+اکنون قسمت پررنگ، هنگام دابل کلیک قابل انتخاب نیست و کلیک چپ روی آن، انتخاب کردن متن را آغاز نمی‌کند.‎
 
-Please note: the text inside it is still selectable. However, the selection should start not on the text itself, but before or after it. Usually that's fine for users.
+توجه داشته باشید: متن داخل آن هنوز قابل انتخاب است. هرچند، انتخاب نباید از روی خود متن، بلکه از قبل یا بعد آن آغاز شود. معمولا کاربران با این رفتار مشکلی ندارند.
 
-````smart header="Preventing copying"
-If we want to disable selection to protect our page content from copy-pasting, then we can use another event: `oncopy`.
+````smart header="جلوگیری از کپی کردن"
+اگر می‌خواهیم که انتخاب شدن متن‌را به منظور محافظت کردن از اطلاعات صفحه در مقابل کپی شدن انجام دهیم، می‌توانیم از یک رویداد دیگر استفاده کینم: `oncopy`.
 
 ```html autorun height=80 no-beautify
-<div *!*oncopy="alert('Copying forbidden!');return false"*/!*>
-  Dear user,
-  The copying is forbidden for you.
-  If you know JS or HTML, then you can get everything from the page source though.
+<div *!*oncopy="alert('کپی کردن ممنوع!');return false"*/!*>
+  کاربر عزیز,
+  کپی کردن برای شما ممنوع شده است.
+  هرچند اگر که اچ‌تی‌ام‌ال یا جاوااسکریپت بلد هستید، می‌توانید هرچه نیاز دارید از سورس صفحه پیدا کنید.
 </div>
 ```
-If you try to copy a piece of text in the `<div>`, that won't work, because the default action `oncopy` is prevented.
+اگر تلاش کنید که اطلاعات متنی داخل `<div>` را کپی کنید، کار نمی‌کند، زیرا از رفتار پیش‌فرض مرورگر در هنگام `oncopy` جلوگیری شده.
 
-Surely the user has access to HTML-source of the page, and can take the content from there, but not everyone knows how to do it.
+قاعدتا کاربر به سورس اچ‌تی‌ام‌ال صفحه دسترسی دارد، و می‌تواند هر اطلاعاتی که بخواهد از آنجا بردارد، اما هرکسی نمی‌داند چطور این‌ کار انجام می‌شود.
 ````
 
-## Summary
+## خلاصه
 
-Mouse events have the following properties:
+رویداد‌های موس این خصوصیات‌را دارند:
 
-- Button: `button`.
-- Modifier keys (`true` if pressed): `altKey`, `ctrlKey`, `shiftKey` and `metaKey` (Mac).
-  - If you want to handle `key:Ctrl`, then don't forget Mac users, they usually use `key:Cmd`, so it's better to check `if (e.metaKey || e.ctrlKey)`.
+- کلید: `button`.
+- کلید‌های اصلاح‌کننده (`true` اگر فشار داده‌شوند): `altKey`, `ctrlKey`, `shiftKey` و `metaKey` (مک).
+  - اگر می‌خواهید که `key:Ctrl` را کنترل کنید، کاربران مک‌را فراموش نکنید،‌آنها معمولا از `key:Cmd` استفاده می‌کند. پس بهتر این است که `if (e.metaKey || e.ctrlKey)` چک شود.
 
-- Window-relative coordinates: `clientX/clientY`.
-- Document-relative coordinates: `pageX/pageY`.
+- مختصات مربوط به پنجره: `clientX/clientY`.
+- مختصاب مربوط به سند: `pageX/pageY`.
 
-The default browser action of `mousedown` is text selection, if it's not good for the interface, then it should be prevented.
+رفتار پیشفرض مروگر در هنگام `mousedown` انتخاب متن است. اگر این برای رابط کاربری شما مناسب نیست، پس باید از آن جلوگیری شود.
 
-In the next chapter we'll see more details about events that follow pointer movement and how to track element changes under it.
+در بخش بعدی ما با جزئیات بیشتری درباره رویدادهایی که حرکت اشاره‌گر موس‌را دنبال می‌کنند، و همچنین با چگونگی شناسایی تغییرات عنصر زیر آن‌ آشنا خواهیم شد.

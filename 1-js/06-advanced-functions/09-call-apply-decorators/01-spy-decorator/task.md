@@ -2,17 +2,17 @@ importance: 5
 
 ---
 
-# Spy decorator
+# دکوراتور جاسوس
 
-Create a decorator `spy(func)` that should return a wrapper that saves all calls to function in its `calls` property.
+یک دکوراتور `spy(func)` بسازید که باید دربرگیرنده‌ای را برگرداند که تمام فراخوانی‌های تابع را درون ویژگی `calls` خودش ذخیره کند.
 
-Every call is saved as an array of arguments.
+هر فراخوانی به عنوان آرایه‌ای از آرگومان‍‌ها ذخیره می‌شود.
 
-For instance:
+برای مثال:
 
 ```js
 function work(a, b) {
-  alert( a + b ); // work is an arbitrary function or method
+  alert( a + b ); // یک تابع یا متد داخواه است work تابع
 }
 
 *!*
@@ -27,4 +27,4 @@ for (let args of work.calls) {
 }
 ```
 
-P.S. That decorator is sometimes useful for unit-testing. Its advanced form is `sinon.spy` in [Sinon.JS](http://sinonjs.org/) library.
+پی‌نوشت: این دکوراتور بعضی اوقات در انجام یونیت تست (unit-testing) کاربرد دارد. شکل پیشرفته آن `sinon.spy` در کتابخانه [Sinon.JS](http://sinonjs.org/) است.

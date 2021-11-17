@@ -1,31 +1,31 @@
 
-# Property getters and setters
+# متدهای getter و setter ویژگی
 
-There are two kinds of object properties.
+ویژگی‌های شیء دو نوع هستند.
 
-The first kind is *data properties*. We already know how to work with them. All properties that we've been using until now were data properties.
+نوع اول *ویژگی‌های داده‌ای* هستند. ما از قبل می‌دانیم چگونه با آن‌ها کار کنیم. تمام ویژگی‌هایی که تا حالا استفاده می‌کردیم ویژگی‌های داده‌ای بودند.
 
-The second type of properties is something new. It's *accessor properties*. They are essentially functions that execute on getting and setting a value, but look like regular properties to an external code.
+نوع دوم ویژگی‌ها چیزی جدید است. این نوع *ویژگی‌های اکسسر(accessor)* است. اساسا آن‌ها تابع‌هایی هستند که برای گرفتن و تنظیم‌کردن مقداری اجرا می‌شوند اما برای یک شیء خارجی مانند ویژگی‌های معمولی به نظر می‌رسند.
 
-## Getters and setters
+## متدهای getter و setter
 
-Accessor properties are represented by "getter" and "setter" methods. In an object literal they are denoted by `get` and `set`:
+ویژگی‌های اکسسر توسط متدهای "getter" و "setter" نمایش داده می‌شوند. در یک شیء لیترال، این متدها با `get` و `set` مشخص می‌شوند.
 
 ```js
 let obj = {
   *!*get propName()*/!* {
-    // getter, the code executed on getting obj.propName
+    // اجرا می‌شود obj.propName کد آن برای دریافت ،getter
   },
 
   *!*set propName(value)*/!* {
-    // setter, the code executed on setting obj.propName = value
+    // اجرا می‌شود obj.propName = value کد آن برای تنظیم ،setter
   }
 };
 ```
 
-The getter works when `obj.propName` is read, the setter -- when it is assigned.
+متد getter زمانی که `obj.propName` خوانده می‌شود کار می‌کند؛ متد setter زمانی که این ویژگی مقداردهی می‌شود.
 
-For instance, we have a `user` object with `name` and `surname`:
+برای مثال، ما یک شیء `user` حاوی `name` و `surname` داریم:
 
 ```js
 let user = {
@@ -34,7 +34,7 @@ let user = {
 };
 ```
 
-Now we want to add a `fullName` property, that should be `"John Smith"`. Of course, we don't want to copy-paste existing information, so we can implement it as an accessor:
+حالا می‌خواهیم یک ویژگی `fullName` اضافه کنیم که باید `"John Smith"` باشد. قطعا، نمی‌توانیم اطلاعات موجود را کپی‌پِیست کنیم پس می‌توانیم آن را به عنوان یک اکسسر پیاده‌سازی کنیم:
 
 ```js run
 let user = {
@@ -53,9 +53,9 @@ alert(user.fullName); // John Smith
 */!*
 ```
 
-From the outside, an accessor property looks like a regular one. That's the idea of accessor properties. We don't *call* `user.fullName` as a function, we *read* it normally: the getter runs behind the scenes.
+از بیرون، یک ویژگی اکسسر مانند ویژگی‌ای معمولی به نظر می‌رسد. این ایده‌ی ویژگی‌های اکسسر است. ما `user.fullName` را به عنوان یک تابع *فراخوانی* نمی‌کنیم بلکه آن را به صورت عادی *دریافت* می‌کنیم:
 
-As of now, `fullName` has only a getter. If we attempt to assign `user.fullName=`, there will be an error:
+از حالا به بعد، `fullName` فقط یک getter دارد. اگر ما بخواهیم `user.fullName` را مقداردهی کنیم، ارور ایجاد می‌شود:
 
 ```js run
 let user = {
@@ -65,11 +65,11 @@ let user = {
 };
 
 *!*
-user.fullName = "Test"; // Error (property has only a getter)
+user.fullName = "Test"; // (دارد getter ویژگی فقط) ارور
 */!*
 ```
 
-Let's fix it by adding a setter for `user.fullName`:
+بیایید با اضافه کردن setter برای `user.fullName` این مشکل را برطرف کنیم:
 
 ```js run
 let user = {
@@ -87,29 +87,29 @@ let user = {
 */!*
 };
 
-// set fullName is executed with the given value.
+// همراه با مقدار داده شده اجرا می‌شود set fullName
 user.fullName = "Alice Cooper";
 
 alert(user.name); // Alice
 alert(user.surname); // Cooper
 ```
 
-As the result, we have a "virtual" property `fullName`. It is readable and writable.
+در نتیجه، ما یک ویژگی «مجازیِ» `fullName` داریم. هم قابل خواندن است و هم قابل نوشتن.
 
-## Accessor descriptors
+## توصیف‌کننده‌های اکسسر
 
-Descriptors for accessor properties are different from those for data properties.
+توصیف‌کننده‌های ویژگی‌های اکسسز نسبت به توصیف‌کننده‌های ویژگی‌های داده‌ای تفاوت دارند.
 
-For accessor properties, there is no `value` or `writable`, but instead there are `get` and `set` functions.
+برای ویژگی‌های اکسسر، `value` یا `writable` وجود ندارد اما به جای آن‌ها تابع‌های `get` و `set` وجود دارد.
 
-That is, an accessor descriptor may have:
+یعنی اینکه یک توصیف‌کننده اکسسز ممکن است این‌ها را داشته باشد:
 
-- **`get`** -- a function without arguments, that works when a property is read,
-- **`set`** -- a function with one argument, that is called when the property is set,
-- **`enumerable`** -- same as for data properties,
-- **`configurable`** -- same as for data properties.
+- متد **`get`** -- تابعی بدون آرگومان، زمانی که ویژگی‌ای خوانده شود کار می‌کند،
+- متد **`set`** -- تابعی با یک آرگومان، زمانی که ویژگی مقداردهی می‌شود فراخوانی می‌شود،
+- ویژگی **`enumerable`** -- مشابه به ویژگی‌های داده‌ای،
+- ویژگی **`configurable`** -- مشابه به ویژگی‌های داده‌ای،
 
-For instance, to create an accessor `fullName` with `defineProperty`, we can pass a descriptor with `get` and `set`:
+برای مثال، برای ایجاد اکسسر `fullName` با استفاده از `defineProperty`، می‌توانیم توصیف‌کننده‌ای شامل `get` و `set` قرار دهیم:
 
 ```js run
 let user = {
@@ -134,13 +134,13 @@ alert(user.fullName); // John Smith
 for(let key in user) alert(key); // name, surname
 ```
 
-Please note that a property can be either an accessor (has `get/set` methods) or a data property (has a `value`), not both.
+لطفا در نظر داشته باشید که یک ویژگی یا می‌تواند اکسسر باشد (دارای متدهای `get/set` است) یا یک ویژگی داده‌ای (یک `value` دارد)، نه هر دو.
 
-If we try to supply both `get` and `value` in the same descriptor, there will be an error:
+اگر ما تلاش کنیم که هم `get` و هم `value` را داخل یک توصیف‌کننده قرار دهیم، ارور ایجاد می‌شود:
 
 ```js run
 *!*
-// Error: Invalid property descriptor.
+// ارور: توصیف‌کننده‌ی غیر قابل قبول ویژگی
 */!*
 Object.defineProperty({}, 'prop', {
   get() {
@@ -151,11 +151,11 @@ Object.defineProperty({}, 'prop', {
 });
 ```
 
-## Smarter getters/setters
+## متدهای getter/setter هوشمندتر
 
-Getters/setters can be used as wrappers over "real" property values to gain more control over operations with them.
+متدهای getter/setter می‌توانند به عنوان دربرگیرنده برای مقدار ویژگی‌های «واقعی» استفاده شوند تا کنترل بیشتری بر روی عملیات با آن‌ها داشته باشیم.
 
-For instance, if we want to forbid too short names for `user`, we can have a setter `name` and keep the value in a separate property `_name`:
+برای مثال، اگر ما بخواهیم اسم‌های خیلی کوتاه‌ها را برای `user` ممنوع کنیم، می‌توانیم یک setter `name` داشته باشیم و مقدار را درون ویژگی جداگانه‌ی `_name` ذخیره کنیم:
 
 ```js run
 let user = {
@@ -165,7 +165,7 @@ let user = {
 
   set name(value) {
     if (value.length < 4) {
-      alert("Name is too short, need at least 4 characters");
+      alert("اسم خیلی کوتاه است، حداقل به 4 کاراکتر نیاز دارد");
       return;
     }
     this._name = value;
@@ -175,19 +175,19 @@ let user = {
 user.name = "Pete";
 alert(user.name); // Pete
 
-user.name = ""; // Name is too short...
+user.name = ""; // ...اسم خیلی کوتاه است
 ```
 
-So, the name is stored in `_name` property, and the access is done via getter and setter.
+پس اسم در ویژگی `_name` ذخیره شده است و دسترسی گرفتن توسط getter و setter انجام می‌گیرد.
 
-Technically, external code is able to access the name directly by using `user._name`. But there is a widely known convention that properties starting with an underscore `"_"` are internal and should not be touched from outside the object.
+از لحاظ فنی، کد بیرونی می‌تواند به صورت مستقیم با استفاده از `user._name` به اسم دسترسی پیدا کند. اما یک قرارداد شناخته شده وجود دارد که ویژگی‌هایی که با یک زیرخط (underscore) `"_"` شروع می‌شوند، داخلی هستند و نباید بیرون از شیء به آن‌ها کاری داشت.
 
 
-## Using for compatibility
+## استفاده برای سازگاری
 
-One of the great uses of accessors is that they allow to take control over a "regular" data property at any moment by replacing it with a getter and a setter and tweak its behavior.
+یکی از بهترین کاربردهای اکسسرها این است که آن‌ها به ما اجازه می‌دهند که در هر زمان یک ویژگی داده‌ای «معمولی» را از طریق جایگزین کردن آن با یک getter و یک setter کنترل کنیم و رفتار آن را تغییر دهیم.
 
-Imagine we started implementing user objects using data properties `name` and `age`:
+تصور کنید که ما شروع به پیاده‌سازی شیءهایی مربوط به کاربران کردیم که شامل ویژگی‌های داده‌ای `name` و `age` هستند:
 
 ```js
 function User(name, age) {
@@ -200,7 +200,7 @@ let john = new User("John", 25);
 alert( john.age ); // 25
 ```
 
-...But sooner or later, things may change. Instead of `age` we may decide to store `birthday`, because it's more precise and convenient:
+...اما دیر یا زود، همه چیز ممکن است تغییر کند. به جای `age` ممکن است تصمیم بگیریم که `birthday` را ذخیره کنیم چون دقیق‌تر و مناسب‌تر است:
 
 ```js
 function User(name, birthday) {
@@ -211,13 +211,13 @@ function User(name, birthday) {
 let john = new User("John", new Date(1992, 6, 1));
 ```
 
-Now what to do with the old code that still uses `age` property?
+حالا با کد قدیمی که هنوز هم از ویژگی `age` استفاده می‌کند چه کار کنیم؟
 
-We can try to find all such places and fix them, but that takes time and can be hard to do if that code is used by many other people. And besides, `age` is a nice thing to have in `user`, right?
+می‌توانیم چنین جاهایی را در کد پیدا و آن‌ها را درست کنیم اما این کار زمان‌بر است و اگر آن کد توسط افراد دیگری در حال استفاده باشد ممکن است این کار سخت شود. و همچنین، `age` چیز خوبی است که در `user` داشته باشیم نه؟
 
-Let's keep it.
+بیایید آن را نگه داریم.
 
-Adding a getter for `age` solves the problem:
+اضافه کردن یک getter برای `age` مشکل را حل می‌کند:
 
 ```js run no-beautify
 function User(name, birthday) {
@@ -225,7 +225,7 @@ function User(name, birthday) {
   this.birthday = birthday;
 
 *!*
-  // age is calculated from the current date and birthday
+  // از تاریخ کنونی و تاریخ تولد محاسبه می‌شود age
   Object.defineProperty(this, "age", {
     get() {
       let todayYear = new Date().getFullYear();
@@ -237,8 +237,8 @@ function User(name, birthday) {
 
 let john = new User("John", new Date(1992, 6, 1));
 
-alert( john.birthday ); // birthday is available
-alert( john.age );      // ...as well as the age
+alert( john.birthday ); // قابل دسترس است birthday
+alert( john.age );      // age درست مانند...
 ```
 
-Now the old code works too and we've got a nice additional property.
+حالا کد قدیمی هم کار می‌کند و ما یک ویژگی اضافی خوب گرفتیم.
