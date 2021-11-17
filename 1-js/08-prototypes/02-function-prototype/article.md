@@ -32,7 +32,7 @@ let rabbit = new Rabbit("خرگوش سفید"); //  rabbit.__proto__ == animal
 alert( rabbit.eats ); // true
 ```
 
-تنظیم `Rabbit.prototype = animal` به معنای واقعی کلمه این موارد را بیان می‌کند: «وقتی یک `new Rabbit` ایجاد شد، `[[Prototype]]` آن را به `animal` اختصاص دهید".
+تنظیم `Rabbit.prototype = animal` به معنای واقعی کلمه این موارد را بیان می‌کند: «وقتی یک `new Rabbit` ایجاد شد، `[[Prototype]]` آن را به `animal` اختصاص دهید«.
 
 این تصویر نتیجه است:
 
