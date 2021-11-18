@@ -1,6 +1,7 @@
-We can use such approach if we are sure that `"constructor"` property has the correct value.
+اگر مطمئن باشیم که ویژگی `"constructor"` مقدار صحیحی دارد، می‌توانیم از چنین رویکردی استفاده کنیم.
 
 For instance, if we don't touch the default `"prototype"`, then this code works for sure:
+برای مثال، اگر `"prototype"` پیش‌فرض را تغییر ندهیم، این کد مطمئناً کار می‌کند:
 
 ```js run
 function User(name) {
@@ -10,14 +11,16 @@ function User(name) {
 let user = new User('John');
 let user2 = new user.constructor('Pete');
 
-alert( user2.name ); // Pete (worked!)
+alert( user2.name ); // Pete (کار کرد!)
 ```
 
 It worked, because `User.prototype.constructor == User`.
+کار کرد، زیرا `User.prototype.constructor == User`. 
 
 ..But if someone, so to speak, overwrites `User.prototype` and forgets to recreate `constructor` to reference `User`, then it would fail.
+..اما اگر شخصی، به اصطلاح، `User.prototype` را بازنویسی کند و فراموش کند `constructor` را برای ارجاع به `User` بازآفرینی کند، آنگاه شکست خواهد خورد.
 
-For instance:
+برای مثال:
 
 ```js run
 function User(name) {
@@ -33,17 +36,17 @@ let user2 = new user.constructor('Pete');
 alert( user2.name ); // undefined
 ```
 
-Why `user2.name` is `undefined`?
+چرا `user2.name` برابر با `undefined` است؟
 
-Here's how `new user.constructor('Pete')` works:
+در اینجا نحوه عملکرد `new user.constructor('Pete')` وجود دارد:
 
-1. First, it looks for `constructor` in `user`. Nothing.
-2. Then it follows the prototype chain. The prototype of `user` is `User.prototype`, and it also has no `constructor` (because we "forgot" to set it right!).
-3. Going further up the chain, `User.prototype` is a plain object, its prototype is the built-in `Object.prototype`. 
-4. Finally, for the built-in `Object.prototype`, there's a built-in `Object.prototype.constructor == Object`. So it is used.
+1. ابتدا، به دنبال `constructor` در `user` می‌گردد. هیچ چیز.
+2. سپس از زنجیره پروتوتایپ پیروی می‌کند. پروتوتایپ `user` برابر با `User.prototype` است، و همچنین `constructor` ندارد (زیرا ما «فراموش کردیم» آن را درست تنظیم کنیم!).
+3. در ادامه زنجیره، `User.prototype` یک شیء ساده است، پروتوتایپ آن `Object.prototype` داخلی است.
+4. در نهایت، برای `Object.prototype` داخلی، `Object.prototype.constructor == Object` داخلی وجود دارد. بنابراین استفاده می‌شود.
 
-Finally, at the end, we have `let user2 = new Object('Pete')`. 
+سر‌انجام، در پایان، `let user2 = new Object('Pete')` را داریم.
 
-Probably, that's not what we want. We'd like to create `new User`, not `new Object`. That's the outcome of the missing `constructor`.
+احتمالاً این چیزی نیست که ما می‌خواهیم. ما می‌خواهیم `new User` ایجاد کنیم، نه `new Object`. این نتیجه `constructor` گم شده است.
 
-(Just in case you're curious, the `new Object(...)` call converts its argument to an object. That's a theoretical thing, in practice no one calls `new Object` with a value, and generally we don't use `new Object` to make objects at all).
+(فقط در صورتی که کنجکاو باشید، فراخوانی `new Object(...)` آرگومان خود را به یک شیء تبدیل می‌کند. این یک چیز تئوری است، در عمل هیچ کس `new Object` را با مقدار نمی‌نامد، و عموما ما اصلاً از `new Object` برای ساختن اشیا استفاده نمی‌کنیم).
