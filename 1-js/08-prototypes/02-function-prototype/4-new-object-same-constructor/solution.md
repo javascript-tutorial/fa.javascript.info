@@ -1,6 +1,5 @@
 اگر مطمئن باشیم که ویژگی `"constructor"` مقدار صحیحی دارد، می‌توانیم از چنین رویکردی استفاده کنیم.
 
-For instance, if we don't touch the default `"prototype"`, then this code works for sure:
 برای مثال، اگر `"prototype"` پیش‌فرض را تغییر ندهیم، این کد مطمئناً کار می‌کند:
 
 ```js run
@@ -14,10 +13,8 @@ let user2 = new user.constructor('Pete');
 alert( user2.name ); // Pete (کار کرد!)
 ```
 
-It worked, because `User.prototype.constructor == User`.
 کار کرد، زیرا `User.prototype.constructor == User`. 
 
-..But if someone, so to speak, overwrites `User.prototype` and forgets to recreate `constructor` to reference `User`, then it would fail.
 ..اما اگر شخصی، به اصطلاح، `User.prototype` را بازنویسی کند و فراموش کند `constructor` را برای ارجاع به `User` بازآفرینی کند، آنگاه شکست خواهد خورد.
 
 برای مثال:
