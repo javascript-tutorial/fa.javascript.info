@@ -166,11 +166,11 @@ let rabbit = {
 
 *!*
 rabbit.walk = function() {
-  alert("Rabbit! Bounce-bounce!");
+  alert("خرگوش! بپر-بپر!");
 };
 */!*
 
-rabbit.walk(); // Rabbit! Bounce-bounce!
+rabbit.walk(); // !خرگوش! بپر-بپر
 ```
 
 از این پس، فراخوانی `rabbit.walk()` بدون اینکه از پروتوتایپ استفاده کند، بلافاصله متد را در شیء پیدا و آن را اجرا می‌کند:
