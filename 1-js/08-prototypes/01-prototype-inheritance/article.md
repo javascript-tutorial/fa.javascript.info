@@ -8,7 +8,7 @@
 
 ## ویژگی [[Prototype]]
 
-در جاوااسکریپت، شیءها یک ویژگی پنهانی `[[Prototype]]` (دقیقا همانطور که در مشخصات زبان نام‌گذاری شده) دارند که یا `null` است یا به شیء دیگر رجوع می‌کند. آن شیء «یک پروتوتایپ» نامیده می‌شود:
+در جاوااسکریپت، شیءها یک ویژگی پنهانی `[[Prototype]]` (دقیقا همانطور که در مشخصات زبان نام‌گذاری شده) دارند که یا `null` است یا به شیء دیگر رجوع می‌کند. آن شیء «یک پروتوتایپ (prototype)» نامیده می‌شود:
 
 ![prototype](object-prototype-empty.svg)
 
@@ -260,11 +260,11 @@ alert(animal.isSleeping); // undefined (چنین ویژگی‌ای درون پر
 
 در نتیجه، متدها به اشتراک گذاشته می‌شوند، اما وضعیت شیء نه.
 
-## for..in loop
+## حلقه for..in
 
-The `for..in` loop iterates over inherited properties too.
+حلقه `for..in` در ویژگی‌های به ارث‌برده‌شده هم حلقه می‌زند.
 
-For instance:
+برای مثال:
 
 ```js run
 let animal = {
@@ -277,19 +277,19 @@ let rabbit = {
 };
 
 *!*
-// Object.keys only returns own keys
+// فقط کلیدهای خود شیء را برمی‌گرداند Object.keys
 alert(Object.keys(rabbit)); // jumps
 */!*
 
 *!*
-// for..in loops over both own and inherited keys
-for(let prop in rabbit) alert(prop); // jumps, then eats
+// هم در کلیدهای خود شیء و هم کلیدهای به ارث‌برده‌شده حلقه می‌زنند for..in حلقه‌های
+for(let prop in rabbit) alert(prop); // eats سپس ،jumps
 */!*
 ```
 
-If that's not what we want, and we'd like to exclude inherited properties, there's a built-in method [obj.hasOwnProperty(key)](mdn:js/Object/hasOwnProperty): it returns `true` if `obj` has its own (not inherited) property named `key`.
+اگر این چیزی نیست که ما می‌خواهیم و دوست داریم که شامل ویژگی‌های به ارث‌برده‌شده نشود، یک متد درون‌ساخت [obj.hasOwnProperty(key)](mdn:js/Object/hasOwnProperty) وجود دارد: این متد اگر `obj` ویژگی خودش (نه به ارث‌برده‌شده) به نام `key` را داشته باشد `true` برمی‌گرداند.
 
-So we can filter out inherited properties (or do something else with them):
+پس می‌تواند ویژگی‌های به ارث‌برده‌شده را جداسازی کنیم (یا کاری دیگر با آن‌ها کنیم):
 
 ```js run
 let animal = {
@@ -305,35 +305,35 @@ for(let prop in rabbit) {
   let isOwn = rabbit.hasOwnProperty(prop);
 
   if (isOwn) {
-    alert(`Our: ${prop}`); // Our: jumps
+    alert(`برای ما: ${prop}`); // jumps :برای ما
   } else {
-    alert(`Inherited: ${prop}`); // Inherited: eats
+    alert(`به ارث‌برده‌شده: ${prop}`); // eats :به ارث‌برده‌شده
   }
 }
 ```
 
-Here we have the following inheritance chain: `rabbit` inherits from `animal`, that inherits from `Object.prototype` (because `animal` is a literal object `{...}`, so it's by default), and then `null` above it:
+اینجا ما زنجیره ارث‌بری پایین را داریم: `rabbit` از `animal` ارث‌بری می‌کند که خود آن از `Object.prototype` ارث‌بری می‌کند (چون `animal` یک شیء لیترال `{...}` است، پس این موضوع پیش‌فرض انجام می‌شود) و سپس `null` در بالای آن:
 
 ![](rabbit-animal-object.svg)
 
-Note, there's one funny thing. Where is the method `rabbit.hasOwnProperty` coming from? We did not define it. Looking at the chain we can see that the method is provided by `Object.prototype.hasOwnProperty`. In other words, it's inherited.
+در نظر داشته باشید که یک موضوع جالب وجود دارد. متد `rabbit.hasOwnProperty` از کجا می‌آید؟ ما آن را تعریف نکردیم. با نگاه به زنجیره می‌توانیم ببینیم که متد توسط `Object.prototype.hasOwnProperty` فراهم شده. به عبارتی دیگر، به ارث برده شده است.
 
-...But why does `hasOwnProperty` not appear in the `for..in` loop like `eats` and `jumps` do, if `for..in` lists inherited properties?
+...اما اگر `for..in` ویژگی‌های به ارث‌برده‌شده را لیست می‌کند، چرا `hasOwnProperty` مثل `eats` و `jumps` که در حلقه `for..in` ظاهر شدند، عمل نکرد؟
 
-The answer is simple: it's not enumerable. Just like all other properties of `Object.prototype`, it has `enumerable:false` flag. And `for..in` only lists enumerable properties. That's why it and the rest of the `Object.prototype` properties are not listed.
+جواب ساده است: این ویژگی غیر قابل شمارش است. درست ماند تمام ویژگی‌های دیگر `Object.prototype`، این ویژگی پرچم `enumerable: false` دارد. و `for..in` فقط ویژگی‌های قابل شمارش را لیست می‌کند. به همین دلیل این ویژگی و دیگر ویژگی‌های `Object.prototype` لیست نشده‌اند.
 
-```smart header="Almost all other key/value-getting methods ignore inherited properties"
-Almost all other key/value-getting methods, such as `Object.keys`, `Object.values` and so on ignore inherited properties.
+```smart header="تقریبا تمام متدهای دریافت کلید/مقدار دیگر هم ویژگی‌های به ارث‌برده‌شده را نادیده می‌گیرند"
+تقریبا تمام متدهای دریافت کلید/مقدار دیگر، مانند `Object.keys`، `Object.values` و بقیه، ویژگی‌های به ارث‌برده‌شده را نادیده می‌گیرند.
 
-They only operate on the object itself. Properties from the prototype are *not* taken into account.
+آن‌ها فقط روی خود شیء کارشان را انجام می‌دهند. ویژگی‌های پروتوتایپ به حساب *نمی‌آیند*.
 ```
 
-## Summary
+## خلاصه
 
-- In JavaScript, all objects have a hidden `[[Prototype]]` property that's either another object or `null`.
-- We can use `obj.__proto__` to access it (a historical getter/setter, there are other ways, to be covered soon).
-- The object referenced by `[[Prototype]]` is called a "prototype".
-- If we want to read a property of `obj` or call a method, and it doesn't exist, then JavaScript tries to find it in the prototype.
-- Write/delete operations act directly on the object, they don't use the prototype (assuming it's a data property, not a setter).
-- If we call `obj.method()`, and the `method` is taken from the prototype, `this` still references `obj`. So methods always work with the current object even if they are inherited.
-- The `for..in` loop iterates over both its own and its inherited properties. All other key/value-getting methods only operate on the object itself.
+- در جاوااسکریپت، تمام شیءها یک ویژگی پنهان `[[Prototype]]` دارند که یا برابر با شیء است یا `null`.
+- ما می‌توانیم از `obj.__proto__` برای دسترسی به آن استفاده کنیم (یک getter/setter قدیمی، راه‌های دیگری هم وجود دارد که به زودی پوشش داده می‌شوند).
+- شیءای که توسط `[[Prototype]]` به آن رجوع می‌شود «پروتوتایپ (prototype)» نام دارد.
+- اگر ما بخواهیم ویژگی‌ای از `obj` را بخوانیم یا متدی از آن را فراخوانی کنیم و وجود نداشته باشد، سپس جاوااسکریپت سعی می‌کند که آن را درون پروتوتایپ پیدا کند.
+- عملیات نوشتن/حذف کردن به طور مستقیم روی شیء انجام می‌شوند، آن‌ها از پروتوتایپ استفاده نمی‌کنند (با فرض اینکه یک ویژگی داده‌ای است، نه یک setter).
+- اگر ما `obj.method()` را فراخوانی کنیم و `method` از پروتوتایپ گرفته شود، `this` هنوز هم به `obj` رجوع می‌کند. پس متدها همیشه با شیء کنونی کار می‌کنند حتی اگر آن‌ها به ارث‌برده‌شده باشند.
+- حلقه `for..in` هم درون ویژگی‌های خود شیء و هم درون ویژگی‌های به ارث‌برده‌شده حلقه می‌زند. تمام متدهای گرفتن کلید/مقدار فقط روی خود شیء کارشان را انجام می‌دهند.
