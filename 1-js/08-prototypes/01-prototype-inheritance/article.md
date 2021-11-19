@@ -202,33 +202,33 @@ let admin = {
 
 alert(admin.fullName); // John Smith (*)
 
-// setter triggers!
+// !فعال می‌شود setter
 admin.fullName = "Alice Cooper"; // (**)
 
-alert(admin.fullName); // Alice Cooper, state of admin modified
-alert(user.fullName); // John Smith, state of user protected
+alert(admin.fullName); // Alice Cooper ،تغییر یافت admin وضعیت
+alert(user.fullName); // John Smith ،حفظ شد user وضعیت
 ```
 
 اینجا در خط `(*)` ویژگی `admin.fullName` در پروتوتایپ `user` دارای یک getter است، پس این تابع فراخوانی می‌شود. و در خط `(**)` ویژگی در پروتوتایپ دارای یک setter است پس این تابع فراخوانی می‌شود.
 
-## The value of "this"
+## مقدار "this"
 
-An interesting question may arise in the example above: what's the value of `this` inside `set fullName(value)`? Where are the properties `this.name` and `this.surname` written: into `user` or `admin`?
+در مثال بالا ممکن است یک مثال جالب مطرح شود: مقدار `this` درون `set fullName(value)` چیست؟ ویژگی‌های `this.name` و `this.surname` در کجا نوشته می‌شوند: درون `user` یا `admin`؟
 
-The answer is simple: `this` is not affected by prototypes at all.
+جواب ساده است: پروتوتایپ‌ها بر روی `this` هیچ تاثیری ندارند.
 
-**No matter where the method is found: in an object or its prototype. In a method call, `this` is always the object before the dot.**
+**مهم نیست که متد کجا پیدا شده است: درون شیء یا پروتوتایپ آن. در فراخوانی یک متد، `this` همیشه برابر با شیء قبل از نقطه است.**
 
-So, the setter call `admin.fullName=` uses `admin` as `this`, not `user`.
+پس فراخوانی setter `admin.fullName=` از `admin` به عنوان `this` استفاده می‌کند نه `user`.
 
-That is actually a super-important thing, because we may have a big object with many methods, and have objects that inherit from it. And when the inheriting objects run the inherited methods, they will modify only their own states, not the state of the big object.
+در واقع این یک موضوع بسیار مهم است چون ما ممکن است شیءای بزرگ با متدهایی زیاد و شیءهایی که از آن ارث‌بری می‌کنند داشته باشیم. و زمانی که شیءهای وارث از متدهای به ارث‌برده‌شده استفاده می‌کنند، آن‌ها فقط وضعیت خودشان را تغییر می‌دهند نه وضعیت شیء بزرگ را.
 
-For instance, here `animal` represents a "method storage", and `rabbit` makes use of it.
+برای مثال، اینجا `animal` نشان دهنده یک «حافظه متد» است و `rabbit` از آن استفاده می‌کند.
 
-The call `rabbit.sleep()` sets `this.isSleeping` on the `rabbit` object:
+فراخوانی `rabbit.sleep()` ویژگی `this.isSleeping` را در شیء `rabbit` مقداردهی می‌کند:
 
 ```js run
-// animal has methods
+// متدهایی دارد animal
 let animal = {
   walk() {
     if (!this.isSleeping) {
@@ -245,20 +245,20 @@ let rabbit = {
   __proto__: animal
 };
 
-// modifies rabbit.isSleeping
+// را تغییر می‌دهیم rabbit.isSleeping
 rabbit.sleep();
 
 alert(rabbit.isSleeping); // true
-alert(animal.isSleeping); // undefined (no such property in the prototype)
+alert(animal.isSleeping); // undefined (چنین ویژگی‌ای درون پروتوتایپ نیست)
 ```
 
-The resulting picture:
+تصویر حاصل:
 
 ![](proto-animal-rabbit-walk-3.svg)
 
-If we had other objects, like `bird`, `snake`, etc., inheriting from `animal`, they would also gain access to methods of `animal`. But `this` in each method call would be the corresponding object, evaluated at the call-time (before dot), not `animal`. So when we write data into `this`, it is stored into these objects.
+اگر ما شیءهای دیگری هم داشتیم، مثل `bird`، `snake` و غیره، که از `animal` ارث‌بری می‌کردند، آن‌ها هم به متدهای `animal` دسترسی پیدا می‌کردند. اما `this` در هر فراخوانی متد، شیء متناظر خواهد بود، که در زمان فراخوانی ارزیابی می‌شود (قبل از نقطه)، نه `animal`. پس زمانی که ما درون `this` داده قرار می‌دهیم، درون این شیءها ذخیره می‌شود.
 
-As a result, methods are shared, but the object state is not.
+در نتیجه، متدها به اشتراک گذاشته می‌شوند، اما وضعیت شیء نه.
 
 ## for..in loop
 
