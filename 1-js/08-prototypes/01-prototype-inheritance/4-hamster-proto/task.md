@@ -2,11 +2,11 @@ importance: 5
 
 ---
 
-# Why are both hamsters full?
+# چرا هر دو دو همستر سیر هستند؟
+ 
+ما دو همستر داریم: `speedy` و `lazy` که از شیء عمومی `hamster` ارث‌بری می‌کنند.
 
-We have two hamsters: `speedy` and `lazy` inheriting from the general `hamster` object. 
-
-When we feed one of them, the other one is also full. Why? How can we fix it?
+زمانی که ما به یکی از آن‌ها غذا می‌دهیم، دیگری هم سیر می‌شود. چرا؟ چگونه می‌توانیم این مشکل را رفع کنیم؟
 
 ```js run
 let hamster = {
@@ -25,11 +25,11 @@ let lazy = {
   __proto__: hamster
 };
 
-// This one found the food
-speedy.eat("apple");
-alert( speedy.stomach ); // apple
+// این همستر غذا را پیدا کرد
+speedy.eat("سیب");
+alert( speedy.stomach ); // سیب
 
-// This one also has it, why? fix please.
-alert( lazy.stomach ); // apple
+// این همستر هم غذا را دارد، چرا؟ لطفا این را درست کنید.
+alert( lazy.stomach ); // سیب
 ```
 

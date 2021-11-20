@@ -1,18 +1,18 @@
-Let's look carefully at what's going on in the call `speedy.eat("apple")`.
+بیایید با دقت نگاه کنیم که در فراخوانی `speedy.eat("سیب")` چه اتفاقی می‌افتد.
 
-1. The method `speedy.eat` is found in the prototype (`=hamster`), then executed with `this=speedy` (the object before the dot).
+1. متد `speedy.eat` درون پروتوتایپ (`=hamster`) پیدا شده، سپس با `this=speedy` اجرا می‌شود (شیء قبل از نقطه).
 
-2. Then `this.stomach.push()` needs to find `stomach` property and call `push` on it. It looks for `stomach` in `this` (`=speedy`), but nothing found.
+2. سپس `this.stomach.push()` باید ویژگی `stomach` را پیدا کند و `push` را روی آن فراخوانی کند. به نظر می‌رسد این متد درون `this` (`=speedy`) به دنبال `stomach` می‌گردد، اما چیزی پیدا نشد.
 
-3. Then it follows the prototype chain and finds `stomach` in `hamster`.
+3. سپس زنجیره پروتوتایپ را دنبال می‌کند و `stomach` را درون `hamster` پیدا می‌کند.
 
-4. Then it calls `push` on it, adding the food into *the stomach of the prototype*.
+4. سپس `push` را روی آن فراخوانی می‌کند، که غذا را به *stomach درون پروتوتایپ* اضافه می‌کند.
 
-So all hamsters share a single stomach!
+پس تمام همسترها شکم (stomach) یکسانی را به اشتراک می‌گذارند!
 
-Both for `lazy.stomach.push(...)` and `speedy.stomach.push()`, the property `stomach` is found in the prototype (as it's not in the object itself), then the new data is pushed into it.
+هم برای `lazy.stomach.push(...)` و `speedy.stomach.push()`، ویژگی `stomach` درون پروتوتایپ پیدا شده است (چون درون خود شیء وجود ندارد)، سپس داده جدید به داخل آن فرستاده می‌شود.
 
-Please note that such thing doesn't happen in case of a simple assignment `this.stomach=`:
+لطفا توجه کنید که در صورت وجود یک مقداردهی ساده `this.stomach=` چنین چیزی اتفاق نمی‌افتد:
 
 ```js run
 let hamster = {
@@ -20,7 +20,7 @@ let hamster = {
 
   eat(food) {
 *!*
-    // assign to this.stomach instead of this.stomach.push
+    // this.stomach.push به جای this.stomach برابر قرار دادن با
     this.stomach = [food];
 */!*
   }
@@ -34,17 +34,17 @@ let lazy = {
   __proto__: hamster
 };
 
-// Speedy one found the food
-speedy.eat("apple");
-alert( speedy.stomach ); // apple
+// غذا را پیدا کرد Speedy همستر
+speedy.eat("سیب");
+alert( speedy.stomach ); // سیب
 
-// Lazy one's stomach is empty
-alert( lazy.stomach ); // <nothing>
+// خالی است Lazy شکم همستر
+alert( lazy.stomach ); // <هیچی>
 ```
 
-Now all works fine, because `this.stomach=` does not perform a lookup of `stomach`. The value is written directly into `this` object.
+حالا همه چیز به درستی کار می‌کند، چون `this.stomach=` در جست و جوی `stomach` نیست. مقدار به صورت مستقیم درون شیء `this` نوشته می‌شود.
 
-Also we can totally avoid the problem by making sure that each hamster has their own stomach:
+همچنین می‌توانیم با اطمینان از اینکه هر همستر stomach خودش را دارا می‌باشد از این مشکل جلوگیری کنیم:
 
 ```js run
 let hamster = {
@@ -69,12 +69,12 @@ let lazy = {
 */!*
 };
 
-// Speedy one found the food
-speedy.eat("apple");
-alert( speedy.stomach ); // apple
+// غذا را پیدا کرد Speedy همستر
+speedy.eat("سیب");
+alert( speedy.stomach ); // سیب
 
-// Lazy one's stomach is empty
-alert( lazy.stomach ); // <nothing>
+// خالی است Lazy شکم همستر
+alert( lazy.stomach ); // <هیچی>
 ```
 
-As a common solution, all properties that describe the state of a particular object, like `stomach` above, should be written into that object. That prevents such problems.
+به عنوان یک راه‌حل عام، تمام ویژگی‌هایی که وضعیت یک شیء خاص را توصیف می‌کنند، مانند `stomach` بالا، باید درون همان شیء نوشته شوند. این کار از بروز مشکلات جلوگیری می‌کند.
