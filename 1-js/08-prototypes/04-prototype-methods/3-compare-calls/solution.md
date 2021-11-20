@@ -1,7 +1,7 @@
 
-The first call has `this == rabbit`, the other ones have `this` equal to `Rabbit.prototype`, because it's actually the object before the dot.
+اولین فراخوانی `this == rabbit` دارد، سایر فراخوانی‌ها `this` برابر با `Rabbit.prototype` دارند، زیرا در واقع شیء قبل از نقطه است.
 
-So only the first call shows `Rabbit`, other ones show `undefined`:
+بنابراین فقط اولین تماس `خرگوش` را نشان می‌دهد، سایر تماس‌ها `undefined` را نشان می‌دهند:
 
 ```js run
 function Rabbit(name) {
@@ -11,9 +11,9 @@ Rabbit.prototype.sayHi = function() {
   alert( this.name );
 }
 
-let rabbit = new Rabbit("Rabbit");
+let rabbit = new Rabbit("خرگوش");
 
-rabbit.sayHi();                        // Rabbit
+rabbit.sayHi();                        // خرگوش
 Rabbit.prototype.sayHi();              // undefined
 Object.getPrototypeOf(rabbit).sayHi(); // undefined
 rabbit.__proto__.sayHi();              // undefined
