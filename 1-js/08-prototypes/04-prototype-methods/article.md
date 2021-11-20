@@ -88,7 +88,6 @@ let clone = Object.create(Object.getPrototypeOf(obj), Object.getOwnPropertyDescr
 
 همانطور که می‌دانیم، اشیاء می‌توانند به عنوان آرایه‌های انجمنی برای ذخیره جفت‌های کلید/مقدار استفاده شوند.
 
-...But if we try to store *user-provided* keys in it (for instance, a user-entered dictionary), we can see an interesting glitch: all keys work fine except `"__proto__"`.
 ...اما اگر بخواهیم کلیدهای *ارائه شده توسط کاربر* را در آن ذخیره کنیم (مثلاً یک فرهنگ لغت وارد شده توسط کاربر)، می‌توانیم یک اشکال جالب را ببینیم: همه کلیدها به جز `"__proto__"` به خوبی کار می‌کنند.
 
 این مثال را بررسی کنید:
