@@ -36,7 +36,6 @@ Object.setPrototypeOf(rabbit, {}); // نمونه اولیه خرگوش را به
 */!*
 ```
 
-`Object.create` has an optional second argument: property descriptors. We can provide additional properties to the new object there, like this:
 `Object.create` یک آرگومان دوم اختیاری دارد: توصیفگرهای ویژگی. ما می‌توانیم ویژگی‌های اضافی را برای شیء جدید در آنجا ارائه دهیم، مانند این:
 
 ```js run
