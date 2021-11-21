@@ -44,57 +44,57 @@ alert(obj.toString === Object.prototype.toString); //true
 alert(Object.prototype.__proto__); // null
 ```
 
-## Other built-in prototypes
+## دیگر پروتوتایپ‌های درون‌ساخت
 
-Other built-in objects such as `Array`, `Date`, `Function` and others also keep methods in prototypes.
+شیءهای دیگر درون‌ساخت مانند `Array`، `Date`، `Function` و بقیه هم متدهایی درون پروتوتایپ‌ها ذخیره می‌کنند.
 
-For instance, when we create an array `[1, 2, 3]`, the default `new Array()` constructor is used internally. So `Array.prototype` becomes its prototype and provides methods. That's very memory-efficient.
+برای مثال، زمانی که ما آرایه `[1, 2, 3]` را می‌سازیم، سازنده `new Array()` به صورت درونی استفاده می‌شود. پس `Array.prototype` پروتوتایپ آن می‌شود و متدها را فراهم می‌کند. این کار برای حافظه خیلی کارآمد است.
 
-By specification, all of the built-in prototypes have `Object.prototype` on the top. That's why some people say that "everything inherits from objects".
+با توجه به خصوصیات زبان، تمام پروتوتایپ‌ها، `Object.prototype` را بالای خود دارند. به همین دلیل است که بعضی افراد می‌گویند «همه چیز از شیءها ارث‌بری می‌کنند».
 
-Here's the overall picture (for 3 built-ins to fit):
+اینجا یک تصویر کلی داریم (برای 3 سازنده درون‌ساخت تا جا شود):
 
 ![](native-prototypes-classes.svg)
 
-Let's check the prototypes manually:
+بیایید به صورت دستی پروتوتایپ‌ها را بررسی کنیم:
 
 ```js run
 let arr = [1, 2, 3];
 
-// it inherits from Array.prototype?
+// ارث‌بری می‌کند؟ Array.prototype آیا از
 alert( arr.__proto__ === Array.prototype ); // true
 
-// then from Object.prototype?
+// چطور؟ Object.prototype سپس از
 alert( arr.__proto__.__proto__ === Object.prototype ); // true
 
-// and null on the top.
+// قرار دارد null و در بالا
 alert( arr.__proto__.__proto__.__proto__ ); // null
 ```
 
-Some methods in prototypes may overlap, for instance, `Array.prototype` has its own `toString` that lists comma-delimited elements:
+بعضی از متدها در پروتوتایپ‌ها ممکن است با هم تطابق داشته باشند، برای مثال `Array.prototype` متد `toString` خودش را دارد که المان‌ها را به صورت جداشده توسط کاما لیست می‌کند:
 
 ```js run
 let arr = [1, 2, 3]
-alert(arr); // 1,2,3 <-- the result of Array.prototype.toString
+alert(arr); // 1,2,3 <-- Array.prototype.toString نتیجه‌ی
 ```
 
-As we've seen before, `Object.prototype` has `toString` as well, but `Array.prototype` is closer in the chain, so the array variant is used.
+همانطور که قبلا دیدیم، `Object.prototype` هم متد `toString` را دارد اما `Array.prototype` در زنجیره نزدیک‌تر است پس نوع آرایه آن استفاده می‌شود.
 
 
 ![](native-prototypes-array-tostring.svg)
 
 
-In-browser tools like Chrome developer console also show inheritance (`console.dir` may need to be used for built-in objects):
+ابزارهای درون مرورگر مانند کنسول توسعه‌دهنده کروم هم ارث‌بری را نشان می‌دهند (ممکن است برای شیءهای درون‌ساخت نیاز باشد که `console.dir` استفاده شود):
 
 ![](console_dir_array.png)
 
-Other built-in objects also work the same way. Even functions -- they are objects of a built-in `Function` constructor, and their methods (`call`/`apply` and others) are taken from `Function.prototype`. Functions have their own `toString` too.
+بقیه شیءهای درون‌ساخت هم این چنین کار می‌کنند. حتی تابع‌ها -- آن‌ها شیءهایی از سازنده `Function` هستند و متدهای آن‌ها (`call`/`apply` و بقیه) از `Function.prototype` گرفته می‌شوند. تابع‌ها `toString` خودشان را هم دارند.
 
 ```js run
 function f() {}
 
 alert(f.__proto__ == Function.prototype); // true
-alert(f.__proto__.__proto__ == Object.prototype); // true, inherit from objects
+alert(f.__proto__.__proto__ == Object.prototype); // true ،ارث‌بری از شیءها
 ```
 
 ## Primitives
