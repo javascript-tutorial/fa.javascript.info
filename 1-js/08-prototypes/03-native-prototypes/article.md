@@ -109,9 +109,9 @@ alert(f.__proto__.__proto__ == Object.prototype); // true ،ارث‌بری از
 مقدارهای خاص `null` و `undefined` استثنا هستند. آن‌ها دربرگیرنده شیء ندارند پس متدها و ویژگی‌هایی هم برای آن‌ها موجود نیست. و پروتوتایپ‌های متناظر هم وجود ندارد.
 ```
 
-## Changing native prototypes [#native-prototype-change]
+## تغییر پروتوتایپ‌های نیتیو [#native-prototype-change]
 
-Native prototypes can be modified. For instance, if we add a method to `String.prototype`,  it becomes available to all strings:
+پروتوتایپ‌های نیتیو (Native prototypes) می‌توانند تغییر کنند. برای مثال، اگر ما متدی را به `String.prototype` اضافه کنیم، این متد برای تمام رشته‌ها در دسترس خواهد بود:
 
 ```js run
 String.prototype.show = function() {
@@ -121,32 +121,32 @@ String.prototype.show = function() {
 "BOOM!".show(); // BOOM!
 ```
 
-During the process of development, we may have ideas for new built-in methods we'd like to have, and we may be tempted to add them to native prototypes. But that is generally a bad idea.
+در حین فرایند توسعه، ممکن است ایده‌هایی برای متدهای درون‌ساخت جدیدی به ذهن‌مان برسد که بخواهیم آن‌ها را داشته باشیم و ممکن است مشتاق باشیم که آن‌ها را به پروتوتایپ‌های نیتیو اضافه کنیم. اما به طور کلی این کار بدی است.
 
 ```warn
-Prototypes are global, so it's easy to get a conflict. If two libraries add a method `String.prototype.show`, then one of them will be overwriting the method of the other.
+پروتوتایپ‌ها گلوبال هستند، پس دریافت تناقض آسان است. اگر دو کتابخانه متد `String.prototype.show` را اضافه کنند، یکی از آن‌ها ممکن است متد دیگری را بازنویسی کند.
 
-So, generally, modifying a native prototype is considered a bad idea.
+پس به طور کلی، تغییر یک پروتوتایپ نیتیو کار بدی محسوب می‌شود.
 ```
 
-**In modern programming, there is only one case where modifying native prototypes is approved. That's polyfilling.**
+**در برنامه‌نویسی مدرن، فقط یک مورد است که تغییر دادن پروتوتایپ‌های نیتیو قابل قبول است. آن هم پلیفیل‌سازی است.**
 
-Polyfilling is a term for making a substitute for a method that exists in the JavaScript specification, but is not yet supported by a particular JavaScript engine.
+پلیفیل‌سازی (polyfilling) عبارتی برای ایجاد یک جایگزین برای متدی است که در خصوصیات جاوااسکریپت وجود دارد اما هنوز توسط موتور جاوااسکریپت خاصی پشتیبانی نمی‌شود.
 
-We may then implement it manually and populate the built-in prototype with it.
+سپس می‌توانیم آن را به صورت دستی پیاده‌سازی و به پروتوتایپ درون‌ساخت اضافه کنیم.
 
-For instance:
+برای مثال:
 
 ```js run
-if (!String.prototype.repeat) { // if there's no such method
-  // add it to the prototype
+if (!String.prototype.repeat) { // اگر چنین متدی وجود نداشته باشد
+  // آن را به پروتوتایپ اضافه کن
 
   String.prototype.repeat = function(n) {
-    // repeat the string n times
+    // بار تکرار کن n رشته را
 
-    // actually, the code should be a little bit more complex than that
-    // (the full algorithm is in the specification)
-    // but even an imperfect polyfill is often considered good enough
+    // در واقع کد باید نسبت به این کمی بیشتر پیچیده باشد
+    // (الگوریتم کامل درون خصوصیات زبان موجود است)
+    // اما حتی یک پلیفیل ناکامل هم اغلب اوقات کافی است
     return new Array(n + 1).join(this);
   };
 }
