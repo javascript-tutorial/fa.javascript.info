@@ -97,16 +97,16 @@ alert(f.__proto__ == Function.prototype); // true
 alert(f.__proto__.__proto__ == Object.prototype); // true ،ارث‌بری از شیءها
 ```
 
-## Primitives
+## مقدارهای اصلی
 
-The most intricate thing happens with strings, numbers and booleans.
+پیچیده‌ترین چیزی که با رشته‌ها، عددها و بولین‌ها اتفاق می‌افتد.
 
-As we remember, they are not objects. But if we try to access their properties, temporary wrapper objects are created using built-in constructors `String`, `Number` and `Boolean`. They provide the methods and disappear.
+همانطور که به یاد داریم، آن‌ها شیء نیستند. اما اگر سعی کنیم که به ویژگی‌های آن‌ها دسترسی پیدا کنیم، شیءهای دربرگیرنده موقتی با استفاده از سازنده‌های درون‌ساخت `String`، `Number` و `Boolean` ساخته می‌شوند. آن‌ها متدها را فراهم می‌کنند و سپس ناپدید می‌شوند.
 
-These objects are created invisibly to us and most engines optimize them out, but the specification describes it exactly this way. Methods of these objects also reside in prototypes, available as `String.prototype`, `Number.prototype` and `Boolean.prototype`.
+این شیءها به صورت پنهانی ایجاد می‌شوند و بیشتر موتورها آن‌ها را بهینه می‌کنند اما خصوصیات زبان دقیقا به همین صورت آن‌ها را توصیف می‌کند. متدهای این شیءها هم درون پروتوتایپ‌ها قرار دارند و به صورت `String.prototype`، `Number.prototype` و `Boolean.prototype` در دسترس هستند.
 
-```warn header="Values `null` and `undefined` have no object wrappers"
-Special values `null` and `undefined` stand apart. They have no object wrappers, so methods and properties are not available for them. And there are no corresponding prototypes either.
+```warn header="مقدارهای `null` و `undefined` دارای دربرگیرنده شیء نیستند"
+مقدارهای خاص `null` و `undefined` استثنا هستند. آن‌ها دربرگیرنده شیء ندارند پس متدها و ویژگی‌هایی هم برای آن‌ها موجود نیست. و پروتوتایپ‌های متناظر هم وجود ندارد.
 ```
 
 ## Changing native prototypes [#native-prototype-change]
