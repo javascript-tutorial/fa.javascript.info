@@ -1,33 +1,33 @@
-# Native prototypes
+# پروتوتایپ‌های نیتیو
 
-The `"prototype"` property is widely used by the core of JavaScript itself. All built-in constructor functions use it.
+ویژگی `"prototype"` به طور گسترده توسط هسته خود جاوااسکریپت استفاده می‌شود. تمام تابع‌های سازنده درون‌ساخت از آن استفاده می‌کنند.
 
-First we'll see at the details, and then how to use it for adding new capabilities to built-in objects.
+در ابتدا به جزئیات می‌پردازیم و سپس چگونگی استفاده کردن از آن برای اضافه کردن قابلیت‌های جدید به شیءهای درون‌ساخت را بررسی می‌کنیم.
 
-## Object.prototype
+## ویژگی Object.prototype
 
-Let's say we output an empty object:
+فرض کنیم ما یک شیء خالی را خروجی می‌گیریم:
 
 ```js run
 let obj = {};
 alert( obj ); // "[object Object]" ?
 ```
 
-Where's the code that generates the string `"[object Object]"`? That's a built-in `toString` method, but where is it? The `obj` is empty!
+کدی که رشته `"[object Object]"` را ایجاد می‌کند کجاست؟ این کد یک متد `toString` درون‌ساخت است اما کجاست؟ `obj` خالی است!
 
-...But the short notation `obj = {}` is the same as `obj = new Object()`, where `Object` is a built-in object constructor function, with its own `prototype` referencing a huge object with `toString` and other methods.
+...اما نماد کوتاه `obj = {}` با `obj = new Object()` یکسان است، که `Object` یک تابع سازنده درون‌ساخت شیء است، که دارای `prototype` است که به یک شیء بسیار بزرگ حاوی `toString` و متدهای دیگر رجوع می‌کند.
 
-Here's what's going on:
+اینجا می‌بینیم که چه اتفاقی در حال رخ دادن است:
 
 ![](object-prototype.svg)
 
-When `new Object()` is called (or a literal object `{...}` is created), the `[[Prototype]]` of it is set to `Object.prototype` according to the rule that we discussed in the previous chapter:
+زمانی که `new Object()` فراخوانی شود (یا یک شیء لیترال `{...}` ساخته می‌شود)، با توجه به قانونی که ما در فصل قبلی درباره آن صحبت کردیم، `[[Prototype]]` آن در `Object.prototype` قرار داده می‌شود:
 
 ![](object-prototype-1.svg)
 
-So then when `obj.toString()` is called the method is taken from `Object.prototype`.
+سپس زمانی که `obj.toString()` فراخوانی می‌شود، این متد از `Object.prototype` گرفته می‌شود.
 
-We can check it like this:
+می‌توانیم آن را به این صورت بررسی کنیم:
 
 ```js run
 let obj = {};
@@ -38,7 +38,7 @@ alert(obj.toString === obj.__proto__.toString); //true
 alert(obj.toString === Object.prototype.toString); //true
 ```
 
-Please note that there is no more `[[Prototype]]` in the chain above `Object.prototype`:
+لطفا در نظر داشته باشید که `[[Prototype]]` دیگری در زنجیره بالای `Object.prototype` وجود ندارد:
 
 ```js run
 alert(Object.prototype.__proto__); // null
