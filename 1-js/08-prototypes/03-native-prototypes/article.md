@@ -155,17 +155,17 @@ alert( "La".repeat(3) ); // LaLaLa
 ```
 
 
-## Borrowing from prototypes
+## قرض گرفتن از پروتوتایپ‌ها
 
-In the chapter <info:call-apply-decorators#method-borrowing> we talked about method borrowing.
+در فصل <info:call-apply-decorators#method-borrowing> ما درباره قرض گرفتن متد صحبت کردیم.
 
-That's when we take a method from one object and copy it into another.
+این زمانی است که ما متدی را از یک شیء دریافت می‌کنیم و آن را درون شیء دیگری کپی می‌کنیم.
 
-Some methods of native prototypes are often borrowed.
+بعضی از متدهای پروتوتایپ‌های نیتیو اغلب اوقات قرض گرفته می‌شوند.
 
-For instance, if we're making an array-like object, we may want to copy some `Array` methods to it.
+برای مثال، اگر ما در حال ساخت یک شیء آرایه مانند باشیم، ممکن است بخواهیم بعضی از متدهای `Array` را درون آن کپی کنیم.
 
-E.g.
+برای مثال:
 
 ```js run
 let obj = {
@@ -181,18 +181,19 @@ obj.join = Array.prototype.join;
 alert( obj.join(',') ); // Hello,world!
 ```
 
-It works because the internal algorithm of the built-in `join` method only cares about the correct indexes and the `length` property. It doesn't check if the object is indeed an array. Many built-in methods are like that.
+این کد کار می‌کند چون الگوریتم داخلی متد درون‌ساخت `join` فقط به ایندکس‌های درست و ویژگی `length` اهمیت می‌دهد. این متد بررسی نمی‌کند که شیء واقعا یک آرایه باشد. بسیاری از متدهای درون‌ساخت همینگونه هستند.
 
-Another possibility is to inherit by setting `obj.__proto__` to `Array.prototype`, so all `Array` methods are automatically available in `obj`.
+احتمال دیگر هم ارث‌بری است که از طریق برابر قرار دادن `obj.__proto__` با `Array.prototype` انجام می‌شود، پس تمام متدهای `Array` به صورت خودکار درون `obj` قابل دسترسی خواهند بود.
 
-But that's impossible if `obj` already inherits from another object. Remember, we only can inherit from one object at a time.
+اما اگر `obj` از قبل از شیء دیگری ارث‌بری کند این کار ناممکن می‌شود. به یاد داشته باشید، ما به طور همزمان فقط می‌توانیم از یک شیء ارث‌بری کنیم.
 
-Borrowing methods is flexible, it allows to mix functionalities from different objects if needed.
+قرض گرفتن متدها قابل انعطاف است، این روش اجازه می‌دهد که در صورت نیاز عملیات‌هایی از شیءهای مختلف را با هم ترکیب کنیم.
 
-## Summary
+## خلاصه
 
-- All built-in objects follow the same pattern:
-    - The methods are stored in the prototype (`Array.prototype`, `Object.prototype`, `Date.prototype`, etc.)
+- تمام شیءهای درون‌ساخت الگویی یکسان را دنبال می‌کنند:
+    - متدها درون پروتوتایپ ذخیره شده‌اند (`Array.prototype`، `Object.prototype`، `Date.prototype` و غیره.)
     - The object itself stores only the data (array items, object properties, the date)
-- Primitives also store methods in prototypes of wrapper objects: `Number.prototype`, `String.prototype` and `Boolean.prototype`. Only `undefined` and `null` do not have wrapper objects
-- Built-in prototypes can be modified or populated with new methods. But it's not recommended to change them. The only allowable case is probably when we add-in a new standard, but it's not yet supported by the JavaScript engine
+    - خود شیء فقط داده را ذخیره می‌کند (المان‌های آرایه، ویژگی‌های شیء، تاریخ)
+- مقدارهای اصلی هم متدها را درون پروتوتایپ‌های شیءهای دربرگیرنده ذخیره می‌کنند : `Number.prototype`، `String.prototype` و `Boolean.prototype`. فقط `undefined` و `null` شیءهای دربرگیرنده ندارند.
+- پروتوتایپ‌های درون‌ساخت می‌توانند تغییر کنند یا با متدهای جدید پر شوند. اما پیشنهاد نمی‌شود که آن‌ها را تغییر دهید. تنها موردی که مجاز است احتمالا زمانی است که ما می‌خواهیم یک استاندارد جدید را اضافه کنیم اما هنوز توسط موتور جاوااسکریپت پشتیبانی نشده است.
