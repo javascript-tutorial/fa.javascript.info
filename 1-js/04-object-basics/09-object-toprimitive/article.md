@@ -1,24 +1,24 @@
 
-# Object to primitive conversion
+# تبدیل شیء به مقدار اصلی
 
-What happens when objects are added `obj1 + obj2`, subtracted `obj1 - obj2` or printed using `alert(obj)`?
+زمانی که شیءها بهم اضافه شوند `obj1 + obj2`، از هم کم شوند `obj1 - obj2` یا با استفاده از `alert(obj)` چاپ شوند چه اتفاقی می‌افتد؟
 
-JavaScript doesn't exactly allow to customize how operators work on objects. Unlike some other programming languages, such as Ruby or C++, we can't implement a special object method to handle an addition (or other operators).
+جاوااسکریپت اجازه نمی‌دهد که چگونگی کار کردن عملگرها را شخصی‌سازی کنیم. بر خلاف بعضی از زبان‌های برنامه‌نویسی، مثل Ruby یا C++، ما نمی‌توانیم یک متد خاص شیء پیاده‌سازی کنیم تا اضافه کردن (یا بقیه عملگرها) را کنترل کند.
 
-In case of such operations, objects are auto-converted to primitives, and then the operation is carried out over these primitives and results in a primitive value.
+در صورت وجود چنین عملیاتی، شیءها به طور خودکار به مقدار اصلی تبدیل و سپس عملیات با این مقدارهای اصلی انجام می‌شوند و نتایج به شکل یک مقدار اصلی است.
 
-That's an important limitation, as the result of `obj1 + obj2` can't be another object!
+این محدودیت مهمی است چون نتیجه `obj1 + obj2` نمی‌تواند شیء دیگری باشد!
 
-E.g. we can't make objects representing vectors or matrices (or achievements or whatever), add them and expect a "summed" object as the result. Such architectural feats are automatically "off the board".
+برای مثال ما نمی‌توانیم کاری کنیم که شیءها بردارها یا ماتریس‌ها (یا دستاوردها یا هرچیزی) را نمایش دهند، آن‌ها را بهم اضافه کنند و توقع یک شیء «جمع‌شده» را به عنوان نتیجه داشته باشیم. چنین شاهکارهای معماری به طور خودکار «خارج از بحث» هستند.
 
-So, because we can't do much here, there's no maths with objects in real projects. When it happens, it's usually because of a coding mistake.
+پس چون نمی‌توانیم در این باره کار خاصی کنیم، در پروژه‌های واقعی شیءها همراه با ریاضیات استفاده نمی‌شوند. زمانی که اتفاق می‌افتد، معمولا بخاطر یک اشتباه کدنویسی است.
 
-In this chapter we'll cover how an object converts to primitive and how to customize it.
+در این فصل ما چگونگی تبدیل یک شیء به مقدار اصلی و شخصی‌سازی آن را پوشش می‌دهیم.
 
-We have two purposes:
+ما دو هدف داریم:
 
-1. It will allow us to understand what's going on in case of coding mistakes, when such an operation happened accidentally.
-2. There are exceptions, where such operations are possible and look good. E.g. subtracting or comparing dates (`Date` objects). We'll come across them later.
+1. این کار به ما اجازه می‌دهد که متوجه شویم در صورت بروز اشتباه‌های کدنویسی چه چیزی در حال رخ دادن است، زمانی که چنین عملیاتی به صورت تصادفی اتفاق افتاد.
+2. استثناهایی وجود دارد که چنین عملیاتی مجاز هستند و خوب بنظر می‌رسند. مثلا تفریق یا مقایسه تاریخ‌ها (شیءهای `Date`). ما بعدا به سراغ آن می‌رویم.
 
 ## Conversion rules
 
