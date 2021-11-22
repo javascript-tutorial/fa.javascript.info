@@ -20,78 +20,78 @@
 1. این کار به ما اجازه می‌دهد که متوجه شویم در صورت بروز اشتباه‌های کدنویسی چه چیزی در حال رخ دادن است، زمانی که چنین عملیاتی به صورت تصادفی اتفاق افتاد.
 2. استثناهایی وجود دارد که چنین عملیاتی مجاز هستند و خوب بنظر می‌رسند. مثلا تفریق یا مقایسه تاریخ‌ها (شیءهای `Date`). ما بعدا به سراغ آن می‌رویم.
 
-## Conversion rules
+## قوانین تبدیل
 
-In the chapter <info:type-conversions> we've seen the rules for numeric, string and boolean conversions of primitives. But we left a gap for objects. Now, as we know about methods and symbols it becomes possible to fill it.
+در فصل <info:type-conversions> ما قوانینی برای تبدیل عددی، رشته‌ای و بولین مقدارهای اصلی را دیدیم. اما ابهامی برای شیءها به جا گذاشتیم. حالا، چون درباره متدها و سمبل‌ها می‌دانیم این موضوع برای پوشش دادن آماده است.
 
-1. All objects are `true` in a boolean context. There are only numeric and string conversions.
-2. The numeric conversion happens when we subtract objects or apply mathematical functions. For instance, `Date` objects (to be covered in the chapter <info:date>) can be subtracted, and the result of `date1 - date2` is the time difference between two dates.
-3. As for the string conversion -- it usually happens when we output an object like `alert(obj)` and in similar contexts.
+1. در زمینه بولین تمام شیءها `true` هستند. فقط تبدیل عددی و رشته‌ای وجود دارد.
+2. تبدیل عددی زمانی که ما شیءها را از هم کم می‌کنیم یا تابع‌های ریاضی را اعمال می‌کنیم اتفاق می‌افتد. برای مثال، شیءهای `Date` (در فصل <info:date> پوشش داده می‌شوند) می‌توانند از هم کم شوند و نتیجه `date1 - date2` برابر با تفاوت زمانی بین دو تاریخ است.
+3. همینطور برای تبدیل رشته‌ای -- این تبدیل زمانی که ما یک شیء را خروجی می‌گیریم مثل `alert(obj)` و در زمینه‌های مشابه اتفاق می‌افتد.
 
-We can fine-tune string and numeric conversion, using special object methods.
+می‌توانیم با استفاده از متدهای خاص شیء تبدیل رشته‌ای و عددی را تنظیم کنیم.
 
-There are three variants of type conversion, that happen in various situations.
+سه نوع تبدیل داده وجود دارد که در موقعیت‌های گوناگون اتفاق می‌افتد.
 
-They're called "hints", as described in the [specification](https://tc39.github.io/ecma262/#sec-toprimitive):
+همانطور که در [مشخصات زبان](https://tc39.github.io/ecma262/#sec-toprimitive) گفته شده، به آن‌ها «جزء (hint)» می‌گویند:
 
 `"string"`
-: For an object-to-string conversion, when we're doing an operation on an object that expects a string, like `alert`:
+: برای تبدیل شیء به رشته، زمانی که ما در حال انجام کاری روی شیءای هستیم که توقع یک رشته دارد، مثل `alert`:
 
     ```js
-    // output
+    // خروجی
     alert(obj);
 
-    // using object as a property key
+    // استفاده از شیء به عنوان کلید ویژگی
     anotherObj[obj] = 123;
     ```
 
 `"number"`
-: For an object-to-number conversion, like when we're doing maths:
+: برای تبدیل شیء به عدد، مثل زمانی که ما از ریاضی استفاده می‌کنیم:
 
     ```js
-    // explicit conversion
+    // تبدیل واضح
     let num = Number(obj);
 
-    // maths (except binary plus)
-    let n = +obj; // unary plus
+    // ریاضیات (به غیر از عملگر مثبت دوگانه)
+    let n = +obj; // مثبت دوگانه
     let delta = date1 - date2;
 
-    // less/greater comparison
+    // مقایسه بزرگ‌تر/کمتر
     let greater = user1 > user2;
     ```
 
 `"default"`
-: Occurs in rare cases when the operator is "not sure" what type to expect.
+: در موارد کمیاب زمانی که عملگر «مطمئن نیست» که چه نوعی را دریافت می‌کند.
 
-    For instance, binary plus `+` can work both with strings (concatenates them) and numbers (adds them), so both strings and numbers would do. So if a binary plus gets an object as an argument, it uses the `"default"` hint to convert it.
+    برای مثال، عملگر مثبت دوگانه `+` هم می‌تواند با رشته‌ها کار کند (آن‌ها را ادغام کند) و هم با عددها (آن‌ها را اضافه می‌کند)، پس هم رشته‌ها و هم عددها قابل قبول هستند. پس اگر یک مثبت دوگانه شیءای را دریافت کند، از جزء `"default"` برای تبدیل آن استفاده می‌کند.
 
-    Also, if an object is compared using `==` with a string, number or a symbol, it's also unclear which conversion should be done, so the `"default"` hint is used.
+    همچنین، اگر شیءای با استفاده از `==` با یک رشته، عدد یا سمبل مقایسه شود، معلوم نیست که کدام تبدیل باید انجام شود پس جزء `"default"` استفاده می‌شود.
 
     ```js
-    // binary plus uses the "default" hint
+    // استفاده می‌کند "default" مثبت دوگانه از جزء
     let total = obj1 + obj2;
 
-    // obj == number uses the "default" hint
+    // استفاده می‌کند "default" از جزء obj == number
     if (user == 1) { ... };
     ```
 
-    The greater and less comparison operators, such as `<` `>`, can work with both strings and numbers too. Still, they use the `"number"` hint, not `"default"`. That's for historical reasons.
+    عملگرهای مقایسه کمتر و بزرگ‌تر، مانند `<` `>`، می‌توانند هم با رشته‌ها و هم با عددها کار کنند. با این حال، این عملگرها از جزء `"number"` استفاده می‌کنند نه `"default"` بنا به دلایلی مربوط به گذشته.
 
-    In practice though, we don't need to remember these peculiar details, because all built-in objects except for one case (`Date` object, we'll learn it later) implement `"default"` conversion the same way as `"number"`. And we can do the same.
+    اگرچه در عمل، ما نیازی به این جزئیات عجیب نداریم چون تمام شیءهای درون‌ساخت به جز یک مورد (شیء `Date`، بعدا آن را یاد خواهیم گرفت) تبدیل `"default"` را مانند `"number"` پیاده‌سازی می‌کنند. و ما می‌توانیم همین کار را کنیم.
 
-```smart header="No `\"boolean\"` hint"
-Please note -- there are only three hints. It's that simple.
+```smart header="جزء `\"boolean\"` نداریم"
+لطفا توجه کنید -- فقط 3 جزء داریم. به همین سادگی.
 
-There is no "boolean" hint (all objects are `true` in boolean context) or anything else. And if we treat `"default"` and `"number"` the same, like most built-ins do, then there are only two conversions.
+هیچ جزء "boolean" وجود ندارد (در زمینه بولین تمام شیءها `true` هستند) یا هر چیز دیگری. و اگر ما با `"default"` و `"number"` یکسان رفتار کنیم، مثل اکثر شیءهای درون‌ساخت، سپس فقط دو نوع تبدیل وجود دارد.
 ```
 
-**To do the conversion, JavaScript tries to find and call three object methods:**
+**برای انجام تبدیل‌ها، جاوااسکریپت سعی می‌کند که سه متد شیء را پیدا و فراخوانی کند:**
 
-1. Call `obj[Symbol.toPrimitive](hint)` - the method with the symbolic key `Symbol.toPrimitive` (system symbol), if such method exists,
-2. Otherwise if hint is `"string"`
-    - try `obj.toString()` and `obj.valueOf()`, whatever exists.
-3. Otherwise if hint is `"number"` or `"default"`
-    - try `obj.valueOf()` and `obj.toString()`, whatever exists.
+1. فراخوانی `obj[Symbol.toPrimitive](hint)` - متدی شامل کلید سمبلی `Symbol.toPrimitive` (سمبل سیستم)، اگر چنین متدی وجود داشته باشد،
+2. در غیر این صورت اگر جزء `"string"` باشد
+    - متد `obj.toString()` و `obj.valueOf()` را امتحان کن، هر کدام که وجود داشته باشد.
+3. در غیر این صورت اگر جزء `"number"` یا `"default"` باشد
+    - متد `obj.valueOf()` and `obj.toString()` را امتحان کن، هر کدام که وجود داشته باشد.
 
 ## Symbol.toPrimitive
 
