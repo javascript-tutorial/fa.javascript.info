@@ -93,21 +93,21 @@
 3. در غیر این صورت اگر جزء `"number"` یا `"default"` باشد
     - متد `obj.valueOf()` and `obj.toString()` را امتحان کن، هر کدام که وجود داشته باشد.
 
-## Symbol.toPrimitive
+## متد Symbol.toPrimitive
 
-Let's start from the first method. There's a built-in symbol named `Symbol.toPrimitive` that should be used to name the conversion method, like this:
+بیایید از اولین متد شروع کنیم. یک سمبل درون‌ساخت به نام `Symbol.toPrimitive` وجود دارد که باید برای نام‌گذاری متد تبدیل استفاده شود، مثلا اینگونه:
 
 ```js
 obj[Symbol.toPrimitive] = function(hint) {
-  // here goes the code to convert this object to a primitive
-  // it must return a primitive value
-  // hint = one of "string", "number", "default"
+  // اینجا کدی برای تبدیل این شیء به مقدار اصلی قرار می‌گیرد
+  // این کد باید یک مقدار اصلی برگرداند
+  // "string" ،"number" ،"default" یکی از = hint
 };
 ```
 
-If the method `Symbol.toPrimitive` exists, it's used for all hints, and no more methods are needed.
+اگر متد `Symbol.toPrimitive` وجود داشته باشد، برای تمام جزءها استفاده می‌شود و متد دیگری نیاز نیست.
 
-For instance, here `user` object implements it:
+برای مثال، اینجا شیء `user` این متد را پیاده‌سازی می‌کند:
 
 ```js run
 let user = {
@@ -120,13 +120,13 @@ let user = {
   }
 };
 
-// conversions demo:
+// دموی تبدیل کردن:
 alert(user); // hint: string -> {name: "John"}
 alert(+user); // hint: number -> 1000
 alert(user + 500); // hint: default -> 1500
 ```
 
-As we can see from the code, `user` becomes a self-descriptive string or a money amount depending on the conversion. The single method `user[Symbol.toPrimitive]` handles all conversion cases.
+همانطور که از کد می‌بینیم، با توجه به تبدیل `user` به رشته‌ای خودتعریف‌کننده یا مقداری پول تبدیل می‌شود. متد `user[Symbol.toPrimitive]` به تنهایی تمام موارد تبدیل را به عهده می‌گیرد.
 
 
 ## toString/valueOf
