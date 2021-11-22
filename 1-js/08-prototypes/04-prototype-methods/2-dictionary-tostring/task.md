@@ -2,30 +2,30 @@ importance: 5
 
 ---
 
-# Add toString to the dictionary
+# toString را به فرهنگ لغت اضافه کنید
 
-There's an object `dictionary`, created as `Object.create(null)`, to store any `key/value` pairs.
+یک شیء `dictionary` وجود دارد که به عنوان `Object.create(null)` ایجاد شده است تا هر جفت `key/value` را ذخیره کند.
 
-Add method `dictionary.toString()` into it, that should return a comma-delimited list of keys. Your `toString` should not show up in `for..in` over the object.
+متد `dictionary.toString()` را به آن اضافه کنید، که باید فهرستی از کلیدها با کاما را برگرداند. `toString` شما نباید در `for..in` روی شیء نشان داده شود.
 
-Here's how it should work:
+به این صورت باید کار کند:
 
 ```js
 let dictionary = Object.create(null);
 
 *!*
-// your code to add dictionary.toString method
+// dictionary.toString کد شما برای افزودن متد
 */!*
 
-// add some data
-dictionary.apple = "Apple";
-dictionary.__proto__ = "test"; // __proto__ is a regular property key here
+// اضافه کردن مقداری داده
+dictionary.apple = "سیب";
+dictionary.__proto__ = "تست"; // یک ویژگی معمولی است __proto__ در اینجا
 
-// only apple and __proto__ are in the loop
+// در حلقه وجود دارند __proto__ تنها سیب و
 for(let key in dictionary) {
-  alert(key); // "apple", then "__proto__"
+  alert(key); // "__proto__" سپس ،"apple"
 }  
 
-// your toString in action
-alert(dictionary); // "apple,__proto__"
+// شما در عمل toString
+alert(dictionary); // "سیب,__proto__"
 ```

@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# The difference between calls
+# تفاوت بین فراخوانی‌ها
 
-Let's create a new `rabbit` object:
+بیایید یک شیء `rabbit` جدید ایجاد کنیم:
 
 ```js
 function Rabbit(name) {
@@ -14,10 +14,10 @@ Rabbit.prototype.sayHi = function() {
   alert(this.name);
 };
 
-let rabbit = new Rabbit("Rabbit");
+let rabbit = new Rabbit("خرگوش");
 ```
 
-These calls do the same thing or not?
+این فراخوانی‌ها همین کار را می‌کنند یا نه؟
 
 ```js
 rabbit.sayHi();
