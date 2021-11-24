@@ -129,23 +129,23 @@ alert(user + 500); // hint: default -> 1500
 همانطور که از کد می‌بینیم، با توجه به تبدیل `user` به رشته‌ای خودتعریف‌کننده یا مقداری پول تبدیل می‌شود. متد `user[Symbol.toPrimitive]` به تنهایی تمام موارد تبدیل را به عهده می‌گیرد.
 
 
-## toString/valueOf
+## متد toString/valueOf
 
-If there's no `Symbol.toPrimitive` then JavaScript tries to find methods `toString` and `valueOf`:
+اگر `Symbol.toPrimitive` وجود نداشته باشد، سپس جاوااسکریپت سعی می‌کند که متدهای `toString` و `valueOf`  را پیدا کند:
 
-- For the "string" hint: `toString`, and if it doesn't exist, then `valueOf` (so `toString` has the priority for string conversions).
-- For other hints: `valueOf`, and if it doesn't exist, then `toString` (so `valueOf` has the priority for maths).
+- برای جزء "string": `toString` و اگر این متد وجود نداشت، سپس `valueOf` (پس `toString` برای تبدیل‌های رشته‌ای اولویت دارد).
+- برای بقیه جزءها: `valueOf` و اگر این متد وجود نداشت، سپس `toString` (پس `valueOf` برای ریاضیات اولویت دارد).
 
-Methods `toString` and `valueOf` come from ancient times. They are not symbols (symbols did not exist that long ago), but rather "regular" string-named methods. They provide an alternative "old-style" way to implement the conversion.
+متدهای `toString` و `valueOf` از زمان‌های گذشته وجود دارند. آن‌ها سمبل نیستند (سمبل‌ها انقدر قدیمی نیستند) بلکه متدهای «معمولی» هستند که اسمی رشته‌ای دارد. آن‌ها راهی جایگزین که «سبک قدیمی» دارد را برای پیاده‌سازی تبدیل فراهم می‌کنند.
 
-These methods must return a primitive value. If `toString` or `valueOf` returns an object, then it's ignored (same as if there were no method).
+این متدها باید یک مقدار اصلی برگردانند. اگر `toString` یا `valueOf` یک شیء برگرداند، سپس این مقدار نادیده گرفته می‌شود (مثل این است که متدی وجود نداشته باشد).
 
-By default, a plain object has following `toString` and `valueOf` methods:
+به صورت پیش‌فرض، یک شیء ساده متدهای `toString` و `valueOf` پایین را دارد:
 
-- The `toString` method returns a string `"[object Object]"`.
-- The `valueOf` method returns the object itself.
+- متد `toString` رشته `"[object Object]"` را برمی‌گرداند.
+- متد `valueOf` خود شیء را برمی‌گرداند.
 
-Here's the demo:
+اینجا یک دمو داریم:
 
 ```js run
 let user = {name: "John"};
@@ -154,25 +154,25 @@ alert(user); // [object Object]
 alert(user.valueOf() === user); // true
 ```
 
-So if we try to use an object as a string, like in an `alert` or so, then by default we see `[object Object]`.
+پس اگر ما سعی کنیم که از شیء به عنوان یک رشته استفاده کنیم، مثلا درون `alert` یا بقیه، سپس به صورت پیش‌فرض ما `[object Object]` را می‌بینیم.
 
-The default `valueOf` is mentioned here only for the sake of completeness, to avoid any confusion. As you can see, it returns the object itself, and so is ignored. Don't ask me why, that's for historical reasons. So we can assume it doesn't exist.
+متد `valueOf` پیش‌فرض فقط برای کامل بودن مطالب اینجا گفته شد تا از هر سردرگمی جلوگیری شود. همانطور که می‌بینید، خود شیء را برمی‌گرداند پس نادیده گرفته می‌شود. نپرسید چرا، دلیلش مربوط به گذشته است. پس ما می‌توانیم فرض کنیم که این متد وجود ندارد.
 
-Let's implement these methods to customize the conversion.
+بیایید این متدها را برای شخصی‌سازی تبدیل پیاده‌سازی کنیم.
 
-For instance, here `user` does the same as above using a combination of `toString` and `valueOf` instead of `Symbol.toPrimitive`:
+برای مثال، اینجا `user` با استفاده از ترکیب `toString` و `valueOf` به جای `Symbol.toPrimitive` کار یکسانی با کد بالا را انجام می‌دهد:
 
 ```js run
 let user = {
   name: "John",
   money: 1000,
 
-  // for hint="string"
+  // hint="string" به ازای
   toString() {
     return `{name: "${this.name}"}`;
   },
 
-  // for hint="number" or "default"
+  // "default" یا hint="number" به ازای
   valueOf() {
     return this.money;
   }
@@ -184,9 +184,9 @@ alert(+user); // valueOf -> 1000
 alert(user + 500); // valueOf -> 1500
 ```
 
-As we can see, the behavior is the same as the previous example with `Symbol.toPrimitive`.
+همانطور که می‌بینیم، رفتار این کد با مثال قبل که شامل `Symbol.toPrimitive` بود یکسان است.
 
-Often we want a single "catch-all" place to handle all primitive conversions. In this case, we can implement `toString` only, like this:
+اغلب اوقات ما یک چیز «همه‌گیر» می‌خواهیم که تمام تبدیل‌های مقدار اصلی را کنترل کند. در این مورد، می‌توانیم فقط `toString` را پیاده‌سازی کنیم، مثلا اینگونه:
 
 ```js run
 let user = {
@@ -201,7 +201,7 @@ alert(user); // toString -> John
 alert(user + 500); // toString -> John500
 ```
 
-In the absence of `Symbol.toPrimitive` and `valueOf`, `toString` will handle all primitive conversions.
+در نبود `Symbol.toPrimitive` و `valueOf`، متد `toString` تمام تبدیل‌های مقدار اصلی را به عهده می‌گیرد.
 
 ### A conversion can return any primitive type
 
