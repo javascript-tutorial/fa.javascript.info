@@ -203,18 +203,18 @@ alert(user + 500); // toString -> John500
 
 در نبود `Symbol.toPrimitive` و `valueOf`، متد `toString` تمام تبدیل‌های مقدار اصلی را به عهده می‌گیرد.
 
-### A conversion can return any primitive type
+### یک تبدیل می‌تواند هر نوع مقدار اصلی را برگرداند
 
-The important thing to know about all primitive-conversion methods is that they do not necessarily return the "hinted" primitive.
+چیز مهمی که باید درباره تمام متدهای تبدیل به مقدار اصلی بدانیم این است که آن‌ها حتما مقدار اصلی «جزئی» را برنمی‌گردانند.
 
-There is no control whether `toString` returns exactly a string, or whether `Symbol.toPrimitive` method returns a number for a hint `"number"`.
+هیچ کنترلی بر روی اینکه `toString` دقیقا رشته برگرداند یا اینکه متد `Symbol.toPrimitive` برای جزء `"number"` حتما یک عدد برگرداند نیست.
 
-The only mandatory thing: these methods must return a primitive, not an object.
+تنها مورد الزامی: این متدها باید یک مقدار اصلی برگردانند نه یک شیء.
 
-```smart header="Historical notes"
-For historical reasons, if `toString` or `valueOf` returns an object, there's no error, but such value is ignored (like if the method didn't exist). That's because in ancient times there was no good "error" concept in JavaScript.
+```smart header="نکاتی مربوط به قدیم"
+بنا به دلایلی مربوط به گذشته، اگر `toString` یا `valueOf` یک شیء برگرداند، اروری ایجاد نمی‌شود، اما چنین مقداری نادیده گرفته می‌شود (انگار که متد وجود ندارد). به این دلیل که در گذشته مفهوم «ارور» مناسبی در جاوااسکریپت وجود نداشت.
 
-In contrast, `Symbol.toPrimitive` *must* return a primitive, otherwise there will be an error.
+در مقابل، `Symbol.toPrimitice` *باید* مقدار اصلی برگرداند، در غیر این صورت یک ارور خواهیم داشت.
 ```
 
 ## Further conversions
