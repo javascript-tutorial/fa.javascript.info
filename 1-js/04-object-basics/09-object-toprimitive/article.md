@@ -217,31 +217,31 @@ alert(user + 500); // toString -> John500
 در مقابل، `Symbol.toPrimitice` *باید* مقدار اصلی برگرداند، در غیر این صورت یک ارور خواهیم داشت.
 ```
 
-## Further conversions
+## تبدیل‌های بیشتر
 
-As we know already, many operators and functions perform type conversions, e.g. multiplication `*` converts operands to numbers.
+همانطور که از قبل می‌دانیم، بسیاری از عملگرها و تابع‌ها تبدیل نوع داده را انجام می‌دهند، مثلا عملگر ضرب `*` عملوندها را به عدد تبدیل می‌کند.
 
-If we pass an object as an argument, then there are two stages:
-1. The object is converted to a primitive (using the rules described above).
-2. If the resulting primitive isn't of the right type, it's converted.
+اگر ما به عنوان آرگومان شیءای را پاس دهیم، دو مرحله وجود خواهد داشت:
+1. شیء به یک مقدار اصلی تبدیل می‌شود (با استفاده از قوانینی که بالاتر گفتیم).
+2. اگر مقدار اصلی حاصل، نوع درستی نباشد، دوباره تبدیل می‌شود.
 
-For instance:
+برای مثال:
 
 ```js run
 let obj = {
-  // toString handles all conversions in the absence of other methods
+  // در نبود بقیه متدها تمام تبدیل‌ها را به عهده می‌گیرد toString
   toString() {
     return "2";
   }
 };
 
-alert(obj * 2); // 4, object converted to primitive "2", then multiplication made it a number
+alert(obj * 2); // شیء به مقدار اصلی "2" تبدیل شد، عملگر ضرب آن را به عدد تبدیل کرد، 4
 ```
 
-1. The multiplication `obj * 2` first converts the object to primitive (that's a string `"2"`).
-2. Then `"2" * 2` becomes `2 * 2` (the string is converted to number).
+1. ضرب `obj * 2` ابتدا شیء را به مقدار اصلی تبدیل می‌کند (برابر است با رشته `"2"`).
+2. سپس `"2" * 2` تبدیل می‌شود به `2 * 2` (رشته به عدد تبدیل می‌شود).
 
-Binary plus will concatenate strings in the same situation, as it gladly accepts a string:
+عملگر مثبت دوگانه همانطور که با خوشحالی یک رشته را قبول می‌کند، رشته‌ها را در موقعیت یکسان ادغام می‌کند:
 
 ```js run
 let obj = {
@@ -250,28 +250,28 @@ let obj = {
   }
 };
 
-alert(obj + 2); // 22 ("2" + 2), conversion to primitive returned a string => concatenation
+alert(obj + 2); // تبدیل به مقدار اصلی، یک رشته => ادغام برگرداند، (2 + "2") 22
 ```
 
-## Summary
+## خلاصه
 
-The object-to-primitive conversion is called automatically by many built-in functions and operators that expect a primitive as a value.
+تبدیل شیء به مقدار اصلی توسط بسیاری از تابع‌ها و عملگرهای درون‌ساخت که مقداری اصلی را به عنوان ورودی قبول می‌کنند به طور خودکار فراخوانی می‌شود.
 
-There are 3 types (hints) of it:
-- `"string"` (for `alert` and other operations that need a string)
-- `"number"` (for maths)
-- `"default"` (few operators)
+سه نوع (جزء) از آن وجود دارد:
+- `"string"` (برای `alert` و عملیات دیگر که به رشته نیاز دارند)
+- `"number"` (برای ریاضیات)
+- `"default"` (تعداد کمی عملگر)
 
-The specification describes explicitly which operator uses which hint. There are very few operators that "don't know what to expect" and use the `"default"` hint. Usually for built-in objects `"default"` hint is handled the same way as `"number"`, so in practice the last two are often merged together.
+مشخصات زبان به طور واضح بیان کرده است که کدام عملگر از کدام جزء استفاده می‌کند. تعداد کمی عملگر وجود دارد که «نمی‌دانند توقع چه چیزی را داشته باشند» و از جزء `"default"` استفاده می‌کنند. معمولا برای شیءهای درون‌ساخت، `"default"` درست مانند `"number"` استفاده می‌شود، پس در عمل این دو اغلب اوقات با هم ادغام می‌شوند.
 
-The conversion algorithm is:
+الگوریتم تبدیل:
 
-1. Call `obj[Symbol.toPrimitive](hint)` if the method exists,
-2. Otherwise if hint is `"string"`
-    - try `obj.toString()` and `obj.valueOf()`, whatever exists.
-3. Otherwise if hint is `"number"` or `"default"`
-    - try `obj.valueOf()` and `obj.toString()`, whatever exists.
+1. فراخوانی `obj[Symbol.toPrimitive](hint)` در صورتی که وجود داشت،
+2. در غیر این صورت اگر جزء `"string"` بود
+    - متدهای `obj.toString()` و `obj.valueOf()` را امتحان کن، هر کدام که وجود داشت.
+3. در غیر این صورت اگر جزء `"number"` یا `"default"` بود
+    - متدهای `obj.valueOf()` و `obj.toString()` را امتحان کن، هر کدام که وجود داشت.
 
-In practice, it's often enough to implement only `obj.toString()` as a "catch-all" method for string conversions that should return a "human-readable" representation of an object, for logging or debugging purposes.  
+در عمل، اینکه فقط `obj.toString()` را به عنوان متدی «همه‌گیر» برای تبدیل‌های رشته‌ای که باید یک نمایش «قابل خواندن برای انسان» از شیء را برگدانند، برای اهداف دیباگ یا لاگ گرفتن، اغلب اوقات کافی است.
 
-As for math operations, JavaScript doesn't provide a way to "override" them using methods, so real life projects rarely use them on objects.
+همینطور برای عملیات ریاضی، جاوااسکریپت راهی برای باطل کردن آن‌ها با استفاده از متدها را فراهم نمی‌کند، پس پروژه‌های زندگی واقعی به ندرت از آن‌ها روی شیءها استفاده می‌کنند.
