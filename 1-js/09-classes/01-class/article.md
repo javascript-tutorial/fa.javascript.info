@@ -49,12 +49,10 @@ let user = new User("John");
 user.sayHi();
 ```
 
-When `new User("John")` is called:
 وقتی `new User("John")` فراخوانی می‌شود:
 1. یک شیء جدید ایجاد می‌شود.
 2. `constructor` با آرگومان داده شده اجرا می‌شود و آن را به `this.name` اختصاص می‌دهد.
 
-...Then we can call object methods, such as `user.sayHi()`.
 ..سپس ما می‌توانیم متد‌های شیء را فراخوانی کنیم، مانند `user.sayHi()`.
 
 
