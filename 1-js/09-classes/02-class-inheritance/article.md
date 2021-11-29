@@ -1,13 +1,13 @@
 
-# Class inheritance
+# وراثت کلاس
 
-Class inheritance is a way for one class to extend another class.
+وراثت کلاس (class inheritance) راهی برای یک کلاس است تا کلاس دیگری را تعمیم دهد (extend).
 
-So we can create new functionality on top of the existing.
+پس می‌توانیم عملکرد جدیدی را بر اساس کلاس موجود بسازیم.
 
-## The "extends" keyword
+## کلمه کلیدی "extends"
 
-Let's say we have class `Animal`:
+فرض کنیم ما کلاس `Animal` (به معنی حیوان) را داریم:
 
 ```js
 class Animal {
@@ -17,61 +17,61 @@ class Animal {
   }
   run(speed) {
     this.speed = speed;
-    alert(`${this.name} runs with speed ${this.speed}.`);
+    alert(`${this.name} با سرعت ${this.speed} می‌دود.`);
   }
   stop() {
     this.speed = 0;
-    alert(`${this.name} stands still.`);
+    alert(`${this.name} ایستاده است.`);
   }
 }
 
-let animal = new Animal("My animal");
+let animal = new Animal("جانور من");
 ```
 
-Here's how we can represent `animal` object and `Animal` class graphically:
+ما می‌توانیم شیء `animal` و کلاس `Animal` را اینگونه به صورت هندسی نمایش دهیم:
 
 ![](rabbit-animal-independent-animal.svg)
 
-...And we would like to create another `class Rabbit`.
+...و ما می‌خواهیم که `class Rabbit` دیگری هم بسازیم.
 
-As rabbits are animals, `Rabbit` class should be based on `Animal`, have access to animal methods, so that rabbits can do what "generic" animals can do.
+چون خرگوش‌ها هم جانور هستند، کلاس `Rabbit` (به معنی خرگوش) باید بر اساس `Animal` باشد و به متدهای جانور دسترسی داشته باشد تا خرگوش‌ها بتوانند کاری که جانوران "معمولی" انجام می‌دهند را انجام دهند.
 
-The syntax to extend another class is: `class Child extends Parent`.
+سینتکس تعمیم دادن کلاس اینگونه است: `class Child extends Parent`.
 
-Let's create `class Rabbit` that inherits from `Animal`:
+بیایید کلاس `class Rabbit` را بسازیم که از `Animal` ارث‌بری می‌کند:
 
 ```js
 *!*
 class Rabbit extends Animal {
 */!*
   hide() {
-    alert(`${this.name} hides!`);
+    alert(`${this.name} قایم می‌شود!`);
   }
 }
 
-let rabbit = new Rabbit("White Rabbit");
+let rabbit = new Rabbit("خرگوش سفید");
 
-rabbit.run(5); // White Rabbit runs with speed 5.
-rabbit.hide(); // White Rabbit hides!
+rabbit.run(5); // خرگوش سفید با سرعت 5 می‌دود
+rabbit.hide(); // !خرگوش سفید قایم می‌شود
 ```
 
-Object of `Rabbit` class have access both to `Rabbit` methods, such as `rabbit.hide()`, and also to `Animal` methods, such as `rabbit.run()`.
+شیء ساخته شده از کلاس `Rabbit` هم به متدهای `Rabbit`، مانند `rabbit.hide()`، دسترسی دارد و هم به متدهای `Animal`، مانند `rabbit.run()`.
 
-Internally, `extends` keyword works using the good old prototype mechanics. It sets `Rabbit.prototype.[[Prototype]]` to `Animal.prototype`. So, if a method is not found in `Rabbit.prototype`, JavaScript takes it from `Animal.prototype`.
+از دورن، کلمه کلیدی `extends` با استفاده از مکانیزم‌های خوب و قدیمی پروتوتایپ کار می‌کند. این کلمه `Rabbit.prototype.[[Prototype]]` را برابر با `Animal.prototype` قرار می‌دهد. پس اگر متدی در `Rabbit.prototype` پیدا نشد، جاوااسکریپت آن را از `Animal.prototype` دریافت می‌کند.
 
 ![](animal-rabbit-extends.svg)
 
-For instance, to find `rabbit.run` method, the engine checks (bottom-up on the picture):
-1. The `rabbit` object (has no `run`).
-2. Its prototype, that is `Rabbit.prototype` (has `hide`, but not `run`).
-3. Its prototype, that is (due to `extends`) `Animal.prototype`, that finally has the `run` method.
+برای مثال، برای پیدا کردن متد `rabbit.run`، موتور این‌ها را بررسی می‌کند (در تصویر از پایین به بالا است):
+1. شیء `rabbit` (`run` ندارد).
+2. پروتوتایپ آن، یعنی `Rabbit.prototype` (`hide` را دارد، اما `run` را نه).
+3. پروتوتایپ آن، یعنی (با توجه به `extends`) همان `Animal.prototype` که در نهایت متد `run` را دارد.
 
-As we can recall from the chapter <info:native-prototypes>, JavaScript itself uses prototypal inheritance for built-in objects. E.g. `Date.prototype.[[Prototype]]` is `Object.prototype`. That's why dates have access to generic object methods.
+همانطور که از فصل <info:native-prototypes> به یاد داریم، خود جاوااسکریپت از وراثت پروتوتایپی برای شیءهای درون‌ساخت استفاده می‌کند. برای مثال `Date.prototype.[[Prototype]]` برابر با `Object.prototype` است. به همین دلیل است که تاریخ‌ها به متدهای عمومی شیء دسترسی دارند.
 
-````smart header="Any expression is allowed after `extends`"
-Class syntax allows to specify not just a class, but any expression after `extends`.
+````smart header="هر عبارتی بعد از `extends` مجاز است"
+سینتکس کلاس اجازه می‌دهد که نه تنها یک کلاس بلکه هر عبارتی را بعد از `extends` قرار دهیم.
 
-For instance, a function call that generates the parent class:
+برای مثال، فراخوانی تابعی که کلاس والد را تولید می‌کند:
 
 ```js run
 function f(phrase) {
@@ -81,14 +81,14 @@ function f(phrase) {
 }
 
 *!*
-class User extends f("Hello") {}
+class User extends f("سلام") {}
 */!*
 
-new User().sayHi(); // Hello
+new User().sayHi(); // سلام
 ```
-Here `class User` inherits from the result of `f("Hello")`.
+اینجا `class User` از نتیجه `f("Hello")` ارث‌بری می‌کند.
 
-That may be useful for advanced programming patterns when we use functions to generate classes depending on many conditions and can inherit from them.
+این موضوع ممکن است برای الگوهای برنامه‌نویسی پیشرفته مفید باشد، زمانی که بر اساس چند شرط ما از تابع‌ها برای ایجاد کلاس‌ها استفاده می‌کنیم و می‌توانیم از آن‌ها ارث‌بری کنیم.
 ````
 
 ## Overriding a method
