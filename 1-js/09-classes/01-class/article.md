@@ -205,7 +205,7 @@ let User = class *!*MyClass*/!* {
   }
 };
 
-new User().sayHi(); // را نشان می دهد MyClass کار می کند، تعریف
+new User().sayHi(); // را نشان می‌دهد MyClass کار می کند، تعریف
 
 alert(MyClass); // خارج از کلاس قابل مشاهده نیست MyClass خطا، نام
 ```
