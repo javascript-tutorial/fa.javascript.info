@@ -86,34 +86,34 @@ class User extends f("سلام") {}
 
 new User().sayHi(); // سلام
 ```
-اینجا `class User` از نتیجه `f("Hello")` ارث‌بری می‌کند.
+اینجا `class User` از نتیجه `f("سلام")` ارث‌بری می‌کند.
 
 این موضوع ممکن است برای الگوهای برنامه‌نویسی پیشرفته مفید باشد، زمانی که بر اساس چند شرط ما از تابع‌ها برای ایجاد کلاس‌ها استفاده می‌کنیم و می‌توانیم از آن‌ها ارث‌بری کنیم.
 ````
 
-## Overriding a method
+## بازنویسی متد
 
-Now let's move forward and override a method. By default, all methods that are not specified in `class Rabbit` are taken directly "as is" from `class Animal`.
+حالا بیایید جلوتر برویم و یک متد را بازنویسی کنیم. به طور پیش‌فرض، تمام متدها که در `class Rabbit` مشخص نشده‌اند به صورت مستقیم از `class Animal` «بدون تغییر» دریافت می‌شوند.
 
-But if we specify our own method in `Rabbit`, such as `stop()` then it will be used instead:
+اما اگر ما متد خودمان را درون `Rabbit` مشخص کنیم، مثل `stop()`، در عوض این متد استفاده خواهد شد:
 
 ```js
 class Rabbit extends Animal {
   stop() {
-    // ...now this will be used for rabbit.stop()
-    // instead of stop() from class Animal
+    // استفاده خواهد شد rabbit.stop() حالا این متد برای...
+    // Animal از کلاس stop() به جای
   }
 }
 ```
 
-Usually we don't want to totally replace a parent method, but rather to build on top of it to tweak or extend its functionality. We do something in our method, but call the parent method before/after it or in the process.
+معمولا ما نمی‌خواهیم که یک متد والد را به طور کلی جایگزین کنیم بلکه می‌خواهیم متدی بر اساس آن بسازیم تا عملکرد آن را تغییر یا گسترش بدهیم. ما کاری را درون متد خود انجام می‌دهیم اما متد والد را قبل/بعد از آن یا در حین فرایند فراخوانی می‌کنیم.
 
-Classes provide `"super"` keyword for that.
+کلاس‌ها کلمه کلیدی `"super"` را برای این موضوع فراهم می‌کنند.
 
-- `super.method(...)` to call a parent method.
-- `super(...)` to call a parent constructor (inside our constructor only).
+- متد `super.method(...)` برای فراخوانی یک متد والد
+- تابع `super(...)` برای فراخوانی سازنده والد (فقط درون سازنده خودمان).
 
-For instance, let our rabbit autohide when stopped:
+برای مثال، بگذاریم خرگوش ما زمانی که می‌ایستد به طور خودکار قایم شود:
 
 ```js run
 class Animal {
@@ -125,53 +125,53 @@ class Animal {
 
   run(speed) {
     this.speed = speed;
-    alert(`${this.name} runs with speed ${this.speed}.`);
+    alert(`${this.name} با سرعت ${this.speed} می‌دود.`);
   }
 
   stop() {
     this.speed = 0;
-    alert(`${this.name} stands still.`);
+    alert(`${this.name} ایستاده است.`);
   }
 
 }
 
 class Rabbit extends Animal {
   hide() {
-    alert(`${this.name} hides!`);
+    alert(`${this.name} قایم می‌شود!`);
   }
 
 *!*
   stop() {
-    super.stop(); // call parent stop
-    this.hide(); // and then hide
+    super.stop(); // والد را فراخوانی کن stop متد
+    this.hide(); // را فراخوانی کن hide و سپس
   }
 */!*
 }
 
-let rabbit = new Rabbit("White Rabbit");
+let rabbit = new Rabbit("خرگوش سفید");
 
-rabbit.run(5); // White Rabbit runs with speed 5.
-rabbit.stop(); // White Rabbit stands still. White Rabbit hides!
+rabbit.run(5); // خرگوش سفید با سرعت 5 می‌دود
+rabbit.stop(); // !خرگوش سفید ایستاده است. خرگوش سفید قایم می‌شود
 ```
 
-Now `Rabbit` has the `stop` method that calls the parent `super.stop()` in the process.
+حالا `Rabbit` متد `stop` را دارد که در فرایند خودش `super.stop()` والد را فراخوانی می‌کند.
 
-````smart header="Arrow functions have no `super`"
-As was mentioned in the chapter <info:arrow-functions>, arrow functions do not have `super`.
+````smart header="تابع‌های کمانی `super` ندارند"
+همانطور که در فصل <info:arrow-functions> گفته شد، تابع‌های کمانی `super` ندارند.
 
-If accessed, it's taken from the outer function. For instance:
+اگر به آن دسترسی پیدا کنیم، از تابع بیرونی گرفته می‌شود. برای مثال:
 ```js
 class Rabbit extends Animal {
   stop() {
-    setTimeout(() => super.stop(), 1000); // call parent stop after 1sec
+    setTimeout(() => super.stop(), 1000); // والد بعد از 1 ثانیه stop فراخوانی
   }
 }
 ```
 
-The `super` in the arrow function is the same as in `stop()`, so it works as intended. If we specified a "regular" function here, there would be an error:
+مقدار `super` در تابع کمانی با مقدار آن در `stop()` یکسان است و همانطور که توقع می‌رود کار می‌کند. اگر ما یک تابع «معمولی» را اینجا مشخص کرده بودیم، ارور ایجاد می‌شد:
 
 ```js
-// Unexpected super
+// غیرمنتظره super
 setTimeout(function() { super.stop() }, 1000);
 ```
 ````
