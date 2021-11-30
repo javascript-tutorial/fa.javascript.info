@@ -2,8 +2,8 @@ importance: 5
 
 ---
 
-# Rewrite to class
+# با کلاس بازنویسی کنید
 
-The `Clock` class (see the sandbox) is written in functional style. Rewrite it in the "class" syntax.
+کلاس `Clock` (به جعبه شنی مراجعه کنید) به سبک تابع نوشته شده است. آن را در سینتکس "کلاس" بازنویسی کنید.
 
-P.S. The clock ticks in the console, open it to see.
+ضمیمه: ساعت در کنسول تیک‌‌تاک می‌کند، آن را باز کنید تا ببینید.
