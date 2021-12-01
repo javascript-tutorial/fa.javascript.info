@@ -274,7 +274,7 @@ class Rabbit extends Animal {
 
 *!*
 // حالا درست است
-let rabbit = new Rabbit("White Rabbit", 10);
+let rabbit = new Rabbit("خرگوش سفید", 10);
 alert(rabbit.name); // خرگوش سفید
 alert(rabbit.earLength); // 10
 */!*
@@ -282,21 +282,21 @@ alert(rabbit.earLength); // 10
 
 
 
-### Overriding class fields: a tricky note
+### بازنویسی فیلدهای کلاس: نکته‌ای فریبنده
 
-```warn header="Advanced note"
-This note assumes you have a certain experience with classes, maybe in other programming languages.
+```warn header="نکته پیشرفته"
+این نکته فرض می‌کند شما درباره کلاس‌ها مقداری تجربه دارید، شاید در زبان‌های برنامه‌نویسی دیگر.
 
-It provides better insight into the language and also explains the behavior that might be a source of bugs (but not very often).
+این نکته باعث بینش بهتر درون زبان می‌شود و همچنین رفتاری را که ممکن است منشا باگ‌ها باشد (اما نه اغلب اوقات) را توضیح می‌دهد.
 
-If you find it difficult to understand, just go on, continue reading, then return to it some time later.
+اگر فهمیدن آن است برای شما سخت است، فقط جلو بروید، به خواندن ادامه دهید، سپس پس مدتی به سراغ آن بیایید.
 ```
 
-We can override not only methods, but also class fields.
+ما نه تنها می‌توانیم متدها را بازنویسی کنیم، بلکه فیلدهای کلاس را هم می‌توانیم.
 
-Although, there's a tricky behavior when we access an overridden field in parent constructor, quite different from most other programming languages.
+اگرچه زمانی که ما به یک فیلد بازنویسی شده درون سازنده والد دسترسی پیدا می‌کنیم رفتاری عجیب وجود دارد که نسبت به اکثر زبان‌های برنامه‌نویسی دیگر خیلی تفاوت دارد.
 
-Consider this example:
+این مثال را در نظر بگیرید:
 
 ```js run
 class Animal {
@@ -317,28 +317,28 @@ new Rabbit(); // animal
 */!*
 ```
 
-Here, class `Rabbit` extends `Animal` and overrides `name` field with its own value.
+اینجا، کلاس `Rabbit` کلاس `Animal` را تعمیم می‌دهد و فیلد `name` را با مقدار خودش بازنویسی می‌کند.
 
-There's no own constructor in `Rabbit`, so `Animal` constructor is called.
+هیچ سازنده‌ای درون `Rabbit` وجود ندارد، پس سازده `Animal` فراخوانی می‌شود.
 
-What's interesting is that in both cases: `new Animal()` and `new Rabbit()`, the `alert` in the line `(*)` shows `animal`.
+موضوع جالب این است که در هر دو مورد: `new Animal()` و `new Rabbit()`، تابع `alert` در خط `(*)` مقدار `animal` را نشان می‌دهد.
 
-**In other words, parent constructor always uses its own field value, not the overridden one.**
+**به عبارتی دیگر، سازنده والد همیشه از مقدار فیلد خودش استفاده می‌کند، نه فیلد بازنویسی شده.**
 
-What's odd about it?
+چه چیزی درباره این عجیب است؟
 
-If it's not clear yet, please compare with methods.
+اگر هنوز واضح نیست، لطفا با متدها مقایسه کنید.
 
-Here's the same code, but instead of `this.name` field we call `this.showName()` method:
+اینجا کدی مشابه داریم اما به جای `this.name` ما متد `this.showName()` را فراخوانی می‌کنیم:
 
 ```js run
 class Animal {
-  showName() {  // instead of this.name = 'animal'
+  showName() {  // this.name = 'animal' به جای
     alert('animal');
   }
 
   constructor() {
-    this.showName(); // instead of alert(this.name);
+    this.showName(); // alert(this.name); به جای
   }
 }
 
@@ -354,27 +354,27 @@ new Rabbit(); // rabbit
 */!*
 ```
 
-Please note: now the output is different.
+لطفا توجه کنید: حالا خروجی فرق دارد.
 
-And that's what we naturally expect. When the parent constructor is called in the derived class, it uses the overridden method.
+و این چیزی است که ما طبیعتا توقع داریم. زمانی که سازنده والد در کلاس مشتق شده فراخوانی می‌شود، از متد بازنویسی شده استفاده می‌کند.
 
-...But for class fields it's not so. As said, the parent constructor always uses the parent field.
+...اما برای فیلدهای کلاس اینگونه نیست. همانطور که گفته شد، سازنده والد همیشه از فیلد والد استفاده می‌کند.
 
-Why is there the difference?
+چرا تفاوت وجود دارد؟
 
-Well, the reason is in the field initialization order. The class field is initialized:
-- Before constructor for the base class (that doesn't extend anything),
-- Immediately after `super()` for the derived class.
+خب دلیل آن درون ترتیب مقداردهی اولیه به فیلدها است. فیلد کلاس اینگونه مقداردهی اولیه می‌شود:
+- قبل از سازنده برای کلاس پایه (که چیزی را تعمیم نمی‌دهد)،
+- بلافاصله بعد از `super()` برای کلاس مشتق شده.
 
-In our case, `Rabbit` is the derived class. There's no `constructor()` in it. As said previously, that's the same as if there was an empty constructor with only `super(...args)`.
+در این مورد ما، `Rabbit` کلاس مشتق شده است. تابع `constructor()` درون آن وجود ندارد. همانطور که قبلا هم گفته شد، درست مانند این است که یک سازنده خالی فقط حاوی `super(...args)` وجود داشته باشد.
 
-So, `new Rabbit()` calls `super()`, thus executing the parent constructor, and (per the rule for derived classes) only after that its class fields are initialized. At the time of the parent constructor execution, there are no `Rabbit` class fields yet, that's why `Animal` fields are used.
+پس `new Rabbit()` تابع `super()` را فراخوانی می‌کند، به همین ترتیب سازنده والد را اجرا می‌کند و (بنا به دلیل موجود برای کلاس‌های مشتق شده) فقط بعد از آن فیلدهای کلاس خودش مقداردهی اولیه می‌شوند. در زمان اجرای سازنده والد، فیلدهای کلاس `Rabbit` هنوز وجود ندارند، به همین دلیل فیلدهای `Animal` استفاده می‌شوند.
 
-This subtle difference between fields and methods is specific to JavaScript
+این تفاوت جزئی بین فیلدها و متدها مختص به جاوااسکریپت است.
 
-Luckily, this behavior only reveals itself if an overridden field is used in the parent constructor. Then it may be difficult to understand what's going on, so we're explaining it here.
+خوشبختانه این موضوع فقط زمانی خودش را نشان می‌دهد که یک فیلد بازنویسی شده درون سازنده والد استفاده شده باشد. سپس ممکن است فهمیدن اینکه چه چیزی در حال رخ دادن است دشوار باشد، به همین دلیل اینجا آن را توضیح دادیم.
 
-If it becomes a problem, one can fix it by using methods or getters/setters instead of fields.
+اگر این مشکلی ایجاد کند، می‌توانید با استفاده از متدها یا getter/setterها به جای فیلدها آن را برطرف کنید.
 
 
 ## Super: internals, [[HomeObject]]
