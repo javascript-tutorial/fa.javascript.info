@@ -177,17 +177,17 @@ setTimeout(function() { super.stop() }, 1000);
 ````
 
 
-## Overriding constructor
+## بازنویسی سازنده
 
-With constructors it gets a little bit tricky.
+با سازنده‌ها این کار کمی پیچیده می‌شود.
 
-Until now, `Rabbit` did not have its own `constructor`.
+تا حالا، `Rabbit` تابع `constructor` خودش را نداشت.
 
-According to the [specification](https://tc39.github.io/ecma262/#sec-runtime-semantics-classdefinitionevaluation), if a class extends another class and has no `constructor`, then the following "empty" `constructor` is generated:
+با توجه به [مشخصات زبان](https://tc39.github.io/ecma262/#sec-runtime-semantics-classdefinitionevaluation)، اگر کلاسی یک کلاس دیگر را تعمیم دهد و `constructor` نداشته باشد، سپس `constructor` «خالی» زیر ایجاد می‌شود:
 
 ```js
 class Rabbit extends Animal {
-  // generated for extending classes without own constructors
+  // برای توابعی که بدون سازنده خودشان تعمیم داده می‌شوند ایجاد می‌شود
 *!*
   constructor(...args) {
     super(...args);
@@ -196,9 +196,9 @@ class Rabbit extends Animal {
 }
 ```
 
-As we can see, it basically calls the parent `constructor` passing it all the arguments. That happens if we don't write a constructor of our own.
+همانطور که می‌توانیم ببینیم، این سازنده با پاس دادن تمام آرگومان‌ها `constructor` والد را فراخوانی می‌کند. اگر ما سازنده خودمان را ننویسیم این اتفاق می‌افتد.
 
-Now let's add a custom constructor to `Rabbit`. It will specify the `earLength` in addition to `name`:
+حالا بیایید یک سازنده سفارشی به `Rabbit` اضافه کنیم. این سازنده علاوه بر `name` ویژگی `earLength` را هم مشخص می‌کند:
 
 ```js run
 class Animal {
@@ -223,31 +223,31 @@ class Rabbit extends Animal {
 }
 
 *!*
-// Doesn't work!
-let rabbit = new Rabbit("White Rabbit", 10); // Error: this is not defined.
+// !کار نمی‌کند
+let rabbit = new Rabbit("خرگوش سفید", 10); // تعریف نشده است this :ارور
 */!*
 ```
 
-Whoops! We've got an error. Now we can't create rabbits. What went wrong?
+ای وای! ارور گرفتیم. حالا نمی‌توانیم خرگوشی بسازیم. چه چیزی اشتباه است؟
 
-The short answer is:
+جواب کوتاه:
 
-- **Constructors in inheriting classes must call `super(...)`, and (!) do it before using `this`.**
+- **سازنده‌های درون کلاس‌های ارث‌بر باید `super(...)` را فراخوانی کنند و (!) قبل از استفاده از `this` این کار را انجام دهند.**
 
-...But why? What's going on here? Indeed, the requirement seems strange.
+...اما چرا؟ چه چیزی در حال اتفاق افتادن است؟ واقعا چیزی که لازم است عجیب به نظر می‌رسد.
 
-Of course, there's an explanation. Let's get into details, so you'll really understand what's going on.
+قطعا توضیحی وجود دارد. بیایید وارد جزئیات شویم تا شما کاملا متوجه شوید که چه چیزی در حال رخ دادن است.
 
-In JavaScript, there's a distinction between a constructor function of an inheriting class (so-called "derived constructor") and other functions. A derived constructor has a special internal property `[[ConstructorKind]]:"derived"`. That's a special internal label.
+در جاوااسکریپت، تفاوتی بین تابع سازنده یک کلاس ارث‌بر (به «سازنده مشتق شده» هم شناخته می‌شود) و بقیه تابع‌ها وجود دارد. سازنده مشتق شده یک ویژگی درونی خاص `[[ConstructorKind]]:"derived"` را دارد. این یک برچسب درونی خاص است.
 
-That label affects its behavior with `new`.
+این برچسب بر رفتار آن همراه با `new` تأثیر می‌گذارد.
 
-- When a regular function is executed with `new`, it creates an empty object and assigns it to `this`.
-- But when a derived constructor runs, it doesn't do this. It expects the parent constructor to do this job.
+- زمانی که یک تابع معمولی همراه با `new` اجرا می‌شود، شیءای خالی می‌سازد و `this` را برابر با آن قرار می‌دهد.
+- اما زمانی که یک سازنده مشتق شده اجرا می‌شود، این کار را نمی‌کند. این سازنده توقع دارد که سازنده والد این کار را انجام دهد.
 
-So a derived constructor must call `super` in order to execute its parent (base) constructor, otherwise the object for `this` won't be created. And we'll get an error.
+پس یک سازنده مشتق شده باید `super` را برای اجرای سازنده والد (پایه) خود فراخوانی کند، در غیر این صورت شیءای برای `this` ساخته نخواهد شد. و ما ارور دریافت خواهیم کرد.
 
-For the `Rabbit` constructor to work, it needs to call `super()` before using `this`, like here:
+برای اینکه سازنده `Rabbit` کار کند، باید قبل از استفاده کردن از `this` تابع `super()` را فراخوانی کند، مانند اینجا:
 
 ```js run
 class Animal {
@@ -273,9 +273,9 @@ class Rabbit extends Animal {
 }
 
 *!*
-// now fine
+// حالا درست است
 let rabbit = new Rabbit("White Rabbit", 10);
-alert(rabbit.name); // White Rabbit
+alert(rabbit.name); // خرگوش سفید
 alert(rabbit.earLength); // 10
 */!*
 ```
