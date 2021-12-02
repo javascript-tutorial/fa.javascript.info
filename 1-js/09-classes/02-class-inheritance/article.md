@@ -377,68 +377,68 @@ new Rabbit(); // rabbit
 اگر این مشکلی ایجاد کند، می‌توانید با استفاده از متدها یا getter/setterها به جای فیلدها آن را برطرف کنید.
 
 
-## Super: internals, [[HomeObject]]
+## تابع Super: از درون، [[HomeObject]]
 
-```warn header="Advanced information"
-If you're reading the tutorial for the first time - this section may be skipped.
+```warn header="اطلاعات اضافی"
+اگر اولین بار است که این آموزش را می‌گذرانید - این بخش می‌توانید از قلم بیاندازید.
 
-It's about the internal mechanisms behind inheritance and `super`.
+این بخش درباره مکانیزم داخلی ارث‌بری و `super` است.
 ```
 
-Let's get a little deeper under the hood of `super`. We'll see some interesting things along the way.
+بیایید در چگونگی نحوه کار کردن `super` کمی عمیق‌تر شویم. ما چیزهای جالبی را طی مسیر خواهیم دید.
 
-First to say, from all that we've learned till now, it's impossible for `super` to work at all!
+اول باید بگوییم، با توجه به تمام چیزهایی که تا حالا یاد گرفتیم، غیر ممکن است که `super` اصلا کار کند!
 
-Yeah, indeed, let's ask ourselves, how it should technically work? When an object method runs, it gets the current object as `this`. If we call `super.method()` then, the engine needs to get the `method` from the prototype of the current object. But how?
+بله، جِدا، بیایید از خودمان بپرسیم، از لحاظ فنی چگونه باید کار کند؟ زمانی که یک متد شیء اجرا می‌شود، شیء کنونی را به عنوان `this` دریافت می‌کند. اگر ما `super.method()` را فراخوانی کنیم، موتور باید `method` را از پروتوتایپ شیء کنونی دریافت کند. اما چگونه؟
 
-The task may seem simple, but it isn't. The engine knows the current object `this`, so it could get the parent `method` as `this.__proto__.method`. Unfortunately, such a "naive" solution won't work.
+این کار ممکن است ساده به نظر برسد، اما نیست. موتور، شیء کنونی `this` را می‌شناسد، پس `method` والد را می‌توانست به صورت `this.__proto__.method` دریافت کند. متاسفانه، چنین راه‌حل ساده‌ای کار نمی‌کند.
 
-Let's demonstrate the problem. Without classes, using plain objects for the sake of simplicity.
+بیایید مشکل را نشان دهیم. به منظور ساده بودن، از کلاس‌ها استفاده نمی‌کنیم و از طریق شیءهای ساده این کار را انجام می‌دهیم..
 
-You may skip this part and go below to the `[[HomeObject]]` subsection if you don't want to know the details. That won't harm. Or read on if you're interested in understanding things in-depth.
+اگر نمی‌خواهید جزئیات را بدانید می‌توانید از این بخش بگذرید و به زیربخش `[[HomeObject]]` بروید. این کار ضرری نمی‌رساند. یا اگر به دانستن عمیق آن‌ها علاقه دارید به خواندن ادامه دهید.
 
-In the example below, `rabbit.__proto__ = animal`. Now let's try: in `rabbit.eat()` we'll call `animal.eat()`, using `this.__proto__`:
+در مثال پایین، `rabbit.__proto__ = animal` برقرار است. حالا بیایید این را امتحان کنیم: در `rabbit.eat()` ما با استفاده از `this.__proto__` متد `animal.eat()` را فراخوانی خواهیم کرد:
 
 ```js run
 let animal = {
-  name: "Animal",
+  name: "جانور",
   eat() {
-    alert(`${this.name} eats.`);
+    alert(`${this.name} غذا می‌خورد.`);
   }
 };
 
 let rabbit = {
   __proto__: animal,
-  name: "Rabbit",
+  name: "خرگوش",
   eat() {
 *!*
-    // that's how super.eat() could presumably work
+    // اینگونه کار کند super.eat() احتمالا
     this.__proto__.eat.call(this); // (*)
 */!*
   }
 };
 
-rabbit.eat(); // Rabbit eats.
+rabbit.eat(); // .خرگوش غذا می‌خورد
 ```
 
-At the line `(*)` we take `eat` from the prototype (`animal`) and call it in the context of the current object. Please note that `.call(this)` is important here, because a simple `this.__proto__.eat()` would execute parent `eat` in the context of the prototype, not the current object.
+در خط `(*)` ما `eat` را از پروتوتایپ (`animal`) دریافت می‌کنیم و آن را در زمینه‌ی شیء کنونی فراخوانی می‌کنیم. لطفا در نظر داشته باشید که `.call(this)` اینجا مهم است، چون یک `this.__proto__.eat()` ساده متد `eat` والد را در زمینه‌ی پروتوتایپ اجرا می‌کند نه شیء کنونی.
 
-And in the code above it actually works as intended: we have the correct `alert`.
+و در کد بالا این متد همانطور که می‌خواهیم کار می‌کند: ما `alert` درستی را داریم.
 
-Now let's add one more object to the chain. We'll see how things break:
+حالا بیایید یک شیء دیگر را به زنجیره اضافه کنیم. می‌بینیم که چگونه همه چیز بهم می‌ریزد:
 
 ```js run
 let animal = {
-  name: "Animal",
+  name: "جانور",
   eat() {
-    alert(`${this.name} eats.`);
+    alert(`${this.name} غذا می‌خورد.`);
   }
 };
 
 let rabbit = {
   __proto__: animal,
   eat() {
-    // ...bounce around rabbit-style and call parent (animal) method
+    // را فراخوانی کن (animal) مانند خرگوش بپر بپر کن و متد والد...
     this.__proto__.eat.call(this); // (*)
   }
 };
@@ -446,7 +446,7 @@ let rabbit = {
 let longEar = {
   __proto__: rabbit,
   eat() {
-    // ...do something with long ears and call parent (rabbit) method
+    // را فراخوانی کن (rabbit) کاری کن و متد والد (long ear) با گوش درازها
     this.__proto__.eat.call(this); // (**)
   }
 };
@@ -456,39 +456,39 @@ longEar.eat(); // Error: Maximum call stack size exceeded
 */!*
 ```
 
-The code doesn't work anymore! We can see the error trying to call `longEar.eat()`.
+این کد دیگر کار نمی‌کند. ما می‌توانیم ببینیم که ارور سعی دارد `longEar.eat()` را فراخوانی کند.
 
-It may be not that obvious, but if we trace `longEar.eat()` call, then we can see why. In both lines `(*)` and `(**)` the value of `this` is the current object (`longEar`). That's essential: all object methods get the current object as `this`, not a prototype or something.
+ممکن است آنقدر واضح نباشد اما اگر ما فراخوانی `longEar.eat()` را دنبال کنیم، سپس دلیل آن را می‌بینیم. در هر دو خط `(*)` و `(**)` مقدار `this` برابر با شیء کنونی (`longEar`) است. این یک موضوع اساسی است: تمام متدهای شیء، شیء کنونی را به عنوان `this` دریافت می‌کنند نه پروتوتایپ یا چیز دیگری را.
 
-So, in both lines `(*)` and `(**)` the value of `this.__proto__` is exactly the same: `rabbit`. They both call `rabbit.eat` without going up the chain in the endless loop.
+پس در هر دو خط `(*)` و `(**)` مقدار `this.__proto__` یکسان است: `rabbit`. آن‌ها هر دو بدون اینکه در حلقه بی‌نهایت زنجیره را بالا بروند، `rabbit.eat` را فراخوانی می‌کنند.
 
-Here's the picture of what happens:
+اینجا تصویری از اینکه چه اتفاقی افتاده موجود است:
 
 ![](this-super-loop.svg)
 
-1. Inside `longEar.eat()`, the line `(**)` calls `rabbit.eat` providing it with `this=longEar`.
+1. درون `longEar.eat()`، خط `(**)` متد `rabbit.eat` را با برقرار کردن `this=longEar` فراخوانی می‌کند.
     ```js
-    // inside longEar.eat() we have this = longEar
+    // this = longEar داریم longEar.eat() درون
     this.__proto__.eat.call(this) // (**)
-    // becomes
+    // که تبدیل می‌شود به
     longEar.__proto__.eat.call(this)
-    // that is
+    // که یعنی
     rabbit.eat.call(this);
     ```
-2. Then in the line `(*)` of `rabbit.eat`, we'd like to pass the call even higher in the chain, but `this=longEar`, so `this.__proto__.eat` is again `rabbit.eat`!
+2. سپس در خط `(*)` از `rabbit.eat`، ما می‌خواهیم که درون زنجیره، فراخوانی را حتی بالاتر بفرستیم اما `this=longEar`، پس `this.__proto__.eat` دوباره برابر `rabbit.eat` است!
 
     ```js
-    // inside rabbit.eat() we also have this = longEar
+    // this = longEar هم داریم rabbit.eat() درون
     this.__proto__.eat.call(this) // (*)
-    // becomes
+    // که تبدیل می‌شود به
     longEar.__proto__.eat.call(this)
-    // or (again)
+    // یا (دوباره)
     rabbit.eat.call(this);
     ```
 
-3. ...So `rabbit.eat` calls itself in the endless loop, because it can't ascend any further.
+3. ...پس `rabbit.eat` خودش را درون حلقه‌ای بی‌نهایت فراخوانی می‌کند چون نمی‌تواند بالاتر برود.
 
-The problem can't be solved by using `this` alone.
+این مشکل فقط با استفاده کردن از `this` برطرف نمی‌شود.
 
 ### `[[HomeObject]]`
 
