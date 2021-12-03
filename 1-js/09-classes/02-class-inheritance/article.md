@@ -490,27 +490,27 @@ longEar.eat(); // Error: Maximum call stack size exceeded
 
 این مشکل فقط با استفاده کردن از `this` برطرف نمی‌شود.
 
-### `[[HomeObject]]`
+### ویژگی `[[HomeObject]]`
 
-To provide the solution, JavaScript adds one more special internal property for functions: `[[HomeObject]]`.
+برای فراهم آوردن راه‌حل، جاوااسکریپت یک ویژگی درونی خاص دیگر را هم برای تابع‌ها اضافه می‌کند: `[[HomeObject]]`.
 
-When a function is specified as a class or object method, its `[[HomeObject]]` property becomes that object.
+زمانی که تابعی به عنوان یک کلاس یا متد شیء مشخص شود، ویژگی `[[HomeObject]]` برابر با آن شیء قرار داده می‌شود.
 
-Then `super` uses it to resolve the parent prototype and its methods.
+سپس `super` از آن برای شناختن پروتوتایپ والد و متدهای آن استفاده می‌کند.
 
-Let's see how it works, first with plain objects:
+بیایید ببینیم چگونه کار می‌کند، ابتدا با استفاده از شیءهای ساده:
 
 ```js run
 let animal = {
-  name: "Animal",
+  name: "جانور",
   eat() {         // animal.eat.[[HomeObject]] == animal
-    alert(`${this.name} eats.`);
+    alert(`${this.name} غذا می‌خورد.`);
   }
 };
 
 let rabbit = {
   __proto__: animal,
-  name: "Rabbit",
+  name: "خرگوش",
   eat() {         // rabbit.eat.[[HomeObject]] == rabbit
     super.eat();
   }
@@ -518,19 +518,19 @@ let rabbit = {
 
 let longEar = {
   __proto__: rabbit,
-  name: "Long Ear",
+  name: "گوش دراز",
   eat() {         // longEar.eat.[[HomeObject]] == longEar
     super.eat();
   }
 };
 
 *!*
-// works correctly
-longEar.eat();  // Long Ear eats.
+// به درستی کار می‌کند
+longEar.eat();  // گوش دراز غذا می‌خورد
 */!*
 ```
 
-It works as intended, due to `[[HomeObject]]` mechanics. A method, such as `longEar.eat`, knows its `[[HomeObject]]` and takes the parent method from its prototype. Without any use of `this`.
+به دلیل مکانیزم‌های `[[HomeObject]]` همانطور که انتظار می‌رود کار می‌کند. یک متد، مثل `longEar.eat`، ویژگی `[[HomeObject]]` خودش را می‌شناسد و متد والد را از پروتوتایپ آن دریافت می‌کند.
 
 ### Methods are not "free"
 
