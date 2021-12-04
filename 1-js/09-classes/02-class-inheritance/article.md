@@ -587,17 +587,17 @@ tree.sayHi();  // من یک جانور هستم (؟!؟)
 
 ![](super-homeobject-wrong.svg)
 
-### Methods, not function properties
+### متدها، نه ویژگی‌های تابعی
 
-`[[HomeObject]]` is defined for methods both in classes and in plain objects. But for objects, methods must be specified exactly as `method()`, not as `"method: function()"`.
+ویژگی `[[HomeObject]]` هم درون کلاس‌ها و هم درون شیءهای ساده برای متدها تعریف شده است. اما برای شیءها، متدها باید دقیقا به صورت `method()` مشخص شوند نه به صورت `"method: function()"`.
 
-The difference may be non-essential for us, but it's important for JavaScript.
+ممکن است که تفاوت برای ما مهم نباشد اما برای جاوااسکریپت مهم است.
 
-In the example below a non-method syntax is used for comparison. `[[HomeObject]]` property is not set and the inheritance doesn't work:
+ذر مثال پایین برای مقایسه، سینتکس غیرمتدی استفاده شده است. ویژگی `[[HomeObject]]` تنظیم نشده است و ارث‌بری کار نمی‌کند:
 
 ```js run
 let animal = {
-  eat: function() { // intentionally writing like this instead of eat() {...
+  eat: function() { // اینگونه می‌نویسیم eat() {...} از قصد به جای
     // ...
   }
 };
@@ -610,21 +610,21 @@ let rabbit = {
 };
 
 *!*
-rabbit.eat();  // Error calling super (because there's no [[HomeObject]])
+rabbit.eat();  // (وجود ندارد [[HomeObject]] چون) ارور گرفتیم super برای فراخوانی
 */!*
 ```
 
-## Summary
+## خلاصه
 
-1. To extend a class: `class Child extends Parent`:
-    - That means `Child.prototype.__proto__` will be `Parent.prototype`, so methods are inherited.
-2. When overriding a constructor:
-    - We must call parent constructor as `super()` in `Child` constructor before using `this`.
-3. When overriding another method:
-    - We can use `super.method()` in a `Child` method to call `Parent` method.
-4. Internals:
-    - Methods remember their class/object in the internal `[[HomeObject]]` property. That's how `super` resolves parent methods.
-    - So it's not safe to copy a method with `super` from one object to another.
+1. برای تعمیم دادن یک کلاس: `class Child extends Parent`:
+    - که یعنی `Child.prototype.__proto__` برابر با `Parent.prototype` خواهد بود، پس متدها به ارث برده می‌شوند.
+2. زمانی که یک سازنده را بازنویسی می‌کنیم:
+    - باید سازنده والد را درون سازنده `Child`(فرزند) قبل از استفاده کردن از `this` به صورت `super()` فراخوانی کنیم.
+3. زمانی که متد دیگری را بازنویسی می‌کنیم:
+    - می‌توانیم برای فراخوانی متد `Parent`، از `super.method()` درون متد `Child` استفاده کنیم.
+4. چیزهای درونی:
+    - متدهای کلاس/شیء خود را درون ویژگی `[[HomeObject]]` به یاد دارند. به همین صورت `super` متدهای والد را می‌شناسد.
+    - پس کپی کردن متد حاوی `super` از شیء به شیء دیگر کار مطمئنی نیست.
 
-Also:
-- Arrow functions don't have their own `this` or `super`, so they transparently fit into the surrounding context.
+همچنین:
+- تابع‌های کمانی `this` یا `super` خودشان را ندارند پس آن‌ها به صورت پنهانی در زمینه (context) دورشان جا می‌گیرند.
