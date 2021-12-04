@@ -532,24 +532,24 @@ longEar.eat();  // گوش دراز غذا می‌خورد
 
 به دلیل مکانیزم‌های `[[HomeObject]]` همانطور که انتظار می‌رود کار می‌کند. یک متد، مثل `longEar.eat`، ویژگی `[[HomeObject]]` خودش را می‌شناسد و متد والد را از پروتوتایپ آن دریافت می‌کند.
 
-### Methods are not "free"
+### متدها «آزاد» نیستند
 
-As we've known before, generally functions are "free", not bound to objects in JavaScript. So they can be copied between objects and called with another `this`.
+همانطور که قبلا هم دیدیم، به طور کلی تابع‌ها «آزاد» هستند و درون جاوااسکریپت به شیءها پیوند زده شده نیستند. پس می‌توانند بین شیءهای مختلف کپی و همراه با `this` دیگری فراخوانی شوند.
 
-The very existence of `[[HomeObject]]` violates that principle, because methods remember their objects. `[[HomeObject]]` can't be changed, so this bond is forever.
+وجود `[[HomeObject]]` این قاعده را نقض می‌کند چون متدهای شیءهای خود را به یاد دارند. `[[HomeObject]]` نمی‌تواند تغییر کند پس این پیوند ابدی است.
 
-The only place in the language where `[[HomeObject]]` is used -- is `super`. So, if a method does not use `super`, then we can still consider it free and copy between objects. But with `super` things may go wrong.
+تنها جایی در زبان که `[[HomeObject]]` استفاده می‌شود `super` است. پس اگر متدی از `super` استفاده نمی‌کند، هنوز هم می‌توانیم آن را آزاد فرض کنیم و بین شیءها کپی کنیم. اما همراه با `super` ممکن است مشکلاتی پیش بیاید.
 
-Here's the demo of a wrong `super` result after copying:
+این یک دمو از نتیجه اشتباه `super` بعد از کپی کردن داریم:
 
 ```js run
 let animal = {
   sayHi() {
-    alert(`I'm an animal`);
+    alert(`من یک جانور هستم`);
   }
 };
 
-// rabbit inherits from animal
+// ارث‌بری می‌کند animal از rabbit
 let rabbit = {
   __proto__: animal,
   sayHi() {
@@ -559,11 +559,11 @@ let rabbit = {
 
 let plant = {
   sayHi() {
-    alert("I'm a plant");
+    alert("من یک گیاه هستم");
   }
 };
 
-// tree inherits from plant
+// ارث‌بری می‌کند plant از tree
 let tree = {
   __proto__: plant,
 *!*
@@ -572,18 +572,18 @@ let tree = {
 };
 
 *!*
-tree.sayHi();  // I'm an animal (?!?)
+tree.sayHi();  // من یک جانور هستم (؟!؟)
 */!*
 ```
 
-A call to `tree.sayHi()` shows "I'm an animal". Definitely wrong.
+فراخوانی `tree.sayHi()` پیام «من یک جانور هستم» را نشان می‌دهد. قطعا اشتباه است.
 
-The reason is simple:
-- In the line `(*)`, the method `tree.sayHi` was copied from `rabbit`. Maybe we just wanted to avoid code duplication?
-- Its `[[HomeObject]]` is `rabbit`, as it was created in `rabbit`. There's no way to change `[[HomeObject]]`.
-- The code of `tree.sayHi()` has `super.sayHi()` inside. It goes up from `rabbit` and takes the method from `animal`.
+دلیل آن ساده است:
+- در خط `(*)`، متد `tree.sayHi` از `rabbit` کپی شد. شاید ما فقط می‌خواهیم از تکرار کد جلوگیری کنیم؟
+- ویژگی `[[HomeObject]]` آن `rabbit` است، چون درون `rabbit` ساخته شد. راهی برای تغییر `[[HomeObject]]` وجود ندارد.
+- کد `tree.sayHi()` درون خودش `super.sayHi()` را دارد. این متد از `rabbit` بالا رفته و متد را از `animal` دریافت می‌کند.
 
-Here's the diagram of what happens:
+اینجا تصویری از اینکه چه اتفاقی می‌افتد را داریم:
 
 ![](super-homeobject-wrong.svg)
 
