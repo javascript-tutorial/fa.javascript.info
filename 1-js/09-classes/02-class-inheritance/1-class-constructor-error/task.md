@@ -2,11 +2,11 @@ importance: 5
 
 ---
 
-# Error creating an instance
+# ارور در ساختن نمونه
 
-Here's the code with `Rabbit` extending `Animal`.
+اینجا کدی داریم که `Rabbit` کلاس `Animal` را تعمیم می‌دهد.
 
-Unfortunately, `Rabbit` objects can't be created. What's wrong? Fix it.
+متاسفانه، شیءهای `Rabbit` نمی‌توانند ساخته شوند. چه چیزی اشتباه است؟ آن را درست کنید.
 ```js run
 class Animal {
 
@@ -24,7 +24,7 @@ class Rabbit extends Animal {
 }
 
 *!*
-let rabbit = new Rabbit("White Rabbit"); // Error: this is not defined
+let rabbit = new Rabbit("خرگوش سفید"); // تعریف نشده است this :ارور
 */!*
 alert(rabbit.name);
 ```
