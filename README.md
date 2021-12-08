@@ -257,8 +257,15 @@ Please don't translate or remove the `[#...]` part, it's for URL anchors.
     
 پس لطفا زمان ترجمۀ رشته‌ها به این دقت کنید که رشته درون `alert` (یا تابع‌هایی که در مرورگر پیامی را نمایش می‌دهند) قرار می‌گیرد یا نه. در صورتی که رشته درون این تابع قرار داشت، ترجمۀ آن مانند متن اصلی است اما اگر خلاف این بود، ترجمۀ آن مانند [کامنت‌های درون کد](#ترجمۀ-کامنتها-در-کد) است یعنی با برعکس کردن جملۀ ترجمه شده.
     
+### نکات جزئی
+
+- سعی کنید تیترها و جمله‌ها را با کلمات فارسی شروع کنید.
+- خوانایی جمله مهم است، لطفا به آن توجه کنید.
+- لطفا از لغت‌نامه پایین **استفاده کنید** تا ترجمه‌ای یک‌دست داشته باشیم.
+- استفاده از علائم نگارشی حتما نباید دقیقا مانند متن باشد. ممکن است ما در فارسی جایی ویرگول نگذاریم اما در انگلیسی نیاز به کاما وجود داشته باشد. فقط بیان جلمات را تغییر ندهید، برای مثال اگر جمله سوالی یا تعجبی نیست علائم مربوط را اضافه نکنید.
+
 ### لغت‌نامه
-لطفا در صورتی که کلمۀ مورد نظر شما در این جدول نبود به ما اطلاع دهید یا README را ویرایش کنید و یک Pull Request بفرستید.
+در صورتی که کلمۀ مورد نظر شما در این جدول نبود لطفا به ما اطلاع دهید یا README را ویرایش کنید و یک Pull Request بفرستید.
     
 جدول به ترتیب حروف الفبای انگلیسی است.
     
@@ -271,16 +278,20 @@ Please don't translate or remove the `[#...]` part, it's for URL anchors.
 | block scope | محدودیت بلوک |                    |
 | boolean | boolean، بولین |                       |
 | callback | callback |                            |
+| child (in class inheritance) | فرزند |           |
 | class | کلاس |                                    |
+| class expression | class expression |            |
 | closure | کلوژر |                                |
 | code block | بلوک کد |                           |
 | constructor function | تابع سازنده |             |
 | context | زمینه | گاهی لازم است انگلیسی آن داخل پرانتز نوشته شود |
 | curly bracket | آکولاد |                          |
 | decorator | دکوراتور |                           |
-| execute | اجرا کردن |                            |
 | error | ارور |                                   |
 | evaluate | ارزیابی کردن |                       |
+| execute | اجرا کردن |                            |
+| extend (in class inheritance) | تعمیم دادن |    |
+| field (in class) | فیلد |                       |
 | framework | فریم‌ورک |                           |
 | function | تابع |                                |
 | Function Declaration | Function Declaration |    |
@@ -301,13 +312,16 @@ Please don't translate or remove the `[#...]` part, it's for URL anchors.
 | null | null |                                    |
 | number | عدد |                                   |
 | object | شیء |                                   |
+| object literal | شیء لیترال |                    |
 | operator | عملگر |                               |
 | parameter | پارامتر |                            |
+| parent (in class inheritance) | والد |           |
 | polyfill | پلیفیل |                              |
 | primitive (data type) | مقدار اصلی |             |
 | property (in objects) | ویژگی |                  |
 | property descriptor | توصیف‌کننده ویژگی |       |
 | property flag | پرچم ویژگی |                     |
+| prototype | پروتوتایپ |                          |
 | recursion | بازگشت |                             |
 | reference | رجوع(کردن)، مرجع | معنی به جمله بستگی دارد |
 | rest parameter `...` | پارامتر رست |            |
