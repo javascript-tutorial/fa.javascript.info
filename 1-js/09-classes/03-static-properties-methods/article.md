@@ -1,9 +1,9 @@
 
-# Static properties and methods
+# ویژگی و متدهای ایستا
 
-We can also assign a method to the class function itself, not to its `"prototype"`. Such methods are called *static*.
+ما می‌توانیم یک متد را در خود تابع کلاس هم قرار دهیم، نه درون `"prototype"` آن. چنین متدهایی *ایستا (static)* نامیده می‌شوند.
 
-In a class, they are prepended by `static` keyword, like this:
+در یک کلاس، آن‌ها با کلمه کلیدی `static` استفاده می‌شوند، مثل این:
 
 ```js run
 class User {
@@ -17,7 +17,7 @@ class User {
 User.staticMethod(); // true
 ```
 
-That actually does the same as assigning it as a property directly:
+این کار دقیقا مانند این است که به طور مستقیم یک ویژگی را مقداردهی کنیم:
 
 ```js run
 class User { }
@@ -29,11 +29,11 @@ User.staticMethod = function() {
 User.staticMethod(); // true
 ```
 
-The value of `this` in `User.staticMethod()` call is the class constructor `User` itself (the "object before dot" rule).
+مقدار `this` درون فراخوانی `User.staticMethod()` برابر با کلاس سازنده یعنی خود `User` است (قانون «شیء قبل از نقطه»).
 
-Usually, static methods are used to implement functions that belong to the class, but not to any particular object of it.
+معمولا، متدهای ایستا برای پیاده‌سازی تابع‌هایی که به کلاس تعلق دارند و نه به هر شیء خاصی از آن استفاده می‌شوند.
 
-For instance, we have `Article` objects and need a function to compare them. A natural solution would be to add `Article.compare` method, like this:
+برای مثال، ما شیءهای کلاس `Article` (به معنی مقاله) را داریم و به تابعی برای مقایسه آن‌ها نیاز داریم. یک راه‌حل طبیعی اضافه کردن متد `Article.compare` است، مثلا اینگونه:
 
 ```js run
 class Article {
@@ -49,7 +49,7 @@ class Article {
 */!*
 }
 
-// usage
+// کارایی
 let articles = [
   new Article("HTML", new Date(2019, 1, 1)),
   new Article("CSS", new Date(2019, 0, 1)),
@@ -63,17 +63,17 @@ articles.sort(Article.compare);
 alert( articles[0].title ); // CSS
 ```
 
-Here `Article.compare` stands "above" articles, as a means to compare them. It's not a method of an article, but rather of the whole class.
+اینجا `Article.compare` در «بالای» مقاله‌ها (articles) قرار دارد، به عنوان واسطه‌ای برای مقایسه آن‌ها. این متدی از یک مقاله نیست، بلکه برای کل کلاس است.
 
-Another example would be a so-called "factory" method. Imagine, we need few ways to create an article:
+مثال دیگر متدی به نام "factory" (به معنی کارخانه) است. فرض کنید، ما به چند راه برای ایجاد یک مقاله نیاز داریم:
 
-1. Create by given parameters (`title`, `date` etc).
-2. Create an empty article with today's date.
-3. ...or else somehow.
+1. ساختن از طریق پارامترها (`title`، `date` و غیره).
+2. ساختن یک مقاله خالی با تاریخ امروز.
+3. ...یا به روشی دیگر.
 
-The first way can be implemented by the constructor. And for the second one we can make a static method of the class.
+اولین راه می‌تواند با استفاده از تابع سازنده پیاده‌سازی شود. و برای راه دوم می‌توانیم یک متد ایستا برای کلاس بسازیم.
 
-Like `Article.createTodays()` here:
+مانند `Article.createTodays()` در اینجا:
 
 ```js run
 class Article {
@@ -84,24 +84,24 @@ class Article {
 
 *!*
   static createTodays() {
-    // remember, this = Article
-    return new this("Today's digest", new Date());
+    // this = Article ،به یاد داشته باشید
+    return new this("خلاصه‌ی امروز", new Date());
   }
 */!*
 }
 
 let article = Article.createTodays();
 
-alert( article.title ); // Today's digest
+alert( article.title ); // خلاصه‌ی امروز
 ```
 
-Now every time we need to create a today's digest, we can call `Article.createTodays()`. Once again, that's not a method of an article, but a method of the whole class.
+حالا هر بار که نیاز داشته باشیم یک خلاصه از امروز بسازیم، می‌توانیم `Article.createTodays()` را فراخوانی کنیم. یکبار دیگر هم می‌گوییم، این متدی از مقاله (article) نیست بلکه متدی از کل کلاس است.
 
-Static methods are also used in database-related classes to search/save/remove entries from the database, like this:
+متدهای ایستا همچنین در کلاس‌های مربوط به پایگاه داده (database) برای جست‌وجو/ذخیره/حذف ورودی‌ها از پایگاه داده هم استفاده می‌شوند، مثلا اینگونه:
 
 ```js
-// assuming Article is a special class for managing articles
-// static method to remove the article:
+// کلاسی خاص برای مدیریت مقاله‌ها است Article با فرض اینکه
+// :متد ایستا برای حذف مقاله‌ها
 Article.remove({id: 12345});
 ```
 
