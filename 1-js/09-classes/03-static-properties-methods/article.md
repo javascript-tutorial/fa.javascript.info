@@ -125,15 +125,15 @@ alert( Article.publisher ); // Ilya Kantor
 Article.publisher = "Ilya Kantor";
 ```
 
-## Inheritance of static properties and methods [#statics-and-inheritance]
+## ارث‌بری ویژگی‌ها و متدهای ایستا [#statics-and-inheritance]
 
-Static properties and methods are inherited.
+ویژگی‌ها و متدهای ایستا به ارث برده می‌شوند.
 
-For instance, `Animal.compare` and `Animal.planet` in the code below are inherited and accessible as `Rabbit.compare` and `Rabbit.planet`:
+برای مثال، در کد پایین `Animal.compare` و `Animal.planet` به ارث برده می‌شوند و به صورت `Rabbit.compare` و `Rabbit.planet` قابل دسترس هستند:
 
 ```js run
 class Animal {
-  static planet = "Earth";
+  static planet = "زمین";
 
   constructor(name, speed) {
     this.speed = speed;
@@ -142,7 +142,7 @@ class Animal {
 
   run(speed = 0) {
     this.speed += speed;
-    alert(`${this.name} runs with speed ${this.speed}.`);
+    alert(`${this.name} با سرعت ${this.speed} می‌دود.`);
   }
 
 *!*
@@ -153,50 +153,50 @@ class Animal {
 
 }
 
-// Inherit from Animal
+// Animal ارث‌بری از
 class Rabbit extends Animal {
   hide() {
-    alert(`${this.name} hides!`);
+    alert(`${this.name} قایم می‌شود!`);
   }
 }
 
 let rabbits = [
-  new Rabbit("White Rabbit", 10),
-  new Rabbit("Black Rabbit", 5)
+  new Rabbit("خرگوش سفید", 10),
+  new Rabbit("خرگوش مشکی", 5)
 ];
 
 *!*
 rabbits.sort(Rabbit.compare);
 */!*
 
-rabbits[0].run(); // Black Rabbit runs with speed 5.
+rabbits[0].run(); // خرگوش مشکی با سرعت 5 می‌دود
 
-alert(Rabbit.planet); // Earth
+alert(Rabbit.planet); // زمین
 ```
 
-Now when we call `Rabbit.compare`, the inherited `Animal.compare` will be called.
+حالا زمانی که `Rabbit.compare` را فراخوانی می‌کنیم، `Animal.compare` که به ارث برده شده فراخوانی خواهد شد.
 
-How does it work? Again, using prototypes. As you might have already guessed, `extends` gives `Rabbit` the `[[Prototype]]` reference to `Animal`.
+این چگونه کار می‌کند؟ دوباره، با استفاده از پروتوتایپ‌ها. همانطور که ممکن است از قبل حدس زده باشید، `extends` به کلاس `Rabbit` ویژگی `[[Prototype]]` می‌دهد که به `Animal` رجوع می‌کند.
 
 ![](animal-rabbit-static.svg)
 
-So, `Rabbit extends Animal` creates two `[[Prototype]]` references:
+پس `Rabbit extends Animal` دو رجوع `[[Prototype]]` می‌سازد:
 
-1. `Rabbit` function prototypally inherits from `Animal` function.
-2. `Rabbit.prototype` prototypally inherits from `Animal.prototype`.
+1. تابع `Rabbit` به صورت پروتوتایپی از تابع `Animal` ارث‌بری می‌کند.
+2. ویژگی `Rabbit.prototype` به صورت پروتوتایپی از `Animal.prototype` ارث‌بری می‌کند.
 
-As a result, inheritance works both for regular and static methods.
+به عنوان یک نتیجه، ارث‌بری هم برای متدهای معمولی کار می‌کند و هم برای متدهای ایستا.
 
-Here, let's check that by code:
+بفرمایید، بیایید این موضوع را با استفاده از کد بررسی کنیم:
 
 ```js run
 class Animal {}
 class Rabbit extends Animal {}
 
-// for statics
+// برای ایستاها
 alert(Rabbit.__proto__ === Animal); // true
 
-// for regular methods
+// برای متدهای معمولی
 alert(Rabbit.prototype.__proto__ === Animal.prototype); // true
 ```
 
