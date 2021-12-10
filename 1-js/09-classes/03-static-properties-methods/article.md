@@ -105,11 +105,11 @@ alert( article.title ); // خلاصه‌ی امروز
 Article.remove({id: 12345});
 ```
 
-## Static properties
+## ویژگی‌های ایستا
 
 [recent browser=Chrome]
 
-Static properties are also possible, they look like regular class properties, but prepended by `static`:
+می‌توانیم ویژگی‌های ایستا هم داشته باشیم، آن‌ها مانند ویژگی‌های معمولی کلاس بنظر می‌رسند اما قبل از آن‌ها `static` وجود دارد:
 
 ```js run
 class Article {
@@ -119,7 +119,7 @@ class Article {
 alert( Article.publisher ); // Ilya Kantor
 ```
 
-That is the same as a direct assignment to `Article`:
+درست مانند مقداردهی مستقیم به `Article` است:
 
 ```js
 Article.publisher = "Ilya Kantor";
