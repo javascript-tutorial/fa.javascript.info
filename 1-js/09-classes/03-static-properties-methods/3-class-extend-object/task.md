@@ -2,11 +2,11 @@ importance: 3
 
 ---
 
-# Class extends Object?
+# آیا Class، Object را تعمیم می‌دهد؟
 
-As we know, all objects normally inherit from `Object.prototype` and get access to "generic" object methods like `hasOwnProperty` etc.
+همانطور که می‌دانیم، تمام شیءهای به صورت طبیعی از `Object.prototype` ارث‌بری می‌کنند و به متدهای «عموnode می» مثل `hastOwnProperty` و بقیه آن‌ها دسترسی دارند.
 
-For instance:
+برای مثل:
 
 ```js run
 class Rabbit {
@@ -18,16 +18,16 @@ class Rabbit {
 let rabbit = new Rabbit("Rab");
 
 *!*
-// hasOwnProperty method is from Object.prototype
+// است Object.prototype از hasOwnProperty متد
 alert( rabbit.hasOwnProperty('name') ); // true
 */!*
 ```
 
-But if we spell it out explicitly like `"class Rabbit extends Object"`, then the result would be different from a simple `"class Rabbit"`?
+اما اگر ما به طور واضح `"class Rabbit extends Object"` را بیان کنیم، سپس نتیجه از یک کلاس ساده `"class Rabbit"` متفاوت خواهد بود؟
 
-What's the difference?
+تفاوت در چیست؟
 
-Here's an example of such code (it doesn't work -- why? fix it?):
+اینجا مثالی از چنین کدی داریم (این کد کار نمی‌کند -- چرا؟ آن را درست کنید):
 
 ```js
 class Rabbit extends Object {
@@ -38,5 +38,5 @@ class Rabbit extends Object {
 
 let rabbit = new Rabbit("Rab");
 
-alert( rabbit.hasOwnProperty('name') ); // Error
+alert( rabbit.hasOwnProperty('name') ); // ارور
 ```

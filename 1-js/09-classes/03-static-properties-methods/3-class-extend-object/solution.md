@@ -1,14 +1,14 @@
-First, let's see why the latter code doesn't work.
+اول، بیایید ببینیم که چرا کد کار نمی‌کند.
 
-The reason becomes obvious if we try to run it. An inheriting class constructor must call `super()`. Otherwise `"this"` won't be "defined".
+اگر سعی کنیم که آن را اجرا کنیم دلیل واضح می‌شود. سازنده کلاس ارث‌بر باید `super()` را فراخوانی کند. در غیر این صورت `"this"` «تعریف شده» نخواهد بود.
 
-So here's the fix:
+حل این مشکل:
 
 ```js run
 class Rabbit extends Object {
   constructor(name) {
 *!*
-    super(); // need to call the parent constructor when inheriting
+    super(); // باید هنگام ارث‌بری سازنده والد را فراخوانی کنیم
 */!*
     this.name = name;
   }
@@ -19,16 +19,16 @@ let rabbit = new Rabbit("Rab");
 alert( rabbit.hasOwnProperty('name') ); // true
 ```
 
-But that's not all yet.
+اما این هنوز تمام ماجرا نیست.
 
-Even after the fix, there's still important difference in `"class Rabbit extends Object"` versus `class Rabbit`.
+حتی بعد از رفع این مشکل، هنوز هم یک تفاوت اساسی بین `"class Rabbit extends Object"` و `class Rabbit` وجود دارد.
 
-As we know, the "extends" syntax sets up two prototypes:
+همانطور که می‌دانیم، سینتکس "extends" دو پروتوتایپ را تنظیم می‌کند:
 
-1. Between `"prototype"` of the constructor functions (for methods).
-2. Between the constructor functions themselves (for static methods).
+1. بین `"prototype"` سازنده تابع‌ها (برای متدها).
+2. بین خود سازنده تابع‌ها (برای متدهای ایستا).
 
-In our case, for `class Rabbit extends Object` it means:
+در این مورد ما، برای `class Rabbit extends Object` داریم:
 
 ```js run
 class Rabbit extends Object {}
@@ -37,45 +37,45 @@ alert( Rabbit.prototype.__proto__ === Object.prototype ); // (1) true
 alert( Rabbit.__proto__ === Object ); // (2) true
 ```
 
-So `Rabbit` now provides access to static methods of `Object` via `Rabbit`, like this:
+پس حالا `Rabbit` به دسترسی متدهای ایستای `Object` از طریق `Rabbit` را فراهم می‌کند، مثلا اینگونه:
 
 ```js run
 class Rabbit extends Object {}
 
 *!*
-// normally we call Object.getOwnPropertyNames
+// را فراخوانی می‌کنیم Object.getOwnPropertyNames معمولا ما
 alert ( Rabbit.getOwnPropertyNames({a: 1, b: 2})); // a,b
 */!*
 ```
 
-But if we don't have `extends Object`, then `Rabbit.__proto__` is not set to `Object`.
+اما اگر ما `extends Object` را نداشته باشیم، سپس `Rabbit.__proto__` برابر با `Object` نخواهد بود.
 
-Here's the demo:
+اینجا یک دمو قرار دارد:
 
 ```js run
 class Rabbit {}
 
 alert( Rabbit.prototype.__proto__ === Object.prototype ); // (1) true
 alert( Rabbit.__proto__ === Object ); // (2) false (!)
-alert( Rabbit.__proto__ === Function.prototype ); // as any function by default
+alert( Rabbit.__proto__ === Function.prototype ); // به صورت پیش‌فرض، مانند هر تابعی
 
 *!*
-// error, no such function in Rabbit
-alert ( Rabbit.getOwnPropertyNames({a: 1, b: 2})); // Error
+// وجود ندارد Rabbit ارور، چنین تابعی درون
+alert ( Rabbit.getOwnPropertyNames({a: 1, b: 2})); // ارور
 */!*
 ```
 
-So `Rabbit` doesn't provide access to static methods of `Object` in that case.
+پس در این صورت `Rabbit` دسترسی به متدهای ایستای `Object` را فراهم نمی‌کند.
 
-By the way, `Function.prototype` has "generic" function methods, like `call`, `bind` etc. They are ultimately available in both cases, because for the built-in `Object` constructor, `Object.__proto__ === Function.prototype`.
+راستی، `Function.prototype` دارای متدهای «عمومی» تابع است، مثل `call`، `bind` و غیره. آن‌ها در هر دو مورد سرانجام در دسترس هستند چون سازنده درون‌ساخت `Object`، `Object.__proto__ === Function.prototype` را دارد.
 
-Here's the picture:
+اینجا تصویر آن را داریم:
 
 ![](rabbit-extends-object.svg)
 
-So, to put it short, there are two differences:
+پس، به طور خلاصه، دو تفاوت وجود دارد:
 
 | class Rabbit | class Rabbit extends Object  |
 |--------------|------------------------------|
-| --             | needs to call `super()` in constructor |
+| --             | باید `super()` را دورن سازنده فراخوانی کند |
 | `Rabbit.__proto__ === Function.prototype` | `Rabbit.__proto__ === Object` |
