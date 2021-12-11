@@ -65,7 +65,7 @@ alert( articles[0].title ); // CSS
 
 اینجا `Article.compare` در «بالای» مقاله‌ها (articles) قرار دارد، به عنوان واسطه‌ای برای مقایسه آن‌ها. این متدی از یک مقاله نیست، بلکه برای کل کلاس است.
 
-مثال دیگر متدی به نام "factory" (به معنی کارخانه) است. فرض کنید، ما به چند راه برای ایجاد یک مقاله نیاز داریم:
+مثال دیگر متدی به نام "factory" (به معنی تولیدکننده) است. فرض کنید، ما به چند راه برای ایجاد یک مقاله نیاز داریم:
 
 1. ساختن از طریق پارامترها (`title`، `date` و غیره).
 2. ساختن یک مقاله خالی با تاریخ امروز.
@@ -200,17 +200,17 @@ alert(Rabbit.__proto__ === Animal); // true
 alert(Rabbit.prototype.__proto__ === Animal.prototype); // true
 ```
 
-## Summary
+## خلاصه
 
-Static methods are used for the functionality that belongs to the class "as a whole". It doesn't relate to a concrete class instance.
+متدهای ایستا برای عملکردی استفاده می‌شوند که «به صورت کامل» به کلاس تعلق دارد. این موضوع به یک نمونه موجود از کلاس مربوط نمی‌شود.
 
-For example, a method for comparison `Article.compare(article1, article2)` or a factory method `Article.createTodays()`.
+برای مثال، متدی برای مقایسه `Article.compare(article1, article2)` یا یک متد تولیدکننده `Article.createTodays()`.
 
-They are labeled by the word `static` in class declaration.
+آن‌ها با کلمه `static` درون تعریف کلاس برچسب زده شده‌اند.
 
-Static properties are used when we'd like to store class-level data, also not bound to an instance.
+ویژگی‌های ایستا زمانی که ما می‌خواهیم داده‌هایی در سطح کلاس ذخیره کنیم و همچنین به یک نمونه از کلاس وابسته نباشند استفاده می‌شوند.
 
-The syntax is:
+سینتکس آن:
 
 ```js
 class MyClass {
@@ -222,13 +222,13 @@ class MyClass {
 }
 ```
 
-Technically, static declaration is the same as assigning to the class itself:
+از لحاظ فنی، تعریف کردن به صورت ایستا درست مانند مقداردهی به خود کلاس است:
 
 ```js
 MyClass.property = ...
 MyClass.method = ...
 ```
 
-Static properties and methods are inherited.
+ویژگی‌ها و متدهای ایستا به ارث برده می‌شوند.
 
-For `class B extends A` the prototype of the class `B` itself points to `A`: `B.[[Prototype]] = A`. So if a field is not found in `B`, the search continues in `A`.
+برای `class B extends A` پروتوتایپ کلاس `B` خودش به `A` اشاره می‌کند: `B.[[Prototype]] = A`. پس اگر یک فیلد درون `B` پیدا نشد، جست‌وجو درون `A` ادامه می‌یابد.
