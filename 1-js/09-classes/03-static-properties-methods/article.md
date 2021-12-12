@@ -1,9 +1,9 @@
 
-# Static properties and methods
+# ویژگی و متدهای ایستا
 
-We can also assign a method to the class function itself, not to its `"prototype"`. Such methods are called *static*.
+ما می‌توانیم یک متد را در خود تابع کلاس هم قرار دهیم، نه درون `"prototype"` آن. چنین متدهایی *ایستا (static)* نامیده می‌شوند.
 
-In a class, they are prepended by `static` keyword, like this:
+در یک کلاس، آن‌ها با کلمه کلیدی `static` استفاده می‌شوند، مثل این:
 
 ```js run
 class User {
@@ -17,7 +17,7 @@ class User {
 User.staticMethod(); // true
 ```
 
-That actually does the same as assigning it as a property directly:
+این کار دقیقا مانند این است که به طور مستقیم یک ویژگی را مقداردهی کنیم:
 
 ```js run
 class User { }
@@ -29,11 +29,11 @@ User.staticMethod = function() {
 User.staticMethod(); // true
 ```
 
-The value of `this` in `User.staticMethod()` call is the class constructor `User` itself (the "object before dot" rule).
+مقدار `this` درون فراخوانی `User.staticMethod()` برابر با کلاس سازنده یعنی خود `User` است (قانون «شیء قبل از نقطه»).
 
-Usually, static methods are used to implement functions that belong to the class, but not to any particular object of it.
+معمولا، متدهای ایستا برای پیاده‌سازی تابع‌هایی که به کلاس تعلق دارند و نه به هر شیء خاصی از آن استفاده می‌شوند.
 
-For instance, we have `Article` objects and need a function to compare them. A natural solution would be to add `Article.compare` method, like this:
+برای مثال، ما شیءهای کلاس `Article` (به معنی مقاله) را داریم و به تابعی برای مقایسه آن‌ها نیاز داریم. یک راه‌حل طبیعی اضافه کردن متد `Article.compare` است، مثلا اینگونه:
 
 ```js run
 class Article {
@@ -49,7 +49,7 @@ class Article {
 */!*
 }
 
-// usage
+// کارایی
 let articles = [
   new Article("HTML", new Date(2019, 1, 1)),
   new Article("CSS", new Date(2019, 0, 1)),
@@ -63,17 +63,17 @@ articles.sort(Article.compare);
 alert( articles[0].title ); // CSS
 ```
 
-Here `Article.compare` stands "above" articles, as a means to compare them. It's not a method of an article, but rather of the whole class.
+اینجا `Article.compare` در «بالای» مقاله‌ها (articles) قرار دارد، به عنوان روشی برای مقایسه آن‌ها. این متدی برای یک مقاله(article) نیست، بلکه برای کل کلاس است.
 
-Another example would be a so-called "factory" method. Imagine, we need few ways to create an article:
+مثال دیگر متدی به نام "factory" (به معنی تولیدکننده) است. فرض کنید، ما به چند راه برای ایجاد یک مقاله نیاز داریم:
 
-1. Create by given parameters (`title`, `date` etc).
-2. Create an empty article with today's date.
-3. ...or else somehow.
+1. ساختن از طریق پارامترها (`title`، `date` و غیره).
+2. ساختن یک مقاله خالی با تاریخ امروز.
+3. ...یا به روشی دیگر.
 
-The first way can be implemented by the constructor. And for the second one we can make a static method of the class.
+اولین راه می‌تواند با استفاده از تابع سازنده پیاده‌سازی شود. و برای راه دوم می‌توانیم یک متد ایستا برای کلاس بسازیم.
 
-Like `Article.createTodays()` here:
+مانند `Article.createTodays()` در اینجا:
 
 ```js run
 class Article {
@@ -84,32 +84,32 @@ class Article {
 
 *!*
   static createTodays() {
-    // remember, this = Article
-    return new this("Today's digest", new Date());
+    // this = Article ،به یاد داشته باشید
+    return new this("خلاصه‌ی امروز", new Date());
   }
 */!*
 }
 
 let article = Article.createTodays();
 
-alert( article.title ); // Today's digest
+alert( article.title ); // خلاصه‌ی امروز
 ```
 
-Now every time we need to create a today's digest, we can call `Article.createTodays()`. Once again, that's not a method of an article, but a method of the whole class.
+حالا هر بار که نیاز داشته باشیم یک خلاصه از امروز بسازیم، می‌توانیم `Article.createTodays()` را فراخوانی کنیم. یکبار دیگر هم می‌گوییم، این متدی از مقاله (article) نیست بلکه متدی از کل کلاس است.
 
-Static methods are also used in database-related classes to search/save/remove entries from the database, like this:
+متدهای ایستا همچنین در کلاس‌های مربوط به پایگاه داده (database) برای جست‌وجو/ذخیره/حذف ورودی‌ها از پایگاه داده هم استفاده می‌شوند، مثلا اینگونه:
 
 ```js
-// assuming Article is a special class for managing articles
-// static method to remove the article:
+// کلاسی خاص برای مدیریت مقاله‌ها است Article با فرض اینکه
+// :متد ایستا برای حذف مقاله‌ها
 Article.remove({id: 12345});
 ```
 
-## Static properties
+## ویژگی‌های ایستا
 
 [recent browser=Chrome]
 
-Static properties are also possible, they look like regular class properties, but prepended by `static`:
+می‌توانیم ویژگی‌های ایستا هم داشته باشیم، آن‌ها مانند ویژگی‌های معمولی کلاس بنظر می‌رسند اما قبل از آن‌ها `static` وجود دارد:
 
 ```js run
 class Article {
@@ -119,21 +119,21 @@ class Article {
 alert( Article.publisher ); // Ilya Kantor
 ```
 
-That is the same as a direct assignment to `Article`:
+درست مانند مقداردهی مستقیم به `Article` است:
 
 ```js
 Article.publisher = "Ilya Kantor";
 ```
 
-## Inheritance of static properties and methods [#statics-and-inheritance]
+## ارث‌بری ویژگی‌ها و متدهای ایستا [#statics-and-inheritance]
 
-Static properties and methods are inherited.
+ویژگی‌ها و متدهای ایستا به ارث برده می‌شوند.
 
-For instance, `Animal.compare` and `Animal.planet` in the code below are inherited and accessible as `Rabbit.compare` and `Rabbit.planet`:
+برای مثال، در کد پایین `Animal.compare` و `Animal.planet` به ارث برده می‌شوند و به صورت `Rabbit.compare` و `Rabbit.planet` قابل دسترس هستند:
 
 ```js run
 class Animal {
-  static planet = "Earth";
+  static planet = "زمین";
 
   constructor(name, speed) {
     this.speed = speed;
@@ -142,7 +142,7 @@ class Animal {
 
   run(speed = 0) {
     this.speed += speed;
-    alert(`${this.name} runs with speed ${this.speed}.`);
+    alert(`${this.name} با سرعت ${this.speed} می‌دود.`);
   }
 
 *!*
@@ -153,64 +153,64 @@ class Animal {
 
 }
 
-// Inherit from Animal
+// Animal ارث‌بری از
 class Rabbit extends Animal {
   hide() {
-    alert(`${this.name} hides!`);
+    alert(`${this.name} قایم می‌شود!`);
   }
 }
 
 let rabbits = [
-  new Rabbit("White Rabbit", 10),
-  new Rabbit("Black Rabbit", 5)
+  new Rabbit("خرگوش سفید", 10),
+  new Rabbit("خرگوش مشکی", 5)
 ];
 
 *!*
 rabbits.sort(Rabbit.compare);
 */!*
 
-rabbits[0].run(); // Black Rabbit runs with speed 5.
+rabbits[0].run(); // خرگوش مشکی با سرعت 5 می‌دود
 
-alert(Rabbit.planet); // Earth
+alert(Rabbit.planet); // زمین
 ```
 
-Now when we call `Rabbit.compare`, the inherited `Animal.compare` will be called.
+حالا زمانی که `Rabbit.compare` را فراخوانی می‌کنیم، `Animal.compare` که به ارث برده شده فراخوانی خواهد شد.
 
-How does it work? Again, using prototypes. As you might have already guessed, `extends` gives `Rabbit` the `[[Prototype]]` reference to `Animal`.
+این چگونه کار می‌کند؟ دوباره، با استفاده از پروتوتایپ‌ها. همانطور که ممکن است از قبل حدس زده باشید، `extends` به کلاس `Rabbit` ویژگی `[[Prototype]]` می‌دهد که به `Animal` رجوع می‌کند.
 
 ![](animal-rabbit-static.svg)
 
-So, `Rabbit extends Animal` creates two `[[Prototype]]` references:
+پس `Rabbit extends Animal` دو رجوع `[[Prototype]]` می‌سازد:
 
-1. `Rabbit` function prototypally inherits from `Animal` function.
-2. `Rabbit.prototype` prototypally inherits from `Animal.prototype`.
+1. تابع `Rabbit` به صورت پروتوتایپی از تابع `Animal` ارث‌بری می‌کند.
+2. ویژگی `Rabbit.prototype` به صورت پروتوتایپی از `Animal.prototype` ارث‌بری می‌کند.
 
-As a result, inheritance works both for regular and static methods.
+به عنوان یک نتیجه، ارث‌بری هم برای متدهای معمولی کار می‌کند و هم برای متدهای ایستا.
 
-Here, let's check that by code:
+بفرمایید، بیایید این موضوع را با استفاده از کد بررسی کنیم:
 
 ```js run
 class Animal {}
 class Rabbit extends Animal {}
 
-// for statics
+// برای ایستاها
 alert(Rabbit.__proto__ === Animal); // true
 
-// for regular methods
+// برای متدهای معمولی
 alert(Rabbit.prototype.__proto__ === Animal.prototype); // true
 ```
 
-## Summary
+## خلاصه
 
-Static methods are used for the functionality that belongs to the class "as a whole". It doesn't relate to a concrete class instance.
+متدهای ایستا برای عملکردی استفاده می‌شوند که «به صورت کامل» به کلاس تعلق دارد. این موضوع به یک نمونه موجود از کلاس مربوط نمی‌شود.
 
-For example, a method for comparison `Article.compare(article1, article2)` or a factory method `Article.createTodays()`.
+برای مثال، متدی برای مقایسه `Article.compare(article1, article2)` یا یک متد تولیدکننده `Article.createTodays()`.
 
-They are labeled by the word `static` in class declaration.
+آن‌ها با کلمه `static` درون تعریف کلاس برچسب زده شده‌اند.
 
-Static properties are used when we'd like to store class-level data, also not bound to an instance.
+ویژگی‌های ایستا زمانی که ما می‌خواهیم داده‌هایی در سطح کلاس ذخیره کنیم و همچنین به یک نمونه از کلاس وابسته نباشند استفاده می‌شوند.
 
-The syntax is:
+سینتکس آن:
 
 ```js
 class MyClass {
@@ -222,13 +222,13 @@ class MyClass {
 }
 ```
 
-Technically, static declaration is the same as assigning to the class itself:
+از لحاظ فنی، تعریف کردن به صورت ایستا درست مانند مقداردهی به خود کلاس است:
 
 ```js
 MyClass.property = ...
 MyClass.method = ...
 ```
 
-Static properties and methods are inherited.
+ویژگی‌ها و متدهای ایستا به ارث برده می‌شوند.
 
-For `class B extends A` the prototype of the class `B` itself points to `A`: `B.[[Prototype]] = A`. So if a field is not found in `B`, the search continues in `A`.
+برای `class B extends A` پروتوتایپ کلاس `B` خودش به `A` اشاره می‌کند: `B.[[Prototype]] = A`. پس اگر یک فیلد درون `B` پیدا نشد، جست‌وجو درون `A` ادامه می‌یابد.
