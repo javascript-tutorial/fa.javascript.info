@@ -161,7 +161,11 @@ for (let key in user) alert(key); // name, age (بدون سمبل)
 alert( "به طور مستقیم: " + user[id] );
 ```
 
+<<<<<<< HEAD
 همچنین `Object.keys(user)` هم آنها را نادیده می‌گیرد. این یک بخش از اصل کلی «مخفی‌سازی ویژگی‌های سمبلی» است. اگر یک اسکریپت یا کتابخانه دیگر در شیء ما حلقه بزند، به تصادفی به ویژگی سمبلی ما دسترسی نخواهد داشت.
+=======
+[Object.keys(user)](mdn:js/Object/keys) also ignores them. That's a part of the general "hiding symbolic properties" principle. If another script or a library loops over our object, it won't unexpectedly access a symbolic property.
+>>>>>>> c5358c59494b53efb832c81a5338e0a23b22c269
 
 در مقابل، [Object.assign](mdn:js/Object/assign) هم ویژگی‌های رشته و هم سمبل را کپی می‌کند:
 

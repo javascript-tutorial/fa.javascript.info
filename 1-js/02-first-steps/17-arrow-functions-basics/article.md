@@ -5,10 +5,14 @@
 به‌خاطر شکلی که دارد، arrow functions نام گرفته است.
 
 ```js
-let func = (arg1, arg2, ..., argN) => expression
+let func = (arg1, arg2, ..., argN) => expression;
 ```
 
+<<<<<<< HEAD
 ...این کد یک تابع `func` می‌سازد که دو آرگومان `arg1..argN` می‌پذیرد و با استفاده از این دو آرگومان `expression` سمت راست را محاسبه می‌کند و نتیجه را برمی‌گرداند.
+=======
+This creates a function `func` that accepts arguments `arg1..argN`, then evaluates the `expression` on the right side with their use and returns its result.
+>>>>>>> c5358c59494b53efb832c81a5338e0a23b22c269
 
 به بیانی دیگر، این کد نسخه‌ی کوتاه‌شده کد زیر است:
 

@@ -256,12 +256,21 @@ function go() {
 ```js run
 // IIFE راه‌هایی برای ایجاد
 
+<<<<<<< HEAD
 (function() {
   alert("پرانتزهای دور تابع");
 }*!*)*/!*();
 
 (function() {
   alert("پرانتزهای دور تمام عبارت");
+=======
+*!*(*/!*function() {
+  alert("Parentheses around the function");
+}*!*)*/!*();
+
+*!*(*/!*function() {
+  alert("Parentheses around the whole thing");
+>>>>>>> c5358c59494b53efb832c81a5338e0a23b22c269
 }()*!*)*/!*;
 
 *!*!*/!*function() {
