@@ -9,27 +9,27 @@
 
 معمولا، دستگاه‌هایی که ما استفاده می‌کنیم بسیار پیچیده هستند. اما محدود کردن رابط داخلی از رابط بیرونی به ما این امکان را می‌دهد که بدون مشکل از آن‌ها استفاده کنیم.
 
-## A real-life example
+## یک مثال در زندگی واقعی
 
-For instance, a coffee machine. Simple from outside: a button, a display, a few holes...And, surely, the result -- great coffee! :)
+برای مثال، یک قهوه‌ساز. از بیرون ساده است: یک دکمه، یک نمایشگر، چند سوراخ...و قطعا، نتیجه -- یک قهوه عالی :)
 
 ![](coffee.jpg)
 
-But inside... (a picture from the repair manual)
+اما از درون... (تصویری از دفترچه راهنمای تعمیرات)
 
 ![](coffee-inside.jpg)
 
-A lot of details. But we can use it without knowing anything.
+مقدار زیادی جزئیات. اما می‌توانیم بدون دانستن چیزی از آن استفاده کنیم.
 
-Coffee machines are quite reliable, aren't they? We can use one for years, and only if something goes wrong -- bring it for repairs.
+قهوه‌سازها بسیار قابل اطمینان هستند نه؟ می‌توانیم برای سال‌ها از آن‌ها استفاده کنیم و اگر چیزی درست نبود -- آن را به تعمیراتی ببرید.
 
-The secret of reliability and simplicity of a coffee machine -- all details are well-tuned and *hidden* inside.
+راز قابل اطمینان و ساده بودن یک قهوه‌ساز -- تمام جزئیات به خوبی تنظیم شده و درون آن *پنهان* است.
 
-If we remove the protective cover from the coffee machine, then using it will be much more complex (where to press?), and dangerous (it can electrocute).
+اگر ما پوشش حفاظتی را از قهوه‌ساز برداریم، سپس استفاده از آن پیچیده‌تر (کجا را فشار دهیم؟) و خطرناک‌تر (می‌تواند باعث برق گرفتگی شود) خواهد بود.
 
-As we'll see, in programming objects are like coffee machines.
+همانطور که خواهیم دید، در برنامه‌نویسی شیءها مانند قهوه‌سازها هستند.
 
-But in order to hide inner details, we'll use not a protective cover, but rather special syntax of the language and conventions.
+اما برای مخفی‌سازی جزئیات درونی،ما از پوشش حفاظتی استفاده نمی‌کنیم، بلکه از سینتکس خاص زبان و قراردادها استفاده می‌کنیم.
 
 ## Internal and external interface
 
