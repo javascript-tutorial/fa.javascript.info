@@ -1,13 +1,13 @@
 
-# Private and protected properties and methods
+# ویژگی‌ها و متدهای شخصی و محافظت شده
 
-One of the most important principles of object oriented programming -- delimiting internal interface from the external one.
+یکی از مهم‌ترین قواعد برنامه‌نویسی شیءگرا -- محدود کردن رابط داخلی از رابط بیرونی است.
 
-That is "a must" practice in developing anything more complex than a "hello world" app.
+یعنی یک کارِ «بایدی» در توسعه هر چیزی پیچیده‌تر از یک برنامه "hello world".
 
-To understand this, let's break away from development and turn our eyes into the real world.
+برای فهمیدن این موضوع، بیایید از توسعه دور شویم و به دنیای واقعی نگاه کنیم.
 
-Usually, devices that we're using are quite complex. But delimiting the internal interface from the external one allows to use them without problems.
+معمولا، دستگاه‌هایی که ما استفاده می‌کنیم بسیار پیچیده هستند. اما محدود کردن رابط داخلی از رابط بیرونی به ما این امکان را می‌دهد که بدون مشکل از آن‌ها استفاده کنیم.
 
 ## A real-life example
 
