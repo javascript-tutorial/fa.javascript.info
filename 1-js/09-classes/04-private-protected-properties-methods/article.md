@@ -69,7 +69,7 @@ class CoffeeMachine {
 
   constructor(power) {
     this.power = power;
-    alert( `یک قهوه‌ساز ایجاد کردیم، قدرت: ${power}` );
+    alert( `یک قهوه‌ساز ایجاد کردیم، توان: ${power}` );
   }
 
 }
@@ -121,13 +121,13 @@ coffeeMachine.waterAmount = -10; // -برابر با 0 خواهد بود نه 10
 
 حالا دسترسی تحت کنترل است پس تنظیم مقدار آب کمتر از صفر ممکن نیست.
 
-## Read-only "power"
+## ویژگی "power" فقط‌خواندنی
 
-For `power` property, let's make it read-only. It sometimes happens that a property must be set at creation time only, and then never modified.
+بیایید ویژگی `power` را فقط‌خواندنی کنیم. گاهی اوقات یک ویژگی باید فقط زمان ایجاد کردن مقداردهی شود و دیگر هیچ‌وقت تغییر نکند.
 
-That's exactly the case for a coffee machine: power never changes.
+این دقیقا برای قهوه‌ساز هم صدق می‌کند: توان (power) هیچ‌وقت تغییر نمی‌کند.
 
-To do so, we only need to make getter, but not the setter:
+برای انجام این کار، ما فقط نیاز داریم که یک getter ایجاد کنیم اما setter را نه:
 
 ```js run
 class CoffeeMachine {
@@ -143,18 +143,18 @@ class CoffeeMachine {
 
 }
 
-// create the coffee machine
+// ایجاد قهوه‌ساز
 let coffeeMachine = new CoffeeMachine(100);
 
-alert(`Power is: ${coffeeMachine.power}W`); // Power is: 100W
+alert(`توان: ${coffeeMachine.power} وات`); // توان: 100 وات
 
-coffeeMachine.power = 25; // Error (no setter)
+coffeeMachine.power = 25; // (نداریم setter) ارور
 ```
 
-````smart header="Getter/setter functions"
-Here we used getter/setter syntax.
+````smart header="تابع‌های Getter/setter"
+اینجا ما از سینتکس getter/setter استفاده کردیم.
 
-But most of the time `get.../set...` functions are preferred, like this:
+اما اکثر اوقات تابع‌های `get.../set...` ترجیح داده می‌شوند، مثلا اینگونه:
 
 ```js
 class CoffeeMachine {
@@ -173,15 +173,15 @@ class CoffeeMachine {
 new CoffeeMachine().setWaterAmount(100);
 ```
 
-That looks a bit longer, but functions are more flexible. They can accept multiple arguments (even if we don't need them right now).
+این کمی طولانی‌تر بنظر می‌رسد اما تابع‌ها بیشتر منعطف هستند. آن‌ها می‌توانند چند آرگومان دریافت کنند (حتی اگر ما همین الان به آن‌ها نیاز نداشته باشیم).
 
-On the other hand, get/set syntax is shorter, so ultimately there's no strict rule, it's up to you to decide.
+از سویی دیگر، سینتکس get/set` کوتاه‌تر است پس در نهایت هیچ قانونی وجود ندارد، تصمیم با شماست.
 ````
 
-```smart header="Protected fields are inherited"
-If we inherit `class MegaMachine extends CoffeeMachine`, then nothing prevents us from accessing `this._waterAmount` or `this._power` from the methods of the new class.
+```smart header="فیلدهای محافظت‌شده به ارث برده می‌شوند"
+اگر ما `class MegaMachine extends CoffeeMachine` را ارث‌بری کنیم، سپس چیزی جلوی ما را برای دسترسی به `this._waterAmount` یا `this._power` از متدهای کلاس جدید نمی‌گیرد.
 
-So protected fields are naturally inheritable. Unlike private ones that we'll see below.
+پس فیلدهای محافظت‌شده به طور طبیعی قابل ارث‌بری هستند. برخلاف فیلدهای خصوصی که پایین خواهیم دید.
 ```
 
 ## Private "#waterLimit"
