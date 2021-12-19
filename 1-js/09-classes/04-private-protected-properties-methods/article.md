@@ -31,33 +31,33 @@
 
 اما برای مخفی‌سازی جزئیات درونی،ما از پوشش حفاظتی استفاده نمی‌کنیم، بلکه از سینتکس خاص زبان و قراردادها استفاده می‌کنیم.
 
-## Internal and external interface
+## رابط درونی و بیرونی
 
-In object-oriented programming, properties and methods are split into two groups:
+در برنامه‌نویسی شیءگرا، ویژگی‌ها و متدها به دو گروه تقسیم می‌شوند:
 
-- *Internal interface* -- methods and properties, accessible from other methods of the class, but not from the outside.
-- *External interface* -- methods and properties, accessible also from outside the class.
+- *رابط درونی* -- متدها و ویژگی‌ها، قابل دسترس از متدهای دیگر کلاس، اما نه از بیرون.
+- *رابط بیرونی* -- متدها و ویژگی‌ها، قابل دسترس از بیرون از کلاس.
 
-If we continue the analogy with the coffee machine -- what's hidden inside: a boiler tube, heating element, and so on -- is its internal interface.
+اگر ما مثال قهوه‌ساز را ادامه دهیم -- چیزی که درون آن است: یک مجرای بخار، المنت حرارت و غیره -- رابط درونی است.
 
-An internal interface is used for the object to work, its details use each other. For instance, a boiler tube is attached to the heating element.
+یک رابط درونی برای اینکه شیء کار کند استفاده می‌شود، جزئیات آن از یکدیگر استفاده می‌کنند. برای مثال، یک مجرای بخار به المنت حرارت متصل شده است.
 
-But from the outside a coffee machine is closed by the protective cover, so that no one can reach those. Details are hidden and inaccessible. We can use its features via the external interface.
+اما از بیرون یک قهوه‌ساز توسط پوشش محافظ بسته شده است پس کسی نمی‌تواند به آن‌ها دسترسی داشته باشد. جزئیات پنهان و غیر قابل دسترس شده‌اند. ما می‌توانیم از طریق رابط بیرونی از خصوصیات آن استفاده کنیم.
 
-So, all we need to use an object is to know its external interface. We may be completely unaware how it works inside, and that's great.
+پس تمام چیزی که برای استفاده از یک شیء نیاز داریم این است که رابط بیرونی آن را بشناسیم. شاید کاملا از اینکه چگونه کار می‌کند و این عالی است.
 
-That was a general introduction.
+این یک معرفی کلی بود.
 
-In JavaScript, there are two types of object fields (properties and methods):
+در جاوااسکریپت، دو نوع فیلد شیء داریم (ویژگی‌ها و متدها):
 
-- Public: accessible from anywhere. They comprise the external interface. Until now we were only using public properties and methods.
-- Private: accessible only from inside the class. These are for the internal interface.
+- عمومی (public): قابل دسترس از هر جا. آن‌ها شامل رابط بیرونی می‌شوند. تا اینجا ما فقط از ویژگی‌ها و متدهای عمومی استفاده می‌کردیم.
+- خصوصی (private): فقط درون کلاس قابل دسترس است. این‌ها برای رابط درونی هستند.
 
-In many other languages there also exist "protected" fields: accessible only from inside the class and those extending it (like private, but plus access from inheriting classes). They are also useful for the internal interface. They are in a sense more widespread than private ones, because we usually want inheriting classes to gain access to them.
+در بسیاری از زبان‌های دیگر فیلدهای «محافظت‌شده» (protected) هم وجود دارد: فقط از درون کلاس و کلاس‌هایی که آن را تعمیم می‌دهند قابل دسترس است (مانند نوع خصوصی اما قابل دسترس از کلاس‌های ارث‌بر). آن‌ها هم برای رابط درونی مفید هستند. آن‌ها در کل نسبت به نوع خصوصی بیشتر رایج هستند چون ما معمولا می‌خواهیم کلاس‌های ارث‌بر به آن‌ها دسترسی داشته باشند.
 
-Protected fields are not implemented in JavaScript on the language level, but in practice they are very convenient, so they are emulated.
+فیلدهای محافظت‌شده در جاوااسکریپت در سطح زبان پیاده‌سازی نشده‌اند اما در عمل بسیار مناسب هستند پس تقلید شده‌اند.
 
-Now we'll make a coffee machine in JavaScript with all these types of properties. A coffee machine has a lot of details, we won't model them to stay simple (though we could).
+حالا در جاوااسکریپت یک قهوه‌ساز همراه با انواع ویژگی خواهیم ساخت. یک قهوه‌ساز جزئیات زیادی دارد، ما برای ساده بودن آن‌ها را مدل‌سازی نمی‌کنیم (اگرچه می‌توانستیم).
 
 ## Protecting "waterAmount"
 
