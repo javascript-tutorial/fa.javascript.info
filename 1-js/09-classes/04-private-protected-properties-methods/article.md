@@ -59,37 +59,37 @@
 
 حالا در جاوااسکریپت یک قهوه‌ساز همراه با انواع ویژگی خواهیم ساخت. یک قهوه‌ساز جزئیات زیادی دارد، ما برای ساده بودن آن‌ها را مدل‌سازی نمی‌کنیم (اگرچه می‌توانستیم).
 
-## Protecting "waterAmount"
+## ویژگی "waterAmount" محافظت‌شده
 
-Let's make a simple coffee machine class first:
+بیایید یک کلاس ساده قهوه‌ساز ایجاد کنیم:
 
 ```js run
 class CoffeeMachine {
-  waterAmount = 0; // the amount of water inside
+  waterAmount = 0; // مقدار آب درون
 
   constructor(power) {
     this.power = power;
-    alert( `Created a coffee-machine, power: ${power}` );
+    alert( `یک قهوه‌ساز ایجاد کردیم، قدرت: ${power}` );
   }
 
 }
 
-// create the coffee machine
+// ایجاد قهوه‌ساز
 let coffeeMachine = new CoffeeMachine(100);
 
-// add water
+// اضافه کردن آب
 coffeeMachine.waterAmount = 200;
 ```
 
-Right now the properties `waterAmount` and `power` are public. We can easily get/set them from the outside to any value.
+حالا ویژگی‌های `waterAmount` و `power` عمومی هستند. می‌توانیم به راحتی از بیرون آن‌ها را دریافت کنیم یا مقداردهی کنیم.
 
-Let's change `waterAmount` property to protected to have more control over it. For instance, we don't want anyone to set it below zero.
+بیایید برای داشتن کنترل بیشتر ویژگی `waterAmount` را به محافظت‌شده تغییر دهیم. برای مثال، ما نمی‌خواهیم کسی آن را کمتر از صفر تنظیم کند.
 
-**Protected properties are usually prefixed with an underscore `_`.**
+**قبل از ویژگی‌های محافظت‌شده معمولا یک زیرخط (underscore) `_` می‌آید.**
 
-That is not enforced on the language level, but there's a well-known convention between programmers that such properties and methods should not be accessed from the outside.
+این نوع در سطح زبان اجرایی نشده اما یک قرارداد شناخته‌شده بین برنامه‌نویسان وجود دارد که نباید از بیرون به چنین ویژگی‌ها و متدهایی دسترسی پیدا کرد.
 
-So our property will be called `_waterAmount`:
+پس ویژگی ما `_waterAmount` خواهد بود:
 
 ```js run
 class CoffeeMachine {
@@ -112,14 +112,14 @@ class CoffeeMachine {
 
 }
 
-// create the coffee machine
+// ایجاد قهوه‌ساز
 let coffeeMachine = new CoffeeMachine(100);
 
-// add water
-coffeeMachine.waterAmount = -10; // _waterAmount will become 0, not -10
+// اضافه کردن آب
+coffeeMachine.waterAmount = -10; // -برابر با 0 خواهد بود نه 10 _waterAmount
 ```
 
-Now the access is under control, so setting the water amount below zero becomes impossible.
+حالا دسترسی تحت کنترل است پس تنظیم مقدار آب کمتر از صفر ممکن نیست.
 
 ## Read-only "power"
 
