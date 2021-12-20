@@ -283,40 +283,40 @@ class User {
 این برای فیلدهای خصوصی غیر ممکن است: `this['#name']` کار نمی‌کند. این یک محدودیت سینتکسی است تا حریم اطمینان حاصل کند.
 ````
 
-## Summary
+## خلاصه
 
-In terms of OOP, delimiting of the internal interface from the external one is called [encapsulation](https://en.wikipedia.org/wiki/Encapsulation_(computer_programming)).
+از نظر برنامه‌نویسی شیءگرا، جدا کردن رابط درونی از بیرونی را [کپسوله‌سازی](https://fa.wikipedia.org/wiki/پوشاندن_(علم_رایانه)) می‌گویند.
 
-It gives the following benefits:
+این مزایا را به ما می‌دهد:
 
-Protection for users, so that they don't shoot themselves in the foot
-: Imagine, there's a team of developers using a coffee machine. It was made by the "Best CoffeeMachine" company, and works fine, but a protective cover was removed. So the internal interface is exposed.
+حفاظت از کاربران، تا آن‌ها خودشان را در مخمصه نیاندازند
+: تصور کنید، تیمی از توسعه‌دهندگان در حال استفاده از قهوه‌ساز هستند. این دستگاه توسط شرکت «بهترین قهوه‌ساز» ساخته شده و به خوبی کار می‌کند، اما یک پوشش محافظ برداشته شد. پس رابط درونی افشاء شده است.
 
-    All developers are civilized -- they use the coffee machine as intended. But one of them, John, decided that he's the smartest one, and made some tweaks in the coffee machine internals. So the coffee machine failed two days later.
+    تمام توسعه‌دهندگان متمدن هستند -- آن‌ها از قهوه‌ساز همانطور که توقع می‌رود استفاده می‌کنند. اما یکی از آن‌ها، John، تصمیم گرفته است که باهوش‌ترین است و درون قهوه‌ساز تغییراتی ایجاد کرد. قهوه‌ساز دو روز بعد از کار می‌افتد.
 
-    That's surely not John's fault, but rather the person who removed the protective cover and let John do his manipulations.
+    قطعا این تقصیر John نیست بلکه تقصیر کسی است که پوشش محافظ را برداشت و اجازه داد که John قهوه‌ساز را دست‌کاری کند.
 
-    The same in programming. If a user of a class will change things not intended to be changed from the outside -- the consequences are unpredictable.
+    همچین چیزی در برنامه‌نویسی هم وجود دارد. اگر یک کاربرِ کلاس چیزهایی را که قرار نیست تغییر کنند را از بیرون تغییر دهد -- عواقب آن غیر قابل پیش‌بینی هستند.
 
-Supportable
-: The situation in programming is more complex than with a real-life coffee machine, because we don't just buy it once. The code constantly undergoes development and improvement.
+قابل پشتیبانی
+: این وضعیت در برنامه‌نویسی پیچیده‌تر از یک قهوه‌ساز در زندگی واقعی است چون ما فقط آن را یک بار نمی‌خریم. کد دائما در توسعه و پیشرفت است.
 
-    **If we strictly delimit the internal interface, then the developer of the class can freely change its internal properties and methods, even without informing the users.**
+    **اگر ما به صورت سخت‌گیرانه رابط درونی را جداسازی کنیم، سپس توسعه‌دهنده‌ی کلاس آزادانه می‌تواند ویژگی‌ها و متدهای درون آن را تغییر دهد، حتی بدون اینکه کاربران را خبردار کند.**
 
-    If you're a developer of such class, it's great to know that private methods can be safely renamed, their parameters can be changed, and even removed, because no external code depends on them.
+    اگر شما توسعه‌دهنده چنین کلاسی باشید، این عالی است که بتوانید متدهای خصوصی را با خیال راحت تغییر نام دهید، پارامترهای آن‌ها را تغییر دهید و حتی حذف کنید، چون هیچ کد بیرونی به آن‌ها وابسته نیست.
 
-    For users, when a new version comes out, it may be a total overhaul internally, but still simple to upgrade if the external interface is the same.
+    برای کاربران، زمانی که نسخه‌ای جدید منتشر می‌شود، ممکن است از درون تعمیرات اساسی نیاز داشته باشد اما اگر رابط بیرونی یکسان باشد هنوز برای ارتقا دادن ساده است.
 
-Hiding complexity
-: People adore using things that are simple. At least from outside. What's inside is a different thing.
+پنهان کردن پیچیدگی
+: مردم عاشق استفاده از چیزهای ساده هستند. حداقل از بیرون. چیزی که درون وجود دارد موضوع متفاوتی است.
 
-    Programmers are not an exception.
+    برنامه‌نویسان استثنا نیستند.
 
-    **It's always convenient when implementation details are hidden, and a simple, well-documented external interface is available.**
+    **همیشه زمانی که جزئیات پیاده‌سازی پنهان هستند و یک رابط بیرونی ساده و به خوبی مستند شده وجود دارد کار راحت است.**
 
-To hide an internal interface we use either protected or private properties:
+برای پنهان‌سازی یک رابط درونی می‌توانیم یا از ویژگی‌های محافظت‌شده استفاده کنیم یا ویژگی‌های خصوصی:
 
-- Protected fields start with `_`. That's a well-known convention, not enforced at the language level. Programmers should only access a field starting with `_` from its class and classes inheriting from it.
-- Private fields start with `#`. JavaScript makes sure we can only access those from inside the class.
+- فیلدهای محافظت‌شده با `_` شروع می‌شوند. این یک قرارداد شناخته‌شده است و در سطح زبان اجرایی نشده‌اند. برنامه‌نویسان فقط باید از درون کلاس و کلاس‌هایی که از آن ارث می‌برند، به فیلدی که با `_` شروع می‌شود دسترسی پیدا کنند.
+- فیلدهای خصوصی با `#` شروع می‌شوند. جاوااسکریپت مطمئن می‌شود که ما فقط از درون کلاس بتوانیم به آن‌ها دسترسی پیدا کنیم.
 
-Right now, private fields are not well-supported among browsers, but can be polyfilled.
+در حال حاضر، فیلدهای خصوصی به خوبی در میان مرورگرها پشتیبانی نمی‌شوند اما می‌توان برای آن‌ها پلیفیل ساخت.
