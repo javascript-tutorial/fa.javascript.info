@@ -188,11 +188,11 @@ new CoffeeMachine().setWaterAmount(100);
 
 [recent browser=none]
 
-There's a finished JavaScript proposal, almost in the standard, that provides language-level support for private properties and methods.
+یک طرح پیشنهادی تمام شده جاوااسکریپت وجود دارد، تقریبا درون استاندارد وارد شده، که پشتیبانی برای ویژگی‌ها و متدهای خصوصی (private) را در سطح زبان فراهم می‌کند.
 
-Privates should start with `#`. They are only accessible from inside the class.
+ویژگی‌ها خصوصی با `#` شروع می‌شوند. آن‌ها فقط از درون کلاس قابل دسترس هستند.
 
-For instance, here's a private `#waterLimit` property and the water-checking private method `#fixWaterAmount`:
+برای مثال، اینجا ویژگی خصوصی `#waterLimit` و متد خصوصی `#fixWaterAmount` را داریم:
 
 ```js run
 class CoffeeMachine {
@@ -216,17 +216,17 @@ class CoffeeMachine {
 let coffeeMachine = new CoffeeMachine();
 
 *!*
-// can't access privates from outside of the class
-coffeeMachine.#fixWaterAmount(123); // Error
-coffeeMachine.#waterLimit = 1000; // Error
+// نمی‌توان بیرون از کلاس به خصوصی‌ها دسترسی پیدا کرد
+coffeeMachine.#fixWaterAmount(123); // ارور
+coffeeMachine.#waterLimit = 1000; // ارور
 */!*
 ```
 
-On the language level, `#` is a special sign that the field is private. We can't access it from outside or from inheriting classes.
+در سطح زبان، `#` نمادی خاص است که یعنی فیلد خصوصی است. ما نمی‌توانیم از بیرون یا از کلاس‌های ارث‌بر به آن دسترسی داشته باشیم.
 
-Private fields do not conflict with public ones. We can have both private `#waterAmount` and public `waterAmount` fields at the same time.
+فیلدهای خصوصی با فیلدهای عمومی ناسازگار نیستند. می‌توانیم در یک زمان هم `#waterAmount` خصوصی داشته باشیم و هم `waterAmount` عمومی.
 
-For instance, let's make `waterAmount` an accessor for `#waterAmount`:
+برای مثال، بیایید `waterAmount` را به عنوان اکسسر برای `#waterAmount` ایجاد کنیم:
 
 ```js run
 class CoffeeMachine {
@@ -246,29 +246,29 @@ class CoffeeMachine {
 let machine = new CoffeeMachine();
 
 machine.waterAmount = 100;
-alert(machine.#waterAmount); // Error
+alert(machine.#waterAmount); // ارور
 ```
 
-Unlike protected ones, private fields are enforced by the language itself. That's a good thing.
+برخلاف محافظت‌شده‌ها، فیلدهای خصوصی در سطح خود زبان اجرایی شده‌اند. این چیز خوبی است.
 
-But if we inherit from `CoffeeMachine`, then we'll have no direct access to `#waterAmount`. We'll need to rely on `waterAmount` getter/setter:
+اما اگر ما از `CoffeMachine` ارث‌بری کنیم، سپس دسترسی مستقیم به `#waterAmount` نداریم. باید به سراغ getter/setter برای `waterAmount` برویم:
 
 ```js
 class MegaCoffeeMachine extends CoffeeMachine {
   method() {
 *!*
-    alert( this.#waterAmount ); // Error: can only access from CoffeeMachine
+    alert( this.#waterAmount ); // ممکن است CoffeMachine ارور: دسترسی فقط از
 */!*
   }
 }
 ```
 
-In many scenarios such limitation is too severe. If we extend a `CoffeeMachine`, we may have legitimate reasons to access its internals. That's why protected fields are used more often, even though they are not supported by the language syntax.
+در بسیاری از سناریوها چنین محدودیتی خیلی سخت‌گیرانه است. اگر ما `CoffeMachine` را تعمیم دهیم، شاید دلایل قابل قبولی برای دسترسی به درون آن داشته باشیم. به همین دلیل فیلدهای محافظت‌شده اغلب اوقات استفاده می‌شوند حتی اگر آن‌ها توسط سینتکس زبان پشتیبانی نمی‌شوند.
 
-````warn header="Private fields are not available as this[name]"
-Private fields are special.
+````warn header="فیلدهای خصوصی به صورت this[name] در دسترس نیستند"
+فیلدهای خصوصی خاص هستند.
 
-As we know, usually we can access fields using `this[name]`:
+همانطور که می‌دانیم، معمولا با استفاده از `this[name]` به فیلدها دسترسی پیدا می‌کنیم:
 
 ```js
 class User {
@@ -280,7 +280,7 @@ class User {
 }
 ```
 
-With private fields that's impossible: `this['#name']` doesn't work. That's a syntax limitation to ensure privacy.
+این برای فیلدهای خصوصی غیر ممکن است: `this['#name']` کار نمی‌کند. این یک محدودیت سینتکسی است تا حریم اطمینان حاصل کند.
 ````
 
 ## Summary
