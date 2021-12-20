@@ -317,13 +317,21 @@ new Rabbit(); // animal
 */!*
 ```
 
+<<<<<<< HEAD
 اینجا، کلاس `Rabbit` کلاس `Animal` را تعمیم می‌دهد و فیلد `name` را با مقدار خودش بازنویسی می‌کند.
+=======
+Here, class `Rabbit` extends `Animal` and overrides the `name` field with its own value.
+>>>>>>> 8d04d0d2db97276dbb2b451c30a7bd3e05d65831
 
 هیچ سازنده‌ای درون `Rabbit` وجود ندارد، پس سازده `Animal` فراخوانی می‌شود.
 
 موضوع جالب این است که در هر دو مورد: `new Animal()` و `new Rabbit()`، تابع `alert` در خط `(*)` مقدار `animal` را نشان می‌دهد.
 
+<<<<<<< HEAD
 **به عبارتی دیگر، سازنده والد همیشه از مقدار فیلد خودش استفاده می‌کند، نه فیلد بازنویسی شده.**
+=======
+**In other words, the parent constructor always uses its own field value, not the overridden one.**
+>>>>>>> 8d04d0d2db97276dbb2b451c30a7bd3e05d65831
 
 چه چیزی درباره این عجیب است؟
 
@@ -360,11 +368,19 @@ new Rabbit(); // rabbit
 
 ...اما برای فیلدهای کلاس اینگونه نیست. همانطور که گفته شد، سازنده والد همیشه از فیلد والد استفاده می‌کند.
 
+<<<<<<< HEAD
 چرا تفاوت وجود دارد؟
 
 خب دلیل آن درون ترتیب مقداردهی اولیه به فیلدها است. فیلد کلاس اینگونه مقداردهی اولیه می‌شود:
 - قبل از سازنده برای کلاس پایه (که چیزی را تعمیم نمی‌دهد)،
 - بلافاصله بعد از `super()` برای کلاس مشتق شده.
+=======
+Why is there a difference?
+
+Well, the reason is the field initialization order. The class field is initialized:
+- Before constructor for the base class (that doesn't extend anything),
+- Immediately after `super()` for the derived class.
+>>>>>>> 8d04d0d2db97276dbb2b451c30a7bd3e05d65831
 
 در این مورد ما، `Rabbit` کلاس مشتق شده است. تابع `constructor()` درون آن وجود ندارد. همانطور که قبلا هم گفته شد، درست مانند این است که یک سازنده خالی فقط حاوی `super(...args)` وجود داشته باشد.
 
