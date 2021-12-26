@@ -213,7 +213,6 @@ alert(x); // "undefined"
 
 این عملگر نوع عبارت را نشان می‌دهد. معمولا زمانی که می‌خواهیم سریع نوع یک مقدار را بررسی کنیم یا زمانی‌که می‌خواهیم پردازشی بر اساس نوع یک مقدار انجام دهیم، کاربرد دارد.
 
-<<<<<<< HEAD
 این عملگر به دو شکل قابل استفاده است:
 
 1. به عنوان عملگر : `typeof x`.
@@ -222,9 +221,6 @@ alert(x); // "undefined"
 به عبارتی دیگر، این عملگر هم با پرانتز کار می‌کند هم بدون آن. نتیجه هر دو یکسان است.
 
 با صدا زدن `typeof x` رشته کاراکتری حاوی نوع آن مقدار نمایش داد می‌شود:
-=======
-A call to `typeof x` returns a string with the type name:
->>>>>>> 8d04d0d2db97276dbb2b451c30a7bd3e05d65831
 
 ```js
 typeof undefined // "undefined"
@@ -254,16 +250,9 @@ typeof alert // "function"  (3)
 
 سه خط آخر احتمالا نیاز به توضیحات بیشتری دارد:
 
-<<<<<<< HEAD
 1. `Math` یک شیء built-in (از پیش نوشته شده در هسته زبان) است که عملیات متنوع ریاضیاتی را در اختیار ما قرار می‌دهد. ما آن را در فصل <info:number> یاد می‌گیریم. در اینجا صرفا یک مثال از آن را نمایش دادیم.
-2. خروجی `typeof null` همانطور که می‌بینید `"object"` است. این یک خطا در نوع کار `typeof` می‌باشد که به منظور سازگاری باقی مانده است. مطمئنا `null` یک object نیست. خودِ null یکی از انواع داده در جاوااسکریپت است. 
-3. خروجی `typeof alert` `"function"` است چراکه `alert` خودش هم یک تابع است. ما در بخش‌های بعدی با تابع‌ها بیشتر آشنا خواهیم شد و خواهیم آموخت که نوعی تحت عنوان function در جاوااسکریپت نداریم. تابع‌ها در اصل از نوعِ object هستند. اما عملگر `typeof` به آنها به طرز دیگری برخورد می‌کند و `function` را برمی‌گرداند. این هم از روزهای اول جاوااسکریپت وجود داشته است. به طور فنی، این رفتار درست نیست، اما در عمل می‌تواند مفید باشد.
-
-## خلاصه
-=======
-1. `Math` is a built-in object that provides mathematical operations. We will learn it in the chapter <info:number>. Here, it serves just as an example of an object.
-2. The result of `typeof null` is `"object"`. That's an officially recognized error in `typeof`, coming from very early days of JavaScript and kept for compatibility. Definitely, `null` is not an object. It is a special value with a separate type of its own. The behavior of `typeof` is wrong here.
-3. The result of `typeof alert` is `"function"`, because `alert` is a function. We'll study functions in the next chapters where we'll also see that there's no special "function" type in JavaScript. Functions belong to the object type. But `typeof` treats them differently, returning `"function"`. That also comes from the early days of JavaScript. Technically, such behavior isn't correct, but can be convenient in practice.
+2. خروجی `typeof null` برابر با `"object"` است. این یک خطا در طرز کار `typeof` می‌باشد که از روزهای اول در جاوااسکریپت وجود داشته و به منظور سازگاری باقی مانده است. مطمئنا `null` یک object نیست. خودِ null یکی از انواع داده در جاوااسکریپت است. 
+3. خروجی `typeof alert` برابر با `"function"` است چراکه `alert` خودش هم یک تابع است. ما در بخش‌های بعدی با تابع‌ها بیشتر آشنا خواهیم شد و خواهیم آموخت که نوعی تحت عنوان function در جاوااسکریپت نداریم. تابع‌ها در اصل از نوعِ object هستند. اما عملگر `typeof` با آنها به طرز دیگری برخورد می‌کند و `function` را برمی‌گرداند. این هم از روزهای اول جاوااسکریپت وجود داشته است. به طور فنی، این رفتار درست نیست، اما در عمل می‌تواند مفید باشد.
 
 ```smart header="The `typeof(x)` syntax"
 You may also come across another syntax: `typeof(x)`. It's the same as `typeof x`.
@@ -275,8 +264,7 @@ Usually, such parentheses contain a mathematical expression, such as `(2 + 2)`, 
 Some people prefer `typeof(x)`, although the `typeof x` syntax is much more common.
 ```
 
-## Summary
->>>>>>> 8d04d0d2db97276dbb2b451c30a7bd3e05d65831
+## خلاصه
 
 در جاوااسکریپت 8 نوع داده پایه‌ای وجود دارد.
 
@@ -291,14 +279,8 @@ Some people prefer `typeof(x)`, although the `typeof x` syntax is much more comm
 
 عملگر `typeof` به شما اجازه می‌دهد نوع مقدار ذخیره شده در یک متغیر را تشخصی دهید.
 
-<<<<<<< HEAD
-- به دو طریق : `typeof x` و یا `typeof(x)`.
+- معمولا به صورت `typeof x` استفاده می‌شود، اما `typeof(x)` هم قابل قبول است.
 - یک رشته شامل اسم نوع را برمی‌گرداند، مثل `"string"`.
 - برای `null` مقدار `"object"` را نمایش می‌دهد -- این یک خطا در خودِ زبان است، در واقع null یک object نیست.
-=======
-- Usually used as `typeof x`, but `typeof(x)` is also possible.
-- Returns a string with the name of the type, like `"string"`.
-- For `null` returns `"object"` -- this is an error in the language, it's not actually an object.
->>>>>>> 8d04d0d2db97276dbb2b451c30a7bd3e05d65831
 
 در فصل‌های بعدی، ما روی نوع‌های "اولیه" تمرکز می‌کنیم و هنگامی که با آنها بیشتر آشنا شدیم، به سراغ شیءها می‌رویم.

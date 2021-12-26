@@ -35,7 +35,7 @@ ladder.showStep(); // 0
 کد `up`، `down` و `showStep` را تغییر دهید تا صدازدن‌ها را زنجیره‌ای کنید، مثل این:
 
 ```js
-ladder.up().up().down().showStep().down().showStep(); // shows 1 then 0
+ladder.up().up().down().showStep().down().showStep(); // اول 1 را نشان می‌دهد سپس 0 را
 ```
 
 چنین روشی در بین کتابخانه‌های جاوااسکریپت به طور گسترده استفاده می‌شود.

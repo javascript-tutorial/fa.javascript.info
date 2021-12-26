@@ -8,11 +8,7 @@
 let func = (arg1, arg2, ..., argN) => expression;
 ```
 
-<<<<<<< HEAD
-...این کد یک تابع `func` می‌سازد که دو آرگومان `arg1..argN` می‌پذیرد و با استفاده از این دو آرگومان `expression` سمت راست را محاسبه می‌کند و نتیجه را برمی‌گرداند.
-=======
-This creates a function `func` that accepts arguments `arg1..argN`, then evaluates the `expression` on the right side with their use and returns its result.
->>>>>>> 8d04d0d2db97276dbb2b451c30a7bd3e05d65831
+...این کد یک تابع `func` می‌سازد که آرگومان‌های `arg1..argN` را می‌پذیرد و با استفاده از این آرگومان‌ها `expression` سمت راست را ارزیابی می‌کند و نتیجه آن را برمی‌گرداند.
 
 به بیانی دیگر، این کد نسخه‌ی کوتاه‌شده کد زیر است:
 

@@ -12,13 +12,9 @@ function sayHi() {
 
 یک سینتکس دیگر هم برای ساخت تابع وجود دارد که *Function Expression* نامیده می‌شود.
 
-<<<<<<< HEAD
-اینطور به نظر می‌رسد:
-=======
-It allows to create a new function in the middle of any expression.
+این سینتکس به ما این امکان را می‌دهد که بین هر عبارتی یک تابع جدید بسازیم.
 
-For example:
->>>>>>> 8d04d0d2db97276dbb2b451c30a7bd3e05d65831
+برای مثال:
 
 ```js
 let sayHi = function() {
@@ -26,11 +22,6 @@ let sayHi = function() {
 };
 ```
 
-<<<<<<< HEAD
-اینجا، تابع ساخته شده و مثل هر مقدار دیگری، صراحتا به متغیر تخصیص داده شده است. فرقی ندارد که تابع چگونه تعریف شده، تابع فقط یک مقدار است که داخل متغیر `sayHi` ذخیره شده است.
-
-معنی این مثال‌های کد یکسان است: "یک تابع بساز و آن را داخل متغیر `sayHi` بگذار".
-=======
 Here we can see a variable `sayHi` getting a value, the new function, created as `function() { alert("Hello"); }`.
 
 As the function creation happens in the context of the assignment expression (to the right side of `=`), this is a *Function Expression*.
@@ -44,7 +35,6 @@ In more advanced situations, that we'll come across later, a function may be cre
 ## Function is a value
 
 Let's reiterate: no matter how the function is created, a function is a value. Both examples above store a function is `sayHi` variable.
->>>>>>> 8d04d0d2db97276dbb2b451c30a7bd3e05d65831
 
 ما حتی می‌توانیم آن مقدار را با استفاده از `alert` چاپ کنیم:
 
@@ -85,19 +75,11 @@ sayHi(); // سلام    //     هنوزم کار می‌کند (چرا نکند)
 2. خط `(2)` آن را داخل متغیر `func` کپی می‌کند. لطفا دوباره در نظر داشته باشید: هیچ پرانتزی بعد از `sayHi` وجود ندارد. اگر وجود داشت، سپس `func = sayHi()` *نتیجه صدا زدن* `sayHi()` را در `func` می‌نوشت، نه خود *تابع* `sayHi`.
 3. حالا تابع می‌تواند با `sayHi()` و `func()` صدا زده شود.
 
-<<<<<<< HEAD
-همچنین توجه داشته باشید که ما می‌توانستیم از یک Function Expression برای تعریف `sayHi` در خط اول، استفاده کنیم:
+همچنین می‌توانستیم از یک Function Expression برای تعریف `sayHi` در خط اول، استفاده کنیم:
 
 ```js
-let sayHi = function() {
+let sayHi = function() { // (1) ایجاد
   alert( "سلام" );
-=======
-We could also have used a Function Expression to declare `sayHi`, in the first line:
-
-```js
-let sayHi = function() { // (1) create
-  alert( "Hello" );
->>>>>>> 8d04d0d2db97276dbb2b451c30a7bd3e05d65831
 };
 
 let func = sayHi;
@@ -120,15 +102,9 @@ let sayHi = function() {
 }*!*;*/!*
 ```
 
-<<<<<<< HEAD
-جواب ساده است:
-- هیچ نیازی به `;` در انتهای بلوک‌های کد و ساختارهای سینتکس که از آنها مثل `if { ... }`، `for {  }`، `function f { }` و... استفاده می‌شود نیست.
-- یک Function Expression به عنوان یک مقدار، در داخل دستور استفاده می‌شود: `let sayHi = ...;`.این یک بلوک کد نیست، بلکه یک تخصیص دادن است. نقطه ویرگول `;` در انتهای دستورها پیشنهاد می‌شود، بدون توجه به اینکه مقدار چه چیزی باشد. پس نقطه ویرگول در اینجا به خود Function Expression مربوط نیست، فقط دستور را به پایان می‌رساند.
-=======
-The answer is simple: a Function Expression is created here as `function(…) {…}` inside the assignment statement: `let sayHi = …;`. The semicolon `;` is recommended at the end of the statement, it's not a part of the function syntax.
+جواب ساده است: یک Function Expression به صورت `function(…) {…}`، در داخل دستور مقداردهی استفاده می‌شود: `let sayHi = ...;`. نقطه ویرگول `;` در انتهای دستور پیشنهاد می‌شود، این علامت جزء سینتکس تابع نیست.
 
-The semicolon would be there for a simpler assignment, such as `let sayHi = 5;`, and it's also there for a function assignment.
->>>>>>> 8d04d0d2db97276dbb2b451c30a7bd3e05d65831
+نقطه ویرگول برای مقداردهی ساده‌تر وجود دارد مثل `let sayHi = 5;` و همچنین برای مقداردهی تابع نیز وجود دارد.
 ````
 
 ## تابع‌های Callback

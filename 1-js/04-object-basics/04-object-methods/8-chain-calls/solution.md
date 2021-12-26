@@ -23,7 +23,7 @@ let ladder = {
   }
 };
 
-ladder.up().up().down().showStep().down().showStep(); // shows 1 then 0
+ladder.up().up().down().showStep().down().showStep(); // اول 1 را نشان می‌دهد و سپس 0 را
 ```
 
 همچنین می‌توانیم به ازای هر خط یک بار صدا بزنیم. برای زنجیره‌های طولانی این روش خوانایی بیشتری دارد:
