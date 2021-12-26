@@ -254,14 +254,14 @@ typeof alert // "function"  (3)
 2. خروجی `typeof null` برابر با `"object"` است. این یک خطا در طرز کار `typeof` می‌باشد که از روزهای اول در جاوااسکریپت وجود داشته و به منظور سازگاری باقی مانده است. مطمئنا `null` یک object نیست. خودِ null یکی از انواع داده در جاوااسکریپت است. 
 3. خروجی `typeof alert` برابر با `"function"` است چراکه `alert` خودش هم یک تابع است. ما در بخش‌های بعدی با تابع‌ها بیشتر آشنا خواهیم شد و خواهیم آموخت که نوعی تحت عنوان function در جاوااسکریپت نداریم. تابع‌ها در اصل از نوعِ object هستند. اما عملگر `typeof` با آنها به طرز دیگری برخورد می‌کند و `function` را برمی‌گرداند. این هم از روزهای اول جاوااسکریپت وجود داشته است. به طور فنی، این رفتار درست نیست، اما در عمل می‌تواند مفید باشد.
 
-```smart header="The `typeof(x)` syntax"
-You may also come across another syntax: `typeof(x)`. It's the same as `typeof x`.
+```smart header="سینتکس `typeof(x)`"
+شاید سینتکس دیگری را دیده باشید: `typeof(x)`. این با `typeof x` یکسان است.
 
-To put it clear: `typeof` is an operator, not a function. The parentheses here aren't a part of `typeof`. It's the kind of parentheses used for mathematical grouping.
+برای اینکه واضح باشد: `typeof` یک اپراتور است نه یک تابع. اینجا پرانتزها بخشی از `typeof` نیستند. این نوعی از پرانتز است که برای گروه‌بندی ریاضیاتی استفاده می‌شود.
 
-Usually, such parentheses contain a mathematical expression, such as `(2 + 2)`, but here they contain only one argument `(x)`. Syntactically, they allow to avoid a space between the `typeof` operator and its argument, and some people like it.
+معمولا چنین پرانتزهایی یک عبارت ریاضیاتی، مانند `(2 + 2)`، را شامل می‌شوند اما اینجا آن‌ها فقط آرگومان `(x)` را دارند. از لحاظ سینتکس، آن‌ها به ما این امکان را می‌دهند که از وجود فاصله بین عملگر `typeof` و آرگومانش جلوگیری کنیم و بعضی از اشخاص آن را دوست دارند.
 
-Some people prefer `typeof(x)`, although the `typeof x` syntax is much more common.
+بعضی از اشخاص `typeof(x)` را ترجیح می‌دهند اگرچه سینتکس `typeof x` رایج‌تر است.
 ```
 
 ## خلاصه
