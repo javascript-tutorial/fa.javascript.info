@@ -22,19 +22,19 @@ let sayHi = function() {
 };
 ```
 
-Here we can see a variable `sayHi` getting a value, the new function, created as `function() { alert("Hello"); }`.
+اینجا می‌توانیم متغیر `sayHi` را ببینیم که مقداری را دریافت می‌کند، تابع جدید، که به صورت `function() { alert("Hello"); }` ساخته شده است.
 
-As the function creation happens in the context of the assignment expression (to the right side of `=`), this is a *Function Expression*.
+چون ایجاد تابع با زمینه (context) عبارت مقداردهی (سمت راست `=`) رخ می‌دهد، این یک *Function Expression* است.
 
-Please note, there's no name after the `function` keyword. Omitting a name is allowed for Function Expressions.
+لطفا در نظر داشته باشید، هیچ اسمی بعد از کلمه کلیدی `function` وجود ندارد. حذف کردن اسم برای Function Expressionها مجاز است.
 
-Here we immediately assign it to the variable, so the meaning of these code samples is the same: "create a function and put it into the variable `sayHi`".
+اینجا ما بلافاصله آن را به متغیر اختصاص می‌دهیم پس معنی این قطعه‌های کد یکسان است: «تابعی بساز و آن را درون متغیر `sayHi` قرار بده».
 
-In more advanced situations, that we'll come across later, a function may be created and immediately called or scheduled for a later execution, not stored anywhere, thus remaining anonymous.
+در موقعیت‌های پیشرفته‌تر، که بعدا به آن‌ها می‌رسیم، یک تابع ممکن است ایجاد و بلافاصله فراخوانی شود یا برای اینکه بعدا اجرا شود برنامه‌ریزی صورت گیرد و جایی ذخیره نشود، از این رو ناشناس بماند.
 
-## Function is a value
+## تابع یک مقدار است
 
-Let's reiterate: no matter how the function is created, a function is a value. Both examples above store a function is `sayHi` variable.
+بیایید تکرار کنیم: مهم نیست که تابع چگونه ساخته شده است، یک تابع همیشه یک مقدار است. هر دو مثال بالا تابعی را درون متغیر `sayHi` ذخیره می‌کنند.
 
 ما حتی می‌توانیم آن مقدار را با استفاده از `alert` چاپ کنیم:
 
