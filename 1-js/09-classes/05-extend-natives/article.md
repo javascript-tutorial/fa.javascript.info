@@ -1,12 +1,12 @@
 
-# Extending built-in classes
+# تعمیم دادن کلاس‌های درون‌ساخت
 
-Built-in classes like Array, Map and others are extendable also.
+کلاس‌های درون‌ساخت مانند Array، Map و بقیه هم قابل تعمیم هستند.
 
-For instance, here `PowerArray` inherits from the native `Array`:
+برای مثال، اینجا `PowerArray` از `Array` نیتیو ارث‌بری می‌کند:
 
 ```js run
-// add one more method to it (can do more)
+// اضافه کردن یک متد دیگر به آن (می‌توانیم بیشتر هم اضافه کنیم)
 class PowerArray extends Array {
   isEmpty() {
     return this.length === 0;
@@ -21,20 +21,20 @@ alert(filteredArr); // 10, 50
 alert(filteredArr.isEmpty()); // false
 ```
 
-Please note a very interesting thing. Built-in methods like `filter`, `map` and others -- return new objects of exactly the inherited type `PowerArray`. Their internal implementation uses the object's `constructor` property for that.
+لطفا به یک موضوع جالب توجه کنید. متدهای درون‌ساخت مانند `filter`، `map` و بقیه -- شیءهای جدیدی که دقیقا از `PowerArray` به ارث برده شده ساخته شده‌اند را برمی‌گردانند. پیاده‌سازی درونی آن‌ها از ویژگی `constructor` شیء برای این کار استفاده می‌کند.
 
-In the example above,
+در مثال بالا،
 ```js
 arr.constructor === PowerArray
 ```
 
-When `arr.filter()` is called, it internally creates the new array of results using exactly `arr.constructor`, not basic `Array`. That's actually very cool, because we can keep using `PowerArray` methods further on the result.
+زمانی که `arr.filter()` فراخوانی می‌شود، از درون، آرایه‌ای جدید از نتیجه‌ها را با استفاده از `arr.constructor` ایجاد می‌کند نه `Array` پایه‌ای.
 
-Even more, we can customize that behavior.
+حتی فراتر از آن، می‌توانیم این عملکرد را شخصی‌سازی کنیم.
 
-We can add a special static getter `Symbol.species` to the class. If it exists, it should return the constructor that JavaScript will use internally to create new entities in `map`, `filter` and so on.
+می‌توانیم یک getter استاتیک `Symbol.species` خاص را به کلاس اضافه کنیم. اگر این متد وجود داشته باشد، باید تابع سازنده‌ای که جاوااسکریپت از درون برای ایجاد المان‌های جدید درون `map`، `filter` و بقیه استفاده می‌کند را برگرداند.
 
-If we'd like built-in methods like `map` or `filter` to return regular arrays, we can return `Array` in `Symbol.species`, like here:
+اگر بخواهیم متدهای درون‌ساخت مانند `map` یا `filter` آرایه‌های معمولی برگردانند، می‌توانیم در `Symbol.species` کلاس `Array` را برگردانیم، مثل اینجا:
 
 ```js run
 class PowerArray extends Array {
@@ -43,7 +43,7 @@ class PowerArray extends Array {
   }
 
 *!*
-  // built-in methods will use this as the constructor
+  // متدهای درون‌ساخت از این به عنوان تابع سازنده استفاده می‌کنند
   static get [Symbol.species]() {
     return Array;
   }
@@ -53,19 +53,19 @@ class PowerArray extends Array {
 let arr = new PowerArray(1, 2, 5, 10, 50);
 alert(arr.isEmpty()); // false
 
-// filter creates new array using arr.constructor[Symbol.species] as constructor
+// به عنوان سازنده، آرایه‌ای جدید تشکیل می‌دهد arr.constructor[Symbol.species] با استفاده از filter
 let filteredArr = arr.filter(item => item >= 10);
 
 *!*
-// filteredArr is not PowerArray, but Array
+// است Array نیست بلکه PowerArray یک filteredArr
 */!*
 alert(filteredArr.isEmpty()); // Error: filteredArr.isEmpty is not a function
 ```
 
-As you can see, now `.filter` returns `Array`. So the extended functionality is not passed any further.
+همانطور که می‌بینید، حالا `.filter` کلاس `Array` را برمی‌گرداند. پس عملکرد تعمیم داده شده دیگر پاس داده نمی‌شود.
 
-```smart header="Other collections work similarly"
-Other collections, such as `Map` and `Set`, work alike. They also use `Symbol.species`.
+```smart header="مجموعه‌های دیگر هم به طور مشابه عمل می‌کنند"
+مجموعه‌های دیگر، مثال `Map` و `Set`، همینطور کار می‌کنند. آن‌ها هم از `Symbol.species` استفاده می‌کنند.
 ```
 
 ## No static inheritance in built-ins
