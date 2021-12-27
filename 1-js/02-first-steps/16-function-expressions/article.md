@@ -34,11 +34,7 @@ let sayHi = function() {
 
 ## تابع یک مقدار است
 
-<<<<<<< HEAD
 بیایید تکرار کنیم: مهم نیست که تابع چگونه ساخته شده است، یک تابع همیشه یک مقدار است. هر دو مثال بالا تابعی را درون متغیر `sayHi` ذخیره می‌کنند.
-=======
-Let's reiterate: no matter how the function is created, a function is a value. Both examples above store a function in the `sayHi` variable.
->>>>>>> 3c934b5a46a76861255e3a4f29da6fd54ab05c8c
 
 ما حتی می‌توانیم آن مقدار را با استفاده از `alert` چاپ کنیم:
 

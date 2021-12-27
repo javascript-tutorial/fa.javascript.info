@@ -27,11 +27,7 @@ alert(user); // {name: "John", age: 30}
 
 ## متد JSON.stringify
 
-<<<<<<< HEAD
 [JSON](http://fa.wikipedia.org/wiki/جی%E2%80%8Cسان) (نشانه‌گذاری شیء جاوااسکریپت، جِی‌سان) یک فرمت کلی برای نمایش مقدارها و شیءها است. جِی‌سان در استاندارد [RFC 4627](http://tools.ietf.org/html/rfc4627) شرح داده شده است. در ابتدا برای جاوااسکریپت ساخته شد اما بسیاری از زبان‌های دیگر هم کتابخانه‌هایی برای بکاربردن آن دارند. پس هنگامی که سمت کاربر سایت از جاوااسکریپت و سمت سرور با زبان‌های Ruby/PHP/Java/یا هر چیز دیگر نوشته شده باشد، استفاده از جی‌سان برای رد و بدل کردن داده آسان است.
-=======
-The [JSON](http://en.wikipedia.org/wiki/JSON) (JavaScript Object Notation) is a general format to represent values and objects. It is described as in [RFC 4627](https://tools.ietf.org/html/rfc4627) standard. Initially it was made for JavaScript, but many other languages have libraries to handle it as well.  So it's easy to use JSON for data exchange when the client uses JavaScript and the server is written on Ruby/PHP/Java/Whatever.
->>>>>>> 3c934b5a46a76861255e3a4f29da6fd54ab05c8c
 
 جاوااسکریپت متدهای زیر را دارد:
 

@@ -54,11 +54,7 @@ alert( rabbit.eats ); // true (**)
 alert( rabbit.jumps ); // true
 ```
 
-<<<<<<< HEAD
 اینجا خط `(*)` شیء `animal` را به عنوان پروتوتایپ `rabbit` تنظیم می‌کند.
-=======
-Here the line `(*)` sets `animal` to be the prototype of `rabbit`.
->>>>>>> 3c934b5a46a76861255e3a4f29da6fd54ab05c8c
 
 سپس زمانی که `alert` سعی می‌کند تا ویژگی `rabbit.eats` `(**)` را بخواند، درون `rabbit` نیست پس جاوااسکریپت مرجع `[[Prototype]]` را دنبال می‌کند و ویژگی را درون `animal` پیدا می‌کند (از پایین به بالا نگاه کنید):
 
@@ -291,11 +287,7 @@ for(let prop in rabbit) alert(prop); // eats سپس ،jumps
 */!*
 ```
 
-<<<<<<< HEAD
 اگر این چیزی نیست که ما می‌خواهیم و دوست داریم که شامل ویژگی‌های به ارث‌برده‌شده نشود، یک متد درون‌ساخت [obj.hasOwnProperty(key)](mdn:js/Object/hasOwnProperty) وجود دارد: این متد اگر `obj` ویژگی خودش (نه به ارث‌برده‌شده) به نام `key` را داشته باشد `true` برمی‌گرداند.
-=======
-If that's not what we want, and we'd like to exclude inherited properties, there's a built-in method [obj.hasOwnProperty(key)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty): it returns `true` if `obj` has its own (not inherited) property named `key`.
->>>>>>> 3c934b5a46a76861255e3a4f29da6fd54ab05c8c
 
 پس می‌تواند ویژگی‌های به ارث‌برده‌شده را جداسازی کنیم (یا کاری دیگر با آن‌ها کنیم):
 
