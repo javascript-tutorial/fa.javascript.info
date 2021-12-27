@@ -118,7 +118,11 @@ alert(Object.getOwnPropertyNames(User.prototype)); // sayHi ،سازنده
 
 ## فقط یک سینتکس برای زیباکردن(syntactic sugar) نیست
 
+<<<<<<< HEAD
 گاهی اوقات مردم می‌گویند که `class` یک «سینتکس برای زیباکردن(syntactic sugar)» است (سینتکسی که برای خواندن ساده‌تر طراحی شده است، اما چیز جدیدی معرفی نمی‌کند)، زیرا در واقع می‌توانیم همان را بدون کلمه کلیدی `class` تعریف کنیم:
+=======
+Sometimes people say that `class` is a "syntactic sugar" (syntax that is designed to make things easier to read, but doesn't introduce anything new), because we could actually declare the same thing without using the `class` keyword at all:
+>>>>>>> 3c934b5a46a76861255e3a4f29da6fd54ab05c8c
 
 ```js run
 // بازنویسی کلاس کاربر در توابع خالص
