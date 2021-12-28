@@ -68,22 +68,22 @@ alert(filteredArr.isEmpty()); // Error: filteredArr.isEmpty is not a function
 مجموعه‌های دیگر، مثال `Map` و `Set`، همینطور کار می‌کنند. آن‌ها هم از `Symbol.species` استفاده می‌کنند.
 ```
 
-## No static inheritance in built-ins
+## ارث‌بری ایستا در درون‌ساخت‌ها وجود ندارد
 
-Built-in objects have their own static methods, for instance `Object.keys`, `Array.isArray` etc.
+شیءهای درون‌ساخت متدهای ایستا خود را دارند، برای مثال `Object.keys`، `Array.isArray` و غیره.
 
-As we already know, native classes extend each other. For instance, `Array` extends `Object`.
+همانطور که از قبل می‌دانیم، کلاس‌های نیتیو یکدیگر را تعمیم می‌دهند. برای مثال `Array` کلاس `Object` را تعمیم می‌دهد.
 
-Normally, when one class extends another, both static and non-static methods are inherited. That was thoroughly explained in the article [](info:static-properties-methods#statics-and-inheritance).
+طبیعاتا، زمانی که کلاسی کلاس دیگر را تعمیم می‌دهد، هم متدهای ایستا و هم متدهای غیر ایستا به ارث برده می‌شوند. این موضوع به طور کامل در مقاله [](info:static-properties-methods#statics-and-inheritance) توضیح داده شد.
 
-But built-in classes are an exception. They don't inherit statics from each other.
+اما کلاس‌های درون‌ساخت استثنا هستند. آن‌ها ویژگی‌های ایستا را از یکدیگر به ارث نمی‌برند.
 
-For example, both `Array` and `Date` inherit from `Object`, so their instances have methods from `Object.prototype`. But `Array.[[Prototype]]` does not reference `Object`, so there's no, for instance, `Array.keys()` (or `Date.keys()`) static method.
+برای مثال، هر دو کلاس `Array` و `Date` از `Object` ارث‌بری می‌کنند، پس نمونه‌های آن‌ها از `Object.prototype` متدهایی دارند. اما `Array.[[Prototype]]` به `Object` رجوع نمی‌کند پس برای مثال، مندهای ایستای `Array.keys()` (یا `Date.keys()`) وجود ندارند.
 
-Here's the picture structure for `Date` and `Object`:
+اینجا ساختاری تصویری برای `Date` و `Object` داریم:
 
 ![](object-date-inheritance.svg)
 
-As you can see, there's no link between `Date` and `Object`. They are independent, only `Date.prototype` inherits from `Object.prototype`.
+همانطور که می‌بینید، بین `Date` و `Object` هیچ ارتباطی وجود ندارد. آن‌ها مستقل هستند، فقط `Date.prototype` از `Object.prototype` ارث‌بری می‌کند.
 
-That's an important difference of inheritance between built-in objects compared to what we get with `extends`.
+این یک تفاوت مهم شیءهای درون‌ساخت در مقایسه با چیزی است که از `extends` بدست می‌آوریم است.
