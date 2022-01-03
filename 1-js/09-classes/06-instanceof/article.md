@@ -204,16 +204,16 @@ alert( {}.toString.call(new XMLHttpRequest()) ); // [object XMLHttpRequest]
 
 زمانی که می‌خواهیم نوع داده را به عنوان یک رشته دریافت کنیم تا اینکه فقط بررسی کنیم، می‌توانیم به جای `instanceof` از `{}.toString.call` برای شیءهای درون‌ساخت استفاده کنیم.
 
-## Summary
+## خلاصه
 
-Let's summarize the type-checking methods that we know:
+بیایید متدهای بررسی نوع داده که می‌شناسیم را خلاصه کنیم:
 
-|               | works for   |  returns      |
+|               | کار می‌کند برای   |  برمی‌گرداند      |
 |---------------|-------------|---------------|
-| `typeof`      | primitives  |  string       |
-| `{}.toString` | primitives, built-in objects, objects with `Symbol.toStringTag`   |       string |
-| `instanceof`  | objects     |  true/false   |
+| `typeof`      | مقدارهای اصلی  |  رشته       |
+| `{}.toString` | مقدارهای اصلی، شیءهای درون‌ساخت، شیءها شامل `Symbol.toStringTag`   |       رشته |
+| `instanceof`  | شیءها     |  true/false   |
 
-As we can see, `{}.toString` is technically a "more advanced" `typeof`.
+همانطور که می‌بینید، `{}.toString` از لحاظ فنی یک `typeof` «پیشرفته‌تر» است.
 
-And `instanceof` operator really shines when we are working with a class hierarchy and want to check for the class taking into account inheritance.
+و زمانی که با سلسله‌ای از کلاس‌ها کار می‌کنیم و می‌خواهیم بررسی کنیم که کلاس در ارث‌بری وجود دارد یا نه، عملگر `instanceof` واقعا می‌درخشد.
