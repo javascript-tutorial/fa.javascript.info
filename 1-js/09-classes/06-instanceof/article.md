@@ -173,11 +173,11 @@ alert( s.call(null) ); // [object Null]
 alert( s.call(alert) ); // [object Function]
 ```
 
-### Symbol.toStringTag
+### متد Symbol.toStringTag
 
-The behavior of Object `toString` can be customized using a special object property `Symbol.toStringTag`.
+رفتار `toString` شیء می‌تواند با استفاده از ویژگی شیء خاص `Symbol.toStringTag` شخصی‌سازی شود.
 
-For instance:
+برای مثال:
 
 ```js run
 let user = {
@@ -187,10 +187,10 @@ let user = {
 alert( {}.toString.call(user) ); // [object User]
 ```
 
-For most environment-specific objects, there is such a property. Here are some browser specific examples:
+برای اکثر شیءهایی که مختص به محیط هستند، چنین ویژگی‌ای وجود دارد. اینجا چند مثال مختص به مرورگر را داریم:
 
 ```js run
-// toStringTag for the environment-specific object and class:
+// :برای شیء و کلاس مختص به محیط toStringTag
 alert( window[Symbol.toStringTag]); // Window
 alert( XMLHttpRequest.prototype[Symbol.toStringTag] ); // XMLHttpRequest
 
@@ -198,11 +198,11 @@ alert( {}.toString.call(window) ); // [object Window]
 alert( {}.toString.call(new XMLHttpRequest()) ); // [object XMLHttpRequest]
 ```
 
-As you can see, the result is exactly `Symbol.toStringTag` (if exists), wrapped into `[object ...]`.
+همانطور که می‌بینید، نتیجه دقیقا `Symbol.toStringTag` (اگر وجود داشته باشد) جایگذاری شده درون `[object ...]` است.
 
-At the end we have "typeof on steroids" that not only works for primitive data types, but also for built-in objects and even can be customized.
+در نهایت ما «انواعی از استروئیدها» را داریم که نه تنها برای انواع داده اصلی کار می‌کند، بلکه برای شیءهای درون‌ساخت هم کار می‌کند و حتی می‌تواند شخصی‌سازی شود.
 
-We can use `{}.toString.call` instead of `instanceof` for built-in objects when we want to get the type as a string rather than just to check.
+زمانی که می‌خواهیم نوع داده را به عنوان یک رشته دریافت کنیم تا اینکه فقط بررسی کنیم، می‌توانیم به جای `instanceof` از `{}.toString.call` برای شیءهای درون‌ساخت استفاده کنیم.
 
 ## Summary
 
