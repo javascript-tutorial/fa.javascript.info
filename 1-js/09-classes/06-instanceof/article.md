@@ -124,7 +124,7 @@ alert( rabbit instanceof Rabbit ); // false
 */!*
 ```
 
-## کمک: متد Object.prototype.toString برای نوع
+## راهنمایی: متد Object.prototype.toString برای نوع
 
 ما از قبل می‌دانیم که شیءهای ساده به صورت `[object Object]` به رشته تبدیل می‌شوند:
 
