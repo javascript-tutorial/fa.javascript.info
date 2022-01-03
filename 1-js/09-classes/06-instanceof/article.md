@@ -125,44 +125,45 @@ alert( rabbit instanceof Rabbit ); // false
 ```
 
 ## Bonus: Object.prototype.toString for the type
+## کمک: متد Object.prototype.toString برای نوع
 
-We already know that plain objects are converted to string as `[object Object]`:
+ما از قبل می‌دانیم که شیءهای ساده به صورت `[object Object]` به رشته تبدیل می‌شوند:
 
 ```js run
 let obj = {};
 
 alert(obj); // [object Object]
-alert(obj.toString()); // the same
+alert(obj.toString()); // یکسان
 ```
 
-That's their implementation of `toString`. But there's a hidden feature that makes `toString` actually much more powerful than that. We can use it as an extended `typeof` and an alternative for `instanceof`.
+این پیاده‌سازی `toString` آن‌ها است. اما در واقع یک ویژگی پنهانی وجود دارد که `toString` را از آن خیلی قدرتمندتر می‌کند. می‌توانیم از این متد به عنوان یک `typeof` پیشرفته‌تر و یک جایگزین برای `instanceof` استفاده کنیم.
 
-Sounds strange? Indeed. Let's demystify.
+عجیب به نظر می‌رسد؟ واقعا هم هست. بیایید آن را ساده‌تر بیان کنیم.
 
-By [specification](https://tc39.github.io/ecma262/#sec-object.prototype.tostring), the built-in `toString` can be extracted from the object and executed in the context of any other value. And its result depends on that value.
+با توجه به [مشخصات زبان](https://tc39.github.io/ecma262/#sec-object.prototype.tostring)، `toString` درون‌ساخت می‌تواند از شیء استخراج شود و در زمینه (context) هر مقدار دیگری اجرا شود. و نتیجه‌اش به آن مقدار بستگی دارد.
 
-- For a number, it will be `[object Number]`
-- For a boolean, it will be `[object Boolean]`
-- For `null`: `[object Null]`
-- For `undefined`: `[object Undefined]`
-- For arrays: `[object Array]`
-- ...etc (customizable).
+- برای یک عدد، `[object Number]` خواهد بود
+- برای یک بولین، `[object Boolean]` خواهد بود
+- برای `null`: `[object Null]`
+- برای `undefined`: `[object Undefined]`
+- برای آرایه‌ها: `[object Array]`
+- ...و غیره (قابل شخصی‌سازی).
 
-Let's demonstrate:
+بیایید نشان دهیم:
 
 ```js run
-// copy toString method into a variable for convenience
+// را درون یک متغیر کپی می‌کنیم toString برای راحتی متد 
 let objectToString = Object.prototype.toString;
 
-// what type is this?
+// این چه نوعی از داده است؟
 let arr = [];
 
 alert( objectToString.call(arr) ); // [object *!*Array*/!*]
 ```
 
-Here we used [call](mdn:js/function/call) as described in the chapter [](info:call-apply-decorators) to execute the function `objectToString` in the context `this=arr`.
+اینجا ما از [call](mdn:js/function/call) همانطور که در فصل [](info:call-apply-decorators) توضیح داده شد برای اجرای تابع `objectToString` با زمینه `this=arr` استفاده کردیم.
 
-Internally, the `toString` algorithm examines `this` and returns the corresponding result. More examples:
+از درون، الگوریتم `toString` مقدار `this` را بررسی می‌کند و نتیجه مربوط را برمی‌گرداند. مثال‌های بیشتر:
 
 ```js run
 let s = Object.prototype.toString;
