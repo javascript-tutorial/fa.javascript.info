@@ -1,16 +1,16 @@
-# Mixins
+# Mixinها
 
-In JavaScript we can only inherit from a single object. There can be only one `[[Prototype]]` for an object. And a class may extend only one other class.
+در جاوااسکریپت ما فقط می‌توانیم از یک شیء ارث‌بری کنیم. فقط یک `[[Prototype]]` برای هر شیء می‌تواند وجود داشته باشد. و یک کلاس فقط می‌تواند یک کلاس دیگر را تعمیم دهد.
 
-But sometimes that feels limiting. For instance, we have a class `StreetSweeper` and a class `Bicycle`, and want to make their mix: a `StreetSweepingBicycle`.
+اما گاهی اوقات این حس محدود بودن را دارد. برای مثال، ما کلاس `StreetSweeper` و کلاس `Bicycle` را داریم و می‌خواهیم ترکیب آن‌ها را بسازیم: یک `StreetSweepingBicycle`.
 
-Or we have a class `User` and a class `EventEmitter` that implements event generation, and we'd like to add the functionality of `EventEmitter` to `User`, so that our users can emit events.
+یا ما کلاس `User` و کلاس `EventEmitter` که پیاده‌سازی ایجاد رویداد (event) انجام می‌دهد را داریم و می‌خواهیم که عملکرد `EventEmitter` را به `User` اضافه کنیم تا کاربران ما بتوانند رویدادها را خارج کنند.
 
-There's a concept that can help here, called "mixins".
+یک راه‌کار وجود دارد که اینجا به کمک می‌آید، به نام "mixins".
 
-As defined in Wikipedia, a [mixin](https://en.wikipedia.org/wiki/Mixin) is a class containing methods that can be used by other classes without a need to inherit from it.
+همانطور که در ویکی‌پدیا تعریف شده است، یک [mixin](https://en.wikipedia.org/wiki/Mixin) کلاسی شامل متدهایی است که می‌توانند بدون نیاز به ارث‌بری از کلاس، توسط کلاس‌های دیگر استفاده شوند.
 
-In other words, a *mixin* provides methods that implement a certain behavior, but we do not use it alone, we use it to add the behavior to other classes.
+به عبارتی دیگر، یک *mixin* متدهایی که یک کار مشخص انجام می‌دهند را فراهم می‌کند اما از آن به تنهایی استفاده نمی‌کنیم بلکه از آن برای اضافه کردن همان کار مشخص به کلاس‌های دیگر استفاده می‌کنیم.
 
 ## A mixin example
 
