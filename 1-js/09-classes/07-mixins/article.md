@@ -12,11 +12,11 @@
 
 به عبارتی دیگر، یک *mixin* متدهایی که یک کار مشخص انجام می‌دهند را فراهم می‌کند اما از آن به تنهایی استفاده نمی‌کنیم بلکه از آن برای اضافه کردن همان کار مشخص به کلاس‌های دیگر استفاده می‌کنیم.
 
-## A mixin example
+## یک مثال mixin
 
-The simplest way to implement a mixin in JavaScript is to make an object with useful methods, so that we can easily merge them into a prototype of any class.
+ساده‌ترین راه برای پیاده‌سازی یک mixin در جاوااسکریپت ایجاد شیءای شامل متدهایی مفید است تا بتوانیم به راحتی آن‌ها را درون پروتوتایپ هر کلاسی ادغام کنیم.
 
-For instance here the mixin `sayHiMixin` is used to add some "speech" for `User`:
+برای مثال اینجا `sayHiMixin` برای اضافه کردن «گفتار» به `User` استفاده شده است:
 
 ```js run
 *!*
@@ -32,7 +32,7 @@ let sayHiMixin = {
 };
 
 *!*
-// usage:
+// :کاربرد
 */!*
 class User {
   constructor(name) {
@@ -40,14 +40,14 @@ class User {
   }
 }
 
-// copy the methods
+// کپی کردن متدها
 Object.assign(User.prototype, sayHiMixin);
 
-// now User can say hi
+// بگوید (hi) می‌تواند سلام User حالا
 new User("Dude").sayHi(); // Hello Dude!
 ```
 
-There's no inheritance, but a simple method copying. So `User` may inherit from another class and also include the mixin to "mix-in" the additional methods, like this:
+ارث‌بری در کار نیست، فقط یک کپی کردن متد ساده است. پس `User` می‌تواند از کلاس دیگری ارث‌بری کند و همچنین mixin را هم شامل شود تا متدهای اضافی را «ترکیب» کند، مثل این:
 
 ```js
 class User extends Person {
@@ -57,9 +57,9 @@ class User extends Person {
 Object.assign(User.prototype, sayHiMixin);
 ```
 
-Mixins can make use of inheritance inside themselves.
+mixinها می‌توانند درون خود از ارث‌بری استفاده کنند.
 
-For instance, here `sayHiMixin` inherits from `sayMixin`:
+برای مثال، اینجا `sayHiMixin` از `sayMixin` ارث‌بری می‌کند:
 
 ```js run
 let sayMixin = {
@@ -69,11 +69,11 @@ let sayMixin = {
 };
 
 let sayHiMixin = {
-  __proto__: sayMixin, // (or we could use Object.setPrototypeOf to set the prototype here)
+  __proto__: sayMixin, // (برای تنظیم پروتوتایپ استفاده کنیم `Object.setPrototypeOf` یا می‌توانستیم اینجا از)
 
   sayHi() {
     *!*
-    // call parent method
+    // فراخوانی متد والد
     */!*
     super.say(`Hello ${this.name}`); // (*)
   },
@@ -88,22 +88,22 @@ class User {
   }
 }
 
-// copy the methods
+// کپی کردن متدها
 Object.assign(User.prototype, sayHiMixin);
 
-// now User can say hi
+// بگوید (hi) می‌تواند سلام User حالا
 new User("Dude").sayHi(); // Hello Dude!
 ```
 
-Please note that the call to the parent method `super.say()` from `sayHiMixin` (at lines labelled with `(*)`) looks for the method in the prototype of that mixin, not the class.
+لطفا توجه کنید که فراخوانی متد `super.say()` از `sayHiMixin` (در خطی که با `(*)` برچسب‌گذاری شده) در پروتوتایپ mixin به دنبال متد می‌گردد نه کلاس.
 
-Here's the diagram (see the right part):
+اینجا شکل آن را داریم (قسمت راست را ببینید):
 
 ![](mixin-inheritance.svg)
 
-That's because methods `sayHi` and `sayBye` were initially created in `sayHiMixin`. So even though they got copied, their `[[HomeObject]]` internal property references `sayHiMixin`, as shown in the picture above.
+دلیلش این است که `sayHi` و `sayBye` از اول درون `sayHiMixin` ایجاد شده‌اند. پس حتی با اینکه کپی شدند، ویژگی درونی `[[HomeObject]]` آن‌ها به `sayHiMixin` رجوع می‌کند، همانطور که در تصویر بالا نشان داده شده است.
 
-As `super` looks for parent methods in `[[HomeObject]].[[Prototype]]`, that means it searches `sayHiMixin.[[Prototype]]`, not `User.[[Prototype]]`.
+چون `super` درون `[[HomeObject]].[[Prototype]]` به دنبال متدهای والد می‌گردد، یعنی `sayHiMixin.[[Prototype]]` را جست‌وجو می‌کند نه `User.[[Prototype]]` را.
 
 ## EventMixin
 
