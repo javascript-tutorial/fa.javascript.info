@@ -107,24 +107,24 @@ new User("Dude").sayHi(); // Hello Dude!
 
 ## EventMixin
 
-Now let's make a mixin for real life.
+حالا بیایید یک mixin برای زندگی واقعی بسازیم.
 
-An important feature of many browser objects (for instance) is that they can generate events. Events are a great way to "broadcast information" to anyone who wants it. So let's make a mixin that allows us to easily add event-related functions to any class/object.
+یک خاصیت مهم در تعداد زیادی از شیءهای مرورگر (برای مثال) این است که آن‌ها می‌توانند رویداد (event) ایجاد کنند. رویدادها راهی عالی برای «انتشار اطلاعات» به هر کسی که آن را بخواهد هستند. پس بیایید یک mixin بسازیم که به ما این امکان را می‌دهد تا به راحتی تابع‌های مربوط به رویداد را به هر شیء/کلاسی اضافه کنیم.
 
-- The mixin will provide a method `.trigger(name, [...data])` to "generate an event" when something important happens to it. The `name` argument is a name of the event, optionally followed by additional arguments with event data.
-- Also the method `.on(name, handler)` that adds `handler` function as the listener to events with the given name. It will be called when an event with the given `name` triggers, and get the arguments from the `.trigger` call.
-- ...And the method `.off(name, handler)` that removes the `handler` listener.
+- این mixin متد `.trigger(name, [...data])` را برای «ایجاد یک رویداد» زمانی که اتفاقی برای آن می‌افتد فراهم می‌کند. آرگومان `name` اسم رویداد است که بعد از آن آرگومان‌های اضافی اختیاری شامل دادۀ رویداد می‌آید.
+- همچنین متد `.on(name, handler)` را فراهم می‌کند که تابع `handler` را به عنوان کنترل‌کننده به رویدادهایی با نام داده شده اضافه می‌کند. این تابع زمانی که رویدادی همراه با `name` داده شده راه می‌افتد (trigger) اجرا می‌شود و آرگومان‌ها را از فراخوانی `.trigger` دریافت می‌کند.
+- ...و متد `.off(name, handler)` را هم فراهم می‌کند که کنترل‌کننده `handler` را حذف می‌کند.
 
-After adding the mixin, an object `user` will be able to generate an event `"login"` when the visitor logs in. And another object, say, `calendar` may want to listen for such events to load the calendar for the logged-in person.
+بعد از اضافه کردن `mixin`، یک شیء `user` خواهد توانست زمانی که بازدیدکننده وارد می‌شود (log in) یک رویداد `"login"` ایجاد کند. و شیء دیگر، مثلا `calendar` (تقویم) شاید بخواهد چنین رویدادهایی را کنترل کند تا تقویم را برای شخص وارد شده بارگیری کند.
 
-Or, a `menu` can generate the event `"select"` when a menu item is selected, and other objects may assign handlers to react on that event. And so on.
+یا یک `menu` (فهرست) می‌تواند زمانی که چیزی از فهرست انتخاب شود رویداد `"select"` (انتخاب) را ایجاد کند و شیءهای دیگر ممکن است کنترل‌کننده‌هایی را برای واکنش دادن به این رویداد داشته باشند. و مثال‌هایی دیگر.
 
-Here's the code:
+اینجا کد آن را داریم:
 
 ```js run
 let eventMixin = {
   /**
-   * Subscribe to event, usage:
+   * :متعهد ساختن به یک رویداد، کاربرد
    *  menu.on('select', function(item) { ... }
   */
   on(eventName, handler) {
@@ -136,7 +136,7 @@ let eventMixin = {
   },
 
   /**
-   * Cancel the subscription, usage:
+   * :لغو کردن تعهد، کاربرد
    *  menu.off('select', handler)
    */
   off(eventName, handler) {
@@ -150,15 +150,15 @@ let eventMixin = {
   },
 
   /**
-   * Generate an event with the given name and data
+   * ایجاد یک رویداد همراه با داده و نام داده شده
    *  this.trigger('select', data1, data2);
    */
   trigger(eventName, ...args) {
     if (!this._eventHandlers?.[eventName]) {
-      return; // no handlers for that event name
+      return; // کنترل‌کننده‌ای برای این نام رویداد وجود ندارد
     }
 
-    // call the handlers
+    // فراخوانی کنترل‌کننده‌ها
     this._eventHandlers[eventName].forEach(handler => handler.apply(this, args));
   }
 };
