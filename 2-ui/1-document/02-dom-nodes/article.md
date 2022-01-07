@@ -8,29 +8,29 @@ libs:
 
 ستون فقرات سند html برچسب ها هستند.
 
-According to the Document Object Model (DOM), every HTML tag is an object. Nested tags are  "children" of the enclosing one. The text inside a tag is an object as well.
+طبق مدل Document Object (DOM)، هر تگ HTML یک شی است. تگ های داخلی "فرزندانِ" برچسب های دربرگیرنده هستند. متن داخل تگ نیز یک شی است.
 
-All these objects are accessible using JavaScript, and we can use them to modify the page.
+همه این اشیا با استفاده از جاوا اسکریپت قابل دسترسی هستند و ما می توانیم از آنها برای تغییر صفحه استفاده کنیم.
 
-For example, `document.body` is the object representing the `<body>` tag.
+به عنوان مثال، `document.body` شیئی است که تگ `<body>` را نشان می دهد.
 
-Running this code will make the `<body>` red for 3 seconds:
+با اجرای این کد، `<body>` به مدت 3 ثانیه قرمز می شود:
 
 ```js run
-document.body.style.background = 'red'; // make the background red
+document.body.style.background = 'red'; // پس زمینه را قرمز کن
 
-setTimeout(() => document.body.style.background = '', 3000); // return back
+setTimeout(() => document.body.style.background = '', 3000); // برگرد
 ```
 
-Here we used `style.background` to change the background color of `document.body`, but there are many other properties, such as:
+در اینجا ما از `style.background` برای تغییر رنگ پس زمینه `document.body` استفاده کردیم، اما ویژگی های زیادِ دیگری وجود دارد، مانند:
 
-- `innerHTML` -- HTML contents of the node.
-- `offsetWidth` -- the node width (in pixels)
-- ...and so on.
+- `innerHTML` -- HTML محتویاتِ گره
+- `offsetWidth` -- عرض گره (بر حسب پیکسل)
+- غیره و ...
 
-Soon we'll learn more ways to manipulate the DOM, but first we need to know about its structure.
+به زودی راه های بیشتری برای دستکاری DOM یاد خواهیم گرفت، اما ابتدا باید ساختار آن را بدانیم.
 
-## An example of the DOM
+## نمونه ای از DOM
 
 Let's start with the following simple document:
 
