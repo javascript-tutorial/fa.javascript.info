@@ -32,21 +32,21 @@ setTimeout(() => document.body.style.background = '', 3000); // برگرد
 
 ## نمونه ای از DOM
 
-Let's start with the following simple document:
+بیایید با سند ساده زیر شروع کنیم:
 
 ```html run no-beautify
 <!DOCTYPE HTML>
 <html>
 <head>
-  <title>About elk</title>
+  <title>درباره گوزن شمالی</title>
 </head>
 <body>
-  The truth about elk.
+  حقیقت درباره گوزن شمالی.
 </body>
 </html>
 ```
 
-The DOM represents HTML as a tree structure of tags. Here's how it looks:
+اینجا چگونه به نظر می رسد که DOM اچ تی ام ال را به عنوان یک ساختار درختی از برچسب ها نشان می دهد:
 
 <div class="domtree"></div>
 
@@ -56,8 +56,9 @@ let node1 = {"name":"HTML","nodeType":1,"children":[{"name":"HEAD","nodeType":1,
 drawHtmlTree(node1, 'div.domtree', 690, 320);
 </script>
 
+
 ```online
-On the picture above, you can click on element nodes and their children will open/collapse.
+در تصویر بالا، می توانید روی گره های عنصر کلیک کنید و فرزندان آنها باز می شوند.
 ```
 
 Every tree node is an object.
