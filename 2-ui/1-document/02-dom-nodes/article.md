@@ -97,20 +97,20 @@ drawHtmlTree(node2, 'div.domtree', 690, 210);
 </script>
 
 ```smart header="Spaces at string start/end and space-only text nodes are usually hidden in tools"
-Browser tools (to be covered soon) that work with DOM usually do not show spaces at the start/end of the text and empty text nodes (line-breaks) between tags.
+ابزارهای مرورگر (به زودی نشان داده خواهد شد) که با DOM کار می کنند معمولاً فاصله ها را در ابتدا / انتهای متن و گره های متنِ خالیِ بین تگ ها(خطوط شکسته)  را نشان نمی دهند.
 
-Developer tools save screen space this way.
+ابزارهای توسعه دهنده(ابزارهای مرورگر) از این طریق فضای صفحه را حفظ می کنند.
 
-On further DOM pictures we'll sometimes omit them when they are irrelevant. Such spaces usually do not affect how the document is displayed.
+در ادامه ی تصاویر DOM ، گاهی اوقات زمانی که نامربوط هستند آنها را حذف می کنیم. چنین فضاهایی معمولاً بر نحوه نمایش سند تأثیر نمی گذارد.
 ```
 
-## Autocorrection
+## تصحیح خودکار
 
-If the browser encounters malformed HTML, it automatically corrects it when making the DOM.
+اگر مرورگر با HTML نادرست مواجه شود، هنگام ساخت DOM به طور خودکار آن را تصحیح می کند.
 
-For instance, the top tag is always `<html>`. Even if it doesn't exist in the document, it will exist in the DOM, because the browser will create it. The same goes for `<body>`.
+به عنوان مثال، تگ بالا همیشه `<html>` است. حتی اگر در سند وجود نداشته باشد، در DOM وجود خواهد داشت، زیرا مرورگر آن را ایجاد می کند. `<body>` هم همینطور.
 
-As an example, if the HTML file is the single word `"Hello"`, the browser will wrap it into `<html>` and `<body>`, and add the required `<head>`, and the DOM will be:
+به عنوان مثال، اگر فایل HTML تنها کلمه `"Hello"` باشد، مرورگر آن را با `<html>` و `<body>` می پیچد و `<head>` ضروری را اضافه می‌کند و DOM اینطور خواهد بود:
 
 
 <div class="domtree"></div>
@@ -121,18 +121,18 @@ let node3 = {"name":"HTML","nodeType":1,"children":[{"name":"HEAD","nodeType":1,
 drawHtmlTree(node3, 'div.domtree', 690, 150);
 </script>
 
-While generating the DOM, browsers automatically process errors in the document, close tags and so on.
+هنگام تولید DOM، مرورگرها به طور خودکار خطاهای سند را پردازش می کنند، تگ ها را می بندند و غیره.
 
-A document with unclosed tags:
+سندی با تگ های بسته نشده:
 
 ```html no-beautify
-<p>Hello
-<li>Mom
-<li>and
-<li>Dad
+<p>سلام
+<li>مامان
+<li>و
+<li>بابا
 ```
 
-...will become a normal DOM as the browser reads tags and restores the missing parts:
+...وقتی مرورگر تگ ها را می خواند و قسمت های از دست رفته را بازیابی می کند، به یک DOM معمولی تبدیل می شود:
 
 <div class="domtree"></div>
 
