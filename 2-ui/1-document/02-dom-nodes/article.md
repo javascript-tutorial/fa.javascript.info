@@ -4,9 +4,8 @@ libs:
 
 ---
 
-# DOM tree
-
-ستون فقرات سند html برچسب ها هستند.
+# درخت DOM
+ستون فقرات سند html تگ ها هستند.
 
 طبق مدل Document Object (DOM)، هر تگ HTML یک شی است. تگ های داخلی "فرزندانِ" برچسب های دربرگیرنده هستند. متن داخل تگ نیز یک شی است.
 
@@ -46,7 +45,7 @@ setTimeout(() => document.body.style.background = '', 3000); // برگرد
 </html>
 ```
 
-اینجا چگونه به نظر می رسد که DOM اچ تی ام ال را به عنوان یک ساختار درختی از برچسب ها نشان می دهد:
+اینجا چگونه به نظر می رسد که DOM اچ تی ام ال را به عنوان یک ساختار درختی از تگ ها نشان می دهد:
 
 <div class="domtree"></div>
 
@@ -74,9 +73,9 @@ drawHtmlTree(node1, 'div.domtree', 690, 320);
 - یک خط جدید: `↵` (در جاوااسکریپت به `n\` شناخته میشود.)
 - یک فاصله(space) : `␣`
 
-Spaces and newlines are totally valid characters, like letters and digits. They form text nodes and become a part of the DOM. So, for instance, in the example above the `<head>` tag contains some spaces before `<title>`, and that text becomes a `#text` node (it contains a newline and some spaces only).
+فاصله ها و خطوط جدید کاراکترهای کاملاً معتبری هستند، مانند حروف و اعداد. آنها گره های متنی را تشکیل می دهند و بخشی از DOM می شوند. بنابراین، برای مثال، در مثال بالا، تگ `<head>` حاوی چند فاصله قبل از `<title>` است، و آن متن به یک گره `text#` تبدیل می‌شود (که فقط حاوی یک خط جدید و چند فاصله است).
 
-There are only two top-level exclusions:
+فقط دو استثناء سطح بالا وجود دارد:
 1. Spaces and newlines before `<head>` are ignored for historical reasons.
 2. If we put something after `</body>`, then that is automatically moved inside the `body`, at the end, as the HTML spec requires that all content must be inside `<body>`. So there can't be any spaces after `</body>`.
 
