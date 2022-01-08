@@ -197,12 +197,12 @@ menu.choose("123");
 
 و `eventMixin` اضافه کردن چنین رفتاری به هر چند کلاسی که بخواهیم را آسان می‌کند، بدون اینکه کاری به زنجیره ارث‌بری داشته باشیم.
 
-## Summary
+## خلاصه
 
-*Mixin* -- is a generic object-oriented programming term: a class that contains methods for other classes.
+*Mixin* -- یک عبارت عام برنامه‌نویسی شیءگرا است: کلاسی که متدهایی را برای کلاس‌های دیگر دربرمی‌گیرد.
 
-Some other languages allow multiple inheritance. JavaScript does not support multiple inheritance, but mixins can be implemented by copying methods into prototype.
+بعضی از زبان‌های دیگر ارث‌بری چندگانه را ممکن می‌سازند. جاوااسکریپت از ارث‌بری چندگانه پشتیبانی نمی‌کند اما با کپی کردن متدها درون پروتوتایپ mixinها می‌توانند پیاده‌سازی شوند.
 
-We can use mixins as a way to augment a class by adding multiple behaviors, like event-handling as we have seen above.
+ما می‌توانیم با اضافه کردن چند عملکرد، از mixinها به عنوان راهی برای قدرتمند کردن یک کلاس استفاده کنیم، مانند کنترل کردن رویداد که بالاتر آن را دیدیم.
 
-Mixins may become a point of conflict if they accidentally overwrite existing class methods. So generally one should think well about the naming methods of a mixin, to minimize the probability of that happening.
+اگر mixinها به طور تصادفی متدهای موجود در کلاس را بازنویسی کنند، ممکن است باعث ایجاد تناقض شوند. پس به طور کلی باید درباره نام‌گذاری متدهای یک mixin به خوبی فکر کنید تا احتمال اتفاق افتادن چنین چیزی را کم کنید.
