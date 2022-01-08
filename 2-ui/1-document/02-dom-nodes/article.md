@@ -63,16 +63,16 @@ drawHtmlTree(node1, 'div.domtree', 690, 320);
 
 هر گره ی درخت یک شی است.
 
-Tags are *element nodes* (or just elements) and form the tree structure: `<html>` is at the root, then `<head>` and `<body>` are its children, etc.
+تگها *گره های عنصر* (عناصر) هستند و ساختار درختی را تشکیل می دهند: `<html>` در ریشه است، سپس `<head>` و `<body>` فرزندان آن هستند و ....
 
-The text inside elements forms *text nodes*, labelled as `#text`. A text node contains only a string. It may not have children and is always a leaf of the tree.
+متن داخل عناصر *گره های متنی* را تشکیل می دهد که با عنوان `text#` برچسب گذاری شده اند. یک گره متنی فقط شامل یک رشته است. ممکن است فرزندی نداشته باشد و همیشه برگ درخت باشد.
 
-For instance, the `<title>` tag has the text `"About elk"`.
+به عنوان مثال تگِ `<title>` متن `"درباره ی گوزن شمالی"` را دارد.
 
-Please note the special characters in text nodes:
+لطفاً به کاراکترهای خاص در گره های متن توجه کنید:
 
-- a newline: `↵` (in JavaScript known as `\n`)
-- a space: `␣`
+- یک خط جدید: `↵` (در جاوااسکریپت به `n\` شناخته میشود.)
+- یک فاصله(space) : `␣`
 
 Spaces and newlines are totally valid characters, like letters and digits. They form text nodes and become a part of the DOM. So, for instance, in the example above the `<head>` tag contains some spaces before `<title>`, and that text becomes a `#text` node (it contains a newline and some spaces only).
 
