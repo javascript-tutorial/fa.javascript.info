@@ -61,7 +61,7 @@ drawHtmlTree(node1, 'div.domtree', 690, 320);
 در تصویر بالا، می توانید روی گره های عنصر کلیک کنید و فرزندان آنها باز می شوند.
 ```
 
-Every tree node is an object.
+هر گره ی درخت یک شی است.
 
 Tags are *element nodes* (or just elements) and form the tree structure: `<html>` is at the root, then `<head>` and `<body>` are its children, etc.
 
