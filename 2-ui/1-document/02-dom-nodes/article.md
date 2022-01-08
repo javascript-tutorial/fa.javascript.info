@@ -50,7 +50,7 @@ setTimeout(() => document.body.style.background = '', 3000); // برگرد
 <div class="domtree"></div>
 
 <script>
-let node1 = {"name":"HTML","nodeType":1,"children":[{"name":"HEAD","nodeType":1,"children":[{"name":"#text","nodeType":3,"content":"\n  "},{"name":"TITLE","nodeType":1,"children":[{"name":"#text","nodeType":3,"content":"About elk"}]},{"name":"#text","nodeType":3,"content":"\n"}]},{"name":"#text","nodeType":3,"content":"\n"},{"name":"BODY","nodeType":1,"children":[{"name":"#text","nodeType":3,"content":"\n  The truth about elk.\n\n\n"}]}]}
+let node1 = {"name":"HTML","nodeType":1,"children":[{"name":"HEAD","nodeType":1,"children":[{"name":"#text","nodeType":3,"content":"\n  "},{"name":"TITLE","nodeType":1,"children":[{"name":"#text","nodeType":3,"content":"درباره گوزن شمالی"}]},{"name":"#text","nodeType":3,"content":"\n"}]},{"name":"#text","nodeType":3,"content":"\n"},{"name":"BODY","nodeType":1,"children":[{"name":"#text","nodeType":3,"content":"\n  حقیقت درباره گوزن شمالی.\n\n\n"}]}]}
 
 drawHtmlTree(node1, 'div.domtree', 690, 320);
 </script>
@@ -76,16 +76,16 @@ drawHtmlTree(node1, 'div.domtree', 690, 320);
 فاصله ها و خطوط جدید کاراکترهای کاملاً معتبری هستند، مانند حروف و اعداد. آنها گره های متنی را تشکیل می دهند و بخشی از DOM می شوند. بنابراین، برای مثال، در مثال بالا، تگ `<head>` حاوی چند فاصله قبل از `<title>` است، و آن متن به یک گره `text#` تبدیل می‌شود (که فقط حاوی یک خط جدید و چند فاصله است).
 
 فقط دو استثناء سطح بالا وجود دارد:
-1. Spaces and newlines before `<head>` are ignored for historical reasons.
-2. If we put something after `</body>`, then that is automatically moved inside the `body`, at the end, as the HTML spec requires that all content must be inside `<body>`. So there can't be any spaces after `</body>`.
+1. فاصله ها و خطوط جدید قبل از `<head>` به دلایل تاریخی نادیده گرفته می شوند.
+2. اگر چیزی را بعد از `</body>` قرار دهیم، در پایان به طور خودکار به داخل `body` منتقل می‌شود، زیرا مشخصات HTML ایجاب می‌کند که تمام محتوا باید داخل `<body>` باشد. بنابراین هیچ فاصله ای بعد از `</body>` وجود ندارد.
 
-In other cases everything's straightforward -- if there are spaces (just like any character) in the document, then they become text nodes in the DOM, and if we remove them, then there won't be any.
+در موارد دیگر همه چیز سر راست است -- اگر در سند فاصله وجود داشته باشد(دقیقاً مانند هر کاراکتری)، آنها به گره های متنی در DOM تبدیل می شوند، و اگر آنها را حذف کنیم،   وجود نخواهند داشت.
 
-Here are no space-only text nodes:
+در اینجا هیچ گره متنی صرفا-فاصله وجود ندارد:
 
 ```html no-beautify
 <!DOCTYPE HTML>
-<html><head><title>About elk</title></head><body>The truth about elk.</body></html>
+<html><head><title>درباره ی گوزن شمالی</title></head><body>حقیقت در مورد گوزن شمالی.</body></html>
 ```
 
 <div class="domtree"></div>
