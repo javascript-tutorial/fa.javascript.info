@@ -165,37 +165,37 @@ let eventMixin = {
 ```
 
 
-- `.on(eventName, handler)` -- assigns function `handler` to run when the event with that name occurs. Technically, there's an `_eventHandlers` property that stores an array of handlers for each event name, and it just adds it to the list.
-- `.off(eventName, handler)` -- removes the function from the handlers list.
-- `.trigger(eventName, ...args)` -- generates the event: all handlers from `_eventHandlers[eventName]` are called, with a list of arguments `...args`.
+- متد `.on(eventName, handler)` -- مشخص می‌کند که تابع `handler` هنگامی که رویدادی با این نام رخ می‌دهد اجرا شود. از لحاظ فنی، یک ویژگی `_eventHandlers` وجود دارد که آرایه‌ای از کنترل‌کننده‌ها را برای هر رویداد ذخیره می‌کند و این متد فقط کنترل‌کننده را به لیست اضافه می‌کند.
+- متد `.off(eventName, handler)` -- تابع را از لیست کنترل‌کننده‌ها حذف می‌کند.
+- متد `.trigger(eventName, ...args)` -- رویداد را ایجاد می‌کند: تمام کنترل‌کننده‌ها از `_eventHandlers[eventName]` همراه با لیستی از آرگومان‌ها `...args` فراخوانی می‌شوند.
 
-Usage:
+کاربرد:
 
 ```js run
-// Make a class
+// ایجاد یک کلاس
 class Menu {
   choose(value) {
     this.trigger("select", value);
   }
 }
-// Add the mixin with event-related methods
+// شامل متدهای مربوط به رویداد mixin اضافه کردن
 Object.assign(Menu.prototype, eventMixin);
 
 let menu = new Menu();
 
-// add a handler, to be called on selection:
+// :فراخوانی شود (select) اضافه کردن یک کنترل‌کننده، تا هنگام انتخاب
 *!*
 menu.on("select", value => alert(`Value selected: ${value}`));
 */!*
 
-// triggers the event => the handler above runs and shows:
+// :رویداد را راه می‌اندازد => کنترل‌کننده بالا اجرا می‌شود و این را نمایش می‌دهد
 // Value selected: 123
 menu.choose("123");
 ```
 
-Now, if we'd like any code to react to a menu selection, we can listen for it with `menu.on(...)`.
+حالا اگر ما بخواهیم هر کدی به انتخاب چیزی از فهرست واکنش نشان دهد، می‌توانیم با `menu.on(...)` آن را کنترل کنیم.
 
-And `eventMixin` mixin makes it easy to add such behavior to as many classes as we'd like, without interfering with the inheritance chain.
+و `eventMixin` اضافه کردن چنین رفتاری به هر چند کلاسی که بخواهیم را آسان می‌کند، بدون اینکه کاری به زنجیره ارث‌بری داشته باشیم.
 
 ## Summary
 
