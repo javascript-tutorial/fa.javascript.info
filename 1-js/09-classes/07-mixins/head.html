@@ -2,7 +2,7 @@
 let eventMixin = {
 
   /**
-   * Subscribe to event, usage:
+   * :متعهد ساختن به یک رویداد، کاربرد
    *  menu.on('select', function(item) { ... }
   */
   on(eventName, handler) {
@@ -14,7 +14,7 @@ let eventMixin = {
   },
 
   /**
-   * Cancel the subscription, usage:
+   * :لغو کردن تعهد، کاربرد
    *  menu.off('select', handler)
    */
   off(eventName, handler) {
@@ -28,15 +28,15 @@ let eventMixin = {
   },
 
   /**
-   * Generate the event and attach the data to it
+   * ایجاد یک رویداد همراه با داده و نام داده شده
    *  this.trigger('select', data1, data2);
    */
   trigger(eventName, ...args) {
     if (!this._eventHandlers || !this._eventHandlers[eventName]) {
-      return; // no handlers for that event name
+      return; // کنترل‌کننده‌ای برای این نام رویداد وجود ندارد
     }
 
-    // call the handlers
+    // فراخوانی کنترل‌کننده‌ها
     this._eventHandlers[eventName].forEach(handler => handler.apply(this, args));
   }
 };
