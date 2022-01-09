@@ -142,16 +142,17 @@ let node4 = {"name":"HTML","nodeType":1,"children":[{"name":"HEAD","nodeType":1,
 drawHtmlTree(node4, 'div.domtree', 690, 360);
 </script>
 
-````warn header="Tables always have `<tbody>`"
-An interesting "special case" is tables. By DOM specification they must have `<tbody>` tag, but HTML text may omit it. Then the browser creates `<tbody>` in the DOM automatically.
+````
+warn header="جداول همیشه تگ `<tbody>` دارند."
 
-For the HTML:
+یک چیز جالب "مورد خاص" جداول است. بر اساس مشخصات DOM، آنها باید تگ `<tbody>` داشته باشند، اما متن HTML ممکن است آن را از قلم انداخته باشد. سپس مرورگر به صورت خودکار `<tbody>` را در DOM ایجاد می کند.
 
-```html no-beautify
-<table id="table"><tr><td>1</td></tr></table>
-```
+برای HTML:
 
-DOM-structure will be:
+ ```html no-beautify
+ <table id="table"><tr><td>1</td></tr></table>
+ ```
+ساختار DOM اینطور خواهد بود:
 <div class="domtree"></div>
 
 <script>
@@ -160,26 +161,26 @@ let node5 = {"name":"TABLE","nodeType":1,"children":[{"name":"TBODY","nodeType":
 drawHtmlTree(node5,  'div.domtree', 600, 200);
 </script>
 
-You see? The `<tbody>` appeared out of nowhere. We should keep this in mind while working with tables to avoid surprises.
+می بینی؟ `<tbody>` از ناکجاآباد ظاهر شد. هنگام کار با جداول باید این را در نظر داشته باشیم تا از غافلگیری جلوگیری کنیم.
 ````
 
-## Other node types
+## انواع دیگر گره ها
 
-There are some other node types besides elements and text nodes.
+علاوه بر عناصر و گره های متن، انواع گره های دیگری نیز وجود دارد.
 
-For example, comments:
+به عنوان مثال، نظرات:
 
 ```html
 <!DOCTYPE HTML>
 <html>
 <body>
-  The truth about elk.
+  حقیقت در مورد گوزن.
   <ol>
-    <li>An elk is a smart</li>
+    <li>گوزن شمالی باهوش است</li>
 *!*
     <!-- comment -->
 */!*
-    <li>...and cunning animal!</li>
+    <li>...و حیوانی حیله گر!</li>
   </ol>
 </body>
 </html>
@@ -188,14 +189,14 @@ For example, comments:
 <div class="domtree"></div>
 
 <script>
-let node6 = {"name":"HTML","nodeType":1,"children":[{"name":"HEAD","nodeType":1,"children":[]},{"name":"BODY","nodeType":1,"children":[{"name":"#text","nodeType":3,"content":"\n  The truth about elk.\n  "},{"name":"OL","nodeType":1,"children":[{"name":"#text","nodeType":3,"content":"\n    "},{"name":"LI","nodeType":1,"children":[{"name":"#text","nodeType":3,"content":"An elk is a smart"}]},{"name":"#text","nodeType":3,"content":"\n    "},{"name":"#comment","nodeType":8,"content":"comment"},{"name":"#text","nodeType":3,"content":"\n    "},{"name":"LI","nodeType":1,"children":[{"name":"#text","nodeType":3,"content":"...and cunning animal!"}]},{"name":"#text","nodeType":3,"content":"\n  "}]},{"name":"#text","nodeType":3,"content":"\n\n\n"}]}]};
+let node6 = {"name":"HTML","nodeType":1,"children":[{"name":"HEAD","nodeType":1,"children":[]},{"name":"BODY","nodeType":1,"children":[{"name":"#text","nodeType":3,"content":"\n  حقیقت در مورد گوزن.\n  "},{"name":"OL","nodeType":1,"children":[{"name":"#text","nodeType":3,"content":"\n    "},{"name":"LI","nodeType":1,"children":[{"name":"#text","nodeType":3,"content":"گوزن شمالی باهوش است"}]},{"name":"#text","nodeType":3,"content":"\n    "},{"name":"#comment","nodeType":8,"content":"comment"},{"name":"#text","nodeType":3,"content":"\n    "},{"name":"LI","nodeType":1,"children":[{"name":"#text","nodeType":3,"content":"...و حیوانی حیله گر!"}]},{"name":"#text","nodeType":3,"content":"\n  "}]},{"name":"#text","nodeType":3,"content":"\n\n\n"}]}]};
 
 drawHtmlTree(node6, 'div.domtree', 690, 500);
 </script>
 
-We can see here a new tree node type -- *comment node*, labeled as `#comment`, between two text nodes.
+ما می‌توانیم در اینجا یک نوع گره درختی جدید ببینیم -- *گره comment*، با برچسب `comment#`، بین دو گره متن.
 
-We may think -- why is a comment added to the DOM? It doesn't affect the visual representation in any way. But there's a rule -- if something's in HTML, then it also must be in the DOM tree.
+ممکن است فکر کنیم -- چرا یک comment به DOM اضافه شده است؟ به هیچ وجه بر نمایش بصری تأثیر نمی گذارد. اما یک قانون وجود دارد - اگر چیزی در HTML است، باید در درخت DOM نیز باشد.
 
 **Everything in HTML, even comments, becomes a part of the DOM.**
 
