@@ -124,7 +124,7 @@ new User("Dude").sayHi(); // Hello Dude!
 ```js run
 let eventMixin = {
   /**
-   * :متعهد ساختن به یک رویداد، کاربرد
+   * :مشترک شدن در یک رویداد، کاربرد
    *  menu.on('select', function(item) { ... }
   */
   on(eventName, handler) {
