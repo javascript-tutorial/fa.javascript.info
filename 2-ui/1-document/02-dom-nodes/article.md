@@ -204,14 +204,14 @@ drawHtmlTree(node6, 'div.domtree', 690, 500);
 
 شی `document` که کل سند را نشان می دهد، به طور رسمی، یک گره DOM نیز هست.
 
-There are [12 node types](https://dom.spec.whatwg.org/#node). In practice we usually work with 4 of them:
+12 نوع گره وجود دارد. در عمل ما معمولا با 4 مورد از آنها کار می کنیم [12 node types](https://dom.spec.whatwg.org/#node) :
 
-1. `document` -- the "entry point" into DOM.
+1. "نقطه ی ورود" به `document` -- DOM
 2. element nodes -- HTML-tags, the tree building blocks.
 3. text nodes -- contain text.
 4. comments -- sometimes we can put information there, it won't be shown, but JS can read it from the DOM.
 
-## See it for yourself
+## خودتان آن را ببینید
 
 To see the DOM structure in real-time, try [Live DOM Viewer](http://software.hixie.ch/utilities/js/live-dom-viewer/). Just type in the document, and it will show up as a DOM at an instant.
 
