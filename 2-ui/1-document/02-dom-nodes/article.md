@@ -213,19 +213,19 @@ drawHtmlTree(node6, 'div.domtree', 690, 500);
 
 ## خودتان آن را ببینید
 
-To see the DOM structure in real-time, try [Live DOM Viewer](http://software.hixie.ch/utilities/js/live-dom-viewer/). Just type in the document, and it will show up as a DOM at an instant.
+برای دیدن ساختار Dom به صورت real-time , امتحان کنید [Live DOM Viewer](http://software.hixie.ch/utilities/js/live-dom-viewer/). فقط در سند تایپ کنید و  درجا به عنوان یک DOM نشان داده خواهد شد.
 
-Another way to explore the DOM is to use the browser developer tools. Actually, that's what we use when developing.
+راه دیگر برای کشف DOM استفاده از ابزارهای توسعه دهنده مرورگر است. در واقع، این همان چیزی است که ما هنگام توسعه استفاده می کنیم.
 
-To do so, open the web page [elk.html](elk.html), turn on the browser developer tools and switch to the Elements tab.
+برای انجام این کار،این صفحه را باز کنید [elk.html](elk.html), ابزارهای توسعه دهنده مرورگر را فعال کنید و به تب Elements بروید.
 
-It should look like this:
+باید شبیه به این باشه:
 
 ![](elk.svg)
 
-You can see the DOM, click on elements, see their details and so on.
+می توانید DOM را ببینید، روی عناصر کلیک کنید، جزئیات آنها را ببینید و غیره.
 
-Please note that the DOM structure in developer tools is simplified. Text nodes are shown just as text. And there are no "blank" (space only) text nodes at all. That's fine, because most of the time we are interested in element nodes.
+لطفاً توجه داشته باشید که ساختار DOM در ابزارهای توسعه دهنده ساده شده است. گره های متن درست به صورت متن نشان داده می شوند. و هیچ گره متنی "خالی" (فقط فاصله) وجود ندارد. این خوب است، زیرا اغلب ما به گره های عنصر علاقه مندیم..
 
 Clicking the <span class="devtools" style="background-position:-328px -124px"></span> button in the left-upper corner allows us to choose a node from the webpage using a mouse (or other pointer devices) and "inspect" it (scroll to it in the Elements tab). This works great when we have a huge HTML page (and corresponding huge DOM) and would like to see the place of a particular element in it.
 
