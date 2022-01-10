@@ -198,11 +198,11 @@ drawHtmlTree(node6, 'div.domtree', 690, 500);
 
 ممکن است فکر کنیم -- چرا یک comment به DOM اضافه شده است؟ به هیچ وجه بر نمایش بصری تأثیر نمی گذارد. اما یک قانون وجود دارد - اگر چیزی در HTML است، باید در درخت DOM نیز باشد.
 
-**Everything in HTML, even comments, becomes a part of the DOM.**
+**همه چیز در HTML، حتی comments، بخشی از DOM می شود.**
 
-Even the `<!DOCTYPE...>` directive at the very beginning of HTML is also a DOM node. It's in the DOM tree right before `<html>`. Few people know about that. We are not going to touch that node, we even don't draw it on diagrams, but it's there.
+حتی دستور `<...DOCTYPE!>` در همان ابتدای HTML نیز یک گره DOM است. درست قبل از `<html>` در درخت DOM قرار دارد. تعداد کمی از مردم در مورد آن می دانند. ما قرار نیست به آن دست بزنیم، حتی آن را روی نمودارها نمی کشیم، اما آنجاست.
 
-The `document` object that represents the whole document is, formally, a DOM node as well.
+شی `document` که کل سند را نشان می دهد، به طور رسمی، یک گره DOM نیز هست.
 
 There are [12 node types](https://dom.spec.whatwg.org/#node). In practice we usually work with 4 of them:
 
