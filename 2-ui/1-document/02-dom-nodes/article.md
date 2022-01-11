@@ -241,16 +241,16 @@ drawHtmlTree(node6, 'div.domtree', 690, 500);
 
 بهترین راه برای مطالعه آنها کلیک کردن در داخل آنها است. اکثر مقادیر درجا قابل ویرایش هستند.
 
-## Interaction with console
+## تعامل با کنسول
 
-As we work the DOM, we also may want to apply JavaScript to it. Like: get a node and run some code to modify it, to see the result. Here are few tips to travel between the Elements tab and the console.
+همانطور که ما روی DOM کار می کنیم، ممکن است بخواهیم جاوا اسکریپت را نیز روی آن اعمال کنیم. مانند: یک گره بگیرید و کدی را برای تغییر آن اجرا کنید تا نتیجه را ببینید. در اینجا چند نکته برای جابجایی بین زبانه Elements و کنسول وجود دارد.
 
-For the start:
+برای شروع:
 
-1. Select the first `<li>` in the Elements tab.
-2. Press `key:Esc` -- it will open console right below the Elements tab.
+1. اولین `<li>` را در زبانه Elements انتخاب کنید.
+2. بزنید `key:Esc` -- کنسول درست زیر زبانه Elements باز می شود.
 
-Now the last selected element is available as `$0`, the previously selected is `$1` etc.
+اکنون آخرین عنصر انتخاب شده به عنوان `$0` در دسترس است، عنصر انتخاب شده قبلی `$1` و غیره است.
 
 We can run commands on them. For instance, `$0.style.background = 'red'` makes the selected list item red, like this:
 
