@@ -217,7 +217,7 @@ drawHtmlTree(node6, 'div.domtree', 690, 500);
 
 راه دیگر برای کشف DOM استفاده از ابزارهای توسعه دهنده مرورگر است. در واقع، این همان چیزی است که ما هنگام توسعه استفاده می کنیم.
 
-برای انجام این کار،این صفحه را باز کنید [elk.html](elk.html), ابزارهای توسعه دهنده مرورگر را فعال کنید و به تب Elements بروید.
+برای انجام این کار،این صفحه را باز کنید [elk.html](elk.html), ابزارهای توسعه دهنده مرورگر را فعال کنید و به زبانه  Elements بروید.
 
 باید شبیه به این باشه:
 
@@ -227,19 +227,19 @@ drawHtmlTree(node6, 'div.domtree', 690, 500);
 
 لطفاً توجه داشته باشید که ساختار DOM در ابزارهای توسعه دهنده ساده شده است. گره های متن درست به صورت متن نشان داده می شوند. و هیچ گره متنی "خالی" (فقط فاصله) وجود ندارد. این خوب است، زیرا اغلب ما به گره های عنصر علاقه مندیم..
 
-Clicking the <span class="devtools" style="background-position:-328px -124px"></span> button in the left-upper corner allows us to choose a node from the webpage using a mouse (or other pointer devices) and "inspect" it (scroll to it in the Elements tab). This works great when we have a huge HTML page (and corresponding huge DOM) and would like to see the place of a particular element in it.
+با کلیک روی دکمه ی <span class="devtools" style="background-position:-328px -124px"></span> در گوشه سمت چپ بالا می توانیم با استفاده از ماوس (یا سایر دستگاه های اشاره گر) یک گره از صفحه وب انتخاب کرده و آن را "inspect" کنیم (در زبانه elements به ان scroll کنید). وقتی یک صفحه HTML بزرگ (و DOM بزرگ مربوطه) داریم و می‌خواهیم جای یک عنصر خاص را در آن ببینیم، عالی عمل می‌کند.
 
-Another way to do it would be just right-clicking on a webpage and selecting "Inspect" in the context menu.
+راه دیگر برای انجام این کار فقط کلیک راست بر روی یک صفحه وب و انتخاب "Inspect" در منوی context است.
 
 ![](inspect.svg)
 
-At the right part of the tools there are the following subtabs:
-- **Styles** -- we can see CSS applied to the current element rule by rule, including built-in rules (gray). Almost everything can be edited in-place, including the dimensions/margins/paddings of the box below.
-- **Computed** -- to see CSS applied to the element by property: for each property we can see a rule that gives it (including CSS inheritance and such).
-- **Event Listeners** -- to see event listeners attached to DOM elements (we'll cover them in the next part of the tutorial).
-- ...and so on.
+در قسمت سمت راست ابزارها زیر زبانه های زیر وجود دارد:
+- **Styles** -- می‌توانیم CSS را ببینیم که قانون به قانون بر عنصر فعلی اعمال می‌شود، از جمله قوانین داخلی (خاکستری رنگ). تقریباً همه چیز را می توان در جای خود ویرایش کرد، از جمله ابعاد / حاشیه های بیرونی / حاشیه های داخلی از طریق جعبه ی زیری.
+- **Computed** -- برای مشاهده CSS اعمال شده بر روی عنصر توسط ویژگی: برای هر ویژگی می‌توانیم قاعده‌ای را ببینیم که به آن می‌دهد (از جمله وراثت CSS و غیره).
+- **Event Listeners** -- برای دیدن event listener متصل به عناصر DOM (ما آنها را در قسمت بعدی آموزش پوشش خواهیم داد).
+- ...و غیره.
 
-The best way to study them is to click around. Most values are editable in-place.
+بهترین راه برای مطالعه آنها کلیک کردن در داخل آنها است. اکثر مقادیر درجا قابل ویرایش هستند.
 
 ## Interaction with console
 
