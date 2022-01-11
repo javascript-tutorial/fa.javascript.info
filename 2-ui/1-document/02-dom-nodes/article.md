@@ -252,7 +252,7 @@ drawHtmlTree(node6, 'div.domtree', 690, 500);
 
 اکنون آخرین عنصر انتخاب شده به عنوان `$0` در دسترس است، عنصر انتخاب شده قبلی `$1` و غیره است.
 
-We can run commands on them. For instance, `$0.style.background = 'red'` makes the selected list item red, like this:
+ما می توانیم دستورات را روی آنها اجرا کنیم. به عنوان مثال <span dir="ltr">`$0.style.background = 'red'`</span>، آیتمِ لیست انتخاب شده را قرمز می کند، مانند این:
 
 ![](domconsole0.svg)
 
