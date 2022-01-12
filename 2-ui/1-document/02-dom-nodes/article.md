@@ -256,28 +256,28 @@ drawHtmlTree(node6, 'div.domtree', 690, 500);
 
 ![](domconsole0.svg)
 
-That's how to get a node from Elements in Console.
+به این ترتیب می توان یک گره از Elements را از کنسول دریافت کرد.
 
-There's also a road back. If there's a variable referencing a DOM node, then we can use the command `inspect(node)` in Console to see it in the Elements pane.
+یک راه برگشت هم هست اگر متغیری وجود دارد که به یک گره DOM ارجاع می دهد، می توانیم از دستور `inspect(node)` در کنسول استفاده کنیم تا آن را در قسمت Elements ببینیم.
 
-Or we can just output the DOM node in the console and explore "in-place", like `document.body` below:
+یا فقط می‌توانیم گره DOM را در کنسول خروجی بگیریم و "درجا" کاوش کنیم، مانند `document.body` در زیر:
 
 ![](domconsole1.svg)
 
-That's for debugging purposes of course. From the next chapter on we'll access and modify DOM using JavaScript.
+این البته برای اهداف اشکال زدایی است. از فصل بعدی به DOM با استفاده از جاوا اسکریپت دسترسی پیدا می کنیم و آن را اصلاح می کنیم.
 
-The browser developer tools are a great help in development: we can explore the DOM, try things and see what goes wrong.
+ابزارهای توسعه دهنده مرورگر کمک بزرگی در توسعه هستند: ما می‌توانیم DOM را کاوش کنیم، چیزهایی را امتحان کنیم و ببینیم چه مشکلی پیش می‌آید.
 
-## Summary
+## خلاصه مطلب
 
-An HTML/XML document is represented inside the browser as the DOM tree.
+یک سند HTML/XML در داخل مرورگر به عنوان درخت DOM نشان داده می شود.
 
-- Tags become element nodes and form the structure.
-- Text becomes text nodes.
-- ...etc, everything in HTML has its place in DOM, even comments.
+- تگ‌ها به گره های عنصر تبدیل می شوند و ساختار را تشکیل می دهند.
+- متن به گره های متنی تبدیل می شود.
+- ... و غیره، همه چیز در HTML جایگاه خود را در DOM دارد، حتی نظرات.
 
-We can use developer tools to inspect DOM and modify it manually.
+ما می توانیم از ابزارهای توسعه دهنده برای DOM Inspect و اصلاح آن به صورت دستی استفاده کنیم.
 
-Here we covered the basics, the most used and important actions to start with. There's an extensive documentation about Chrome Developer Tools at <https://developers.google.com/web/tools/chrome-devtools>. The best way to learn the tools is to click here and there, read menus: most options are obvious. Later, when you know them in general, read the docs and pick up the rest.
+در اینجا به اصول اولیه، پرکاربردترین و مهم ترین اقدامات برای شروع پرداختیم. در <https://developers.google.com/web/tools/chrome-devtools> اسناد گسترده ای در مورد ابزارهای برنامه نویس Chrome وجود دارد. بهترین راه برای یادگیری ابزارها این است که اینجا و آنجا کلیک کنید، منوها را بخوانید: اکثر گزینه ها واضح هستند. بعداً، وقتی آنها را به طور کلی شناختید، اسناد را بخوانید و بقیه را انتخاب کنید.
 
-DOM nodes have properties and methods that allow us to travel between them, modify them, move around the page, and more. We'll get down to them in the next chapters.
+گره‌های DOM دارای ویژگی‌ها و روش‌هایی هستند که به ما امکان می‌دهند بین آنها پیمایش کنیم، آنها را اصلاح کنیم، در صفحه حرکت کنیم و موارد دیگر. در فصل های بعدی به آنها خواهیم پرداخت.
