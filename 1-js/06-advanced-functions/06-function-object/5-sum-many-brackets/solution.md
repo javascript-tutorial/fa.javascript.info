@@ -1,9 +1,9 @@
 
-1. For the whole thing to work *anyhow*, the result of `sum` must be function.
-2. That function must keep in memory the current value between calls.
-3. According to the task, the function must become the number when used in `==`. Functions are objects, so the conversion happens as described in the chapter <info:object-toprimitive>, and we can provide our own method that returns the number.
+1. برای اینکه همه چیز به *هر نحوی* کار کند، نتیجه `sum` باید تابع باشد.
+2. آن تابع باید بین فراخوانی‌ها مقدار کنونی را در حافظه ذخیره کند.
+3. با توجه به تمرین، تابع باید زمانی که با `==` استفاده می‌شود، تبدیل به عدد شود. تابع‌ها شیء هستند پس تبدیل شدن همانطور که در فصل <info:object-toprimitive> گفته شد اتفاق می‌افتد و ما می‌توانیم متد خودمان را برای برگرداندن عدد بسازیم.
 
-Now the code:
+حالا می‌رسیم به کد:
 
 ```js demo run
 function sum(a) {
@@ -28,28 +28,28 @@ alert( sum(6)(-1)(-2)(-3) ); // 0
 alert( sum(0)(1)(2)(3)(4)(5) ); // 15
 ```
 
-Please note that the `sum` function actually works only once. It returns function `f`.
+لطفا در نظر داشته باشید که تابع `sum` فقط یکبار کار می‌کند. تابع `f` را برمی‌گرداند.
 
-Then, on each subsequent call, `f` adds its parameter to the sum `currentSum`, and returns itself.
+سپس در هر فراخوانی زیر مجموعه آن، تابع `f` پارامتر خودش را به جمع `currentSum` اضافه می‌کند و خودش را برمی‌گرداند.
 
-**There is no recursion in the last line of `f`.**
+**هیچ بازگشتی در آخرین خط `f` وجود ندارد.**
 
-Here is what recursion looks like:
-
-```js
-function f(b) {
-  currentSum += b;
-  return f(); // <-- recursive call
-}
-```
-
-And in our case, we just return the function, without calling it:
+بازگشتی اینگونه بنظر می‌رسد:
 
 ```js
 function f(b) {
   currentSum += b;
-  return f; // <-- does not call itself, returns itself
+  return f(); // <-- فراخوانی بازگشتی
 }
 ```
 
-This `f` will be used in the next call, again return itself, as many times as needed. Then, when used as a number or a string -- the `toString` returns the `currentSum`. We could also use `Symbol.toPrimitive` or `valueOf` here for the conversion.
+و در این مورد ما، بدون صدا زدن تابع، ما فقط آن را برمی‌گردانیم:
+
+```js
+function f(b) {
+  currentSum += b;
+  return f; // <-- خودش را صدا نمی‌زد، خودش را برمی‌گرداند
+}
+```
+
+این `f` در فراخوانی بعدی استفاده می‌شود و دوباره خودش را برمی‌گرداند، هر چند باری که نیاز باشد. سپس زمانی که به عنوان یک عدد یا رشته استفاده می‌شود -- `toString` مقدار `currentSum` را برمی‌گرداند. ما می‌توانستیم برای تبدیل از `Symbol.toPrimitive` یا `valueOf` اینجا استفاده کنیم.

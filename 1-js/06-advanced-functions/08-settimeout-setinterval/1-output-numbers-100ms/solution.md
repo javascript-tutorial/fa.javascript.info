@@ -1,5 +1,5 @@
 
-Using `setInterval`:
+با استفاده از `setInterval`:
 
 ```js run
 function printNumbers(from, to) {
@@ -14,11 +14,11 @@ function printNumbers(from, to) {
   }, 1000);
 }
 
-// usage:
+// :کاربرد
 printNumbers(5, 10);
 ```
 
-Using nested `setTimeout`:
+با استفاده از `setTimeout` تودرتو:
 
 
 ```js run
@@ -34,13 +34,13 @@ function printNumbers(from, to) {
   }, 1000);
 }
 
-// usage:
+// :کاربرد
 printNumbers(5, 10);
 ```
 
-Note that in both solutions, there is an initial delay before the first output. The function is called after `1000ms` the first time.
+در نظر داشته باشید که در هر دو راه‌حل، یک تاخیر اولیه قبل از اولین خروجی وجود دارد. تابع بعد `1000 میلی‌ثانیه` از اولین بار فراخوانی می‌شود.
 
-If we also want the function to run immediately, then we can add an additional call on a separate line, like this:
+اگر ما بخواهیم که تابع بلافاصله اجرا شود، سپس می‌توانیم یک فراخوانی اضافی در خطی جداگانه اضافه کنیم، مثل اینجا:
 
 ```js run
 function printNumbers(from, to) {

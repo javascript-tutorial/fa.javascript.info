@@ -2,18 +2,18 @@ importance: 4
 
 ---
 
-# Add the decorating "defer()" to functions
+# دکوراتور "defer()" را به تابع‌ها اضافه کنید
 
-Add to the prototype of all functions the method `defer(ms)`, that returns a wrapper, delaying the call by `ms` milliseconds.
+متد `defer(ms)` را به پروتوتایپ تمام تابع‌ها اضافه کنید که یک دربرگیرنده را برمی‌گرداند و فراخوانی را به اندازه `ms` میلی‌ثانیه به تاخیر می‌اندازد.
 
-Here's an example of how it should work:
+این کد نمونه‌ای چگونگی کار کردن آن است:
 
 ```js
 function f(a, b) {
   alert( a + b );
 }
 
-f.defer(1000)(1, 2); // shows 3 after 1 second
+f.defer(1000)(1, 2); // بعد از 1 ثانیه 3 را نمایش می‌دهد
 ```
 
-Please note that the arguments should be passed to the original function.
+لطفا در نظر داشته باشید که آرگومان‌ها باید به تابع اصلی پاس داده شوند.

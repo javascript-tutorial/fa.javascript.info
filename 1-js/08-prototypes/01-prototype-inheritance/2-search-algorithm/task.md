@@ -2,11 +2,11 @@ importance: 5
 
 ---
 
-# Searching algorithm
+# الگوریتم جست و جو
 
-The task has two parts.
+این تمرین دو بخش دارد.
 
-Given the following objects:
+شیءهای زیر داده شده‌اند:
 
 ```js
 let head = {
@@ -27,5 +27,5 @@ let pockets = {
 };
 ```
 
-1. Use `__proto__` to assign prototypes in a way that any property lookup will follow the path: `pockets` -> `bed` -> `table` -> `head`. For instance, `pockets.pen` should be `3` (found in `table`), and `bed.glasses` should be `1` (found in `head`).
-2. Answer the question: is it faster to get `glasses` as `pockets.glasses` or `head.glasses`? Benchmark if needed.
+1. از `__proto__` برای مقداردهی پروتوتایپ‌ها استفاده کنید به طوری که جست و جوی هر ویژگی این مسیر را دنبال کند: `pockets` -> `bed` -> `table` -> `head`. برای مثال، `pockets.pen` باید `3` باشد (در `table` پیدا شد) و `bed.glasses` باید `1` باشد (در `head` پیدا شد).
+2. این سوال را جواب دهید: دریافت `glasses` به صورت `pockets.glasses` سریع‌تر است یا `head.glasses`؟ اگر نیاز بود بنچمارک انجام دهید.

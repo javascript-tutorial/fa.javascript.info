@@ -2,20 +2,20 @@ importance: 5
 
 ---
 
-# Move the ball across the field
+# توپ را طول زمین حرکت دهید
 
-Move the ball across the field to a click. Like this:
+باید یک کلیک توپ را در طول زمین حرکت کنید. مانند:
 
 [iframe src="solution" height="260" link]
 
-Requirements:
+نیازها:
 
-- The ball center should come exactly under the pointer on click (if possible without crossing the field edge).
-- CSS-animation is welcome.
-- The ball must not cross field boundaries.
-- When the page is scrolled, nothing should break.
+- در زمان کلیک، وسط توپ باید دقیقا زیر وس قرار بگیرید (در صورت امکان بدون خروج از حاشیه‌های زمین).
+- استفاده از انیمیشن‌های CSS توصیه می‌شود.
+- توپ نباید از حدود زمین عبور کند.
+- در صورت پیمایش صفحه، نباید چیزی خراب شود.
 
-Notes:
+نکات:
 
-- The code should also work with different ball and field sizes, not be bound to any fixed values.
-- Use properties `event.clientX/event.clientY` for click coordinates.
+- کد شما باید با توپ‌ها و اندازه‌های مختلف زمین کارکند، و مقید به مقادیر ثابتی نباشد.
+- از خصوصیات `event.clientX/event.clientY` برای گرفتن مختصات اشاره‌گر موس استفاده کنید.

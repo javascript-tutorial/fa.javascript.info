@@ -2,11 +2,11 @@ importance: 5
 
 ---
 
-# Which handlers run?
+# کدام کنترل‌کننده اجرا شود؟
 
-There's a button in the variable. There are no handlers on it.
+یک دکمه درون  متغیر ذخیره شده. ولی هیچ کنترل‌کننده به آن اختصاص نیافته.
 
-Which handlers run on click after the following code? Which alerts show up?
+با توجه به کد زیر، کدام کنترل‌کننده بعد از کلیک اجرا می‌شود؟ کدوم پیغام نمایش داده می‌شود؟
 
 ```js no-beautify
 button.addEventListener("click", () => alert("1"));

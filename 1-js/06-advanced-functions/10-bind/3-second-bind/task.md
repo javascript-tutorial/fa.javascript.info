@@ -2,11 +2,11 @@ importance: 5
 
 ---
 
-# Second bind
+# متد bind دوم
 
-Can we change `this` by additional binding?
+آیا می‌توانیم با پیوند زدن اضافی `this` را تغییر دهیم؟
 
-What will be the output?
+خروجی چه خواهد بود؟
 
 ```js no-beautify
 function f() {

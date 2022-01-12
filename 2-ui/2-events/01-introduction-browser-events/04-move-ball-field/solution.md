@@ -1,11 +1,11 @@
 
-First we need to choose a method of positioning the ball.
+اول نیاز داریم که روش قرارگیری توپ را انتخاب کنیم.
 
-We can't use `position:fixed` for it, because scrolling the page would move the ball from the field.
+نمی‌توانیم از `position:fixed` به این منظور استفاده کنیم. چون اسکرول کردن صفحه باید توپ را در زمین جابجا کند.
 
-So we should use `position:absolute` and, to make the positioning really solid, make `field` itself positioned.
+پس باید از `position:absolute` استفاده کنیم و برای اینکه از موقعیت توپ مطمئن شویم، روش قرارگیری `field` را نیز تنظیم می‌کنیم.
 
-Then the ball will be positioned relatively to the field:
+در این صورت، توپ نسبت به زمین قرار گرفته می‌شود:
 
 ```css
 #field {
@@ -16,36 +16,36 @@ Then the ball will be positioned relatively to the field:
 
 #ball {
   position: absolute;
-  left: 0; /* relative to the closest positioned ancestor (field) */
+  left: 0; /* نسبت به نزدیکترین والدی که موقعیت آن تنظیم شده (field) */
   top: 0;
-  transition: 1s all; /* CSS animation for left/top makes the ball fly */
+  transition: 1s all; /* انیمیشن‌های CSS برای چپ/بالا، انگار توپ پرتاب شده */
 }
 ```
 
-Next we need to assign the correct `ball.style.left/top`. They contain field-relative coordinates now.
+حال باید مقدارهای درستی به `ball.style.left/top` بدهیم. این مقدار نسبت به زمین خواهد بود.
 
-Here's the picture:
+مانند این تصویر:
 
 ![](move-ball-coords.svg)
 
-We have `event.clientX/clientY` -- window-relative coordinates of the click.
+ما `event.clientX/clientY` را داریم، مختصات اشاره‌گر موس نسبت به پنجره.
 
-To get field-relative `left` coordinate of the click, we can substract the field left edge and the border width:
+برای اینکه مقدار `left` مختصات اشاره‌گر موس در زمان کلیک را نسبت به زمین بگیریم، باید چپ زمین و عرض حاشیه را از هم کم کنیم.
 
 ```js
 let left = event.clientX - fieldCoords.left - field.clientLeft;
 ```
 
-Normally, `ball.style.left` means the "left edge of the element" (the ball). So if we assign that `left`, then the ball edge, not center, would be under the mouse cursor.
+معمولا، `ball.style.left` به معنی "حاشیه چپ عنصر" (توپ) است. پس اگر که به `left` مقدار دهیم، پس گوشیه توپ، و نه وسط آن زیر موس قرار می‌گیرد.
 
-We need to move the ball half-width left and half-height up to make it center.
+باید که توپ را به اندازه نصف طولش به چپ، و به اندازه نصف ارتفاع آن به بالا ببریم تا وسط قرار گیرد.
 
-So the final `left` would be:
+پس مقدار نهایی `left` به صورت زیر است:
 
 ```js
 let left = event.clientX - fieldCoords.left - field.clientLeft - ball.offsetWidth/2;
 ```
 
-The vertical coordinate is calculated using the same logic.
+مختصات عمودی نیز با همین منطق محاسبه می‌شود.
 
-Please note that the ball width/height must be known at the time we access `ball.offsetWidth`. Should be specified in HTML or CSS.
+لطفا توجه کنید که طول/ارتفاع توب باید در زمانی که به `ball.offsetWidth` معلوم باشد. پس باید در HTML یا CSS آنها را مقدار دهی کنیم.

@@ -53,11 +53,7 @@ let ms = 0.000001;
 let ms = 1e-6; // شش صفر در چپ ۱ 
 ```
 
-<<<<<<< HEAD
 اگر ما تعداد صفرهای `0.000001` را بشماریم، شش تا از آنها موجودست. بنابراین طبعا می‌شود `1e-6`.
-=======
-If we count the zeroes in `0.000001`, there are 6 of them. So naturally it's `1e-6`.
->>>>>>> 4d01fc20d4d82358e61518a31efe80dec9bb2602
 
 به زبانی دیگر، یک عدد منفی بعد `"e"`، به معنی  تقسیم بر یک با تعداد صفرهای داده شده است.
 
@@ -332,11 +328,7 @@ let num = +prompt("Enter a number", '');
 alert( isFinite(num) );
 ```
 
-<<<<<<< HEAD
 توجه داشته باشید که رشته حرفی‌ای که در آن فقط یک جای خالی باشد یا کلا خالی باشد، به عنوان صفر در همه‌ی توابع عددی از جمله `isFinite` در نظر گرفته میشود.
-=======
-Please note that an empty or a space-only string is treated as `0` in all numeric functions including `isFinite`.
->>>>>>> 4d01fc20d4d82358e61518a31efe80dec9bb2602
 
 ```smart header="مقایسه کنید با `Object.is`"
 

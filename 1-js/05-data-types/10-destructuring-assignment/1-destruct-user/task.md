@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# Destructuring assignment
+# مقداردهی تجزیه‌کننده‌ی ساختار
 
-We have an object:
+ما یک شیء داریم:
 
 ```js
 let user = {
@@ -13,18 +13,18 @@ let user = {
 };
 ```
 
-Write the destructuring assignment that reads:
+مقداردهی تجزیه‌کننده‌ی ساختاری بنویسید که این‌ها را بخواند:
 
-- `name` property into the variable `name`.
-- `years` property into the variable `age`.
-- `isAdmin` property into the variable `isAdmin` (false, if no such property)
+- ویژگی `name` درون متغیر `name`.
+- ویژگی `years` درون متغیر `age`.
+- ویژگی `isAdmin` درون متغیر `isAdmin` (اگر این ویژگی ناموجود بود، مقدار false باشد)
 
-Here's an example of the values after your assignment:
+یک مثال برای مقدارها بعد از مقداردهی شما:
 
 ```js
 let user = { name: "John", years: 30 };
 
-// your code to the left side:
+// :کد شما در سمت چپ
 // ... = user
 
 alert( name ); // John
