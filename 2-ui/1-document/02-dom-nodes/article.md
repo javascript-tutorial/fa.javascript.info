@@ -206,10 +206,10 @@ drawHtmlTree(node6, 'div.domtree', 690, 500);
 
 12 نوع گره وجود دارد. در عمل ما معمولا با 4 مورد از آنها کار می کنیم [12 node types](https://dom.spec.whatwg.org/#node) :
 
-1. "نقطه ی ورود" به `document` -- DOM
-2. element nodes -- HTML-tags, the tree building blocks.
-3. text nodes -- contain text.
-4. comments -- sometimes we can put information there, it won't be shown, but JS can read it from the DOM.
+1. `document` -- <span dir="rtl">"نقطه ی ورود" به DOM</span>
+2. element nodes -- <span dir="rtl">تگ های HTML، بلوک های ساختار درختی.</span>
+3. text nodes -- حاوی متن
+4. comments -- <span dir="rtl">گاهی اوقات می توانیم اطلاعات را در آنجا قرار دهیم، نشان داده نمی شود، اما JS می تواند آن را از DOM بخواند.</span>
 
 ## خودتان آن را ببینید
 
