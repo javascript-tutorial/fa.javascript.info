@@ -152,6 +152,7 @@ warn header="جداول همیشه تگ `<tbody>` دارند."
  ```html no-beautify
  <table id="table"><tr><td>1</td></tr></table>
  ```
+
 ساختار DOM اینطور خواهد بود:
 <div class="domtree"></div>
 
