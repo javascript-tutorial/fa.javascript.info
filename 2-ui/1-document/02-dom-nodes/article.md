@@ -56,7 +56,6 @@ let node1 = {"name":"HTML","nodeType":1,"children":[{"name":"HEAD","nodeType":1,
 drawHtmlTree(node1, 'div.domtree', 690, 320);
 </script>
 
-
 ```online
 در تصویر بالا، می‌توانید روی گره‌های عنصر کلیک کنید و فرزندان آن‌ها باز می‌شوند.
 ```
