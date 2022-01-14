@@ -4,88 +4,88 @@ libs:
 
 ---
 
-# DOM tree
+# درخت DOM
 
-The backbone of an HTML document is tags.
+ستون فقرات سند html تگ‌ها (tag) هستند.
 
-According to the Document Object Model (DOM), every HTML tag is an object. Nested tags are  "children" of the enclosing one. The text inside a tag is an object as well.
+طبق مدل شیءگرای سند (Document Object Model یا DOM)، هر تگ HTML یک شیء است. تگ‌های داخلی "فرزندانِ" تگ‌های دربرگیرنده هستند. متن داخل تگ نیز یک شیء است.
 
-All these objects are accessible using JavaScript, and we can use them to modify the page.
+همه این اشیاء با استفاده از جاوااسکریپت قابل دسترس هستند و ما می‌توانیم از آن‌ها برای تغییر صفحه استفاده کنیم.
 
-For example, `document.body` is the object representing the `<body>` tag.
+به عنوان مثال، `document.body` شیءای است که تگ `<body>` را نشان می‌دهد.
 
-Running this code will make the `<body>` red for 3 seconds:
+با اجرای این کد، `<body>` به مدت 3 ثانیه قرمز می‌شود:
 
 ```js run
-document.body.style.background = 'red'; // make the background red
+document.body.style.background = 'red'; // پس زمینه را قرمز کن
 
-setTimeout(() => document.body.style.background = '', 3000); // return back
+setTimeout(() => document.body.style.background = '', 3000); // برگرد
 ```
 
-Here we used `style.background` to change the background color of `document.body`, but there are many other properties, such as:
+در اینجا ما از `style.background` برای تغییر رنگ پس زمینه `document.body` استفاده کردیم، اما ویژگی‌های زیادِ دیگری وجود دارد، مانند:
 
-- `innerHTML` -- HTML contents of the node.
-- `offsetWidth` -- the node width (in pixels)
-- ...and so on.
+- `innerHTML` -- HTML محتویاتِ گره
+- `offsetWidth` -- عرض گره (بر حسب پیکسل)
+- غیره و ...
 
-Soon we'll learn more ways to manipulate the DOM, but first we need to know about its structure.
+به زودی راه‌های بیشتری برای دستکاری DOM یاد خواهیم گرفت، اما ابتدا باید ساختار آن را بدانیم.
 
-## An example of the DOM
+## نمونه ای از DOM
 
-Let's start with the following simple document:
+بیایید با سند ساده زیر شروع کنیم:
 
 ```html run no-beautify
 <!DOCTYPE HTML>
 <html>
 <head>
-  <title>About elk</title>
+  <title>درباره گوزن شمالی</title>
 </head>
 <body>
-  The truth about elk.
+  حقیقت درباره گوزن شمالی.
 </body>
 </html>
 ```
 
-The DOM represents HTML as a tree structure of tags. Here's how it looks:
+شیء DOM سند HTML را به عنوان یک ساختار درختی از تگ‌ها نشان می‌دهد. اینگونه به نظر می‌رسد:
 
 <div class="domtree"></div>
 
 <script>
-let node1 = {"name":"HTML","nodeType":1,"children":[{"name":"HEAD","nodeType":1,"children":[{"name":"#text","nodeType":3,"content":"\n  "},{"name":"TITLE","nodeType":1,"children":[{"name":"#text","nodeType":3,"content":"About elk"}]},{"name":"#text","nodeType":3,"content":"\n"}]},{"name":"#text","nodeType":3,"content":"\n"},{"name":"BODY","nodeType":1,"children":[{"name":"#text","nodeType":3,"content":"\n  The truth about elk.\n"}]}]}
+let node1 = {"name":"HTML","nodeType":1,"children":[{"name":"HEAD","nodeType":1,"children":[{"name":"#text","nodeType":3,"content":"\n  "},{"name":"TITLE","nodeType":1,"children":[{"name":"#text","nodeType":3,"content":"درباره گوزن شمالی"}]},{"name":"#text","nodeType":3,"content":"\n"}]},{"name":"#text","nodeType":3,"content":"\n"},{"name":"BODY","nodeType":1,"children":[{"name":"#text","nodeType":3,"content":"\n  حقیقت درباره گوزن شمالی.\n\n\n"}]}]}
 
 drawHtmlTree(node1, 'div.domtree', 690, 320);
 </script>
 
 ```online
-On the picture above, you can click on element nodes and their children will open/collapse.
+در تصویر بالا، می‌توانید روی گره‌های عنصر کلیک کنید و فرزندان آن‌ها باز می‌شوند.
 ```
 
-Every tree node is an object.
+هر گره‌ی درخت یک شیء است.
 
-Tags are *element nodes* (or just elements) and form the tree structure: `<html>` is at the root, then `<head>` and `<body>` are its children, etc.
+تگ‌ها *گره‌های عنصر* (عناصر) هستند و ساختار درختی را تشکیل می‌دهند: `<html>` در ریشه است، سپس `<head>` و `<body>` فرزندان آن هستند و ....
 
-The text inside elements forms *text nodes*, labelled as `#text`. A text node contains only a string. It may not have children and is always a leaf of the tree.
+متن داخل عناصر *گره‌های متنی (text nodes)* را تشکیل می‌دهد که با عنوان `text#` برچسب‌گذاری شده‌اند. یک گره متنی فقط شامل یک رشته است. ممکن است فرزندی نداشته باشد و همیشه برگ درخت باشد.
 
-For instance, the `<title>` tag has the text `"About elk"`.
+به عنوان مثال تگِ `<title>` متن `"درباره‌ی گوزن شمالی"` را دارد.
 
-Please note the special characters in text nodes:
+لطفاً به کاراکترهای خاص در گره‌های متن توجه کنید:
 
-- a newline: `↵` (in JavaScript known as `\n`)
-- a space: `␣`
+- یک خط جدید: `↵` (در جاوااسکریپت به صورت `n\` شناخته می‌شود.)
+- یک فاصله(space) : `␣`
 
-Spaces and newlines are totally valid characters, like letters and digits. They form text nodes and become a part of the DOM. So, for instance, in the example above the `<head>` tag contains some spaces before `<title>`, and that text becomes a `#text` node (it contains a newline and some spaces only).
+فاصله ها و خطوط جدید کاراکترهای کاملاً معتبری هستند، مانند حروف و اعداد. آن‌ها گره‌های متنی را تشکیل می‌دهند و بخشی از DOM می‌شوند. بنابراین، برای مثال، در مثال بالا، تگ `<head>` حاوی چند فاصله قبل از `<title>` است، و آن متن به یک گره `text#` تبدیل می‌شود (که فقط حاوی یک خط جدید و چند فاصله است).
 
-There are only two top-level exclusions:
-1. Spaces and newlines before `<head>` are ignored for historical reasons.
-2. If we put something after `</body>`, then that is automatically moved inside the `body`, at the end, as the HTML spec requires that all content must be inside `<body>`. So there can't be any spaces after `</body>`.
+فقط دو استثناء سطح بالا وجود دارد:
+1. فاصله‌ها و خطوط جدید قبل از `<head>` به دلایل تاریخی نادیده گرفته می‌شوند.
+2. اگر چیزی را بعد از `</body>` قرار دهیم، در پایان به طور خودکار به داخل `body` منتقل می‌شود، زیرا مشخصات HTML ایجاب می‌کند که تمام محتوا باید داخل `<body>` باشد. بنابراین هیچ فاصله‌ای بعد از `</body>` وجود ندارد.
 
-In other cases everything's straightforward -- if there are spaces (just like any character) in the document, then they become text nodes in the DOM, and if we remove them, then there won't be any.
+در موارد دیگر همه چیز سر راست است -- اگر در سند فاصله وجود داشته باشد(دقیقاً مانند هر کاراکتری)، آن‌ها به گره‌های متنی در DOM تبدیل می‌شوند، و اگر آنها را حذف کنیم، وجود نخواهند داشت.
 
-Here are no space-only text nodes:
+در اینجا هیچ گره متنی فقط-فاصله وجود ندارد:
 
 ```html no-beautify
 <!DOCTYPE HTML>
-<html><head><title>About elk</title></head><body>The truth about elk.</body></html>
+<html><head><title>درباره‌ی گوزن شمالی</title></head><body>حقیقت در مورد گوزن شمالی.</body></html>
 ```
 
 <div class="domtree"></div>
@@ -96,21 +96,21 @@ let node2 = {"name":"HTML","nodeType":1,"children":[{"name":"HEAD","nodeType":1,
 drawHtmlTree(node2, 'div.domtree', 690, 210);
 </script>
 
-```smart header="Spaces at string start/end and space-only text nodes are usually hidden in tools"
-Browser tools (to be covered soon) that work with DOM usually do not show spaces at the start/end of the text and empty text nodes (line-breaks) between tags.
+```smart header="فاصله‌ها در شروع/پایان رشته و گره‌های متنی فقط-فاصله معمولاً در ابزارها پنهان می‌شوند"
+ابزارهای مرورگر (به زودی پوشش داده خواهد شد) که با DOM کار می‌کنند معمولاً فاصله‌ها را در ابتدا/انتهای متن و گره‌های متنِ خالیِ بین تگ‌ها (خطوط جدید)  را نشان نمی‌دهند.
 
-Developer tools save screen space this way.
+ابزارهای توسعه دهنده(ابزارهای مرورگر) از این طریق فضای صفحه را حفظ می‌کنند.
 
-On further DOM pictures we'll sometimes omit them when they are irrelevant. Such spaces usually do not affect how the document is displayed.
+در ادامه‌ی تصاویر DOM ، گاهی اوقات زمانی که نامربوط هستند آن‌ها را حذف می‌کنیم. چنین فضاهایی معمولاً بر نحوه نمایش سند تأثیر نمی‌گذارد.
 ```
 
-## Autocorrection
+## تصحیح خودکار
 
-If the browser encounters malformed HTML, it automatically corrects it when making the DOM.
+اگر مرورگر با HTML نادرست مواجه شود، هنگام ساخت DOM به طور خودکار آن را تصحیح می‌کند.
 
-For instance, the top tag is always `<html>`. Even if it doesn't exist in the document, it will exist in the DOM, because the browser will create it. The same goes for `<body>`.
+به عنوان مثال، تگ بالا همیشه `<html>` است. حتی اگر در سند وجود نداشته باشد، در DOM وجود خواهد داشت، زیرا مرورگر آن را ایجاد می‌کند. `<body>` هم همینطور.
 
-As an example, if the HTML file is the single word `"Hello"`, the browser will wrap it into `<html>` and `<body>`, and add the required `<head>`, and the DOM will be:
+به عنوان مثال، اگر فایل HTML تنها کلمه `"Hello"` باشد، مرورگر آن را درون `<html>` و `<body>` می‌پیچد و `<head>` ضروری را اضافه می‌کند و DOM اینطور خواهد بود:
 
 
 <div class="domtree"></div>
@@ -121,18 +121,18 @@ let node3 = {"name":"HTML","nodeType":1,"children":[{"name":"HEAD","nodeType":1,
 drawHtmlTree(node3, 'div.domtree', 690, 150);
 </script>
 
-While generating the DOM, browsers automatically process errors in the document, close tags and so on.
+هنگام تولید DOM، مرورگرها به طور خودکار خطاهای سند را پردازش می‌کنند، تگ‌ها را می‌بندند و غیره.
 
-A document with unclosed tags:
+سندی با تگ‌های بسته نشده:
 
 ```html no-beautify
-<p>Hello
-<li>Mom
-<li>and
-<li>Dad
+<p>سلام
+<li>مامان
+<li>و
+<li>بابا
 ```
 
-...will become a normal DOM as the browser reads tags and restores the missing parts:
+...وقتی مرورگر تگ‌ها را می‌خواند و قسمت‌های از دست رفته را بازیابی می‌کند، به یک DOM معمولی تبدیل می‌شود:
 
 <div class="domtree"></div>
 
@@ -142,16 +142,16 @@ let node4 = {"name":"HTML","nodeType":1,"children":[{"name":"HEAD","nodeType":1,
 drawHtmlTree(node4, 'div.domtree', 690, 360);
 </script>
 
-````warn header="Tables always have `<tbody>`"
-An interesting "special case" is tables. By DOM specification they must have `<tbody>` tag, but HTML text may omit it. Then the browser creates `<tbody>` in the DOM automatically.
+````warn header="جداول همیشه تگ `<tbody>` دارند."
+یک "مورد خاص" جالب، جداول است. بر اساس مشخصات DOM، آنها باید تگ `<tbody>` داشته باشند، اما متن HTML ممکن است آن را از قلم انداخته باشد. سپس مرورگر به صورت خودکار `<tbody>` را در DOM ایجاد می‌کند.
 
-For the HTML:
+برای HTML:
 
-```html no-beautify
-<table id="table"><tr><td>1</td></tr></table>
-```
+ ```html no-beautify
+ <table id="table"><tr><td>1</td></tr></table>
+ ```
 
-DOM-structure will be:
+ساختار DOM اینطور خواهد بود:
 <div class="domtree"></div>
 
 <script>
@@ -160,26 +160,26 @@ let node5 = {"name":"TABLE","nodeType":1,"children":[{"name":"TBODY","nodeType":
 drawHtmlTree(node5,  'div.domtree', 600, 200);
 </script>
 
-You see? The `<tbody>` appeared out of nowhere. We should keep this in mind while working with tables to avoid surprises.
+می‌بینی؟ `<tbody>` از ناکجاآباد ظاهر شد. هنگام کار با جداول باید این را در نظر داشته باشیم تا از غافلگیری جلوگیری کنیم.
 ````
 
-## Other node types
+## انواع دیگر گره‌ها
 
-There are some other node types besides elements and text nodes.
+علاوه بر عناصر و گره‌های متن، انواع دیگر گره‌ها نیز وجود دارد.
 
-For example, comments:
+به عنوان مثال، کامنت‌ها:
 
 ```html
 <!DOCTYPE HTML>
 <html>
 <body>
-  The truth about elk.
+  حقیقت در مورد گوزن.
   <ol>
-    <li>An elk is a smart</li>
+    <li>گوزن شمالی باهوش است</li>
 *!*
     <!-- comment -->
 */!*
-    <li>...and cunning animal!</li>
+    <li>...و حیوانی حیله‌گر!</li>
   </ol>
 </body>
 </html>
@@ -188,95 +188,95 @@ For example, comments:
 <div class="domtree"></div>
 
 <script>
-let node6 = {"name":"HTML","nodeType":1,"children":[{"name":"HEAD","nodeType":1,"children":[]},{"name":"BODY","nodeType":1,"children":[{"name":"#text","nodeType":3,"content":"\n  The truth about elk.\n  "},{"name":"OL","nodeType":1,"children":[{"name":"#text","nodeType":3,"content":"\n    "},{"name":"LI","nodeType":1,"children":[{"name":"#text","nodeType":3,"content":"An elk is a smart"}]},{"name":"#text","nodeType":3,"content":"\n    "},{"name":"#comment","nodeType":8,"content":"comment"},{"name":"#text","nodeType":3,"content":"\n    "},{"name":"LI","nodeType":1,"children":[{"name":"#text","nodeType":3,"content":"...and cunning animal!"}]},{"name":"#text","nodeType":3,"content":"\n  "}]},{"name":"#text","nodeType":3,"content":"\n\n\n"}]}]};
+let node6 = {"name":"HTML","nodeType":1,"children":[{"name":"HEAD","nodeType":1,"children":[]},{"name":"BODY","nodeType":1,"children":[{"name":"#text","nodeType":3,"content":"\n  حقیقت در مورد گوزن.\n  "},{"name":"OL","nodeType":1,"children":[{"name":"#text","nodeType":3,"content":"\n    "},{"name":"LI","nodeType":1,"children":[{"name":"#text","nodeType":3,"content":"گوزن شمالی باهوش است"}]},{"name":"#text","nodeType":3,"content":"\n    "},{"name":"#comment","nodeType":8,"content":"comment"},{"name":"#text","nodeType":3,"content":"\n    "},{"name":"LI","nodeType":1,"children":[{"name":"#text","nodeType":3,"content":"...و حیوانی حیله‌گر!"}]},{"name":"#text","nodeType":3,"content":"\n  "}]},{"name":"#text","nodeType":3,"content":"\n\n\n"}]}]};
 
 drawHtmlTree(node6, 'div.domtree', 690, 500);
 </script>
 
-We can see here a new tree node type -- *comment node*, labeled as `#comment`, between two text nodes.
+ما می‌توانیم در اینجا یک نوع گره درختی جدید ببینیم -- *گره comment*، با برچسب `comment#`، بین دو گره متن.
 
-We may think -- why is a comment added to the DOM? It doesn't affect the visual representation in any way. But there's a rule -- if something's in HTML, then it also must be in the DOM tree.
+ممکن است فکر کنیم -- چرا یک comment به DOM اضافه شده است؟ به هیچ وجه بر نمایش بصری تأثیر نمی‌گذارد. اما یک قانون وجود دارد - اگر چیزی در HTML است، باید در درخت DOM نیز باشد.
 
-**Everything in HTML, even comments, becomes a part of the DOM.**
+**همه چیز در HTML، حتی comments، بخشی از DOM می‌شود.**
 
-Even the `<!DOCTYPE...>` directive at the very beginning of HTML is also a DOM node. It's in the DOM tree right before `<html>`. Few people know about that. We are not going to touch that node, we even don't draw it on diagrams, but it's there.
+حتی دستور `<...DOCTYPE!>` در همان ابتدای HTML نیز یک گره DOM است. درست قبل از `<html>` در درخت DOM قرار دارد. تعداد کمی از مردم در مورد آن می‌دانند. ما قرار نیست به آن دست بزنیم، حتی آن را روی نمودارها نمی‌کشیم، اما وجود دارد..
 
-The `document` object that represents the whole document is, formally, a DOM node as well.
+شی `document` که کل سند را نشان می‌دهد، به طور رسمی، یک گره DOM نیز هست.
 
-There are [12 node types](https://dom.spec.whatwg.org/#node). In practice we usually work with 4 of them:
+12 نوع گره وجود دارد. در عمل ما معمولا با 4 مورد از آنها کار می‌کنیم [12 node types](https://dom.spec.whatwg.org/#node) :
 
-1. `document` -- the "entry point" into DOM.
-2. element nodes -- HTML-tags, the tree building blocks.
-3. text nodes -- contain text.
-4. comments -- sometimes we can put information there, it won't be shown, but JS can read it from the DOM.
+1. `document` -- "DOM" نقطه‌ی ورود به
+2. (گره‌های عنصر) -- بلوک‌های ساختار درختی , HTML تگ‌های 
+3. حاوی متن -- (گره‌های متن)
+4. (کامنت‌ها) -- بخواند DOM گاهی اوقات می‌توانیم اطلاعات را در آنجا قرار دهیم، نشان داده نمی‌شود، اما جاوااسکریپت می‌تواند آن را از
 
-## See it for yourself
+## خودتان آن را ببینید
 
-To see the DOM structure in real-time, try [Live DOM Viewer](http://software.hixie.ch/utilities/js/live-dom-viewer/). Just type in the document, and it will show up as a DOM at an instant.
+برای دیدن ساختار Dom به صورت بی‌وقفه (real-time)، امتحان کنید [Live DOM Viewer](http://software.hixie.ch/utilities/js/live-dom-viewer/). فقط در سند تایپ کنید و  درجا به عنوان یک DOM نشان داده خواهد شد.
 
-Another way to explore the DOM is to use the browser developer tools. Actually, that's what we use when developing.
+راه دیگر برای کشف DOM استفاده از ابزارهای توسعه دهنده مرورگر است. در واقع، این همان چیزی است که ما هنگام توسعه استفاده می‌کنیم.
 
-To do so, open the web page [elk.html](elk.html), turn on the browser developer tools and switch to the Elements tab.
+برای انجام این کار،این صفحه را باز کنید [elk.html](elk.html), ابزارهای توسعه دهنده مرورگر را فعال کنید و به زبانه  Elements بروید.
 
-It should look like this:
+باید شبیه به این باشه:
 
 ![](elk.svg)
 
-You can see the DOM, click on elements, see their details and so on.
+می‌توانید DOM را ببینید، روی عناصر کلیک کنید، جزئیات آنها را ببینید و غیره.
 
-Please note that the DOM structure in developer tools is simplified. Text nodes are shown just as text. And there are no "blank" (space only) text nodes at all. That's fine, because most of the time we are interested in element nodes.
+لطفاً توجه داشته باشید که ساختار DOM در ابزارهای توسعه دهنده ساده شده است. گره‌های متن فقط به صورت متن نشان داده می‌شوند. و هیچ گره متنی "خالی" (فقط فاصله) وجود ندارد. این خوب است، زیرا اغلب ما به گره‌های عنصر علاقه‌مندیم..
 
-Clicking the <span class="devtools" style="background-position:-328px -124px"></span> button in the left-upper corner allows us to choose a node from the webpage using a mouse (or other pointer devices) and "inspect" it (scroll to it in the Elements tab). This works great when we have a huge HTML page (and corresponding huge DOM) and would like to see the place of a particular element in it.
+با کلیک روی دکمه‌ی <span class="devtools" style="background-position:-328px -124px"></span> در گوشه سمت چپ بالا می‌توانیم با استفاده از ماوس (یا سایر دستگاه‌های اشاره‌گر) یک گره از صفحه وب انتخاب کرده و آن را «بازرسی (inspect)» کنیم (در زبانه Elements به آن scroll کنید). وقتی یک صفحه HTML بزرگ (و DOM بزرگ مربوطه) داریم و می‌خواهیم جای یک عنصر خاص را در آن ببینیم، عالی عمل می‌کند.
 
-Another way to do it would be just right-clicking on a webpage and selecting "Inspect" in the context menu.
+راه دیگر برای انجام این کار فقط کلیک راست بر روی یک صفحه وب و انتخاب "Inspect" در منوی context است.
 
 ![](inspect.svg)
 
-At the right part of the tools there are the following subtabs:
-- **Styles** -- we can see CSS applied to the current element rule by rule, including built-in rules (gray). Almost everything can be edited in-place, including the dimensions/margins/paddings of the box below.
-- **Computed** -- to see CSS applied to the element by property: for each property we can see a rule that gives it (including CSS inheritance and such).
-- **Event Listeners** -- to see event listeners attached to DOM elements (we'll cover them in the next part of the tutorial).
-- ...and so on.
+در قسمت سمت راست ابزارها زیر زبانه‌های زیر وجود دارد:
+- **Styles** -- می‌توانیم CSS را ببینیم که قانون به قانون بر عنصر فعلی اعمال می‌شود، از جمله قوانین داخلی (خاکستری رنگ). تقریباً همه چیز را می‌توان در جای خود ویرایش کرد، از جمله ابعاد/حاشیه های بیرونی/حاشیه‌های داخلی از طریق جعبه‌ی زیرین.
+- **Computed** -- برای مشاهده CSS اعمال شده بر روی عنصر توسط ویژگی: برای هر ویژگی می‌توانیم قانونی که به آن می‌دهد را ببینیم (از جمله وراثت CSS و از این دست موارد).
+- **Event Listeners** -- برای دیدن event listener متصل به عناصر DOM (ما آن‌ها را در قسمت بعدی آموزش پوشش خواهیم داد).
+- ...و غیره.
 
-The best way to study them is to click around. Most values are editable in-place.
+بهترین راه برای مطالعه آنها کلیک کردن در داخل آنها است. اکثر مقادیر درجا قابل ویرایش هستند.
 
-## Interaction with console
+## تعامل با کنسول
 
-As we work the DOM, we also may want to apply JavaScript to it. Like: get a node and run some code to modify it, to see the result. Here are few tips to travel between the Elements tab and the console.
+همانطور که ما روی DOM کار می‌کنیم، ممکن است بخواهیم جاوا اسکریپت را نیز روی آن اعمال کنیم. مانند: یک گره بگیرید و کدی را برای تغییر آن اجرا کنید تا نتیجه را ببینید. در اینجا چند نکته برای جابجایی بین زبانه Elements و کنسول وجود دارد.
 
-For the start:
+برای شروع:
 
-1. Select the first `<li>` in the Elements tab.
-2. Press `key:Esc` -- it will open console right below the Elements tab.
+1. اولین `<li>` را در زبانه Elements انتخاب کنید.
+2. بزنید `key:Esc` -- کنسول درست زیر زبانه Elements باز می شود.
 
-Now the last selected element is available as `$0`, the previously selected is `$1` etc.
+اکنون آخرین عنصر انتخاب شده به عنوان `0$` در دسترس است، عنصر انتخاب شده قبلی `1$` و غیره است.
 
-We can run commands on them. For instance, `$0.style.background = 'red'` makes the selected list item red, like this:
+ما می‌توانیم دستورات را روی آنها اجرا کنیم. به عنوان مثال <span dir="ltr">`$0.style.background = 'red'`</span>، آیتمِ لیست انتخاب شده را قرمز می‌کند، مانند این:
 
 ![](domconsole0.svg)
 
-That's how to get a node from Elements in Console.
+به این ترتیب می‌توان یک گره از Elements را در کنسول دریافت کرد.
 
-There's also a road back. If there's a variable referencing a DOM node, then we can use the command `inspect(node)` in Console to see it in the Elements pane.
+یک راه برگشت هم هست اگر متغیری وجود دارد که به یک گره DOM ارجاع می‌دهد، می‌توانیم از دستور `inspect(node)` در کنسول استفاده کنیم تا آن را در قسمت Elements ببینیم.
 
-Or we can just output the DOM node in the console and explore "in-place", like `document.body` below:
+یا فقط می‌توانیم گره DOM را در کنسول خروجی بگیریم و "درجا" کاوش کنیم، مانند `document.body` در زیر:
 
 ![](domconsole1.svg)
 
-That's for debugging purposes of course. From the next chapter on we'll access and modify DOM using JavaScript.
+این البته برای اهداف اشکال‌زدایی است. از فصل بعدی با استفاده از جاوااسکریپت به DOM دسترسی پیدا می‌کنیم و آن را اصلاح می‌کنیم.
 
-The browser developer tools are a great help in development: we can explore the DOM, try things and see what goes wrong.
+ابزارهای توسعه دهنده مرورگر کمک بزرگی در توسعه هستند: ما می‌توانیم DOM را کاوش کنیم، چیزهایی را امتحان کنیم و ببینیم چه مشکلی پیش می‌آید.
 
-## Summary
+## خلاصه
 
-An HTML/XML document is represented inside the browser as the DOM tree.
+یک سند HTML/XML داخل مرورگر به عنوان درخت DOM نشان داده می‌شود.
 
-- Tags become element nodes and form the structure.
-- Text becomes text nodes.
-- ...etc, everything in HTML has its place in DOM, even comments.
+- تگ‌ها به گره‌های عنصر تبدیل می‌شوند و ساختار را تشکیل می‌دهند.
+- متن به گره‌های متنی تبدیل می‌شود.
+- ... و غیره، همه چیز در HTML جایگاه خود را در DOM دارد، حتی کامنت‌ها.
 
-We can use developer tools to inspect DOM and modify it manually.
+ما می‌توانیم از ابزارهای توسعه دهنده برای بازرسی (Inspect) DOM و اصلاح آن به صورت دستی استفاده کنیم.
 
-Here we covered the basics, the most used and important actions to start with. There's an extensive documentation about Chrome Developer Tools at <https://developers.google.com/web/tools/chrome-devtools>. The best way to learn the tools is to click here and there, read menus: most options are obvious. Later, when you know them in general, read the docs and pick up the rest.
+در اینجا به اصول اولیه، پرکاربردترین و مهم‌ترین اقدامات برای شروع پرداختیم. در <https://developers.google.com/web/tools/chrome-devtools> اسناد گسترده‌ای در مورد ابزارهای برنامه نویس Chrome وجود دارد. بهترین راه برای یادگیری ابزارها این است که آن‌ها امتحان کنید، منوها را بخوانید: اکثر گزینه‌ها واضح هستند. بعداً، وقتی آنها را به طور کلی شناختید، اسناد را بخوانید و بقیه را انتخاب کنید.
 
-DOM nodes have properties and methods that allow us to travel between them, modify them, move around the page, and more. We'll get down to them in the next chapters.
+گره‌های DOM دارای ویژگی‌ها و روش‌هایی هستند که به ما امکان می‌دهند بین آن‌ها پیمایش کنیم، آن‌ها را اصلاح کنیم، در صفحه حرکت کنیم و موارد دیگر. در فصل‌های بعدی به آن‌ها خواهیم پرداخت.
