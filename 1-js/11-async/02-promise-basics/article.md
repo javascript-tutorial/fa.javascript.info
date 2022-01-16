@@ -1,15 +1,15 @@
-# Promise
+# وعده (promise)
 
-Imagine that you're a top singer, and fans ask day and night for your upcoming song.
+تصور کنید که یک خواننده برتر هستید و طرفداران شب و روز درخواست آهنگ بعدی شما را دارند.
 
-To get some relief, you promise to send it to them when it's published. You give your fans a list. They can fill in their email addresses, so that when the song becomes available, all subscribed parties instantly receive it. And even if something goes very wrong, say, a fire in the studio, so that you can't publish the song, they will still be notified.
+برای اینکه کمی راحت بشوید، قول می‌دهید پس از انتشار آن را برای آن‌ها ارسال کنید. شما یک لیست به طرفداران خود می‌دهید. آن‌ها می‌توانند آدرس ایمیل خود را پر کنند، به طوری که وقتی آهنگ در دسترس قرار گرفت، همه دنبال‌ کننده‌ها فورا آن را دریافت کنند. و حتی اگر مشکلی پیش بیاید، فرض کنید آتش سوزی در استودیو، به طوری که نتوانید آهنگ را منتشر کنید، باز هم به آن‌ها اطلاع داده خواهد شد.
 
-Everyone is happy: you, because the people don't crowd you anymore, and fans, because they won't miss the song.
+همه خوشحال هستند: شما، چون مردم دیگر مزاحم شما نمی‌شوند، و طرفداران، چون آهنگ را از دست نمی‌دهند.
 
-This is a real-life analogy for things we often have in programming:
+این یک تشبیه واقعی برای چیزهایی است که اغلب در برنامه‌نویسی داریم:
 
-1. A "producing code" that does something and takes time. For instance, some code that loads the data over a network. That's a "singer".
-2. A "consuming code" that wants the result of the "producing code" once it's ready. Many functions  may need that result. These are the "fans".
+1. یک "کد تولید‌کننده" که کاری انجام می‌دهد و زمانی می‌برد. به عنوان مثال، کدهایی که داده‌ها را از طریق شبکه بارگیری می‌کند. این یک "خواننده" است.
+2. یک "کد مصرف‌کننده" که نتیجه‌ی "کد تولیدکننده" را پس از آماده شدن می خواهد. بسیاری از توابع ممکن است به آن نتیجه نیاز داشته باشند. اینها "طرفداران" هستند.
 3. A *promise* is a special JavaScript object that links the "producing code" and the "consuming code" together. In terms of our analogy: this is the "subscription list". The "producing code" takes whatever time it needs to produce the promised result, and the "promise" makes that result available to all of the subscribed code when it's ready.
 
 The analogy isn't terribly accurate, because JavaScript promises are more complex than a simple subscription list: they have additional features and limitations. But it's fine to begin with.
