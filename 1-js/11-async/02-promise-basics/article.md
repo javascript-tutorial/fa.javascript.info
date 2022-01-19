@@ -22,16 +22,16 @@ let promise = new Promise(function(resolve, reject) {
 });
 ```
 
-The function passed to `new Promise` is called the *executor*. When `new Promise` is created, the executor runs automatically. It contains the producing code which should eventually produce the result. In terms of the analogy above: the executor is the "singer".
+تابعی که به `new Promise` ارسال می‌شود *اجرا‌کننده* نامیده می‌شود. هنگامی که `new Promise` ایجاد می‌شود، اجرا‌کننده به طور خودکار اجرا می‌شود. این شامل کد تولید‌کننده است که در نهایت باید نتیجه را ایجاد کند. از نظر تشبیه بالا: اجراکننده "خواننده" است.
 
-Its arguments `resolve` and `reject` are callbacks provided by JavaScript itself. Our code is only inside the executor.
+آرگومان‌های آن `resolve` و `reject`  فراخوان‌هایی هستند که توسط خود جاوا‌اسکریپت ارائه شده است. کد ما فقط در داخل اجرا‌کننده است.
 
-When the executor obtains the result, be it soon or late, doesn't matter, it should call one of these callbacks:
+وقتی اجرا‌کننده به نتیجه رسید، چه زود باشد چه دیر، مهم نیست، باید یکی از این callback ها را فراخوانی کند:
 
-- `resolve(value)` — if the job is finished successfully, with result `value`.
-- `reject(error)` — if an error has occurred, `error` is the error object.
+- `resolve(value)` — `value` اگر کار با موفقیت به پایان رسید، با نتیجه‌ی.
+- `reject(error)` — همان شیء خطا است `error` ، اگر خطایی رخ داده باشد  
 
-So to summarize: the executor runs automatically and attempts to perform a job. When it is finished with the attempt, it calls `resolve` if it was successful or `reject` if there was an error.
+بنابراین به طور خلاصه: اجراکننده به طور خودکار اجرا می‌شود و تلاش می‌کند تا یک کار را انجام دهد. هنگامی که کار با تلاش به پایان رسید، در صورت موفقیت‌آمیز بودن، `resolve` یا در صورت وجود هر خطایی `reject` را فراخوانی می‌کند.
 
 The `promise` object returned by the `new Promise` constructor has these internal properties:
 
