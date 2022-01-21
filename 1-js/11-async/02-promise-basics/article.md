@@ -33,18 +33,18 @@ let promise = new Promise(function(resolve, reject) {
 
 بنابراین به طور خلاصه: اجراکننده به طور خودکار اجرا می‌شود و تلاش می‌کند تا یک کار را انجام دهد. هنگامی که کار با تلاش به پایان رسید، در صورت موفقیت‌آمیز بودن، `resolve` یا در صورت وجود هر خطایی `reject` را فراخوانی می‌کند.
 
-The `promise` object returned by the `new Promise` constructor has these internal properties:
+شیء `promise` که توسط سازنده `new Promise` برگردانده شده است دارای این ویژگی‌های داخلی است:
 
-- `state` — initially `"pending"`, then changes to either `"fulfilled"` when `resolve` is called or `"rejected"` when `reject` is called.
-- `result` — initially `undefined`, then changes to `value` when `resolve(value)` called or `error` when `reject(error)` is called.
+- `state` — .تغییر می‌کند `"rejected"` فراخوانی می‌شود به `reject` یا زمانی که `"fulfilled"` به `resolve` سپس با فراخوانی، `"pending"` در ابتدا
+- `result` — .تغییر می‌کند `error` فراخوانی می شود به `reject(error)`  یا زمانی که `value` به `resolve(value)` سپس با فراخوانی ،`undefined` در ابتدا
 
-So the executor eventually moves `promise` to one of these states:
+بنابراین اجرا‌کننده در نهایت `promise` را به یکی از این حالات منتقل می‌کند:
 
 ![](promise-resolve-reject.svg)
 
-Later we'll see how "fans" can subscribe to these changes.
+بعداً خواهیم دید که چگونه "طرفداران" می‌توانند در این تغییرات مشترک شوند.
 
-Here's an example of a promise constructor and a simple executor function with  "producing code" that takes time (via `setTimeout`):
+در اینجا یک نمونه از سازنده وعده (promise) و یک تابع اجرا‌کننده ساده با "کد تولید‌کننده" است که زمانی می‌برد (از طریق `setTimeout`):
 
 ```js run
 let promise = new Promise(function(resolve, reject) {
