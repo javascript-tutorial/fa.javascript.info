@@ -48,17 +48,17 @@ let promise = new Promise(function(resolve, reject) {
 
 ```js run
 let promise = new Promise(function(resolve, reject) {
-  // the function is executed automatically when the promise is constructed
+  //  ساخته می‌شود به طور خودکار اجرا می‌شود (promise)این تابع زمانی که وعده
 
-  // after 1 second signal that the job is done with the result "done"
+  // انجام شد "done" پس از 1 ثانیه سیگنال می‌دهد که کار با نتیجه 
   setTimeout(() => *!*resolve("done")*/!*, 1000);
 });
 ```
 
-We can see two things by running the code above:
+با اجرای کد بالا می توانیم دو چیز را ببینیم:
 
-1. The executor is called automatically and immediately (by `new Promise`).
-2. The executor receives two arguments: `resolve` and `reject`. These functions are pre-defined by the JavaScript engine, so we don't need to create them. We should only call one of them when ready.
+۱. اجرا‌کننده به صورت خودکار و بلافاصله فراخوانی می‌شود (توسط `new Promise`).<br /> 
+۲. اجرا‌کننده دو آرگومان دریافت می‌کند: `resolve` و `reject`. این توابع توسط موتور جاوااسکریپت از پیش تعریف شده‌اند, بنابراین ما نیازی به ایجاد آن‌ها نداریم. وقتی آماده شدیم فقط باید یکی از آن‌ها را فراخوانی کنیم.
 
     After one second of "processing" the executor calls `resolve("done")` to produce the result. This changes the state of the `promise` object:
 
