@@ -39,15 +39,9 @@
 ```online
 روی دکمه زیر کلیک کنید تا رویدادها را ببینید. دابل کلیک را هم امتحان کنید.
 
-<<<<<<< HEAD
-در قسمت آزمایشی زیر همه رویدادها چاپ می‌شوند، و اگر بیش از ۱ ثانیه فاصله زمانی بین آنها باشد توسط یک خط افقی جدا می‌شوند.
+در قسمت آزمایشی زیر همه رویدادهای موس (mouse) چاپ می‌شوند، و اگر بیش از ۱ ثانیه فاصله زمانی بین آن‌ها باشد، توسط یک خط افقی جدا می‌شوند.
 
 همچنین می‌توانیم یک خاصیت `button` مشاهده کنیم که به ما این امکان را می‌دهد تا کلید موس را شناسایی کنیم که در قسمت پایین شرح داده شده.
-=======
-On the teststand below, all mouse events are logged, and if there is more than a 1 second delay between them, they are separated by a horizontal rule.
-
-Also, we can see the `button` property that allows us to detect the mouse button; it's explained below.
->>>>>>> bae0ef44d0208506f6e9b7f3421ee640ab41af2b
 
 <input onmousedown="return logMouse(event)" onmouseup="return logMouse(event)" onclick="return logMouse(event)" oncontextmenu="return logMouse(event)" ondblclick="return logMouse(event)" value="با کلید راست یا چپ موس روی من کلیک کنید" type="button"> <input onclick="logClear('test')" value="Clear" type="button"> <form id="testform" name="testform"> <textarea style="font-size:12px;height:150px;width:360px;"></textarea></form>
 ```

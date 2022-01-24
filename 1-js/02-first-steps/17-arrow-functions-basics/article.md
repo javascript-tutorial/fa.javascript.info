@@ -33,11 +33,7 @@ let sum = function(a, b) {
 alert(sum(1, 2)); // 3
 ```
 
-<<<<<<< HEAD
 همانطور که می‌بینید `(a, b) => a + b` بدین معنی‌ست که این تابع دو آرگومان با نام‌های `a` و `b` می‌پذیرد. و هنگام اجرا شدن، مقدار `a + b` را حساب می‌کند و نتیجه را برمی‌گرداند.
-=======
-As you can see, `(a, b) => a + b` means a function that accepts two arguments named `a` and `b`. Upon the execution, it evaluates the expression `a + b` and returns the result.
->>>>>>> bae0ef44d0208506f6e9b7f3421ee640ab41af2b
 
 - اگر فقط یک آرگومان داشته باشیم می‌توانیم پرانتزهای دور آرگومان را حذف کنیم و کد را از این هم کوتاه‌تر کنیم.
 
@@ -88,11 +84,7 @@ welcome();
 let sum = (a, b) => {  // کمانک یک تابع چندخظی را دربرمی‌گیرد
   let result = a + b;
 *!*
-<<<<<<< HEAD
-  return result; // اگر از کمانک استفاده کنیم باید از return استفاده کنیم
-=======
-  return result; // if we use curly braces, then we need an explicit "return"
->>>>>>> bae0ef44d0208506f6e9b7f3421ee640ab41af2b
+  return result; // استفاده کنیم "return" اگر از آکولاد استفاده کنیم، سپس باید صراحتا از
 */!*
 };
 
