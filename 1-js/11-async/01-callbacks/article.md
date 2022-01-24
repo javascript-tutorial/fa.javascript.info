@@ -164,8 +164,14 @@ loadScript("/my/script.js", function(error, script) {
 
 ## هرم عذاب
 
+<<<<<<< HEAD
 در نگاه اول این روش برای نوشتن کدهای ناهمگام پایدار بنظر میرسد. که واقعا هم این چنین است ولی برای نهایتا یک یا دو فراخوان تودرتو!!
 اما برای چندین عمل ناهمگام که یکی پس از دیگری اتفاق میفتد چیزی شبیه به این خواهیم داشت:
+=======
+At first glance, it looks like a viable approach to asynchronous coding. And indeed it is. For one or maybe two nested calls it looks fine.
+
+But for multiple asynchronous actions that follow one after another, we'll have code like this:
+>>>>>>> bae0ef44d0208506f6e9b7f3421ee640ab41af2b
 
 ```js
 loadScript("1.js", function(error, script) {
@@ -197,7 +203,16 @@ loadScript("1.js", function(error, script) {
 2. `2.js`را بارگذاری میکنیم سپس  اگر خطایی نداشت
 3. `3.js` را بارگذاری میکنیم سپس  اگر خطایی نداشت  -- کار دیگری انجام میدهیم`(*)`
 
+<<<<<<< HEAD
 هرچقدر فراخوانی های ما تودرتو باشند کدهای مارا عمیقتر و غیرقابل فهم و مدیریت میکنند مخصوصا اگر به جای ... ها کدهای واقعی داشته باشیم که خود شامل حلقه ها و شرط ها و هر جمله دیگری هستند.
+=======
+In the code above:
+1. We load `1.js`, then if there's no error...
+2. We load `2.js`, then if there's no error...
+3. We load `3.js`, then if there's no error -- do something else `(*)`.
+
+As calls become more nested, the code becomes deeper and increasingly more difficult to manage, especially if we have real code instead of `...` that may include more loops, conditional statements and so on.
+>>>>>>> bae0ef44d0208506f6e9b7f3421ee640ab41af2b
 
 که معمولا به آن "جهنم فراخوانی" (callback-hell / pyramid of doom) میگویند.
 
@@ -262,7 +277,13 @@ function step3(error, script) {
 ```
 همینجوری که مشاهده میکنید نتیجه تغییری نکرد ولی از تودرتو بودن فراخوانی ها با تعریف کردن توابع به صورت جداگانه برای هر مرحله از تودرتو بودن عمیق جلوگیری کردیم.
 
+<<<<<<< HEAD
 این روش کار میکند ولی کدش تکه تکه و جدا از هم است که خواندن آن را سخت میکند. همانطور که احتمالا دیدید لازم است در حین خواندن از جایی به جای دیگر بپرید. این طور اصلا راحت نیست مخصوصا اگر به کد آشنا نباشید و ندانید باید برای ادامه کد کجا را بخوانید.
+=======
+See? It does the same thing, and there's no deep nesting now because we made every action a separate top-level function.
+
+It works, but the code looks like a torn apart spreadsheet. It's difficult to read, and you probably noticed that one needs to eye-jump between pieces while reading it. That's inconvenient, especially if the reader is not familiar with the code and doesn't know where to eye-jump.
+>>>>>>> bae0ef44d0208506f6e9b7f3421ee640ab41af2b
 
 همچنین توابعِ `step*` فقط یکبار استفاده میشوند و فقط برای جلوگیری از بوجود امدن جهنم فراخوانی و تودرتویی بیش از حد تعریف شده اند که باعث بی نظمی زیادی در کد میشوند.
 

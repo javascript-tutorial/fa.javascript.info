@@ -12,7 +12,11 @@ function sayHi() {
 
 یک سینتکس دیگر هم برای ساخت تابع وجود دارد که *Function Expression* نامیده می‌شود.
 
+<<<<<<< HEAD
 این سینتکس به ما این امکان را می‌دهد که بین هر عبارتی یک تابع جدید بسازیم.
+=======
+It allows us to create a new function in the middle of any expression.
+>>>>>>> bae0ef44d0208506f6e9b7f3421ee640ab41af2b
 
 برای مثال:
 

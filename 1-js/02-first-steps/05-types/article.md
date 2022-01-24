@@ -46,13 +46,23 @@ n = 12.345;
     alert( "not a number" / 2 ); // NaN، چنین تقسیمی اشتباه است
     ```
 
+<<<<<<< HEAD
    هر عملی بر روی `NaN` نتیجه `NaN` خواهد داشت:
+=======
+    `NaN` is sticky. Any further mathematical operation on `NaN` returns `NaN`:
+>>>>>>> bae0ef44d0208506f6e9b7f3421ee640ab41af2b
 
     ```js run
-    alert( "not a number" / 2 + 5 ); // NaN
+    alert( NaN + 1 ); // NaN
+    alert( 3 * NaN ); // NaN
+    alert( "not a number" / 2 - 1 ); // NaN
     ```
 
+<<<<<<< HEAD
     در نتیجه اگر `NaN` در عملیات ریاضیاتی‌ای وجود داشته باشد، بر روی تمام معادله تاثیر می‌گذارد (نتیجه معادله برابر `NaN` خواهد بود).
+=======
+    So, if there's a `NaN` somewhere in a mathematical expression, it propagates to the whole result (there's only one exception to that: `NaN ** 0` is `1`).
+>>>>>>> bae0ef44d0208506f6e9b7f3421ee640ab41af2b
 
 ```smart header="عملیات ریاضیاتی امن هستند"
 عملیات ریاضی در جاوااسکریپت امن است. ما هر نوع عملی می‌توانیم انجام دهیم مانند تقسیم بر صفر، رفتار کردن با رشته‌های غیر عددی همانند اعداد و غیره.

@@ -25,7 +25,11 @@ alert(user.address.street); // !خطا
 
 ولی  در بسیاری از موارد عملی، ما ترجیح می‌دهیم به جای خطا، ‍`undefined` را دریافت کنیم (به معنای "بدون خیابان").
 
+<<<<<<< HEAD
 ...و مثالی دیگر، در توسعه وب، ما می‌توانیم یک شیء که با یک المان در صفحه مطابقت دارد را با استفاده از یک متد خاص، مانند `document.querySelector('.elem')` بگیریم و این متد هنگامی که چنین المانی وجود نداشته باشد `null` را برمی‌گرداند:
+=======
+...and another example. In Web development, we can get an object that corresponds to a web page element using a special method call, such as `document.querySelector('.elem')`, and it returns `null` when there's no such element.
+>>>>>>> bae0ef44d0208506f6e9b7f3421ee640ab41af2b
 
 ```js run
 // document.querySelector('.elem') خواهد شد اگر المنت وجود نداشته باشد null برابر با

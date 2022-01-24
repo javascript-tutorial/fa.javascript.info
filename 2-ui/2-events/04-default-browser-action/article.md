@@ -17,7 +17,7 @@ There are two ways to tell the browser we don't want it to act:
 - The main way is to use the `event` object. There's a method `event.preventDefault()`.
 - If the handler is assigned using `on<event>` (not by `addEventListener`), then returning `false` also works the same.
 
-In this HTML a click on a link doesn't lead to navigation, browser doesn't do anything:
+In this HTML, a click on a link doesn't lead to navigation; the browser doesn't do anything:
 
 ```html autorun height=60 no-beautify
 <a href="/" onclick="return false">Click here</a>
@@ -92,6 +92,23 @@ Try to click on the first `<input>` below -- the `focus` event happens. But if y
 That's because the browser action is canceled on `mousedown`. The focusing is still possible if we use another way to enter the input. For instance, the `key:Tab` key to switch from the 1st input into the 2nd. But not with the mouse click any more.
 ````
 
+<<<<<<< HEAD
+=======
+## The "passive" handler option
+
+The optional `passive: true` option of `addEventListener` signals the browser that the handler is not going to call `preventDefault()`.
+
+Why might that be needed?
+
+There are some events like `touchmove` on mobile devices (when the user moves their finger across the screen), that cause scrolling by default, but that scrolling can be prevented using `preventDefault()` in the handler.
+
+So when the browser detects such event, it has first to process all handlers, and then if `preventDefault` is not called anywhere, it can proceed with scrolling. That may cause unnecessary delays and "jitters" in the UI.
+
+The `passive: true` options tells the browser that the handler is not going to cancel scrolling. Then browser scrolls immediately providing a maximally fluent experience, and the event is handled by the way.
+
+For some browsers (Firefox, Chrome), `passive` is `true` by default for `touchstart` and `touchmove` events.
+
+>>>>>>> bae0ef44d0208506f6e9b7f3421ee640ab41af2b
 
 ## event.defaultPrevented
 
