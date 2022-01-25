@@ -60,28 +60,28 @@ let promise = new Promise(function(resolve, reject) {
 ۱. اجرا‌کننده به صورت خودکار و بلافاصله فراخوانی می‌شود (توسط `new Promise`).<br /> 
 ۲. اجرا‌کننده دو آرگومان دریافت می‌کند: `resolve` و `reject`. این توابع توسط موتور جاوااسکریپت از پیش تعریف شده‌اند, بنابراین ما نیازی به ایجاد آن‌ها نداریم. وقتی آماده شدیم فقط باید یکی از آن‌ها را فراخوانی کنیم.
 
-    After one second of "processing" the executor calls `resolve("done")` to produce the result. This changes the state of the `promise` object:
+    :را تغییر می‌دهد `promise` را برای ایجاد نتیجه فراخوانی می‌کند. این وضعیت شیء `resolve("done")` پس از یک ثانیه "پردازش"، اجرا‌کننده
 
     ![](promise-resolve-1.svg)
 
-That was an example of a successful job completion, a "fulfilled promise".
+این نمونه‌ای از تکمیل موفقیت آمیز کار بود، یک "fulfilled promise".
 
-And now an example of the executor rejecting the promise with an error:
+و حال نمونه‌ای از ردشدن(rejecting) وعده‌ی(promise) اجرا‌کننده با یک خطا:
 
 ```js
 let promise = new Promise(function(resolve, reject) {
-  // after 1 second signal that the job is finished with an error
+  // بعد از 1 ثانیه سیگنال می‌دهد که کار با یک خطا تمام شده است
   setTimeout(() => *!*reject(new Error("Whoops!"))*/!*, 1000);
 });
 ```
 
-The call to `reject(...)` moves the promise object to `"rejected"` state:
+فراخوانیِ `(...)reject` شیء وعده(promise) را به وضعیت `"rejected"` می‌برد:
 
 ![](promise-reject-1.svg)
 
-To summarize, the executor should perform a job (usually something that takes time) and then call `resolve` or `reject` to change the state of the corresponding promise object.
+به طور خلاصه، اجرا‌کننده باید یک کار را انجام دهد (معمولاً کاری که زمان می‌برد) و سپس `resolve` یا `reject` را برای تغییر وضعیت شیء وعده‌ی(promise) مربوطه فراخوانی کند.
 
-A promise that is either resolved or rejected is called "settled", as opposed to an initially "pending" promise.
+به وعده‌ای که یا حل‌و‌فصل(resolved) می‌شود یا رد(rejected) می‌شود، "تسویه‌شده" ("settled") می‌گویند، برخلاف وعده‌ای(promise) که در ابتدا "درحال انتظار" ("pending") است.
 
 ````smart header="There can be only a single result or an error"
 The executor should call only one `resolve` or one `reject`. Any state change is final.
