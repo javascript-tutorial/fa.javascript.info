@@ -1,4 +1,4 @@
-# کنترل کردن ارور، "try...catch"
+# مدیریت ارور، "try...catch"
 
 مهم نیست که چقدر در برنامه‌نویسی عالی هستیم، گاهی اوقات اسکریپت‌های ما ارورهایی (error) دارند. این ارورها ممکن است به دلیل اشتباهات ما، ورودی غیر منتظره کاربر، پاسخ نادرست سرور و هزاران دلیل دیگر رخ بدهند.
 
@@ -6,113 +6,113 @@
 
 اما یک ساختار سینتکسی `try...catch` وجود دارد که به ما این امکان را می‌دهد که ارورها را «بگیریم (catch)» تا اسکریپت، به جای مردن، بتواند کاری منطقی‌تر انجام دهد.
 
-## The "try...catch" syntax
+## سینتکس "try...catch"
 
-The `try...catch` construct has two main blocks: `try`, and then `catch`:
+ساختار `try...catch` دو بلوک اصلی دارد: `try` و سپس `catch`:
 
 ```js
 try {
 
-  // code...
+  // ...کد
 
 } catch (err) {
 
-  // error handling
+  // مدیریت ارور
 
 }
 ```
 
-It works like this:
+این سینتکس اینگونه کار می‌کند:
 
-1. First, the code in `try {...}` is executed.
-2. If there were no errors, then `catch (err)` is ignored: the execution reaches the end of `try` and goes on, skipping `catch`.
-3. If an error occurs, then the `try` execution is stopped, and control flows to the beginning of `catch (err)`. The `err` variable (we can use any name for it) will contain an error object with details about what happened.
+1. ابتدا، کد درون `try {...}` اجرا می‌شود.
+2. اگر اروری وجود نداشت، سپس `catch (err)` نادیده گرفته می‌شود: اجرای برنامه به انتهای `try` می‌رسد و با گذشتن از `catch` ادامه می‌یابد.
+3. اگر اروری رخ دهد، سپس اجرای `try` متوقف شده و کنترل برنامه به ابتدای `catch (err)` می‌رود. متغیر `err` (می‌توانیم هر نامی برای آن استفاده کنیم) شامل شیء اروری حاوی جزئیاتی درباره چیزی که اتفاق افتاده است.
 
 ![](try-catch-flow.svg)
 
-So, an error inside the `try {...}` block does not kill the script -- we have a chance to handle it in `catch`.
+پس یک ارور درون بلوک `try {...}` اسکریپت را نمی‌کشد -- ما شانسی برای مدیریت آن درون `catch` داریم.
 
-Let's look at some examples.
+بیایید به چند مثال نگاهی بیاندازیم.
 
-- An errorless example: shows `alert` `(1)` and `(2)`:
+- یک مثال بدون ارور: `alert` خطوط `(1)` و `(2)` را نشان می‌دهد:
 
     ```js run
     try {
 
-      alert('Start of try runs');  // *!*(1) <--*/!*
+      alert('ابتدای try اجرا می‌شود');  // *!*(1) <--*/!*
 
-      // ...no errors here
+      // اروری اینجا وجود ندارد...
 
-      alert('End of try runs');   // *!*(2) <--*/!*
+      alert('انتهای try اجرا می‌شود');   // *!*(2) <--*/!*
 
     } catch (err) {
 
-      alert('Catch is ignored, because there are no errors'); // (3)
+      alert('نادیده گرفته می‌شود چون اروری وجود ندارد Catch'); // (3)
 
     }
     ```
-- An example with an error: shows `(1)` and `(3)`:
+- مثالی شامل یک ارور: خطوط `(1)` و `(3)` را نمایش می‌دهد:
 
     ```js run
     try {
 
-      alert('Start of try runs');  // *!*(1) <--*/!*
+      alert('ابتدای try اجرا می‌شود');  // *!*(1) <--*/!*
 
     *!*
-      lalala; // error, variable is not defined!
+      lalala; // !ارور، متغیر تعریف نشده است
     */!*
 
-      alert('End of try (never reached)');  // (2)
+      alert('(هیچ گاه به اینجا نمی‌رسد) try انتهای');  // (2)
 
     } catch (err) {
 
-      alert(`Error has occurred!`); // *!*(3) <--*/!*
+      alert(`ارور رخ داد!`); // *!*(3) <--*/!*
 
     }
     ```
 
 
-````warn header="`try...catch` only works for runtime errors"
-For `try...catch` to work, the code must be runnable. In other words, it should be valid JavaScript.
+````warn header="`try...catch` فقط برای ارورهای هنگام اجرای برنامه کار می‌کند"
+برای اینکه `try...catch` کار کند، کد باید قابل اجرا باشد. به عبارتی دیگر، باید کد جاوااسکریپت معتبر باشد.
 
-It won't work if the code is syntactically wrong, for instance it has unmatched curly braces:
+اگر کد از لحاظ سینتکسی غلط باشد کار نمی‌کند، برای مثال اگر آکولادهای بی‌همتا داشته باشد:
 
 ```js run
 try {
   {{{{{{{{{{{{
 } catch (err) {
-  alert("The engine can't understand this code, it's invalid");
+  alert("موتور جاوااسکریپت نمی‌تواند این کد را متوجه شود. این کد نامعتبر است.");
 }
 ```
 
-The JavaScript engine first reads the code, and then runs it. The errors that occur on the reading phase are called "parse-time" errors and are unrecoverable (from inside that code). That's because the engine can't understand the code.
+موتور جاوااسکریپت ابتدا کد را می‌خواند و سپس آن را اجرا می‌کند. ارورهایی که در فاز خواندن رخ می‌دهند، ارورهای «زمان تجزیه (parse-time errors)» نامیده می‌شوند و قابل پوشش نیستند (از درون همان کد). به این دلیل که موتور نمی‌تواند کد را متوجه شود.
 
-So, `try...catch` can only handle errors that occur in valid code. Such errors are called "runtime errors" or, sometimes, "exceptions".
+پس `try...catch` تنها می‌تواند ارورهایی که در کد معتبر رخ می‌دهند را مدیریت کند. چنین ارورهایی «ارورهای هنگام اجرا (runtime errors)» یا گاهی اوقات «استثناها (exceptions)» نامیده می‌شوند.
 ````
 
 
-````warn header="`try...catch` works synchronously"
-If an exception happens in "scheduled" code, like in `setTimeout`, then `try...catch` won't catch it:
+````warn header="`try...catch` به صورت همگام کار می‌کند"
+اگر یک استثناء در کدی «برنامه‌ریزی شده» رخ دهد، مثلا در `setTimeout`، سپس `try...catch` آن را نمی‌گیرد:
 
 ```js run
 try {
   setTimeout(function() {
-    noSuchVariable; // script will die here
+    noSuchVariable; // اسکریپت اینجا می‌میرد
   }, 1000);
 } catch (err) {
-  alert( "won't work" );
+  alert( "کار نخواهد کرد" );
 }
 ```
 
-That's because the function itself is executed later, when the engine has already left the `try...catch` construct.
+به این دلیل که خود تابع بعدا اجرا می‌شود، زمانی که موتور ساختار `try...catch` را پشت سر گذاشته است.
 
-To catch an exception inside a scheduled function, `try...catch` must be inside that function:
+برای اینکه استثناء را درون یک تابع برنامه‌ریزی شده بگیریم، `try...catch` باید درون آن تابع باشد:
 ```js run
 setTimeout(function() {
   try {    
-    noSuchVariable; // try...catch handles the error!
+    noSuchVariable; // !ارور را مدیریت می‌کند try...catch
   } catch {
-    alert( "error is caught here!" );
+    alert( "ارور اینجا گرفته می‌شود!" );
   }
 }, 1000);
 ```
