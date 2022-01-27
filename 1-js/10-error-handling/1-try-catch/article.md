@@ -1,10 +1,10 @@
-# Error handling, "try...catch"
+# کنترل کردن ارور، "try...catch"
 
-No matter how great we are at programming, sometimes our scripts have errors. They may occur because of our mistakes, an unexpected user input, an erroneous server response, and for a thousand other reasons.
+مهم نیست که چقدر در برنامه‌نویسی عالی هستیم، گاهی اوقات اسکریپت‌های ما ارورهایی (error) دارند. این ارورها ممکن است به دلیل اشتباهات ما، ورودی غیر منتظره کاربر، پاسخ نادرست سرور و هزاران دلیل دیگر رخ بدهند.
 
-Usually, a script "dies" (immediately stops) in case of an error, printing it to console.
+معمولا، هنگامی که اروری رخ می‌دهد اسکریپت می‌میرد (بلافاصله متوقف می‌شود) و آن را در کنسول چاپ می‌کند.
 
-But there's a syntax construct `try...catch` that allows us to "catch" errors so the script can, instead of dying, do something more reasonable.
+اما یک ساختار سینتکسی `try...catch` وجود دارد که به ما این امکان را می‌دهد که ارورها را «بگیریم (catch)» تا اسکریپت، به جای مردن، بتواند کاری منطقی‌تر انجام دهد.
 
 ## The "try...catch" syntax
 
