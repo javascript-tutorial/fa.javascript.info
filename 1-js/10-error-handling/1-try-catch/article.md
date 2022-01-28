@@ -118,45 +118,45 @@ setTimeout(function() {
 ```
 ````
 
-## Error object
+## شیء Error
 
-When an error occurs, JavaScript generates an object containing the details about it. The object is then passed as an argument to `catch`:
+زمانی که یک ارور رخ می‌دهد، جاوااسکریپت شیءای حاوی جزئیاتی درباره آن را ایجاد می‌کند. این شیء به عنوان آرگومان به `catch` پاس داده می‌شود:
 
 ```js
 try {
   // ...
-} catch (err) { // <-- the "error object", could use another word instead of err
+} catch (err) { // <-- استفاده کنیم err این «شیء ارور» است، می‌توانستیم از کلمه‌ای دیگر به جای
   // ...
 }
 ```
 
-For all built-in errors, the error object has two main properties:
+برای تمام ارورهای درون‌ساخت، شیء ارور دو ویژگی اصلی دارد:
 
 `name`
-: Error name. For instance, for an undefined variable that's `"ReferenceError"`.
+: اسم ارور. برای مثال، برای یک متغیر تعریف نشده برابر با `"ReferenceError"` است.
 
 `message`
-: Textual message about error details.
+: پیام متنی درباره جزئیات ارور.
 
-There are other non-standard properties available in most environments. One of most widely used and supported is:
+در اکثر محیط‌ها ویژگی‌های غیر استاندارد دیگر هم وجود دارد. یکی از ویژگی‌هایی که به طور گسترده استفاده و پشتیبانی می‌شود:
 
 `stack`
-: Current call stack: a string with information about the sequence of nested calls that led to the error. Used for debugging purposes.
+: پشته فراخوانی کنونی: رشته‌ای حاوی اطلاعاتی درباره دنباله فراخوانی‌هایی که موجب رخ دادن ارور شدند. برای اهداف اشکال‌زدایی استفاده می‌شود.
 
-For instance:
+برای مثال:
 
 ```js run untrusted
 try {
 *!*
-  lalala; // error, variable is not defined!
+  lalala; // !ارور، متغیر تعریف نشده است
 */!*
 } catch (err) {
   alert(err.name); // ReferenceError
   alert(err.message); // lalala is not defined
-  alert(err.stack); // ReferenceError: lalala is not defined at (...call stack)
+  alert(err.stack); // ReferenceError: lalala is not defined at (...پشته فراخوانی‌ها)
 
-  // Can also show an error as a whole
-  // The error is converted to string as "name: message"
+  // می‌توانستیم ارور را به طور کامل هم نشان دهیم
+  // به رشته تبدیل می‌شود «name: message» ارور به صورت
   alert(err); // ReferenceError: lalala is not defined
 }
 ```
