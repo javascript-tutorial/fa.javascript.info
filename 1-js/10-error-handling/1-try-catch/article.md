@@ -175,37 +175,37 @@ try {
 }
 ```
 
-## Using "try...catch"
+## استفاده از "try...catch"
 
-Let's explore a real-life use case of `try...catch`.
+بیایید یک مورد استفاده از `try...catch` را در دنیای واقعی ببینیم.
 
-As we already know, JavaScript supports the [JSON.parse(str)](mdn:js/JSON/parse) method to read JSON-encoded values.
+همانطور که از قبل می‌دانیم، جاوااسکریپت از متد [JSON.parse(str)](mdn:js/JSON/parse) برای خواندن مقدارهایی که به صورت جی‌سان کدگذاری شده‌اند پشتیبانی می‌کند.
 
-Usually it's used to decode data received over the network, from the server or another source.
+این متد معمولا برای کدبرداری داده‌ای که از طریق شبکه دریافت شده است، از سرور یا منبعی دیگر، استفاده می‌شود.
 
-We receive it and call `JSON.parse` like this:
+ما داده را دریافت می‌کنیم و `JSON.parse` را اینگونه فراخوانی می‌کنیم:
 
 ```js run
-let json = '{"name":"John", "age": 30}'; // data from the server
+let json = '{"name":"John", "age": 30}'; // داده دریافت شده از سرور
 
 *!*
-let user = JSON.parse(json); // convert the text representation to JS object
+let user = JSON.parse(json); // تبدیل نمایش متنی به شیء جاوااسکریپت
 */!*
 
-// now user is an object with properties from the string
+// شیءای حاوی ویژگی‌های دریافت شده از رشته است user حالا
 alert( user.name ); // John
 alert( user.age );  // 30
 ```
 
-You can find more detailed information about JSON in the <info:json> chapter.
+شما می‌توانید در فصل <info:json> اطلاعاتی با جزئیات بیشتر درباره جی‌سان پیدا کنید.
 
-**If `json` is malformed, `JSON.parse` generates an error, so the script "dies".**
+**اگر `json` شکل درستی نداشته باشد، `JSON.parse` یک ارور ایجاد می‌کند، پس اسکریپت «می‌میرد».**
 
-Should we be satisfied with that? Of course not!
+آیا ما باید به آن راضی باشیم؟ قطعا نه!
 
-This way, if something's wrong with the data, the visitor will never know that (unless they open the developer console). And people really don't like when something "just dies" without any error message.
+اینگونه، اگر داده مشکلی داشته باشد، بازدید کننده هرگز آن را نخواهد دانست (مگر اینکه آن‌ها کنسول توسعه‌دهنده را باز کنند). و مردم چیزی که بدون پیام اروری «می‌میرد» را دوست ندارند.
 
-Let's use `try...catch` to handle the error:
+بیایید از `try...catch` برای مدیریت ارور استفاده کنیم:
 
 ```js run
 let json = "{ bad json }";
@@ -213,21 +213,21 @@ let json = "{ bad json }";
 try {
 
 *!*
-  let user = JSON.parse(json); // <-- when an error occurs...
+  let user = JSON.parse(json); // <-- ...زمانی که اروری رخ می‌دهد
 */!*
-  alert( user.name ); // doesn't work
+  alert( user.name ); // کار نمی‌کند
 
 } catch (err) {
 *!*
-  // ...the execution jumps here
-  alert( "Our apologies, the data has errors, we'll try to request it one more time." );
+  // اجرای برنامه به اینجا می‌پرد...
+  alert( "پوزش می‌خواهیم، داده دارای ارور است، ما سعی خواهیم کرد یک بار دیگر برای آن درخواست کنیم." );
   alert( err.name );
   alert( err.message );
 */!*
 }
 ```
 
-Here we use the `catch` block only to show the message, but we can do much more: send a new network request, suggest an alternative to the visitor, send information about the error to a logging facility, ... . All much better than just dying.
+اینجا ما از بلوک `catch` فقط برای نمایش پیام استفاده می‌کنیم، اما می‌توانیم کارهای بیشتری انجام دهیم: یک درخواست شبکه جدید ارسال کنیم، یک راه جایگزین به بازدیدکننده پیشنهاد کنیم، اطلاعاتی درباره ارور را به logging facility ارسال کنیم و... . هر چیزی از مردن بهتر است.
 
 ## Throwing our own errors
 
