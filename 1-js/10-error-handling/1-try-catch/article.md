@@ -161,16 +161,16 @@ try {
 }
 ```
 
-## Optional "catch" binding
+## پیوند اختیاری «catch»
 
 [recent browser=new]
 
-If we don't need error details, `catch` may omit it:
+اگر ما به جزئیات ارور نیازی نداریم، `catch` می‌تواند آن را حذف کند:
 
 ```js
 try {
   // ...
-} catch { // <-- without (err)
+} catch { // <-- (err) بدون
   // ...
 }
 ```
