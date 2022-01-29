@@ -83,10 +83,10 @@ let promise = new Promise(function(resolve, reject) {
 
 به وعده‌ای که یا حل‌و‌فصل(resolved) می‌شود یا رد(rejected) می‌شود، "تسویه‌شده" ("settled") می‌گویند، برخلاف وعده‌ای(promise) که در ابتدا "درحال انتظار" ("pending") است.
 
-````smart header="There can be only a single result or an error"
-The executor should call only one `resolve` or one `reject`. Any state change is final.
+````smart header="تنها یک نتیجه یا یک خطا می تواند وجود داشته باشد"
+.را فراخوانی کند. هر تغییر وضعیتی نهایی است `reject` یا یک `resolve` اجرا‌کننده باید فقط یک
 
-All further calls of `resolve` and `reject` are ignored:
+:نادیده گرفته می‌شوند `reject` و `resolve` همه فراخوانی‌های دیگر از
 
 ```js
 let promise = new Promise(function(resolve, reject) {
@@ -94,14 +94,14 @@ let promise = new Promise(function(resolve, reject) {
   resolve("done");
 */!*
 
-  reject(new Error("…")); // ignored
-  setTimeout(() => resolve("…")); // ignored
+  reject(new Error("…")); // نادیده گرفته شد
+  setTimeout(() => resolve("…")); // نادیده گرفته شد
 });
 ```
 
-The idea is that a job done by the executor may have only one result or an error.
+ایده این است که کار انجام شده توسط اجرا‌کننده ممکن است تنها یک نتیجه یا یک خطا داشته باشد.
 
-Also, `resolve`/`reject` expect only one argument (or none) and will ignore additional arguments.
+.تنها یک آرگومان (یا هیچی) را انتظار دارد و آرگومان‌های اضافی را نادیده می‌گیرد `resolve`/`reject` ،همچنین
 ````
 
 ```smart header="Reject with `Error` objects"
