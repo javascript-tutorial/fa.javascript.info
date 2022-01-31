@@ -28,10 +28,17 @@ let range = {
 
 برای اینکه شیء `range` را حلقه‌پذیر کنیم (و به این ترتیب بگذاریم `for..of` کار کند) ما نیاز داریم که یک متد به اسم `Symbol.iterator` را به شیء اضافه کنیم ( یک سمبل خاص درون ساخت که فقط برای این کار است).
 
+<<<<<<< HEAD
 1. زمانی که `for..of` شروع می‌شود، متد را یک بار صدا می‌زند (یا اگر پیدا نشود ارور می‌دهد). متد باید یک *حلقه‌زننده* را برگرداند -- شیءای که متد `next` را دارد.
 2. همینطور رو به جلو، `for..of` *تنها با شیء برگردانده شده* کار می‌کند.
 3. زمانی که `for..of` مقدار بعدی را نیاز دارد، روی آن شیء `next()` را صدا می‌زند.
 4. نتیجه `next()` باید به شکل `{done: Boolean, value: any}` باشد که `done=true` به معنی پایان حلقه‌زدن است، در غیر این صورت `value` مقدار بعدی خواهد بود.
+=======
+1. When `for..of` starts, it calls that method once (or errors if not found). The method must return an *iterator* -- an object with the method `next`.
+2. Onward, `for..of` works *only with that returned object*.
+3. When `for..of` wants the next value, it calls `next()` on that object.
+4. The result of `next()` must have the form `{done: Boolean, value: any}`, where `done=true` means that the loop is finished, otherwise `value` is the next value.
+>>>>>>> 0f748275e20a81700c8514f22a7cc80c4422d09c
 
 اینجا پیاده‌سازی کامل `range` را به همراه ملاحظات داریم:
 
@@ -44,11 +51,16 @@ let range = {
 // 1. در ابتدا این متد صدا زده می‌شود for..of با صدازدن
 range[Symbol.iterator] = function() {
 
+<<<<<<< HEAD
   // :این متد شیء حلقه‌زننده را برمی‌گرداند...
   // 2. فقط با این حلقه‌زننده کار می‌کند، که از آن مقدار بعدی را درخواست می‌کند for..of ،همینطور رو به جلو
+=======
+  // ...it returns the iterator object:
+  // 2. Onward, for..of works only with the iterator object below, asking it for next values
+>>>>>>> 0f748275e20a81700c8514f22a7cc80c4422d09c
   return {
     current: this.from,
-    last: this.to,      
+    last: this.to,
 
     // 3. فراخوانی می‌شود for..of در هر دور حلقه توسط next()
     next() {
@@ -270,7 +282,11 @@ for (let char of str) {
 alert(chars);
 ```
 
+<<<<<<< HEAD
 ...اما این روش کوتاه‌تر است.
+=======
+...But it is shorter.
+>>>>>>> 0f748275e20a81700c8514f22a7cc80c4422d09c
 
 ما حتی می‌توانیم یک `slice` که از جفت‌های جایگیر آگاه است را روی آن بسازیم:
 
