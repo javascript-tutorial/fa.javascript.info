@@ -254,42 +254,42 @@ try {
 
 برای یکی کردن مدیریت ارور، ما از عملگر `throw` استفاده می‌کنیم.
 
-### "Throw" operator
+### عملگر «Throw»
 
-The `throw` operator generates an error.
+عملگر `throw` (به معنی پرتاب کردن) یک ارور ایجاد می‌کند.
 
-The syntax is:
+سینتکس آن:
 
 ```js
 throw <error object>
 ```
 
-Technically, we can use anything as an error object. That may be even a primitive, like a number or a string, but it's better to use objects, preferably with `name` and `message` properties (to stay somewhat compatible with built-in errors).
+از لحاظ فنی ما می‌توانیم از هر چیزی به عنوان شیء ارور استفاده کنیم. حتی ارور می‌تواند یک مقدار اصلی باشد،مثل یک عدد یا رشته، اما بهتر است از شیءها استفاده کنیم که ترجیحا ویژگی‌های `name` و `message` را داشته باشند (برای اینکه تا حدی با ارورهای درون‌ساخت سازگار باشند).
 
-JavaScript has many built-in constructors for standard errors: `Error`, `SyntaxError`, `ReferenceError`, `TypeError` and others. We can use them to create error objects as well.
+جاوااسکریپت تابع‌های سازنده درون‌ساخت زیادی برای ارورهای استاندارد دارد: `Error`، `SyntaxError`، `ReferenceError`، `TypeError` و بقیه آن‌ها. ما می‌توانیم از آن‌ها برای ایجاد شیءهای ارور هم استفاده کنیم.
 
-Their syntax is:
+سینتکس آن‌ها:
 
 ```js
 let error = new Error(message);
-// or
+// یا
 let error = new SyntaxError(message);
 let error = new ReferenceError(message);
 // ...
 ```
 
-For built-in errors (not for any objects, just for errors), the `name` property is exactly the name of the constructor. And `message` is taken from the argument.
+برای ارور‌های درون‌ساخت (نه برای هر شیءای، فقط برای ارورها)، ویژگی `name` دقیقا اسم سازنده است. و `message` از آرگومان گرفته می‌شود.
 
-For instance:
+برای مثال:
 
 ```js run
-let error = new Error("Things happen o_O");
+let error = new Error("اتفاقاتی رخ می‌دهد o_O");
 
 alert(error.name); // Error
-alert(error.message); // Things happen o_O
+alert(error.message); // o_O اتفاقاتی رخ می‌دهد
 ```
 
-Let's see what kind of error `JSON.parse` generates:
+بیایید ببینیم `JSON.parse` چه نوع اروری ایجاد می‌کند:
 
 ```js run
 try {
@@ -302,18 +302,18 @@ try {
 }
 ```
 
-As we can see, that's a `SyntaxError`.
+همانطور که می‌بینیم یک `SyntaxError` است.
 
-And in our case, the absence of `name` is an error, as users must have a `name`.
+و در این مورد ما، نبودن `name` یک ارور است چون کاربران باید یک `name` داشته باشند.
 
-So let's throw it:
+پس بیایید آن را throw کنیم:
 
 ```js run
-let json = '{ "age": 30 }'; // incomplete data
+let json = '{ "age": 30 }'; // داده ناقص
 
 try {
 
-  let user = JSON.parse(json); // <-- no errors
+  let user = JSON.parse(json); // <-- اروری وجود ندارد
 
   if (!user.name) {
 *!*
@@ -328,9 +328,9 @@ try {
 }
 ```
 
-In the line `(*)`, the `throw` operator generates a `SyntaxError` with the given `message`, the same way as JavaScript would generate it itself. The execution of `try` immediately stops and the control flow jumps into `catch`.
+در خط `(*)`، عملگر `throw` با `message` داده شده یک `SyntaxError` ایجاد می‌کند، به همان شیوه که جاوااسکریپت خودش این ارور را ایجاد می‌کند. اجرای `try` بلافاصله متوقف می‌شود و کنترل به `catch` می‌پرد.
 
-Now `catch` became a single place for all error handling: both for `JSON.parse` and other cases.
+حالا `catch` به جایی برای مدیریت تمام ارورها تبدیل شد: هم برای JSON.parse` و هم برای موارد دیگر.
 
 ## Rethrowing
 
