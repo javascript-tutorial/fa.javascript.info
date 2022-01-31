@@ -332,40 +332,40 @@ try {
 
 حالا `catch` به جایی برای مدیریت تمام ارورها تبدیل شد: هم برای JSON.parse` و هم برای موارد دیگر.
 
-## Rethrowing
+## پرتاب دوباره (Rethrowing)
 
-In the example above we use `try...catch` to handle incorrect data. But is it possible that *another unexpected error* occurs within the `try {...}` block? Like a programming error (variable is not defined) or something else, not just this "incorrect data" thing.
+در مثال بالا ما از `try...catch` برای مدیریت داده نادرست استفاده می‌کنیم. اما آیا ممکن است که *ارور غیر منتظره دیگری* درون بلوک `try{...}` رخ دهد؟ مثلا یک ارور برنامه‌نویسی (متغیر تعریف نشده باشد) یا چیز دیگری، نه فقط موضوع «داده نادرست».
 
-For example:
+برای مثال:
 
 ```js run
-let json = '{ "age": 30 }'; // incomplete data
+let json = '{ "age": 30 }'; // داده ناقص
 
 try {
-  user = JSON.parse(json); // <-- forgot to put "let" before user
+  user = JSON.parse(json); // را قرار دهیم «let» کلمه user یادمان رفت که قبل از
 
   // ...
 } catch (err) {
   alert("JSON Error: " + err); // JSON Error: ReferenceError: user is not defined
-  // (no JSON Error actually)
+  // (نیست JSON Error در واقع)
 }
 ```
 
-Of course, everything's possible! Programmers do make mistakes. Even in open-source utilities used by millions for decades -- suddenly a bug may be discovered that leads to terrible hacks.
+قطعا، هر چیزی ممکن است! برنامه‌نویسان حتما اشتباهاتی می‌کنند. حتی در تسهیلات متن‌باز (open-source) که برای ده‌ها سال میلیون‌ها بار استفاده شده‌اند -- ناگهان یک خطا یا باگ (bug) ممکن است کشف شود که منجر به هک‌های وحشتناک می‌شود.
 
-In our case, `try...catch` is placed to catch "incorrect data" errors. But by its nature, `catch` gets *all* errors from `try`. Here it gets an unexpected error, but still shows the same `"JSON Error"` message. That's wrong and also makes the code more difficult to debug.
+در این مورد ما، `try...catch` برای گرفتن ارورهای «داده نادرست» قرار داده شده است.اما به خاطر ذات آن، `catch` *تمام* ارورها را از `try` دریافت می‌کند. اینجا، این بلوک یک ارور غیر منتظره دریافت می‌کند اما هنوز پیام `"JSON Error"` یکسان را نشان می‌دهد. این غلط است و همچنین اشکال‌زدایی کد را دشوارتر می‌کند.
 
-To avoid such problems, we can employ the "rethrowing" technique. The rule is simple:
+برای جلوگیری از چنین مشکلاتی، می‌توانیم تکنیک «پرتاب دوباره (rethrowing)» را به کار ببریم. قانون ساده است:
 
-**Catch should only process errors that it knows and "rethrow" all others.**
+**بلوک catch فقط باید ارورهایی را پردازش کند که آن‌ها را می‌شناسد و بقیه آن‌ها را «rethrow» کند.**
 
-The "rethrowing" technique can be explained in more detail as:
+تکنیک «rethrowing» می‌تواند می‌تواند اینگونه با جزئیات بیشتری توضیح داده شود:
 
-1. Catch gets all errors.
-2. In the `catch (err) {...}` block we analyze the error object `err`.
-3. If we don't know how to handle it, we do `throw err`.
+1. تمام ارورها را دریافت کن.
+2. در بلوک `catch (err) {...}` ما شیء ارور `err` را آنالیز می‌کنیم.
+3. اگر نمی‌دانیم که چگونه آن را مدیریت کنیم، `throw err` را انجام می‌دهیم.
 
-Usually, we can check the error type using the `instanceof` operator:
+معمولا، می‌توانیم با استفاده از عملگر `instanceof` نوع ارور را بررسی کنیم:
 
 ```js run
 try {
@@ -374,17 +374,17 @@ try {
 *!*
   if (err instanceof ReferenceError) {
 */!*
-    alert('ReferenceError'); // "ReferenceError" for accessing an undefined variable
+    alert('ReferenceError'); // برای دسترسی به یک متغیر تعریف نشده «ReferenceError»
   }
 }
 ```
 
-We can also get the error class name from `err.name` property. All native errors have it. Another option is to read `err.constructor.name`.
+همچنین می‌توانیم از ویژگی `err.name` اسم کلاس ارور را دریافت کنیم. تمام ارورهای نیتیو (برای خود زبان) آن را دارند. گزینه دیگر خواندن `err.constructor.name` است.
 
-In the code below, we use rethrowing so that `catch` only handles `SyntaxError`:
+در کد پایین، ما از rethrowing استفاده می‌کنیم تا `catch` فقط `SyntaxError` را مدیریت کند:
 
 ```js run
-let json = '{ "age": 30 }'; // incomplete data
+let json = '{ "age": 30 }'; // داده ناقص
 try {
 
   let user = JSON.parse(json);
@@ -394,7 +394,7 @@ try {
   }
 
 *!*
-  blabla(); // unexpected error
+  blabla(); // ارور غیر منتظره
 */!*
 
   alert( user.name );
@@ -412,11 +412,11 @@ try {
 }
 ```
 
-The error throwing on line `(*)` from inside `catch` block "falls out" of `try...catch` and can be either caught by an outer `try...catch` construct (if it exists), or it kills the script.
+پرتاب ارور در خط `(*)` از درون بلوک `catch`، از `try...catch` «بیرون می‌افتد» و می‌تواند توسط یک ساختار `try...catch` بیرونی گرفته شود (اگر وجود داشته باشد) یا اسکریپت را بکشد.
 
-So the `catch` block actually handles only errors that it knows how to deal with and "skips" all others.
+پس بلوک `catch` در واقع فقط ارورهایی که می‌داند چگونه با آن‌ها مدارا کند را مدیریت می‌کند و بقیه ارورها را «از قلم می‌اندازد».
 
-The example below demonstrates how such errors can be caught by one more level of `try...catch`:
+مثال پایین نشان می‌دهد که چنین ارورهایی چگونه می‌توانند توسط یک سطح بالاتر از `try...catch` گرفته شوند:
 
 ```js run
 function readData() {
@@ -425,13 +425,13 @@ function readData() {
   try {
     // ...
 *!*
-    blabla(); // error!
+    blabla(); // !ارور
 */!*
   } catch (err) {
     // ...
     if (!(err instanceof SyntaxError)) {
 *!*
-      throw err; // rethrow (don't know how to deal with it)
+      throw err; // rethrow (نمی‌دانیم چگونه آن را کنترل کنیم)
 */!*
     }
   }
@@ -441,12 +441,12 @@ try {
   readData();
 } catch (err) {
 *!*
-  alert( "External catch got: " + err ); // caught it!
+  alert( "External catch got: " + err ); // !آن را گرفتیم
 */!*
 }
 ```
 
-Here `readData` only knows how to handle `SyntaxError`, while the outer `try...catch` knows how to handle everything.
+اینجا `readData` فقط می‌داند که `SyntaxError` را چگونه مدیریت کند در حالی که `try...catch` بیرونی می‌داند چگونه همه چیز را مدیریت کند.
 
 ## try...catch...finally
 
