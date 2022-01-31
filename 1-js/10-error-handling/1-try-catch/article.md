@@ -229,30 +229,30 @@ try {
 
 اینجا ما از بلوک `catch` فقط برای نمایش پیام استفاده می‌کنیم، اما می‌توانیم کارهای بیشتری انجام دهیم: یک درخواست شبکه جدید ارسال کنیم، یک راه جایگزین به بازدیدکننده پیشنهاد کنیم، اطلاعاتی درباره ارور را به logging facility ارسال کنیم و... . هر چیزی از مردن بهتر است.
 
-## Throwing our own errors
+## پرتاب ارورهای خودمان
 
-What if `json` is syntactically correct, but doesn't have a required `name` property?
+اگر `json` از لحاظ سینتکس درست باشد اما ویژگی مورد نیاز `name` را نداشته باشد چه؟
 
-Like this:
+مثل اینجا:
 
 ```js run
-let json = '{ "age": 30 }'; // incomplete data
+let json = '{ "age": 30 }'; // داده ناقض
 
 try {
 
-  let user = JSON.parse(json); // <-- no errors
+  let user = JSON.parse(json); // <-- اروری وجود ندارد
 *!*
-  alert( user.name ); // no name!
+  alert( user.name ); // !وجود ندارد name ویژگی
 */!*
 
 } catch (err) {
-  alert( "doesn't execute" );
+  alert( "اجرا نمی‌شود" );
 }
 ```
 
-Here `JSON.parse` runs normally, but the absence of `name` is actually an error for us.
+اینجا `JSON.parse` به صورت طبیعی اجرا می‌شود اما در واقع نبودن `name` برای ما یک ارور است.
 
-To unify error handling, we'll use the `throw` operator.
+برای یکی کردن مدیریت ارور، ما از عملگر `throw` استفاده می‌کنیم.
 
 ### "Throw" operator
 
