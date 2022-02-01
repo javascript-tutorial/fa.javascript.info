@@ -108,19 +108,19 @@ let promise = new Promise(function(resolve, reject) {
 <span dir="rtl">در صورتی که مشکلی پیش بیاید، اجرا‌کننده باید `reject` را فراخوانی کند. این کار می‌تواند با هر نوع آرگومانی انجام شود (دقیقاً مانند `resolve`). اما توصیه می‌شود از اشیاء `Error` (یا اشیایی که از `Error` به ارث می‌برند) استفاده کنید. دلیل آن به زودی مشخص خواهد شد.<span>
 ```
 
-````smart header="Immediately calling `resolve`/`reject`"
-In practice, an executor usually does something asynchronously and calls `resolve`/`reject` after some time, but it doesn't have to. We also can call `resolve` or `reject` immediately, like this:
+````smart header="را فراخوانی می‌کند `Resolve`/`Reject` بلافاصله"
+:را فراخوانی کنیم، مانند این `reject` یا `resolve` را فراخوانی می‌کند، اما مجبور نیست. همچنین می‌توانیم بلافاصله `resolve`/`reject` در عمل، یک اجرا‌کننده معمولاً کاری را به صورت ناهمزمان انجام می‌دهد و پس از مدتی
 
 ```js
 let promise = new Promise(function(resolve, reject) {
-  // not taking our time to do the job
-  resolve(123); // immediately give the result: 123
+  // وقت خود را برای انجام کار صرف نمی کنیم
+  resolve(123); // بلافاصله نتیجه را بدهید: 123
 });
 ```
 
-For instance, this might happen when we start to do a job but then see that everything has already been completed and cached.
+به عنوان مثال، این ممکن است زمانی اتفاق بیفتد که ما شروع به انجام یک کار می‌کنیم، اما بعد می‌بینیم که همه چیز قبلاً تکمیل شده و در حافظه پنهان(cache) ذخیره شده است.
 
-That's fine. We immediately have a resolved promise.
+خوبه. ما بلافاصله یک وعده(promise) حل‌شده(resolved) داریم.
 ````
 
 ```smart header="The `state` and `result` are internal"
