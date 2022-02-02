@@ -14,7 +14,7 @@
 
 این تشبیه خیلی دقیق نیست، زیرا وعده‌های (promises) جاوا‌اسکریپت پیچیده‌تر از یک لیست اشتراک ساده است: آن‌ها دارای ویژگی‌ها و محدودیت‌های اضافی هستند. اما برای شروع خوب است.
 
-نحوِ (syntax) سازنده برای یک شیء وعده (promise) به صورت زیر است:
+سینتکس سازنده برای یک شیء وعده(promise) به صورت زیر است:
 
 ```js
 let promise = new Promise(function(resolve, reject) {
@@ -125,7 +125,7 @@ let promise = new Promise(function(resolve, reject) {
 
 ```smart header="داخلی هستند `result` و `state`"
 .استفاده کنیم. در زیر توضیح داده شده‌اند `.then`/`.catch`/`.finally` داخلی هستند. ما نمی‌توانیم مستقیماً به آن‌ها دسترسی داشته باشیم. برای این کار می‌توانیم از متدهای Promise شیء `result` و `state` ویژگی های
-`````
+```
 
 ## مصرف‌کنندگان: then, catch, finally
 
@@ -135,7 +135,7 @@ let promise = new Promise(function(resolve, reject) {
 
 مهم ترین و اساسی ترین آن `then.` است.
 
-نحو(syntax) عبارت است از:
+سینتکس عبارت است از:
 
 ```js
 promise.then(
@@ -148,14 +148,14 @@ promise.then(
 
 آرگومان دوم `then.` تابعی است که با رد شدن(rejected) وعده(promise) اجرا می‌شود و خطا را دریافت می‌کند.
 
-For instance, here's a reaction to a successfully resolved promise:
+به عنوان مثال، در اینجا یک واکنش به یک وعده‌ی(promise) با موفقیت حل شده(resolved) داریم:
 
 ```js run
 let promise = new Promise(function(resolve, reject) {
   setTimeout(() => resolve("done!"), 1000);
 });
 
-// resolve runs the first function in .then
+// اجرا می کند resolve را .then اولین تابع در
 promise.then(
 *!*
   result => alert(result), // shows "done!" after 1 second
