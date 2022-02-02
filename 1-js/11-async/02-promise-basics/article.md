@@ -123,30 +123,30 @@ let promise = new Promise(function(resolve, reject) {
 خوبه. ما بلافاصله یک وعده(promise) حل‌شده(resolved) داریم.
 ````
 
-```smart header="The `state` and `result` are internal"
-The properties `state` and `result` of the Promise object are internal. We can't directly access them. We can use the methods `.then`/`.catch`/`.finally` for that. They are described below.
-```
+```smart header="داخلی هستند `result` و `state`"
+.استفاده کنیم. در زیر توضیح داده شده‌اند `.then`/`.catch`/`.finally` داخلی هستند. ما نمی‌توانیم مستقیماً به آن‌ها دسترسی داشته باشیم. برای این کار می‌توانیم از متدهای Promise شیء `result` و `state` ویژگی های
+`````
 
-## Consumers: then, catch, finally
+## مصرف‌کنندگان: then, catch, finally
 
-A Promise object serves as a link between the executor (the "producing code" or "singer") and the consuming functions (the "fans"), which will receive the result or error. Consuming functions can be registered (subscribed) using methods `.then`, `.catch` and `.finally`.
+یک شیء Promise به عنوان یک پیوند بین اجراکننده ("کد تولید‌کننده" یا "خواننده") و توابع مصرف‌کننده ("طرفداران") عمل می‌کند که نتیجه یا خطا را دریافت می‌کند. توابع مصرف‌کننده را می‌توان با استفاده از متدهای `then`، `.catch.` و `finally.` ثبت (مشترک) کرد.
 
-### then
+### متدِ then
 
-The most important, fundamental one is `.then`.
+مهم ترین و اساسی ترین آن `then.` است.
 
-The syntax is:
+نحو(syntax) عبارت است از:
 
 ```js
 promise.then(
-  function(result) { *!*/* handle a successful result */*/!* },
-  function(error) { *!*/* handle an error */*/!* }
+  function(result) { *!*/* یک نتیجه موفق را مدیریت کنید */*/!* },
+  function(error) { *!*/* یک خطا را مدیریت کنید */*/!* }
 );
 ```
 
-The first argument of `.then` is a function that runs when the promise is resolved, and receives the result.
+اولین آرگومان `then.` تابعی است که با حل شدن(resolved) وعده(promise) اجرا می‌شود و نتیجه را دریافت می‌کند.
 
-The second argument of `.then` is a function that runs when the promise is rejected, and receives the error.
+آرگومان دوم `then.` تابعی است که با رد شدن(rejected) وعده(promise) اجرا می‌شود و خطا را دریافت می‌کند.
 
 For instance, here's a reaction to a successfully resolved promise:
 
