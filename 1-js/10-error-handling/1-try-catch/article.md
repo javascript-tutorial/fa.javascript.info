@@ -531,16 +531,16 @@ alert( `اجرای کد ${diff} میلی‌ثانیه طول کشید.` );
 به عبارتی دیگر، تابع می‌تواند با `return` یا `throw` به اتمام برسد، این موضوع مهم نیست. بند `finally` در هر دو مورد اجرا می‌شود.
 
 
-```smart header="Variables are local inside `try...catch...finally`"
-Please note that `result` and `diff` variables in the code above are declared *before* `try...catch`.
+```smart header="متغیرهای درون `try...catch...finally` محلی هستند"
+لطفا در نظر داشته باشید که در کد بالا متغیرهای `result` و `diff` *قبل از* `try...catch` تعریف شده‌اند.
 
-Otherwise, if we declared `let` in `try` block, it would only be visible inside of it.
+در غیر این صورت، اگر ما `let` را درون بلوک `try` تعریف می‌کردیم، این متغیر فقط درون همان بلوک قابل رویت بود.
 ```
 
-````smart header="`finally` and `return`"
-The `finally` clause works for *any* exit from `try...catch`. That includes an explicit `return`.
+````smart header="بند `finally` و `return`"
+بند `finally` برای *تمام* خارج‌شدن‌ها از `try...catch` کار می‌کند. این موضوع شامل یک `return` واضح هم می‌شود.
 
-In the example below, there's a `return` in `try`. In this case, `finally` is executed just before the control returns to the outer code.
+در مثال پایین، یک `return` درون `try` وجود دارد. در این صورت، `finally` درست قبل از اینکه کنترل به کد بیرونی برگردد اجرا می‌شود.
 
 ```js run
 function func() {
@@ -559,25 +559,25 @@ function func() {
   }
 }
 
-alert( func() ); // first works alert from finally, and then this one
+alert( func() ); // کار می‌کند و سپس این یکی finally درون alert اول
 ```
 ````
 
-````smart header="`try...finally`"
+````smart header="ساختار `try...finally`"
 
-The `try...finally` construct, without `catch` clause, is also useful. We apply it when we don't want to handle errors here (let them fall through), but want to be sure that processes that we started are finalized.
+ساختار `try...finally`، بدون بند `catch`، هم مفید است. ما زمانی که نمی‌خواهیم ارورها را مدیریت کنیم (می‌گذاریم رخ دهند) اما می‌خواهیم مطمئن باشیم فرایندهایی که شروع کردیم پایان می‌یابند آن را اعمال می‌کنیم.
 
 ```js
 function func() {
-  // start doing something that needs completion (like measurements)
+  // شروع انجام چیزی که به کامل شدن نیاز دارد (مثل اندازه‌گیری‌ها)
   try {
     // ...
   } finally {
-    // complete that thing even if all dies
+    // کامل کردن آن حتی اگر همه چیز بمیرد
   }
 }
 ```
-In the code above, an error inside `try` always falls out, because there's no `catch`. But `finally` works before the execution flow leaves the function.
+در کد بالا، همیشه یک ارور از داخل `try` بیرون می‌آید چون `catch` وجود ندارد. اما قبل از اینکه جریان اجرای برنامه از تابع بیرون بیاید `finally` کار می‌کند.
 ````
 
 ## Global catch
