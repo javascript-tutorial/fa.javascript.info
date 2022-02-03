@@ -448,35 +448,35 @@ try {
 
 اینجا `readData` فقط می‌داند که `SyntaxError` را چگونه مدیریت کند در حالی که `try...catch` بیرونی می‌داند چگونه همه چیز را مدیریت کند.
 
-## try...catch...finally
+## ساختار try...catch...finally
 
-Wait, that's not all.
+صبر کنید، این همه چیز نیست.
 
-The `try...catch` construct may have one more code clause: `finally`.
+ساختار `try...catch` می‌تواند یک بند دیگر از کد هم داشته باشد: `finally`.
 
-If it exists, it runs in all cases:
+اگر این بند وجود داشته باشد، در تمام موارد اجرا می‌شود:
 
-- after `try`, if there were no errors,
-- after `catch`, if there were errors.
+- بعد از `try`، اگر اروری وجود نداشته باشد،
+- بعد از `catch`، اگر اروری وجود داشته باشد.
 
-The extended syntax looks like this:
+سینتکس گسترده اینگونه به نظر می‌رسد:
 
 ```js
 *!*try*/!* {
-   ... try to execute the code ...
+   ... سعی در اجرای کد ...
 } *!*catch*/!* (err) {
-   ... handle errors ...
+   ... مدیریت ارورها ...
 } *!*finally*/!* {
-   ... execute always ...
+   ... همیشه اجرا می‌شود ...
 }
 ```
 
-Try running this code:
+سعی کنید این کد را اجرا کنید:
 
 ```js run
 try {
   alert( 'try' );
-  if (confirm('Make an error?')) BAD_CODE();
+  if (confirm('ارور ایجاد کنیم؟')) BAD_CODE();
 } catch (err) {
   alert( 'catch' );
 } finally {
@@ -484,27 +484,27 @@ try {
 }
 ```
 
-The code has two ways of execution:
+این کد 2 راه برای اجرا دارد:
 
-1. If you answer "Yes" to "Make an error?", then `try -> catch -> finally`.
-2. If you say "No", then `try -> finally`.
+1. اگر به سوال «ارور ایجاد کنیم؟» جواب «بله» دهید، سپس `try -> catch -> finally`.
+2. اگر شما «نه» بگویید، سپس `try -> finally`.
 
-The `finally` clause is often used when we start doing something and want to finalize it in any case of outcome.
+بند `finally` اغلب زمانی استفاده می‌شود که ما انجام کاری را شروع می‌کنیم و می‌خواهیم با هر نتیجه‌ای آن را به پایان برسانیم.
 
-For instance, we want to measure the time that a Fibonacci numbers function `fib(n)` takes. Naturally, we can start measuring before it runs and finish afterwards. But what if there's an error during the function call? In particular, the implementation of `fib(n)` in the code below returns an error for negative or non-integer numbers.
+برای مثال، ما می‌خواهیم زمانی که یک تابع اعداد فیبوناچی `fib(n)` می‌گیرد را محاسبه کنیم. طبیعتا، ما می‌توانیم قبل از اینکه اجرا شود محاسبه را آغاز کنیم و سپس آن تمام کنیم. اما اگر در حین فراخوانی تابع ارور ایجاد شود چه؟ به خصوص در کد پایین، پیاده‌سازی `fib(n)` به ازای اعداد منفی یا غیر صحیح یک ارور برمی‌گرداند.
 
-The `finally` clause is a great place to finish the measurements no matter what.
+بند `finally` مکانی عالی برای اتمام محاسبات است؛ هر چه می‌خواهد رخ دهد.
 
-Here `finally` guarantees that the time will be measured correctly in both situations -- in case of a successful execution of `fib` and in case of an error in it:
+اینجا `finally` تضمین می‌کند که زمان در هر دو وضعیت به درستی محاسبه می‌شود -- در وضعیتی که اجرای `fib` موفقیت‌آمیز باشد و در وضعیتی که اروری درون آن باشد:
 
 ```js run
-let num = +prompt("Enter a positive integer number?", 35)
+let num = +prompt("یک عدد مثبت وارد کنید.", 35)
 
 let diff, result;
 
 function fib(n) {
   if (n < 0 || Math.trunc(n) != n) {
-    throw new Error("Must not be negative, and also an integer.");
+    throw new Error("نباید منفی باشد. همچنین عدد صحیح قابل قبول است.");
   }
   return n <= 1 ? n : fib(n - 1) + fib(n - 2);
 }
@@ -521,14 +521,14 @@ try {
 }
 */!*
 
-alert(result || "error occurred");
+alert(result || "اروری رخ داد");
 
-alert( `execution took ${diff}ms` );
+alert( `اجرای کد ${diff} میلی‌ثانیه طول کشید.` );
 ```
 
-You can check by running the code with entering `35` into `prompt` -- it executes normally, `finally` after `try`. And then enter `-1` -- there will be an immediate error, and the execution will take `0ms`. Both measurements are done correctly.
+شما می‌توانید با اجرای کد بالا همراه با وارد کردن `35` درون `prompt` بررسی کنید -- کد به صورت معمولی اجرا می‌شود، `finally` بعد از `try`. سپس `1-` را وارد کنید -- بلافاصله ارور ایجاد می‌شود و اجرای کد `0ms` طول می‌کشد. هر دو محاسبه به درستی انجام شده‌اند.
 
-In other words, the function may finish with `return` or `throw`, that doesn't matter. The `finally` clause executes in both cases.
+به عبارتی دیگر، تابع می‌تواند با `return` یا `throw` به اتمام برسد، این موضوع مهم نیست. بند `finally` در هر دو مورد اجرا می‌شود.
 
 
 ```smart header="Variables are local inside `try...catch...finally`"
