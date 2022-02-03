@@ -504,7 +504,7 @@ let diff, result;
 
 function fib(n) {
   if (n < 0 || Math.trunc(n) != n) {
-    throw new Error("نباید منفی باشد. همچنین عدد صحیح قابل قبول است.");
+    throw new Error("نباید منفی باشد، همچنین عدد صحیح قابل قبول است.");
   }
   return n <= 1 ? n : fib(n - 1) + fib(n - 2);
 }
