@@ -606,7 +606,7 @@ window.onerror = function(message, url, line, col, error) {
 `url`
 : URL اسکریپتی که ارور در آنجا رخ داده است.
 
-`line`, `col`
+`line`، `col`
 : اعداد خط و ستون که ارور در آنجا رخ داده است.
 
 `error`
