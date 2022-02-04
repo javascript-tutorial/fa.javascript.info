@@ -580,17 +580,17 @@ function func() {
 در کد بالا، همیشه یک ارور از داخل `try` بیرون می‌آید چون `catch` وجود ندارد. اما قبل از اینکه جریان اجرای برنامه از تابع بیرون بیاید `finally` کار می‌کند.
 ````
 
-## Global catch
+## catch گلوبال
 
-```warn header="Environment-specific"
-The information from this section is not a part of the core JavaScript.
+```warn header="مختص به محیط اجرا"
+اطلاعات این قسمت بخشی از جاوااسکریپت اصلی نیست.
 ```
 
-Let's imagine we've got a fatal error outside of `try...catch`, and the script died. Like a programming error or some other terrible thing.
+بیایید فرض کنیم که بیرون از `try...catch` یک ارور مهلک رخ داده است و اسکریپت می‌میرد. مثلا یک ارور برنامه‌نویسی یا یک چیز وحشتناک دیگر.
 
-Is there a way to react on such occurrences? We may want to log the error, show something to the user (normally they don't see error messages), etc.
+آیا راهی برای واکنش به چنین اتفاقاتی وجود دارد؟ ممکن است ما بخواهیم ارور را رخدادنگاری کنیم، چیزی را به کاربر نمایش دهیم (معمولا آن‌ها پیام‌های ارور را نمی‌بینند) و غیره.
 
-There is none in the specification, but environments usually provide it, because it's really useful. For instance, Node.js has [`process.on("uncaughtException")`](https://nodejs.org/api/process.html#process_event_uncaughtexception) for that. And in the browser we can assign a function to the special [window.onerror](mdn:api/GlobalEventHandlers/onerror) property, that will run in case of an uncaught error.
+درون مشخصات زبان راهی وجود ندارد اما محیط‌های اجرا معمولا راهی را فراهم می‌کنند چون این کار بسیار مفید است. برای مثال، Node.js برای این کار [`process.on("uncaughtException")`](https://nodejs.org/api/process.html#process_event_uncaughtexception) را دارد. و در مرورگر ما می‌توانیم به ویژگی مخصوص  [window.onerror](mdn:api/GlobalEventHandlers/onerror) یک تابع اختصاص دهیم که در صورت رخ دادن یک ارور کنترل نشده اجرا شود.
 
 The syntax:
 
@@ -601,18 +601,18 @@ window.onerror = function(message, url, line, col, error) {
 ```
 
 `message`
-: Error message.
+: پیام ارور.
 
 `url`
-: URL of the script where error happened.
+: URL اسکریپتی که ارور در آنجا رخ داده است.
 
 `line`, `col`
-: Line and column numbers where error happened.
+: اعداد خط و ستون که ارور در آنجا رخ داده است.
 
 `error`
-: Error object.
+: شیء ارور.
 
-For instance:
+برای مثال:
 
 ```html run untrusted refresh height=1
 <script>
@@ -623,23 +623,23 @@ For instance:
 */!*
 
   function readData() {
-    badFunc(); // Whoops, something went wrong!
+    badFunc(); // !اوه، یک جای کار می‌لنگد
   }
 
   readData();
 </script>
 ```
 
-The role of the global handler `window.onerror` is usually not to recover the script execution -- that's probably impossible in case of programming errors, but to send the error message to developers.
+معمولا نقش کنترل‌کننده گلوبال `window.onerror` این نیست که اجرای اسکریپت را ترمیم کند -- این موضوع در صورتی که ارور برنامه‌نویسی وجود داشته باشد احتمالا غیر ممکن است اما فرستادن پیام ارور به توسعه‌دهندگان ممکن است.
 
-There are also web-services that provide error-logging for such cases, like <https://errorception.com> or <http://www.muscula.com>.
+همچنین سرویس‌های وب وجود دارند که رخدادنگاری ارور را برای چنین مواردی فراهم می‌کنند مانند <https://errorception.com> یا <http://www.muscula.com>.
 
-They work like this:
+آن‌ها اینگونه کار می‌کنند:
 
-1. We register at the service and get a piece of JS (or a script URL) from them to insert on pages.
-2. That JS script sets a custom `window.onerror` function.
-3. When an error occurs, it sends a network request about it to the service.
-4. We can log in to the service web interface and see errors.
+1. ما در سرویس ثبت نام می‌کنیم و از آن‌ها تکه‌ای از کد جاوااسکریپت (یا یک URL اسکریپت) برای اضافه کردن به صفحات دریافت می‌کنیم.
+2. آن کد جاوااسکریپت یک تابع `window.onerror` شخصی‌سازی شده را تنظیم می‌کند.
+3. زمانی که اروری رخ می‌دهد، این تابع درباره آن ارور، یک درخواست شبکه را به سرویس ارسال می‌کند.
+4. ما می‌توانیم وارد رابط وب سرویس شویم و ارورها را ببینیم.
 
 ## Summary
 
