@@ -269,8 +269,4 @@ function step3(error, script) {
 
 ما نیاز داریم تا روش بهتری برای اینکار پیدا کنیم.
 
-<<<<<<< HEAD
-خوشبختانه راه هایی برای حل این مشکل وجود دارند که یکی از بهترین های آن "قول"ها(promises) هستند که در بخش بعدی به آنها میپردازیم.
-=======
-Luckily, there are other ways to avoid such pyramids. One of the best ways is to use "promises", described in the next chapter.
->>>>>>> 71da17e5960f1c76aad0d04d21f10bc65318d3f6
+خوشبختانه راه‌های دیگری برای حل این مشکل وجود دارند. یکی از بهترین آن‌ها "قول"ها(promises) هستند که در فصل بعدی توضیح داده شده است.
