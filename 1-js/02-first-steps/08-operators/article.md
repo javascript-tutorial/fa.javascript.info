@@ -194,6 +194,7 @@ alert( +apples + +oranges ); // 5
 | اولویت | نام | علامت |
 |------------|------|------|
 | ... | ... | ... |
+<<<<<<< HEAD
 | 17 | جمع یگانه | `+` |
 | 17 | تفریق یگانه | `-` |
 | 16 | بتوان رساندن | `**` |
@@ -206,10 +207,28 @@ alert( +apples + +oranges ); // 5
 | ... | ... | ... |
 
 همانطور که می‌بینیم "عملگر + یگانه" اولویت 17 دارد که از عملگر جمع ( + دوگانه) با اولویت 13 بالاتر است. به همین دلیل است که در عبارت `"+apples + +oranges"` عملگرهای + یگانه پیش از علامت جمع اجرا می‌شوند.
+=======
+| 15 | unary plus | `+` |
+| 15 | unary negation | `-` |
+| 14 | exponentiation | `**` |
+| 13 | multiplication | `*` |
+| 13 | division | `/` |
+| 12 | addition | `+` |
+| 12 | subtraction | `-` |
+| ... | ... | ... |
+| 2 | assignment | `=` |
+| ... | ... | ... |
+
+As we can see, the "unary plus" has a priority of `15` which is higher than the `13` of "addition" (binary plus). That's why, in the expression `"+apples + +oranges"`, unary pluses work before the addition.
+>>>>>>> 71da17e5960f1c76aad0d04d21f10bc65318d3f6
 
 ## مقداردهی
 
+<<<<<<< HEAD
 در نظر داشته باشید که مقداردهی با علامت `=` نیز یک عملگر است. در جدول اولویت‌ها با اولویت پایین `3` قرار گرفته است.
+=======
+Let's note that an assignment `=` is also an operator. It is listed in the precedence table with the very low priority of `2`.
+>>>>>>> 71da17e5960f1c76aad0d04d21f10bc65318d3f6
 
 به همین دلیل است که وقتی متغیری را مقدار دهی می‌کنیم، مانند `x = 2 * 2 + 1`، ابتدا عملیات محاسباتی انجام شده و سپس مقداردهی `=` صورت می‌گیرد و نتیجه را داخل `x` ذخیره می‌کند. 
 

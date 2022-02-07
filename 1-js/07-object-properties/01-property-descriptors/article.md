@@ -318,7 +318,11 @@ for (let key in user) {
 
 ...اما این روش پرچم‌ها را کپی نمی‌کند. پس اگر ما کپی‌برداری «بهتری» بخواهیم `Object.defineProperties` ترجیح داده می‌شود.
 
+<<<<<<< HEAD
 تفاوتی دیگر این است که `for..in` ویژگی‌های سمبلی (symbolic) را نادیده می‌گیرد، اما `Object.getOwnPropertyDescriptors` *تمام* توصیف‌کننده‌های ویژگی‌ها را برمی‌گرداند که شامل ویژگی‌های سمبلی هم می‌شود.
+=======
+Another difference is that `for..in` ignores symbolic and non-enumerable properties, but `Object.getOwnPropertyDescriptors` returns *all* property descriptors including symbolic and non-enumerable ones.
+>>>>>>> 71da17e5960f1c76aad0d04d21f10bc65318d3f6
 
 ## مهر و موم کردن شیء به طور کلی
 

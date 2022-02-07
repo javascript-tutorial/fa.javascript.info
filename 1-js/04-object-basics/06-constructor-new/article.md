@@ -1,6 +1,10 @@
 # سازنده، عملگر "new"
 
+<<<<<<< HEAD
 سینتکس معمولی {...} اجازه ساخت یک شیء را می دهد. اما غالبا ما نیاز داریم که شیء های متشابه زیادی ایجاد کنیم، مثل چند کاربر یا آیتم های منو و... 
+=======
+The regular `{...}` syntax allows us to create one object. But often we need to create many similar objects, like multiple users or menu items and so on.
+>>>>>>> 71da17e5960f1c76aad0d04d21f10bc65318d3f6
 
 این می تواند با استفاده از تابع های سازنده و عملگر `new` انجام شود.
 
