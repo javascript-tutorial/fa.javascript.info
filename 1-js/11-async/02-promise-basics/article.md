@@ -125,7 +125,7 @@ let promise = new Promise(function(resolve, reject) {
 
 ```smart header="داخلی هستند `result` و `state`"
 .استفاده کنیم. در زیر توضیح داده شده‌اند `.then`/`.catch`/`.finally` داخلی هستند. ما نمی‌توانیم مستقیماً به آن‌ها دسترسی داشته باشیم. برای این کار می‌توانیم از متدهای Promise شیء `result` و `state` ویژگی های
-```
+`````
 
 ## مصرف‌کنندگان: then, catch, finally
 
@@ -158,31 +158,31 @@ let promise = new Promise(function(resolve, reject) {
 // اجرا می کند resolve را .then اولین تابع در
 promise.then(
 *!*
-  result => alert(result), // shows "done!" after 1 second
+  result => alert(result), // نشان می‌دهد "Done!" بعد از 1 ثانیه
 */!*
-  error => alert(error) // doesn't run
+  error => alert(error) //  اجرا نمی‌شود
 );
 ```
 
-The first function was executed.
+اولین تابع اجرا شد.
 
-And in the case of a rejection, the second one:
+و در صورت ردشدن دومی:
 
 ```js run
 let promise = new Promise(function(resolve, reject) {
   setTimeout(() => reject(new Error("Whoops!")), 1000);
 });
 
-// reject runs the second function in .then
+// اجرا می کند .then تابع دوم را در reject 
 promise.then(
-  result => alert(result), // doesn't run
+  result => alert(result), // اجرا نمی‌شود
 *!*
-  error => alert(error) // shows "Error: Whoops!" after 1 second
+  error => alert(error) // نشان می‌دهد "Error: Whoops!" بعد از 1 ثانیه
 */!*
 );
 ```
 
-If we're interested only in successful completions, then we can provide only one function argument to `.then`:
+اگر فقط به تکمیل موفقیت‌آمیز علاقه داریم، می‌توانیم تنها یک آرگومان تابع را برای `then.` ارائه کنیم:
 
 ```js run
 let promise = new Promise(resolve => {
@@ -190,11 +190,11 @@ let promise = new Promise(resolve => {
 });
 
 *!*
-promise.then(alert); // shows "done!" after 1 second
+promise.then(alert); // نشان می‌دهد "done!" بعد از 1 ثانیه
 */!*
 ```
 
-### catch
+### متدِ catch
 
 If we're interested only in errors, then we can use `null` as the first argument: `.then(null, errorHandlingFunction)`. Or we can use `.catch(errorHandlingFunction)`, which is exactly the same:
 
