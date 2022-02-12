@@ -196,7 +196,7 @@ promise.then(alert); // نشان می‌دهد "done!" بعد از 1 ثانیه
 
 ### متدِ catch
 
-If we're interested only in errors, then we can use `null` as the first argument: `.then(null, errorHandlingFunction)`. Or we can use `.catch(errorHandlingFunction)`, which is exactly the same:
+اگر فقط به خطاها علاقه‌مند هستیم، می‌توانیم از `null` به عنوان اولین آرگومان استفاده کنیم: `then(null، errorHandlingFunction).`. یا می‌توانیم از `catch(errorHandlingFunction).` استفاده کنیم که دقیقاً مشابه است:
 
 
 ```js run
@@ -206,32 +206,32 @@ let promise = new Promise((resolve, reject) => {
 
 *!*
 // .catch(f) is the same as promise.then(null, f)
-promise.catch(alert); // shows "Error: Whoops!" after 1 second
+promise.catch(alert); // .را بعد از 1 ثانیه نشان می‌دهد "Error: Whoops!" خطای
 */!*
 ```
 
-The call `.catch(f)` is a complete analog of `.then(null, f)`, it's just a shorthand.
+فراخوانی `catch(f).` یک تشابه کامل از `then(null, f).` است. این فقط یک کوتاه نویسی است.
 
-### finally
+### متدِ finally
 
-Just like there's a `finally` clause in a regular `try {...} catch {...}`, there's `finally` in promises.
+درست مانند یک بند `finally` در یک `catch {...} try {...}` معمولی، در وعده‌ها(promises) نیز `finally` وجود دارد.
 
-The call `.finally(f)` is similar to `.then(f, f)` in the sense that `f` always runs when the promise is settled: be it resolve or reject.
+فراخوانی `finally(f).` شبیه به `then(f, f).` است به این معنا که `f` همیشه زمانی که وعده(promise) تسویه(settled) می‌شود اجرا می‌شود: خواه حل‌وفصل(resolve) یا رد(reject) شود.
 
-`finally` is a good handler for performing cleanup, e.g. stopping our loading indicators, as they are not needed anymore, no matter what the outcome is.
+متدِ `finally` یک کنترل‌کننده خوب برای انجام پاکسازی است، به عنوان مثال. نشانگرهای بارگیری(loading indicators) خود را متوقف می‌کنیم، زیرا بدون توجه به نتیجه، دیگر به آن‌ها نیازی نیست.
 
-Like this:
+مثل این:
 
 ```js
 new Promise((resolve, reject) => {
-  /* do something that takes time, and then call resolve/reject */
+  /* را فراخوانی کنید resolve/reject کاری را انجام دهید که زمان می‌برد و سپس */
 })
 *!*
-  // runs when the promise is settled, doesn't matter successfully or not
-  .finally(() => stop loading indicator)
-  // so the loading indicator is always stopped before we process the result/error
+  // زمانی اجرا می‌شود که وعده تسویه شود، مهم نیست موفقیت‌آمیز باشد یا نه
+  .finally(() => توقف نشانه‌گر بارگیری)
+  // بنابراین نشانگر بارگیری همیشه قبل از پردازش نتیجه/خطا متوقف می‌شود
 */!*
-  .then(result => show result, err => show error)
+  .then(result => نمایش نتیجه, err => نمایش خطا)
 ```
 
 That said, `finally(f)` isn't exactly an alias of `then(f,f)` though. There are few subtle differences:
