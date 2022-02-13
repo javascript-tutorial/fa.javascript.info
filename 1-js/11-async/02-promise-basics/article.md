@@ -234,12 +234,12 @@ new Promise((resolve, reject) => {
   .then(result => نمایش نتیجه, err => نمایش خطا)
 ```
 
-That said, `finally(f)` isn't exactly an alias of `then(f,f)` though. There are few subtle differences:
+با این حال، `finally(f)` دقیقاً نام مستعار `then(f,f)` نیست. چند تفاوت ظریف وجود دارد:
 
-1. A `finally` handler has no arguments. In `finally` we don't know whether the promise is successful or not. That's all right, as our task is usually to perform "general" finalizing procedures.
-2. A `finally` handler passes through results and errors to the next handler.
+۱. یک کنترل‌کننده `finally` هیچ آرگومانی ندارد. در `finally` ما نمی‌دانیم که آیا وعده(promise) موفق است یا نه. همه چیز درست است، زیرا وظیفه ما معمولاً انجام مراحل نهایی‌سازی "عمومی" است.  
+۲. یک کنترل‌کننده `finally` نتایج و خطاها را به کنترل‌کننده بعدی منتقل می‌کند.
 
-    For instance, here the result is passed through `finally` to `then`:
+    :منتقل می‌شود `then` به `finally` به عنوان مثال، در اینجا نتیجه از
     ```js run
     new Promise((resolve, reject) => {
       setTimeout(() => resolve("result"), 2000)
