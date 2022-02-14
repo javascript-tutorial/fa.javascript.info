@@ -1,12 +1,12 @@
-# Custom errors, extending Error
+# ارورهای شخصی‌سازی شده، تعمیم دادن Error
 
-When we develop something, we often need our own error classes to reflect specific things that may go wrong in our tasks. For errors in network operations we may need `HttpError`, for database operations `DbError`, for searching operations `NotFoundError` and so on.
+زمانی که ما چیزی را توسعه می‌دهیم، اغلب اوقات به کلاس‌های ارور خودمان برای بازتاب دادن اشتباهات خاصی که ممکن است در کارهایمان رخ دهند نیاز داریم. برای ارورهای درون عملیات شبکه‌ای ممکن است به `HttpError` نیاز داشته باشیم، برای عملیات پایگاه داده به `DbError`، برای عملیات جستجو به `NotFoundError` و غیره.
 
-Our errors should support basic error properties like `message`, `name` and, preferably, `stack`. But they also may have other properties of their own, e.g. `HttpError` objects may have a `statusCode` property with a value like `404` or `403` or `500`.
+ارورهای ما باید از ویژگی‌های اولیه ارور مانند `message`، `name` و ترجیحا `stack` هم پشتیبانی کنند. اما آن‌ها ممکن است ویژگی‌های خود را داشته باشند، برای مثال شیءهای `HttpError` ممکن است ویژگی `statusCode` را با مقداری مانند `404` یا `403` یا `500` داشته باشند.
 
-JavaScript allows to use `throw` with any argument, so technically our custom error classes don't need to inherit from `Error`. But if we inherit, then it becomes possible to use `obj instanceof Error` to identify error objects. So it's better to inherit from it.
+جاوااسکریپت اجازه می‌دهد که از `throw` همراه با هر آرگومانی استفاده کنیم، پس از لحاظ فنی ارورهای شخصی‌سازی شده ما نیازی ندارند که از `Error` ارث‌بری کنند. اما اگر ما از آن ارث‌بری کنیم، سپس استفاده از `obj instanceof Error` برای شناسایی شیءهای ارور ممکن می‌شود. پس بهتر است از آن ارث‌بری کنیم. 
 
-As the application grows, our own errors naturally form a hierarchy. For instance, `HttpTimeoutError` may inherit from `HttpError`, and so on.
+همانطور که برنامه رشد می‌کند، طبیعتا ارورهای ما یک سلسه مراتب تشکیل می‌دهند. برای مثال، `HttpTimeoutError` ممکن است از `HttpError` ارث‌بری کند و همینطور ادامه داشته باشد.
 
 ## Extending Error
 
