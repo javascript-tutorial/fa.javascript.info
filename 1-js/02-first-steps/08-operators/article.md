@@ -205,11 +205,7 @@ alert( +apples + +oranges ); // 5
 | 2 | مقداردهی | `=` |
 | ... | ... | ... |
 
-<<<<<<< HEAD
-همانطور که می‌بینیم «عملگر + یگانه» اولویت `15` دارد که از عملگر جمع ( + دوگانه) با اولویت `13` بالاتر است. به همین دلیل است که در عبارت `"+apples + +oranges"` عملگرهای + یگانه پیش از علامت جمع اجرا می‌شوند.
-=======
-As we can see, the "unary plus" has a priority of `15` which is higher than the `12` of "addition" (binary plus). That's why, in the expression `"+apples + +oranges"`, unary pluses work before the addition.
->>>>>>> 29216730a877be28d0a75a459676db6e7f5c4834
+همانطور که می‌بینیم «عملگر + یگانه» اولویت `15` دارد که از عملگر جمع ( + دوگانه) با اولویت `12` بالاتر است. به همین دلیل است که در عبارت `"+apples + +oranges"` عملگرهای + یگانه پیش از علامت جمع اجرا می‌شوند.
 
 ## مقداردهی
 
