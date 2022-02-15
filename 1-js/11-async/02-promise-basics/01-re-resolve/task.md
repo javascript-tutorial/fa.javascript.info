@@ -1,8 +1,8 @@
 
-# Re-resolve a promise?
+# آیا Re-resolve یک وعده(promise) است؟
 
 
-What's the output of the code below? 
+خروجی کد زیر چیست؟
 
 ```js
 let promise = new Promise(function(resolve, reject) {
