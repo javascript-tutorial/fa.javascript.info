@@ -3,7 +3,7 @@ function delay(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-delay(3000).then(() => alert('runs after 3 seconds'));
+delay(3000).then(() => alert('بعد از 3 ثانیه اجرا می‌شود'));
 ```
 
-Please note that in this task `resolve` is called without arguments. We don't return any value from `delay`, just ensure the delay.
+لطفاً توجه داشته باشید که در این کار `resolve` بدون آرگومان فراخوانی می‌شود. ما هیچ مقداری را از `delay` بر نمی‌گردانیم، فقط از تاخیر اطمینان حاصل کنید.
