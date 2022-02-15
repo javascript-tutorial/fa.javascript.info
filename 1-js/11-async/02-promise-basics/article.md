@@ -280,11 +280,11 @@ promise.then(alert); // done! (همین الآن نشان می‌دهد)
 
 در مرحله بعد، بیایید نمونه‌های عملی بیشتری را ببینیم که چگونه وعده‌ها می‌توانند به ما در نوشتن کد ناهمزمان کمک کنند.
 
-## Example: loadScript [#loadscript]
+## مثال: loadScript [#loadscript]
 
-We've got the `loadScript` function for loading a script from the previous chapter.
+ما تابع `loadScript` را برای بارگیری یک اسکریپت از فصل قبل داریم.
 
-Here's the callback-based variant, just to remind us of it:
+در اینجا یک نوع مبتنی بر کال‌بک(callback) است، فقط برای یادآوری آن:
 
 ```js
 function loadScript(src, callback) {
@@ -298,9 +298,9 @@ function loadScript(src, callback) {
 }
 ```
 
-Let's rewrite it using Promises.
+بیایید آن را با استفاده از Promises بازنویسی کنیم.
 
-The new function `loadScript` will not require a callback. Instead, it will create and return a Promise object that resolves when the loading is complete. The outer code can add handlers (subscribing functions) to it using `.then`:
+تابع جدید `loadScript` نیازی به کال‌بک نخواهد داشت. درعوض، یک شی Promise ایجاد و برمی‌گرداند که پس از اتمام بارگیری حل‌وفصل می‌شود. کد بیرونی می‌تواند با استفاده از `then.`، اجراکنندگان (توابع اشتراک) را به آن اضافه کند:
 
 ```js run
 function loadScript(src) {
@@ -329,12 +329,12 @@ promise.then(
 promise.then(script => alert('Another handler...'));
 ```
 
-We can immediately see a few benefits over the callback-based pattern:
+ما می‌توانیم بلافاصله چند مزیت را نسبت به الگوی مبتنی بر کال‌بک(callback) مشاهده کنیم:
 
 
 | Promises | Callbacks |
 |----------|-----------|
-| Promises allow us to do things in the natural order. First, we run `loadScript(script)`, and `.then` we write what to do with the result. | We must have a `callback` function at our disposal when calling `loadScript(script, callback)`. In other words, we must know what to do with the result *before* `loadScript` is called. |
-| We can call `.then` on a Promise as many times as we want. Each time, we're adding a new "fan", a new subscribing function, to the "subscription list". More about this in the next chapter: [](info:promise-chaining). | There can be only one callback. |
+| وعده‌ها به ما این امکان را می‌دهند که کارها را به ترتیب طبیعی انجام دهیم. ابتدا `(loadScript(script` را اجرا می‌کنیم و `.then` می‌نویسیم که با نتیجه چه کنیم. | هنگام فراخوانی `loadScript(script, callback)` باید یک تابع `callback` در اختیار داشته باشیم. به عبارت دیگر، *قبل* از فراخوانی `loadScript` باید بدانیم که با نتیجه چه کنیم. |
+| می‌توانیم `.then` را در یک Promise هر چند بار که بخواهیم فراخوانی کنیم. هر بار، یک `طرفدار` جدید، یک تابع اشتراک جدید، به "لیست اشتراک" اضافه می‌کنیم. اطلاعات بیشتر در مورد این در فصل بعدی: [](info:promise-chaining). | فقط یک کال‌بک می‌تواند وجود داشته باشد. |
 
-So promises give us better code flow and flexibility. But there's more. We'll see that in the next chapters.
+بنابراین وعده‌ها جریان کد و انعطاف‌پذیری بهتری به ما می‌دهند. اما موارد بیشتری وجود دارد. آن را در فصل‌های بعدی خواهیم دید.
