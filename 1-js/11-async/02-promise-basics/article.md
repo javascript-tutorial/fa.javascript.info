@@ -245,10 +245,10 @@ new Promise((resolve, reject) => {
       setTimeout(() => resolve("result"), 2000)
     })
       .finally(() => alert("Promise ready"))
-      .then(result => alert(result)); // <-- .then handles the result
+      .then(result => alert(result)); // <-- نتیجه را اجرا می‌کند .then
     ```
 
-    And here there's an error in the promise, passed through `finally` to `catch`:
+    :پاس داده می‌شود `catch` به `finally` و در اینجا یک خطایی در وعده وجود دارد که از
 
     ```js run
     new Promise((resolve, reject) => {
@@ -258,27 +258,27 @@ new Promise((resolve, reject) => {
       .catch(err => alert(err));  // <-- .catch handles the error object
     ```
 
-That's very convenient, because `finally` is not meant to process a promise result. So it passes it through.
+این بسیار راحت است، زیرا `finally` به معنای پردازش یک نتیجه وعده(promise) نیست. بنابراین از آن عبور می‌کند.
 
-We'll talk more about promise chaining and result-passing between handlers in the next chapter.
+در فصل بعدی بیشتر در مورد زنجیره وعده(promise) و انتقال نتیجه بین اجراکنندگان صحبت خواهیم کرد.
 
 
-````smart header="We can attach handlers to settled promises"
-If a promise is pending, `.then/catch/finally` handlers wait for it. Otherwise, if a promise has already settled, they just run:
+````smart header="ما می توانیم اجراکننده‌ها را به وعده‌های تسویه‌شده متصل کنیم"
+اگر وعده‌ای در حال تعلیق است، اجراکنندگان `then/catch/finally.` منتظر آن هستند. در غیر این صورت، اگر وعده‌ای قبلاً تسویه شده باشد، آنها فقط اجرا می کنند:
 
 ```js run
-// the promise becomes resolved immediately upon creation
+// وعده بلافاصله پس از ایجاد حل‌وفصل می‌شود
 let promise = new Promise(resolve => resolve("done!"));
 
-promise.then(alert); // done! (shows up right now)
+promise.then(alert); // done! (همین الآن نشان می‌دهد)
 ```
 
-Note that this makes promises more powerful than the real life "subscription list" scenario. If the singer has already released their song and then a person signs up on the subscription list, they probably won't receive that song. Subscriptions in real life must be done prior to the event.
+توجه داشته باشید که این باعث می‌شود وعده‌ها قدرتمندتر از سناریوی واقعی "فهرست اشتراک" باشد. اگر خواننده قبلا آهنگ خود را منتشر کرده باشد و سپس شخصی در لیست اشتراک ثبت نام کند، احتمالاً آن آهنگ را دریافت نخواهد کرد. اشتراک در دنیای واقعی باید قبل از رویداد انجام شود.
 
-Promises are more flexible. We can add handlers any time: if the result is already there, they just execute.
+وعده‌ها انعطاف‌پذیرتر هستند. ما می توانیم هر زمان که بخواهیم اجراکنندگان را اضافه کنیم: اگر نتیجه از قبل وجود داشته باشد، آنها فقط اجرا می‌شوند.
 ````
 
-Next, let's see more practical examples of how promises can help us write asynchronous code.
+در مرحله بعد، بیایید نمونه‌های عملی بیشتری را ببینیم که چگونه وعده‌ها می‌توانند به ما در نوشتن کد ناهمزمان کمک کنند.
 
 ## Example: loadScript [#loadscript]
 
