@@ -1,15 +1,15 @@
 
-# Animated circle with promise
+# دایره متحرک با وعده(promise)
 
-Rewrite the `showCircle` function in the solution of the task <info:task/animate-circle-callback> so that it returns a promise instead of accepting a callback.
+تابع `showCircle` را در راه‌حل تمرین <info:task/animate-circle-callback> بازنویسی کنید تا به جای پذیرش کال‌بک، یک وعده را برگرداند.
 
-The new usage:
+کاربرد جدید:
 
 ```js
 showCircle(150, 150, 100).then(div => {
   div.classList.add('message-ball');
-  div.append("Hello, world!");
+  div.append("سلام دنیا!");
 });
 ```
 
-Take the solution of the task <info:task/animate-circle-callback> as the base.
+راه‌حل تمرین <info:task/animate-circle-callback> را به عنوان پایه در نظر بگیرید.
