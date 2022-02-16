@@ -18,7 +18,7 @@
 
 ```js
 let promise = new Promise(function(resolve, reject) {
-  // executor (the producing code, "singer")
+  // اجراکننده (کد تولیدکننده , "خواننده")
 });
 ```
 
@@ -51,7 +51,7 @@ let promise = new Promise(function(resolve, reject) {
   //  ساخته می‌شود به طور خودکار اجرا می‌شود (promise)این تابع زمانی که وعده
 
   // انجام شد "done" پس از 1 ثانیه سیگنال می‌دهد که کار با نتیجه 
-  setTimeout(() => *!*resolve("done")*/!*, 1000);
+  setTimeout(() => *!*resolve("انجام شده")*/!*, 1000);
 });
 ```
 
@@ -91,7 +91,7 @@ let promise = new Promise(function(resolve, reject) {
 ```js
 let promise = new Promise(function(resolve, reject) {
 *!*
-  resolve("done");
+  resolve("انجام شده");
 */!*
 
   reject(new Error("…")); // نادیده گرفته شد
@@ -152,13 +152,13 @@ promise.then(
 
 ```js run
 let promise = new Promise(function(resolve, reject) {
-  setTimeout(() => resolve("done!"), 1000);
+  setTimeout(() => resolve("انجام شده!"), 1000);
 });
 
 // اجرا می کند resolve را .then اولین تابع در
 promise.then(
 *!*
-  result => alert(result), // نشان می‌دهد "Done!" بعد از 1 ثانیه
+  result => alert(result), // بعد از 1 ثانیه  "انجام شده!" را نشان می‌دهد 
 */!*
   error => alert(error) //  اجرا نمی‌شود
 );
@@ -186,7 +186,7 @@ promise.then(
 
 ```js run
 let promise = new Promise(resolve => {
-  setTimeout(() => resolve("done!"), 1000);
+  setTimeout(() => resolve("انجام شده!"), 1000);
 });
 
 *!*
@@ -244,7 +244,7 @@ new Promise((resolve, reject) => {
     new Promise((resolve, reject) => {
       setTimeout(() => resolve("result"), 2000)
     })
-      .finally(() => alert("Promise ready"))
+      .finally(() => alert("Promise آماده است"))
       .then(result => alert(result)); // <-- نتیجه را اجرا می‌کند .then
     ```
 
@@ -252,10 +252,10 @@ new Promise((resolve, reject) => {
 
     ```js run
     new Promise((resolve, reject) => {
-      throw new Error("error");
+      throw new Error("خطا");
     })
-      .finally(() => alert("Promise ready"))
-      .catch(err => alert(err));  // <-- .catch handles the error object
+      .finally(() => alert("Promise آماده است"))
+      .catch(err => alert(err));  // <-- شیء خطا را اجرا می‌کند .catch 
     ```
 
 این بسیار راحت است، زیرا `finally` به معنای پردازش یک نتیجه وعده(promise) نیست. بنابراین از آن عبور می‌کند.
@@ -268,9 +268,9 @@ new Promise((resolve, reject) => {
 
 ```js run
 // وعده بلافاصله پس از ایجاد حل‌وفصل می‌شود
-let promise = new Promise(resolve => resolve("done!"));
+let promise = new Promise(resolve => resolve("انجام شده!"));
 
-promise.then(alert); // done! (همین الآن نشان می‌دهد)
+promise.then(alert); //  (همین الآن نشان می‌دهد) انجام شده!
 ```
 
 توجه داشته باشید که این باعث می‌شود وعده‌ها قدرتمندتر از سناریوی واقعی "فهرست اشتراک" باشد. اگر خواننده قبلا آهنگ خود را منتشر کرده باشد و سپس شخصی در لیست اشتراک ثبت نام کند، احتمالاً آن آهنگ را دریافت نخواهد کرد. اشتراک در دنیای واقعی باید قبل از رویداد انجام شود.
@@ -292,7 +292,7 @@ function loadScript(src, callback) {
   script.src = src;
 
   script.onload = () => callback(null, script);
-  script.onerror = () => callback(new Error(`Script load error for ${src}`));
+  script.onerror = () => callback(new Error(`خطای بارگیری اسکریپت برای ${src}`));
 
   document.head.append(script);
 }
@@ -309,7 +309,7 @@ function loadScript(src) {
     script.src = src;
 
     script.onload = () => resolve(script);
-    script.onerror = () => reject(new Error(`Script load error for ${src}`));
+    script.onerror = () => reject(new Error(`خطای بارگیری اسکریپت برای ${src}`));
 
     document.head.append(script);
   });
@@ -322,11 +322,11 @@ Usage:
 let promise = loadScript("https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.js");
 
 promise.then(
-  script => alert(`${script.src} is loaded!`),
+  script => alert(`${script.src} بارگذاری شده است!`),
   error => alert(`Error: ${error.message}`)
 );
 
-promise.then(script => alert('Another handler...'));
+promise.then(script => alert('اجراکننده دیگر...'));
 ```
 
 ما می‌توانیم بلافاصله چند مزیت را نسبت به الگوی مبتنی بر کال‌بک(callback) مشاهده کنیم:
