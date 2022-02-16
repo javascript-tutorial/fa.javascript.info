@@ -1,5 +1,5 @@
 
-# آیا Re-resolve یک وعده(promise) است؟
+# آیا یک Promise دوباره resolve می‌شود؟
 
 
 خروجی کد زیر چیست؟
