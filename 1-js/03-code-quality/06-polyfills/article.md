@@ -42,7 +42,11 @@ height = height !== undefined && height !== null ? height : 100;
 
 حالا که صحبتش شد، بهتر است بدانید [Babel](http://babeljs.io/) یکی از برجسته‌ترین ترنسپایلرها است.
 
+<<<<<<< HEAD
 سیستم‌های build پروژه مدرن مثل [webpack](http://webpack.github.io/) این امکان را می‌دهند که بعد از هر بار تغییر کد، ترنسپایلر به‌صورت اتوماتیک اجرا شود و برای همین ادغام کردن آن در روند توسعه کار بسیار ساده‌ای است.
+=======
+Modern project build systems, such as [webpack](https://webpack.js.org/), provide means to run transpiler automatically on every code change, so it's very easy to integrate into development process.
+>>>>>>> e2f9e5840737e00846bfd492192d8a3828820c60
 
 ## پلیفیل‌ها
 
@@ -82,7 +86,11 @@ if (!Math.trunc) { // اگر چنین تابعی وجود ندارد
 
 فراموش نکنید که از یک ترنسپایلر (اگر از syntax یا عملگرهای مدرن استفاده می‌کنید) و پلیفیل‌ها (برای اضافه کردن تابع‌هایی که ممکن است موجود نباشند) استفاده کنید. و با این کار مطمئن خواهید بود که کد شما کار می‌کند.
 
+<<<<<<< HEAD
 برای مثال، بعدها که با جاوااسکریپت آشنایی بیشتری پیدا کنید، می‌توانید یک سیستم build کد با [webpack](http://webpack.github.io/) و پلاگین [babel-loader](https://github.com/babel/babel-loader) راه‌اندازی کنید.
+=======
+For example, later when you're familiar with JavaScript, you can setup a code build system based on [webpack](https://webpack.js.org/) with [babel-loader](https://github.com/babel/babel-loader) plugin.
+>>>>>>> e2f9e5840737e00846bfd492192d8a3828820c60
 
 منابع خوبی که نشان می‌دهند فیچرهای مختلف در چه حالتی از پشتیبانی قرار دارند:
 - <https://kangax.github.io/compat-table/es6/> - برای جاوااسکریپت.
