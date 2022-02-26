@@ -2,13 +2,13 @@ importance: 5
 
 ---
 
-# Inherit from SyntaxError
+# ارث‌بری از SyntaxError
 
-Create a class `FormatError` that inherits from the built-in `SyntaxError` class.
+یک کلاس `FormatError` بسازید که از کلاس درون‌ساخت `SyntaxError` ارث‌بری می‌کند.
 
-It should support `message`, `name` and `stack` properties.
+این کلاس باید از ویژگی‌های `message`، `name` و `stack` پشتیبانی کند.
 
-Usage example:
+مثالی از کاربرد:
 
 ```js
 let err = new FormatError("formatting error");
@@ -18,5 +18,5 @@ alert( err.name ); // FormatError
 alert( err.stack ); // stack
 
 alert( err instanceof FormatError ); // true
-alert( err instanceof SyntaxError ); // true (because inherits from SyntaxError)
+alert( err instanceof SyntaxError ); // true (ارث‌بری می‌کند SyntaxError چون از)
 ```
