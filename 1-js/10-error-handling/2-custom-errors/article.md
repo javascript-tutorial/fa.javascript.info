@@ -321,7 +321,6 @@ try {
 
 پس کد بیرونی `instanceof ReadError` را بررسی می‌کند و تمام. نیازی به لیست کردن تمام انواع ارور احتمالی نیست.
 
-The approach is called "wrapping exceptions", because we take "low level" exceptions and "wrap" them into `ReadError` that is more abstract. It is widely used in object-oriented programming.
 این روش «دربرگرفتن استثناءها» نامیده می‌شود چون ما استثناءهای «سطح پایین» را دریافت می‌کنیم و آن‌ها را درون `ReadError` که خلاصه‌تر است «دربرمی‌گیریم».
 
 ## خلاصه
