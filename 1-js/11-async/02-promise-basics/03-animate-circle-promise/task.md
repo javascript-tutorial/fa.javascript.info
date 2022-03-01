@@ -1,7 +1,7 @@
 
-# دایره متحرک با وعده(promise)
+# دایره متحرک با Promise
 
-تابع `showCircle` را در راه‌حل تمرین <info:task/animate-circle-callback> بازنویسی کنید تا به جای پذیرش کال‌بک، یک وعده را برگرداند.
+تابع `showCircle` را در راه‌حل تمرین <info:task/animate-circle-callback> بازنویسی کنید تا به جای پذیرش کال‌بک، یک Promise را برگرداند.
 
 کاربرد جدید:
 
