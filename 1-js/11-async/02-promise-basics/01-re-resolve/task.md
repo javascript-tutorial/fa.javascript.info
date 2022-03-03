@@ -1,8 +1,8 @@
 
-# Re-resolve a promise?
+# آیا یک Promise دوباره resolve می‌شود؟
 
 
-What's the output of the code below? 
+خروجی کد زیر چیست؟
 
 ```js
 let promise = new Promise(function(resolve, reject) {

@@ -1,14 +1,14 @@
 
-# Delay with a promise
+# تاخیر با Promise
 
-The built-in function `setTimeout` uses callbacks. Create a promise-based alternative.
+تابع داخلی `setTimeout` از کال‌بک‌ها استفاده می‌کند. یک جایگزین مبتنی بر Promise ایجاد کنید.
 
-The function `delay(ms)` should return a promise. That promise should resolve after `ms` milliseconds, so that we can add `.then` to it, like this:
+تابع `delay(ms)` باید یک Promise برگرداند. این وعده باید پس از `ms` میلی‌ثانیه حل‌وفصل (resolve) شود، به طوری که می‌توانیم `then.` را به آن اضافه کنیم، مانند این:
 
 ```js
 function delay(ms) {
-  // your code
+  // کد شما
 }
 
-delay(3000).then(() => alert('runs after 3 seconds'));
+delay(3000).then(() => alert('بعد از 3 ثانیه اجرا می‌شود'));
 ```

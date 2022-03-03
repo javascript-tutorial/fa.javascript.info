@@ -1,202 +1,202 @@
-# Promise
+# کلاس Promise
 
-Imagine that you're a top singer, and fans ask day and night for your upcoming song.
+تصور کنید که یک خواننده برتر هستید و طرفداران شب و روز درخواست آهنگ بعدی شما را دارند.
 
-To get some relief, you promise to send it to them when it's published. You give your fans a list. They can fill in their email addresses, so that when the song becomes available, all subscribed parties instantly receive it. And even if something goes very wrong, say, a fire in the studio, so that you can't publish the song, they will still be notified.
+برای اینکه کمی راحت بشوید، قول می‌دهید پس از انتشار آن را برای آن‌ها ارسال کنید. شما یک لیست به طرفداران خود می‌دهید. آن‌ها می‌توانند آدرس ایمیل خود را پر کنند، به طوری که وقتی آهنگ در دسترس قرار گرفت، همه مشترکین فورا آن را دریافت کنند. و حتی اگر مشکلی پیش بیاید، مثلا آتش سوزی در استودیو، به طوری که نتوانید آهنگ را منتشر کنید، باز هم به آن‌ها اطلاع داده خواهد شد.
 
-Everyone is happy: you, because the people don't crowd you anymore, and fans, because they won't miss the song.
+همه خوشحال هستند: شما، چون مردم دیگر مزاحم شما نمی‌شوند، و طرفداران، چون آهنگ را از دست نمی‌دهند.
 
-This is a real-life analogy for things we often have in programming:
+این یک تشبیه واقعی برای چیزهایی است که اغلب در برنامه‌نویسی داریم:
 
-1. A "producing code" that does something and takes time. For instance, some code that loads the data over a network. That's a "singer".
-2. A "consuming code" that wants the result of the "producing code" once it's ready. Many functions  may need that result. These are the "fans".
-3. A *promise* is a special JavaScript object that links the "producing code" and the "consuming code" together. In terms of our analogy: this is the "subscription list". The "producing code" takes whatever time it needs to produce the promised result, and the "promise" makes that result available to all of the subscribed code when it's ready.
+1. یک «کد تولید‌کننده» که کاری انجام می‌دهد و زمانی می‌برد. به عنوان مثال، کدهایی که داده‌ها را از طریق شبکه بارگیری می‌کند. این یک «خواننده» است.
+2. یک «کد مصرف‌کننده» که نتیجه‌ی «کد تولیدکننده» را پس از آماده شدن می خواهد. بسیاری از توابع ممکن است به آن نتیجه نیاز داشته باشند. اینها «طرفداران» هستند.
+3. یک *Promise* (معنی لغوی: قول/وعده) یک شیء خاص جاوااسکریپت است که «کد تولید‌کننده» و «کد مصرف‌کننده» را به یکدیگر پیوند می‌دهد. از نظر تشبیه ما: این «فهرست اشتراک» است. «کد تولید‌کننده» هر مقدار زمانی را که برای تولید نتیجه وعده داده شده نیاز دارد مصرف می‌کند و Promise آن نتیجه را پس از آماده شدن برای همه کدهای مشترک شده در دسترس قرار می‌دهد.
 
-The analogy isn't terribly accurate, because JavaScript promises are more complex than a simple subscription list: they have additional features and limitations. But it's fine to begin with.
+این تشبیه خیلی دقیق نیست، زیرا Promiseهای جاوا‌اسکریپت پیچیده‌تر از یک لیست اشتراک ساده است: آن‌ها دارای ویژگی‌ها و محدودیت‌های اضافی هستند. اما برای شروع خوب است.
 
-The constructor syntax for a promise object is:
+سینتکس سازنده برای یک شیء Promise به صورت زیر است:
 
 ```js
 let promise = new Promise(function(resolve, reject) {
-  // executor (the producing code, "singer")
+  // اجراکننده (کد تولیدکننده , "خواننده")
 });
 ```
 
-The function passed to `new Promise` is called the *executor*. When `new Promise` is created, the executor runs automatically. It contains the producing code which should eventually produce the result. In terms of the analogy above: the executor is the "singer".
+تابعی که به `new Promise` ارسال می‌شود *اجرا‌کننده* (executer) نامیده می‌شود. هنگامی که `new Promise` ایجاد می‌شود، اجرا‌کننده به طور خودکار اجرا می‌شود. این شامل کد تولید‌کننده است که در نهایت باید نتیجه را ایجاد کند. از نظر تشبیه بالا: اجراکننده «خواننده» است.
 
-Its arguments `resolve` and `reject` are callbacks provided by JavaScript itself. Our code is only inside the executor.
+آرگومان‌های آن `resolve` و `reject`  فراخوان‌هایی هستند که توسط خود جاوا‌اسکریپت ارائه شده است. کد ما فقط در داخل اجرا‌کننده است.
 
-When the executor obtains the result, be it soon or late, doesn't matter, it should call one of these callbacks:
+وقتی اجرا‌کننده به نتیجه رسید، چه زود باشد چه دیر، مهم نیست، باید یکی از این callback ها را فراخوانی کند:
 
-- `resolve(value)` — if the job is finished successfully, with result `value`.
-- `reject(error)` — if an error has occurred, `error` is the error object.
+- `resolve(value)` — `value` اگر کار با موفقیت به پایان رسید، با نتیجه‌ی.
+- `reject(error)` — همان شیء خطا است `error` ، اگر خطایی رخ داده باشد  
 
-So to summarize: the executor runs automatically and attempts to perform a job. When it is finished with the attempt, it calls `resolve` if it was successful or `reject` if there was an error.
+بنابراین به طور خلاصه: اجراکننده به طور خودکار اجرا می‌شود و تلاش می‌کند تا یک کار را انجام دهد. هنگامی که کار با تلاش به پایان رسید، در صورت موفقیت‌آمیز بودن، `resolve` یا در صورت وجود هر خطایی `reject` را فراخوانی می‌کند.
 
-The `promise` object returned by the `new Promise` constructor has these internal properties:
+شیء `promise` که توسط سازنده `new Promise` برگردانده شده است دارای این ویژگی‌های داخلی است:
 
-- `state` — initially `"pending"`, then changes to either `"fulfilled"` when `resolve` is called or `"rejected"` when `reject` is called.
-- `result` — initially `undefined`, then changes to `value` when `resolve(value)` called or `error` when `reject(error)` is called.
+- `state` — در ابتدا `"pending"` سپس با فراخوانی، `resolve` به `"fulfilled"` یا زمانی که `reject` فراخوانی می‌شود به `"rejected"` تغییر می‌کند.
+- `result` — در ابتدا `undefined`، سپس با فراخوانی `resolve(value)` به `value` یا زمانی که `reject(error)` فراخوانی می شود به  `error` تغییر می‌کند.
 
-So the executor eventually moves `promise` to one of these states:
+بنابراین اجرا‌کننده در نهایت `promise` را به یکی از این حالات منتقل می‌کند:
 
 ![](promise-resolve-reject.svg)
 
-Later we'll see how "fans" can subscribe to these changes.
+بعداً خواهیم دید که چگونه "طرفداران" می‌توانند در این تغییرات مشترک شوند.
 
-Here's an example of a promise constructor and a simple executor function with  "producing code" that takes time (via `setTimeout`):
+در اینجا یک نمونه از سازنده Promise و یک تابع اجرا‌کننده ساده با «کد تولید‌کننده» داریم که زمانبر است (از طریق `setTimeout`):
 
 ```js run
 let promise = new Promise(function(resolve, reject) {
-  // the function is executed automatically when the promise is constructed
+  //  ساخته می‌شود به طور خودکار اجرا می‌شود Promise این تابع زمانی که 
 
-  // after 1 second signal that the job is done with the result "done"
-  setTimeout(() => *!*resolve("done")*/!*, 1000);
+  // انجام شد "done" پس از 1 ثانیه سیگنال می‌دهد که کار با نتیجه 
+  setTimeout(() => *!*resolve("انجام شده")*/!*, 1000);
 });
 ```
 
-We can see two things by running the code above:
+با اجرای کد بالا می توانیم دو چیز را ببینیم:
 
-1. The executor is called automatically and immediately (by `new Promise`).
-2. The executor receives two arguments: `resolve` and `reject`. These functions are pre-defined by the JavaScript engine, so we don't need to create them. We should only call one of them when ready.
+۱. اجرا‌کننده به صورت خودکار و بلافاصله فراخوانی می‌شود (توسط `new Promise`).  
+۲. اجرا‌کننده دو آرگومان دریافت می‌کند: `resolve` و `reject`. این توابع توسط موتور جاوااسکریپت از پیش تعریف شده‌اند, بنابراین ما نیازی به ایجاد آن‌ها نداریم. وقتی آماده شدیم فقط باید یکی از آن‌ها را فراخوانی کنیم.
 
-    After one second of "processing" the executor calls `resolve("done")` to produce the result. This changes the state of the `promise` object:
+ پس از یک ثانیه "پردازش"، اجرا‌کننده `resolve("done")` را برای ایجاد نتیجه فراخوانی می‌کند. این وضعیت شیء `promise` را تغییر می‌ده:
 
     ![](promise-resolve-1.svg)
 
-That was an example of a successful job completion, a "fulfilled promise".
+این نمونه‌ای از تکمیل موفقیت آمیز کار بود، یک "fulfilled promise".
 
-And now an example of the executor rejecting the promise with an error:
+و حال نمونه‌ای از رد کردن (rejecting) یک Promise توسط اجرا‌کننده با یک خطا:
 
 ```js
 let promise = new Promise(function(resolve, reject) {
-  // after 1 second signal that the job is finished with an error
+  // بعد از 1 ثانیه سیگنال می‌دهد که کار با یک خطا تمام شده است
   setTimeout(() => *!*reject(new Error("Whoops!"))*/!*, 1000);
 });
 ```
 
-The call to `reject(...)` moves the promise object to `"rejected"` state:
+فراخوانیِ `(...)reject` شیء Promise را به وضعیت `"rejected"` می‌برد:
 
 ![](promise-reject-1.svg)
 
-To summarize, the executor should perform a job (usually something that takes time) and then call `resolve` or `reject` to change the state of the corresponding promise object.
+به طور خلاصه، اجرا‌کننده باید یک کار را انجام دهد (معمولاً کاری که زمان می‌برد) و سپس `resolve` یا `reject` را برای تغییر وضعیت شیء Promise مربوطه فراخوانی کند.
 
-A promise that is either resolved or rejected is called "settled", as opposed to an initially "pending" promise.
+به یک Promise که یا حل‌و‌فصل (resolved) می‌شود یا رد (rejected) می‌شود، «تسویه‌شده» ("settled") می‌گویند، برخلاف Promise که در ابتدا «درحال انتظار» ("pending") است.
 
-````smart header="There can be only a single result or an error"
-The executor should call only one `resolve` or one `reject`. Any state change is final.
+````smart header="تنها یک نتیجه یا یک خطا می تواند وجود داشته باشد"
+اجرا‌کننده باید فقط یک `resolve` یا یک `reject` را فراخوانی کند. هر تغییر وضعیتی نهایی است.
 
-All further calls of `resolve` and `reject` are ignored:
+همه فراخوانی‌های دیگر از `resolve` و `reject` نادیده گرفته می‌شوند:
 
 ```js
 let promise = new Promise(function(resolve, reject) {
 *!*
-  resolve("done");
+  resolve("انجام شده");
 */!*
 
-  reject(new Error("…")); // ignored
-  setTimeout(() => resolve("…")); // ignored
+  reject(new Error("…")); // نادیده گرفته شد
+  setTimeout(() => resolve("…")); // نادیده گرفته شد
 });
 ```
 
-The idea is that a job done by the executor may have only one result or an error.
+ایده این است که کار انجام شده توسط اجرا‌کننده ممکن است تنها یک نتیجه یا یک خطا داشته باشد.
 
-Also, `resolve`/`reject` expect only one argument (or none) and will ignore additional arguments.
+همچنین، `resolve`/`reject` تنها یک آرگومان (یا هیچی) را انتظار دارد و آرگومان‌های اضافی را نادیده می‌گیرد.
 ````
 
-```smart header="Reject with `Error` objects"
-In case something goes wrong, the executor should call `reject`. That can be done with any type of argument (just like `resolve`). But it is recommended to use `Error` objects (or objects that inherit from `Error`). The reasoning for that will soon become apparent.
+```smart header="با شیءهای `Error` رد (reject) کنید"
+در صورتی که مشکلی پیش بیاید، اجرا‌کننده باید `reject` را فراخوانی کند. این کار می‌تواند با هر نوع آرگومانی انجام شود (دقیقاً مانند `resolve`). اما توصیه می‌شود از اشیاء `Error` (یا اشیایی که از `Error` به ارث می‌برند) استفاده کنید. دلیل آن به زودی مشخص خواهد شد.
 ```
 
-````smart header="Immediately calling `resolve`/`reject`"
-In practice, an executor usually does something asynchronously and calls `resolve`/`reject` after some time, but it doesn't have to. We also can call `resolve` or `reject` immediately, like this:
+````smart header="فراخوانی بلافاصله `resolve`/`reject`"
+در عمل، یک اجرا‌کننده معمولاً کاری را به صورت ناهمزمان انجام می‌دهد و پس از مدتی `resolve`/`reject` را فراخوانی می‌کند، اما مجبور نیست. همچنین می‌توانیم بلافاصله `reject` یا `resolve` را فراخوانی کنیم، مانند این:
 
 ```js
 let promise = new Promise(function(resolve, reject) {
-  // not taking our time to do the job
-  resolve(123); // immediately give the result: 123
+  // وقت خود را برای انجام کار صرف نمی کنیم
+  resolve(123); // بلافاصله نتیجه را بدهید: 123
 });
 ```
 
-For instance, this might happen when we start to do a job but then see that everything has already been completed and cached.
+به عنوان مثال، این ممکن است زمانی اتفاق بیفتد که ما شروع به انجام یک کار می‌کنیم، اما بعد می‌بینیم که همه چیز قبلاً تکمیل شده و در حافظه پنهان(cache) ذخیره شده است.
 
-That's fine. We immediately have a resolved promise.
+مشکلی ندارد. ما بلافاصله یک Promise حل‌شده (resolved) داریم.
 ````
 
-```smart header="The `state` and `result` are internal"
-The properties `state` and `result` of the Promise object are internal. We can't directly access them. We can use the methods `.then`/`.catch`/`.finally` for that. They are described below.
-```
+```smart header="`state` و `result` داخلی هستند"
+ویژگی های `state` و `result` شیء Promise داخلی هستند. ما نمی‌توانیم مستقیماً به آن‌ها دسترسی داشته باشیم. برای این کار می‌توانیم از متدهای `.then`/`.catch`/`.finally` استفاده کنیم. در زیر توضیح داده شده‌اند.
+`````
 
-## Consumers: then, catch, finally
+## مصرف‌کنندگان: then, catch, finally
 
-A Promise object serves as a link between the executor (the "producing code" or "singer") and the consuming functions (the "fans"), which will receive the result or error. Consuming functions can be registered (subscribed) using methods `.then`, `.catch` and `.finally`.
+یک شیء Promise به عنوان یک پیوند بین اجراکننده ("کد تولید‌کننده" یا "خواننده") و توابع مصرف‌کننده ("طرفداران") عمل می‌کند که نتیجه یا خطا را دریافت می‌کند. توابع مصرف‌کننده را می‌توان با استفاده از متدهای `then`، `.catch.` و `finally.` ثبت (مشترک) کرد.
 
-### then
+### متدِ then
 
-The most important, fundamental one is `.then`.
+مهم ترین و اساسی ترین آن `then.` است.
 
-The syntax is:
+سینتکس عبارت است از:
 
 ```js
 promise.then(
-  function(result) { *!*/* handle a successful result */*/!* },
-  function(error) { *!*/* handle an error */*/!* }
+  function(result) { *!*/* یک نتیجه موفق را مدیریت کنید */*/!* },
+  function(error) { *!*/* یک خطا را مدیریت کنید */*/!* }
 );
 ```
 
-The first argument of `.then` is a function that runs when the promise is resolved, and receives the result.
+اولین آرگومان `then.` تابعی است که با حل‌وفصل شدن (resolved) یک Promise اجرا می‌شود و نتیجه را دریافت می‌کند.
 
-The second argument of `.then` is a function that runs when the promise is rejected, and receives the error.
+آرگومان دوم `then.` تابعی است که با رد شدن (rejected) یک Promise اجرا می‌شود و خطا را دریافت می‌کند.
 
-For instance, here's a reaction to a successfully resolved promise:
+به عنوان مثال، در اینجا یک واکنش به یک Promise که با موفقیت حل‌وفصل شده (resolved) داریم:
 
 ```js run
 let promise = new Promise(function(resolve, reject) {
-  setTimeout(() => resolve("done!"), 1000);
+  setTimeout(() => resolve("انجام شده!"), 1000);
 });
 
-// resolve runs the first function in .then
+// را اجرا می کند .then اولین تابع در resolve
 promise.then(
 *!*
-  result => alert(result), // shows "done!" after 1 second
+  result => alert(result), // بعد از 1 ثانیه  "انجام شده!" را نشان می‌دهد 
 */!*
-  error => alert(error) // doesn't run
+  error => alert(error) //  اجرا نمی‌شود
 );
 ```
 
-The first function was executed.
+اولین تابع اجرا شد.
 
-And in the case of a rejection, the second one:
+و در صورت ردشدن، تابع دوم:
 
 ```js run
 let promise = new Promise(function(resolve, reject) {
   setTimeout(() => reject(new Error("Whoops!")), 1000);
 });
 
-// reject runs the second function in .then
+// اجرا می کند .then تابع دوم را در reject 
 promise.then(
-  result => alert(result), // doesn't run
+  result => alert(result), // اجرا نمی‌شود
 *!*
-  error => alert(error) // shows "Error: Whoops!" after 1 second
+  error => alert(error) // نشان می‌دهد "Error: Whoops!" بعد از 1 ثانیه
 */!*
 );
 ```
 
-If we're interested only in successful completions, then we can provide only one function argument to `.then`:
+اگر فقط به تکمیل موفقیت‌آمیز کار علاقه داریم، می‌توانیم تنها یک آرگومان تابع را برای `then.` ارائه کنیم:
 
 ```js run
 let promise = new Promise(resolve => {
-  setTimeout(() => resolve("done!"), 1000);
+  setTimeout(() => resolve("انجام شده!"), 1000);
 });
 
 *!*
-promise.then(alert); // shows "done!" after 1 second
+promise.then(alert); // بعد از 1 ثانیه «انجام شده!» را نشان می‌دهد
 */!*
 ```
 
-### catch
+### متدِ catch
 
-If we're interested only in errors, then we can use `null` as the first argument: `.then(null, errorHandlingFunction)`. Or we can use `.catch(errorHandlingFunction)`, which is exactly the same:
+اگر فقط به خطاها علاقه‌مند هستیم، می‌توانیم از `null` به عنوان اولین آرگومان استفاده کنیم: `then(null، errorHandlingFunction).`. یا می‌توانیم از `catch(errorHandlingFunction).` استفاده کنیم که دقیقاً مشابه است:
 
 
 ```js run
@@ -206,85 +206,85 @@ let promise = new Promise((resolve, reject) => {
 
 *!*
 // .catch(f) is the same as promise.then(null, f)
-promise.catch(alert); // shows "Error: Whoops!" after 1 second
+promise.catch(alert); // .را بعد از 1 ثانیه نشان می‌دهد "Error: Whoops!" خطای
 */!*
 ```
 
-The call `.catch(f)` is a complete analog of `.then(null, f)`, it's just a shorthand.
+فراخوانی `catch(f).` یک تشابه کامل از `then(null, f).` است. این فقط یک کوتاه نویسی است.
 
-### finally
+### متدِ finally
 
-Just like there's a `finally` clause in a regular `try {...} catch {...}`, there's `finally` in promises.
+درست مانند یک بند `finally` در یک `catch {...} try {...}` معمولی، در وعده‌ها(promises) نیز `finally` وجود دارد.
 
-The call `.finally(f)` is similar to `.then(f, f)` in the sense that `f` always runs when the promise is settled: be it resolve or reject.
+فراخوانی `finally(f).` شبیه به `then(f, f).` است به این معنا که `f` همیشه زمانی که Promise تسویه (settled) می‌شود اجرا می‌شود: خواه حل‌وفصل (resolve) یا رد (reject) شود.
 
-`finally` is a good handler for performing cleanup, e.g. stopping our loading indicators, as they are not needed anymore, no matter what the outcome is.
+متدِ `finally` یک کنترل‌کننده خوب برای انجام پاکسازی است، به عنوان مثال. نشانگرهای بارگیری(loading indicators) خود را متوقف می‌کنیم، زیرا بدون توجه به نتیجه، دیگر به آن‌ها نیازی نیست.
 
-Like this:
+مثل این:
 
 ```js
 new Promise((resolve, reject) => {
-  /* do something that takes time, and then call resolve/reject */
+  /* را فراخوانی کنید resolve/reject کاری را انجام دهید که زمان می‌برد و سپس */
 })
 *!*
-  // runs when the promise is settled, doesn't matter successfully or not
-  .finally(() => stop loading indicator)
-  // so the loading indicator is always stopped before we process the result/error
+// تسویه شود، مهم نیست موفقیت‌آمیز باشد یا نه promise زمانی اجرا می‌شود که
+  .finally(() => توقف نشانه‌گر بارگیری)
+  // بنابراین نشانگر بارگیری همیشه قبل از پردازش نتیجه/خطا متوقف می‌شود
 */!*
-  .then(result => show result, err => show error)
+  .then(result => نمایش نتیجه, err => نمایش خطا)
 ```
 
-That said, `finally(f)` isn't exactly an alias of `then(f,f)` though. There are few subtle differences:
+با این حال، `finally(f)` دقیقاً نام مستعار `then(f,f)` نیست. چند تفاوت ظریف وجود دارد:
 
-1. A `finally` handler has no arguments. In `finally` we don't know whether the promise is successful or not. That's all right, as our task is usually to perform "general" finalizing procedures.
-2. A `finally` handler passes through results and errors to the next handler.
+۱. یک کنترل‌کننده `finally` هیچ آرگومانی ندارد. در `finally` ما نمی‌دانیم که آیا Promise موفقیت‌آمیز است یا نه. همه چیز درست است، زیرا وظیفه ما معمولاً انجام مراحل نهایی‌سازی "عمومی" است.  
+۲. یک کنترل‌کننده `finally` نتایج و خطاها را به کنترل‌کننده بعدی منتقل می‌کند.
 
-    For instance, here the result is passed through `finally` to `then`:
+    به عنوان مثال، در اینجا نتیجه از `finally` به `then` منتقل می‌شود:
     ```js run
     new Promise((resolve, reject) => {
       setTimeout(() => resolve("result"), 2000)
     })
-      .finally(() => alert("Promise ready"))
-      .then(result => alert(result)); // <-- .then handles the result
+      .finally(() => alert("Promise آماده است"))
+      .then(result => alert(result)); // <-- نتیجه را اجرا می‌کند .then
     ```
 
-    And here there's an error in the promise, passed through `finally` to `catch`:
+    :و در  اینجا یک خطا در Promise وجود دارد که از `finally` به `catch` پاس داده می‌شود
 
     ```js run
     new Promise((resolve, reject) => {
-      throw new Error("error");
+      throw new Error("خطا");
     })
-      .finally(() => alert("Promise ready"))
-      .catch(err => alert(err));  // <-- .catch handles the error object
+      .finally(() => alert("Promise آماده است"))
+      .catch(err => alert(err));  // <-- شیء خطا را اجرا می‌کند .catch 
     ```
 
-That's very convenient, because `finally` is not meant to process a promise result. So it passes it through.
+این بسیار راحت است، زیرا `finally` به معنای پردازش نتیجه Promise نیست. بنابراین از آن عبور می‌کند.
 
-We'll talk more about promise chaining and result-passing between handlers in the next chapter.
+در فصل بعدی بیشتر در مورد زنجیره Promise و انتقال نتیجه بین کنترل‌کننده‌ها صحبت خواهیم کرد.
 
 
-````smart header="We can attach handlers to settled promises"
-If a promise is pending, `.then/catch/finally` handlers wait for it. Otherwise, if a promise has already settled, they just run:
+````smart header="ما می توانیم اجراکننده‌ها را به Promiseهای تسویه‌شده متصل کنیم"
+اگر وعده‌ای در حالت انتظار است، کنترل‌کننده‌ها `then/catch/finally.` منتظر آن می‌مانند. در غیر این صورت، اگر وعده‌ای قبلاً تسویه شده باشد، آنها فقط اجرا می‌شوند:
 
 ```js run
-// the promise becomes resolved immediately upon creation
-let promise = new Promise(resolve => resolve("done!"));
+// بلافاصله پس از ایجاد حل‌وفصل می‌شود Promise
+let promise = new Promise(resolve => resolve("انجام شده!"));
 
-promise.then(alert); // done! (shows up right now)
+promise.then(alert); //  (همین الآن نشان می‌دهد) انجام شده!
 ```
 
-Note that this makes promises more powerful than the real life "subscription list" scenario. If the singer has already released their song and then a person signs up on the subscription list, they probably won't receive that song. Subscriptions in real life must be done prior to the event.
+توجه داشته باشید که این باعث می‌شود Promiseها قدرتمندتر از سناریوی واقعی "فهرست اشتراک" باشد. اگر خواننده قبلا آهنگ خود را منتشر کرده باشد و سپس شخصی در لیست اشتراک ثبت نام کند، احتمالاً آن آهنگ را دریافت نخواهد کرد. اشتراک در دنیای واقعی باید قبل از رویداد انجام شود.
 
-Promises are more flexible. We can add handlers any time: if the result is already there, they just execute.
+انعطاف Promiseها بیشتر است. ما می توانیم هر زمان که بخواهیم کنترل‌کننده‌ها را اضافه کنیم: اگر نتیجه از قبل وجود داشته باشد، آنها فقط اجرا می‌شوند.
 ````
 
-Next, let's see more practical examples of how promises can help us write asynchronous code.
+در مرحله بعد، بیایید نمونه‌های عملی بیشتری را ببینیم که چگونه Promiseها می‌توانند به ما در نوشتن کد ناهمزمان کمک کنند.
 
-## Example: loadScript [#loadscript]
+## مثال: loadScript [#loadscript]
 
-We've got the `loadScript` function for loading a script from the previous chapter.
+ما تابع `loadScript` را برای بارگیری یک اسکریپت از فصل قبل داریم.
 
-Here's the callback-based variant, just to remind us of it:
+اینجا یک نوع مبتنی بر callback داریم، فقط برای یادآوری آن:
 
 ```js
 function loadScript(src, callback) {
@@ -292,15 +292,15 @@ function loadScript(src, callback) {
   script.src = src;
 
   script.onload = () => callback(null, script);
-  script.onerror = () => callback(new Error(`Script load error for ${src}`));
+  script.onerror = () => callback(new Error(`خطای بارگیری اسکریپت برای ${src}`));
 
   document.head.append(script);
 }
 ```
 
-Let's rewrite it using Promises.
+بیایید آن را با استفاده از Promiseها بازنویسی کنیم.
 
-The new function `loadScript` will not require a callback. Instead, it will create and return a Promise object that resolves when the loading is complete. The outer code can add handlers (subscribing functions) to it using `.then`:
+تابع جدید `loadScript` نیازی به callback نخواهد داشت. درعوض، یک شی Promise ایجاد و برمی‌گرداند که پس از اتمام بارگیری حل‌وفصل می‌شود. کد بیرونی می‌تواند با استفاده از `then.`، کنترل‌کننده‌ها (توابع اشتراک) را به آن اضافه کند:
 
 ```js run
 function loadScript(src) {
@@ -309,7 +309,7 @@ function loadScript(src) {
     script.src = src;
 
     script.onload = () => resolve(script);
-    script.onerror = () => reject(new Error(`Script load error for ${src}`));
+    script.onerror = () => reject(new Error(`خطای بارگیری اسکریپت برای ${src}`));
 
     document.head.append(script);
   });
@@ -322,19 +322,19 @@ Usage:
 let promise = loadScript("https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.js");
 
 promise.then(
-  script => alert(`${script.src} is loaded!`),
+  script => alert(`اسکریپت ${script.src} بارگذاری شده است!`),
   error => alert(`Error: ${error.message}`)
 );
 
-promise.then(script => alert('Another handler...'));
+promise.then(script => alert('کنترل‌کننده دیگر...'));
 ```
 
-We can immediately see a few benefits over the callback-based pattern:
+ما می‌توانیم بلافاصله چند مزیت را نسبت به الگوی مبتنی بر callback مشاهده کنیم:
 
 
 | Promises | Callbacks |
 |----------|-----------|
-| Promises allow us to do things in the natural order. First, we run `loadScript(script)`, and `.then` we write what to do with the result. | We must have a `callback` function at our disposal when calling `loadScript(script, callback)`. In other words, we must know what to do with the result *before* `loadScript` is called. |
-| We can call `.then` on a Promise as many times as we want. Each time, we're adding a new "fan", a new subscribing function, to the "subscription list". More about this in the next chapter: [](info:promise-chaining). | There can be only one callback. |
+| Promiseها به ما این امکان را می‌دهند که کارها را به ترتیب طبیعی انجام دهیم. ابتدا `(loadScript(script` را اجرا می‌کنیم و `.then` می‌نویسیم که با نتیجه چه کنیم. | هنگام فراخوانی `loadScript(script, callback)` باید یک تابع `callback` در اختیار داشته باشیم. به عبارت دیگر، *قبل* از فراخوانی `loadScript` باید بدانیم که با نتیجه چه کنیم. |
+| می‌توانیم `.then` را در یک Promise هر چند بار که بخواهیم فراخوانی کنیم. هر بار، یک `طرفدار` جدید، یک تابع اشتراک جدید، به "لیست اشتراک" اضافه می‌کنیم. اطلاعات بیشتر در مورد این در فصل بعدی: [](info:promise-chaining). | فقط یک کال‌بک می‌تواند وجود داشته باشد. |
 
-So promises give us better code flow and flexibility. But there's more. We'll see that in the next chapters.
+بنابراین Promiseها جریان کد و انعطاف‌پذیری بهتری به ما می‌دهند. اما موارد بیشتری وجود دارد. آن را در فصل‌های بعدی خواهیم دید.

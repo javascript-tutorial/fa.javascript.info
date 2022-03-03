@@ -1,3 +1,3 @@
-The output is: `1`.
+خروجی: `1`.
 
-The second call to `resolve` is ignored, because only the first call of `reject/resolve` is taken into account. Further calls are ignored.
+فراخوانی دوم برای `resolve` نادیده گرفته می‌شود، زیرا فقط اولین فراخوانی `reject/resolve` در نظر گرفته می‌شود. فراخوانی‌های بعدی نادیده گرفته می‌شوند.
