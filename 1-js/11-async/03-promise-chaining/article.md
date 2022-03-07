@@ -1,13 +1,13 @@
 
-# Promises chaining
+# زنجیره‌ای کردن Promise
 
-Let's return to the problem mentioned in the chapter <info:callbacks>: we have a sequence of asynchronous tasks to be performed one after another — for instance, loading scripts. How can we code it well?
+بیایید به مشکلی که در فصل <info:callbacks> ذکر شد برگردیم: ما دنباله‌ای از کارهای ناهمگام داریم که یکی پس از دیگری اجرا شوند - برای مثال، بارگیری اسکریپت‌ها. چگونه می‌توانیم آن را به خوبی کدنویسی کنیم؟
 
-Promises provide a couple of recipes to do that.
+Promiseها چند دستورالعمل برای انجام آن فراهم می‌کنند.
 
-In this chapter we cover promise chaining.
+در این فصل ما زنجیره‌ای کردن promise را پوشش می‌دهیم.
 
-It looks like this:
+اینگونه بنظر می‌رسد:
 
 ```js run
 new Promise(function(resolve, reject) {
@@ -32,25 +32,25 @@ new Promise(function(resolve, reject) {
 });
 ```
 
-The idea is that the result is passed through the chain of `.then` handlers.
+ایده کار این است که نتیجه از طریق زنجیره‌ای از مدیریت‌کننده‌های `.then` پاس داده شود.
 
-Here the flow is:
-1. The initial promise resolves in 1 second `(*)`,
-2. Then the `.then` handler is called `(**)`, which in turn creates a new promise (resolved with `2` value).
-3. The next `then` `(***)` gets the result of the previous one, processes it (doubles) and passes it to the next handler.
-4. ...and so on.
+اینجا روند برنامه اینگونه است:
+1. شیء promise اول در 1 ثانیه resolve می‌شود `(*)`.
+2. سپس مدیریت‌کننده `.then` فراخوانی می‌شود `(**)` که به نوبه خود یک promise جدید می‌سازد (که با مقدار `2` حل‌وفصل می‌شود).
+3. `then` بعدی `(***)` نتیجه قبلی را دریافت می‌کند، آن را پردازش می‌کند (دو برابرش می‌کند) و آن را به مدیریت‌کننده بعدی انتقال می‌دهد.
+4. ...و این چرخه ادامه دارد.
 
-As the result is passed along the chain of handlers, we can see a sequence of `alert` calls: `1` -> `2` -> `4`.
+همانطور که نتیجه در طول زنجیره مدیریت‌کننده‌ها پاس داده می‌شود، ما می‌توانیم دنباله‌ای از فراخوانی‌های `alert` را ببینیم: `1` -> `2` -> `4`.
 
 ![](promise-then-chain.svg)
 
-The whole thing works, because every call to a `.then` returns a new promise, so that we can call the next `.then` on it.
+تمام این کد کار می‌کند چون هر فراخوانی `.then` یک promise جدید برمی‌گرداند پس ما می‌توانیم `.then` بعدی را روی آن فراخوانی کنیم.
 
-When a handler returns a value, it becomes the result of that promise, so the next `.then` is called with it.
+زمانی که یک مدیریت‌کننده مقداری را برمی‌گرداند، این مقدار به نتیجه آن promise تبدیل می‌شود پس `.then` بعدی همراه آن فراخوانی می‌شود.
 
-**A classic newbie error: technically we can also add many `.then` to a single promise. This is not chaining.**
+**یک ارور کلاسیک افراد تازه‌کار: از لحاظ فنی ما می‌توانیم تعداد زیادی `.then` را هم به یک promise اضافه کنیم. این کار زنجیره‌ای کردن نیست.**
 
-For example:
+برای مثال:
 ```js run
 let promise = new Promise(function(resolve, reject) {
   setTimeout(() => resolve(1), 1000);
@@ -72,15 +72,16 @@ promise.then(function(result) {
 });
 ```
 
-What we did here is just several handlers to one promise. They don't pass the result to each other; instead they process it independently.
+کاری که اینجا کردیم فقط اضافه کردن چند مدیریت‌کننده به یک promise است. آن‌ها نتیجه را به یکدیگر پاس نمی‌دهند؛ در عوض به صورت جداگانه آن را پردازش می‌کنند.
 
 Here's the picture (compare it with the chaining above):
+تصویر را اینجا داریم (آن را با زنجیره‌ای کردن بالا مقایسه کنید):
 
 ![](promise-then-many.svg)
 
-All `.then` on the same promise get the same result -- the result of that promise. So in the code above all `alert` show the same: `1`.
+تمام `.then` ها روی promise یکسان نتیجه یکسانی دریافت می‌کنند -- نتیجه همان promise. پس در کد بالا تمام `alert`ها مقدار یکسانی را نمایش می‌دهند: `1`.
 
-In practice we rarely need multiple handlers for one promise. Chaining is used much more often.
+در عمل ما به ندرت چند مدیریت‌کننده برای یک promise نیاز داریم. زنجیره‌ای کردن خیلی بیشتر استفاده می‌شود.
 
 ## Returning promises
 
