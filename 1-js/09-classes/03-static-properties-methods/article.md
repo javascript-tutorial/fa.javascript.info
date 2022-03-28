@@ -1,9 +1,15 @@
 
 # ویژگی و متدهای ایستا
 
+<<<<<<< HEAD
 ما می‌توانیم یک متد را در خود تابع کلاس هم قرار دهیم، نه درون `"prototype"` آن. چنین متدهایی *ایستا (static)* نامیده می‌شوند.
 
 در یک کلاس، آن‌ها با کلمه کلیدی `static` استفاده می‌شوند، مثل این:
+=======
+We can also assign a method to the class as a whole. Such methods are called *static*.
+
+In a class declaration, they are prepended by `static` keyword, like this:
+>>>>>>> 741d90ce8a730d66e987bff5e9794d6e41cb2f05
 
 ```js run
 class User {
@@ -31,9 +37,17 @@ User.staticMethod(); // true
 
 مقدار `this` درون فراخوانی `User.staticMethod()` برابر با کلاس سازنده یعنی خود `User` است (قانون «شیء قبل از نقطه»).
 
+<<<<<<< HEAD
 معمولا، متدهای ایستا برای پیاده‌سازی تابع‌هایی که به کلاس تعلق دارند و نه به هر شیء خاصی از آن استفاده می‌شوند.
 
 برای مثال، ما شیءهای کلاس `Article` (به معنی مقاله) را داریم و به تابعی برای مقایسه آن‌ها نیاز داریم. یک راه‌حل طبیعی اضافه کردن متد `Article.compare` است، مثلا اینگونه:
+=======
+Usually, static methods are used to implement functions that belong to the class as a whole, but not to any particular object of it.
+
+For instance, we have `Article` objects and need a function to compare them.
+
+A natural solution would be to add `Article.compare` static method:
+>>>>>>> 741d90ce8a730d66e987bff5e9794d6e41cb2f05
 
 ```js run
 class Article {
@@ -63,9 +77,17 @@ articles.sort(Article.compare);
 alert( articles[0].title ); // CSS
 ```
 
+<<<<<<< HEAD
 اینجا `Article.compare` در «بالای» مقاله‌ها (articles) قرار دارد، به عنوان روشی برای مقایسه آن‌ها. این متدی برای یک مقاله(article) نیست، بلکه برای کل کلاس است.
 
 مثال دیگر متدی به نام "factory" (به معنی تولیدکننده) است. فرض کنید، ما به چند راه برای ایجاد یک مقاله نیاز داریم:
+=======
+Here `Article.compare` method stands "above" articles, as a means to compare them. It's not a method of an article, but rather of the whole class.
+
+Another example would be a so-called "factory" method.
+
+Let's say, we need multiple ways to create an article:
+>>>>>>> 741d90ce8a730d66e987bff5e9794d6e41cb2f05
 
 1. ساختن از طریق پارامترها (`title`، `date` و غیره).
 2. ساختن یک مقاله خالی با تاریخ امروز.
@@ -73,7 +95,11 @@ alert( articles[0].title ); // CSS
 
 اولین راه می‌تواند با استفاده از تابع سازنده پیاده‌سازی شود. و برای راه دوم می‌توانیم یک متد ایستا برای کلاس بسازیم.
 
+<<<<<<< HEAD
 مانند `Article.createTodays()` در اینجا:
+=======
+Such as `Article.createTodays()` here:
+>>>>>>> 741d90ce8a730d66e987bff5e9794d6e41cb2f05
 
 ```js run
 class Article {
@@ -100,8 +126,13 @@ alert( article.title ); // خلاصه‌ی امروز
 متدهای ایستا همچنین در کلاس‌های مربوط به پایگاه داده (database) برای جست‌وجو/ذخیره/حذف ورودی‌ها از پایگاه داده هم استفاده می‌شوند، مثلا اینگونه:
 
 ```js
+<<<<<<< HEAD
 // کلاسی خاص برای مدیریت مقاله‌ها است Article با فرض اینکه
 // :متد ایستا برای حذف مقاله‌ها
+=======
+// assuming Article is a special class for managing articles
+// static method to remove the article by id:
+>>>>>>> 741d90ce8a730d66e987bff5e9794d6e41cb2f05
 Article.remove({id: 12345});
 ```
 

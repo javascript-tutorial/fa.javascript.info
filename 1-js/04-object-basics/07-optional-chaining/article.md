@@ -108,9 +108,15 @@ alert( user?.address.street ); // undefined
 ```warn header="از زنجیره‌ی اختیاری بیش از حد استفاده نکنید"
 ما باید از `.?` فقط زمانی استفاده کنیم که عدم وجود چیزی اشکالی ندارد.
 
+<<<<<<< HEAD
 برای مثال، اگر طبق منطق کد ما باید شیء `user` وجود داشته باشد ولی `address` اختیاری باشد، پس ما باید اینگونه بنویسیم `user.address?.street` نه `user?.address?.street`.
    
 بنابراین، اگر تصادفاً به دلیل اشتباهی ‍`user` برابر با `undefined` باشد، شاهد یک خطای برنامه‌نویسی در مورد آن خواهیم بود و آن را برطرف خواهیم کرد. در غیر این صورت، خطاهای کد را می توان در مواردی که مناسب نیست ساکت کرد، و این کار اشکال‌زدایی را سخت‌تر می‌کند.
+=======
+For example, if according to our code logic `user` object must exist, but `address` is optional, then we should write `user.address?.street`, but not `user?.address?.street`.
+
+Then, if `user` happens to be undefined, we'll see a programming error about it and fix it. Otherwise, if we overuse `?.`, coding errors can be silenced where not appropriate, and become more difficult to debug.
+>>>>>>> 741d90ce8a730d66e987bff5e9794d6e41cb2f05
 ```
 
 ````warn header="متغیر قبل از `.?` باید تعریف شده باشد"
@@ -127,7 +133,11 @@ user?.address;
 
 همانطور که قبلا گفته شد عبارت `.?` اگر عبارت سمت چپ آن وجود نداشته باشد، فوراً ارزیابی را متوقف می‌کند (اتصال را کوتاه می‌کند).
 
+<<<<<<< HEAD
 بنابراین، اگر صدازدن تابعی یا عوارض جانبی دیگری وجود داشته باشند، اتفاق نمی‌افتند.
+=======
+So, if there are any further function calls or operations to the right of `?.`, they won't be made.
+>>>>>>> 741d90ce8a730d66e987bff5e9794d6e41cb2f05
 
 برای نمونه:
 
@@ -135,7 +145,11 @@ user?.address;
 let user = null;
 let x = 0;
 
+<<<<<<< HEAD
 user?.sayHi(x++); // اجرا نمی‌شود x++ وجود ندارد، پس "sayHi"
+=======
+user?.sayHi(x++); // no "user", so the execution doesn't reach sayHi call and x++
+>>>>>>> 741d90ce8a730d66e987bff5e9794d6e41cb2f05
 
 alert(x); // 0 :مقدار افزایش نیافته پس
 ​```

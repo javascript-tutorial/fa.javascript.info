@@ -47,7 +47,11 @@ alert( 7.3e9 );  // 7.3 billions (same as 7300000000 or 7_300_000_000)
 let mсs = 0.000001;
 ```
 
+<<<<<<< HEAD
 دقیقا مثل قبل، استفاده از `"e"` میتواند کمک کند. اگر ما بخواهیم که از نوشتن صفرها خودداری کنیم، میتوانیم بنویسیم که:
+=======
+Just like before, using `"e"` can help. If we'd like to avoid writing the zeroes explicitly, we could write the same as:
+>>>>>>> 741d90ce8a730d66e987bff5e9794d6e41cb2f05
 
 ```js
 let mcs = 1e-6; // شش صفر در سمت چپ ۱ 
@@ -156,7 +160,11 @@ alert( num.toString(2) );   // 11111111
 
 ۱. ضرب و تقسیم
 
+<<<<<<< HEAD
     برای مثال، برای رند کردن عدد تا دومین رقم اعشاری، میتوانیم عدد را در`۱۰۰` (یا یک توان بزرگ‌تر ۱۰) ضرب کنیم، تابع رند کردن را صدا بزنیم و سپس دوباره تقسیم کنیم.
+=======
+    For example, to round the number to the 2nd digit after the decimal, we can multiply the number by `100`, call the rounding function and then divide it back.
+>>>>>>> 741d90ce8a730d66e987bff5e9794d6e41cb2f05
     ```js run
     let num = 1.23456;
 
@@ -184,13 +192,21 @@ alert( num.toString(2) );   // 11111111
     alert( num.toFixed(5) ); // "12.34000", صفر اضافه شده تا دقیقا ۵ رقم شود 
     ```
 
+<<<<<<< HEAD
     ما میتوانیم آن را با کمک جمع واحد یا با فراخوانی `Number()` در `+num.toFixed(5)` به عدد تبدیل کنیم
+=======
+    We can convert it to a number using the unary plus or a `Number()` call, e.g write `+num.toFixed(5)`.
+>>>>>>> 741d90ce8a730d66e987bff5e9794d6e41cb2f05
 
 ## محاسبات تقریبی
 
 در درون سیستم، یک عدد به شکل ۶۴-بیتی است [IEEE-754](http://en.wikipedia.org/wiki/IEEE_754-1985)، بنابراین دقیقا ۶۴ بیت برای ذخیره‌ی یک عدد داریم: ۵۲ تا از آنها برای ذخیره کردن ارقام هستند، ۱۱ تا از آنها برای ذخیره کردن جایگاه نقطه‌ی مشخص کننده‌ی اعشار (که برای اعداد صحیح صفر است)، و یک بیت برای علامت آن.
 
+<<<<<<< HEAD
 اگر عددی بیش از حد بزرگ باشد، حافظه‌ی ۶۴ بیتی سرریز میکند و مقدار بینهایت را برمیگرداند:
+=======
+If a number is really huge, it may overflow the 64-bit storage and become a special numeric value `Infinity`:
+>>>>>>> 741d90ce8a730d66e987bff5e9794d6e41cb2f05
 
 ```js run
 alert( 1e500 ); // Infinity 
@@ -198,7 +214,11 @@ alert( 1e500 ); // Infinity
 
 اتفاقی که زیاد مشخص نیست و کمتر اتفاق می‌افتد، از دست دادن دقت است.
 
+<<<<<<< HEAD
 این آزمون (اشتباه!) را در نظر بگیرید:
+=======
+Consider this (falsy!) equality test:
+>>>>>>> 741d90ce8a730d66e987bff5e9794d6e41cb2f05
 
 ```js run
 alert( 0.1 + 0.2 == 0.3 ); // *!*false*/!*
@@ -212,13 +232,21 @@ alert( 0.1 + 0.2 == 0.3 ); // *!*false*/!*
 alert( 0.1 + 0.2 ); // 0.30000000000000004
 ```
 
+<<<<<<< HEAD
 اوه! اتفاقات بدتری تا یک مقایسه‌ی ساده میتواند بیفتد. مثلا فرض کنید شما در فروشگاهی اینترنتی مقدار `$0.10` و `$0.20` را به حساب خود واریز میکنید. مجموع موجودی شما `$0.30000000000000004` میشود. این شکه کننده‌ست!
+=======
+Ouch! Imagine you're making an e-shopping site and the visitor puts `$0.10` and `$0.20` goods into their cart. The order total will be `$0.30000000000000004`. That would surprise anyone.
+>>>>>>> 741d90ce8a730d66e987bff5e9794d6e41cb2f05
 
 اما چرا این اتفاق می‌افتد؟
 
 یک عدد در حافظه به شکل دودویی آن ذخیره میشود، مجموعه‌ای از صفرها و یک‌ها. اما کسرهایی مثل `0.1`، `0.2` که در سیستم اعداد اعشاری ساده به نظر میرسند در اصل کسرهای بی‌پایانی در شکل دودویی خود هستند.
 
+<<<<<<< HEAD
 به زبانی دیگر، `0.1` چیست؟ مقدار یک که بر ده تقسیم شده، `1/10` یعنی یک دهم. در سیستم اعداد اعشاری چنین اعدادی به سادگی قابل نمایشند. با یک سوم `1/3` مقایسه کنید. به کسری بی‌پایان تبدیل میشود. `0.33333(3)`
+=======
+What is `0.1`? It is one divided by ten `1/10`, one-tenth. In decimal numeral system such numbers are easily representable. Compare it to one-third: `1/3`. It becomes an endless fraction `0.33333(3)`.
+>>>>>>> 741d90ce8a730d66e987bff5e9794d6e41cb2f05
 
 بنابراین، تقسیم های از توان ده، قطعا در سیستم اعشاری کار میکند اما تقسیم‌های بر ۳ اینطور نیست. به علت مشابه، در سیستم اعداد دودویی، تقسیم توان‌های ۲ هم قطعا کار میکند اما ۱/۱۰، کسر دودویی بی‌پایانی میشود.
 
