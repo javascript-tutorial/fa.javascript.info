@@ -48,7 +48,11 @@ alert(sum(1, 2)); // 3
   alert( double(3) ); // 6
   ```
 
+<<<<<<< HEAD
 - اگر آرگومان ورودی نداریم، پرانتزها خالی می‌مانند (ولی حتما باید حاضر باشند):
+=======
+- If there are no arguments, parentheses are empty, but they must be present:
+>>>>>>> ac7daa516fa8e687427eac51186af97154748afa
 
   ```js run
   let sayHi = () => alert("Hello!");
@@ -74,9 +78,15 @@ welcome();
 
 ## وقتی Arrow Functionها چندخطی می‌شوند
 
+<<<<<<< HEAD
 مثال‌های بالا از سمت چپ فلش `<=` آرگومان گرفتند و سمت راست را با آن محاسبه کردند.
 
 گاهی کد پیچیده‌تری داریم که چند expression یا statement دارد. در این مواقع باید کد را درون کمانک قرار دهیم. و درون کمانک نیز از `return` استفاده کنیم.
+=======
+The arrow functions that we've seen so far were very simple. They took arguments from the left of `=>`, evaluated and returned the right-side expression with them.
+
+Sometimes we need a more complex function, with multiple expressions and statements. In that case, we can enclose them in curly braces. The major difference is that curly braces require a `return` within them to return a value (just like a regular function does).
+>>>>>>> ac7daa516fa8e687427eac51186af97154748afa
 
 مانند این:
 
@@ -103,7 +113,14 @@ alert( sum(1, 2) ); // 3
 
 ## خلاصه
 
+<<<<<<< HEAD
 توابع Arrow function مناسب کدهای تک‌خطی هستند. و به‌صورت‌های مختلفی می‌توان از آن‌ها استفاده کرد.
 
 1. بدون کمانک: `(...args) => expression` -- سمت راست یک expression یا عبارت است: تابع آن را می‌خواند و نتیجه را برمی‌گرداند.
 2. با کمانک: `(...args) => { body }` -- کمانک‌ها به ما این امکان را می‌دهند تا چند statement را داخل تابع بنویسیم, اما در این صورت باید حتما از `return` برای بازگرداندن نتیجه استفاده کنیم.
+=======
+Arrow functions are handy for simple actions, especially for one-liners. They come in two flavors:
+
+1. Without curly braces: `(...args) => expression` -- the right side is an expression: the function evaluates it and returns the result. Parentheses can be omitted, if there's only a single argument, e.g. `n => n*2`.
+2. With curly braces: `(...args) => { body }` -- brackets allow us to write multiple statements inside the function, but we need an explicit `return` to return something.
+>>>>>>> ac7daa516fa8e687427eac51186af97154748afa

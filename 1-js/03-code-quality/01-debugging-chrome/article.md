@@ -38,7 +38,11 @@
 
 بعد از اجرای تکه‌کد، نتایج آن در زیر آن نمایش داده می‌شوند.
 
+<<<<<<< HEAD
 برای مثال، نتیجه `1+2` می‌شود `3`، و `hello("debugger")` چیزی را بر نمی‌گرداند، پس نتیجه `undefined` است:
+=======
+For example, here `1+2` results in `3`, while the function call `hello("debugger")` returns nothing, so the result is `undefined`:
+>>>>>>> ac7daa516fa8e687427eac51186af97154748afa
 
 ![](chrome-sources-console.svg)
 
@@ -63,12 +67,20 @@
 - و دیگر موارد...
 
 ```smart header="Conditional breakpoints"
+<<<<<<< HEAD
 *راست کلیک* بر روی شمارهٔ خط این امکان را می‌دهد تا یک بریک‌پوینت *شرطی* تعریف کنیم. این بریک‌پوینت تنها زمانی صدازده می‌شود که شرط تعیین‌شده درست باشد.
+=======
+*Right click* on the line number allows to create a *conditional* breakpoint. It only triggers when the given expression, that you should provide when you create it, is truthy.
+>>>>>>> ac7daa516fa8e687427eac51186af97154748afa
 
 این امکان می‌تواند برای زمانی که نیاز داریم تا تنها برای یک متغیر خاص یا پارامترهای خاصی برای فانکشن توقف کنیم کارآمد باشد. 
 ```
 
+<<<<<<< HEAD
 ## دستور debugger
+=======
+## The command "debugger"
+>>>>>>> ac7daa516fa8e687427eac51186af97154748afa
 
 ما همچنین می‌توانیم با استفاده از دستور  `debugger` کد را متوقف کنیم، مثلاً:
 
@@ -84,8 +96,12 @@ function hello(name) {
 }
 ```
 
+<<<<<<< HEAD
 این امکان در زمانی که در یک ویرایش‌گر کد هستیم و نمی‌خواهیم به مرورگر برویم و اسکریپت را در developer tools پیدا کنیم و بریک‌پوینت را ست کنیم  خیلی مناسب است.
 
+=======
+Such command works only when the development tools are open, otherwise the browser ignores it.
+>>>>>>> ac7daa516fa8e687427eac51186af97154748afa
 
 ## توقف و گَشتن
 
@@ -99,7 +115,11 @@ function hello(name) {
 
 1. **`Watch` -- .نمایش مقادیر فعلی برای هر عبارت**
 
+<<<<<<< HEAD
     شما می‌تونید دکمه به‌علاوه  `+` رو فشار بدید و یک عبارت وارد کنید. اشکال‌زدا مقدار آن را در هر لحظه از فرآیند اجرا، به صورت خودکار دوباره محاسبه می‌کنه و نمایش خواهد داد.
+=======
+    You can click the plus `+` and input an expression. The debugger will show its value, automatically recalculating it in the process of execution.
+>>>>>>> ac7daa516fa8e687427eac51186af97154748afa
 
 2. **`Call Stack` -- .نمایش زنجیرهٔ صدازدن‌های تودرتو**
 
@@ -134,12 +154,21 @@ function hello(name) {
 
     کلیک کردن دوباره و دوباره این، گام‌به‌گام همهٔ عبارات اسکریپت را اجرا می‌کند.
 
+<<<<<<< HEAD
 <span class="devtools" style="background-position:-62px -192px"></span> -- "Step over": دستور بعدی را اجرا می‌کند، اما *داخل یک تابع نمی‌شود*، میانبر `key:F10`.
 : شبیه دستور قبلی «step»، اما اگر عبارت بعدی یک تابع - که built-in نباشد، مانند `alert` باشد، بلکه یک تابع که خودمان آن را تعریف کرده باشیم - باشد، متقاوت رفتار می‌کند.
 
     دستور «step» وارد آن می‌شود و فرآیند اجرا را در خطر اول آن متوقف می‌کند، در حالی که دستور «step over» صدازدن‌های تودرتو تابع را نامرئی اجرا می‌کند، از تابع‌های داخلی رد می‌شود.
 
      سپس فرآیند اجرا بعد از آن تابع بلافاصله متوقف می‌شود.
+=======
+<span class="devtools" style="background-position:-62px -192px"></span> -- "Step over": run the next command, but *don't go into a function*, hotkey `key:F10`.
+: Similar to the previous "Step" command, but behaves differently if the next statement is a function call (not a built-in, like `alert`, but a function of our own).
+
+    If we compare them, the "Step" command goes into a nested function call and pauses the execution at its first line, while "Step over" executes the nested function call invisibly to us, skipping the function internals.
+
+    The execution is then paused immediately after that function call.
+>>>>>>> ac7daa516fa8e687427eac51186af97154748afa
 
     این دستور اگر نخواهیم ببینیم داخل تابع چه اتفاقی می‌افتد، می‌تواند مفید واقع شود.
 
@@ -155,7 +184,11 @@ function hello(name) {
 : این دکمه فرآیند اجرا را تغییر نمی‌ده. فقط برای خاموش/روشن کردن بریک‌پوین‌ها به صورت کلی‌ست.
 
 <span class="devtools" style="background-position:-90px -146px"></span> -- enable/disable automatic pause in case of an error.
+<<<<<<< HEAD
 : زمانی که فعال باشد، و Developer tools باز باشد، در زمان وقوع خطا اسکریپت به صورت خودکار متوقف می‌شود. بعد از آن می‌توانیم متغیرها را تحلیل کنیم تا مشکل را پیدا کنیم. پس اگر اسکریپت ما با یک خطا از کار افتاد، می‌توانیم اشکال‌زدا را باز کنیم، این امکان را فعال کنیم و صفحه را مجدداً بارگزاری کنیم تا ببینیم مشکل در کجا بوده است و نوشته در آن لحظه چه بوده است.
+=======
+: When enabled, if the developer tools is open, an error during the script execution automatically pauses it. Then we can analyze variables in the debugger to see what went wrong. So if our script dies with an error, we can open debugger, enable this option and reload the page to see where it dies and what's the context at that moment.
+>>>>>>> ac7daa516fa8e687427eac51186af97154748afa
 
 ```smart header="Continue to here"
 راست کلیک برروی یک خط کد  context menu را باز می‌کند همراه با امکانی عالی که  «Continue to here» نامیده می‌شود.
@@ -187,7 +220,11 @@ for (let i = 0; i < 5; i++) {
 2. عبارات  `debugger`.
 3. یک خطا (اگر dev tools باز باشد و دکمه <span class="devtools" style="background-position:-90px -146px"></span> «on» باشد).
 
+<<<<<<< HEAD
 وقتی متوقف شد، می‌توانیم اشکال‌زدایی کنیم - بررسی توابع و ردیابی کد تا ببینیم کجای فرآیند اجرا به مشکل خورده است.
+=======
+When paused, we can debug: examine variables and trace the code to see where the execution goes wrong.
+>>>>>>> ac7daa516fa8e687427eac51186af97154748afa
 
 امکانات بسیار زیادتری در developer tools از چیزی که در این‌جا گفته شد وجود دارد. توضیحات کامل در <https://developers.google.com/web/tools/chrome-devtools> قابل دسترس است.
 
