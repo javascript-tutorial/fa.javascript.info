@@ -32,11 +32,7 @@ alert(user.address.street); // !خطا
 let html = document.querySelector('.elem').innerHTML; // باشد خطا خواهد داد null اگر
 ```
 
-<<<<<<< HEAD
-باری دیگر، اگر اِلمان وجود نداشته باشد ما با مقدار NULL نمی‌توانیم به  `.innerHTML` دسترسی داشته باشیم. و در بعضی موارد، وقتی که نبودِ اِلمان طبیعی است، ما می‌خواهیم از خطا جلوگیری کنیم و فقط `html = null` را قبول کنیم. 
-=======
-Once again, if the element doesn't exist, we'll get an error accessing `.innerHTML` property of `null`. And in some cases, when the absence of the element is normal, we'd like to avoid the error and just accept `html = null` as the result.
->>>>>>> ac7daa516fa8e687427eac51186af97154748afa
+باری دیگر، اگر اِلمان وجود نداشته باشد ما هنگام دسترسی به ویژگی `.innerHTML` از `null` ارور دریافت می‌کنیم. و در بعضی موارد، وقتی که نبودِ اِلمان طبیعی است، ما می‌خواهیم از خطا جلوگیری کنیم و فقط `html = null` را به عنوان نتیجه قبول کنیم. 
 
 چگونه می‌توانیم این کار را انجام دهیم؟
 
@@ -48,27 +44,19 @@ let user = {};
 alert(user.address ? user.address.street : undefined);
 ```
 
-<<<<<<< HEAD
-الان بدون خطا کار می‌کند... ولی اصلا زیبا نیست. همانطور که می‌بینید `"user.address"` دوبار در کد تکرار شده است. برای دسترسی به ویژگی‌هایی با تو در تویی زیاد نیاز به تکرار بیشتری لازم است و این مشکل ایجاد می‌کند. 
+الان بدون خطا کار می‌کند... ولی اصلا زیبا نیست. همانطور که می‌بینید `"user.address"` دوبار در کد تکرار شده است.
 
-برای مثال بیاید مقدار `user.address.street.name` را بگیریم.
-
-ما باید هم `user.address` و `user.address.street` را بررسی کنیم:
-=======
-It works, there's no error... But it's quite inelegant. As you can see, the `"user.address"` appears twice in the code.
-
-Here's how the same would look for `document.querySelector`:
+اینجا می‌بینیم که این موضوع چگونه برای `document.querySelector` بنظر می‌رسد:
 
 ```js run
 let html = document.querySelector('.elem') ? document.querySelector('.elem').innerHTML : null;
 ```
 
-We can see that the element search `document.querySelector('.elem')` is actually called twice here. Not good.
+می‌توانیم ببینیم که جستجوی المان `document.querySelector('.elem')` اینجا دوبار فراخوانی شده است. این خوب نیست.
 
-For more deeply nested properties, it becomes even uglier, as more repetitions are required.
+برای ویژگی‌هایی با تو در تویی عمیق‌تر، حتی زشت‌تر می‌شود چون تکرارهای بیشتری نیاز است.
 
-E.g. let's get `user.address.street.name` in a similar fashion.
->>>>>>> ac7daa516fa8e687427eac51186af97154748afa
+برای مثال بیاید مقدار `user.address.street.name` را با روشی مشابه بگیریم.
 
 ```js
 let user = {}; // کاربر آدرسی ندارد
@@ -78,11 +66,7 @@ alert(user.address ? user.address.street ? user.address.street.name : null : nul
 
 این افتضاح است، یک نفر ممکن است حتی با درک این کد مشکل داشته باشد.
 
-<<<<<<< HEAD
-حتی اهمیتی هم ندارد، چون راه بهتری برای نوشتن آن وجود دارد، با استفاده از عملگر `&&`:
-=======
-There's a little better way to write it, using the `&&` operator:
->>>>>>> ac7daa516fa8e687427eac51186af97154748afa
+راه بهتری برای نوشتن آن وجود دارد، با استفاده از عملگر `&&`:
 
 ```js run
 let user = {}; // کاربر آدرسی ندارد
@@ -116,17 +100,13 @@ alert( user?.address?.street ); // undefined (بدون خطا)
 
 حالا کد کوتاه و تمیز است، بدون هیچ تکرار اضافه‌ای.
 
-<<<<<<< HEAD
-خواندن ویژگی آدرس با `user?.address` حتی زمانی هم که شیء `user` وجود ندارد هم کار خواهد کرد:
-=======
-Here's an example with `document.querySelector`:
+اینجا مثالی با استفاده از `document.querySelector` داریم:
 
 ```js run
 let html = document.querySelector('.elem')?.innerHTML; // will be null, if there's no element
 ```
 
-Reading the address with `user?.address` works even if `user` object doesn't exist:
->>>>>>> ac7daa516fa8e687427eac51186af97154748afa
+خواندن آدرس با استفاده از `user?.address` حتی اگر شیء `user` وجود نداشته باشد هم کار می‌کند:
 
 ```js run
 let user = null;
@@ -196,19 +176,11 @@ userAdmin.admin?.(); // من ادمین هستم
 */!*
 
 *!*
-<<<<<<< HEAD
-userGuest.admin?.(); // هیچی (چنین متدی وجود ندارد)
-=======
-userGuest.admin?.(); // nothing happens (no such method)
->>>>>>> ac7daa516fa8e687427eac51186af97154748afa
+userGuest.admin?.(); // چیزی اتفاق نمی‌افتد (چنین متدی وجود ندارد)
 */!*
 ​```
 
-<<<<<<< HEAD
-در اینجا در هر دو خط، ما ابتدا از نقطه (`userAdmin.admin`) برای گرفتن ویژگی ‍`admin` استفاده می‌کنیم به خاطر اینکه شیء ‍`user` حتما وجود دارد پس برای خواندن از آن مطمئن هستیم.
-=======
-Here, in both lines we first use the dot (`userAdmin.admin`) to get `admin` property, because we assume that the `user` object exists, so it's safe read from it.
->>>>>>> ac7daa516fa8e687427eac51186af97154748afa
+اینجا، در هر دو خط، ما ابتدا از نقطه (`userAdmin.admin`) برای گرفتن ویژگی ‍`admin` استفاده می‌کنیم به خاطر اینکه فرض می‌کنیم که شیء ‍`user` حتما وجود دارد پس خواندن از آن مطمئن است.
 
 سپس `().?` عبارت سمت چپ را بررسی می‌کند: اگر تابع ‍admin وجود داشته باشد اجرا می‌شود (برای `userAdmin` صدق می‌کند). در غیر اینصورت (برای `userGuest`) ارزیابی بدون خطا متوقف می‌شود.
 
@@ -240,18 +212,10 @@ delete user?.name; // را حذف کن user.name وجود داشت user اگر
 ```js run
 let user = null;
 
-<<<<<<< HEAD
 user?.name = "John"; // ارور، کار نمی‌کند
 // undefined = "John" :چون اینگونه ارزیابی می‌شود
 ```
 
-آنقدرها هم هوشمند نیست.
-=======
-user?.name = "John"; // Error, doesn't work
-// because it evaluates to: undefined = "John"
-```
-
->>>>>>> ac7daa516fa8e687427eac51186af97154748afa
 ````
 
 ## خلاصه
@@ -266,8 +230,4 @@ user?.name = "John"; // Error, doesn't work
 
 زنجیره‌ای از `.?` امکان دسترسی به ویژگی‌های تودرتو را هم فراهم می‌کند.
 
-<<<<<<< HEAD
-با این حال هنوز ما باید `.?` را با دقت اعمال کنیم، فقط درصورتی که وجود نداشتن قسمت سمت چپ قابل قبول باشد. تا اگر ارورهای برنامه‌نویسی رخ دادند، از ما پنهان نباشند.
-=======
-Still, we should apply `?.` carefully, only where it's acceptable, according to our code logic, that the left part doesn't exist. So that it won't hide programming errors from us, if they occur.
->>>>>>> ac7daa516fa8e687427eac51186af97154748afa
+با این حال هنوز ما باید `.?` را با دقت اعمال کنیم، فقط درصورتی که با توجه به منطق کد ما وجود نداشتن قسمت سمت چپ قابل قبول باشد. تا اگر ارورهای برنامه‌نویسی رخ دادند، از ما پنهان نباشند.
