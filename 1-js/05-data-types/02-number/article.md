@@ -22,7 +22,11 @@ let billion = 1000000000;
 let billion = 1_000_000_000;
 ```
 
+<<<<<<< HEAD
 اینجا خط تیره `_` نقش "syntactic sugar" را بازی می‌کند، و عدد را خواناتر می‌کند. موتور جاوااسکریپت به راحتی `_` بین ارقام را نادیده می‌گیرد، پس دقیقا عددی مانند یک میلیارد بالا است.
+=======
+Here the underscore `_` plays the role of the "[syntactic sugar](https://en.wikipedia.org/wiki/Syntactic_sugar)", it makes the number more readable. The JavaScript engine simply ignores `_` between digits, so it's exactly the same one billion as above.
+>>>>>>> 291b5c05b99452cf8a0d32bd32426926dbcc0ce0
 
 اما در زندگی واقعی ما عموما از نوشتن رشته حرف با تعداد زیاد صفر خودداری میکنیم به خاطر اینکه به راحتی ممکن است خطا داشته باشیم و اشتباه بنویسیم. همینطور، ما تنبل هستیم! ما معمولا یه چیزی شبیه "1bn" مینویسیم به جای یک میلیارد یا "7.3bn" برای هفت میلیارد و سیصد میلیون. این حقیقت برای اکثر اعداد بزرگ هم صحیح است.
 
@@ -330,9 +334,14 @@ alert( isFinite(num) );
 
 توجه داشته باشید که رشته حرفی‌ای که در آن فقط یک جای خالی باشد یا کلا خالی باشد، به عنوان صفر در همه‌ی توابع عددی از جمله `isFinite` در نظر گرفته میشود.
 
+<<<<<<< HEAD
 ```smart header="مقایسه کنید با `Object.is`"
 
 یک تابع از پیش آماده شده‌ی خاص [Object.is](mdn:js/Object/is) که مقادیر را مثل `===` مقایسه میکند، اما برای دو حالت مرزی قابل اعتمادتر است.
+=======
+```smart header="Compare with `Object.is`"
+There is a special built-in method `Object.is` that compares values like `===`, but is more reliable for two edge cases:
+>>>>>>> 291b5c05b99452cf8a0d32bd32426926dbcc0ce0
 
 ۱. با `NaN` کار میکند:  `Object.is(NaN, NaN) === true`، که چیز خوبیست.
 ۲. مقادیر `0` و `-0` متفاوت هستند: `Object.is(0, -0) === false`، به ندرت اهمیت دارد، اما این مقادیر در اصل متفاوتند.

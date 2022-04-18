@@ -194,7 +194,11 @@ ask(
       return a + b;
     }
     ```
+<<<<<<< HEAD
 - *Function Expression:* یک تابع است، که در داخل یک عبارت یا داخل یک ساختار سینتکس دیگر ساخته می‌شود. اینجا، تابع سمت راست "عبارت تخصیص دادن" `=` ساخته شده است.
+=======
+- *Function Expression:* a function, created inside an expression or inside another syntax construct. Here, the function is created on the right side of the "assignment expression" `=`:
+>>>>>>> 291b5c05b99452cf8a0d32bd32426926dbcc0ce0
 
     ```js
     // Function Expression
@@ -291,9 +295,15 @@ if (age < 18) {
   welcome();               // \   (اجرا می‌شود)
 */!*
                            //  |
+<<<<<<< HEAD
   function welcome() {     //  |  
     alert("سلام!");         //  |  Function Declaration در دسترس است
   }                        //  |  هرجایی از بلوکی که داخل آن تعریف شده است
+=======
+  function welcome() {     //  |
+    alert("Hello!");       //  |  Function Declaration is available
+  }                        //  |  everywhere in the block where it's declared
+>>>>>>> 291b5c05b99452cf8a0d32bd32426926dbcc0ce0
                            //  |
 *!*
   welcome();               // /   (اجرا می‌شود)
@@ -301,8 +311,13 @@ if (age < 18) {
 
 } else {
 
+<<<<<<< HEAD
   function welcome() {    
     alert("درود!");
+=======
+  function welcome() {
+    alert("Greetings!");
+>>>>>>> 291b5c05b99452cf8a0d32bd32426926dbcc0ce0
   }
 }
 

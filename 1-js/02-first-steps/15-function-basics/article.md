@@ -176,8 +176,13 @@ alert( from ); // Ann
 
 به عبارتی دیگر، بگذارید این مقررات را تعیین کنیم:
 
+<<<<<<< HEAD
 - یک پارامتر یک متغیر لیست شده درون پرانتز‌های تعریف تابع (در زمان تعریف تابع) است.
 - یک آرگومان مقداری‌ست که به تابع موقع صدازدن آن پاس داده شده است.
+=======
+- A parameter is the variable listed inside the parentheses in the function declaration (it's a declaration time term).
+- An argument is the value that is passed to the function when it is called (it's a call time term).
+>>>>>>> 291b5c05b99452cf8a0d32bd32426926dbcc0ce0
 
 ما توابع را با پارامترهای‌شان تعریف می‌کنیم، و سپس آن‌ها را با آرگومان‌هایشان صدا می‌زنیم.
 
@@ -225,7 +230,43 @@ function showMessage(from, text = anotherFunction()) {
 از سوی دیگر، این به طور مستقل فراخوانی می‌شود وقتی `text` وجود نداشته باشد.
 ```
 
+<<<<<<< HEAD
 ### پارامترهای پیش‌فرض جایگزین
+=======
+````smart header="Default parameters in old JavaScript code"
+Several years ago, JavaScript didn't support the syntax for default parameters. So people used other ways to specify them.
+
+Nowadays, we can come across them in old scripts.
+
+For example, an explicit check for `undefined`:
+
+```js
+function showMessage(from, text) {
+*!*
+  if (text === undefined) {
+    text = 'no text given';
+  }
+*/!*
+
+  alert( from + ": " + text );
+}
+```
+
+...Or using the `||` operator:
+
+```js
+function showMessage(from, text) {
+  // If the value of text is falsy, assign the default value
+  // this assumes that text == "" is the same as no text at all
+  text = text || 'no text given';
+  ...
+}
+```
+````
+
+
+### Alternative default parameters
+>>>>>>> 291b5c05b99452cf8a0d32bd32426926dbcc0ce0
 
 گاهی اوقات این منطقی است که مقدارهای پیش‌فرض پارامترها را در تعریف تابع قرار ندهیم بلکه در مرحله بعدی یعنی حین اجرا شدن آن قرار دهیم.
 

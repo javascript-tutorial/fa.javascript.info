@@ -4,7 +4,11 @@
 
 عملگر nullish coalescing با دو علامت سوال `??` نوشته می‌شود.
 
+<<<<<<< HEAD
 به دلیل اینکه این عملگر با `null` و `undefined` به طور یکسان رفتار می‌کند، ما در این فصل از یک اصطلاح خاص استفاده می‌کنیم. می‌گوییم که یک عبارت "تعریف شده" است هرگاه که نه `null` باشد و نه `undefined`.
+=======
+As it treats `null` and `undefined` similarly, we'll use a special term here, in this article. For brevity, we'll say that a value is "defined" when it's neither `null` nor `undefined`.
+>>>>>>> 291b5c05b99452cf8a0d32bd32426926dbcc0ce0
 
 نتیجه‌ی `a ?? b`:
 - اگر `a` تعریف شده باشد، پس برابر با `a` است،
@@ -22,9 +26,15 @@ result = (a !== null && a !== undefined) ? a : b;
 
 حال باید کاملا روشن باشد که `??` چه کاری انجام می‌دهد. بیایید ببینیم این عملگر کجا کمک‌مان می‌کند.
 
+<<<<<<< HEAD
 یک مورد متداول برای استفاده از `??` تعیین کردن مقداری پیش فرض برای متغیری است که شاید تعریف نشده باشد.
 
 برای مثال، اینجا نشان می‌دهیم که `user` تعریف شده است، در غیر این صورت `Anonymous` است:
+=======
+The common use case for `??` is to provide a default value.
+
+For example, here we show `user` if its value isn't `null/undefined`, otherwise `Anonymous`:
+>>>>>>> 291b5c05b99452cf8a0d32bd32426926dbcc0ce0
 
 ```js run
 let user;
@@ -42,9 +52,15 @@ alert(user ?? "Anonymous"); // John (user defined)
 
 همچنین می‌توانیم از دنباله‌ی `??` برای انتخاب کردن اولین مقدار در یک لیست که `null/undefined` نباشد استفاده کنیم.
 
+<<<<<<< HEAD
 فرض کنیم که داده‌ی کاربری را در متغیرهای `firstName`، `lastName` یا `nickName` ذخیره کرده‌ایم. اگر کاربر تصمیم به وارد نکردن مقداری گرفته باشد، ممکن است همه آنها تعریف شده نباشند.
 
 ما می‌خواهیم اسم کاربر را با استفاده از این متغیرها نمایش دهیم، یا اگر هیچ کدام تعریف شده نباشند "Anonymous" را نمایش  دهیم.
+=======
+Let's say we have a user's data in variables `firstName`, `lastName` or `nickName`. All of them may be not defined, if the user decided not to fill in the corresponding values.
+
+We'd like to display the user name using one of these variables, or show "Anonymous" if all of them are `null/undefined`.
+>>>>>>> 291b5c05b99452cf8a0d32bd32426926dbcc0ce0
 
 بیایید برای این کار از عملگر `??` استفاده کنیم:
 
@@ -110,7 +126,11 @@ alert(height ?? 100); // 0
 
 این یعنی که درست مانند `||`، عملگر nullish coalescing `??` قبل از `=` و `?` ارزیابی می‌شود، اما بعد از بیشتر عملیات‌ها مانند `+`، `-` ارزیابی می‌شود.
 
+<<<<<<< HEAD
 پس اگر بخواهیم مقداری را با استفاده از `??` در یک عبارت که عملگرهای دیگر هم وجود دارند انتخاب کنیم، باید اضافه کردن پرانتز را در نظر بگیریم:
+=======
+So we may need to add parentheses in expressions like this:
+>>>>>>> 291b5c05b99452cf8a0d32bd32426926dbcc0ce0
 
 ```js run
 let height = null;
@@ -128,7 +148,11 @@ alert(area); // 5000
 // بدون پرانتز
 let area = height ?? 100 * width ?? 50;
 
+<<<<<<< HEAD
 // ...عبارت بالا مثل عبارت پایین عمل می‌کند (که احتمالا چیزی نیست که ما بخواهیم)
+=======
+// ...works this way (not what we want):
+>>>>>>> 291b5c05b99452cf8a0d32bd32426926dbcc0ce0
 let area = height ?? (100 * width) ?? 50;
 ```
 
