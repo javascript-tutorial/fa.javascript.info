@@ -1,9 +1,22 @@
 
 # نوع سمبل (Symbol type)
 
+<<<<<<< HEAD
 با توجه به خصوصیات زبان، کلیدهای ویژگی‌های شیء می‌توانند یا از نوع رشته باشند، یا از نوع سمبل (symbol). نه از نوع اعداد و نه boolean، فقط رشته یا سمبل، همین دو نوع.
 
 تا اینجا ما فقط از رشته‌ها استفاده می‌کردیم. حال بیایید مزایایی که سمبل‌ها به ما می‌دهند را ببینیم.
+=======
+By specification, only two primitive types may serve as object property keys:
+
+- string type, or
+- symbol type.
+
+Otherwise, if one uses another type, such as number, it's autoconverted to string. So that `obj[1]` is the same as `obj["1"]`, and `obj[true]` is the same as `obj["true"]`.
+
+Till now we've been using only strings.
+
+Now let's explore symbols, see what they can do for us.
+>>>>>>> 206485fc3a5465f961608b6e7303fae2e1a0e0b5
 
 ## سمبل‌ها (Symbols)
 
@@ -12,7 +25,10 @@
 یک مقدار از این نوع می‌تواند با استفاده از `Symbol()` ساخته شود:
 
 ```js
+<<<<<<< HEAD
 // یک سمبل جدید است id
+=======
+>>>>>>> 206485fc3a5465f961608b6e7303fae2e1a0e0b5
 let id = Symbol();
 ```
 
@@ -38,8 +54,15 @@ alert(id1 == id2); // false
 
 اگر شما با Ruby یا زبان دیگری که یک جورایی "سمبل" دارد آشنایی دارید -- لطفا گمراه نشوید. سمبل‌های جاوااسکریپت متفاوت هستند.
 
+<<<<<<< HEAD
 ````warn header="سمبل‌ها به صورت خودکار به رشته تبدیل نمی‌شوند"
 اکثر مقدارهای در جاوااسکریپت تبدیل به رشته به صورت ضمنی را انجام می‌دهند. برای مثال، ما می‌توانیم هر مقداری را `alert` کنیم، و این کار خواهد کرد. سمبل‌ها خاص هستند. آنها به صورت خودکار تبدیل نمی‌شوند.
+=======
+So, to summarize, symbols are "primitive unique values" with optional description. Let's see where we can use them.
+
+````warn header="Symbols don't auto-convert to a string"
+Most values in JavaScript support implicit conversion to a string. For instance, we can `alert` almost any value, and it will work. Symbols are special. They don't auto-convert.
+>>>>>>> 206485fc3a5465f961608b6e7303fae2e1a0e0b5
 
 برای مثال، این `alert` یک ارور را نمایش می‌دهد:
 
@@ -52,7 +75,12 @@ alert(id); // TypeError: Cannot convert a Symbol value to a string
 
 این موضوع یک "گارد زبان" در برابر خرابکاری کردن است، چون رشته‌ها و سمبل‌ها از پایه متفاوت هستند و نباید به صورت تصادفی به یکدیگر تبدیل شوند.
 
+<<<<<<< HEAD
 اگر ما واقعا نیاز داریم که یک سمبل را نمایش دهیم، باید به طور ضمنی همراه آن `.toString()` را هم صدا بزنیم، مثل اینجا:
+=======
+If we really want to show a symbol, we need to explicitly call `.toString()` on it, like here:
+
+>>>>>>> 206485fc3a5465f961608b6e7303fae2e1a0e0b5
 ```js run
 let id = Symbol("id");
 *!*
@@ -60,7 +88,12 @@ alert(id.toString()); // Symbol(id)، حالا کار می‌کند
 */!*
 ```
 
+<<<<<<< HEAD
 یا فقط ویژگی `symbol.description` را برای نمایش توضیحات دریافت کنیم:
+=======
+Or get `symbol.description` property to show the description only:
+
+>>>>>>> 206485fc3a5465f961608b6e7303fae2e1a0e0b5
 ```js run
 let id = Symbol("id");
 *!*
@@ -72,7 +105,12 @@ alert(id.description); // id
 
 ## ویژگی‌های «مخفی»
 
+<<<<<<< HEAD
 سمبل‌ها به ما این امکان را می‌دهند که در یک شیء ویژگی‌های "مخفی" بسازیم، که هیچ کجای کد نتواند به صورت تصادفی به آن دسترسی داشته باشد یا آن را تغییر دهد.
+=======
+
+Symbols allow us to create "hidden" properties of an object, that no other part of code can accidentally access or overwrite.
+>>>>>>> 206485fc3a5465f961608b6e7303fae2e1a0e0b5
 
 برای مثال، اگر ما در حال کار کردن با شیءهای `user` که متعلق به یک شخص ثالث است باشیم. ما می‌خواهیم شناسه‌هایی به آنها اضافه کنیم.
 
@@ -227,7 +265,11 @@ alert( Symbol.keyFor(sym2) ); // id
 
 متد `Symbol.keyFor` درون خود از رجیستری ثبت سمبل global برای پیدا کردن کلید (key) سمبل استفاده می‌کند. پس برای سمبل‌های غیر global کار نمی‌کند. اگر سمبل global نباشد، قادر به پیدا کردن آن نخواهد بود و `undefined` را برمی‌گرداند.
 
+<<<<<<< HEAD
 همانطور که گفته شد، هر سمبل ویژگی `description` را دارد.
+=======
+That said, all symbols have the `description` property.
+>>>>>>> 206485fc3a5465f961608b6e7303fae2e1a0e0b5
 
 برای مثال:
 
@@ -267,8 +309,14 @@ alert( localSymbol.description ); // name
 
 سمبل‌ها در دو مورد زیاد استفاده می‌شوند:
 
+<<<<<<< HEAD
 1. ویژگی‌های «مخفی» شیء.
     اگر ما بخواهیم یک ویژگی را درون یک شیء که به اسکریپت یا کتابخانه دیگری "تعلق دارد" اضافه کنیم، می‌توانیم یک سمبل بسازیم و از آن به عنوان کلید ویژگی استفاده کنیم. یک ویژگی سمبلی در `for..in` نمایان نمی‌شود، پس با ویژگی‌های دیگر به طور تصادفی روی آن فرایندی انجام نمی‌گیرد. همچنین دسترسی مستقیم به آن وجود ندارد، چون اسکریپت دیگر سمبل ما را ندارد. پس ویژگی از استفاده یا بازنویسی تصادفی در امان می‌ماند.
+=======
+1. "Hidden" object properties.
+
+    If we want to add a property into an object that "belongs" to another script or a library, we can create a symbol and use it as a property key. A symbolic property does not appear in `for..in`, so it won't be accidentally processed together with other properties. Also it won't be accessed directly, because another script does not have our symbol. So the property will be protected from accidental use or overwrite.
+>>>>>>> 206485fc3a5465f961608b6e7303fae2e1a0e0b5
 
     پس ما می‌توانیم با استفاده از ویژگی‌های سمبلی، به صورت "مخفیانه" چیزی را که نیاز داریم درون شیءها پنهان کنیم، اما بقیه آن را نباید ببینند.
 

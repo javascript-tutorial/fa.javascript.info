@@ -256,7 +256,11 @@ switch (age) {
 3. تابع پیکانی (Arrow Function)
 
     ```js
+<<<<<<< HEAD
     // :عبارت سمت راست برمی‌گردد
+=======
+    // expression on the right side
+>>>>>>> 206485fc3a5465f961608b6e7303fae2e1a0e0b5
     let sum = (a, b) => a + b;
 
     // یا مدل چند خطی با {...}، که در این حالت باید return :هم بنویسید

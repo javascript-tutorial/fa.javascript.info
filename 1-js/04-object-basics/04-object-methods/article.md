@@ -50,8 +50,13 @@ let user = {
 *!*
 // اول تعریف می‌کنیم
 function sayHi() {
+<<<<<<< HEAD
   alert("سلام!");
 };
+=======
+  alert("Hello!");
+}
+>>>>>>> 206485fc3a5465f961608b6e7303fae2e1a0e0b5
 
 // سپس به عنوان متد آن را اضافه می‌کنیم
 user.sayHi = sayHi;

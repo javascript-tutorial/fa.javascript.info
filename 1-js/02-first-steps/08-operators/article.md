@@ -437,7 +437,11 @@ counter++;
 - RIGHT SHIFT ( `>>` )
 - ZERO-FILL RIGHT SHIFT ( `>>>` )
 
+<<<<<<< HEAD
 این عملگرها بسیار به ندرت استفاده می‌شوند، زمانی که بخواهیم با اعداد در پایین‌ترین سطح خود (bitwise) کار کنیم. ما فعلا به این عملگرها نیازی نداریم، همانطور که در توسعه وب استفاده‌ی بسیار کمی از آنها دارد، اما در بعضی حوزه‌های خاص مانند کریپتوگرافی، این عملگرها مفید هستند. شما می‌توانید فصل [عملگرهای بیتی](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators#Bitwise) را در MDN هر زمان که نیاز داشتید بخوانید.
+=======
+These operators are used very rarely, when we need to fiddle with numbers on the very lowest (bitwise) level. We won't need these operators any time soon, as web development has little use of them, but in some special areas, such as cryptography, they are useful. You can read the [Bitwise Operators](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators#bitwise_operators) chapter on MDN when a need arises.
+>>>>>>> 206485fc3a5465f961608b6e7303fae2e1a0e0b5
 
 ## کاما
 

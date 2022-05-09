@@ -21,14 +21,22 @@ alert( rabbit.hasOwnProperty('name') ); // true
 
 اما این هنوز تمام ماجرا نیست.
 
+<<<<<<< HEAD
 حتی بعد از رفع این مشکل، هنوز هم یک تفاوت اساسی بین `"class Rabbit extends Object"` و `class Rabbit` وجود دارد.
+=======
+Even after the fix, there's still an important difference between `"class Rabbit extends Object"` and `class Rabbit`.
+>>>>>>> 206485fc3a5465f961608b6e7303fae2e1a0e0b5
 
 همانطور که می‌دانیم، سینتکس "extends" دو پروتوتایپ را تنظیم می‌کند:
 
 1. بین `"prototype"` سازنده تابع‌ها (برای متدها).
 2. بین خود سازنده تابع‌ها (برای متدهای ایستا).
 
+<<<<<<< HEAD
 در این مورد ما، برای `class Rabbit extends Object` داریم:
+=======
+In the case of `class Rabbit extends Object` it means:
+>>>>>>> 206485fc3a5465f961608b6e7303fae2e1a0e0b5
 
 ```js run
 class Rabbit extends Object {}
@@ -37,7 +45,11 @@ alert( Rabbit.prototype.__proto__ === Object.prototype ); // (1) true
 alert( Rabbit.__proto__ === Object ); // (2) true
 ```
 
+<<<<<<< HEAD
 پس حالا `Rabbit` به دسترسی متدهای ایستای `Object` از طریق `Rabbit` را فراهم می‌کند، مثلا اینگونه:
+=======
+So `Rabbit` now provides access to the static methods of `Object` via `Rabbit`, like this:
+>>>>>>> 206485fc3a5465f961608b6e7303fae2e1a0e0b5
 
 ```js run
 class Rabbit extends Object {}
@@ -67,7 +79,11 @@ alert ( Rabbit.getOwnPropertyNames({a: 1, b: 2})); // ارور
 
 پس در این صورت `Rabbit` دسترسی به متدهای ایستای `Object` را فراهم نمی‌کند.
 
+<<<<<<< HEAD
 راستی، `Function.prototype` دارای متدهای «عمومی» تابع است، مثل `call`، `bind` و غیره. آن‌ها در هر دو مورد سرانجام در دسترس هستند چون سازنده درون‌ساخت `Object`، `Object.__proto__ === Function.prototype` را دارد.
+=======
+By the way, `Function.prototype` also has "generic" function methods, like `call`, `bind` etc. They are ultimately available in both cases, because for the built-in `Object` constructor, `Object.__proto__ === Function.prototype`.
+>>>>>>> 206485fc3a5465f961608b6e7303fae2e1a0e0b5
 
 اینجا تصویر آن را داریم:
 
