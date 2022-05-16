@@ -5,7 +5,11 @@
 
 نوع اول *ویژگی‌های داده‌ای* هستند. ما از قبل می‌دانیم چگونه با آن‌ها کار کنیم. تمام ویژگی‌هایی که تا حالا استفاده می‌کردیم ویژگی‌های داده‌ای بودند.
 
+<<<<<<< HEAD
 نوع دوم ویژگی‌ها چیزی جدید است. این نوع *ویژگی‌های اکسسر(accessor)* است. اساسا آن‌ها تابع‌هایی هستند که برای گرفتن و تنظیم‌کردن مقداری اجرا می‌شوند اما برای یک شیء خارجی مانند ویژگی‌های معمولی به نظر می‌رسند.
+=======
+The second type of property is something new. It's an *accessor property*. They are essentially functions that execute on getting and setting a value, but look like regular properties to an external code.
+>>>>>>> 2901e0c64590a67d8a2bde1ea76a514d96f80469
 
 ## متدهای getter و setter
 

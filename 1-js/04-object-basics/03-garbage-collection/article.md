@@ -205,8 +205,16 @@ family = null;
 
 کتاب کلی "The Garbage Collection Handbook: The Art of Automatic Memory Management" (R. Jones و بقیه افراد) بعضی از آنها را پوشش می‌دهد.
 
+<<<<<<< HEAD
 اگر شما با برنامه‌نویسی سطح پایین آشنایی دارید، اطلاعاتی با جزییات درباره زباله‌روبی V8 در این مقاله است [A tour of V8: Garbage Collection](http://jayconrod.com/posts/55/a-tour-of-v8-garbage-collection).
 
 [بلاگ V8](https://v8.dev/) هم هر چند گاهی مقاله‌هایی درباره تغییرات مدیریت حافظه منتشر می‌کند. طبیعتا، برای یادگیری زباله‌روبی، شما بهتر است به طور کلی با یاد گرفتن چیزهای داخلی V8 آماده شوید و بلاگ [Vyacheslav Egorov](http://mrale.ph) که یکی از مهندس‌های V8 بود را بخوانید. من می‌گویم: "V8" چون مقاله‌های زیادی درباره آن در اینترنت وجود دارد. برای موتورهای دیگر، بیشتر روش‌ها مشابه هستند، اما زباله‌روبی در جنبه‌های زیادی متفاوت است.
  
 اگر شما بهینه‌سازی‌های سطح پایین را نیاز دارید، دانایی عمیق موتورها چیز خوبی است. این کار عاقلانه‌ای است که بعد از آشنایی با زبان برای آن برنامه‌ریزی کنید.
+=======
+If you are familiar with low-level programming, more detailed information about V8's garbage collector is in the article [A tour of V8: Garbage Collection](http://jayconrod.com/posts/55/a-tour-of-v8-garbage-collection).
+
+The [V8 blog](https://v8.dev/) also publishes articles about changes in memory management from time to time. Naturally, to learn more about garbage collection, you'd better prepare by learning about V8 internals in general and read the blog of [Vyacheslav Egorov](http://mrale.ph) who worked as one of the V8 engineers. I'm saying: "V8", because it is best covered by articles on the internet. For other engines, many approaches are similar, but garbage collection differs in many aspects.
+
+In-depth knowledge of engines is good when you need low-level optimizations. It would be wise to plan that as the next step after you're familiar with the language.
+>>>>>>> 2901e0c64590a67d8a2bde1ea76a514d96f80469

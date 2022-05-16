@@ -63,7 +63,13 @@ alert(sum(1, 2)); // 3
 ```js run
 let age = prompt("What is your age?", 18);
 
+<<<<<<< HEAD
 let welcome = age < 18 ? () => alert("Hello") : () => alert("Greetings!");
+=======
+let welcome = (age < 18) ?
+  () => alert('Hello!') :
+  () => alert("Greetings!");
+>>>>>>> 2901e0c64590a67d8a2bde1ea76a514d96f80469
 
 welcome();
 ```

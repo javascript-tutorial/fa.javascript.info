@@ -268,7 +268,11 @@ for (let i = 0; i < 10; i++) {
 
 از دیدگاه فنی، این شبیه مثال بالا است. مسلما، ما می توانیم کد را داخل یک بلوک `if` بگذاریم به جای اینکه از `continue` استفاده کنیم.
 
+<<<<<<< HEAD
 اما به عنوان یک عارضه جانبی، یک سطح بیشتری از تو در تویی می سازد (صدا زدن `alert` داخل آکولادها). اگر کد داخل `if` بیشتر از چند خط باشد، ممکن است خوانایی کلی را کاهش دهد.
+=======
+But as a side effect, this created one more level of nesting (the `alert` call inside the curly braces). If the code inside of `if` is longer than a few lines, that may decrease the overall readability.
+>>>>>>> 2901e0c64590a67d8a2bde1ea76a514d96f80469
 ````
 
 ````warn header="ممنوعیت `break/continue` در سمت راست '?'"

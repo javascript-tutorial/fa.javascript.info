@@ -138,7 +138,25 @@ function pow(x, n) {
 }
 ```
 
+<<<<<<< HEAD
 چنین یادداشت هایی به ما امکان می دهد بدون نگاه کردن به کد  ، هدف از تابع را بفهمیم و از آن به روش صحیح استفاده کنیم.
+=======
+Such comments allow us to understand the purpose of the function and use it the right way without looking in its code.
+
+By the way, many editors like [WebStorm](https://www.jetbrains.com/webstorm/) can understand them as well and use them to provide autocomplete and some automatic code-checking.
+
+Also, there are tools like [JSDoc 3](https://github.com/jsdoc3/jsdoc) that can generate HTML-documentation from the comments. You can read more information about JSDoc at <https://jsdoc.app>.
+
+Why is the task solved this way?
+: What's written is important. But what's *not* written may be even more important to understand what's going on. Why is the task solved exactly this way? The code gives no answer.
+
+    If there are many ways to solve the task, why this one? Especially when it's not the most obvious one.
+
+    Without such comments the following situation is possible:
+    1. You (or your colleague) open the code written some time ago, and see that it's "suboptimal".
+    2. You think: "How stupid I was then, and how much smarter I'm now", and rewrite using the "more obvious and correct" variant.
+    3. ...The urge to rewrite was good. But in the process you see that the "more obvious" solution is actually lacking. You even dimly remember why, because you already tried it long ago. You revert to the correct variant, but the time was wasted.
+>>>>>>> 2901e0c64590a67d8a2bde1ea76a514d96f80469
 
  به هر حال ، بسیاری از ویراستاران مانند 
  [WebStorm](https://www.jetbrains.com/webstorm/)
