@@ -176,13 +176,8 @@ alert( from ); // Ann
 
 به عبارتی دیگر، بگذارید این مقررات را تعیین کنیم:
 
-<<<<<<< HEAD
-- یک پارامتر یک متغیر لیست شده درون پرانتز‌های تعریف تابع (در زمان تعریف تابع) است.
-- یک آرگومان مقداری‌ست که به تابع موقع صدازدن آن پاس داده شده است.
-=======
-- A parameter is the variable listed inside the parentheses in the function declaration (it's a declaration time term).
-- An argument is the value that is passed to the function when it is called (it's a call time term).
->>>>>>> 2901e0c64590a67d8a2bde1ea76a514d96f80469
+- یک پارامتر یک متغیر لیست شده درون پرانتز‌های تعریف تابع است (عبارتی مربوط به زمان تعریف).
+- یک آرگومان مقداری‌ست که موقع فراخوانی تابع به آن پاس داده شده است (عبارتی مربوط به زمان فراخوانی).
 
 ما توابع را با پارامترهای‌شان تعریف می‌کنیم، و سپس آن‌ها را با آرگومان‌هایشان صدا می‌زنیم.
 
@@ -230,21 +225,18 @@ function showMessage(from, text = anotherFunction()) {
 از سوی دیگر، این به طور مستقل فراخوانی می‌شود وقتی `text` وجود نداشته باشد.
 ```
 
-<<<<<<< HEAD
-### پارامترهای پیش‌فرض جایگزین
-=======
-````smart header="Default parameters in old JavaScript code"
-Several years ago, JavaScript didn't support the syntax for default parameters. So people used other ways to specify them.
+````smart header="پارامترهای پیش‌فرض در کد قدیمی جاوااسکریپت"
+چندین سال قبل، جاوااسکریپت از سینتکس پارامترهای پیش‌فرض پشتیبانی نمی‌کرد. پس افراد از راه‌های دیگری برای تعیین کردن آن‌ها استفاده می‌کردند.
 
-Nowadays, we can come across them in old scripts.
+امروزه، می‌توانیم در اسکریپت‌های قدیمی با آن‌ها روبرو شویم.
 
-For example, an explicit check for `undefined`:
+برای مثال، یک بررسی واضح برای `undefined`:
 
 ```js
 function showMessage(from, text) {
 *!*
   if (text === undefined) {
-    text = 'no text given';
+    text = 'متنی داده نشده';
   }
 */!*
 
@@ -252,12 +244,12 @@ function showMessage(from, text) {
 }
 ```
 
-...Or using the `||` operator:
+...یا با استفاده از عملگر `||`:
 
 ```js
 function showMessage(from, text) {
-  // If the value of text is falsy, assign the default value
-  // this assumes that text == "" is the same as no text at all
+  // است، مقدار پیش‌فرض را اختصاص بده falsy از نوع text اگر مقدار
+  // با وجود نداشتن هیچ متنی یکسان است text == "" این عبارت فرض می‌کند که
   text = text || 'no text given';
   ...
 }
@@ -265,8 +257,7 @@ function showMessage(from, text) {
 ````
 
 
-### Alternative default parameters
->>>>>>> 2901e0c64590a67d8a2bde1ea76a514d96f80469
+### پارامترهای پیش‌فرض جایگزین
 
 گاهی اوقات این منطقی است که مقدارهای پیش‌فرض پارامترها را در تعریف تابع قرار ندهیم بلکه در مرحله بعدی یعنی حین اجرا شدن آن قرار دهیم.
 
@@ -531,11 +522,7 @@ function name(parameters, delimited, by, comma) {
 
 برای قابل فهم و تمیز بودن کد، توصیه می‌شود از متغیرهای محلی و پارامترهای تابع را استفاده کنیم تا متغیرهای بیرونی.
 
-<<<<<<< HEAD
-فهم اینکه یک تابع پارامترها را می‌گیرد و با آنها کار می‌کند و سپس یک خروجی می‌دهد همیشه ساده‌تر است تا اینکه یک تابع که هیچ پارامتری نمی‌گیرد اما متغیرهای بیرونی را تغییر می‌دهد.
-=======
-It is always easier to understand a function which gets parameters, works with them and returns a result than a function which gets no parameters, but modifies outer variables as a side effect.
->>>>>>> 2901e0c64590a67d8a2bde1ea76a514d96f80469
+فهم اینکه یک تابع پارامترها را می‌گیرد و با آنها کار می‌کند و سپس یک خروجی می‌دهد همیشه ساده‌تر است تا اینکه یک تابع که هیچ پارامتری نمی‌گیرد اما به عنوان یک عمل جانبی متغیرهای بیرونی را تغییر می‌دهد.
 
 نامگذاری تابع:
 

@@ -138,41 +138,21 @@ function pow(x, n) {
 }
 ```
 
-<<<<<<< HEAD
-چنین یادداشت هایی به ما امکان می دهد بدون نگاه کردن به کد  ، هدف از تابع را بفهمیم و از آن به روش صحیح استفاده کنیم.
-=======
-Such comments allow us to understand the purpose of the function and use it the right way without looking in its code.
+چنین یادداشت هایی به ما امکان می دهد که هدف تابع را بفهمیم و از آن به روش صحیح استفاده کنیم.
 
-By the way, many editors like [WebStorm](https://www.jetbrains.com/webstorm/) can understand them as well and use them to provide autocomplete and some automatic code-checking.
+راستی، تعداد زیادی از ویرایشگرها مثل [WebStorm](https://www.jetbrains.com/webstorm/) می‌توانند یادداشت‌ها را نیز متوجه شوند و از آن‌ها برای تکمیل خودکار و بررسی کد به صورت خودکار استفاده کنند.
 
-Also, there are tools like [JSDoc 3](https://github.com/jsdoc3/jsdoc) that can generate HTML-documentation from the comments. You can read more information about JSDoc at <https://jsdoc.app>.
+همچنین، ابزارهایی مانند [JSDoc 3](https://github.com/jsdoc3/jsdoc) وجود دارند که برای یادداشت‌ها مستندسازی HTML (HTML-documentaion) تولید می‌کنند. شما می‌توانید در <https://jsdoc.app> درباره JSDoc بیشتر بخوانید.
 
-Why is the task solved this way?
-: What's written is important. But what's *not* written may be even more important to understand what's going on. Why is the task solved exactly this way? The code gives no answer.
+چرا این کار به این صورت حل شده است؟
+: چیزی که نوشته شده مهم است. اما برای فهمیدن اینکه چه چیزی در حال رخ دادن است، فهمیدن چیزی که نوشته *نشده* است شاید مهم‌تر باشد. چرا این کار دقیقا به این صورت حل شده است؟ کد به ما پاسخی نمی‌دهد.
 
-    If there are many ways to solve the task, why this one? Especially when it's not the most obvious one.
+    اگر راه‌های زیادی برای حل کردن این کار وجود داشته باشد، چرا این راه؟ خصوصا زمانی که این واضح‌ترین راه نیست.
 
-    Without such comments the following situation is possible:
-    1. You (or your colleague) open the code written some time ago, and see that it's "suboptimal".
-    2. You think: "How stupid I was then, and how much smarter I'm now", and rewrite using the "more obvious and correct" variant.
-    3. ...The urge to rewrite was good. But in the process you see that the "more obvious" solution is actually lacking. You even dimly remember why, because you already tried it long ago. You revert to the correct variant, but the time was wasted.
->>>>>>> 2901e0c64590a67d8a2bde1ea76a514d96f80469
-
- به هر حال ، بسیاری از ویراستاران مانند 
- [WebStorm](https://www.jetbrains.com/webstorm/)
- می تواند آنها را به خوبی درک کرده و از آنها برای ارائه خودکار و برخی بررسی خودکار کد استفاده کند. 
- 
-همچنین ابزارهایی مانند
- [JSDoc 3](https://github.com/jsdoc3/jsdoc)
- که می تواند مستندات HTML را از یادداشت ها ایجاد کند.
- می توانید اطلاعات بیشتر در مورد JSDoc را در <http://usejsdoc.org/> مطالعه کنید.
- 
-    اگر راه های زیادی برای حل این مورد وجود دارد ، چرا این یکی؟ مخصوصاً وقتی که واضح ترین آن نیست.
-    
-         بدون چنین یادداشت هایی شرایط زیر امکان پذیر است:
-         1. شما (یا همكار خود) كدی را كه چند وقت پیش نوشتید باز می كنید و می بینید كه "زیر حد بهینه" است.
-         2. شما فکر می کنید: "من در آن زمان چقدر احمق بودم ، و چقدر باهوش تر شدم حالا" ، و با استفاده از نوع "واضح تر و صحیح تر" بازنویسی می کنید.
-         3. ... میل به بازنویسی خوب بود. اما در این روند می بینید که در واقع فاقد راه حل "آشکارتر" است. شما حتی کم به خاطر می آورید ، چرا که مدتها قبل آن را امتحان کرده اید. شما به نوع صحیح بر می گردید ، اما زمان هدر رفته است.
+    بدون چنین یادداشت‌هایی موقعیت زیر ممکن می‌شود:
+    1. شما (یا همکار شما) کدی که زمانی پیش نوشته شده است را باز می‌کنید و می‌بینید که این کد «زیرمجموعه» است.
+    2. با خود فکر می‌کنید: «آن زمان چه احمقی بودم و حالا چقدر باهوش‌تر هستم» و با استفاده از روش «واضح‌تر و صحیح» بازنویسی می‌کنید.
+    3. ...ضرورت بازنویسی خود بود. اما در حین کار می‌بینید که راه‌حل «واضح‌تر» در واقع ناقص است. حتی به سختی دلیل آن را به یاد می‌آورید چون خیلی وقت پیش آن را امتحان کرده‌اید.
     
          یادداشت ها که راه حل را توضیح می دهد بسیار مهم هستند. آنها به ادامه پیشرفت صحیح راه کمک می کنند.
 
