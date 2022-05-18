@@ -52,11 +52,7 @@
 
 ما معمولا این خاصیت را برای رویدادهای `click` و `contextmenu` استفاده نمی‌کنیم،‌ زیرا اولی فقط با کلیک چپ، و دومی با کلیک راست اتفاق می‌افتد.
 
-<<<<<<< HEAD
-از طرف دیگر، کنترل‌کننده‌های `mousedown` و `mouseup‍‍` ممکن است به `event.button` نیاز پیدا کنند، زیرا این رویدادها به واسطه هر کلیدی اتفاق می‌افتند، پس `button` این امکان را می‌دهد تا "کلیک کلید راست" و "کلیک کلید چپ" موس را تشخیص دهیم.
-=======
-On the other hand, `mousedown` and `mouseup` handlers may need `event.button`, because these events trigger on any button, so `button` allows to distinguish between "right-mousedown" and "left-mousedown".
->>>>>>> 2901e0c64590a67d8a2bde1ea76a514d96f80469
+از طرف دیگر، کنترل‌کننده‌های `mousedown` و `mouseup‍‍` ممکن است به `event.button` نیاز پیدا کنند، زیرا این رویدادها به واسطه هر کلیدی اتفاق می‌افتند، پس `button` این امکان را می‌دهد تا «کلیک کلید راست» و «کلیک کلید چپ» موس را تشخیص دهیم.
 
 مقادیر قابل قبول برای `event.button`:
 
@@ -158,11 +154,7 @@ On the other hand, `mousedown` and `mouseup` handlers may need `event.button`, b
 
 ## جلوگیری از انتخاب در هنگام mousedown
 
-<<<<<<< HEAD
-دابل کلیک موس یک اثر جانبی دارد که در بعضی از رابطه‌های کاربری مزاحم است: متن را انتخاب می‌کند.
-=======
-Double mouse click has a side effect that may be disturbing in some interfaces: it selects text.
->>>>>>> 2901e0c64590a67d8a2bde1ea76a514d96f80469
+دابل کلیک موس یک اثر جانبی دارد که در بعضی از رابط‌های کاربری مزاحم است: متن را انتخاب می‌کند.
 
 برای مثال، دابل کلیک کردن روی متن زیر آنرا انتخاب می‌کند که در کنترل‌کندده ما تعریف نشده:
 
