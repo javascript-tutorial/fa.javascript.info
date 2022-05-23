@@ -37,7 +37,11 @@ let user = {
 
 شیء در جایی از حافظه ذخیره شده است (سمت راست تصویر)، در حالی که متغیر `user` (سمت چپ) به شیء "رجوع می‌کند".
 
+<<<<<<< HEAD
 می‌توانیم به متغیری که شیءای را ذخیره می‌کند، مانند `user`، به عنوان یک ورق کاغذ که شامل آدرس شیء است نگاه کنیم.
+=======
+We may think of an object variable, such as `user`, like a sheet of paper with the address of the object on it.
+>>>>>>> d5e8b6d308869738bd1f08dde62b64c969b0673e
 
 زمانی که ما با شیء کاری انجام می‌دهیم، برای مثال یک ویژگی را می‌گیریم `user.name`، موتور جاوااسکریپت به آدرس نگاه می‌کند که چه چیزی درون آن قرار دارد و عملیات را روی شیء واقعی انجام می‌دهد.
 
@@ -104,11 +108,17 @@ alert( a == b ); // false
 
 پس کپی کردن یک متغیر حاوی شیء باعث ساخت یک مرجع اضافی به همان شیء می‌شود.
 
+<<<<<<< HEAD
 اما اگر ما نیاز داشته باشیم که چند نسخه از یک شیء بسازیم چه کار کنیم؟ ساخت یک کپی مستقل، یک شیء مشابه؟
 
 این هم شدنی است، اما کمی سخت‌تر است، چون هیچ متد درون‌سازی برای چنین کاری در جاوااسکریپت وجود ندارد. اما نیاز به انجام چنین کاری کم پیش می‌آید و کپی کردن مرجع اکثر اوقات کار مناسبی است.
 
 اگر واقعا چنین چیزی را بخواهیم، باید یک شیء جدید بسازیم و ساختار شیءای که از قبل موجود است را با حلقه زدن بین ویژگی‌های آن و کپی کردن آنها در سطح مقدارهای اصلی، در شیء جدید کپی کنیم.
+=======
+But what if we need to duplicate an object?
+
+We can create a new object and replicate the structure of the existing one, by iterating over its properties and copying them on the primitive level.
+>>>>>>> d5e8b6d308869738bd1f08dde62b64c969b0673e
 
 مانند این کد:
 
@@ -133,7 +143,11 @@ clone.name = "Pete"; // تغییر دادن داده‌ی درون آن
 alert( user.name ); // است John هنوز در شیء اصلی برابر با
 ```
 
+<<<<<<< HEAD
 همچنین ما می‌توانیم از متد [Object.assign](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign) برای این کار استفاده کنیم.
+=======
+We can also use the method [Object.assign](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign).
+>>>>>>> d5e8b6d308869738bd1f08dde62b64c969b0673e
 
 سینتکس آن اینگونه است:
 
@@ -190,7 +204,11 @@ let clone = Object.assign({}, user);
 
 ## کپی کردن تو در تو
 
+<<<<<<< HEAD
 تا اینجا ما فرض کردیم که تمام ویژگی‌های `user` مقدارهای اصلی هستند. اما ویژگی ‌ها می‌توانند به شیءهای دیگر رجوع کنند. با آنها چه کار کنیم؟
+=======
+Until now we assumed that all properties of `user` are primitive. But properties can be references to other objects.
+>>>>>>> d5e8b6d308869738bd1f08dde62b64c969b0673e
 
 مانند این کد:
 ```js run
@@ -205,9 +223,13 @@ let user = {
 alert( user.sizes.height ); // 182
 ```
 
+<<<<<<< HEAD
 اینجا کپی کردن `clone.sizes = user.sizes` کافی است، چون `user.sized` یک شیء است و توسط مرجع کپی می‌شود. پس `clone` و `user` سایزهای یکسانی را مشترک می‌شوند:
 
 مثل این:
+=======
+Now it's not enough to copy `clone.sizes = user.sizes`, because `user.sizes` is an object, and will be copied by reference, so `clone` and `user` will share the same sizes:
+>>>>>>> d5e8b6d308869738bd1f08dde62b64c969b0673e
 
 ```js run
 let user = {
@@ -222,12 +244,21 @@ let clone = Object.assign({}, user);
 
 alert( user.sizes === clone.sizes ); // true :شیءهای یکسان پس
 
+<<<<<<< HEAD
 // سایزهای مشترک دارند clone و user
 user.sizes.width++;       // یک ویژگی را از یک جا تغییر دهید
 alert(clone.sizes.width); // 51 :نتیجه را از جای دیگر ببینید
 ```
 
 برای رفع این اشکال، ما باید از یک حلقه‌ی کپی‌کردن استفاده کنیم که هر مقدار `user[key]` را بررسی می‌کند و اگر شیء بود، سپس ساختار آن را هم کپی می‌کند. به این کار "کپی‌کردن عمیق" می‌گویند.
+=======
+// user and clone share sizes
+user.sizes.width++;       // change a property from one place
+alert(clone.sizes.width); // 51, get the result from the other one
+```
+
+To fix that and make `user` and `clone` truly separate objects, we should use a cloning loop that examines each value of `user[key]` and, if it's an object, then replicate its structure as well. That is called a "deep cloning".
+>>>>>>> d5e8b6d308869738bd1f08dde62b64c969b0673e
 
 ما می‌توانیم از بازگشت برای پیاده‌سازی آن استفاده کنیم. یا برای اینکه دوباره کاری نکنیم، از چیزی که قبلا پیاده‌سازی شده استفاده کنیم، برای مثال [_.cloneDeep(obj)](https://lodash.com/docs#cloneDeep) از کتابخانه‌ی [lodash](https://lodash.com).
 

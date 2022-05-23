@@ -92,6 +92,38 @@ let fruits = [
 سبک «کامای دنباله‌دار» اضافه/حذف کردن المان را آسان‌تر می‌کند، چون همه خطوط مشابه می‌شوند.
 ````
 
+## Get last elements with "at"
+
+[recent browser="new"]
+
+Let's say we want a last element of the array.
+
+Some programming languages allow to use negative indexes for the same purpose, like `fruits[-1]`.
+
+Although, in JavaScript it won't work. The result will be `undefined`, because the index in square brackets is treated literally.
+
+We can explicitly calculate the last element index and then access it: `fruits[fruits.length - 1]`.
+
+```js run
+let fruits = ["Apple", "Orange", "Plum"];
+
+alert( fruits[fruits.length-1] ); // Plum
+```
+
+A bit cumbersome, isn't it? We need to write the variable name twice.
+
+Luckily, there's a shorter syntax: `fruits.at(-1)`:
+
+```js run
+let fruits = ["Apple", "Orange", "Plum"];
+
+// same as fruits[fruits.length-1]
+alert( fruits.at(-1) ); // Plum
+```
+
+In other words, `arr.at(i)`:
+- is exactly the same as `arr[i]`, if `i >= 0`.
+- for negative values of `i`, it steps back from the end of the array.
 
 ## متدهای pop/push، shift/unshift
 
@@ -137,6 +169,8 @@ let fruits = [
 
     alert( fruits ); // Apple, Orange
     ```
+
+    Both `fruits.pop()` and `fruits.at(-1)` return the last element of the array, but `fruits.pop()` also modifies the array by removing it.
 
 `push`
 : المان را به انتهای آرایه اضافه می‌کند:
@@ -439,7 +473,11 @@ alert( "1,2" + 1 ); // "1,21"
 - اگر یکی از آرگومان‌های `==` شیء باشد و دیگری یک مقدار اصلی (primitive) باشد، سپس شیء به مقدار اصلی تبدیل می‌شود، همانطور که در فصل <info:object-toprimitive> توضیح داده شد.
 - ...به استثنای `null` و `undefined` که با `==` برابر هستند اما با چیز دیگری برابر نیستند.
 
+<<<<<<< HEAD
 مقایسه سخت‌گیرانه `===` حتی ساده‌تر است چون نوع مقدارها را تبدیل نمی‌کند.
+=======
+The strict comparison `===` is even simpler, as it doesn't convert types.
+>>>>>>> d5e8b6d308869738bd1f08dde62b64c969b0673e
 
 پس اگر ما آرایه‌ها را با `==` مقایسه کنیم، آنها هیچ وقت برابر نیستند، مگر اینکه دو متغیر را که به یک آرایه رجوع می‌کنند را مقایسه کنیم.
 
@@ -461,7 +499,13 @@ alert('0' == [] ); // false
  
 اینجا در هر دو مورد، ما یک مقدار اصلی را با یک شیء آرایه‌ای مقایسه می‌کنیم. پس آرایه `[]` برای انجام مقایسه به مقدار اصلی و سپس به یک رشته خالی `''` تبدیل می‌شود.
 
+<<<<<<< HEAD
 سپس فرایند مقایسه با مقدارهای اصلی پیش می‌رود، همانطور که در فصل <info:type-conversions> توضیح داده شد:
+=======
+Here, in both cases, we compare a primitive with an array object. So the array `[]` gets converted to primitive for the purpose of comparison and becomes an empty string `''`.
+
+Then the comparison process goes on with the primitives, as described in the chapter <info:type-conversions>:
+>>>>>>> d5e8b6d308869738bd1f08dde62b64c969b0673e
 
 ```js run
 // بعد از اینکه [] به '' تبدیل شد
@@ -478,6 +522,7 @@ alert('0' == '' ); // false ،هیچ تبدیلی رخ نداد، رشته‌ه�
 
 آرایه یک نوع خاصی از شیء است که برای ذخیره و مدیریت داده‌های مرتب مناسب است.
 
+<<<<<<< HEAD
 - نحوه تعریف کردن:
 
     ```js
@@ -489,11 +534,33 @@ alert('0' == '' ); // false ،هیچ تبدیلی رخ نداد، رشته‌ه�
     ```
 
     صدا زدن `new Array(number)` یک آرایه با طول داده شده می‌سازد، اما بدون المان.
+=======
+The declaration:
+
+```js
+// square brackets (usual)
+let arr = [item1, item2...];
+
+// new Array (exceptionally rare)
+let arr = new Array(item1, item2...);
+```
+
+The call to `new Array(number)` creates an array with the given length, but without elements.
+>>>>>>> d5e8b6d308869738bd1f08dde62b64c969b0673e
 
 - ویژگی `length` طول آرایه است، یا اگر بخواهیم دقیق باشیم، برابر با آخرین ایندکس به علاوه یک است. این ویژگی به طور خودکار توسط متدهای آرایه تنظیم می‌شود.
 - اگر ما به طور دستی `length` را کوتاه کنیم، آرایه بریده می‌شود.
 
+<<<<<<< HEAD
 ما می‌توانیم از یک آرایه با عملیات‌های زیر به عنوان یک صف دو طرفه استفاده کنیم:
+=======
+Getting the elements:
+
+- we can get element by its index, like `arr[0]`
+- also we can use `at(i)` method to get negative-index elements, for negative values of `i`, it steps back from the end of the array. In the rest it works same as `arr[i]`, if `i >= 0`.
+
+We can use an array as a deque with the following operations:
+>>>>>>> d5e8b6d308869738bd1f08dde62b64c969b0673e
 
 - `push(...items)` اضافه می‌کند `items` را به انتهای آرایه.
 - `pop()` المان را از آخر حذف می‌کند و آن را برمی‌گرداند.

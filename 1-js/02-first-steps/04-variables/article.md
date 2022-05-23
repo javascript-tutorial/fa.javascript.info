@@ -193,8 +193,13 @@ let 1a; // نمی‌تواند با یک عدد شروع شود
 let my-name; // خط‌های پیوند '-' در نام‌ها ممنوع هستند
 ```
 
+<<<<<<< HEAD
 ```smart header="بزرگی و کوچکی حروف مهم است"
 متغیر apple با Apple متفاوت است.
+=======
+```smart header="Case matters"
+Variables named `apple` and `APPLE` are two different variables.
+>>>>>>> d5e8b6d308869738bd1f08dde62b64c969b0673e
 ```
 
 ````smart header="کاراکترهای غیر انگلیسی مجاز هستند ولی توصیه نمی‌شوند"
@@ -299,7 +304,13 @@ Constant بودن یک متغیر صرفا بدین معناست که مقدار
 const pageLoadTime = /* زمان بارگیری برای یک صفحه وب */;
 ```
 
+<<<<<<< HEAD
 مقدار ثابت `pageLoadTime` پیش از اجرای برنامه مشخص نبوده و به همین دلیل به صورت عادی نوشته شده است. اما همچنان یک ثابت است چراکه زمان اجرای برنامه بعد از مقدار دهی دیگر تغییر نخواهد کرد.
+=======
+The value of `pageLoadTime` is not known prior to the page load, so it's named normally. But it's still a constant because it doesn't change after assignment.
+
+In other words, capital-named constants are only used as aliases for "hard-coded" values.
+>>>>>>> d5e8b6d308869738bd1f08dde62b64c969b0673e
 
 به تعبیری دیگر ثابت‌های با حروف بزرگ زمانی که اصطلاحا مقداری به صورت "hard code" شده داریم، به عنوان نام مستعار استفاده می‌شوند.
 

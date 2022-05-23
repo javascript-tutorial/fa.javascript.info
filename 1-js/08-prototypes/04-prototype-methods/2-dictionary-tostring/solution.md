@@ -28,4 +28,8 @@ alert(dictionary); // "apple,__proto__"
 
 وقتی یک ویژگی را با استفاده از یک توصیفگر ایجاد می‌کنیم، پرچم‌های آن به طور پیش‌فرض `false` هستند. بنابراین در کد بالا، `dictionary.toString` غیرقابل شمارش است.
 
+<<<<<<< HEAD
 برای بررسی به فصل [](info:property-descriptors) مراجعه کنید.
+=======
+See the chapter [](info:property-descriptors) for review.
+>>>>>>> d5e8b6d308869738bd1f08dde62b64c969b0673e
