@@ -57,10 +57,17 @@
 `new Date(year, month, date, hours, minutes, seconds, ms)`
 : یک تاریخ با مؤلفه‎های داده شده در منطقه‌زمانی محلی می‌سازد. فقط دو آرگومان اول ضروری هستند.
 
+<<<<<<< HEAD
     - پارامتر `year` باید حتما 4 رقم باشد: `2013` خوب است ولی `98` نه.
     - شمارش پارامتر `month` از `0` (ژانویه) تا `11` (دسامبر) است.
     - پارامتر `date` در واقع روز ماه است، اگر وارد نشود `1` فرض می‌شود.
     - اگر `hours/minutes/seconds/ms` وارد نشوند،برای آنها `0` در نظر گرفته می‌شود.
+=======
+    - The `year` should have 4 digits. For compatibility, 2 digits are also accepted and considered `19xx`, e.g. `98` is same as `1998` here, but always using 4 digits is strongly encouraged.
+    - The `month` count starts with `0` (Jan), up to `11` (Dec).
+    - The `date` parameter is actually the day of month, if absent then `1` is assumed.
+    - If `hours/minutes/seconds/ms` is absent, they are assumed to be equal `0`.
+>>>>>>> 2efe0dce18a57f2b6121ed6656d6fe10b0ee8f96
 
     برای مثال:
 
@@ -406,7 +413,7 @@ alert(ms); // 1327611110417  (برچسب زمان)
 ```js run
 let date = new Date( Date.parse('2012-01-26T13:51:50.417-07:00') );
 
-alert(date);  
+alert(date);
 ```
 
 ## خلاصه

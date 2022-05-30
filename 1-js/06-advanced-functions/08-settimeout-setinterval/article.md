@@ -232,7 +232,11 @@ setTimeout(function() {...}, 100);
 
 برای `setInterval` تابع تا زمانی که `clearInterval` فراخوانی شود درون حافظه می‌ماند.
 
+<<<<<<< HEAD
 یک عارضه جانبی وجود دارد. یک تابع به محیط لغوی بیرونی رجوع می‌کند پس، تا زمانی که تابع وجود داشته باشد، متغیرهای بیرونی هم وجود خواهند داشت. آنها حافظه بسیار بیشتری را نسبت به خود تابع اشغال می‌کنند. پس زمانی که دیگر نیازی به تابع زمان‌بندی شده نداریم، بهتر است که آن را لغو کنیم حتی اگر خیلی کوچک باشد.
+=======
+There's a side effect. A function references the outer lexical environment, so, while it lives, outer variables live too. They may take much more memory than the function itself. So when we don't need the scheduled function anymore, it's better to cancel it, even if it's very small.
+>>>>>>> 2efe0dce18a57f2b6121ed6656d6fe10b0ee8f96
 ````
 
 ## تابع setTimeout بدون تاخیر

@@ -109,7 +109,22 @@ alert( article.title ); // خلاصه‌ی امروز
 Article.remove({id: 12345});
 ```
 
+<<<<<<< HEAD
 ## ویژگی‌های ایستا
+=======
+````warn header="Static methods aren't available for individual objects"
+Static methods are callable on classes, not on individual objects.
+
+E.g. such code won't work:
+
+```js
+// ...
+article.createTodays(); /// Error: article.createTodays is not a function
+```
+````
+
+## Static properties
+>>>>>>> 2efe0dce18a57f2b6121ed6656d6fe10b0ee8f96
 
 [recent browser=Chrome]
 
