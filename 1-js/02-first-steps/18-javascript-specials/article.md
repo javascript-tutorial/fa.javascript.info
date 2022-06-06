@@ -55,7 +55,11 @@ for(;;) {
 
 این دستور می‌تواند در ابتدای یک فایل جاوااسکریپت یا ابتدای یک تابع نوشته شود.
 
+<<<<<<< HEAD
 بدون نوشتن `"use strict"` هم کد ما کار می‌کند، ولی بعضی چیزها در حالت قدیمی خود عمل می‌کنند. ما معمولاً رفتار مدرن آن‌ها را ترجیح می‌دهیم.
+=======
+Without `"use strict"`, everything still works, but some features behave in the old-fashioned, "compatible" way. We'd generally prefer the modern behavior.
+>>>>>>> 2efe0dce18a57f2b6121ed6656d6fe10b0ee8f96
 
 بعضی از ویژگی‌های مدرن جاوااسکریپت (مثل کلاس‌ها که بعداً به آن می‌رسیم) به صورت خودکار و بدون اینکه نیازی باشد `"use strict"` را بنویسیم کد را در حالت strict اجرا می‌کنند.
 
@@ -256,7 +260,11 @@ switch (age) {
 3. تابع پیکانی (Arrow Function)
 
     ```js
+<<<<<<< HEAD
     // :عبارت سمت راست برمی‌گردد
+=======
+    // expression on the right side
+>>>>>>> 2efe0dce18a57f2b6121ed6656d6fe10b0ee8f96
     let sum = (a, b) => a + b;
 
     // یا مدل چند خطی با {...}، که در این حالت باید return :هم بنویسید
