@@ -22,7 +22,11 @@ let billion = 1000000000;
 let billion = 1_000_000_000;
 ```
 
+<<<<<<< HEAD
 اینجا خط تیره `_` نقش "syntactic sugar" را بازی می‌کند، و عدد را خواناتر می‌کند. موتور جاوااسکریپت به راحتی `_` بین ارقام را نادیده می‌گیرد، پس دقیقا عددی مانند یک میلیارد بالا است.
+=======
+Here the underscore `_` plays the role of the "[syntactic sugar](https://en.wikipedia.org/wiki/Syntactic_sugar)", it makes the number more readable. The JavaScript engine simply ignores `_` between digits, so it's exactly the same one billion as above.
+>>>>>>> 7bb6066eb6ea3a030b875cdc75433c458f80997e
 
 اما در زندگی واقعی ما عموما از نوشتن رشته حرف با تعداد زیاد صفر خودداری میکنیم به خاطر اینکه به راحتی ممکن است خطا داشته باشیم و اشتباه بنویسیم. همینطور، ما تنبل هستیم! ما معمولا یه چیزی شبیه "1bn" مینویسیم به جای یک میلیارد یا "7.3bn" برای هفت میلیارد و سیصد میلیون. این حقیقت برای اکثر اعداد بزرگ هم صحیح است.
 
@@ -177,7 +181,11 @@ alert( num.toString(2) );   // 11111111
     alert( num.toFixed(1) ); // "12.4"
     ```
 
+<<<<<<< HEAD
     توجه داشته باشید که مقدار `toFixed` یک رشته حرفی‌ست. اگر قسمت بعد اعشار کوچک‌ترین مقدار لازم است، صفر به آخر آن اضافه خواهد شد:
+=======
+    Please note that the result of `toFixed` is a string. If the decimal part is shorter than required, zeroes are appended to the end:
+>>>>>>> 7bb6066eb6ea3a030b875cdc75433c458f80997e
 
     ```js run
     let num = 12.34;
@@ -245,7 +253,7 @@ PHP، Java، C، Perl، Ruby دقیقا نتیجه‌ی مشابه را میده
 
 ```js run
 let sum = 0.1 + 0.2;
-alert( sum.toFixed(2) ); // 0.30
+alert( sum.toFixed(2) ); // "0.30"
 ```
 
 توجه داشته باشید که `toFixed` همیشه مقدار رشته حرفی برمیگرداند. این تابع حتما مطمئن میشود که تا دو رقم اعشار را حساب می‌کند. که البته این روش منطقی‌‌ست وقتی مثلا در یک فروشگاه اینترنتی ما نیاز داریم مقدار `$0.30` را نمایش دهیم. برای حالات دیگر، میتوانیم از جمع واحد استفاده کنیم تا آنرا به یک عدد تبدیل کنیم:
@@ -330,9 +338,14 @@ alert( isFinite(num) );
 
 توجه داشته باشید که رشته حرفی‌ای که در آن فقط یک جای خالی باشد یا کلا خالی باشد، به عنوان صفر در همه‌ی توابع عددی از جمله `isFinite` در نظر گرفته میشود.
 
+<<<<<<< HEAD
 ```smart header="مقایسه کنید با `Object.is`"
 
 یک تابع از پیش آماده شده‌ی خاص [Object.is](mdn:js/Object/is) که مقادیر را مثل `===` مقایسه میکند، اما برای دو حالت مرزی قابل اعتمادتر است.
+=======
+```smart header="Compare with `Object.is`"
+There is a special built-in method `Object.is` that compares values like `===`, but is more reliable for two edge cases:
+>>>>>>> 7bb6066eb6ea3a030b875cdc75433c458f80997e
 
 ۱. با `NaN` کار میکند:  `Object.is(NaN, NaN) === true`، که چیز خوبیست.
 ۲. مقادیر `0` و `-0` متفاوت هستند: `Object.is(0, -0) === false`، به ندرت اهمیت دارد، اما این مقادیر در اصل متفاوتند.

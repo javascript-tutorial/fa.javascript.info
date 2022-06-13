@@ -141,7 +141,11 @@ switch (a) {
 
 حالا `3` و `5` پیام یکسانی نمایش می‌دهند.
 
+<<<<<<< HEAD
 این توانایی که می‌توان caseهای مختلف را گروه‌بندی کرد، به این خاطر است که `switch/case` بدون `break` کار می‌کند. اینجا اجرای کد `case 3` از خط `(*)` شروع می‌شود و تا خط `case 5` ادامه پیدا می‌کند. چرا که هیچ `break` وجود ندارد.
+=======
+The ability to "group" cases is a side effect of how `switch/case` works without `break`. Here the execution of `case 3` starts from the line `(*)` and goes through `case 5`, because there's no `break`.
+>>>>>>> 7bb6066eb6ea3a030b875cdc75433c458f80997e
 
 ## نوع داده Type مهم است
 
