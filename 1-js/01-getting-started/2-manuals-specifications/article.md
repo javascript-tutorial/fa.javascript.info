@@ -41,11 +41,18 @@
 
 - <https://kangax.github.io/compat-table> جدولی با ویژگی‌های زبان و موتورهایی که قابلیت پشتیبانی آنهارا دارند یا ندارند.
 
+<<<<<<< HEAD
 تمام این منابع در توسعه و برنامه‌نویسی‌ در زندگی واقعی مفیدند چراکه بسیاری اطلاعات ارزشمند راجب جزئیات زبان، پشتیبانیشان و غیره را دارند.
 @@@old part@@@
 @@@new part@@@
 Although, it's often best to use an internet search instead. Just use "MDN [term]" in the query, e.g. <https://google.com/search?q=MDN+parseInt> to search for `parseInt` function.
 @@@new part@@@
 @@@needs translation@@@
+=======
+- <https://caniuse.com> - per-feature tables of support, e.g. to see which engines support modern cryptography functions: <http://caniuse.com/#feat=cryptography>.
+- <https://kangax.github.io/compat-table> - a table with language features and engines that support those or don't support.
+
+All these resources are useful in real-life development, as they contain valuable information about language details, their support etc.
+>>>>>>> 7964b11b8fa2c314d9a09a82ea4b585cda618c80
 
 این صفحه را وقتی به اطلاعات دقیق یا یک ویژگی خاصی نیاز داشتید به یاد داشته باشید.

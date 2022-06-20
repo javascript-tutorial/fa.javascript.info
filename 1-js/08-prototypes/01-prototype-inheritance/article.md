@@ -131,9 +131,14 @@ alert(longEar.jumps); // true (rabbit از)
 
 همچنین ممکن است واضح باشد اما باز هم: فقط یک `[[Prototype]]` می‌تواند وجود داشته باشد. یک شیء نمی‌تواند از دو شیء دیگر ارث‌بری کند.
 
+<<<<<<< HEAD
 
 ```smart header="ویژگی `__proto__` یک getter/setter قدیمی برای `[[Prototype]]` است"
 این یک اشتباه توسعه‌دهندگان تازه‌وارد است که تفاوت میان این دو را ندانند.
+=======
+```smart header="`__proto__` is a historical getter/setter for `[[Prototype]]`"
+It's a common mistake of novice developers not to know the difference between these two.
+>>>>>>> 7964b11b8fa2c314d9a09a82ea4b585cda618c80
 
 لطفا توجه کنید که `__proto__` با ویژگی درونی `[[Prototype]]` *یکسان نیست*. این ویژگی یک getter/setter برای `[[Prototype]]` است. بعدا ما موقعیت‌هایی را خواهیم دید که این موضوع اهمیت دارد، اما چون فهم خود را از زبان جاوااسکریپت می‌سازیم، بیایید فقط این را در ذهن خود داشته باشیم.
 

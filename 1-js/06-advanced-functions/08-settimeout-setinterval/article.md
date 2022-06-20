@@ -232,7 +232,11 @@ setTimeout(function() {...}, 100);
 
 برای `setInterval` تابع تا زمانی که `clearInterval` فراخوانی شود درون حافظه می‌ماند.
 
+<<<<<<< HEAD
 یک عارضه جانبی وجود دارد. یک تابع به محیط لغوی بیرونی رجوع می‌کند پس، تا زمانی که تابع وجود داشته باشد، متغیرهای بیرونی هم وجود خواهند داشت. آنها حافظه بسیار بیشتری را نسبت به خود تابع اشغال می‌کنند. پس زمانی که دیگر نیازی به تابع زمان‌بندی شده نداریم، بهتر است که آن را لغو کنیم حتی اگر خیلی کوچک باشد.
+=======
+There's a side effect. A function references the outer lexical environment, so, while it lives, outer variables live too. They may take much more memory than the function itself. So when we don't need the scheduled function anymore, it's better to cancel it, even if it's very small.
+>>>>>>> 7964b11b8fa2c314d9a09a82ea4b585cda618c80
 ````
 
 ## تابع setTimeout بدون تاخیر
@@ -294,9 +298,16 @@ setTimeout(function run() {
 
 لطفا در نظر داشته باشید که روش‌های زمان‌بندی فاصله زمانی دقیق را *تضمین* نمی‌کنند.
 
+<<<<<<< HEAD
 برای مثال، تایمر درون مرورگر ممکن است به دلایل زیادی کند شود:
 - کارهای زیادی به پردازنده سپرده شده است.
 - تب (tab) مرورگر در حالت پس‌زمینه است.
 - لپ تاپ در حال استفاده از باتری است.
+=======
+For example, the in-browser timer may slow down for a lot of reasons:
+- The CPU is overloaded.
+- The browser tab is in the background mode.
+- The laptop is on battery saving mode.
+>>>>>>> 7964b11b8fa2c314d9a09a82ea4b585cda618c80
 
 All that may increase the minimal timer resolution (the minimal delay) to 300ms or even 1000ms depending on the browser and OS-level performance settings.

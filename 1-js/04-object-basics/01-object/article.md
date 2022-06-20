@@ -44,7 +44,11 @@ let user = {     // یک شیء
 
 ![user object](object-user.svg)
 
+<<<<<<< HEAD
 ما می‌توانیم در هر زمانی پرونده‌ها را اضافه یا کم کنیم یا آنها را بخوانیم.
+=======
+We can add, remove and read files from it at any time.
+>>>>>>> 7964b11b8fa2c314d9a09a82ea4b585cda618c80
 
 مقدارهای ویژگی‌ها با استفاده از نقطه قابل دسترسی هستند:
 
@@ -62,7 +66,11 @@ user.isAdmin = true;
 
 ![user object 2](object-user-isadmin.svg)
 
+<<<<<<< HEAD
 برای حذف یک ویژگی، از عملگر `delete` استفاده می‌کنیم:
+=======
+To remove a property, we can use the `delete` operator:
+>>>>>>> 7964b11b8fa2c314d9a09a82ea4b585cda618c80
 
 ```js
 delete user.age;
@@ -201,13 +209,21 @@ let bag = {
 };
 ```
 
+<<<<<<< HEAD
 براکت‌ها قدرت بسیار بیشتری نسبت به نقطه دارند. آنها هر نوع اسم ویژگی و متغیر را ممکن می‌سازند. اما آنها برای نوشتن سخت‌تر هستند.
+=======
+Square brackets are much more powerful than dot notation. They allow any property names and variables. But they are also more cumbersome to write.
+>>>>>>> 7964b11b8fa2c314d9a09a82ea4b585cda618c80
 
 پس اکثر اوقات، زمانی که اسم‌های ویژگی‌ها شناخته شده و ساده هستند، نقطه استفاده می‌شود. اگر ما به چیزی پیچیده‌تر نیاز داشته باشیم، سپس به سراغ براکت‌ها می‌رویم.
 
 ## خلاصه نویسی مقدار ویژگی
 
+<<<<<<< HEAD
 در کدنویسی واقعی معمولا نیاز داریم که از متغیرهای موجود به عنوان مقدار برای ویژگی‌ها استفاده کنیم.
+=======
+In real code, we often use existing variables as values for property names.
+>>>>>>> 7964b11b8fa2c314d9a09a82ea4b585cda618c80
 
 برای مثال:
 
@@ -252,7 +268,11 @@ let user = {
 
 ## محدودیت اسم‌های ویژگی‌ها
 
+<<<<<<< HEAD
 همانطور که از قبل می‌دانیم، یک متغیر نمی‌تواند اسمی برابر با کلماتی که توسط زبان رزرو شده‌اند داشته باشد مانند "for" و "let"، "return" و غیره.
+=======
+As we already know, a variable cannot have a name equal to one of the language-reserved words like "for", "let", "return" etc.
+>>>>>>> 7964b11b8fa2c314d9a09a82ea4b585cda618c80
 
 اما برای ویژگی یک شیء، چنین محدودیتی وجود ندارد:
 
@@ -325,7 +345,11 @@ alert( "blabla" in user ); // false وجود ندارد پس user.blabla
 
 لطفا در نظر داشته باشید که در سمت چپ `in` باید *اسم ویژگی* وجود داشته باشد که معمولا یک رشته درون کوتیشن است.
 
+<<<<<<< HEAD
 اگر ما کوتیشن را حذف کنیم، مانند متغیر فرض می‌شود، پس باید اسم واقعی برای بررسی استفاده شود. برای مثال:
+=======
+If we omit quotes, that means a variable should contain the actual name to be tested. For instance:
+>>>>>>> 7964b11b8fa2c314d9a09a82ea4b585cda618c80
 
 ```js run
 let user = { age: 30 };
@@ -355,7 +379,11 @@ alert( "test" in obj ); // !می‌دهد، بنابراین ویژگی وجود
 موقعیت‌هایی شبیه به این به ندرت اتفاق می‌افتند، چون `undefined` نباید به صراحت برای مقداردهی استفاده شود. ما معمولا از `null` برای متغیرهای "ناشناخته" یا "خالی" استفاده می‌کنیم. در نتیجه عملگر `in` در کد مانند یک غریبه است.
 
 
+<<<<<<< HEAD
 ## حلقه‌ی "for..in"
+=======
+## The "for..in" loop [#forin]
+>>>>>>> 7964b11b8fa2c314d9a09a82ea4b585cda618c80
 
 برای گردش در بین تمام ویژگی‌های یک شیء، شکل خاصی از حلقه وجود دارد: `for..in`. این حلقه کاملا متفاوت از ساختار `(;;)for` که قبلا آموختیم است.
 
@@ -412,7 +440,11 @@ for (let code in codes) {
 */!*
 ```
 
+<<<<<<< HEAD
 این شیء ممکن است برای پیشنهاد دادن لیستی از گزینه‌ها به کاربر استفاده شود. اگر ما در حال ساخت سایتی که به طور عمده برای آلمانی‌ها است باشیم پس احتمالا می‌خواهیم که `49` اولین گزینه باشد.
+=======
+The object may be used to suggest a list of options to the user. If we're making a site mainly for a German audience then we probably want `49` to be the first.
+>>>>>>> 7964b11b8fa2c314d9a09a82ea4b585cda618c80
 
 اما اگر ما کد را اجرا کنیم، نتیجه‌ای کاملا متفاوت می‌بینیم:
 
@@ -424,6 +456,7 @@ for (let code in codes) {
 ````smart header="ویژگی‌های عدد صحیح؟ داستان از چه قرار است؟"
 عبارت "ویژگی عدد صحیح" در اینجا به معنی رشته‌ای است که می‌تواند بدون تغییر، به عدد صحیح تبدیل شود و برعکس.
 
+<<<<<<< HEAD
 بنابراین "49" یک اسمِ ویژگیِ صحیح است، چون زمانی که به یک عدد صحیح تبدیل می‌شود و برعکس، هنوز یکسان است. اما "49+" و "1.2" اینطور نیستند:
 
 ```js run
@@ -431,6 +464,16 @@ for (let code in codes) {
 alert( String(Math.trunc(Number("49"))) ); // "49", یکسان است، پس ویژگی‌ای صحیح است
 alert( String(Math.trunc(Number("+49"))) ); // "49", با "49+" مشابه نیست، پس ویژگی‌ای صحیح هم نیست
 alert( String(Math.trunc(Number("1.2"))) ); // "1", با "1.2" مشابه نیست، پس ویژگی‌ای صحیح هم نیست
+=======
+So, `"49"` is an integer property name, because when it's transformed to an integer number and back, it's still the same. But `"+49"` and `"1.2"` are not:
+
+```js run
+// Number(...) explicitly converts to a number
+// Math.trunc is a built-in function that removes the decimal part
+alert( String(Math.trunc(Number("49"))) ); // "49", same, integer property
+alert( String(Math.trunc(Number("+49"))) ); // "49", not same "+49" ⇒ not integer property
+alert( String(Math.trunc(Number("1.2"))) ); // "1", not same "1.2" ⇒ not integer property
+>>>>>>> 7964b11b8fa2c314d9a09a82ea4b585cda618c80
 ```
 ````
 
@@ -479,9 +522,15 @@ for (let code in codes) {
 - کلیدهای ویژگی‌ها باید رشته یا symbol باشند (معمولا رشته).
 - مقدارها می‌توانند از هر نوعی باشند.
 
+<<<<<<< HEAD
 برای دسترسی داشتن به یک ویژگی، ما می‌توانیم از این روش‌ها استفاده کنیم:
 - نقطه: `obj.property`.
 - براکت `obj["property"]`. براکت‌ها به ما اجازه می‌دهند که key را از یک متغیر بگیریم، مثلا: `obj[varWithKey]`.
+=======
+To access a property, we can use:
+- The dot notation: `obj.property`.
+- Square brackets notation `obj["property"]`. Square brackets allow taking the key from a variable, like `obj[varWithKey]`.
+>>>>>>> 7964b11b8fa2c314d9a09a82ea4b585cda618c80
 
 عملگرهای اضافی:
 - برای حذف یک ویژگی: `delete obj.prop`.

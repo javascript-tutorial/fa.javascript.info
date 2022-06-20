@@ -2,7 +2,11 @@
 
 ویژگی `"prototype"` به طور گسترده توسط هسته خود جاوااسکریپت استفاده می‌شود. تمام تابع‌های سازنده درون‌ساخت از آن استفاده می‌کنند.
 
+<<<<<<< HEAD
 در ابتدا به جزئیات می‌پردازیم و سپس چگونگی استفاده کردن از آن برای اضافه کردن قابلیت‌های جدید به شیءهای درون‌ساخت را بررسی می‌کنیم.
+=======
+First we'll look at the details, and then how to use it for adding new capabilities to built-in objects.
+>>>>>>> 7964b11b8fa2c314d9a09a82ea4b585cda618c80
 
 ## ویژگی Object.prototype
 

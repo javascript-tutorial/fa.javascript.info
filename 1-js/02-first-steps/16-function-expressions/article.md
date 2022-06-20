@@ -89,8 +89,13 @@ let func = sayHi;
 همه چیز به همان شکل کار خواهد کرد.
 
 
+<<<<<<< HEAD
 ````smart header="چرا یک نقطه ویرگول در انتها وجود دارد؟"
 شاید برای شما سوال باشد، چرا Function Expression در انتها نقطه ویرگول `;` دارد، اما Function Declaration ندارد:
+=======
+````smart header="Why is there a semicolon at the end?"
+You might wonder, why do Function Expressions have a semicolon `;` at the end, but Function Declarations do not:
+>>>>>>> 7964b11b8fa2c314d9a09a82ea4b585cda618c80
 
 ```js
 function sayHi() {
@@ -144,13 +149,21 @@ function showCancel() {
 ask("آیا موافق هستید؟", showOk, showCancel);
 ```
 
+<<<<<<< HEAD
 در عمل، چنین تابع هایی بسیار مفید هستند. تفاوت اصلی بین یک `ask` در زندگی واقعی و مثال بالا در این است که تابع‌ها در زندگی واقعی از راه‌های پیچیده‌تری نسبت به یک `confirm` ساده برای تعامل با کاربر استفاده استفاده می کنند. در مرورگر، چنین تابع‌هایی معمولا یک پنچره سوال زیبا را طرح می‌کنند. اما آن یک داستان دیگر است.
+=======
+In practice, such functions are quite useful. The major difference between a real-life `ask` and the example above is that real-life functions use more complex ways to interact with the user than a simple `confirm`. In the browser, such functions usually draw a nice-looking question window. But that's another story.
+>>>>>>> 7964b11b8fa2c314d9a09a82ea4b585cda618c80
 
 **آرگومان‌های `showOk` و `showCancel` داخل `ask` *callback functions* یا فقط *callbacks* نامیده می‌شوند.**
 
 ایده اینطور است که ما یک تابع را می‌دهیم و از آن توقع داریم که بعدا اگر نیاز شد "دوباره صدا زده شود". در مورد ما، `showOk` تبدیل به callback برای جواب "yes" می‌شود، و `showCancel` برای چواب "no".
 
+<<<<<<< HEAD
 ما می توانیم از Function Expressions برای نوشتن بسیار کوتاه‌تر همان تابع استفاده کنیم:
+=======
+We can use Function Expressions to write an equivalent, shorter function:
+>>>>>>> 7964b11b8fa2c314d9a09a82ea4b585cda618c80
 
 ```js run no-beautify
 function ask(question, yes, no) {
@@ -186,7 +199,11 @@ ask(
 
 اول، سینتکس: چگونه داخل کد بین آنها فرق قائل شویم.
 
+<<<<<<< HEAD
 - *Function Declaration:* یک تابع است، که به عنوان یک دستور جدا، در کد اصلی تعریف می‎شود.
+=======
+- *Function Declaration:* a function, declared as a separate statement, in the main code flow:
+>>>>>>> 7964b11b8fa2c314d9a09a82ea4b585cda618c80
 
     ```js
     // Function Declaration
@@ -194,7 +211,11 @@ ask(
       return a + b;
     }
     ```
+<<<<<<< HEAD
 - *Function Expression:* یک تابع است، که در داخل یک عبارت یا داخل یک ساختار سینتکس دیگر ساخته می‌شود. اینجا، تابع سمت راست "عبارت تخصیص دادن" `=` ساخته شده است.
+=======
+- *Function Expression:* a function, created inside an expression or inside another syntax construct. Here, the function is created on the right side of the "assignment expression" `=`:
+>>>>>>> 7964b11b8fa2c314d9a09a82ea4b585cda618c80
 
     ```js
     // Function Expression
@@ -291,9 +312,15 @@ if (age < 18) {
   welcome();               // \   (اجرا می‌شود)
 */!*
                            //  |
+<<<<<<< HEAD
   function welcome() {     //  |  
     alert("سلام!");         //  |  Function Declaration در دسترس است
   }                        //  |  هرجایی از بلوکی که داخل آن تعریف شده است
+=======
+  function welcome() {     //  |
+    alert("Hello!");       //  |  Function Declaration is available
+  }                        //  |  everywhere in the block where it's declared
+>>>>>>> 7964b11b8fa2c314d9a09a82ea4b585cda618c80
                            //  |
 *!*
   welcome();               // /   (اجرا می‌شود)
@@ -301,8 +328,13 @@ if (age < 18) {
 
 } else {
 
+<<<<<<< HEAD
   function welcome() {    
     alert("درود!");
+=======
+  function welcome() {
+    alert("Greetings!");
+>>>>>>> 7964b11b8fa2c314d9a09a82ea4b585cda618c80
   }
 }
 
