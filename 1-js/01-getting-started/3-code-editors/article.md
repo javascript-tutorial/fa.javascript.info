@@ -12,8 +12,13 @@
 
 اگر هنوز یک IDE انتخاب نکرده‌اید، موارد زیر را در نظر داشته باشید : 
 
+<<<<<<< HEAD
 - [Visual Studio Code](https://code.visualstudio.com/) : رایگان - Cross Platform و همچنین تعدادی از قابلیت‌های IDE ها را دارد 
 - [WebStorm](http://www.jetbrains.com/webstorm/) برای توسعه Front End . کمپانی Jetbrains همینطور IDE های دیگری را برای زبان‌های دیگر ارائه می‌کند (که رایگان نیستند) 
+=======
+- [Visual Studio Code](https://code.visualstudio.com/) (cross-platform, free).
+- [WebStorm](https://www.jetbrains.com/webstorm/) (cross-platform, paid).
+>>>>>>> 30a5d5e2a7c3504c9afd5028f83f4a696e60aede
 
 همینطور برای Windows می‌توانید از Visual Studio استفاده کنید (منظور Visual Studio Code نیست). Visual Studio یک نرم افزار غیر رایگان است و فقط بر روی Windows کار می‌کند که برای توسعه پلتفرم dot net مناسب است. نسخه رایگان این نرم افزار [Visual Studio Community](https://www.visualstudio.com/vs/community/) نام دارد.  
 
