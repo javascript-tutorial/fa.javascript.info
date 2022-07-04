@@ -270,6 +270,7 @@ typeof alert // "function"  (3)
 
 در جاوااسکریپت 8 نوع داده پایه‌ای وجود دارد.
 
+<<<<<<< HEAD
 - `number` برای اعداد از هر دسته‌ای: عدد صحیح یا اعشاری، اعداد صحیح به <code>±(2<sup>53</sup>-1)</code> محدود می‌شوند.
 - `bigint` برای اعداد صحیح با طول دلخواه است.
 - `string` برای رشته‌ها. یک رشته ممکن است صفر کاراکتر یا بیشتر داشته باشد، هیج نوع جداگانه‌ی تک کاراکتری وجود ندارد.
@@ -278,6 +279,18 @@ typeof alert // "function"  (3)
 - `undefined` برای مقدارهای تخصیص نیافته -- یک نوع مستقل که فقط یک مقدار `undefined` دارد.
 - `object` برای ساختارهای پیچیده‌تر داده.
 - `symbol` برای شناسه‌های یکتا.
+=======
+- Seven primitive data types:
+    - `number` for numbers of any kind: integer or floating-point, integers are limited by <code>±(2<sup>53</sup>-1)</code>.
+    - `bigint` for integer numbers of arbitrary length.
+    - `string` for strings. A string may have zero or more characters, there's no separate single-character type.
+    - `boolean` for `true`/`false`.
+    - `null` for unknown values -- a standalone type that has a single value `null`.
+    - `undefined` for unassigned values -- a standalone type that has a single value `undefined`.
+    - `symbol` for unique identifiers.
+- And one non-primitive data type:
+    - `object` for more complex data structures.
+>>>>>>> fe1c4a241f12a0939d1e0977cec6504ccd67201f
 
 عملگر `typeof` به شما اجازه می‌دهد نوع مقدار ذخیره شده در یک متغیر را تشخصی دهید.
 

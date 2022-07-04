@@ -39,8 +39,13 @@ john.sayHi(); // Hi buddy!
 
 ## یک داده‌ ابتدایی به عنوان یک شئ
 
+<<<<<<< HEAD
 تناقضی که سازنده جاوااسکریپت با آن مواجه شده:
 -خیلی کارها هستند که یک نفر بخواهد با داده‌های ابتدایی مثل رشته حروف یا اعداد انجام دهد که اگر دسترسی به آنها به عنوان تابع باشد عالی میشود.
+=======
+- There are many things one would want to do with a primitive, like a string or a number. It would be great to access them using methods.
+- Primitives must be as fast and lightweight as possible.
+>>>>>>> fe1c4a241f12a0939d1e0977cec6504ccd67201f
 
 راه حال، اندکی عجیب به نظر میرسد:
 
@@ -107,11 +112,18 @@ if (zero) { // zero is true, because it's an object
 }
 ```
 
+<<<<<<< HEAD
 از سویی دیگر، توابع مشابه  `رشته حرف/عدد/متغیر بولی` بدون `new`، به شدت چیز به درد بخوری هستند. آنها یک مقدار را به نوع مربوطه‌شان تبدیل میکنند: یک رشته حرف، یک عدد یا یک متغیر بولی
 (داده ابتدایی).
  
 برای مثال، این کاملا صحیح است:
 
+=======
+On the other hand, using the same functions `String/Number/Boolean` without `new` is totally fine and useful thing. They convert a value to the corresponding type: to a string, a number, or a boolean (primitive).
+
+For example, this is entirely valid:
+
+>>>>>>> fe1c4a241f12a0939d1e0977cec6504ccd67201f
 ```js
 let num = Number("123"); // convert a string to number
 ```

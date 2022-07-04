@@ -55,7 +55,11 @@ for(;;) {
 
 این دستور می‌تواند در ابتدای یک فایل جاوااسکریپت یا ابتدای یک تابع نوشته شود.
 
+<<<<<<< HEAD
 بدون نوشتن `"use strict"` هم کد ما کار می‌کند، ولی بعضی چیزها در حالت قدیمی خود عمل می‌کنند. ما معمولاً رفتار مدرن آن‌ها را ترجیح می‌دهیم.
+=======
+Without `"use strict"`, everything still works, but some features behave in the old-fashioned, "compatible" way. We'd generally prefer the modern behavior.
+>>>>>>> fe1c4a241f12a0939d1e0977cec6504ccd67201f
 
 بعضی از ویژگی‌های مدرن جاوااسکریپت (مثل کلاس‌ها که بعداً به آن می‌رسیم) به صورت خودکار و بدون اینکه نیازی باشد `"use strict"` را بنویسیم کد را در حالت strict اجرا می‌کنند.
 
@@ -143,8 +147,13 @@ alert( "Tea wanted: " + isTeaWanted ); // true
 مقداردهی (Assignments)
 : دو نوع مقداردهی داریم: مقداردهی معمولی مثل `a = b` و مقداردهی ترکیبی مثل `a *= 2`.
 
+<<<<<<< HEAD
 بیتی (Bitwise)
 : عملگرهای بیتی با اعداد 32 بیتی در پایین‌ترین سطح یعنی بیت کار می‌کنند: زمانی که به آنها نیاز داشتید به [مستندات](mdn:/JavaScript/Guide/Expressions_and_Operators#Bitwise) مراجعه کنید.
+=======
+Bitwise
+: Bitwise operators work with 32-bit integers at the lowest, bit-level: see the [docs](mdn:/JavaScript/Guide/Expressions_and_Operators#bitwise_operators) when they are needed.
+>>>>>>> fe1c4a241f12a0939d1e0977cec6504ccd67201f
 
 شرطی (Conditional)
 : تنها اپراتور 3 پارامتری: `cond ? resultA : resultB`. اگر `cond` truthy باشد، `resultA` را برمی‌گرداند، در غیر این صورت `resultB`.
@@ -256,7 +265,11 @@ switch (age) {
 3. تابع پیکانی (Arrow Function)
 
     ```js
+<<<<<<< HEAD
     // :عبارت سمت راست برمی‌گردد
+=======
+    // expression on the right side
+>>>>>>> fe1c4a241f12a0939d1e0977cec6504ccd67201f
     let sum = (a, b) => a + b;
 
     // یا مدل چند خطی با {...}، که در این حالت باید return :هم بنویسید
