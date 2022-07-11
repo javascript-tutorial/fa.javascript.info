@@ -25,7 +25,11 @@ var gVar = 5;
 alert(window.gVar); // 5 (به یک ویژگی از شیء گلوبال تبدیل شد)
 ```
 
+<<<<<<< HEAD
 اعلان تابع (عبارات دارای کلمه کلیدی `تابع` در جریان کد اصلی، نه عبارات تابع) نیز همین تأثیر را دارد.
+=======
+Function declarations have the same effect (statements with `function` keyword in the main code flow, not function expressions).
+>>>>>>> 82ed8f11b40bd40797427a5dd1763edbe1fca523
 
 لطفا به آن تکیه نکنید! این رفتار به دلایل سازگاری وجود دارد. اسکریپت‌های مدرن از [ماژول‌های جاوا‌اسکریپت](info:modules) در مواردی که چنین چیزی اتفاق نمی‌افتد استفاده می‌کنند.
 

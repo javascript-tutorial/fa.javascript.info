@@ -50,8 +50,13 @@ let user = {
 *!*
 // اول تعریف می‌کنیم
 function sayHi() {
+<<<<<<< HEAD
   alert("سلام!");
 };
+=======
+  alert("Hello!");
+}
+>>>>>>> 82ed8f11b40bd40797427a5dd1763edbe1fca523
 
 // سپس به عنوان متد آن را اضافه می‌کنیم
 user.sayHi = sayHi;
@@ -90,7 +95,11 @@ user = {
 
 همانطور که نشان داده شد، ما می‌توانیم `"function"` را حذف کنیم و فقط `sayHi()` را بنویسیم.
 
+<<<<<<< HEAD
 حقیقتا این دو روش کاملا یکسان نیستند. تفاوت‌هایی جزئی و مربوط به وراثت شیء (بعدا آن را می‌آموزیم) وجود دارند، اما آنها الان مهم نیستند. تقریبا در تمام موارد سینتکس کوتاه‌تر ترجیح داده می‌شود.
+=======
+To tell the truth, the notations are not fully identical. There are subtle differences related to object inheritance (to be covered later), but for now they do not matter. In almost all cases, the shorter syntax is preferred.
+>>>>>>> 82ed8f11b40bd40797427a5dd1763edbe1fca523
 
 ## "this" در متدها
 

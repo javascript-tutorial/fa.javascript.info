@@ -103,7 +103,7 @@ alert( user?.address?.street ); // undefined (بدون خطا)
 اینجا مثالی با استفاده از `document.querySelector` داریم:
 
 ```js run
-let html = document.querySelector('.elem')?.innerHTML; // will be null, if there's no element
+let html = document.querySelector('.elem')?.innerHTML; // will be undefined, if there's no element
 ```
 
 خواندن آدرس با استفاده از `user?.address` حتی اگر شیء `user` وجود نداشته باشد هم کار می‌کند:
@@ -182,7 +182,11 @@ userGuest.admin?.(); // چیزی اتفاق نمی‌افتد (چنین متدی
 
 اینجا، در هر دو خط، ما ابتدا از نقطه (`userAdmin.admin`) برای گرفتن ویژگی ‍`admin` استفاده می‌کنیم به خاطر اینکه فرض می‌کنیم که شیء ‍`user` حتما وجود دارد پس خواندن از آن مطمئن است.
 
+<<<<<<< HEAD
 سپس `().?` عبارت سمت چپ را بررسی می‌کند: اگر تابع ‍admin وجود داشته باشد اجرا می‌شود (برای `userAdmin` صدق می‌کند). در غیر اینصورت (برای `userGuest`) ارزیابی بدون خطا متوقف می‌شود.
+=======
+Then `?.()` checks the left part: if the `admin` function exists, then it runs (that's so for `userAdmin`). Otherwise (for `userGuest`) the evaluation stops without errors.
+>>>>>>> 82ed8f11b40bd40797427a5dd1763edbe1fca523
 
 سینتکس `[].?` نیز کار می‌کند، اگر ما می‌خواهیم از براکت به جای نقطه `.` برای دستیابی به ویژگی‌ها استفاده کنیم. مشابه موارد قبلی، این سینتکس اجازه می دهد تا با خیال راحت یک ویژگی از شیءای که ممکن است وجود نداشته باشد را بخوانیم.
 
@@ -205,8 +209,13 @@ alert( user2?.[key] ); // undefined
 delete user?.name; // را حذف کن user.name وجود داشت user اگر
 ```
 
+<<<<<<< HEAD
 ````warn header="ما می‌توانیم از`.?` برای پاک کردن و خواندن مطمئن استفاده کنیم ولی مقداردهی نه."
 زنجیره‌ی اختیاری `.?` هیچ کاربردی برای سمت چپ مساوی ندارد.
+=======
+````warn header="We can use `?.` for safe reading and deleting, but not writing"
+The optional chaining `?.` has no use on the left side of an assignment.
+>>>>>>> 82ed8f11b40bd40797427a5dd1763edbe1fca523
 
 برای مثال:
 ```js run

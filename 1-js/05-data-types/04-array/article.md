@@ -92,6 +92,38 @@ let fruits = [
 سبک «کامای دنباله‌دار» اضافه/حذف کردن المان را آسان‌تر می‌کند، چون همه خطوط مشابه می‌شوند.
 ````
 
+## Get last elements with "at"
+
+[recent browser="new"]
+
+Let's say we want the last element of the array.
+
+Some programming languages allow to use negative indexes for the same purpose, like `fruits[-1]`.
+
+Although, in JavaScript it won't work. The result will be `undefined`, because the index in square brackets is treated literally.
+
+We can explicitly calculate the last element index and then access it: `fruits[fruits.length - 1]`.
+
+```js run
+let fruits = ["Apple", "Orange", "Plum"];
+
+alert( fruits[fruits.length-1] ); // Plum
+```
+
+A bit cumbersome, isn't it? We need to write the variable name twice.
+
+Luckily, there's a shorter syntax: `fruits.at(-1)`:
+
+```js run
+let fruits = ["Apple", "Orange", "Plum"];
+
+// same as fruits[fruits.length-1]
+alert( fruits.at(-1) ); // Plum
+```
+
+In other words, `arr.at(i)`:
+- is exactly the same as `arr[i]`, if `i >= 0`.
+- for negative values of `i`, it steps back from the end of the array.
 
 ## متدهای pop/push، shift/unshift
 
@@ -121,9 +153,15 @@ let fruits = [
 
 برای پشته‌ها، آخرین چیزی که اضافه شده باشد اول دریافت می‌شود، همچنین به آن LIFO (Last-In-First-Out) هم گفته می‌شود. برای صف‌ها، ما FIFO (First-In-First-Out) را داریم.
 
+<<<<<<< HEAD
 آرایه‌ها در جاوااسکریپت می‌توانند هم به عنوان یک صف و هم به عنوان یک پشته کار کنند. آنها به شما اجازه می‌دهند که المان‌ها را به/از آغاز یا پایان اضافه/حذف کنید.
 
 در علوم کامپیوتر ساختار داده‌ای که همچنین چیزی را ممکن می‌کند، [صف دو طرفه](https://en.wikipedia.org/wiki/Double-ended_queue) نامیده می‌شود.
+=======
+Arrays in JavaScript can work both as a queue and as a stack. They allow you to add/remove elements, both to/from the beginning or the end.
+
+In computer science, the data structure that allows this, is called [deque](https://en.wikipedia.org/wiki/Double-ended_queue).
+>>>>>>> 82ed8f11b40bd40797427a5dd1763edbe1fca523
 
 **متدهایی که با انتهای آرایه کار می‌کنند:**
 
@@ -137,6 +175,8 @@ let fruits = [
 
     alert( fruits ); // Apple, Orange
     ```
+
+    Both `fruits.pop()` and `fruits.at(-1)` return the last element of the array, but `fruits.pop()` also modifies the array by removing it.
 
 `push`
 : المان را به انتهای آرایه اضافه می‌کند:
@@ -247,7 +287,11 @@ fruits.age = 25; // ساخت یک ویژگی با یک اسم دلخواه
 fruits.shift(); // یک المان را از آغاز از بین ببر
 ```
 
+<<<<<<< HEAD
 اینکه المان با عدد `0` را بگیریم و ازبین ببریم کافی نیست. بقیه المان‌ها هم نیاز دارند که دوباره شماره گذاری شوند.
+=======
+It's not enough to take and remove the element with the index `0`. Other elements need to be renumbered as well.
+>>>>>>> 82ed8f11b40bd40797427a5dd1763edbe1fca523
 
 عملیات `shift` باید 3 کار انجام دهد:
 
@@ -365,11 +409,19 @@ alert( arr[3] ); // undefined :مقدارها برنمی‌گردند
 let arr = *!*new Array*/!*("Apple", "Pear", "etc");
 ```
 
+<<<<<<< HEAD
 این سینتکس به ندرت استفاده می‌شود چون استفاده از براکت‌ها کوتاه‌تر است. همچنین یک خاصیت فریبنده همراه آن وجود دارد.
+=======
+It's rarely used, because square brackets `[]` are shorter. Also, there's a tricky feature with it.
+>>>>>>> 82ed8f11b40bd40797427a5dd1763edbe1fca523
 
 اگر `new Array` همراه با یک آرگومان که عدد است صدا زده شود، سپس یک آرایه *بدون المان، اما با طول داده شده* ساخته می‌شود.
 
+<<<<<<< HEAD
 بیایید ببینیم چگونه یک شخص ناخواسته شرایط را برای خود بدتر می‌کند:
+=======
+Let's see how one can shoot themselves in the foot:
+>>>>>>> 82ed8f11b40bd40797427a5dd1763edbe1fca523
 
 ```js run
 let arr = new Array(2); آیا یک آرایه با 2 المان ساخته می‌شود؟
@@ -439,7 +491,11 @@ alert( "1,2" + 1 ); // "1,21"
 - اگر یکی از آرگومان‌های `==` شیء باشد و دیگری یک مقدار اصلی (primitive) باشد، سپس شیء به مقدار اصلی تبدیل می‌شود، همانطور که در فصل <info:object-toprimitive> توضیح داده شد.
 - ...به استثنای `null` و `undefined` که با `==` برابر هستند اما با چیز دیگری برابر نیستند.
 
+<<<<<<< HEAD
 مقایسه سخت‌گیرانه `===` حتی ساده‌تر است چون نوع مقدارها را تبدیل نمی‌کند.
+=======
+The strict comparison `===` is even simpler, as it doesn't convert types.
+>>>>>>> 82ed8f11b40bd40797427a5dd1763edbe1fca523
 
 پس اگر ما آرایه‌ها را با `==` مقایسه کنیم، آنها هیچ وقت برابر نیستند، مگر اینکه دو متغیر را که به یک آرایه رجوع می‌کنند را مقایسه کنیم.
 
@@ -461,7 +517,13 @@ alert('0' == [] ); // false
  
 اینجا در هر دو مورد، ما یک مقدار اصلی را با یک شیء آرایه‌ای مقایسه می‌کنیم. پس آرایه `[]` برای انجام مقایسه به مقدار اصلی و سپس به یک رشته خالی `''` تبدیل می‌شود.
 
+<<<<<<< HEAD
 سپس فرایند مقایسه با مقدارهای اصلی پیش می‌رود، همانطور که در فصل <info:type-conversions> توضیح داده شد:
+=======
+Here, in both cases, we compare a primitive with an array object. So the array `[]` gets converted to primitive for the purpose of comparison and becomes an empty string `''`.
+
+Then the comparison process goes on with the primitives, as described in the chapter <info:type-conversions>:
+>>>>>>> 82ed8f11b40bd40797427a5dd1763edbe1fca523
 
 ```js run
 // بعد از اینکه [] به '' تبدیل شد
@@ -478,6 +540,7 @@ alert('0' == '' ); // false ،هیچ تبدیلی رخ نداد، رشته‌ه�
 
 آرایه یک نوع خاصی از شیء است که برای ذخیره و مدیریت داده‌های مرتب مناسب است.
 
+<<<<<<< HEAD
 - نحوه تعریف کردن:
 
     ```js
@@ -489,11 +552,33 @@ alert('0' == '' ); // false ،هیچ تبدیلی رخ نداد، رشته‌ه�
     ```
 
     صدا زدن `new Array(number)` یک آرایه با طول داده شده می‌سازد، اما بدون المان.
+=======
+The declaration:
+
+```js
+// square brackets (usual)
+let arr = [item1, item2...];
+
+// new Array (exceptionally rare)
+let arr = new Array(item1, item2...);
+```
+
+The call to `new Array(number)` creates an array with the given length, but without elements.
+>>>>>>> 82ed8f11b40bd40797427a5dd1763edbe1fca523
 
 - ویژگی `length` طول آرایه است، یا اگر بخواهیم دقیق باشیم، برابر با آخرین ایندکس به علاوه یک است. این ویژگی به طور خودکار توسط متدهای آرایه تنظیم می‌شود.
 - اگر ما به طور دستی `length` را کوتاه کنیم، آرایه بریده می‌شود.
 
+<<<<<<< HEAD
 ما می‌توانیم از یک آرایه با عملیات‌های زیر به عنوان یک صف دو طرفه استفاده کنیم:
+=======
+Getting the elements:
+
+- we can get element by its index, like `arr[0]`
+- also we can use `at(i)` method that allows negative indexes. For negative values of `i`, it steps back from the end of the array. If `i >= 0`, it works same as `arr[i]`.
+
+We can use an array as a deque with the following operations:
+>>>>>>> 82ed8f11b40bd40797427a5dd1763edbe1fca523
 
 - `push(...items)` اضافه می‌کند `items` را به انتهای آرایه.
 - `pop()` المان را از آخر حذف می‌کند و آن را برمی‌گرداند.
