@@ -2,14 +2,23 @@
 
 دو ساختار داده پر استفاده در جاوااسکریپت `Object` و `Array` هستند.
 
+<<<<<<< HEAD
 - شیءها به ما این امکان را می‌دهند تا چیزی بسازیم که المان‌های داده را به واسطه کلید ذخیره کند.
 - آرایه‌ها به ما امکان جمع‌آوری المان‌های داده را در لیستی مرتب می‌دهند.
+=======
+- Objects allow us to create a single entity that stores data items by key.
+- Arrays allow us to gather data items into an ordered list.
+>>>>>>> 7000ede297bfd688f9a3767e8ca43abd9242f322
 
 اگرچه، زمانی که ما آن‌ها را به تابع می‌دهیم، ممکن است که نیازی به کل یک شیء/آرایه نباشد. شاید تنها قطعه‌های تکی نیاز باشد.
  
 *مقداردهیِ تجزیه‌کننده‌ی ساختار (Destructuring assignment)* یک سینتکس خاص است که به ما امکان می‌دهد تا آرایه‌ها یا شیءها را درون چند متغیر «پخش کنیم» چون بعضی اوقات این موضوع کار را راحت‌تر می‌کند.
 
+<<<<<<< HEAD
 تخریب ساختار همچنین با تابع‌های پیچیده که تعداد زیادی پارامتر، مقدارهای پیش‌فرض و... دارند هم به خوبی کار می‌کند. به زودی آن را خواهیم دید.
+=======
+*Destructuring assignment* is a special syntax that allows us to "unpack" arrays or objects into a bunch of variables, as sometimes that's more convenient.
+>>>>>>> 7000ede297bfd688f9a3767e8ca43abd9242f322
 
 ## تجزیه ساختار آرایه
 
@@ -76,12 +85,21 @@ alert( title ); // Consul
 let [a, b, c] = "abc"; // ["a", "b", "c"]
 let [one, two, three] = new Set([1, 2, 3]);
 ```
+<<<<<<< HEAD
 این کار می‌کند چون از درون، یک مقداردهی تجزیه‌کننده‌ی ساختار با حلقه زدن در مقدار سمت راست کار می‌کند. برای فراخوانی `for..of` در مقدار سمت راست `=` و تخصیص دادن مقدارها، به نوعی خوش سینتکس است.
 ````
 
 
 ````smart header="در سمت چپ به هر چیزی تخصیص دهید"
 ما می‌توانیم از «قابل مقداردهی‌ها» در سمت چپ استفاده کنیم.
+=======
+That works, because internally a destructuring assignment works by iterating over the right value. It's a kind of syntax sugar for calling `for..of` over the value to the right of `=` and assigning the values.
+````
+
+
+````smart header="Assign to anything at the left-side"
+We can use any "assignables" on the left side.
+>>>>>>> 7000ede297bfd688f9a3767e8ca43abd9242f322
 
 برای مثال، یک ویژگی شیء:
 ```js run
@@ -178,7 +196,13 @@ alert(rest.length); // 2
  
 مقدار `rest` آرایه‌ای از المان‌های باقی مانده است.
 
+<<<<<<< HEAD
 می‌توانیم از هر اسم دیگری به جای `rest` برای متغیر استفاده کنیم، فقط مطمئن شوید که قبل از آن سه نقطه وجود دارد و در انتهای مقداردهی تجزیه‌کننده‌ی ساختار قرار می‌گیرد.
+=======
+The value of `rest` is the array of the remaining array elements.
+
+We can use any other variable name in place of `rest`, just make sure it has three dots before it and goes last in the destructuring assignment.
+>>>>>>> 7000ede297bfd688f9a3767e8ca43abd9242f322
 
 ```js run
 let [name1, name2, *!*...titles*/!*] = ["Julius", "Caesar", "Consul", "of the Roman Republic"];
@@ -234,7 +258,11 @@ alert(surname); // دریافت کند prompt هر چیزی که
 let {var1, var2} = {var1:…, var2:…}
 ```
 
+<<<<<<< HEAD
 ما باید یک شیء موجود که می‌خواهیم آن را در چند متغیر پخش کنیم در سمت راست داشته باشیم. سمت چپ شامل یک «الگوی» شیء مانند برای ویژگی‌های متناظر می‌شود. در ساده‌ترین حالت، یک لیست از اسم‌های متغیر در `{...}` است.
+=======
+We should have an existing object on the right side, that we want to split into variables. The left side contains an object-like "pattern" for corresponding properties. In the simplest case, that's a list of variable names in `{...}`.
+>>>>>>> 7000ede297bfd688f9a3767e8ca43abd9242f322
 
 برای مثال:
 
@@ -256,7 +284,13 @@ alert(height); // 200
  
 ویژگی‌های `options.title`، `options.width` و `options.height` به متغیرهای متناظر تخصیص داده شده‌اند.
 
+<<<<<<< HEAD
 ترتیب مهم نیست. اینگونه هم کار می‌کند:
+=======
+Properties `options.title`, `options.width` and `options.height` are assigned to the corresponding variables.
+
+The order does not matter. This works too:
+>>>>>>> 7000ede297bfd688f9a3767e8ca43abd9242f322
 
 ```js
 // تغییر دادیم let {...} ترتیب را در
@@ -420,7 +454,11 @@ alert( title ); // Menu
 
 اگر یک شیء یا آرایه، شیء و آرایه‌های تودرتو دیگری را شامل شود، ما می‌توانیم از الگوری پیچیده‌تری در سمت چپ برای استخراج قسمت‌های عمیق‌تر استفاده کنیم.
 
+<<<<<<< HEAD
 در کد زیر `options` یک شیء دیگری درون ویژگی `size` و یک آرایه درون ویژگی `items` دارد. الگوی سمت چپ مقداردهی ساختار یکسانی برای استخراج مقدار از آنها را دارد:
+=======
+In the code below `options` has another object in the property `size` and an array in the property `items`. The pattern on the left side of the assignment has the same structure to extract values from them:
+>>>>>>> 7000ede297bfd688f9a3767e8ca43abd9242f322
 
 ```js run
 let options = {
@@ -429,7 +467,7 @@ let options = {
     height: 200
   },
   items: ["Cake", "Donut"],
-  extra: true   
+  extra: true
 };
 
 // مقداردهی تجزیه‌کننده‌ی ساختار برای واضح بودن در چند خط قرار گرفته است
