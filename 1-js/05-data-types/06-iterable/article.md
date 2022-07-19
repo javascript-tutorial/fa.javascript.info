@@ -48,7 +48,7 @@ range[Symbol.iterator] = function() {
   // 2. فقط با این حلقه‌زننده کار می‌کند، که از آن مقدار بعدی را درخواست می‌کند for..of ،همینطور رو به جلو
   return {
     current: this.from,
-    last: this.to,      
+    last: this.to,
 
     // 3. فراخوانی می‌شود for..of در هر دور حلقه توسط next()
     next() {
