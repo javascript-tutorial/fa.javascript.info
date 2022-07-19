@@ -4,11 +4,7 @@
 
 عملگر nullish coalescing با دو علامت سوال `??` نوشته می‌شود.
 
-<<<<<<< HEAD
 به دلیل اینکه این عملگر با `null` و `undefined` به طور یکسان رفتار می‌کند، ما در این فصل از یک اصطلاح خاص استفاده می‌کنیم. می‌گوییم که یک عبارت "تعریف شده" است هرگاه که نه `null` باشد و نه `undefined`.
-=======
-As it treats `null` and `undefined` similarly, we'll use a special term here, in this article. For brevity, we'll say that a value is "defined" when it's neither `null` nor `undefined`.
->>>>>>> 7000ede297bfd688f9a3767e8ca43abd9242f322
 
 نتیجه‌ی `a ?? b`:
 - اگر `a` تعریف شده باشد، پس برابر با `a` است،
