@@ -5,11 +5,7 @@
 
 تیم‌های مسئول موتورهای جاوااسکریپت تصمیم می‌گیرند کدام یک را اول پیاده‌سازی کنند. ممکن است تصمیم بگیرند پیشنهادهایی که هنوز به‌صورت پیش‌نویس هستند را اول پیاده‌سازی کنند و پیشنهادهایی که در مرحلهٔ تشخیص هستند را به بعدتر موکول کنند، به دلیل اینکه کمتر جالب هستند و یا فقط سخت‌تر هستند.
 
-<<<<<<< HEAD
 پس کاملا طبیعی است که یک موتور فقط بخشی از یک استاندارد را پیاده‌سازی کند.
-=======
-So it's quite common for an engine to implement only part of the standard.
->>>>>>> 7000ede297bfd688f9a3767e8ca43abd9242f322
 
 یک صفحه‌ی خوب برای این که ببینید در حال حاضر چه چیزهایی پشتیبانی می‌شود اینجاست <https://kangax.github.io/compat-table/es6/> (خیلی بزرگ است، ما چیزهای زیادی برای مطالعه داریم).
 
@@ -44,15 +40,9 @@ height = height !== undefined && height !== null ? height : 100;
 
 معمولا توسعه‌دهنده ترنسپایلر را روی کامپیوتر خودش اجرا می‌کند و سپس کد transpileشده را روی سرور deploy می‌کند.
 
-<<<<<<< HEAD
 حالا که صحبتش شد، بهتر است بدانید [Babel](http://babeljs.io/) یکی از برجسته‌ترین ترنسپایلرها است.
 
 سیستم‌های build پروژه مدرن مثل [webpack](https://webpack.js.org/) این امکان را می‌دهند که بعد از هر بار تغییر کد، ترنسپایلر به‌صورت اتوماتیک اجرا شود و برای همین ادغام کردن آن در روند توسعه کار بسیار ساده‌ای است.
-=======
-Speaking of names, [Babel](https://babeljs.io) is one of the most prominent transpilers out there.
-
-Modern project build systems, such as [webpack](https://webpack.js.org/), provide a means to run a transpiler automatically on every code change, so it's very easy to integrate into the development process.
->>>>>>> 7000ede297bfd688f9a3767e8ca43abd9242f322
 
 ## پلیفیل‌ها
 
@@ -79,34 +69,20 @@ if (!Math.trunc) { // اگر چنین تابعی وجود ندارد
 }
 ```
 
-<<<<<<< HEAD
 جاوااسکریپت یک زبان به‌شدت داینامیک است. اسکریپت‌ها می‌توانند هر تابعی را تغییر دهند یا اضافه کنند. حتی تابع‌های built-in.
 
 دو کتابخانه جالب پلیفیل‌ها:
 - [core js](https://github.com/zloirock/core-js) که از چیزهای زیادی پشتیبانی می‌کند و اجازه می‌دهد فقط فیچرهای مورد نیاز خود را اضافه کنید.
 - [polyfill.io](http://polyfill.io) سرویسی که یک اسکریپت با پلیفیل‌ها ارائه می‌دهد. بسته به فیچرها و مرورگر کاربر.
-=======
-JavaScript is a highly dynamic language. Scripts may add/modify any function, even built-in ones.
-
-Two interesting polyfill libraries are:
-- [core js](https://github.com/zloirock/core-js) that supports a lot, allows to include only needed features.
-- [polyfill.io](http://polyfill.io) service that provides a script with polyfills, depending on the features and user's browser.
->>>>>>> 7000ede297bfd688f9a3767e8ca43abd9242f322
 
 
 ## خلاصه
 
 در این فصل ما می‌خواهیم به شما انگیزه بدهیم تا بروید و فیچرهای جدید زبان را یاد بگیرید. حتی اگر هنوز توسط موتورهای جاوااسکریپت به‌خوبی پشتیبانی نمی‌شوند.
 
-<<<<<<< HEAD
 فراموش نکنید که از یک ترنسپایلر (اگر از syntax یا عملگرهای مدرن استفاده می‌کنید) و پلیفیل‌ها (برای اضافه کردن تابع‌هایی که ممکن است موجود نباشند) استفاده کنید. و با این کار مطمئن خواهید بود که کد شما کار می‌کند.
 
 برای مثال، بعدها که با جاوااسکریپت آشنایی بیشتری پیدا کنید، می‌توانید یک سیستم build کد با [webpack](https://webpack.js.org/) و پلاگین [babel-loader](https://github.com/babel/babel-loader) راه‌اندازی کنید.
-=======
-Just don't forget to use a transpiler (if using modern syntax or operators) and polyfills (to add functions that may be missing). They'll ensure that the code works.
-
-For example, later when you're familiar with JavaScript, you can setup a code build system based on [webpack](https://webpack.js.org/) with the [babel-loader](https://github.com/babel/babel-loader) plugin.
->>>>>>> 7000ede297bfd688f9a3767e8ca43abd9242f322
 
 منابع خوبی که نشان می‌دهند فیچرهای مختلف در چه حالتی از پشتیبانی قرار دارند:
 - <https://kangax.github.io/compat-table/es6/> - برای جاوااسکریپت.

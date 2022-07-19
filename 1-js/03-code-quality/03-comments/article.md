@@ -138,25 +138,22 @@ function pow(x, n) {
 }
 ```
 
-<<<<<<< HEAD
 چنین یادداشت هایی به ما امکان می دهد بدون نگاه کردن به کد  ، هدف از تابع را بفهمیم و از آن به روش صحیح استفاده کنیم.
-=======
-Such comments allow us to understand the purpose of the function and use it the right way without looking in its code.
 
-By the way, many editors like [WebStorm](https://www.jetbrains.com/webstorm/) can understand them as well and use them to provide autocomplete and some automatic code-checking.
+راستی، بسیاری از ویراستارها مانند [WebStorm](https://www.jetbrains.com/webstorm/) می‌توانند آن‌ها را متوجه شوند و از آن‌ها برای فراهم کردن تکمیل خودکار و بعضی بررسی خودکار کدهای استفاده کنند.
 
-Also, there are tools like [JSDoc 3](https://github.com/jsdoc/jsdoc) that can generate HTML-documentation from the comments. You can read more information about JSDoc at <https://jsdoc.app>.
+همچنین، ابزارهایی مانند [JSDoc 3](https://github.com/jsdoc/jsdoc) وجود دارند که می‌توانند از یادداشت‌ها مستنداتی در غالب HTML تولید کنند. شما می‌توانید درباره JSDoc در <https://jsdoc.app> بیشتر اطلاعات کسب کنید.
 
-Why is the task solved this way?
-: What's written is important. But what's *not* written may be even more important to understand what's going on. Why is the task solved exactly this way? The code gives no answer.
 
-    If there are many ways to solve the task, why this one? Especially when it's not the most obvious one.
+چرا تمرین اینگونه حل شد؟
+: چیزی که نوشته شده است مهم است. اما برای فهمیدن اینکه چه چیزی در حال رخ دادن است شاید چیزی که نوشته *نشده* است مهمتر باشد. چرا این تمرین دقیقا به این روش حل شد؟ قطعه کد جوابی نمی‌دهد.
 
-    Without such comments the following situation is possible:
-    1. You (or your colleague) open the code written some time ago, and see that it's "suboptimal".
-    2. You think: "How stupid I was then, and how much smarter I'm now", and rewrite using the "more obvious and correct" variant.
-    3. ...The urge to rewrite was good. But in the process you see that the "more obvious" solution is actually lacking. You even dimly remember why, because you already tried it long ago. You revert to the correct variant, but the time was wasted.
->>>>>>> 7000ede297bfd688f9a3767e8ca43abd9242f322
+    اگر راه‌های زیادی برای حل این تمرین وجود دارد، چرا این یکی؟ خصوصا وقتی این راه‌حل واضح‌ترین آن‌ها نیست.
+
+    بدون چنین یادداشت‌هایی موقعیت زیر احتمال رخداد دارد:
+    1. شما (یا همکار شما) کدی که چند وقت پیش نوشته شده است را باز می‌کنید و می‌بینید که این کد «زیرمجموعه« است.
+    2. شما اینطور فکر می‌کنید: «چقدر آن زمان احمق وبدم و چقدر الان باهوش‌تر هستم» و کد با به روش «واضح‌تر و درست‌تر» بازنویسی می‌کنید.
+    3. ...اصرار به بازنویسی خوب بود. اما در حین پروسه می‌بینید که روش «واضح‌تر» در واقع کمبود دارد. شما به سختی دلیل آن را به یاد می‌آورید چون خیلی وقت پیش آن را امتحان کردید. شما برمی‌گردید که این نوع کد نوشته شده را اصلاح کنید اما زمان هدر رفته.
 
  به هر حال ، بسیاری از ویراستاران مانند 
  [WebStorm](https://www.jetbrains.com/webstorm/)

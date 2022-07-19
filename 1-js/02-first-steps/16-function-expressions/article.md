@@ -144,21 +144,13 @@ function showCancel() {
 ask("آیا موافق هستید؟", showOk, showCancel);
 ```
 
-<<<<<<< HEAD
-در عمل، چنین تابع هایی بسیار مفید هستند. تفاوت اصلی بین یک `ask` در زندگی واقعی و مثال بالا در این است که تابع‌ها در زندگی واقعی از راه‌های پیچیده‌تری نسبت به یک `confirm` ساده برای تعامل با کاربر استفاده استفاده می کنند. در مرورگر، چنین تابع‌هایی معمولا یک پنچره سوال زیبا را طرح می‌کنند. اما آن یک داستان دیگر است.
-=======
-In practice, such functions are quite useful. The major difference between a real-life `ask` and the example above is that real-life functions use more complex ways to interact with the user than a simple `confirm`. In the browser, such functions usually draw a nice-looking question window. But that's another story.
->>>>>>> 7000ede297bfd688f9a3767e8ca43abd9242f322
+در عمل، چنین تابع هایی بسیار مفید هستند. تفاوت اصلی بین یک `ask` در زندگی واقعی و مثال بالا در این است که تابع‌ها در زندگی واقعی از راه‌های پیچیده‌تری نسبت به یک `confirm` ساده برای تعامل با کاربر استفاده می‌کنند. در مرورگر، چنین تابع‌هایی معمولا یک پنچره پرسش زیبا را ایجاد می‌کنند. اما آن یک داستان دیگر است.
 
 **آرگومان‌های `showOk` و `showCancel` داخل `ask` *callback functions* یا فقط *callbacks* نامیده می‌شوند.**
 
 ایده اینطور است که ما یک تابع را می‌دهیم و از آن توقع داریم که بعدا اگر نیاز شد "دوباره صدا زده شود". در مورد ما، `showOk` تبدیل به callback برای جواب "yes" می‌شود، و `showCancel` برای چواب "no".
 
-<<<<<<< HEAD
-ما می توانیم از Function Expressions برای نوشتن بسیار کوتاه‌تر همان تابع استفاده کنیم:
-=======
-We can use Function Expressions to write an equivalent, shorter function:
->>>>>>> 7000ede297bfd688f9a3767e8ca43abd9242f322
+ما می توانیم از Function Expressions برای نوشتن همان تابع به صورت بسیار کوتاه‌تر استفاده کنیم:
 
 ```js run no-beautify
 function ask(question, yes, no) {
@@ -194,11 +186,7 @@ ask(
 
 اول، سینتکس: چگونه داخل کد بین آنها فرق قائل شویم.
 
-<<<<<<< HEAD
-- *Function Declaration:* یک تابع است، که به عنوان یک دستور جدا، در کد اصلی تعریف می‎شود.
-=======
-- *Function Declaration:* a function, declared as a separate statement, in the main code flow:
->>>>>>> 7000ede297bfd688f9a3767e8ca43abd9242f322
+- *Function Declaration:* یک تابع است، که به عنوان یک دستور جدا، در کد اصلی تعریف می‌شود.
 
     ```js
     // Function Declaration
@@ -206,11 +194,7 @@ ask(
       return a + b;
     }
     ```
-<<<<<<< HEAD
 - *Function Expression:* یک تابع است، که در داخل یک عبارت یا داخل یک ساختار سینتکس دیگر ساخته می‌شود. اینجا، تابع سمت راست "عبارت تخصیص دادن" `=` ساخته شده است.
-=======
-- *Function Expression:* a function, created inside an expression or inside another syntax construct. Here, the function is created on the right side of the "assignment expression" `=`:
->>>>>>> 7000ede297bfd688f9a3767e8ca43abd9242f322
 
     ```js
     // Function Expression
@@ -307,15 +291,9 @@ if (age < 18) {
   welcome();               // \   (اجرا می‌شود)
 */!*
                            //  |
-<<<<<<< HEAD
   function welcome() {     //  |  
     alert("سلام!");         //  |  Function Declaration در دسترس است
   }                        //  |  هرجایی از بلوکی که داخل آن تعریف شده است
-=======
-  function welcome() {     //  |
-    alert("Hello!");       //  |  Function Declaration is available
-  }                        //  |  everywhere in the block where it's declared
->>>>>>> 7000ede297bfd688f9a3767e8ca43abd9242f322
                            //  |
 *!*
   welcome();               // /   (اجرا می‌شود)
@@ -323,13 +301,8 @@ if (age < 18) {
 
 } else {
 
-<<<<<<< HEAD
   function welcome() {    
     alert("درود!");
-=======
-  function welcome() {
-    alert("Greetings!");
->>>>>>> 7000ede297bfd688f9a3767e8ca43abd9242f322
   }
 }
 
@@ -386,13 +359,8 @@ welcome(); // الان درست است
 ```
 
 
-<<<<<<< HEAD
 ```smart header="چه زمانی Function Declaration را انتخاب کنیم و چه زمانی Function Expression؟"
 به عنوان یک قاعده کلی، زمانی که ما نیاز به تعریف یک تابع داریم، اولین چیزی که باید سراغ آن برویم سینتکس Function Declaration است. آن به ما آزادی بیشتری برای سازماندهی کردن کد مان به ما می‌دهد، چون ما می‌توانیم چنین تابع‌هایی را قبل از اینکه تعریف شوند صدا بزنیم.
-=======
-```smart header="When to choose Function Declaration versus Function Expression?"
-As a rule of thumb, when we need to declare a function, the first thing to consider is Function Declaration syntax. It gives more freedom in how to organize our code, because we can call such functions before they are declared.
->>>>>>> 7000ede297bfd688f9a3767e8ca43abd9242f322
 
 همچنین آن برای خوانایی نیز بهتر است، چون پیدا کردن `function f(...) {...}` در کد راحت تر است از `let f = function(...) {...}`. Function Declarationها "چشم نوازتر" هستند.
 
