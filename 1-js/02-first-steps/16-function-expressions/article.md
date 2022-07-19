@@ -89,13 +89,8 @@ let func = sayHi;
 همه چیز به همان شکل کار خواهد کرد.
 
 
-<<<<<<< HEAD
 ````smart header="چرا یک نقطه ویرگول در انتها وجود دارد؟"
 شاید برای شما سوال باشد، چرا Function Expression در انتها نقطه ویرگول `;` دارد، اما Function Declaration ندارد:
-=======
-````smart header="Why is there a semicolon at the end?"
-You might wonder, why do Function Expressions have a semicolon `;` at the end, but Function Declarations do not:
->>>>>>> 7000ede297bfd688f9a3767e8ca43abd9242f322
 
 ```js
 function sayHi() {
