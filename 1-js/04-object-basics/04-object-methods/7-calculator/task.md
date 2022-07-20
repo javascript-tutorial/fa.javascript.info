@@ -6,15 +6,9 @@ importance: 5
 
 یک شیء `calculator` با سه متد بسازید:
 
-<<<<<<< HEAD
-- `read()` برای دو مقدار prompt می‌کند و آنها را به عنوان ویژگی‌های شیء ذخیره می‌کند.
+- `read()` برای دو مقدار prompt می‌کند و آنها را به عنوان ویژگی‌های شیء با نام‌های `a` و `b` ذخیره می‌کند.
 - `sum()` مجموع مقدارهای ذخیره‌شده را برمی‌گرداند.
 - `mul()` مقدارهای ذخیره‌شده را ضرب می‌کند و نتیجه را برمی‌گرداند.
-=======
-- `read()` prompts for two values and saves them as object properties with names `a` and `b` respectively.
-- `sum()` returns the sum of saved values.
-- `mul()` multiplies saved values and returns the result.
->>>>>>> 7000ede297bfd688f9a3767e8ca43abd9242f322
 
 ```js
 let calculator = {
@@ -26,8 +20,4 @@ alert( calculator.sum() );
 alert( calculator.mul() );
 ```
 
-<<<<<<< HEAD
 [دمو]
-=======
-[demo]
->>>>>>> 7000ede297bfd688f9a3767e8ca43abd9242f322
