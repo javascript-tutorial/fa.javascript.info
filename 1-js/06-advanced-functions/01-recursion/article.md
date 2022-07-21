@@ -535,11 +535,7 @@ list.next = list.next.next;
     list = { value, next -> list }
     ```
 
-<<<<<<< HEAD
-    درخت‌ها مانند المان‌های HTML یا درخت بخش اداری در این فصل هم به طور طبیعی بازگشتی هستند: آنها شاخه‌شاخه می‌شوند و هر شاخه می‌تواند شاخه‌های دیگر هم داشته باشد.
-=======
-    Trees like HTML elements tree or the department tree from this chapter are also naturally recursive: they have branches and every branch can have other branches.
->>>>>>> 7000ede297bfd688f9a3767e8ca43abd9242f322
+    درخت‌ها مانند المان‌های HTML یا درخت بخش اداری در این فصل هم به طور طبیعی بازگشتی هستند: آنها شاخه‌‌هایی دارند و هر شاخه می‌تواند شاخه‌های دیگر هم داشته باشد.
 
     همانطور که در مثال `sumSalary` دیدیم تابع‌های بازگشتی می‌توانند برای پیمایش درون آنها استفاده شوند.
 

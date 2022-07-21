@@ -8,15 +8,9 @@ importance: 5
 
 زمانی که چند بار فراخوانی شد، فقط یک بار به ازای هر `ms` میلی‌ثانیه `f` را فرا می‌خواند.
 
-<<<<<<< HEAD
 تفاوت این تابع با معلق‌کننده این است که کاملا یک دکوراتور متفاوت است:
 - `debounce` تابع را بعد از مدت «آرام‌شدن» اجرا می‌کند. برای پردازش نتیجه نهایی خوب است.
 - `throttle` هر بار بعد از گذشت `ms` میلی‌ثانیه تابع را اجرا می‌کند. برای بروزرسانی‌های منظم که نباید زیاد انجام شوند خوب است.
-=======
-Compared to the debounce decorator, the behavior is completely different:
-- `debounce` runs the function once after the "cooldown" period. Good for processing the final result.
-- `throttle` runs it not more often than given `ms` time. Good for regular updates that shouldn't be very often.
->>>>>>> 7000ede297bfd688f9a3767e8ca43abd9242f322
 
 به عبارتی دیگر، `throttle` مانند یک منشی است که تماس‌های تلفنی را می‌پذیرد اما پس از `ms` میلی‌ثانیه فقط یک بار مزاحم رئیس می‌شود (تابع واقعی `f` را فراخوانی می‌کند).
 

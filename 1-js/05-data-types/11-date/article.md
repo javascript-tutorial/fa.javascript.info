@@ -57,17 +57,10 @@
 `new Date(year, month, date, hours, minutes, seconds, ms)`
 : یک تاریخ با مؤلفه‎های داده شده در منطقه‌زمانی محلی می‌سازد. فقط دو آرگومان اول ضروری هستند.
 
-<<<<<<< HEAD
-    - پارامتر `year` باید حتما 4 رقم باشد: `2013` خوب است ولی `98` نه.
+    - پارامتر `year` باید 4 رقم باشد: برای سازگاری، 2 رقم هم مورد قبول است و به صورت `19xx` فرض می‌شود، برای مثال `98` با `1998` یکسان است اما همیشه استفاده از 4 رقم پیشنهاد می‌شود.
     - شمارش پارامتر `month` از `0` (ژانویه) تا `11` (دسامبر) است.
     - پارامتر `date` در واقع روز ماه است، اگر وارد نشود `1` فرض می‌شود.
     - اگر `hours/minutes/seconds/ms` وارد نشوند،برای آنها `0` در نظر گرفته می‌شود.
-=======
-    - The `year` should have 4 digits. For compatibility, 2 digits are also accepted and considered `19xx`, e.g. `98` is the same as `1998` here, but always using 4 digits is strongly encouraged.
-    - The `month` count starts with `0` (Jan), up to `11` (Dec).
-    - The `date` parameter is actually the day of month, if absent then `1` is assumed.
-    - If `hours/minutes/seconds/ms` is absent, they are assumed to be equal `0`.
->>>>>>> 7000ede297bfd688f9a3767e8ca43abd9242f322
 
     برای مثال:
 
