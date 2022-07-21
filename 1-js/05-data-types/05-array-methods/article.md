@@ -234,24 +234,14 @@ arr.forEach(function(item, index, array) {
 
 ### متدهای indexOf/lastIndexOf and includes
 
-<<<<<<< HEAD
-متدهای [arr.indexOf](mdn:js/Array/indexOf)، [arr.lastIndexOf](mdn:js/Array/lastIndexOf) و [arr.includes](mdn:js/Array/includes) سینتکس مشابه دارند و اساسا همان کار همتایان خود در رشته‌ها را انجام می‌دهند، اما به جای کاراکترها با المان‌ها کار دارند:
+متدهای [arr.indexOf](mdn:js/Array/indexOf) و [arr.includes](mdn:js/Array/includes) سینتکس مشابه دارند و اساسا همان کار همتایان خود در رشته‌ها را انجام می‌دهند، اما به جای کاراکترها با المان‌ها کار دارند:
 
 - `arr.indexOf(item, from)` -- با شروع از ایندکس `from` به دنبال `item` می‌گردد و ایندکسی که المان در آن پیدا شد را برمی‌گرداند، در غیر این صورت `1-`.
-- `arr.lastIndexOf(item, from)` -- شبیه متد بالا، اما از راست به چپ جستجو می‌کند.
 - `arr.includes(item, from)` -- با شروع از ایندکس `from` به دنبال `item` می‌گردد، اگر پیدا کند `true` را برمی‌گرداند.
 
+معمولا این متدها تنها با یک آرگومان استفاده می‌شوند: المانی (`item`) که جستجو برای آن انجام می‌شود. به طور پیش‌فرض، جستجو از ابتدا انجام می‌شود.
+
 برای مثال:
-=======
-The methods [arr.indexOf](mdn:js/Array/indexOf) and [arr.includes](mdn:js/Array/includes) have the similar syntax and do essentially the same as their string counterparts, but operate on items instead of characters:
-
-- `arr.indexOf(item, from)` -- looks for `item` starting from index `from`, and returns the index where it was found, otherwise `-1`.
-- `arr.includes(item, from)` -- looks for `item` starting from index `from`, returns `true` if found.
-
-Usually these methods are used with only one argument: the `item` to search. By default, the search is from the beginning.
-
-For instance:
->>>>>>> 7000ede297bfd688f9a3767e8ca43abd9242f322
 
 ```js run
 let arr = [1, 0, false];
@@ -263,48 +253,31 @@ alert( arr.indexOf(null) ); // -1
 alert( arr.includes(1) ); // true
 ```
 
-<<<<<<< HEAD
 توجه داشته باشید که متدها از مقایسه `===` استفاده می‌کنند. پس اگر ما به دنبال `false` باشیم، متد دقیقا `false` را پیدا می‌کند و نه صفر را.
 
-اگر ما می‌خواهیم شامل بودن را بررسی کنیم و به دنبال ایندکس دقیق نیستیم، پس `arr.includes` ترجیح داده می‌شود.
+اگر ما بخواهیم بررسی کنیم که `item` درون آرایه وجود دارد یا نه و به دنبال ایندکس دقیق نیستیم، پس `arr.includes` ترجیح داده می‌شود.
 
-همچنین، یک تفاوت بسیار کوچک `includes` این است که این متد به درستی `NaN` را کنترل می‌کند، درست برعکس `indexOf/lastIndexOf`:
-
-```js run
-const arr = [NaN];
-alert( arr.indexOf(NaN) ); // -1 (کار نمی‌کند NaN باید 0 باشد، اما برابری === برای)
-alert( arr.includes(NaN) );// true (درست است)
-=======
-Please note that `indexOf` uses the strict equality `===` for comparison. So, if we look for `false`, it finds exactly `false` and not the zero.
-
-If we want to check if `item` exists in the array, and don't need the exact index, then `arr.includes` is preferred.
-
-The method [arr.lastIndexOf](mdn:js/Array/lastIndexOf) is the same as `indexOf`, but looks for from right to left.
+متد [arr.lastIndexOf](mdn:js/Array/lastIndexOf) مانند `indexOf` است اما از راست به چپ جستجو می‌کند.
 
 ```js run
 let fruits = ['Apple', 'Orange', 'Apple']
 
-alert( arr.indexOf('Apple') ); // 0 (first Apple)
-alert( arr.lastIndexOf('Apple') ); // 2 (last Apple)
+alert( arr.indexOf('Apple') ); // 0 (Apple اولین)
+alert( arr.lastIndexOf('Apple') ); // 2 (Apple آخرین)
 ```
 
-````smart header="The `includes` method handles `NaN` correctly"
-A minor, but noteworthy feature of `includes` is that it correctly handles `NaN`, unlike `indexOf`:
+````smart header="متد `includes` مقدار `NaN` را به درستی مدیریت می‌کند"
+یک تفاوت بسیار کوچک `includes` این است که این متد به درستی `NaN` را کنترل می‌کند، درست برعکس `indexOf`:
 
 ```js run
 const arr = [NaN];
-alert( arr.indexOf(NaN) ); // -1 (wrong, should be 0)
-alert( arr.includes(NaN) );// true (correct)
->>>>>>> 7000ede297bfd688f9a3767e8ca43abd9242f322
+alert( arr.indexOf(NaN) ); // -1 (اشتباه است، باید 0 باشد)
+alert( arr.includes(NaN) );// true (درست است)
 ```
-That's because `includes` was added to JavaScript much later and uses the more up to date comparison algorithm internally.
+به این دلیل که `includes` بسیار بعدتر به جاوااسکریپت اضافه شد و از درون از الگوریتم‌های مقایسه بروزتری استفاده می‌کند.
 ````
 
-<<<<<<< HEAD
-### متدهای find and findIndex
-=======
-### find and findIndex/findLastIndex
->>>>>>> 7000ede297bfd688f9a3767e8ca43abd9242f322
+### متدهای find و findIndex/findLastIndex
 
 تصور کنید که یک آرایه‌ای از شیءها داریم. چگونه باید یک شیء با شرطی مشخص را پیدا کنیم؟
 
@@ -344,14 +317,11 @@ alert(user.name); // John
 
 توجه داشته باشید که در مثال بالا ما تابع `item => item.id == 1` را همراه با یک آرگومان برای `find` در نظر گرفتیم. این چیز معمولی است، بقیه آرگومان‌های این تابع به ندرت استفاده می‌شوند.
 
-<<<<<<< HEAD
-متد [arr.findIndex](mdn:js/Array/findIndex) اساسا یکسان است، اما به جای خود المان ایندکسی که المان در آن پیدا شد را برمی‌گرداند و اگر چیزی پیدا نشد `1-` را برمی‌گرداند.
-=======
-The [arr.findIndex](mdn:js/Array/findIndex) method has the same syntax, but returns the index where the element was found instead of the element itself. The value of `-1` is returned if nothing is found.
+متد [arr.findIndex](mdn:js/Array/findIndex) سینتکس یکسانی دارد اما به جای خود المان ایندکسی که المان در آن پیدا شد را برمی‌گرداند. اگر چیزی پیدا نشد مقدار `1-` برگردانده می‌شود.
 
-The [arr.findLastIndex](mdn:js/Array/findLastIndex) method is like `findIndex`, but searches from right to left, similar to `lastIndexOf`.
+متد [arr.findLastIndex](mdn:js/Array/findLastIndex) مانند `findIndex` است اما مانند `lastIndexOf` از راست به چپ جستجو می‌کند.
 
-Here's an example:
+اینجا یک مثال داریم:
 
 ```js run
 let users = [
@@ -361,15 +331,13 @@ let users = [
   {id: 4, name: "John"}
 ];
 
-// Find the index of the first John
+// را پیدا کن John ایندکس اولین
 alert(users.findIndex(user => user.name == 'John')); // 0
 
-// Find the index of the last John
+// را پیدا کن John ایندکس آخرین
 alert(users.findLastIndex(user => user.name == 'John')); // 3
 ```
 
-
->>>>>>> 7000ede297bfd688f9a3767e8ca43abd9242f322
 
 ### متد filter
 
@@ -453,12 +421,7 @@ alert( arr );  // *!*1, 15, 2*/!*
 
 برای استفاده از ترتیب‌بندی خودمان، ما نیاز داریم که یک تابع را به عنوان آرگومان `arr.sort()` قرار دهیم.
 
-<<<<<<< HEAD
 تابع باید دو مقدار دلخواه را مقایسه کند و چیزی را برگرداند:
-=======
-The function should compare two arbitrary values and return:
-
->>>>>>> 7000ede297bfd688f9a3767e8ca43abd9242f322
 ```js
 function compare(a, b) {
   if (a > b) return 1; // اگر مقدار اول بزرگتر از دومی باشد
@@ -703,12 +666,8 @@ arr.reduce((sum, current) => sum + current);
 
 متد [arr.reduceRight](mdn:js/Array/reduceRight) کار یکسان را انجام می‌هد، اما از راست به چپ.
 
-<<<<<<< HEAD
 
 ##متد Array.isArray
-=======
-## Array.isArray
->>>>>>> 7000ede297bfd688f9a3767e8ca43abd9242f322
 
 آرایه‌ها شکل جدیدی از انواع داده را شکل نمی‌دهند. آنها بر اساس شیءها هستند.
 
@@ -716,11 +675,7 @@ arr.reduce((sum, current) => sum + current);
 
 ```js run
 alert(typeof {}); // object
-<<<<<<< HEAD
-alert(typeof []); // یکسان
-=======
-alert(typeof []); // object (same)
->>>>>>> 7000ede297bfd688f9a3767e8ca43abd9242f322
+alert(typeof []); // object (یکسان)
 ```
 
 ...اما آرایه‌ها به دلیل اینکه اغلب اوقات استفاده می‌شوند، یک متد خاص برای این کار دارند: [Array.isArray(value)](mdn:js/Array/isArray). این متد اگر `value` یک آرایه باشد `true` برمی‌گرداند و در غیر این صورت `false`.
@@ -810,13 +765,8 @@ alert(soldiers[1].age); // 23
   - `split/join` -- یک رشته را به آرایه تبدیل می‌کند و برعکس.
   - `reduce/reduceRight(func, initial)` -- با صدا زدن `func` برای هر المان و رد و بدل کردن یک نتیجه واسطه بین هر فراخوانی، یک مقدار مفرد را در آرایه محاسبه می‌کند.
 
-<<<<<<< HEAD
 - علاوه بر این:
-  - `Array.isArray(arr)` بررسی می‌کند که `arr` یک آرایه باشد.
-=======
-- Additionally:
-  - `Array.isArray(value)` checks `value` for being an array, if so returns `true`, otherwise `false`.
->>>>>>> 7000ede297bfd688f9a3767e8ca43abd9242f322
+  - `Array.isArray(arr)` بررسی می‌کند که `arr` یک آرایه باشد و اگر بود مقدار `true` را برمی‌گرداند در غیر این صورت `false`.
 
 لطفا در نظر داشته باشید که متدهای `sort`، `reverse` و `splice` خود آرایه را تغییر می‌دهند.
 
@@ -828,12 +778,7 @@ alert(soldiers[1].age); // 23
 
   این متدها تقریبا شبیه عملگرهای `||` و `&&` رفتار می‌کنند: اگر `fn` مقدار truthy را برگرداند، `arr.some()` درجا `true` را برمی‌گرداند و حلقه زدن روی بقیه المان‌ها را متوقف می‌کند؛ اگر `fn` یک مقدار falsy برگرداند، `arr.every()` فورا `false` را برمی‌گرداند و حلقه زدن در بقیه المان‌ها را متوقف می‌کند.
 
-<<<<<<< HEAD
   ما می‌توانیم از `every` برای مقایسه آرایه‌ها استفاده کنیم
-=======
-  We can use `every` to compare arrays:
-
->>>>>>> 7000ede297bfd688f9a3767e8ca43abd9242f322
   ```js run
   function arraysEqual(arr1, arr2) {
     return arr1.length === arr2.length && arr1.every((value, index) => value === arr2[index]);

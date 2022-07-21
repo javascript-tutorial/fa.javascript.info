@@ -2,15 +2,9 @@
 
 در جاوااسکریپت، دو نوع عدد وجود دارد:
 
-<<<<<<< HEAD
 1. اعداد معمولی در جاوااسکریپت با فرمت 64 بیتی [IEEE-754](https://en.wikipedia.org/wiki/IEEE_754-2008_revision) ذخیره می‌شوند، همچنین با "اعداد اعشاری با دقت یک صدم" هم شناخته می‌شوند. ما اکثر اوقات از این اعداد استفاده می‌کنیم، و درباره آنها در این فصل صحبت خواهیم کرد.
 
 2. اعداد BigInt، برای نمایش اعدادی با طول دلخواه استفاده می‌شوند. آنها بعضی اوقات مورد نیاز هستند، چون اعداد معمولی نمی‌توانند از <code>2<sup>53</sup></code> بیشتر یا از <code>-2<sup>53</sup></code> کمتر باشند. چون bigintها در چند حوزه خاص استفاده می‌شوند، ما به آنها یک فصل خاص <info:bigint> اختصاص می‌دهیم.
-=======
-1. Regular numbers in JavaScript are stored in 64-bit format [IEEE-754](https://en.wikipedia.org/wiki/IEEE_754), also known as "double precision floating point numbers". These are numbers that we're using most of the time, and we'll talk about them in this chapter.
-
-2. BigInt numbers represent integers of arbitrary length. They are sometimes needed because a regular integer number can't safely exceed <code>(2<sup>53</sup>-1)</code> or be less than <code>-(2<sup>53</sup>-1)</code>, as we mentioned earlier in the chapter <info:types>. As bigints are used in few special areas, we devote them a special chapter <info:bigint>.
->>>>>>> 7000ede297bfd688f9a3767e8ca43abd9242f322
 
 پس اینجا درباره اعداد معمولی صحبت می‌کنیم. بیایید دانش‌مان درباره آنها را گسترش دهیم.
 
@@ -28,11 +22,7 @@ let billion = 1000000000;
 let billion = 1_000_000_000;
 ```
 
-<<<<<<< HEAD
-اینجا خط تیره `_` نقش "syntactic sugar" را بازی می‌کند، و عدد را خواناتر می‌کند. موتور جاوااسکریپت به راحتی `_` بین ارقام را نادیده می‌گیرد، پس دقیقا عددی مانند یک میلیارد بالا است.
-=======
-Here the underscore `_` plays the role of the "[syntactic sugar](https://en.wikipedia.org/wiki/Syntactic_sugar)", it makes the number more readable. The JavaScript engine simply ignores `_` between digits, so it's exactly the same one billion as above.
->>>>>>> 7000ede297bfd688f9a3767e8ca43abd9242f322
+اینجا خط تیره `_` نقش "[syntactic sugar](https://en.wikipedia.org/wiki/Syntactic_sugar)" را بازی می‌کند، و عدد را خواناتر می‌کند. موتور جاوااسکریپت به راحتی `_` بین ارقام را نادیده می‌گیرد، پس دقیقا عددی مانند یک میلیارد بالا است.
 
 اما در زندگی واقعی ما عموما از نوشتن رشته حرف با تعداد زیاد صفر خودداری میکنیم به خاطر اینکه به راحتی ممکن است خطا داشته باشیم و اشتباه بنویسیم. همینطور، ما تنبل هستیم! ما معمولا یه چیزی شبیه "1bn" مینویسیم به جای یک میلیارد یا "7.3bn" برای هفت میلیارد و سیصد میلیون. این حقیقت برای اکثر اعداد بزرگ هم صحیح است.
 
@@ -60,11 +50,7 @@ let mсs = 0.000001;
 دقیقا مثل قبل، استفاده از `"e"` می‌تواند کمک کند. اگر ما بخواهیم که از نوشتن صفرها خودداری کنیم، می‌توانیم بنویسیم:
 
 ```js
-<<<<<<< HEAD
-let mcs = 1e-6; // شش صفر در سمت چپ ۱ 
-=======
-let mcs = 1e-6; // five zeroes to the left from 1
->>>>>>> 7000ede297bfd688f9a3767e8ca43abd9242f322
+let mcs = 1e-6; // پنج صفر در سمت چپ ۱ 
 ```
 
 اگر ما تعداد صفرهای `0.000001` را بشماریم، شش تا از آنها موجودست. بنابراین طبعا می‌شود `1e-6`.
@@ -78,8 +64,8 @@ let mcs = 1e-6; // five zeroes to the left from 1
 // -6 divides by 1 with 6 zeroes
 1.23e-6 === 1.23 / 1000000; // 0.00000123
 
-// an example with a bigger number
-1234e-2 === 1234 / 100; // 12.34, decimal point moves 2 times
+// مثالی با یک عدد بزرگتر
+1234e-2 === 1234 / 100; // ممیز دو بار حرکت می‌کند، 12.34
 ```
 
 ### اعداد پایه ۱۶، دودویی، پایه ۸
@@ -194,11 +180,7 @@ alert( num.toString(2) );   // 11111111
     alert( num.toFixed(1) ); // "12.4"
     ```
 
-<<<<<<< HEAD
-    توجه داشته باشید که مقدار `toFixed` یک رشته حرفی‌ست. اگر قسمت بعد اعشار کوچک‌ترین مقدار لازم است، صفر به آخر آن اضافه خواهد شد:
-=======
-    Please note that the result of `toFixed` is a string. If the decimal part is shorter than required, zeroes are appended to the end:
->>>>>>> 7000ede297bfd688f9a3767e8ca43abd9242f322
+    توجه داشته باشید که مقدار `toFixed` یک رشته است. اگر قسمت بعد اعشار کوچک‌تر از آنجه نیاز است باشد، صفر به آخر آن اضافه خواهد شد:
 
     ```js run
     let num = 12.34;
@@ -209,11 +191,7 @@ alert( num.toString(2) );   // 11111111
 
 ## محاسبات تقریبی
 
-<<<<<<< HEAD
 در درون سیستم، یک عدد به شکل ۶۴-بیتی است [IEEE-754](http://en.wikipedia.org/wiki/IEEE_754-1985)، بنابراین دقیقا ۶۴ بیت برای ذخیره‌ی یک عدد داریم: ۵۲ تا از آنها برای ذخیره کردن ارقام هستند، ۱۱ تا از آنها برای ذخیره کردن جایگاه نقطه‌ی مشخص کننده‌ی اعشار (که برای اعداد صحیح صفر است)، و یک بیت برای علامت آن.
-=======
-Internally, a number is represented in 64-bit format [IEEE-754](https://en.wikipedia.org/wiki/IEEE_754), so there are exactly 64 bits to store a number: 52 of them are used to store the digits, 11 of them store the position of the decimal point, and 1 bit is for the sign.
->>>>>>> 7000ede297bfd688f9a3767e8ca43abd9242f322
 
 اگر عددی بیش از حد بزرگ باشد، حافظه‌ی ۶۴ بیتی سرریز می‌شود و به مقدار بی‌نهایت تبدیل می‌شود:
 
@@ -329,13 +307,8 @@ alert( 9999999999999999 ); // shows 10000000000000000
         alert( isNaN("str") ); // true
     ```
 
-<<<<<<< HEAD
     اما آیا ما به این تابع نیاز داریم؟ نمیتوانیم صرفا از تساوی `=== NaN` استفاده کنیم؟‌ متاسفانه جواب خیر است. مقدار `NaN`، مقداری یکتاست و با هیچ چیز، حتی خودش برابر نیست.
     
-=======
-    But do we need this function? Can't we just use the comparison `=== NaN`? Unfortunately not. The value `NaN` is unique in that it does not equal anything, including itself:
-
->>>>>>> 7000ede297bfd688f9a3767e8ca43abd9242f322
     ```js run
     alert( NaN === NaN ); // false
     ```
@@ -360,14 +333,8 @@ alert( isFinite(num) );
 
 توجه داشته باشید که رشته حرفی‌ای که در آن فقط یک جای خالی باشد یا کلا خالی باشد، به عنوان صفر در همه‌ی توابع عددی از جمله `isFinite` در نظر گرفته میشود.
 
-<<<<<<< HEAD
 ```smart header="مقایسه کنید با `Object.is`"
-
-یک تابع از پیش آماده شده‌ی خاص [Object.is](mdn:js/Object/is) که مقادیر را مثل `===` مقایسه میکند، اما برای دو حالت مرزی قابل اعتمادتر است.
-=======
-```smart header="Compare with `Object.is`"
-There is a special built-in method `Object.is` that compares values like `===`, but is more reliable for two edge cases:
->>>>>>> 7000ede297bfd688f9a3767e8ca43abd9242f322
+یک متد درون‌ساخت خاص به نام [Object.is](mdn:js/Object/is) وجود دارد که مقادیر را مثل `===` مقایسه میکند، اما برای دو حالت مرزی قابل اعتمادتر است:
 
 ۱. با `NaN` کار میکند:  `Object.is(NaN, NaN) === true`، که چیز خوبیست.
 ۲. مقادیر `0` و `-0` متفاوت هستند: `Object.is(0, -0) === false`، به ندرت اهمیت دارد، اما این مقادیر در اصل متفاوتند.
@@ -434,13 +401,8 @@ alert( parseInt('2n9c', 36) ); // 123456
     alert( Math.random() ); // ... (هر عدد تصادفی‌ای)
     ```
 
-<<<<<<< HEAD
 `Math.max(a, b, c...)` / `Math.min(a, b, c...)`
 : بزرگترین/کوچک‌ترین عدد را از بین تعداد دلخواه آرگومان‌ها بر‌می‌گرداند
-=======
-`Math.max(a, b, c...)` and `Math.min(a, b, c...)`
-: Returns the greatest and smallest from the arbitrary number of arguments.
->>>>>>> 7000ede297bfd688f9a3767e8ca43abd9242f322
 
     ```js run
     alert( Math.max(3, 5, -10, 0, 1) ); // 5
@@ -469,18 +431,14 @@ alert( parseInt('2n9c', 36) ); // 123456
 - `parseInt(str, base)` یک عدد صحیح را از هر سیستم عددی با پایه‌ی `2 ≤ base ≤ 36` را استخراج می‌کند. 
 - `num.toString(base)` یک عدد را به یک رشته‌ی حرفی در سیستم عددی با پایه داده شده تبدیل می‌کند.
 
+برای آزمایش عادی عددها:
+
+- `isNaN(value)` آرگومان خود را به یک عدد تبدیل می‌کند و بررسی می‌کند که `NaN` است یا خیر.
+- `isFinite(value)` آرگومان خود را به عدد تبدیل می‌کند و اگر یک عدد معمولی باشد `true` برمی‌گرداند نه اینکه `NaN/Infinity/-Infinity` باشد.
+
 برای تبدیل مقادیری مثل `12pt` و `100px` به یک عدد:
 
-<<<<<<< HEAD
 - `parseInt/parseFloat` را برای تبدیلات ساده استفاده کنید که یک عدد را از یک رشته‌ی حرفی می‌خواند و سپس مقداری که قبل از بروز خطا خوانده‌ست را برمی‌گرداند.
-=======
-For regular number tests:
-
-- `isNaN(value)` converts its argument to a number and then tests it for being `NaN`
-- `isFinite(value)` converts its argument to a number and returns `true` if it's a regular number, not `NaN/Infinity/-Infinity`
-
-For converting values like `12pt` and `100px` to a number:
->>>>>>> 7000ede297bfd688f9a3767e8ca43abd9242f322
 
 برای کسرها:
 
