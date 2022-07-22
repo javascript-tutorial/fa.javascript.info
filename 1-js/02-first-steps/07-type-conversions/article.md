@@ -6,11 +6,6 @@
 
 همینطور شرایطی وجود دارد که ما نیاز داریم مقدار را به نوع مورد نظرمان تبدیل کنیم.
 
-<<<<<<< HEAD
-=======
-```smart header="Not talking about objects yet"
-In this chapter, we won't cover objects. For now, we'll just be talking about primitives.
->>>>>>> 7000ede297bfd688f9a3767e8ca43abd9242f322
 
 ```smart header="هنوز در مورد object ها صحبت نکرده‌ایم"
 در این بخش در مورد object ها صحبت نمی‌کنیم. فعلا فقط درباره انواع اولیه صحبت می‌کنیم.
