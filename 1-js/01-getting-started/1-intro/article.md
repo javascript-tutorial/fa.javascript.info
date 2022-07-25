@@ -172,22 +172,16 @@
 - [Dart](https://www.dartlang.org/) : که زبانی مستقل با موتور مربوط به خود بوده و در محیط‌های غیر مرورگری (مانند نرم‌افزارهای موبایل) کار می‌کند. این زبان در ابتدا توسط گوگل معرفی شد تا جایگزینی برای جاوا اِسکریپت باشد.  
 - [Brython](https://brython.info/) یک ترانسپایلر پایتون به جاوا اسکریپت است که توسعه دهندگان را قادر می سازد برنامه هایی به زبان پایتون خالص بدون جاوا اسکریپت بنویسند.
 
-@@@needs translation@@@
-@@@old part@@@
 ## خلاصه 
-@@@old part@@@
-@@@new part@@@
-- [CoffeeScript](http://coffeescript.org/) is a "syntactic sugar" for JavaScript. It introduces shorter syntax, allowing us to write clearer and more precise code. Usually, Ruby devs like it.
-- [TypeScript](http://www.typescriptlang.org/) is concentrated on adding "strict data typing" to simplify the development and support of complex systems. It is developed by Microsoft.
-- [Flow](http://flow.org/) also adds data typing, but in a different way. Developed by Facebook.
-- [Dart](https://www.dartlang.org/) is a standalone language that has its own engine that runs in non-browser environments (like mobile apps), but also can be transpiled to JavaScript. Developed by Google.
-- [Brython](https://brython.info/) is a Python transpiler to JavaScript that enables the writing of applications in pure Python without JavaScript.
-- [Kotlin](https://kotlinlang.org/docs/reference/js-overview.html) is a modern, concise and safe programming language that can target the browser or Node.
-@@@new part@@@
-@@@needs translation@@@
+
+- [CoffeeScript](https://coffeescript.org/) یک «syntactic sugar(سینتکس راحت‌تر)» برای جاوااسکریپت است. این زبان سینتکس کوتاه‌تری را معرفی می‌کند که به ما اجازه نوشتن کدی تمیزتر و دقیق‌تر را می‌دهد. معمولا،  توسعه‌دهندگان زبان Ruby آن را دوست دارند.
+- [TypeScript](https://www.typescriptlang.org/) بر روی اضافه کردن «تعیین سخت‌گیرانه نوع داده» تمرکز کرده است تا توسعه و پشتیبانی از سیستم‌های پیچیده را ساده کند. این زبان توسط مایکروسافت توسعه داده شده است.
+- [Flow](https://flow.org/) هم تعیین نوع داده را اضافه کرده است اما به روش دیگری. توسط فیسبوک توسعه داده شده است.
+- [Dart](https://www.dartlang.org/) یک زبان مستقل است که موتور خود را دارد که در محیط‌های غیر مرورگر اجرا می‌شود (مانند اپ‌های موبایل) اما می‌تواند به جاوااسکریپت هم ترجمه شود. توسط گوگل توسعه داده شده است.
+- [Brython](https://brython.info/) یک مترجم پایتون به جاوااسکریپت است که نوشتن یک برنامه به طور کامل در زبان پایتون را بدون جاوااسکریپت مقدور می‌سازد.
+- [Kotlin](https://kotlinlang.org/docs/reference/js-overview.html) یک زبان برنامه‌نویسی مدرن، مختصر و امن است که می‌تواند مرورگر یا Node را مورد هدف قرار دهد.
 
 - جاوا اِسکریپت در ابتدا برای مرورگرها ساخته شده بود ولی در حال حاضر در محیط‌های متفاوتی قابلیت اجرا دارد.  
 - جاوا اِسکریپت در شرایط حاضر موقعیت مشخص و منحصر بفردی در زبان‌های تحت مرورگرها دارد که تطابق کاملی با HTML و CSS را دارا می‌باشد.  
 - زبان‌های مختلفی وجود دارند که به جاوا اِسکریپت تبدیل می‌شوند تا بتوانند ویژگی‌های مشخصی را فراهم کنند. که پیشنهاد می‌کنیم حداقل یکی از آنها را بعد از تسلط به جاوا اِسکریپت مطالعه نمائید.
-
 

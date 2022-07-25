@@ -109,6 +109,17 @@ alert( article.title ); // خلاصه‌ی امروز
 Article.remove({id: 12345});
 ```
 
+````warn header="متدهای ایستا برای شیءها قابل دسترس نیستند"
+متدهای ایستا بر روی کلاس‌های قابل فراخوانی هستند نه بر روی شیءها.
+
+برای مثال، چنین کدی کار نخواهد کرد:
+
+```js
+// ...
+article.createTodays(); /// Error: article.createTodays is not a function
+```
+````
+
 ## ویژگی‌های ایستا
 
 [recent browser=Chrome]

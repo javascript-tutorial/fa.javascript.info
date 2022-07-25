@@ -215,7 +215,7 @@ alert( 'Interface'.toLowerCase() ); // interface
 
 یا اگر بخواهیم یک کاراکتر را به حرف کوچک آن تبدیل کنیم اینگونه عمل می‌کنیم:
 
-```js
+```js run
 alert( 'Interface'[0].toLowerCase() ); // 'i'
 ```
 
@@ -372,8 +372,8 @@ alert( "Widget".includes("id", 3) ); // false وجود ندارد پس "id" از
 متدهای [str.startsWith](mdn:js/String/startsWith)(بررسی شروع شدن رشته با یک زیر رشته) و [str.endsWith](mdn:js/String/endsWith)(بررسی پایان یافتن رشته با یک زیر رشته) دقیقا کاری را که می‌گویند انجام می‌دهند:
 
 ```js run
-alert( "Widget".startsWith("Wid") ); // true شروع می‌شود پس "Wid" با "Widget"
-alert( "Widget".endsWith("get") ); // true پایان می‌یابد پس "get" با "Widget"
+alert( "*!*Wid*/!*get".startsWith("Wid") ); // true شروع می‌شود پس "Wid" با "Widget"
+alert( "Wid*!*get*/!*".endsWith("get") ); // true پایان می‌یابد پس "get" با "Widget"
 ```
 
 ## گرفتن یک زیر رشته

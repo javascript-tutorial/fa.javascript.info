@@ -429,7 +429,7 @@ let options = {
     height: 200
   },
   items: ["Cake", "Donut"],
-  extra: true   
+  extra: true
 };
 
 // مقداردهی تجزیه‌کننده‌ی ساختار برای واضح بودن در چند خط قرار گرفته است

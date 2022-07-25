@@ -28,7 +28,7 @@ alert( rabbit.hasOwnProperty('name') ); // true
 1. بین `"prototype"` سازنده تابع‌ها (برای متدها).
 2. بین خود سازنده تابع‌ها (برای متدهای ایستا).
 
-در این مورد ما، برای `class Rabbit extends Object` داریم:
+در مورد `class Rabbit extends Object` یعنی:
 
 ```js run
 class Rabbit extends Object {}
@@ -67,7 +67,7 @@ alert ( Rabbit.getOwnPropertyNames({a: 1, b: 2})); // ارور
 
 پس در این صورت `Rabbit` دسترسی به متدهای ایستای `Object` را فراهم نمی‌کند.
 
-راستی، `Function.prototype` دارای متدهای «عمومی» تابع است، مثل `call`، `bind` و غیره. آن‌ها در هر دو مورد سرانجام در دسترس هستند چون سازنده درون‌ساخت `Object`، `Object.__proto__ === Function.prototype` را دارد.
+راستی، `Function.prototype` دارای متدهای «عمومی» تابع است، مثل `call`، `bind` و غیره. آن‌ها سرانجام در هر دو مورد در دسترس هستند چون سازنده درون‌ساخت `Object`، `Object.__proto__ === Function.prototype` را دارد.
 
 اینجا تصویر آن را داریم:
 
