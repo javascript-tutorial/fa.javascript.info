@@ -68,9 +68,26 @@ n = 12.345;
 
 ## BigInt [#bigint-type]
 
+<<<<<<< HEAD
 در جاوااسکریپت، نوع "number" نمی‌تواند مقدارهای صحیح بیشتر از <code>(2<sup>53</sup>-1)</code> (برابر با `9007199254740991`) یا اعداد منفی کمتر از <code>-(2<sup>53</sup>-1)</code> را نشان دهد. این یک محدودیت فنی است که توسط نمایش درون زبانی آنها ایجاد شده است.
 
 آن مقدار برای بیشتر کارها کافی است، اما گاهی به اعداد بسیار بزرگ نیاز داریم، برای مثال در کریپتوگرافی یا timestamps با دقت میکرو ثانیه.
+=======
+In JavaScript, the "number" type cannot safely represent integer values larger than <code>(2<sup>53</sup>-1)</code> (that's `9007199254740991`), or less than <code>-(2<sup>53</sup>-1)</code> for negatives.
+
+To be really precise, the "number" type can store larger integers (up to <code>1.7976931348623157 * 10<sup>308</sup></code>), but outside of the safe integer range <code>±(2<sup>53</sup>-1)</code> there'll be a precision error, because not all digits fit into the fixed 64-bit storage. So an "approximate" value may be stored.
+
+For example, these two numbers (right above the safe range) are the same:
+
+```js
+console.log(9007199254740991 + 1); // 9007199254740992
+console.log(9007199254740991 + 2); // 9007199254740992
+```
+
+So to say, all odd integers greater than <code>(2<sup>53</sup>-1)</code> can't be stored at all in the "number" type.
+
+For most purposes <code>±(2<sup>53</sup>-1)</code> range is quite enough, but sometimes we need the entire range of really big integers, e.g. for cryptography or microsecond-precision timestamps.
+>>>>>>> 7000ede297bfd688f9a3767e8ca43abd9242f322
 
 نوع `BigInt` برای نمایش دادن اعداد صحیح که طول دلخواهی دارند به تازگی به زبان اضافه شده است.
 
@@ -270,6 +287,7 @@ typeof alert // "function"  (3)
 
 در جاوااسکریپت 8 نوع داده پایه‌ای وجود دارد.
 
+<<<<<<< HEAD
 - `number` برای اعداد از هر دسته‌ای: عدد صحیح یا اعشاری، اعداد صحیح به <code>±(2<sup>53</sup>-1)</code> محدود می‌شوند.
 - `bigint` برای اعداد صحیح با طول دلخواه است.
 - `string` برای رشته‌ها. یک رشته ممکن است صفر کاراکتر یا بیشتر داشته باشد، هیج نوع جداگانه‌ی تک کاراکتری وجود ندارد.
@@ -278,6 +296,18 @@ typeof alert // "function"  (3)
 - `undefined` برای مقدارهای تخصیص نیافته -- یک نوع مستقل که فقط یک مقدار `undefined` دارد.
 - `object` برای ساختارهای پیچیده‌تر داده.
 - `symbol` برای شناسه‌های یکتا.
+=======
+- Seven primitive data types:
+    - `number` for numbers of any kind: integer or floating-point, integers are limited by <code>±(2<sup>53</sup>-1)</code>.
+    - `bigint` for integer numbers of arbitrary length.
+    - `string` for strings. A string may have zero or more characters, there's no separate single-character type.
+    - `boolean` for `true`/`false`.
+    - `null` for unknown values -- a standalone type that has a single value `null`.
+    - `undefined` for unassigned values -- a standalone type that has a single value `undefined`.
+    - `symbol` for unique identifiers.
+- And one non-primitive data type:
+    - `object` for more complex data structures.
+>>>>>>> 7000ede297bfd688f9a3767e8ca43abd9242f322
 
 عملگر `typeof` به شما اجازه می‌دهد نوع مقدار ذخیره شده در یک متغیر را تشخصی دهید.
 

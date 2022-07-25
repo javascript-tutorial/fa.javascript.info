@@ -66,8 +66,27 @@ function leadScript(src, *!*callback*/!*) {
     document.head.append(script);
 }
 ```
+<<<<<<< HEAD
 ایده این است که ارگومان دوم یک تابع است (معمولا ناشناس) که زمانیکه عمل به پایان رسید اجرا میشود.
 این هم یک مثال قابل اجرا با یک اسکریپت واقعی:
+=======
+
+The `onload` event is described in the article <info:onload-onerror#loading-a-script>, it basically executes a function after the script is loaded and executed.
+
+Now if we want to call new functions from the script, we should write that in the callback:
+
+```js
+loadScript('/my/script.js', function() {
+  // the callback runs after the script is loaded
+  newFunction(); // so now it works
+  ...
+});
+```
+
+That's the idea: the second argument is a function (usually anonymous) that runs when the action is completed.
+
+Here's a runnable example with a real script:
+>>>>>>> 7000ede297bfd688f9a3767e8ca43abd9242f322
 
 ```js run
 function loadScript(src, callback) {
@@ -78,9 +97,15 @@ function loadScript(src, callback) {
 }
 
 *!*
+<<<<<<< HEAD
 leadScript("https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.2.0/lodash.js", () => {
     alert(`اسکریپت ${script.src} بازگذاری شد`);
     alert( _ ); //تابع تعریف شده در اسکریپت بارگذاری شده
+=======
+loadScript('https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.2.0/lodash.js', script => {
+  alert(`Cool, the script ${script.src} is loaded`);
+  alert( _ ); // _ is a function declared in the loaded script
+>>>>>>> 7000ede297bfd688f9a3767e8ca43abd9242f322
 });
 */!*
 ```

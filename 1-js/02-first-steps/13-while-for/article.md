@@ -6,7 +6,24 @@
 
 *حلقه ها* راهی برای تکرار یک کد برای چندین بار هستند.
 
+<<<<<<< HEAD
 ## حلقه "while"
+=======
+```smart header="The for..of and for..in loops"
+A small announcement for advanced readers.
+
+This article covers only basic loops: `while`, `do..while` and `for(..;..;..)`.
+
+If you came to this article searching for other types of loops, here are the pointers:
+
+- See [for..in](info:object#forin) to loop over object properties.
+- See [for..of](info:array#loops) and [iterables](info:iterable) for looping over arrays and iterable objects.
+
+Otherwise, please read on.
+```
+
+## The "while" loop
+>>>>>>> 7000ede297bfd688f9a3767e8ca43abd9242f322
 
 حلقه `while` سینتکس زیر را دارد:
 
@@ -162,11 +179,14 @@ for (i = 0; i < 3; i++) { // استفاده از یک متغیر موجود
 
 alert(i); // 3، قابل دیدن است، چون بیرون از حلقه تعریف شده است
 ```
-
 ````
 
+<<<<<<< HEAD
 
 ### قسمت های قابل جا انداختن
+=======
+### Skipping parts
+>>>>>>> 7000ede297bfd688f9a3767e8ca43abd9242f322
 
 هر قسمت `for` را می توان از قلم انداخت.
 
@@ -268,7 +288,11 @@ for (let i = 0; i < 10; i++) {
 
 از دیدگاه فنی، این شبیه مثال بالا است. مسلما، ما می توانیم کد را داخل یک بلوک `if` بگذاریم به جای اینکه از `continue` استفاده کنیم.
 
+<<<<<<< HEAD
 اما به عنوان یک عارضه جانبی، یک سطح بیشتری از تو در تویی می سازد (صدا زدن `alert` داخل آکولادها). اگر کد داخل `if` بیشتر از چند خط باشد، ممکن است خوانایی کلی را کاهش دهد.
+=======
+But as a side effect, this created one more level of nesting (the `alert` call inside the curly braces). If the code inside of `if` is longer than a few lines, that may decrease the overall readability.
+>>>>>>> 7000ede297bfd688f9a3767e8ca43abd9242f322
 ````
 
 ````warn header="ممنوعیت `break/continue` در سمت راست '?'"
@@ -285,7 +309,6 @@ if (i > 5) {
 ```
 
 ...و آن را با استفاده از علامت سوال دوباره بنویسیم:
-
 
 ```js no-beautify
 (i > 5) ? alert(i) : *!*continue*/!*; // continue اینجا مجاز نیست
@@ -320,7 +343,12 @@ alert('تمام!');
 
 `break` معمولی بعد از `input` فقط حلقه داخلی را متوقف می کند. این کافی نیست -- برچسب ها، به کمک می آیند!
 
+<<<<<<< HEAD
 یک *برچسب* مشخص کننده ای است که قبل از یک حلقه همراه دو نقطه می آید:
+=======
+A *label* is an identifier with a colon before a loop:
+
+>>>>>>> 7000ede297bfd688f9a3767e8ca43abd9242f322
 ```js
 labelName: for (...) {
   ...
@@ -342,7 +370,12 @@ labelName: for (...) {
     // یک کاری با مقدار انجام بده...
   }
 }
+<<<<<<< HEAD
 alert('تمام!');
+=======
+
+alert('Done!');
+>>>>>>> 7000ede297bfd688f9a3767e8ca43abd9242f322
 ```
 
 در کد بالا، `break outer` برای پیدا کردن برچسب `outer` بالا را جست و جو می کند و از آن حلقه خارج می شود.
@@ -361,14 +394,24 @@ for (let i = 0; i < 3; i++) { ... }
 ````warn header="برچسب ها اجازه \"پرش\" به جایی را نمی دهند"
 برچسب ها به ما اجازه نمی دهند که به جای دلخواهی از کد بپریم.
 
+<<<<<<< HEAD
 برای مثال، انجام دادن این کار غیر ممکن است:
+=======
+For example, it is impossible to do this:
+
+>>>>>>> 7000ede297bfd688f9a3767e8ca43abd9242f322
 ```js
 break label; // پرش به برچسب پایین (کار نمی کند)
 
 label: for (...)
 ```
 
+<<<<<<< HEAD
 یک دستور `break` باید در داخل بلوک کد باشد. از نظر فنی، آن بلوک می تواند هر بلوک کد برچسب زده باشد
+=======
+A `break` directive must be inside a code block. Technically, any labelled code block will do, e.g.:
+
+>>>>>>> 7000ede297bfd688f9a3767e8ca43abd9242f322
 ```js
 label: {
   // ...

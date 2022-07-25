@@ -74,7 +74,11 @@ let admin = user;
 user = null;
 ```
 
+<<<<<<< HEAD
 ...سپس شیء هنوز توسط متغیر global `admin` قابل دسترس است، پس در حافظه وجود دارد. اگر ما `admin` را هم بازنویسی کنیم، سپس این شیء حذف می‌شود.
+=======
+...Then the object is still reachable via `admin` global variable, so it must stay in memory. If we overwrite `admin` too, then it can be removed.
+>>>>>>> 7000ede297bfd688f9a3767e8ca43abd9242f322
 
 ## شیءهای بهم پیوسته
 
@@ -169,11 +173,19 @@ family = null;
 
 ![](garbage-collection-2.svg)
 
+<<<<<<< HEAD
 سپس مرجع‌های آنها علامت گذاری می‌شود:
 
 ![](garbage-collection-3.svg)
 
 ...و تا جایی که ممکن باشد، مرجع‌های آنها:
+=======
+Then we follow their references and mark referenced objects:
+
+![](garbage-collection-3.svg)
+
+...And continue to follow further references, while possible:
+>>>>>>> 7000ede297bfd688f9a3767e8ca43abd9242f322
 
 ![](garbage-collection-4.svg)
 
@@ -183,13 +195,23 @@ family = null;
 
 همچنین می‌توانیم فرایند را اینگونه فرض کنیم که یک سطل رنگ بسیار بزرگ از ریشه ریخته می‌شود که بین تمام مرجع‌ها جریان می‌یابد و تمام شیءهای قابل دسترس را علامت گذاری می‌کند. سپس شیءهایی که علامت گذاری نشده‌اند پاک می‌شوند.
 
+<<<<<<< HEAD
 این مفهوم کلی چگونگی کار کردن زباله‌روبی است. موتورهای جاوااسکریپت بهینه‌سازی‌های زیادی را اعمال می‌کنند تا آن را سریع‌تر کنند و روی اجراشدن برنامه تاثیری نگذارد.
+=======
+That's the concept of how garbage collection works. JavaScript engines apply many optimizations to make it run faster and not introduce any delays into the code execution.
+>>>>>>> 7000ede297bfd688f9a3767e8ca43abd9242f322
 
 بعضی از بهینه‌سازی‌ها:
 
+<<<<<<< HEAD
 - **جمع‌آوری نسلی** -- شیءها به دو دسته تقسیم می‌شوند: "جدیدها" و " قدیمی‌ها". بسیاری از شیءها به وجود می‌آیند، کارشان را انجام می‌دهند و به سرعت می‌میرند، آنها می‌توانند به سرعت پاک می‌شوند. شیءهایی که برای مدت زیاد باقی می‌مانند، "قدیمی" می‌شوند و کمتر بررسی می‌شوند.
 - **جمع‌آوری افزایشی** -- اگر شیءهای زیادی وجود داشته باشند و ما تلاش کنیم که یک باره برویم و تمام دسته شیء را علامت گذاری کنیم، ممکن است این کار زمان ببرد و اختلال‌های قابل رویت را در اجرا ایجاد کند. پس موتور سعی می‌کند که جمع‌آوری زباله را به چند بخش تقسیم کند. سپس هر بخش یکی یکی به صورت جداگانه انجام می‌شود. این کار برای دنبال کردن تغییرات به ثبت کردن بیشتری نیاز دارد، اما ما به جای اختلالی بزرگ اختلال‌های خیلی کوچک را خواهیم داشت.
 - **جمع‌آوری زمان بیکاری** -- زباله جمع‌کن سعی می‌کند که فقط زمانی که پردازنده (CPU) بیکار است کار خود را انجام دهد تا تاثیر ممکن روی اجراشدن را کاهش دهد.
+=======
+- **Generational collection** -- objects are split into two sets: "new ones" and "old ones". In typical code, many objects have a short life span: they appear, do their job and die fast, so it makes sense to track new objects and clear the memory from them if that's the case. Those that survive for long enough, become "old" and are examined less often.
+- **Incremental collection** -- if there are many objects, and we try to walk and mark the whole object set at once, it may take some time and introduce visible delays in the execution. So the engine splits the whole set of existing objects into multiple parts. And then clear these parts one after another. There are many small garbage collections instead of a total one. That requires some extra bookkeeping between them to track changes, but we get many tiny delays instead of a big one.
+- **Idle-time collection** -- the garbage collector tries to run only while the CPU is idle, to reduce the possible effect on the execution.
+>>>>>>> 7000ede297bfd688f9a3767e8ca43abd9242f322
 
 بهینه‌سازی و روش‌های دیگری هم برای الگوریتم‌های زباله‌روبی وجود دارد. همان قدر که دوست دارم آنها را اینجا توضیح دهم، نباید ادامه دهم، چون موتورهای مختلف تکنیک و فن‌های مختلفی را پیاده‌سازی می‌کنند. و این حتی مهم تر است که همانطور که موتورها پیشرفت می‌کنند چیزهایی هم تغییر می‌کنند، پس مطالعه‌ی عمیق‌تر "پیشرفته" بدون نیاز واقعی احتمالا ارزش ندارد. مگر اینکه، موضوع کاملا مربوط به علاقه باشد که در این صورت لینک‌هایی برای شما در پایین قرار داده شده است.
 
@@ -197,16 +219,30 @@ family = null;
 
 چیزهای مهم که باید بدانیم:
 
+<<<<<<< HEAD
 - زباله‌روبی به صورت خودکار انجام می‌شود. ما نمی‌توانیم آن را مجبور یا از آن جلوگیری کنیم.
 - شیءها تا زمانی که قابل دسترس باشند در حافظه باقی می‌مانند.
 - مرجع بودن با قابل دسترس بودن (از یک ریشه) یکسان نیست : یک دسته‌ی شیءهای بهم پیوسته می‌توانند به طور کامل غیر قابل دسترس شوند.
+=======
+- Garbage collection is performed automatically. We cannot force or prevent it.
+- Objects are retained in memory while they are reachable.
+- Being referenced is not the same as being reachable (from a root): a pack of interlinked objects can become unreachable as a whole, as we've seen in the example above.
+>>>>>>> 7000ede297bfd688f9a3767e8ca43abd9242f322
 
 موتورهای مدرن الگوریتم‌های پیشرفته‌ی زباله‌روبی را پیاده‌سازی می‌کنند.
 
 کتاب کلی "The Garbage Collection Handbook: The Art of Automatic Memory Management" (R. Jones و بقیه افراد) بعضی از آنها را پوشش می‌دهد.
 
+<<<<<<< HEAD
 اگر شما با برنامه‌نویسی سطح پایین آشنایی دارید، اطلاعاتی با جزییات درباره زباله‌روبی V8 در این مقاله است [A tour of V8: Garbage Collection](http://jayconrod.com/posts/55/a-tour-of-v8-garbage-collection).
 
 [بلاگ V8](https://v8.dev/) هم هر چند گاهی مقاله‌هایی درباره تغییرات مدیریت حافظه منتشر می‌کند. طبیعتا، برای یادگیری زباله‌روبی، شما بهتر است به طور کلی با یاد گرفتن چیزهای داخلی V8 آماده شوید و بلاگ [Vyacheslav Egorov](http://mrale.ph) که یکی از مهندس‌های V8 بود را بخوانید. من می‌گویم: "V8" چون مقاله‌های زیادی درباره آن در اینترنت وجود دارد. برای موتورهای دیگر، بیشتر روش‌ها مشابه هستند، اما زباله‌روبی در جنبه‌های زیادی متفاوت است.
  
 اگر شما بهینه‌سازی‌های سطح پایین را نیاز دارید، دانایی عمیق موتورها چیز خوبی است. این کار عاقلانه‌ای است که بعد از آشنایی با زبان برای آن برنامه‌ریزی کنید.
+=======
+If you are familiar with low-level programming, more detailed information about V8's garbage collector is in the article [A tour of V8: Garbage Collection](http://jayconrod.com/posts/55/a-tour-of-v8-garbage-collection).
+
+The [V8 blog](https://v8.dev/) also publishes articles about changes in memory management from time to time. Naturally, to learn more about garbage collection, you'd better prepare by learning about V8 internals in general and read the blog of [Vyacheslav Egorov](http://mrale.ph) who worked as one of the V8 engineers. I'm saying: "V8", because it is best covered by articles on the internet. For other engines, many approaches are similar, but garbage collection differs in many aspects.
+
+In-depth knowledge of engines is good when you need low-level optimizations. It would be wise to plan that as the next step after you're familiar with the language.
+>>>>>>> 7000ede297bfd688f9a3767e8ca43abd9242f322
