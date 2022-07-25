@@ -448,4 +448,3 @@ alert( parseInt('2n9c', 36) ); // 123456
 توابع ریاضی بیشتر:
 
 - [Math](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Math) شئ را وقتی به آنها نیاز دارید ببینید. کتابخانه‌ی بسیار کوچکیست اما توابع پایه‌ای را پوشش می‌دهد.
-

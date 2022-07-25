@@ -165,4 +165,3 @@ alert( Boolean(" ") ); // spaces, also true (any non-empty string is true)
 - `"0"` و string حاوی جای خالی `"  "` به عنوان `boolean` برابر true خواهند بود.
 
 در اینجا در مورد تبدیل object ها صحبت نکردیم و در بخش‌های بعدی به آنها خواهیم پرداخت. 
-
