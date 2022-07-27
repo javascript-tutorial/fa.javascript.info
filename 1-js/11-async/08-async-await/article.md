@@ -1,10 +1,10 @@
 # Async/await
 
-There's a special syntax to work with promises in a more comfortable fashion, called "async/await". It's surprisingly easy to understand and use.
+یک روش خاص برای کار با Promise ها به شیوه راحتتر وجود دارد که به آن "async/await" گفته می شود. فهمیدن و استفاده از آن به شکل غافلگیر کننده راحت است.
 
-## Async functions
+## توابع Async
 
-Let's start with the `async` keyword. It can be placed before a function, like this:
+بیایید با کلیدواژه `async` شروع کنیم. این کلیدواژه قبل از یک تابع قرار می گیرد، مانند زیر:
 
 ```js
 async function f() {
@@ -12,9 +12,9 @@ async function f() {
 }
 ```
 
-The word "async" before a function means one simple thing: a function always returns a promise. Other values are wrapped in a resolved promise automatically.
+وجود کلمه "async" قبل از یک تابع یک معنی ساده می دهد: تابع همیشه یک Promise برمی گرداند. سایر مقادیر به صورت خودکار با یک Promise انجام شده در بر گرفته می شوند.
 
-For instance, this function returns a resolved promise with the result of `1`; let's test it:
+برای نمونه، این تابع یک Promise انجام شده با مقدار `1` را برمی گرداند؛ بیایید امتحان کنیم:
 
 ```js run
 async function f() {
@@ -24,7 +24,7 @@ async function f() {
 f().then(alert); // 1
 ```
 
-...We could explicitly return a promise, which would be the same:
+... ما می‌توانیم به طور مستقیم یک Promise را برگردانیم، که همان خواهد بود:
 
 ```js run
 async function f() {
@@ -34,20 +34,20 @@ async function f() {
 f().then(alert); // 1
 ```
 
-So, `async` ensures that the function returns a promise, and wraps non-promises in it. Simple enough, right? But not only that. There's another keyword, `await`, that works only inside `async` functions, and it's pretty cool.
+بنابراین، `async` تضمین می کند که تابع یک Promise برمی گرداند و قسمت های غیر Promise آن را در بر می گیرد. ساده است، نه؟ اما فقط این نیست. کلیدواژه دیگری به اسم `await` وجود دارد که فقط داخل توابع `async` کار می کند.
 
 ## Await
 
-The syntax:
+به شکل زیر استفاده می شود:
 
 ```js
-// works only inside async functions
+// تنها در توابع async کار می کند
 let value = await promise;
 ```
 
-The keyword `await` makes JavaScript wait until that promise settles and returns its result.
+کلیدواژه `await` باعث می شود که جاوااسکریپت تا اجرا شدن آن Promise صبر کند و مقدار آن را برگرداند.
 
-Here's an example with a promise that resolves in 1 second:
+در اینجا مثالی از یک Promise داریم که در مدت ۱ ثانیه با موفقیت اجرا می شود:
 ```js run
 async function f() {
 
@@ -56,7 +56,7 @@ async function f() {
   });
 
 *!*
-  let result = await promise; // wait until the promise resolves (*)
+  let result = await promise; // صبر می کند تا پرامیس با موفقیت اجرا شود (*)
 */!*
 
   alert(result); // "done!"
@@ -65,7 +65,7 @@ async function f() {
 f();
 ```
 
-The function execution "pauses" at the line `(*)` and resumes when the promise settles, with `result` becoming its result. So the code above shows "done!" in one second.
+اجرای تابع در خط `(*)` متوقف می شود و زمانی که Promise اجرا شد ادامه می یابد، به صورتی که ‍`result` نتیجه آن می شود. بنابراین قطعه کد بالا مقدار "!done" را طی یک ثانیه نمایش می دهد.
 
 Let's emphasize: `await` literally suspends the function execution until the promise settles, and then resumes it with the promise result. That doesn't cost any CPU resources, because the JavaScript engine can do other jobs in the meantime: execute other scripts, handle events, etc.
 
