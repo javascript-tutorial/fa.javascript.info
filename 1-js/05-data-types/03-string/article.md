@@ -447,7 +447,13 @@ alert( "Wid*!*get*/!*".endsWith("get") ); // true پایان می‌یابد پ�
     alert( str.substr(-4, 2) ); // 'gi' :از موقعیت چهارم 2 کاراکتر را بگیر
     ```
 
+<<<<<<< HEAD
 بیایید این متدها را برای جلوگیری از هر گمراهی خلاصه کنیم:
+=======
+    This method resides in the [Annex B](https://tc39.es/ecma262/#sec-string.prototype.substr) of the language specification. It means that only browser-hosted Javascript engines should support it, and it's not recommended to use it. In practice, it's supported everywhere.
+
+Let's recap these methods to avoid any confusion:
+>>>>>>> 1edb0a38330b54d2e1916f5193fc043e6fbbea78
 
 | متد | انتخاب می‌کند... | منفی‌ها |
 |--------|-----------|-----------|

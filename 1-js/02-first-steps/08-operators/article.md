@@ -194,6 +194,7 @@ alert( +apples + +oranges ); // 5
 | اولویت | نام | علامت |
 |------------|------|------|
 | ... | ... | ... |
+<<<<<<< HEAD
 | 15 | جمع یگانه | `+` |
 | 15 | تفریق یگانه | `-` |
 | 14 | بتوان رساندن | `**` |
@@ -201,11 +202,24 @@ alert( +apples + +oranges ); // 5
 | 13 | تقسیم | `/` |
 | 12 | جمع | `+` |
 | 12 | تفریق | `-` |
+=======
+| 14 | unary plus | `+` |
+| 14 | unary negation | `-` |
+| 13 | exponentiation | `**` |
+| 12 | multiplication | `*` |
+| 12 | division | `/` |
+| 11 | addition | `+` |
+| 11 | subtraction | `-` |
+>>>>>>> 1edb0a38330b54d2e1916f5193fc043e6fbbea78
 | ... | ... | ... |
 | 2 | مقداردهی | `=` |
 | ... | ... | ... |
 
+<<<<<<< HEAD
 همانطور که می‌بینیم «عملگر + یگانه» اولویت `15` دارد که از عملگر جمع ( + دوگانه) با اولویت `12` بالاتر است. به همین دلیل است که در عبارت `"+apples + +oranges"` عملگرهای + یگانه پیش از علامت جمع اجرا می‌شوند.
+=======
+As we can see, the "unary plus" has a priority of `14` which is higher than the `11` of "addition" (binary plus). That's why, in the expression `"+apples + +oranges"`, unary pluses work before the addition.
+>>>>>>> 1edb0a38330b54d2e1916f5193fc043e6fbbea78
 
 ## مقداردهی
 
@@ -303,9 +317,13 @@ alert( n ); // 14
 ```js run
 let n = 2;
 
-n *= 3 + 5;
+n *= 3 + 5; // right part evaluated first, same as n *= 8
 
+<<<<<<< HEAD
 alert( n ); // 16 (یکسان است n *= 8، قسمت سمت راست اول ارزیابی می‌شود)
+=======
+alert( n ); // 16  
+>>>>>>> 1edb0a38330b54d2e1916f5193fc043e6fbbea78
 ```
 
 ## عملگر افزایش/کاهش 

@@ -137,8 +137,13 @@ alert(user + 500); // hint: default -> 1500
 
 اگر `Symbol.toPrimitive` وجود نداشته باشد، سپس جاوااسکریپت سعی می‌کند که متدهای `toString` و `valueOf`  را پیدا کند:
 
+<<<<<<< HEAD
 - برای جزء "string": `toString` و اگر این متد وجود نداشت، سپس `valueOf` (پس `toString` برای تبدیل‌های رشته‌ای اولویت دارد).
 - برای بقیه جزءها: `valueOf` و اگر این متد وجود نداشت، سپس `toString` (پس `valueOf` برای ریاضیات اولویت دارد).
+=======
+- For the `"string"` hint: call `toString` method, and if it doesn't exist or if it returns an object instead of a primitive value, then call `valueOf` (so `toString` has the priority for string conversions).
+- For other hints: call `valueOf`, and if it doesn't exist or if it returns an object instead of a primitive value, then call `toString` (so `valueOf` has the priority for maths).
+>>>>>>> 1edb0a38330b54d2e1916f5193fc043e6fbbea78
 
 متدهای `toString` و `valueOf` از زمان‌های گذشته وجود دارند. آن‌ها سمبل نیستند (سمبل‌ها انقدر قدیمی نیستند) بلکه متدهای «معمولی» هستند که اسمی رشته‌ای دارد. آن‌ها راهی جایگزین برای پیاده‌سازی تبدیل به «سبک قدیمی» را  فراهم می‌کنند.
 
