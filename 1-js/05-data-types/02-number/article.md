@@ -333,53 +333,46 @@ alert( isFinite(num) );
 
 توجه داشته باشید که رشته حرفی‌ای که در آن فقط یک جای خالی باشد یا کلا خالی باشد، به عنوان صفر در همه‌ی توابع عددی از جمله `isFinite` در نظر گرفته میشود.
 
-<<<<<<< HEAD
-```smart header="مقایسه کنید با `Object.is`"
-یک متد درون‌ساخت خاص به نام [Object.is](mdn:js/Object/is) وجود دارد که مقادیر را مثل `===` مقایسه میکند، اما برای دو حالت مرزی قابل اعتمادتر است:
-=======
-````smart header="`Number.isNaN` and `Number.isFinite`"
-[Number.isNaN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/isNaN) and [Number.isFinite](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/isFinite) methods are the more "strict" versions of `isNaN` and `isFinite` functions. They do not autoconvert their argument into a number, but check if it belongs to the `number` type instead.
+````smart header="`Number.isNaN` و `Number.isFinite`"
+متدهای [Number.isNaN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/isNaN) و [Number.isFinite](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/isFinite) نسخه‌های «سخت‌گیرتر» از تابع‌های `isNaN` و `isFinite` هستند. آن‌ها به طور خودکار آرگومان خود را به عدد تبدیل نمی‌کنند بلکه در عوض بررسی می‌کنند که آیا آرگومان به نوع `number` تعلق دارد یا خیر. 
 
-- `Number.isNaN(value)` returns `true` if the argument belongs to the `number` type and it is `NaN`. In any other case it returns `false`.
+- `Number.isNaN(value)` اگر آرگومان به نوع `number` تعلق داشته باشد و برابر با `NaN` باشد مقدار `true` را برمی‌گرداند. در غیر این صورت `false` برگردانده می‌شود.
 
     ```js run
     alert( Number.isNaN(NaN) ); // true
     alert( Number.isNaN("str" / 2) ); // true
 
-    // Note the difference:
-    alert( Number.isNaN("str") ); // false, because "str" belongs to the string type, not the number type
+    // :به تفاوت توجه کنید
+    alert( Number.isNaN("str") ); // false به نوع رشته تعلق دارد نه عدد پس "str" چون
     alert( isNaN("str") ); // true, because isNaN converts string "str" into a number and gets NaN as a result of this conversion
+    // چون isNaN رشته "str" را به یک عدد تبدیل می‌کند و از این تبدیل NaN را دریافت می‌کند
+    // true را دریافت می‌کند پس NaN را به یک عدد تبدیل می‌کند و از این تبدیل "str" رشته isNaN چون
     ```
 
-- `Number.isFinite(value)` returns `true` if the argument belongs to the `number` type and it is not `NaN/Infinity/-Infinity`. In any other case it returns `false`.
+- `Number.isFinite(value)` اگر آرگومان به نوع `number` تعلق داشته باشد و `NaN/Infinity/-Infinity` نباشد مقدار `true` برگردانده می‌شود. در غیر این صورت `false` را برمی‌گرداند.
 
     ```js run
     alert( Number.isFinite(123) ); // true
     alert( Number.isFinite(Infinity) ); //false
     alert( Number.isFinite(2 / 0) ); // false
 
-    // Note the difference:
-    alert( Number.isFinite("123") ); // false, because "123" belongs to the string type, not the number type
-    alert( isFinite("123") ); // true, because isFinite converts string "123" into a number 123
+    // :به تفاوت توجه کنید
+    alert( Number.isFinite("123") ); // false چون "123" به نوع رشته تعلق دارد نه نوع عدد پس 
+    alert( isFinite("123") ); // true رشته "123" را به عدد 123 تبدیل می‌کند پس isFinite چون
     ```
 
-In a way, `Number.isNaN` and `Number.isFinite` are simpler and more straightforward than `isNaN` and `isFinite` functions. In practice though, `isNaN` and `isFinite` are mostly used, as they're shorter to write.
+به نحوی، `Number.isNaN` و `Number.isFinite` ساده‌تر و سرراست‌تر از تابع‌های `isNaN` و `isFinite` هستند. اگرچه در عمل، `isNaN` و `isFinite` بیشتر استفاده می‌شوند چون برای نوشتن کوتاه‌تر هستند.
 ````
 
-```smart header="Comparison with `Object.is`"
-There is a special built-in method `Object.is` that compares values like `===`, but is more reliable for two edge cases:
->>>>>>> 1edb0a38330b54d2e1916f5193fc043e6fbbea78
+```smart header="مقایسه کنید با `Object.is`"
+یک متد درون‌ساخت خاص به نام [Object.is](mdn:js/Object/is) وجود دارد که مقادیر را مثل `===` مقایسه میکند، اما برای دو حالت مرزی قابل اعتمادتر است:
 
 ۱. با `NaN` کار میکند:  `Object.is(NaN, NaN) === true`، که چیز خوبیست.
 ۲. مقادیر `0` و `-0` متفاوت هستند: `Object.is(0, -0) === false`، به ندرت اهمیت دارد، اما این مقادیر در اصل متفاوتند.
 
 در تمام حالات دیگر، `Object.is(a, b)` با `a === b` برابراست.
 
-<<<<<<< HEAD
-این روش مقایسه عموما در جاوااسکریپت استفاده می‌شود. وقتی یک الگوریتم درون سیستمی به مقایسه کردن برای برابری دقیق دو مقدار  نیاز دارد، از `Object.is` استفاده می‌کند (که در درون سیستم به نام [SameValue](https://tc39.github.io/ecma262/#sec-samevalue)) می‌باشد.)
-=======
-We mention `Object.is` here, because it's often used in JavaScript specification. When an internal algorithm needs to compare two values for being exactly the same, it uses `Object.is` (internally called [SameValue](https://tc39.github.io/ecma262/#sec-samevalue)).
->>>>>>> 1edb0a38330b54d2e1916f5193fc043e6fbbea78
+ما `Object.is` را اینجا ذکر می‌کنیم چون اغلب در مشخصات جاوااسکریپت استفاده می‌شود. زمانی که یک الگوریتم درونی نیاز دارد که دو مقدار را برای اینکه دقیقا یکسان باشند مقایسه کند، از `Object.is` استفاده می‌کند (از درون [SameValue](https://tc39.github.io/ecma262/#sec-samevalue) فراخوانی می‌شود).
 ```
 
 
@@ -471,15 +464,10 @@ alert( parseInt('2n9c', 36) ); // 123456
 
 برای آزمایش عادی عددها:
 
-<<<<<<< HEAD
 - `isNaN(value)` آرگومان خود را به یک عدد تبدیل می‌کند و بررسی می‌کند که `NaN` است یا خیر.
+- `Number.isNaN(value)` بررسی می‌کند که آرگومان آن به نوع `number` تعلق دارد یا خیر و اگر داشت، بررسی می‌کند که `NaN` هست یا خیر
 - `isFinite(value)` آرگومان خود را به عدد تبدیل می‌کند و اگر یک عدد معمولی باشد `true` برمی‌گرداند نه اینکه `NaN/Infinity/-Infinity` باشد.
-=======
-- `isNaN(value)` converts its argument to a number and then tests it for being `NaN`
-- `Number.isNaN(value)` checks whether its argument belongs to the `number` type, and if so, tests it for being `NaN`
-- `isFinite(value)` converts its argument to a number and then tests it for not being `NaN/Infinity/-Infinity`
-- `Number.isFinite(value)` checks whether its argument belongs to the `number` type, and if so, tests it for not being `NaN/Infinity/-Infinity`
->>>>>>> 1edb0a38330b54d2e1916f5193fc043e6fbbea78
+- `Number.isFinite(vlaue)` بررسی می‌کند که آیا آرگومان آن به نوع `number` تعلق دارد یا خیر و اگر داشت، بررسی می‌کند که `NaN/Infinity/-Infinity` نباشد
 
 برای تبدیل مقادیری مثل `12pt` و `100px` به یک عدد:
 

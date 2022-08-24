@@ -72,11 +72,7 @@ alert(age); // NaN, conversion failed
 |`undefined`|`NaN`|
 |`null`|`0`|
 |<code>true&nbsp;and&nbsp;false</code> | `1` and `0` |
-<<<<<<< HEAD
-| `string` | فاصله‌های خالی ابتدا و انتها حذف می‌شوند. اگر رشته‌ی باقی مانده خالی باشد نتیجه `0` خواهد بود. در غیر اینصورت عدد موجود در رشته کاراکترها خوانده خواهد شد. همینطور اگر خطایی رخ دهد نتیجه `NaN` خواهد بود. |
-=======
-| `string` | Whitespaces (includes spaces, tabs `\t`, newlines `\n` etc.) from the start and end are removed. If the remaining string is empty, the result is `0`. Otherwise, the number is "read" from the string. An error gives `NaN`. |
->>>>>>> 1edb0a38330b54d2e1916f5193fc043e6fbbea78
+| `string` | فاصله‌های خالی ابتدا و انتها (شامل spaceها، tabها `\t`و خطوط جدید `\n` و دیگر موارد) حذف می‌شوند. اگر رشته‌ی باقی مانده خالی باشد نتیجه `0` خواهد بود. در غیر اینصورت عدد موجود در رشته کاراکترها «خوانده» خواهد شد. اگر خطایی رخ دهد نتیجه `NaN` خواهد بود. |
 
 Examples:
 
@@ -150,13 +146,9 @@ alert( Boolean(" ") ); // spaces, also true (any non-empty string is true)
 |`undefined`|`NaN`|
 |`null`|`0`|
 |<code>true&nbsp;/&nbsp;false</code> | `1 / 0` |
-<<<<<<< HEAD
-| `string` | فاصله‌های خالی ابتدا و انتها حذف می‌شوند. اگر رشته‌ی باقی مانده خالی باشد نتیجه `0` خواهد بود. در غیر اینصورت عدد موجود در رشته کاراکترها خوانده خواهد شد. همینطور اگر خطایی رخ دهد نتیجه `NaN` خواهد بود. |
+| `string` | رشته همانطور که «هست» خوانده می‌شود و فاصله‌های خالی (شامل spaceها، tabها `\t`، خطوط جدید `\n` و غیره) نادیده گرفته می‌شوند. یک رشته خالی `0` می‌شود. ارور `NaN` را نتیجه می‌دهد. |
 
 **`تبدیل به boolean`** – در عملگرهای  منطقی رخ می‌دهد. از طریق `Boolean(value)` قابل انجام است.
-=======
-| `string` | The string is read "as is", whitespaces (includes spaces, tabs `\t`, newlines `\n` etc.) from both sides are ignored. An empty string becomes `0`. An error gives `NaN`. |
->>>>>>> 1edb0a38330b54d2e1916f5193fc043e6fbbea78
 
 این تبدیل از این قوانین پیروی می‌کند :
 
