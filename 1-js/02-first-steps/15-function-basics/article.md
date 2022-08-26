@@ -206,17 +206,13 @@ function showMessage(from, *!*text = "no text given"*/!*) {
 showMessage("Ann"); // Ann: no text given
 ```
 
-<<<<<<< HEAD
 حالا اگر پارامتر `text` پاس داده نشود، مقدار `"no text given"` را می‌گیرد.
-=======
-Now if the `text` parameter is not passed, it will get the value `"no text given"`.
 
-The default value also jumps in if the parameter exists, but strictly equals `undefined`, like this:
+همچنین اگر پارامتر وجود داشته باشد نیز ممکن است مقدار پیش‌فرض قرار بگیرد، در صورتی که برابر با `undefined` باشد، مانند زیر:
 
 ```js
 showMessage("Ann", undefined); // Ann: no text given
 ```
->>>>>>> 1edb0a38330b54d2e1916f5193fc043e6fbbea78
 
 اینجا `"no text given"` یک رشته است، اما می‌تواند عبارت پیچیده‌تری باشد، که تنها در حالتی ارزیابی و مقداردهی می‌شود که پارامتری وجود نداشته باشد. بنابراین این هم ممکن است:
 

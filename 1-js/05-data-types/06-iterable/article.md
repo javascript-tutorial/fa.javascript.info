@@ -218,13 +218,8 @@ alert(arr.pop()); // World (متد کار کرد)
 
 اتفاق مشابهی برای حلقه‌پذیر می‌افتد:
 
-<<<<<<< HEAD
 ```js
 // از مثال بالا گرفته شده است range فرض می‌کنیم که
-=======
-```js run
-// assuming that range is taken from the example above
->>>>>>> 1edb0a38330b54d2e1916f5193fc043e6fbbea78
 let arr = Array.from(range);
 alert(arr); // 1,2,3,4,5 (آرایه کار می‌کند toString تبدیل)
 ```
@@ -238,13 +233,8 @@ Array.from(obj[, mapFn, thisArg])
 
 برای مثال:
 
-<<<<<<< HEAD
 ```js
 // از مثال بالا گرفته شده است range فرض می‌کنیم
-=======
-```js run
-// assuming that range is taken from the example above
->>>>>>> 1edb0a38330b54d2e1916f5193fc043e6fbbea78
 
 // به توان 2 رساندن هر عدد
 let arr = Array.from(range, num => num * num);

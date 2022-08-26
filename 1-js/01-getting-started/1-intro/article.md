@@ -46,23 +46,13 @@
 
 بخاطر سپردن این نام‌ها مفید هستند، چراکه در مقالات مختلف به آنها بر خواهید خورد، همینطور زمانیکه ما در این آموزش برای نمونه می‌گوییم ویژگی X توسط موتور **V8** پشتیبانی می‌شود، یعنی به احتمال زیاد در مرورگرهای کروم و اپرا پشتیبانی خواهد شد.  
 
-<<<<<<< HEAD
   
-=======
-1. The engine (embedded if it's a browser) reads ("parses") the script.
-2. Then it converts ("compiles") the script to machine code.
-3. And then the machine code runs, pretty fast.
->>>>>>> 1edb0a38330b54d2e1916f5193fc043e6fbbea78
 
 **موتورها** **چگونه کار** **می‌کنند** 
 
 موتورها پیچیده هستند، ولی اساس آنها ساده است.  
 
-<<<<<<< HEAD
 ۱. موتور در ابتدا اِسکریپت را می‌خواند (Parse).  
-=======
-Modern JavaScript is a "safe" programming language. It does not provide low-level access to memory or the CPU, because it was initially created for browsers which do not require it.
->>>>>>> 1edb0a38330b54d2e1916f5193fc043e6fbbea78
 
 ۲. سپس آن را به زبان ماشین ترجمه می‌کند (Compile). 
 
@@ -74,11 +64,7 @@ Modern JavaScript is a "safe" programming language. It does not provide low-leve
 
   
 
-<<<<<<< HEAD
 ## جاوا اِسکریپت در مرورگر چه توانایی‌هایی دارد  ؟   
-=======
-JavaScript's abilities in the browser are limited to protect the user's safety. The aim is to prevent an evil webpage from accessing private information or harming the user's data.
->>>>>>> 1edb0a38330b54d2e1916f5193fc043e6fbbea78
 
   
 
@@ -86,29 +72,15 @@ JavaScript's abilities in the browser are limited to protect the user's safety. 
 
   
 
-<<<<<<< HEAD
 قابلیت‌های جاوا اِسکریپت کاملا به محیطی که در آن اجرا می‌شود بستگی دارد. برای نمونه با جاوا اِسکریپت در [Node.JS](https://wikipedia.org/wiki/Node.js) می‌توان عملیات خواندن و نوشتن (Read/Write) روی فایل‌ها را انجام داد، و یا در شبکه درخواست‌هایی ارسال و دریافت کرد، و دیگر موارد.  
 
   
 
 در مرورگر جاوا اِسکریپت می‌تواند تمامی تعمالات لازم با کاربر و وب‌سِرور را انجام دهد.  
-=======
-    There are ways to interact with the camera/microphone and other devices, but they require a user's explicit permission. So a JavaScript-enabled page may not sneakily enable a web-camera, observe the surroundings and send the information to the [NSA](https://en.wikipedia.org/wiki/National_Security_Agency).
-- Different tabs/windows generally do not know about each other. Sometimes they do, for example when one window uses JavaScript to open the other one. But even in this case, JavaScript from one page may not access the other page if they come from different sites (from a different domain, protocol or port).
-
-    This is called the "Same Origin Policy". To work around that, *both pages* must agree for data exchange and must contain special JavaScript code that handles it. We'll cover that in the tutorial.
-
-    This limitation is, again, for the user's safety. A page from `http://anysite.com` which a user has opened must not be able to access another browser tab with the URL `http://gmail.com`, for example, and steal information from there.
-- JavaScript can easily communicate over the net to the server where the current page came from. But its ability to receive data from other sites/domains is crippled. Though possible, it requires explicit agreement (expressed in HTTP headers) from the remote side. Once again, that's a safety limitation.
->>>>>>> 1edb0a38330b54d2e1916f5193fc043e6fbbea78
 
   
 
-<<<<<<< HEAD
 برای نمونه جاوا اِسکریپت در مرورگر می‌تواند :  
-=======
-Such limitations do not exist if JavaScript is used outside of the browser, for example on a server. Modern browsers also allow plugins/extensions which may ask for extended permissions.
->>>>>>> 1edb0a38330b54d2e1916f5193fc043e6fbbea78
 
   
 
@@ -182,11 +154,7 @@ Such limitations do not exist if JavaScript is used outside of the browser, for 
 
 ##  زبان‌هایی فراتر از جاوا اِسکریپت  
 
-<<<<<<< HEAD
   
-=======
-That said, JavaScript can be used to create servers, mobile applications, etc.
->>>>>>> 1edb0a38330b54d2e1916f5193fc043e6fbbea78
 
 سینتَکس (Syntax) جاوا اِسکریپت مورد نیاز هر کسی نیست و اشخاص مختلف به قابلیت‌های متفاوتی نیاز دارند. چراکه نیازمندی‌های هر پروژه متفاوت است.  
 
@@ -194,11 +162,7 @@ That said, JavaScript can be used to create servers, mobile applications, etc.
 
 اخیرا تعداد زیادی زبان بوجود آمده‌اند که به جاوا اِسکریپت تبدیل (Transpile) شده، پیش از آنکه جاوا اِسکریپت در مرورگر اجرا شود.  
 
-<<<<<<< HEAD
   
-=======
-So, recently a plethora of new languages appeared, which are *transpiled* (converted) to JavaScript before they run in the browser.
->>>>>>> 1edb0a38330b54d2e1916f5193fc043e6fbbea78
 
 نمونه‌هایی از این زبان‌ها : 
 
@@ -208,7 +172,6 @@ So, recently a plethora of new languages appeared, which are *transpiled* (conve
 - [Dart](https://www.dartlang.org/) : که زبانی مستقل با موتور مربوط به خود بوده و در محیط‌های غیر مرورگری (مانند نرم‌افزارهای موبایل) کار می‌کند. این زبان در ابتدا توسط گوگل معرفی شد تا جایگزینی برای جاوا اِسکریپت باشد.  
 - [Brython](https://brython.info/) یک ترانسپایلر پایتون به جاوا اسکریپت است که توسعه دهندگان را قادر می سازد برنامه هایی به زبان پایتون خالص بدون جاوا اسکریپت بنویسند.
 
-<<<<<<< HEAD
 ## خلاصه 
 
 - [CoffeeScript](https://coffeescript.org/) یک «syntactic sugar(سینتکس راحت‌تر)» برای جاوااسکریپت است. این زبان سینتکس کوتاه‌تری را معرفی می‌کند که به ما اجازه نوشتن کدی تمیزتر و دقیق‌تر را می‌دهد. معمولا،  توسعه‌دهندگان زبان Ruby آن را دوست دارند.
@@ -217,16 +180,6 @@ So, recently a plethora of new languages appeared, which are *transpiled* (conve
 - [Dart](https://www.dartlang.org/) یک زبان مستقل است که موتور خود را دارد که در محیط‌های غیر مرورگر اجرا می‌شود (مانند اپ‌های موبایل) اما می‌تواند به جاوااسکریپت هم ترجمه شود. توسط گوگل توسعه داده شده است.
 - [Brython](https://brython.info/) یک مترجم پایتون به جاوااسکریپت است که نوشتن یک برنامه به طور کامل در زبان پایتون را بدون جاوااسکریپت مقدور می‌سازد.
 - [Kotlin](https://kotlinlang.org/docs/reference/js-overview.html) یک زبان برنامه‌نویسی مدرن، مختصر و امن است که می‌تواند مرورگر یا Node را مورد هدف قرار دهد.
-=======
-- [CoffeeScript](https://coffeescript.org/) is "syntactic sugar" for JavaScript. It introduces shorter syntax, allowing us to write clearer and more precise code. Usually, Ruby devs like it.
-- [TypeScript](https://www.typescriptlang.org/) is concentrated on adding "strict data typing" to simplify the development and support of complex systems. It is developed by Microsoft.
-- [Flow](https://flow.org/) also adds data typing, but in a different way. Developed by Facebook.
-- [Dart](https://www.dartlang.org/) is a standalone language that has its own engine that runs in non-browser environments (like mobile apps), but also can be transpiled to JavaScript. Developed by Google.
-- [Brython](https://brython.info/) is a Python transpiler to JavaScript that enables the writing of applications in pure Python without JavaScript.
-- [Kotlin](https://kotlinlang.org/docs/reference/js-overview.html) is a modern, concise and safe programming language that can target the browser or Node.
-
-There are more. Of course, even if we use one of these transpiled languages, we should also know JavaScript to really understand what we're doing.
->>>>>>> 1edb0a38330b54d2e1916f5193fc043e6fbbea78
 
 - جاوا اِسکریپت در ابتدا برای مرورگرها ساخته شده بود ولی در حال حاضر در محیط‌های متفاوتی قابلیت اجرا دارد.  
 - جاوا اِسکریپت در شرایط حاضر موقعیت مشخص و منحصر بفردی در زبان‌های تحت مرورگرها دارد که تطابق کاملی با HTML و CSS را دارا می‌باشد.  

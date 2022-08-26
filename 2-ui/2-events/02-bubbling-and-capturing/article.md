@@ -126,31 +126,18 @@
 2. فاز هدف -- رویداد به عنصر هدف می‌رسد.
 3. فاز بالارفتن -- رویداد از عنصر بالا می‌رود.
 
-<<<<<<< HEAD
 این یک عکس از یک کلیک روی `<td>` داخل یک جدول است، که شامل مشخصات زیر است
-=======
-Here's the picture, taken from the specification, of the capturing `(1)`, target `(2)` and bubbling `(3)` phases for a click event on a `<td>` inside a table:
->>>>>>> 1edb0a38330b54d2e1916f5193fc043e6fbbea78
 
 ![](eventflow.svg)
 
 اینگونه که: برای یک کلیک روی `<td>` رویداد اول از زنجیره اجداد پایین می‌آید تا به عنصر برسد‌(گرفتن). بعد به عنصر هدف می‌رسد و بعد بالا می‌رود (بالارفتن) و کنترل‌کننده‌ها را در مسیر صدا می‌زند.
 
-<<<<<<< HEAD
-**قبلا تنها درباره بالارفتن رویداد صحبت کردیم، چون که فاز گرفتن به ندرت استفاده می‌شود. معمولا برای ما نمایان نیست.**
+قبلا تنها درباره بالارفتن رویداد صحبت کردیم، چون که فاز گرفتن به ندرت استفاده می‌شود. معمولا برای ما نمایان نیست.
 
 کنترل‌کننده‌هایی که با استفاده از خاصیت `on<event>` یا صفت‌های HTML یا با متد با دو ورودی `addEventListener(event, handler)` اضافه می‌شوند، چیزی درباره گرفتن نمی‌دانند. فقط در فازهای دوم و سوم اجرا می‌شوند.
-=======
-Until now, we only talked about bubbling, because the capturing phase is rarely used.
-
-In fact, the capturing phase was invisible for us, because handlers added using `on<event>`-property or using HTML attributes or using two-argument `addEventListener(event, handler)` don't know anything about capturing, they only run on the 2nd and 3rd phases.
->>>>>>> 1edb0a38330b54d2e1916f5193fc043e6fbbea78
 
 برای گرفتن یک رویداد در فاز گرفتن، باید که ورودی سوم `addEventListener` را `true` قرار دهیم.
 
-<<<<<<< HEAD
-برای آخرین ورودی که اختیاری دو مقدار می‌تواند وجود داشته باشد:
-=======
 ```js
 elem.addEventListener(..., {capture: true})
 
@@ -158,8 +145,7 @@ elem.addEventListener(..., {capture: true})
 elem.addEventListener(..., true)
 ```
 
-There are two possible values of the `capture` option:
->>>>>>> 1edb0a38330b54d2e1916f5193fc043e6fbbea78
+برای آخرین ورودی که اختیاری دو مقدار می‌تواند وجود داشته باشد:
 
 - اگر `false` باشد (پیش‌فرض)، کنترل‌کننده در فاز بالارفتن مشخص می‌شود.
 - اگر `true` باشد، کنترل‌کننده در فاز گرفتن مشخص می‌شود.
@@ -196,29 +182,12 @@ There are two possible values of the `capture` option:
 
 اگر روی `<p>` کلیک کنیم، بعد ترتیب به این صورت است:
 
-<<<<<<< HEAD
-1. `HTML` -> `BODY` -> `FORM` -> `DIV` (فاز گرفتن, اولین شنونده):
-2. `P` (فاز هدف, دوباره فراخوانی می‌شود, به این دلیل که ما دو شنونده روی آن تنظیم کردیم: گرفتن و بالارفتن)
-3. `DIV` -> `FORM` -> `BODY` -> `HTML` (فاز بالارفتن, شنونده دوم).
-=======
-1. `HTML` -> `BODY` -> `FORM` -> `DIV -> P` (capturing phase, the first listener):
-2. `P` -> `DIV` -> `FORM` -> `BODY` -> `HTML` (bubbling phase, the second listener).
-
-Please note, the `P` shows up twice, because we've set two listeners: capturing and bubbling. The target triggers at the end of the first and at the beginning of the second phase.
->>>>>>> 1edb0a38330b54d2e1916f5193fc043e6fbbea78
+1. `HTML` -> `BODY` -> `FORM` -> `DIV -> P` (فاز گرفتن, اولین شنونده):
+2. `P` -> `DIV` -> `FORM` -> `BODY` -> `HTML` (فاز بالارفتن, شنونده دوم).
 
 توجه کنید که `P` دوبار نمایش داده می‌شود: در پایان گرفتن و در زمان شروع بالارفتن.
 
-<<<<<<< HEAD
 خاصیت `event.eventPhase` به ما شماره فازی که در آن رویداد فراخوانی شده را می‌گوید. اما به ندرت استفاده می‌شود چون معمولا در کنترل‌کننده آنرا می‌دانیم.
-=======
-```smart header="The `event.stopPropagation()` during the capturing also prevents the bubbling"
-The `event.stopPropagation()` method and its sibling `event.stopImmediatePropagation()` can also be called on the capturing phase. Then not only the futher capturing is stopped, but the bubbling as well.
-
-In other words, normally the event goes first down ("capturing") and then up ("bubbling"). But if `event.stopPropagation()` is called during the capturing phase, then the event travel stops, no bubbling will occur.
-```
-
->>>>>>> 1edb0a38330b54d2e1916f5193fc043e6fbbea78
 
 ## خلاصه
 
@@ -236,11 +205,8 @@ In other words, normally the event goes first down ("capturing") and then up ("b
 
 هر کنترل‌کننده‌ای می‌تواند رویداد را با `event.stopPropagation()` متوقف کند، اما این روش پیشنهاد نمی‌شود چون که همیشه مطمئن نیستیم که رویداد را در مرحله‌های بالاتر نیاز نخواهیم داشت، شاید برای کارهایی کاملا متفاوت.
 
-<<<<<<< HEAD
 فاز گرفتن به ندرت استفاده می‌شود، معمولا رویدادها را در فاز بالارفتن کنترل می‌کنیم. و یک منطق پشت آن است.
-=======
-The capturing phase is used very rarely, usually we handle events on bubbling. And there's a logical explanation for that.
->>>>>>> 1edb0a38330b54d2e1916f5193fc043e6fbbea78
+
 
 در دنیای واقعی، زمانی که تصادفی رخ‌ میدهد، مقامات محلی زودتر عکس العمل نشان می‌دهند. آنها بهتر از هر کس دیگری درباره محلی که این حادثه رخ داده اطلاعات دارند. بعد از آنها در صورت نیاز مقامات بالاتر.
 
