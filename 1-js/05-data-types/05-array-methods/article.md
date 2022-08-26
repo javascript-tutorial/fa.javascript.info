@@ -264,7 +264,6 @@ let fruits = ['Apple', 'Orange', 'Apple']
 
 alert( arr.indexOf('Apple') ); // 0 (Apple اولین)
 alert( arr.lastIndexOf('Apple') ); // 2 (Apple آخرین)
-```
 
 ````smart header="متد `includes` مقدار `NaN` را به درستی مدیریت می‌کند"
 یک تفاوت بسیار کوچک `includes` این است که این متد به درستی `NaN` را کنترل می‌کند، درست برعکس `indexOf`:

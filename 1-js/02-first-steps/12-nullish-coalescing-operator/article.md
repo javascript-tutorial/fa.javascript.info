@@ -106,7 +106,7 @@ alert(height ?? 100); // 0
 
 ## اولویت
 
-اولویت عملگر `??` برابر با عملگر `||` است. اولویت آن‌ها در [جدول MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence#Table) برابر با `4` است.
+اولویت عملگر `??` برابر با عملگر `||` است. اولویت آن‌ها در [جدول MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence#Table) برابر با `3` است.
 
 این یعنی که درست مانند `||`، عملگر nullish coalescing `??` قبل از `=` و `?` ارزیابی می‌شود، اما بعد از بیشتر عملیات‌ها مانند `+`، `-` ارزیابی می‌شود.
 

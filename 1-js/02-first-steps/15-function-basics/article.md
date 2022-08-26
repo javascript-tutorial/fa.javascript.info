@@ -24,7 +24,7 @@ function showMessage() {
 
 ```js
 function name(parameter1, parameter2, ... parameterN) {
-  ...body...
+ // body
 }
 ```
 
@@ -207,6 +207,12 @@ showMessage("Ann"); // Ann: no text given
 ```
 
 حالا اگر پارامتر `text` پاس داده نشود، مقدار `"no text given"` را می‌گیرد.
+
+همچنین اگر پارامتر وجود داشته باشد نیز ممکن است مقدار پیش‌فرض قرار بگیرد، در صورتی که برابر با `undefined` باشد، مانند زیر:
+
+```js
+showMessage("Ann", undefined); // Ann: no text given
+```
 
 اینجا `"no text given"` یک رشته است، اما می‌تواند عبارت پیچیده‌تری باشد، که تنها در حالتی ارزیابی و مقداردهی می‌شود که پارامتری وجود نداشته باشد. بنابراین این هم ممکن است:
 

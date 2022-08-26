@@ -268,7 +268,6 @@ new Promise((resolve, reject) => {
     new Promise((resolve, reject) => {
       throw new Error("خطا");
     })
-<<<<<<< HEAD
       .finally(() => alert("Promise آماده است")) // این اول فعال می‌شود
       .catch(err => alert(err));  // <-- خطا را نمایش می‌دهد .catch 
     ```
