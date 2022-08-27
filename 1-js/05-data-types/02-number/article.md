@@ -344,9 +344,7 @@ alert( isFinite(num) );
 
     // :به تفاوت توجه کنید
     alert( Number.isNaN("str") ); // false به نوع رشته تعلق دارد نه عدد پس "str" چون
-    alert( isNaN("str") ); // true, because isNaN converts string "str" into a number and gets NaN as a result of this conversion
-    // چون isNaN رشته "str" را به یک عدد تبدیل می‌کند و از این تبدیل NaN را دریافت می‌کند
-    // true را دریافت می‌کند پس NaN را به یک عدد تبدیل می‌کند و از این تبدیل "str" رشته isNaN چون
+    alert( isNaN("str") ); // true را دریافت می‌کند پس NaN را به یک عدد تبدیل می‌کند و از این تبدیل "str" رشته isNaN چون
     ```
 
 - `Number.isFinite(value)` اگر آرگومان به نوع `number` تعلق داشته باشد و `NaN/Infinity/-Infinity` نباشد مقدار `true` برگردانده می‌شود. در غیر این صورت `false` را برمی‌گرداند.
