@@ -297,6 +297,6 @@ setTimeout(function run() {
 برای مثال، تایمر درون مرورگر ممکن است به دلایل زیادی کند شود:
 - کارهای زیادی به پردازنده سپرده شده است.
 - تب (tab) مرورگر در حالت پس‌زمینه است.
-- لپ تاپ در حال استفاده از باتری است.
+- لپ تاپ در حالت صرفه‌جویی باتری است.
 
 All that may increase the minimal timer resolution (the minimal delay) to 300ms or even 1000ms depending on the browser and OS-level performance settings.

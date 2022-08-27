@@ -234,11 +234,12 @@ arr.forEach(function(item, index, array) {
 
 ### متدهای indexOf/lastIndexOf and includes
 
-متدهای [arr.indexOf](mdn:js/Array/indexOf)، [arr.lastIndexOf](mdn:js/Array/lastIndexOf) و [arr.includes](mdn:js/Array/includes) سینتکس مشابه دارند و اساسا همان کار همتایان خود در رشته‌ها را انجام می‌دهند، اما به جای کاراکترها با المان‌ها کار دارند:
+متدهای [arr.indexOf](mdn:js/Array/indexOf) و [arr.includes](mdn:js/Array/includes) سینتکس مشابه دارند و اساسا همان کار همتایان خود در رشته‌ها را انجام می‌دهند، اما به جای کاراکترها با المان‌ها کار دارند:
 
 - `arr.indexOf(item, from)` -- با شروع از ایندکس `from` به دنبال `item` می‌گردد و ایندکسی که المان در آن پیدا شد را برمی‌گرداند، در غیر این صورت `1-`.
-- `arr.lastIndexOf(item, from)` -- شبیه متد بالا، اما از راست به چپ جستجو می‌کند.
 - `arr.includes(item, from)` -- با شروع از ایندکس `from` به دنبال `item` می‌گردد، اگر پیدا کند `true` را برمی‌گرداند.
+
+معمولا این متدها تنها با یک آرگومان استفاده می‌شوند: المانی (`item`) که جستجو برای آن انجام می‌شود. به طور پیش‌فرض، جستجو از ابتدا انجام می‌شود.
 
 برای مثال:
 
@@ -254,17 +255,28 @@ alert( arr.includes(1) ); // true
 
 توجه داشته باشید که متدها از مقایسه `===` استفاده می‌کنند. پس اگر ما به دنبال `false` باشیم، متد دقیقا `false` را پیدا می‌کند و نه صفر را.
 
-اگر ما می‌خواهیم شامل بودن را بررسی کنیم و به دنبال ایندکس دقیق نیستیم، پس `arr.includes` ترجیح داده می‌شود.
+اگر ما بخواهیم بررسی کنیم که `item` درون آرایه وجود دارد یا نه و به دنبال ایندکس دقیق نیستیم، پس `arr.includes` ترجیح داده می‌شود.
 
-همچنین، یک تفاوت بسیار کوچک `includes` این است که این متد به درستی `NaN` را کنترل می‌کند، درست برعکس `indexOf/lastIndexOf`:
+متد [arr.lastIndexOf](mdn:js/Array/lastIndexOf) مانند `indexOf` است اما از راست به چپ جستجو می‌کند.
+
+```js run
+let fruits = ['Apple', 'Orange', 'Apple']
+
+alert( arr.indexOf('Apple') ); // 0 (Apple اولین)
+alert( arr.lastIndexOf('Apple') ); // 2 (Apple آخرین)
+
+````smart header="متد `includes` مقدار `NaN` را به درستی مدیریت می‌کند"
+یک تفاوت بسیار کوچک `includes` این است که این متد به درستی `NaN` را کنترل می‌کند، درست برعکس `indexOf`:
 
 ```js run
 const arr = [NaN];
-alert( arr.indexOf(NaN) ); // -1 (کار نمی‌کند NaN باید 0 باشد، اما برابری === برای)
+alert( arr.indexOf(NaN) ); // -1 (اشتباه است، باید 0 باشد)
 alert( arr.includes(NaN) );// true (درست است)
 ```
+به این دلیل که `includes` بسیار بعدتر به جاوااسکریپت اضافه شد و از درون از الگوریتم‌های مقایسه بروزتری استفاده می‌کند.
+````
 
-### متدهای find and findIndex
+### متدهای find و findIndex/findLastIndex
 
 تصور کنید که یک آرایه‌ای از شیءها داریم. چگونه باید یک شیء با شرطی مشخص را پیدا کنیم؟
 
@@ -304,7 +316,27 @@ alert(user.name); // John
 
 توجه داشته باشید که در مثال بالا ما تابع `item => item.id == 1` را همراه با یک آرگومان برای `find` در نظر گرفتیم. این چیز معمولی است، بقیه آرگومان‌های این تابع به ندرت استفاده می‌شوند.
 
-متد [arr.findIndex](mdn:js/Array/findIndex) اساسا یکسان است، اما به جای خود المان ایندکسی که المان در آن پیدا شد را برمی‌گرداند و اگر چیزی پیدا نشد `1-` را برمی‌گرداند.
+متد [arr.findIndex](mdn:js/Array/findIndex) سینتکس یکسانی دارد اما به جای خود المان ایندکسی که المان در آن پیدا شد را برمی‌گرداند. اگر چیزی پیدا نشد مقدار `1-` برگردانده می‌شود.
+
+متد [arr.findLastIndex](mdn:js/Array/findLastIndex) مانند `findIndex` است اما مانند `lastIndexOf` از راست به چپ جستجو می‌کند.
+
+اینجا یک مثال داریم:
+
+```js run
+let users = [
+  {id: 1, name: "John"},
+  {id: 2, name: "Pete"},
+  {id: 3, name: "Mary"},
+  {id: 4, name: "John"}
+];
+
+// را پیدا کن John ایندکس اولین
+alert(users.findIndex(user => user.name == 'John')); // 0
+
+// را پیدا کن John ایندکس آخرین
+alert(users.findLastIndex(user => user.name == 'John')); // 3
+```
+
 
 ### متد filter
 
@@ -642,7 +674,7 @@ arr.reduce((sum, current) => sum + current);
 
 ```js run
 alert(typeof {}); // object
-alert(typeof []); // یکسان
+alert(typeof []); // object (یکسان)
 ```
 
 ...اما آرایه‌ها به دلیل اینکه اغلب اوقات استفاده می‌شوند، یک متد خاص برای این کار دارند: [Array.isArray(value)](mdn:js/Array/isArray). این متد اگر `value` یک آرایه باشد `true` برمی‌گرداند و در غیر این صورت `false`.
@@ -733,7 +765,7 @@ alert(soldiers[1].age); // 23
   - `reduce/reduceRight(func, initial)` -- با صدا زدن `func` برای هر المان و رد و بدل کردن یک نتیجه واسطه بین هر فراخوانی، یک مقدار مفرد را در آرایه محاسبه می‌کند.
 
 - علاوه بر این:
-  - `Array.isArray(arr)` بررسی می‌کند که `arr` یک آرایه باشد.
+  - `Array.isArray(arr)` بررسی می‌کند که `arr` یک آرایه باشد و اگر بود مقدار `true` را برمی‌گرداند در غیر این صورت `false`.
 
 لطفا در نظر داشته باشید که متدهای `sort`، `reverse` و `splice` خود آرایه را تغییر می‌دهند.
 

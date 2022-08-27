@@ -103,7 +103,7 @@ alert( user?.address?.street ); // undefined (بدون خطا)
 اینجا مثالی با استفاده از `document.querySelector` داریم:
 
 ```js run
-let html = document.querySelector('.elem')?.innerHTML; // will be null, if there's no element
+let html = document.querySelector('.elem')?.innerHTML; // خواهد بود undefined اگر المانی وجود نداشته باشد
 ```
 
 خواندن آدرس با استفاده از `user?.address` حتی اگر شیء `user` وجود نداشته باشد هم کار می‌کند:
