@@ -35,13 +35,8 @@ let promise = new Promise(function(resolve, reject) {
 
 شیء `promise` که توسط سازنده `new Promise` برگردانده شده است دارای این ویژگی‌های داخلی است:
 
-<<<<<<< HEAD
 - `state` — در ابتدا `"pending"` سپس با فراخوانی، `resolve` به `"fulfilled"` یا زمانی که `reject` فراخوانی می‌شود به `"rejected"` تغییر می‌کند.
 - `result` — در ابتدا `undefined`، سپس با فراخوانی `resolve(value)` به `value` یا زمانی که `reject(error)` فراخوانی می شود به  `error` تغییر می‌کند.
-=======
-- `state` — initially `"pending"`, then changes to either `"fulfilled"` when `resolve` is called or `"rejected"` when `reject` is called.
-- `result` — initially `undefined`, then changes to `value` when `resolve(value)` is called or `error` when `reject(error)` is called.
->>>>>>> 1edb0a38330b54d2e1916f5193fc043e6fbbea78
 
 بنابراین اجرا‌کننده در نهایت `promise` را به یکی از این حالات منتقل می‌کند:
 
@@ -273,7 +268,6 @@ new Promise((resolve, reject) => {
     new Promise((resolve, reject) => {
       throw new Error("خطا");
     })
-<<<<<<< HEAD
       .finally(() => alert("Promise آماده است")) // این اول فعال می‌شود
       .catch(err => alert(err));  // <-- خطا را نمایش می‌دهد .catch 
     ```
@@ -288,11 +282,7 @@ new Promise((resolve, reject) => {
 - اگر یک کنترل‌کننده `finally` چیزی برگرداند، نادیده گرفته می‌شود.
 - زمانی که `finally` خطایی برگراند، سپس اجرای برنامه به نزدیک‌ترین کنترل‌کننده خطا می‌رود.
 
-<<<<<<< HEAD
 این خواص مفید هستند و اگر ما تعیین کنیم که `finally` در نهایت چگونه قرار است استفاده شود کاری می‌کنند که همه چیز به درستی کار کند: برای روند تمیزکاری عمومی.
-=======
-These features are helpful and make things work just the right way if we use `finally` how it's supposed to be used: for generic cleanup procedures.
->>>>>>> 1edb0a38330b54d2e1916f5193fc043e6fbbea78
 
 ````smart header="ما می توانیم اجراکننده‌ها را به Promiseهای تسویه‌شده متصل کنیم"
 اگر یک promise در حالت انتظار است، کنترل‌کننده‌های `then/catch/finally.` منتظر آن می‌مانند.

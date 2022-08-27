@@ -262,14 +262,8 @@ alert( arr.includes(1) ); // true
 ```js run
 let fruits = ['Apple', 'Orange', 'Apple']
 
-<<<<<<< HEAD
 alert( arr.indexOf('Apple') ); // 0 (Apple اولین)
 alert( arr.lastIndexOf('Apple') ); // 2 (Apple آخرین)
-=======
-alert( fruits.indexOf('Apple') ); // 0 (first Apple)
-alert( fruits.lastIndexOf('Apple') ); // 2 (last Apple)
->>>>>>> 1edb0a38330b54d2e1916f5193fc043e6fbbea78
-```
 
 ````smart header="متد `includes` مقدار `NaN` را به درستی مدیریت می‌کند"
 یک تفاوت بسیار کوچک `includes` این است که این متد به درستی `NaN` را کنترل می‌کند، درست برعکس `indexOf`:
