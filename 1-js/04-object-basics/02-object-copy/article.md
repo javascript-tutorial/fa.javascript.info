@@ -100,7 +100,35 @@ alert( a == b ); // false
 
 برای مقایسه‌هایی مانند `obj1 > obj2` یا مقایسه شیء با یک مقدار اصلی `obj == 5`، شیءها به مقدارهای اصلی تبدیل می‌شوند. ما چگونگی تبدیل شیءها را به زودی مطالعه می‌کنیم، اما اگر بخواهیم حقیقت را بگوییم، چنین تبدیل‌هایی به ندرت نیاز می‌شوند -- آنها معمولا به عنوان نتیجه‌ی یک اشتباه برنامه‌نویسی ظاهر می‌شوند. 
 
+<<<<<<< HEAD
 ## کپی و ادغام کردن، Object.assign [#cloning-and-merging-object-assign]
+=======
+````smart header="Const objects can be modified"
+An important side effect of storing objects as references is that an object declared as `const` *can* be modified.
+
+For instance:
+
+```js run
+const user = {
+  name: "John"
+};
+
+*!*
+user.name = "Pete"; // (*)
+*/!*
+
+alert(user.name); // Pete
+```
+
+It might seem that the line `(*)` would cause an error, but it does not. The value of `user` is constant, it must always reference the same object, but properties of that object are free to change.
+
+In other words, the `const user` gives an error only if we try to set `user=...` as a whole.
+
+That said, if we really need to make constant object properties, it's also possible, but using totally different methods. We'll mention that in the chapter <info:property-descriptors>.
+````
+
+## Cloning and merging, Object.assign [#cloning-and-merging-object-assign]
+>>>>>>> 53b35c16835b7020a0a5046da5a47599d313bbb8
 
 پس کپی کردن یک متغیر حاوی شیء باعث ساخت یک مرجع اضافی به همان شیء می‌شود.
 
@@ -136,7 +164,7 @@ alert( user.name ); // است John هنوز در شیء اصلی برابر با
 سینتکس آن اینگونه است:
 
 ```js
-Object.assign(dest, [src1, src2, src3...])
+Object.assign(dest, src1[, src2, src3...])
 ```
 
 - اولین آرگومان `dest` همان شیء مقصود است.
@@ -220,6 +248,7 @@ let clone = Object.assign({}, user);
 
 alert( user.sizes === clone.sizes ); // true :شیءهای یکسان پس
 
+<<<<<<< HEAD
 // سایزهای مشترک دارند clone و user
 user.sizes.width++;       // یک ویژگی را از یک جا تغییر دهید
 alert(clone.sizes.width); // 51 :نتیجه را از جای دیگر ببینید
@@ -233,25 +262,83 @@ alert(clone.sizes.width); // 51 :نتیجه را از جای دیگر ببینی
 یک از عارضه‌های جانبی مهم ذخیره شدن شیءها به عنوان مرجع، این است که شیءای که به عنوان `const` تعریف شده است *می‌تواند* تغییر کند.
 
 برای مثال:
+=======
+// user and clone share sizes
+user.sizes.width = 60;    // change a property from one place
+alert(clone.sizes.width); // 60, get the result from the other one
+```
+
+To fix that and make `user` and `clone` truly separate objects, we should use a cloning loop that examines each value of `user[key]` and, if it's an object, then replicate its structure as well. That is called a "deep cloning" or "structured cloning". There's [structuredClone](https://developer.mozilla.org/en-US/docs/Web/API/structuredClone) method that implements deep cloning.
+
+
+### structuredClone
+
+The call `structuredClone(object)` clones the `object` with all nested properties.
+
+Here's how we can use it in our example:
+>>>>>>> 53b35c16835b7020a0a5046da5a47599d313bbb8
 
 ```js run
-const user = {
-  name: "John"
+let user = {
+  name: "John",
+  sizes: {
+    height: 182,
+    width: 50
+  }
 };
 
 *!*
-user.name = "Pete"; // (*)
+let clone = structuredClone(user);
 */!*
 
-alert(user.name); // Pete
+alert( user.sizes === clone.sizes ); // false, different objects
+
+// user and clone are totally unrelated now
+user.sizes.width = 60;    // change a property from one place
+alert(clone.sizes.width); // 50, not related
 ```
 
+<<<<<<< HEAD
 شاید به نظر برسد که خط `(*)` باعث ارور شود، اما اینطور نیست. مقدار `user` ثابت است و همیشه باید به شیء یکسان رجوع کند، اما ویژگی‌های آن شیء برای تغییر آزاد هستند.
 
 به عبارتی دیگر، اگر ما سعی کنیم که عبارت `user=...` را به طور کل تغییر دهیم `const user` باعث ارور می‌شود.
 
 با این حال، اگر ما واقعا نیاز به ساخت شیء ثابت داشته باشیم، می‌توانیم این کار را انجام دهیم، اما با روش‌های کاملا متفاوت. آنها را در فصل <info:property-descriptors> بیان می‌کنیم.
 ````
+=======
+The `structuredClone` method can clone most data types, such as objects, arrays, primitive values.
+
+It also supports circular references, when an object property references the object itself (directly or via a chain or references).
+
+For instance:
+
+```js run
+let user = {};
+// let's create a circular reference:
+// user.me references the user itself
+user.me = user;
+
+let clone = structuredClone(user);
+alert(clone.me === clone); // true
+```
+
+As you can see, `clone.me` references the `clone`, not the `user`! So the circular reference was cloned correctly as well.
+
+Although, there are cases when `structuredClone` fails.
+
+For instance, when an object has a function property:
+
+```js run
+// error
+structuredClone({
+  f: function() {}
+});
+```
+
+Function properties aren't supported.
+
+To handle such complex cases we may need to use a combination of cloning methods, write custom code or, to not reinvent the wheel, take an existing implementation, for instance [_.cloneDeep(obj)](https://lodash.com/docs#cloneDeep) from the JavaScript library [lodash](https://lodash.com).
+>>>>>>> 53b35c16835b7020a0a5046da5a47599d313bbb8
 
 ## خلاصه
 
@@ -259,4 +346,8 @@ alert(user.name); // Pete
 
 تمام عملیات‌ها (مانند اضافه/کم کردن ویژگی‌ها) از طریق مرجع کپی‌شده روی شیء یکسان انجام می‌شوند.
 
+<<<<<<< HEAD
 برای اینکه یک "کپی واقعی" (یک مشبه) را بسازیم می‌توانیم از `Object.assign` برای "کپی‌های سطحی" (شیءهای تو در تو توسط مرجع کپی می‌شوند) یا از تابع "کپی عمیق" استفاده کنیم، مانند [_.cloneDeep(obj)](https://lodash.com/docs#cloneDeep).
+=======
+To make a "real copy" (a clone) we can use `Object.assign` for the so-called "shallow copy" (nested objects are copied by reference) or a "deep cloning" function `structuredClone` or use a custom cloning implementation, such as [_.cloneDeep(obj)](https://lodash.com/docs#cloneDeep).
+>>>>>>> 53b35c16835b7020a0a5046da5a47599d313bbb8

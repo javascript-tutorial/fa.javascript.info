@@ -1,6 +1,10 @@
 # The Modern JavaScript Tutorial in Persian (Farsi)
 
+<<<<<<< HEAD
 This repository hosts the translation of <https://javascript.info> in Persian (Farsi).
+=======
+This repository hosts the English content of the Modern JavaScript Tutorial, published at [https://javascript.info](https://javascript.info).
+>>>>>>> 53b35c16835b7020a0a5046da5a47599d313bbb8
 
 **That's how you can contribute:**
 
@@ -20,14 +24,21 @@ If maintainers do not respond, or if you'd like to become a maintainer, write us
 
 🎉 Thank you!
 
+<<<<<<< HEAD
 Your name and the contribution size will appear in the "About project" page when the translation gets published.
+=======
+We'd also like to collaborate on the tutorial with other people.
 
-**You can edit the text in any editor.** The tutorial uses enhanced "markdown" format, easy to grasp. And if you want to see how it looks on-site, there's a server to run the tutorial locally at <https://github.com/javascript-tutorial/server>.
+Something's wrong? A topic is missing? Explain it to people, add it as PR 👏
+>>>>>>> 53b35c16835b7020a0a5046da5a47599d313bbb8
+
+**You can edit the text in any editor.** The tutorial uses an enhanced "markdown" format, easy to grasp. And if you want to see how it looks on-site, there's a server to run the tutorial locally at <https://github.com/javascript-tutorial/server>.
 
 The list of contributors is available at <https://javascript.info/about#contributors>.
 The full list of languages can be found at <https://javascript.info/translate>.
 ## Structure
 
+<<<<<<< HEAD
 Every chapter, an article or a task resides in its own folder.
 
 The folder is named `N-url`, where `N` – is the number for sorting (articles are ordered), and `url` is the URL-slug on the site.
@@ -343,6 +354,11 @@ Please don't translate or remove the `[#...]` part, it's for URL anchors.
 | undefined (data type) | undefined |              |
 | value | مقدار |                                  |
 | wrapper | دربرگیرنده |                           |
+=======
+Every chapter, article, or task has its folder.
+
+The folder is named like `N-url`, where `N` is a number for the sorting purposes and `URL` is the URL part with the title of the material.
+>>>>>>> 53b35c16835b7020a0a5046da5a47599d313bbb8
 
 </div>
 
