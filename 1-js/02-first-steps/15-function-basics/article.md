@@ -265,11 +265,7 @@ function showMessage(from, text) {
 
 
 
-<<<<<<< HEAD
-گاهی اوقات این منطقی است که مقدارهای پیش‌فرض پارامترها را در تعریف تابع قرار ندهیم بلکه در مرحله بعدی یعنی حین اجرا شدن آن قرار دهیم.
-=======
-Sometimes it makes sense to assign default values for parameters at a later stage after the function declaration.
->>>>>>> 53b35c16835b7020a0a5046da5a47599d313bbb8
+گاهی اوقات این منطقی است که مقدارهای پیش‌فرض پارامترها را در مرحله‌ای بعد از تعریف تابع قرار دهیم.
 
 برای بررسی یک پارامتر حذف شده، می‌توانیم آن را با `undefined` مقایسه کنیم:
 

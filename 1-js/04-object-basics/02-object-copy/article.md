@@ -100,13 +100,10 @@ alert( a == b ); // false
 
 برای مقایسه‌هایی مانند `obj1 > obj2` یا مقایسه شیء با یک مقدار اصلی `obj == 5`، شیءها به مقدارهای اصلی تبدیل می‌شوند. ما چگونگی تبدیل شیءها را به زودی مطالعه می‌کنیم، اما اگر بخواهیم حقیقت را بگوییم، چنین تبدیل‌هایی به ندرت نیاز می‌شوند -- آنها معمولا به عنوان نتیجه‌ی یک اشتباه برنامه‌نویسی ظاهر می‌شوند. 
 
-<<<<<<< HEAD
-## کپی و ادغام کردن، Object.assign [#cloning-and-merging-object-assign]
-=======
-````smart header="Const objects can be modified"
-An important side effect of storing objects as references is that an object declared as `const` *can* be modified.
+````smart header="شیءهای const می‌توانند تغییر داده شوند"
+یک عارضه جانبی مهم ذخیره شیءها به عنوان مرجع این است که شیءای که به عنوان `const` تعریف شده است *می‌تواند* تغییر داده شود.
 
-For instance:
+برای مثال:
 
 ```js run
 const user = {
@@ -120,15 +117,14 @@ user.name = "Pete"; // (*)
 alert(user.name); // Pete
 ```
 
-It might seem that the line `(*)` would cause an error, but it does not. The value of `user` is constant, it must always reference the same object, but properties of that object are free to change.
+شاید به نظر برسد که خط `(*)` باعث ارور شود اما اینطور نیست. مقدار `user` ثابت است و همیشه باید به شیءای یکسان رجوع کند اما ویژگی‌های آن شیء برای تغییر آزاد هستند.
 
-In other words, the `const user` gives an error only if we try to set `user=...` as a whole.
+به عبارتی دیگر، `const user` تنها اگر ما برای تنظیم `user=...` تلاش کنیم ارور می‌دهد.
 
-That said, if we really need to make constant object properties, it's also possible, but using totally different methods. We'll mention that in the chapter <info:property-descriptors>.
+با این حال اگر واقعا نیاز داریم که ویژگی‌های شیء را ثابت نگه داریم می‌توانیم این کار را انجام دهیم اما با استفاده از متدهای کاملا متفاوت. ما این موضوع را در فصل <info:property-descriptors> ذکر کرده‌ایم.
 ````
 
-## Cloning and merging, Object.assign [#cloning-and-merging-object-assign]
->>>>>>> 53b35c16835b7020a0a5046da5a47599d313bbb8
+## کپی و ادغام کردن، Object.assign [#cloning-and-merging-object-assign]
 
 پس کپی کردن یک متغیر حاوی شیء باعث ساخت یک مرجع اضافی به همان شیء می‌شود.
 
@@ -250,33 +246,17 @@ alert( user.sizes === clone.sizes ); // true :شیءهای یکسان پس
 
 <<<<<<< HEAD
 // سایزهای مشترک دارند clone و user
-user.sizes.width++;       // یک ویژگی را از یک جا تغییر دهید
-alert(clone.sizes.width); // 51 :نتیجه را از جای دیگر ببینید
+user.sizes.width = 60;       // یک ویژگی را از یک جا تغییر دهید
+alert(clone.sizes.width); // 60 :نتیجه را از جای دیگر ببینید
 ```
 
-برای رفع این اشکال و مجبور کردن `user` و `clone` به اینکه واقعا مجزا باشند، ما باید از یک حلقه‌ی کپی‌کردن استفاده کنیم که هر مقدار `user[key]` را بررسی می‌کند و اگر شیء بود، سپس ساختار آن را هم کپی می‌کند. به این کار "کپی‌کردن عمیق" می‌گویند.
+برای رفع این اشکال و مجبور کردن `user` و `clone` به اینکه واقعا مجزا باشند، ما باید از یک حلقه‌ی کپی‌کردن استفاده کنیم که هر مقدار `user[key]` را بررسی می‌کند و اگر شیء بود، سپس ساختار آن را هم کپی می‌کند. به این کار "کپی‌کردن عمیق" یا "کپی‌کردن ساختاری" می‌گویند. یک متد [structuredClone](https://developer.mozilla.org/en-US/docs/Web/API/structuredClone) وجود دارد که کپی‌کردن عمیق را پیاده‌سازی می‌کند.
 
-ما می‌توانیم از بازگشت برای پیاده‌سازی آن استفاده کنیم. یا برای اینکه دوباره کاری نکنیم، از چیزی که قبلا پیاده‌سازی شده استفاده کنیم، برای مثال [_.cloneDeep(obj)](https://lodash.com/docs#cloneDeep) از کتابخانه‌ی [lodash](https://lodash.com).
+### متد structuredClone
 
-````smart header="شیءهای ثابت (const) می‌توانند تغییر کنند"
-یک از عارضه‌های جانبی مهم ذخیره شدن شیءها به عنوان مرجع، این است که شیءای که به عنوان `const` تعریف شده است *می‌تواند* تغییر کند.
+فراخوانی `structuredClone(object)` شیء `object` با تمام ویژگی‌های تودرتو را کپی می‌کند.
 
-برای مثال:
-=======
-// user and clone share sizes
-user.sizes.width = 60;    // change a property from one place
-alert(clone.sizes.width); // 60, get the result from the other one
-```
-
-To fix that and make `user` and `clone` truly separate objects, we should use a cloning loop that examines each value of `user[key]` and, if it's an object, then replicate its structure as well. That is called a "deep cloning" or "structured cloning". There's [structuredClone](https://developer.mozilla.org/en-US/docs/Web/API/structuredClone) method that implements deep cloning.
-
-
-### structuredClone
-
-The call `structuredClone(object)` clones the `object` with all nested properties.
-
-Here's how we can use it in our example:
->>>>>>> 53b35c16835b7020a0a5046da5a47599d313bbb8
+اینجا نشان می‌دهیم چگونه می‌توانیم از آن در مثال خود استفاده کنیم:
 
 ```js run
 let user = {
@@ -291,54 +271,45 @@ let user = {
 let clone = structuredClone(user);
 */!*
 
-alert( user.sizes === clone.sizes ); // false, different objects
+alert( user.sizes === clone.sizes ); // false ،شیءهای متفاوت
 
-// user and clone are totally unrelated now
-user.sizes.width = 60;    // change a property from one place
-alert(clone.sizes.width); // 50, not related
+// اکنون کاملا نامرتبط هستند clone و user شیءهای
+user.sizes.width = 60;    // ویژگی‌ای را از جایی تغییر دهید
+alert(clone.sizes.width); // 50 ،مرتبط نیستند
 ```
 
-<<<<<<< HEAD
-شاید به نظر برسد که خط `(*)` باعث ارور شود، اما اینطور نیست. مقدار `user` ثابت است و همیشه باید به شیء یکسان رجوع کند، اما ویژگی‌های آن شیء برای تغییر آزاد هستند.
+متد `structuredClone` می‌تواند اکثر انواع داده مانند شیءها، آرایه‌ها و مقدارهای اصلی را کپی کند.
 
-به عبارتی دیگر، اگر ما سعی کنیم که عبارت `user=...` را به طور کل تغییر دهیم `const user` باعث ارور می‌شود.
+این متد همچنین مرجع‌های دایره‌ای را هم پوشش می‌دهد، زمانی که یک ویژگی شیء به خود شیء رجوع می‌کند (به صورت مستقیم یا از طریق یک زنجیره از مرجع‌ها).
 
-با این حال، اگر ما واقعا نیاز به ساخت شیء ثابت داشته باشیم، می‌توانیم این کار را انجام دهیم، اما با روش‌های کاملا متفاوت. آنها را در فصل <info:property-descriptors> بیان می‌کنیم.
-````
-=======
-The `structuredClone` method can clone most data types, such as objects, arrays, primitive values.
-
-It also supports circular references, when an object property references the object itself (directly or via a chain or references).
-
-For instance:
+برای مثال:
 
 ```js run
 let user = {};
-// let's create a circular reference:
-// user.me references the user itself
+// :بیایید یک مرجع دایره‌ای بسازیم
+// رجوع می‌کند user به خود user.me
 user.me = user;
 
 let clone = structuredClone(user);
 alert(clone.me === clone); // true
 ```
 
-As you can see, `clone.me` references the `clone`, not the `user`! So the circular reference was cloned correctly as well.
+همانطور که می‌توانید ببینید، `clone.me` به `clone` رجوع می‌کند نه به `user`! پس مرجع دایره‌ای هم به درستی کپی شده. 
 
-Although, there are cases when `structuredClone` fails.
+اگرچه، مواردی وجود دارند که `structuredClone` موفقیت‌آمیز نیست.
 
-For instance, when an object has a function property:
+برای مثال، زمانی که یک شیء ویژگی تابع داشته باشد:
 
 ```js run
-// error
+// ارور
 structuredClone({
   f: function() {}
 });
 ```
 
-Function properties aren't supported.
+ویژگی‌های تابع پشتیبانی نمی‌شوند.
 
-To handle such complex cases we may need to use a combination of cloning methods, write custom code or, to not reinvent the wheel, take an existing implementation, for instance [_.cloneDeep(obj)](https://lodash.com/docs#cloneDeep) from the JavaScript library [lodash](https://lodash.com).
->>>>>>> 53b35c16835b7020a0a5046da5a47599d313bbb8
+برای مدیریت چنین مواردی ما شاید نیاز داشته باشیم که از ترکیبی از متدهای کپی‌سازی استفاده کنیم، کد شخصی‌سازی شده بنویسیم یا برای اینکه چرخ را دوباره نسازیم، یک پیاده‌سازی موجود را استفاده کنیم، برای مثال [_.cloneDeep(obj)](https://lodash.com/docs#cloneDeep) از کتابخانه [lodash](https://lodash.com) جاوااسکریپت.
 
 ## خلاصه
 
@@ -346,8 +317,4 @@ To handle such complex cases we may need to use a combination of cloning methods
 
 تمام عملیات‌ها (مانند اضافه/کم کردن ویژگی‌ها) از طریق مرجع کپی‌شده روی شیء یکسان انجام می‌شوند.
 
-<<<<<<< HEAD
-برای اینکه یک "کپی واقعی" (یک مشبه) را بسازیم می‌توانیم از `Object.assign` برای "کپی‌های سطحی" (شیءهای تو در تو توسط مرجع کپی می‌شوند) یا از تابع "کپی عمیق" استفاده کنیم، مانند [_.cloneDeep(obj)](https://lodash.com/docs#cloneDeep).
-=======
-To make a "real copy" (a clone) we can use `Object.assign` for the so-called "shallow copy" (nested objects are copied by reference) or a "deep cloning" function `structuredClone` or use a custom cloning implementation, such as [_.cloneDeep(obj)](https://lodash.com/docs#cloneDeep).
->>>>>>> 53b35c16835b7020a0a5046da5a47599d313bbb8
+برای اینکه یک "کپی واقعی" (یک مشبه) را بسازیم می‌توانیم از `Object.assign` برای "کپی‌های سطحی" (شیءهای تو در تو توسط مرجع کپی می‌شوند) یا از یک تابع «کپی‌سازی عمیق» `structuredClone` یا یک پیاده‌سازی شخصی‌سازی شده مانند [_.cloneDeep(obj)](https://lodash.com/docs#cloneDeep) استفاده کنیم.

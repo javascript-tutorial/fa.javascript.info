@@ -1,10 +1,6 @@
 # The Modern JavaScript Tutorial in Persian (Farsi)
 
-<<<<<<< HEAD
 This repository hosts the translation of <https://javascript.info> in Persian (Farsi).
-=======
-This repository hosts the English content of the Modern JavaScript Tutorial, published at [https://javascript.info](https://javascript.info).
->>>>>>> 53b35c16835b7020a0a5046da5a47599d313bbb8
 
 **That's how you can contribute:**
 
@@ -24,24 +20,19 @@ If maintainers do not respond, or if you'd like to become a maintainer, write us
 
 🎉 Thank you!
 
-<<<<<<< HEAD
-Your name and the contribution size will appear in the "About project" page when the translation gets published.
-=======
-We'd also like to collaborate on the tutorial with other people.
+ما همچنین می‌خواهیم در این آموزش با افراد دیگر نیز همکاری کنیم.
 
-Something's wrong? A topic is missing? Explain it to people, add it as PR 👏
->>>>>>> 53b35c16835b7020a0a5046da5a47599d313bbb8
+چیزی اشتباه است؟ موضوعی کم است؟ آن را به افراد دیگر توضیح دهید و با PR آن را اضافه کنید.
 
 **You can edit the text in any editor.** The tutorial uses an enhanced "markdown" format, easy to grasp. And if you want to see how it looks on-site, there's a server to run the tutorial locally at <https://github.com/javascript-tutorial/server>.
 
 The list of contributors is available at <https://javascript.info/about#contributors>.
-The full list of languages can be found at <https://javascript.info/translate>.
+
 ## Structure
 
-<<<<<<< HEAD
-Every chapter, an article or a task resides in its own folder.
+Every chapter, article, or task has its folder.
 
-The folder is named `N-url`, where `N` – is the number for sorting (articles are ordered), and `url` is the URL-slug on the site.
+The folder is named like `N-url`, where `N` is a number for the sorting purposes and `URL` is the URL part with the title of the material.
 
 The folder has one of files:
 
@@ -49,7 +40,7 @@ The folder has one of files:
 - `article.md` for an article,
 - `task.md` for a task formulation (+`solution.md` with the solution text if any).
 
-A file starts with the `# Title Header`, and then the text in Markdown-like format, editable in a simple text editor. 
+Each of these files starts from the # Main header.
 
 Additional resources and examples for the article or the task, are also in the same folder.
 
@@ -354,19 +345,7 @@ Please don't translate or remove the `[#...]` part, it's for URL anchors.
 | undefined (data type) | undefined |              |
 | value | مقدار |                                  |
 | wrapper | دربرگیرنده |                           |
-=======
-Every chapter, article, or task has its folder.
-
-The folder is named like `N-url`, where `N` is a number for the sorting purposes and `URL` is the URL part with the title of the material.
->>>>>>> 53b35c16835b7020a0a5046da5a47599d313bbb8
 
 </div>
 
 [^1]: [نیم‌فاصله در ویکی‌پدیای فارسی](https://fa.wikipedia.org/wiki/%D9%81%D8%A7%D8%B5%D9%84%D9%87_%D9%85%D8%AC%D8%A7%D8%B2%DB%8C)
-
-## Running locally
-
-You can run the tutorial server locally to see how the translation looks.
-
-The server and install instructions are at <https://github.com/javascript-tutorial/server>. 
----  
