@@ -224,11 +224,7 @@ new Promise(resolve => resolve(1))
 
 ## مثال بزرگتر: fetch
 
-<<<<<<< HEAD
 در برنامه‌نویسی فرانت‌اند، اغلب اوقات promiseها برای درخواست‌های شبکه استفاده می‌شوند. پس بیایید یک مثال گسترده از آن ببینیم.
-=======
-In frontend programming, promises are often used for network requests. So let's see an extended example of that.
->>>>>>> 3f7a1a53b6ffc875af8724987d9ce491a4622e09
 
 ما از متد [fetch](info:fetch) برای اینکه اطلاعات کاربر را از سرور ریموت بارگیری کنیم استفاده خواهیم کرد. این متد پارامترهای اختیاری زیادی دارد که در [فصل‌های جداگانه](info:fetch) پوشش داده شده‌اند اما سینتکس پایه آن بسیار ساده است:
 
