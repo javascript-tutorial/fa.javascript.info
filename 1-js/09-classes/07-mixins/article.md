@@ -103,7 +103,7 @@ new User("Dude").sayHi(); // Hello Dude!
 
 دلیلش این است که `sayHi` و `sayBye` از اول درون `sayHiMixin` ایجاد شده‌اند. پس حتی با اینکه کپی شدند، ویژگی درونی `[[HomeObject]]` آن‌ها به `sayHiMixin` رجوع می‌کند، همانطور که در تصویر بالا نشان داده شده است.
 
-چون `super` درون `[[HomeObject]].[[Prototype]]` به دنبال متدهای والد می‌گردد، یعنی `sayHiMixin.[[Prototype]]` را جست‌وجو می‌کند نه `User.[[Prototype]]` را.
+چون `super` درون `[[HomeObject]].[[Prototype]]` به دنبال متدهای والد می‌گردد، یعنی `sayHiMixin.[[Prototype]]` را جست‌وجو می‌کند.
 
 ## EventMixin
 
