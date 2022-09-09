@@ -1,4 +1,4 @@
-The answer is: **no, it won't**:
+پاسخ: **نه قعال نخواهد شد**:
 
 ```js run
 new Promise(function(resolve, reject) {
@@ -8,6 +8,6 @@ new Promise(function(resolve, reject) {
 }).catch(alert);
 ```
 
-As said in the chapter, there's an "implicit `try..catch`" around the function code. So all synchronous errors are handled.
+همانطور که در همین فصل گفته شد، یک «`try..catch` واضح» دور کد تابع وجود دارد. پس تمام ارورهای همگام مدیریت می‌شوند.
 
-But here the error is generated not while the executor is running, but later. So the promise can't handle it. 
+اما اینجا ارور زمانی که اجرا کننده اجرا می‌شود تولید نمی‌شد بلکه بعدتر ایجاد شد. پس promise نمی‌تواند آن را مدیریت کند.
