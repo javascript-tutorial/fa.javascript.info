@@ -2,6 +2,8 @@
 
 This repository hosts the translation of <https://javascript.info> in Persian (Farsi).
 
+**Got a question to ask? feel free to ask in our Telegram group: [t.me/javascriptFa](https://t.me/javascriptFa)**
+
 **That's how you can contribute:**
 
 - See the [Persian (Farsi) Translate Progress](https://github.com/javascript-tutorial/fa.javascript.info/issues/1) issue.
