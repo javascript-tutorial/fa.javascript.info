@@ -1,3 +1,3 @@
-# Web components
+# اجزاء وب
 
-Web components is a set of standards to make self-contained components: custom HTML-elements with their own properties and methods, encapsulated DOM and styles.
+اجزاء وب (web component) مجموعه‌ای از استانداردها هستند تا اجزای self-contained بسازند: المان‌های HTML شخصی‌سازی شده با ویژگی‌ها و متدهای خودشان، DOM کپسوله و استایل‌ها.

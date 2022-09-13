@@ -1,3 +1,3 @@
-# Regular expressions
+# Regular expressionها
 
-Regular expressions is a powerful way of doing search and replace in strings.
+Regular expressionها راهی قدرتمند برای انجام جستجو و جایگزین کردن در رشته‌ها هستند.

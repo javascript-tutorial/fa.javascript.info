@@ -1,3 +1,3 @@
-# Objects, classes, inheritance
+# شیءها، کلاس‌ها، ارث‌بری
 
-In this section we return to objects and learn them even more in-depth.
+در این قسمت ما به شیءها برمی‌گردیم و حتی آن‌ها را عمیق‌تر یاد می‌گیریم.

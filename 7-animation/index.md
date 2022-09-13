@@ -1,3 +1,3 @@
-# Animation
+# انیمیشن
 
-CSS and JavaScript animations.
+انیمیشن‌های CSS و جاوااسکریپت.

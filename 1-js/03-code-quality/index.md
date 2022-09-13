@@ -1,3 +1,3 @@
-# Code quality
+# کیفیت کد
 
-This chapter explains coding practices that we'll use further in the development. 
+این قسمت تکنیک‌هایی از کد زدن را توضیح می‌دهد که ما بعدا در توسعه دادن استفاده می‌کنیم.

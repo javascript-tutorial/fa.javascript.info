@@ -1,3 +1,3 @@
-# Browser: Document, Events, Interfaces 
+# مرورگر: Document، Eventها، رابط‌ها 
 
-Learning how to manage the browser page: add elements, manipulate their size and position, dynamically create interfaces and interact with the visitor.
+یاد بگیرید چگونه صفحه مرورگر را مدیریت کنید: المان‌ها را اضافه کنید، اندازه و موقعیت آن‌ها را دستکاری کنید، به صورت پویا رابط‌ها (interface) بسازید و با بیننده صفحه تعامل داشته باشید.

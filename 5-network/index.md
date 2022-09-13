@@ -1,2 +1,2 @@
 
-# Network requests
+# درخواست‌های شبکه
