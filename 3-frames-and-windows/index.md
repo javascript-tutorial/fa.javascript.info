@@ -1,1 +1,1 @@
-# Frames and windows
+# Frameها و پنجره‌ها

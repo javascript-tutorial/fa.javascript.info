@@ -1,3 +1,3 @@
-# Binary data, files
+# داده Binary، فایل‌ها
 
-Working with binary data and files in JavaScript.
+کار کردن با داده binary و فایل‌ها در جاوااسکریپت.

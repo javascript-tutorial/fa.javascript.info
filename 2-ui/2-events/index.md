@@ -1,3 +1,3 @@
-# Introduction into Events
+# معرفی Events
 
-An introduction to browser events, event properties and handling patterns.
+معرفی eventهای مرورگر، ویژگی‌های event و مدیریت الگوها (pattern).

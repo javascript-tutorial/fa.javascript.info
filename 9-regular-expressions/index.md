@@ -1,3 +1,3 @@
-# Regular expressions
+# عبارات باقاعده (Regular Expression)
 
-Regular expressions is a powerful way of doing search and replace in strings.
+عبارات باقاعده راهی قدرتمند برای انجام جستجو و جایگزین کردن در رشته‌ها هستند.
