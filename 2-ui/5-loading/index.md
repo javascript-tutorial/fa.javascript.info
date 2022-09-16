@@ -1,2 +1,2 @@
 
-# Document و بارگیری resourceها
+# Document و بارگیری منابع
