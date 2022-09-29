@@ -14,23 +14,13 @@
 
 متدها و ویژگی‌های آن:
 
-<<<<<<< HEAD
 - `new Map()` -- map را می‌سازد.
-- `map.set(key, value)` -- value را به واسطه key ذخیره می‌کند.
-- `map.get(key)` -- مقدار را به واسطه key برمی‌گرداند، اگر `key` در map وجود نداشته باشد `undefined` برگردانده می‌شود.
-- `map.has(key)` -- اگر `key` وجود داشته باشد `true` برگردانده می‌شود، در غیر این صورت `false`.
-- `map.delete(key)` -- مقدار را به واسطه key حذف می‌کند.
-- `map.clear()` -- همه چیز را از map حذف می‌کند.
-- `map.size` -- تعداد المان‌های کنونی را برمی‌گرداند.
-=======
-- `new Map()` -- creates the map.
-- [`map.set(key, value)`](mdn:js/Map/set) -- stores the value by the key.
-- [`map.get(key)`](mdn:js/Map/get) -- returns the value by the key, `undefined` if `key` doesn't exist in map.
-- [`map.has(key)`](mdn:js/Map/has) -- returns `true` if the `key` exists, `false` otherwise.
-- [`map.delete(key)`](mdn:js/Map/delete) -- removes the value by the key.
-- [`map.clear()`](mdn:js/Map/clear) -- removes everything from the map.
-- [`map.size`](mdn:js/Map/size) -- returns the current element count.
->>>>>>> ff4ef57c8c2fd20f4a6aa9032ad37ddac93aa3c4
+- [`map.set(key, value)`](mdn:js/Map/set) -- value را به واسطه key ذخیره می‌کند.
+- [`map.get(key)`](mdn:js/Map/get) -- مقدار را به واسطه key برمی‌گرداند، اگر `key` در map وجود نداشته باشد `undefined` برگردانده می‌شود.
+- [`map.has(key)`](mdn:js/Map/has) -- اگر `key` وجود داشته باشد `true` برگردانده می‌شود، در غیر این صورت `false`.
+- [`map.delete(key)`](mdn:js/Map/delete) -- مقدار را به واسطه key حذف می‌کند.
+- [`map.clear()`](mdn:js/Map/clear) -- همه چیز را از map حذف می‌کند.
+- [`map.size`](mdn:js/Map/size) -- تعداد المان‌های کنونی را برمی‌گرداند.
 
 برای مثال:
 
@@ -115,15 +105,9 @@ map.set('1', 'str1')
 
 برای حلقه زدن در `map` 3 متد وجود دارد:
 
-<<<<<<< HEAD
-- `map.keys()` -- یک حلقه‌پذیر برای کلیدها برمی‌گرداند،
-- `map.values()` -- یک حلقه‌پذیر برای مقدارها برمی‌گرداند،
-- `map.entries()` -- یک حلقه‌پذیر برای برای اطلاعات به شکل `[key, value]` برمی‌گرداند که به صورت پیش‌فرض در `for..of` استفاده می‌شود.
-=======
-- [`map.keys()`](mdn:js/Map/keys) -- returns an iterable for keys,
-- [`map.values()`](mdn:js/Map/values) -- returns an iterable for values,
-- [`map.entries()`](mdn:js/Map/entries) -- returns an iterable for entries `[key, value]`, it's used by default in `for..of`.
->>>>>>> ff4ef57c8c2fd20f4a6aa9032ad37ddac93aa3c4
+- [`map.keys()`](mdn:js/Map/keys) -- یک حلقه‌پذیر برای کلیدها برمی‌گرداند،
+- [`map.values()`](mdn:js/Map/values) -- یک حلقه‌پذیر برای مقدارها برمی‌گرداند،
+- [`map.entries()`](mdn:js/Map/entries) -- یک حلقه‌پذیر برای برای اطلاعات به شکل `[key, value]` برمی‌گرداند که به صورت پیش‌فرض در `for..of` استفاده می‌شود.
 
 برای مثال:
 
@@ -253,21 +237,12 @@ let obj = Object.fromEntries(map); // را حذف کردیم .entries()
 
 متدهای اصلی آن:
 
-<<<<<<< HEAD
 - `new Set(iterable)` -- set را ایجاد می‌کند و اگر یک شیء حلقه‌پذیر داده شود (معمولا یک آرایه)، مقدارها را از آن درون set کپی می‌کند.
-- `set.add(value)` -- یک مقدار اضافه می‌کند و خود set را برمی‌گرداند.
-- `set.delete(value)` -- مقدار را حذف می‌کند و اگر `value` هنگام فراخوانی وجود داشته باشد `true` را برمی‌گرداند، در غیر این صورت `false`.
-- `set.has(value)` -- اگر مقدار در set وجود داشته باشد `true` را برمی‌گرداند، در غیر این صورت `false`.
-- `set.clear()` -- همه چیز را از set حذف می‌کند.
-- `set.size` -- برابر با تعداد المان‌ها است.
-=======
-- `new Set(iterable)` -- creates the set, and if an `iterable` object is provided (usually an array), copies values from it into the set.
-- [`set.add(value)`](mdn:js/Set/add) -- adds a value, returns the set itself.
-- [`set.delete(value)`](mdn:js/Set/delete) -- removes the value, returns `true` if `value` existed at the moment of the call, otherwise `false`.
-- [`set.has(value)`](mdn:js/Set/has) -- returns `true` if the value exists in the set, otherwise `false`.
-- [`set.clear()`](mdn:js/Set/clear) -- removes everything from the set.
-- [`set.size`](mdn:js/Set/size) -- is the elements count.
->>>>>>> ff4ef57c8c2fd20f4a6aa9032ad37ddac93aa3c4
+- [`set.add(value)`](mdn:js/Set/add) -- یک مقدار اضافه می‌کند و خود set را برمی‌گرداند.
+- [`set.delete(value)`](mdn:js/Set/delete) -- مقدار را حذف می‌کند و اگر `value` هنگام فراخوانی وجود داشته باشد `true` را برمی‌گرداند، در غیر این صورت `false`.
+- [`set.has(value)`](mdn:js/Set/has) -- اگر مقدار در set وجود داشته باشد `true` را برمی‌گرداند، در غیر این صورت `false`.
+- [`set.clear()`](mdn:js/Set/clear) -- همه چیز را از set حذف می‌کند.
+- [`set.size`](mdn:js/Set/size) -- برابر با تعداد المان‌ها است.
 
 ویژگی اصلی این اصت که فراخوانی‌های پی‌در‌پی `set.add(value)` با مقداری یکسان، کاری انجام نمی‌دهد. به همین دلیل است که هر مقدار تنها یک بار در `Set` واقع می‌شوند.
 
@@ -316,23 +291,13 @@ set.forEach((value, valueAgain, set) => {
 
 یک چیز جالب را در نظر داشته باشید. تابعی که به `forEach` داده شده 3 آرگومان دارد: یک `value`، سپس *مقدار یکسان* `valueAgain` و سپس شیء مورد نظر. در واقع، مقداری یکسان دو بار در آرگومان ظاهر می‌شود.
 
-<<<<<<< HEAD
 این به دلیل سازگاری با `Map` است که تابع داده شده به `forEach` دارای 3 آرگومان است. قطعا کمی عجیب به نظر می‌رسد. اما می‌تواند به جایگزینی `Map` با `Set` و برعکس در بعضی موارد کمک کند.
-=======
-That's for compatibility with `Map` where the callback passed `forEach` has three arguments. Looks a bit strange, for sure. But this may help to replace `Map` with `Set` in certain cases with ease, and vice versa.
->>>>>>> ff4ef57c8c2fd20f4a6aa9032ad37ddac93aa3c4
 
 همچنین متدهای مشابهی که `Map` هم برای حلقه‌زننده‌ها دارد، پشتیبانی می‌شوند:
 
-<<<<<<< HEAD
-- `set.keys()` -- یک شیء حلقه‌پذیر برای مقدارها را برمی‌گرداند،
-- `set.values()` -- با `set.keys()` یکسان است، برای سازگاری با `Map`
-- `set.entries()` -- یک شیء حلقه‌پذیر را برای اطلاعات به شکل `[value, value]` برمی‌گرداند، برای سازگاری با `Map` وجود دارد.
-=======
-- [`set.keys()`](mdn:js/Set/keys) -- returns an iterable object for values,
-- [`set.values()`](mdn:js/Set/values) -- same as `set.keys()`, for compatibility with `Map`,
-- [`set.entries()`](mdn:js/Set/entries) -- returns an iterable object for entries `[value, value]`, exists for compatibility with `Map`.
->>>>>>> ff4ef57c8c2fd20f4a6aa9032ad37ddac93aa3c4
+- [`set.keys()`](mdn:js/Set/keys) -- یک شیء حلقه‌پذیر برای مقدارها را برمی‌گرداند،
+- [`set.values()`](mdn:js/Set/values) -- با `set.keys()` یکسان است، برای سازگاری با `Map`
+- [`set.entries()`](mdn:js/Set/entries) -- یک شیء حلقه‌پذیر را برای اطلاعات به شکل `[value, value]` برمی‌گرداند، برای سازگاری با `Map` وجود دارد.
 
 ## خلاصه
 
@@ -340,23 +305,13 @@ That's for compatibility with `Map` where the callback passed `forEach` has thre
 
 متدها و ویژگی‌های آن:
 
-<<<<<<< HEAD
 - `new Map([iterable])` -- map را می‌سازد، برای مقداردهی اولیه از `iterable`(حلقه‌پذیر) اختیاری (مانند آرایه) از جفت‌های `[key,value]` می‌توان استفاده کرد.
-- `map.set(key, value)` -- مقدار را به واسطه کلید ذخیره می‌کند، خود map را برمی‌گرداند.
-- `map.get(key)` -- مقدار را به واسطه کلید برمی‌گرداند، اگر `key` در map وجود نداشته باشد `undefined` برمی‌گرداند.
-- `map.has(key)` -- اگر `key` وجود داشته باشد `true` برمی‌گرداند، در غیر این صورت `false`.
-- `map.delete(key)` -- مقدار را به واسطه کلید حذف می‌کند، اگر `key` در لحظه فراخوانی وجود داشته باشد `true` برمی‌گرداند، در غیر این صورت `false`.
-- `map.clear()` -- همه چیز را از map حذف می‌کند.
-- `map.size` -- تعداد المان‌ها را برمی‌گرداند.
-=======
-- `new Map([iterable])` -- creates the map, with optional `iterable` (e.g. array) of `[key,value]` pairs for initialization.
-- [`map.set(key, value)`](mdn:js/Map/set) -- stores the value by the key, returns the map itself.
-- [`map.get(key)`](mdn:js/Map/get)` -- returns the value by the key, `undefined` if `key` doesn't exist in map.
-- [`map.has(key)`](mdn:js/Map/has) -- returns `true` if the `key` exists, `false` otherwise.
-- [`map.delete(key)`](mdn:js/Map/delete) -- removes the value by the key, returns `true` if `key` existed at the moment of the call, otherwise `false`.
-- [`map.clear()`](mdn:js/Map/clear) -- removes everything from the map.
-- [`map.size`](mdn:js/Map/size) -- returns the current element count.
->>>>>>> ff4ef57c8c2fd20f4a6aa9032ad37ddac93aa3c4
+- [`map.set(key, value)`](mdn:js/Map/set) -- مقدار را به واسطه کلید ذخیره می‌کند، خود map را برمی‌گرداند.
+- [`map.get(key)`](mdn:js/Map/get)` -- مقدار را به واسطه کلید برمی‌گرداند، اگر `key` در map وجود نداشته باشد `undefined` برمی‌گرداند.
+- [`map.has(key)`](mdn:js/Map/has) -- اگر `key` وجود داشته باشد `true` برمی‌گرداند، در غیر این صورت `false`.
+- [`map.delete(key)`](mdn:js/Map/delete) -- مقدار را به واسطه کلید حذف می‌کند، اگر `key` در لحظه فراخوانی وجود داشته باشد `true` برمی‌گرداند، در غیر این صورت `false`.
+- [`map.clear()`](mdn:js/Map/clear) -- همه چیز را از map حذف می‌کند.
+- [`map.size`](mdn:js/Map/size) -- تعداد المان‌ها را برمی‌گرداند.
 
 تفاوت آن با `Object` معمولی:
 
@@ -367,20 +322,11 @@ That's for compatibility with `Map` where the callback passed `forEach` has thre
 
 متدها و ویژگی‌های آن:
 
-<<<<<<< HEAD
 - `new Set([iterable])` -- set را ایجاد می‌کند، برای مقداردهی اولیه می‌توان از `iterable`(حلقه‌پذیر مانند آرایه) شامل مقدارها استفاده کرد.
-- `set.add(value)` -- یک مقدار را اضافه می‌کند (اگر `value` وجود داشته باشد کاری نمی‌کند)، خود set را برمی‌گرداند.
-- `set.delete(value)` -- مقدار را حذف می‌کند، اگر `value` هنگام فراخوانی وجود داشته باشد `true` را برمی‌گرداند، در غیر این صورت `false`.
-- `set.has(value)` -- اگر مقدار در set وجود داشته باشد `true` را برمی‌گرداند، در غیر این صورت `false`.
-- `set.clear()` -- همه چیز را از set حذف می‌کند.
-- `set.size` -- برابر با تعداد المان‌ها است.
-=======
-- `new Set([iterable])` -- creates the set, with optional `iterable` (e.g. array) of values for initialization.
-- [`set.add(value)`](mdn:js/Set/add) -- adds a value (does nothing if `value` exists), returns the set itself.
-- [`set.delete(value)`](mdn:js/Set/delete) -- removes the value, returns `true` if `value` existed at the moment of the call, otherwise `false`.
-- [`set.has(value)`](mdn:js/Set/has) -- returns `true` if the value exists in the set, otherwise `false`.
-- [`set.clear()`](mdn:js/Set/clear) -- removes everything from the set.
-- [`set.size`](mdn:js/Set/size) -- is the elements count.
->>>>>>> ff4ef57c8c2fd20f4a6aa9032ad37ddac93aa3c4
+- [`set.add(value)`](mdn:js/Set/add) -- یک مقدار را اضافه می‌کند (اگر `value` وجود داشته باشد کاری نمی‌کند)، خود set را برمی‌گرداند.
+- [`set.delete(value)`](mdn:js/Set/delete) -- مقدار را حذف می‌کند، اگر `value` هنگام فراخوانی وجود داشته باشد `true` را برمی‌گرداند، در غیر این صورت `false`.
+- [`set.has(value)`](mdn:js/Set/has) -- اگر مقدار در set وجود داشته باشد `true` را برمی‌گرداند، در غیر این صورت `false`.
+- [`set.clear()`](mdn:js/Set/clear) -- همه چیز را از set حذف می‌کند.
+- [`set.size`](mdn:js/Set/size) -- برابر با تعداد المان‌ها است.
 
 حلقه‌زدن در `Map` و `Set` همیشه با ترتیب اضافه‌کردن انجام می‌شود، پس ما نمی‌توانیم بگوییم این مجموعه‌ها نامرتب هستند اما نمی‌توانیم المان‌ها را دوباره مرتب کنیم یا به صورت مستقیم یک المان را با استفاده از عدد آن دریافت کنیم.

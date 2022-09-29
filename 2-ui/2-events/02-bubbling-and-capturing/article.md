@@ -187,30 +187,26 @@ elem.addEventListener(..., true)
 
 توجه کنید که `P` دوبار نمایش داده می‌شود: در پایان گرفتن و در زمان شروع بالارفتن.
 
-<<<<<<< HEAD
 خاصیت `event.eventPhase` به ما شماره فازی که در آن رویداد فراخوانی شده را می‌گوید. اما به ندرت استفاده می‌شود چون معمولا در کنترل‌کننده آنرا می‌دانیم.
-=======
-There's a property `event.eventPhase` that tells us the number of the phase on which the event was caught. But it's rarely used, because we usually know it in the handler.
 
-```smart header="To remove the handler, `removeEventListener` needs the same phase"
-If we `addEventListener(..., true)`, then we should mention the same phase in `removeEventListener(..., true)` to correctly remove the handler.
+```smart header="برای حذف کنترل‌کننده، `removeEventListener` به فاز یکسان نیاز دارد"
+اگر ما `addEventListener(..., true)` را فراخوانی کنیم، سپس باید فاز یکسان را در `removeEventListener(..., true)` ذکر کنیم تا به درستی کنترل‌کننده را حذف کنیم.
 ```
 
-````smart header="Listeners on the same element and same phase run in their set order"
-If we have multiple event handlers on the same phase, assigned to the same element with `addEventListener`, they run in the same order as they are created:
+````smart header="کنترل‌کننده‌های یک المان و یک فاز به ترتیب تنظیم‌شدن‌شان اجرا می‌شوند"
+اگر ما چند کنترل‌کننده رویداد روی یک فاز داشته باشیم، که با `addEventListener` به یک المان داده شده‌اند، آن را دقیقا با ترتیب ایجاد شدن اجرا می‌شوند:
 
 ```js
-elem.addEventListener("click", e => alert(1)); // guaranteed to trigger first
+elem.addEventListener("click", e => alert(1)); // تضمین می‌شود که اول فعال شود
 elem.addEventListener("click", e => alert(2));
 ```
 ````
 
-```smart header="The `event.stopPropagation()` during the capturing also prevents the bubbling"
-The `event.stopPropagation()` method and its sibling `event.stopImmediatePropagation()` can also be called on the capturing phase. Then not only the futher capturing is stopped, but the bubbling as well.
+```smart header="`event.stopPropagation()` در حین گرفتن از بالارفتن حبابی جلوگیری می‌کند"
+متد `event.stopPropagation()` و همزاد خود `event.stopImmediatePropagation()` می‌توانند در فاز گرفتن هم فراخوانی شوند. سپس نه تنها گرفتن بیشتر متوقف می‌شود بلکه بالارفتن حبابی هم همینطور.
 
-In other words, normally the event goes first down ("capturing") and then up ("bubbling"). But if `event.stopPropagation()` is called during the capturing phase, then the event travel stops, no bubbling will occur.
+به عبارتی دیگر، معمولا رویداد ابتدا پایین می‌رود («گرفتن») و سپس بالا («بالارفتن حبابی»). اما اگر `event.stopPropagation()` در حین فاز گرفتن فراخوانی شود، سپس سفر رویداد متوقف می‌شود و هیچ بالارفتن حبابی اتفاق نمی‌افتد.
 ```
->>>>>>> ff4ef57c8c2fd20f4a6aa9032ad37ddac93aa3c4
 
 ## خلاصه
 

@@ -59,11 +59,7 @@ alert( getMaxSubSum([100, -9, 2, -3, 5]) ); // 100
 
 این راه حل یک پیچیدگی زمانی [O(n<sup>2</sup>)](https://fa.wikipedia.org/wiki/نماد_O_بزرگ) دارد، به عبارتی دیگر، اگر ما اندازه آرایه را دو برابر کنیم، الگوریتم 4 برابر بیشتر زمان می‌برد.
 
-<<<<<<< HEAD
 برای آرایه‌های بزرگ (1000، 10000 یا المان‌های بیشتر) چنین الگوریتمی می‌تواند باعث سستی جدی شود.
-=======
-For big arrays (1000, 10000 or more items) such algorithms can lead to serious sluggishness.
->>>>>>> ff4ef57c8c2fd20f4a6aa9032ad37ddac93aa3c4
 
 # راه حل سریع
 
@@ -95,8 +91,4 @@ alert( getMaxSubSum([-1, -2, -3]) ); // 0
 
 الگوریتم دقیقا به 1 آرایه نیاز دارد، پس پیچیدگی زمان O(n) است.
 
-<<<<<<< HEAD
 شما می‌توانید اطلاعات بیشتری درباره الگوریتم را اینجا پیدا کنید: [مسئله زیرآرایه بیشینه](http://en.wikipedia.org/wiki/Maximum_subarray_problem). اگر هنوز هم برای شما مشخص نیست که چرا کار می‌کند، لطفا الگوریتم را در مثال بالا دنبال کنید، ببینید چگونه کار می‌کند، این کار بهتر از حرفی است.
-=======
-You can find more detailed information about the algorithm here: [Maximum subarray problem](http://en.wikipedia.org/wiki/Maximum_subarray_problem). If it's still not obvious why that works, then please trace the algorithm on the examples above, see how it works, that's better than any words.
->>>>>>> ff4ef57c8c2fd20f4a6aa9032ad37ddac93aa3c4

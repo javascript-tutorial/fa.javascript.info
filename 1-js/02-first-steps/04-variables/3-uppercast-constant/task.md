@@ -12,24 +12,14 @@ const birthday = '18.04.1982';
 const age = someCode(birthday);
 ```
 
-<<<<<<< HEAD
-ما در اینجا یک ثابت با نام `birthday` داریم و ثابتی دیگر با نام `age` که با کمک کدهای دیگر از `birthday` محاسبه می‌شود (برای کوتاه شدن ارائه نشده‌است، و همچنین به دلیل اینکه جزییات اینجا اهمیت ندارند).
-=======
-Here we have a constant `birthday` for the date, and also the `age` constant.
+ما در اینجا یک ثابت با نام `birthday` برای تاریخ داریم و ثابتی دیگر با نام `age`.
 
-The `age` is calculated from `birthday` using `someCode()`, which means a function call that we didn't explain yet (we will soon!), but the details don't matter here, the point is that `age` is calculated somehow based on the `birthday`.
->>>>>>> ff4ef57c8c2fd20f4a6aa9032ad37ddac93aa3c4
+مقدار `age`با استفاده از `someCode()`، یعنی فراخوانی تابع که ما هنوز آن را توضیح نداده‌ایم (به زودی توضیح داده خواهد شد)، از `birthday` محاسبه می‌شود. اما اینجا جزئیات مهم نیستند و نکته این است که `age` به نحوی بر اساس `birthday` محاسبه می‌شود.
 
 آیا نوشتن `birthday` با حروف بزرگ درست است؟ برای `age` چطور؟
 
 ```js
-<<<<<<< HEAD
-const BIRTHDAY = '18.04.1982'; // با حروف بزرگ؟
+const BIRTHDAY = '18.04.1982'; // با حروف بزرگ باشد؟ birthday آیا
 
-const AGE = someCode(BIRTHDAY); // با حروف بزرگ؟
-=======
-const BIRTHDAY = '18.04.1982'; // make birthday uppercase?
-
-const AGE = someCode(BIRTHDAY); // make age uppercase?
->>>>>>> ff4ef57c8c2fd20f4a6aa9032ad37ddac93aa3c4
+const AGE = someCode(BIRTHDAY); // با حروف بزرگ باشد؟ age آیا
 ```

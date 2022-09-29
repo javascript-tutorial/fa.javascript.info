@@ -24,11 +24,7 @@
 **رویدادهای CSS:**
 - `transitionend` -- زمانی که یک انیمیشن CSS تمام می‌شود.
 
-<<<<<<< HEAD
 رویدادهای متعدد دیگری نیز وجود دارد. درباره  جزئیات مخصوص به هرکدام از رویدادها در بخش‌های بعدی صحبت می‌کنیم.
-=======
-There are many other events. We'll get into more details of particular events in upcoming chapters.
->>>>>>> ff4ef57c8c2fd20f4a6aa9032ad37ddac93aa3c4
 
 ## کنترل‌کننده‌های رویدادها
 
@@ -199,11 +195,7 @@ document.body.setAttribute('onclick', function() { alert(1) });
 
 ## addEventListener
 
-<<<<<<< HEAD
-مشکل اساسی با روش‌هایی که در بالا درباره تعریف و اختصاص دادن کنترل‌کننده‌ها گفته شد، این است که نمی‌توانیم چند گنترل‌کننده‌ را به یک رویداد اختصاص دهیم.
-=======
-The fundamental problem of the aforementioned ways to assign handlers is that we *can't assign multiple handlers to one event*.
->>>>>>> ff4ef57c8c2fd20f4a6aa9032ad37ddac93aa3c4
+مشکل اساسی با روش‌هایی که در بالا درباره تعریف و اختصاص دادن کنترل‌کننده‌ها گفته شد، این است که *نمی‌توانیم چند گنترل‌کننده‌ را به یک رویداد اختصاص دهیم*.
 
 فرض کنیم که یک قسمت از کد می‌خواهد که دکمه‌ای را هنگام کلیک شدن، هایلایت کند، و کد دیگری که می‌خواهد در زمان همان کلیک پیغامی را نمایش دهد.
 
@@ -215,11 +207,7 @@ input.onclick = function() { alert(1); }
 input.onclick = function() { alert(2); } // جایگزین کنترل‌کننده قبلی می‌شود
 ```
 
-<<<<<<< HEAD
 توسعه‌دهندگان استاندارهای وب خیلی وقت پیش متوجه این موضوع شدند و یک راه حل جایگزین برای مدیریت کنترل‌کننده‌‌ها با استفاده از متد‌های مخصوص `addEventListener` و `removeEventListener` پیشنهاد دادند. این دو متد مشکل بالا را نخواهند داشت.
-=======
-Developers of web standards understood that long ago and suggested an alternative way of managing handlers using the special methods `addEventListener` and `removeEventListener` which aren't bound by such constraint.
->>>>>>> ff4ef57c8c2fd20f4a6aa9032ad37ddac93aa3c4
 
 سینتکس و چگونگی اضافه کردن یک کنترل‌کننده:
 
@@ -273,11 +261,7 @@ input.removeEventListener("click", handler);
 توجه کنید، اگر که ما تابع کنترل‌کننده‌را درون یک متغیر ذخیره نکنیم، نمی‌توانیم آنرا حذف کنیم. راهی برای "بازخوانی" کنترل‌کننده‌هایی که با `addEventListener` اختصاص داده‌ می‌شوند وجود ندارد.
 ````
 
-<<<<<<< HEAD
-با چند بار صدا زدن `addEventListener` می‌توانیم چندین کنترل‌کننده برای یک رویداد اختصاص دهیم. مانند:
-=======
-Multiple calls to `addEventListener` allow it to add multiple handlers, like this:
->>>>>>> ff4ef57c8c2fd20f4a6aa9032ad37ddac93aa3c4
+با چند بار صدا زدن `addEventListener` می‌توانیم چندین کنترل‌کننده اضافه کنیم مانند این:
 
 ```html run no-beautify
 <input id="elem" type="button" value="روی من کلیک کن"/>
@@ -304,11 +288,7 @@ Multiple calls to `addEventListener` allow it to add multiple handlers, like thi
 ````warn header="برای بعضی از رویدادها، کنترل‌کننده‌ها فقط با `addEventListener` کار می‌کنند"
 رویدادهایی وجود دارند که نمی‌توان با استفاده از خاصیت DOM برای آنها کنترل‌کننده اختصاص داد. فقط با `addEventListener`.
 
-<<<<<<< HEAD
 برای مثال، رویداد `DOMContentLoaded` که زمانی اتفاق می‌افتد که سند بارگزاری شده و درخت DOM ساخته شده.
-=======
-For instance, the `DOMContentLoaded` event, that triggers when the document is loaded and the DOM has been built.
->>>>>>> ff4ef57c8c2fd20f4a6aa9032ad37ddac93aa3c4
 
 ```js
 // هیچ‌وقت اجرا نمی‌شود
@@ -354,17 +334,10 @@ document.addEventListener("DOMContentLoaded", function() {
 `event.currentTarget`
 : عنصری که رویداد را کنترل می‌کند. دقیقا همان `this` است، مگر اینکه کنترل کننده یک تابع پیکانی (arrow function) باشد، یا اینکه `this` به چیز دیگری مقید شده باشد، در این صورت می‌توانیم عنصر را از `event.currentTarget` بگیریم.
 
-<<<<<<< HEAD
 `event.clientX / event.clientY`
 : مختصات اشاره‌گر موس نسبت به پنجره برای رویدادهای مربوط به اشاره‌گر موس.
 
-خصوصیات بیشتری نیز وجود دارد. خیلی از آنها به نوع رویداد بستگی دارند: رویدادهای صفحه‌کلید یک مجموعه خصوصیت دارند، رویدادهای اشاره‌گر موس یک مجموعه دیگر. درباره آنها در آینده بیشتر یاد خواهیم گرفت و درباره جزئیات هرکدام بحث می‌کنیم.
-=======
-`event.clientX` / `event.clientY`
-: Window-relative coordinates of the cursor, for pointer events.
-
-There are more properties. Many of them depend on the event type: keyboard events have one set of properties, pointer events - another one, we'll study them later when as we move on to the details of different events.
->>>>>>> ff4ef57c8c2fd20f4a6aa9032ad37ddac93aa3c4
+خصوصیات بیشتری نیز وجود دارد. خیلی از آنها به نوع رویداد بستگی دارند: رویدادهای صفحه‌کلید یک مجموعه خصوصیت دارند، رویدادهای اشاره‌گر موس یک مجموعه دیگر. همانطور که به جزئیات رویدادهای مختلف می‌پردازیم درباره آنها در آینده بیشتر یاد خواهیم گرفت.
 
 ````smart header="شئ رویداد در کنترل‌کننده‌های HTML نیز وجود دارد"
 اگر که یک کنترل‌کننده را درون HTML تعریف کنیم، می‌توانیم از شئ `event` استفاده کنیم، مانند:
@@ -400,11 +373,7 @@ There are more properties. Many of them depend on the event type: keyboard event
 
 همانطور که میبینید زمانی که `addEventListener` یک شئ را به کنترل‌کننده دریافت می‌کند، `obj.handleEvent(event)` را در صورت اتفاق افتادن آن رویداد صدا می‌زند.
 
-<<<<<<< HEAD
-همچنین می‌توانیم از یک کلاس برای این کار استفاده کنیم:
-=======
-We could also use objects of a custom class, like this:
->>>>>>> ff4ef57c8c2fd20f4a6aa9032ad37ddac93aa3c4
+همچنین می‌توانیم از یک کلاس شخصی‌سازی شده برای این کار استفاده کنیم، مثل این:
 
 
 ```html run
