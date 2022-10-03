@@ -351,7 +351,7 @@ alert( isFinite(num) );
 
     ```js run
     alert( Number.isFinite(123) ); // true
-    alert( Number.isFinite(Infinity) ); //false
+    alert( Number.isFinite(Infinity) ); // false
     alert( Number.isFinite(2 / 0) ); // false
 
     // :به تفاوت توجه کنید
@@ -365,8 +365,13 @@ alert( isFinite(num) );
 ```smart header="مقایسه کنید با `Object.is`"
 یک متد درون‌ساخت خاص به نام [Object.is](mdn:js/Object/is) وجود دارد که مقادیر را مثل `===` مقایسه میکند، اما برای دو حالت مرزی قابل اعتمادتر است:
 
+<<<<<<< HEAD
 ۱. با `NaN` کار میکند:  `Object.is(NaN, NaN) === true`، که چیز خوبیست.
 ۲. مقادیر `0` و `-0` متفاوت هستند: `Object.is(0, -0) === false`، به ندرت اهمیت دارد، اما این مقادیر در اصل متفاوتند.
+=======
+1. It works with `NaN`: `Object.is(NaN, NaN) === true`, that's a good thing.
+2. Values `0` and `-0` are different: `Object.is(0, -0) === false`, technically that's correct, because internally the number has a sign bit that may be different even if all other bits are zeroes.
+>>>>>>> 18b1314af4e0ead5a2b10bb4bacd24cecbb3f18e
 
 در تمام حالات دیگر، `Object.is(a, b)` با `a === b` برابراست.
 

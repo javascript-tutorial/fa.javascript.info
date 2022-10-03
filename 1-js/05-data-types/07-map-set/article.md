@@ -305,6 +305,7 @@ set.forEach((value, valueAgain, set) => {
 
 متدها و ویژگی‌های آن:
 
+<<<<<<< HEAD
 - `new Map([iterable])` -- map را می‌سازد، برای مقداردهی اولیه از `iterable`(حلقه‌پذیر) اختیاری (مانند آرایه) از جفت‌های `[key,value]` می‌توان استفاده کرد.
 - [`map.set(key, value)`](mdn:js/Map/set) -- مقدار را به واسطه کلید ذخیره می‌کند، خود map را برمی‌گرداند.
 - [`map.get(key)`](mdn:js/Map/get)` -- مقدار را به واسطه کلید برمی‌گرداند، اگر `key` در map وجود نداشته باشد `undefined` برمی‌گرداند.
@@ -312,6 +313,15 @@ set.forEach((value, valueAgain, set) => {
 - [`map.delete(key)`](mdn:js/Map/delete) -- مقدار را به واسطه کلید حذف می‌کند، اگر `key` در لحظه فراخوانی وجود داشته باشد `true` برمی‌گرداند، در غیر این صورت `false`.
 - [`map.clear()`](mdn:js/Map/clear) -- همه چیز را از map حذف می‌کند.
 - [`map.size`](mdn:js/Map/size) -- تعداد المان‌ها را برمی‌گرداند.
+=======
+- `new Map([iterable])` -- creates the map, with optional `iterable` (e.g. array) of `[key,value]` pairs for initialization.
+- [`map.set(key, value)`](mdn:js/Map/set) -- stores the value by the key, returns the map itself.
+- [`map.get(key)`](mdn:js/Map/get) -- returns the value by the key, `undefined` if `key` doesn't exist in map.
+- [`map.has(key)`](mdn:js/Map/has) -- returns `true` if the `key` exists, `false` otherwise.
+- [`map.delete(key)`](mdn:js/Map/delete) -- removes the value by the key, returns `true` if `key` existed at the moment of the call, otherwise `false`.
+- [`map.clear()`](mdn:js/Map/clear) -- removes everything from the map.
+- [`map.size`](mdn:js/Map/size) -- returns the current element count.
+>>>>>>> 18b1314af4e0ead5a2b10bb4bacd24cecbb3f18e
 
 تفاوت آن با `Object` معمولی:
 

@@ -168,8 +168,13 @@ alert( new SmallUser().name );  // John
 
 معمولا سازنده ها دستور `return` ندارند. اینجا ما این رفتار خاص برگرداندن شیءها را تنها برای کامل بودن خاطر نشان کردیم.
 
+<<<<<<< HEAD
 ````smart header="پنهان کردن پرانتزها"
 راستی، اگر هیچ آرگومانی در کار نباشد، ما می توانیم پرانترهای بعد از `new` را حذف کنیم:
+=======
+````smart header="Omitting parentheses"
+By the way, we can omit parentheses after `new`:
+>>>>>>> 18b1314af4e0ead5a2b10bb4bacd24cecbb3f18e
 
 ```js
 let user = new User; // <-- بدون پرانتز
