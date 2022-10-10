@@ -50,7 +50,11 @@ let guestList = "Guests: // Error: Unexpected token ILLEGAL
 
 کوتیشن‌های تکی و دوتایی از زمان بسیار قدیم در زبان وجود داشتند زمانی که نیاز به رشته‌های چند خطی خیلی به چشم نمی‌آمد. Backtickها بعدها به وجود آمدند و به این ترتیب چند کاره هستند.
 
+<<<<<<< HEAD
 Backtickها به ما اجازه می‌دهند که یک "تابع الگو" قبل از backtick اول مشخص کنیم. سینتکس اینگونه است: <code>func&#96;string&#96;</code>. تابع `func` به طور خودکار صدا زده می‌شود، رشته را دریافت می‌کند و عبارات را ایجاد می‌کند و می‌تواند با آنها فرایندی انجام دهد. به این "الگوهای برچسب گذاری شده" می‌گویند. این ویژگی پیاده‌سازی الگوهای سفارشی را آسان‌تر می‌کند، اما در عمل خیلی کم استفاده می‌شود. می‌توانید درباره آن در [کتاب راهنما](mdn:/JavaScript/Reference/Template_literals#Tagged_templates) بیشتر بخوانید.
+=======
+Backticks also allow us to specify a "template function" before the first backtick. The syntax is: <code>func&#96;string&#96;</code>. The function `func` is called automatically, receives the string and embedded expressions and can process them. This feature is called "tagged templates", it's rarely seen, but you can read about it in the MDN: [Template literals](mdn:/JavaScript/Reference/Template_literals#Tagged_templates).
+>>>>>>> 18b1314af4e0ead5a2b10bb4bacd24cecbb3f18e
 
 ## کاراکترهای خاص
 
@@ -74,7 +78,11 @@ World`;
 alert(str1 == str2); // true
 ```
 
+<<<<<<< HEAD
 کاراکترهای "خاص" دیگر و غیر متداول هم هستند:
+=======
+There are other, less common special characters:
+>>>>>>> 18b1314af4e0ead5a2b10bb4bacd24cecbb3f18e
 
 | کاراکتر | توضیحات |
 |-----------|-------------|
@@ -111,7 +119,11 @@ alert( 'I*!*\'*/!*m the Walrus!' ); // *!*I'm*/!* the Walrus!
 alert( "I'm the Walrus!" ); // I'm the Walrus!
 ```
 
+<<<<<<< HEAD
 در کنار این کاراکترهای خاص، همچنین یک نشان خاص برای کدهای Unicode `\u…` وجود دارد که کمی بعدتر در این فصل آن را پوشش می‌دهیم.
+=======
+Besides these special characters, there's also a special notation for Unicode codes `\u…`, it's rarely used and is covered in the optional chapter about [Unicode](info:unicode).
+>>>>>>> 18b1314af4e0ead5a2b10bb4bacd24cecbb3f18e
 
 ## طول رشته
 
@@ -126,33 +138,55 @@ alert( `My\n`.length ); // 3
 ```warn header="`length` یک ویژگی است"
 بعضی اوقات افرادی که زمینه‌ای در بعضی زبان‌های برنامه نویسی دیگر دارند اشتباها `str.length()` را به جای نوشتن `str.length` صدا می‌زنند. اینگونه کار نمی‌کند.
 
+<<<<<<< HEAD
 لطفا در نظر داشته باشید که `str.length` یک ویژگی عددی است نه یک تابع. نیازی به اضافه کردن پرانتر بعد از آن نیست.
+=======
+Please note that `str.length` is a numeric property, not a function. There is no need to add parenthesis after it. Not `.length()`, but `.length`.
+>>>>>>> 18b1314af4e0ead5a2b10bb4bacd24cecbb3f18e
 ```
 
 ## دسترسی داشتن به کاراکترها
 
+<<<<<<< HEAD
 برای دریافت یک کاراکتر در موقعیت `pos`، از براکت‌ها استفاده کنید یا متد [str.charAt(pos)](mdn:js/String/charAt) را صدا بزنید. اولین کاراکتر از موقعیت صفر شروع می‌شود:
+=======
+To get a character at position `pos`, use square brackets `[pos]` or call the method [str.at(pos)](mdn:js/String/at). The first character starts from the zero position:
+>>>>>>> 18b1314af4e0ead5a2b10bb4bacd24cecbb3f18e
 
 ```js run
 let str = `Hello`;
 
 // اولین کاراکتر
 alert( str[0] ); // H
-alert( str.charAt(0) ); // H
+alert( str.at(0) ); // H
 
 // آخرین کاراکتر
 alert( str[str.length - 1] ); // o
+alert( str.at(-1) );
 ```
 
+<<<<<<< HEAD
 براکت‌ها روش مدرن دریافت کاراکتر هستند، در حالی که `charAt` بنا به دلایلی مربوط به تاریخچه زبان وجود دارد.
 
 تنها تفاوت میان آنها این است که اگر کاراکتری پیدا نشود، `[]` مقدار `undefined` را برمی‌گرداند، و `charAt` یک رشته خالی را برمی‌گرداند:
+=======
+As you can see, the `.at(pos)` method has a benefit of allowing negative position. If `pos` is negative, then it's counted from the end of the string.
+
+So `.at(-1)` means the last character, and `.at(-2)` is the one before it, etc.
+
+The square brackets always return `undefined` for negative indexes, for instance:
+>>>>>>> 18b1314af4e0ead5a2b10bb4bacd24cecbb3f18e
 
 ```js run
 let str = `Hello`;
 
+<<<<<<< HEAD
 alert( str[1000] ); // undefined
 alert( str.charAt(1000) ); // '' (یک رشته خالی)
+=======
+alert( str[-2] ); // undefined
+alert( str.at(-2) ); // l
+>>>>>>> 18b1314af4e0ead5a2b10bb4bacd24cecbb3f18e
 ```
 
 همچنین ما می‌توانیم با استفاده از `for..of` برای کاراکترها حلقه بزنیم:
@@ -430,9 +464,15 @@ alert( "Wid*!*get*/!*".endsWith("get") ); // true پایان می‌یابد پ�
 
     اگر ما اسم این کشورها را مرتب کنیم این موضوع ممکن است باعث ایجاد نتایج عجیب شود. معمولا مردم توقع داشند که `Zealand` بعد از `Österreich` در لیست بیاید.
 
+<<<<<<< HEAD
 برای فهمیدن اینکه چه چیزی رخ می‌دهد، بیایید نمایش داخلی رشته‌ها را در جاوااسکریپت مرور کنیم.
 
 تمام رشته‌ها با استفاده از [UTF-16](https://en.wikipedia.org/wiki/UTF-16) کدگذاری شده‌اند. یعنی اینکه: هر کاراکتر یک کد عددی متناظر دارد. متدهای خاصی هستند که گرفتن کد از کاراکتر و برعکس را ممکن می‌سازند.
+=======
+To understand what happens, we should be aware that strings in Javascript are encoded using [UTF-16](https://en.wikipedia.org/wiki/UTF-16). That is: each character has a corresponding numeric code.
+
+There are special methods that allow to get the character for the code and back:
+>>>>>>> 18b1314af4e0ead5a2b10bb4bacd24cecbb3f18e
 
 `str.codePointAt(pos)`
 : یک عدد دهدهی که نمایان‌گر کد کاراکتر در موقعیت `pos` است را برمی‌گرداند:
@@ -440,8 +480,12 @@ alert( "Wid*!*get*/!*".endsWith("get") ); // true پایان می‌یابد پ�
     ```js run
     // حروف با بزرگی یا کوچکی متفاوت کدهای متفاوت دارند
     alert( "z".codePointAt(0) ); // 122
+<<<<<<< HEAD
     alert( "Z".codePointAt(0) ); // 90
     alert( "z".codePointAt(0).toString(16) ); // 7a (اگر ما به مقدار هگزادسیمال کد نیاز داشته باشیم)
+=======
+    alert( "z".codePointAt(0).toString(16) ); // 7a (if we need a hexadecimal value)
+>>>>>>> 18b1314af4e0ead5a2b10bb4bacd24cecbb3f18e
     ```
 
 `String.fromCodePoint(code)`
@@ -452,6 +496,7 @@ alert( "Wid*!*get*/!*".endsWith("get") ); // true پایان می‌یابد پ�
     alert( String.fromCodePoint(0x5a) ); // Z (همچنین می‌توانیم از یک مقدار هگزادسیمال به عنوان آرگومان استفاده کنیم)
     ```
 
+<<<<<<< HEAD
     همچنین ما می‌توانیم کاراکترهای Unicode را از طریق کد آنها با استفاده از `\u` که بعد از آن کد hex می‌آید اضافه کنیم:
 
     ```js run
@@ -460,6 +505,9 @@ alert( "Wid*!*get*/!*".endsWith("get") ); // true پایان می‌یابد پ�
     ```
 
 حال بیایید با ساختن یک رشته از کاراکترهایی که کد `65..220` دارند آنها را نگاه بیاندازیم (حروف الفبای لاتین و کمی بیشتر):
+=======
+Now let's see the characters with codes `65..220` (the latin alphabet and a little bit extra) by making a string of them:
+>>>>>>> 18b1314af4e0ead5a2b10bb4bacd24cecbb3f18e
 
 ```js run
 let str = '';
@@ -468,6 +516,7 @@ for (let i = 65; i <= 220; i++) {
   str += String.fromCodePoint(i);
 }
 alert( str );
+// Output:
 // ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~
 // ¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜ
 ```
@@ -487,7 +536,11 @@ alert( str );
 
 پس، مرورگر نیاز دارد که زبان را برای مقایسه کردن بداند.
 
+<<<<<<< HEAD
 خوشبختانه، تمام مرورگرهای مدرن (IE10 به کتابخانه اضافی [Intl.js](https://github.com/andyearnshaw/Intl.js/) احتیاج دارد) از استاندارد بین‌المللی‌کردن [ECMA-402](http://www.ecma-international.org/ecma-402/1.0/ECMA-402.pdf) پشتیبانی می‌کنند.
+=======
+Luckily, modern browsers support the internationalization standard [ECMA-402](https://www.ecma-international.org/publications-and-standards/standards/ecma-402/).
+>>>>>>> 18b1314af4e0ead5a2b10bb4bacd24cecbb3f18e
 
 این استاندارد یک متد خاص را برای مقایسه رشته‌ها در زبان‌های مختلف را مهیا می‌کند که از قوانین خودشان پیروی می‌شود.
 
@@ -505,6 +558,7 @@ alert( 'Österreich'.localeCompare('Zealand') ); // -1
 
 این متد دو آرگومان اضافی دارد که در [مستندات](mdn:js/String/localeCompare) مشخص شده‌اند که به ما اجازه می‌دهند تا زبان را مشخص کنیم (به طور پیش‌فرض از شرایط فعلی بدست می‌آید، ترتیب حروف به زبان بستگی دارد) و قوانین اضافی را ایجاد کنیم مثل حساسیت بزرگی یا کوچکی حرف یا اینکه به یک صورت با `"a"` و `"á"` رفتار شود و غیره.
 
+<<<<<<< HEAD
 ## داخلی‌ها، Unicode
 
 ```warn header="اطلاعات پیشرفته"
@@ -684,6 +738,17 @@ alert( "S\u0307\u0323".normalize() == "\u1e68" ); // true
 - برای تغییر بزرگی یا کوچکی حروف انگلیسی یک رشته، از `toLowerCase/toUpperCase` استفاده کنید.
 - برای گشتن به دنبال یک زیر رشته از `indexOf` یا برای بررسی‌های ساده از `includes/startsWith/endsWith` استفاده کنید.
 - برای مقایسه رشته‌ها با توجه به زبان آنها، از `localeCompare` استفاده کنید، در غیر این صورت آنها توسط کدهای کاراکتر مقایسه می‌شوند.
+=======
+## Summary
+
+- There are 3 types of quotes. Backticks allow a string to span multiple lines and embed expressions `${…}`.
+- We can use special characters, such as a line break `\n`.
+- To get a character, use: `[]`.
+- To get a substring, use: `slice` or `substring`.
+- To lowercase/uppercase a string, use: `toLowerCase/toUpperCase`.
+- To look for a substring, use: `indexOf`, or `includes/startsWith/endsWith` for simple checks.
+- To compare strings according to the language, use: `localeCompare`, otherwise they are compared by character codes.
+>>>>>>> 18b1314af4e0ead5a2b10bb4bacd24cecbb3f18e
 
 چند متد دیگر هم برای رشته‌ها وجود دارد:
 
@@ -691,4 +756,10 @@ alert( "S\u0307\u0323".normalize() == "\u1e68" ); // true
 - `str.repeat(n)` -- رشته را `n` بار تکرار می‌کند.
 - ...و متدهای بیشتری در [مستندات](mdn:js/String) وجود دارند.
 
+<<<<<<< HEAD
 رشته‌ها متدهایی را برای جستجو/جایگزین‌کردن عبارات با قاعده (regular expression) دارند. اما این یک بحث بزرگ است، پس در یک قسمت جدای این آموزش <info:regular-expressions> توضیح داده شده است.
+=======
+Strings also have methods for doing search/replace with regular expressions. But that's big topic, so it's explained in a separate tutorial section <info:regular-expressions>.
+
+Also, as of now it's important to know that strings are based on Unicode encoding, and hence there're issues with comparisons. There's more about Unicode in the chapter <info:unicode>.
+>>>>>>> 18b1314af4e0ead5a2b10bb4bacd24cecbb3f18e
