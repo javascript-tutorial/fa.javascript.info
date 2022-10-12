@@ -50,11 +50,7 @@ let guestList = "Guests: // Error: Unexpected token ILLEGAL
 
 کوتیشن‌های تکی و دوتایی از زمان بسیار قدیم در زبان وجود داشتند زمانی که نیاز به رشته‌های چند خطی خیلی به چشم نمی‌آمد. Backtickها بعدها به وجود آمدند و به این ترتیب چند کاره هستند.
 
-<<<<<<< HEAD
 Backtickها به ما اجازه می‌دهند که یک "تابع الگو" قبل از backtick اول مشخص کنیم. سینتکس اینگونه است: <code>func&#96;string&#96;</code>. تابع `func` به طور خودکار صدا زده می‌شود، رشته را دریافت می‌کند و عبارات را ایجاد می‌کند و می‌تواند با آنها فرایندی انجام دهد. به این "الگوهای برچسب گذاری شده" می‌گویند. این ویژگی پیاده‌سازی الگوهای سفارشی را آسان‌تر می‌کند، اما در عمل خیلی کم استفاده می‌شود. می‌توانید درباره آن در [کتاب راهنما](mdn:/JavaScript/Reference/Template_literals#Tagged_templates) بیشتر بخوانید.
-=======
-Backticks also allow us to specify a "template function" before the first backtick. The syntax is: <code>func&#96;string&#96;</code>. The function `func` is called automatically, receives the string and embedded expressions and can process them. This feature is called "tagged templates", it's rarely seen, but you can read about it in the MDN: [Template literals](mdn:/JavaScript/Reference/Template_literals#Tagged_templates).
->>>>>>> 18b1314af4e0ead5a2b10bb4bacd24cecbb3f18e
 
 ## کاراکترهای خاص
 

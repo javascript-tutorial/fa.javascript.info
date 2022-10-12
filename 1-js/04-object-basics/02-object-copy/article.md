@@ -163,24 +163,13 @@ alert( user.name ); // است John هنوز در شیء اصلی برابر با
 Object.assign(dest, ...sources)
 ```
 
-<<<<<<< HEAD
 - اولین آرگومان `dest` همان شیء مقصود است.
 - آرگومان‌های بعدی `src1, ..., srcN` (ممکن است هر تعدادی باشد) شیءها منبع هستند.
 - این متد ویژگی‌های تمام شیءها منبع `src1, ..., srcN` را درون `dest` کپی می‌کند. به عبارتی دیگر، ویژگی‌های تمام آرگومان‌های بعد از دومین آرگومان، درون شیء اول کپی می‌شوند.
 - متد صدازده شده `dest` را برمی‌گرداند.
 
 برای مثال، می‌توانیم از این متد برای ادغام چند شیء و ریختن آنها درون یک شیء استفاده کنیم:
-```js
-=======
-- The first argument `dest` is a target object.
-- Further arguments is a list of source objects.
-
-It copies the properties of all source objects into the target `dest`, and then returns it as the result.
-
-For example, we have `user` object, let's add a couple of permissions to it:
-
 ```js run
->>>>>>> 18b1314af4e0ead5a2b10bb4bacd24cecbb3f18e
 let user = { name: "John" };
 
 let permissions1 = { canView: true };
@@ -193,12 +182,9 @@ Object.assign(user, permissions1, permissions2);
 
 <<<<<<< HEAD
 // user = { name: "John", canView: true, canEdit: true } :حالا داریم
-=======
-// now user = { name: "John", canView: true, canEdit: true }
 alert(user.name); // John
 alert(user.canView); // true
 alert(user.canEdit); // true
->>>>>>> 18b1314af4e0ead5a2b10bb4bacd24cecbb3f18e
 ```
 
 اگر ویژگی کپی‌شده از قبل وجود داشته باشد، دوباره مقداردهی می‌شود:
@@ -211,11 +197,7 @@ Object.assign(user, { name: "Pete" });
 alert(user.name); // user = { name: "Pete" } :حالا داریم
 ```
 
-<<<<<<< HEAD
-همچنین می‌توانیم برای کپی کردن‌های ساده از `Object.assign` به جای حلقه‌ی `for..in` استفاده کنیم:
-=======
-We also can use `Object.assign` to perform a simple object cloning:
->>>>>>> 18b1314af4e0ead5a2b10bb4bacd24cecbb3f18e
+همچنین می‌توانیم برای کپی کردن‌های ساده از `Object.assign` استفاده کنیم:
 
 ```js run
 let user = {
@@ -231,11 +213,7 @@ alert(clone.name); // John
 alert(clone.age); // 30
 ```
 
-<<<<<<< HEAD
 تمام ویژگی‌های `user` درون شیء خالی کپی و برگردانده می‌شوند.
-=======
-Here it copies all properties of `user` into the empty object and returns it.
->>>>>>> 18b1314af4e0ead5a2b10bb4bacd24cecbb3f18e
 
 همچنین متدهای دیگری برای کپی یک شیء وجود دارد مانند استفاده کردن از [سینتکس spread](info:rest-parameters-spread) `clone = {...user}` که بعدا در این آموزش پوشش داده می‌شود.
 

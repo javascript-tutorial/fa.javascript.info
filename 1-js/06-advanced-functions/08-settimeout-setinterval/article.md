@@ -102,11 +102,7 @@ alert(timerId); // (نمی‌شود null بعد از لغو کردن) شناسه
 
 باز هم، مشخصات جامعی برای این متدها وجود ندارد پس مشکلی نیست.
 
-<<<<<<< HEAD
 برای مرورگرها، تایمرها در [قسمت تایمرهای](https://www.w3.org/TR/html5/webappapis.html#timers) استاندارد HTML5 هستند.
-=======
-For browsers, timers are described in the [timers section](https://html.spec.whatwg.org/multipage/timers-and-user-prompts.html#timers) of HTML Living Standard.
->>>>>>> 18b1314af4e0ead5a2b10bb4bacd24cecbb3f18e
 
 ## تابع setInterval
 

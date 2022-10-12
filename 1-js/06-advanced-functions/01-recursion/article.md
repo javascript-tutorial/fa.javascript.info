@@ -285,11 +285,7 @@ function pow(x, n) {
 
 **تمام بازگشت‌ها می‌توانند به عنوان یک حلقه بازنویسی شوند. نوعی که با حلقه نوشته شده است ممکن است مفیدتر باشد.**
 
-<<<<<<< HEAD
 ...اما گاهی اوقات بازنویسی بدیهی نیست خصوصا زمانی که تابع با توجه به شروط از زیرفراخوانی‌های بازگشتی مختلف استفاده می‌کند و نتیجه‌های آنها را ادغام می‌کند یا زمانی که شاخه‌بندی پیچیده‌تر است. و بهینه‌سازی شاید نیاز نباشد و ارزش سختی آن را نداشته باشد.
-=======
-...But sometimes the rewrite is non-trivial, especially when a function uses different recursive subcalls depending on conditions and merges their results or when the branching is more intricate. And the optimization may be unneeded and totally not worth the efforts.
->>>>>>> 18b1314af4e0ead5a2b10bb4bacd24cecbb3f18e
 
 بازگشت می‌تواند کد کوتاه‌تری ایجاد کند و درک و پشتیبانی از آن راحت‌تر باشد. به بهینه‌سازی‌ها همه جا نیاز نیست. اکثر اوقات ما به کد خوب نیاز داریم و به همین دلیل است که بازگشت استفاده می‌شود.
 
