@@ -5,11 +5,11 @@ Backticks عبارت داخل `{...}$` را در رشته قرار می‌دهد
 let name = "Ilya";
 
 // عبارت عدد 1 است
-alert( `hello ${1}` ); // hello 1
+alert( `سلام ${1}` ); // 1 سلام
 
-// عبارت رشته‌ی "name" است
-alert( `hello ${"name"}` ); // hello name
+// است "name" عبارت رشته
+alert( `سلام ${"name"}` ); // name سلام
 
 // عبارت یک متغیر است، آن را داخل رشته قرار می‌دهد
-alert( `hello ${name}` ); // hello Ilya
+alert( `سلام ${name}` ); // Ilya سلام
 ```
