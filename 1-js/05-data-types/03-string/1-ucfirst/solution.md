@@ -8,13 +8,7 @@ let newStr = str[0].toUpperCase() + str.slice(1);
 
 البته یک مشکل کوچک وجود دارد. اگر `str` خالی باشد، پس `str[0]` برابر با `undefined` است و `undefined` متد `toUpperCase()` را ندارد، پس ما ارور خواهیم داشت.
 
-دو روش پیش روی‌مان داریم:
-
-1. از `str.charAt(0)` استفاده کنیم، چون همیشه یک رشته برمی‌گرداند (شاید رشته خالی).
-2. یک تست برای رشته خالی اضافه کنیم.
-
-روش دوم را اینجا داریم:
-
+آسان‌ترین روش اضافه کردن یک تست برای یک رشته خالی است، مانند:
 ```js run demo
 function ucFirst(str) {
   if (!str) return str;
@@ -24,4 +18,3 @@ function ucFirst(str) {
 
 alert( ucFirst("john") ); // John
 ```
-

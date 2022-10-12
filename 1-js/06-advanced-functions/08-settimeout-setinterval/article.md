@@ -255,8 +255,13 @@ alert("Hello");
 
 همچنین موارد استفاده پیشرفته مربوط به مرورگر از زمان‌بندی با تاخیر 0 وجود دارند که ما در فصل <info:event-loop> به آنها می‌پردازیم.
 
+<<<<<<< HEAD
 ````smart header="تاخیر صفر در واقع صفر نیست (در مرورگر)"
 در مرورگر، یک محدودیت برای اینکه تایمرهای تودرتو هر چند وقت یک بار می‌توانند اجرا شوند وجود دارد. [استاندارد HTML5](https://html.spec.whatwg.org/multipage/timers-and-user-prompts.html#timers) می‌گوید: «بعد از 5 تایمر تودرتو، فاصله زمانی ناچار می‌شود که حداقل 4 میلی‌ثانیه باشد.».
+=======
+````smart header="Zero delay is in fact not zero (in a browser)"
+In the browser, there's a limitation of how often nested timers can run. The [HTML Living Standard](https://html.spec.whatwg.org/multipage/timers-and-user-prompts.html#timers) says: "after five nested timers, the interval is forced to be at least 4 milliseconds.".
+>>>>>>> 18b1314af4e0ead5a2b10bb4bacd24cecbb3f18e
 
 بیایید با مثال پایین نشان دهیم که این یعنی چه. فراخوانی `setTimeout` در مثال زیر خودش را با تاخیر صفر دوباره زمان‌بندی می‌کند. هر فراخوانی زمان واقعی گذشته از فراخوانی قبلی را در آرایه `times` ذخیره می‌کند. تاخیرهای واقعی چگونه بنظر می‌رسند؟ بیایید ببینیم:
 

@@ -160,7 +160,7 @@ alert( user.name ); // است John هنوز در شیء اصلی برابر با
 سینتکس آن اینگونه است:
 
 ```js
-Object.assign(dest, src1[, src2, src3...])
+Object.assign(dest, ...sources)
 ```
 
 - اولین آرگومان `dest` همان شیء مقصود است.
@@ -169,7 +169,7 @@ Object.assign(dest, src1[, src2, src3...])
 - متد صدازده شده `dest` را برمی‌گرداند.
 
 برای مثال، می‌توانیم از این متد برای ادغام چند شیء و ریختن آنها درون یک شیء استفاده کنیم:
-```js
+```js run
 let user = { name: "John" };
 
 let permissions1 = { canView: true };
@@ -180,7 +180,11 @@ let permissions2 = { canEdit: true };
 Object.assign(user, permissions1, permissions2);
 */!*
 
+<<<<<<< HEAD
 // user = { name: "John", canView: true, canEdit: true } :حالا داریم
+alert(user.name); // John
+alert(user.canView); // true
+alert(user.canEdit); // true
 ```
 
 اگر ویژگی کپی‌شده از قبل وجود داشته باشد، دوباره مقداردهی می‌شود:
@@ -193,9 +197,9 @@ Object.assign(user, { name: "Pete" });
 alert(user.name); // user = { name: "Pete" } :حالا داریم
 ```
 
-همچنین می‌توانیم برای کپی کردن‌های ساده از `Object.assign` به جای حلقه‌ی `for..in` استفاده کنیم:
+همچنین می‌توانیم برای کپی کردن‌های ساده از `Object.assign` استفاده کنیم:
 
-```js
+```js run
 let user = {
   name: "John",
   age: 30
@@ -204,6 +208,9 @@ let user = {
 *!*
 let clone = Object.assign({}, user);
 */!*
+
+alert(clone.name); // John
+alert(clone.age); // 30
 ```
 
 تمام ویژگی‌های `user` درون شیء خالی کپی و برگردانده می‌شوند.

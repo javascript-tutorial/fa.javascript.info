@@ -351,7 +351,7 @@ alert( isFinite(num) );
 
     ```js run
     alert( Number.isFinite(123) ); // true
-    alert( Number.isFinite(Infinity) ); //false
+    alert( Number.isFinite(Infinity) ); // false
     alert( Number.isFinite(2 / 0) ); // false
 
     // :به تفاوت توجه کنید
