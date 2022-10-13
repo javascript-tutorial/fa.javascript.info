@@ -1,7 +1,7 @@
 کد جاوااسکریپت:
 
 ```js demo run
-let name = prompt("What is your name?", "");
+let name = prompt("اسم شما چیست؟", "");
 alert(name);
 ```
 
@@ -15,7 +15,7 @@ alert(name);
   <script>
     'use strict';
 
-    let name = prompt("What is your name?", "");
+    let name = prompt("اسم شما چیست؟", "");
     alert(name);
   </script>
 
