@@ -122,8 +122,13 @@ user.name = "Pete"; // مقدار داد 'name' ارور: نمی‌توان به
 
 حالا هیچ‌کس نمی‌تواند اسم کاربر ما را تغییر دهد، مگر اینکه `defineProperty` خودش را برای باطل کردن توصیف‌کننده‌ی ما اعمال کند.
 
+<<<<<<< HEAD
 ```smart header="ارورها فقط در حالت سخت‌گیرانه ایجاد می‌شوند"
 در حالت غیر سخت‌گیرانه، زمانی که بر روی ویژگی‌های غیرقابل نوشتن می‌نویسیم، هیچ اروری رخ نمی‌دهد. اما همچنان این کار انجام نمی‌شود. در حالت غیر سخت‌گیرانه، کارهای نقص‌کننده‌ی پرچم بی سر و صدا نادیده گرفته می‌شوند.
+=======
+```smart header="Errors appear only in strict mode"
+In non-strict mode, no errors occur when writing to non-writable properties and such. But the operation still won't succeed. Flag-violating actions are just silently ignored in non-strict.
+>>>>>>> 5dff42ba283bce883428c383c080fa9392b71df8
 ```
 
 اینجا مثالی مشابه داریم اما ویژگی از اول ایجاد شده است:

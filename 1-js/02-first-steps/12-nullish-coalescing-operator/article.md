@@ -29,7 +29,7 @@ result = (a !== null && a !== undefined) ? a : b;
 ```js run
 let user;
 
-alert(user ?? "Anonymous"); // Anonymous (user not defined)
+alert(user ?? "Anonymous"); // Anonymous (user is undefined)
 ```
 
 در این مثال یک اسم به `user` تخصیص داده شده است:
@@ -37,7 +37,7 @@ alert(user ?? "Anonymous"); // Anonymous (user not defined)
 ```js run
 let user = "John";
 
-alert(user ?? "Anonymous"); // John (user defined)
+alert(user ?? "Anonymous"); // John (user is not null/udefined)
 ```
 
 همچنین می‌توانیم از دنباله‌ی `??` برای انتخاب کردن اولین مقدار در یک لیست که `null/undefined` نباشد استفاده کنیم.

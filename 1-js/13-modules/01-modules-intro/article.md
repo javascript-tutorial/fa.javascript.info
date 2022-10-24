@@ -9,9 +9,15 @@
 
 این ها نمونه هایی از این کتابخانه ها است (این بخش صرفا جنبه تاریخی دارد):
 
+<<<<<<< HEAD
 - [AMD](https://en.wikipedia.org/wiki/Asynchronous_module_definition) -- یکی از قدیمی ترین سیستم های ماژول بندی، که اولین بار توسط کتابخانه [require.js](http://requirejs.org/) پیاده سازی شد .
 - [CommonJS](http://wiki.commonjs.org/wiki/Modules/1.1) -- سیستم ماژول بندی که برای سرورها Node.js درست شد.
 - [UMD](https://github.com/umdjs/umd) -- یک سیستم ماژول بندی که به عنوان یک سیستم جهانی شناخته شده و با هردو سیستم AMD و CommonJS همخوانی دارد.
+=======
+- [AMD](https://en.wikipedia.org/wiki/Asynchronous_module_definition) -- one of the most ancient module systems, initially implemented by the library [require.js](https://requirejs.org/).
+- [CommonJS](https://wiki.commonjs.org/wiki/Modules/1.1) -- the module system created for Node.js server.
+- [UMD](https://github.com/umdjs/umd) -- one more module system, suggested as a universal one, compatible with AMD and CommonJS.
+>>>>>>> 5dff42ba283bce883428c383c080fa9392b71df8
 
 همه این سیستم ها کم کم تبدیل به بخشی از تاریخ شدند اما هنوز هم می توان آن ها را در اسکریپت های قدیمی مشاهده کرد.
 

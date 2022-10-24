@@ -202,7 +202,11 @@ for (let key in user) {
 }
 ```
 
+<<<<<<< HEAD
 کتابخانه‌های جاوااسکریپت هم تابع‌هایی برای پیوند زدن گسترده و راحت ارائه می‌دهد، مانند [_.bindAll(object, methodNames)](http://lodash.com/docs#bindAll) در lodash.
+=======
+JavaScript libraries also provide functions for convenient mass binding , e.g. [_.bindAll(object, methodNames)](https://lodash.com/docs#bindAll) in lodash.
+>>>>>>> 5dff42ba283bce883428c383c080fa9392b71df8
 ````
 
 ## تابع‌های جزئی

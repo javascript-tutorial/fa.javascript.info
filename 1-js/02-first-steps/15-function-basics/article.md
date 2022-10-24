@@ -460,7 +460,11 @@ checkPermission(..) // یک سطح دسترسی را بررسی می‌کند و
 ```smart header="نام‌های خیلی کوتاه تابع"
 توابعی که بیشتر مورد استفاده قرار می‌گیرند، بعضی اوقات اسم‌های خیلی کوتاهی دارند.
 
+<<<<<<< HEAD
 برای مثال، فریمورک [jQuery](http://jquery.com) یک تابع را با `$` تعریف می‌کند. کتابخانه‌ [LoDash](http://lodash.com/) هم تابع اصلی‌ش با نام `_` است.
+=======
+For example, the [jQuery](https://jquery.com/) framework defines a function with `$`. The [Lodash](https://lodash.com/) library has its core function named `_`.
+>>>>>>> 5dff42ba283bce883428c383c080fa9392b71df8
 
 اینها استثنا هستند. عموما اسم‌های توابع باید مختصر و توصیفی باشند.
 ```

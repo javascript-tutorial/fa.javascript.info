@@ -212,7 +212,11 @@ drawHtmlTree(node6, 'div.domtree', 690, 500);
 
 ## خودتان آن را ببینید
 
+<<<<<<< HEAD
 برای دیدن ساختار Dom به صورت بی‌وقفه (real-time)، امتحان کنید [Live DOM Viewer](http://software.hixie.ch/utilities/js/live-dom-viewer/). فقط در سند تایپ کنید و  درجا به عنوان یک DOM نشان داده خواهد شد.
+=======
+To see the DOM structure in real-time, try [Live DOM Viewer](https://software.hixie.ch/utilities/js/live-dom-viewer/). Just type in the document, and it will show up as a DOM at an instant.
+>>>>>>> 5dff42ba283bce883428c383c080fa9392b71df8
 
 راه دیگر برای کشف DOM استفاده از ابزارهای توسعه دهنده مرورگر است. در واقع، این همان چیزی است که ما هنگام توسعه استفاده می‌کنیم.
 
