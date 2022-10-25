@@ -29,20 +29,11 @@
 
 در عمل ویرایشگرهای سبک دارای افزونه‌های متعددی هستند، مانند تحلیل‌کننده‌های سینتَکس (syntax)، تکمیل‌کننده های کد و غیره. به همین دلیل نمی‌توان مرز دقیقی بین IDE و ویرایشگرهای سبک قائل بود. 
 
-<<<<<<< HEAD
 موارد زیر ارزش توجه را دارند: 
 
-- [Atom](https://atom.io/) (cross-platform، رایگان). 
 - [Sublime Text](http://www.sublimetext.com) (cross-platform، shareware).
 - [Notepad++](https://notepad-plus-plus.org/) (Windows، رایگان)
 - [Vim](http://www.vim.org/) و [Emacs](https://www.gnu.org/software/emacs/) هم اگر با نحوه کارشان آشنا باشید خوب هستند. 
-=======
-There are many options, for instance:
-
-- [Sublime Text](https://www.sublimetext.com/) (cross-platform, shareware).
-- [Notepad++](https://notepad-plus-plus.org/) (Windows, free).
-- [Vim](https://www.vim.org/) and [Emacs](https://www.gnu.org/software/emacs/) are also cool if you know how to use them.
->>>>>>> 5dff42ba283bce883428c383c080fa9392b71df8
 
 ## بیایید بحث نکنیم 
 
@@ -50,13 +41,9 @@ There are many options, for instance:
 
 ویرایشگرهای دیگری نیز وجود دارند پس همانی که مورد علاقه شماست را انتخاب کنید. 
 
-<<<<<<< HEAD
 انتخاب ویرایشگر یا هر ابزار دیگری شخصی بوده و به نوع پروژه، عادات و سلیقه شخصی بستگی دارد. 
-=======
-The choice of an editor, like any other tool, is individual and depends on your projects, habits, and personal preferences.
 
-The author's personal opinion:
+نظر شخصی نویسنده:
 
-- I'd use [Visual Studio Code](https://code.visualstudio.com/) if I develop mostly frontend.
-- Otherwise, if it's mostly another language/platform and partially frontend, then consider other editors, such as XCode (Mac), Visual Studio (Windows) or Jetbrains family (Webstorm, PHPStorm, RubyMine etc, depending on the language).
->>>>>>> 5dff42ba283bce883428c383c080fa9392b71df8
+- اگر من اغلب اوقات فرانت‌اند کار می‌کنم، از [Visual Studio Code](https://code.visualstudio.com/) استفاده خواهم کرد.
+- در غیر این صورت، اگر اکثر اوقات زبان/پلتفرم دیگری کار می‌کنم و کمی فرانت‌اند، دیگر ویرایشگرها را انتخاب می‌کنم مانند XCode (Mac)، Visual Studio (Windows) یا خانواده Jetbrains (بر اساس زبان مورد نظر، Webstorm، PHPStorm، RubyMine و غیره).

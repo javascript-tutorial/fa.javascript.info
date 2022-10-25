@@ -150,13 +150,8 @@ let message = "آن"; // SyntaxError: Identifier 'message' has already been decl
 بنابراین، ما باید متغیر را یک بار تعریف کنیم و سپس بدون `let` به آن رجوع کنیم.
 ````
 
-<<<<<<< HEAD
 ```smart header="زبان‌های Functional"
-جالب است بدانید زبان‌های [functional](https://fa.wikipedia.org/wiki/برنامه%E2%80%8Cنویسی_تابعی) (تابع‌محور) مانند [Scala](http://www.scala-lang.org/) یا [Erlang](http://www.erlang.org/) تغییر مقدار متغیر را ممنوع کرده‌اند.
-=======
-```smart header="Functional languages"
-It's interesting to note that there exist [functional](https://en.wikipedia.org/wiki/Functional_programming) programming languages, like [Scala](https://www.scala-lang.org/) or [Erlang](https://www.erlang.org/) that forbid changing variable values.
->>>>>>> 5dff42ba283bce883428c383c080fa9392b71df8
+جالب است بدانید زبان‌های [functional](https://fa.wikipedia.org/wiki/برنامه%E2%80%8Cنویسی_تابعی) (تابع‌محور) مانند [Scala](http://www.scala-lang.org/) یا [Erlang](http://www.erlang.org/) وجود دارند که تغییر مقدار متغیر را ممنوع کرده‌اند.
 
 در این نوع زبان‌ها، یک بار که مقداری را "در جعبه" قرار می‌دهیم، تا ابد آنجا می‌ماند. اگر بخواهیم مقداری دیگر را ذخیره کنیم، زبان ما را مجبور می‌کند تا جعبه‌ای جدید بسازیم (متغیر جدیدی تعریف کنیم). نمی‌توانیم از متغیر قدیمی استفاده کنیم.
 
@@ -202,13 +197,8 @@ let my-name; // خط‌های پیوند '-' در نام‌ها ممنوع هس�
 متغیرهای apple و Apple دو متغیر متفاوت هستند.
 ```
 
-<<<<<<< HEAD
 ````smart header="کاراکترهای غیر انگلیسی مجاز هستند ولی توصیه نمی‌شوند"
-امکان استفاده از کاراکترهای زبان‌های دیگر، شامل حروف cyrillic یا حتی hieroglyphs(حروف تصویری) وجود دارد:
-=======
-````smart header="Non-Latin letters are allowed, but not recommended"
-It is possible to use any language, including cyrillic letters, Chinese logograms and so on, like this:
->>>>>>> 5dff42ba283bce883428c383c080fa9392b71df8
+امکان استفاده از هر زبانی، شامل حروف cyrillic، لوگوگرام‌های چینی و دیگر زبان‌ها وجود دارد، مثلا اینگونه::
 
 ```js
 let имя = '...';

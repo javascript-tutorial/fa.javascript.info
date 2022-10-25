@@ -12,7 +12,7 @@
 <<<<<<< HEAD
 - [AMD](https://en.wikipedia.org/wiki/Asynchronous_module_definition) -- یکی از قدیمی ترین سیستم های ماژول بندی، که اولین بار توسط کتابخانه [require.js](http://requirejs.org/) پیاده سازی شد .
 - [CommonJS](http://wiki.commonjs.org/wiki/Modules/1.1) -- سیستم ماژول بندی که برای سرورها Node.js درست شد.
-- [UMD](https://github.com/umdjs/umd) -- یک سیستم ماژول بندی که به عنوان یک سیستم جهانی شناخته شده و با هردو سیستم AMD و CommonJS همخوانی دارد.
+- [UMD](https://github.com/umdjs/umd) -- یک سیستم ماژول بندی که به عنوان یک سیستم جامع شناخته شده و با هردو سیستم AMD و CommonJS همخوانی دارد.
 =======
 - [AMD](https://en.wikipedia.org/wiki/Asynchronous_module_definition) -- one of the most ancient module systems, initially implemented by the library [require.js](https://requirejs.org/).
 - [CommonJS](https://wiki.commonjs.org/wiki/Modules/1.1) -- the module system created for Node.js server.

@@ -1,11 +1,7 @@
 
 # پلیفیل‌ها و ترنسپایلرها
 
-<<<<<<< HEAD
-زبان جاوااسکریپت پیوسته در حال تکامل است. پیشنهادهایی برای بهتر شدن آن به‌طور منظم صورت می‌گیرد، این پیشنهاد‌ها بررسی می‌شوند و اگر ارزشمند باشند، به لیست <https://tc39.github.io/ecma262/> اضافه می‌شوند و سپس برای [تشخیص](http://www.ecma-international.org/publications/standards/Ecma-262.htm) پیش می‌روند.
-=======
-The JavaScript language steadily evolves. New proposals to the language appear regularly, they are analyzed and, if considered worthy, are appended to the list at <https://tc39.github.io/ecma262/> and then progress to the [specification](https://www.ecma-international.org/publications-and-standards/standards/ecma-262/).
->>>>>>> 5dff42ba283bce883428c383c080fa9392b71df8
+زبان جاوااسکریپت پیوسته در حال تکامل است. پیشنهادهایی برای بهتر شدن آن به‌طور منظم صورت می‌گیرد، این پیشنهاد‌ها بررسی می‌شوند و اگر ارزشمند باشند، به لیست <https://tc39.github.io/ecma262/> اضافه می‌شوند و سپس برای [مشخصات زبان (specification)](http://www.ecma-international.org/publications/standards/Ecma-262.htm) پیش می‌روند.
 
 تیم‌های مسئول موتورهای جاوااسکریپت تصمیم می‌گیرند کدام یک را اول پیاده‌سازی کنند. ممکن است تصمیم بگیرند پیشنهادهایی که هنوز به‌صورت پیش‌نویس هستند را اول پیاده‌سازی کنند و پیشنهادهایی که در مرحلهٔ تشخیص هستند را به بعدتر موکول کنند، به دلیل اینکه کمتر جالب هستند و یا فقط سخت‌تر هستند.
 
@@ -75,15 +71,9 @@ if (!Math.trunc) { // اگر چنین تابعی وجود ندارد
 
 جاوااسکریپت یک زبان به‌شدت داینامیک است. اسکریپت‌ها می‌توانند هر تابعی را تغییر دهند یا اضافه کنند. حتی تابع‌های built-in.
 
-<<<<<<< HEAD
 دو کتابخانه جالب پلیفیل‌ها:
 - [core js](https://github.com/zloirock/core-js) که از چیزهای زیادی پشتیبانی می‌کند و اجازه می‌دهد فقط فیچرهای مورد نیاز خود را اضافه کنید.
 - [polyfill.io](http://polyfill.io) سرویسی که یک اسکریپت با پلیفیل‌ها ارائه می‌دهد. بسته به فیچرها و مرورگر کاربر.
-=======
-Two interesting polyfill libraries are:
-- [core js](https://github.com/zloirock/core-js) that supports a lot, allows to include only needed features.
-- [polyfill.io](https://polyfill.io/) service that provides a script with polyfills, depending on the features and user's browser.
->>>>>>> 5dff42ba283bce883428c383c080fa9392b71df8
 
 
 ## خلاصه
