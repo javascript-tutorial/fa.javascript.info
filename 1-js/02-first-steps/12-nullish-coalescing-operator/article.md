@@ -29,7 +29,7 @@ result = (a !== null && a !== undefined) ? a : b;
 ```js run
 let user;
 
-alert(user ?? "Anonymous"); // Anonymous (user not defined)
+alert(user ?? "Anonymous"); // Anonymous (است undefined برابر با user)
 ```
 
 در این مثال یک اسم به `user` تخصیص داده شده است:
@@ -37,7 +37,7 @@ alert(user ?? "Anonymous"); // Anonymous (user not defined)
 ```js run
 let user = "John";
 
-alert(user ?? "Anonymous"); // John (user defined)
+alert(user ?? "Anonymous"); // John (نیست null/udefined برابر با user)
 ```
 
 همچنین می‌توانیم از دنباله‌ی `??` برای انتخاب کردن اولین مقدار در یک لیست که `null/undefined` نباشد استفاده کنیم.
@@ -70,7 +70,7 @@ let firstName = null;
 let lastName = null;
 let nickName = "Supercoder";
 
-// shows the first truthy value:
+// :را نشان می‌دهد truthy اولین مقدار
 *!*
 alert(firstName || lastName || nickName || "Anonymous"); // Supercoder
 */!*
@@ -161,7 +161,7 @@ alert(x); // 2
   از آن برای تعیین کردن مقدار پیش‌فرض برای متغیرها استفاده می‌شود:
 
   ```js
-  // set height=100, if height is null or undefined
+  // را تنظیم کن height=100 ،بود undefined یا null برابر با height اگر
   height = height ?? 100;
   ```
 

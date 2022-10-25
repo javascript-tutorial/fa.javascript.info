@@ -31,7 +31,6 @@
 
 موارد زیر ارزش توجه را دارند: 
 
-- [Atom](https://atom.io/) (cross-platform، رایگان). 
 - [Sublime Text](http://www.sublimetext.com) (cross-platform، shareware).
 - [Notepad++](https://notepad-plus-plus.org/) (Windows، رایگان)
 - [Vim](http://www.vim.org/) و [Emacs](https://www.gnu.org/software/emacs/) هم اگر با نحوه کارشان آشنا باشید خوب هستند. 
@@ -43,3 +42,8 @@
 ویرایشگرهای دیگری نیز وجود دارند پس همانی که مورد علاقه شماست را انتخاب کنید. 
 
 انتخاب ویرایشگر یا هر ابزار دیگری شخصی بوده و به نوع پروژه، عادات و سلیقه شخصی بستگی دارد. 
+
+نظر شخصی نویسنده:
+
+- اگر من اغلب اوقات فرانت‌اند کار می‌کنم، از [Visual Studio Code](https://code.visualstudio.com/) استفاده خواهم کرد.
+- در غیر این صورت، اگر اکثر اوقات زبان/پلتفرم دیگری کار می‌کنم و کمی فرانت‌اند، دیگر ویرایشگرها را انتخاب می‌کنم مانند XCode (Mac)، Visual Studio (Windows) یا خانواده Jetbrains (بر اساس زبان مورد نظر، Webstorm، PHPStorm، RubyMine و غیره).
