@@ -58,7 +58,7 @@ alert(test); // ReferenceError: test is not defined
 
 همین مورد برای حلقه‌ها هم صدق می‌کند: `var` نمی‌تواند در محدوده بلوک حلقه باشد:
 
-```js
+```js run
 for (var i = 0; i < 10; i++) {
   var one = 1;
   // ...
@@ -170,7 +170,7 @@ sayHi();
 
 ```js run
 function sayHi() {
-  alert(phrase);  
+  alert(phrase);
 
 *!*
   var phrase = "سلام";
