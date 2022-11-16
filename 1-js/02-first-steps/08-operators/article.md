@@ -50,14 +50,9 @@
 برای مثال:
 
 ```js run
-<<<<<<< HEAD
-alert( 5 % 2 ); // ۱، باقی‌ماندهٔ تقسیم ۵ بر ۲
-alert( 8 % 3 ); // ۲، باقی‌ماندهٔ تقسیم ۸ بر ۳
-=======
-alert( 5 % 2 ); // 1, a remainder of 5 divided by 2
-alert( 8 % 3 ); // 2, a remainder of 8 divided by 3
-alert( 8 % 4 ); // 2, 0 remainder of 8 divided by 4
->>>>>>> 8d9ecb724c7df59774d1e5ffb5e5167740b7d321
+alert( 5 % 2 ); // 1، باقی‌ماندهٔ تقسیم 5 بر 2
+alert( 8 % 3 ); // 2، باقی‌ماندهٔ تقسیم 8 بر 3
+alert( 8 % 4 ); // باقی‌ماندۀ تقسیم 8 بر 4، 0
 ```
 
 ### بتوان‌رساندن **
@@ -74,11 +69,7 @@ alert( 2 ** 3 ); // 2³ = 8
 alert( 2 ** 4 ); // 2⁴ = 16
 ```
 
-<<<<<<< HEAD
 درست مانند ریاضیات، عملگر بتوان‌رساندن برای اعداد غیر صحیح نیز تعریف می‌شود.
-=======
-Just like in maths, the exponentiation operator is defined for non-integer numbers as well.
->>>>>>> 8d9ecb724c7df59774d1e5ffb5e5167740b7d321
 
 برای مثال، جذر(ریشهٔ دوم) یک عدد با بتوان‌رساندن آن به ½ به‌دست می‌آید: 
 

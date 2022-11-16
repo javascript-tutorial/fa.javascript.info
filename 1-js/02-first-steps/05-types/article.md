@@ -224,11 +224,7 @@ alert(x); // "undefined"
 
 ## عملگر typeof [#type-typeof]
 
-<<<<<<< HEAD
-این عملگر نوع عبارت را نشان می‌دهد. معمولا زمانی که می‌خواهیم سریع نوع یک مقدار را بررسی کنیم یا زمانی‌ که می‌خواهیم پردازشی بر اساس نوع یک مقدار انجام دهیم، کاربرد دارد.
-=======
-The `typeof` operator returns the type of the operand. It's useful when we want to process values of different types differently or just want to do a quick check.
->>>>>>> 8d9ecb724c7df59774d1e5ffb5e5167740b7d321
+عملگر `typeof` نوع عملوند را نشان می‌دهد. معمولا زمانی که می‌خواهیم به سرعت نوع یک مقدار را بررسی کنیم یا زمانی‌ که می‌خواهیم مقادیری از انواع مختلف را به طور متفاوت پردازش کنیم، کاربرد دارد.
 
 این عملگر به دو شکل قابل استفاده است:
 

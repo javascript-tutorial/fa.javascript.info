@@ -37,11 +37,7 @@ alert(user ?? "Anonymous"); // Anonymous (است undefined برابر با user)
 ```js run
 let user = "John";
 
-<<<<<<< HEAD
 alert(user ?? "Anonymous"); // John (نیست null/udefined برابر با user)
-=======
-alert(user ?? "Anonymous"); // John (user is not null/undefined)
->>>>>>> 8d9ecb724c7df59774d1e5ffb5e5167740b7d321
 ```
 
 همچنین می‌توانیم از دنباله‌ی `??` برای انتخاب کردن اولین مقدار در یک لیست که `null/undefined` نباشد استفاده کنیم.

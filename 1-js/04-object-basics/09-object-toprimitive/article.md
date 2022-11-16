@@ -224,14 +224,9 @@ alert(user + 500); // toString -> John500
 
 همانطور که از قبل می‌دانیم، بسیاری از عملگرها و تابع‌ها تبدیل نوع داده را انجام می‌دهند، مثلا عملگر ضرب `*` عملوندها را به عدد تبدیل می‌کند.
 
-<<<<<<< HEAD
+اگر ما شیء را به عنوان یک آرگومان پاس دهیم سپس دو مرحله از محاسبات وجود خواهد داشت:
 1. شیء به یک مقدار اصلی تبدیل می‌شود (با استفاده از قوانینی که بالاتر گفتیم).
 2. اگر برای محاسبات بعدی لازم باشد، مقدار اصلی حاصل باز هم تبدیل می‌شود.
-=======
-If we pass an object as an argument, then there are two stages of calculations:
-1. The object is converted to a primitive (using the rules described above).
-2. If necessary for further calculations, the resulting primitive is also converted.
->>>>>>> 8d9ecb724c7df59774d1e5ffb5e5167740b7d321
 
 برای مثال:
 
