@@ -10,17 +10,17 @@
 
 ## ساختار Map
 
-[Map](mdn:js/Map) مجموعه‌ای از داده‌های کلیددار است، درست مانند `Object`. اما تفاوت اصلی آنها این است که `Map` اجازه می‌دهد که کلیدها از هر نوعی باشند.
+[Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) مجموعه‌ای از داده‌های کلیددار است، درست مانند `Object`. اما تفاوت اصلی آنها این است که `Map` اجازه می‌دهد که کلیدها از هر نوعی باشند.
 
 متدها و ویژگی‌های آن:
 
-- `new Map()` -- map را می‌سازد.
-- [`map.set(key, value)`](mdn:js/Map/set) -- value را به واسطه key ذخیره می‌کند.
-- [`map.get(key)`](mdn:js/Map/get) -- مقدار را به واسطه key برمی‌گرداند، اگر `key` در map وجود نداشته باشد `undefined` برگردانده می‌شود.
-- [`map.has(key)`](mdn:js/Map/has) -- اگر `key` وجود داشته باشد `true` برگردانده می‌شود، در غیر این صورت `false`.
-- [`map.delete(key)`](mdn:js/Map/delete) -- مقدار را به واسطه key حذف می‌کند.
-- [`map.clear()`](mdn:js/Map/clear) -- همه چیز را از map حذف می‌کند.
-- [`map.size`](mdn:js/Map/size) -- تعداد المان‌های کنونی را برمی‌گرداند.
+- [`new Map()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/Map) -- map را می‌سازد.
+- [`map.set(key, value)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/set) -- value را به واسطه key ذخیره می‌کند.
+- [`map.get(key)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/get) -- مقدار را به واسطه key برمی‌گرداند، اگر `key` در map وجود نداشته باشد `undefined` برگردانده می‌شود.
+- [`map.has(key)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/has) -- اگر `key` وجود داشته باشد `true` برگردانده می‌شود، در غیر این صورت `false`.
+- [`map.delete(key)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/delete) -- مقدار را به واسطه key حذف می‌کند.
+- [`map.clear()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/clear) -- همه چیز را از map حذف می‌کند.
+- [`map.size`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/size) -- تعداد المان‌های کنونی را برمی‌گرداند.
 
 برای مثال:
 
@@ -100,14 +100,13 @@ map.set('1', 'str1')
 ```
 ````
 
-
 ## حلقه زدن در Map
 
 برای حلقه زدن در `map` 3 متد وجود دارد:
 
-- [`map.keys()`](mdn:js/Map/keys) -- یک حلقه‌پذیر برای کلیدها برمی‌گرداند،
-- [`map.values()`](mdn:js/Map/values) -- یک حلقه‌پذیر برای مقدارها برمی‌گرداند،
-- [`map.entries()`](mdn:js/Map/entries) -- یک حلقه‌پذیر برای برای اطلاعات به شکل `[key, value]` برمی‌گرداند که به صورت پیش‌فرض در `for..of` استفاده می‌شود.
+- [`map.keys()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/keys) -- یک حلقه‌پذیر برای کلیدها برمی‌گرداند،
+- [`map.values()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/values) -- یک حلقه‌پذیر برای مقدارها برمی‌گرداند،
+- [`map.entries()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/entries) -- یک حلقه‌پذیر برای برای اطلاعات به شکل `[key, value]` برمی‌گرداند که به صورت پیش‌فرض در `for..of` استفاده می‌شود.
 
 برای مثال:
 
@@ -162,7 +161,7 @@ let map = new Map([
 alert( map.get('1') ); // str1
 ```
 
-اگر ما یک شیء ساده داریم و بخواهیم از آن یک `Map` بسازیم، می‌توانیم از متد درون‌ساخت [Object.entries(obj)](mdn:js/Object/entries) استفاده کنیم که برای یک شیء آرایه‌ای از جفت‌های کلید/مقدار را دقیقا در همان فرمت برمی‌گرداند.
+اگر ما یک شیء ساده داریم و بخواهیم از آن یک `Map` بسازیم، می‌توانیم از متد درون‌ساخت [Object.entries(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries) استفاده کنیم که برای یک شیء آرایه‌ای از جفت‌های کلید/مقدار را دقیقا در همان فرمت برمی‌گرداند.
 
 بنابراین ما می‌توانیم به این صورت از شیء یک map بسازیم:
 
@@ -233,16 +232,16 @@ let obj = Object.fromEntries(map); // را حذف کردیم .entries()
 
 ## ساختار Set
 
-یک `Set` مجموعه‌ای خاص است - «دسته‌ای از مقدارها» (بدون کلید) که هر مقدار تنها یک بار در آن واقع می‌شود.
+یک [`Set`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set) مجموعه‌ای خاص است - «دسته‌ای از مقدارها» (بدون کلید) که هر مقدار تنها یک بار در آن واقع می‌شود.
 
 متدهای اصلی آن:
 
-- `new Set(iterable)` -- set را ایجاد می‌کند و اگر یک شیء حلقه‌پذیر داده شود (معمولا یک آرایه)، مقدارها را از آن درون set کپی می‌کند.
-- [`set.add(value)`](mdn:js/Set/add) -- یک مقدار اضافه می‌کند و خود set را برمی‌گرداند.
-- [`set.delete(value)`](mdn:js/Set/delete) -- مقدار را حذف می‌کند و اگر `value` هنگام فراخوانی وجود داشته باشد `true` را برمی‌گرداند، در غیر این صورت `false`.
-- [`set.has(value)`](mdn:js/Set/has) -- اگر مقدار در set وجود داشته باشد `true` را برمی‌گرداند، در غیر این صورت `false`.
-- [`set.clear()`](mdn:js/Set/clear) -- همه چیز را از set حذف می‌کند.
-- [`set.size`](mdn:js/Set/size) -- برابر با تعداد المان‌ها است.
+- [`new Set([iterable])`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/Set) -- set را ایجاد می‌کند و اگر یک شیء حلقه‌پذیر داده شود (معمولا یک آرایه)، مقدارها را از آن درون set کپی می‌کند.
+- [`set.add(value)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/add) -- یک مقدار اضافه می‌کند و خود set را برمی‌گرداند.
+- [`set.delete(value)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/delete) -- مقدار را حذف می‌کند و اگر `value` هنگام فراخوانی وجود داشته باشد `true` را برمی‌گرداند، در غیر این صورت `false`.
+- [`set.has(value)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/has) -- اگر مقدار در set وجود داشته باشد `true` را برمی‌گرداند، در غیر این صورت `false`.
+- [`set.clear()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/clear) -- همه چیز را از set حذف می‌کند.
+- [`set.size`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/size) -- برابر با تعداد المان‌ها است.
 
 ویژگی اصلی این اصت که فراخوانی‌های پی‌در‌پی `set.add(value)` با مقداری یکسان، کاری انجام نمی‌دهد. به همین دلیل است که هر مقدار تنها یک بار در `Set` واقع می‌شوند.
 
@@ -272,7 +271,7 @@ for (let user of set) {
 }
 ```
 
-جایگزین `Set` می‌تواند آرایه‌ای از کاربران و کدی برای بررسی تکراری بودن کاربر در هر بار اضافه کردن با استفاده از [arr.find](mdn:js/Array/find) باشد. اما عملکرد کد ممکن است بسیار بد باشد چون این متد تمام آرایه و هر المان را بررسی می‌کند. `Set` برای بررسی یکتا بودن از درون بسیار بهینه‌تر است.
+جایگزین `Set` می‌تواند آرایه‌ای از کاربران و کدی برای بررسی تکراری بودن کاربر در هر بار اضافه کردن با استفاده از [arr.find](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find) باشد. اما عملکرد کد ممکن است بسیار بد باشد چون این متد تمام آرایه و هر المان را بررسی می‌کند. `Set` برای بررسی یکتا بودن از درون بسیار بهینه‌تر است.
 
 ## حلقه‌زدن در Set
 
@@ -295,38 +294,38 @@ set.forEach((value, valueAgain, set) => {
 
 همچنین متدهای مشابهی که `Map` هم برای حلقه‌زننده‌ها دارد، پشتیبانی می‌شوند:
 
-- [`set.keys()`](mdn:js/Set/keys) -- یک شیء حلقه‌پذیر برای مقدارها را برمی‌گرداند،
-- [`set.values()`](mdn:js/Set/values) -- با `set.keys()` یکسان است، برای سازگاری با `Map`
-- [`set.entries()`](mdn:js/Set/entries) -- یک شیء حلقه‌پذیر را برای اطلاعات به شکل `[value, value]` برمی‌گرداند، برای سازگاری با `Map` وجود دارد.
+- [`set.keys()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/keys) -- یک شیء حلقه‌پذیر برای مقدارها را برمی‌گرداند،
+- [`set.values()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/values) -- با `set.keys()` یکسان است، برای سازگاری با `Map`
+- [`set.entries()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/entries) -- یک شیء حلقه‌پذیر را برای اطلاعات به شکل `[value, value]` برمی‌گرداند، برای سازگاری با `Map` وجود دارد.
 
 ## خلاصه
 
-`Map` -- یک مجموعه از مقدارهای کلیددار است.
+[`Map`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) -- یک مجموعه از مقدارهای کلیددار است.
 
 متدها و ویژگی‌های آن:
 
-- `new Map([iterable])` -- map را می‌سازد، برای مقداردهی اولیه از `iterable`(حلقه‌پذیر) اختیاری (مانند آرایه) از جفت‌های `[key,value]` می‌توان استفاده کرد.
-- [`map.set(key, value)`](mdn:js/Map/set) -- مقدار را به واسطه کلید ذخیره می‌کند، خود map را برمی‌گرداند.
-- [`map.get(key)`](mdn:js/Map/get)` -- مقدار را به واسطه کلید برمی‌گرداند، اگر `key` در map وجود نداشته باشد `undefined` برمی‌گرداند.
-- [`map.has(key)`](mdn:js/Map/has) -- اگر `key` وجود داشته باشد `true` برمی‌گرداند، در غیر این صورت `false`.
-- [`map.delete(key)`](mdn:js/Map/delete) -- مقدار را به واسطه کلید حذف می‌کند، اگر `key` در لحظه فراخوانی وجود داشته باشد `true` برمی‌گرداند، در غیر این صورت `false`.
-- [`map.clear()`](mdn:js/Map/clear) -- همه چیز را از map حذف می‌کند.
-- [`map.size`](mdn:js/Map/size) -- تعداد المان‌ها را برمی‌گرداند.
+- [`new Map([iterable])`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/Map) -- map را می‌سازد، برای مقداردهی اولیه از `iterable`(حلقه‌پذیر) اختیاری (مانند آرایه) از جفت‌های `[key,value]` می‌توان استفاده کرد.
+- [`map.set(key, value)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/set) -- مقدار را به واسطه کلید ذخیره می‌کند، خود map را برمی‌گرداند.
+- [`map.get(key)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/get) -- مقدار را به واسطه کلید برمی‌گرداند، اگر `key` در map وجود نداشته باشد `undefined` برمی‌گرداند.
+- [`map.has(key)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/has) -- اگر `key` وجود داشته باشد `true` برمی‌گرداند، در غیر این صورت `false`.
+- [`map.delete(key)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/delete) -- مقدار را به واسطه کلید حذف می‌کند، اگر `key` در لحظه فراخوانی وجود داشته باشد `true` برمی‌گرداند، در غیر این صورت `false`.
+- [`map.clear()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/clear) -- همه چیز را از map حذف می‌کند.
+- [`map.size`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/size) -- تعداد المان‌ها را برمی‌گرداند.
 
 تفاوت آن با `Object` معمولی:
 
 - هر کلیدی ممکن است، شیءها هم می‌توانند کلید باشند.
 - متدهای خوب بیشتر، ویژگی `size`
 
-`Set` -- یک مجموعه از مقدارهای یکتا است.
+[`Set`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set) -- یک مجموعه از مقدارهای یکتا است.
 
 متدها و ویژگی‌های آن:
 
-- `new Set([iterable])` -- set را ایجاد می‌کند، برای مقداردهی اولیه می‌توان از `iterable`(حلقه‌پذیر مانند آرایه) شامل مقدارها استفاده کرد.
-- [`set.add(value)`](mdn:js/Set/add) -- یک مقدار را اضافه می‌کند (اگر `value` وجود داشته باشد کاری نمی‌کند)، خود set را برمی‌گرداند.
-- [`set.delete(value)`](mdn:js/Set/delete) -- مقدار را حذف می‌کند، اگر `value` هنگام فراخوانی وجود داشته باشد `true` را برمی‌گرداند، در غیر این صورت `false`.
-- [`set.has(value)`](mdn:js/Set/has) -- اگر مقدار در set وجود داشته باشد `true` را برمی‌گرداند، در غیر این صورت `false`.
-- [`set.clear()`](mdn:js/Set/clear) -- همه چیز را از set حذف می‌کند.
-- [`set.size`](mdn:js/Set/size) -- برابر با تعداد المان‌ها است.
+- [`new Set([iterable])`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/Set) -- set را ایجاد می‌کند، برای مقداردهی اولیه می‌توان از `iterable`(حلقه‌پذیر مانند آرایه) شامل مقدارها استفاده کرد.
+- [`set.add(value)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/add) -- یک مقدار را اضافه می‌کند (اگر `value` وجود داشته باشد کاری نمی‌کند)، خود set را برمی‌گرداند.
+- [`set.delete(value)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/delete) -- مقدار را حذف می‌کند، اگر `value` هنگام فراخوانی وجود داشته باشد `true` را برمی‌گرداند، در غیر این صورت `false`.
+- [`set.has(value)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/has) -- اگر مقدار در set وجود داشته باشد `true` را برمی‌گرداند، در غیر این صورت `false`.
+- [`set.clear()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/clear) -- همه چیز را از set حذف می‌کند.
+- [`set.size`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/size) -- برابر با تعداد المان‌ها است.
 
 حلقه‌زدن در `Map` و `Set` همیشه با ترتیب اضافه‌کردن انجام می‌شود، پس ما نمی‌توانیم بگوییم این مجموعه‌ها نامرتب هستند اما نمی‌توانیم المان‌ها را دوباره مرتب کنیم یا به صورت مستقیم یک المان را با استفاده از عدد آن دریافت کنیم.
