@@ -14,23 +14,13 @@
 
 متدها و ویژگی‌های آن:
 
-<<<<<<< HEAD
 - [`new Map()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/Map) -- map را می‌سازد.
 - [`map.set(key, value)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/set) -- value را به واسطه key ذخیره می‌کند.
 - [`map.get(key)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/get) -- مقدار را به واسطه key برمی‌گرداند، اگر `key` در map وجود نداشته باشد `undefined` برگردانده می‌شود.
 - [`map.has(key)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/has) -- اگر `key` وجود داشته باشد `true` برگردانده می‌شود، در غیر این صورت `false`.
-- [`map.delete(key)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/delete) -- مقدار را به واسطه key حذف می‌کند.
+- [`map.delete(key)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/delete) -- المان (جفت key/value) را به واسطه key حذف می‌کند.
 - [`map.clear()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/clear) -- همه چیز را از map حذف می‌کند.
 - [`map.size`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/size) -- تعداد المان‌های کنونی را برمی‌گرداند.
-=======
-- [`new Map()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/Map) -- creates the map.
-- [`map.set(key, value)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/set) -- stores the value by the key.
-- [`map.get(key)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/get) -- returns the value by the key, `undefined` if `key` doesn't exist in map.
-- [`map.has(key)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/has) -- returns `true` if the `key` exists, `false` otherwise.
-- [`map.delete(key)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/delete) -- removes the element (the key/value pair) by the key.
-- [`map.clear()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/clear) -- removes everything from the map.
-- [`map.size`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/size) -- returns the current element count.
->>>>>>> 746ad803c878e33182e7fab1578c0d15b9b75ca0
 
 برای مثال:
 
@@ -314,7 +304,6 @@ set.forEach((value, valueAgain, set) => {
 
 متدها و ویژگی‌های آن:
 
-<<<<<<< HEAD
 - [`new Map([iterable])`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/Map) -- map را می‌سازد، برای مقداردهی اولیه از `iterable`(حلقه‌پذیر) اختیاری (مانند آرایه) از جفت‌های `[key,value]` می‌توان استفاده کرد.
 - [`map.set(key, value)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/set) -- مقدار را به واسطه کلید ذخیره می‌کند، خود map را برمی‌گرداند.
 - [`map.get(key)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/get) -- مقدار را به واسطه کلید برمی‌گرداند، اگر `key` در map وجود نداشته باشد `undefined` برمی‌گرداند.
@@ -322,15 +311,6 @@ set.forEach((value, valueAgain, set) => {
 - [`map.delete(key)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/delete) -- مقدار را به واسطه کلید حذف می‌کند، اگر `key` در لحظه فراخوانی وجود داشته باشد `true` برمی‌گرداند، در غیر این صورت `false`.
 - [`map.clear()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/clear) -- همه چیز را از map حذف می‌کند.
 - [`map.size`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/size) -- تعداد المان‌ها را برمی‌گرداند.
-=======
-- [`new Map([iterable])`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/Map) -- creates the map, with optional `iterable` (e.g. array) of `[key,value]` pairs for initialization.
-- [`map.set(key, value)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/set) -- stores the value by the key, returns the map itself.
-- [`map.get(key)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/get) -- returns the value by the key, `undefined` if `key` doesn't exist in map.
-- [`map.has(key)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/has) -- returns `true` if the `key` exists, `false` otherwise.
-- [`map.delete(key)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/delete) -- removes the element by the key, returns `true` if `key` existed at the moment of the call, otherwise `false`.
-- [`map.clear()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/clear) -- removes everything from the map.
-- [`map.size`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/size) -- returns the current element count.
->>>>>>> 746ad803c878e33182e7fab1578c0d15b9b75ca0
 
 تفاوت آن با `Object` معمولی:
 

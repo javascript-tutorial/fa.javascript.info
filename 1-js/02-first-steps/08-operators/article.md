@@ -50,15 +50,9 @@
 برای مثال:
 
 ```js run
-<<<<<<< HEAD
 alert( 5 % 2 ); // 1، باقی‌ماندهٔ تقسیم 5 بر 2
 alert( 8 % 3 ); // 2، باقی‌ماندهٔ تقسیم 8 بر 3
 alert( 8 % 4 ); // باقی‌ماندۀ تقسیم 8 بر 4، 0
-=======
-alert( 5 % 2 ); // 1, the remainder of 5 divided by 2
-alert( 8 % 3 ); // 2, the remainder of 8 divided by 3
-alert( 8 % 4 ); // 0, the remainder of 8 divided by 4
->>>>>>> 746ad803c878e33182e7fab1578c0d15b9b75ca0
 ```
 
 ### بتوان‌رساندن **
