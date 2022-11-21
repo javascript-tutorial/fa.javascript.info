@@ -150,12 +150,21 @@ let message = "آن"; // SyntaxError: Identifier 'message' has already been decl
 بنابراین، ما باید متغیر را یک بار تعریف کنیم و سپس بدون `let` به آن رجوع کنیم.
 ````
 
+<<<<<<< HEAD
 ```smart header="زبان‌های Functional"
 جالب است بدانید زبان‌های [functional](https://fa.wikipedia.org/wiki/برنامه%E2%80%8Cنویسی_تابعی) (تابع‌محور) مانند [Scala](http://www.scala-lang.org/) یا [Erlang](http://www.erlang.org/) وجود دارند که تغییر مقدار متغیر را ممنوع کرده‌اند.
+=======
+```smart header="Functional languages"
+It's interesting to note that there exist so-called [pure functional](https://en.wikipedia.org/wiki/Purely_functional_programming) programming languages, such as [Haskell](https://en.wikipedia.org/wiki/Haskell), that forbid changing variable values.
+>>>>>>> 746ad803c878e33182e7fab1578c0d15b9b75ca0
 
 در این نوع زبان‌ها، یک بار که مقداری را "در جعبه" قرار می‌دهیم، تا ابد آنجا می‌ماند. اگر بخواهیم مقداری دیگر را ذخیره کنیم، زبان ما را مجبور می‌کند تا جعبه‌ای جدید بسازیم (متغیر جدیدی تعریف کنیم). نمی‌توانیم از متغیر قدیمی استفاده کنیم.
 
+<<<<<<< HEAD
 اگرچه در نگاه اول این زبان‌ها عجیب به نظر می‌رسند، ولی کاملا توانایی توسعه پروژه‌های جدی را دارند. مهم‌تر از آن، در زمینه‌هایی مانند محاسبات موازی (Parallel Computation) این محدودیت‌ها تبدیل به مزیت می‌شوند. مطالعه‌ی چنین زبان‌هایی (حتی اگر به این زودی قصد استفاده از آنها را ندارید) برای وسیع شدن دیدتان، توصیه می‌شود.
+=======
+Though it may seem a little odd at first sight, these languages are quite capable of serious development. More than that, there are areas like parallel computations where this limitation confers certain benefits.
+>>>>>>> 746ad803c878e33182e7fab1578c0d15b9b75ca0
 ```
 
 ## نام‌گذاری متغیرها [#variable-naming]
