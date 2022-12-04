@@ -4,12 +4,12 @@ Backticks عبارت داخل `{...}$` را در رشته قرار می‌دهد
 ```js run
 let name = "Ilya";
 
-// عبارت عدد 1 است
-alert( `سلام ${1}` ); // 1 سلام
+// the expression is a number 1
+alert( `hello ${1}` ); // hello 1
 
-// است "name" عبارت رشته
-alert( `سلام ${"name"}` ); // name سلام
+// the expression is a string "name"
+alert( `hello ${"name"}` ); // hello name
 
-// عبارت یک متغیر است، آن را داخل رشته قرار می‌دهد
-alert( `سلام ${name}` ); // Ilya سلام
+// the expression is a variable, embed it
+alert( `hello ${name}` ); // hello Ilya
 ```
