@@ -180,10 +180,17 @@ alert( message );
 
 ممکن است در نگاه اول فهمیدن اینکه چه چیزی در حال رخ دادن است سخت باشد. اما بعد از یک نگاه دقیق‌تر، متوجه می‌شویم که فقط یک دنباله معمولی از آزمایش‌ها است:
 
+<<<<<<< HEAD
 1. اولین علامت سوال بررسی می‌کند که آیا `age < 3`.
 2. اگر درست باشد -- `'سلام کوچولو!'` برگردانده می‌شود. در غیر این صورت به عبارت بعد از دو نقطه '":"' می‌رود و `age < 18` را بررسی می‌کند
 3. اگر درست باشد -- `'سلام!'` را برمی‌گرداند. در غیر این صورت، به عبارت بعد از دو نقطه بعدی '":"' می‌رود و `age < 100` را بررسی می‌کند.
 4. اگر درست باشد -- `'درود!'` را برمی‌گرداند. در غیر این صورت، به عبارت بعد از آخرین '":"' می‌رود و `'چه سن غیر معمولی!'` را برمی‌گرداند.
+=======
+1. The first question mark checks whether `age < 3`.
+2. If true -- it returns `'Hi, baby!'`. Otherwise, it continues to the expression after the colon ":", checking `age < 18`.
+3. If that's true -- it returns `'Hello!'`. Otherwise, it continues to the expression after the next colon ":", checking `age < 100`.
+4. If that's true -- it returns `'Greetings!'`. Otherwise, it continues to the expression after the last colon ":", returning `'What an unusual age!'`.
+>>>>>>> 1ce5644a15ee141fbe78c0fb79c8f40d870d7043
 
 اگر از `if..else` استفاده می‌شد، اینگونه بنظر می‌رسید:
 
