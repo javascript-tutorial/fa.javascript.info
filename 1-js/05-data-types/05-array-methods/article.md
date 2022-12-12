@@ -255,11 +255,7 @@ alert( arr.includes(1) ); // true
 
 توجه داشته باشید که متدها از مقایسه `===` استفاده می‌کنند. پس اگر ما به دنبال `false` باشیم، متد دقیقا `false` را پیدا می‌کند و نه صفر را.
 
-<<<<<<< HEAD
 اگر ما بخواهیم بررسی کنیم که `item` درون آرایه وجود دارد یا نه و به دنبال ایندکس دقیق نیستیم، پس `arr.includes` ترجیح داده می‌شود.
-=======
-If we want to check if `item` exists in the array, and don't need the index, then `arr.includes` is preferred.
->>>>>>> ea7738bb7c3616bb51ff14ae3db2a2747d7888ff
 
 متد [arr.lastIndexOf](mdn:js/Array/lastIndexOf) مانند `indexOf` است اما از راست به چپ جستجو می‌کند.
 
@@ -341,16 +337,9 @@ alert(users.findIndex(user => user.name == 'John')); // 0
 alert(users.findLastIndex(user => user.name == 'John')); // 3
 ```
 
-<<<<<<< HEAD
-
 ### متد filter
 
 متد `find` برای یک (اولین) المان که باعث شود تابع `true` برگرداند، جستجو می‌کند.
-=======
-### filter
-
-The `find` method looks for a single (first) element that makes the function return `true`.
->>>>>>> ea7738bb7c3616bb51ff14ae3db2a2747d7888ff
 
 اگر ممکن باشد تعداد بیشتری موجود باشند، می‌توانیم از [arr.filter(fn)](mdn:js/Array/filter) استفاده کنیم.
 
