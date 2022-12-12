@@ -337,7 +337,6 @@ alert(users.findIndex(user => user.name == 'John')); // 0
 alert(users.findLastIndex(user => user.name == 'John')); // 3
 ```
 
-
 ### متد filter
 
 متد `find` برای یک (اولین) المان که باعث شود تابع `true` برگرداند، جستجو می‌کند.
