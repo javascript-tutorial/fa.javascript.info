@@ -68,7 +68,11 @@ if (cond) {
 
 ## عبارت "else"
 
+<<<<<<< HEAD
 دستور `if` ممکن است یک بلوک اختیاری "else" هم شامل شود. این بلوک زمانی که شرط falsy باشد اجرا می‌شود.
+=======
+The `if` statement may contain an optional `else` block. It executes when the condition is falsy.
+>>>>>>> ea7738bb7c3616bb51ff14ae3db2a2747d7888ff
 
 برای مثال:
 ```js run
