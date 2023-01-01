@@ -1,14 +1,14 @@
-The test demonstrates one of the temptations a developer meets when writing tests.
+این تست, نمونه ای از وسوسه‌هایی را که یک توسعه دهنده(برنامه نویس) هنگام نوشتن تست‌ها با آن رو به رو می‌شود را نشان می‌دهد.
 
-What we have here is actually 3 tests, but layed out as a single function with 3 asserts.
+آنچه که در اینجا داریم در واقع 3 تست است، اما به عنوان یک تابع با 3 دارایی(assert) نوشته شده است.
 
-Sometimes it's easier to write this way, but if an error occurs, it's much less obvious what went wrong.
+بعضی وقت ها نوشتن به این مدل ساده تر است، اما اگر خطایی رخ بدهد، خیلی کمتر مشخص میشود که مشکل از کجاست.
 
-If an error happens in the middle of a complex execution flow, then we'll have to figure out the data at that point. We'll actually have to *debug the test*.
+اگر خطایی در وسط اجرای یک جریان پیچیده رخ بدهد، در این مرحله باید داده ها را کشف کنیم. ما در واقع باید *تست را دیباگ(اشکال زدایی) کنیم*.
 
-It would be much better to break the test into multiple `it` blocks with clearly written inputs and outputs.
+خیلی بهتر میشود که تست را به چندین بلوک `it` با ورودی ها و خروجی های کامل نوشته شده تقسیم کنیم.
 
-Like this:
+مثل این:
 ```js
 describe("Raises x to power n", function() {
   it("5 in the power of 1 equals 5", function() {
@@ -25,9 +25,9 @@ describe("Raises x to power n", function() {
 });
 ```
 
-We replaced the single `it` with `describe` and a group of `it` blocks. Now if something fails we would see clearly what the data was.
+ما یک `it` را با `describe` و گروهی از بلوک‌های `it` جایگزین میکنیم. حالا اگر مشکلی پیش بیاید، به وضوح می‌بینیم که داده‌ها چه بوده‌اند.
 
-Also we can isolate a single test and run it in standalone mode by writing `it.only` instead of `it`:
+همچنین می‌توانیم با نوشتن `it.only` به جای `it`، یک تست را جدا کرده و آن را در حالت مستقل(به تنهایی) اجرا کنیم:
 
 
 ```js
