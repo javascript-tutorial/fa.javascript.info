@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# What's wrong in the test?
+# چه مشکلی در تست(آزمون) وجود دارد؟
 
-What's wrong in the test of `pow` below?
+تست `pow` که در زیر آمده چه مشکلی دارد؟
 
 ```js
 it("Raises x to the power n", function() {
@@ -20,5 +20,4 @@ it("Raises x to the power n", function() {
   assert.equal(pow(x, 3), result);
 });
 ```
-
-P.S. Syntactically the test is correct and passes.
+از نظر سینتکس(نحوی) تست درست است و قبول می شود.
