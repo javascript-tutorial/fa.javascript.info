@@ -1,42 +1,42 @@
-# Automated testing with Mocha
+# تست خودکار با موکا(Mocha)
 
-Automated testing will be used in further tasks, and it's also widely used in real projects.
+تست خودکار در تسک های بعدی استفاده خواهد شد، و همچنین به طور گسترده در پروژه های واقعی استفاده می شود.
 
-## Why do we need tests?
+## چرا به تست نیاز داریم؟
 
-When we write a function, we can usually imagine what it should do: which parameters give which results.
+وقتی یک تابعی را می نویسیم، معمولاً می توانیم تصور کنیم که چه کاری باید انجام دهد: کدام پارامترها چه نتایجی را ارائه می دهند.
 
-During development, we can check the function by running it and comparing the outcome with the expected one. For instance, we can do it in the console.
+در طول توسعه، میتوانیم تابعی را اجزا کرده و خروجی آن را با چیزی که انتظار داریم تابع به ما بدهد بررسی کنیم. به عنوان مثال، ما می توانیم این کار را در کنسول انجام دهیم.
 
-If something is wrong -- then we fix the code, run again, check the result -- and so on till it works.
+اگر چیزی اشتباه باشد -- کد را تصحیح می کنیم، دوباره از اول اجرا می کنیم، نتیجه را بررسی می کنیم -- و به همین ترتیب تا زمانی که کد ما کار کند, این کار ها را انجام میدهیم.
 
-But such manual "re-runs" are imperfect.
+اما چنین "re-runs"(اجرای مجدد) به صورت دستی ناقص می باشد.
 
-**When testing a code by manual re-runs, it's easy to miss something.**
+**هنگام تست یک کد با اجرای مجدد(re-reuns) به صورت دستی، به راحتی می توان چیزی را از قلم بیاندازیم(فراموش کنیم).**
 
-For instance, we're creating a function `f`. Wrote some code, testing: `f(1)` works, but `f(2)` doesn't work. We fix the code and now `f(2)` works. Looks complete? But we forgot to re-test `f(1)`. That may lead to an error.
+به عنوان مثال، ما یک تابع `f` ایجاد می کنیم. کدی مینویسیم و تست میکنیم: `f(1)` کار می کند، اما `f(2)` کار نمی کند. ما کد را اصلاح می کنیم و اکنون `f(2)` کار می کند. آیا الان تست ما کامل به نظر میرسد؟ اما فراموش کردیم `f(1)` را دوباره تست کنیم, که ممکن است به ارور برخورد کنیم.
 
-That's very typical. When we develop something, we keep a lot of possible use cases in mind. But it's hard to expect a programmer to check all of them manually after every change. So it becomes easy to fix one thing and break another one.
+این خیلی معمول(عادی) است. وقتی چیزی را توسعه می‌دهیم، کیس های احتمالی زیادی را در ذهن خود نگه میداریم, اما به سختی می توان انتظار داشت که یک برنامه نویس پس از هر تغییر، همه آنها را به صورت دستی بررسی کند. بنابراین اصلاح یک چیز و خراب کردن یک چیز دیگر آسان می شود.
 
-**Automated testing means that tests are written separately, in addition to the code. They run our functions in various ways and compare results with the expected.**
+**تست خودکار به این معنی است که تست ها علاوه بر کد, به طور جداگانه نوشته می شوند. آنها عملکرد(تابع) های ما را به روش های مختلف اجرا می کنند و نتایج به دست آمده را با آنچه انتظار می رود مقایسه می کنند.**
 
-## Behavior Driven Development (BDD)
+## توسعه ی رفتار محور (behavior driven development) (BDD)
 
-Let's start with a technique named [Behavior Driven Development](http://en.wikipedia.org/wiki/Behavior-driven_development) or, in short, BDD.
+بیایید با تکنیکی به نام [Behavior Driven Development](http://en.wikipedia.org/wiki/Behavior-driven_development) یا به طور خلاصه (BDD) شروع کنیم.
 
-**BDD is three things in one: tests AND documentation AND examples.**
+**این BDD سه قسمت دارد: تست ها, مستندات(داکیومنت ها) و مثال ها.**
 
-To understand BDD, we'll examine a practical case of development.
+برای درک بهتر BDD، یک مورد عملی از توسعه را بررسی خواهیم کرد.
 
-## Development of "pow": the spec
+## توسعه ی "pow": توضیح:
 
-Let's say we want to make a function `pow(x, n)` that raises `x` to an integer power `n`. We assume that `n≥0`.
+فرض کنید می‌خواهیم یک تابع `pow(x, n)` بسازیم که `x` را به توان یک عدد صحیح `n` برساند. ما فرض می کنیم که `n≥0`.
 
-That task is just an example: there's the `**` operator in JavaScript that can do that, but here we concentrate on the development flow that can be applied to more complex tasks as well.
+این تسک فقط یک مثال است: اپراتور `**` در جاوا اسکریپت وجود دارد که می تواند این کار را انجام دهد، اما در اینجا ما روی جریان توسعه تمرکز می کنیم که می تواند برای کارهای پیچیده تر نیز اعمال شود.
 
-Before creating the code of `pow`, we can imagine what the function should do and describe it.
+قبل از ایجاد کد `pow`، می‌توانیم تصور کنیم که تابع باید چه کاری انجام دهد و چگونه آن را توصیف کنیم.
 
-Such description is called a *specification* or, in short, a spec, and contains descriptions of use cases together with tests for them, like this:
+چنین توصیفی یک *specification(مشخصات)* یا به طور خلاصه، یک spec نامیده می‌شود و حاوی توضیحاتی در مورد کیس(مورد) های همراه با تست هایی برای آنها است، مانند این:
 
 ```js
 describe("pow", function() {
@@ -48,63 +48,63 @@ describe("pow", function() {
 });
 ```
 
-A spec has three main building blocks that you can see above:
+یک spec دارای سه بلوک اصلی است که می توانید در بالا مشاهده کنید:
 
 `describe("title", function() { ... })`
-: What functionality we're describing? In our case we're describing the function `pow`. Used to group "workers" -- the `it` blocks.
+: چه عملکردی را توضیح می دهیم؟ در این کیس, ما تابع `pow` را توصیف می کنیم. برای گروه بندی "کارگران(workers)" -- بلوک های `it` استفاده می شود.
 
 `it("use case description", function() { ... })`
-: In the title of `it` we *in a human-readable way* describe the particular use case, and the second argument is a function that tests it.
+: در تایتل(عنوان) `it` ما *به روشی قابل خواندن برای انسان* کیس مورد نظر را توصیف می کنیم، و آرگومان دوم تابعی است که آن را تست می کند.
 
 `assert.equal(value1, value2)`
-: The code inside `it` block, if the implementation is correct, should execute without errors.
+: کد داخل بلوک `it`، در صورتی که پیاده سازی آن صحیح باشد، باید بدون خطا(ارور) اجرا شود.
 
-    Functions `assert.*` are used to check whether `pow` works as expected. Right here we're using one of them -- `assert.equal`, it compares arguments and yields an error if they are not equal. Here it checks that the result of `pow(2, 3)` equals `8`. There are other types of comparisons and checks, that we'll add later.
+    توابع `*.assert` برای بررسی اینکه آیا `pow` همانطور که انتظار می رود کار می کند یا نه استفاده می شود. در اینجا ما از یکی از آنها استفاده می کنیم -- `assert.equal`، آرگومان ها را با هم مقایسه می کند و در صورتی که برابر نباشند، خطا می دهد. در اینجا بررسی می‌کند که نتیجه `pow(2، 3)` برابر `8` باشد. انواع دیگری از مقایسه و بررسی وجود دارد که بعداً اضافه خواهیم کرد.
 
-The specification can be executed, and it will run the test specified in `it` block. We'll see that later.
+در ابنجا specification را می توان اجرا کرد و تست مشخص شده در بلوک `it` را اجرا می کند. بعداً خواهیم دید.
 
-## The development flow
+## جریان توسعه
 
-The flow of development usually looks like this:
+جریان توسعه معمولاً به این صورت است:
 
-1. An initial spec is written, with tests for the most basic functionality.
-2. An initial implementation is created.
-3. To check whether it works, we run the testing framework [Mocha](https://mochajs.org/) (more details soon) that runs the spec. While the functionality is not complete, errors are displayed. We make corrections until everything works.
-4. Now we have a working initial implementation with tests.
-5. We add more use cases to the spec, probably not yet supported by the implementations. Tests start to fail.
-6. Go to 3, update the implementation till tests give no errors.
-7. Repeat steps 3-6 till the functionality is ready.
+1. یک spec اولیه با تست هایی برای بنیادی(اساسی) ترین عملکرد نوشته شده است.
+2. یک پیاده سازی اولیه ایجاد می شود.
+3. برای بررسی اینکه آیا کار می کند یا نه، فریم ورک تست [Mocha] (https://mochajs.org/) (جزئیات بیشتر به زودی) را اجرا می کنیم که spec را اجرا می کند. تا زمانی که عملکرد ها کامل نیست، خطاها نمایش داده می شوند. ما اصلاحات را انجام می دهیم تا زمانی که همه چیز درست کار بکند
+4. اکنون ما یک پیاده سازی اولیه با تست داریم.
+5. کیس های بیشتری را به spec اضافه می کنیم که احتمالاً هنوز توسط پیاده سازی ها پشتیبانی نشده اند. تست ها به مشکل بر میخورند.
+6. به شماره 3 برگردید و پیاده سازی ها را آپدیت کنید تا وقتی که تست ها خطایی ندهند.
+7. مراحل 3-6 را تکرار کنید تا عملکرد ها آماده شود.
 
-So, the development is *iterative*. We write the spec, implement it, make sure tests pass, then write more tests, make sure they work etc. At the end we have both a working implementation and tests for it.
+بنابراین، توسعه به معنای *تکرار کننده* می باشد. ما spec را می‌نویسیم، آن را پیاده‌سازی می‌کنیم، مطمئن می‌شویم که تست‌ها قبول شدند، سپس تست‌های بیشتری می‌نویسیم، مطمئن می‌شویم که کار می‌کنند و غیره.
 
-Let's see this development flow in our practical case.
+بیایید این جریان توسعه را در مثال عملی خود ببینیم.
 
-The first step is already complete: we have an initial spec for `pow`. Now, before making the implementation, let's use a few JavaScript libraries to run the tests, just to see that they are working (they will all fail).
+مرحله اول در حال حاضر کامل شده است: ما یک spec اولیه برای `pow` داریم. اکنون، قبل از پیاده سازی، بیایید از چند کتابخانه جاوا اسکریپت برای اجرای تست ها استفاده کنیم تا ببینیم که آنها کار می کنند (همه تست ها رد شدند).
 
-## The spec in action
+## مشخصات(spec) در عمل
 
-Here in the tutorial we'll be using the following JavaScript libraries for tests:
+اینجا یعنی دوره آموزشی ما, از کتابخانه های جاوا اسکریپت زیر برای تست(آزمایش) استفاده خواهیم کرد:
 
-- [Mocha](https://mochajs.org/) -- the core framework: it provides common testing functions including `describe` and `it` and the main function that runs tests.
-- [Chai](https://www.chaijs.com/) -- the library with many assertions. It allows to use a lot of different assertions, for now we need only `assert.equal`.
-- [Sinon](https://sinonjs.org/) -- a library to spy over functions, emulate built-in functions and more, we'll need it much later.
+- [Mocha](https://mochajs.org/) -- فریم ورک اصلی: توابع تستی رایج از جمله `spec` و `it` و تابع اصلی که تست ها را اجرا می‌کند را ارائه می‌کند.
+- [Chai](https://www.chaijs.com/) -- کتابخانه ای با توابع فراوان که این اجازه را می دهد تا از بسیاری از توابع مختلف استفاده کنیم، در حال حاضر فقط به `assert.equal` نیاز داریم.
+- [Sinon](https://sinonjs.org/) -- کتابخانه ای برای جاسوسی از توابع، شبیه سازی توابع(built-in) یا همان توابعداخلی و دیگر موارد، بعداً به آن نیاز خواهیم داشت.
 
-These libraries are suitable for both in-browser and server-side testing. Here we'll consider the browser variant.
+این کتابخانه ها هم برای تست داخل مرورگر و هم برای تست سمت سرور مناسب هستند. در اینجا ما نوع مرورگر را در نظر خواهیم گرفت.
 
-The full HTML page with these frameworks and `pow` spec:
+صفحه کامل HTML با این فریم ورک ها و `pow` spec:
 
 ```html src="index.html"
 ```
 
-The page can be divided into five parts:
+صفحه را می توان به پنج بخش تقسیم کرد:
 
-1. The `<head>` -- add third-party libraries and styles for tests.
-2. The `<script>` with the function to test, in our case -- with the code for `pow`.
-3. The tests -- in our case an external script `test.js` that has `describe("pow", ...)` from above.
-4. The HTML element `<div id="mocha">` will be used by Mocha to output results.
-5. The tests are started by the command `mocha.run()`.
+1. قسمت `<head>` -- برای اضافه کردن کتاب خانه های خارجی و استایل های برای تست.
+2. قسمت `<script>` با توابعی برای تست, که در مثال ما --با کد `pow`.
+3. قسمت تست ها -- در مثال ما, اسکریپ خارجی `test.js` که تابع `describe("pow", ...)` را دارد(مانند مثال بالایی).
+4. المان html مقابل: `<div id="mocha">` برای نمایش نتیجه, Mocha از این تگ استفاده میکند.
+5. با کامند(دستور) `mocha.run()` تست ما شروع میشود.
 
-The result:
+نتیجه:
 
 [iframe height=250 src="pow-1" border=1 edit]
 
