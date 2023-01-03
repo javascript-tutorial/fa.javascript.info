@@ -8,7 +8,7 @@
 
 عبارت باقاعده (همچنین "regexp"، یا فقط "reg") از یک *الگو(pattern)* و *پرچم(flags)* های اختیاری تشکیل شده است.
 
-دو سینتکس وجود دارد که می توان از آنها برای ایجاد یک شیء عبارت باقاعده(Regular expression) استفاده کرد.
+دو سینتکس وجود دارد که می توان از آنها برای ایجاد یک شیء عبارت باقاعده استفاده کرد.
 
 سینتکس "طولانی":
 
@@ -37,32 +37,32 @@ let tag = prompt("چه بر چسبی می خواهید پیدا کنید؟", "h2
 let regexp = new RegExp(`<${tag}>`); // مانند /<h2>/ اگر در اعلان بالا "h2" پاسخ داده شود
 ```
 
-## Flags
+## پرچم ها (Flags)
 
-Regular expressions may have flags that affect the search.
+عبارات باقاعده ممکن است دارای پرچم هایی باشند که بر جستجو تأثیر می گذارد.
 
-There are only 6 of them in JavaScript:
+در جاوا اسکریپت، فقط 6 مورد از آنها وجود دارد:
 
 `pattern:i`
-: With this flag the search is case-insensitive: no difference between `A` and `a` (see the example below).
+: با این پرچم، جستجو به حروف کوچک و بزرگ حساس نیست: تفاوتی بین `A` و `a` نمی گذارد (به مثال زیر مراجعه کنید).
 
 `pattern:g`
-: With this flag the search looks for all matches, without it -- only the first match is returned.
+: با این پرچم، جستجو برای همه موارد منطبق، بدون آن - فقط اولین موردی که هم خوانی دارد، برگردانده می شود.
 
 `pattern:m`
-: Multiline mode (covered in the chapter <info:regexp-multiline-mode>).
+: حالت چند خطی (در فصل <info:regexp-multiline-mode> پوشش داده شده است).
 
 `pattern:s`
-: Enables "dotall" mode, that allows a dot `pattern:.` to match newline character `\n` (covered in the chapter <info:regexp-character-classes>).
+: حالت `dotall` را فعال می‌کند، که به یک نقطه `.:pattern` اجازه می‌دهد تا با کاراکتر خط جدید `n\` مطابقت داشته باشد (در فصل <info:regexp-character-classes> پوشش داده شده است).
 
 `pattern:u`
-: Enables full Unicode support. The flag enables correct processing of surrogate pairs. More about that in the chapter <info:regexp-unicode>.
+: پشتیبانی کامل از یونیکد را فعال می کند. پرچم پردازش صحیح جفت های جایگزین را امکان پذیر می کند. اطلاعات بیشتر در مورد آن در فصل <info:regexp-unicode>.
 
 `pattern:y`
-: "Sticky" mode: searching at the exact position in the text  (covered in the chapter <info:regexp-sticky>)
+: حالت `Sticky`: جستجو در موقعیت دقیق متن (در فصل <info:regexp-sticky> پوشش داده شده است)
 
 ```smart header="Colors"
-From here on the color scheme is:
+از اینجا به بعد رنگ بندی به این صورت است:
 
 - regexp -- `pattern:red`
 - string (where we search) -- `subject:blue`
