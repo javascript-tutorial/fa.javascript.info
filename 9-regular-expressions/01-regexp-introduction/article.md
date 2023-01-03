@@ -23,18 +23,18 @@ regexp = /pattern/; // بدون پرچم
 regexp = /pattern/gmi; // با پرچم g, m, i (به زودی پوشش داده میشود)
 ```
 
-اسلش های `pattern:/.../` به جاوا اسکریپت می گوید که ما در حال ایجاد یک عبارت باقاعده هستیم. آنها همان نقش کوتیشن("") را برای رشته ها بازی می کنند.
+اسلش های `pattern:/.../` به جاوا اسکریپت می گوید که ما در حال ایجاد یک عبارت باقاعده هستیم. آنها همان نقش کوتیشن('') را برای رشته ها بازی می کنند.
 
-In both cases `regexp` becomes an instance of the built-in `RegExp` class.
+در هر دو مورد، `regexp` به یک نمونه از کلاس داخلی `RegExp` تبدیل می‌شود.
 
-The main difference between these two syntaxes is that pattern using slashes `/.../` does not allow for expressions to be inserted (like string template literals with `${...}`). They are fully static.
+تفاوت اصلی بین این دو سینتکس در این است که الگو با استفاده از اسلش‌های `/.../`، اجازه درج عبارات را نمی دهد (مانند حروف الفبای قالب(template literals) رشته با `${...}`). آنها کاملا ساکن هستند.
 
-Slashes are used when we know the regular expression at the code writing time -- and that's the most common situation. While `new RegExp` is more often used when we need to create a regexp "on the fly" from a dynamically generated string. For instance:
+اسلش ها زمانی استفاده می شوند که عبارت باقاعده را در زمان نوشتن کد بدانیم -- و این رایج ترین حالت است. در حالی که `new RegExp` بیشتر زمانی استفاده می شود که ما نیاز به ایجاد یک regexp "در حال پرواز" از یک رشته تولید شده به صورت پویا داشته باشیم. برای مثال:
 
 ```js
-let tag = prompt("What tag do you want to find?", "h2");
+let tag = prompt("چه بر چسبی می خواهید پیدا کنید؟", "h2");
 
-let regexp = new RegExp(`<${tag}>`); // same as /<h2>/ if answered "h2" in the prompt above
+let regexp = new RegExp(`<${tag}>`); // مانند /<h2>/ اگر در اعلان بالا "h2" پاسخ داده شود
 ```
 
 ## Flags
