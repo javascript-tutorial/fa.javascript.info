@@ -1,29 +1,29 @@
-# Patterns and flags
+# الگو ها و پرچم ها (Patterns and flags)
 
-Regular expressions are patterns that provide a powerful way to search and replace in text.
+عبارات باقاعده(Regular expressions) الگوهایی هستند که روشی قدرتمند برای جستجو و جایگزینی در متن ارائه می دهند.
 
-In JavaScript, they are available via the [RegExp](mdn:js/RegExp) object, as well as being integrated in methods of strings.
+در جاوا اسکریپت، آنها از طریق شیء [RegExp](mdn:js/RegExp) و همچنین به خوبی با متد های رشته ها ادغام می شوند.
 
-## Regular Expressions
+## عبارات باقاعده (Regular Expressions)
 
-A regular expression (also "regexp", or just "reg") consists of a *pattern* and optional *flags*.
+عبارت باقاعده (همچنین "regexp"، یا فقط "reg") از یک *الگو(pattern)* و *پرچم(flags)* های اختیاری تشکیل شده است.
 
-There are two syntaxes that can be used to create a regular expression object.
+دو سینتکس وجود دارد که می توان از آنها برای ایجاد یک شیء عبارت باقاعده(Regular expression) استفاده کرد.
 
-The "long" syntax:
-
-```js
-regexp = new RegExp("pattern", "flags");
-```
-
-And the "short" one, using slashes `"/"`:
+سینتکس "طولانی":
 
 ```js
-regexp = /pattern/; // no flags
-regexp = /pattern/gmi; // with flags g,m and i (to be covered soon)
+regexp = new RegExp("pattern(الگو)", "flags(پرچم)");
 ```
 
-Slashes `pattern:/.../` tell JavaScript that we are creating a regular expression. They play the same role as quotes for strings.
+و سینتکس "کوتاه" نیز، استفاده از اسلش `"/"` می باشد.
+
+```js
+regexp = /pattern/; // بدون پرچم
+regexp = /pattern/gmi; // با پرچم g, m, i (به زودی پوشش داده میشود)
+```
+
+اسلش های `pattern:/.../` به جاوا اسکریپت می گوید که ما در حال ایجاد یک عبارت باقاعده هستیم. آنها همان نقش کوتیشن("") را برای رشته ها بازی می کنند.
 
 In both cases `regexp` becomes an instance of the built-in `RegExp` class.
 
