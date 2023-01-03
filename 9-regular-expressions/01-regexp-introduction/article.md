@@ -69,21 +69,21 @@ let regexp = new RegExp(`<${tag}>`); // مانند /<h2>/ اگر در اعلان
 - result -- `match:green`
 ```
 
-## Searching: str.match
+## جستجو: str.match
 
-As mentioned previously, regular expressions are integrated with string methods.
+همانطور که قبلا ذکر شد، عبارات باقاعده با متدهای رشته ای ادغام می شوند.
 
-The method `str.match(regexp)` finds all matches of `regexp` in the string `str`.
+متد `str.match(regexp)` همه مطابقت‌ های `regexp` را در رشته `str` پیدا می‌کند.
 
-It has 3 working modes:
+و دارای 3 حالت کار است:
 
-1. If the regular expression has flag `pattern:g`, it returns an array of all matches:
+1. اگر عبارت باقاعده دارای پرچم `pattern:g` باشد، آرایه‌ای از همه موارد مطابق را بر می‌ گرداند:
     ```js run
     let str = "We will, we will rock you";
 
-    alert( str.match(/we/gi) ); // We,we (an array of 2 substrings that match)
+    alert( str.match(/we/gi) ); // We,we (آرایه ای از 2 رشته که مطابقت دارند)
     ```
-    Please note that both `match:We` and `match:we` are found, because flag `pattern:i` makes the regular expression case-insensitive.
+    لطفاً توجه کنید که `match:We` و `match:we` نتیجه یکسانی میدهند، زیرا پرچم `pattern:i` باعث می‌شود که عبارت باقاعده به حروف بزرگ و کوچک حساس نباشد.
 
 2. If there's no such flag it returns only the first match in the form of an array, with the full match at index `0` and some additional details in properties:
     ```js run
