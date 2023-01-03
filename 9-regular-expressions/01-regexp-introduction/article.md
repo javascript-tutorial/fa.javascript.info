@@ -123,11 +123,11 @@ let regexp = new RegExp(`<${tag}>`); // مانند /<h2>/ اگر در اعلان
     }
     ```
 
-## Replacing: str.replace
+## جایگزین کردن: str.replace
 
-The method `str.replace(regexp, replacement)` replaces matches found using `regexp` in string `str` with `replacement` (all matches if there's flag `pattern:g`, otherwise, only the first one).
+روش `str.replace(regexp، replacement)` تطابق ‌هایی را که با استفاده از `regexp` در رشته `str` یافت می‌شود را با `replacement` جایگزین می‌کند (همه منطبق هستند اگر پرچم `pattern:g` وجود داشته باشد، در غیر این صورت، فقط اولین مورد است).
 
-For instance:
+برای مثال:
 
 ```js run
 // no flag g
@@ -137,18 +137,18 @@ alert( "We will, we will".replace(/we/i, "I") ); // I will, we will
 alert( "We will, we will".replace(/we/ig, "I") ); // I will, I will
 ```
 
-The second argument is the `replacement` string. We can use special character combinations in it to insert fragments of the match:
+آرگومان دوم رشته، `replacement(جایگزینی)` است. می‌توانیم از ترکیب کاراکتر های ویژه در آن برای درج قطعاتی از تطابق استفاده کنیم:
 
-| Symbols | Action in the replacement string |
+| نماد | عمل در رشته جایگزین |
 |--------|--------|
-|`$&`|inserts the whole match|
-|<code>$&#096;</code>|inserts a part of the string before the match|
-|`$'`|inserts a part of the string after the match|
-|`$n`|if `n` is a 1-2 digit number, then it inserts the contents of n-th parentheses, more about it in the chapter <info:regexp-groups>|
-|`$<name>`|inserts the contents of the parentheses with the given `name`, more about it in the chapter <info:regexp-groups>|
-|`$$`|inserts character `$` |
+|`$&`|کل تطابق را درج می کند|
+|<code>$&#096;</code>|قسمتی از رشته را قبل از تطابق وارد می کند|
+|`$'`|قسمتی از رشته را بعد از تطابق وارد می کند|
+|`$n`|اگر`n` یک عدد 1-2 رقمی باشد، محتویات پرانتزهای n را درج می کند، اطلاعات بیشتر در مورد آن در فصل <info:regexp-groups>|
+|`$<name>`|محتویات پرانتز را با `name` داده شده درج می کند، اطلاعات بیشتر در مورد آن در فصل <info:regexp-groups>|
+|`$$`|کاراکتر "$" را درج می کند |
 
-An example with `pattern:$&`:
+مثالی برای `pattern:$&`:
 
 ```js run
 alert( "I love HTML".replace(/HTML/, "$& and JavaScript") ); // I love HTML and JavaScript
