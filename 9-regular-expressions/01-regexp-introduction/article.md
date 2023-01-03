@@ -154,9 +154,9 @@ alert( "We will, we will".replace(/we/ig, "I") ); // I will, I will
 alert( "I love HTML".replace(/HTML/, "$& and JavaScript") ); // I love HTML and JavaScript
 ```
 
-## Testing: regexp.test
+## تست کردن: regexp.test
 
-The method `regexp.test(str)` looks for at least one match, if found, returns `true`, otherwise `false`.
+متد `regexp.test(str)` حداقل یک تطابق را جستجو می‌کند، در صورت یافتن `true`، در غیر این صورت `false` بر میگرداند.
 
 ```js run
 let str = "I love JavaScript";
@@ -165,14 +165,14 @@ let regexp = /LOVE/i;
 alert( regexp.test(str) ); // true
 ```
 
-Later in this chapter we'll study more regular expressions, walk through more examples, and also meet other methods.
+بعداً در این فصل، عبارات باقاعده بیشتری را یاد می گیریم. مثال‌های بیشتری را مرور می‌ کنیم، و همچنین با روش‌ های دیگر آشنا می‌ شویم.
 
-Full information about the methods is given in the article <info:regexp-methods>.
+اطلاعات کامل در مورد متد ها در مقاله <info:regexp-methods> آورده شده است.
 
-## Summary
+## خلاصه
 
-- A regular expression consists of a pattern and optional flags: `pattern:g`, `pattern:i`, `pattern:m`, `pattern:u`, `pattern:s`, `pattern:y`.
-- Without flags and special symbols  (that we'll study later), the search by a regexp is the same as a substring search.
-- The method `str.match(regexp)` looks for matches: all of them if there's `pattern:g` flag, otherwise, only the first one.
-- The method `str.replace(regexp, replacement)` replaces matches found using `regexp` with `replacement`: all of them if there's `pattern:g` flag, otherwise only the first one.
-- The method `regexp.test(str)` returns `true` if there's at least one match, otherwise, it returns `false`.
+- یک عبارت باقاعده از یک الگو و پرچم‌های اختیاری تشکیل شده است: `pattern:g`، `pattern:i`، `pattern:m`، `pattern:u`، `pattern:s`، `pattern:y`.
+- بدون پرچم و نمادهای خاص (که بعداً مطالعه خواهیم کرد)، جستجو توسط regexp مانند جستجوی زیر رشته(substring) است.
+- متد `str.match(regexp)` به دنبال تطابق است: اگر پرچم `pattern:g` وجود داشته باشد، همه آنها را بر میگرداند، در غیر این صورت، فقط اولین مورد را بر میگرداند.
+- متد `str.replace(regexp، replacement)»` تطابق های یافت شده با استفاده از `regexp` را با `replacement` جایگزین می‌کند: به همه آنها این فرایند را اعمال میکند اگر پرچم `pattern:g` وجود داشته باشد، در غیر این صورت فقط به اولین مورد اعمال میکند.
+- متد `regexp.test(str)` اگر حداقل یک مورد مطابقت داشته باشد، `true` بر می‌گرداند، در غیر این صورت، `false` بر می‌گرداند.
