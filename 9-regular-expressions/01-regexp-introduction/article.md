@@ -85,7 +85,7 @@ let regexp = new RegExp(`<${tag}>`); // مانند /<h2>/ اگر در اعلان
     ```
     لطفاً توجه کنید که `match:We` و `match:we` نتیجه یکسانی میدهند، زیرا پرچم `pattern:i` باعث می‌شود که عبارت باقاعده به حروف بزرگ و کوچک حساس نباشد.
 
-2. If there's no such flag it returns only the first match in the form of an array, with the full match at index `0` and some additional details in properties:
+2. اگر چنین پرچمی وجود نداشته باشد، فقط اولین تطابق را در یک آرایه، با تطابق کامل در ایندکس `0` و برخی جزئیات اضافی در ویژگی ها بر می گرداند:
     ```js run
     let str = "We will, we will rock you";
 
@@ -95,14 +95,15 @@ let regexp = new RegExp(`<${tag}>`); // مانند /<h2>/ اگر در اعلان
     alert( result.length ); // 1
 
     // Details:
-    alert( result.index );  // 0 (position of the match)
-    alert( result.input );  // We will, we will rock you (source string)
+    alert( result.index );  // 0 (موقعیت تطابق)
+    alert( result.input );  // We will, we will rock you (رشته منبع)
     ```
-    The array may have other indexes, besides `0` if a part of the regular expression is enclosed in parentheses. We'll cover that in the chapter  <info:regexp-groups>.
+    
+    اگر بخشی از عبارت باقاعده در داخل پرانتز قرار بگیرد، ممکن است آرایه، ایندکس های دیگری در کنار ایندکس `0` نیز داشته باشد. ما آن را در فصل <info:regexp-groups> پوشش خواهیم داد.
 
-3. And, finally, if there are no matches, `null` is returned (doesn't matter if there's flag `pattern:g` or not).
+3. و در نهایت، اگر هیچ تطابقی وجود نداشته باشد، `null` بر می گرداند. (فرقی نمی‌کند که پرچم `pattern:g` وجود داشته باشد یا خیر).
 
-    This a very important nuance. If there are no matches, we don't receive an empty array, but instead receive `null`. Forgetting about that may lead to errors, e.g.:
+    این یک فرق ریز و بسیار مهم است. اگر هیچ تطابقی وجود نداشته باشد، یک آرایه خالی دریافت نمی‌کنیم، بلکه `null` دریافت می‌ کنیم. فراموش کردن آن ممکن است منجر به خطاهایی شود، به عنوان مثال:
 
     ```js run
     let matches = "JavaScript".match(/HTML/); // = null
@@ -112,7 +113,7 @@ let regexp = new RegExp(`<${tag}>`); // مانند /<h2>/ اگر در اعلان
     }
     ```
 
-    If we'd like the result to always be an array, we can write it this way:
+    اگر می‌خواهیم نتیجه همواره یک آرایه باشد، می‌ توانیم آن را به این صورت بنویسیم:
 
     ```js run
     let matches = "JavaScript".match(/HTML/)*!* || []*/!*;
