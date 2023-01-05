@@ -88,16 +88,15 @@ let regexp = new RegExp(`<${tag}>`); // خواهد بود /<h2>/ جواب داد
     ```js run
     let str = "We will, we will rock you";
 
-    let result = str.match(/we/i); // without flag g
+    let result = str.match(/we/i); // بدون پرچم g
 
-    alert( result[0] );     // We (1st match)
+    alert( result[0] );     // We (اولین تطابق)
     alert( result.length ); // 1
 
     // Details:
     alert( result.index );  // 0 (موقعیت تطابق)
     alert( result.input );  // We will, we will rock you (رشته منبع)
     ```
-    
     اگر بخشی از عبارت باقاعده در داخل پرانتز قرار بگیرد، ممکن است آرایه، ایندکس های دیگری در کنار ایندکس `0` نیز داشته باشد. ما آن را در فصل <info:regexp-groups> پوشش خواهیم داد.
 
 3. و در نهایت، اگر هیچ تطابقی وجود نداشته باشد، `null` بر می گرداند. (فرقی نمی‌ کند که پرچم `pattern:g` وجود داشته باشد یا خیر).
@@ -108,7 +107,7 @@ let regexp = new RegExp(`<${tag}>`); // خواهد بود /<h2>/ جواب داد
     let matches = "JavaScript".match(/HTML/); // = null
 
     if (!matches.length) { // Error: Cannot read property 'length' of null
-      alert("Error in the line above");
+      alert("خطا در خط بالایی");
     }
     ```
 
@@ -118,7 +117,7 @@ let regexp = new RegExp(`<${tag}>`); // خواهد بود /<h2>/ جواب داد
     let matches = "JavaScript".match(/HTML/)*!* || []*/!*;
 
     if (!matches.length) {
-      alert("No matches"); // now it works
+      alert("No matches"); // الان درست کار میکند
     }
     ```
 
