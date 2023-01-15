@@ -1,14 +1,14 @@
-# Character classes
+# کلاس های کاراکتر (Character classes) 
 
-Consider a practical task -- we have a phone number like `"+7(903)-123-45-67"`, and we need to turn it into pure numbers: `79031234567`.
+یک تسک عملی را در نظر بگیرید -- ما یک شماره تلفن مانند `"67-45-123-(903)7+"` داریم و باید آن را به اعداد خالص تبدیل کنیم: `79031234567`.
 
-To do so, we can find and remove anything that's not a number. Character classes can help with that.
+برای انجام این تسک، می‌ توانیم هر چیزی را که عدد نیست پیدا و حذف کنیم. کلاس های کاراکتر می تواند در این مورد کمک کند.
 
-A *character class* is a special notation that matches any symbol from a certain set.
+*کلاس کاراکتر* نماد خاصی است که با هر نمادی از یک مجموعه خاص مطابقت دارد.
 
-For the start, let's explore the "digit" class. It's written as `pattern:\d` and corresponds to "any single digit".
+برای شروع، بیایید کلاس "digit" را بررسی کنیم. به صورت `pattern:\d` نوشته می‌ شود و با "هر رقمی" مطابقت دارد.
 
-For instance, let's find the first digit in the phone number:
+به عنوان مثال، بیایید اولین رقم را در شماره تلفن پیدا کنیم:
 
 ```js run
 let str = "+7(903)-123-45-67";
@@ -18,24 +18,24 @@ let regexp = /\d/;
 alert( str.match(regexp) ); // 7
 ```
 
-Without the flag `pattern:g`, the regular expression only looks for the first match, that is the first digit `pattern:\d`.
+بدون پرچم `pattern:g`، عبارت باقاعده فقط به دنبال اولین تطابق است. که اولین رقم `pattern:\d` می باشد.
 
-Let's add the `pattern:g` flag to find all digits:
+بیایید پرچم `pattern:g` را اضافه کنیم تا همه ارقام را پیدا کنیم:
 
 ```js run
 let str = "+7(903)-123-45-67";
 
 let regexp = /\d/g;
 
-alert( str.match(regexp) ); // array of matches: 7,9,0,3,1,2,3,4,5,6,7
+alert( str.match(regexp) ); // آرایه ای از اعداد : 7,9,0,3,1,2,3,4,5,6,7
 
-// let's make the digits-only phone number of them:
+// بیایید شماره تلفن را به صورت رقمی بنویسیم:
 alert( str.match(regexp).join('') ); // 79031234567
 ```
 
-That was a character class for digits. There are other character classes as well.
+این یک کلاس کاراکتر برای ارقام بود. کلاس های کاراکتر های دیگری نیز وجود دارند.
 
-Most used are:
+بیشترین استفاده ها عبارتند از:
 
 `pattern:\d` ("d" is from "digit")
 : A digit: a character from `0` to `9`.
