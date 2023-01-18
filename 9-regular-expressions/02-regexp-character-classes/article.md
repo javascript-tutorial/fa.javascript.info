@@ -69,22 +69,22 @@ alert( "I love HTML5!".match(/\s\w\w\w\w\d/) ); // ' HTML5'
 
 ![](love-html5-classes.svg)
 
-## Inverse classes
+## کلاس های معکوس (Inverse classes)
 
-For every character class there exists an "inverse class", denoted with the same letter, but uppercased.
+برای هر کلاس کاراکتر یک "کلاس معکوس" وجود دارد که با همان حرف مشخص می شود، اما با حروف بزرگ نشان داده می شود.
 
-The "inverse" means that it matches all other characters, for instance:
+"معکوس" به این معنی است که با تمام کاراکتر های دیگر مطابقت دارد، به عنوان مثال:
 
 `pattern:\D`
-: Non-digit: any character except `pattern:\d`, for instance a letter.
+: غیر رقمی: هر کاراکتری به جز `pattern:\d`، به عنوان مثال یک حرف.
 
 `pattern:\S`
-: Non-space: any character except `pattern:\s`, for instance a letter.
+: بدون فاصله: هر کاراکتری به جز `pattern:\s`، به عنوان مثال یک حرف.
 
 `pattern:\W`
-: Non-wordly character: anything but `pattern:\w`, e.g a non-latin letter or a space.
+: کاراکتر غیرکلمه ای: هر چیزی جز `pattern:\w`، به عنوان مثال یک حرف غیر لاتین یا یک فاصله.
 
-In the beginning of the chapter we saw how to make a number-only phone number from a string like `subject:+7(903)-123-45-67`: find all digits and join them.
+در ابتدای فصل دیدیم که چگونه از رشته ای مانند `subject:+7(903)-123-45-67` یک شماره تلفن تنها با اعداد بسازیم: همه ارقام را پیدا کنید و آنها را به هم متصل کنید.
 
 ```js run
 let str = "+7(903)-123-45-67";
