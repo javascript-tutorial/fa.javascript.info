@@ -37,20 +37,20 @@ alert( str.match(regexp).join('') ); // 79031234567
 
 بیشترین استفاده ها عبارتند از:
 
-`pattern:\d` ("d" is from "digit")
-: A digit: a character from `0` to `9`.
+`pattern:\d` ("d" مخفف "digit(رقم)")
+: رقم: کاراکتری از `0` تا `9`.
 
-`pattern:\s` ("s" is from "space")
-: A space symbol: includes spaces, tabs `\t`, newlines `\n` and few other rare characters, such as `\v`, `\f` and `\r`.
+`pattern:\s` ("s" مخفف "space(فاصله)")
+: یک علامت فاصله: شامل فاصله‌ها، تب ها `t\`، خطوط جدید `n\` و چند کاراکتر کمیاب دیگر، مانند `v\`، `f\` و `r\`.
 
 `pattern:\w` ("w" is from "word")
-: A "wordly" character: either a letter of Latin alphabet or a digit or an underscore `_`. Non-Latin letters (like cyrillic or hindi) do not belong to `pattern:\w`.
+: یک کاراکتر "کلمه ای": یا یک حرف الفبای لاتین یا یک رقم یا زیرخط `_`. حروف غیر لاتین (مانند سیریلیک یا هندی) به `pattern:\w` تعلق ندارند.
 
-For instance, `pattern:\d\s\w` means a "digit" followed by a "space character" followed by a "wordly character", such as `match:1 a`.
+به عنوان مثال، `pattern:\d\s\w` به معنای یک `رقم` است که به دنبال آن یک `کاراکتر فاصله` و به دنبال آن یک `کاراکتر واژه‌ای` مانند `match:1 a`.
 
-**A regexp may contain both regular symbols and character classes.**
+**یک regexp ممکن است شامل نمادهای معمولی و کلاس های کاراکتر باشد.**
 
-For instance, `pattern:CSS\d` matches a string `match:CSS` with a digit after it:
+برای مثال، `pattern:CSS\d` با رشته `Match:CSS` با یک رقم بعد از آن مطابقت دارد:
 
 ```js run
 let str = "Is there CSS4?";
@@ -59,13 +59,13 @@ let regexp = /CSS\d/
 alert( str.match(regexp) ); // CSS4
 ```
 
-Also we can use many character classes:
+همچنین می توانیم از بسیاری از کلاس های کاراکتر استفاده کنیم:
 
 ```js run
 alert( "I love HTML5!".match(/\s\w\w\w\w\d/) ); // ' HTML5'
 ```
 
-The match (each regexp character class has the corresponding result character):
+مطابقت (هر کلاس کاراکتر regexp دارای کاراکتر نتیجه مربوطه است):
 
 ![](love-html5-classes.svg)
 
