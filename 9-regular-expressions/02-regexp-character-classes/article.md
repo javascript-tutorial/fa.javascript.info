@@ -184,20 +184,20 @@ We can't add or remove spaces from a regular expression and expect it to work th
 In other words, in a regular expression all characters matter, spaces too.
 ````
 
-## Summary
+## خلاصه
 
-There exist following character classes:
+کلاس های کاراکتر زیر وجود دارد:
 
-- `pattern:\d` -- digits.
-- `pattern:\D` -- non-digits.
-- `pattern:\s` -- space symbols, tabs, newlines.
+- `pattern:\d` -- رقمی.
+- `pattern:\D` -- غیر رقمی.
+- `pattern:\s` -- نمادهای فاصله، تب ها، خطوط جدید.
 - `pattern:\S` -- all but `pattern:\s`.
-- `pattern:\w` -- Latin letters, digits, underscore `'_'`.
+- `pattern:\w` -- حروف لاتین، اعداد، خط زیر `'_'`.
 - `pattern:\W` -- all but `pattern:\w`.
-- `pattern:.` -- any character if with the regexp `'s'` flag, otherwise any except a newline `\n`.
+- `pattern:.` -- هر کاراکتری اگر `regxp` با پرچم `'s'`، در غیر این صورت هر کاراکتری به جز خط جدید `n\`.
 
-...But that's not all!
+...اما این همه ماجرا نیست!
 
-Unicode encoding, used by JavaScript for strings, provides many properties for characters, like: which language the letter belongs to (if it's a letter), is it a punctuation sign, etc.
+رمزگذاری یونیکد، که توسط جاوا اسکریپت برای رشته ها استفاده می شود، ویژگی های بسیاری را برای کاراکترها فراهم می کند، مانند: حروف به کدام زبان تعلق دارد (اگر حرف باشد)، آیا علامت نقطه گذاری است و غیره.
 
-We can search by these properties as well. That requires flag `pattern:u`, covered in the next article.
+ما می توانیم بر اساس این ویژگی ها نیز جستجو کنیم. برای این کار باید`pattern:u` را علامت گذاری کنید که در مقاله بعدی پوشش داده شده است.
