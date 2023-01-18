@@ -92,7 +92,7 @@ let str = "+7(903)-123-45-67";
 alert( str.match(/\d/g).join('') ); // 79031234567
 ```
 
-An alternative, shorter way is to find non-digits `pattern:\D` and remove them from the string:
+یک راه جایگزین و کوتاهتر این است که `pattern:\D` غیر رقمی را پیدا کنید و آنها را از رشته حذف کنید:
 
 ```js run
 let str = "+7(903)-123-45-67";
@@ -100,48 +100,48 @@ let str = "+7(903)-123-45-67";
 alert( str.replace(/\D/g, "") ); // 79031234567
 ```
 
-## A dot is "any character"
+## نقطه، "هر کاراکتری" است
 
-A dot `pattern:.` is a special character class that matches "any character except a newline".
+نقطه `.:pattern` یک کلاس کاراکتر ویژه است که با "هر کاراکتری به جز خط جدید" مطابقت دارد.
 
-For instance:
+برای مثال:
 
 ```js run
 alert( "Z".match(/./) ); // Z
 ```
 
-Or in the middle of a regexp:
+یا در وسط یک regexp:
 
 ```js run
 let regexp = /CS.4/;
 
 alert( "CSS4".match(regexp) ); // CSS4
 alert( "CS-4".match(regexp) ); // CS-4
-alert( "CS 4".match(regexp) ); // CS 4 (space is also a character)
+alert( "CS 4".match(regexp) ); // CS 4 (فاصله نیز کاراکتر می باشد)
 ```
 
-Please note that a dot means "any character", but not the "absence of a character". There must be a character to match it:
+لطفاً توجه داشته باشید که نقطه به معنای "هر کاراکتری" است، اما نه "عدم وجود یک کاراکتر". باید کاراکتری وجود داشته باشد که با آن مطابقت داشته باشد:
 
 ```js run
-alert( "CS4".match(/CS.4/) ); // null, no match because there's no character for the dot
+alert( "CS4".match(/CS.4/) ); // null, منطبق نیست زیرا هیچ کاراکتری برای نقطه وجود ندارد
 ```
 
-### Dot as literally any character with "s" flag
+### نقطه به معنای واقعی کلمه به عنوان هر کاراکتر با پرچم "s" است.
 
-By default, a dot doesn't match the newline character `\n`.
+به طور پیش فرض، یک نقطه با کاراکتر خط جدید `n\` مطابقت ندارد.
 
-For instance, the regexp `pattern:A.B` matches `match:A`, and then `match:B` with any character between them, except a newline `\n`:
+برای مثال، عبارت باقاعده `pattern:A.B` با `match:A` و سپس `match:B` با هر کاراکتری بین آنها، به جز خط جدید `n\` مطابقت دارد:
 
 ```js run
-alert( "A\nB".match(/A.B/) ); // null (no match)
+alert( "A\nB".match(/A.B/) ); // null (مطابقت ندارد)
 ```
 
-There are many situations when we'd like a dot to mean literally "any character", newline included.
+موقعیت‌ های زیادی وجود دارد که می‌ خواهیم یک نقطه به معنای واقعی کلمه "هر کاراکتری" باشد و شامل خط جدید باشد.
 
-That's what flag `pattern:s` does. If a regexp has it, then a dot `pattern:.` matches literally any character:
+این همان کاری است که flag `pattern:s` انجام می دهد. اگر یک regexp، آن را داشته باشد، یک نقطه `.:pattern` به معنای واقعی کلمه با هر کاراکتری مطابقت دارد:
 
 ```js run
-alert( "A\nB".match(/A.B/s) ); // A\nB (match!)
+alert( "A\nB".match(/A.B/s) ); // A\nB (!مطابقت دارد)
 ```
 
 ````warn header="Not supported in IE"
