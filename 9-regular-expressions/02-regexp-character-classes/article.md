@@ -145,17 +145,17 @@ alert( "A\nB".match(/A.B/s) ); // A\nB (!مطابقت دارد)
 ```
 
 ````warn header="Not supported in IE"
-The `pattern:s` flag is not supported in IE.
+پرچم `pattern:s` در IE پشتیبانی نمی شود.
 
-Luckily, there's an alternative, that works everywhere. We can use a regexp like `pattern:[\s\S]` to match "any character" (this pattern will be covered in the article <info:regexp-character-sets-and-ranges>).
+خوشبختانه، جایگزینی وجود دارد که در همه جا کار می کند. می‌ توانیم از یک regexp مانند `pattern:[\s\S]` برای مطابقت با "هر کاراکتری" استفاده کنیم (این الگو در مقاله <info:regexp-character-sets-and-ranges> پوشش داده خواهد شد).
 
 ```js run
-alert( "A\nB".match(/A[\s\S]B/) ); // A\nB (match!)
+alert( "A\nB".match(/A[\s\S]B/) ); // A\nB (!مطابقت دارد)
 ```
 
-The pattern `pattern:[\s\S]` literally says: "a space character OR not a space character". In other words, "anything". We could use another pair of complementary classes, such as `pattern:[\d\D]`, that doesn't matter. Or even the `pattern:[^]` -- as it means match any character except nothing.
+الگوی `pattern:[\s\S]` به معنای واقعی کلمه می گوید: "یا کاراکتر فاصله یا نه". به عبارت دیگر، "هر چیزی". می‌ توانیم از یک جفت کلاس مکمل دیگر، مانند `pattern:[\d\D]` استفاده کنیم، که مهم نیست. یا حتی `[^]:pattern` -- به این معنی که با هر کاراکتری به جز هیچ چیز مطابقت دارد.
 
-Also we can use this trick if we want both kind of "dots" in the same pattern: the actual dot `pattern:.` behaving the regular way ("not including a newline"), and also a way to match "any character" with `pattern:[\s\S]` or alike.
+همچنین اگر بخواهیم هر دو نوع `نقطه` را در یک الگوی یکسان بخواهیم، می‌ توانیم از این ترفند استفاده کنیم: `.:pattern` نقطه واقعی که به روش معمولی رفتار می‌کند (خط جدید را شامل نمی شود)، و همچنین راهی برای مطابقت با "هر کاراکتری" با `pattern:[\s\S]` یا مشابه.
 ````
 
 ````warn header="Pay attention to spaces"
