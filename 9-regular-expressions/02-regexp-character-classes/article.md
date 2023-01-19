@@ -159,29 +159,30 @@ alert( "A\nB".match(/A[\s\S]B/) ); // A\nB (!مطابقت دارد)
 ````
 
 ````warn header="Pay attention to spaces"
-Usually we pay little attention to spaces. For us strings `subject:1-5` and `subject:1 - 5` are nearly identical.
+معمولا ما به فضاها توجه کمی می کنیم. برای ما رشته های `subject:1-5` و `subject:1 - 5` تقریباً یکسان هستند.
 
-But if a regexp doesn't take spaces into account, it may fail to work.
+اما اگر یک regexp فضاها را در نظر نگیرد، ممکن است کار نکند.
 
-Let's try to find digits separated by a hyphen:
-
-```js run
-alert( "1 - 5".match(/\d-\d/) ); // null, no match!
-```
-
-Let's fix it adding spaces into the regexp `pattern:\d - \d`:
+بیایید سعی کنیم ارقامی را که با خط فاصله جدا شده اند پیدا کنیم:
 
 ```js run
-alert( "1 - 5".match(/\d - \d/) ); // 1 - 5, now it works
-// or we can use \s class:
-alert( "1 - 5".match(/\d\s-\s\d/) ); // 1 - 5, also works
+alert( "1 - 5".match(/\d-\d/) ); // null, مطابقت ندارد!
 ```
 
-**A space is a character. Equal in importance with any other character.**
+بیایید با افزودن فاصله به regexp به صورت `pattern:\d - \d آن را برطرف کنیم:
 
-We can't add or remove spaces from a regular expression and expect it to work the same.
+```js run
+alert( "1 - 5".match(/\d - \d/) ); // 1 - 5, حال درست کار می کند
+// یا می توانیم از کلاس s\ استفاده کنیم:
+alert( "1 - 5".match(/\d\s-\s\d/) ); // 1 - 5, این نیز کار می کند
+```
 
-In other words, in a regular expression all characters matter, spaces too.
+**فضا یک کاراکتر است. از نظر اهمیت با هر کاراکتر دیگری برابر است.**
+
+
+ما نمی‌ توانیم فاصله‌ها را از یک عبارت باقاعده اضافه یا حذف کنیم و انتظار داشته باشیم که به همان صورت عمل کند.
+
+به عبارت دیگر، در یک عبارت باقاعده، همه کاراکترها مهم هستند. فضاها نیز همین طور.
 ````
 
 ## خلاصه
