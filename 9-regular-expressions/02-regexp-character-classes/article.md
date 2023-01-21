@@ -1,14 +1,14 @@
-# Character classes
+# کلاس های کاراکتر (Character classes) 
 
-Consider a practical task -- we have a phone number like `"+7(903)-123-45-67"`, and we need to turn it into pure numbers: `79031234567`.
+یک تسک عملی را در نظر بگیرید -- ما یک شماره تلفن مانند `"67-45-123-(903)7+"` داریم و باید آن را به ارقام تبدیل کنیم: `79031234567`.
 
-To do so, we can find and remove anything that's not a number. Character classes can help with that.
+برای انجام این تسک، می‌ توانیم هر چیزی را که عدد نیست پیدا و حذف کنیم. کلاس های کاراکتر می تواند در این مورد کمک کند.
 
-A *character class* is a special notation that matches any symbol from a certain set.
+*کلاس کاراکتر* نماد خاصی است که با هر نمادی از یک مجموعه خاص مطابقت دارد.
 
-For the start, let's explore the "digit" class. It's written as `pattern:\d` and corresponds to "any single digit".
+برای شروع، بیایید کلاس «ارقام» را بررسی کنیم. به صورت `pattern:\d` نوشته می‌ شود و با "هر رقمی" مطابقت دارد.
 
-For instance, let's find the first digit in the phone number:
+به عنوان مثال، بیایید اولین رقم را در شماره تلفن پیدا کنیم:
 
 ```js run
 let str = "+7(903)-123-45-67";
@@ -18,39 +18,39 @@ let regexp = /\d/;
 alert( str.match(regexp) ); // 7
 ```
 
-Without the flag `pattern:g`, the regular expression only looks for the first match, that is the first digit `pattern:\d`.
+بدون پرچم `pattern:g`، عبارت باقاعده فقط به دنبال اولین تطابق است، که اولین رقم `pattern:\d` می باشد.
 
-Let's add the `pattern:g` flag to find all digits:
+بیایید پرچم `pattern:g` را اضافه کنیم تا همه ارقام را پیدا کنیم:
 
 ```js run
 let str = "+7(903)-123-45-67";
 
 let regexp = /\d/g;
 
-alert( str.match(regexp) ); // array of matches: 7,9,0,3,1,2,3,4,5,6,7
+alert( str.match(regexp) ); // آرایه ای از اعداد : 7,9,0,3,1,2,3,4,5,6,7
 
-// let's make the digits-only phone number of them:
+// :بیایید از این آرایه شماره تلفنی بسازیم که تنها حاوی ارقام است
 alert( str.match(regexp).join('') ); // 79031234567
 ```
 
-That was a character class for digits. There are other character classes as well.
+این یک کلاس کاراکتر برای ارقام بود. کلاس های کاراکتر های دیگری نیز وجود دارند.
 
-Most used are:
+بیشترین استفاده ها عبارتند از:
 
-`pattern:\d` ("d" is from "digit")
-: A digit: a character from `0` to `9`.
+`pattern:\d` ("d" مخفف "digit(رقم)")
+: رقم: کاراکتری از `0` تا `9`.
 
-`pattern:\s` ("s" is from "space")
-: A space symbol: includes spaces, tabs `\t`, newlines `\n` and few other rare characters, such as `\v`, `\f` and `\r`.
+`pattern:\s` ("s" مخفف "space(فاصله)")
+: یک علامت فاصله: شامل فاصله‌ها، تب ها `t\`، خطوط جدید `n\` و چند کاراکتر کمیاب دیگر، مانند `v\`، `f\` و `r\`.
 
-`pattern:\w` ("w" is from "word")
-: A "wordly" character: either a letter of Latin alphabet or a digit or an underscore `_`. Non-Latin letters (like cyrillic or hindi) do not belong to `pattern:\w`.
+`pattern:\w` ("w" مخفف "word")
+: یک کاراکتر "کلمه ای": یا یک حرف الفبای لاتین یا یک رقم یا زیرخط `_`. حروف غیر لاتین (مانند سیریلیک یا هندی) به `pattern:\w` تعلق ندارند.
 
-For instance, `pattern:\d\s\w` means a "digit" followed by a "space character" followed by a "wordly character", such as `match:1 a`.
+به عنوان مثال، `pattern:\d\s\w` به معنای یک `رقم` است که به دنبال آن یک `کاراکتر فاصله` و به دنبال آن یک `کاراکتر کلمه‌ای` مانند `match:1 a`.
 
-**A regexp may contain both regular symbols and character classes.**
+**یک regexp ممکن است شامل نمادهای معمولی و کلاس های کاراکتر باشد.**
 
-For instance, `pattern:CSS\d` matches a string `match:CSS` with a digit after it:
+برای مثال، `pattern:CSS\d` با رشته `Match:CSS` با یک رقم بعد از آن مطابقت دارد:
 
 ```js run
 let str = "Is there CSS4?";
@@ -59,32 +59,32 @@ let regexp = /CSS\d/
 alert( str.match(regexp) ); // CSS4
 ```
 
-Also we can use many character classes:
+همچنین می توانیم از بسیاری از کلاس های کاراکتر استفاده کنیم:
 
 ```js run
 alert( "I love HTML5!".match(/\s\w\w\w\w\d/) ); // ' HTML5'
 ```
 
-The match (each regexp character class has the corresponding result character):
+عبارت دارای مطابقت (هر کلاس کاراکتر regexp دارای کاراکتر نتیجه مربوطه است):
 
 ![](love-html5-classes.svg)
 
-## Inverse classes
+## کلاس های معکوس (Inverse classes)
 
-For every character class there exists an "inverse class", denoted with the same letter, but uppercased.
+برای هر کلاس کاراکتر یک "کلاس معکوس" وجود دارد که با همان حرف مشخص می شود، اما با حروف بزرگ نشان داده می شود.
 
-The "inverse" means that it matches all other characters, for instance:
+"معکوس" به این معنی است که با تمام کاراکتر های دیگر مطابقت دارد، به عنوان مثال:
 
 `pattern:\D`
-: Non-digit: any character except `pattern:\d`, for instance a letter.
+: غیر رقمی: هر کاراکتری به جز `pattern:\d`، به عنوان مثال یک حرف.
 
 `pattern:\S`
-: Non-space: any character except `pattern:\s`, for instance a letter.
+: بدون فاصله: هر کاراکتری به جز `pattern:\s`، به عنوان مثال یک حرف.
 
 `pattern:\W`
-: Non-wordly character: anything but `pattern:\w`, e.g a non-latin letter or a space.
+: کاراکتر غیر کلمه ای: هر چیزی جز `pattern:\w`، به عنوان مثال یک حرف غیر لاتین یا یک فاصله.
 
-In the beginning of the chapter we saw how to make a number-only phone number from a string like `subject:+7(903)-123-45-67`: find all digits and join them.
+در ابتدای فصل دیدیم که چگونه از رشته ای مانند `subject:+7(903)-123-45-67` یک شماره تلفن تنها با اعداد بسازیم: همه ارقام را پیدا کنید و آنها را به هم متصل کنید.
 
 ```js run
 let str = "+7(903)-123-45-67";
@@ -92,7 +92,7 @@ let str = "+7(903)-123-45-67";
 alert( str.match(/\d/g).join('') ); // 79031234567
 ```
 
-An alternative, shorter way is to find non-digits `pattern:\D` and remove them from the string:
+یک راه جایگزین و کوتاهتر این است که `pattern:\D` غیر رقمی را پیدا کنید و آنها را از رشته حذف کنید:
 
 ```js run
 let str = "+7(903)-123-45-67";
@@ -100,104 +100,104 @@ let str = "+7(903)-123-45-67";
 alert( str.replace(/\D/g, "") ); // 79031234567
 ```
 
-## A dot is "any character"
+## نقطه، "هر کاراکتری" است
 
-A dot `pattern:.` is a special character class that matches "any character except a newline".
+نقطه `.:pattern` یک کلاس کاراکتر ویژه است که با "هر کاراکتری به جز خط جدید" مطابقت دارد.
 
-For instance:
+برای مثال:
 
 ```js run
 alert( "Z".match(/./) ); // Z
 ```
 
-Or in the middle of a regexp:
+یا در وسط یک regexp:
 
 ```js run
 let regexp = /CS.4/;
 
 alert( "CSS4".match(regexp) ); // CSS4
 alert( "CS-4".match(regexp) ); // CS-4
-alert( "CS 4".match(regexp) ); // CS 4 (space is also a character)
+alert( "CS 4".match(regexp) ); // CS 4 (فاصله نیز کاراکتر می باشد)
 ```
 
-Please note that a dot means "any character", but not the "absence of a character". There must be a character to match it:
+لطفاً توجه داشته باشید که نقطه به معنای "هر کاراکتری" است، اما نه "عدم وجود یک کاراکتر". باید کاراکتری وجود داشته باشد که با آن مطابقت داشته باشد:
 
 ```js run
-alert( "CS4".match(/CS.4/) ); // null, no match because there's no character for the dot
+alert( "CS4".match(/CS.4/) ); // null, منطبق نیست زیرا هیچ کاراکتری برای نقطه وجود ندارد
 ```
 
-### Dot as literally any character with "s" flag
+### نقطه به معنای واقعی کلمه به عنوان هر کاراکتر با پرچم "s" است.
 
-By default, a dot doesn't match the newline character `\n`.
+به طور پیش فرض، یک نقطه با کاراکتر خط جدید `n\` مطابقت ندارد.
 
-For instance, the regexp `pattern:A.B` matches `match:A`, and then `match:B` with any character between them, except a newline `\n`:
+برای مثال، عبارت باقاعده `pattern:A.B` با `match:A` و سپس `match:B` با هر کاراکتری بین آنها، به جز خط جدید `n\` مطابقت دارد:
 
 ```js run
-alert( "A\nB".match(/A.B/) ); // null (no match)
+alert( "A\nB".match(/A.B/) ); // null (مطابقت ندارد)
 ```
 
-There are many situations when we'd like a dot to mean literally "any character", newline included.
+موقعیت‌ های زیادی وجود دارد که می‌ خواهیم یک نقطه به معنای واقعی کلمه "هر کاراکتری" باشد و شامل خط جدید باشد.
 
-That's what flag `pattern:s` does. If a regexp has it, then a dot `pattern:.` matches literally any character:
+این همان کاری است که flag `pattern:s` انجام می دهد. اگر یک regexp، آن را داشته باشد، یک نقطه `.:pattern` به معنای واقعی کلمه با هر کاراکتری مطابقت دارد:
 
 ```js run
-alert( "A\nB".match(/A.B/s) ); // A\nB (match!)
+alert( "A\nB".match(/A.B/s) ); // A\nB (!مطابقت دارد)
 ```
 
 ````warn header="Not supported in IE"
-The `pattern:s` flag is not supported in IE.
+پرچم `pattern:s` در IE پشتیبانی نمی شود.
 
-Luckily, there's an alternative, that works everywhere. We can use a regexp like `pattern:[\s\S]` to match "any character" (this pattern will be covered in the article <info:regexp-character-sets-and-ranges>).
+خوشبختانه، جایگزینی وجود دارد که در همه جا کار می کند. می‌ توانیم از یک regexp مانند `pattern:[\s\S]` برای مطابقت با "هر کاراکتری" استفاده کنیم (این الگو در مقاله <info:regexp-character-sets-and-ranges> پوشش داده خواهد شد).
 
 ```js run
-alert( "A\nB".match(/A[\s\S]B/) ); // A\nB (match!)
+alert( "A\nB".match(/A[\s\S]B/) ); // A\nB (!مطابقت دارد)
 ```
 
-The pattern `pattern:[\s\S]` literally says: "a space character OR not a space character". In other words, "anything". We could use another pair of complementary classes, such as `pattern:[\d\D]`, that doesn't matter. Or even the `pattern:[^]` -- as it means match any character except nothing.
+الگوی `pattern:[\s\S]` به معنای واقعی کلمه می گوید: "یا کاراکتر فاصله یا نه". به عبارت دیگر، "هر چیزی". می‌ توانیم از یک جفت کلاس مکمل دیگر، مانند `pattern:[\d\D]` استفاده کنیم، که مهم نیست. یا حتی `[^]:pattern` -- به این معنی که با هر کاراکتری به جز هیچ چیز مطابقت دارد.
 
-Also we can use this trick if we want both kind of "dots" in the same pattern: the actual dot `pattern:.` behaving the regular way ("not including a newline"), and also a way to match "any character" with `pattern:[\s\S]` or alike.
+همچنین اگر بخواهیم هر دو نوع `نقطه` را در یک الگوی یکسان بخواهیم، می‌ توانیم از این ترفند استفاده کنیم: `.:pattern` نقطه واقعی که به روش معمولی رفتار می‌کند (خط جدید را شامل نمی شود)، و همچنین راهی برای مطابقت با "هر کاراکتری" با `pattern:[\s\S]` یا مشابه.
 ````
 
-````warn header="Pay attention to spaces"
-Usually we pay little attention to spaces. For us strings `subject:1-5` and `subject:1 - 5` are nearly identical.
+````warn header="به فاصله ها توجه کنید"
+معمولا ما به فضاها توجه کمی می کنیم. برای ما رشته های `subject:1-5` و `subject:1 - 5` تقریباً یکسان هستند.
 
-But if a regexp doesn't take spaces into account, it may fail to work.
+اما اگر یک regexp فضاها را در نظر نگیرد، ممکن است کار نکند.
 
-Let's try to find digits separated by a hyphen:
-
-```js run
-alert( "1 - 5".match(/\d-\d/) ); // null, no match!
-```
-
-Let's fix it adding spaces into the regexp `pattern:\d - \d`:
+بیایید سعی کنیم ارقامی را که با خط فاصله جدا شده اند پیدا کنیم:
 
 ```js run
-alert( "1 - 5".match(/\d - \d/) ); // 1 - 5, now it works
-// or we can use \s class:
-alert( "1 - 5".match(/\d\s-\s\d/) ); // 1 - 5, also works
+alert( "1 - 5".match(/\d-\d/) ); // null, مطابقت ندارد!
 ```
 
-**A space is a character. Equal in importance with any other character.**
+بیایید با افزودن فاصله به regexp به صورت `pattern:\d - \d آن را برطرف کنیم:
 
-We can't add or remove spaces from a regular expression and expect it to work the same.
+```js run
+alert( "1 - 5".match(/\d - \d/) ); // 1 - 5, حال درست کار می کند
+// :استفاده کنیم \s یا می توانیم از کلاس
+alert( "1 - 5".match(/\d\s-\s\d/) ); // 1 - 5, این نیز کار می کند
+```
 
-In other words, in a regular expression all characters matter, spaces too.
+**فضا یک کاراکتر است. از نظر اهمیت با هر کاراکتر دیگری برابر است.**
+
+ما نمی‌ توانیم فاصله‌ها را از یک عبارت باقاعده اضافه یا حذف کنیم و انتظار داشته باشیم که به همان صورت عمل کند.
+
+به عبارت دیگر، در یک عبارت باقاعده، همه کاراکترها مهم هستند. فاصله ها نیز همین طور.
 ````
 
-## Summary
+## خلاصه
 
-There exist following character classes:
+کلاس های کاراکتر زیر وجود دارد:
 
-- `pattern:\d` -- digits.
-- `pattern:\D` -- non-digits.
-- `pattern:\s` -- space symbols, tabs, newlines.
-- `pattern:\S` -- all but `pattern:\s`.
-- `pattern:\w` -- Latin letters, digits, underscore `'_'`.
-- `pattern:\W` -- all but `pattern:\w`.
-- `pattern:.` -- any character if with the regexp `'s'` flag, otherwise any except a newline `\n`.
+- `pattern:\d` -- رقمی.
+- `pattern:\D` -- غیر رقمی.
+- `pattern:\s` -- نمادهای فاصله، تب ها، خطوط جدید.
+- `pattern:\S` -- هر چیزی به جز `pattern:\s`.
+- `pattern:\w` -- حروف لاتین، اعداد، خط زیر `'_'`.
+- `pattern:\W` -- هر چیزی به جز `pattern:\w`.
+- `pattern:.` -- اگر با پرچم `'s'` همراه باشد هر کاراکتری مورد قبول است، در غیر این صورت هر کاراکتری به جز خط جدید `n\`.
 
-...But that's not all!
+...اما این همه ماجرا نیست!
 
-Unicode encoding, used by JavaScript for strings, provides many properties for characters, like: which language the letter belongs to (if it's a letter), is it a punctuation sign, etc.
+رمزگذاری یونیکد، که توسط جاوااسکریپت برای رشته ها استفاده می شود، ویژگی های بسیاری را برای کاراکترها فراهم می کند، مانند: حروف به کدام زبان تعلق دارد (اگر حرف باشد)، آیا علامت نقطه گذاری است و غیره.
 
-We can search by these properties as well. That requires flag `pattern:u`, covered in the next article.
+ما می توانیم بر اساس این ویژگی ها نیز جستجو کنیم. برای این کار باید`pattern:u` را علامت گذاری کنید که در مقاله بعدی پوشش داده شده است.
