@@ -27,30 +27,30 @@ alert('𝒳'.length); // 2
 
 ...اما ما می توانیم ببینیم که فقط یکی وجود دارد، درست است؟ نکته این است که `length` آن را 4 بایت به عنوان دو کاراکتر 2 بایتی در نظر می گیرد. این نادرست است، زیرا آنها باید فقط با هم در نظر گرفته شوند(به اصطلاح "جفت جانشین"، می توانید در مورد آنها در مقاله <info:string> بخوانید).
 
-By default, regular expressions also treat 4-byte "long characters" as a pair of 2-byte ones. And, as it happens with strings, that may lead to odd results. We'll see that a bit later, in the article <info:regexp-character-sets-and-ranges>.
+به‌ طور پیش‌ فرض، عبارات باقاعده نیز "کاراکتر های طولانی" 4 بایتی را به عنوان یک جفت 2 بایتی در نظر می‌ گیرند. همانطور که در مورد رشته ها اتفاق می افتد، ممکن است به نتایج عجیب و غریب منجر شود. این را کمی بعد، در مقاله <info:regexp-character-sets-and-ranges> خواهیم دید.
 
-Unlike strings, regular expressions have flag `pattern:u` that fixes such problems. With such flag, a regexp handles 4-byte characters correctly. And also Unicode property search becomes available, we'll get to it next.
+برخلاف رشته‌ها، عبارات باقاعده دارای پرچم `pattern:u` هستند که چنین مشکلاتی را برطرف می‌ کند. با چنین پرچمی، یک regexp کاراکترهای 4 بایتی را به درستی مدیریت می کند. همچنین جستجوی ویژگی یونیکد در دسترس قرار می گیرد. در ادامه به آن خواهیم پرداخت.
 
-## Unicode properties \p{...}
+## ویژگی های یونیکد {...}p\
 
-Every character in Unicode has a lot of properties. They describe what "category" the character belongs to, contain miscellaneous information about it.
+هر کاراکتر در یونیکد دارای ویژگی های زیادی است. آنها توصیف می کنند که کاراکتر به چه "رده ای" تعلق دارد و حاوی اطلاعات متفرقه در مورد آن است.
 
-For instance, if a character has `Letter` property, it means that the character belongs to an alphabet (of any language). And `Number` property means that it's a digit: maybe Arabic or Chinese, and so on.
+به عنوان مثال، اگر یک کاراکتر دارای ویژگی `Letter` باشد، به این معنی است که کاراکتر متعلق به الفبا (از هر زبان) است. خاصیت `Number` به این معنی است که یک رقم است: شاید عربی یا چینی و غیره.
 
-We can search for characters with a property, written as `pattern:\p{…}`. To use `pattern:\p{…}`, a regular expression must have flag `pattern:u`.
+می‌ توانیم کاراکترهایی را با یک ویژگی جستجو کنیم که به صورت `{…}pattern:\p` نوشته شده است. برای استفاده از `{…}pattern:\p`، یک عبارت باقاعده باید دارای پرچم `pattern:u` باشد.
 
-For instance, `\p{Letter}` denotes a letter in any language. We can also use `\p{L}`, as `L` is an alias of `Letter`. There are shorter aliases for almost every property.
+برای مثال، `{Letter}p\` یک حرف در هر زبانی را نشان می‌دهد. همچنین می‌توانیم از `p{L}\` استفاده کنیم، زیرا `L` نام مستعار `Letter` است. تقریباً برای هر ویژگی نام مستعار کوتاه تری وجود دارد.
 
-In the example below three kinds of letters will be found: English, Georgian and Korean.
+در مثال زیر سه نوع حرف وجود دارد: انگلیسی، گرجی و کره ای.
 
 ```js run
 let str = "A ბ ㄱ";
 
 alert( str.match(/\p{L}/gu) ); // A,ბ,ㄱ
-alert( str.match(/\p{L}/g) ); // null (no matches, \p doesn't work without the flag "u")
+alert( str.match(/\p{L}/g) ); // null (بدون منطبق، \p بدون پرچم "u" کار نمی کند)
 ```
 
-Here's the main character categories and their subcategories:
+در اینجا دسته بندی کاراکتر های اصلی و زیر شاخه های آنها آمده است:
 
 - Letter `L`:
   - lowercase `Ll`
