@@ -52,43 +52,43 @@ alert( str.match(/\p{L}/g) ); // null (بدون منطبق، \p بدون پرچ�
 
 در اینجا دسته بندی کاراکتر های اصلی و زیر شاخه های آنها آمده است:
 
-- Letter `L`:
-  - lowercase `Ll`
-  - modifier `Lm`,
-  - titlecase `Lt`,
-  - uppercase `Lu`,
-  - other `Lo`.
-- Number `N`:
-  - decimal digit `Nd`,
-  - letter number `Nl`,
-  - other `No`.
-- Punctuation `P`:
-  - connector `Pc`,
-  - dash `Pd`,
-  - initial quote `Pi`,
-  - final quote `Pf`,
-  - open `Ps`,
-  - close `Pe`,
-  - other `Po`.
-- Mark `M` (accents etc):
-  - spacing combining `Mc`,
-  - enclosing `Me`,
-  - non-spacing `Mn`.
-- Symbol `S`:
-  - currency `Sc`,
-  - modifier `Sk`,
-  - math `Sm`,
-  - other `So`.
-- Separator `Z`:
-  - line `Zl`,
-  - paragraph `Zp`,
-  - space `Zs`.
-- Other `C`:
-  - control `Cc`,
-  - format `Cf`,
-  - not assigned `Cn`,
-  - private use `Co`,
-  - surrogate `Cs`.
+- حرف `L`:
+  - حروف کوچک `Ll`
+  - اصلاح کننده `Lm`,
+  - عنوان `Lt`,
+  - حروف بزرگ `Lu`,
+  - سایر `Lo`.
+- عدد `N`:
+  - رقم اعشاری `Nd`,
+  - شماره نامه `Nl`,
+  - سایر `No`.
+- نقطه گذاری `P`:
+  - اتصال دهنده `Pc`,
+  - خط تیره `Pd`,
+  - نقل قول اولیه `Pi`,
+  - نقل قول نهایی `Pf`,
+  - باز `Ps`,
+  - بسته `Pe`,
+  - سایر `Po`.
+- علامت `M` (لهجه ها و غیره):
+  - ترکیب فاصله `Mc`,
+  - محصور کردن `Me`,
+  - بدون فاصله `Mn`.
+- نماد `S`:
+  - واحد پول `Sc`,
+  - اصلاح کننده `Sk`,
+  - ریاضی `Sm`,
+  - سایر `So`.
+- جداکننده `Z`:
+  - خط `Zl`,
+  - پاراگراف `Zp`,
+  - فاصله `Zs`.
+- سایر `C`:
+  - کنترل `Cc`,
+  - فرمت `Cf`,
+  - اختصاص داده نشده `Cn`,
+  - استفاده خصوصی `Co`,
+  - جانشین `Cs`.
 
 
 So, e.g. if we need letters in lower case, we can write `pattern:\p{Ll}`, punctuation signs: `pattern:\p{P}` and so on.
