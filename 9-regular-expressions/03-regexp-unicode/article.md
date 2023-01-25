@@ -1,12 +1,12 @@
-# Unicode: flag "u" and class \p{...}
+# یونیکد: پرچم "u" و کلاس {...}p\
 
-JavaScript uses [Unicode encoding](https://en.wikipedia.org/wiki/Unicode) for strings. Most characters are encoded with 2 bytes, but that allows to represent at most 65536 characters.
+جاوااسکریپت از [رمزگذاری یونیکد](https://en.wikipedia.org/wiki/Unicode) برای رشته ها استفاده می کند. اکثر کاراکترها با 2 بایت کدگذاری می شوند، اما این امکان را برای نمایش حداکثر 65536 کاراکتر فراهم می کند.
 
-That range is not big enough to encode all possible characters, that's why some rare characters are encoded with 4 bytes, for instance like `𝒳` (mathematical X) or `😄` (a smile), some hieroglyphs and so on.
+این محدوده به اندازه کافی بزرگ نیست تا همه کاراکترهای ممکن را رمزگذاری کند، به همین دلیل است که برخی از کاراکترهای کمیاب با 4 بایت کدگذاری می شوند، به عنوان مثال مانند `𝒳` (X ریاضی) یا `😄` (لبخند)، برخی از هیروگلیف ها و غیره.
 
-Here are the Unicode values of some characters:
+در اینجا مقادیر یونیکد برخی از کاراکترها آمده است:
 
-| Character  | Unicode | Bytes count in Unicode  |
+| کاراکتر  | یونیکد | تعداد بایت یونیکد  |
 |------------|---------|--------|
 | a | `0x0061` |  2 |
 | ≈ | `0x2248` |  2 |
@@ -14,18 +14,18 @@ Here are the Unicode values of some characters:
 |𝒴| `0x1d4b4` | 4 |
 |😄| `0x1f604` | 4 |
 
-So characters like `a` and `≈` occupy 2 bytes, while codes for `𝒳`, `𝒴` and `😄` are longer, they have 4 bytes.
+بنابراین کاراکتر هایی مانند `a` و `≈` 2 بایت را اشغال می کنند، در حالی که کدهای `𝒳`، `𝒴` و `😄` طولانی تر هستند و 4 بایت دارند.
 
-Long time ago, when JavaScript language was created, Unicode encoding was simpler: there were no 4-byte characters. So, some language features still handle them incorrectly.
+مدت ها پیش، زمانی که زبان جاوااسکریپت ایجاد شد، رمزگذاری یونیکد ساده تر بود: هیچ کاراکتر 4 بایتی وجود نداشت. بنابراین برخی از ویژگی های زبان را به اشتباه مدیریت می کردند.
 
-For instance, `length` thinks that here are two characters:
+به عنوان مثال، `length` فکر می کند که در اینجا دو کاراکتر وجود دارد:
 
 ```js run
 alert('😄'.length); // 2
 alert('𝒳'.length); // 2
 ```
 
-...But we can see that there's only one, right? The point is that `length` treats 4 bytes as two 2-byte characters. That's incorrect, because they must be considered only together (so-called "surrogate pair", you can read about them in the article <info:string>).
+...اما ما می توانیم ببینیم که فقط یکی وجود دارد، درست است؟ نکته این است که `length` آن را 4 بایت به عنوان دو کاراکتر 2 بایتی در نظر می گیرد. این نادرست است، زیرا آنها باید فقط با هم در نظر گرفته شوند(به اصطلاح "جفت جانشین"، می توانید در مورد آنها در مقاله <info:string> بخوانید).
 
 By default, regular expressions also treat 4-byte "long characters" as a pair of 2-byte ones. And, as it happens with strings, that may lead to odd results. We'll see that a bit later, in the article <info:regexp-character-sets-and-ranges>.
 
