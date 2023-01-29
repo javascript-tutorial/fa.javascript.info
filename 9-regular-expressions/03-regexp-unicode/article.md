@@ -107,9 +107,9 @@ alert( str.match(/\p{L}/g) ); // null (بدون منطبق، \p بدون پرچ�
 
 ### مثال: اعداد هگزادسیمال
 
-For instance, let's look for hexadecimal numbers, written as `xFF`, where `F` is a hex digit (0..9 or A..F).
+برای مثال، بیایید به دنبال اعداد هگزادسیمال بگردیم که به صورت `xFF` نوشته می‌شوند، جایی که `F` یک رقم هگزاست (0..9 یا A..F).
 
-A hex digit can be denoted as `pattern:\p{Hex_Digit}`:
+یک رقم هگز را می توان به عنوان `pattern:\p{Hex_Digit}` نشان داد:
 
 ```js run
 let regexp = /x\p{Hex_Digit}\p{Hex_Digit}/u;
@@ -117,27 +117,26 @@ let regexp = /x\p{Hex_Digit}\p{Hex_Digit}/u;
 alert("number: xAF".match(regexp)); // xAF
 ```
 
-### Example: Chinese hieroglyphs
+### مثال: هیروگلیف چینی
 
-Let's look for Chinese hieroglyphs.
+بیایید دنبال هیروگلیف چینی بگردیم.
+یک ویژگی یونیکد `Script` (یک سیستم نوشتاری) وجود دارد که ممکن است دارای مقدار باشد: `سیریلیک`، `یونانی`، `عربی`، `هان` (چینی) و غیره، [فهرست کامل در اینجا آمده است](https://en.wikipedia.org/wiki/Script_(Unicode)).
 
-There's a Unicode property `Script` (a writing system), that may have a value: `Cyrillic`, `Greek`, `Arabic`, `Han` (Chinese) and so on, [here's the full list](https://en.wikipedia.org/wiki/Script_(Unicode)).
-
-To look for characters in a given writing system we should use `pattern:Script=<value>`, e.g. for Cyrillic letters: `pattern:\p{sc=Cyrillic}`, for Chinese hieroglyphs: `pattern:\p{sc=Han}`, and so on:
+برای جستجوی کاراکترها در یک سیستم نوشتاری معین، باید از `<pattern:Script=<value` استفاده کنیم، به عنوان مثال. برای حروف سیریلیک: `pattern:\p{sc=Cyrillic}`، برای هیروگلیف چینی: `pattern:\p{sc=Han}` و غیره:
 
 ```js run
-let regexp = /\p{sc=Han}/gu; // returns Chinese hieroglyphs
+let regexp = /\p{sc=Han}/gu; // هیروگلیف های چینی را برمی گرداند
 
 let str = `Hello Привет 你好 123_456`;
 
 alert( str.match(regexp) ); // 你,好
 ```
 
-### Example: currency
+### مثال: ارز
 
-Characters that denote a currency, such as `$`, `€`, `¥`, have Unicode property  `pattern:\p{Currency_Symbol}`, the short alias: `pattern:\p{Sc}`.
+کاراکتر ‌هایی که یک ارز را نشان می‌دهند، مانند `$`، `€`، `¥`، دارای ویژگی یونیکد `pattern:\p{Currency_Symbol}` هستند، نام مستعار کوتاه: `pattern:\p{Sc}`.
 
-Let's use it to look for prices in the format "currency, followed by a digit":
+بیایید از آن برای جستجوی قیمت‌ها در قالب "ارز و به دنبال آن یک رقم" استفاده کنیم:
 
 ```js run
 let regexp = /\p{Sc}\d/gu;
