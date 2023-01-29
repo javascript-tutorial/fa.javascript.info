@@ -146,15 +146,15 @@ let str = `Prices: $2, €1, ¥9`;
 alert( str.match(regexp) ); // $2,€1,¥9
 ```
 
-Later, in the article <info:regexp-quantifiers> we'll see how to look for numbers that contain many digits.
+بعداً، در مقاله <info:regexp-quantifiers> خواهیم دید که چگونه به دنبال اعدادی بگردیم که دارای ارقام زیادی هستند.
 
-## Summary
+## خلاصه
 
-Flag `pattern:u` enables the support of Unicode in regular expressions.
+پرچم `pattern:u` پشتیبانی از یونیکد را در عبارات منظم فعال می کند.
 
-That means two things:
+یعنی دو چیز:
 
-1. Characters of 4 bytes are handled correctly: as a single character, not two 2-byte characters.
-2. Unicode properties can be used in the search: `\p{…}`.
+1. کاراکترهای 4 بایتی به درستی مدیریت می شوند: به عنوان یک کاراکتر، نه دو کاراکتر 2 بایتی.
+2. از ویژگی های یونیکد می توان در جستجو استفاده کرد: `{…}p\`.
 
-With Unicode properties we can look for words in given languages, special characters (quotes, currencies) and so on.
+با ویژگی‌های یونیکد می‌توانیم به دنبال کلمات در زبان‌های معین، کاراکترهای خاص (نقل‌ ها، ارزها) و غیره بگردیم.
