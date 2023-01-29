@@ -91,21 +91,21 @@ alert( str.match(/\p{L}/g) ); // null (بدون منطبق، \p بدون پرچ�
   - جانشین `Cs`.
 
 
-So, e.g. if we need letters in lower case, we can write `pattern:\p{Ll}`, punctuation signs: `pattern:\p{P}` and so on.
+بنابراین، به عنوان مثال اگر به حروف کوچک نیاز داریم، می‌توانیم `pattern:\p{Ll}`، علائم نگارشی: `pattern:\p{P}` و غیره را بنویسیم.
 
-There are also other derived categories, like:
-- `Alphabetic` (`Alpha`), includes Letters `L`, plus letter numbers `Nl` (e.g. Ⅻ - a character for the roman number 12), plus some other symbols `Other_Alphabetic` (`OAlpha`).
-- `Hex_Digit` includes hexadecimal digits: `0-9`, `a-f`.
-- ...And so on.
+دسته های نشات گرفته شده دیگری نیز وجود دارد، مانند:
+- `Alphabetic` (`Alpha`)، شامل حروف `L`، به اضافه اعداد حروف `Nl` (مثلاً Ⅻ - یک کاراکتر برای عدد رومی 12)، به‌علاوه برخی از نمادهای دیگر `Other_Alphabetic` (`OAlpha`).
+- `Hex_Digit` شامل اعداد هگزا دسیمال است. `0-9` `a-f`
+- ...و غیره.
 
-Unicode supports many different properties, their full list would require a lot of space, so here are the references:
+یونیکد از بسیاری از ویژگی های مختلف پشتیبانی می کند، لیست کامل آنها به فضای زیادی نیاز دارد، بنابراین در اینجا منابع آمده است:
 
-- List all properties by a character: <https://unicode.org/cldr/utility/character.jsp>.
-- List all characters by a property: <https://unicode.org/cldr/utility/list-unicodeset.jsp>.
-- Short aliases for properties: <https://www.unicode.org/Public/UCD/latest/ucd/PropertyValueAliases.txt>.
-- A full base of Unicode characters in text format, with all properties, is here: <https://www.unicode.org/Public/UCD/latest/ucd/>.
+- لیست تمام ویژگی ها بر اساس یک کاراکتر: <https://unicode.org/cldr/utility/character.jsp>.
+- همه کاراکترها را بر اساس یک ویژگی: <https://unicode.org/cldr/utility/list-unicodeset.jsp>.
+- نام مستعار کوتاه برای خواص: <https://www.unicode.org/Public/UCD/latest/ucd/PropertyValueAliases.txt>.
+- یک پایه کامل از کاراکترهای یونیکد در قالب متن، با تمام خصوصیات، اینجا است: <https://www.unicode.org/Public/UCD/latest/ucd/>.
 
-### Example: hexadecimal numbers
+### مثال: اعداد هگزادسیمال
 
 For instance, let's look for hexadecimal numbers, written as `xFF`, where `F` is a hex digit (0..9 or A..F).
 
