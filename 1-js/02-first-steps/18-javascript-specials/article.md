@@ -103,25 +103,14 @@ typeof function(){} == "function" // تابع‌ها در اصل زیرمجمو�
 
 ما از مرورگر به عنوان محیط کار خود استفاده می‌کنیم، در این محیط چند تابع برای ارتباط با کاربر وجود دارد:
 
-<<<<<<< HEAD
-[`prompt(question, [default])`](mdn:api/Window/prompt)
-: `question` را به کاربر نمایش می‌دهد که از او می‌خواهد متنی را تایپ کند. بعد متن تایپ شده را بر می‌گرداند. در صورتی که کاربر روی "cancel" کلیک کند یا کلید Esc را فشار دهد مقدار `null` را بر می‌گرداند.
-
-[`confirm(question)`](mdn:api/Window/confirm)
-: `question` را نشان می‌دهد و منتظر می‌ماند تا کاربر روی دکمه‌ی cancel یا ok کلیک کند. در صورت کلیک روی ok مقدار true و در صورت کلیک روی cancel یا زدن Esc مقدار false را برمی‌گرداند.
-
-[`alert(message)`](mdn:api/Window/alert)
-: `message` را به کاربر نمایش می‌دهد
-=======
 [`prompt(question, [default])`](https://developer.mozilla.org/en-US/docs/Web/API/Window/prompt)
-: Ask a `question`, and return either what the visitor entered or `null` if they clicked "cancel".
+: `question` را به کاربر نمایش می‌دهد که از او می‌خواهد متنی را تایپ کند. بعد متن تایپ شده را بر می‌گرداند. در صورتی که کاربر روی "cancel" کلیک کند مقدار `null` را بر می‌گرداند.
 
 [`confirm(question)`](https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm)
-: Ask a `question` and suggest to choose between Ok and Cancel. The choice is returned as `true/false`.
+: `question` را نشان می‌دهد و منتظر می‌ماند تا کاربر روی دکمه‌ی cancel یا ok کلیک کند. در صورت کلیک روی ok مقدار true و در صورت کلیک روی cancel یا زدن Esc مقدار false را برمی‌گرداند.
 
 [`alert(message)`](https://developer.mozilla.org/en-US/docs/Web/API/Window/alert)
-: Output a `message`.
->>>>>>> 9e3fa1351f80cfd6353a778a55b2c86bca9e895f
+: `message` را به کاربر نمایش می‌دهد
 
 تمام این توابع *modal* هستند، آنها اجرای کد را متوقف می‌کنند و از تعامل کاربر با صفحه تا زمانی که جواب بدهد جلوگیری می‌کنند.
 
@@ -154,13 +143,8 @@ alert( "Tea wanted: " + isTeaWanted ); // true
 مقداردهی (Assignments)
 : دو نوع مقداردهی داریم: مقداردهی معمولی مثل `a = b` و مقداردهی ترکیبی مثل `a *= 2`.
 
-<<<<<<< HEAD
 بیتی (Bitwise)
-: عملگرهای بیتی با اعداد 32 بیتی در پایین‌ترین سطح یعنی بیت کار می‌کنند: زمانی که به آنها نیاز داشتید به [مستندات](mdn:/JavaScript/Guide/Expressions_and_Operators#Bitwise) مراجعه کنید.
-=======
-Bitwise
-: Bitwise operators work with 32-bit integers at the lowest, bit-level: see the [docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators#bitwise_operators) when they are needed.
->>>>>>> 9e3fa1351f80cfd6353a778a55b2c86bca9e895f
+: عملگرهای بیتی با اعداد 32 بیتی در پایین‌ترین سطح یعنی بیت کار می‌کنند: زمانی که به آنها نیاز داشتید به [مستندات](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators#bitwise_operators) مراجعه کنید.
 
 شرطی (Conditional)
 : تنها اپراتور 3 پارامتری: `cond ? resultA : resultB`. اگر `cond` truthy باشد، `resultA` را برمی‌گرداند، در غیر این صورت `resultB`.

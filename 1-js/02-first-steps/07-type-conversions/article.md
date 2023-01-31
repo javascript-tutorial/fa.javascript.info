@@ -36,11 +36,7 @@ alert(typeof value); // string
 
 تبدیل به number در فانکشن‌ها و عبارات ریاضیاتی به طور خودکار انجام می‌شود.
 
-<<<<<<< HEAD
 برای نمونه وقتی تقسیم `/` بر روی مقادیر غیر عددی رخ می‌دهد :
-=======
-Numeric conversion in mathematical functions and expressions happens automatically.
->>>>>>> 9e3fa1351f80cfd6353a778a55b2c86bca9e895f
 
 
 ```js run
