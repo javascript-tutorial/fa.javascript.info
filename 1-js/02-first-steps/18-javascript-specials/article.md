@@ -103,13 +103,13 @@ typeof function(){} == "function" // تابع‌ها در اصل زیرمجمو�
 
 ما از مرورگر به عنوان محیط کار خود استفاده می‌کنیم، در این محیط چند تابع برای ارتباط با کاربر وجود دارد:
 
-[`prompt(question, [default])`](mdn:api/Window/prompt)
-: `question` را به کاربر نمایش می‌دهد که از او می‌خواهد متنی را تایپ کند. بعد متن تایپ شده را بر می‌گرداند. در صورتی که کاربر روی "cancel" کلیک کند یا کلید Esc را فشار دهد مقدار `null` را بر می‌گرداند.
+[`prompt(question, [default])`](https://developer.mozilla.org/en-US/docs/Web/API/Window/prompt)
+: `question` را به کاربر نمایش می‌دهد که از او می‌خواهد متنی را تایپ کند. بعد متن تایپ شده را بر می‌گرداند. در صورتی که کاربر روی "cancel" کلیک کند مقدار `null` را بر می‌گرداند.
 
-[`confirm(question)`](mdn:api/Window/confirm)
+[`confirm(question)`](https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm)
 : `question` را نشان می‌دهد و منتظر می‌ماند تا کاربر روی دکمه‌ی cancel یا ok کلیک کند. در صورت کلیک روی ok مقدار true و در صورت کلیک روی cancel یا زدن Esc مقدار false را برمی‌گرداند.
 
-[`alert(message)`](mdn:api/Window/alert)
+[`alert(message)`](https://developer.mozilla.org/en-US/docs/Web/API/Window/alert)
 : `message` را به کاربر نمایش می‌دهد
 
 تمام این توابع *modal* هستند، آنها اجرای کد را متوقف می‌کنند و از تعامل کاربر با صفحه تا زمانی که جواب بدهد جلوگیری می‌کنند.
@@ -144,7 +144,7 @@ alert( "Tea wanted: " + isTeaWanted ); // true
 : دو نوع مقداردهی داریم: مقداردهی معمولی مثل `a = b` و مقداردهی ترکیبی مثل `a *= 2`.
 
 بیتی (Bitwise)
-: عملگرهای بیتی با اعداد 32 بیتی در پایین‌ترین سطح یعنی بیت کار می‌کنند: زمانی که به آنها نیاز داشتید به [مستندات](mdn:/JavaScript/Guide/Expressions_and_Operators#Bitwise) مراجعه کنید.
+: عملگرهای بیتی با اعداد 32 بیتی در پایین‌ترین سطح یعنی بیت کار می‌کنند: زمانی که به آنها نیاز داشتید به [مستندات](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators#bitwise_operators) مراجعه کنید.
 
 شرطی (Conditional)
 : تنها اپراتور 3 پارامتری: `cond ? resultA : resultB`. اگر `cond` truthy باشد، `resultA` را برمی‌گرداند، در غیر این صورت `resultB`.
