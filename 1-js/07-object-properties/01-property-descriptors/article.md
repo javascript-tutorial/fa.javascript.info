@@ -327,10 +327,10 @@ for (let key in user) {
 متدهایی هم هستند که دسترسی به *کل* شیء را محدود می‌کنند:
 
 [Object.preventExtensions(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/preventExtensions)
-: اضافه کردن ویژگی جدید به شیء را ممنون می‌کند.
+: اضافه کردن ویژگی جدید به شیء را ممنوع می‌کند.
 
 [Object.seal(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/seal)
-: اضافه/حذف کردن ویژگی را ممنون می‌کند. `configurable: false` را برای تمام ویژگی‌های موجود تنظیم می‌کند.
+: اضافه/حذف کردن ویژگی را ممنوع می‌کند. `configurable: false` را برای تمام ویژگی‌های موجود تنظیم می‌کند.
 
 [Object.freeze(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze)
 : اضافه/حذف/تغییر دادن ویژگی‌ها را ممنوع می‌کند. `configurable: false, writable: false` را برای تمام ویژگی‌های موجود تنظیم می‌کند.
