@@ -42,10 +42,10 @@ alert( regexp.test(badInput) ); // نادرست
 
 کل رشته باید دقیقاً در این قالب باشد. اگر انحراف یا یک کاراکتر اضافی وجود داشته باشد، نتیجه `نادرست` است.
 
-Anchors behave differently if flag `pattern:m` is present. We'll see that in the next article.
+اگر پرچم `pattern:m` وجود داشته باشد، لنگرها رفتار متفاوتی دارند. آن را در مقاله بعدی خواهیم دید.
 
 ```smart header="Anchors have \"zero width\""
-Anchors `pattern:^` and `pattern:$` are tests. They have zero width.
+لنگرهای `^:pattern` و `$:pattern` تست هستند. عرض آنها صفر است.
 
-In other words, they do not match a character, but rather force the regexp engine to check the condition (text start/end).
+به عبارت دیگر، آنها با یک کاراکتر مطابقت ندارند، بلکه موتور regexp را مجبور می‌کنند تا شرایط را بررسی کند (شروع/پایان متن).
 ```
