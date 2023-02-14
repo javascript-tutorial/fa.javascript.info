@@ -1,23 +1,23 @@
-# Anchors: string start ^ and end $
+# لنگرها: رشته شروع ^ و پایان $
 
-The caret `pattern:^` and dollar `pattern:$` characters have special meaning in a regexp. They are called "anchors".
+کاراکترهای `pattern:^` و دلار `pattern:$` معنای خاصی در یک regexp دارند. به آنها "لنگر" می گویند.
 
 The caret `pattern:^` matches at the beginning of the text, and the dollar `pattern:$` -- at the end.
+`pattern:^` در ابتدای متن و `pattern:$` دلاری -- در پایان متن مطابقت دارد.
 
-For instance, let's test if the text starts with `Mary`:
-
+به عنوان مثال، بیایید آزمایش کنیم که آیا متن با `Mary` شروع می شود یا خیر:
 ```js run
 let str1 = "Mary had a little lamb";
-alert( /^Mary/.test(str1) ); // true
+alert( /^Mary/.test(str1) ); // درست
 ```
 
-The pattern `pattern:^Mary` means: "string start and then Mary".
+الگوی `pattern:^Mary` به معنای "شروع رشته و سپس Mary" است.
 
-Similar to this, we can test if the string ends with `snow` using `pattern:snow$`:
+مشابه این، می‌توانیم با استفاده از `pattern:snow$` آزمایش کنیم که آیا رشته به `snow` ختم می‌شود:
 
 ```js run
 let str1 = "its fleece was white as snow";
-alert( /snow$/.test(str1) ); // true
+alert( /snow$/.test(str1) ); // درست
 ```
 
 In these particular cases we could use string methods `startsWith/endsWith` instead. Regular expressions should be used for more complex tests.
