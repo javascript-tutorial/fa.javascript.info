@@ -20,28 +20,27 @@ let str1 = "its fleece was white as snow";
 alert( /snow$/.test(str1) ); // درست
 ```
 
-In these particular cases we could use string methods `startsWith/endsWith` instead. Regular expressions should be used for more complex tests.
+در این موارد خاص، می‌توانیم به جای آن از روش‌های رشته‌ای `startsWith/endsWith` استفاده کنیم. برای تست های پیچیده تر باید از عبارات منظم استفاده شود.
 
-## Testing for a full match
+## تست برای یک مسابقه کامل
 
-Both anchors together `pattern:^...$` are often used to test whether or not a string fully matches the pattern. For instance, to check if the user input is in the right format.
+هر دو لنگر با هم `$...^:pattern` اغلب برای آزمایش اینکه آیا یک رشته کاملاً با الگو مطابقت دارد یا نه استفاده می شود. به عنوان مثال، برای بررسی اینکه آیا ورودی کاربر در قالب مناسب است یا خیر.
 
-Let's check whether or not a string is a time in `12:34` format. That is: two digits, then a colon, and then another two digits.
+بیایید بررسی کنیم که آیا یک رشته زمان در قالب `12:34` است یا خیر. یعنی: دو رقم، سپس یک دونقطه، و سپس دو رقم دیگر.
 
-In regular expressions language that's `pattern:\d\d:\d\d`:
-
+در زبان عبارات معمولی `pattern:\d\d:\d\d` است:
 ```js run
 let goodInput = "12:34";
 let badInput = "12:345";
 
 let regexp = /^\d\d:\d\d$/;
-alert( regexp.test(goodInput) ); // true
-alert( regexp.test(badInput) ); // false
+alert( regexp.test(goodInput) ); // درست
+alert( regexp.test(badInput) ); // نادرست
 ```
 
-Here the match for `pattern:\d\d:\d\d` must start exactly after the beginning of the text `pattern:^`, and the end `pattern:$` must immediately follow.
+در اینجا تطبیق `pattern:\d\d:\d\d` باید دقیقاً بعد از ابتدای متن `^:pattern` شروع شود و انتهای `$:pattern` باید بلافاصله دنبال شود.
 
-The whole string must be exactly in this format. If there's any deviation or an extra character, the result is `false`.
+کل رشته باید دقیقاً در این قالب باشد. اگر انحراف یا یک کاراکتر اضافی وجود داشته باشد، نتیجه `نادرست` است.
 
 Anchors behave differently if flag `pattern:m` is present. We'll see that in the next article.
 
