@@ -5,6 +5,7 @@
 `pattern:^` در ابتدای متن و `pattern:$`  در پایان متن مطابقت دارد.
 
 به عنوان مثال، بیایید آزمایش کنیم که آیا متن با `Mary` شروع می شود یا خیر:
+
 ```js run
 let str1 = "Mary had a little lamb";
 alert( /^Mary/.test(str1) ); // true
