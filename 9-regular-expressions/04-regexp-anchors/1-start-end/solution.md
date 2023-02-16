@@ -1,5 +1,5 @@
-An empty string is the only match: it starts and immediately finishes.
+یک رشته خالی تنها انطباق است: شروع می شود و بلافاصله تمام می شود.
 
-The task once again demonstrates that anchors are not characters, but tests.
+این کار یک بار دیگر نشان می دهد که anchorها کاراکتر نیستند، بلکه آزمایش هستند.
 
-The string is empty `""`. The engine first matches the `pattern:^` (input start), yes it's there, and then immediately the end `pattern:$`, it's here too. So there's a match.
+رشته `""` خالی است. موتور ابتدا `^:pattern` (شروع ورودی) را تطبیق می‌دهد، بله تطابق دارد، و بلافاصله `$:pattern` انتهایی را، آن هم مطابقت دارد. بنابراین یک انطباق داریم.

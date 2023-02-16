@@ -1,3 +1,3 @@
 # Regexp ^$
 
-Which string matches the pattern `pattern:^$`?
+کدام رشته با الگوی `$^:pattern` مطابقت دارد؟
