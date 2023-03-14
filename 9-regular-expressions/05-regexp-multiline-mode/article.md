@@ -20,7 +20,7 @@ console.log( str.match(/^\d/gm) ); // 1, 2, 3
 */!*
 ```
 
-Without the flag `pattern:m` only the first digit is matched:
+بدون پرچم `pattern:m` تنها رقم اول مطابقت دارد:
 
 ```js run
 let str = `1st place: Winnie
@@ -32,12 +32,12 @@ console.log( str.match(/^\d/g) ); // 1
 */!*
 ```
 
-That's because by default a caret `pattern:^` only matches at the beginning of the text, and in the multiline mode -- at the start of any line.
+دلیلش این است که به طور پیش‌ فرض یک `^:pattern` فقط در ابتدای متن و در حالت چند خطی - در ابتدای هر خط مطابقت دارد.
 
 ```smart
-"Start of a line" formally means "immediately after a line break": the test  `pattern:^` in multiline mode matches at all positions preceded by a newline character `\n`.
+"شروع یک خط" به طور رسمی به معنای "بلافاصله پس از شکست خط" است: "^:pattern" آزمایشی در حالت چند خطی در همه موقعیت هایی که قبل از یک کاراکتر خط جدید "n\" قرار دارند مطابقت دارد.
 
-And at the text start.
+و در شروع متن.
 ```
 
 ## Searching at line end $
