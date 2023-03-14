@@ -61,13 +61,13 @@ console.log( str.match(/\d$/gm) ); // 1,2,3
 و در انتهای متن.
 ```
 
-## Searching for \n instead of ^ $
+## جستجو برای \n به جای ^ $
 
-To find a newline, we can use not only anchors `pattern:^` and `pattern:$`, but also the newline character `\n`.
+برای یافتن یک خط جدید، می‌ توانیم نه تنها از لنگرهای `^:pattern` و `$:pattern`، بلکه از کاراکتر خط جدید `n\` استفاده کنیم.
 
-What's the difference? Let's see an example.
+تفاوت در چیست؟ بیایید یک مثال را ببینیم.
 
-Here we search for `pattern:\d\n` instead of `pattern:\d$`:
+در اینجا ما `pattern:\d\n` را به جای `$pattern:\d` جستجو می کنیم:
 
 ```js run
 let str = `Winnie: 1
