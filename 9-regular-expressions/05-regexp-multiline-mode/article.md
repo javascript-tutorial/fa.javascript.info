@@ -1,14 +1,14 @@
-# Multiline mode of anchors ^ $, flag "m"
+# حالت چند خطی anchors ^ $، پرچم "m"
 
-The multiline mode is enabled by the flag `pattern:m`.
+حالت چند خطی با پرچم `pattern:m` فعال می شود.
 
-It only affects the behavior of `pattern:^` and `pattern:$`.
+فقط بر رفتار `^:pattern` و `$:pattern` تأثیر می گذارد.
 
-In the multiline mode they match not only at the beginning and the end of the string, but also at start/end of line.
+در حالت چند خطی، نه تنها در ابتدا و انتهای رشته، بلکه در شروع/پایان خط نیز مطابقت دارند.
 
-## Searching at line start ^
+## جستجو در شروع خط ^
 
-In the example below the text has multiple lines. The pattern `pattern:/^\d/gm` takes a digit from the beginning of each line:
+در مثال زیر متن دارای چندین خط است. الگوی `pattern:/^\d/gm` از ابتدای هر خط یک رقم می گیرد:
 
 ```js run
 let str = `1st place: Winnie
