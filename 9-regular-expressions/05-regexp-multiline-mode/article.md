@@ -40,11 +40,10 @@ console.log( str.match(/^\d/g) ); // 1
 و در شروع متن.
 ```
 
-## Searching at line end $
+## جستجو در انتهای خط $
+علامت دلار `$:pattern` رفتار مشابهی دارد.
 
-The dollar sign `pattern:$` behaves similarly.
-
-The regular expression `pattern:\d$` finds the last digit in every line
+عبارت منظم `$pattern:\d` آخرین رقم را در هر خط پیدا می کند
 
 ```js run
 let str = `Winnie: 1
@@ -54,12 +53,12 @@ Eeyore: 3`;
 console.log( str.match(/\d$/gm) ); // 1,2,3
 ```
 
-Without the flag `pattern:m`, the dollar `pattern:$` would only match the end of the whole text, so only the very last digit would be found.
+بدون پرچم `pattern:m` و `$:pattern` دلاری فقط با انتهای کل متن مطابقت دارد، بنابراین فقط آخرین رقم پیدا می‌شود.
 
 ```smart
-"End of a line" formally means "immediately before a line break": the test  `pattern:$` in multiline mode matches at all positions succeeded by a newline character `\n`.
+"پایان یک خط" به طور رسمی به معنای "بلافاصله قبل از شکست خط" است: تست "$:pattern" در حالت چند خطی در همه موقعیت‌هایی که توسط یک کاراکتر خط جدید "n\" جایگزین می‌شود، مطابقت دارد.
 
-And at the text end.
+و در انتهای متن.
 ```
 
 ## Searching for \n instead of ^ $
