@@ -77,10 +77,10 @@ Eeyore: 3`;
 console.log( str.match(/\d\n/g) ); // 1\n,2\n
 ```
 
-As we can see, there are 2 matches instead of 3.
+همانطور که می بینیم به جای 3 شباهت 2 شباهت وجود دارد.
 
-That's because there's no newline after `subject:3` (there's text end though, so it matches `pattern:$`).
+دلیلش این است که بعد از `3:subject` خط جدیدی وجود ندارد (البته پایان متن وجود دارد، بنابراین با `$:pattern` مطابقت دارد.
 
-Another difference: now every match includes a newline character `match:\n`. Unlike the anchors `pattern:^` `pattern:$`, that only test the condition (start/end of a line), `\n` is a character, so it becomes a part of the result.
+تفاوت دیگر: اکنون هر تطابق شامل یک کاراکتر خط جدید `match:\n` است. برخلاف `$:pattern` و `^:pattern` که فقط شرط (شروع/پایان یک خط) را آزمایش می‌کنند، `n\` یک کاراکتر است، بنابراین بخشی از نتیجه می‌ شود.
 
-So, a `\n` in the pattern is used when we need newline characters in the result, while anchors are used to find something at the beginning/end of a line.
+بنابراین، زمانی که به کاراکترهای خط جدید در نتیجه نیاز داشته باشیم، از `n\` در الگو استفاده می‌شود، در حالی که از لنگرها برای یافتن چیزی در ابتدا/پایان یک خط استفاده می‌شود.
