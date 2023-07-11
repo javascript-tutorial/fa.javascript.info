@@ -291,6 +291,67 @@ message = hello;
 - استفاده از علائم نگارشی حتما نباید دقیقا مانند متن باشد. ممکن است ما در فارسی جایی ویرگول نگذاریم اما در انگلیسی نیاز به کاما وجود داشته باشد. فقط بیان جلمات را تغییر ندهید، برای مثال اگر جمله سوالی یا تعجبی نیست علائم مربوط را اضافه یا حذف نکنید.
 - مقدارهای بولین (boolean) را ترجمه نکنید.
 
+### لغت‌نامه
+در صورتی که کلمۀ مورد نظر شما در این جدول نبود لطفا به ما اطلاع دهید یا README را ویرایش کنید و یک Pull Request بفرستید.
+
+جدول به ترتیب حروف الفبای انگلیسی است.
+
+<details>
+
+<summary>برای دیدن لغت‌نامه کلیک کنید.</summary>
+
+<br>
+
+| کلمۀ انگلیسی | ترجمۀ فارسی | توضیحات           |
+|---------|---------|------------------------------|
+| argument | آرگومان |                            |
+| array | آرایه |                                 |
+| binary | دوگانه، دودویی |                       |
+| boolean | boolean، بولین |                       |
+| callback | callback |                            |
+| child (in class inheritance) | فرزند |           |
+| class | کلاس |                                    |
+| class expression | class expression |            |
+| closure | کلوژر |                                |
+| code block | بلوک کد |                           |
+| curly bracket | آکولاد |                          |
+| error | ارور |                                   |
+| evaluate | ارزیابی کردن |                       |
+| execute | اجرا کردن |                            |
+| field (in class) | فیلد |                       |
+| framework | فریم‌ورک |                           |
+| function | تابع |                                |
+| Function Declaration | Function Declaration |    |
+| Function Expression | Function Expression |      |
+| global | گلوبال |                               |
+| item (in arrays) | المان |                       |
+| iteration(over) | حلقه زدن |                     |
+| JSON | جی‌سان |                                  |
+| key (in data structures) | کلید |                |
+| loop over | حلقه زدن |                           |
+| method (in data structures) | متد |              |
+| null | null |                                    |
+| number | عدد |                                   |
+| object | شیء |                                   |
+| operator | عملگر |                               |
+| parameter | پارامتر |                            |
+| parent (in class inheritance) | والد |           |
+| property (in objects) | ویژگی |                  |
+| recursion | بازگشت |                             |
+| reference | رجوع(کردن)، مرجع | معنی به جمله بستگی دارد |
+| return | برگرداندن |                            |
+| specification | مشخصات زبان |                   |
+| square bracket | براکت |                         |
+| string | رشته |                                  |
+| syntax | سینتکس |                                |
+| task (exercise) | تمرین، تکلیف | منظور تمرین‌های انتهای مقاله است |
+| ternary | سه‌گانه |                              |
+| unary | یگانه |                                  |
+| undefined (data type) | undefined |              |
+| value | مقدار |                                  |
+
+</details>
+
 </div>
 
 [^1]: [نیم‌فاصله در ویکی‌پدیای فارسی](https://fa.wikipedia.org/wiki/%D9%81%D8%A7%D8%B5%D9%84%D9%87_%D9%85%D8%AC%D8%A7%D8%B2%DB%8C)
