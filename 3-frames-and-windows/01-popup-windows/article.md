@@ -1,27 +1,28 @@
-# Popups and window methods
+# پاپ آپ ها و نمایش پنجره
 
-A popup window is one of the oldest methods to show additional document to user.
+پنجره ی پاپ آپ یکی از قدیمی ترین روش ها برای نمایش سند اضافی به کاربر می باشد.
 
-Basically, you just run:
+اساسا شما دستور زیر را اجرا میکنید:
 ```js
 window.open('https://javascript.info/')
 ```
 
-...And it will open a new window with given URL. Most modern browsers are configured to open url in new tabs instead of separate windows.
+...و این دستور شما را به یک پنجره ی جدید به همان آدرس URL فوق هدایت میکند. البته بیشتر مرورگر های امروزی به گونه ای طراحی شده اند که آدرس URL  را  به جای اینکه در پنجره ای جداگانه باز کنند ، در یک نوار زبانه ی جدید یا همان Tab  باز میکنند.
 
-Popups exist from really ancient times. The initial idea was to show another content without closing the main window. As of now, there are other ways to do that: we can load content dynamically with [fetch](info:fetch) and show it in a dynamically generated `<div>`. So, popups is not something we use everyday.
+پاپ آپ ها از گذشته ای دور وجود داشته اند. ایده ی ابتدایی بر آن بود که یک محتوای دیگری را بدون بستن پنجره ی اصلی نمایش دهد. در زمان کنونی راه های دیگری برای انجام آن وجود دارند.برای بارگذاری و نمایش محتوا به صورت پویا میتوانیم به ترتیب از دستور [fetch](info:fetch) و`<div>` استفاده کنیم.نتیجه میگیریم که پاپ آپ ها چیزی نیستند که هر روز از آن ها استفاده کنیم.
 
-Also, popups are tricky on mobile devices, that don't show multiple windows simultaneously.
+همچنین، پنجره‌های پاپ آپ در دستگاه‌هایی چون تلفن همراه دارای مشکل هستند، چونکه چندین پنجره را به طور همزمان نشان نمی‌دهند.
 
-Still, there are tasks where popups are still used, e.g. for OAuth authorization (login with Google/Facebook/...), because:
+با این حال، عملکرد هایی وجود دارند که در آن ها پنجره‌ های پاپ آپ هنوز استفاده می‌شوند، به عنوان مثال. برای اعطای مجوز OAuth در (ورود با Google/Facebook/...)، زیرا:
 
-1. A popup is a separate window which has its own independent JavaScript environment. So opening a popup from a third-party, non-trusted site is safe.
-2. It's very easy to open a popup.
-3. A popup can navigate (change URL) and send messages to the opener window.
+1. یک پاپ آپ پنجره ی مجزایی است که محیط جاوا اسکریپتی مستقل خود را دارد. بنابراین باز کردن پاپ آپ یک شخص ثالث و یا یک سایت غیر مطمئن، امن میباشد.
+2. باز کردن یکی پاپ آپ بسیار آسان است.
+3. یک پاپ آپ میتواند با تغییر آدرس URL به مسیری هدایت کند و از این رو پیام هایی را به باز کننده ی پاپ آپ نمایش دهد.
+   
 
-## Popup blocking
+## مسدود سازی پاپ آپ
 
-In the past, evil sites abused popups a lot. A bad page could open tons of popup windows with ads. So now most browsers try to block popups and protect the user.
+در گذشته، سایت های مخرب استفاده ی زیادی از پاپ آپ ها میکردند. به عوان مثال یک صفحه ی بد به مقدار بی شماری از پنجره های پاپ آپ با تبلیغ منتهی میشد. بنابرآن امروزه اکثر مرورگرها سعی بر آن دارند با مسدود کردن پاپ آپ ها، کاربر را ایمن نگه دارند.
 
 **Most browsers block popups if they are called outside of user-triggered event handlers like `onclick`.**
 
