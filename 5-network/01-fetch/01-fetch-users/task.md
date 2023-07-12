@@ -1,13 +1,13 @@
-# Fetch users from GitHub
+# دریافت کاربران از گیت هاب
 
-Create an async function `getUsers(names)`, that gets an array of GitHub logins, fetches the users from GitHub and returns an array of GitHub users.
+یک تابع async به نام `getUsers(names)`بسازید که یک آرایه از نام‌های ورود به سیستم گیت هاب دریافت کرده، کاربران را از گیت هاب بارگیری کند و یک آرایه از کاربران گیت هاب را برگرداند.
 
-The GitHub url with user information for the given `USERNAME` is: `https://api.github.com/users/USERNAME`.
+آدرس گیت هاب برای دریافت اطلاعات کاربران `USERNAME` به این صورت است: `https://api.github.com/users/USERNAME`.
 
-There's a test example in the sandbox.
+در سندباکس (sandbox) یک مثال آزمایشی وجود دارد
 
-Important details:
+موارد مهم:
 
-1. There should be one `fetch` request per user.
-2. Requests shouldn't wait for each other. So that the data arrives as soon as possible.
-3. If any request fails, or if there's no such user, the function should return `null` in the resulting array.
+1. باید یک درخواست `fetch` برای هر کاربر وجود داشته باشد.
+2. درخواست‌ها باید منتظر یکدیگر نباشند تا داده‌ها به سرعت برسند.
+3. اگر هر درخواست موفق آمیز نباشد یا چنین کاربری وجود نداشته باشد،تابع باید مقدار `null` را در آرایه نتیجه برگرداند.
