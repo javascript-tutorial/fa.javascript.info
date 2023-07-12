@@ -22,11 +22,11 @@ window.open('https://javascript.info/')
 
 ## مسدود سازی پاپ آپ
 
-در گذشته، سایت های مخرب استفاده ی زیادی از پاپ آپ ها میکردند. به عوان مثال یک صفحه ی بد به مقدار بی شماری از پنجره های پاپ آپ با تبلیغ منتهی میشد. بنابرآن امروزه اکثر مرورگرها سعی بر آن دارند با مسدود کردن پاپ آپ ها، کاربر را ایمن نگه دارند.
+در گذشته، سایت های مخرب استفاده ی زیادی از پاپ آپ ها میکردند. به عوان مثال یک صفحه ی بد به مقدار بی شماری از پنجره های پاپ آپ با تبلیغ منتهی میشد. بنابرآن امروزه اکثر مرورگرها سعی بر آن دارند با مسدود کردن پاپ آپ ها، کاربر را ایمن نگه دارند. 
 
-**Most browsers block popups if they are called outside of user-triggered event handlers like `onclick`.**
+**اکثر مرورگرها اقدام به مسدود سازی پاپ آپ ها میکنند اگر توسط رخداد کنترل کننده ای همچون `onclick` خارج از کنترل کاربر راه اندازی شده باشد.**
 
-For example:
+به عنوان مثال:
 ```js
 // popup blocked
 window.open('https://javascript.info');
@@ -37,36 +37,62 @@ button.onclick = () => {
 };
 ```
 
-This way users are somewhat protected from unwanted popups, but the functionality is not disabled totally.
+به این ترتیب کاربران تا حدودی از پنجره های پاپ آپ ناخواسته محافظت می شوند، اما عملکرد به طور کامل غیرفعال نمی شود.
+## window.open (بازکردن پنجره)
 
-## window.open
+سینتکس باز کردن پاپ آپ اینچنین است: `window.open(url, name, params)`
 
-The syntax to open a popup is: `window.open(url, name, params)`:
+آدرس URL
+: ادرس URL ای که در یک پنجره ی جدید بارگذاری میشود.
 
-url
-: An URL to load into the new window.
+نام 
+:نام پنجره ی جدید.هر پنجره، یک `window.name` خود را داراست، اینجاست که میتوانیم مشخص کنیم کدام پنجره به عنوان پاپ آپ استفاده شود. اگر از قبل یک پنجره با همان نام وجود داشت، URL داده شده در همان باز خواهد شد، در غیر اینصورت در پنجره ی جدید باز خواهد شد.
 
-name
-: A name of the new window. Each window has a `window.name`, and here we can specify which window to use for the popup. If there's already a window with such name -- the given URL opens in it, otherwise a new window is opened.
+پارامترها 
+: رشته ای از پیکربندی برای پنجره ی جدید.شامل تنظیماتی هستند  که با کاما مشخص شده اند.توجه داشته باشید در پارامتر ها باید هیچگونه space یا فاصله ای وجود نداشته باشد. به عنوان مثال: `width=200,height=100`
 
-params
-: The configuration string for the new window. It contains settings, delimited by a comma. There must be no spaces in params, for instance: `width=200,height=100`.
+تنظیمات پارامترها `params`: 
 
-Settings for `params`:
-
-- Position:
-  - `left/top` (numeric) -- coordinates of the window top-left corner on the screen. There is a limitation: a new window cannot be positioned offscreen.
-  - `width/height` (numeric) -- width and height of a new window. There is a limit on minimal width/height, so it's impossible to create an invisible window.
-- Window features:
-  - `menubar` (yes/no) -- shows or hides the browser menu on the new window.
-  - `toolbar` (yes/no) -- shows or hides the browser navigation bar (back, forward, reload etc) on the new window.
-  - `location` (yes/no) -- shows or hides the URL field in the new window. FF and IE don't allow to hide it by default.
-  - `status` (yes/no) -- shows or hides the status bar. Again, most browsers force it to show.
-  - `resizable` (yes/no) -- allows to disable the resize for the new window. Not recommended.
-  - `scrollbars` (yes/no) -- allows to disable the scrollbars for the new window. Not recommended.
+- Position (موقعیت):
+- 
+  - `left/top` ---> مقدار به صورت عددی وارد میشود
 
 
-There is also a number of less supported browser-specific features, which are usually not used. Check <a href="https://developer.mozilla.org/en/DOM/window.open">window.open in MDN</a> for examples.
+آن مقدار عددی، همان مختصاتی است که پنجره را در گوشه ی سمت چپ-بالا از صفحه نمایش را نشان میدهد.در نظر داشته باشید محدودیتی وجود دارد و آن اینست که پنجره ی جدید نمیتواند در خارج از صفحه قرار بگیرد.
+  
+  - `width/height (عرض/ارتفاع)` ---> مقدار به صورت عددی وارد میشود
+
+   عرض و ارتفاع پنجره ی جدید است.مقدار عرض و ارتفاع دارای یک محدودیت حداقلی است. به عبارتی نمیتواند مقدار اندازه پنچره را از یک مقدار حداقلی کمتر کرد. در نتیجه امکان نمایش پنجره ای به صورت مخفی یا نامرئی وجود ندارد.
+  
+- ## Window features (ویژگی های پنجره):
+- توجه داشته باشید تمامی مقادیر 6 پارامتر زیر به صورت عبارت مقابل وارد میشوند---->yes/no
+
+  -
+  
+  - `menubar`
+  - 
+    منوی مرورگر را در پنجره ی جدید نمایش یا پنهان میکند
+  - 
+  - `toolbar` 
+  - نوار پیمایش مرورگر (به عقب، جلو، بارگذاری مجدد و غیره) را در پنجره جدید نشان می دهد یا پنهان می کند
+  - 
+  - `location` 
+  - فیلد آدرس URL را در پنجره ی جدید نمایش و یا مخفی میکند. فایرفاکس و اینترنت اکسپلورر به طور پیشفرض اجازه ی مخفی کردن آن را نمیدهند
+  - 
+  - `status` 
+  - نوار وضعیت را نمایش و یا پنهان میکند. در این مورد هم اکثر مرورگرها آن را نمایش میدهند
+  - 
+  - `resizable`
+  - گرچه پیشنهاد نمیشود ولی این امکان را به شما میدهد تا تغییر اندازه را برای پنجره ی جدید غیر فعال کنید
+  - 
+  - `scrollbars`
+  - این مورد هم پیشنهاد نمیشود و این امکان را به شما میدهد تا نوار پیمایش را در پنجره ی جدید غیر فعال کنید
+-
+همچنین تعدادی از ویژگی های اختصاصی مرورگر که کمتر پشتیبانی می شوند وجود دارد که معمولاً استفاده نمی شوند. برای مثال و یادگیری بیشتر میتوانید به آدرس زیر سر بزنید .
+-
+
+
+<a href="https://developer.mozilla.org/en/DOM/window.open">window.open in MDN</a> 
 
 ## Example: a minimalistic window
 
