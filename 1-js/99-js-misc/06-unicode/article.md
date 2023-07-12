@@ -1,165 +1,168 @@
 
-# Unicode, String internals
+# یونی‌کد، رشته های داخلی 
 
-```warn header="Advanced knowledge"
-The section goes deeper into string internals. This knowledge will be useful for you if you plan to deal with emoji, rare mathematical or hieroglyphic characters, or other rare symbols.
+```warn header="اطلاعات بیشتر"
+این بخش به دنبال عمیق شدن در رشته‌ها است. این دانش برای شما مفید خواهد بود اگر قصد دارید با شکلک‌ها، کاراکترهای ریاضی نادر یا هیروگلیف‌ها یا سایر نمادهای نادر سر و کار داشته باشید.
 ```
 
-As we already know, JavaScript strings are based on [Unicode](https://en.wikipedia.org/wiki/Unicode): each character is represented by a byte sequence of 1-4 bytes.
+همانطور که می‌دانیم رشته‌ها (strings) در جاوااسکریپت بر پایه [یونی‌کد](https://fa.wikipedia.org/wiki/%DB%8C%D9%88%D9%86%DB%8C%E2%80%8C%DA%A9%D8%AF) هستند و هر کاراکتر نماینده دنباله‌ای 1 تا 4 عضوی از بایت‌ها است.
 
-JavaScript allows us to insert a character into a string by specifying its hexadecimal Unicode code with one of these three notations:
+جاوااسکریپت اجازه درج کاراکتر توسط یونی‌کد هگزادسیمال آن درون یک رشته را با یکی از این سه نماد می‌دهد:
 
-- `\xXX`
+- `‎\xXX`
 
-    `XX` must be two hexadecimal digits with a value between `00` and `FF`, then `\xXX` is the character whose Unicode code is `XX`.
+    به جای `XX` باید دو عدد هگزادسیمال در بازه `00` و `FF` قرار گیرد. در نتیجه `‎\xXX` کاراکتری است که یونی‌کد آن `XX` هست.
 
-    Because the `\xXX` notation supports only two hexadecimal digits, it can be used only for the first 256 Unicode characters.
+    از آنجا که نماد `‎\xXX` فقط از دو عدد هگزادسیمال پشتیبانی می‌کند، از آن می‌توان فقط برای 256 کاراکتر اول یونی‌کد استفاده کرد.
+    
 
-    These first 256 characters include the Latin alphabet, most basic syntax characters, and some others. For example, `"\x7A"` is the same as `"z"` (Unicode `U+007A`).
+
+    این 256 کاراکتر اول شامل الفبای لاتین ، کاراکتر های نحوی ابتدایی و برخی چیزهای دیگر می‌شود. به عنوان مثال `"‎\x7A"` مانند نوشتن `"z"` هست. (یونی‌کد `U+007A`)
 
     ```js run
     alert( "\x7A" ); // z
-    alert( "\xA9" ); // ©, the copyright symbol
+    alert( "\xA9" ); // ©, نماد کپی‌رایت
     ```
 
-- `\uXXXX`
-    `XXXX` must be exactly 4 hex digits with the value between `0000` and `FFFF`, then `\uXXXX` is the character whose Unicode code is `XXXX`.
+- `‎\uXXXX`
+  
+    به جای `XXXX` باید 4 عدد هگزادسیمال در بازه `0000` و `FFFF` قرار گیرد. در نتیجه `‎\uXXXX` کاراکتری است که یونی‌کد آن `XXXX` هست.
 
-    Characters with Unicode values greater than `U+FFFF` can also be represented with this notation, but in this case, we will need to use a so called surrogate pair (we will talk about surrogate pairs later in this chapter).
+    کاراکترهایی بامقادیر یونی‌کد بزرگتر از `U+FFFF` را هم می‌توان با این روش نشان داد. برای آن باید از یک جفت جایگزین (surrogate pair) استفاده کرد. (در ادامه بیشتر در رابطه با آنها صحبت خواهیم کرد.)
 
     ```js run
-    alert( "\u00A9" ); // ©, the same as \xA9, using the 4-digit hex notation
-    alert( "\u044F" ); // я, the Cyrillic alphabet letter
-    alert( "\u2191" ); // ↑, the arrow up symbol
+    alert( "\u00A9" ); // ©, با استفاده از نماد هگز 4 رقمی \xA9 مانند 
+    alert( "\u044F" ); // я, حرف 'یَه' در الفبای سیریلیک
+    alert( "\u2191" ); // ↑, نماد فلش رو به بالا
     ```
 
-- `\u{X…XXXXXX}`
+- `‎\u{X…XXXXXX}`
 
-    `X…XXXXXX` must be a hexadecimal value of 1 to 6 bytes between `0` and `10FFFF` (the highest code point defined by Unicode). This notation allows us to easily represent all existing Unicode characters.
+    به جای `X…XXXXXX` باید یک مقدار هگزادسیمال 1 تا 6 بایت در بازه `0` و `10FFFF` قرار گیرد (بالاترین مقدار تعریف شده توسط یونی‌کد). توسط این نماد می‌توان تمامی یونی‌کد های موجود را به راحتی نشان داد.
 
     ```js run
-    alert( "\u{20331}" ); // 佫, a rare Chinese character (long Unicode)
-    alert( "\u{1F60D}" ); // 😍, a smiling face symbol (another long Unicode)
+    alert( "\u{20331}" ); // 佫, یک کاراکتر چینی نادر (دارای یونی‌کد طولانی)
+    alert( "\u{1F60D}" ); // 😍, ایموجی چهره خندان (یونی‌کد طولانی دیگر)
     ```
 
-## Surrogate pairs
+## جفت جایگزین (Surrogate pairs)
+تمامی کاراکترهای متداول دارای کدهای 2 بایتی هستند (4 رقم هگز). حروف در بیشتر زبان های اروپایی ، اعداد و مجموعه های ایدئوگرافیک چینی، ژاپنی و کره‌ای (CJK) ، با 2 بایت نمایش داده می‌شوند.
 
-All frequently used characters have 2-byte codes (4 hex digits). Letters in most European languages, numbers, and the basic unified CJK ideographic sets (CJK -- from Chinese, Japanese, and Korean writing systems), have a 2-byte representation.
+در ابتدا جاوا اسکریپت بر پایه رمزگذاری UTF-16 فقط 2 بایت را برای هر کاراکتر در نظر می‌گرفت. اما 2 بایت فقط برای نمایش 65536 ترکیب هست و این مقدار برای حالت های ممکن نمادهای یونی‌کد کافی نیست.
 
-Initially, JavaScript was based on UTF-16 encoding that only allowed 2 bytes per character. But 2 bytes only allow 65536 combinations and that's not enough for every possible symbol of Unicode.
+بنابراین نمادهای کمیاب که نیازمند بیش از دو بایت هستند. با یک جفت کاراکتر 2 بیتی به‌نام "جفت جایگزین (Surrogate pairs)" کدگذاری می‌شوند.
 
-So rare symbols that require more than 2 bytes are encoded with a pair of 2-byte characters called "a surrogate pair".
-
-As a side effect, the length of such symbols is `2`:
+که تاثیر جانبی این اقدام افزایش طول کاراکتر به `2` است:
 
 ```js run
-alert( '𝒳'.length ); // 2, MATHEMATICAL SCRIPT CAPITAL X
-alert( '😂'.length ); // 2, FACE WITH TEARS OF JOY
-alert( '𩷶'.length ); // 2, a rare Chinese character
+alert( '𝒳'.length ); // 2, در ریاضیات X نماد
+alert( '😂'.length ); // 2, ایموجی لبخند
+alert( '𩷶'.length ); // 2, یک کاراکتر چینی نادر
 ```
 
-That's because surrogate pairs did not exist at the time when JavaScript was created, and thus are not correctly processed by the language!
+دلیل این اتفاق این است که در زمان ایجاد جاوااسکریپت جفت‌های جایگزین وجود نداشتند و بنابراین به درستی توسط زبان پردازش نمی‌شوند!
 
-We actually have a single symbol in each of the strings above, but the `length` property shows a length of `2`.
+در حقیقت در هر یک از رشته‌های بالا یک نماد واحد داریم، در صورتی که ویژگی length مقدار `2` را نشان می‌دهد.
 
-Getting a symbol can also be tricky, because most language features treat surrogate pairs as two characters.
+دریافت نماد نیز می‌تواند مشکل باشد، زیرا بیشتر اجزای زبان، جفت‌های جایگزین را به‌عنوان دو کاراکتر در نظر می‌گیرند.
 
-For example, here we can see two odd characters in the output:
+به عنوان مثال، در اینجا می‌توان دو بخش یک کاراکتر را مشاهده نمود:
 
 ```js run
-alert( '𝒳'[0] ); // shows strange symbols...
-alert( '𝒳'[1] ); // ...pieces of the surrogate pair
+alert( '𝒳'[0] ); // بخش اول از جفت جانشین - نمایش نماد ناشناخته 
+alert( '𝒳'[1] ); // بخش دوم از جفت جانشین - نمایش نماد ناشناخته 
 ```
 
-Pieces of a surrogate pair have no meaning without each other. So the alerts in the example above actually display garbage.
+قسمت‌های یک جفت جایگزین بدون یکدیگر معنایی ندارند. بنابراین پیغام‌های بالا چیزهای بی معنی نشان می‌دهند.
 
-Technically, surrogate pairs are also detectable by their codes: if a character has the code in the interval of `0xd800..0xdbff`, then it is the first part of the surrogate pair. The next character (second part) must have the code in interval `0xdc00..0xdfff`. These intervals are reserved exclusively for surrogate pairs by the standard.
+از نظر فنی جفت‌های جایگزین (surrogate pairs) را از طریق کدهایشان می‌‌توان تشخیص داد. اگر کاراکتر دارای کد در بازه `0xd800..0xdbff` باشد ، آنگاه قسمت اول از جفت جایگزین (surrogate pairs) هست. کاراکتر بعد (قسمت دوم) باید در بازه `0xdc00..0xdfff` باشد. این بازه‌ها به‌طور انحصاری برای جفت‌های جایگزین توسط استاندارد آن رزرو شده.
 
-So the methods [String.fromCodePoint](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/fromCodePoint) and [str.codePointAt](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/codePointAt) were added in JavaScript to deal with surrogate pairs.
+متد‌های [String.fromCodePoint](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/fromCodePoint) و [str.codePointAt](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/codePointAt) به جاوااسکریپت اضافه‌شدند تا با جفت‌های جایگزین (surrogate pairs) بتوان بدون مشکل عمل کرد.
 
-They are essentially the same as [String.fromCharCode](mdn:js/String/fromCharCode) and [str.charCodeAt](mdn:js/String/charCodeAt), but they treat surrogate pairs correctly.
+این متدها بسیار شبیه [String.fromCharCode](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/fromCharCode) و [str.charCodeAt](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/fromCodePoint) هستند، اما در رفتار با جفت‌های جایگزین (surrogate pairs) به درستی عمل می‌کنند.
 
-One can see the difference here:
+تفاوت را در اینجا مشاهده کنید:
 
 ```js run
-// charCodeAt is not surrogate-pair aware, so it gives codes for the 1st part of 𝒳:
-
+// را می‌دهد 𝒳 به جفت‌ جایگزین آگاه نیست برای همین فقط کد قسمت اول charCodeAt 
 alert( '𝒳'.charCodeAt(0).toString(16) ); // d835
 
-// codePointAt is surrogate-pair aware
-alert( '𝒳'.codePointAt(0).toString(16) ); // 1d4b3, reads both parts of the surrogate pair
+// به جفت‌ جایگزین آگاه هست codePointAt
+alert( '𝒳'.codePointAt(0).toString(16) ); // 1d4b3, هر دو قسمت را میخواند
 ```
 
-That said, if we take from position 1 (and that's rather incorrect here), then they both return only the 2nd part of the pair:
+زمانی که بخواهیم خانه دوم (ایندکس 1) را بخوانیم (حرکت نسبتاً اشتباه در این قسمت) هر دو فقط قسمت دوم جفت را بر می‌گردانند.
 
 ```js run
 alert( '𝒳'.charCodeAt(1).toString(16) ); // dcb3
 alert( '𝒳'.codePointAt(1).toString(16) ); // dcb3
-// meaningless 2nd half of the pair
+// بخش دوم از جفت - نمایش نماد ناشناخته 
 ```
 
-You will find more ways to deal with surrogate pairs later in the chapter <info:iterable>. There are probably special libraries for that too, but nothing famous enough to suggest here.
+شما راه‌های بیشتری در رابطه با نحوه برخورد با جفت‌های جایگزین (surrogate pairs) در فصل <info:iterable> خوهید آموخت. احتمالا کتابخانه‌های خاصی برای این امر وجود دارند، اما هیچ کدام آنها آنقدر معروف نیستند که اینجا معرفی شوند.
 
-````warn header="Takeaway: splitting strings at an arbitrary point is dangerous"
-We can't just split a string at an arbitrary position, e.g. take `str.slice(0, 4)` and expect it to be a valid string, e.g.:
+````warn header="تقسیم رشته ها در یک نقطه دلخواه خطرناک است"
+نمی‌توان یک رشته را در یک قمست دلخواه تقسیم کرد و همیشه انتظار یک رشته معتبر داشت. به عنوان مثال "str.slice(0,4)". به نمونه توجه کنید:
 
 ```js run
-alert( 'hi 😂'.slice(0, 4) ); //  hi [?]
+alert( 'hi 😂'.slice(0, 4) ); //  hi �
 ```
 
-Here we can see a garbage character (first half of the smile surrogate pair) in the output.
+در اینجا می‌توان کاراکتر بی معنی (نمیه اول جفت جایگزین ایموجی لبخند) را در خروجی مشاهده نمود.
 
-Just be aware of it if you intend to reliably work with surrogate pairs. May not be a big problem, but at least you should understand what happens.
+درصورتی که قصد دارید به‌طور غیر قابل اعتماد با جفت‌های جایگزین (surrogate pairs) کار کنید باید از این موضوع آگاه باشید. احتمالا مشکل بزرگی نیست، اما حداقل باید بدا نید چه اتفاقی درحال روی دادن است.
 ````
 
-## Diacritical marks and normalization
+## علائم حرکت گذاری و عادی سازی
 
-In many languages, there are symbols that are composed of the base character with a mark above/under it.
+در بسیاری از زبان های نوشتاری، نمادهایی وجود دارند که از یک کاراکتر پایه با یک علامت در پایین یا بالای آن تشکیل شده‌اند.
 
-For instance, the letter `a` can be the base character for these characters: `àáâäãåā`.
+به عنوان مثال حرف پایه می‌تواند `a` باشد و نمونه های مقابل را درست کرد: `àáâäãåā`
 
-Most common "composite" characters have their own code in the Unicode table. But not all of them, because there are too many possible combinations.
+در زبان فارسی هم نمونه‌هایی و جود دارد مانند تشدید در `ملّت` و حروف صدادار.
 
-To support arbitrary compositions, the Unicode standard allows us to use several Unicode characters: the base character followed by one or many "mark" characters that "decorate" it.
+اکثر کاراکتر های رایج ترکیبات خود را هم در جدول یونی‌کد دارند. ولی نه همه آنها، زیرا تعداد ترکیبات ممکن بسیار زیاد خواهد شد. 
 
-For instance, if we have `S` followed by the special "dot above" character (code `\u0307`), it is shown as Ṡ.
+برای پشتیبانی از همه ترکیبات دلخواه، استاندارد یونی‌کد این امکان را می‌دهد تا از چند کاراکتر یونی‌کد استفاده کنیم: یک کاراکتر پایه و یک یا چند کاراکتر "مارک" که به کاراکتر اول افزوده می‌شود و آن را تزئین می‌ کند.
+
+به عنوان نمونه در صورتی که `S` با کاراکتر ویژه "نقطه در بالا" (کد `‎\u0307`) بیاید، `Ṡ` را نمایش می‌دهد.
 
 ```js run
-alert( 'S\u0307' ); // Ṡ
+alert( 'S‎\u0307' ); // Ṡ
 ```
 
-If we need an additional mark above the letter (or below it) -- no problem, just add the necessary mark character.
+اگر به علامت بیشتری نیاز دارید، فقط کاراکتر علامت مورد نیاز را اضافه کنید.
 
-For instance, if we append a character "dot below" (code `\u0323`), then we'll have "S with dots above and below": `Ṩ`.
+به عنوان نمونه در صورتی که در مرحله قبل "نقطه در پایین" (کد `‎\u0323`) را هم اضافه کنیم، ما یک "s با نقطه در پایین و بالا" خواهیم داشت: `Ṩ` .
 
-For example:
+به عنوان مثال:
 
 ```js run
 alert( 'S\u0307\u0323' ); // Ṩ
 ```
 
-This provides great flexibility, but also an interesting problem: two characters may visually look the same, but be represented with different Unicode compositions.
+این انعطاف پذیری خوب می‌تواند مشکل جالبی را پیش بیاورد: دو کاراکتر می توانند ظاهری یکسان داشته باشند در صورتی که با ترکیبات مختلف یونی‌کد ساخته شده باشند.
 
-For instance:
+به عنوان مثال:
 
 ```js run
-let s1 = 'S\u0307\u0323'; // Ṩ, S + dot above + dot below
-let s2 = 'S\u0323\u0307'; // Ṩ, S + dot below + dot above
+let s1 = 'S\u0307\u0323'; // Ṩ, نقطه در بالا + نقطه در پایین + S
+let s2 = 'S\u0323\u0307'; // Ṩ, نقطه در پایین + نقطه در بالا + S
 
-alert( `s1: ${s1}, s2: ${s2}` );
+alert( `s1: ${s1}, s2: ${s2}` ); // s1: Ṩ, s2: Ṩ
 
-alert( s1 == s2 ); // false though the characters look identical (?!)
+alert( s1 == s2 ); // می‌دهد در صورتی که یکسان بنظر می‌آیند (!؟) flase پاسخ
 ```
 
-To solve this, there exists a "Unicode normalization" algorithm that brings each string to the single "normal" form.
+برای حل این مشکل، یک الگوریتم "نرمال سازی یونی‌کد" وجود داردکه هر رشته را بصورت فرم یکتا آن نرمال می‌کند.
 
-It is implemented by [str.normalize()](mdn:js/String/normalize).
+و توسط [str.normalize()‎]([mdn:js/String/normalize](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/normalize)) پیاده سازی شده.
 
 ```js run
 alert( "S\u0307\u0323".normalize() == "S\u0323\u0307".normalize() ); // true
 ```
 
-It's funny that in our situation `normalize()` actually brings together a sequence of 3 characters to one: `\u1e68` (S with two dots).
+خنده‌دار است که `normalize()‎` در واقع دنباله ای از 3 کاراکتر را باهم جمع می‌کند: `‎\u1e68` (حرف s با دو نقطه).
 
 ```js run
 alert( "S\u0307\u0323".normalize().length ); // 1
@@ -167,6 +170,6 @@ alert( "S\u0307\u0323".normalize().length ); // 1
 alert( "S\u0307\u0323".normalize() == "\u1e68" ); // true
 ```
 
-In reality, this is not always the case. The reason is that the symbol `Ṩ` is "common enough", so Unicode creators included it in the main table and gave it the code.
+در واقعیت همیشه اینطور نیست. دلیل آن این است که نماد `Ṩ` به اندازه ای مهم بود که سازندگان یونی‌کد آن را در جدول اصلی قرار دهند و این کد را به آن اختصاص دهند.
 
-If you want to learn more about normalization rules and variants -- they are described in the appendix of the Unicode standard: [Unicode Normalization Forms](https://www.unicode.org/reports/tr15/), but for most practical purposes the information from this section is enough.
+درصورتی که می‌خواهید در مورد قوانین و انواع نرمال سازی اطلاعات بیشتری کسب کنید آنها در پیوست استاندارد یونی‌کد توضیح داده شده‌اند: [Unicode Normalization Forms](https://www.unicode.org/reports/tr15/) ،  ولی برای بیشتر اهداف کاربردی تا همین اندازه کافی است.
