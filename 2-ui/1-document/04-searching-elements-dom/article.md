@@ -49,7 +49,8 @@
 <div id="elem"></div>
 
 <script>
-  let elem = 5; // الان مقدار elem، 5 <div id="elem"> است نه ارجاعی به 
+  let elem = 5; // الان مقدار elem، 5 <div id="elem"> است نه ارجاعی به
+است نه ارجاعی به <div id="elem"> 5ُ، elem الان مقدار
 
   alert(elem); // 5
 </script>
