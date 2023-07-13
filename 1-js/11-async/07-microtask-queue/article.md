@@ -1,48 +1,47 @@
 
-# Microtasks
+# خرده کار ها
 
-Promise handlers `.then`/`.catch`/`.finally` are always asynchronous.
+مدیریت کننده های پرامیس `.then`/`.catch`/`.finally` همواره ناهمگام هستند.
 
-Even when a Promise is immediately resolved, the code on the lines *below* `.then`/`.catch`/`.finally` will still execute before these handlers.
+حتی زمانی که یک پرامیس در آن واحد به سر انجام رسیده, کد هایی که در خطوط *زیرین* `.then`/`.catch`/`.finally` هستند هنوز پیش از این مدیریت کننده ها اجرا می شوند.
 
-Here's a demo:
+یک نمونه:
 
 ```js run
 let promise = Promise.resolve();
 
 promise.then(() => alert("promise done!"));
 
-alert("code finished"); // this alert shows first
+alert("code finished"); // این هشدار پیشتر نمایان می شود
 ```
+اگر این کد را اجرا کنید, عبارت `code finished` را در ابتدا و سپس `promise done!` را میبینید.
 
-If you run it, you see `code finished` first, and then `promise done!`.
+این عجیب است, زیرا پرامیس قطعا از پیش به انجام رسیده است.
 
-That's strange, because the promise is definitely done from the beginning.
+چرا `.then` بعدتر اجرا شد؟ چه رخ میدهد؟
 
-Why did the `.then` trigger afterwards? What's going on?
+## صف خرده کار ها
 
-## Microtasks queue
+کار های ناهمگام نیازمند مدیریت درست هستند. به همین سبب، استاندارد ECMA یک صف داخلی به نام `PromiseJobs` مشخص میکند که بیشتر با نام "microtask queue" از آن یاد می شود (اصطلاح V8).
 
-Asynchronous tasks need proper management. For that, the ECMA standard specifies an internal queue `PromiseJobs`, more often referred to as the "microtask queue" (V8 term).
+همانطور که در [خصوصیات](https://tc39.github.io/ecma262/#sec-jobs-and-job-queues) یاد شده:
 
-As stated in the [specification](https://tc39.github.io/ecma262/#sec-jobs-and-job-queues):
+- صف first-in-first-out است: کارهایی که نخست وارد صف شده اند نخست اجرا می شوند.
+- اجرای یک کار تنها زمانی شروع می شود که چیز دیگری در حال اجرا نباشد.
 
-- The queue is first-in-first-out: tasks enqueued first are run first.
-- Execution of a task is initiated only when nothing else is running.
+یا، به عبارت ساده تر، زمانی که یک پرامیس آماده است، مدیر های `.then/catch/finally` آن درون صف قرار داده می شوند؛ آنها هنوز اجرا نشده اند. زمانی که موتور جاوااسکریپت از کد فعلی رها می شود، یک کار (تسک) از صف میگیرد و آن را اجرا میکند.
 
-Or, to put it more simply, when a promise is ready, its `.then/catch/finally` handlers are put into the queue; they are not executed yet. When the JavaScript engine becomes free from the current code, it takes a task from the queue and executes it.
-
-That's why "code finished" in the example above shows first.
+به همین دلیل عبارت "code finished" در نمونه بالا نخست نمایان می شود.
 
 ![](promiseQueue.svg)
 
-Promise handlers always go through this internal queue.
+مدیریت کننده های پرامیس همواره از درون این صف داخلی می گذرند.
 
-If there's a chain with multiple `.then/catch/finally`, then every one of them is executed asynchronously. That is, it first gets queued, then executed when the current code is complete and previously queued handlers are finished.
+اگر زنجیره ای با چندین `.then/catch/finally` باشد، آنگاه هر یک از آنها به صورت ناهمگام اجرا می شود. بدان صورت که، ابتدا وارد صف می شود، سپس زمانی که کد فعلی تمام شده و مدیریت کننده های پیشین صف شده به پایان رسیده اند، اجرا می شود.
 
-**What if the order matters for us? How can we make `code finished` appear after `promise done`?**
+**اگر ترتیب برای ما اهمیت داشت چه? چگونه می توانیم `code finished` را پیش از `promise done` نمایان کنیم؟**
 
-Easy, just put it into the queue with `.then`:
+به سادگی، فقط با استفاده از `.then` درون صف قرارش بده:
 
 ```js run
 Promise.resolve()
@@ -50,17 +49,17 @@ Promise.resolve()
   .then(() => alert("code finished"));
 ```
 
-Now the order is as intended.
+حالا ترتیب در نظر گرفته شده.
 
-## Unhandled rejection
+## رد شدن مدیریت نشده
 
-Remember the `unhandledrejection` event from the article <info:promise-error-handling>?
+رخداد `unhandledrejection` را از مقاله <info:promise-error-handling> به یاد دارید؟
 
-Now we can see exactly how JavaScript finds out that there was an unhandled rejection.
+حال میتوانیم به دقت ببینیم که جاوااسکریپت چگونه پی میبرد که رد شدن مدیریت نشده ای پیش آمده.
 
-**An "unhandled rejection" occurs when a promise error is not handled at the end of the microtask queue.**
+**یک "رد شدن مدیریت نشده" زمانی پیش می آید که یک حطای پرامیس در پایان صف خرده کار مدیریت نشده باشد.**
 
-Normally, if we expect an error, we add `.catch` to the promise chain to handle it:
+معمولا، اگر منتظر خطایی هستیم، `.catch` را به زنجیره پرامیس می افزاییم تا آن را مدیریت کند:
 
 ```js run
 let promise = Promise.reject(new Error("Promise Failed!"));
@@ -68,11 +67,11 @@ let promise = Promise.reject(new Error("Promise Failed!"));
 promise.catch(err => alert('caught'));
 */!*
 
-// doesn't run: error handled
+// اجرا نمی شود: خطا مدیریت شد
 window.addEventListener('unhandledrejection', event => alert(event.reason));
 ```
 
-But if we forget to add `.catch`, then, after the microtask queue is empty, the engine triggers the event:
+اما اگر فراموش کنیم که `.catch` را بیافزاییم، آنگاه، پس از اینکه صف خرده کار خالی شد، موتور رخداد را فراخوانی میکند:
 
 ```js run
 let promise = Promise.reject(new Error("Promise Failed!"));
@@ -81,7 +80,7 @@ let promise = Promise.reject(new Error("Promise Failed!"));
 window.addEventListener('unhandledrejection', event => alert(event.reason));
 ```
 
-What if we handle the error later? Like this:
+چه می شود اگر خطا را بعدتر مدیریت کنیم؟ همچون این:
 
 ```js run
 let promise = Promise.reject(new Error("Promise Failed!"));
@@ -93,20 +92,20 @@ setTimeout(() => promise.catch(err => alert('caught')), 1000);
 window.addEventListener('unhandledrejection', event => alert(event.reason));
 ```
 
-Now, if we run it, we'll see `Promise Failed!` first and then `caught`.
+حال، اگر اجرایش کنیم، عبارت `Promise Failed!` را نخست و سپس عبارت `caught` را مشاهده خواهیم کرد.
 
-If we didn't know about the microtasks queue, we could wonder: "Why did `unhandledrejection` handler run? We did catch and handle the error!"
+اگر ما درباره صف خرده کار ها نمیدانستیم، می توانستیم شگفت زده شویم: "چرا مدیر `unhandledrejection` اجرا شد؟ ما یقینا حطا را گرفتیم و مدیریت کردیم!"
 
-But now we understand that `unhandledrejection` is generated when the microtask queue is complete: the engine examines promises and, if any of them is in the "rejected" state, then the event triggers.
+اما حال میتوجه می شویم که `unhandledrejection` زمانی ایجاد می شود که صف خرده کار تمام شده: موتور پرامیس ها را بررسی میکند و، اگر هر یک از آنها در وضعیت "rejected" باشد، آنگاه رویداد فراخوانی می شود.
 
-In the example above, `.catch` added by `setTimeout` also triggers. But it does so later, after `unhandledrejection` has already occurred, so it doesn't change anything.
+در نمونه بالا، `.catch` افزوده شده توسط `setTimeout` هم فراخوانی می شود. اما بعدتر فراخوانی می شود، پس از اینکه دیگر `unhandledrejection` رخ داده، پس چیزی را تغییر نمیدهد.
 
-## Summary
+## چکیده
 
-Promise handling is always asynchronous, as all promise actions pass through the internal "promise jobs" queue, also called "microtask queue" (V8 term).
+مدیریت پرامیس همواره ناهمگام است، همانطور که تمام عملیات پرامیس از درون صف داخلی "promise jobs" می گذرند، همچنین با عنوان "microtask queue" از آن یاد می شود (اصطلاح V8).
 
-So `.then/catch/finally` handlers are always called after the current code is finished.
+پس مدیر های `.then/catch/finally` همواره پس از به پایان رسیدن کد فعلی فراخوانی می شوند.
 
-If we need to guarantee that a piece of code is executed after `.then/catch/finally`, we can add it into a chained `.then` call.
+اگر نیاز داریم که تضمین کنیم یک تکه کد پس از `.then/catch/finally` اجرا می شود، می توانیم به یک فراخوانی زنجیره ای `.then` بیافزاییمش.
 
-In most Javascript engines, including browsers and Node.js, the concept of microtasks is closely tied with the "event loop" and "macrotasks". As these have no direct relation to promises, they are covered in another part of the tutorial, in the article <info:event-loop>.
+در بیشتر موتور های جاوااسکریپت، شامل مرورگر ها و Node.js، مفهوم خرده کار ها به دقت با "event loop" و "macrotasks" در هم تنیده شده. از آنجایی که این دو رابطه مستقیمی با پرامیس ها ندارند، در بخش دیگری از این دوره به آنها پرداخته شده، در مقاله <info:event-loop>.
