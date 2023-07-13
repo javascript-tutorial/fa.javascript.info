@@ -17,7 +17,7 @@
 </div>
 
 <script>
-// element به دسترسی
+// element دسترسی به
 *!*
   let elem = document.getElementById('elem');
 */!*
