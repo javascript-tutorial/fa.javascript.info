@@ -2,19 +2,21 @@ importance: 5
 
 ---
 
-# Endless page
+# صفحه بی‌پایان
 
-Create an endless page. When a visitor scrolls it to the end, it auto-appends current date-time to the text (so that a visitor can scroll more).
+یک صفحه بی پایان ایجاد کنید. وقتی یک بیننده به انتهای آن اسکرول می‌کند صفحه به طور خودکار تاریخ فعلی را به طور متنی اضافه می‌کند (پس اینطوری کاربر می‌تواند بیشتر اسکرول کند)
 
-Like this:
+مثل این:
 
 [iframe src="solution" height=200]
 
-Please note two important features of the scroll:
+لطفا به دو ویژگی مهم اسکرول توجه داشته باشید: 
 
-1. **The scroll is "elastic".** We can scroll a little beyond the document start or end in some browsers/devices (empty space below is shown, and then the document will automatically "bounces back" to normal).
-2. **The scroll is imprecise.** When we scroll to page end, then we may be in fact like 0-50px away from the real document bottom.
+1. **اسکرول "قابل ارتجاع" است.** ما می‌توانیم کمی فرانتر از شروع یا پایان داکیومنت، در برخی از مرورگر‌ها و دستگاه‌ها اسکرول کنیم (فضای خالی زیر نشان داده شده است و سپس داکیومنت به طور خودکار به حالت عادی بر می‌گردد.).
 
-So, "scrolling to the end" should mean that the visitor is no more than 100px away from the document end.
+2. **اسکرول دقیق نیست..** هنگامی که به انتهای صفحه اسکرول می‌کنیم ممکن است در حقیقت از document bottom بین 0 تا 50 پیکسل فاصله داشته باشیم.
 
-P.S. In real life we may want to show "more messages" or "more goods".
+پس "اسکرول کردن به انتها" باید به این معنا باشد که بیننده بیش از 100 پیکسل به پایان داکیومنت فاصله ندارد..
+
+در واقعیت ممکن است بخواهیم "پیام‌های بیشتر" یا "کالاهای بیشتر" را نمایش دهیم.
+

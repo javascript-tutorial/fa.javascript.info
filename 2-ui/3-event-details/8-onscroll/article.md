@@ -1,12 +1,12 @@
-# Scrolling
+# اسکرول کردن (Scrolling)
 
-The `scroll` event allows reacting to a page or element scrolling. There are quite a few good things we can do here.
+ایونت `scroll` اجازه می‌دهد به یک صفحه یا المنت واکنش نشان دهید. چندین کار جالب وجود دارد که می‌توانیم انجام دهیم.
 
-For instance:
-- Show/hide additional controls or information depending on where in the document the user is.
-- Load more data when the user scrolls down till the end of the page.
+برای مثال:
+- نمایش دادن یا پنهان کردن کنترل‌ های اضافی یا اطلاعات، با توجه به این که کاربر کجای داکیومنت است.
+- بارگزاری کردن بیشتر داده، هنگامی که کاربر درحال اسکرول به سمت انتهای پیج است.
 
-Here's a small function to show the current scroll:
+اینجا یک تابع کوچک برای نمایش دادن اسکرول فعلی می‌باشد:
 
 ```js autorun
 window.addEventListener('scroll', function() {
@@ -15,23 +15,23 @@ window.addEventListener('scroll', function() {
 ```
 
 ```online
-In action:
+در عمل:
 
-Current scroll = <b id="showScroll">scroll the window</b>
+اسکرول فعلی = <b id="showScroll">اسکرول window</b>
 ```
 
-The `scroll` event works both on the `window` and on scrollable elements.
+ایونت `scroll` در `window` و المنت‌های قابل اسکرول کار می‌کند.
 
-## Prevent scrolling
+## جلوگیری از اسکرول کردن
 
-How do we make something unscrollable?
+چطور می‌توانیم چیزی را غیر قابل اسکرول کنیم؟
 
-We can't prevent scrolling by using `event.preventDefault()` in `onscroll` listener, because it triggers *after* the scroll has already happened.
+ما نمی‌توانیم اسکرول کردن را توسط `()event.preventDefault` در `onscroll` listener جلوگیری کنیم چون *پس* از اسکرولی که قبلا اتفاق افتاده است رخ می‌دهد.
 
-But we can prevent scrolling by `event.preventDefault()` on an event that causes the scroll, for instance `keydown` event for `key:pageUp` and `key:pageDown`.
+اما می‌توانیم توسط `()event.preventDefault` از ایونتی که باعث اسکرول می‌شود جلوگیری کنیم. برای مثال: ایونت `keydown` برای `key:pageUp` و `key:pageDown`
 
-If we add an event handler to these events and `event.preventDefault()` in it, then the scroll won't start.
+اگر ما یک ایونت هندلر به این ایونت‌ها و درون آن `()event.preventDefault` اضافه کنیم، اسکرول شروع نخواهد شد.
 
-There are many ways to initiate a scroll, so it's more reliable to use CSS, `overflow` property.
+راه های زیادی برای شروع کردن یک اسکرول وجود دارد پس استفاده از پراپرتی CSS `overflow` خیلی قابل اطمینان‌تر است.
 
-Here are few tasks that you can solve or look through to see applications of `onscroll`.
+اینجا چند تمرین وجود دارد که شما می‌توانید آنها را حل کنید یا نگاهی به اپلیکیشن های `onscroll` بیندازید.
