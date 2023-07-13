@@ -1,6 +1,6 @@
-**Error**!
+**خطا**!
 
-Try it:
+کد زیر را مدنظر داشته باشید:
 
 ```js run
 let user = {
@@ -8,22 +8,25 @@ let user = {
   go: function() { alert(this.name) }
 }
 
-(user.go)() // error!
+(user.go)() // خطا دارد!
 ```
 
-The error message in most browsers does not give us much of a clue about what went wrong.
+پیام خطا در بیشتر مرورگر ها اطلاعاتی بابت اینکه چه اشتباهی رخ داده است نمیدهد.
 
-**The error appears because a semicolon is missing after `user = {...}`.**
 
-JavaScript does not auto-insert a semicolon before a bracket `(user.go)()`, so it reads the code like:
+** این خطا نشان داده میشود چون سمیکالن بعد از این دستور فراموش شده است `user = {...}`.**
+
+
+جاوااسکریپت به صورت پیش فرض سمیکالن را براکت قبل از دستور `(user.go)()` اضافه نمیکند. سپس کد به این صورت خوانده میشود:
 
 ```js no-beautify
 let user = { go:... }(user.go)()
 ```
 
-Then we can also see that such a joint expression is syntactically a call of the object `{ go: ... }` as a function with the argument `(user.go)`. And that also happens on the same line with `let user`, so the `user` object has not yet even been defined, hence the error.
+بنابراین جاوااسکریپت حدس میزند که ما درواقع آبجکت `{ go: ... }` را به عنوان یک فانکشن با آرگومان های `(user.go)` صدا زده ایم. و سپس چون به `let user` میرسیم آبجکت `user`  به صورت تعریف نشده معرفی میشود و ما ارور را مشاهده میکنیم.
 
-If we insert the semicolon, all is fine:
+
+همه چیز خوب بنظر میرسد اگر سمیکالن را انتهای آبجکت اضافه کنیم:
 
 ```js run
 let user = {
@@ -34,4 +37,4 @@ let user = {
 (user.go)() // John
 ```
 
-Please note that parentheses around `(user.go)` do nothing here. Usually they setup the order of operations, but here the dot `.` works first anyway, so there's no effect. Only the semicolon thing matters.
+توجه داشته باشید که پرانتز اطراف `(user.go)` کاری انجام نمیدهد. معمولا در اکثر موقعیت ها اولویت عملگر هارا تغییر میدهند, اما در اینجا فقط عملگر نقطه `.` کار میکند. سپس مورد خاصی نیست و فعلا بحث سمیکالن مهم است.
