@@ -17,7 +17,7 @@
 </div>
 
 <script>
-  // دسترسی به element
+// element به دسترسی
 *!*
   let elem = document.getElementById('elem');
 */!*
@@ -27,7 +27,7 @@
 </script>
 ```
 
-همچنین، متغیری global وجود دارد که با `id` نام‌گذازی شده‌ است و به element ارجاع می‌دهد: 
+همچنین، متغیری global وجود دارد که با `id` نام‌گذاری شده‌ است و به element ارجاع می‌دهد: 
 
 ```html run
 <div id="*!*elem*/!*">
