@@ -49,21 +49,20 @@
 <div id="elem"></div>
 
 <script>
-  let elem = 5; // الان مقدار elem، 5 <div id="elem"> است نه ارجاعی به
-است نه ارجاعی به <div id="elem"> 5ُ، elem الان مقدار
-
+  let elem = 5; // <div id="elem"> پنج است، نه ارجاعی به elem الان مقدار
+ 
   alert(elem); // 5
 </script>
 ```
 
 ```warn header="Please don't use id-named global variables to access elements"
-This behavior is described [in the specification](https://html.spec.whatwg.org/multipage/window-object.html#named-access-on-the-window-object), but it is supported mainly for compatibility.
+این رفتار در [in the specification](https://html.spec.whatwg.org/multipage/window-object.html#named-access-on-the-window-object) توضیح داده شده است اما به طور معمول برای سازگاری پشتیبانی می‌شود.
 
-The browser tries to help us by mixing namespaces of JS and DOM. That's fine for simple scripts, inlined into HTML, but generally isn't a good thing. There may be naming conflicts. Also, when one reads JS code and doesn't have HTML in view, it's not obvious where the variable comes from.
+مرورگر تلاش می‌کند که با ترکیب namespaceهای JS و DOM به ما کمک کند. این کار برای scriptهای ساده‌ای که به صورت inline در HTML نوشته شده اند مناسب است،‌اما به طور کلی ایده‌ی خوبی نیست. ممکن است تعارض‌‌هایی در نام‌گذاری به وجود آورد. همچنین، وقتی کسی کد JS را می‌خواند و به HTML دسترسی ندارد، مشخص نیست که متغیر از کجا می‌آید. 
 
-Here in the tutorial we use `id` to directly reference an element for brevity, when it's obvious where the element comes from.
+اینحا در این آموزش وقتی مشخص است که element از کجا آمده است، ما برای کوتاهی و اختصار از `id` استفاده می‌کنیم تا به طور مستقیم به یک element ارجاع دهیم. 
 
-In real life `document.getElementById` is the preferred method.
+ترجیح داده می‌شودdocument.getElementById`  در زندگی واقعی 
 ```
 
 ```smart header="The `id` must be unique"
