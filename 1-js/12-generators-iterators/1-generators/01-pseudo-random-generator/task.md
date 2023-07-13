@@ -1,34 +1,44 @@
+# generator شبه تصادفی
 
-# Pseudo-random generator
+سناریوهای زیادی وجود دارند که در آن به دیتای تصادفی نیاز است.
 
-There are many areas where we need random data.
+یکی از آن‌ها تست کردن است. ممکن است ما برای یک تست خوب به دیتای تصادفی نیاز داشته باشیم: متن، عدد و غیره.
 
-One of them is testing. We may need random data: text, numbers, etc. to test things out well.
+در جاوااسکریپت می‌توان از `()Math.random` استفاده کرد. ولی می‌خواهیم این قابلیت را داشته باشیم که تست را دقیقا با همان دیتا بتوانیم تکرار کنیم.
 
-In JavaScript, we could use `Math.random()`. But if something goes wrong, we'd like to be able to repeat the test, using exactly the same data.
+برای این منظور "seeded pseudo-random generators" استفاده می‌شوند. این generatorها یک "seed" -مقدار اولیه- را می‌گیرند و طبق یک فرمول باقی دنباله را تولید می‌کنند. در نتیجه "seed" یکسان دنباله یکسانی را تولید می‌کند و کل دنباله را به راحتی می‌توان بازتولید کرد. فقط نیاز است "seed" را به یاد داشته باشیم.
 
-For that, so called "seeded pseudo-random generators" are used. They take a "seed", the first value, and then generate the next ones using a formula so that the same seed yields the same sequence, and hence the whole flow is easily reproducible. We only need to remember the seed to repeat it.
-
-An example of such formula, that generates somewhat uniformly distributed values:
+یک مثال از چنین فرمولی که مقادیری با توزیع تقریبا یکنواخت تولید می‌کند:
 
 ```
+
 next = previous * 16807 % 2147483647
+
 ```
 
-If we use `1` as the seed, the values will be:
+
+اگر از `1` به عنوان "seed" استفاده کنیم دنباله به شکل زیر خواهد بود:
+
 1. `16807`
+
 2. `282475249`
+
 3. `1622650073`
-4. ...and so on...
 
-The task is to create a generator function `pseudoRandom(seed)` that takes `seed` and creates the generator with this formula.
+4. ...و به همین ترتیب ادامه می‌یابد...
 
-Usage example:
+تسک، ساختن یک تابع generator با امضای `pseudoRandom(seed)` است که یک "seed" می‌گیرد و یک generator با فرمول داده شده می‌سازد.
+
+مثلا:
 
 ```js
+
 let generator = pseudoRandom(1);
 
 alert(generator.next().value); // 16807
+
 alert(generator.next().value); // 282475249
+
 alert(generator.next().value); // 1622650073
+
 ```
