@@ -1,12 +1,12 @@
-importance: 3
+میزان سختی سوال: 3
 
 ---
 
-# Explain the value of "this"
+# مقدار "this" را توضیح دهید.
 
-In the code below we intend to call `obj.go()` method 4 times in a row.
+در کد زیر قصد داریم متد `()obj.go` را در 4 موقعیت مختلف اجرا کنیم.
 
-But calls `(1)` and `(2)` works differently from `(3)` and `(4)`. Why?
+ولی پاسخ موقعیت (1) و (2) با موقعیت (3) و (4) متفاوت است. چرا؟
 
 ```js run no-beautify
 let obj, method;
