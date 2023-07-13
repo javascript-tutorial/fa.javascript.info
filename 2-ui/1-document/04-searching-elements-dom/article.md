@@ -38,9 +38,8 @@
   // است elem به نام id با DOM-element ارجاعی به elem
   elem.style.background = 'red';
 
-  // id="elem-content" has a hyphen inside, so it can't be a variable name
-  // درون خود یک خط تیره (-) دارد، پس نمی‌تواند نام یک متغیر باشد elem-content. 
-  // ...but we can access it using square brackets: window['elem-content']
+  // درون خود یک خط تیره (-) دارد، پس نمی‌تواند نام یک متغیر باشد elem-content 
+  // اما می‌توانیم با استفاده از براکت ([]) به آن دسترسی داشته باشیم: window['elem-content']
 </script>
 ```
 
