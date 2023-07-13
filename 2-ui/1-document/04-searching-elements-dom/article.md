@@ -5,7 +5,7 @@
 
 روش‌های جستجوی دیگری برای آن وجود دارد. 
 
-## document.getElementById یا تنها id
+## id یا تنها document.getElementById
 
 اگر یک element،دارای attribute (ویژگی) id باشد، می‌توانیم با استفاده از methodای به نام `document.getElementById(id)` به آن دسترسی داشته باشیم. اهمیتی ندارد که آن element کجا است. 
 
