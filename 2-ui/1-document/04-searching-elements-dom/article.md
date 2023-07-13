@@ -44,6 +44,7 @@
 ```
 
 ...That's unless we declare a JavaScript variable with the same name, then it takes precedence:
+....مگر اینکه یک متغیر جاوا اسکریپت را با همین نام تعریف کنیم. در این صورت آن اولویت دارد:‌
 
 ```html run untrusted height=0
 <div id="elem"></div>
