@@ -39,7 +39,7 @@
   elem.style.background = 'red';
 
   // id="elem-content" has a hyphen inside, so it can't be a variable name
-  // elem-content درون خود یک خط تیره (-) دارد، پس نمی‌تواند نام یک متغیر باشد. 
+  // درون خود یک خط تیره (-) دارد، پس نمی‌تواند نام یک متغیر باشد elem-content. 
   // ...but we can access it using square brackets: window['elem-content']
 </script>
 ```
