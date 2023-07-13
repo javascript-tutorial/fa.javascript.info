@@ -43,14 +43,13 @@
 </script>
 ```
 
-...That's unless we declare a JavaScript variable with the same name, then it takes precedence:
 ....مگر اینکه یک متغیر جاوا اسکریپت را با همین نام تعریف کنیم. در این صورت آن اولویت دارد:‌
 
 ```html run untrusted height=0
 <div id="elem"></div>
 
 <script>
-  let elem = 5; // now elem is 5, not a reference to <div id="elem">
+  let elem = 5; // الان مقدار elem، 5 <div id="elem"> است نه ارجاعی به 
 
   alert(elem); // 5
 </script>
