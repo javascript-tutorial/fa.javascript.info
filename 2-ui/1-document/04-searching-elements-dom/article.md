@@ -1,14 +1,15 @@
-# Searching: getElement*, querySelector*
+# جستجو: *getElement و *querySelector
 
-DOM navigation properties are great when elements are close to each other. What if they are not? How to get an arbitrary element of the page?
+وقتی elementها به یکدیگر نزدیک هستند، استفاده از ویژگی‌های DOM navigation عالی است. اما اگر elementها نزدیک هم نباشند چه؟ چگونه باید به یک element دلخواه دسترسی داشته باشیم؟
 
-There are additional searching methods for that.
 
-## document.getElementById or just id
+روش‌های جستجوی دیگری برای آن وجود دارد. 
 
-If an element has the `id` attribute, we can get the element using the method `document.getElementById(id)`, no matter where it is.
+## document.getElementById یا تنها id
 
-For instance:
+اگر یک element،دارای attribute (ویژگی) id باشد، می‌توانیم با استفاده از methodای به نام `document.getElementById(id)` به آن دسترسی داشته باشیم. اهمیتی ندارد که آن element کجا است. 
+
+برای مثال: 
 
 ```html run
 <div id="elem">
@@ -16,17 +17,17 @@ For instance:
 </div>
 
 <script>
-  // get the element
+  // دسترسی به element
 *!*
   let elem = document.getElementById('elem');
 */!*
 
-  // make its background red
+  // پس‌زمینه‌ی آن را قرمز می‌‌کنیم
   elem.style.background = 'red';
 </script>
 ```
 
-Also, there's a global variable named by `id` that references the element:
+همچنین، متغیری global وجود دارد که با `id` نام‌گذازی شده‌ است و به element ارجاع می‌دهد: 
 
 ```html run
 <div id="*!*elem*/!*">
@@ -34,7 +35,7 @@ Also, there's a global variable named by `id` that references the element:
 </div>
 
 <script>
-  // elem is a reference to DOM-element with id="elem"
+  // است elem به نام id با DOM-element ارجاعی به elem
   elem.style.background = 'red';
 
   // id="elem-content" has a hyphen inside, so it can't be a variable name
