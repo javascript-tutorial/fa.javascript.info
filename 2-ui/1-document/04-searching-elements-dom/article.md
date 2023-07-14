@@ -79,9 +79,9 @@
 
 ## querySelectorAll [#querySelectorAll]
 
-By far, the most versatile method, `elem.querySelectorAll(css)` returns all elements inside `elem` matching the given CSS selector.
+تا اینجا، همه‌کاره‌ترین روش `elem.querySelectorAll(css)` بود که تمام elementهای درون `elem` که با css selector داده شده تطابق دارند را انتخاب می‌کند. 
 
-Here we look for all `<li>` elements that are last children:
+اینحا به دنبال تمام `<li>`هایی هستیم که آخرین فرزند هستند: 
 
 ```html run
 <ul>
@@ -103,10 +103,10 @@ Here we look for all `<li>` elements that are last children:
 </script>
 ```
 
-This method is indeed powerful, because any CSS selector can be used.
+این method واقعا قدرتمند است، چون هر css selectorای می‌تواند استفاده شود. 
 
-```smart header="Can use pseudo-classes as well"
-Pseudo-classes in the CSS selector like `:hover` and `:active` are also supported. For instance, `document.querySelectorAll(':hover')` will return the collection with elements that the pointer is over now (in nesting order: from the outermost `<html>` to the most nested one).
+```smart header="pseudo-classها نیز می‌توانند استفاده شوند"
+pseudo-classها در css selector مثل `:hover` و `:active`  `document.querySelectorAll(':hover')` مجموعه‌ای از elementهایی که نشانگر الان روی آن‌ها است را برمی‌گرداند. (به ترتیب تو در تو: از بیرونی ترین `<html>` تا درونی‌ترین( هم پشتیبانی شده‌اند. برای مثال 
 ```
 
 ## querySelector [#querySelector]
