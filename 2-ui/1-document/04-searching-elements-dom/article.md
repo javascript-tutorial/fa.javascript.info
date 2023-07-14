@@ -111,17 +111,19 @@ pseudo-classها در css selector مثل `:hover` و `:active`  `document.query
 
 ## querySelector [#querySelector]
 
-The call to `elem.querySelector(css)` returns the first element for the given CSS selector.
+فراخوانی `elem.querySelector(css)` اولین element را برای css selector داده شده برمی‌گرداند.
 
-In other words, the result is the same as `elem.querySelectorAll(css)[0]`, but the latter is looking for *all* elements and picking one, while `elem.querySelector` just looks for one. So it's faster and also shorter to write.
+
+به عبارت دیگر، نتیجه با `elem.querySelectorAll(css)[0]` یکسان است اما دومی به دنبال *تمام* elementها است و یکی را انتخاب می‌کند در حالی که `elem.querySelector` فقط به دنبال یکی است. پس هم سریع‌تر است و هم برای نوشتن کوتاه‌تر است. 
+
 
 ## matches
 
-Previous methods were searching the DOM.
+روش‌های قبلی در DOM جستجو می‌کردند. 
 
-The [elem.matches(css)](https://dom.spec.whatwg.org/#dom-element-matches) does not look for anything, it merely checks if `elem` matches the given CSS-selector. It returns `true` or `false`.
+عبارت [elem.matches(css)](https://dom.spec.whatwg.org/#dom-element-matches) در جستجوی چیزی نیست، فقط چک می‌کند که element با CSS-selector داده شده مطابقت دارد یا نه و `true` یا `false` برمی‌گرداند. 
 
-The method comes in handy when we are iterating over elements (like in an array or something) and trying to filter out those that interest us.
+این روش زمانی به کار می‌آید که می‌خواهیم روی elementهایی (مثل آرایه یا همچین چیزی) iterate کنیم و آن‌هایی که مطلوب هستند را فیلتر کنیم. 
 
 For instance:
 
@@ -130,12 +132,14 @@ For instance:
 <a href="http://ya.ru">...</a>
 
 <script>
-  // can be any collection instead of document.body.children
+  // باشد document.body.children می‌تواند هر مجموعه‌ای به جای 
   for (let elem of document.body.children) {
 *!*
     if (elem.matches('a[href$="zip"]')) {
 */!*
       alert("The archive reference: " + elem.href );
+      alert("این آرشیو ارجاع می‌دهد به : " + elem.href );
+      
     }
   }
 </script>
