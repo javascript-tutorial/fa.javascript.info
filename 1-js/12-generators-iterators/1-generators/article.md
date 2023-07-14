@@ -211,11 +211,8 @@ let range = {
 alert([...range]); // 1,2,3,4,5
 ```
 
-
 دلیل کارکرد روش بالا این است که  `()range[Symbol.iterator]` دقیقا همان چیزی را برمی‌گرداند که `for..of` انتظار دارد:
-
 - متود `next` موجود است.
-
 - مقدار بازگشتی به فرم `{value:..., done:true/false}` است.
 
 این کارکرد یک اتفاق نیست، generatorها با توجه به  iterator ها، برای پیاده‌سازی ساده‌تر آن‌ها به زبان اضافه شده‌اند.
@@ -223,11 +220,10 @@ alert([...range]); // 1,2,3,4,5
 روشی که از generator استفاده می‌کند بسیار مختصرتر از روش اول `range` است و همان کارکرد را دارد.
 
 ```smart header="generatorها ممکن است تا ابد مقدار تولید کنند"
-
 در مثال بالا، یک دنباله کران‌دار تولید کردیم، ولی می‌توان به همان روش یک دنباله بی‌کران از مقادیر را ساخت. مثل یک دنباله بی‌پایان از اعداد شبه تصادفی.
 
+چنین کاربردی قطعا به یک `break` یا `return` در `for..of` نیاز دارد. در غیر این صورت حلقه تا ابد تکرار می‌شود.
 ```
-
 
 ## ترکیب generatorها
 
@@ -236,18 +232,12 @@ alert([...range]); // 1,2,3,4,5
 برای مثال یک generator داریم که یک دنباله از اعداد را تولید می‌کند:
 
 ```js
-
 function* generateSequence(start, end) {
-
   for (let i = start; i <= end; i++) yield i;
-
 }
-
 ```
 
-
 اکنون می‎‌خواهیم از آن به نحوی بازاستفاده کنیم که دنباله پیچیده‌تری بتوان ایجاد کرد:
-
 - ابتدا ارقام از `0` تا `9`(با کد کاراکتر 48 تا 57)
 -  سپس حروف بزرگ از `A` تا `Z`(با کد کاراکتر 65 تا 90)
 -  سپس حروف کوچک از `a` تا `z`(با کد کاراکتر 97 تا 122)
@@ -261,29 +251,21 @@ function* generateSequence(start, end) {
 generator ترکیب شده:
 
 ```js run
-
 function* generateSequence(start, end) {
-
   for (let i = start; i <= end; i++) yield i;
-
 }
 
 function* generatePasswordCodes() {
 
 \*!*
-
   // 0..9
-
   yield* generateSequence(48, 57);
 
   // A..Z
-
   yield* generateSequence(65, 90);
 
   // a..z
-
   yield* generateSequence(97, 122);
-
 \*/!*
 
 }
@@ -291,44 +273,32 @@ function* generatePasswordCodes() {
 let str = '';
 
 for(let code of generatePasswordCodes()) {
-
   str += String.fromCharCode(code);
-
 }
 
 alert(str); // 0..9A..Za..z
-
 ```
-
 
 عبارت `*yield` اجرا را به یک generator دیگر می‌سپارد(اصطلاحا `delegate` می‌کند). بدان معنا که `yeild* gen` روی `gen` ایتریت می‌کند و به صورت درونی مقدار yield شده را به بیرون هدایت می‌کند؛ انگار که کلا مقدار توسط generator دوم تولید شده است.
 
 اگر از generatorها به صورت inline و تو در تو استفاده کنیم نیز به همان نتیجه می‌رسیم:
 
 ```js run
-
 function* generateSequence(start, end) {
-
   for (let i = start; i <= end; i++) yield i;
-
 }
 
 function* generateAlphaNum() {
 
 \*!*
-
   // yield* generateSequence(48, 57);
-
   for (let i = 48; i <= 57; i++) yield i;
 
   // yield* generateSequence(65, 90);
-
   for (let i = 65; i <= 90; i++) yield i;
 
   // yield* generateSequence(97, 122);
-
   for (let i = 97; i <= 122; i++) yield i;
-
 \*/!*
 
 }
@@ -336,15 +306,11 @@ function* generateAlphaNum() {
 let str = '';
 
 for(let code of generateAlphaNum()) {
-
   str += String.fromCharCode(code);
-
 }
 
 alert(str); // 0..9A..Za..z
-
 ```
-
 
 ترکیب generatorها یک راه معقول برای استفاده از جریان یک generator درون دیگری است و از حافظه بیشتر برای ذخیره مقادیر استفاده نمی‌کند.
 
@@ -359,19 +325,13 @@ alert(str); // 0..9A..Za..z
 برای مثال:
 
 ```js run
-
 function* gen() {
-
 \*!*
-
   // یک سوال را به کد بیرونی برگردانید و منتظر جواب شوید
-
   let result = yield "2 + 2 = ?"; // (*)
-
 \*/!*
 
   alert(result);
-
 }
 
 let generator = gen();
@@ -379,16 +339,12 @@ let generator = gen();
 let question = generator.next().value; // <-- مقدار را بر می‌گرداند yield
 
 generator.next(4); // --> برمی‌گرداند generator نتیجه را به
-
 ```
-
 
 ![](genYield2.svg)
 
 1. نمی‌توان اولین بار که `()generator.next` صدا می‌شود به آن argument داد و در صورت داده شدن، نادید گرفته خواهد شد. پس از صدا شدن متود، اجرای  generator شروع می‌شود و مقدار اولین yield را برمی‌گرداند. اکنون اجرای generator متوقف شده و در خط `*` مانده است.
-
 2. سپس مانند تصویر بالا، نتیجه yield اول در متغیر `question` ذخیره می‌شود.
-
 3. با اجرای `generator.next(4)`، اجرای generator دوباره شروع می‌‎شود و مقدار متغیر `result` برابر `4` می‌شود.
 
 توجه داشته باشید که نیاز نیست کد بیرونی فورا `(4)next` را صدا کند؛ اگر طول بکشد، generator صبر خواهد کرد.
@@ -396,22 +352,16 @@ generator.next(4); // --> برمی‌گرداند generator نتیجه را به
 برای مثال:
 
 ```js
-
 // پس از تاخیری دوباره شروع می‌شود generator اجرای
-
 setTimeout(() => generator.next(4), 1000);
-
 ```
-
 
 همان‌طور که مشاهده می‌شود بر خلاف توابع معمولی، یک generator و کد صدا زننده‌اش می‌توانند با هم مقادیر را از طریق `next/yield` رد و بدل کنند.
 
 یک مثال دیگر:
 
 ```js run
-
 function* gen() {
-
   let ask1 = yield "2 + 2 = ?";
 
   alert(ask1); // 4
@@ -419,7 +369,6 @@ function* gen() {
   let ask2 = yield "3 * 3 = ?";
 
   alert(ask2); // 9
-
 }
 
 let generator = gen();
@@ -429,22 +378,16 @@ alert(generator.next().value); // "2 + 2 = ?"
 alert(generator.next(4).value); // "3 * 3 = ?"
 
 alert(generator.next(9).done); // true
-
 ```
-
 
 تصویر اجرا:
 
 ![](genYield2-2.svg)
 
 1. اولین `()next`اجرای generator را آغاز می‌کند تا به اولین yield برسد.
-
 2. نتیجه به کد بیرونی برگردانده می‌شود.
-
 3. صدا زده شدن `next(4)` مقدار `4` را به generator به عنوان نتیجه اولین yield باز می‌گرداند و اجرای generator را دوباره شروع می‌کند.
-
 4. به yield دوم می‌رسد و مقدار آن نتیجه دومین بار صدا شدن `next` است.
-
 5. صدا زده شدن `next(9)`مقدار `9` را به عنوان نتیجه دومین yield برمی‌گرداند و اجرای generator دوباره شروع می‌شود تا به انتهای تابع، `done:true` برسد.
 
 درست مثل بازی پینگ پنگ؛ `(value)next` یک مقدار را به generator پاس می‌دهد که نتیجه yield فعلی می‌شود و سپس نتیجه yield بعدی به بیرون پاس داده می‌شود.
@@ -460,21 +403,14 @@ alert(generator.next(9).done); // true
 برای مثال اینجا yield شدن "2 + 2 = ?" باعث ارور می‌شود:
 
 ```js run
-
 function* gen() {
-
   try {
-
     let result = yield "2 + 2 = ?"; // (1)
 
     alert("اجرا به اینجا نمی‌رسد چون خط بالا ارور پرتاب کرده است");
-
   } catch(e) {
-
     alert(e); // ارور را نشان می‌دهد
-
   }
-
 }
 
 let generator = gen();
@@ -482,13 +418,9 @@ let generator = gen();
 let question = generator.next().value;
 
 \*!*
-
 generator.throw(new Error("پاسخ در دیتابیس من نیست")); // (2)
-
 \*/!*
-
 ```
-
 
 ارور پرتاب شده به داخل generator در خط `2` باعث exception در خط `1` دارای yield می‌شود که در مثال بالا توسط `try..catch` گرفته شده و نمایش داده می‌شود.
 
@@ -497,11 +429,8 @@ generator.throw(new Error("پاسخ در دیتابیس من نیست")); // (2)
 خط فعلی کد صدا زننده، خط دارای `generator.throw` با لیبل `2` است. پس خطا را این گونه هم می‌توان گرفت:
 
 ```js run
-
 function* generate() {
-
   let result = yield "2 + 2 = ?"; // خطا در این خط
-
 }
 
 let generator = generate();
@@ -509,21 +438,13 @@ let generator = generate();
 let question = generator.next().value;
 
 \*!*
-
 try {
-
   generator.throw(new Error("پاسخ در دیتابیس من نیست"));
-
 } catch(e) {
-
   alert(e); // ارور را نمایش می‌دهد
-
 }
-
 \*/!*
-
 ```
-
 
 اگر ارور را catch نکنیم، در صورت وجود کد بیرونی اجرا به آن منتقل می‌شود و اگر آن‌جا نیز هندل نشده باشد، اجرای کد با خطا پایان می‌پذیرد.
 
@@ -532,27 +453,18 @@ try {
 این متود اجرای generator را به اتمام می‌رساند و مقدار argument را به عنوان نتیجه برمی‌گرداند.
 
 ```js
-
 function* gen() {
-
   yield 1;
-
   yield 2;
-
   yield 3;
-
 }
 
 const g = gen();
 
 g.next(); // { value: 1, done: false }
-
 g.return("foo"); // { value: "foo", done: true }
-
 g.next(); // { value: undefined, done: true }
-
 ```
-
 
 اگر در یک generatorخاتمه یافته دوباره از `()generator.return`استفاده کنیم، همان مقدار را دوباره برمی‌گرداند.([MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator/return)).
 
@@ -561,9 +473,7 @@ g.next(); // { value: undefined, done: true }
 ## خلاصه
 
 - generatorها توسط تابع generator تولید می‌شوند. `{...} (...) function* f`
-
 - عملگر yield (فقط) در داخل generatorها وجود دارد.
-
 - کد بیرونی و generator ممکن است توسط `next/yield` با هم نتایج را رد و بدل کنند.
 
 در جاوااسکریپت مدرن، generatorها کم استفاده می‌شوند. اما گاهی اوقات می‌توانند مفید باشند؛ رد و بدل کردن داده با کد صدا زننده، یک قابلیت منحصر بفرد است. هم‌چنین برای ساخت iterableها هم بکار می‌روند.
