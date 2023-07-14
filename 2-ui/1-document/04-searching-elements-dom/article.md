@@ -56,23 +56,25 @@
 ```
 
 ```warn header="Please don't use id-named global variables to access elements"
-این رفتار در [in the specification](https://html.spec.whatwg.org/multipage/window-object.html#named-access-on-the-window-object) توضیح داده شده است اما به طور معمول برای سازگاری پشتیبانی می‌شود.
+.توضیح داده شده است اما به طور معمول برای سازگاری پشتیبانی می‌شود [in the specification](https://html.spec.whatwg.org/multipage/window-object.html#named-access-on-the-window-object) این رفتار در
 
-مرورگر تلاش می‌کند که با ترکیب namespaceهای JS و DOM به ما کمک کند. این کار برای scriptهای ساده‌ای که به صورت inline در HTML نوشته شده اند مناسب است،‌اما به طور کلی ایده‌ی خوبی نیست. ممکن است تعارض‌‌هایی در نام‌گذاری به وجود آورد. همچنین، وقتی کسی کد JS را می‌خواند و به HTML دسترسی ندارد، مشخص نیست که متغیر از کجا می‌آید. 
+.دسترسی ندارد، مشخص نیست که متغیر از کجا می‌آید HTML را می‌خواند و به JS نوشته شده‌اند مناسب است اما به طور کلی ایده‌ی خوبی نیست و ممکن است تعارض‌هایی در نام‌گذاری به وجود آورد و همچنین وقتی کسی کد HTML در inline های ساده‌ای که به صورتscript به ما کمک کند. این کار برای DOM و JS هایnamespace مرورگر تلاش می‌کند که با ترکیب 
 
-اینحا در این آموزش وقتی مشخص است که element از کجا آمده است، ما برای کوتاهی و اختصار از `id` استفاده می‌کنیم تا به طور مستقیم به یک element ارجاع دهیم. 
+.ارجاع دهیم element استفاده می‌کنیم تا به طور مستقیم به یک `id` از کجا آمده است ما برای کوتاهی و اختصار از elemnt اینجا در این آموزش وقتی مشخص است که
 
 ترجیح داده می‌شودdocument.getElementById`  در زندگی واقعی 
 ```
 
-```smart header="The `id` must be unique"
-The `id` must be unique. There can be only one element in the document with the given `id`.
+``` smart header=" باید منحصر به فرد باشد `id`"
 
-If there are multiple elements with the same `id`, then the behavior of methods that use it is unpredictable, e.g. `document.getElementById` may return any of such elements at random. So please stick to the rule and keep `id` unique.
+فقط یک element با `id` داده شده می‌تواند در document وجود داشته باشد.
+
+
+اگر چند element با یک `id` مشخص داشته باشیم، رفتار methodای که از آن استفاده می‌کند می‌تواند غیرقابل پیش‌بینی باشد. برای مثال `document.getElementById` ممکن است هر یک از آن elementها را به صورت تصادفی برگرداند. پس لطفا به این قانون توجه داشته باشید و `id` را منحصر به فرد نگه دارید. 
 ```
 
-```warn header="Only `document.getElementById`, not `anyElem.getElementById`"
-The method `getElementById` can be called only on `document` object. It looks for the given `id` in the whole document.
+```warn header=" فقط `document.getElementById`, نه `anyElem.getElementById`"
+.داده شده می‌گردد `id` به دنبال document صدا بزنیم. آن در تمام document را روی اشیای `getElementById‍‍` ما تنها می‌توانیم
 ```
 
 ## querySelectorAll [#querySelectorAll]
