@@ -147,7 +147,7 @@ For instance:
 
 ## closest
 
-*والدهای* یک element عبارت‌اند از: پدر، پدر پدر، پدر آن و ... . این والدها با یکدیگر زنجیره‌ای از والدها را از یک عنصر به سمت بالا تشکیل می‌دهند. 
+*والدهای* یک element عبارت‌اند از: پدر، پدر پدر، پدر آن و ... . این والدها با یکدیگر زنجیره‌ای از والدها را از یک element به سمت بالا تشکیل می‌دهند. 
 
 متد `elem.closest(css)` به دنبال نزدیک‌ترین والدی است که با CSS-selector تطابق دارد. خود `elem` هم شامل این جستجو می‌شود. 
 
@@ -177,38 +177,41 @@ For instance:
 
 ## getElementsBy*
 
-There are also other methods to look for nodes by a tag, class, etc.
+همچنین روش‌های دیگری برای جستجو برای یک node با tag، class و ... وجود دارد. 
 
-Today, they are mostly history, as `querySelector` is more powerful and shorter to write.
+امروزه آن‌ها بیشتر تاریخچه هستند چون `querySelector` قدرتمندتر است و برای نوشتن سریع‌تر است. 
 
-So here we cover them mainly for completeness, while you can still find them in the old scripts.
+پس اینجا ما بیشتر آن‌ها را برای کامل بودن پوشش می‌دهیم اما هنوز می‌توانید آن‌ها را در scriptهای قدیمی پیدا کنید. 
 
-- `elem.getElementsByTagName(tag)` looks for elements with the given tag and returns the collection of them. The `tag` parameter can also be a star `"*"` for "any tags".
-- `elem.getElementsByClassName(className)` returns elements that have the given CSS class.
-- `document.getElementsByName(name)` returns elements with the given `name` attribute, document-wide. Very rarely used.
+- عبارت `elem.getElementsByTagName(tag)` به دنبال elementهایی با tag داده شده است و مجموعه‌ی آن‌ها را برمی‌گرداند. پارامتر `tag` همچنین می‌تواند یک ستاره باشد `"*"` به معنای تمام tag ها.
 
-For instance:
+- عبارت `elem.getElementsByClassName(className)` تمام elementهایی که کلاس CSS داده شده را دارند برمی‌گرداند. 
+
+- عبارت `document.getElementsByName(name)`تمام elementهایی که `name` به عنوان attribute به آن‌ها داده شده است را برمی‌گرداند و بسیار کم استفاده می‌شود. 
+
+برای مثال:‌
 ```js
-// get all divs in the document
+
+//تمام div های درون document را می‌گیرد.
 let divs = document.getElementsByTagName('div');
 ```
 
-Let's find all `input` tags inside the table:
+بیایید تمام tagهای `input` درون این table را پیدا کنیم:‌
 
 ```html run height=50
 <table id="table">
   <tr>
-    <td>Your age:</td>
+    <td>سن شما:</td>
 
     <td>
       <label>
-        <input type="radio" name="age" value="young" checked> less than 18
+        <input type="radio" name="age" value="young" checked> کمتر از 18
       </label>
       <label>
-        <input type="radio" name="age" value="mature"> from 18 to 50
+        <input type="radio" name="age" value="mature"> از 18 تا 50
       </label>
       <label>
-        <input type="radio" name="age" value="senior"> more than 60
+        <input type="radio" name="age" value="senior"> بیشتر از 60
       </label>
     </td>
   </tr>
