@@ -11,48 +11,30 @@
 ظاهر یک تابع generator به صورت زیر است:
 
 ```js
-
 function* generateSequence() {
-
   yield 1;
-
   yield 2;
-
   return 3;
-
 }
-
 ```
-
 
 توابع generator با توابع معمول، رفتار متفاوتی دارند. زمانی که این توابع صدا می‌شوند، بدنه آن‌ها اجرا نمی‌شود؛ در عوض، یک آبجکت خاص به نام "generator object" برمی‌گردانند که به وسیله آن اجرای تابع را می‌توان کنترل کرد.
 
 برای مثال:
 
 ```js run
-
 function* generateSequence() {
-
   yield 1;
-
   yield 2;
-
   return 3;
-
 }
 
 //برمی‌گرداند generator یک آبجکت generator تابع
-
 let generator = generateSequence();
-
 \*!*
-
 alert(generator); // [object Generator]
-
 \*/!*
-
 ```
-
 
 اجرای بدنه تابع هنوز شروع نشده است:
 
@@ -61,37 +43,26 @@ alert(generator); // [object Generator]
 متد اصلی یک آبجکت generator متد `()next` است. هنگامی که صدا می‌شود، بدنه تابع تا اولین `yield value` اجرا می‌شود(`value` می‌تواند حذف شود که در این صورت `undefined` است.)؛ سپس اجرای تابع متوقف می‌شود و مقدار yield شده برگرداننده می‌شود.
 
 مقدار برگردانده شده توسط متود `next` همواره یک آبجکت با 2 پراپرتی است:
-
 - `value`: مقدار برگرداننده شده توسط `yield`.
-
 - `done`: یک Boolean است که در صورت اتمام بدنه تابع مقدار true و در غیر این صورت مقدار false دارد.
 
 برای مثال، در کد زیر، یک آبجکت generator ایجاد شده و اولین مقدار `yield` شده توسط آن گرفته شده است:
 
 ```js run
-
 function* generateSequence() {
-
   yield 1;
-
   yield 2;
-
   return 3;
-
 }
 
 let generator = generateSequence();
 
 \*!*
-
 let one = generator.next();
-
 \*/!*
 
 alert(JSON.stringify(one)); // {value: 1, done: false}
-
 ```
-
 
 اکنون فقط مقدار اول را گرفته‌ایم و اجرای تابع در خط دوم متوقف شده است:
 
@@ -100,26 +71,20 @@ alert(JSON.stringify(one)); // {value: 1, done: false}
 اکنون اگر دوباره `()generator.next` را صدا بزنیم اجرای تابع شروع می‌شود و تا `yield` بعدی و برگردانده شدن مقدار ادامه می‌یابد:
 
 ```js
-
 let two = generator.next();
 
 alert(JSON.stringify(two)); // {value: 2, done: false}
-
 ```
-
 
 ![](generateSequence-3.svg)
 
 و اگر برای بار سوم آن را صدا بزنیم، اجرای تابع به `return` می‌رسد و تمام می‌شود:
 
 ```js
-
 let three = generator.next();
 
 alert(JSON.stringify(three)); // {value: 3, *!*done: true*/!*}
-
 ```
-
 
 ![](generateSequence-4.svg)
 
@@ -128,11 +93,9 @@ alert(JSON.stringify(three)); // {value: 3, *!*done: true*/!*}
 دیگر صدا کردن `()generator.next` منطقی نیست. اگر این کار را انجام دهیم، آبجکت یکسانی با `done:true` برگردانده می‌شود.
 
 ```smart header="`function* f(…)`یا`function *f(…)`؟"
-
 هر دو سینتکس صحیح هستند.
 
 ولی معمولا اولی ترجیح داده می‌شود؛ چون `*` نوع تابع و نه نام تابع را مشخص می‌کند.
-
 ````
 
 ## generatorها iterable هستند.
@@ -142,25 +105,17 @@ alert(JSON.stringify(three)); // {value: 3, *!*done: true*/!*}
 با استفاد از `for..of` می‌توان از `value` آن‌ها استفاده کرد:
 
 ```js run
-
 function* generateSequence() {
-
   yield 1;
-
   yield 2;
-
   return 3;
-
 }
 
 let generator = generateSequence();
 
 for(let value of generator) {
-
   alert(value); // ابتدا 1 و سپس 2
-
 }
-
 ````
 
 این شیوه از صدا کردن `next` تمیزتر است؛ این‌گونه فکر نمی‌کنید؟
@@ -168,53 +123,36 @@ for(let value of generator) {
 ...اما دقت کنید: مثال بالا ابتدا `1` و سپس `2` را نشان داد؛ خبری از `3` نیست!
 
 علت این اتفاق این است که `for..of` آخرین مقدار را هنگامی که `done:true` است در نظر نمی‌گیرد. هنگام برگرداندن آخرین مقدار با `return`، بر خلاف `done:true`، `yield` است. در نتیجه برای نشان دادن تمام مقادیر باید آن‌ها را با `yield` برگردانیم:
+
 ```js run
-
 function* generateSequence() {
-
   yield 1;
-
   yield 2;
-
 \*!*
-
   yield 3;
-
 \*/!*
-
 }
 
 let generator = generateSequence();
 
 for(let value of generator) {
-
   alert(value); // ابتدا 1 سپس 2 و بعد از آن 3
-
 }
-
 ```
-
 
 از آنجایی که generatorها iterable هستند، از تمام functionality آن‌ها نیز برای generatorها می‌توان استفاده کرد؛ مثل spread syntax `...`:
 
 ```js run
-
 function* generateSequence() {
-
   yield 1;
-
   yield 2;
-
   yield 3;
-
 }
 
 let sequence = [0, ...generateSequence()];
 
 alert(sequence); // 0, 1, 2, 3
-
 ```
-
 
 در کد بالا، `()generateSequence...`، باعث می‌شود آبجکت generator که iterable هم هست به آرایه‌ای از اعداد تبدیل شود.(درباره spread syntax در چپتر [](info:rest-parameters-spread#spread-syntax) بیشتر بخوانید.)
 
@@ -225,85 +163,52 @@ alert(sequence); // 0, 1, 2, 3
 کد آن به شرح زیر بود:
 
 ```js run
-
 let range = {
-
   from: 1,
-
   to: 5,
 
   // در ابتدا این متود را فقط یک بار صدا می‌کند for..of range
-
   [Symbol.iterator]() {
-
     // این، آبجکت ایتریتور را باز می‌گرداند:
-
 	 // فقط با آن آبجکت کار می‌کند و از آن مقادیر بعدی را می‌خواند for..of سپس
     return {
-
       current: this.from,
-
       last: this.to,
 
       // صدا می‌شود for..of توسط iteration در هر next()
-
       next() {
-
-        // باید مقدار را به عنوان یک آبجکت برگرداند:
-        // {value: ..., done: ...}
-
+        // {value: ..., done: ...}:باید مقدار را به عنوان یک آبجکت برگرداند
         if (this.current <= this.last) {
-
           return { done: false, value: this.current++ };
-
         } else {
-
           return { done: true };
-
         }
-
       },
-
     };
-
   },
-
 };
 
 // برمی‌گرداند range.to تا range.from اعداد را از range روی iteration
 alert([...range]); // 1,2,3,4,5
-
 ```
-
 
 می‌توان از یک تابع generator برای iteration به جای Symbol.iterator استفاده کرد.
 
 این همان `range` اما بسیار جمع و جور تر است:
 
 ```js run
-
 let range = {
-
   from: 1,
-
   to: 5,
 
-  \*[Symbol.iterator]() {
-
-    //[Symbol.iterator] نسخه جمع و جور : function*()
-
+  *[Symbol.iterator]() {//[Symbol.iterator] نسخه جمع و جور : function*()
     for (let value = this.from; value <= this.to; value++) {
-
       yield value;
-
     }
-
   },
-
 };
 
 alert([...range]); // 1,2,3,4,5
-
 ```
 
 
