@@ -31,9 +31,9 @@ function* generateSequence() {
 
 //برمی‌گرداند generator یک شیء generator تابع
 let generator = generateSequence();
-\*!*
+*!*
 alert(generator); // [object Generator]
-\*/!*
+*/!*
 ```
 
 اجرای بدنه تابع هنوز شروع نشده است:
@@ -57,9 +57,9 @@ function* generateSequence() {
 
 let generator = generateSequence();
 
-\*!*
+*!*
 let one = generator.next();
-\*/!*
+*/!*
 
 alert(JSON.stringify(one)); // {value: 1, done: false}
 ```
@@ -128,9 +128,9 @@ for(let value of generator) {
 function* generateSequence() {
   yield 1;
   yield 2;
-\*!*
+*!*
   yield 3;
-\*/!*
+*/!*
 }
 
 let generator = generateSequence();
@@ -257,7 +257,7 @@ function* generateSequence(start, end) {
 
 function* generatePasswordCodes() {
 
-\*!*
+*!*
   // 0..9
   yield* generateSequence(48, 57);
 
@@ -266,7 +266,7 @@ function* generatePasswordCodes() {
 
   // a..z
   yield* generateSequence(97, 122);
-\*/!*
+*/!*
 
 }
 
@@ -290,7 +290,7 @@ function* generateSequence(start, end) {
 
 function* generateAlphaNum() {
 
-\*!*
+*!*
   // yield* generateSequence(48, 57);
   for (let i = 48; i <= 57; i++) yield i;
 
@@ -299,7 +299,7 @@ function* generateAlphaNum() {
 
   // yield* generateSequence(97, 122);
   for (let i = 97; i <= 122; i++) yield i;
-\*/!*
+*/!*
 
 }
 
@@ -326,10 +326,10 @@ alert(str); // 0..9A..Za..z
 
 ```js run
 function* gen() {
-\*!*
+*!*
   // یک سوال را به کد بیرونی برگردانید و منتظر جواب شوید
   let result = yield "2 + 2 = ?"; // (*)
-\*/!*
+*/!*
 
   alert(result);
 }
@@ -417,9 +417,9 @@ let generator = gen();
 
 let question = generator.next().value;
 
-\*!*
+*!*
 generator.throw(new Error("پاسخ در دیتابیس من نیست")); // (2)
-\*/!*
+*/!*
 ```
 
 ارور پرتاب شده به داخل generator در خط `2` باعث exception در خط `1` دارای yield می‌شود که در مثال بالا توسط `try..catch` گرفته شده و نمایش داده می‌شود.
@@ -437,13 +437,13 @@ let generator = generate();
 
 let question = generator.next().value;
 
-\*!*
+*!*
 try {
   generator.throw(new Error("پاسخ در دیتابیس من نیست"));
 } catch(e) {
   alert(e); // ارور را نمایش می‌دهد
 }
-\*/!*
+*/!*
 ```
 
 اگر ارور را catch نکنیم، در صورت وجود کد بیرونی اجرا به آن منتقل می‌شود و اگر آن‌جا نیز هندل نشده باشد، اجرای کد با خطا پایان می‌پذیرد.
