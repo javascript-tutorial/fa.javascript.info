@@ -382,10 +382,12 @@ document.getElementsByTagName('input')[0].value = 5;
 .های قدیمی یافت شود script هم گاهی به صورت پراکنده می‌تواند مفید باشد یا در `getElement(s)By` شده است، اما `querySelectorAll` و `querySelector` تا اینجا بیشترین استفاده از
 
 
-Besides that:
+علاوه بر آن:
 
-- There is `elem.matches(css)` to check if `elem` matches the given CSS selector.
-- There is `elem.closest(css)` to look for the nearest ancestor that matches the given CSS-selector. The `elem` itself is also checked.
+.تطابق دارد یا نه CSS-selector با elem برای این استفاده می‌شود که چک کنیم `elem.matches(css)` از عبارت -
 
-And let's mention one more method here to check for the child-parent relationship, as it's sometimes useful:
--  `elemA.contains(elemB)` returns true if `elemB` is inside `elemA` (a descendant of `elemA`) or when `elemA==elemB`.
+.هم چک می‌شود `elem` داده شده تطابق دارند. خود CSS-selector برای جستجوی نزدیک‌ترین والدهایی است که با `elem.closest(css)` عبارت - 
+
+
+و بیایید اینجا یک روش دیگر برای بررسی رابطه والد و فرزند را چک کنیم،‌چون بعضی وقت‌ها مفید است: 
+.را برمی‌گرداند true مثدار `elemA.contains(elemB)` باشد، عبارت `elemA==elemB` یا وقتی که (`elemA` از فرزندان) باشد `elemA` داخل `elemB` اگر -
