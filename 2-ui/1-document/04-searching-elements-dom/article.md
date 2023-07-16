@@ -273,14 +273,17 @@ document.getElementsByTagName('input')[0].value = 5;
 </script>
 ```
 
-## Live collections
+## مجموعه‌های زنده
 
-All methods `"getElementsBy*"` return a *live* collection. Such collections always reflect the current state of the document and "auto-update" when it changes.
+.می‌شوند update را منعکس می‌کنند و وقتی تغییر می‌کند، به صورت خودکار document یک مجموعه‌ی زنده برمی‌گردانند. چنین مجموعه‌هایی همیشه وضعیت فعلی `"getElementsBy*"` تمام متدهای
 
-In the example below, there are two scripts.
+.داریم script در مثال زیر دو
 
-1. The first one creates a reference to the collection of `<div>`. As of now, its length is `1`.
-2. The second scripts runs after the browser meets one more `<div>`, so its length is `2`.
+
+.ایجاد می‌کند در حال حاضر طول آن `1` است  `<div>` اولی ارجاعی به مجموعه‌ی  
+
+دیگر را ببیند پس طول آن `2` است `<div>` زمانی اجرا می‌شود که مرورگر یک script دومین 
+
 
 ```html run
 <div>First div</div>
@@ -299,9 +302,9 @@ In the example below, there are two scripts.
 </script>
 ```
 
-In contrast, `querySelectorAll` returns a *static* collection. It's like a fixed array of elements.
+.ها استelement را برمی‌گرداند که شبیه یک آرایه‌ی ثابت static یک مجموعه‌ی `querySelectorAll` ،متقابلا
 
-If we use it instead, then both scripts output `1`:
+.خروجی `1` را می‌دهند script اگر به جایش از آن استفاده کنیم، هر دو
 
 
 ```html run
