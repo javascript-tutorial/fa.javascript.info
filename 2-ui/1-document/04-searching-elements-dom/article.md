@@ -236,39 +236,40 @@ let divs = document.getElementsByTagName('div');
 حرف `"s"` در `getElementById` وجود ندارد زیرا یک element تک را برمی‌گرداند. اما `getElementsByTagName` مجموعه‌ای از عناصر را برمی‌گرداند،‌ پس یک `"s"` در آن هست. 
 ```
 
-````warn header="It returns a collection, not an element!"
-Another widespread novice mistake is to write:
+````warn header="element یک مجموعه را برمی‌گرداند، نه یک"
+یک اشتباه رایج دیگر تازه‌کارانه این است که بنویسیم:
 
 ```js
-// doesn't work
+// کار نمی‌کند
 document.getElementsByTagName('input').value = 5;
 ```
 
-That won't work, because it takes a *collection* of inputs and assigns the value to it rather than to elements inside it.
+این کار نمی‌کند،‌چون یک *مجموعه* از ورودی‌ها را می‌گیرد و مقدار را به جای element درون آن، به آن انتساب می‌دهد.
 
-We should either iterate over the collection or get an element by its index, and then assign, like this:
+ما باید یا روی آن مجموعه iterate کنیم یا یک element را با عنصر آن بگیریم و بعد به آن انتساب دهیم. مثل این:‌
 
 ```js
-// should work (if there's an input)
+// باید کار کند (اگر یک ورودی وجود داشته باشد)
 document.getElementsByTagName('input')[0].value = 5;
 ```
 ````
 
-Looking for `.article` elements:
+`.article` هایelement جستجو برای
 
 ```html run height=50
 <form name="my-form">
-  <div class="article">Article</div>
-  <div class="long article">Long article</div>
+  <div class="article">مقاله</div>
+  <div class="long article">مقاله طولانی</div>
 </form>
 
 <script>
-  // find by name attribute
+
+// name پیدا کردن با استفاده از ویژگی
   let form = document.getElementsByName('my-form')[0];
 
-  // find by class inside the form
+// form داخل class پیدا کردن با استفاده از
   let articles = form.getElementsByClassName('article');
-  alert(articles.length); // 2, found two elements with class "article"
+  alert(articles.length); // 2, پیدا شد article با کلاس element 2
 </script>
 ```
 
