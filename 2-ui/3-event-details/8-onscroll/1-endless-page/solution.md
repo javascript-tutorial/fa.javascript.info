@@ -1,6 +1,6 @@
 هسته راه‌حل تابعی است که تاریخ های بیشتر را  هنگامی که در انتهای صفحه هستیم به صفحه اضافه می‌کند (یا در واقعیت بارگذاری اجناس بیشتر).
 
-ما می‌توانیم بلافاصله آن را call کنیم و به عنوان هندلر `window.onscroll` اضافه‌اش کنیم.
+ما می‌توانیم بلافاصله آن را فراخوانی کنیم و به عنوان هندلر `window.onscroll` اضافه‌اش کنیم.
 
 مهم‌ترین سوال این است که: "چگونه تشخیص دهیم که صفحه به پایین اسکرول شده است؟"
 
@@ -8,7 +8,7 @@
 
 داکیومنت در تگ `<html>` نمایش داده می‌شود که آن `document.documentElement` است.
 
-ما می‌توانیم مختصات مروبط به window کل داکیومنت را به صورت `()document.documentElement.getBoundingClientRect` دریافت کنیم. پراپرتی `bottom`، مختصات مربوط به window document bottom خواهد بود.
+ما می‌توانیم مختصات مروبط به window کل داکیومنت را به صورت `()document.documentElement.getBoundingClientRect` دریافت کنیم. ویژگی `bottom`، مختصات مربوط به window document bottom خواهد بود.
 
 برای مثال اگر ارتفاع کل داکیومنت `2000px` HTML است سپس:
 
@@ -31,7 +31,7 @@ document.documentElement.getBoundingClientRect().top = -500
 document.documentElement.getBoundingClientRect().bottom = 1500
 ```
 
-هنگامی که ما تا انها اسکرول می‌کنیم فرض می‌کنیم ارتفاع `600px` window است:
+هنگامی که ما تا انتها اسکرول می‌کنیم فرض می‌کنیم ارتفاع `600px` window است:
 
 ```js
 // document top is above the window 1400px
