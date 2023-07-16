@@ -286,14 +286,14 @@ document.getElementsByTagName('input')[0].value = 5;
 
 
 ```html run
-<div>First div</div>
+<div>div اول</div>
 
 <script>
   let divs = document.getElementsByTagName('div');
   alert(divs.length); // 1
 </script>
 
-<div>Second div</div>
+<div>div دوم</div>
 
 <script>
 *!*
@@ -308,7 +308,7 @@ document.getElementsByTagName('input')[0].value = 5;
 
 
 ```html run
-<div>First div</div>
+<div>اول div</div>
 
 <script>
   let divs = document.querySelectorAll('div');
@@ -324,19 +324,19 @@ document.getElementsByTagName('input')[0].value = 5;
 </script>
 ```
 
-Now we can easily see the difference. The static collection did not increase after the appearance of a new `div` in the document.
+.افزایش نیافته است static مجموعه‌ی ،document جدید در div حالا می‌توانیم تفاوت را به راحتی ببینیم. بعد از ایجاد شدن یک
 
-## Summary
+## خلاصه
 
-There are 6 main methods to search for nodes in DOM:
+.وجود دارد DOM ها در node شش روش اصلی برای جستجو در
 
 <table>
 <thead>
 <tr>
-<td>Method</td>
-<td>Searches by...</td>
-<td>Can call on an element?</td>
-<td>Live?</td>
+<td>روش</td>
+<td>جستجو بر اساس ...</td>
+<td>فراخوانی شود؟ element می‌تواند روی</td>
+<td>زنده؟</td>
 </tr>
 </thead>
 <tbody>
