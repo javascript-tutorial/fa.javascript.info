@@ -379,7 +379,8 @@ document.getElementsByTagName('input')[0].value = 5;
 </tbody>
 </table>
 
-By far the most used are `querySelector` and `querySelectorAll`, but `getElement(s)By*` can be sporadically helpful or found in the old scripts.
+.های قدیمی یافت شود script هم گاهی به صورت پراکنده می‌تواند مفید باشد یا در `getElement(s)By` شده است، اما `querySelectorAll` و `querySelector` تا اینجا بیشترین استفاده از
+
 
 Besides that:
 
