@@ -106,7 +106,8 @@
 این method واقعا قدرتمند است، چون هر css selectorای می‌تواند استفاده شود. 
 
 ```smart header="pseudo-classها نیز می‌توانند استفاده شوند"
-pseudo-classها در css selector مثل `:hover` و `:active`  `document.querySelectorAll(':hover')` مجموعه‌ای از elementهایی که نشانگر الان روی آن‌ها است را برمی‌گرداند. (به ترتیب تو در تو: از بیرونی ترین `<html>` تا درونی‌ترین( هم پشتیبانی شده‌اند. برای مثال 
+(تا درونی‌ترین آن‌ها `<html>` به ترتیب تو در تو: از بیرونی‌ترین) مجموعه‌ای از عناصری که نشانگر الان روی آن‌ها است را برمی‌گرداند. `document.querySelectorAll(':hover')`نیز پشتیبانی می‌شود. برای مثال `:active` و `:hover` هایی مثل Pseudo-class از
+
 ```
 
 ## querySelector [#querySelector]
