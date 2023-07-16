@@ -228,10 +228,12 @@ let divs = document.getElementsByTagName('div');
 </script>
 ```
 
-```warn header="Don't forget the `\"s\"` letter!"
-Novice developers sometimes forget the letter `"s"`. That is, they try to call `getElementByTagName` instead of <code>getElement<b>s</b>ByTagName</code>.
+```warn header="را فراموش نکنید. `\"s\"` عبارت"
 
-The `"s"` letter is absent in `getElementById`, because it returns a single element. But `getElementsByTagName` returns a collection of elements, so there's `"s"` inside.
+برنامه‌نویس‌های تازه‌‌کار گاهی اوقات حرف ‍‍`"s"` را فراموش می‌کنند. یعنی، آن‌ها سعی می‌کنند به جای <code>getElement<b>s</b>ByTagName</code> عبارت  `getElementByTagName` را فراخوانی کنند.
+
+
+حرف `"s"` در `getElementById` وجود ندارد زیرا یک element تک را برمی‌گرداند. اما `getElementsByTagName` مجموعه‌ای از عناصر را برمی‌گرداند،‌ پس یک `"s"` در آن هست. 
 ```
 
 ````warn header="It returns a collection, not an element!"
