@@ -2,7 +2,6 @@
 
 وقتی elementها به یکدیگر نزدیک هستند، استفاده از ویژگی‌های DOM navigation عالی است. اما اگر elementها نزدیک هم نباشند چه؟ چگونه باید به یک element دلخواه دسترسی داشته باشیم؟
 
-
 روش‌های جستجوی دیگری برای آن وجود دارد. 
 
 ## id یا تنها document.getElementById
@@ -55,7 +54,7 @@
 </script>
 ```
 
-```warn header="Please don't use id-named global variables to access elements"
+```warn header=".ها استفاده نکنیدelement برای دسترسی به global لفطا از متغیرهای"
 .توضیح داده شده است اما به طور معمول برای سازگاری پشتیبانی می‌شود [in the specification](https://html.spec.whatwg.org/multipage/window-object.html#named-access-on-the-window-object) این رفتار در
 
 .دسترسی ندارد، مشخص نیست که متغیر از کجا می‌آید HTML را می‌خواند و به JS نوشته شده‌اند مناسب است اما به طور کلی ایده‌ی خوبی نیست و ممکن است تعارض‌هایی در نام‌گذاری به وجود آورد و همچنین وقتی کسی کد HTML در inline های ساده‌ای که به صورتscript به ما کمک کند. این کار برای DOM و JS هایnamespace مرورگر تلاش می‌کند که با ترکیب 
@@ -66,9 +65,7 @@
 ```
 
 ``` smart header=" باید منحصر به فرد باشد `id`"
-
 فقط یک element با `id` داده شده می‌تواند در document وجود داشته باشد.
-
 
 اگر چند element با یک `id` مشخص داشته باشیم، رفتار methodای که از آن استفاده می‌کند می‌تواند غیرقابل پیش‌بینی باشد. برای مثال `document.getElementById` ممکن است هر یک از آن elementها را به صورت تصادفی برگرداند. پس لطفا به این قانون توجه داشته باشید و `id` را منحصر به فرد نگه دارید. 
 ```
@@ -107,16 +104,13 @@
 
 ```smart header="pseudo-classها نیز می‌توانند استفاده شوند"
 (تا درونی‌ترین آن‌ها `<html>` به ترتیب تو در تو: از بیرونی‌ترین) مجموعه‌ای از عناصری که نشانگر الان روی آن‌ها است را برمی‌گرداند. `document.querySelectorAll(':hover')`نیز پشتیبانی می‌شود. برای مثال `:active` و `:hover` هایی مثل Pseudo-class از
-
 ```
 
 ## querySelector [#querySelector]
 
 فراخوانی `elem.querySelector(css)` اولین element را برای css selector داده شده برمی‌گرداند.
 
-
 به عبارت دیگر، نتیجه با `elem.querySelectorAll(css)[0]` یکسان است اما دومی به دنبال *تمام* elementها است و یکی را انتخاب می‌کند در حالی که `elem.querySelector` فقط به دنبال یکی است. پس هم سریع‌تر است و هم برای نوشتن کوتاه‌تر است. 
-
 
 ## matches
 
@@ -138,9 +132,7 @@ For instance:
 *!*
     if (elem.matches('a[href$="zip"]')) {
 */!*
-      alert("The archive reference: " + elem.href );
       alert("این آرشیو ارجاع می‌دهد به : " + elem.href );
-      
     }
   }
 </script>
@@ -192,7 +184,6 @@ For instance:
 
 برای مثال:‌
 ```js
-
 //تمام div های درون document را می‌گیرد.
 let divs = document.getElementsByTagName('div');
 ```
@@ -230,9 +221,7 @@ let divs = document.getElementsByTagName('div');
 ```
 
 ```warn header="را فراموش نکنید. `\"s\"` عبارت"
-
 برنامه‌نویس‌های تازه‌‌کار گاهی اوقات حرف ‍‍`"s"` را فراموش می‌کنند. یعنی، آن‌ها سعی می‌کنند به جای <code>getElement<b>s</b>ByTagName</code> عبارت  `getElementByTagName` را فراخوانی کنند.
-
 
 حرف `"s"` در `getElementById` وجود ندارد زیرا یک element تک را برمی‌گرداند. اما `getElementsByTagName` مجموعه‌ای از عناصر را برمی‌گرداند،‌ پس یک `"s"` در آن هست. 
 ```
@@ -264,11 +253,10 @@ document.getElementsByTagName('input')[0].value = 5;
 </form>
 
 <script>
-
-// name پیدا کردن با استفاده از ویژگی
+  // name پیدا کردن با استفاده از ویژگی
   let form = document.getElementsByName('my-form')[0];
 
-// form داخل class پیدا کردن با استفاده از
+  // form داخل class پیدا کردن با استفاده از
   let articles = form.getElementsByClassName('article');
   alert(articles.length); // 2, پیدا شد article با کلاس element 2
 </script>
@@ -280,11 +268,8 @@ document.getElementsByTagName('input')[0].value = 5;
 
 .داریم script در مثال زیر دو
 
-
 .ایجاد می‌کند در حال حاضر طول آن `1` است  `<div>` اولی ارجاعی به مجموعه‌ی  
-
 دیگر را ببیند پس طول آن `2` است `<div>` زمانی اجرا می‌شود که مرورگر یک script دومین 
-
 
 ```html run
 <div>div اول</div>
@@ -382,13 +367,10 @@ document.getElementsByTagName('input')[0].value = 5;
 
 .های قدیمی یافت شود script هم گاهی به صورت پراکنده می‌تواند مفید باشد یا در `getElement(s)By` شده است، اما `querySelectorAll` و `querySelector` تا اینجا بیشترین استفاده از
 
-
 علاوه بر آن:
 
 .تطابق دارد یا نه CSS-selector با elem برای این استفاده می‌شود که چک کنیم `elem.matches(css)` از عبارت -
-
 .هم چک می‌شود `elem` داده شده تطابق دارند. خود CSS-selector برای جستجوی نزدیک‌ترین والدهایی است که با `elem.closest(css)` عبارت - 
-
 
 و بیایید اینجا یک روش دیگر برای بررسی رابطه والد و فرزند را چک کنیم،‌چون بعضی وقت‌ها مفید است: 
 .را برمی‌گرداند true مثدار `elemA.contains(elemB)` باشد، عبارت `elemA==elemB` یا وقتی که (`elemA` از فرزندان) باشد `elemA` داخل `elemB` اگر -
