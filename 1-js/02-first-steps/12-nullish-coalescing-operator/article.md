@@ -76,7 +76,11 @@ alert(firstName || lastName || nickName || "Anonymous"); // Supercoder
 */!*
 ```
 
+<<<<<<< HEAD
 از لحاظ تاریخی، عملگرِ یا `||` اول وجود پیدا کرد. این عملگر از اولین روزهای جاوااسکریپت وجود داشت، بنابراین توسعه دهندگان به مدت طولانی برای چنین کارهایی از این عملگر استفاده می‌کردند.
+=======
+Historically, the OR `||` operator was there first. It's been there since the beginning of JavaScript, so developers were using it for such purposes for a long time.
+>>>>>>> 733ff697c6c1101c130e2996f7eca860b2aa7ab9
 
 از طرفی دیگر، عملگر nullish coalescing `??` به تازگی به جاوااسکریپت اضافه شد و دلیل آن هم این بود که افراد خیلی از `||` راضی نبودند.
 
