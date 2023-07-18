@@ -3,17 +3,17 @@
 جزییات:
 
 ```js run
-// اجرا می شود.
-// نتیجه 1- = 0 || 1-، truthy
+// Runs.
+// The result of -1 || 0 = -1, truthy
 if (-1 || 0) alert( 'first' );
 
-// اجرا نمی شود.
+// Doesn't run
 // -1 && 0 = 0, falsy
 if (-1 && 0) alert( 'second' );
 
-// اجرا می شود
-// عملوند && اولویت بیشتری نسبت به || دارد
-// پس 1 && 1- اول اجرا می شود، و به ما زنجیره را می دهد: 
+// Executes
+// Operator && has a higher precedence than ||
+// so -1 && 1 executes first, giving us the chain:
 // null || -1 && 1  ->  null || 1  ->  1
 if (null || -1 && 1) alert( 'third' );
 ```
