@@ -23,7 +23,7 @@ let func = function(arg1, arg2, ..., argN) {
 ```js run
 let sum = (a, b) => a + b;
 
-/* This arrow function is a shorter form of:
+/* نسخه کوتاه تابع زیر است arrow function این
 
 let sum = function(a, b) {
   return a + b;
@@ -42,7 +42,7 @@ alert( sum(1, 2) ); // 3
   ```js run
   *!*
   let double = n => n * 2;
-  // roughly the same as: let double = function(n) { return n * 2 }
+  // let double = function(n) { return n * 2 } :معادل است با
   */!*
 
   alert( double(3) ); // 6
