@@ -1,17 +1,17 @@
-There are many ways to do it.
+راه‌های زیادی برای آن وجود دارد.
 
-Here are some of them:
+اینجا برخی از آن‌ها را می‌بینیم:
 
 ```js
-// 1. The table with `id="age-table"`.
+// 1. جدول یا `id="age-table"`
 let table = document.getElementById('age-table')
 
-// 2. All label elements inside that table
+// 2. تمام عناصر label داخل آن جدول
 table.getElementsByTagName('label')
 // or
 document.querySelectorAll('#age-table label')
 
-// 3. The first td in that table (with the word "Age")
+// 3. اولین td داخل آن جدول (با کلمه‌ی "Age")
 table.rows[0].cells[0]
 // or
 table.getElementsByTagName('td')[0]
