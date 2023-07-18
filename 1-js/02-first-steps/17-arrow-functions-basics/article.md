@@ -23,7 +23,7 @@ let func = function(arg1, arg2, ..., argN) {
 ```js run
 let sum = (a, b) => a + b;
 
-/* نسخه کوتاه تابع زیر است arrow function این
+/* نسخه کوتاه تابع زیر است arrow function این:
 
 let sum = function(a, b) {
   return a + b;
