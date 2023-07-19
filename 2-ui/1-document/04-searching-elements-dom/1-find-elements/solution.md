@@ -21,7 +21,7 @@ table.querySelector('td')
 // 4. form با نام "search"
 // با فرض اینکه فقط یک element با نام "search" در document است. 
 let form = document.getElementsByName('search')[0]
-// یا به طور خاص،‌form
+// یا به طور خاص،‌form.
 document.querySelector('form[name="search"]')
 
 // 5. اولین input درون form
