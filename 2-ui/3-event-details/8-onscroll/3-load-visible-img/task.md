@@ -2,29 +2,29 @@ importance: 4
 
 ---
 
-# Load visible images
+# بارگذاری تصاویر قابل‌مشاهده
 
-Let's say we have a slow-speed client and want to save their mobile traffic.
+بیایید فرض کنیم یک کلاینت که سرعت پایینی دارد داریم و می‌خواهیم ترافیک موبایل آن را ذخیره کنیم.
 
-For that purpose we decide not to show images immediately, but rather replace them with placeholders, like this:
+برای این کار ما تصمیم می‌گیریم بلافاصله تصاویر را نمایش ندهیم اما درعوض جای آن را با placeholderها پر کنیم مانند این:
 
 ```html
 <img *!*src="placeholder.svg"*/!* width="128" height="128" *!*data-src="real.jpg"*/!*>
 ```
 
-So, initially all images are `placeholder.svg`. When the page scrolls to the position where the user can see the image -- we change `src` to the one in `data-src`, and so the image loads.
+پس در ابتدا تمام تصاویر `placeholder.svg` هستند. هنگامی که صفحه به موقعیتی کاربر می‌تواند تصویر را ببیند اسکرول شد ما `src` را به آن `data-src` تغییر می‌دهیم و تصویر بارگذاری می‌شود.
 
-Here's an example in `iframe`:
+اینجا در `iframe` یک مثال است:
 
 [iframe src="solution"]
 
-Scroll it to see images load "on-demand".
+اسکرول کنید تا تصویر بارگذاری شود.
 
-Requirements:
-- When the page loads, those images that are on-screen should load immediately, prior to any scrolling.
-- Some images may be regular, without `data-src`. The code should not touch them.
-- Once an image is loaded, it should not reload any more when scrolled in/out.
+الزامات:
+- هنگامی که صفحه بارگذاری می‌شود تصاویری که روی صفحه هستند بدون هیچ اسکرولی بلافاصله باید بارگذاری شوند.
+- برخی تصاویر ممکن است عادی و بدون `data-src` باشند. کد نباید آنها را تحت تاثیر قرار دهد.
+- وقتی تصویری بارگذاری شد نباید با اسکرول مجدد دوباره تصویر بارگذاری شود.
 
-P.S. If you can, make a more advanced solution that would "preload" images that are one page below/after the current position.
+اگر می‌توانید پاسخ پیشرفته‌تری ایجاد کنید که تصاویری که در پایین/بعد از موقعیت فعلی هستند از قبل بارگذاری شوند.
 
-P.P.S. Only vertical scroll is to be handled, no horizontal scrolling.
+.فقط اسکرول عمودی پیاده شود نه اسکرول افقی

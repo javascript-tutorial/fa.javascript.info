@@ -10,4 +10,4 @@ importance: 2
 
 ![](ifelse_task2.svg)
 
-[دمو src="ifelse_task2"]
+[demo src="ifelse_task2"]
