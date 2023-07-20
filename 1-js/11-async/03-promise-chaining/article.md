@@ -72,11 +72,7 @@ promise.then(function(result) {
 });
 ```
 
-<<<<<<< HEAD
 کاری که اینجا کردیم فقط اضافه کردن چند مدیریت‌کننده به یک promise است. آن‌ها نتیجه را به یکدیگر پاس نمی‌دهند؛ در عوض به صورت جداگانه آن را پردازش می‌کنند.
-=======
-What we did here is just adding several handlers to one promise. They don't pass the result to each other; instead they process it independently.
->>>>>>> 733ff697c6c1101c130e2996f7eca860b2aa7ab9
 
 تصویر را اینجا داریم (آن را با زنجیره‌ای کردن بالا مقایسه کنید):
 
