@@ -1,16 +1,15 @@
 # Dispatching custom events
 
-We can not only assign handlers, but also generate events from JavaScript.
+ما نه تنها می توانیم کنترل کننده ها را اختصاص دهیم، بلکه می توانیم رویدادها را از جاوا اسکریپت نیز تولید کنیم.
 
-Custom events can be used to create "graphical components". For instance, a root element of our own JS-based menu may trigger events telling what happens with the menu: `open` (menu open), `select` (an item is selected) and so on. Another code may listen for the events and observe what's happening with the menu.
+از رویدادهای سفارشی می توان برای ایجاد "مولفه های گرافیکی" استفاده کرد. به عنوان مثال، یک عنصر ریشه از منوی مبتنی بر JS خودمان ممکن است رویدادهایی را ایجاد کند که می‌گوید چه اتفاقی در منو می‌افتد: باز کردن (باز کردن منو)، انتخاب (یک مورد انتخاب شده است) و غیره. کد دیگری ممکن است به رویدادها گوش دهد و آنچه را که در منو اتفاق می افتد مشاهده کند.
 
-We can generate not only completely new events, that we invent for our own purposes, but also built-in ones, such as `click`, `mousedown` etc. That may be helpful for automated testing.
-
+ما می‌توانیم نه تنها رویدادهای کاملاً جدیدی را که برای اهداف خود اختراع می‌کنیم، بلکه همچنین رویدادهای داخلی مانند کلیک، پایین آوردن ماوس و غیره را ایجاد کنیم. ممکن است برای آزمایش خودکار مفید باشد.
 ## Event constructor
 
-Built-in event classes form a hierarchy, similar to DOM element classes. The root is the built-in [Event](https://dom.spec.whatwg.org/#events) class.
+کلاس های رویداد داخلی یک سلسله مراتب را تشکیل می دهند، مشابه کلاس های عنصر DOM. ریشه کلاس رویداد داخلی است.
 
-We can create `Event` objects like this:
+ما می توانیم اشیاء رویداد را مانند این ایجاد کنیم: [Event](https://dom.spec.whatwg.org/#events) 
 
 ```js
 let event = new Event(type[, options]);
