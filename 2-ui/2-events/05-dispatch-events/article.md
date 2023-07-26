@@ -15,14 +15,11 @@
 let event = new Event(type[, options]);
 ```
 
-Arguments:
+پارامتر ها: 
 
-- *type* -- event type, a string like `"click"` or our own like `"my-event"`.
-- *options* -- the object with two optional properties:
-  - `bubbles: true/false` -- if `true`, then the event bubbles.
-  - `cancelable: true/false` -- if `true`, then the "default action"  may be prevented. Later we'll see what it means for custom events.
-
-  By default both are false: `{bubbles: false, cancelable: false}`.
+- *نوع*: event type,  یک رشته مانند `"click"` .
+- *گزینه ها*: شی ای با دو ویژگی اختیاری.
+- *لغو شدن (true/false)*: اگر ویزگی مقدار true را داشت عمل پیش فرض آن لغو میشود، 
 
 ## dispatchEvent
 
