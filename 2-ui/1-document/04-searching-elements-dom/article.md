@@ -54,7 +54,7 @@
 </script>
 ```
 
-```warn header=".ها استفاده نکنیدelement برای دسترسی به global لفطا از متغیرهای"
+```warn header=".ها استفاده نکنیدelement برای دسترسی به global لطفا از متغیرهای"
 .توضیح داده شده است اما به طور معمول برای سازگاری پشتیبانی می‌شود [in the specification](https://html.spec.whatwg.org/multipage/window-object.html#named-access-on-the-window-object) این رفتار در
 
 .دسترسی ندارد، مشخص نیست که متغیر از کجا می‌آید HTML را می‌خواند و به JS نوشته شده‌اند مناسب است اما به طور کلی ایده‌ی خوبی نیست و ممکن است تعارض‌هایی در نام‌گذاری به وجود آورد و همچنین وقتی کسی کد HTML در inline های ساده‌ای که به صورتscript به ما کمک کند. این کار برای DOM و JS هایnamespace مرورگر تلاش می‌کند که با ترکیب 
@@ -76,7 +76,7 @@
 
 ## querySelectorAll [#querySelectorAll]
 
-تا اینجا، همه‌کاره‌ترین روش `elem.querySelectorAll(css)` بود که تمام elementهای درون `elem` که با css selector داده شده تطابق دارند را انتخاب می‌کند. 
+با اختلاف، جامع‌ترین روش `elem.querySelectorAll(css)` بود که تمام elementهای درون `elem` که با css selector داده شده تطابق دارند را انتخاب می‌کند. 
 
 اینحا به دنبال تمام `<li>`هایی هستیم که آخرین فرزند هستند: 
 
@@ -120,7 +120,7 @@
 
 این روش زمانی به کار می‌آید که می‌خواهیم روی elementهایی (مثل آرایه یا همچین چیزی) iterate کنیم و آن‌هایی که مطلوب هستند را فیلتر کنیم. 
 
-For instance:
+برای مثال:
 
 ```html run
 <a href="http://example.com/file.zip">...</a>
@@ -172,7 +172,7 @@ For instance:
 
 همچنین روش‌های دیگری برای جستجو برای یک node با tag، class و ... وجود دارد. 
 
-امروزه آن‌ها بیشتر تاریخچه هستند چون `querySelector` قدرتمندتر است و برای نوشتن سریع‌تر است. 
+امروزه آن‌ها کمتر استفاده می‌شوند چون `querySelector` قدرتمندتر است و برای نوشتن سریع‌تر است. 
 
 پس اینجا ما بیشتر آن‌ها را برای کامل بودن پوشش می‌دهیم اما هنوز می‌توانید آن‌ها را در scriptهای قدیمی پیدا کنید. 
 
@@ -365,7 +365,7 @@ document.getElementsByTagName('input')[0].value = 5;
 </tbody>
 </table>
 
-.های قدیمی یافت شود script هم گاهی به صورت پراکنده می‌تواند مفید باشد یا در `getElement(s)By` شده است، اما `querySelectorAll` و `querySelector` تا اینجا بیشترین استفاده از
+.های قدیمی یافت شود script هم گاهی به صورت پراکنده می‌تواند مفید باشد یا در `getElement(s)By` شده است، اما `querySelectorAll` و `querySelector` با اختلاف بیشترین استفاده از
 
 علاوه بر آن:
 
@@ -373,4 +373,4 @@ document.getElementsByTagName('input')[0].value = 5;
 .هم چک می‌شود `elem` داده شده تطابق دارند. خود CSS-selector برای جستجوی نزدیک‌ترین والدهایی است که با `elem.closest(css)` عبارت - 
 
 و بیایید اینجا یک روش دیگر برای بررسی رابطه والد و فرزند را چک کنیم،‌چون بعضی وقت‌ها مفید است: 
-.را برمی‌گرداند true مثدار `elemA.contains(elemB)` باشد، عبارت `elemA==elemB` یا وقتی که (`elemA` از فرزندان) باشد `elemA` داخل `elemB` اگر -
+.را برمی‌گرداند true مقدار `elemA.contains(elemB)` باشد، عبارت `elemA==elemB` یا وقتی که (`elemA` از فرزندان) باشد `elemA` داخل `elemB` اگر -
