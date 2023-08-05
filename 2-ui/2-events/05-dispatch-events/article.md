@@ -1,6 +1,6 @@
 # Dispatching custom events
 
-ما نه تنها می توانیم کنترل کننده ها را اختصاص دهیم، بلکه می توانیم رویدادها را از جاوا اسکریپت نیز تولید کنیم.
+ما نه تنها می توانیم handler ها را اختصاص دهیم، بلکه می توانیم رویدادها را از جاوا اسکریپت نیز تولید کنیم.
 
 از رویدادهای سفارشی می توان برای ایجاد "مولفه های گرافیکی" استفاده کرد. به عنوان مثال، یک عنصر ریشه از منوی مبتنی بر JS خودمان ممکن است رویدادهایی را ایجاد کند که می‌گوید چه اتفاقی در منو می‌افتد: باز کردن (باز کردن منو)، انتخاب (یک مورد انتخاب شده است) و غیره. کد دیگری ممکن است به رویدادها گوش دهد و آنچه را که در منو اتفاق می افتد مشاهده کند.
 
@@ -15,23 +15,22 @@
 let event = new Event(type[, options]);
 ```
 
+پارامتر ها: 
 Arguments:
 
-- *type* -- event type, a string like `"click"` or our own like `"my-event"`.
-- *options* -- the object with two optional properties:
-  - `bubbles: true/false` -- if `true`, then the event bubbles.
-  - `cancelable: true/false` -- if `true`, then the "default action"  may be prevented. Later we'll see what it means for custom events.
-
-  By default both are false: `{bubbles: false, cancelable: false}`.
+- *نوع*: event type,  یک رشته مانند `"click"` .
+- *گزینه ها*: شی ای با دو ویژگی اختیاری.
+- *Bubbles*:اگر true  بود یعنی  bubbled  می شود. 
+- *لغو شدن (true/false)*: اگر ویزگی مقدار true را داشت عمل پیش فرض آن لغو میشود،
+- به صورت پیش فرض: `{bubbles: false, cancelable: false}`.
 
 ## dispatchEvent
 
-After an event object is created, we should "run" it on an element using the call `elem.dispatchEvent(event)`.
+پس از ایجاد یک event، باید آن را روی یک element با استفاده از فراخوانی elem.dispatchEvent(event) اجرا کنیم.
 
-Then handlers react on it as if it were a regular browser event. If the event was created with the `bubbles` flag, then it bubbles.
+سپس handler ها به آن واکنش نشان می دهند که گویی یک رویداد معمولی مرورگر است. اگر رویداد با bubble flag ها ایجاد شده باشد، bubbled می شود.
 
-In the example below the `click` event is initiated in JavaScript. The handler works same way as if the button was clicked:
-
+در مثال زیر رویداد کلیک در جاوا اسکریپت آغاز می شود. handler به همان روشی کار می کند که اگر روی دکمه کلیک شده باشد:
 ```html run no-beautify
 <button id="elem" onclick="alert('Click!');">Autoclick</button>
 
@@ -41,11 +40,9 @@ In the example below the `click` event is initiated in JavaScript. The handler w
 </script>
 ```
 
-```smart header="event.isTrusted"
-There is a way to tell a "real" user event from a script-generated one.
+راهی برای تشخیص یک user event "واقعی" از event تولید شده توسط اسکریپت وجود دارد.
 
-The property `event.isTrusted` is `true` for events that come from real user actions and `false` for script-generated events.
-```
+ویژگی 'event.isTrusted' برای رویدادهایی که از اقدامات واقعی کاربر ناشی می شوند 'true' و برای رویدادهای تولید شده توسط اسکریپت 'false' است.
 
 ## Bubbling example
 
