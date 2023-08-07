@@ -2,7 +2,9 @@
 
 ما نه تنها می توانیم handler ها را اختصاص دهیم، بلکه می توانیم رویدادها را از جاوا اسکریپت نیز تولید کنیم.
 
-از رویدادهای سفارشی می توان برای ایجاد "مولفه های گرافیکی" استفاده کرد. به عنوان مثال، یک عنصر ریشه از منوی مبتنی بر JS خودمان ممکن است رویدادهایی را ایجاد کند که می‌گوید چه اتفاقی در منو می‌افتد: باز کردن (باز کردن منو)، انتخاب (یک مورد انتخاب شده است) و غیره. کد دیگری ممکن است به رویدادها گوش دهد و آنچه را که در منو اتفاق می افتد مشاهده کند.
+از رویدادهای سفارشی می توان برای ایجاد "مولفه های گرافیکی" استفاده کرد. به عنوان مثال، یک عنصر ریشه از منوی مبتنی بر JS خودمان ممکن است رویدادهایی را ایجاد کند که می‌گوید چه اتفاقی در منو می‌افتد:
+
+باز کردن (باز کردن منو)، انتخاب (یک مورد انتخاب شده است) و غیره. کد دیگری ممکن است به رویدادها گوش دهد و آنچه را که در منو اتفاق می افتد مشاهده کند.
 
 ما می‌توانیم نه تنها رویدادهای کاملاً جدیدی را که برای اهداف خود اختراع می‌کنیم، بلکه همچنین رویدادهای داخلی مانند کلیک، پایین آوردن ماوس و غیره را ایجاد کنیم. ممکن است برای آزمایش خودکار مفید باشد.
 ## Event constructor
@@ -23,13 +25,34 @@ Arguments:
 - *Bubbles*:اگر true  بود یعنی  bubbled  می شود. 
 - *لغو شدن (true/false)*: اگر ویزگی مقدار true را داشت عمل پیش فرض آن لغو میشود،
 - به صورت پیش فرض: `{bubbles: false, cancelable: false}`.
+  
+  ## dispatchEvent
+
+پس از ایجاد یک event، باید آن را روی یک element با استفاده از فراخوانی elem.dispatchEvent(event) اجرا کنیم.
+
+سپس handler ها به آن واکنش نشان می دهند که گویی یک رویداد معمولی مرورگر است. اگر رویداد با bubble flag ها ایجاد شده باشد، bubbled می شود.
+
+در مثال زیر رویداد کلیک در جاوا اسکریپت آغاز می شود. handler به همان روشی کار می کند که اگر روی دکمه کلیک شده باشد:
+```html run no-beautify
+<button id="elem" onclick="alert('Click!');">Autoclick</button>
+
+<script>
+  let event = new Event("click");
+  elem.dispatchEvent(event);
+</script>
+```
+
+راهی برای تشخیص یک user event "واقعی" از event تولید شده توسط اسکریپت وجود دارد.
+
+ویژگی 'event.isTrusted' برای رویدادهایی که از اقدامات واقعی کاربر ناشی می شوند 'true' و برای رویدادهای تولید شده توسط اسکریپت 'false' است.
 
 
 ## Bubbling example
 
-We can create a bubbling event with the name `"hello"` and catch it on `document`.
 
-All we need is to set `bubbles` to `true`:
+می‌توانیم یک bubbling event با نام `"hello"` ایجاد کنیم و آن را در `document` بگیریم.
+
+تنها چیزی که نیاز داریم این است که `bubbles` را روی "true" تنظیم کنیم:
 
 ```html run no-beautify
 <h1 id="elem">Hello from the script!</h1>
@@ -50,16 +73,16 @@ All we need is to set `bubbles` to `true`:
 ```
 
 
-Notes:
+نکات:
 
-1. We should use `addEventListener` for our custom events, because `on<event>` only exists for built-in events, `document.onhello` doesn't work.
-2. Must set `bubbles:true`, otherwise the event won't bubble up.
+1. باید از `addEventListener` برای custom  کردن  event  ها استفاده کرد، زیرا `on<event>` فقط برای built-in event وجود دارد و `document.onhello` کار نمیکند. 
+2. باید `bubbles:true` را  set  کنیم مگرنه event  bubble up  نخواهد شد.
 
-The bubbling mechanics is the same for built-in (`click`) and custom (`hello`) events. There are also capturing and bubbling stages.
+مکانیک bubbling برای built-in (`click`) و custom (`hello`) یکسان است.  هم چنین مراحلی برای گرفتن و bubbling نیز وجود دارد.
 
 ## MouseEvent, KeyboardEvent and others
 
-Here's a short list of classes for UI Events from the [UI Event specification](https://www.w3.org/TR/uievents):
+موارد زیر شامل یک لیست کوتاه از کلاس هایی برای UI Events از [UI Event specification](https://www.w3.org/TR/uievents) هستند: 
 
 - `UIEvent`
 - `FocusEvent`
@@ -68,11 +91,11 @@ Here's a short list of classes for UI Events from the [UI Event specification](h
 - `KeyboardEvent`
 - ...
 
-We should use them instead of `new Event` if we want to create such events. For instance, `new MouseEvent("click")`.
+ اگر میخواهید رویدادی به وجود بیاوریم، باید به جای `new Event` از کلاس های بالا استفاده کنیم. برای مثال `new MouseEvent("click")`.
+ 
+ انتخاب constructor درست این امکان را میدهد که  property های استاندارد را برای هر نوع از  event  مشخص کنیم.
 
-The right constructor allows to specify standard properties for that type of event.
-
-Like `clientX/clientY` for a mouse event:
+ مانند `clientX/clientY` برای mouse event:
 
 ```js run
 let event = new MouseEvent("click", {
@@ -86,10 +109,9 @@ let event = new MouseEvent("click", {
 alert(event.clientX); // 100
 */!*
 ```
+لطفا به یاد داشته باشد: constructor های generic `Event` اجازه این کار را نمیدهد.
 
-Please note: the generic `Event` constructor does not allow that.
-
-Let's try:
+بیایید این روش را امتحان کنیم:
 
 ```js run
 let event = new Event("click", {
@@ -103,10 +125,9 @@ let event = new Event("click", {
 alert(event.clientX); // undefined, the unknown property is ignored!
 */!*
 ```
+از نظر فنی، می‌توانیم با اختصاص مستقیم `event.clientX=100` پس از ایجاد، آن را حل کنیم. بنابراین این موضوع راحت و پیروی از قوانین است. event های ایجاد شده توسط مرورگر همیشه نوع مناسبی دارند.
 
-Technically, we can work around that by assigning directly `event.clientX=100` after creation. So that's a matter of convenience and following the rules. Browser-generated events always have the right type.
-
-The full list of properties for different UI events is in the specification, for instance, [MouseEvent](https://www.w3.org/TR/uievents/#mouseevent).
+لیست کاملی از  property  ها برای event های مختلف UI به تفکیک، برای مثال، [MouseEvent](https://www.w3.org/TR/uievents/#mouseevent).
 
 ## Custom events
 
