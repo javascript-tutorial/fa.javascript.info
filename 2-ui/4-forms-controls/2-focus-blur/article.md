@@ -28,15 +28,15 @@
   #error { color: red }
 </style>
 
-Your email please: <input type="email" id="input">
+ایمیلتان لطفا: <input type="email" id="input">
 
 <div id="error"></div>
 
 <script>
 *!*input.onblur*/!* = function() {
-  if (!input.value.includes('@')) { // not email
+  if (!input.value.includes('@')) { // ایمیل نیست
     input.classList.add('invalid');
-    error.innerHTML = 'Please enter a correct email.'
+    error.innerHTML = '.لطفا یک ایمیل درست وارد کنید'
   }
 };
 
