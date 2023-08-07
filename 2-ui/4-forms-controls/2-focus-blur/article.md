@@ -85,7 +85,7 @@
 </script>
 ```
 
-It works in all browsers except Firefox ([bug](https://bugzilla.mozilla.org/show_bug.cgi?id=53579)).
+این روی تمام مرورگرها به جز Firefox کار می‌کند ([bug](https://bugzilla.mozilla.org/show_bug.cgi?id=53579)).
 
 If we enter something into the input and then try to use `key:Tab` or click away from the `<input>`, then `onblur` returns the focus back.
 
