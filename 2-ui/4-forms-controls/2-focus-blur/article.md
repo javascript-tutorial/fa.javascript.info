@@ -55,9 +55,9 @@
 
 ## متدهای focus/blur
 
-Methods `elem.focus()` and `elem.blur()` set/unset the focus on the element.
+تابع‌های `elem.focus()` و `elem.blur()` برای این هستند که focus را روی element فعال/غیرفعال کنند. 
 
-For instance, let's make the visitor unable to leave the input if the value is invalid:
+برای مثال، بیایید کاری کنیم که اگر مقدار نامعتبر باشد، نتواند input را ترک کند:
 
 ```html run autorun height=80
 <style>
@@ -66,16 +66,16 @@ For instance, let's make the visitor unable to leave the input if the value is i
   }
 </style>
 
-Your email please: <input type="email" id="input">
-<input type="text" style="width:220px" placeholder="make email invalid and try to focus here">
+ایمیلتان لطفا: <input type="email" id="input">
+<input type="text" style="width:220px" placeholder="کنید focus ایمیل را نامعتبر کنید و سعی کنید اینجا">
 
 <script>
   input.onblur = function() {
-    if (!this.value.includes('@')) { // not email
-      // show the error
+    if (!this.value.includes('@')) { // نیست email
+      // را نشان می‌دهد error
       this.classList.add("error");
 *!*
-      // ...and put the focus back
+      // ... را برگردانید focus و
       input.focus();
 */!*
     } else {
