@@ -50,7 +50,7 @@
 </script>
 ```
 
-Modern HTML allows us to do many validations using input attributes: `required`, `pattern` and so on. And sometimes they are just what we need. JavaScript can be used when we want more flexibility. Also we could automatically send the changed value to the server if it's correct.
+زبان HTML مدرن به ما اجازه می‌دهد که بسیاری از اعتبارسنجی‌ها را با input attributeها انجام دهیم: `required`، `pattern` و چیزهای دیگر. و بعضی وقت‌ها دقیقا چیزهایی هستند که ما نیاز داریم. وقتی که می‌خواهیم انعطاف‌پذیری بیشتری داشته باشیم، می‌توانیم از javascript استفاده کنیم. همچنین اگر داده درست باشد، ما می‌توانیم داده‌ی تغییرداده‌شده را به صورت خودکار به سرور بفرستیم
 
 
 ## Methods focus/blur
