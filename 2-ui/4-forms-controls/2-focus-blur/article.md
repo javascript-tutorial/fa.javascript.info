@@ -42,7 +42,7 @@
 
 *!*input.onfocus*/!* = function() {
   if (this.classList.contains('invalid')) {
-    // remove the "error" indication, because the user wants to re-enter something
+    // را پاک می‌کند، چون کاربر می‌خواهد دوباره چیزی را وارد کند error علامت
     this.classList.remove('invalid');
     error.innerHTML = "";
   }
