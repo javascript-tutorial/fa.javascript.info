@@ -24,25 +24,6 @@ Arguments:
 - *لغو شدن (true/false)*: اگر ویزگی مقدار true را داشت عمل پیش فرض آن لغو میشود،
 - به صورت پیش فرض: `{bubbles: false, cancelable: false}`.
 
-## dispatchEvent
-
-پس از ایجاد یک event، باید آن را روی یک element با استفاده از فراخوانی elem.dispatchEvent(event) اجرا کنیم.
-
-سپس handler ها به آن واکنش نشان می دهند که گویی یک رویداد معمولی مرورگر است. اگر رویداد با bubble flag ها ایجاد شده باشد، bubbled می شود.
-
-در مثال زیر رویداد کلیک در جاوا اسکریپت آغاز می شود. handler به همان روشی کار می کند که اگر روی دکمه کلیک شده باشد:
-```html run no-beautify
-<button id="elem" onclick="alert('Click!');">Autoclick</button>
-
-<script>
-  let event = new Event("click");
-  elem.dispatchEvent(event);
-</script>
-```
-
-راهی برای تشخیص یک user event "واقعی" از event تولید شده توسط اسکریپت وجود دارد.
-
-ویژگی 'event.isTrusted' برای رویدادهایی که از اقدامات واقعی کاربر ناشی می شوند 'true' و برای رویدادهای تولید شده توسط اسکریپت 'false' است.
 
 ## Bubbling example
 
