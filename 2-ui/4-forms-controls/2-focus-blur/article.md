@@ -13,14 +13,14 @@
 
 ## Events focus/blur
 
-The `focus` event is called on focusing, and `blur` -- when the element loses the focus.
+هنگام متمرکز شده از `focus` استفاده می‌شود و `blur` -- برای زمانی که element آن focus را از دست می‌دهد. 
 
-Let's use them for validation of an input field.
+بیایید برای اعتبارسنجی یک input field از آن‌ها استفاده کنیم. 
 
-In the example below:
+در مثال زیر:
 
-- The `blur` handler checks if the field has an email entered, and if not -- shows an error.
-- The `focus` handler hides the error message (on `blur` it will be checked again):
+- کنترل‌کننده‌ی `blur` چک می‌کند که یک email وارد شده است یا نه، و اگر نه -- یک error نشان می‌دهد. 
+- کنترل‌کننده‌ی `focus` پیام error را پنهان می‌کند (در حالت `blur` دوباره چک می‌شود):
 
 ```html run autorun height=60
 <style>
