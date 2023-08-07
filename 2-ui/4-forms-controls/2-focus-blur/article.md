@@ -1,8 +1,9 @@
-# Focusing: focus/blur
+# Focus: متمرکز کردن/محو کردن
 
-An element receives the focus when the user either clicks on it or uses the `key:Tab` key on the keyboard. There's also an `autofocus` HTML attribute that puts the focus onto an element by default when a page loads and other means of getting the focus.
 
-Focusing on an element generally means: "prepare to accept the data here", so that's the moment when we can run the code to initialize the required functionality.
+یک element وقتی focus دریافت می‌کند که کاربر روی آن click کند یا از کلید `key:Tab` در صفحه‌کلید استفاده کند. همچنین یک attribute به نام `autofocus` در HTML وجود دارد که وقتی صفحه load می‌شود، به صورت پیش‌فرض focus را روی یک element می‌گذارد و روش‌های دیگری برای دریافت focus. 
+
+قرار دادن focus روی یک element به طور کلی یعنی: "آماده شدن برای دریافت داده در اینجا"، پس این وقتی است که می‌توانیم code را برای مقداردهی اولیه برای عملکرد مورد نیاز اجرا کنیم. 
 
 The moment of losing the focus ("blur") can be even more important. That's when a user clicks somewhere else or presses `key:Tab` to go to the next form field, or there are other means as well.
 
