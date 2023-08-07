@@ -3,11 +3,11 @@
 
 یک element وقتی focus دریافت می‌کند که کاربر روی آن click کند یا از کلید `key:Tab` در صفحه‌کلید استفاده کند. همچنین یک attribute به نام `autofocus` در HTML وجود دارد که وقتی صفحه load می‌شود، به صورت پیش‌فرض focus را روی یک element می‌گذارد و روش‌های دیگری برای دریافت focus. 
 
-قرار دادن focus روی یک element به طور کلی یعنی: "آماده شدن برای دریافت داده در اینجا"، پس این وقتی است که می‌توانیم code را برای مقداردهی اولیه برای عملکرد مورد نیاز اجرا کنیم. 
+قرار دادن focus روی یک element به طور کلی یعنی: "آماده شدن برای دریافت داده در اینجا"، پس این زمانی است که می‌توانیم code را برای مقداردهی اولیه برای عملکرد مورد نیاز اجرا کنیم. 
 
-The moment of losing the focus ("blur") can be even more important. That's when a user clicks somewhere else or presses `key:Tab` to go to the next form field, or there are other means as well.
+لحظه‌ای که focus از دست می‌رود ("blur") حتی می‌تواند مهم‌تر باشد. آن وقتی است که کاربر روی جایی دیگر click می‌کند یا `key:Tab` را فشار می‌دهد تا به form بعدی برود یا راه‌های دیگری نیز وجود دارد. 
 
-Losing the focus generally means: "the data has been entered", so we can run the code to check it or even to save it to the server and so on.
+از دست دادن داده به طور کلی یعنی "داده وارد شده است"، پس ما می‌توانیم کد را اجرا کنیم تا آن را چک کنیم یا حتی آن را در server ذخیره کنیم و چیزهای دیگر.
 
 There are important peculiarities when working with focus events. We'll do the best to cover them further on.
 
