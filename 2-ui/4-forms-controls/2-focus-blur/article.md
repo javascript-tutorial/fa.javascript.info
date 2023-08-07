@@ -9,7 +9,7 @@
 
 از دست دادن داده به طور کلی یعنی "داده وارد شده است"، پس ما می‌توانیم کد را اجرا کنیم تا آن را چک کنیم یا حتی آن را در server ذخیره کنیم و چیزهای دیگر.
 
-There are important peculiarities when working with focus events. We'll do the best to cover them further on.
+هنگام کار با focus eventها،‌ ویژگی‌های مهمی وجود دارند. ما در ادامه بیشترین تلاش خود را می‌کنیم تا آن‌ها را پوشش دهیم. 
 
 ## Events focus/blur
 
