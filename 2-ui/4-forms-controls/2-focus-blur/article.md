@@ -98,12 +98,13 @@
 
 :هم می‌تواند باعث آن شود. برای مثال javascript می‌کند اما خود click یکی از آن‌ها وقتی است که بازدیدکننده روی جای دیگری
 
-- An `alert` moves focus to itself, so it causes the focus loss at the element (`blur` event), and when the `alert` is dismissed, the focus comes back (`focus` event).
-- If an element is removed from DOM, then it also causes the focus loss. If it is reinserted later, then the focus doesn't return.
+(`focus` event) نادیده گرفته می‌شود، برمی‌گردد `alert` و وقتی که (`blur` event) در عنصر می‌شود focus فوکوس را به خودش منتقل می‌کند، پس باعث از بین رفتن `alert` یک -
 
-These features sometimes cause `focus/blur` handlers to misbehave -- to trigger when they are not needed.
+برگردانده نمی‌شود focus می‌شود. اگر آن بعدا دوباره وارد شود focus پاک شود، آنگاه آن هم باعث از بین رفتن DOM از element اگر یک -
 
-The best recipe is to be careful when using these events. If we want to track user-initiated focus-loss, then we should avoid causing it ourselves.
+.شوند trigger بدرفتاری کنند -- زمانی که نیاز نیست `focus/blurs` این ویژگی‌ها گاهی باعث می‌شوند -
+
+توسط کاربر را ردیابی کنیم، خودمان باید از ایجاد آن اجتناب کنیم. focus-loss مراقب باشید. اگر می‌خواهیم events بهترین دستورالعمل این است که موقع کار با این
 ```
 ## Allow focusing on any element: tabindex
 
