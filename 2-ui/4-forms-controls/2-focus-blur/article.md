@@ -87,16 +87,16 @@
 
 این روی تمام مرورگرها به جز Firefox کار می‌کند ([bug](https://bugzilla.mozilla.org/show_bug.cgi?id=53579)).
 
-If we enter something into the input and then try to use `key:Tab` or click away from the `<input>`, then `onblur` returns the focus back.
+اگر چیزی را در input وارد کنیم و سپس سعی کنیم از `key:Tab` استفاده کنیم یا روی input کلیک کنیم، `onblur` فوکوس را برمی‌گرداند. 
 
-Please note that we can't "prevent losing focus" by calling `event.preventDefault()` in `onblur`, because `onblur` works *after* the element lost the focus.
+لطفا توجه داشته باشید که ما نمی‌توانیم با فراخوانی `event.preventDefault()` از "از دست دادن focus" در `onblur` جلوگیری کنیم، چون `onblur` *پس از* اینکه عنصر focus را از دست می‌دهد کار می‌کند. 
 
-In practice though, one should think well, before implementing something like this, because we generally *should show errors* to the user, but *should not prevent their progress* in filling our form. They may want to fill other fields first.
+اگرچه در عمل، قبل از اینکه چیزی مثل این را پیاده‌سازی کنیم،‌باید خوب فکر کنیم، چون به طور کلی *باید به کاربر error نمایش دهیم* اما *نباید مانع پیشرفت آن‌ها* در پر کردن form خودمان شویم. ممکن است آن‌ها بخواهند ابتدا fieldهای دیگر را پر کنند. 
 
 ```warn header="JavaScript-initiated focus loss"
-A focus loss can occur for many reasons.
+ممکن است به دلایل مختلفی رخ دهد focus از دست رفتن
 
-One of them is when the visitor clicks somewhere else. But also JavaScript itself may cause it, for instance:
+:هم می‌تواند باعث آن شود. برای مثال javascript می‌کند اما خود click یکی از آن‌ها وقتی است که بازدیدکننده روی جای دیگری
 
 - An `alert` moves focus to itself, so it causes the focus loss at the element (`blur` event), and when the `alert` is dismissed, the focus comes back (`focus` event).
 - If an element is removed from DOM, then it also causes the focus loss. If it is reinserted later, then the focus doesn't return.
