@@ -106,9 +106,9 @@
 
 توسط کاربر را ردیابی کنیم، خودمان باید از ایجاد آن اجتناب کنیم. focus-loss مراقب باشید. اگر می‌خواهیم events بهترین دستورالعمل این است که موقع کار با این
 ```
-## Allow focusing on any element: tabindex
+## اجازه focus کردن روی هر عنصری را می‌دهد: tabindex
 
-By default, many elements do not support focusing.
+به صورت پیش‌فرض، بیشتر عناصر از focus پشتیبانی نمی‌کنند.
 
 The list varies a bit between browsers, but one thing is always correct: `focus/blur` support is guaranteed for elements that a visitor can interact with: `<button>`, `<input>`, `<select>`, `<a>` and so on.
 
