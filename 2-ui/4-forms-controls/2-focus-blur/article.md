@@ -167,32 +167,33 @@
 <!-- را اضافه کنید class -- روی فرم focus در مورد -->
 
 <form *!*onfocus="this.className='focused'"*/!*>
-  <input type="text" name="name" value="Name">
-  <input type="text" name="surname" value="Surname">
+  <input type="text" name="name" value="نام">
+  <input type="text" name="surname" value="نام خانوادگی">
 </form>
 
 <style> .focused { outline: 1px solid red; } </style>
 ```
 
-The example above doesn't work, because when user focuses on an `<input>`, the `focus` event triggers on that input only. It doesn't bubble up. So `form.onfocus` never triggers.
+مثال بالا کار نمی‌کند زیرا وقتی کاربر روی یک `<input>` فوکوس می‌کند، `focus` event فقط روی آن input فعال می‌شود. رفتار بالا رفتن حبابی ندارد. پس `form.onfocus` هیچوقت فعال نمی‌شود.
 
-There are two solutions.
+دو راه حل وجود دارد.
 
-First, there's a funny historical feature: `focus/blur` do not bubble up, but propagate down on the capturing phase.
+ابندا یک ویژگی قدیمی خنده‌دار وجود دارد: `focus/blur` بالا رفتن حبابی ندارند، بلکه در مرحله‌ی capturing به پایین منتشر می‌شوند.
 
-This will work:
+
+این کار می‌کند:
 
 ```html autorun height=80
 <form id="form">
-  <input type="text" name="name" value="Name">
-  <input type="text" name="surname" value="Surname">
+  <input type="text" name="name" value="نام">
+  <input type="text" name="surname" value="نام خانوادگی">
 </form>
 
 <style> .focused { outline: 1px solid red; } </style>
 
 <script>
 *!*
-  // put the handler on capturing phase (last argument true)
+  //قرار دهید (آخرین آرگومان درست) capturing کنترلگر را روی فاز 
   form.addEventListener("focus", () => form.classList.add('focused'), true);
   form.addEventListener("blur", () => form.classList.remove('focused'), true);
 */!*
