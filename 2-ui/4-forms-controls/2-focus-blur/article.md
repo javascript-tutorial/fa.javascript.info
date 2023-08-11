@@ -126,15 +126,15 @@ The list varies a bit between browsers, but one thing is always correct: `focus/
 
 عناصری که با `tabindex` تطبیق پیدا نمی‌کنند، به ترتیب document source (به ترتیب پیش‌فرض) تغییر می‌کنند. 
 
-There are two special values:
+دو مقدار استثنا وجود دارند:‌
 
-- `tabindex="0"` puts an element among those without `tabindex`. That is, when we switch elements, elements with `tabindex=0` go after elements with `tabindex ≥ 1`.
+- مقدار `tabindex="0"` یک element را میان عناصری که `tabindex` ندارند قرار می‌دهد. یعنی،‌ وقتی elementها را تغییر می‌دهیم، elementهایی با `tabindex=0` بعد از elementهایی با `tabindex ≥ 1` می‌آیند.
 
-    Usually it's used to make an element focusable, but keep the default switching order. To make an element a part of the form on par with `<input>`.
+    معمولا برای focusable کردن یک element استفاده می‌شود، اما ترتیب switching پیش‌فرض را حفظ کنید. برای اینکه یک element به صورت همتراز با `<input>` باشد. 
 
-- `tabindex="-1"` allows only programmatic focusing on an element. The `key:Tab` key ignores such elements, but method `elem.focus()` works.
+- مقدار `tabindex="-1"` فقط امکان programmatic focusing روی یک element را فراهم می‌کند. `key:Tab` همچین کلیدهایی را نادیده می‌گیرد اما `elem.focus()` کار می‌کند.
 
-For instance, here's a list. Click the first item and press `key:Tab`:
+برای مثال، اینجا یک لیست داریم. روی اولین item کلیک کنید و `key:Tab` را فشار دهید.
 
 ```html autorun no-beautify
 Click the first item and press Tab. Keep track of the order. Please note that many subsequent Tabs can move the focus out of the iframe in the example.
