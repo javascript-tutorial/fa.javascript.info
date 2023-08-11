@@ -200,7 +200,7 @@
 </script>
 ```
 
-Second, there are `focusin` and `focusout` events -- exactly the same as `focus/blur`, but they bubble.
+دوم، eventهای `focusin` و `focusout` وجود دارند. -- دقیقا مثل `focus/blur`، اما آن‌ها رفتار بالا رفتن حبابی دارند.
 
 Note that they must be assigned using `elem.addEventListener`, not `on<event>`.
 
