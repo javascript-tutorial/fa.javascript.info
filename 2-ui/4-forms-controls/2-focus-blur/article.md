@@ -152,18 +152,20 @@
 
 ترتیب به این صورت است: `1 - 2 - 0`. به طور نرمال، `<li>` از focus پشتیبانی نمی‌کند اما `tabindex` آن را به همراه eventها و style دادن با `:focus` مهیا می‌کند.
 
-```smart header="The property `elem.tabIndex` works too"
-We can add `tabindex` from JavaScript by using the `elem.tabIndex` property. That has the same effect.
+```smart header="هم کار می‌کند. `elem.tabIndex`"
+
+ما می‌توانیم `tabindex`از JavaScript را با استفاده از `elem.tabIndex` اضافه کنیم. آن هم اثر یکسان را دارد
+
 ```
 
 ## Delegation: focusin/focusout
 
-Events `focus` and `blur` do not bubble.
-
-For instance, we can't put `onfocus` on the `<form>` to highlight it, like this:
+.وجود ندارد `blur` و `focus` رفتار بالا رفتن حبابی در
+کنیم، مثل این highlight بگذاریم تا آن را `<form>` را روی `onfocus` برای مثال ما نمی‌توانیم
 
 ```html autorun height=80
-<!-- on focusing in the form -- add the class -->
+<!-- را اضافه کنید class -- روی فرم focus در مورد -->
+
 <form *!*onfocus="this.className='focused'"*/!*>
   <input type="text" name="name" value="Name">
   <input type="text" name="surname" value="Surname">
