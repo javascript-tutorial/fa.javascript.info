@@ -111,18 +111,20 @@
 به صورت پیش‌فرض، بیشتر عناصر از focus پشتیبانی نمی‌کنند.
 
 The list varies a bit between browsers, but one thing is always correct: `focus/blur` support is guaranteed for elements that a visitor can interact with: `<button>`, `<input>`, `<select>`, `<a>` and so on.
+این لیست کمی میان مرورگرها تفاوت می‌کند اما یک چیز همیشه درست است: `focus/blur` 
 
-On the other hand, elements that exist to format something, such as `<div>`, `<span>`, `<table>` -- are unfocusable by default. The method `elem.focus()` doesn't work on them, and `focus/blur` events are never triggered.
+از طرفی دیگر، عناصری که برای format کردن چیزی وجود دارند،‌ مثل `<div>`، `<span>`، `<table>` -- به طور پیش‌فرض غیر قابل focus هستند. متد `elem.focus()` روی آن‌ها کار نمی‌کند و eventهای `focus/blur` هیچ وقت trigger نمی‌شوند. 
 
-This can be changed using HTML-attribute `tabindex`.
+می‌توانیم این را با `tabindex` که یک HTML-attribute است تغییر دهیم.
 
-Any element becomes focusable if it has `tabindex`. The value of the attribute is the order number of the element when `key:Tab` (or something like that) is used to switch between them.
+هر elementای اگر `tabindex` داشته باشد، قابل focus می‌شود. هنگامی که `key:Tab` (یا چیزی شبیه آن) برای جابه‌جایی بین آن‌ها استفاده می‌شود،‌ مقدار attribute برابر order number آن element می‌شود. 
 
-That is: if we have two elements, the first has `tabindex="1"`, and the second has `tabindex="2"`, then pressing `key:Tab` while in the first element -- moves the focus into the second one.
 
-The switch order is: elements with `tabindex` from `1` and above go first (in the `tabindex` order), and then elements without `tabindex` (e.g. a regular `<input>`).
+یعنی: اگر ما دو element داشته باشیم که اولی `tabindex="1"` داشته باشد و دومی `tabindex="2"` داشته باشد، آنگاه وقتی در اولین element هستیم و `key:Tab` را فشار می‌دهیم -- focus را به دومی می‌برد.
 
-Elements without matching `tabindex` are switched in the document source order (the default order).
+ترتیب تغییر به این صورت است: elementهایی با `tabindex` از `1` و بالاتر ابتدا می‌روند (در ترتیب `tabindex`) و بعد از آن، elementهای بدون `tabindex` (مثلا یک `<input>` معمولی)
+
+عناصری که با `tabindex` تطبیق پیدا نمی‌کنند، به ترتیب document source (به ترتیب پیش‌فرض) تغییر می‌کنند. 
 
 There are two special values:
 
