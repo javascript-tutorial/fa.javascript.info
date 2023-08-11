@@ -110,8 +110,7 @@
 
 به صورت پیش‌فرض، بیشتر عناصر از focus پشتیبانی نمی‌کنند.
 
-The list varies a bit between browsers, but one thing is always correct: `focus/blur` support is guaranteed for elements that a visitor can interact with: `<button>`, `<input>`, `<select>`, `<a>` and so on.
-این لیست کمی میان مرورگرها تفاوت می‌کند اما یک چیز همیشه درست است: `focus/blur` 
+این لیست کمی میان مرورگرها تفاوت می‌کند اما یک چیز همیشه درست است: پشتیبانی از `focus/blur` برای elementهایی که یک کاربر می‌تواند با آن‌ها تعامل داشته باشد:‌ `<button>`, `<input>`, `<select>`, `<a>` و ... تضمین شده است.
 
 از طرفی دیگر، عناصری که برای format کردن چیزی وجود دارند،‌ مثل `<div>`، `<span>`، `<table>` -- به طور پیش‌فرض غیر قابل focus هستند. متد `elem.focus()` روی آن‌ها کار نمی‌کند و eventهای `focus/blur` هیچ وقت trigger نمی‌شوند. 
 
@@ -137,12 +136,12 @@ The list varies a bit between browsers, but one thing is always correct: `focus/
 برای مثال، اینجا یک لیست داریم. روی اولین item کلیک کنید و `key:Tab` را فشار دهید.
 
 ```html autorun no-beautify
-Click the first item and press Tab. Keep track of the order. Please note that many subsequent Tabs can move the focus out of the iframe in the example.
+روی اولین item کلیک کنید و Tab را فشار دهید. order را پیگری کنید. لطفا توجه داشته باشد که تعداد زیادی Tab بعدی می‌تواند focus را از iframe داخل مثال خارج کند.
 <ul>
-  <li tabindex="1">One</li>
-  <li tabindex="0">Zero</li>
-  <li tabindex="2">Two</li>
-  <li tabindex="-1">Minus one</li>
+  <li tabindex="1">یک</li>
+  <li tabindex="0">صفر</li>
+  <li tabindex="2">دو</li>
+  <li tabindex="-1">منهای یک</li>
 </ul>
 
 <style>
@@ -151,7 +150,7 @@ Click the first item and press Tab. Keep track of the order. Please note that ma
 </style>
 ```
 
-The order is like this: `1 - 2 - 0`. Normally, `<li>` does not support focusing, but `tabindex` full enables it, along with events and styling with `:focus`.
+ترتیب به این صورت است: `1 - 2 - 0`. به طور نرمال، `<li>` از focus پشتیبانی نمی‌کند اما `tabindex` آن را به همراه eventها و style دادن با `:focus` مهیا می‌کند.
 
 ```smart header="The property `elem.tabIndex` works too"
 We can add `tabindex` from JavaScript by using the `elem.tabIndex` property. That has the same effect.
