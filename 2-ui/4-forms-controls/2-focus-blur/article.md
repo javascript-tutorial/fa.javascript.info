@@ -202,14 +202,14 @@
 
 دوم، eventهای `focusin` و `focusout` وجود دارند. -- دقیقا مثل `focus/blur`، اما آن‌ها رفتار بالا رفتن حبابی دارند.
 
-Note that they must be assigned using `elem.addEventListener`, not `on<event>`.
+توجه داشته باشید که آن‌ها باید با استفاده از `elem.addEventListener` انتصاب داده شوند، نه `on<event>`.
 
-So here's another working variant:
+پس در اینجا یک نوع کار دیگر هست:
 
 ```html autorun height=80
 <form id="form">
-  <input type="text" name="name" value="Name">
-  <input type="text" name="surname" value="Surname">
+  <input type="text" name="name" value="نام">
+  <input type="text" name="surname" value="نام خانوادگی">
 </form>
 
 <style> .focused { outline: 1px solid red; } </style>
