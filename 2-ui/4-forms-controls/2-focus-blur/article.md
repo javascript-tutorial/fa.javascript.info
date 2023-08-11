@@ -222,12 +222,14 @@
 </script>
 ```
 
-## Summary
+## خلاصه
 
-Events `focus` and `blur` trigger on an element focusing/losing focus.
+فعال شدن eventهای `focus` و `blur` بسته به این است که آن عنصر فوکوس کند/از دست بدهد.
 
-Their specials are:
-- They do not bubble. Can use capturing state instead or `focusin/focusout`.
-- Most elements do not support focus by default. Use `tabindex` to make anything focusable.
 
-The current focused element is available as `document.activeElement`.
+
+استثناهای آن‌ّا عبارت‌اند از:
+- آن‌ها رفتار بالا رفتن حبابی ندارند. می‌توانند به جایش از حالت capturing یا `focusin/focusout` استفاده کنند.
+- بیشتر elementها به طور پیش‌فرض از focus پشتیبانی نمی‌کنند. از `tabindex` استفاده کنید تا هر چیزی قابلیت focus داشته باشد.
+
+عنصری که در حال حاضر روی آن focus شده است با `document.activeElement` قابل دسترسی است.
