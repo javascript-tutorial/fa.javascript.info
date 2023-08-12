@@ -130,12 +130,11 @@ alert(event.clientX); // undefined, the unknown property is ignored!
 لیست کاملی از  property  ها برای event های مختلف UI به تفکیک، برای مثال، [MouseEvent](https://www.w3.org/TR/uievents/#mouseevent).
 
 ## Custom events
+برای انواع events های کاملاً جدید خودمان مانند  `"hello"` باید از "CustomEvent جدید" استفاده کنیم. از نظر فنی [CustomEvent](https://dom.spec.whatwg.org/#customevent) با «رویداد» یکسان است،البته با یک استثنا.
 
-For our own, completely new events types like `"hello"` we should use `new CustomEvent`. Technically [CustomEvent](https://dom.spec.whatwg.org/#customevent) is the same as `Event`, with one exception.
+در آرگومان دوم (object) می‌توانیم یک ویژگی «detail» برای هر اطلاعات که می‌خواهیم با event ارسال کنیم، اضافه کنیم.
 
-In the second argument (object) we can add an additional property `detail` for any custom information that we want to pass with the event.
-
-For instance:
+برای مثال:
 
 ```html run refresh
 <h1 id="elem">Hello for John!</h1>
@@ -153,10 +152,9 @@ For instance:
   }));
 </script>
 ```
+ویژگی "detail" می تواند هر داده ای را داشته باشد. از نظر فنی می‌توانیم بدون آن زندگی کنیم، زیرا می‌توانیم هر ویژگی را پس از ایجاد یک شی `new Event` معمولی به آن اختصاص دهیم. اما `CustomEvent` فیلد  `detail` ویژه ای را برای جلوگیری از conflicts با سایر properti های رویداد فراهم می کند.
 
-The `detail` property can have any data. Technically we could live without, because we can assign any properties into a regular `new Event` object after its creation. But `CustomEvent` provides the special `detail` field for it to evade conflicts with other event properties.
-
-Besides, the event class describes "what kind of event" it is, and if the event is custom, then we should use `CustomEvent` just to be clear about what it is.
+علاوه بر این، event class توضیح می‌دهد که «چه نوع رویدادی» است، و اگر event is custom است، باید از  `CustomEvent` استفاده کنیم تا مشخص شود که چیست.
 
 ## event.preventDefault()
 
