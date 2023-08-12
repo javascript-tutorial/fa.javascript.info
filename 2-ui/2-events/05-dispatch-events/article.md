@@ -234,8 +234,7 @@ alert(event.clientX); // undefined, the unknown property is ignored!
 </script>
 ```
 
-ترتیب خروجی این است: 1 -> nested -> 2.
-
+ترتیب خروجی این است: 1 -> تودرتو (nested) -> 2 
 لطفاً توجه داشته باشید که منوی رویداد تودرتو که باز است در `document` وجود دارد. انتشار و مدیریت رویداد تودرتو قبل از اینکه پردازش به کد خارجی بازگردد (`onclick`) به پایان می رسد.
 
 این فقط مربوط به `dispatchEvent` نیست، موارد دیگری نیز وجود دارد. اگر یک کنترل کننده رویداد متدهایی را فراخوانی کند که رویدادهای دیگر را راه‌اندازی می‌کنند، آنها نیز به صورت همزمان و به صورت تودرتو پردازش می‌شوند.
@@ -269,23 +268,23 @@ alert(event.clientX); // undefined, the unknown property is ignored!
 
 ## Summary
 
-To generate an event from code, we first need to create an event object.
+برای تولید یک event code، ابتدا باید یک event object ایجاد کنیم.
 
-The generic `Event(name, options)` constructor accepts an arbitrary event name and the `options` object with two properties:
-- `bubbles: true` if the event should bubble.
-- `cancelable: true` if the `event.preventDefault()` should work.
+سازنده  `Event(name, options)` یک نام رویداد دلخواه و `options` object را با دو ویژگی می‌پذیرد:
+-  `bubbles: true` اگر رویداد باید حباب شود.
+- `cancelable: true`  اگر `event.preventDefault()` باید کار کند.
 
-Other constructors of native events like `MouseEvent`, `KeyboardEvent` and so on accept properties specific to that event type. For instance, `clientX` for mouse events.
+سایر سازنده‌های native events مانند `MouseEvent`, `KeyboardEvent` و غیره ویژگی‌های خاص آن نوع رویداد را می‌پذیرند. به عنوان مثال، `clientX` برای رویدادهای ماوس.
 
-For custom events we should use `CustomEvent` constructor. It has an additional option named `detail`, we should assign the event-specific data to it. Then all handlers can access it as `event.detail`.
+برای custom events باید از سازنده `CustomEvent` استفاده کنیم. این یک گزینه اضافی به نام `detail` دارد، ما باید داده های رویداد خاص را به آن اختصاص دهیم. سپس همه کنترل کننده ها می توانند به عنوان `event.detail` به آن دسترسی داشته باشند.
 
-Despite the technical possibility of generating browser events like `click` or `keydown`, we should use them with great care.
+علیرغم امکان فنی ایجاد browser events مانند `click` یا `keydown`، ما باید با دقت زیادی از آنها استفاده کنیم.
 
-We shouldn't generate browser events as it's a hacky way to run handlers. That's bad architecture most of the time.
+ما نباید browser events را ایجاد کنیم زیرا این یک روش هک برای اجرای کنترلرها است. این معماری در بیشتر مواقع بد است.
 
-Native events might be generated:
+هم چنین native events ممکن است ایجاد شوند:
 
-- As a dirty hack to make 3rd-party libraries work the needed way, if they don't provide other means of interaction.
-- For automated testing, to "click the button" in the script and see if the interface reacts correctly.
+- به عنوان یک dirty hack برای اینکه کتابخانه های شخص ثالث به روش مورد نیاز کار کنند، اگر ابزارهای تعامل دیگری را ارائه ندهند.
+- برای تست خودکار، روی دکمه "click the button" در اسکریپت و ببینید که آیا رابط به درستی واکنش نشان می دهد.
 
-Custom events with our own names are often generated for architectural purposes, to signal what happens inside our menus, sliders, carousels etc.
+ همک چنین custom events با نام خود ما اغلب برای مقاصد معماری ایجاد می شوند تا نشان دهند که چه اتفاقی در منوها، اسلایدر ها و غیره می افتد.
