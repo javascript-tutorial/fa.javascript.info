@@ -205,14 +205,15 @@ alert(event.clientX); // undefined, the unknown property is ignored!
 
 ## Events-in-events are synchronous
 
-Usually events are processed in a queue. That is: if the browser is processing `onclick` and a new event occurs, e.g. mouse moved, then its handling is queued up, corresponding `mousemove` handlers will be called after `onclick` processing is finished.
+معمولا رویدادها در یک صف پردازش می شوند. یعنی: اگر مرورگر در حال پردازش `onclick` باشد و یک رویداد جدید رخ دهد، به عنوان مثال: ماوس حرکت می کند، سپس handling آن در صف قرار می گیرد، پس از اتمام پردازش `onclick`، کنترل کننده های مربوط به `mousemove` فراخوانی می شوند.
 
-The notable exception is when one event is initiated from within another one, e.g. using `dispatchEvent`. Such events are processed immediately: the new event handlers are called, and then the current event handling is resumed.
+استثنا قابل توجه زمانی است که یک رویداد از درون رویداد دیگری آغاز می شود، به عنوان مثال: با استفاده از `dispatchEvent` چنین رویدادهایی بلافاصله پردازش می‌شوند: کنترل‌کننده‌های رویداد جدید فراخوانی می‌شوند و سپس مدیریت رویداد فعلی از سر گرفته می‌شود.
 
-For instance, in the code below the `menu-open` event is triggered during the `onclick`.
+به عنوان مثال، در کد زیر، رویداد  `menu-open` در حین کلیک فعال می شود.
 
-It's processed immediately, without waiting for `onclick` handler to end:
+بلافاصله پردازش می شود، بدون اینکه منتظر پایان کنترل کننده `onclick` باشد:
 
+بدون اینکه برای `onclick` handler صبر کند تا تمام شود، شروع به process شدن میشود:   
 
 ```html run autorun
 <button id="menu">Menu (click me)</button>
@@ -233,15 +234,15 @@ It's processed immediately, without waiting for `onclick` handler to end:
 </script>
 ```
 
-The output order is: 1 -> nested -> 2.
+ترتیب خروجی این است: 1 -> nested -> 2.
 
-Please note that the nested event `menu-open` is caught on the `document`. The propagation and handling of the nested event is finished before the processing gets back to the outer code (`onclick`).
+لطفاً توجه داشته باشید که منوی رویداد تودرتو که باز است در `document` وجود دارد. انتشار و مدیریت رویداد تودرتو قبل از اینکه پردازش به کد خارجی بازگردد (`onclick`) به پایان می رسد.
 
-That's not only about `dispatchEvent`, there are other cases. If an event handler calls methods that trigger other events -- they are processed synchronously too, in a nested fashion.
+این فقط مربوط به `dispatchEvent` نیست، موارد دیگری نیز وجود دارد. اگر یک کنترل کننده رویداد متدهایی را فراخوانی کند که رویدادهای دیگر را راه‌اندازی می‌کنند، آنها نیز به صورت همزمان و به صورت تودرتو پردازش می‌شوند.
 
-Let's say we don't like it. We'd want `onclick` to be fully processed first, independently from `menu-open` or any other nested events.
+بیایید بگوییم که آن را دوست نداریم. ما می خواهیم ابتدا `onclick` به طور کامل پردازش شود، مستقل از `menu-open` یا هر رویداد تو در تو.
 
-Then we can either put the `dispatchEvent` (or another event-triggering call) at the end of `onclick` or, maybe better, wrap it in the zero-delay `setTimeout`:
+سپس می‌توانیم `dispatchEvent` (یا یک تماس event-triggering) را در انتهای `onclick` قرار دهیم یا، شاید بهتر، آن را در `setTimeout` با تاخیر صفر قرار دهیم:
 
 ```html run
 <button id="menu">Menu (click me)</button>
@@ -260,10 +261,11 @@ Then we can either put the `dispatchEvent` (or another event-triggering call) at
   document.addEventListener('menu-open', () => alert('nested'));
 </script>
 ```
+حالا `dispatchEvent` یه صورت asynchronously بعد از اینکه اجرای کد فعلی به اتمام رسید،  run  میشود، که شامل `menu.onclick`. پس event handler ها به صورت جدت و مستقل فعالیت میکنند. 
 
-Now `dispatchEvent` runs asynchronously after the current code execution is finished, including `menu.onclick`, so event handlers are totally separate.
+خروجی خ.اهد بود:1 -> 2 -> nested.
 
-The output order becomes: 1 -> 2 -> nested.
+
 
 ## Summary
 
