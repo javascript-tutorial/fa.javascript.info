@@ -158,19 +158,19 @@ alert(event.clientX); // undefined, the unknown property is ignored!
 
 ## event.preventDefault()
 
-Many browser events have a "default action", such as navigating to a link, starting a selection, and so on.
+بسیاری از رویدادهای مرورگر دارای یک "default action" هستند، مانند پیمایش یک لینک، شروع یک انتخاب و غیره.
 
-For new, custom events, there are definitely no default browser actions, but a code that dispatches such event may have its own plans what to do after triggering the event.
+برای event های جدید و custom events، قطعاً هیچ اقدام پیش‌فرض مرورگر وجود ندارد، اما کدی که چنین رویدادی را ارسال می‌کند ممکن است برنامه‌های خاص خود را داشته باشد که پس از راه‌اندازی رویداد چه کاری انجام دهد.
 
-By calling `event.preventDefault()`, an event handler may send a signal that those actions should be canceled.
+با فراخوانی `event.preventDefault()`، یک کنترل کننده رویداد ممکن است سیگنالی ارسال کند که آن اقدامات باید لغو شوند.
 
-In that case the call to `elem.dispatchEvent(event)` returns `false`. And the code that dispatched it knows that it shouldn't continue.
+در آن صورت فراخوانی به `elem.dispatchEvent(event)` false برمی گردد. و کدی که آن را ارسال کرده می داند که نباید ادامه یابد.
 
-Let's see a practical example - a hiding rabbit (could be a closing menu or something else).
+بیایید یک مثال عملی ببینیم - یک خرگوش پنهان (ممکن است منوی بسته شدن یا چیز دیگری باشد).
 
-Below you can see a `#rabbit` and `hide()` function that dispatches `"hide"` event on it, to let all interested parties know that the rabbit is going to hide.
+در زیر می‌توانید یک تابع #rabbit and hide() را مشاهده کنید که رویداد "hide" را روی آن ارسال می‌کند تا به همه علاقه‌مندان اطلاع دهد که خرگوش قرار است مخفی شود.
 
-Any handler can listen for that event with `rabbit.addEventListener('hide',...)` and, if needed, cancel the action using `event.preventDefault()`. Then the rabbit won't disappear:
+هر کنترل‌کننده‌ای می‌تواند با `rabbit.addEventListener('hide',...)` به آن رویداد گوش دهد و در صورت نیاز، عمل را با استفاده از  `event.preventDefault()` لغو کند. سپس خرگوش ناپدید نمی شود:
 
 ```html run refresh autorun
 <pre id="rabbit">
@@ -201,8 +201,7 @@ Any handler can listen for that event with `rabbit.addEventListener('hide',...)`
   });
 </script>
 ```
-
-Please note: the event must have the flag `cancelable: true`, otherwise the call `event.preventDefault()` is ignored.
+نکته: event  حتما باید  flag `cancelable: true` را داشته باشد یا اینکه `event.preventDefault()` فراخوانی نمیشود. 
 
 ## Events-in-events are synchronous
 
