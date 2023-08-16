@@ -1,6 +1,6 @@
 
-We can use `mouse.onclick` to handle the click and make the mouse "moveable" with `position:fixed`, then `mouse.onkeydown` to handle arrow keys.
+ما می‌توانیم برای هندل کردن click از `mouse.onclick`، برای قابل حرکت دادن mouse از `position:fixed` و سپس از `mouse.onkeydown` برای هندل کردن کلید‌های جهت‌دار استفاده کنیم.
 
-The only pitfall is that `keydown` only triggers on elements with focus. So we need to add `tabindex` to the element.  As we're forbidden to change HTML, we can use `mouse.tabIndex` property for that.
+تنها مشکل این است که `keydown` فقط روی elementهایی که focus دارند فعال می‌شود. پس باید `tabindex` را به element اضافه کنیم. چون اجازه نداریم که HTML را تغییر دهیم، می‌توانیم برای آن از `mouse.tabIndex` استفاده کنیم.
 
-P.S. We also can replace `mouse.onclick` with `mouse.onfocus`.
+پی‌نوشت: همچنین می‌توانیم `mouse.onclick` را با `mouse.onfocus` جایگزین کنیم.
