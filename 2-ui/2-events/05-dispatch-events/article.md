@@ -153,6 +153,7 @@ alert(event.clientX); // undefined, the unknown property is ignored!
 ```
 ویژگی "detail" می تواند هر داده ای را داشته باشد. از نظر فنی می‌توانیم بدون آن زندگی کنیم، زیرا می‌توانیم هر ویژگی را پس از ایجاد یک شی `new Event` معمولی به آن اختصاص دهیم. اما `CustomEvent` فیلد  `detail` ویژه ای را برای جلوگیری از conflicts با سایر properti های رویداد فراهم می کند.
 
+
 علاوه بر این، event class توضیح می‌دهد که «چه نوع رویدادی» است، و اگر event is custom است، باید از  `CustomEvent` استفاده کنیم تا مشخص شود که چیست.
 
 ## event.preventDefault()
@@ -200,6 +201,7 @@ alert(event.clientX); // undefined, the unknown property is ignored!
   });
 </script>
 ```
+
 نکته: event  حتما باید  flag `cancelable: true` را داشته باشد یا اینکه `event.preventDefault()` فراخوانی نمیشود. 
 
 ## Events-in-events are synchronous
@@ -234,6 +236,7 @@ alert(event.clientX); // undefined, the unknown property is ignored!
 ```
 
 ترتیب خروجی این است: 1 -> تودرتو (nested) -> 2 
+
 لطفاً توجه داشته باشید که منوی رویداد تودرتو که باز است در `document` وجود دارد. انتشار و مدیریت رویداد تودرتو قبل از اینکه پردازش به کد خارجی بازگردد (`onclick`) به پایان می رسد.
 
 این فقط مربوط به `dispatchEvent` نیست، موارد دیگری نیز وجود دارد. اگر یک کنترل کننده رویداد متدهایی را فراخوانی کند که رویدادهای دیگر را راه‌اندازی می‌کنند، آنها نیز به صورت همزمان و به صورت تودرتو پردازش می‌شوند.
