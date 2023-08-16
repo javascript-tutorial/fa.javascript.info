@@ -18,14 +18,13 @@ let event = new Event(type[, options]);
 ```
 
 پارامتر ها: 
-Arguments:
 
 - *نوع*: event type,  یک رشته مانند `"click"` .
 - *گزینه ها*: شی ای با دو ویژگی اختیاری.
 - *Bubbles*:اگر true  بود یعنی  bubbled  می شود. 
 - *لغو شدن (true/false)*: اگر ویزگی مقدار true را داشت عمل پیش فرض آن لغو میشود،
 - به صورت پیش فرض: `{bubbles: false, cancelable: false}`.
-  
+- 
   ## dispatchEvent
 
 پس از ایجاد یک event، باید آن را روی یک element با استفاده از فراخوانی elem.dispatchEvent(event) اجرا کنیم.
