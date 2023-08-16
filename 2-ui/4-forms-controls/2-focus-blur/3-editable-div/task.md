@@ -8,7 +8,6 @@ importance: 5
 
 با کمک textarea می‌توانید HTML را در `<div>` ویرایش کنید.
 
-
 وقتی که کاربر `key:Enter` را فشار دهد یا آن focus را از دست بدهد، `<textarea>` دوباره به `<div>` تبدیل می‌شود و محتوای آن در `<div>` به HTML تبدیل می‌شود.
 
 [demo src="solution"]
