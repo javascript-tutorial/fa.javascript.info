@@ -2,12 +2,12 @@ importance: 4
 
 ---
 
-# Keyboard-driven mouse
+# ماوس همراه با کیبورد
 
-Focus on the mouse. Then use arrow keys to move it:
+روی موش focus کنید. سپس از کلیدهای جهت‌دار خود استفاده کنید تا آن را حرکت دهید. 
 
 [demo src="solution"]
 
-P.S. Don't put event handlers anywhere except the `#mouse` element.
+پی‌نوشت: از event handlerها جایی به جز element با آیدی `mouse#` استفاده نکنید.
 
-P.P.S. Don't modify HTML/CSS, the approach should be generic and work with any element.
+پی‌نوشت۲: فایل HTML/CSS را تغییر ندهید. رویکرد شما باید کلی باشد و با هر elementای کار کند. 

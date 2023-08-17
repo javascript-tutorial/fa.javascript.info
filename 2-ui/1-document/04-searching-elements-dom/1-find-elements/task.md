@@ -2,17 +2,17 @@ importance: 4
 
 ---
 
-# Search for elements
+# جستجوی elementها
 
-Here's the document with the table and form.
+اینجا document مربوط به table و form را می‌بینیم. 
 
-How to find?...
+چگونه موارد زیر را پیدا کنیم؟
 
-1. The table with `id="age-table"`.
-2. All `label` elements inside that table (there should be 3 of them).
-3. The first `td` in that table (with the word "Age").
-4. The `form` with `name="search"`.
-5. The first `input` in that form.
-6. The last `input` in that form.
+1. جدول با شناسه‌ی `id="age-table"`.
+2. تمام `label` های درون آن table (باید سه تا باشند)
+3. اولین `td` درون آن table (با کلمه‌ی "Age")
+4. `form` با `name="search"`
+5. اولین `input` در آن فرم
+6. آخرین `input` در آن فرم
 
-Open the page [table.html](table.html) in a separate window and make use of browser tools for that.
+صفحه‌ی [table.html](table.html) را در یک پنجره‌ی جدا باز کنید و از ابزارهای مرورگر برای آن استفاده کنید. 
