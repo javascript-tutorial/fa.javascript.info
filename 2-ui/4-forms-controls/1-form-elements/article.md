@@ -156,7 +156,7 @@ For instance:
 
 ### input and textarea
 
-.به مقدار آن دسترسی داشته باشیم radio buttons و checkboxes برای `input.value` (string) یا `input.checked` (boolean) ما می‌توانیم با
+.به مقدار آن‌ها دسترسی داشته باشیم radio buttons و checkboxes برای `input.value` (string) یا `input.checked` (boolean) ما می‌توانیم با
 
 مثل این:
 
@@ -168,20 +168,20 @@ input.checked = true; // radio button یا checkbox برای یک
 ```
 
 ```warn header="Use `textarea.value`, نه `textarea.innerHTML`"
-Please note that even though `<textarea>...</textarea>` holds its value as nested HTML, we should never use `textarea.innerHTML` to access it.
+.به آن دسترسی داشته باشیم `textarea.innerHTML` تو در تو حفظ می‌کند اما ما هرگز نباید از طریق HTML مقدار خود را به عنوان `<textarea>...</textarea>` لطفا توجه کنید که با اینکه
 
-It stores only the HTML that was initially on the page, not the current value.
+.که در ابتدا در صفحه بوده را ذخیره می‌کند، نه مقدار فعلی را HTML آن فقط
 ```
 
 ### select and option
 
-A `<select>` element has 3 important properties:
+:مهم دارد property سه `<select>` element یک
 
-1. `select.options` -- the collection of `<option>` subelements,
-2. `select.value` -- the *value* of the currently selected `<option>`,
-3. `select.selectedIndex` -- the *number* of the currently selected `<option>`.
+1. `select.options` -- `<option>` subelements مجموعه‌ای از 
+2. `select.value` -- در حال حاضر انتخاب شده `<option>` *مقدار*
+3. `select.selectedIndex` -- در حال حاضر انتخاب شده `<option>` *تعداد* 
 
-They provide three different ways of setting a value for a `<select>`:
+:عرضه می‌کنند `<select>` کردن یک مقدار برای set آن‌ها سه راه مختلف برای
 
 1. Find the corresponding `<option>` element (e.g. among `select.options`) and set its `option.selected` to `true`.
 2. If we know a new value: set `select.value` to the new value.
