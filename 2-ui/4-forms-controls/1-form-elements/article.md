@@ -161,8 +161,8 @@ For instance:
 مثل این:
 
 ```js
-input.value = "New value";
-textarea.value = "New text";
+input.value = "جدید value";
+textarea.value = "جدید text";
 
 input.checked = true; // radio button یا checkbox برای یک
 ```
@@ -173,7 +173,7 @@ input.checked = true; // radio button یا checkbox برای یک
 .که در ابتدا در صفحه بوده را ذخیره می‌کند، نه مقدار فعلی را HTML آن فقط
 ```
 
-### select and option
+### select و option
 
 :مهم دارد property سه `<select>` element یک
 
@@ -205,11 +205,11 @@ input.checked = true; // radio button یا checkbox برای یک
 </script>
 ```
 
-Unlike most other controls, `<select>` allows to select multiple options at once if it has `multiple` attribute. This attribute is rarely used, though.
+.به ندرت استفاده می‌شود attribute به طور همزمان انتخاب شوند. با این حال، این option داشته باشد، اجازه می‌دهد که چند attribute `چند` `<select>` های دیگر اگرcontrol برعکس بیشتر
 
-For multiple selected values, use the first way of setting values: add/remove the `selected` property from `<option>` subelements.
+.حذف/به آن اضافه کنید `<option>` subelements را از `selected` property برای چندین مقدار انتخاب شده، از روش اول برای تنظیم مقادیر استفاده کنید
 
-Here's an example of how to get selected values from a multi-select:
+:مقدار انتخاب‌شده را به دست آوریم ،multi-select اینجا یک مثال داریم از اینکه چگونه از یک
 
 ```html run
 <select id="select" *!*multiple*/!*>
@@ -219,7 +219,7 @@ Here's an example of how to get selected values from a multi-select:
 </select>
 
 <script>
-  // get all selected values from multi-select
+  // multi-select گرفتن تمام مقادیر انتخاب‌شده از
   let selected = Array.from(select.options)
     .filter(option => option.selected)
     .map(option => option.value);
@@ -228,11 +228,11 @@ Here's an example of how to get selected values from a multi-select:
 </script>
 ```
 
-The full specification of the `<select>` element is available in the specification <https://html.spec.whatwg.org/multipage/forms.html#the-select-element>.
+.موجود است <https://html.spec.whatwg.org/multipage/forms.html#the-select-element> در مشخصات `<select>` element مشخصات کامل
 
-### new Option
+### جدید Option
 
-In the [specification](https://html.spec.whatwg.org/multipage/forms.html#the-option-element) there's a nice short syntax to create an `<option>` element:
+:وجود دارد <option>` element کوتاه و زیبا برای ایجاد یک syntax یک [مشخصات](https://html.spec.whatwg.org/multipage/forms.html#the-option-element) در
 
 ```js
 option = new Option(text, value, defaultSelected, selected);
