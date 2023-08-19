@@ -183,25 +183,25 @@ input.checked = true; // radio button یا checkbox برای یک
 
 :عرضه می‌کنند `<select>` کردن یک مقدار برای set آن‌ها سه راه مختلف برای
 
-1. Find the corresponding `<option>` element (e.g. among `select.options`) and set its `option.selected` to `true`.
-2. If we know a new value: set `select.value` to the new value.
-3. If we know the new option number: set `select.selectedIndex` to that number.
+1. .قرار می‌دهد `true` آن را برابر `option.selected` و مقدار (برای مثال `select.options`) متناظر را پیدا می‌کند `<option>` عنصر 
+2. .را برابر آن مقدار جدید قرار می‌دهد `select.value` اگر یک مقدار جدید را بدانیم:
+3. .را برابر آن عدد قرار می‌دهد `select.selectedIndex` جدید را بدانیم: مقدار option number اگر
 
-Here is an example of all three methods:
+:اینجا مثالی از هر سه متد می‌بینیم
 
 ```html run
 <select id="select">
-  <option value="apple">Apple</option>
-  <option value="pear">Pear</option>
-  <option value="banana">Banana</option>
+  <option value="apple">سیب</option>
+  <option value="pear">گلابی</option>
+  <option value="banana">موز</option>
 </select>
 
 <script>
-  // all three lines do the same thing
+  // تمام سه خط کار یکسانی انجام می‌دهند
   select.options[2].selected = true; 
   select.selectedIndex = 2;
   select.value = 'banana';
-  // please note: options start from zero, so index 2 means the 3rd option.
+  // .option از صفر شروع می‌شوند، پس اندیس دو یعنی سومین options :لطفا دقت داشته باشید
 </script>
 ```
 
