@@ -105,34 +105,34 @@ For instance:
 </form>
 
 <script>
-  alert(form.elements.login == form.login); // true, the same <input>
+  alert(form.elements.login == form.login); // true, همان <input>
 
-  form.login.name = "username"; // change the name of the input
+  form.login.name = "username"; // را تغییر می‌دهد input نام
 
-  // form.elements updated the name:
+  // می‌کند update را name، forms.elements
   alert(form.elements.login); // undefined
   alert(form.elements.username); // input
 
 *!*
-  // form allows both names: the new one and the old one
+  // را مجاز می‌کند: هم جدید و هم قدیمی name فرم هر دو 
   alert(form.username == form.login); // true
 */!*
 </script>
 ```
 
-That's usually not a problem, however, because we rarely change names of form elements.
+با این حال، این معمولا یک مشکل نیست، چون ما به ندرت نام elementهای فرم را تغییر می‌دهیم.
 
 ````
 
 ## Backreference: element.form
 
-For any element, the form is available as `element.form`. So a form references all elements, and elements reference the form.
+برای هر elementای، فرم به عنوان `element.form` قابل دسترسی است. بنابراین یک فرم به همه‌ی elementها ارجاع می‌دهد و elementها هم به فرم ارجاع می‌دهند.
 
-Here's the picture:
+این هم تصویرش است:
 
 ![](form-navigation.svg)
 
-For instance:
+برای مثال:
 
 ```html run height=40
 <form id="form">
@@ -152,22 +152,22 @@ For instance:
 
 ## Form elements
 
-Let's talk about form controls.
+.صحبت کنیم form controls بیایید درباره‌ی 
 
 ### input and textarea
 
-We can access their value as `input.value` (string) or `input.checked` (boolean) for checkboxes and radio buttons.
+.به مقدار آن دسترسی داشته باشیم radio buttons و checkboxes برای `input.value` (string) یا `input.checked` (boolean) ما می‌توانیم با
 
-Like this:
+مثل این:
 
 ```js
 input.value = "New value";
 textarea.value = "New text";
 
-input.checked = true; // for a checkbox or radio button
+input.checked = true; // radio button یا checkbox برای یک
 ```
 
-```warn header="Use `textarea.value`, not `textarea.innerHTML`"
+```warn header="Use `textarea.value`, نه `textarea.innerHTML`"
 Please note that even though `<textarea>...</textarea>` holds its value as nested HTML, we should never use `textarea.innerHTML` to access it.
 
 It stores only the HTML that was initially on the page, not the current value.
