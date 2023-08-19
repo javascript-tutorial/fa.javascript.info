@@ -238,16 +238,16 @@ input.checked = true; // radio button یا checkbox برای یک
 option = new Option(text, value, defaultSelected, selected);
 ```
 
-This syntax is optional. We can use `document.createElement('option')` and set attributes manually. Still, it may be shorter, so here are the parameters:
+:را به صورت دستی مقداردهی کنیم. با این حال،‌ ممکن است کوتاه‌تر باشد پس اینجا پارامترها وجود دارند attributes استقاده کنیم و `document.createElement('option')` اختیاری است، ما می‌توانیم از syntax این
 
-- `text` -- the text inside the option,
-- `value` -- the option value,
-- `defaultSelected` -- if `true`, then `selected` HTML-attribute is created,
-- `selected` -- if `true`, then the option is selected.
+- `text` -- option متن درون,
+- `value` -- option مقدار,
+- `defaultSelected` -- ایجاد می‌شود `selected` HTML-attribute باشد `true` اگر
+- `selected` -- انتخاب می‌شود option باشد `true` اگر
 
-The difference between `defaultSelected` and `selected` is that `defaultSelected` sets the HTML-attribute (that we can get using `option.getAttribute('selected')`, while `selected` sets whether the option is selected or not.
+.انتخاب شده است یا نه option مشخص می‌کند که آیا `selected` در حالی که (آن را بگیریم `option.getAttribute('selected')` که ما می‌توانیم با) می‌کند set را HTML-attribute مقدار `defaultSelected` در این است که `selected` و `defaultSelected` تفاوت بین
 
-In practice, one should usually set _both_ values to `true` or `false`. (Or, simply omit them; both default to `false`.)
+(`false` یا به سادگی حذف شوند، مقدار پیش‌فرض هر دو) .باشند `false` یا `true` در عمل باید معمولا _هر دو_ مقدار
 
 For instance, here's a new "unselected" option:
 
