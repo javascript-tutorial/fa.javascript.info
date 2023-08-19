@@ -1,8 +1,8 @@
-# Form properties and methods
+# Form properties و methodها
 
-Forms and control elements, such as `<input>` have a lot of special properties and events.
+فرم‌ها و control elementها مثل `<input>` دارای prperty و eventهای ویژه‌ای هستند.
 
-Working with forms will be much more convenient when we learn them.
+وقتی فرم‌ها را یاد بگیریم، کار کردن با آن‌ها بسیار راحت‌تر می‌شود.
 
 ## Navigation: form and elements
 
