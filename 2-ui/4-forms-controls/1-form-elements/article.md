@@ -1,4 +1,4 @@
-# Form properties و methodها
+# Form properties و methods
 
 فرم‌ها و control elementها مثل `<input>` دارای prperty و eventهای ویژه‌ای هستند.
 
@@ -6,18 +6,19 @@
 
 ## Navigation: form and elements
 
-Document forms are members of the special collection `document.forms`.
+فرم‌های document از اعضای مجموعه‌ی ویژه‌ی `document.forms` هستند.
 
-That's a so-called *"named collection"*: it's both named and ordered. We can use both the name or the number in the document to get the form.
+این به اصطلاح یک مجموعه‌ی نام‌گذاری شده است: هم نام‌گذاری شده و هم ترتیب‌دار شده است. برای دسترسی به فرم می‌توانیم هم از نام آن و هم از شماره‌ی آن در document استفاده کنیم.
+
 
 ```js no-beautify
-document.forms.my; // the form with name="my"
-document.forms[0]; // the first form in the document
+document.forms.my; // "my" = فرم با نام
+document.forms[0]; // document اولین فرم در
 ```
 
-When we have a form, then any element is available in the named collection `form.elements`.
+وقتی یک فرم داریم،‌ در این صورت هر elementای در مجموعه‌ی نام‌گذاری شده با `form.elements` قابل دسترسی است.
 
-For instance:
+برای مثال:
 
 ```html run height=40
 <form name="my">
@@ -26,19 +27,19 @@ For instance:
 </form>
 
 <script>
-  // get the form
+  // form گرفتن
   let form = document.forms.my; // <form name="my"> element
 
-  // get the element
+  // element گرفتن
   let elem = form.elements.one; // <input name="one"> element
 
   alert(elem.value); // 1
 </script>
 ```
 
-There may be multiple elements with the same name. This is typical with radio buttons and checkboxes.
+ممکن است elementهای زیادی با نام یکسان وجود داشته باشند. این در مورد radio buttonها و checkboxها معمول است.
 
-In that case, `form.elements[name]` is a *collection*. For instance:
+در آن صورت، `form.elements[name]` یک *مجموعه*‌است. برای مثال:‌
 
 ```html run height=40
 <form>
@@ -57,11 +58,11 @@ alert(ageElems[0]); // [object HTMLInputElement]
 </script>
 ```
 
-These navigation properties do not depend on the tag structure. All control elements, no matter how deep they are in the form, are available in `form.elements`.
+این navigation propertyها به tag structure وابستگی ندارند. تمام control elementها، فرقی ندارد چقدر در فرم عمیق باشند، در `form.elements` قابل دسترسی هستند.
 
 
 ````smart header="Fieldsets as \"subforms\""
-A form may have one or many `<fieldset>` elements inside it. They also have `elements` property that lists form controls inside them.
+.را درون خود فهرست می‌کنند form controls دارند که `elements` property در خودش داشته باشد. آن‌ها همچنین `<fieldset>` elements یک فرم ممکن است یک یا چند
 
 For instance:
 
@@ -81,7 +82,7 @@ For instance:
     let fieldset = form.elements.userFields;
     alert(fieldset); // HTMLFieldSetElement
 
-    // we can get the input by name both from the form and from the fieldset
+    // .دریافت کنیم fieldset و هم از form را با نام هم از input ما می‌توانیم
     alert(fieldset.elements.login == form.elements.login); // true
 */!*
   </script>
@@ -89,14 +90,14 @@ For instance:
 ```
 ````
 
-````warn header="Shorter notation: `form.name`"
-There's a shorter notation: we can access the element as `form[index/name]`.
+````warn header="نماد کوتاه‌تر: `form.name`"
+.دسترسی داشته باشیم element به `form[index/name]` کوتاه‌تر هم وجود دارد: ما می‌توانیم با notation یک
 
-In other words, instead of `form.elements.login` we can write `form.login`.
+به عبارت دیگر، به جای `form.elements.login` می‌توانیم بنویسیم `form.login`. 
 
-That also works, but there's a minor issue: if we access an element, and then change its `name`, then it is still available under the old name (as well as under the new one).
+آن هم کار می‌کند، ولی یک مشکل جزئی وجود دارد: اگر به یک element دسترسی داشته باشیم، و بعد `name` آن را تغییر بدهیم، آنگاه آن هنوز با نام قدیمی قابل دسترسی است (همچنین با نام جدید)
 
-That's easy to see in an example:
+آسان‌تر است که آن را در یک مثال ببینیم:
 
 ```html run height=40
 <form id="form">
