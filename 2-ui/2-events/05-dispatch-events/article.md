@@ -156,10 +156,9 @@ alert(event.clientX); // undefined, the unknown property is ignored!
   }));
 </script>
 ```
-ویژگی "detail" می تواند هر داده ای را داشته باشد. از نظر فنی می‌توانیم بدون آن زندگی کنیم، زیرا می‌توانیم هر ویژگی را پس از ایجاد یک شی `new Event` معمولی به آن اختصاص دهیم. اما `CustomEvent` فیلد  `detail` ویژه ای را برای جلوگیری از conflicts با سایر properti های رویداد فراهم می کند.
+ویژگی `detail` می تواند هر داده ای را داشته باشد. از نظر فنی می‌توانیم آن را تنظیم نکنیم، زیرا می‌توانیم هر ویژگی را پس از ایجاد یک شی `new Event` معمولی به آن اختصاص دهیم. اما `CustomEvent` فیلد  `detail` ویژه ای را برای جلوگیری از conflicts با سایر property های event فراهم می کند.
 
-
-علاوه بر این، event class توضیح می‌دهد که «چه نوع رویدادی» است، و اگر event is custom است، باید از  `CustomEvent` استفاده کنیم تا مشخص شود که چیست.
+علاوه بر این، کلاس event توضیح می‌دهد که «چه نوع رویدادی» است، و اگر event سفارشی باشد، باید از  `CustomEvent` استفاده کنیم تا مشخص شود که چیست.
 
 ## event.preventDefault()
 
@@ -173,7 +172,7 @@ alert(event.clientX); // undefined, the unknown property is ignored!
 
 بیایید یک مثال عملی ببینیم - یک خرگوش پنهان (ممکن است منوی بسته شدن یا چیز دیگری باشد).
 
-در زیر می‌توانید یک تابع #rabbit and hide() را مشاهده کنید که رویداد "hide" را روی آن ارسال می‌کند تا به همه علاقه‌مندان اطلاع دهد که خرگوش قرار است مخفی شود.
+در زیر می‌توانید یک element با آیدی `#rabbit` و یک تابع `hide()` را مشاهده کنید که رویداد `"hide"` را روی آن ارسال می‌کند تا به همه علاقه‌مندان اطلاع دهد که خرگوش قرار است مخفی شود.
 
 هر کنترل‌کننده‌ای می‌تواند با `rabbit.addEventListener('hide',...)` به آن رویداد گوش دهد و در صورت نیاز، عمل را با استفاده از  `event.preventDefault()` لغو کند. سپس خرگوش ناپدید نمی شود:
 
@@ -207,7 +206,7 @@ alert(event.clientX); // undefined, the unknown property is ignored!
 </script>
 ```
 
-نکته: event حتما باید  flag `cancelable: true` را داشته باشد یا اینکه `event.preventDefault()` فراخوانی نمیشود. 
+نکته: event  حتما باید `cancelable: true` را داشته باشد یا اینکه `event.preventDefault()` فراخوانی نمی شود. 
 
 ## Events-in-events are synchronous
 
@@ -217,7 +216,7 @@ alert(event.clientX); // undefined, the unknown property is ignored!
 
 به عنوان مثال، در کد زیر، رویداد `menu-open` در حین کلیک فعال می شود.
 
-بلافاصله پردازش می شود، بدون اینکه منتظر پایان کنترل کننده `onclick` باشد:
+بدون اینکه برای هندلر `onclick` صبر کند تا تمام شود، پردازش می‌ شود:   
 
 بدون اینکه برای `onclick` هندلر صبر کند تا تمام شود، شروع به process شدن میشود:   
 
@@ -248,7 +247,7 @@ alert(event.clientX); // undefined, the unknown property is ignored!
 
 بیایید بگوییم که آن را دوست نداریم. ما می خواهیم ابتدا `onclick` به طور کامل پردازش شود، مستقل از `menu-open` یا هر رویداد تو در تو.
 
-سپس می‌توانیم `dispatchEvent` (یا یک تماس event-triggering) را در انتهای `onclick` قرار دهیم یا، شاید بهتر، آن را در `setTimeout` با تاخیر صفر قرار دهیم:
+سپس می‌توانیم `dispatchEvent` (یا یک فراخوانی event-triggering) را در انتهای `onclick` قرار دهیم یا، شاید بهتر، آن را در `setTimeout` با تاخیر صفر قرار دهیم:
 
 ```html run
 <button id="menu">Menu (click me)</button>
@@ -269,11 +268,11 @@ alert(event.clientX); // undefined, the unknown property is ignored!
 ```
 حالا `dispatchEvent` یه صورت asynchronously بعد از اینکه اجرای کد فعلی به اتمام رسید،  run  میشود، که شامل `menu.onclick`. پس event handler ها به صورت جدت و مستقل فعالیت میکنند. 
 
-خروجی خ.اهد بود:1 -> 2 -> nested.
+خروجی به این ترتیب خواهد بود: 1 -> 2 -> nested.
 
 
 
-## Summary
+## خلاصه
 
 برای تولید یک event code، ابتدا باید یک event object ایجاد کنیم.
 
