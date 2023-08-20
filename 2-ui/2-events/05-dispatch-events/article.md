@@ -6,48 +6,51 @@
 
 باز کردن (باز کردن منو)، انتخاب (یک مورد انتخاب شده است) و غیره. کد دیگری ممکن است به event ها گوش دهد و آنچه را که در منو اتفاق می افتد مشاهده کند.
 
-ما می‌توانیم نه تنها event های کاملاً جدیدی را که برای اهداف خود اختراع می‌کنیم، بلکه همچنین event های داخلی مانند کلیک، پایین آوردن ماوس و غیره را ایجاد کنیم. ممکن است برای آزمایش خودکار مفید باشد.
+ما می‌توانیم نه تنها event های کاملاً جدیدی را که برای اهداف خود اختراع می‌کنیم، بلکه همچنین event های داخلی مانند کلیک، پایین آوردن ماوس و غیره را ایجاد کنیم. ممکن است برای تست خودکار نرم افزار مفید باشد.
 
 ## Event constructor
 
-کلاس های internal event یک سلسله مراتب را تشکیل می دهند، مشابه کلاس های عنصر DOM. ریشه کلاس رویداد داخلی است.
+کلاس های event متعلق به زبان یک سلسله مراتب را تشکیل می دهند، مشابه کلاس های عنصر DOM. ریشه آن، کلاس درون‌ساخت [Event](https://dom.spec.whatwg.org/#events) است.
 
-ما می توانیم object event ها را مانند این ایجاد کنیم: [Event](https://dom.spec.whatwg.org/#events) 
-
+ما می توانیم اشیاء event را به این صورت ایجاد کنیم: 
 ```js
 let event = new Event(type[, options]);
 ```
 
 پارامتر ها: 
 
-- *نوع*: event type,  یک رشته مانند `"click"` .
-- *گزینه ها*: شی ای با دو ویژگی اختیاری.
+- *type*: event type,  یک رشته مانند `"click"` .
+- *options*: شی ای با دو ویژگی اختیاری.
 - *Bubbles*:اگر true  بود یعنی  bubbled  می شود. 
-- *لغو شدن (true/false)*: اگر ویزگی مقدار true را داشت عمل پیش فرض آن لغو میشود،
+- *cancelable (true/false)*: اگر ویزگی مقدار true را داشت عمل پیش فرض آن لغو میشود،
 - به صورت پیش فرض: `{bubbles: false, cancelable: false}`.
 - 
   ## dispatchEvent
 
-پس از ایجاد یک event، باید آن را روی یک element با استفاده از فراخوانی elem.dispatchEvent(event) اجرا کنیم.
+پس از ایجاد یک event، باید آن را روی یک element با استفاده از فراخوانی `elem.dispatchEvent(event)` اجرا کنیم.
 
 سپس هندلر ها به آن واکنش نشان می دهند که گویی یک event معمولی مرورگر است. اگر event با bubble flag ها ایجاد شده باشد، bubbled می شود.
 
-در مثال زیر event کلیک در جاوااسکریپت آغاز می شود. هندلر به همان روشی کار می کند که اگر روی دکمه کلیک شده باشد:
+در مثال زیر رویداد `click` در جاوااسکریپت آغاز می شود. هندلر به همان روشی کار می کند که اگر روی دکمه کلیک شده باشد:
 ```html run no-beautify
 <button id="elem" onclick="alert('Click!');">Autoclick</button>
 
 <script>
+
   let event = new Event("click");
   elem.dispatchEvent(event);
 </script>
 ```
 
-راهی برای تشخیص یک user event "واقعی" از event تولید شده توسط اسکریپت وجود دارد.
+```smart header="event.isTrusted"
 
-ویژگی 'event.isTrusted' برای event هایی که از اقدامات واقعی کاربر ناشی می شوند 'true' و برای event های تولید شده توسط اسکریپت 'false' است.
+ راهی برای تشخیص یک user event "واقعی" از event تولید شده توسط اسکریپت وجود دارد.
+
+ ویژگی 'event.isTrusted' برای رویدادهایی که از اقدامات کاربر واقعی ناشی می شوند 'true' و برای رویدادهای تولید شده توسط اسکریپت 'false' است.
+```
 
 
-## Bubbling example
+## مثالی از Bubbling 
 
 
 می‌توانیم یک bubbling event با نام `"hello"` ایجاد کنیم و آن را در `document` بگیریم.
@@ -75,10 +78,10 @@ let event = new Event(type[, options]);
 
 نکات:
 
-1. باید از `addEventListener` برای custom  کردن  event ها استفاده کرد، زیرا `on<event>` فقط برای built-in event وجود دارد و `document.onhello` کار نمیکند. 
-2. باید `bubbles:true` را  set  کنیم مگرنه event  bubble up  نخواهد شد.
+1. باید از `addEventListener` برای شخصی‌سازی eventها استفاده کرد، زیرا `on<event>` فقط برای eventهای متعلق به زبان وجود دارد و `document.onhello` کار نمی کند. 
+2. باید `bubbles:true` را تنظیم کنیم وگرنه رویداد bubble up نخواهد شد.
 
-مکانیک bubbling برای built-in (`click`) و custom (`hello`) یکسان است. هم چنین مراحلی برای گرفتن و bubbling نیز وجود دارد.
+مکانیک bubbling برای event درون‌ساخت (`click`) و event شخصی‌سازه‌شده (`hello`) یکسان است.  هم چنین مراحلی برای capturing و bubbling نیز وجود دارد.
 
 ## MouseEvent, KeyboardEvent and others
 
@@ -109,6 +112,7 @@ let event = new MouseEvent("click", {
 alert(event.clientX); // 100
 */!*
 ```
+
 لطفا به یاد داشته باشد: constructor های generic `Event` اجازه این کار را نمیدهد.
 
 بیایید این روش را امتحان کنیم:
@@ -125,15 +129,14 @@ let event = new Event("click", {
 alert(event.clientX); // undefined, the unknown property is ignored!
 */!*
 ```
-از نظر فنی، می‌توانیم با اختصاص مستقیم `event.clientX=100` پس از ایجاد، آن را حل کنیم. بنابراین این موضوع راحت و پیروی از قوانین است. event های ایجاد شده توسط مرورگر همیشه نوع مناسبی دارند.
+ااز نظر فنی، می‌توانیم با اختصاص مستقیم `event.clientX=100` پس از ایجاد، آن را حل کنیم. بنابراین این موضوع راحت و پیروی از قوانین است. event های ایجاد شده توسط مرورگر همیشه از نوع مناسبی هستند.
 
-لیست کاملی از property ها برای event های مختلف UI به تفکیک، برای مثال، [MouseEvent](https://www.w3.org/TR/uievents/#mouseevent).
+للیست کاملی از  propertyها برای eventهای مختلف UI در مشخصات زبان وجود دارد، برای مثال، [MouseEvent](https://www.w3.org/TR/uievents/#mouseevent).
+## event شخصی‌سازی‌شد
 
-## Custom events
+برای انواع events های کاملاً جدید خودمان مانند  `"hello"` باید از `new CustomEvent` استفاده کنیم. از نظر فنی [CustomEvent](https://dom.spec.whatwg.org/#customevent) با `Event` یکسان است،البته با یک استثنا.
 
-برای انواع events های کاملاً جدید خودمان مانند `"hello"` باید از "CustomEvent جدید" استفاده کنیم. از نظر فنی [CustomEvent](https://dom.spec.whatwg.org/#customevent) با «رویداد» یکسان است،البته با یک استثنا.
-
-در آرگومان دوم (object) می‌توانیم یک ویژگی «detail» برای هر اطلاعات که می‌خواهیم با event ارسال کنیم، اضافه کنیم.
+در آرگومان دوم (object) می‌توانیم یک ویژگی `detail` برای هر اطلاعات که می‌خواهیم با event ارسال کنیم، اضافه کنیم.
 
 برای مثال:
 
