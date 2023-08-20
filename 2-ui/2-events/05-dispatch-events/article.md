@@ -16,7 +16,6 @@
 ```js
 let event = new Event(type[, options]);
 ```
-
 پارامتر ها: 
 
 - *type*: event type,  یک رشته مانند `"click"` .
@@ -48,7 +47,6 @@ let event = new Event(type[, options]);
 
  ویژگی 'event.isTrusted' برای رویدادهایی که از اقدامات کاربر واقعی ناشی می شوند 'true' و برای رویدادهای تولید شده توسط اسکریپت 'false' است.
 ```
-
 
 ## مثالی از Bubbling 
 
