@@ -19,4 +19,4 @@ importance: 5
 2. یک option اضافه کنید: `<option value="classic">Classic</option>`.
 3. ان را selected بکنید.
 
-توجه کنید که اگر همه چیز را درست انجام داده باشد alert باید `blues` را نشان دهد.
+توجه کنید که اگر همه چیز را درست انجام داده باشید alert باید `blues` را نشان دهد.
