@@ -1,7 +1,6 @@
 # Events: change, input, cut, copy, paste
 
-Let's cover various events that accompany data updates.
-
+بیایید event های مختلفی را که همراه با به روز رسانی داده ها هستند، پوشش دهیم.
 ## Event: change
 
 The `change` event triggers when the element has finished changing.
