@@ -249,51 +249,51 @@ option = new Option(text, value, defaultSelected, selected);
 
 (`false` یا به سادگی حذف شوند، مقدار پیش‌فرض هر دو) .باشند `false` یا `true` در عمل باید معمولا _هر دو_ مقدار
 
-For instance, here's a new "unselected" option:
+برای مثال، اینجا بک "unselected" option داریم:
 
 ```js
 let option = new Option("Text", "value");
-// creates <option value="value">Text</option>
+// ایجاد می‌کند <option value="value">Text</option>
 ```
 
-The same option, but selected:
+شده select اما option همان
 
 ```js
 let option = new Option("Text", "value", true, true);
 ```
 
-Option elements have properties:
+:دارند property یک سری Option elements
 
 `option.selected`
-: Is the option selected.
+: انتخاب شده است یا نه option
 
 `option.index`
-: The number of the option among the others in its `<select>`.
+خودش `<select>` در بین بقیه option عدد :
 
 `option.text`
-: Text content of the option (seen by the visitor).
+(توسط بازدیدکننده دیده می‌شود) option محتوای متنی :
 
-## References
+## منابع
 
-- Specification: <https://html.spec.whatwg.org/multipage/forms.html>.
+- جزئیات: <https://html.spec.whatwg.org/multipage/forms.html>.
 
-## Summary
+## خلاصه
 
 Form navigation:
 
 `document.forms`
-: A form is available as `document.forms[name/index]`.
+.قابل دسترسی است `document.forms[name/index]` یک فرم با :
 
 `form.elements`  
-: Form elements are available as `form.elements[name/index]`, or can use just `form[name/index]`. The `elements` property also works for `<fieldset>`.
+.کار می‌کنند `<fieldset>` همچنین با `elements` property استفاده کرد. `form[name/index]` قابل دسترسی هستند، یا فقط می‌توان از `form.elements[name/index]` با Form elements عناصر :
 
 `element.form`
-: Elements reference their form in the `form` property.
+.به فرم خود ارجاع می‌دهند `form` property عناصر در :
 
-Value is available as `input.value`, `textarea.value`, `select.value`, etc. (For checkboxes and radio buttons, use `input.checked` to determine whether a value is selected.)
+(.استفاده کنید که مشخص می‌کند یک مقدار انتخاب شده است یا نه `input.checked` از radio buttons و checkboxes برای) و ... قابل دسترسی است. `input.value`، `textarea.value`، `select.value` با value مقدار
 
-For `<select>`, one can also get the value by the index `select.selectedIndex` or through the options collection `select.options`.
+.به دست آورد options collection `select.options` یا از طریق `select.selectedIndex` همچنین می‌توان مقدار را با اندیس `<select>` برای 
 
-These are the basics to start working with forms. We'll meet many examples further in the tutorial.
+این‌ها مبانی شروع کار با فرم‌ها هستند. ما مثال‌های بیشتری را در آموزش خواهیم دید.
 
-In the next chapter we'll cover `focus` and `blur` events that may occur on any element, but are mostly handled on forms.
+.را پوشش خواهیم داد که ممکن است در هر عنصری اتفاق بیفتند، اما بیشتر در فرم‌ها مدیریت می‌شوند `blur` و `focus` در فصل بعدی ما
