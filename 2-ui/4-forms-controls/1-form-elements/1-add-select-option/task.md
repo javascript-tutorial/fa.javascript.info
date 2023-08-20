@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# Add an option to select
+# اضافه کردن یک option به select
 
-There's a `<select>`:
+یک `<select>` وجود دارد:
 
 ```html
 <select id="genres">
@@ -13,10 +13,10 @@ There's a `<select>`:
 </select>
 ```
 
-Use JavaScript to:
+از JavaScript استفاده کنید تا:
 
-1. Show the value and the text of the selected option.
-2. Add an option: `<option value="classic">Classic</option>`.
-3. Make it selected.
+1. مقدار و متن selected option را نشان دهید.
+2. یک option اضافه کنید: `<option value="classic">Classic</option>`.
+3. ان را selected بکنید.
 
-Note, if you've done everything right, your alert should show `blues`.
+توجه کنید که اگر همه چیز را درست انجام داده باشد alert باید `blues` را نشان دهد.
