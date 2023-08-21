@@ -1,35 +1,35 @@
 # Events: change, input, cut, copy, paste
 
-Let's cover various events that accompany data updates.
+بیایید eventهای مختلفی که همراه با آپدیت داده‌ها هستند پوشش دهیم.
 
 ## Event: change
 
-The `change` event triggers when the element has finished changing.
+وقنی که تغییر یک element تمام می‌شود، `change` event فعال می‌شود.
 
-For text inputs that means that the event occurs when it loses focus.
+برای text inputها این یعنی که event زمانی اتفاق می‌افتد که focus را از دست می‌دهد.
 
-For instance, while we are typing in the text field below -- there's no event. But when we move the focus somewhere else, for instance, click on a button -- there will be a `change` event:
+برای مثال وقتی که ما داریم در text field زیر تایپ می‌کنیم -- هیچ eventای وجود ندارد. اما وقتی focus را به جایی دیگر منتقل می‌کنیم، برای مثال، روی یک button کلیک می‌کنیم، یک `change` event به وجود خواهد آمد:
 
 ```html autorun height=40 run
 <input type="text" onchange="alert(this.value)">
 <input type="button" value="Button">
 ```
 
-For other elements: `select`, `input type=checkbox/radio` it triggers right after the selection changes:
+برای دیگر elementها: `select` و `input type=checkbox/radio` دقیقا بعد از آن که انتخاب تغییر می‌کند فعال می‌شود:
 
 ```html autorun height=40 run
 <select onchange="alert(this.value)">
-  <option value="">Select something</option>
-  <option value="1">Option 1</option>
-  <option value="2">Option 2</option>
-  <option value="3">Option 3</option>
+  <option value="">چیزی را انتخاب کنید</option>
+  <option value="1">انتخاب 1</option>
+  <option value="2">انتخاب 2</option>
+  <option value="3">انتخاب 3</option>
 </select>
 ```
 
 
 ## Event: input
 
-The `input` event triggers every time after a value is modified by the user.
+هر بار پس از آن که یک مقدار توسط کاربر تغییر می‌کند، `input` event فعال می‌شود.
 
 Unlike keyboard events, it triggers on any value change, even those that does not involve keyboard actions: pasting with a mouse or using speech recognition to dictate the text.
 
