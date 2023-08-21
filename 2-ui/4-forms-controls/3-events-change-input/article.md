@@ -81,11 +81,11 @@
 </script>
 ```
 
-Please note: inside `cut` and `copy` event handlers a call to  `event.clipboardData.getData(...)` returns an empty string. That's because technically the data isn't in the clipboard yet. If we use `event.preventDefault()` it won't be copied at all.
+لطفا توجه داشته باشید: درون `cut` and `copy` event handlers یک فراخوانی `event.clipboardData.getData(...)` یک رشته‌ی خالی برمی‌گرداند. این به این دلیل است که از نظر تکنیکی، داده هنوز در clipboard نیست. اگر از `event.preventDefault()` استفاده کنیم آن اصلا کپی نمی‌شود. 
 
-So the example above uses `document.getSelection()` to get the selected text. You can find more details about document selection in the article <info:selection-range>.
+پس مثال بالا از `document.getSelection()` استفاده می‌کند تا متن انتخاب‌شده را بگیرد. می‌توانید جزئیات بیشتری درباره‌ی document selection در مقاله‌ی <info:selection-range> پیدا کنید. 
 
-It's possible to copy/paste not just text, but everything. For instance, we can copy a file in the OS file manager, and paste it.
+این ممکن است که فقط متن را، بلکه همه چیز را copy/paste کنیم. برای مثال می‌توانیم یک فایل را در OS file manager کپی و paste کنیم.
 
 That's because `clipboardData` implements `DataTransfer` interface, commonly used for drag'n'drop and copy/pasting. It's a bit beyond our scope now, but you can find its methods in the [DataTransfer specification](https://html.spec.whatwg.org/multipage/dnd.html#the-datatransfer-interface).
 
