@@ -7,9 +7,9 @@
 
 ## Syntax
 
-`MutationObserver` is easy to use.
+استفاده از `MutationObserver` بسیار ساده است.
 
-First, we create an observer with a callback-function:
+اول از ههمه، یک observer با استفاده از callback-function می سازیم:  
 
 ```js
 let observer = new MutationObserver(callback);
