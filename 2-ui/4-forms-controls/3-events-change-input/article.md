@@ -31,9 +31,9 @@
 
 هر بار پس از آن که یک مقدار توسط کاربر تغییر می‌کند، `input` event فعال می‌شود.
 
-Unlike keyboard events, it triggers on any value change, even those that does not involve keyboard actions: pasting with a mouse or using speech recognition to dictate the text.
+برعکس keyboard inputها، آن با هر تغییر مقداری فعال می‌شود، حتی آن‌هایی که شامل keyboard actions نمی‌شوند: paste کردن با یک موش یا استفاده از تشخیص گفتار برای دیکته کردن متن.
 
-For instance:
+برای مثال:
 
 ```html autorun height=40 run
 <input type="text" id="input"> oninput: <span id="result"></span>
@@ -44,23 +44,25 @@ For instance:
 </script>
 ```
 
-If we want to handle every modification of an `<input>` then this event is the best choice.
+اگر بخواهیم تمام تغییرات یک `<input>` را هندل کنیم، آنگاه این event بهترین انتخاب است.
 
-On the other hand, `input` event doesn't trigger on keyboard input and other actions that do not involve value change, e.g. pressing arrow keys `key:⇦` `key:⇨` while in the input.
+از طرفی دیگر، `input` event با keyboard input و فعالیت‌های دیگری که شامل تغییر value نمی‌شوند فعال نمی‌شود، مثل فشار دادن کلیدهای جهت‌دار `key:⇦` `key:⇨` زمانی که داخل input هستیم.
 
-```smart header="Can't prevent anything in `oninput`"
-The `input` event occurs after the value is modified.
+```smart header="جلوگیری کرد. `oninput` نمی‌توان از چیزی در"
 
-So we can't use `event.preventDefault()` there -- it's just too late, there would be no effect.
+بعد از اینکه value تغییر می‌کند، `input` event فعال می‌شود.
+
+
+پس آن جا نمی‌توانیم از `event.preventDefault()` استفاده کنیم -- بسیار دیر است و تاثیری نخواهد داشت.
 ```
 
 ## Events: cut, copy, paste
 
-These events occur on cutting/copying/pasting a value.
+این eventها زمان cut کردن/copy کردن/paste کردن یک مقدار اتفاق می‌افتند.
 
-They belong to [ClipboardEvent](https://www.w3.org/TR/clipboard-apis/#clipboard-event-interfaces) class and provide access to the data that is cut/copied/pasted.
+ان‌ها به [ClipboardEvent](https://www.w3.org/TR/clipboard-apis/#clipboard-event-interfaces) class تعلق دارند و دسترسی به داده‌ای را که cut/copy/paste شده را فراهم می‌کنند.
 
-We also can use `event.preventDefault()` to abort the action, then nothing gets copied/pasted.
+همچنین می‌توانیم برای لغو یک action از `event.preventDefault()` استفاده کنیم، آنگاه هیچ چیز copy/paste نمی‌شود.
 
 For instance, the code below prevents all `cut/copy/paste` events and shows the text we're trying to cut/copy/paste:
 
