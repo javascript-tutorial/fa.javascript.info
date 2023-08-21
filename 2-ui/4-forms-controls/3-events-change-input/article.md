@@ -58,13 +58,13 @@
 
 ## Events: cut, copy, paste
 
-این eventها زمان cut کردن/copy کردن/paste کردن یک مقدار اتفاق می‌افتند.
+.یک مقدار اتفاق می‌اقتد cut کردن/copy کردن/کردن paste زمان events این
 
-ان‌ها به [ClipboardEvent](https://www.w3.org/TR/clipboard-apis/#clipboard-event-interfaces) class تعلق دارند و دسترسی به داده‌ای را که cut/copy/paste شده را فراهم می‌کنند.
+.شده را فراهم می‌کنند cut/copy/paste تعلق دارند و دسترسی به داده‌ای را که [ClipboardEvent](https://www.w3.org/TR/clipboard-apis/#clipboard-event-interfaces) class آن‌ها به
 
-همچنین می‌توانیم برای لغو یک action از `event.preventDefault()` استفاده کنیم، آنگاه هیچ چیز copy/paste نمی‌شود.
+.نمی‌شود copy/paste استفاده کنیم، آنگاه هیچ چیز `event.preventDefault()` از action همچنین می‌توانیم برای لغو یک
 
-For instance, the code below prevents all `cut/copy/paste` events and shows the text we're trying to cut/copy/paste:
+:کنیم را نشان می‌دهد cut/copy/paste پیشگیری می‌کند و متنی که تلاش می‌کنیم `cut/copy/paste` events برای مثال: کد زیر از تمام 
 
 ```html autorun height=40 run
 <input type="text" id="input">
