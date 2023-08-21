@@ -49,7 +49,6 @@
 از طرفی دیگر، `input` event با keyboard input و فعالیت‌های دیگری که شامل تغییر value نمی‌شوند فعال نمی‌شود، مثل فشار دادن کلیدهای جهت‌دار `key:⇦` `key:⇨` زمانی که داخل input هستیم.
 
 ```smart header="جلوگیری کرد. `oninput` نمی‌توان از چیزی در"
-
 بعد از اینکه value تغییر می‌کند، `input` event فعال می‌شود.
 
 
@@ -80,37 +79,36 @@
   };
 </script>
 ```
-
 لطفا توجه داشته باشید: درون `cut` and `copy` event handlers یک فراخوانی `event.clipboardData.getData(...)` یک رشته‌ی خالی برمی‌گرداند. این به این دلیل است که از نظر تکنیکی، داده هنوز در clipboard نیست. اگر از `event.preventDefault()` استفاده کنیم آن اصلا کپی نمی‌شود. 
 
 پس مثال بالا از `document.getSelection()` استفاده می‌کند تا متن انتخاب‌شده را بگیرد. می‌توانید جزئیات بیشتری درباره‌ی document selection در مقاله‌ی <info:selection-range> پیدا کنید. 
 
 این ممکن است که فقط متن را، بلکه همه چیز را copy/paste کنیم. برای مثال می‌توانیم یک فایل را در OS file manager کپی و paste کنیم.
 
-That's because `clipboardData` implements `DataTransfer` interface, commonly used for drag'n'drop and copy/pasting. It's a bit beyond our scope now, but you can find its methods in the [DataTransfer specification](https://html.spec.whatwg.org/multipage/dnd.html#the-datatransfer-interface).
+این به این دلیل است که `clipboardData` پیاده‌سازی `DataTransfer` interface را به عهده دارد، معمولا برای drag'n'drop و copy/pasting استفاده می‌شود. این الان کمی از خارج از محتوای ماست، اما می‌نوانید methodهای آن را در [DataTransfer specification](https://html.spec.whatwg.org/multipage/dnd.html#the-datatransfer-interface). پیدا کنید. 
 
-Also, there's an additional asynchronous API of accessing the clipboard: `navigator.clipboard`. More about it in the specification [Clipboard API and events](https://www.w3.org/TR/clipboard-apis/), [not supported by Firefox](https://caniuse.com/async-clipboard).
+همچنین یک asynchronous API اضافی برای دسترسی به clipboard وجود دارد. اطلاعات بیشتر در جزئیات در [Clipboard API and events](https://www.w3.org/TR/clipboard-apis/), [not supported by Firefox](https://caniuse.com/async-clipboard).
 
-### Safety restrictions
+### محدودیت‌های امنیتی
 
-The clipboard is a "global" OS-level thing. A user may switch between various applications, copy/paste different things, and a browser page shouldn't see all that.
+در سطح سیستم عامل، clipboard یک چیز global است. یک کاربر ممکن است بین applicationهای مختلف جابه‌جا شود، چیزهای مختلفی را copy/paste کند و صفحه‌ی مرورگر نباید همه‌ی این‌ها را ببیند.
 
-So most browsers allow seamless read/write access to the clipboard only in the scope of certain user actions, such as copying/pasting etc.
+بنابراین اکثر مرورگرها فقط در محدوده اقدامات خاص کاربر، مانند copy/paste کردن و ...، دسترسی یکپارچه خواندن/نوشتن به clipboard را مجاز می‌کنند.
 
-It's forbidden to generate "custom" clipboard events with `dispatchEvent` in all browsers except Firefox. And even if we manage to dispatch such event, the specification clearly states that such "syntetic" events must not provide access to the clipboard.
+در تمام مرورگرها به جز Firefox ممنوع است که با `dispatchEvent` یک سری "custom" clipboard event ایجاد کنیم. و حتی اگر بخاهیم چنین eventهایی را ارسال کنیم، مضخصات به وضوح بیان می‌کنند که چنین "syntetic" eventهایی نباید به clipboard دسترسی داشته باشند.
 
-Even if someone decides to save `event.clipboardData` in an event handler, and then access it later -- it won't work.
+حتی اگر کسی تصمیم بگیرد که `event.clipboardData` را در یک event handler ذخیره کند و بعدا به آن دسترسی داشته باشد -- کار نخواهد کرد.
 
-To reiterate, [event.clipboardData](https://www.w3.org/TR/clipboard-apis/#clipboardevent-clipboarddata) works solely in the context of user-initiated event handlers.
+برای تکرار، [event.clipboardData](https://www.w3.org/TR/clipboard-apis/#clipboardevent-clipboarddata) تنها در زمینه‌ی user-initiated event handler کار می‌کند.
 
-On the other hand, [navigator.clipboard](https://www.w3.org/TR/clipboard-apis/#h-navigator-clipboard) is the more recent API, meant for use in any context. It asks for user permission, if needed.
+از طرفی دیگر، [navigator.clipboard](https://www.w3.org/TR/clipboard-apis/#h-navigator-clipboard) API جدیدتری است که برای استفاده در این زمینه طراحی شده است. اگر نیاز باشد، از کاربر اجازه می‌گیرد. 
 
-## Summary
+## خلاصه
 
 Data change events:
 
-| Event | Description | Specials |
+| Event | توضیحات | Specials |
 |---------|----------|-------------|
-| `change`| A value was changed. | For text inputs triggers on focus loss. |
-| `input` | For text inputs on every change. | Triggers immediately unlike `change`. |
-| `cut/copy/paste` | Cut/copy/paste actions. | The action can be prevented. The `event.clipboardData` property gives access to the clipboard. All browsers except Firefox also support `navigator.clipboard`. |
+| `change`| یک مقدار تفییر کرده است. | .فعال می‌شود focus loss زمان text inputs برای |
+| `input` | روی هر تغییر text inputs برای | بلافاصله فعال می‌شود `change` برعکس |
+| `cut/copy/paste` | Cut/copy/paste actions. | .پشتیبانی می‌کنند `navigator.clipboard` از Firefox  دسترسی می‌دهد همچنین تمام مرورگرها به جز clipboard به `event.clipboardData` property .می‌تواند جلوگیری شود action از این|
