@@ -27,7 +27,6 @@ For other elements: `select`, `input type=checkbox/radio` it triggers right afte
 ```
 
 
-
 ## Event: input
 
 The `input` event triggers every time after a value is modified by the user.
