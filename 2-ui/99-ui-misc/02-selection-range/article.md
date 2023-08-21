@@ -6,7 +6,7 @@
 
 # Selection and Range
 
-In this chapter we'll cover selection in the document, as well as selection in form fields, such as `<input>`.
+در این فصل ما در رابطه با selection، از جمله selection در فرم ها مثل `<input>` صحبت می کنیم.  
 
 JavaScript can access an existing selection, select/deselect DOM nodes as a whole or partially, remove the selected content from the document, wrap it into a tag, and so on.
 
