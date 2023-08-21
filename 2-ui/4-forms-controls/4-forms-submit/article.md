@@ -1,42 +1,42 @@
 # Forms: event و method submit
 
-The `submit` event triggers when the form is submitted, it is usually used to validate the form before sending it to the server or to abort the submission and process it in JavaScript.
+معمولا `submit` event زمانی فعال می‌شود که یک فرم submit می‌شود. معمولا برای اعتبارسنجی فرم قبل از اینکه به سمت سرور فرستاده شود یا لغو و پردازش آن در JavaScript استفاده می‌شود.  
 
-The method `form.submit()` allows to initiate form sending from JavaScript. We can use it to dynamically create and send our own forms to server.
+متد `form.submit()` اجازه می‌دهد که فرستادن فرم از JavaScript آغاز شود. ما می‌توانیم از آن استفاده کنیم که به صورت پویا فرم‌های خودمان را ایجاد کنیم و به سرور بفرستیم.
 
-Let's see more details of them.
+بیایید جزئیات بیشتری از آن‌ها ببینیم.
 
 ## Event: submit
 
-There are two main ways to submit a form:
+دو راه اصلی برای submit کردن یک فرم وجود دارد. 
 
-1. The first -- to click `<input type="submit">` or `<input type="image">`.
-2. The second -- press `key:Enter` on an input field.
+1. اولی -- کلیک کردن `<input type="submit">` یا `<input type="image">`.
+2. دومی -- فشار دادن `key:Enter` روی یک input field.
 
-Both actions lead to `submit` event on the form. The handler can check the data, and if there are errors, show them and call `event.preventDefault()`, then the form won't be sent to the server.
+هر دو کار باعث `submit` event روی فرم می‌شوند. Handler می‌تواند داده را چک کند، و اگر خطاییی باشد، آن‌ها را نشان دهد و `event.preventDefault()` را فراخوانی کند، آنگاه فرم به سمت سرور ارسال نخواهد شد.
 
-In the form below:
-1. Go into the text field and press `key:Enter`.
-2. Click `<input type="submit">`.
+در فرم زیر:
+1. به text field بعدی بروید و `key:Enter` را فشار دهید. 
+2. روی `<input type="submit">` کلیک کنید. 
 
-Both actions show `alert` and the form is not sent anywhere due to `return false`:
+هر دو فعالیت `alert` را نمایش می‌دهند و فرم به دلیل `return false` به هیچ جا فرستاده نمی‌شود: 
 
 ```html autorun height=60 no-beautify
 <form onsubmit="alert('submit!');return false">
-  First: Enter in the input field <input type="text" value="text"><br>
-  Second: Click "submit": <input type="submit" value="Submit">
+  را بزنید enter ،input field  در <input type="text" value="text"><br>
+  را کلیک کنید "submit" دوم: <input type="submit" value="Submit">
 </form>
 ```
 
-````smart header="Relation between `submit` and `click`"
-When a form is sent using `key:Enter` on an input field, a `click` event triggers on the `<input type="submit">`.
+````smart header="`click` و `submit` ارتباط میان"
+.فعال می‌شود `<input type="submit">` روی `click` event فرستاده می‌شود یک `key:Enter` با input field وقتی که یک فرم در یک
 
-That's rather funny, because there was no click at all.
+این نسبتا خنده‌دار است زیرا هیچ کلیکی اصلا وجود نداشته است.
 
-Here's the demo:
+در اینجا نسخه‌ی نمایشی هست:
 ```html autorun height=60
 <form onsubmit="return false">
- <input type="text" size="30" value="Focus here and press enter">
+ <input type="text" size="30" value="اینجا فوکوس کنید">
  <input type="submit" value="Submit" *!*onclick="alert('click')"*/!*>
 </form>
 ```
@@ -45,11 +45,12 @@ Here's the demo:
 
 ## Method: submit
 
-To submit a form to the server manually, we can call `form.submit()`.
+برای اینکه یک فرم را به صورت دستی submit کنیم، می‌توانیم `form.submit()` را فراخوانی کنیم.
 
-Then the `submit` event is not generated. It is assumed that if the programmer calls `form.submit()`, then the script already did all related processing.
+آنگاه `submit` event ایجاد نمی‌شود. تصور می‌شود که اگر برنامه‌نویس `form.submit()` را فراخونی کند، آنگاه script خودش تمام پردازش‌های مربوطه را انجام می‌دهد.
 
 Sometimes that's used to manually create and send a form, like this:
+گاهی اوقات معمول ایت است که یک فرم را با این روش ایجاد و ارسال کنند.
 
 ```js run
 let form = document.createElement('form');
@@ -58,7 +59,7 @@ form.method = 'GET';
 
 form.innerHTML = '<input name="q" value="test">';
 
-// the form must be in the document to submit it
+// شود submit باشد تا document فرم باید در
 document.body.append(form);
 
 form.submit();
