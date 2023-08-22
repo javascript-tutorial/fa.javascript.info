@@ -4,10 +4,11 @@ importance: 5
 
 # Modal form
 
-Create a function `showPrompt(html, callback)` that shows a form with the message `html`, an input field and buttons `OK/CANCEL`.
+یک function `showPrompt(html, callback)` ایجاد کنید که فرمی با پیام `html`، یک input field و دکمه‌های `OK/CANCEL` داشته باشد.
 
-- A user should type something into a text field and press `key:Enter` or the OK button, then `callback(value)` is called with the value they entered.
+- یک کاربر باید چیزی را در tex field تایپ کند و `key:Enter` را فشار دهد، آنگاه `callback(value)` با مقداری که وارد شده است فراخوانی می‌شود. 
 - Otherwise if the user presses `key:Esc` or CANCEL, then `callback(null)` is called.
+- در غیر این صورت اگر کاربر `key:Esc` یا CANCEL را فشار دهد، `callback(null)` فراخوانی می‌شود.
 
 In both cases that ends the input process and removes the form.
 
