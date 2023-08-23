@@ -1,39 +1,39 @@
 # Events: change, input, cut, copy, paste
 
-Let's cover various events that accompany data updates.
+بیایید eventهای مختلفی که همراه با آپدیت داده‌ها هستند پوشش دهیم.
 
 ## Event: change
 
-The `change` event triggers when the element has finished changing.
+وقنی که تغییر یک element تمام می‌شود، `change` event فعال می‌شود.
 
-For text inputs that means that the event occurs when it loses focus.
+برای text inputها این یعنی که event زمانی اتفاق می‌افتد که focus را از دست می‌دهد.
 
-For instance, while we are typing in the text field below -- there's no event. But when we move the focus somewhere else, for instance, click on a button -- there will be a `change` event:
+برای مثال وقتی که ما داریم در text field زیر تایپ می‌کنیم -- هیچ eventای وجود ندارد. اما وقتی focus را به جایی دیگر منتقل می‌کنیم، برای مثال، روی یک button کلیک می‌کنیم، یک `change` event به وجود خواهد آمد:
 
 ```html autorun height=40 run
 <input type="text" onchange="alert(this.value)">
 <input type="button" value="Button">
 ```
 
-For other elements: `select`, `input type=checkbox/radio` it triggers right after the selection changes:
+برای دیگر elementها: `select` و `input type=checkbox/radio` دقیقا بعد از آن که انتخاب تغییر می‌کند فعال می‌شود:
 
 ```html autorun height=40 run
 <select onchange="alert(this.value)">
-  <option value="">Select something</option>
-  <option value="1">Option 1</option>
-  <option value="2">Option 2</option>
-  <option value="3">Option 3</option>
+  <option value="">چیزی را انتخاب کنید</option>
+  <option value="1">انتخاب 1</option>
+  <option value="2">انتخاب 2</option>
+  <option value="3">انتخاب 3</option>
 </select>
 ```
 
 
 ## Event: input
 
-The `input` event triggers every time after a value is modified by the user.
+هر بار پس از آن که یک مقدار توسط کاربر تغییر می‌کند، `input` event فعال می‌شود.
 
-Unlike keyboard events, it triggers on any value change, even those that does not involve keyboard actions: pasting with a mouse or using speech recognition to dictate the text.
+برعکس keyboard inputها، آن با هر تغییر مقداری فعال می‌شود، حتی آن‌هایی که شامل keyboard actions نمی‌شوند: paste کردن با یک موش یا استفاده از تشخیص گفتار برای دیکته کردن متن.
 
-For instance:
+برای مثال:
 
 ```html autorun height=40 run
 <input type="text" id="input"> oninput: <span id="result"></span>
@@ -44,25 +44,26 @@ For instance:
 </script>
 ```
 
-If we want to handle every modification of an `<input>` then this event is the best choice.
+اگر بخواهیم تمام تغییرات یک `<input>` را هندل کنیم، آنگاه این event بهترین انتخاب است.
 
-On the other hand, `input` event doesn't trigger on keyboard input and other actions that do not involve value change, e.g. pressing arrow keys `key:⇦` `key:⇨` while in the input.
+از طرفی دیگر، `input` event با keyboard input و فعالیت‌های دیگری که شامل تغییر value نمی‌شوند فعال نمی‌شود، مثل فشار دادن کلیدهای جهت‌دار `key:⇦` `key:⇨` زمانی که داخل input هستیم.
 
-```smart header="Can't prevent anything in `oninput`"
-The `input` event occurs after the value is modified.
+```smart header="جلوگیری کرد. `oninput` نمی‌توان از چیزی در"
+بعد از اینکه value تغییر می‌کند، `input` event فعال می‌شود.
 
-So we can't use `event.preventDefault()` there -- it's just too late, there would be no effect.
+
+پس آن جا نمی‌توانیم از `event.preventDefault()` استفاده کنیم -- بسیار دیر است و تاثیری نخواهد داشت.
 ```
 
 ## Events: cut, copy, paste
 
-These events occur on cutting/copying/pasting a value.
+.یک مقدار اتفاق می‌اقتد cut کردن/copy کردن/کردن paste زمان events این
 
-They belong to [ClipboardEvent](https://www.w3.org/TR/clipboard-apis/#clipboard-event-interfaces) class and provide access to the data that is cut/copied/pasted.
+.شده را فراهم می‌کنند cut/copy/paste تعلق دارند و دسترسی به داده‌ای را که [ClipboardEvent](https://www.w3.org/TR/clipboard-apis/#clipboard-event-interfaces) class آن‌ها به
 
-We also can use `event.preventDefault()` to abort the action, then nothing gets copied/pasted.
+.نمی‌شود copy/paste استفاده کنیم، آنگاه هیچ چیز `event.preventDefault()` از action همچنین می‌توانیم برای لغو یک
 
-For instance, the code below prevents all `cut/copy/paste` events and shows the text we're trying to cut/copy/paste:
+:کنیم را نشان می‌دهد cut/copy/paste پیشگیری می‌کند و متنی که تلاش می‌کنیم `cut/copy/paste` events برای مثال: کد زیر از تمام 
 
 ```html autorun height=40 run
 <input type="text" id="input">
@@ -78,37 +79,36 @@ For instance, the code below prevents all `cut/copy/paste` events and shows the 
   };
 </script>
 ```
+لطفا توجه داشته باشید: درون `cut` and `copy` event handlers یک فراخوانی `event.clipboardData.getData(...)` یک رشته‌ی خالی برمی‌گرداند. این به این دلیل است که از نظر تکنیکی، داده هنوز در clipboard نیست. اگر از `event.preventDefault()` استفاده کنیم آن اصلا کپی نمی‌شود. 
 
-Please note: inside `cut` and `copy` event handlers a call to  `event.clipboardData.getData(...)` returns an empty string. That's because technically the data isn't in the clipboard yet. If we use `event.preventDefault()` it won't be copied at all.
+پس مثال بالا از `document.getSelection()` استفاده می‌کند تا متن انتخاب‌شده را بگیرد. می‌توانید جزئیات بیشتری درباره‌ی document selection در مقاله‌ی <info:selection-range> پیدا کنید. 
 
-So the example above uses `document.getSelection()` to get the selected text. You can find more details about document selection in the article <info:selection-range>.
+این ممکن است که فقط متن را، بلکه همه چیز را copy/paste کنیم. برای مثال می‌توانیم یک فایل را در OS file manager کپی و paste کنیم.
 
-It's possible to copy/paste not just text, but everything. For instance, we can copy a file in the OS file manager, and paste it.
+این به این دلیل است که `clipboardData` پیاده‌سازی `DataTransfer` interface را به عهده دارد، معمولا برای drag'n'drop و copy/pasting استفاده می‌شود. این الان کمی از خارج از محتوای ماست، اما می‌نوانید methodهای آن را در [DataTransfer specification](https://html.spec.whatwg.org/multipage/dnd.html#the-datatransfer-interface). پیدا کنید. 
 
-That's because `clipboardData` implements `DataTransfer` interface, commonly used for drag'n'drop and copy/pasting. It's a bit beyond our scope now, but you can find its methods in the [DataTransfer specification](https://html.spec.whatwg.org/multipage/dnd.html#the-datatransfer-interface).
+همچنین یک asynchronous API اضافی برای دسترسی به clipboard وجود دارد. اطلاعات بیشتر در جزئیات در [Clipboard API and events](https://www.w3.org/TR/clipboard-apis/), [not supported by Firefox](https://caniuse.com/async-clipboard).
 
-Also, there's an additional asynchronous API of accessing the clipboard: `navigator.clipboard`. More about it in the specification [Clipboard API and events](https://www.w3.org/TR/clipboard-apis/), [not supported by Firefox](https://caniuse.com/async-clipboard).
+### محدودیت‌های امنیتی
 
-### Safety restrictions
+در سطح سیستم عامل، clipboard یک چیز global است. یک کاربر ممکن است بین applicationهای مختلف جابه‌جا شود، چیزهای مختلفی را copy/paste کند و صفحه‌ی مرورگر نباید همه‌ی این‌ها را ببیند.
 
-The clipboard is a "global" OS-level thing. A user may switch between various applications, copy/paste different things, and a browser page shouldn't see all that.
+بنابراین اکثر مرورگرها فقط در محدوده اقدامات خاص کاربر، مانند copy/paste کردن و ...، دسترسی یکپارچه خواندن/نوشتن به clipboard را مجاز می‌کنند.
 
-So most browsers allow seamless read/write access to the clipboard only in the scope of certain user actions, such as copying/pasting etc.
+در تمام مرورگرها به جز Firefox ممنوع است که با `dispatchEvent` یک سری "custom" clipboard event ایجاد کنیم. و حتی اگر بخاهیم چنین eventهایی را ارسال کنیم، مضخصات به وضوح بیان می‌کنند که چنین "syntetic" eventهایی نباید به clipboard دسترسی داشته باشند.
 
-It's forbidden to generate "custom" clipboard events with `dispatchEvent` in all browsers except Firefox. And even if we manage to dispatch such event, the specification clearly states that such "syntetic" events must not provide access to the clipboard.
+حتی اگر کسی تصمیم بگیرد که `event.clipboardData` را در یک event handler ذخیره کند و بعدا به آن دسترسی داشته باشد -- کار نخواهد کرد.
 
-Even if someone decides to save `event.clipboardData` in an event handler, and then access it later -- it won't work.
+برای تکرار، [event.clipboardData](https://www.w3.org/TR/clipboard-apis/#clipboardevent-clipboarddata) تنها در زمینه‌ی user-initiated event handler کار می‌کند.
 
-To reiterate, [event.clipboardData](https://www.w3.org/TR/clipboard-apis/#clipboardevent-clipboarddata) works solely in the context of user-initiated event handlers.
+از طرفی دیگر، [navigator.clipboard](https://www.w3.org/TR/clipboard-apis/#h-navigator-clipboard) API جدیدتری است که برای استفاده در این زمینه طراحی شده است. اگر نیاز باشد، از کاربر اجازه می‌گیرد. 
 
-On the other hand, [navigator.clipboard](https://www.w3.org/TR/clipboard-apis/#h-navigator-clipboard) is the more recent API, meant for use in any context. It asks for user permission, if needed.
-
-## Summary
+## خلاصه
 
 Data change events:
 
-| Event | Description | Specials |
+| Event | توضیحات | Specials |
 |---------|----------|-------------|
-| `change`| A value was changed. | For text inputs triggers on focus loss. |
-| `input` | For text inputs on every change. | Triggers immediately unlike `change`. |
-| `cut/copy/paste` | Cut/copy/paste actions. | The action can be prevented. The `event.clipboardData` property gives access to the clipboard. All browsers except Firefox also support `navigator.clipboard`. |
+| `change`| یک مقدار تفییر کرده است. | .فعال می‌شود focus loss زمان text inputs برای |
+| `input` | روی هر تغییر text inputs برای | بلافاصله فعال می‌شود `change` برعکس |
+| `cut/copy/paste` | Cut/copy/paste actions. | .پشتیبانی می‌کنند `navigator.clipboard` از Firefox  دسترسی می‌دهد همچنین تمام مرورگرها به جز clipboard به `event.clipboardData` property .می‌تواند جلوگیری شود action از این|
