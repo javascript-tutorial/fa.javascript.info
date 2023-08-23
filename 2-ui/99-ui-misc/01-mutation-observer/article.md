@@ -20,9 +20,8 @@ let observer = new MutationObserver(callback);
 ```js
 observer.observe(node, config);
 ```
-
-`config` is an object with boolean options "what kind of changes to react on":
-- `childList` -- changes in the direct children of `node`,
+ (کانفیگ)`config` یک شی با  boolean options "به چه نوع تغییراتی باید واکنش نشان داد" است:
+- `childList` --  `node` از direct children تغییراتی در 
 - `subtree` -- in all descendants of `node`,
 - `attributes` -- attributes of `node`,
 - `attributeFilter` -- an array of attribute names, to observe only selected ones.
