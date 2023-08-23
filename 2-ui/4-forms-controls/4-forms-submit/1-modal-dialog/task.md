@@ -30,4 +30,4 @@ showPrompt("Enter something<br>...smart :)", function(value) {
 
 [iframe src="solution" height=160 border=1]
 
-پی‌نوشت: کد source documentای که ارائه شده HTML/CSS برای فرم با fixed positioning را دارد، اما این بر عهده‌ی شماست که آن را به modal تبدیل کنید.
+پی‌نوشت: source documentای که ارائه شده HTML/CSS برای فرم با fixed positioning را دارد، اما این بر عهده‌ی شماست که آن را به modal تبدیل کنید.
