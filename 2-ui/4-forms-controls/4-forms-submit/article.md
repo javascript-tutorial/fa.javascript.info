@@ -1,4 +1,4 @@
-# Forms: event و method submit
+# فرم‌ها: event و method submit
 
 معمولا `submit` event زمانی فعال می‌شود که یک فرم submit می‌شود. معمولا برای اعتبارسنجی فرم قبل از اینکه به سمت سرور فرستاده شود یا لغو و پردازش آن در JavaScript استفاده می‌شود.  
 
