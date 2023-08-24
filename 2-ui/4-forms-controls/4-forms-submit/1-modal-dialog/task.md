@@ -9,7 +9,7 @@ importance: 5
 - یک کاربر باید چیزی را در tex field تایپ کند و `key:Enter` را فشار دهد، آنگاه `callback(value)` با مقداری که وارد شده است فراخوانی می‌شود. 
 - در غیر این صورت اگر کاربر `key:Esc` یا CANCEL را فشار دهد، `callback(null)` فراخوانی می‌شود.
 
-در هر دو صورت،‌این فرآیند input را تمام میکند و فرم را پاک میکند.
+در هر دو صورت،‌ این فرآیند input را تمام میکند و فرم را پاک میکند.
 
 ملزومات:
 
@@ -26,7 +26,7 @@ showPrompt("Enter something<br>...smart :)", function(value) {
 });
 ```
 
-نسخهی نمایشی در iframe:
+نسخه‌ای نمایشی در iframe:
 
 [iframe src="solution" height=160 border=1]
 
