@@ -1,57 +1,57 @@
-# Popups and window methods
+# Popups و window methods
 
-A popup window is one of the oldest methods to show additional document to user.
+یک popup window یکی از قدیمی‌ترین روش‌ها برای نشان دادن document اضافی به کاربر است.
 
-Basically, you just run:
+اساسا شما فقط اجرا می‌کنید:
 ```js
 window.open('https://javascript.info/')
 ```
 
-...And it will open a new window with given URL. Most modern browsers are configured to open url in new tabs instead of separate windows.
+... و آن یک پنجره‌ی جدید با URL داده شده باز می‌کند. اکثر مرورگرهای مدرن به گونه‌ای پیکربندی شده‌اند که به جای پنجره‌های جداگانه، آدرس اینترنتی را در پنجره‌های جدید باز کنند.
 
-Popups exist from really ancient times. The initial idea was to show another content without closing the main window. As of now, there are other ways to do that: we can load content dynamically with [fetch](info:fetch) and show it in a dynamically generated `<div>`. So, popups is not something we use everyday.
+از زمان‌های بسیار قدیم،‌ Popupها وجود دارند. ایده‌ی اولیه این بود که بتوان یک محتوای دیگر را بدون بستن پنجره‌ی اصلی نمایش داد. در حال حاضر، راه‌های دیگری برای این کار وجود دارد: می‌توانیم داده را به صورت پویا با [fetch](info:fetch) بارگیری کنیم و آن را در یک `<div>` که به صورت پویا ایجاد شده است نمایش دهیم. بنابراین، popupها چیزهایی نیستند که ما هر روز از آن‌ها استفاده کنیم.
 
-Also, popups are tricky on mobile devices, that don't show multiple windows simultaneously.
+همچنین، popupها در دستگاه‌های موبایل که چند پنجره را به صورت همزمان نشان نمی‌دهند کمی مشکل هستند.
 
-Still, there are tasks where popups are still used, e.g. for OAuth authorization (login with Google/Facebook/...), because:
+با این حال، کارهایی وجود دارند که popupها هنوز در آن‌ها استفاده می‌شوند. برای مثال، برای مجوز OAuth (lgin با Google/Facebook/...) چون که: 
 
-1. A popup is a separate window which has its own independent JavaScript environment. So opening a popup from a third-party, non-trusted site is safe.
-2. It's very easy to open a popup.
-3. A popup can navigate (change URL) and send messages to the opener window.
+1. یک popup پنجره‌ای جدا است که محیط JavaScript جداگانه‌ی خود را دارد. بنابراین باز کردن یک popup از یک سایت سوم غیر قابل اطمینان، امن است.
+2. باز کردن یک popup بسیار ساده است.
+3. یک popup می‌تواند پیمایش کند (آدرس سایت را تغییر دهد)‌ و به پنجره‌ی بازکننده پیام بفرستد.
 
 ## Popup blocking
 
-In the past, evil sites abused popups a lot. A bad page could open tons of popup windows with ads. So now most browsers try to block popups and protect the user.
+در گذشته، سایت‌های خبیث بسیار از popup سواستفاده می‌کردند. یک صفحه می‌توانست تعداد زیادی popup با تبلیغات باز کند. بنابراین امروزه، اکثر مرورگرها تلاش می‌‌کنند که popup را مسدود کنند و از کاربر در برابر آن‌ها محافظت کنند.
 
-**Most browsers block popups if they are called outside of user-triggered event handlers like `onclick`.**
+**اکثر مرورگرها، اگر فراخوانی popupها خارج از event handlerهای ایجاد شده توسط کاربر صورت بگیرد، آن‌ها را مسدود می‌کنند.**
 
-For example:
+برای مثال:
 ```js
-// popup blocked
+// popup مسدود شده است 
 window.open('https://javascript.info');
 
-// popup allowed
+// popup اجازه داده شده است
 button.onclick = () => {
   window.open('https://javascript.info');
 };
 ```
 
-This way users are somewhat protected from unwanted popups, but the functionality is not disabled totally.
+به این ترتیب، کاربرها تا حدودی از popupهای ناخواسته محافظت می‌شوند، اما عملکرد به طور کامل غیرفعال نمی‌شود.
 
 ## window.open
 
-The syntax to open a popup is: `window.open(url, name, params)`:
+برای باز کردن یک popup از syntax روبه‌رو استفاده می‌شود: `window.open(url, name, params)`:
 
 url
-: An URL to load into the new window.
+: یک URL برای بارگیری در پنجره جدید.
 
 name
-: A name of the new window. Each window has a `window.name`, and here we can specify which window to use for the popup. If there's already a window with such name -- the given URL opens in it, otherwise a new window is opened.
+: یک name پنجره‌ی جدید. هر پنجره یک `window.name` دارد و اینجا می‌توانیم مشخص کنیم که از کدام پنجره به عنوان popup استفاده کنیم. اگر قبلا پنجره‌ای با این نام وجود داشته باشد، -- URL داده شده در آن باز می‌شود، در غیر این صورت، یک پنجره‌ی جدید باز می‌شود.
 
 params
-: The configuration string for the new window. It contains settings, delimited by a comma. There must be no spaces in params, for instance: `width=200,height=100`.
+: رشته‌ی configuration برای پنجره‌ی جدید. این شامل تنظیماتی است که با comma مشخص می‌شوند. هیچ spaceای نباید در params وجود داشته باشد،‌ برای مثال: `width=200,height=100`
 
-Settings for `params`:
+تنظیمات برای `params`:
 
 - Position:
   - `left/top` (numeric) -- coordinates of the window top-left corner on the screen. There is a limitation: a new window cannot be positioned offscreen.
