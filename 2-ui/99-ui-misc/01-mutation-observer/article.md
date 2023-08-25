@@ -22,9 +22,9 @@ observer.observe(node, config);
 ```
  (کانفیگ)`config` یک شی با  boolean options "به چه نوع تغییراتی باید واکنش نشان داد" است:
 - `childList` --  `node` از direct children تغییراتی در 
-- `subtree` -- in all descendants of `node`,
-- `attributes` -- attributes of `node`,
-- `attributeFilter` -- an array of attribute names, to observe only selected ones.
+- `subtree` --`node` در همه فرزندان 
+- `attributes` -- attributes های `node`,
+- `attributeFilter` --که فقط سلکت شده ها را ببینیم ،attribute name یک ارایه از
 - `characterData` -- whether to observe `node.data` (text content),
 
 Few other options:
