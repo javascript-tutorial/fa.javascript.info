@@ -54,22 +54,22 @@ params
 تنظیمات برای `params`:
 
 - Position:
-  - `left/top` (numeric) -- coordinates of the window top-left corner on the screen. There is a limitation: a new window cannot be positioned offscreen.
-  - `width/height` (numeric) -- width and height of a new window. There is a limit on minimal width/height, so it's impossible to create an invisible window.
-- Window features:
-  - `menubar` (yes/no) -- shows or hides the browser menu on the new window.
-  - `toolbar` (yes/no) -- shows or hides the browser navigation bar (back, forward, reload etc) on the new window.
-  - `location` (yes/no) -- shows or hides the URL field in the new window. FF and IE don't allow to hide it by default.
-  - `status` (yes/no) -- shows or hides the status bar. Again, most browsers force it to show.
-  - `resizable` (yes/no) -- allows to disable the resize for the new window. Not recommended.
-  - `scrollbars` (yes/no) -- allows to disable the scrollbars for the new window. Not recommended.
+  - `چپ/بالا`(عددی) - مختصات گوشه‌ی سمت چپ بالای پنجره در صفحه. یک محدودیت وجود دارد: یک پنجره‌ی جدید را نمی‌توان خارج صفحه قرار داد.
+  - `عرض/ارتفاع`(عددی) - عرض و ارتفاع یک پنجره‌ی جدید. در حداقل عرض/ارتفاع یک محدودیت وجود دارد. بنابرین غیرممکن است که یک پنجره‌ی غیرقابل دیدن ایجاد کرد.
+- ویژگی‌های پنجره:
+  - `menubar` (بله/خیر) -- .منوی مرورگر را در پنجره جدید نشان می‌دهد یا پنهان می‌کند
+  - `toolbar` (بله/خیر) -- .نوار پیمایش مرورگر (به عقب، جلو، بارگذاری مجدد و ...) را در پنجره جدید نشان می‌دهد یا پنهان می‌کند
+  - `location` (بله/خیر) -- .به طور پیش فرض اجازه مخفی کردن آن را نمی‌دهند IE و FF را در پنجره‌ی جدید نشان می‌دهد یا پنهان می‌کند URL فیلد
+  - `status` (بله/خیر) -- .را نشان می‌دهد یا پنهان می‌کند. باز هم، اکثر مرورگرها آن را مجبور به نمایش می‌کنند status bar
+  - `resizable` (بله/خیر) -- .اجازه می‌دهد تا تغییر اندازه را برای پنجره جدید غیرفعال کنید. توصیه نمی‌شود
+  - `scrollbars` (بله/خیر) -- .اجازه می‌دهد تا نوارهای اسکرول را برای پنجره جدید غیرفعال کنید. توصیه نمی‌شود.
 
 
-There is also a number of less supported browser-specific features, which are usually not used. Check <a href="https://developer.mozilla.org/en/DOM/window.open">window.open in MDN</a> for examples.
+همجنین، تعدادی ویژگی خاص مرورگر وجود دارند که کمتر پشتیبانی می‌شوند که معمولا از آن‌ها استفاده نمی‌شود. برای مثال، <a href="https://developer.mozilla.org/en/DOM/window.open">window.open در MDN</a> را بررسی کنید.
 
-## Example: a minimalistic window
+## مثال: یک پنجره‌ی minimalistic
 
-Let's open a window with minimal set of features, just to see which of them browser allows to disable:
+بیایید یک پنجره با حداقل مجموعه‌ای ویژگی‌ها باز کنیم،‌ فقط برای آن که ببینیم مرورگر کدام یکی از آن‌ها را غیرفعال می‌کند:
 
 ```js run
 let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,
@@ -78,9 +78,9 @@ width=0,height=0,left=-1000,top=-1000`;
 open('/', 'test', params);
 ```
 
-Here most "window features" are disabled and window is positioned offscreen. Run it and see what really happens. Most browsers "fix" odd things like zero `width/height` and offscreen `left/top`. For instance, Chrome open such a window with full width/height, so that it occupies the full screen.
+اینجا اکثر "ویژگی‌های پنجره" غیرفعال شده‌اند و پنجره خارج صفحه قرار می‌گیرد. آن را اجرا کنید و ببینید واقعا چه اتفاقی می‌افتد. اکثر مرورگرها موارد عجیب و غریب مثل `width/height` صفر و `left/top` خارج از صفحه را درست می‌کنند. برای مثال، chrome همچین پنجره‌ای را با عرض/ارتفاع کامل باز می‌کند تا تمام صفحه را اشغال کند.
 
-Let's add normal positioning options and reasonable `width`, `height`, `left`, `top` coordinates:
+بیایید گزینه‌های موقعیت‌یابی عادی و مختصات `عرض`، `ارتفاع`، `چپ`، `بالا` را اضافه کنیم:
 
 ```js run
 let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,
@@ -89,14 +89,14 @@ width=600,height=300,left=100,top=100`;
 open('/', 'test', params);
 ```
 
-Most browsers show the example above as required.
+اکثر مرورگرها مثال بالا را در صورت لزوم نشان می دهند.
 
-Rules for omitted settings:
+قوانین مربوط به تنظیمات حذف شده:
 
-- If there is no 3rd argument in the `open` call, or it is empty, then the default window parameters are used.
-- If there is a string of params, but some `yes/no` features are omitted, then the omitted features assumed to have `no` value. So if you specify params, make sure you explicitly set all required features to yes.
-- If there is no `left/top` in params, then the browser tries to open a new window near the last opened window.
-- If there is no `width/height`, then the new window will be the same size as the last opened.
+- اگر هیچ آرگومان سومی در فراخوانی `open` نیست یا خالی است، آنگاه پارامترهای پیش‌فرض پنجره استفاده می‌شوند.
+- اگر رشته‌ای از params وجود دارد اما بعضی از ویژگی‌های `yes/no` حذف شده‌اند،‌ آنگاه فرض می‌شود که ویژگی‌های حذف‌شده مقدار `no` را دارند. اگر پارامترها را مشخص می‌کنید،‌مطمئن شوید که تمام ویژگی‌های مورد نیاز به صراحت روی yes تنظیم شده‌اند.
+- اگر هیچ `left/top`ای در params وجود ندارد، مرورگر تلاش می‌کند که پنجره‌ای جدید را نزدیک آخرین پنجره‌ی باز شده، باز کند.
+- اگر هیچ `width/height`ای وجود ندارد، پنجره‌ی جدید همان اندازه‌ی آخرین پنجره‌ی باز شده را خواهد داشت.
 
 ## Accessing popup from window
 
