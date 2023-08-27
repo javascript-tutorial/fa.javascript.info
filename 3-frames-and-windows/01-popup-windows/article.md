@@ -237,22 +237,23 @@ window.onblur = () => window.focus();
 
 برای مثال:
 
-- When we open a popup, it might be a good idea to run `newWindow.focus()` on it. Just in case, for some OS/browser combinations it ensures that the user is in the new window now.
-- If we want to track when a visitor actually uses our web-app, we can track `window.onfocus/onblur`. That allows us to suspend/resume in-page activities, animations etc. But please note that the `blur` event means that the visitor switched out from the window, but they still may observe it. The window is in the background, but still may be visible.
+- وقتی یک popup باز می‌کنیم، ممکن است ایده‌ی خوبی باشد که `newWindow.focus()` را روی آن اجرا کنیم. در هر صورت، برای برخی ترکیبات سیستم‌عامل/مرورگر، تضمین می‌کند که کاربر اکنون در پنجره‌ی جدید است.
+- گر بخواهیم ردیابی کنیم که چه زمانی بازدیدکننده واقعاً از برنامه‌ی وب ما استفاده می کند، می توانیم `window.onfocus/onblur` را ردیابی کنیم. این به ما امکان می‌دهد فعالیت‌های درون صفحه، انیمیشن‌ها و... را تعلیق/ازسرگیری کنیم. اما لطفا توجه داشته باشید که `blur` event به این معنی است که بازدیدکننده از پنجره خارج شده است، اما همچنان ممکن است آن را مشاهده کند. پنجره در پس‌زمینه است، اما همچنان ممکن است قابل مشاهده باشد.
+- 
 
-## Summary
+## خلاصه
 
-Popup windows are used rarely, as there are alternatives: loading and displaying information in-page, or in iframe.
+پنجره‌های popup به ندرت استفاده می‌شوند. چون گزینه‌های دیگری وجود دارند: load کردن و نمایش دادن اطلاعات در صفحه یا در iframe.
 
-If we're going to open a popup, a good practice is to inform the user about it. An "opening window" icon near a link or button would allow the visitor to survive the focus shift and keep both windows in mind.
+اگر می‌خواهیم یک popup باز کنیم، یک تمرین خوب این است که به کاربر درباره‌ی آن اطلاعات بدهیم. یک نماد "opening window" نزدیک یک لینک یا دکمه به بازدیدکننده اجازه می‌دهد تا از تغییر فوکوس جان سالم به در ببرد و هر دو پنجره را در ذهن نگه دارد. 
 
-- A popup can be opened by the `open(url, name, params)` call. It returns the reference to the newly opened window.
-- Browsers block `open` calls from the code outside of user actions. Usually a notification appears, so that a user may allow them.
-- Browsers open a new tab by default, but if sizes are provided, then it'll be a popup window.
-- The popup may access the opener window using the `window.opener` property.
-- The main window and the popup can freely read and modify each other if they have the same origin. Otherwise, they can change location of each other and [exchange messages](info:cross-window-communication).
+- یک popup می‌تواند با فراخوانی `open(url, name, params)` باز شود. آن ارجاع را به پنجره‌ی تازه بازشده بازمی‌گرداند.
+- مرورگرها فراخوانی‌های `open` از خارج کنش‌های کاربر را مسدود می‌کنند. معمولا یک اعلان ظاهر می‌شود که کاربر ممکن است به آن‌ها اجازه بدهد.
+- مرورگرها به صورت پیش‌فرض یک tab جدید باز می‌کنند اما اگر اندازه‌ها ارائه شده باشند، آنگاه یک پنجره‌ی popup خواهد بود.
+- پنجره‌ی popup ممکن است با استفاده از `window.opener` property به پنجره‌ی بازکننده دسترسی داشته باشد.
+- اگر popup و پنجره‌ی اصلی از یک مبدا باشند، می‌توانند به صورت آزادانه یکدیگر را بخوانند یا تغییر دهند. در غیر این صورت، می‌توانند مکان یکدیگر را تغییر دهند و [پیام رد و بدل کنند](info:cross-window-communication).
 
-To close the popup: use `close()` call. Also the user may close them (just like any other windows). The `window.closed` is `true` after that.
+برای بستن popup: از فراخوانی `close()` استفاده کنید. همچنین کاربر ممکن است آن‌ها را ببندد (دقیقا شبیه هر پنجره‌ی دیگری). بعد از آن مقدار `window.closed` برابر `true` است.
 
-- Methods `focus()` and `blur()` allow to focus/unfocus a window. But they don't work all the time.
-- Events `focus` and `blur` allow to track switching in and out of the window. But please note that a  window may still be visible even in the background state, after `blur`.
+- متدهای `focus()` و `blur()` اجازه می‌دهند که روی یک پنجره focus/unfocus کنیم. اما آن‌ها همیشه کار نمی‌کنند.
+- با `focus` and `blur` events امکان ردیابی جابه‌جایی در داخل و خارج صفحه فراهم می‌شود/ اما لطفا توجه داشته باشید که بعد از `blur` یک پنجره ممکن است همچنان در وضعیت پس‌زمینه قابل مشاهده باشد. 
