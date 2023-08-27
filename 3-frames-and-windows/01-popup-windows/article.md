@@ -217,25 +217,25 @@ newWindow.onload = function() {
 
 ## Focus/blur روی یک پنجره
 
-Theoretically, there are `window.focus()` and `window.blur()` methods to focus/unfocus on a window. And there are also `focus/blur` events that allow to catch the moment when the visitor focuses on a window and switches elsewhere.
+از نظر تئوری برای focus/unfocus کردن روی یک پنجره، دو متد `window.focus()` و `window.blur()` وجود دارند. و همچنین `focus/blur` events هستند که که اجازه می‌دهند که لحظه‌ای که بازدیدکننده روی یک پنجره focus/unfocus می‌کند و به جای دیگری تغییر می‌دهد را ثبت کنید.
 
-Although, in practice they are severely limited, because in the past evil pages abused them.
+اگرچه، در عمل آنها به شدت محدود هستند، زیرا در گذشته صفحات بد از آنها سوء استفاده می‌کردند.
 
-For instance, look at this code:
+برای مثال به این کد نگاه کنید:
 
 ```js run
 window.onblur = () => window.focus();
 ```
 
-When a user attempts to switch out of the window (`window.onblur`), it brings the window back into focus. The intention is to "lock" the user within the `window`.
+وقتی یک کاربر تلاش می‌کند که از پنجره بیرون برود (`window.onblur`)، این، پنجره را به focus برمی‌گرداند. هدف این است که کاربر را در `window` قفل کنیم.
 
-So browsers had to introduce many limitations to forbid the code like that and protect the user from ads and evils pages. They depend on the browser.
+در نتیجه مرورگرها مجبور بودند تعدادی محدودیت معرفی کنند تا کدی مثل آن را ممنوع کند و کاربر را از تبلیغات و صفحات بد محافظت کنند. آن‌ها به مرورگر بستگی دارند. 
 
-For instance, a mobile browser usually ignores `window.focus()` completely. Also focusing doesn't work when a popup opens in a separate tab rather than a new window.
+برای مثال، یک مرورگر موبایل معمولا `window.focus()` را به طور کامل نادیده می‌گیرد. همچنین وقتی که یک popup در یک صفحه‌ی جدا به جای یک پنجره‌ی جدبد باز می‌شود، فوکوس کردن کار نمی‌کند.
 
-Still, there are some use cases when such calls do work and can be useful.
+با این حال، موارد استفاده‌ای وجود دارد که چنین فراخوانی‌هایی کار می‌کنند و می‌توانند مفید باشند.
 
-For instance:
+برای مثال:
 
 - When we open a popup, it might be a good idea to run `newWindow.focus()` on it. Just in case, for some OS/browser combinations it ensures that the user is in the new window now.
 - If we want to track when a visitor actually uses our web-app, we can track `window.onfocus/onblur`. That allows us to suspend/resume in-page activities, animations etc. But please note that the `blur` event means that the visitor switched out from the window, but they still may observe it. The window is in the background, but still may be visible.
