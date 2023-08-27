@@ -134,11 +134,11 @@ newWindow.onload = function() {
 .را ببینید <info:cross-window-communication> این برای دلایل امنیتی غیرممکن است. برای جزئیات، بخش `gmail.com` از popup باشد و `site.com` در غیر این صورت، برای مثال اگر پنجره‌ی اصلی از
 ```
 
-## Accessing window from popup
+## دسترسی به پنجره از طریق popup
 
-A popup may access the "opener" window as well using `window.opener` reference. It is `null` for all windows except popups.
+یک popup علاوه بر استفاده از ارجاع `window.opener` می‌تواند به  "opener" هم دسترسی داشته باشد. این برای تمام پنجره‌ها به جز popupها null است.
 
-If you run the code below, it replaces the opener (current) window content with "Test":
+اگر کد زیر را اجرا کنید، محتوای openr window (در حال حاضر) را با "Test" جایگزین می‌کند. 
 
 ```js run
 let newWin = window.open("about:blank", "hello", "width=200,height=200");
@@ -148,19 +148,19 @@ newWin.document.write(
 );
 ```
 
-So the connection between the windows is bidirectional: the main window and the popup have a reference to each other.
+بنابراین، ارتباط میان پنجره‌ها دوطرفه است: پنجره‌ی اصلی و popup ارجاعی به یکدیگر دارند.
 
-## Closing a popup
+## بستن یک popup
 
-To close a window: `win.close()`.
+برای بستن یک پنجره: `win.close()`.
 
-To check if a window is closed: `win.closed`.
+برای اینکه چک کنیم که یه پنجره بسته است یا نه: `win.closed`.
 
-Technically, the `close()` method is available for any `window`, but `window.close()` is ignored by most browsers if `window` is not created with `window.open()`. So it'll only work on a popup.
+از نظر فنی، `close()` method برای هر `window` قابل دسترسی است اما اگر `window` با `window.open()` ایجاد شده باشد، `window.close()` توسط اکثر مرورگرها نادیده گرفته می‌شود. پس آن فقط روی یک popup کار خواهد کرد. 
 
-The `closed` property is `true` if the window is closed. That's useful to check if the popup (or the main window) is still open or not. A user can close it anytime, and our code should take that possibility into account.
+اگر پنجره بسته باشد، `closed` property برابر `true` می‌شود. این برای بررسی اینکه popup (یا پنجره‌ی اصلی) هنوز باز هستند یا نه مفید است. یک کاربر می‌تواند هر وقتی ببندد و کد ما باید امکان آن را در نظر بگیرد.
 
-This code loads and then closes the window:
+این کد پنجره را load می‌کند و سپس می‌بندد.
 
 ```js run
 let newWindow = open('/', 'example', 'width=300,height=300');
