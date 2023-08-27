@@ -172,50 +172,50 @@ newWindow.onload = function() {
 ```
 
 
-## Moving and resizing
+## حرکت دادن و تغییر اندازه
 
-There are methods to move/resize a window:
+راه‌هایی برای جابه‌جایی/تغییر اندازه‌ی یک پنجره وجود دارد:
 
 `win.moveBy(x,y)`
-: Move the window relative to current position `x` pixels to the right and `y` pixels down. Negative values are allowed (to move left/up).
+: پنجره را نسبت به موقعیت فعلی، `x` پیکسل به سمت راست و `y` پیکسل به سمت پایین حرکت می‌دهد. مقادیر منفی هم مجاز هستند (برای حرکت دادن به چپ/بالا)
 
 `win.moveTo(x,y)`
-: Move the window to coordinates `(x,y)` on the screen.
+: پنجره را به مختصات `(x,y)` در صفحه می‌برد.
 
 `win.resizeBy(width,height)`
-: Resize the window by given `width/height` relative to the current size. Negative values are allowed.
+: پنجره را با اندازه‌های `width/height` داده شده نسبت به اندازه‌ی فعلی تغییر سایز می‌دهد. مقادیر منفی مجاز هستند.
 
 `win.resizeTo(width,height)`
-: Resize the window to the given size.
+: پنجره را به اندازه‌ی داده شده تغییر اندازه می‌دهد.
 
-There's also `window.onresize` event.
+همچنین یک `window.onresize` event نیز وجود دارد.
 
-```warn header="Only popups"
-To prevent abuse, the browser usually blocks these methods. They only work reliably on popups that we opened, that have no additional tabs.
+```warn header="فقط popups"
+.برای اینکه از سواستفاده جلوگیری شود، مرورگر معمولا این متدها را مسدود می‌کنند. آن‌ها فقط روی پنجره‌های بازشو که هیچ صفحه‌ی اضافی ندارند، به‌ طور قابل اعتماد کار می‌کنند
 ```
 
 ```warn header="No minification/maximization"
-JavaScript has no way to minify or maximize a window. These OS-level functions are hidden from Frontend-developers.
+.پنهان هستند Frontend-developers هیچ راهی برای به حداقل رساندن یا به حداکثر رساندن یک پنجره نیست. این متدها که در سطح سیستم‌عامل هستند از دید JavaScript در
 
-Move/resize methods do not work for maximized/minimized windows.
+.روش‌های جابجایی/تغییر اندازه برای پنجره‌های حداکثر/حداقل شده کار نمی‌کنند
 ```
 
-## Scrolling a window
+## پیمایش یک پنجره
 
-We already talked about scrolling a window in the chapter <info:size-and-scroll-window>.
+ما قبلا در مورد scroll کردن یک پنجره در بخش <info:size-and-scroll-window> صحبت کرده‌ایم.
 
 `win.scrollBy(x,y)`
-: Scroll the window `x` pixels right and `y` down relative the current scroll. Negative values are allowed.
+: پنجره را نسبت به scroll فعلی، `x` پیکسل به راست و `y` پیکسل به پایین scroll می‌کند. مقادیر منفی مجاز هستند.
 
 `win.scrollTo(x,y)`
-: Scroll the window to the given coordinates `(x,y)`.
+: پنجره را به مختصات داده شده `(x,y)` scroll می‌کند.
 
 `elem.scrollIntoView(top = true)`
-: Scroll the window to make `elem` show up at the top (the default) or at the bottom for `elem.scrollIntoView(false)`.
+: پنجره را scroll می‌کند که `elem` را در بالا (پیش فرض) یا پایین برای `elem.scrollIntoView(false)` نمایش دهد.
 
-There's also `window.onscroll` event.
+همچنین یک `window.onscroll` event نیز هست.
 
-## Focus/blur on a window
+## Focus/blur روی یک پنجره
 
 Theoretically, there are `window.focus()` and `window.blur()` methods to focus/unfocus on a window. And there are also `focus/blur` events that allow to catch the moment when the visitor focuses on a window and switches elsewhere.
 
