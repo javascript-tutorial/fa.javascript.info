@@ -98,11 +98,11 @@ open('/', 'test', params);
 - اگر هیچ `left/top`ای در params وجود ندارد، مرورگر تلاش می‌کند که پنجره‌ای جدید را نزدیک آخرین پنجره‌ی باز شده، باز کند.
 - اگر هیچ `width/height`ای وجود ندارد، پنجره‌ی جدید همان اندازه‌ی آخرین پنجره‌ی باز شده را خواهد داشت.
 
-## Accessing popup from window
+## دسترسی به popup از طریق پنجره
 
-The `open` call returns a reference to the new window. It can be used to manipulate its properties, change location and even more.
+فراخوانی `open` ارجاعی به پنجره‌ی جدید را برمی‌گرداند. از آن می‌توان برای دستکاری کردن propertyها، تغییر دادن location و حتی بیشتر استفاده کرد.
 
-In this example, we generate popup content from JavaScript:
+در این مثال، ما از JavaScript محتوای popup را تولید می‌کنیم.
 
 ```js
 let newWin = window.open("about:blank", "hello", "width=200,height=200");
@@ -110,13 +110,13 @@ let newWin = window.open("about:blank", "hello", "width=200,height=200");
 newWin.document.write("Hello, world!");
 ```
 
-And here we modify the contents after loading:
+و اینجا بعد از load کردن، محتوا را دستکاری می‌کنیم. 
 
 ```js run
 let newWindow = open('/', 'example', 'width=300,height=300')
 newWindow.focus();
 
-alert(newWindow.location.href); // (*) about:blank, loading hasn't started yet
+alert(newWindow.location.href); // (*) about:blank,  هنوز شروع نشده است loading
 
 newWindow.onload = function() {
   let html = `<div style="font-size:30px">Welcome!</div>`;
@@ -126,12 +126,12 @@ newWindow.onload = function() {
 };
 ```
 
-Please note: immediately after `window.open`, the new window isn't loaded yet. That's demonstrated by `alert` in line `(*)`. So we wait for `onload` to modify it. We could also use `DOMContentLoaded` handler for `newWin.document`.
+لطفا توجه داشته باشید: بلافاصله بعد از `window.open` پنجره‌ی جدید هنوز load نشده است. آن، در خط `(*)` با `alert` نشان داده می‌شود. پس صبر می‌کنیم تا `onload` آن را اصلاح کند. همچنین برای `newWin.document` می‌توانیم از `DOMContentLoaded` handler استفاده کنیم.
 
-```warn header="Same origin policy"
-Windows may freely access content of each other only if they come from the same origin (the same protocol://domain:port).
+```warn header="سیاست مبدا یکسان"
+.می‌توانند به صورت آزادانه به محتوای یکدیگر دسترسی داشته باشند (همان پروتکل://domain:port) پنجره‌ها فقط در صورتی که از یک مبدا باشند
 
-Otherwise, e.g. if the main window is from `site.com`, and the popup from `gmail.com`, that's impossible for user safety reasons. For the details, see chapter <info:cross-window-communication>.
+.را ببینید <info:cross-window-communication> این برای دلایل امنیتی غیرممکن است. برای جزئیات، بخش `gmail.com` از popup باشد و `site.com` در غیر این صورت، برای مثال اگر پنجره‌ی اصلی از
 ```
 
 ## Accessing window from popup
