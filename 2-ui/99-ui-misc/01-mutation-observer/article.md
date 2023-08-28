@@ -64,7 +64,7 @@ observer.observe(elem, {
 </script>
 ```
 
-If we run this code in the browser, then focus on the given `<div>` and change the text inside `<b>edit</b>`, `console.log` will show one mutation:
+اگر ما این کد را در browser run کنیم، و بعد روی `<div>` داده شده و تغییرات درون `<b>edit</b>` تمرکز کنیم، `console.log` یک mutation نشان می دهد:    
 
 ```js
 mutationRecords = [{
