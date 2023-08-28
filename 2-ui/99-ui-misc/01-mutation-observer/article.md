@@ -28,9 +28,9 @@ observer.observe(node, config);
 - `characterData` -- whether to observe `node.data` (text content),
 - `characterData` -- ایا `node.data` (text content) را مشاهده کنیم یا نه 
 
-Few other options:
-- `attributeOldValue` -- if `true`, pass both the old and the new value of attribute to callback (see below), otherwise only the new one (needs `attributes` option),
-- `characterDataOldValue` -- if `true`, pass both the old and the new value of `node.data` to callback (see below), otherwise only the new one (needs `characterData` option).
+چند گزینه دیگر:
+- `attributeOldValue` --بود هم مقدار قذیم و هم مقدار جدید attribute به callback  پاس داده می شود `true` اگر 
+- `characterDataOldValue` --(needs `characterData` option) پاس می دهیم، در غیر این صورت فقط مقدار جدید را callback را یه  `node.data` بود هم مقدار جدید و هم مقدار قدیم `true` اگر
 
 Then after any changes, the `callback` is executed: changes are passed in the first argument as a list of [MutationRecord](https://dom.spec.whatwg.org/#mutationrecord) objects, and the observer itself as the second argument.
 
