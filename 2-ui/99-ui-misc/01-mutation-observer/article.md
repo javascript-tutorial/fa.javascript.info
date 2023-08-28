@@ -26,6 +26,7 @@ observer.observe(node, config);
 - `attributes` -- attributes های `node`,
 - `attributeFilter` --که فقط سلکت شده ها را ببینیم ،attribute name یک ارایه از
 - `characterData` -- whether to observe `node.data` (text content),
+- `characterData` -- ایا `node.data` (text content) را مشاهده کنیم یا نه 
 
 Few other options:
 - `attributeOldValue` -- if `true`, pass both the old and the new value of attribute to callback (see below), otherwise only the new one (needs `attributes` option),
