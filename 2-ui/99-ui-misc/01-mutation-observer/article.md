@@ -75,7 +75,7 @@ mutationRecords = [{
 }];
 ```
 
-If we make more complex editing operations, e.g. remove the `<b>edit</b>`, the mutation event may contain multiple mutation records:
+اگر ما ادیت های پیچیده تری را اجرا کنیم، مانند ریمو کردن `<b>edit</b>`، آن گاه mutation event ممکن است شامل تعدادی mutation records باشد:   
 
 ```js
 mutationRecords = [{
