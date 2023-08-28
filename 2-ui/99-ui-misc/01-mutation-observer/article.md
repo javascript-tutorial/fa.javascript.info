@@ -128,10 +128,7 @@ mutationRecords = [{
 </code></pre>
 ...
 ```
-
-For better readability and at the same time, to beautify it, we'll be using a JavaScript syntax highlighting library on our site, like [Prism.js](https://prismjs.com/). To get syntax highlighting for above snippet in Prism, `Prism.highlightElem(pre)` is called, which examines the contents of such `pre` elements and adds special tags and styles for colored syntax highlighting into those elements, similar to what you see in examples here, on this page.
-
-برای خوانایی بهتر و در عین حال برای زیباتر کردن آن، از کتابخانه برجسته سازی نحوی جاوا اسکریپت در سایت خود مانند [Prism.js](https://prismjs.com/) استفاده خواهیم کرد. برای دریافت برجسته‌سازی نحو برای قطعه بالا در `(Prism.highlightElem(pre`  نامیده می‌شود، که محتویات چنین عناصر`pre`را بررسی می‌کند و تگ‌ها و سبک‌های خاصی را برای برجسته کردن نحو رنگی به آن عناصر اضافه می‌کند، مشابه آنچه می‌بینید. در مثال های اینجا، در این صفحه.
+ کردن آن، از کتابخانه برجسته سازی نحوی جاوا اسکریپت در سایت خود مانند [Prism.js](https://prismjs.com/) استفاده خواهیم کرد. برای دریافت syntax highlighting برای قطعه بالا درprism، که `Prism.highlightElem(pre)` نامیده می‌شود، که محتویات چنین عناصر`pre`را بررسی می‌کند و تگ‌ها و سبک‌های خاصی را برای  syntax highlighting رنگی به آن عناصر اضافه می‌کند، مشابه آنچه در این صفحه می بینید.
 
 دقیقاً چه زمانی باید آن روش برجسته سازی را اجرا کنیم؟ خوب، می‌توانیم این کار را در رویداد  `DOMContentLoaded` انجام دهیم یا اسکریپت را در پایین صفحه قرار دهیم. لحظه‌ای که DOM ما آماده است، می‌توانیم عناصر `pre[class*="language"]` را جستجو کنیم و روی آنها  `Prism.highlightElem` را صدا کنیم:
 
