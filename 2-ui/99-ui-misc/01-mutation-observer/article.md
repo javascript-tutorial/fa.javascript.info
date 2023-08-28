@@ -207,13 +207,13 @@ let demoElem = document.getElementById('highlight-demo');
 observer.observe(demoElem, {childList: true, subtree: true});
 ```
 
-Here, below, there's an HTML-element and JavaScript that dynamically fills it using `innerHTML`.
+در اینجا، در زیر، یک عنصر HTML و جاوااسکریپت وجود دارد که به صورت پویا با استفاده از `innerHTML` آن را پر می کند.
 
-Please run the previous code (above, observes that element), and then the code below. You'll see how `MutationObserver` detects and highlights the snippet.
+لطفا کد قبلی را اجرا کنید (در بالا، آن عنصر را مشاهده کنید)، و سپس کد زیر را اجرا کنید. خواهید دید که چگونه  `MutationObserver` قطعه را شناسایی و برجسته می کند.
 
-<p id="highlight-demo" style="border: 1px solid #ddd">A demo-element with <code>id="highlight-demo"</code>, run the code above to observe it.</p>
+<p id="highlight-demo" style="border: 1px solid #ddd">یک عنصر آزمایشی با <code>id="highlight-demo"</code>، کد بالا را اجرا کنید تا آن را مشاهده کنید.</ p>
 
-The following code populates its `innerHTML`, that causes the `MutationObserver` to react and highlight its contents:
+کد زیر `innerHTML` خود را پر می کند، که باعث می شود`MutationObserver` واکنش نشان داده و محتوای آن را برجسته کند:
 
 ```js run
 let demoElem = document.getElementById('highlight-demo');
@@ -228,19 +228,19 @@ demoElem.innerHTML = `A code snippet is below:
 `;
 ```
 
-Now we have `MutationObserver` that can track all highlighting in observed elements or the whole `document`. We can add/remove code snippets in HTML without thinking about it.
+اکنون `MutationObserver` را داریم که می تواند تمام برجسته سازی ها در عناصر مشاهده شده یا کل `document` را ردیابی کند. ما می‌توانیم تکه‌های کد را بدون فکر کردن در HTML اضافه یا حذف کنیم.
 
 ## Additional methods
 
-There's a method to stop observing the node:
+روشی برای توقف مشاهده گره وجود دارد:
 
-- `observer.disconnect()` -- stops the observation.
+- `observer.disconnect()` - مشاهده را متوقف می کند.
 
-When we stop the observing, it might be possible that some changes were not yet processed by the observer. In such cases, we use
+وقتی مشاهده را متوقف می کنیم، ممکن است برخی از تغییرات هنوز توسط ناظر پردازش نشده باشد. در چنین مواردی استفاده می کنیم
 
-- `observer.takeRecords()` -- gets a list of unprocessed mutation records - those that happened, but the callback has not handled them.
+-`observer.takeRecords()` - لیستی از سوابق جهش پردازش نشده را دریافت می کند - مواردی که اتفاق افتاده اند، اما پاسخ تماس آنها را مدیریت نکرده است.
 
-These methods can be used together, like this:
+این روش ها را می توان با هم استفاده کرد، مانند:
 
 ```js
 // get a list of unprocessed mutations
@@ -266,8 +266,8 @@ The mere fact that a DOM node is observed doesn't prevent the garbage collection
 
 ## Summary  
 
-`MutationObserver` can react to changes in DOM - attributes, text content and adding/removing elements.
+ پس`MutationObserver` می تواند به تغییرات در DOM - ویژگی ها، محتوای متن و افزودن/حذف عناصر واکنش نشان دهد.
 
-We can use it to track changes introduced by other parts of our code, as well as to integrate with third-party scripts.
+ما می‌توانیم از آن برای ردیابی تغییرات ایجاد شده توسط بخش‌های دیگر کدمان و همچنین برای ادغام با اسکریپت‌های شخص ثالث استفاده کنیم.
 
-`MutationObserver` can track any changes. The config "what to observe" options are used for optimizations, not to spend resources on unneeded callback invocations.
+هم چنین `MutationObserver` می تواند هر تغییری را ردیابی کند. تنظیمات "چه چیزی را مشاهده کنیم" برای بهینه سازی استفاده می شود، نه برای صرف منابع در فراخوانی های غیر ضروری.
