@@ -99,25 +99,26 @@ mutationRecords = [{
 
 ## Usage for integration
 
-When such thing may be useful?
+چه زمانی این اتفاقات به صورت دیفالت رخ می دهند؟
 
-Imagine the situation when you need to add a third-party script that contains useful functionality, but also does something unwanted, e.g. shows ads `<div class="ads">Unwanted ads</div>`.
+شرایطی را تصور کنید که باید یک اسکریپت شخص ثالث اضافه کنید که حاوی عملکرد مفید باشد، اما همچنین کاری ناخواسته انجام دهد، به عنوان مثال تبلیغات `<div class="ads">Unwanted ads</div>` را نشان می دهد.
 
-Naturally, the third-party script provides no mechanisms to remove it.
 
-Using `MutationObserver`, we can detect when the unwanted element appears in our DOM and remove it.
+به طور طبیعی، اسکریپت شخص ثالث هیچ مکانیزمی برای حذف آن ارائه نمی دهد.
 
-There are other situations when a third-party script adds something into our document, and we'd like to detect, when it happens, to adapt our page, dynamically resize something etc.
+با استفاده از `MutationObserver`، می توانیم تشخیص دهیم که عنصر ناخواسته در DOM ما ظاهر می شود و آن را حذف می کنیم.
 
-`MutationObserver` allows to implement this.
+موقعیت‌های دیگری هم وجود دارد که یک اسکریپت شخص ثالث چیزی را به سند ما اضافه می‌کند، و ما می‌خواهیم زمانی که این اتفاق می‌افتد، صفحه خود را تطبیق دهیم، اندازه چیزی را به صورت پویا تغییر اندازه دهیم و غیره.
+
+ هم چنین `MutationObserver` امکان اجرای این را فراهم می کند.
 
 ## Usage for architecture
 
-There are also situations when `MutationObserver` is good from architectural standpoint.
+همچنین شرایطی وجود دارد که `MutationObserver` از نظر معماری خوب است.
 
-Let's say we're making a website about programming. Naturally, articles and other materials may contain source code snippets.
+فرض کنید در حال ساخت یک وب سایت در مورد برنامه نویسی هستیم. به طور طبیعی، مقالات و سایر مطالب ممکن است حاوی کد منبع باشند.
 
-Such snippet in an HTML markup looks like this:
+چنین قطعه ای در نشانه گذاری HTML به شکل زیر است:
 
 ```html
 ...
@@ -130,7 +131,9 @@ Such snippet in an HTML markup looks like this:
 
 For better readability and at the same time, to beautify it, we'll be using a JavaScript syntax highlighting library on our site, like [Prism.js](https://prismjs.com/). To get syntax highlighting for above snippet in Prism, `Prism.highlightElem(pre)` is called, which examines the contents of such `pre` elements and adds special tags and styles for colored syntax highlighting into those elements, similar to what you see in examples here, on this page.
 
-When exactly should we run that highlighting method? Well, we can do it on `DOMContentLoaded` event, or put the script at the bottom of the page. The moment our DOM is ready, we can search for elements `pre[class*="language"]` and call `Prism.highlightElem` on them:
+برای خوانایی بهتر و در عین حال برای زیباتر کردن آن، از کتابخانه برجسته سازی نحوی جاوا اسکریپت در سایت خود مانند [Prism.js](https://prismjs.com/) استفاده خواهیم کرد. برای دریافت برجسته‌سازی نحو برای قطعه بالا در `(Prism.highlightElem(pre`  نامیده می‌شود، که محتویات چنین عناصر`pre`را بررسی می‌کند و تگ‌ها و سبک‌های خاصی را برای برجسته کردن نحو رنگی به آن عناصر اضافه می‌کند، مشابه آنچه می‌بینید. در مثال های اینجا، در این صفحه.
+
+دقیقاً چه زمانی باید آن روش برجسته سازی را اجرا کنیم؟ خوب، می‌توانیم این کار را در رویداد  `DOMContentLoaded` انجام دهیم یا اسکریپت را در پایین صفحه قرار دهیم. لحظه‌ای که DOM ما آماده است، می‌توانیم عناصر `pre[class*="language"]` را جستجو کنیم و روی آنها  `Prism.highlightElem` را صدا کنیم:
 
 ```js
 // highlight all code snippets on the page
