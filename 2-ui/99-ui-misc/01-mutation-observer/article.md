@@ -35,7 +35,7 @@ Then after any changes, the `callback` is executed: changes are passed in the fi
 
 [MutationRecord](https://dom.spec.whatwg.org/#mutationrecord) objects have properties:
 
-- `type` -- mutation type, one of
+- `type` -- mutation type, یکی از موارد زیر
     - `"attributes"`: attribute modified
     - `"characterData"`: data modified, used for text nodes,
     - `"childList"`: child elements added/removed,
@@ -45,7 +45,7 @@ Then after any changes, the `callback` is executed: changes are passed in the fi
 - `attributeName/attributeNamespace` -- the name/namespace (for XML) of the changed attribute,
 - `oldValue` -- the previous value, only for attribute or text changes, if the corresponding option is set `attributeOldValue`/`characterDataOldValue`.
 
-For example, here's a `<div>` with a `contentEditable` attribute. That attribute allows us to focus on it and edit.
+برای مثال، در مثال زیر یک `<div>` با یک `contentEditable` وجود دارد. این attribute به ما اجازه میدهد روی آن و ادیت کردن آن تمرکز کنیم.  
 
 ```html run
 <div contentEditable id="elem">Click and <b>edit</b>, please</div>
