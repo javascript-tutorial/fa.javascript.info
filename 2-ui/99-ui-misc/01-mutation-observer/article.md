@@ -94,7 +94,7 @@ mutationRecords = [{
 }];
 ```
 
-So, `MutationObserver` allows to react on any changes within DOM subtree.
+پس، `MutationObserver` اجازه می دهد که به هر اغییری در DOM subtree واکنش نشان دهیم.
 
 ## Usage for integration
 
