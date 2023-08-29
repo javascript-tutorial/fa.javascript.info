@@ -1,12 +1,11 @@
 
 # Mutation observer
 
- همان طور که می دانیم `MutationObserver` یک شی داخلی است که یک عنصر DOM را مشاهده می کند و هنگامی که تغییری را تشخیص می دهد یک تماس برگشتی ایجاد می کند.
+`MutationObserver` is a built-in object that observes a DOM element and fires a callback when it detects a change.
 
-ابتدا نگاهی به نحو می اندازیم و سپس یک مورد استفاده در دنیای واقعی را بررسی می کنیم تا ببینیم چنین چیزی در کجا ممکن است مفید باشد.
+We'll first take a look at the syntax, and then explore a real-world use case, to see where such thing may be useful.
 
 ## Syntax
-
 `MutationObserver` is easy to use.
 
 First, we create an observer with a callback-function:
