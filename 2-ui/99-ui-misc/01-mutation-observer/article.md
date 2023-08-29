@@ -36,7 +36,6 @@ observer.observe(node, config);
 
 
   شی (object) های [MutationRecord](https://dom.spec.whatwg.org/#mutationrecord) properties هایی دارند:
-
 - `type` -- mutation type, یکی از موارد زیر
     - `"attributes"`: attribute modified
     - `"characterData"`: data modified, used for text nodes,
@@ -77,8 +76,7 @@ mutationRecords = [{
 }];
 ```
 
-اگر ما ادیت های پیچیده تری را اجرا کنیم، مانند ریمو کردن `<b>edit</b>`، آن گاه mutation event ممکن است شامل تعدادی mutation records باشد:   
-
+اگر ما ادیت های پیچیده تری را اجرا کنیم، مانند ریمو کردن `<b>edit</b>`، آن گاه mutation event ممکن است شامل تعدادی mutation records باشد:  
 ```js
 mutationRecords = [{
   type: "childList",
