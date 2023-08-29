@@ -54,17 +54,18 @@ let range = new Range();
 ![](range-hello-1.svg)
 ### Selecting element nodes
 
-**Alternatively, if `node` is an element node, then `offset` must be the child number.** 
 
-That's handy for making ranges that contain nodes as a whole, not stop somewhere inside their text.
+** متناوباً، اگر `node` یک element node است، `offset` باید شماره فرزند باشد.**
 
-For example, we have a more complex document fragment:
+این برای ایجاد محدوده هایی که شامل گره ها به عنوان یک کل هستند، مفید است، نه اینکه در جایی در متن خود متوقف شوند.
+
+به عنوان مثال، ما یک قطعه سند پیچیده تر داریم:
 
 ```html autorun
 <p id="p">Example: <i>italic</i> and <b>bold</b></p>
 ```
 
-Here's its DOM structure with both element and text nodes:
+در اینجا ساختار DOM آن با هر دو گره عنصر و متن آمده است:
 
 <div class="select-p-domtree"></div>
 
