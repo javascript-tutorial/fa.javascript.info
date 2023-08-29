@@ -1,4 +1,4 @@
-libs:
+کتابخانه ها:
   - d3
   - domtree
 
@@ -6,35 +6,36 @@ libs:
 
 # Selection and Range
 
-In this chapter we'll cover selection in the document, as well as selection in form fields, such as `<input>`.
 
-JavaScript can access an existing selection, select/deselect DOM nodes as a whole or partially, remove the selected content from the document, wrap it into a tag, and so on.
+جاوااسکریپت می‌تواند به یک انتخاب موجود دسترسی داشته باشد، گره‌های DOM را به‌طور کلی یا جزئی انتخاب یا لغو انتخاب کند، محتوای انتخاب‌شده را از سند حذف کند، آن را در یک برچسب قرار دهد و غیره.
 
-You can find some recipes for common tasks at the end of the chapter, in "Summary" section. Maybe that covers your current needs, but you'll get much more if you read the whole text.
+می‌توانید دستور العمل‌هایی برای کارهای رایج در انتهای فصل، در بخش "Summary" بیابید. شاید این نیازهای فعلی شما را پوشش دهد، اما اگر متن کامل را بخوانید، خیلی بیشتر به دست خواهید آورد.
 
-The underlying `Range` and `Selection` objects are easy to grasp, and then you'll need no recipes to make them do what you want.
+درک اشیاء زیربنایی  `Range` و`Selection` آسان است، و پس از آن برای اینکه آنها را به آنچه می‌خواهید انجام دهند، به هیچ دستور العملی نیاز نخواهید داشت.
 
 ## Range
 
-The basic concept of selection is [Range](https://dom.spec.whatwg.org/#ranges), that is essentially a pair of "boundary points": range start and range end.
+فهوم اصلی انتخاب [Range](https://dom.spec.whatwg.org/#ranges) است، که اساساً یک جفت "boundary points"است: شروع محدوده و پایان محدوده.
 
-A `Range` object is created without parameters:
+
+یک `Range` object بدون پارامتر ساخته می شود: 
 
 ```js
 let range = new Range();
 ```
 
-Then we can set the selection boundaries using `range.setStart(node, offset)` and `range.setEnd(node, offset)`.
+پس می‌توانیم مرزهای انتخاب را با استفاده از `range.setStart(node, offset)` و `range.setEnd(node, offset)` تنظیم کنیم.
 
-As you might guess, further we'll use the `Range` objects for selection, but first let's create few such objects.
+همانطور که ممکن است حدس بزنید، در ادامه از اشیاء `Range`  برای انتخاب استفاده خواهیم کرد، اما ابتدا اجازه دهید تعداد کمی از این اشیاء ایجاد کنیم.
 
 ### Selecting the text partially
 
-The interesting thing is that the first argument `node` in both methods can be either a text node or an element node, and the meaning of the second argument depends on that.
+نکته جالب این است که آرگومان اول `node` در هر دو روش می تواند یک text node یا یelement node عنصر باشد و معنای آرگومان دوم به آن بستگی دارد.
 
-**If `node` is a text node, then `offset` must be the position in its text.**
 
-For example, given the element `<p>Hello</p>`, we can create the range containing the letters "ll" as follows:
+**اگر `node` یک text nodeاست، `offset` باید موقعیتی در متن آن باشد.**
+
+به عنوان مثال، با توجه به عنصر `<p>Hello</p>`، می‌توانیم محدوده حاوی حروف «ll» را به صورت زیر ایجاد کنیم:
 
 ```html run
 <p id="p">Hello</p>
@@ -48,10 +49,9 @@ For example, given the element `<p>Hello</p>`, we can create the range containin
 </script>
 ```
 
-Here we take the first child of `<p>` (that's the text node) and specify the text positions inside it:
+در اینجا اولین فرزند `<p>` را می گیریم (این text node است) و موقعیت های متن را در داخل آن مشخص می کنیم:
 
 ![](range-hello-1.svg)
-
 ### Selecting element nodes
 
 **Alternatively, if `node` is an element node, then `offset` must be the child number.** 
