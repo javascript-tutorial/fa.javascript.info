@@ -1,7 +1,7 @@
 
 # Mutation observer
 
- همان طور که می دانیم `MutationObserver` یک شی داخلی است که یک عنصر DOM را مشاهده می کند و هنگامی که تغییری را تشخیص می دهد یک تماس برگشتی ایجاد می کند.
+ همان طور که می دانیم `MutationObserver` یک inner object است که یک عنصر DOM را مشاهده می کند و هنگامی که تغییری را تشخیص می دهد یک تماس برگشتی ایجاد می کند.
 
 ابتدا نگاهی به نحو می اندازیم و سپس یک مورد استفاده در دنیای واقعی را بررسی می کنیم تا ببینیم چنین چیزی در کجا ممکن است مفید باشد.
 
@@ -9,7 +9,7 @@
 
 استفاده از `MutationObserver` بسیار ساده است.
 
-اول از ههمه، یک observer با استفاده از callback-function می سازیم:  
+اول از همه، یک observer با استفاده از callback-function می سازیم:  
 
 ```js
 let observer = new MutationObserver(callback);
@@ -32,19 +32,20 @@ observer.observe(node, config);
 - `attributeOldValue` --بود هم مقدار قذیم و هم مقدار جدید attribute به callback  پاس داده می شود `true` اگر 
 - `characterDataOldValue` --(needs `characterData` option) پاس می دهیم، در غیر این صورت فقط مقدار جدید را callback را یه  `node.data` بود هم مقدار جدید و هم مقدار قدیم `true` اگر
 
-Then after any changes, the `callback` is executed: changes are passed in the first argument as a list of [MutationRecord](https://dom.spec.whatwg.org/#mutationrecord) objects, and the observer itself as the second argument.
+سپس پس از هر تغییری، `callback` اجرا می‌شود: تغییرات در آرگومان اول به‌عنوان فهرستی از اشیاء [MutationRecord](https://dom.spec.whatwg.org/#mutationrecord) و خود مشاهده‌گر به‌عنوان استدلال دوم است.
 
-[MutationRecord](https://dom.spec.whatwg.org/#mutationrecord) objects have properties:
+
+  شی (object) های [MutationRecord](https://dom.spec.whatwg.org/#mutationrecord) properties هایی دارند:
 
 - `type` -- mutation type, یکی از موارد زیر
     - `"attributes"`: attribute modified
     - `"characterData"`: data modified, used for text nodes,
     - `"childList"`: child elements added/removed,
-- `target` -- where the change occurred: an element for `"attributes"`, or text node for `"characterData"`, or an element for a `"childList"` mutation,
-- `addedNodes/removedNodes`  -- nodes that were added/removed,
-- `previousSibling/nextSibling` -- the previous and next sibling to added/removed nodes,
-- `attributeName/attributeNamespace` -- the name/namespace (for XML) of the changed attribute,
-- `oldValue` -- the previous value, only for attribute or text changes, if the corresponding option is set `attributeOldValue`/`characterDataOldValue`.
+- `target` -- `"childList"` mutation برای  element و یا `"characterData"` برای  text node یا `"attributes"` جایی که تغییر رخ داده است: یک عنصر برای 
+- `addedNodes/removedNodes` -- شده اند added/removed هایی که (nodes)نود
+- `previousSibling/nextSibling` --added/removed nodes خواهر یا برادر قبلی یا جدید، 
+- `attributeName/attributeNamespace` --  changed attribute (XML) برای namespace اسم یا 
+- `oldValue` --  .تنظیم شود `attributeOldValue`/`characterDataOldValue` مقدار قبلی، فقط برای تغییر ویژگی یا متن می باشد، اگر گزینه مربوطه
 
 برای مثال، در مثال زیر یک `<div>` با یک `contentEditable` وجود دارد. این attribute به ما اجازه میدهد روی آن و ادیت کردن آن تمرکز کنیم.  
 
@@ -137,20 +138,20 @@ mutationRecords = [{
 document.querySelectorAll('pre[class*="language"]').forEach(Prism.highlightElem);
 ```
 
-Everything's simple so far, right? We find code snippets in HTML and highlight them.
 
-Now let's go on. Let's say we're going to dynamically fetch materials from a server. We'll study methods for that [later in the tutorial](info:fetch). For now it only matters that we fetch an HTML article from a webserver and display it on demand:
+حالا بیایید ادامه دهیم. فرض کنید می خواهیم مطالب را به صورت پویا از یک سرور واکشی کنیم. ما روش‌هایی را برای آن مطالعه خواهیم کرد [later in the tutorial](info:fetch). در حال حاضر فقط مهم است که یک مقاله HTML را از یک وب سرور واکشی کنیم و آن را در صورت درخواست نمایش دهیم:
 
 ```js
 let article = /* fetch new content from server */
 articleElem.innerHTML = article;
 ```
 
-The new `article` HTML may contain code snippets. We need to call `Prism.highlightElem` on them, otherwise they won't get highlighted.
 
-**Where and when to call `Prism.highlightElem` for a dynamically loaded article?**
+در HTML `article` جدید ممکن است حاوی کدهایی باشد. باید`Prism.highlightElem` را روی آنها صدا کنیم، در غیر این صورت برجسته نمی‌شوند.
 
-We could append that call to the code that loads an article, like this:
+**کجا و چه زمانی برای یک مقاله بارگذاری شده پویا با `Prism.highlightElem` تماس بگیرید؟**
+
+می‌توانیم آن فراخوان را به کدی که یک مقاله را بارگیری می‌کند، اضافه کنیم، مانند این:
 
 ```js
 let article = /* fetch new content from server */
@@ -162,21 +163,22 @@ snippets.forEach(Prism.highlightElem);
 */!*
 ```
 
-...But, imagine if we have many places in the code where we load our content - articles, quizzes, forum posts, etc. Do we need to put the highlighting call everywhere, to highlight the code in content after loading? That's not very convenient.
 
-And what if the content is loaded by a third-party module? For example, we have a forum written by someone else, that loads content dynamically, and we'd like to add syntax highlighting to it. No one likes patching third-party scripts.
+...اما، تصور کنید اگر ما مکان های زیادی در کد داشته باشیم که در آن محتوای خود را بارگذاری می کنیم - مقالات، آزمون ها، پست های انجمن و غیره. این خیلی راحت نیست.
 
-Luckily, there's another option.
+و اگر محتوا توسط یک ماژول شخص ثالث بارگذاری شود چه؟ به عنوان مثال، ما یک انجمن داریم که توسط شخص دیگری نوشته شده است، که محتوا را به صورت پویا بارگیری می کند، و مایلیم برجسته سازی نحوی را به آن اضافه کنیم. هیچ کس وصله اسکریپت های شخص ثالث را دوست ندارد.
 
-We can use `MutationObserver` to automatically detect when code snippets are inserted into the page and highlight them.
+خوشبختانه، گزینه دیگری وجود دارد.
 
-So we'll handle the highlighting functionality in one place, relieving us from the need to integrate it.
+می‌توانیم از `MutationObserver` استفاده کنیم تا به‌طور خودکار زمانی که قطعه‌های کد در صفحه درج می‌شوند، شناسایی کرده و آن‌ها را برجسته کنیم.
+
+بنابراین ما عملکرد برجسته سازی را در یک مکان مدیریت می کنیم و ما را از نیاز به ادغام آن رها می کنیم.
 
 ### Dynamic highlight demo
 
-Here's the working example.
+و مثالی که کار می کند.
 
-If you run this code, it starts observing the element below and highlighting any code snippets that appear there:
+اگر این کد را اجرا کنید، شروع به مشاهده element زیر می کند و هر قطعه کدی را که در آنجا ظاهر می شود برجسته می کند:
 
 ```js run
 let observer = new MutationObserver(mutations => {
@@ -254,14 +256,14 @@ observer.disconnect();
 ```
 
 
-```smart header="Records returned by `observer.takeRecords()` are removed from the processing queue"
-The callback won't be called for records, returned by `observer.takeRecords()`.
+```  پس smart header="سوابق برگردانده شده توسط `observer.takeRecords()` از صف پردازش حذف می شوند"
+تماس برگشتی برای رکوردها که توسط 'observer.takeRecords()' برگردانده شده است، فراخوانی نمی شود.
 ```
 
-```smart header="Garbage collection interaction"
-Observers use weak references to nodes internally. That is, if a node is removed from the DOM, and becomes unreachable, then it can be garbage collected.
+```smart header="تعامل جمع آوری زباله"
+ناظران از ارجاعات ضعیف به گره ها در داخل استفاده می کنند. به این معنا که اگر یک گره از DOM حذف شود و غیرقابل دسترسی شود، می‌توان زباله‌ها را جمع‌آوری کرد.
 
-The mere fact that a DOM node is observed doesn't prevent the garbage collection.
+صرف این واقعیت که یک گره DOM مشاهده می شود مانع از جمع آوری زباله نمی شود.
 ```
 
 ## Summary  
