@@ -1,23 +1,21 @@
 # Events: change, input, cut, copy, paste
 
-بیایید event های مختلفی را که همراه با به روز رسانی داده ها هستند، پوشش دهیم.
+Let's cover various events that accompany data updates.
+
 ## Event: change
 
-در event `change` وقتی که element تغیرات را متوقف می کند، trigger شدن رخ می دهد.
+The `change` event triggers when the element has finished changing.
 
+For text inputs that means that the event occurs when it loses focus.
 
-در ورودی های متن به این معنی است که event زمانی رخ می دهد که فوکوس خود را از دست بدهد.
-
-به عنوان مثال، وقتی که در فایل زیر تایپ می کنیم--هیچ event  وجود ندارد. اما وقتی تمرکزمان را روی قسمت دیگری ببریم، مثلا، کلیک کردن روی دکمه--آن وقت یک `change` event خواهیم داشت.
-
-
+For instance, while we are typing in the text field below -- there's no event. But when we move the focus somewhere else, for instance, click on a button -- there will be a `change` event:
 
 ```html autorun height=40 run
 <input type="text" onchange="alert(this.value)">
 <input type="button" value="Button">
 ```
 
-برای باقی  element ها: `select`, `input type=checkbox/radio` دقیقا وقتی که selection تغییر می کند trigger می شود:
+For other elements: `select`, `input type=checkbox/radio` it triggers right after the selection changes:
 
 ```html autorun height=40 run
 <select onchange="alert(this.value)">
