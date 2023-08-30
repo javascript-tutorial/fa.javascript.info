@@ -104,20 +104,20 @@ let selectPDomtree = {
 drawHtmlTree(selectPDomtree, 'div.select-p-domtree', 690, 320);
 </script>
 
-Let's make a range for `"Example: <i>italic</i>"`.
 
-As we can see, this phrase consists of exactly two children of `<p>`, with indexes `0` and `1`:
+همانطور که می بینیم، این عبارت دقیقاً از دو فرزند `<p>` با نمایه های  `0`  و `1` تشکیل شده است:
 
 ![](range-example-p-0-1.svg)
 
-- The starting point has `<p>` as the parent `node`, and `0` as the offset.
 
-    So we can set it as `range.setStart(p, 0)`.
-- The ending point also has `<p>` as the parent `node`, but `2` as the offset (it specifies the range up to, but not including `offset`).
+- نقطه شروع  `<p>` به عنوان  `node` والد، و  `0` به عنوان آفست است.
 
-    So we can set it as `range.setEnd(p, 2)`.
+     بنابراین می‌توانیم آن را به‌عنوان `range.setStart(p, 0)` تنظیم کنیم.
+- نقطه پایانی نیز `<p>` را به عنوان  `node` والد، اما  `2` را به عنوان آفست دارد (محدوده تا را مشخص می کند، اما `offset` را شامل نمی شود).
 
-Here's the demo. If you run it, you can see that the text gets selected:
+     بنابراین می‌توانیم آن را به‌عنوان `range.setEnd(p, 2)` تنظیم کنیم.
+
+در اینجا نسخه ی نمایشی است. اگر آن را اجرا کنید، می بینید که متن انتخاب شده است:
 
 ```html run
 <p id="p">Example: <i>italic</i> and <b>bold</b></p>
@@ -138,7 +138,7 @@ Here's the demo. If you run it, you can see that the text gets selected:
 </script>
 ```
 
-Here's a more flexible test stand where you can set range start/end numbers and explore other variants:
+در اینجا یک پایه تست انعطاف‌پذیرتر وجود دارد که در آن می‌توانید اعداد شروع/پایان محدوده را تنظیم کنید و انواع دیگر را بررسی کنیدد:
 
 ```html run autorun
 <p id="p">Example: <i>italic</i> and <b>bold</b></p>
@@ -161,7 +161,7 @@ From <input id="start" type="number" value=1> – To <input id="end" type="numbe
 </script>
 ```
 
-E.g. selecting in the same `<p>` from offset `1` to `4` gives us the range `<i>italic</i> and <b>bold</b>`:
+به عنوان مثال، انتخاب در همان `<p>` از آفست `1` تا `4`، محدوده `<i>italic</i> and <b>bold</b>` را به ما می‌دهد:
 
 ![](range-example-p-1-3.svg)
 
