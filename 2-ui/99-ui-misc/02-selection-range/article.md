@@ -1,4 +1,4 @@
-libs:
+کتابخانه ها:
   - d3
   - domtree
 
@@ -6,35 +6,36 @@ libs:
 
 # Selection and Range
 
-In this chapter we'll cover selection in the document, as well as selection in form fields, such as `<input>`.
 
-JavaScript can access an existing selection, select/deselect DOM nodes as a whole or partially, remove the selected content from the document, wrap it into a tag, and so on.
+جاوااسکریپت می‌تواند به یک انتخاب موجود دسترسی داشته باشد، گره‌های DOM را به‌طور کلی یا جزئی انتخاب یا لغو انتخاب کند، محتوای انتخاب‌شده را از سند حذف کند، آن را در یک برچسب قرار دهد و غیره.
 
-You can find some recipes for common tasks at the end of the chapter, in "Summary" section. Maybe that covers your current needs, but you'll get much more if you read the whole text.
+می‌توانید دستور العمل‌هایی برای کارهای رایج در انتهای فصل، در بخش "Summary" بیابید. شاید این نیازهای فعلی شما را پوشش دهد، اما اگر متن کامل را بخوانید، خیلی بیشتر به دست خواهید آورد.
 
-The underlying `Range` and `Selection` objects are easy to grasp, and then you'll need no recipes to make them do what you want.
+درک اشیاء زیربنایی  `Range` و`Selection` آسان است، و پس از آن برای اینکه آنها را به آنچه می‌خواهید انجام دهند، به هیچ دستور العملی نیاز نخواهید داشت.
 
 ## Range
 
-The basic concept of selection is [Range](https://dom.spec.whatwg.org/#ranges), that is essentially a pair of "boundary points": range start and range end.
+فهوم اصلی انتخاب [Range](https://dom.spec.whatwg.org/#ranges) است، که اساساً یک جفت "boundary points"است: شروع محدوده و پایان محدوده.
 
-A `Range` object is created without parameters:
+
+یک `Range` object بدون پارامتر ساخته می شود: 
 
 ```js
 let range = new Range();
 ```
 
-Then we can set the selection boundaries using `range.setStart(node, offset)` and `range.setEnd(node, offset)`.
+پس می‌توانیم مرزهای انتخاب را با استفاده از `range.setStart(node, offset)` و `range.setEnd(node, offset)` تنظیم کنیم.
 
-As you might guess, further we'll use the `Range` objects for selection, but first let's create few such objects.
+همانطور که ممکن است حدس بزنید، در ادامه از اشیاء `Range`  برای انتخاب استفاده خواهیم کرد، اما ابتدا اجازه دهید تعداد کمی از این اشیاء ایجاد کنیم.
 
 ### Selecting the text partially
 
-The interesting thing is that the first argument `node` in both methods can be either a text node or an element node, and the meaning of the second argument depends on that.
+نکته جالب این است که آرگومان اول `node` در هر دو روش می تواند یک text node یا یelement node عنصر باشد و معنای آرگومان دوم به آن بستگی دارد.
 
-**If `node` is a text node, then `offset` must be the position in its text.**
 
-For example, given the element `<p>Hello</p>`, we can create the range containing the letters "ll" as follows:
+**اگر `node` یک text nodeاست، `offset` باید موقعیتی در متن آن باشد.**
+
+به عنوان مثال، با توجه به عنصر `<p>Hello</p>`، می‌توانیم محدوده حاوی حروف «ll» را به صورت زیر ایجاد کنیم:
 
 ```html run
 <p id="p">Hello</p>
@@ -48,23 +49,24 @@ For example, given the element `<p>Hello</p>`, we can create the range containin
 </script>
 ```
 
-Here we take the first child of `<p>` (that's the text node) and specify the text positions inside it:
+در اینجا اولین فرزند `<p>` را می گیریم (این text node است) و موقعیت های متن را در داخل آن مشخص می کنیم:
+
 
 ![](range-hello-1.svg)
-
 ### Selecting element nodes
 
-**Alternatively, if `node` is an element node, then `offset` must be the child number.** 
 
-That's handy for making ranges that contain nodes as a whole, not stop somewhere inside their text.
+** متناوباً، اگر `node` یک element node است، `offset` باید شماره فرزند باشد.**
 
-For example, we have a more complex document fragment:
+این برای ایجاد محدوده هایی که شامل گره ها به عنوان یک کل هستند، مفید است، نه اینکه در جایی در متن خود متوقف شوند.
+
+به عنوان مثال، ما یک قطعه سند پیچیده تر داریم:
 
 ```html autorun
 <p id="p">Example: <i>italic</i> and <b>bold</b></p>
 ```
 
-Here's its DOM structure with both element and text nodes:
+در اینجا ساختار DOM آن با هر دو گره عنصر و متن آمده است:
 
 <div class="select-p-domtree"></div>
 
@@ -102,20 +104,20 @@ let selectPDomtree = {
 drawHtmlTree(selectPDomtree, 'div.select-p-domtree', 690, 320);
 </script>
 
-Let's make a range for `"Example: <i>italic</i>"`.
 
-As we can see, this phrase consists of exactly two children of `<p>`, with indexes `0` and `1`:
+همانطور که می بینیم، این عبارت دقیقاً از دو فرزند `<p>` با نمایه های  `0`  و `1` تشکیل شده است:
 
 ![](range-example-p-0-1.svg)
 
-- The starting point has `<p>` as the parent `node`, and `0` as the offset.
 
-    So we can set it as `range.setStart(p, 0)`.
-- The ending point also has `<p>` as the parent `node`, but `2` as the offset (it specifies the range up to, but not including `offset`).
+- نقطه شروع  `<p>` به عنوان  `node` والد، و  `0` به عنوان آفست است.
 
-    So we can set it as `range.setEnd(p, 2)`.
+     بنابراین می‌توانیم آن را به‌عنوان `range.setStart(p, 0)` تنظیم کنیم.
+- نقطه پایانی نیز `<p>` را به عنوان  `node` والد، اما  `2` را به عنوان آفست دارد (محدوده تا را مشخص می کند، اما `offset` را شامل نمی شود).
 
-Here's the demo. If you run it, you can see that the text gets selected:
+     بنابراین می‌توانیم آن را به‌عنوان `range.setEnd(p, 2)` تنظیم کنیم.
+
+در اینجا نسخه ی نمایشی است. اگر آن را اجرا کنید، می بینید که متن انتخاب شده است:
 
 ```html run
 <p id="p">Example: <i>italic</i> and <b>bold</b></p>
@@ -136,7 +138,7 @@ Here's the demo. If you run it, you can see that the text gets selected:
 </script>
 ```
 
-Here's a more flexible test stand where you can set range start/end numbers and explore other variants:
+در اینجا یک پایه تست انعطاف‌پذیرتر وجود دارد که در آن می‌توانید اعداد شروع/پایان محدوده را تنظیم کنید و انواع دیگر را بررسی کنیدد:
 
 ```html run autorun
 <p id="p">Example: <i>italic</i> and <b>bold</b></p>
@@ -159,7 +161,7 @@ From <input id="start" type="number" value=1> – To <input id="end" type="numbe
 </script>
 ```
 
-E.g. selecting in the same `<p>` from offset `1` to `4` gives us the range `<i>italic</i> and <b>bold</b>`:
+به عنوان مثال، انتخاب در همان `<p>` از آفست `1` تا `4`، محدوده `<i>italic</i> and <b>bold</b>` را به ما می‌دهد:
 
 ![](range-example-p-1-3.svg)
 
