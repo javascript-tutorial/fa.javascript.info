@@ -1,58 +1,58 @@
-# Dispatching custom events
+# Dispatchکردن eventهای شخصی سازی شده
 
-ما نه تنها می توانیم handler ها را اختصاص دهیم، بلکه می توانیم رویدادها را از جاوا اسکریپت نیز تولید کنیم.
+ما نه تنها می توانیم هندلر ها را اختصاص دهیم، بلکه می توانیم رویدادها را از جاوااسکریپت نیز تولید کنیم.
 
-از رویدادهای سفارشی می توان برای ایجاد "مولفه های گرافیکی" استفاده کرد. به عنوان مثال، یک عنصر ریشه از منوی مبتنی بر JS خودمان ممکن است رویدادهایی را ایجاد کند که می‌گوید چه اتفاقی در منو می‌افتد:
+از custom events می توان برای ایجاد "مولفه های گرافیکی" استفاده کرد. به عنوان مثال، یک عنصر ریشه از منوی مبتنی بر JS خودمان ممکن است رویدادهایی را ایجاد کند که می‌گوید چه اتفاقی در منو می‌افتد: باز کردن (باز کردن منو)، انتخاب (یک مورد انتخاب شده است) و غیره. کد دیگری ممکن است به event ها گوش دهد و آنچه را که در منو اتفاق می افتد مشاهده کند.
 
-باز کردن (باز کردن منو)، انتخاب (یک مورد انتخاب شده است) و غیره. کد دیگری ممکن است به رویدادها گوش دهد و آنچه را که در منو اتفاق می افتد مشاهده کند.
+ما می‌توانیم نه تنها event های کاملاً جدیدی را که برای اهداف خود اختراع می‌کنیم، بلکه همچنین event های داخلی مانند کلیک، پایین آوردن ماوس و غیره را ایجاد کنیم. ممکن است برای تست خودکار نرم افزار مفید باشد.
 
-ما می‌توانیم نه تنها رویدادهای کاملاً جدیدی را که برای اهداف خود اختراع می‌کنیم، بلکه همچنین رویدادهای داخلی مانند کلیک، پایین آوردن ماوس و غیره را ایجاد کنیم. ممکن است برای آزمایش خودکار مفید باشد.
 ## Event constructor
 
-کلاس های رویداد داخلی یک سلسله مراتب را تشکیل می دهند، مشابه کلاس های عنصر DOM. ریشه کلاس رویداد داخلی است.
+کلاس های event متعلق به زبان یک سلسله مراتب را تشکیل می دهند، مشابه کلاس های عنصر DOM. ریشه آن، کلاس درون‌ساخت [Event](https://dom.spec.whatwg.org/#events) است.
 
-ما می توانیم اشیاء رویداد را مانند این ایجاد کنیم: [Event](https://dom.spec.whatwg.org/#events) 
+ما می توانیم اشیاء event را به این صورت ایجاد کنیم: 
 
 ```js
 let event = new Event(type[, options]);
 ```
 
 پارامتر ها: 
-Arguments:
 
-- *نوع*: event type,  یک رشته مانند `"click"` .
-- *گزینه ها*: شی ای با دو ویژگی اختیاری.
-- *Bubbles*:اگر true  بود یعنی  bubbled  می شود. 
-- *لغو شدن (true/false)*: اگر ویزگی مقدار true را داشت عمل پیش فرض آن لغو میشود،
-- به صورت پیش فرض: `{bubbles: false, cancelable: false}`.
+- *type*: event type,  یک رشته مانند `"click"` .
+- *options*: شی ای با دو ویژگی اختیاری.
+  - *Bubbles*:اگر true  بود یعنی  bubbled  می شود. 
+  - *cancelable (true/false)*: اگر ویزگی مقدار true را داشت عمل پیش فرض آن لغو میشود،
   
+  به صورت پیش فرض: `{bubbles: false, cancelable: false}`.
+
   ## dispatchEvent
 
-پس از ایجاد یک event، باید آن را روی یک element با استفاده از فراخوانی elem.dispatchEvent(event) اجرا کنیم.
+پس از ایجاد یک event، باید آن را روی یک element با استفاده از فراخوانی `elem.dispatchEvent(event)` اجرا کنیم.
 
-سپس handler ها به آن واکنش نشان می دهند که گویی یک رویداد معمولی مرورگر است. اگر رویداد با bubble flag ها ایجاد شده باشد، bubbled می شود.
+سپس هندلر ها به آن واکنش نشان می دهند که گویی یک event معمولی مرورگر است. اگر event با bubble flag ها ایجاد شده باشد، bubbled می شود.
 
-در مثال زیر رویداد کلیک در جاوا اسکریپت آغاز می شود. handler به همان روشی کار می کند که اگر روی دکمه کلیک شده باشد:
+در مثال زیر رویداد `click` در جاوااسکریپت آغاز می شود. هندلر به همان روشی کار می کند که اگر روی دکمه کلیک شده باشد:
 ```html run no-beautify
 <button id="elem" onclick="alert('Click!');">Autoclick</button>
 
 <script>
+
   let event = new Event("click");
   elem.dispatchEvent(event);
 </script>
 ```
 
-راهی برای تشخیص یک user event "واقعی" از event تولید شده توسط اسکریپت وجود دارد.
+```smart header="event.isTrusted"
 
-ویژگی 'event.isTrusted' برای رویدادهایی که از اقدامات واقعی کاربر ناشی می شوند 'true' و برای رویدادهای تولید شده توسط اسکریپت 'false' است.
+ راهی برای تشخیص یک user event "واقعی" از event تولید شده توسط اسکریپت وجود دارد.
 
-
-## Bubbling example
-
+ ویژگی 'event.isTrusted' برای رویدادهایی که از اقدامات کاربر واقعی ناشی می شوند 'true' و برای رویدادهای تولید شده توسط اسکریپت 'false' است.
+```
+## مثالی از Bubbling 
 
 می‌توانیم یک bubbling event با نام `"hello"` ایجاد کنیم و آن را در `document` بگیریم.
 
-تنها چیزی که نیاز داریم این است که `bubbles` را روی "true" تنظیم کنیم:
+تنها چیزی که نیاز داریم این است که `bubbles` را روی `true` تنظیم کنیم:
 
 ```html run no-beautify
 <h1 id="elem">Hello from the script!</h1>
@@ -75,10 +75,10 @@ Arguments:
 
 نکات:
 
-1. باید از `addEventListener` برای custom  کردن  event  ها استفاده کرد، زیرا `on<event>` فقط برای built-in event وجود دارد و `document.onhello` کار نمیکند. 
-2. باید `bubbles:true` را  set  کنیم مگرنه event  bubble up  نخواهد شد.
+1. باید از `addEventListener` برای شخصی‌سازی eventها استفاده کرد، زیرا `on<event>` فقط برای eventهای متعلق به زبان وجود دارد و `document.onhello` کار نمی کند. 
+2. باید `bubbles:true` را تنظیم کنیم وگرنه رویداد bubble up نخواهد شد.
 
-مکانیک bubbling برای built-in (`click`) و custom (`hello`) یکسان است.  هم چنین مراحلی برای گرفتن و bubbling نیز وجود دارد.
+مکانیک bubbling برای event درون‌ساخت (`click`) و event شخصی‌سازه‌شده (`hello`) یکسان است.  هم چنین مراحلی برای capturing و bubbling نیز وجود دارد.
 
 ## MouseEvent, KeyboardEvent and others
 
@@ -91,9 +91,9 @@ Arguments:
 - `KeyboardEvent`
 - ...
 
- اگر میخواهید رویدادی به وجود بیاوریم، باید به جای `new Event` از کلاس های بالا استفاده کنیم. برای مثال `new MouseEvent("click")`.
+ اگر میخواهید event به وجود بیاوریم، باید به جای `new Event` از کلاس های بالا استفاده کنیم. برای مثال `new MouseEvent("click")`.
  
- انتخاب constructor درست این امکان را میدهد که  property های استاندارد را برای هر نوع از  event  مشخص کنیم.
+ انتخاب constructor درست این امکان را میدهد که property های استاندارد را برای هر نوع از event مشخص کنیم.
 
  مانند `clientX/clientY` برای mouse event:
 
@@ -109,6 +109,7 @@ let event = new MouseEvent("click", {
 alert(event.clientX); // 100
 */!*
 ```
+
 لطفا به یاد داشته باشد: constructor های generic `Event` اجازه این کار را نمیدهد.
 
 بیایید این روش را امتحان کنیم:
@@ -125,17 +126,18 @@ let event = new Event("click", {
 alert(event.clientX); // undefined, the unknown property is ignored!
 */!*
 ```
-از نظر فنی، می‌توانیم با اختصاص مستقیم `event.clientX=100` پس از ایجاد، آن را حل کنیم. بنابراین این موضوع راحت و پیروی از قوانین است. event های ایجاد شده توسط مرورگر همیشه نوع مناسبی دارند.
 
-لیست کاملی از  property  ها برای event های مختلف UI به تفکیک، برای مثال، [MouseEvent](https://www.w3.org/TR/uievents/#mouseevent).
+ااز نظر فنی، می‌توانیم با اختصاص مستقیم `event.clientX=100` پس از ایجاد، آن را حل کنیم. بنابراین این موضوع راحت و پیروی از قوانین است. event های ایجاد شده توسط مرورگر همیشه از نوع مناسبی هستند.
 
-## Custom events
+لیست کاملی از  propertyها برای eventهای مختلف UI در مشخصات زبان وجود دارد، برای مثال، [MouseEvent](https://www.w3.org/TR/uievents/#mouseevent).
 
-For our own, completely new events types like `"hello"` we should use `new CustomEvent`. Technically [CustomEvent](https://dom.spec.whatwg.org/#customevent) is the same as `Event`, with one exception.
+## event شخصی‌سازی‌شد
 
-In the second argument (object) we can add an additional property `detail` for any custom information that we want to pass with the event.
+برای انواع events های کاملاً جدید خودمان مانند  `"hello"` باید از `new CustomEvent` استفاده کنیم. از نظر فنی [CustomEvent](https://dom.spec.whatwg.org/#customevent) با `Event` یکسان است،البته با یک استثنا.
 
-For instance:
+در آرگومان دوم (object) می‌توانیم یک ویژگی `detail` برای هر اطلاعات که می‌خواهیم با event ارسال کنیم، اضافه کنیم.
+
+برای مثال:
 
 ```html run refresh
 <h1 id="elem">Hello for John!</h1>
@@ -154,25 +156,25 @@ For instance:
 </script>
 ```
 
-The `detail` property can have any data. Technically we could live without, because we can assign any properties into a regular `new Event` object after its creation. But `CustomEvent` provides the special `detail` field for it to evade conflicts with other event properties.
+ویژگی `detail` می تواند هر داده ای را داشته باشد. از نظر فنی می‌توانیم آن را تنظیم نکنیم، زیرا می‌توانیم هر ویژگی را پس از ایجاد یک شی `new Event` معمولی به آن اختصاص دهیم. اما `CustomEvent` فیلد  `detail` ویژه ای را برای جلوگیری از conflicts با سایر property های event فراهم می کند.
 
-Besides, the event class describes "what kind of event" it is, and if the event is custom, then we should use `CustomEvent` just to be clear about what it is.
+علاوه بر این، کلاس event توضیح می‌دهد که «چه نوع رویدادی» است، و اگر event سفارشی باشد، باید از  `CustomEvent` استفاده کنیم تا مشخص شود که چیست.
 
 ## event.preventDefault()
 
-Many browser events have a "default action", such as navigating to a link, starting a selection, and so on.
+بسیاری از رویدادهای مرورگر دارای یک "default action" هستند، مانند پیمایش یک لینک، شروع یک انتخاب و غیره.
 
-For new, custom events, there are definitely no default browser actions, but a code that dispatches such event may have its own plans what to do after triggering the event.
+برای event های جدید و custom events، قطعاً هیچ اقدام پیش‌فرض مرورگر وجود ندارد، اما کدی که چنین رویدادی را ارسال می‌کند ممکن است برنامه‌های خاص خود را داشته باشد که پس از راه‌اندازی رویداد چه کاری انجام دهد.
 
-By calling `event.preventDefault()`, an event handler may send a signal that those actions should be canceled.
+با فراخوانی `event.preventDefault()`، یک کنترل کننده رویداد ممکن است سیگنالی ارسال کند که آن اقدامات باید لغو شوند.
 
-In that case the call to `elem.dispatchEvent(event)` returns `false`. And the code that dispatched it knows that it shouldn't continue.
+در آن صورت فراخوانی به `elem.dispatchEvent(event)` false برمی گردد. و کدی که آن را ارسال کرده می داند که نباید ادامه یابد.
 
-Let's see a practical example - a hiding rabbit (could be a closing menu or something else).
+بیایید یک مثال عملی ببینیم - یک خرگوش پنهان (ممکن است منوی بسته شدن یا چیز دیگری باشد).
 
-Below you can see a `#rabbit` and `hide()` function that dispatches `"hide"` event on it, to let all interested parties know that the rabbit is going to hide.
+در زیر می‌توانید یک element با آیدی `#rabbit` و یک تابع `hide()` را مشاهده کنید که رویداد `"hide"` را روی آن ارسال می‌کند تا به همه علاقه‌مندان اطلاع دهد که خرگوش قرار است مخفی شود.
 
-Any handler can listen for that event with `rabbit.addEventListener('hide',...)` and, if needed, cancel the action using `event.preventDefault()`. Then the rabbit won't disappear:
+هر کنترل‌کننده‌ای می‌تواند با `rabbit.addEventListener('hide',...)` به آن رویداد گوش دهد و در صورت نیاز، عمل را با استفاده از  `event.preventDefault()` لغو کند. سپس خرگوش ناپدید نمی شود:
 
 ```html run refresh autorun
 <pre id="rabbit">
@@ -204,17 +206,17 @@ Any handler can listen for that event with `rabbit.addEventListener('hide',...)`
 </script>
 ```
 
-Please note: the event must have the flag `cancelable: true`, otherwise the call `event.preventDefault()` is ignored.
+نکته: event  حتما باید `cancelable: true` را داشته باشد یا اینکه `event.preventDefault()` فراخوانی نمی شود. 
 
 ## Events-in-events are synchronous
 
-Usually events are processed in a queue. That is: if the browser is processing `onclick` and a new event occurs, e.g. mouse moved, then its handling is queued up, corresponding `mousemove` handlers will be called after `onclick` processing is finished.
+معمولا رویدادها در یک صف پردازش می شوند. یعنی: اگر مرورگر در حال پردازش `onclick` باشد و یک رویداد جدید رخ دهد، به عنوان مثال: ماوس حرکت می کند، سپس handling آن در صف قرار می گیرد، پس از اتمام پردازش `onclick`، کنترل کننده های مربوط به `mousemove` فراخوانی می شوند.
 
-The notable exception is when one event is initiated from within another one, e.g. using `dispatchEvent`. Such events are processed immediately: the new event handlers are called, and then the current event handling is resumed.
+استثنا قابل توجه زمانی است که یک رویداد از درون رویداد دیگری آغاز می شود، به عنوان مثال: با استفاده از `dispatchEvent` چنین رویدادهایی بلافاصله پردازش می‌شوند: کنترل‌کننده‌های رویداد جدید فراخوانی می‌شوند و سپس مدیریت رویداد فعلی از سر گرفته می‌شود.
 
-For instance, in the code below the `menu-open` event is triggered during the `onclick`.
+به عنوان مثال، در کد زیر، رویداد `menu-open` در حین `onclick` فعال می شود.
 
-It's processed immediately, without waiting for `onclick` handler to end:
+بدون اینکه برای `onclick` هندلر صبر کند تا تمام شود، شروع به پردازش می شود:   
 
 
 ```html run autorun
@@ -236,15 +238,15 @@ It's processed immediately, without waiting for `onclick` handler to end:
 </script>
 ```
 
-The output order is: 1 -> nested -> 2.
+ترتیب خروجی این است: 1 -> تودرتو (nested) -> 2 
 
-Please note that the nested event `menu-open` is caught on the `document`. The propagation and handling of the nested event is finished before the processing gets back to the outer code (`onclick`).
+لطفاً توجه داشته باشید که منوی رویداد تودرتو که باز است در `document` وجود دارد. انتشار و مدیریت رویداد تودرتو قبل از اینکه پردازش به کد خارجی بازگردد (`onclick`) به پایان می رسد.
 
-That's not only about `dispatchEvent`, there are other cases. If an event handler calls methods that trigger other events -- they are processed synchronously too, in a nested fashion.
+این فقط مربوط به `dispatchEvent` نیست، موارد دیگری نیز وجود دارد. اگر یک کنترل کننده event متدهایی را فراخوانی کند که رویدادهای دیگر را راه‌اندازی می‌کنند، آنها نیز به صورت همزمان و به صورت تودرتو پردازش می‌شوند.
 
-Let's say we don't like it. We'd want `onclick` to be fully processed first, independently from `menu-open` or any other nested events.
+بیایید بگوییم که آن را دوست نداریم. ما می خواهیم ابتدا `onclick` به طور کامل پردازش شود، مستقل از `menu-open` یا هر رویداد تو در تو.
 
-Then we can either put the `dispatchEvent` (or another event-triggering call) at the end of `onclick` or, maybe better, wrap it in the zero-delay `setTimeout`:
+سپس می‌توانیم `dispatchEvent` (یا یک فراخوانی event-triggering) را در انتهای `onclick` قرار دهیم یا، شاید بهتر، آن را در `setTimeout` با تاخیر صفر قرار دهیم:
 
 ```html run
 <button id="menu">Menu (click me)</button>
@@ -264,29 +266,29 @@ Then we can either put the `dispatchEvent` (or another event-triggering call) at
 </script>
 ```
 
-Now `dispatchEvent` runs asynchronously after the current code execution is finished, including `menu.onclick`, so event handlers are totally separate.
+حالا `dispatchEvent` یه صورت asynchronously بعد از اینکه اجرای کد فعلی به اتمام رسید،  run  میشود، که شامل `menu.onclick`. پس event handler ها به صورت جدت و مستقل فعالیت میکنند. 
 
-The output order becomes: 1 -> 2 -> nested.
+خروجی به این ترتیب خواهد بود: 1 -> 2 -> nested.
 
-## Summary
+## خلاصه
 
-To generate an event from code, we first need to create an event object.
+برای تولید یک event code، ابتدا باید یک event object ایجاد کنیم.
 
-The generic `Event(name, options)` constructor accepts an arbitrary event name and the `options` object with two properties:
-- `bubbles: true` if the event should bubble.
-- `cancelable: true` if the `event.preventDefault()` should work.
+سازنده  `Event(name, options)` یک نام رویداد دلخواه و `options` object را با دو ویژگی می‌پذیرد:
+-  `bubbles: true` اگر رویداد باید حباب شود.
+- `cancelable: true`  اگر `event.preventDefault()` باید کار کند.
 
-Other constructors of native events like `MouseEvent`, `KeyboardEvent` and so on accept properties specific to that event type. For instance, `clientX` for mouse events.
+سایر سازنده‌های native events مانند `MouseEvent`, `KeyboardEvent` و غیره ویژگی‌های خاص آن نوع رویداد را می‌پذیرند. به عنوان مثال، `clientX` برای رویدادهای ماوس.
 
-For custom events we should use `CustomEvent` constructor. It has an additional option named `detail`, we should assign the event-specific data to it. Then all handlers can access it as `event.detail`.
+برای custom events باید از سازنده `CustomEvent` استفاده کنیم. این یک گزینه اضافی به نام `detail` دارد، ما باید داده های رویداد خاص را به آن اختصاص دهیم. سپس همه کنترل کننده ها می توانند به عنوان `event.detail` به آن دسترسی داشته باشند.
 
-Despite the technical possibility of generating browser events like `click` or `keydown`, we should use them with great care.
+علیرغم امکان فنی ایجاد browser events مانند `click` یا `keydown`، ما باید با دقت زیادی از آنها استفاده کنیم.
 
-We shouldn't generate browser events as it's a hacky way to run handlers. That's bad architecture most of the time.
+ما نباید browser events را ایجاد کنیم زیرا این یک روش هک برای اجرای کنترلرها است. این معماری در بیشتر مواقع بد است.
 
-Native events might be generated:
+هم چنین native events ممکن است ایجاد شوند:
 
-- As a dirty hack to make 3rd-party libraries work the needed way, if they don't provide other means of interaction.
-- For automated testing, to "click the button" in the script and see if the interface reacts correctly.
+- به عنوان یک dirty hack برای اینکه کتابخانه های شخص ثالث به روش مورد نیاز کار کنند، اگر ابزارهای تعامل دیگری را ارائه ندهند.
+- برای تست خودکار، روی دکمه "click the button" در اسکریپت و ببینید که آیا رابط به درستی واکنش نشان می دهد.
 
-Custom events with our own names are often generated for architectural purposes, to signal what happens inside our menus, sliders, carousels etc.
+ همچنین eventهای سفارشی با نام خود ما اغلب برای مقاصد معماری ایجاد می شوند تا نشان دهند که چه اتفاقی در منوها، اسلایدرها و غیره می افتد.
