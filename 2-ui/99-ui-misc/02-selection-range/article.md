@@ -1,4 +1,170 @@
 
+کتابخانه ها:
+  - d3
+  - domtree
+
+---
+
+# Selection and Range
+
+
+جاوااسکریپت می‌تواند به یک انتخاب موجود دسترسی داشته باشد، گره‌های DOM را به‌طور کلی یا جزئی انتخاب یا لغو انتخاب کند، محتوای انتخاب‌شده را از سند حذف کند، آن را در یک برچسب قرار دهد و غیره.
+
+می‌توانید دستور العمل‌هایی برای کارهای رایج در انتهای فصل، در بخش "Summary" بیابید. شاید این نیازهای فعلی شما را پوشش دهد، اما اگر متن کامل را بخوانید، خیلی بیشتر به دست خواهید آورد.
+
+درک اشیاء زیربنایی  `Range` و`Selection` آسان است، و پس از آن برای اینکه آنها را به آنچه می‌خواهید انجام دهند، به هیچ دستور العملی نیاز نخواهید داشت.
+
+## Range
+
+فهوم اصلی انتخاب [Range](https://dom.spec.whatwg.org/#ranges) است، که اساساً یک جفت "boundary points"است: شروع محدوده و پایان محدوده.
+
+
+یک `Range` object بدون پارامتر ساخته می شود: 
+
+```js
+let range = new Range();
+```
+
+پس می‌توانیم مرزهای انتخاب را با استفاده از `range.setStart(node, offset)` و `range.setEnd(node, offset)` تنظیم کنیم.
+
+همانطور که ممکن است حدس بزنید، در ادامه از اشیاء `Range`  برای انتخاب استفاده خواهیم کرد، اما ابتدا اجازه دهید تعداد کمی از این اشیاء ایجاد کنیم.
+
+### Selecting the text partially
+
+نکته جالب این است که آرگومان اول `node` در هر دو روش می تواند یک text node یا یelement node عنصر باشد و معنای آرگومان دوم به آن بستگی دارد.
+
+
+**اگر `node` یک text nodeاست، `offset` باید موقعیتی در متن آن باشد.**
+
+به عنوان مثال، با توجه به عنصر `<p>Hello</p>`، می‌توانیم محدوده حاوی حروف «ll» را به صورت زیر ایجاد کنیم:
+
+```html run
+<p id="p">Hello</p>
+<script>
+  let range = new Range();
+  range.setStart(p.firstChild, 2);
+  range.setEnd(p.firstChild, 4);
+  
+  // toString of a range returns its content as text
+  console.log(range); // ll
+</script>
+```
+
+در اینجا اولین فرزند `<p>` را می گیریم (این text node است) و موقعیت های متن را در داخل آن مشخص می کنیم:
+
+
+![](range-hello-1.svg)
+### Selecting element nodes
+
+
+** متناوباً، اگر `node` یک element node است، `offset` باید شماره فرزند باشد.**
+
+این برای ایجاد محدوده هایی که شامل گره ها به عنوان یک کل هستند، مفید است، نه اینکه در جایی در متن خود متوقف شوند.
+
+به عنوان مثال، ما یک قطعه سند پیچیده تر داریم:
+
+```html autorun
+<p id="p">Example: <i>italic</i> and <b>bold</b></p>
+```
+
+در اینجا ساختار DOM آن با هر دو گره عنصر و متن آمده است:
+
+<div class="select-p-domtree"></div>
+
+<script>
+let selectPDomtree = {
+  "name": "P",
+  "nodeType": 1,
+  "children": [{
+    "name": "#text",
+    "nodeType": 3,
+    "content": "Example: "
+  }, {
+    "name": "I",
+    "nodeType": 1,
+    "children": [{
+      "name": "#text",
+      "nodeType": 3,
+      "content": "italic"
+    }]
+  }, {
+    "name": "#text",
+    "nodeType": 3,
+    "content": " and "
+  }, {
+    "name": "B",
+    "nodeType": 1,
+    "children": [{
+      "name": "#text",
+      "nodeType": 3,
+      "content": "bold"
+    }]
+  }]
+}
+
+drawHtmlTree(selectPDomtree, 'div.select-p-domtree', 690, 320);
+</script>
+
+
+همانطور که می بینیم، این عبارت دقیقاً از دو فرزند `<p>` با نمایه های  `0`  و `1` تشکیل شده است:
+
+![](range-example-p-0-1.svg)
+
+
+- نقطه شروع  `<p>` به عنوان  `node` والد، و  `0` به عنوان آفست است.
+
+     بنابراین می‌توانیم آن را به‌عنوان `range.setStart(p, 0)` تنظیم کنیم.
+- نقطه پایانی نیز `<p>` را به عنوان  `node` والد، اما  `2` را به عنوان آفست دارد (محدوده تا را مشخص می کند، اما `offset` را شامل نمی شود).
+
+     بنابراین می‌توانیم آن را به‌عنوان `range.setEnd(p, 2)` تنظیم کنیم.
+
+در اینجا نسخه ی نمایشی است. اگر آن را اجرا کنید، می بینید که متن انتخاب شده است:
+
+```html run
+<p id="p">Example: <i>italic</i> and <b>bold</b></p>
+
+<script>
+*!*
+  let range = new Range();
+
+  range.setStart(p, 0);
+  range.setEnd(p, 2);
+*/!*
+
+  // toString of a range returns its content as text, without tags
+  console.log(range); // Example: italic
+
+  // apply this range for document selection (explained later below)
+  document.getSelection().addRange(range);
+</script>
+```
+
+در اینجا یک پایه تست انعطاف‌پذیرتر وجود دارد که در آن می‌توانید اعداد شروع/پایان محدوده را تنظیم کنید و انواع دیگر را بررسی کنیدد:
+
+```html run autorun
+<p id="p">Example: <i>italic</i> and <b>bold</b></p>
+
+From <input id="start" type="number" value=1> – To <input id="end" type="number" value=4>
+<button id="button">Click to select</button>
+<script>
+  button.onclick = () => {
+  *!*
+    let range = new Range();
+
+    range.setStart(p, start.value);
+    range.setEnd(p, end.value);
+  */!*
+
+    // apply the selection, explained later below
+    document.getSelection().removeAllRanges();
+    document.getSelection().addRange(range);
+  };
+</script>
+```
+
+به عنوان مثال، انتخاب در همان `<p>` از آفست `1` تا `4`، محدوده `<i>italic</i> and <b>bold</b>` را به ما می‌دهد:
+
+![](range-example-p-1-3.svg)
 
 
 ```smart header="گره های شروع و پایان می توانند متفاوت باشند"
