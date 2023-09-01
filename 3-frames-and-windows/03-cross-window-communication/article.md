@@ -45,22 +45,22 @@ For instance, let's try reading and writing to `<iframe>` from another origin:
 
 <script>
   iframe.onload = function() {
-    // we can get the reference to the inner window
+    // می‌توانیم ارجاع‌ها به پنجره‌ی درونی را بگیریم
 *!*
     let iframeWindow = iframe.contentWindow; // OK
 */!*
     try {
-      // ...but not to the document inside it
+      // ... داخل آن نه document اما
 *!*
       let doc = iframe.contentDocument; // ERROR
 */!*
     } catch(e) {
-      alert(e); // Security Error (another origin)
+      alert(e); // خطای امنیتی (یک منبع دیگر)
     }
 
-    // also we can't READ the URL of the page in iframe
+    // را بخوانیم iframe یک صفحه درون URL همچنین ما نمی‌توانیم
     try {
-      // Can't read URL from the Location object
+      // بخوانیم Location object را از URL نمی‌توانیم
 *!*
       let href = iframe.contentWindow.location.href; // ERROR
 */!*
@@ -68,22 +68,23 @@ For instance, let's try reading and writing to `<iframe>` from another origin:
       alert(e); // Security Error
     }
 
-    // ...we can WRITE into location (and thus load something else into the iframe)!
+    // ... !(بارگذاری کنیم iframe و در نتیجه چیز دیگری را) بنویسیم location ما می‌توانیم بر
 *!*
     iframe.contentWindow.location = '/'; // OK
 */!*
 
-    iframe.onload = null; // clear the handler, not to run it after the location change
+    iframe.onload = null; // آن را اجرا کند location را پاک می‌کند، نه اینکه بعد از تغییر handler این
+
   };
 </script>
 ```
 
-The code above shows errors for any operations except:
+کد بالا خطاهای هر عملیاتی را نشان می‌هد به جز:
 
-- Getting the reference to the inner window `iframe.contentWindow` - that's allowed.
-- Writing to `location`.
+- گرفتن ارجاع به پنجره‌ی درونی `iframe.contentWindow` - آن مجاز است.
+- نوشتن برا `location`
 
-Contrary to that, if the `<iframe>` has the same origin, we can do anything with it:
+بر خلاف آن، اگر `<iframe>` منبع یکسانی داشته باشد،‌ ما می‌توانیم با آن هر کاری بکنیم:
 
 ```html run
 <!-- iframe from the same site -->
@@ -91,16 +92,16 @@ Contrary to that, if the `<iframe>` has the same origin, we can do anything with
 
 <script>
   iframe.onload = function() {
-    // just do anything
+    // هر کاری می‌کند
     iframe.contentDocument.body.prepend("Hello, world!");
   };
 </script>
 ```
 
-```smart header="`iframe.onload` vs `iframe.contentWindow.onload`"
-The `iframe.onload` event (on the `<iframe>` tag) is essentially the same as `iframe.contentWindow.onload` (on the embedded window object). It triggers when the embedded window fully loads with all resources.
+```smart header="`iframe.onload` در مقابل `iframe.contentWindow.onload`"
+اساسا `iframe.onload` event (در تگ `<iframe>`) همان `iframe.contentWindow.onload` (در شی پنجره‌ی جداسازی‌شده)‌ است. وقتی که پنجره‌ی جاسازی شده به طور کامل با تمام منابع load می‌شود، فعال می‌شود.
 
-...But we can't access `iframe.contentWindow.onload` for an iframe from another origin, so using `iframe.onload`.
+...اما نمی‌توانیم به `iframe.contentWindow.onload` برای یک iframe از مبدا دیگری دسترسی پیدا کنیم،‌بنابراین از `iframe.onload` استفاده می‌کنیم.
 ```
 
 ## Windows on subdomains: document.domain
