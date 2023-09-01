@@ -1,43 +1,44 @@
-# Cross-window communication
+# ارتباط بین پنجره‌ای
 
-The "Same Origin" (same site) policy limits access of windows and frames to each other.
+سیاست "Same Origin" (همان سایت) دسترسی پنجره‌ها و فریم‌ها به یکدیگر را محدود می‌کند.
 
-The idea is that if a user has two pages open: one from `john-smith.com`, and another one is `gmail.com`, then they wouldn't want a script from `john-smith.com` to read our mail from `gmail.com`. So, the purpose of the "Same Origin" policy is to protect users from information theft.
+ایده این است که اگر یک یک کاربر دو صفحه‌ی باز داشته باشد: یکی از `john-smith.com` و دیگری از `gmail.com`، آنگاه آن‌ها نمی‌خواهند که که یک script از `john-smith.com` تمام نامه‌‌های شما از `gmail.com` را بخواند. بنابراین، هدف سیاست "Same Origin" این است که کاربران را از دزدی اطلاعات حفظ کند.
 
 ## Same Origin [#same-origin]
 
-Two URLs are said to have the "same origin" if they have the same protocol, domain and port.
+اگر URLها یک protocol، domain و ports داشته باشند، می‌گویند که "same origin" دارند. 
 
-These URLs all share the same origin:
+این URLها همگی یک منبع را به اشتراک می‌گذارند.
 
 - `http://site.com`
 - `http://site.com/`
 - `http://site.com/my/page.html`
 
-These ones do not:
+این یکی‌ها نه:
 
 - <code>http://<b>www.</b>site.com</code> (another domain: `www.` matters)
 - <code>http://<b>site.org</b></code> (another domain: `.org` matters)
 - <code><b>https://</b>site.com</code> (another protocol: `https`)
 - <code>http://site.com:<b>8080</b></code> (another port: `8080`)
 
-The "Same Origin" policy states that:
+سیاست "Same Origin" بیان می‌کند که:
 
-- if we have a reference to another window, e.g. a popup created by `window.open` or a window inside `<iframe>`, and that window comes from the same origin, then we have full access to that window.
-- otherwise, if it comes from another origin, then we can't access the content of that window: variables, document, anything. The only exception is `location`: we can change it (thus redirecting the user). But we can't not *read* location (so we can't see where the user is now, no information leak).
+- اگر ما ارجاعی به پنجره‌ای دیگر داشته باشیم، برای مثال یک popup که با `window.open` ایجاد شده یا یک پنجره داخل `<iframe>`، و آن پنجره از منبع یکسان بیاید،‌آنگاه ما به آن پنجره دسترسی کامل داریم.
+- ذر غیر این صورت اگر از یک منبع دیگر بیاید،‌ آنگاه نمی‌توانیم به محتوای آن صفحه دسترسی داشته باشیم: متغیرها، document، هر چیزی. تنها استثنا `location` است: ما می‌توانیم آن را تغییر دهیم. (در نتیجه کاربر را هدایت کنیم). اما نمی‌توانیم از location *بخوانیم* (در نتیجه نمی‌توانیم ببینیم که کاربر در حال حاضر کجا است،‌ هیچ نشت اطلاعاتی وجود ندارد).
 
-### In action: iframe
+### در عمل: iframe
 
-An `<iframe>` tag hosts a separate embedded window, with its own separate `document` and `window` objects.
+یک تگ `<iframe>` میزبان یک پنجره‌ی جاسازی‌شده‌ی جداگانه با `document` جداگانه‌ی خود و اشیای `window` است.
 
-We can access them using properties:
+می‌توان با استفاده از property‌ها به آن‌ها دسترسی داشت:
 
-- `iframe.contentWindow` to get the window inside the `<iframe>`.
-- `iframe.contentDocument` to get the document inside the `<iframe>`, shorthand for `iframe.contentWindow.document`.
+- برای گرفتن پنجره‌ی داخل `<iframe>` از `iframe.contentWindow` استفاده می‌شود.
+- برای گرفتن documdnt داخل `<iframe>` از `iframe.contentDocument` استفاده می‌شود، کوتاه‌شده‌ی `iframe.contentWindow.document`.
 
-When we access something inside the embedded window, the browser checks if the iframe has the same origin. If that's not so then the access is denied (writing to `location` is an exception, it's still permitted).
+وقتی به چیزی داخل پنجره‌ی جاسازی شده دسترسی پیدا می‌کنیم، مرورگر چک می‌کند که آیا iframe همان منبع را دارد یا نه. اگر اینطور نباشد،‌ دسترسی رد می‌شود (نوشتن بر `location` یک استثنا است،‌ آن همچنان مجاز است).
 
 For instance, let's try reading and writing to `<iframe>` from another origin:
+برای مثال، بیایید تلاش کنیم خواندن و نوشتن بر `<iframe>` از یک منبع دیگر را امتحان کنیم. 
 
 ```html run
 <iframe src="https://example.com" id="iframe"></iframe>
