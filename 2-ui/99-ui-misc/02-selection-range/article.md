@@ -165,21 +165,24 @@ From <input id="start" type="number" value=1> – To <input id="end" type="numbe
 
 ![](range-example-p-1-3.svg)
 
-```smart header="Starting and ending nodes can be different"
-We don't have to use the same node in `setStart` and `setEnd`. A range may span across many unrelated nodes. It's only important that the end is after the start in the document.
+
+```smart header="گره های شروع و پایان می توانند متفاوت باشند"
+ما مجبور نیستیم از همان گره در «setStart» و «setEnd» استفاده کنیم. یک محدوده ممکن است در بسیاری از گره‌های غیرمرتبط باشد. فقط مهم است که پایان آن پس از شروع در سند باشد.
 ```
 
 ### Selecting a bigger fragment
 
-Let's make a bigger selection in our example, like this:
+بیایید در مثال خود یک انتخاب بزرگتر انجام دهیم، مانند این:
 
 ![](range-example-p-2-b-3.svg)
 
-We already know how to do that. We just need to set the start and the end as a relative offset in text nodes.
 
-We need to create a range, that:
-- starts from position 2 in `<p>` first child (taking all but two first letters of "Ex<b>ample:</b> ")
-- ends at the position 3 in `<b>` first child (taking first three letters of "<b>bol</b>d", but no more):
+
+ما قبلاً می دانیم که چگونه این کار را انجام دهیم. فقط باید شروع و پایان را به عنوان یک افست نسبی در گره های متنی تنظیم کنیم.
+
+ما باید یک محدوده ایجاد کنیم، که:
+- از موقعیت 2 در `<p>` فرزند اول شروع می‌شود (با گرفتن همه حرف‌های اول «مثال<b>ample:</b>» به جز دو حرف اول)
+- در `<b>`فرزند اول به موقعیت 3 ختم می شود (با گرفتن سه حرف اول "<b>bol</b>d"، اما نه بیشتر):
 
 ```html run
 <p id="p">Example: <i>italic</i> and <b>bold</b></p>
@@ -197,37 +200,38 @@ We need to create a range, that:
 </script>
 ```
 
-As you can see, it's fairly easy to make a range of whatever we want.
+همانطور که می بینید، ساختن طیف وسیعی از هر چیزی که می خواهیم بسیار آسان است.
 
-If we'd like to take nodes as a whole, we can pass elements in `setStart/setEnd`. Otherwise, we can work on the text level. 
+اگر می‌خواهیم گره‌ها را به‌عنوان یک کل بگیریم، می‌توانیم عناصر را در  `setStart/setEnd` ارسال کنیم. در غیر این صورت می توانیم در سطح متن کار کنیم.
 
 ## Range properties
 
-The range object that we created in the example above has following properties:
+شی range که در مثال بالا ایجاد کردیم دارای ویژگی های زیر است:
 
 ![](range-example-p-2-b-3-range.svg)
 
-- `startContainer`, `startOffset` -- node and offset of the start,
-  - in the example above: first text node inside `<p>` and `2`.
-- `endContainer`, `endOffset` -- node and offset of the end,
-  - in the example above: first text node inside `<b>` and `3`.
-- `collapsed` -- boolean, `true` if the range starts and ends on the same point (so there's no content inside the range),
-  - in the example above: `false`
-- `commonAncestorContainer` -- the nearest common ancestor of all nodes within the range,
-  - in the example above: `<p>`
+
+-  `startContainer`، `startOffset` - گره و افست شروع،
+   - در مثال بالا: اولین گره متن داخل `<p>` و  `2`.
+-  `endContainer`، `endOffset` - گره و افست انتهایی،
+   - در مثال بالا: اولین گره متن داخل `<b>` و `3`.
+- `collapsed` -- boolean، `true` اگر محدوده در همان نقطه شروع و به پایان برسد (بنابراین هیچ محتوایی در محدوده وجود ندارد)،
+   - در مثال بالا: `false`.
+- "commonAncestorContainer" - نزدیکترین جد مشترک همه گره های موجود در محدوده،
+   - در مثال بالا:`<p>`.
 
 
 ## Range selection methods
 
-There are many convenient methods to manipulate ranges.
+روش‌های راحت زیادی برای دستکاری محدوده‌ها وجود دارد.
 
-We've already seen `setStart` and `setEnd`, here are other similar methods.
+قبلاً `setStart` و `setEnd` را دیده‌ایم، در اینجا روش‌های مشابه دیگری وجود دارد.
 
-Set range start:
+تنظیم شروع محدوده:
 
-- `setStart(node, offset)` set start at: position `offset` in `node`
-- `setStartBefore(node)` set start at: right before `node`
-- `setStartAfter(node)` set start at: right after `node`
+- `setStart(node, offset)` تنظیم شروع در: موقعیت `offset` در `node`
+- `setStartBefore(node)`شروع را در: درست قبل از `node` تنظیم کنید
+- `setStart(node, offset)` مجموعه شروع در: درست بعد از `node`.
 
 Set range end (similar methods):
 
