@@ -1,6 +1,5 @@
 # Events: change, input, cut, copy, paste
 
-
 بیایید eventهای مختلفی که همراه با آپدیت داده‌ها هستند پوشش دهیم.
 
 ## Event: change
@@ -11,15 +10,12 @@
 
 برای مثال وقتی که ما داریم در text field زیر تایپ می‌کنیم -- هیچ eventای وجود ندارد. اما وقتی focus را به جایی دیگر منتقل می‌کنیم، برای مثال، روی یک button کلیک می‌کنیم، یک `change` event به وجود خواهد آمد:
 
-
 ```html autorun height=40 run
 <input type="text" onchange="alert(this.value)">
 <input type="button" value="Button">
 ```
 
-
 برای دیگر elementها: `select` و `input type=checkbox/radio` دقیقا بعد از آن که انتخاب تغییر می‌کند فعال می‌شود:
-
 
 ```html autorun height=40 run
 <select onchange="alert(this.value)">
