@@ -1,4 +1,4 @@
-# export و import
+# Export و Import
 
 دستورات export و import شامل چندین نوع پیاده سازی هستند.
 
