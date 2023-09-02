@@ -1,52 +1,53 @@
 
 # Mutation observer
 
-`MutationObserver` is a built-in object that observes a DOM element and fires a callback when it detects a change.
+ همان طور که می دانیم `MutationObserver` یک inner object است که یک عنصر DOM را مشاهده می کند و هنگامی که تغییری را تشخیص می دهد یک تماس برگشتی ایجاد می کند.
+
 
 We'll first take a look at the syntax, and then explore a real-world use case, to see where such thing may be useful.
 
-## Syntax
+## سینتکس
 
-`MutationObserver` is easy to use.
+استفاده از `MutationObserver` بسیار ساده است.
 
-First, we create an observer with a callback-function:
+اول از همه، یک observer با استفاده از callback-function می سازیم:  
 
 ```js
 let observer = new MutationObserver(callback);
 ```
 
-And then attach it to a DOM node:
+و بعد observer را به DOM node، attach  می کند.
 
 ```js
 observer.observe(node, config);
 ```
-
-`config` is an object with boolean options "what kind of changes to react on":
-- `childList` -- changes in the direct children of `node`,
-- `subtree` -- in all descendants of `node`,
-- `attributes` -- attributes of `node`,
-- `attributeFilter` -- an array of attribute names, to observe only selected ones.
+ (کانفیگ)`config` یک شی با  boolean options "به چه نوع تغییراتی باید واکنش نشان داد" است:
+- `childList` --  `node` از direct children تغییراتی در 
+- `subtree` --`node` در همه فرزندان 
+- `attributes` -- attributes های `node`,
+- `attributeFilter` --که فقط سلکت شده ها را ببینیم ،attribute name یک ارایه از
 - `characterData` -- whether to observe `node.data` (text content),
+- `characterData` -- ایا `node.data` (text content) را مشاهده کنیم یا نه 
 
-Few other options:
-- `attributeOldValue` -- if `true`, pass both the old and the new value of attribute to callback (see below), otherwise only the new one (needs `attributes` option),
-- `characterDataOldValue` -- if `true`, pass both the old and the new value of `node.data` to callback (see below), otherwise only the new one (needs `characterData` option).
+چند گزینه دیگر:
+- `attributeOldValue` --بود هم مقدار قذیم و هم مقدار جدید attribute به callback  پاس داده می شود `true` اگر 
+- `characterDataOldValue` --(needs `characterData` option) پاس می دهیم، در غیر این صورت فقط مقدار جدید را callback را یه  `node.data` بود هم مقدار جدید و هم مقدار قدیم `true` اگر
 
-Then after any changes, the `callback` is executed: changes are passed in the first argument as a list of [MutationRecord](https://dom.spec.whatwg.org/#mutationrecord) objects, and the observer itself as the second argument.
+سپس پس از هر تغییری، `callback` اجرا می‌شود: تغییرات در آرگومان اول به‌عنوان فهرستی از اشیاء [MutationRecord](https://dom.spec.whatwg.org/#mutationrecord) و خود مشاهده‌گر به‌عنوان استدلال دوم است.
 
-[MutationRecord](https://dom.spec.whatwg.org/#mutationrecord) objects have properties:
 
-- `type` -- mutation type, one of
+  شی (object) های [MutationRecord](https://dom.spec.whatwg.org/#mutationrecord) properties هایی دارند:
+- `type` -- mutation type, یکی از موارد زیر
     - `"attributes"`: attribute modified
     - `"characterData"`: data modified, used for text nodes,
     - `"childList"`: child elements added/removed,
-- `target` -- where the change occurred: an element for `"attributes"`, or text node for `"characterData"`, or an element for a `"childList"` mutation,
-- `addedNodes/removedNodes`  -- nodes that were added/removed,
-- `previousSibling/nextSibling` -- the previous and next sibling to added/removed nodes,
-- `attributeName/attributeNamespace` -- the name/namespace (for XML) of the changed attribute,
-- `oldValue` -- the previous value, only for attribute or text changes, if the corresponding option is set `attributeOldValue`/`characterDataOldValue`.
+- `target` -- `"childList"` mutation برای  element و یا `"characterData"` برای  text node یا `"attributes"` جایی که تغییر رخ داده است: یک عنصر برای 
+- `addedNodes/removedNodes` -- شده اند added/removed هایی که (nodes)نود
+- `previousSibling/nextSibling` --added/removed nodes خواهر یا برادر قبلی یا جدید، 
+- `attributeName/attributeNamespace` --  changed attribute (XML) برای namespace اسم یا 
+- `oldValue` --  .تنظیم شود `attributeOldValue`/`characterDataOldValue` مقدار قبلی، فقط برای تغییر ویژگی یا متن می باشد، اگر گزینه مربوطه
 
-For example, here's a `<div>` with a `contentEditable` attribute. That attribute allows us to focus on it and edit.
+برای مثال، در مثال زیر یک `<div>` با یک `contentEditable` وجود دارد. این attribute به ما اجازه میدهد روی آن و ادیت کردن آن تمرکز کنیم.  
 
 ```html run
 <div contentEditable id="elem">Click and <b>edit</b>, please</div>
@@ -65,7 +66,7 @@ observer.observe(elem, {
 </script>
 ```
 
-If we run this code in the browser, then focus on the given `<div>` and change the text inside `<b>edit</b>`, `console.log` will show one mutation:
+اگر ما این کد را در browser run کنیم، و بعد روی `<div>` داده شده و تغییرات درون `<b>edit</b>` تمرکز کنیم، `console.log` یک mutation نشان می دهد:    
 
 ```js
 mutationRecords = [{
@@ -76,8 +77,7 @@ mutationRecords = [{
 }];
 ```
 
-If we make more complex editing operations, e.g. remove the `<b>edit</b>`, the mutation event may contain multiple mutation records:
-
+اگر ما ادیت های پیچیده تری را اجرا کنیم، مانند ریمو کردن `<b>edit</b>`، آن گاه mutation event ممکن است شامل تعدادی mutation records باشد:  
 ```js
 mutationRecords = [{
   type: "childList",
@@ -95,29 +95,30 @@ mutationRecords = [{
 }];
 ```
 
-So, `MutationObserver` allows to react on any changes within DOM subtree.
+پس، `MutationObserver` اجازه می دهد که به هر اغییری در DOM subtree واکنش نشان دهیم.
 
-## Usage for integration
+## کاربرد های integration
 
-When such thing may be useful?
+چه زمانی این اتفاقات به صورت دیفالت رخ می دهند؟
 
-Imagine the situation when you need to add a third-party script that contains useful functionality, but also does something unwanted, e.g. shows ads `<div class="ads">Unwanted ads</div>`.
+شرایطی را تصور کنید که باید یک اسکریپت شخص ثالث اضافه کنید که حاوی عملکرد مفید باشد، اما همچنین کاری ناخواسته انجام دهد، به عنوان مثال تبلیغات `<div class="ads">Unwanted ads</div>` را نشان می دهد.
 
-Naturally, the third-party script provides no mechanisms to remove it.
 
-Using `MutationObserver`, we can detect when the unwanted element appears in our DOM and remove it.
+به طور طبیعی، اسکریپت شخص ثالث هیچ مکانیزمی برای حذف آن ارائه نمی دهد.
 
-There are other situations when a third-party script adds something into our document, and we'd like to detect, when it happens, to adapt our page, dynamically resize something etc.
+با استفاده از `MutationObserver`، می توانیم تشخیص دهیم که عنصر ناخواسته در DOM ما ظاهر می شود و آن را حذف می کنیم.
 
-`MutationObserver` allows to implement this.
+موقعیت‌های دیگری هم وجود دارد که یک اسکریپت شخص ثالث چیزی را به سند ما اضافه می‌کند، و ما می‌خواهیم زمانی که این اتفاق می‌افتد، صفحه خود را تطبیق دهیم، اندازه چیزی را به صورت پویا تغییر اندازه دهیم و غیره.
 
-## Usage for architecture
+ هم چنین `MutationObserver` امکان اجرای این را فراهم می کند.
 
-There are also situations when `MutationObserver` is good from architectural standpoint.
+## کاربرد های architecture
 
-Let's say we're making a website about programming. Naturally, articles and other materials may contain source code snippets.
+همچنین شرایطی وجود دارد که `MutationObserver` از نظر معماری خوب است.
 
-Such snippet in an HTML markup looks like this:
+فرض کنید در حال ساخت یک وب سایت در مورد برنامه نویسی هستیم. به طور طبیعی، مقالات و سایر مطالب ممکن است حاوی کد منبع باشند.
+
+چنین قطعه ای در نشانه گذاری HTML به شکل زیر است:
 
 ```html
 ...
@@ -127,30 +128,29 @@ Such snippet in an HTML markup looks like this:
 </code></pre>
 ...
 ```
+ کردن آن، از کتابخانه برجسته سازی نحوی جاوا اسکریپت در سایت خود مانند [Prism.js](https://prismjs.com/) استفاده خواهیم کرد. برای دریافت syntax highlighting برای قطعه بالا درprism، که `Prism.highlightElem(pre)` نامیده می‌شود، که محتویات چنین عناصر`pre`را بررسی می‌کند و تگ‌ها و سبک‌های خاصی را برای  syntax highlighting رنگی به آن عناصر اضافه می‌کند، مشابه آنچه در این صفحه می بینید.
 
-For better readability and at the same time, to beautify it, we'll be using a JavaScript syntax highlighting library on our site, like [Prism.js](https://prismjs.com/). To get syntax highlighting for above snippet in Prism, `Prism.highlightElem(pre)` is called, which examines the contents of such `pre` elements and adds special tags and styles for colored syntax highlighting into those elements, similar to what you see in examples here, on this page.
-
-When exactly should we run that highlighting method? Well, we can do it on `DOMContentLoaded` event, or put the script at the bottom of the page. The moment our DOM is ready, we can search for elements `pre[class*="language"]` and call `Prism.highlightElem` on them:
+دقیقاً چه زمانی باید آن روش برجسته سازی را اجرا کنیم؟ خوب، می‌توانیم این کار را در رویداد  `DOMContentLoaded` انجام دهیم یا اسکریپت را در پایین صفحه قرار دهیم. لحظه‌ای که DOM ما آماده است، می‌توانیم عناصر `pre[class*="language"]` را جستجو کنیم و روی آنها  `Prism.highlightElem` را صدا کنیم:
 
 ```js
 // highlight all code snippets on the page
 document.querySelectorAll('pre[class*="language"]').forEach(Prism.highlightElem);
 ```
 
-Everything's simple so far, right? We find code snippets in HTML and highlight them.
 
-Now let's go on. Let's say we're going to dynamically fetch materials from a server. We'll study methods for that [later in the tutorial](info:fetch). For now it only matters that we fetch an HTML article from a webserver and display it on demand:
+حالا بیایید ادامه دهیم. فرض کنید می خواهیم مطالب را به صورت پویا از یک سرور واکشی کنیم. ما روش‌هایی را برای آن مطالعه خواهیم کرد [later in the tutorial](info:fetch). در حال حاضر فقط مهم است که یک مقاله HTML را از یک وب سرور واکشی کنیم و آن را در صورت درخواست نمایش دهیم:
 
 ```js
 let article = /* fetch new content from server */
 articleElem.innerHTML = article;
 ```
 
-The new `article` HTML may contain code snippets. We need to call `Prism.highlightElem` on them, otherwise they won't get highlighted.
 
-**Where and when to call `Prism.highlightElem` for a dynamically loaded article?**
+در HTML `article` جدید ممکن است حاوی کدهایی باشد. باید`Prism.highlightElem` را روی آنها صدا کنیم، در غیر این صورت برجسته نمی‌شوند.
 
-We could append that call to the code that loads an article, like this:
+**کجا و چه زمانی برای یک مقاله بارگذاری شده پویا با `Prism.highlightElem` تماس بگیرید؟**
+
+می‌توانیم آن فراخوان را به کدی که یک مقاله را بارگیری می‌کند، اضافه کنیم، مانند این:
 
 ```js
 let article = /* fetch new content from server */
@@ -162,21 +162,22 @@ snippets.forEach(Prism.highlightElem);
 */!*
 ```
 
-...But, imagine if we have many places in the code where we load our content - articles, quizzes, forum posts, etc. Do we need to put the highlighting call everywhere, to highlight the code in content after loading? That's not very convenient.
 
-And what if the content is loaded by a third-party module? For example, we have a forum written by someone else, that loads content dynamically, and we'd like to add syntax highlighting to it. No one likes patching third-party scripts.
+...اما، تصور کنید اگر ما مکان های زیادی در کد داشته باشیم که در آن محتوای خود را بارگذاری می کنیم - مقالات، آزمون ها، پست های انجمن و غیره. این خیلی راحت نیست.
 
-Luckily, there's another option.
+و اگر محتوا توسط یک ماژول شخص ثالث بارگذاری شود چه؟ به عنوان مثال، ما یک انجمن داریم که توسط شخص دیگری نوشته شده است، که محتوا را به صورت پویا بارگیری می کند، و مایلیم برجسته سازی نحوی را به آن اضافه کنیم. هیچ کس وصله اسکریپت های شخص ثالث را دوست ندارد.
 
-We can use `MutationObserver` to automatically detect when code snippets are inserted into the page and highlight them.
+خوشبختانه، گزینه دیگری وجود دارد.
 
-So we'll handle the highlighting functionality in one place, relieving us from the need to integrate it.
+می‌توانیم از `MutationObserver` استفاده کنیم تا به‌طور خودکار زمانی که قطعه‌های کد در صفحه درج می‌شوند، شناسایی کرده و آن‌ها را برجسته کنیم.
 
-### Dynamic highlight demo
+بنابراین ما عملکرد برجسته سازی را در یک مکان مدیریت می کنیم و ما را از نیاز به ادغام آن رها می کنیم.
 
-Here's the working example.
+### داینامیک highlight demo
 
-If you run this code, it starts observing the element below and highlighting any code snippets that appear there:
+و مثالی که کار می کند.
+
+اگر این کد را اجرا کنید، شروع به مشاهده element زیر می کند و هر قطعه کدی را که در آنجا ظاهر می شود برجسته می کند:
 
 ```js run
 let observer = new MutationObserver(mutations => {
@@ -207,13 +208,13 @@ let demoElem = document.getElementById('highlight-demo');
 observer.observe(demoElem, {childList: true, subtree: true});
 ```
 
-Here, below, there's an HTML-element and JavaScript that dynamically fills it using `innerHTML`.
+در اینجا، در زیر، یک عنصر HTML و جاوااسکریپت وجود دارد که به صورت پویا با استفاده از `innerHTML` آن را پر می کند.
 
-Please run the previous code (above, observes that element), and then the code below. You'll see how `MutationObserver` detects and highlights the snippet.
+لطفا کد قبلی را اجرا کنید (در بالا، آن عنصر را مشاهده کنید)، و سپس کد زیر را اجرا کنید. خواهید دید که چگونه  `MutationObserver` قطعه را شناسایی و برجسته می کند.
 
-<p id="highlight-demo" style="border: 1px solid #ddd">A demo-element with <code>id="highlight-demo"</code>, run the code above to observe it.</p>
+<p id="highlight-demo" style="border: 1px solid #ddd">یک عنصر آزمایشی با <code>id="highlight-demo"</code>، کد بالا را اجرا کنید تا آن را مشاهده کنید.</ p>
 
-The following code populates its `innerHTML`, that causes the `MutationObserver` to react and highlight its contents:
+کد زیر `innerHTML` خود را پر می کند، که باعث می شود`MutationObserver` واکنش نشان داده و محتوای آن را برجسته کند:
 
 ```js run
 let demoElem = document.getElementById('highlight-demo');
@@ -228,19 +229,19 @@ demoElem.innerHTML = `A code snippet is below:
 `;
 ```
 
-Now we have `MutationObserver` that can track all highlighting in observed elements or the whole `document`. We can add/remove code snippets in HTML without thinking about it.
+اکنون `MutationObserver` را داریم که می تواند تمام برجسته سازی ها در عناصر مشاهده شده یا کل `document` را ردیابی کند. ما می‌توانیم تکه‌های کد را بدون فکر کردن در HTML اضافه یا حذف کنیم.
 
-## Additional methods
+## متد های اضافه
 
-There's a method to stop observing the node:
+روشی برای توقف مشاهده گره وجود دارد:
 
-- `observer.disconnect()` -- stops the observation.
+- `observer.disconnect()` - مشاهده را متوقف می کند.
 
-When we stop the observing, it might be possible that some changes were not yet processed by the observer. In such cases, we use
+وقتی مشاهده را متوقف می کنیم، ممکن است برخی از تغییرات هنوز توسط ناظر پردازش نشده باشد. در چنین مواردی استفاده می کنیم
 
-- `observer.takeRecords()` -- gets a list of unprocessed mutation records - those that happened, but the callback has not handled them.
+-`observer.takeRecords()` - لیستی از سوابق جهش پردازش نشده را دریافت می کند - مواردی که اتفاق افتاده اند، اما پاسخ تماس آنها را مدیریت نکرده است.
 
-These methods can be used together, like this:
+این روش ها را می توان با هم استفاده کرد، مانند:
 
 ```js
 // get a list of unprocessed mutations
@@ -254,20 +255,20 @@ observer.disconnect();
 ```
 
 
-```smart header="Records returned by `observer.takeRecords()` are removed from the processing queue"
-The callback won't be called for records, returned by `observer.takeRecords()`.
+```  پس smart header="سوابق برگردانده شده توسط `observer.takeRecords()` از صف پردازش حذف می شوند"
+تماس برگشتی برای رکوردها که توسط 'observer.takeRecords()' برگردانده شده است، فراخوانی نمی شود.
 ```
 
-```smart header="Garbage collection interaction"
-Observers use weak references to nodes internally. That is, if a node is removed from the DOM, and becomes unreachable, then it can be garbage collected.
+```smart header="تعامل جمع آوری زباله"
+ناظران از ارجاعات ضعیف به گره ها در داخل استفاده می کنند. به این معنا که اگر یک گره از DOM حذف شود و غیرقابل دسترسی شود، می‌توان زباله‌ها را جمع‌آوری کرد.
 
-The mere fact that a DOM node is observed doesn't prevent the garbage collection.
+صرف این واقعیت که یک گره DOM مشاهده می شود مانع از جمع آوری زباله نمی شود.
 ```
 
-## Summary  
+## خلاصه  
 
-`MutationObserver` can react to changes in DOM - attributes, text content and adding/removing elements.
+ پس`MutationObserver` می تواند به تغییرات در DOM - ویژگی ها، محتوای متن و افزودن/حذف عناصر واکنش نشان دهد.
 
-We can use it to track changes introduced by other parts of our code, as well as to integrate with third-party scripts.
+ما می‌توانیم از آن برای ردیابی تغییرات ایجاد شده توسط بخش‌های دیگر کدمان و همچنین برای ادغام با اسکریپت‌های شخص ثالث استفاده کنیم.
 
-`MutationObserver` can track any changes. The config "what to observe" options are used for optimizations, not to spend resources on unneeded callback invocations.
+هم چنین `MutationObserver` می تواند هر تغییری را ردیابی کند. تنظیمات "چه چیزی را مشاهده کنیم" برای بهینه سازی استفاده می شود، نه برای صرف منابع در فراخوانی های غیر ضروری.
