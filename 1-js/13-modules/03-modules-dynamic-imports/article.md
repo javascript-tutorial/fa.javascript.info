@@ -1,36 +1,36 @@
-# Dynamic imports
+# Import پویا
 
-Export and import statements that we covered in previous chapters are called "static". The syntax is very simple and strict.
+عبارات Export و Import که در بخش‌های قبلی بررسی کردیم "ایستا (static)" نامیده می‌شوند. ساختار آنها بسیار ساده و سخت‌گیرانه است.
 
-First, we can't dynamically generate any parameters of `import`.
+اول اینکه، نمی‌توانیم پارامترهای `import` را به صورت پویا تولید کنیم.
 
-The module path must be a primitive string, can't be a function call. This won't work:
+مسیر ماژول باید یک رشته ابتدایی باشد، نمی تواند یک فراخوانی تابع باشد. این کار نمی‌کند:
 
 ```js
 import ... from *!*getModuleName()*/!*; // Error, only from "string" is allowed
 ```
 
-Second, we can't import conditionally or at run-time:
+دوم اینکه، نمی‌توانیم به صورت شرطی یا در زمان اجرا آن را import کنیم:
 
 ```js
 if(...) {
-  import ...; // Error, not allowed!
+  import ...; // !خطا، مجاز نیست
 }
 
 {
-  import ...; // Error, we can't put import in any block
+  import ...; // را در هر بلوکی قرار دهیم import خطا، نمی‌توانیم
 }
 ```
 
-That's because `import`/`export` aim to provide a backbone for the code structure. That's a good thing, as code structure can be analyzed, modules can be gathered and bundled into one file by special tools, unused exports can be removed ("tree-shaken"). That's possible only because the structure of imports/exports is simple and fixed.
+زیرا `import`/`export` قصد دارد ستون فقراتی برای ساختار کد فراهم کنند. این یک چیز خوب است، زیرا ساختار کد قابل تجزیه و تحلیل است، ماژول ها را می‌توان با ابزارهای ویژه در یک قالب یک فایل جمع آوری کرد، export های استفاده نشده می‌توانند حذف شوند ("tree-shaken"). این‌ها فقط به این خاطر امکان‌پذیر است که ساختار imports/exports ساده و ثابت است.
 
-But how can we import a module dynamically, on-demand?
+اما چگونه می‌توان یک ماژول را به صورت پویا، بنا به نیازمان import کنیم؟
 
-## The import() expression
+## عبارت import()‎
 
-The `import(module)` expression loads the module and returns a promise that resolves into a module object that contains all its exports. It can be called from any place in the code.
+عبارت `import(module)` ماژول را بارگذاری می‌کند و یک promise برمی‌گرداند که به یک شی حاوی همه export های ماژول تبدیل می‌شود. می‌توان آن را در هر جایی از کد صدا زد. (به تفاوت ظاهری آن با import های ایستا دقت کنید)
 
-We can use it dynamically in any place of the code, for instance:
+می‌توانیم آن را به صورت پویا در هر جای کد استفاده کنیم، به عنوان مثال:
 
 ```js
 let modulePath = prompt("Which module to load?");
@@ -40,9 +40,9 @@ import(modulePath)
   .catch(err => <loading error, e.g. if no such module>)
 ```
 
-Or, we could use `let module = await import(modulePath)` if inside an async function.
+یا، می‌توانیم `let module = await import(modulePath)` را درون یک تابع هنگام (async) استفاده کنیم.
 
-For instance, if we have the following module `say.js`:
+به عنوان مثال، اگر ماژول `say.js` را به شرح زیر داشته باشیم:
 
 ```js
 // 📁 say.js
@@ -55,7 +55,7 @@ export function bye() {
 }
 ```
 
-...Then dynamic import can be like this:
+آنگاه import پویا می‌تواند مانند این باشد:
 
 ```js
 let {hi, bye} = await import('./say.js');
@@ -64,7 +64,7 @@ hi();
 bye();
 ```
 
-Or, if `say.js` has the default export:
+یا اگر `say.js` دارای export پیش‌فرض باشد:
 
 ```js
 // 📁 say.js
@@ -73,7 +73,7 @@ export default function() {
 }
 ```
 
-...Then, in order to access it, we can use `default` property of the module object:
+آنگاه برای دسترسی به آن، می‌توانیم از خاصیت `default` شیء ماژول استفاده کنیم:
 
 ```js
 let obj = await import('./say.js');
@@ -83,16 +83,16 @@ let say = obj.default;
 say();
 ```
 
-Here's the full example:
+مثال کامل:
 
 [codetabs src="say" current="index.html"]
 
 ```smart
-Dynamic imports work in regular scripts, they don't require `script type="module"`.
+import پویا در اسکریپت‌های معمولی هم کار می‌کنند، نیازی به `script type="module"‎` ندارند.
 ```
 
 ```smart
-Although `import()` looks like a function call, it's a special syntax that just happens to use parentheses (similar to `super()`).
+اگرچه import()‎ شبیه یک تابع به نظر می‌رسد، ولی ساختار ویژه‌ای است که تصادفاً از پرانتز استفاده می‌کند (مشابه `super()‎`).
 
-So we can't copy `import` to a variable or use `call/apply` with it. It's not a function.
+پس نمی‌توانیم آن را به یک متغیر اختصاص دهیم یا از `call/apply` در رفتار با آن استفاده کنیم. تابع نیست.
 ```
