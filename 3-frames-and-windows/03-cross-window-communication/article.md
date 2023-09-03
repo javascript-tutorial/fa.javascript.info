@@ -175,11 +175,11 @@ document.domain = 'site.com';
 </script>
 ```
 
-## Collection: window.frames
+## مجموعه: window.frames
 
-An alternative way to get a window object for `<iframe>` -- is to get it from the named collection  `window.frames`:
+یک راه جایگزین برای دریافت یک شی پنجره برای `<iframe>` -- این است که از مجموعه‌ی نام‌گذاری‌شده‌ی `window.frames` آن را بگیریم:
 
-- By number: `window.frames[0]` -- the window object for the first frame in the document.
+- : `window.frames[0]` -- the window object for the first frame in the document.
 - By name: `window.frames.iframeName` -- the window object for the frame with  `name="iframeName"`.
 
 For instance:
