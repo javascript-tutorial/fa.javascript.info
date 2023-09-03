@@ -91,7 +91,7 @@ For instance, let's try reading and writing to `<iframe>` from another origin:
 <script>
   iframe.onload = function() {
     // هر کاری می‌کند
-    iframe.contentDocument.body.prepend("Hello, world!");
+    iframe.contentDocument.body.prepend("سلام، دنیا");
   };
 </script>
 ```
@@ -117,21 +117,21 @@ document.domain = 'site.com';
 همه‌اش همین است. حالا آن‌ها می‌توانند بدون محدودیت با هم تعامل داشته باشند. باز هم، این فقط برای صفحاتی با همان دامنه‌ی سطح دوم امکان پذیر است.
 
 ```warn header="منسوخ شده، اما همچنان کار می‌کند"
-The `document.domain` property is in the process of being removed from the [specification](https://html.spec.whatwg.org/multipage/origin.html#relaxing-the-same-origin-restriction). The cross-window messaging (explained soon below) is the suggested replacement.
+امروزه `document.domain` property در حال حذف از [مشخصات](https://html.spec.whatwg.org/multipage/origin.html#relaxing-the-same-origin-restriction) است. پیام دادن بین پنجره‌ای (به زودی در زیر توضیح داده می‌شود) جایگزین پیشنهادی است.
 
-That said, as of now all browsers support it. And the support will be kept for the future, not to break old code that relies on `document.domain`.
+گقته می‌شود تا کنون تمام مرورگرها از آن پشتیبانی می‌کنند. و پشتیبانی برای آینده حفظ خواهد شد، نه برای شکستن کدهای قدیمی که به `document.domain` متکی هستند.
 ```
 
 
-## Iframe: wrong document pitfall
+## Iframe: تله‌ی اشتباه document
 
-When an iframe comes from the same origin, and we may access its  `document`, there's a pitfall. It's not related to cross-origin things, but important to know.
+وقتی یک iframe از همان منبع می‌آید، و ما ممکن است به `document` آن دسترسی پیدا کنیم، یک تله وجود دارد. این به چیزهای متقاطع مربوط نیست، اما مهم است که بدانید.
 
-Upon its creation an iframe immediately has a document. But that document is different from the one that loads into it!
+به محض ایجاد یک iframe بلافاصله یک document دارد. اما آن document با documentای که در آن بارگذاری می‌شود متفاوت است!
 
-So if we do something with the document immediately, that will probably be lost.
+بنابراین اگر فورا با document کاری انجام دهیم، احتمالا از بین خواهد رفت.
 
-Here, look:
+اینجا، نگاه کنید:
 
 
 ```html run
@@ -142,20 +142,20 @@ Here, look:
   iframe.onload = function() {
     let newDoc = iframe.contentDocument;
 *!*
-    // the loaded document is not the same as initial!
+    // !بارگذاری شده مشابه اولیه نیست document
     alert(oldDoc == newDoc); // false
 */!*
   };
 </script>
 ```
 
-We shouldn't work with the document of a not-yet-loaded iframe, because that's the *wrong document*. If we set any event handlers on it, they will be ignored.
+ما نباید با document یک iframe که هنوز بارگذاری نشده است کار کنیم، زیرا آن *docment اشتباه* است. اگر روی آن هر event handlerای تنظیم کنیم، نادیده گرفته خواهند شد. 
 
-How to detect the moment when the document is there?
+چگونه می‌توان لحظه‌ای که document وجود دارد را تشخیص داد؟
 
-The right document is definitely at place when `iframe.onload`  triggers. But it only triggers when the whole iframe with all resources is loaded.
+وقتی `iframe.onload` راه‌اندازی می‌شود، قطعا document مناسب در محل قرار می‌گیرد. اما فقط زمانی فعال می‌شود که کل iframe با تمام منابعش بارگذاری شود.
 
-We can try to catch the moment earlier using checks in `setInterval`:
+می‌توانیم با استفاده از چک‌های `setInterval` آن لحظه را زودتر بگیریم:
 
 ```html run
 <iframe src="/" id="iframe"></iframe>
@@ -163,14 +163,14 @@ We can try to catch the moment earlier using checks in `setInterval`:
 <script>
   let oldDoc = iframe.contentDocument;
 
-  // every 100 ms check if the document is the new one
+  // جدید باشد document هر 100 میلی‌ثانیه چک می‌کند که
   let timer = setInterval(() => {
     let newDoc = iframe.contentDocument;
     if (newDoc == oldDoc) return;
 
-    alert("New document is here!");
+    alert("!جدید اینجا است document");
 
-    clearInterval(timer); // cancel setInterval, don't need it any more
+    clearInterval(timer); // را کنسل می‌کند، دیگر به آن نیازی نیست setInterval
   }, 100);
 </script>
 ```
