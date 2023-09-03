@@ -39,7 +39,6 @@
 
 For instance, let's try reading and writing to `<iframe>` from another origin:
 برای مثال، بیایید تلاش کنیم خواندن و نوشتن بر `<iframe>` از یک منبع دیگر را امتحان کنیم. 
-
 ```html run
 <iframe src="https://example.com" id="iframe"></iframe>
 
@@ -65,7 +64,7 @@ For instance, let's try reading and writing to `<iframe>` from another origin:
       let href = iframe.contentWindow.location.href; // ERROR
 */!*
     } catch(e) {
-      alert(e); // Security Error
+      alert(e); // خطای امنیتی
     }
 
     // ... !(بارگذاری کنیم iframe و در نتیجه چیز دیگری را) بنویسیم location ما می‌توانیم بر
@@ -74,7 +73,6 @@ For instance, let's try reading and writing to `<iframe>` from another origin:
 */!*
 
     iframe.onload = null; // آن را اجرا کند location را پاک می‌کند، نه اینکه بعد از تغییر handler این
-
   };
 </script>
 ```
@@ -82,7 +80,7 @@ For instance, let's try reading and writing to `<iframe>` from another origin:
 کد بالا خطاهای هر عملیاتی را نشان می‌هد به جز:
 
 - گرفتن ارجاع به پنجره‌ی درونی `iframe.contentWindow` - آن مجاز است.
-- نوشتن برا `location`
+- نوشتن بر `location`
 
 بر خلاف آن، اگر `<iframe>` منبع یکسانی داشته باشد،‌ ما می‌توانیم با آن هر کاری بکنیم:
 
@@ -104,21 +102,21 @@ For instance, let's try reading and writing to `<iframe>` from another origin:
 ...اما نمی‌توانیم به `iframe.contentWindow.onload` برای یک iframe از مبدا دیگری دسترسی پیدا کنیم،‌بنابراین از `iframe.onload` استفاده می‌کنیم.
 ```
 
-## Windows on subdomains: document.domain
+## پنجره‌ها در زیردامنه‌ها: document.domain
 
-By definition, two URLs with different domains have different origins.
+طبق تعریف، دو URL با دامنه‌های مختلف، منشأ متفاوتی دارند.
 
-But if windows share the same second-level domain, for instance `john.site.com`, `peter.site.com` and `site.com` (so that their common second-level domain is `site.com`), we can make the browser ignore that difference, so that they can be treated as coming from the "same origin" for the purposes of cross-window communication.
+اما اگر پنجره‌ها دامنه‌ی سطح دوم یکسانی داشته باشند، برای مثال `john.site.com`، `peter.site.com` و `site.com` (به طوری که دامنه‌ی سطح دوم مشترک آن‌ها `site.com` باشد) ما می‌توانیم مرورگر را مجبور کنیم این تفاوت را نادیده بگیرد، به طوری که می‌توان آن‌ها را به عنوان "same origin" برای اهداف ارتباط بین پنجره‌ای در نظر گرفت.
 
-To make it work, each such window should run the code:
+برای اینکه کار کند، هر پنجره باید کد زیر را اجرا کند:
 
 ```js
 document.domain = 'site.com';
 ```
 
-That's all. Now they can interact without limitations. Again, that's only possible for pages with the same second-level domain.
+همه‌اش همین است. حالا آن‌ها می‌توانند بدون محدودیت با هم تعامل داشته باشند. باز هم، این فقط برای صفحاتی با همان دامنه‌ی سطح دوم امکان پذیر است.
 
-```warn header="Deprecated, but still working"
+```warn header="منسوخ شده، اما همچنان کار می‌کند"
 The `document.domain` property is in the process of being removed from the [specification](https://html.spec.whatwg.org/multipage/origin.html#relaxing-the-same-origin-restriction). The cross-window messaging (explained soon below) is the suggested replacement.
 
 That said, as of now all browsers support it. And the support will be kept for the future, not to break old code that relies on `document.domain`.
