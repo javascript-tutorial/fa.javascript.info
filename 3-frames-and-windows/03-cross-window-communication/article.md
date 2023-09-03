@@ -179,10 +179,10 @@ document.domain = 'site.com';
 
 یک راه جایگزین برای دریافت یک شی پنجره برای `<iframe>` -- این است که از مجموعه‌ی نام‌گذاری‌شده‌ی `window.frames` آن را بگیریم:
 
-- : `window.frames[0]` -- the window object for the first frame in the document.
-- By name: `window.frames.iframeName` -- the window object for the frame with  `name="iframeName"`.
-
-For instance:
+- با عدد: `window.frames[0]` -- شی پنجره برای اولین فریم در document.
+- با نام: `window.frames.iframeName` -- شی پنجره برای فریم با نام `name="iframeName"`.
+  
+برای مثال:
 
 ```html run
 <iframe src="/" style="height:80px" name="win" id="iframe"></iframe>
@@ -193,27 +193,27 @@ For instance:
 </script>
 ```
 
-An iframe may have other iframes inside. The corresponding `window` objects form a hierarchy.
+یک فریم ممکن است فریم‌های دیگری هم درون خود داشته باشد. اشیای `پنجره‌ی` مربوطه یک سلسله مراتب را تشکیل می‌دهند.
 
-Navigation links are:
+لینک‌های هدایت‌کننده این‌ها هستند:
 
-- `window.frames` -- the collection of "children" windows (for nested frames).
-- `window.parent` -- the reference to the "parent" (outer) window.
-- `window.top` -- the reference to the topmost parent window.
+- `window.frames` -- مجموعه‌ی پنجره‌های "فرزند" (برای فریم‌های تو در تو).
+- `window.parent` -- ارجاع به پنجره‌ی "والد" (بیرونی).
+- `window.top` -- ارجاع به بالاترین پنجره‌ی والد.
 
-For instance:
+برای مثال:
 
 ```js run
 window.frames[0].parent === window; // true
 ```
 
-We can use the `top` property to check if the current document is open inside a frame or not:
+می‌توانیم از `top` property استفاده کنیم که چک کنیم که document جاری درون یک فریم باز است یا نه:
 
 ```js run
-if (window == top) { // current window == window.top?
-  alert('The script is in the topmost window, not in a frame');
+if (window == top) { // جاری window == window.top?
+  alert('در بالاترین پنجره است، نه در یک فریم script');
 } else {
-  alert('The script runs in a frame!');
+  alert('!در یک فریم اجرا می‌شود script');
 }
 ```
 
