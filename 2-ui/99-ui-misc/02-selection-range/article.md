@@ -319,38 +319,37 @@ Click buttons to run methods on the selection, "resetExample" to reset it.
 </script>
 ```
 
-There also exist methods to compare ranges, but these are rarely used. When you need them, please refer to the [spec](https://dom.spec.whatwg.org/#interface-range) or [MDN manual](mdn:/api/Range).
+مچنین روش هایی برای مقایسه محدوده ها وجود دارد، اما به ندرت از آنها استفاده می شود. هنگامی که به آنها نیاز دارید، لطفاً به spec](https://dom.spec.whatwg.org/#interface-range) یا [MDN manual](mdn:/api/Range) مراجعه کنید.
 
 
 ## Selection
 
-`Range` is a generic object for managing selection ranges. Although, creating a `Range` doesn't mean that we see a selection on screen.
+در واقع `Range` یک شیء عمومی برای مدیریت محدوده های انتخابی است. اگرچه، ایجاد یک `Range` به این معنی نیست که ما یک انتخاب را روی صفحه می بینیم.
 
-We may create `Range` objects, pass them around -- they do not visually select anything on their own.
+ما ممکن است اشیاء `Range` ایجاد کنیم، آنها را به اطراف منتقل کنیم -- آنها به صورت بصری چیزی را به تنهایی انتخاب نمی کنند.
 
-The document selection is represented by `Selection` object, that can be obtained as `window.getSelection()` or `document.getSelection()`. A selection may include zero or more ranges. At least, the [Selection API specification](https://www.w3.org/TR/selection-api/) says so. In practice though, only Firefox allows to select multiple ranges in the document by using `key:Ctrl+click` (`key:Cmd+click` for Mac).
-
-Here's a screenshot of a selection with 3 ranges, made in Firefox:
+انتخاب سند با شی `Selection` نشان داده می شود که می تواند به عنوان `window.getSelection()` یا `document.getSelection()` به دست آید. یک انتخاب ممکن است شامل محدوده صفر یا بیشتر باشد. حداقل،specification](https://www.w3.org/TR/selection-api/) این را می گوید. اگرچه در عمل، فقط فایرفاکس اجازه می دهد تا با استفاده از `key:Ctrl+click` (`key:Cmd+click` برای Mac)، چندین محدوده را در سند انتخاب کنید.
 
 ![](selection-firefox.svg)
 
-Other browsers support at maximum 1 range. As we'll see, some of `Selection` methods imply that there may be many ranges, but again, in all browsers except Firefox, there's at maximum 1.
+سایر مرورگرها حداکثر 1 محدوده را پشتیبانی می کنند. همانطور که خواهیم دید، برخی از روش های  `Selection` نشان می دهد که ممکن است محدوده های زیادی وجود داشته باشد، اما باز هم، در همه مرورگرها به جز فایرفاکس، حداکثر 1 وجود دارد.
 
-Here's a small demo that shows the current selection (select something and click) as text:
+در اینجا یک نسخه نمایشی کوچک وجود دارد که انتخاب فعلی (چیزی را انتخاب کنید و کلیک کنید) را به عنوان متن نشان می دهد:
 
 <button onclick="alert(document.getSelection())">alert(document.getSelection())</button>
 
 ## Selection properties
 
-As said, a selection may in theory contain multiple ranges. We can get these range objects using the method:
 
-- `getRangeAt(i)` -- get i-th range, starting from `0`. In all browsers except Firefox, only `0` is used.
+همانطور که گفته شد، یک انتخاب ممکن است در تئوری شامل چندین محدوده باشد. ما می توانیم این اشیاء محدوده را با استفاده از روش بدست آوریم:
 
-Also, there exist properties that often provide better convenience.
+- `getRangeAt(i)` -- محدوده i-ام را دریافت کنید که از `0` شروع می شود. در همه مرورگرها به جز فایرفاکس، فقط «0» استفاده می شود.
 
-Similar to a range, a selection object has a start, called "anchor", and the end, called "focus".
+همچنین، ویژگی هایی وجود دارد که اغلب راحتی بهتری را ارائه می دهند.
 
-The main selection properties are:
+مشابه یک محدوده، یک شی انتخاب یک شروع به نام "anchor" و پایان به نام "focus" دارد.
+
+ویژگی های اصلی انتخاب عبارتند از:
 
 - `anchorNode` -- the node where the selection starts,
 - `anchorOffset` -- the offset in `anchorNode` where the selection starts,
