@@ -234,35 +234,35 @@ From <input id="start" type="number" value=1> – To <input id="end" type="numbe
 - `setStartBefore(node)`شروع را در: درست قبل از `node` تنظیم کنید
 - `setStart(node, offset)` مجموعه شروع در: درست بعد از `node`.
 
-Set range end (similar methods):
+تنظیم پایان محدوده (روش های مشابه)
+- `setEnd(node, offset)` پایان را در: موقعیت `offset` در `node` تنظیم کنید
+- `setEndBefore(node)` پایان را در: درست قبل از `node` تنظیم کنید
+- `setEndAfter(node)` پایان را در: درست بعد از `node` تنظیم کنید
 
-- `setEnd(node, offset)` set end at: position `offset` in `node`
-- `setEndBefore(node)` set end at: right before `node`
-- `setEndAfter(node)` set end at: right after `node`
+از نظر فنی، `setStart/setEnd` می‌تواند هر کاری انجام دهد، اما روش‌های بیشتر راحتی بیشتری را فراهم می‌کنند.
 
-Technically, `setStart/setEnd` can do anything, but more methods provide more convenience.
+در همه این روش‌ها، `node` می‌تواند هم یک متن یا یک گره عنصر باشد: برای گره‌های متنی، `offset` بسیاری از کاراکترها را رد می‌کند، در حالی که برای گره‌های عنصر از بسیاری از گره‌های فرزند.
 
-In all these methods, `node` can be both a text or element node: for text nodes `offset` skips that many of characters, while for element nodes that many child nodes.
 
-Even more methods to create ranges:
-- `selectNode(node)` set range to select the whole `node`
-- `selectNodeContents(node)` set range to select the whole `node` contents
-- `collapse(toStart)` if `toStart=true` set end=start, otherwise set start=end, thus collapsing the range
-- `cloneRange()` creates a new range with the same start/end
+حتی روش های بیشتری برای ایجاد محدوده:
+- `selectNode(node)` محدوده را برای انتخاب کل  `node` تنظیم کنید
+- `selectNodeContents(node)` محدوده را برای انتخاب کل محتویات  `node` تنظیم کنید
+- `selectNodeContents(node)` اگر `toStart=true` set end=start، در غیر این صورت start=end را تنظیم کنید، بنابراین محدوده را جمع می کند
+- `cloneRange()` یک محدوده جدید با شروع/پایان یکسان ایجاد می کند
 
 ## Range editing methods
 
-Once the range is created, we can manipulate its content using these methods:
+هنگامی که محدوده ایجاد شد، می‌توانیم محتوای آن را با استفاده از این روش‌ها دستکاری کنیم:
 
-- `deleteContents()` -- remove range content from the document
-- `extractContents()` -- remove range content from the document and return as [DocumentFragment](info:modifying-document#document-fragment)
-- `cloneContents()` -- clone range content and return as [DocumentFragment](info:modifying-document#document-fragment)
-- `insertNode(node)` -- insert `node` into the document at the beginning of the range
-- `surroundContents(node)` -- wrap `node` around range content. For this to work, the range must contain both opening and closing tags for all elements inside it: no partial ranges like `<i>abc`.
+- `deleteContents()` -- محتوای محدوده را از سند حذف کنید
+- `extractContents()` -- محتوای محدوده را از سند حذف کنید و به عنوان [DocumentFragment](info:modifying-document#document-fragment)
+- `cloneContents()` -- محتویات محدوده را کلون کنید و به عنوان [DocumentFragment](info:modifying-document#document-fragment)
+- `insertNode(node)` -- `node` را در سند در ابتدای محدوده وارد کنید
+- `surroundContents(node)`- `node` را در اطراف محتوای محدوده قرار دهید. برای انجام این کار، محدوده باید دارای هر دو برچسب باز و بسته برای همه عناصر داخل آن باشد: هیچ محدوده جزئی مانند `<i>abc`.
 
-With these methods we can do basically anything with selected nodes.
+با این روش ها اساساً می توانیم هر کاری را با گره های انتخاب شده انجام دهیم.
 
-Here's the test stand to see them in action:
+در اینجا پایه آزمایشی برای مشاهده آنها در عمل آمده است:
 
 ```html run refresh autorun height=260
 Click buttons to run methods on the selection, "resetExample" to reset it.
