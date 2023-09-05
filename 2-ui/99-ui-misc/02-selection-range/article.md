@@ -505,12 +505,12 @@ The exception is some selection methods, that replace the existing selection, su
 عناصر فرم، مانند `input` و textarea [special API for selection](https://html.spec.whatwg.org/#textFieldSelection) را بدون اشیاء `Selection` یا `Range` ارائه می‌کنند. از آنجایی که مقدار ورودی یک متن خالص است، نه HTML، نیازی به چنین اشیایی نیست، همه چیز بسیار ساده تر است.
 
 ویژگی ها:
-- `input.selectionStart` -- position of selection start (writeable),
-- `input.selectionEnd` -- position of selection end (writeable),
-- `input.selectionDirection` -- selection direction, one of: "forward", "backward" or "none" (if e.g. selected with a double mouse click),
+- `input.selectionStart` -- موقعیت شروع انتخاب (قابل نوشتن)،
+- `input.selectionEnd` -- موقعیت انتهای انتخاب (قابل نوشتن)،
+- `input.selectionDirection` -- جهت انتخاب، یکی از: "backward"، "backward" یا "none" (به عنوان مثال اگر با دوبار کلیک ماوس انتخاب شده باشد)،
 
-Events:
-- `input.onselect` -- triggers when something is selected.
+(رویداد ها)Events:
+- `input.onselect` -- هنگامی که چیزی انتخاب می شود فعال می شود.
 
 Methods:
 
