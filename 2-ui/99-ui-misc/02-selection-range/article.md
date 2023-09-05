@@ -351,38 +351,38 @@ Click buttons to run methods on the selection, "resetExample" to reset it.
 
 ویژگی های اصلی انتخاب عبارتند از:
 
-- `anchorNode` -- the node where the selection starts,
-- `anchorOffset` -- the offset in `anchorNode` where the selection starts,
-- `focusNode` -- the node where the selection ends,
-- `focusOffset` -- the offset in `focusNode` where the selection ends,
-- `isCollapsed` -- `true` if selection selects nothing (empty range), or doesn't exist.
-- `rangeCount` -- count of ranges in the selection, maximum `1` in all browsers except Firefox.
+-`anchorNode` -- گره ای که انتخاب شروع می شود،
+- `anchorOffset` - آفست در `anchorNode` جایی که انتخاب شروع می شود،
+- `focusNode` - گره ای که در آن انتخاب به پایان می رسد،
+-`focusOffset` - آفست در `focusNode` جایی که انتخاب به پایان می رسد،
+- `isCollapsed` -- `true` اگر انتخاب چیزی (محدوده خالی) را انتخاب نکند یا وجود نداشته باشد.
+- `rangeCount` -- تعداد محدوده ها در انتخاب، حداکثر `1` در همه مرورگرها به جز فایرفاکس.
 
-```smart header="Selection end/start vs Range"
+ ```smart header="انتخاب پایان/شروع در مقابل محدوده"
 
-There's an important differences of a selection anchor/focus compared with a `Range` start/end.
 
-As we know, `Range` objects always have their start before the end. 
+تفاوت‌های مهمی بین لنگر/فوکوس انتخاب در مقایسه با `Range` start/end وجود دارد.
 
-For selections, that's not always the case.
+همانطور که می دانیم، اشیاء  `Range` همیشه شروع خود را قبل از پایان دارند.
 
-Selecting something with a mouse can be done in both directions: either "left-to-right" or "right-to-left".
+برای انتخاب، همیشه اینطور نیست.
 
-In other words, when the mouse button is pressed, and then it moves forward in the document, then its end (focus) will be after its start (anchor).
+انتخاب چیزی با ماوس را می توان در هر دو جهت انجام داد:  "left-to-right" یا  "right-to-left".
 
-E.g. if the user starts selecting with mouse and goes from "Example" to "italic":
+به عبارت دیگر، وقتی دکمه ماوس را فشار داده و سپس در سند به جلو حرکت می کند، انتهای آن (focus) بعد از شروع آن (anchor) خواهد بود.
+
+به عنوان مثال. اگر کاربر شروع به انتخاب با ماوس کند و از "مثال" به "مورب" برود:
 
 ![](selection-direction-forward.svg)
 
-...But the same selection could be done backwards: starting from  "italic" to "Example" (backward direction), then its end (focus) will be before the start (anchor):
+...اما همین انتخاب را می توان به عقب انجام داد: از "مورب" به "مثال" (جهت عقب) شروع می شود، سپس پایان آن (focus) قبل از شروع (anchor) خواهد بود:
 
 ![](selection-direction-backward.svg)
 ```
 
 ## Selection events
 
-There are events on to keep track of selection:
-
+رویدادهایی برای پیگیری انتخاب وجود دارد:
 - `elem.onselectstart` -- when a selection *starts* specifically on element `elem` (or inside it). For instance, when the user presses the mouse button on it and starts to move the pointer.
     - Preventing the default action cancels the selection start. So starting a selection from this element becomes impossible, but the element is still selectable. The visitor just needs to start the selection from elsewhere.
 - `document.onselectionchange` -- whenever a selection changes or starts.
