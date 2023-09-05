@@ -1,10 +1,7 @@
-
 کتابخانه ها:
   - d3
   - domtree
-
 ---
-
 # Selection and Range
 
 
@@ -28,7 +25,6 @@ let range = new Range();
 پس می‌توانیم مرزهای انتخاب را با استفاده از `range.setStart(node, offset)` و `range.setEnd(node, offset)` تنظیم کنیم.
 
 همانطور که ممکن است حدس بزنید، در ادامه از اشیاء `Range`  برای انتخاب استفاده خواهیم کرد، اما ابتدا اجازه دهید تعداد کمی از این اشیاء ایجاد کنیم.
-
 ### Selecting the text partially
 
 نکته جالب این است که آرگومان اول `node` در هر دو روش می تواند یک text node یا یelement node عنصر باشد و معنای آرگومان دوم به آن بستگی دارد.
@@ -37,7 +33,6 @@ let range = new Range();
 **اگر `node` یک text nodeاست، `offset` باید موقعیتی در متن آن باشد.**
 
 به عنوان مثال، با توجه به عنصر `<p>Hello</p>`، می‌توانیم محدوده حاوی حروف «ll» را به صورت زیر ایجاد کنیم:
-
 ```html run
 <p id="p">Hello</p>
 <script>
@@ -52,7 +47,6 @@ let range = new Range();
 
 در اینجا اولین فرزند `<p>` را می گیریم (این text node است) و موقعیت های متن را در داخل آن مشخص می کنیم:
 
-
 ![](range-hello-1.svg)
 ### Selecting element nodes
 
@@ -62,13 +56,11 @@ let range = new Range();
 این برای ایجاد محدوده هایی که شامل گره ها به عنوان یک کل هستند، مفید است، نه اینکه در جایی در متن خود متوقف شوند.
 
 به عنوان مثال، ما یک قطعه سند پیچیده تر داریم:
-
 ```html autorun
 <p id="p">Example: <i>italic</i> and <b>bold</b></p>
 ```
 
 در اینجا ساختار DOM آن با هر دو گره عنصر و متن آمده است:
-
 <div class="select-p-domtree"></div>
 
 <script>
@@ -107,7 +99,6 @@ drawHtmlTree(selectPDomtree, 'div.select-p-domtree', 690, 320);
 
 
 همانطور که می بینیم، این عبارت دقیقاً از دو فرزند `<p>` با نمایه های  `0`  و `1` تشکیل شده است:
-
 ![](range-example-p-0-1.svg)
 
 
@@ -119,7 +110,6 @@ drawHtmlTree(selectPDomtree, 'div.select-p-domtree', 690, 320);
      بنابراین می‌توانیم آن را به‌عنوان `range.setEnd(p, 2)` تنظیم کنیم.
 
 در اینجا نسخه ی نمایشی است. اگر آن را اجرا کنید، می بینید که متن انتخاب شده است:
-
 ```html run
 <p id="p">Example: <i>italic</i> and <b>bold</b></p>
 
@@ -140,7 +130,6 @@ drawHtmlTree(selectPDomtree, 'div.select-p-domtree', 690, 320);
 ```
 
 در اینجا یک پایه تست انعطاف‌پذیرتر وجود دارد که در آن می‌توانید اعداد شروع/پایان محدوده را تنظیم کنید و انواع دیگر را بررسی کنیدد:
-
 ```html run autorun
 <p id="p">Example: <i>italic</i> and <b>bold</b></p>
 
@@ -163,7 +152,6 @@ From <input id="start" type="number" value=1> – To <input id="end" type="numbe
 ```
 
 به عنوان مثال، انتخاب در همان `<p>` از آفست `1` تا `4`، محدوده `<i>italic</i> and <b>bold</b>` را به ما می‌دهد:
-
 ![](range-example-p-1-3.svg)
 
 
@@ -174,17 +162,13 @@ From <input id="start" type="number" value=1> – To <input id="end" type="numbe
 ### Selecting a bigger fragment
 
 بیایید در مثال خود یک انتخاب بزرگتر انجام دهیم، مانند این:
-
 ![](range-example-p-2-b-3.svg)
-
-
 
 ما قبلاً می دانیم که چگونه این کار را انجام دهیم. فقط باید شروع و پایان را به عنوان یک افست نسبی در گره های متنی تنظیم کنیم.
 
 ما باید یک محدوده ایجاد کنیم، که:
 - از موقعیت 2 در `<p>` فرزند اول شروع می‌شود (با گرفتن همه حرف‌های اول «مثال<b>ample:</b>» به جز دو حرف اول)
 - در `<b>`فرزند اول به موقعیت 3 ختم می شود (با گرفتن سه حرف اول "<b>bol</b>d"، اما نه بیشتر):
-
 ```html run
 <p id="p">Example: <i>italic</i> and <b>bold</b></p>
 
@@ -206,7 +190,6 @@ From <input id="start" type="number" value=1> – To <input id="end" type="numbe
 اگر می‌خواهیم گره‌ها را به‌عنوان یک کل بگیریم، می‌توانیم عناصر را در  `setStart/setEnd` ارسال کنیم. در غیر این صورت می توانیم در سطح متن کار کنیم.
 
 ## Range properties
-
 شی range که در مثال بالا ایجاد کردیم دارای ویژگی های زیر است:
 
 ![](range-example-p-2-b-3-range.svg)
@@ -416,6 +399,7 @@ From <input id="from" disabled> – To <input id="to" disabled>
 
 1. می‌توانیم از `document.getSelection().toString()` برای دریافت آن به عنوان متن استفاده کنیم.
 2. در غیر این صورت، برای کپی کردن DOM کامل، به عنوان مثال. اگر نیاز به قالب‌بندی داشته باشیم، می‌توانیم محدوده‌های زیربنایی را با `getRangeAt(...)` دریافت کنیم. یک شی `Range` به نوبه خود دارای متد `cloneContents()` است که محتوای آن را شبیه‌سازی می‌کند و به عنوان شی `DocumentFragment` برمی‌گرداند، که می‌توانیم آن را در جای دیگری درج کنیم.
+3. 
 
 در اینجا نسخه ی نمایشی کپی کردن محتوای انتخاب شده به عنوان متن و به عنوان گره های DOM آمده است:
 
@@ -454,6 +438,7 @@ As text: <span id="astext"></span>
 - `removeAllRanges()` -- حذف همه محدوده ها.
 - `empty()` -- نام مستعار `removeAllRanges`.
 
+
 همچنین روش‌های آسانی برای دستکاری مستقیم محدوده انتخاب، بدون فراخوانی `Range` میانی وجود دارد:
 
 - `collapse(node, offset)` -- محدوده انتخاب شده را با یک محدوده جدید جایگزین کنید که در "گره" داده شده شروع و پایان می یابد، در موقعیت "offset".
@@ -481,7 +466,6 @@ As text: <span id="astext"></span>
 ```
 
 همین مورد با استفاده از محدوده ها:
-
 ```html run
 <p id="p">Select me: <i>italic</i> and <b>bold</b></p>
 
@@ -587,6 +571,7 @@ Focus on me, the cursor will be at position 10.
 
 ### Example: modifying selection
 
+
 برای تغییر محتوای انتخابی، می‌توانیم از روش `input.setRangeText()` استفاده کنیم. البته، می‌توانیم `selectionStart/End` را بخوانیم و با آگاهی از انتخاب، زیررشته مربوط به `value` را تغییر دهیم، اما `setRangeText` قدرتمندتر و اغلب راحت‌تر است.
 
 این یک روش تا حدودی پیچیده است. در ساده ترین شکل تک آرگومان خود، جایگزین محدوده انتخابی کاربر می شود و انتخاب را حذف می کند.
@@ -629,7 +614,6 @@ button.onclick = () => {
 ```
 
 ### Example: insert at cursor
-
 
 اگر چیزی انتخاب نشده باشد، یا از `start` و `end` مساوی در `setRangeText` استفاده کنیم، آنگاه متن جدید فقط درج می‌شود، چیزی حذف نمی‌شود.
 
