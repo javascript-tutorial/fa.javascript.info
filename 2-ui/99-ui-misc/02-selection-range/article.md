@@ -512,15 +512,15 @@ The exception is some selection methods, that replace the existing selection, su
 (رویداد ها)Events:
 - `input.onselect` -- هنگامی که چیزی انتخاب می شود فعال می شود.
 
-Methods:
+متد ها:
+- `input.select()` -- همه چیز را در کنترل متن انتخاب می کند (می تواند `textarea` به جای `input` باشد)
+- `input.setSelectionRange(start, end, [direction])` -- انتخاب را تغییر دهید تا از موقعیت `شروع` تا `"پایان` در جهت معین (اختیاری) باشد.
+- `input.setRangeText(replacement, [start], [end], [selectionMode])` -- یک محدوده از متن را با متن جدید جایگزین کنید.
 
-- `input.select()` -- selects everything in the text control (can be `textarea` instead of `input`),
-- `input.setSelectionRange(start, end, [direction])` -- change the selection to span from position `start` till `end`, in the given direction (optional).
-- `input.setRangeText(replacement, [start], [end], [selectionMode])` -- replace a range of text with the new text.
+  
+  آرگومان های اختیاری`«شروع` و`«پایان`، در صورت ارائه، محدوده شروع و پایان را تنظیم می کنند، در غیر این صورت از انتخاب کاربر استفاده می شود.
 
-    Optional arguments `start` and `end`, if provided, set the range start and end, otherwise user selection is used.
-
-    The last argument, `selectionMode`, determines how the selection will be set after the text has been replaced. The possible values are:
+     آخرین آرگومان،  `selectionMode`، نحوه تنظیم انتخاب پس از جایگزینی متن را تعیین می‌کند. مقادیر ممکن عبارتند از:
 
     - `"select"` -- the newly inserted text will be selected.
     - `"start"` -- the selection range collapses just before the inserted text (the cursor will be immediately before it).
@@ -528,10 +528,16 @@ Methods:
     - `"preserve"` -- attempts to preserve the selection. This is the default.
 
 Now let's see these methods in action.
+ - `"select"` -- متن درج شده جدید انتخاب خواهد شد.
+ - `"start"`-- محدوده انتخاب درست قبل از متن درج شده جمع می شود (مکان نما بلافاصله قبل از آن خواهد بود).
+ - `"end"` -- محدوده انتخاب درست بعد از متن درج شده جمع می شود (مکان نما درست بعد از آن خواهد بود).
+ - `"preserve"` - تلاش برای حفظ انتخاب. این پیش فرض است.
+
+حال بیایید این روش ها را در عمل ببینیم.
 
 ### Example: tracking selection
 
-For example, this code uses `onselect` event to track selection:
+رای مثال، این کد از رویداد `onselect` برای ردیابی انتخاب استفاده می‌کند:
 
 ```html run autorun
 <textarea id="area" style="width:80%;height:60px">
@@ -548,20 +554,19 @@ From <input id="from" disabled> – To <input id="to" disabled>
 </script>
 ```
 
-Please note:
-- `onselect` triggers when something is selected, but not when the selection is removed.
-- `document.onselectionchange` event should not trigger for selections inside a form control, according to the [spec](https://w3c.github.io/selection-api/#dfn-selectionchange), as it's not related to `document` selection and ranges. Some browsers generate it, but we shouldn't rely on it.
-
-
+لطفا توجه داشته باشید:
+- وقتی چیزی انتخاب می‌شود، `onselect` فعال می‌شود، اما وقتی انتخاب حذف می‌شود نه.
+- طبق [spec](https://w3c.github.io/selection-api/#dfn-selectionchange)، رویداد  `document.onselectionchange` نباید برای انتخاب‌های داخل یک کنترل فرم فعال شود، زیرا به مرتبط نیست انتخاب `document` و محدوده برخی از مرورگرها آن را تولید می کنند، اما ما نباید به آن تکیه کنیم.
 ### Example: moving cursor
 
-We can change `selectionStart` and `selectionEnd`, that sets the selection.
 
-An important edge case is when `selectionStart` and `selectionEnd` equal each other. Then it's exactly the cursor position. Or, to rephrase, when nothing is selected, the selection is collapsed at the cursor position.
+می‌توانیم `selectionStart` و `selectionEnd` را تغییر دهیم که انتخاب را تنظیم می‌کند.
 
-So, by setting `selectionStart` and `selectionEnd` to the same value, we move the cursor.
+یک مورد مهم لبه زمانی است که `selectionStart` و `selectionEnd` با هم برابر باشند. سپس دقیقاً موقعیت مکان نما است. یا، برای بازنویسی، وقتی چیزی انتخاب نشده است، انتخاب در موقعیت مکان نما جمع می شود.
 
-For example:
+بنابراین، با تنظیم `selectionStart` و `selectionEnd` روی یک مقدار، مکان‌نما را حرکت می‌دهیم.
+
+مثلا:
 
 ```html run autorun
 <textarea id="area" style="width:80%;height:60px">
@@ -582,11 +587,11 @@ Focus on me, the cursor will be at position 10.
 
 ### Example: modifying selection
 
-To modify the content of the selection, we can use `input.setRangeText()` method. Of course, we can read `selectionStart/End` and, with the knowledge of the selection, change the corresponding substring of `value`, but `setRangeText` is more powerful and often more convenient.
+برای تغییر محتوای انتخابی، می‌توانیم از روش `input.setRangeText()` استفاده کنیم. البته، می‌توانیم `selectionStart/End` را بخوانیم و با آگاهی از انتخاب، زیررشته مربوط به `value` را تغییر دهیم، اما `setRangeText` قدرتمندتر و اغلب راحت‌تر است.
 
-That's a somewhat complex method. In its simplest one-argument form it replaces the user selected range and removes the selection.
+این یک روش تا حدودی پیچیده است. در ساده ترین شکل تک آرگومان خود، جایگزین محدوده انتخابی کاربر می شود و انتخاب را حذف می کند.
 
-For example, here the user selection will be wrapped by `*...*`:
+به عنوان مثال، در اینجا انتخاب کاربر با `*...*` پیچیده می شود:
 
 ```html run autorun
 <input id="input" style="width:200px" value="Select here and click the button">
@@ -604,9 +609,9 @@ button.onclick = () => {
 </script>
 ```
 
-With more arguments, we can set range `start` and `end`.
+با آرگومان های بیشتر، می توانیم محدوده `start` و `end` را تنظیم کنیم.
 
-In this example we find `"THIS"` in the input text, replace it and keep the replacement selected:
+در این مثال، `"THIS"` را در متن ورودی پیدا می کنیم، آن را جایگزین می کنیم و جایگزین را انتخاب می کنیم:
 
 ```html run autorun
 <input id="input" style="width:200px" value="Replace THIS in text">
@@ -625,11 +630,12 @@ button.onclick = () => {
 
 ### Example: insert at cursor
 
-If nothing is selected, or we use equal `start` and `end` in `setRangeText`, then the new text is just inserted, nothing is removed.
 
-We can also insert something "at the cursor" using `setRangeText`.
+اگر چیزی انتخاب نشده باشد، یا از `start` و `end` مساوی در `setRangeText` استفاده کنیم، آنگاه متن جدید فقط درج می‌شود، چیزی حذف نمی‌شود.
 
-Here's a button that inserts `"HELLO"` at the cursor position and puts the cursor immediately after it. If the selection is not empty, then it gets replaced (we can detect it by comparing `selectionStart!=selectionEnd` and do something else instead):
+همچنین می‌توانیم چیزی را «در مکان‌نما» با استفاده از `setRangeText` وارد کنیم.
+
+در اینجا دکمه ای وجود دارد که «HELLO» را در موقعیت مکان نما قرار می دهد و مکان نما را بلافاصله بعد از آن قرار می دهد. اگر انتخاب خالی نباشد، جایگزین می‌شود (می‌توانیم آن را با مقایسه «selectionStart!=selectionEnd» شناسایی کنیم و به جای آن کار دیگری انجام دهیم):
 
 ```html run autorun
 <input id="input" style="width:200px" value="Text Text Text Text Text">
@@ -646,9 +652,9 @@ Here's a button that inserts `"HELLO"` at the cursor position and puts the curso
 
 ## Making unselectable
 
-To make something unselectable, there are three ways:
+2. برای غیرقابل انتخاب کردن چیزی، سه راه وجود دارد:
 
-1. Use CSS property `user-select: none`.
+1. از ویژگی `user-select: none` استفاده کنید.
 
     ```html run
     <style>
@@ -658,13 +664,14 @@ To make something unselectable, there are three ways:
     </style>
     <div>Selectable <div id="elem">Unselectable</div> Selectable</div>
     ```
+    
 
-    This doesn't allow the selection to start at `elem`. But the user may start the selection elsewhere and include `elem` into it.
+   این اجازه نمی‌دهد انتخاب از «elem» شروع شود. اما کاربر ممکن است انتخاب را از جای دیگری شروع کند و `elem` را در آن قرار دهد.
 
-    Then `elem` will become a part of `document.getSelection()`, so the selection actually happens, but its content is usually ignored in copy-paste.
+     سپس `elem` به بخشی از `document.getSelection()` تبدیل می‌شود، بنابراین انتخاب در واقع اتفاق می‌افتد، اما محتوای آن معمولاً در کپی-پیست نادیده گرفته می‌شود.
 
 
-2. Prevent default action in `onselectstart` or `mousedown` events.
+4. 3. از اقدام پیش‌فرض در رویدادهای `onselectstart` یا `mousedown` جلوگیری کنید.
 
     ```html run
     <div>Selectable <div id="elem">Unselectable</div> Selectable</div>
@@ -674,11 +681,12 @@ To make something unselectable, there are three ways:
     </script>
     ```
 
-    This prevents starting the selection on `elem`, but the visitor may start it at another element, then extend to `elem`.
+   این کار از شروع انتخاب روی `elem` جلوگیری می‌کند، اما بازدیدکننده ممکن است آن را از عنصر دیگری شروع کند و سپس به `elem` گسترش دهد.
 
-    That's convenient when there's another event handler on the same action that triggers the select (e.g. `mousedown`). So we disable the selection to avoid conflict, still allowing `elem` contents to be copied.
+     زمانی که کنترل‌کننده رویداد دیگری در همان عملکرد وجود دارد که انتخاب را فعال می‌کند، راحت است (e.g. `mousedown`). بنابراین، برای جلوگیری از تضاد، انتخاب را غیرفعال می‌کنیم و همچنان اجازه می‌دهیم محتوای `elem` کپی شود.
 
-3. We can also clear the selection post-factum after it happens with `document.getSelection().empty()`. That's rarely used, as this causes unwanted blinking as the selection appears-disappears.
+5. همچنین می‌توانیم انتخاب post-factum را بعد از اینکه با `document.getSelection().empty()` رخ داد پاک کنیم. این به ندرت استفاده می شود، زیرا باعث چشمک زدن ناخواسته با ظاهر شدن انتخاب می شود - ناپدید می شود.
+
 
 ## References
 
@@ -689,16 +697,17 @@ To make something unselectable, there are three ways:
 
 ## Summary
 
-We covered two different APIs for selections:
 
-1. For document: `Selection` and `Range` objects.
-2. For `input`, `textarea`: additional methods and properties.
+ ما دو API مختلف را برای انتخاب پوشش دادیم:
 
-The second API is very simple, as it works with text.
+1. برای سند: اشیاء `Selection` و `Range`.
+2. برای `input`، `textarea`: روش‌ها و ویژگی‌های اضافی.
 
-The most used recipes are probably:
+وAPI دوم بسیار ساده است، زیرا با متن کار می کند.
 
-1. Getting the selection:
+دستور العمل های مورد استفاده احتمالاً عبارتند از:
+
+1. دریافت انتخاب:
     ```js
     let selection = document.getSelection();
 
@@ -710,7 +719,7 @@ The most used recipes are probably:
       cloned.append(selection.getRangeAt(i).cloneContents());
     }
     ```
-2. Setting the selection:
+3. تنظیمات selection:
     ```js
     let selection = document.getSelection();
 
@@ -721,5 +730,5 @@ The most used recipes are probably:
     selection.removeAllRanges();
     selection.addRange(range);
     ```
-
-And finally, about the cursor. The cursor position in editable elements, like `<textarea>` is always at the start or the end of the selection. We can use it  to get cursor position or to move the cursor by setting `elem.selectionStart` and `elem.selectionEnd`.
+    
+و در نهایت، در مورد مکان نما. موقعیت مکان نما در عناصر قابل ویرایش، مانند `<textarea>` همیشه در ابتدا یا انتهای انتخاب است. می‌توانیم با تنظیم `elem.selectionStart` و  `elem.selectionEnd` از آن برای به دست آوردن موقعیت مکان‌نما یا حرکت مکان‌نما استفاده کنیم.
