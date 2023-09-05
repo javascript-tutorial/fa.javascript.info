@@ -383,14 +383,14 @@ Click buttons to run methods on the selection, "resetExample" to reset it.
 ## Selection events
 
 رویدادهایی برای پیگیری انتخاب وجود دارد:
-- `elem.onselectstart` -- when a selection *starts* specifically on element `elem` (or inside it). For instance, when the user presses the mouse button on it and starts to move the pointer.
-    - Preventing the default action cancels the selection start. So starting a selection from this element becomes impossible, but the element is still selectable. The visitor just needs to start the selection from elsewhere.
-- `document.onselectionchange` -- whenever a selection changes or starts.
-    - Please note: this handler can be set only on `document`, it tracks all selections in it.
+- `elem.onselectstart` -- زمانی که یک انتخاب *شروع می شود* به طور خاص روی عنصر `elem` (یا داخل آن). به عنوان مثال، زمانی که کاربر دکمه ماوس را روی آن فشار می دهد و شروع به حرکت اشاره گر می کند.
+     - جلوگیری از عمل پیش فرض شروع انتخاب را لغو می کند. بنابراین شروع انتخاب از این عنصر غیرممکن می شود، اما عنصر همچنان قابل انتخاب است. بازدیدکننده فقط باید انتخاب را از جای دیگری شروع کند.
+- `document.onselectionchange` - هر زمان که یک انتخاب تغییر کند یا شروع شود.
+     - لطفاً توجه داشته باشید: این کنترل کننده را می توان فقط روی `document` تنظیم کرد، همه انتخاب های موجود در آن را ردیابی می کند.
 
 ### Selection tracking demo
 
-Here's a small demo. It tracks the current selection on the `document` and shows its boundaries:
+در اینجا یک نسخه نمایشی کوچک است. این انتخاب فعلی در `document` را ردیابی می کند و مرزهای آن را نشان می دهد:
 
 ```html run height=80
 <p id="p">Select me: <i>italic</i> and <b>bold</b></p>
@@ -411,12 +411,13 @@ From <input id="from" disabled> – To <input id="to" disabled>
 
 ### Selection copying demo
 
-There are two approaches to copying the selected content:
+دو روش برای کپی کردن محتوای انتخابی وجود دارد:
 
-1. We can use `document.getSelection().toString()` to get it as text.
-2. Otherwise, to copy the full DOM, e.g. if we need to keep formatting, we can get the underlying ranges with `getRangeAt(...)`. A `Range` object, in turn, has `cloneContents()` method that clones its content and returns as `DocumentFragment` object, that we can insert elsewhere.
 
-Here's the demo of copying the selected content both as text and as DOM nodes:
+1. می‌توانیم از `document.getSelection().toString()` برای دریافت آن به عنوان متن استفاده کنیم.
+2. در غیر این صورت، برای کپی کردن DOM کامل، به عنوان مثال. اگر نیاز به قالب‌بندی داشته باشیم، می‌توانیم محدوده‌های زیربنایی را با `getRangeAt(...)` دریافت کنیم. یک شی `Range` به نوبه خود دارای متد `cloneContents()` است که محتوای آن را شبیه‌سازی می‌کند و به عنوان شی `DocumentFragment` برمی‌گرداند، که می‌توانیم آن را در جای دیگری درج کنیم.
+
+در اینجا نسخه ی نمایشی کپی کردن محتوای انتخاب شده به عنوان متن و به عنوان گره های DOM آمده است:
 
 ```html run height=100
 <p id="p">Select me: <i>italic</i> and <b>bold</b></p>
@@ -444,29 +445,31 @@ As text: <span id="astext"></span>
 
 ## Selection methods
 
-We can work with the selection by adding/removing ranges:
+ا می توانیم با افزودن/حذف محدوده ها با انتخاب کار کنیم:
 
-- `getRangeAt(i)` -- get i-th range, starting from `0`. In all browsers except Firefox, only `0` is used.
-- `addRange(range)` -- add `range` to selection. All browsers except Firefox ignore the call, if the selection already has an associated range.
-- `removeRange(range)` -- remove `range` from the selection.
-- `removeAllRanges()` -- remove all ranges.
-- `empty()` -- alias to `removeAllRanges`.
 
-There are also convenience methods to manipulate the selection range directly, without intermediate `Range` calls:
+- `getRangeAt(i)` -- محدوده i-ام را دریافت کنید که از `0` شروع می شود. در همه مرورگرها به جز فایرفاکس، فقط  `0` استفاده می شود.
+- `addRange(range)` -- `range` را به انتخاب اضافه کنید. همه مرورگرها به جز فایرفاکس تماس را نادیده می گیرند، در صورتی که انتخاب از قبل دارای یک محدوده مرتبط باشد.
+- `removeRange(range)` --  `range` را از انتخاب حذف کنید.
+- `removeAllRanges()` -- حذف همه محدوده ها.
+- `empty()` -- نام مستعار `removeAllRanges`.
 
-- `collapse(node, offset)` -- replace selected range with a new one that starts and ends at the given `node`, at position `offset`.
-- `setPosition(node, offset)` -- alias to `collapse`.
-- `collapseToStart()` - collapse (replace with an empty range) to selection start,
-- `collapseToEnd()` - collapse to selection end,
-- `extend(node, offset)` - move focus of the selection to the given `node`, position `offset`,
-- `setBaseAndExtent(anchorNode, anchorOffset, focusNode, focusOffset)` - replace selection range with the given start `anchorNode/anchorOffset` and end `focusNode/focusOffset`. All content in-between them is selected.
-- `selectAllChildren(node)` -- select all children of the `node`.
-- `deleteFromDocument()` -- remove selected content from the document.
-- `containsNode(node, allowPartialContainment = false)` -- checks whether the selection contains `node` (partially if the second argument is `true`)
+همچنین روش‌های آسانی برای دستکاری مستقیم محدوده انتخاب، بدون فراخوانی `Range` میانی وجود دارد:
 
-For most tasks these methods are just fine, there's no need to access the underlying `Range` object.
+- `collapse(node, offset)` -- محدوده انتخاب شده را با یک محدوده جدید جایگزین کنید که در "گره" داده شده شروع و پایان می یابد، در موقعیت "offset".
+- `setPosition(node, offset)` -- نام مستعار `collapse`.
+- `collapseToStart()` - جمع کردن (با یک محدوده خالی جایگزین شود) تا شروع انتخاب،
+- `collapseToEnd()` - جمع کردن تا انتهای انتخاب،
+- `extend(node, offset)` - فوکوس انتخاب را به `node` داده شده منتقل کنید، موقعیت `offset`،
+- `setBaseAndExtent(anchorNode, anchorOffset, focusNode, focusOffset)` - جایگزین محدوده انتخاب با شروع داده شده `anchorNode/anchorOffset` و پایان `focusNode/focusOffset`. تمام محتوای بین آنها انتخاب شده است.
+- `selectAllChildren(node)` -- همه فرزندان "گره" را انتخاب کنید.
+- `deleteFromDocument()` -- محتوای انتخاب شده را از سند حذف کنید.
+- `containsNode(node, allowPartialContainment = false)` -- بررسی می کند که آیا انتخاب شامل "node" است (تا حدی اگر آرگومان دوم "true" باشد)
 
-For example, selecting the whole contents of the paragraph `<p>`:
+
+برای اکثر وظایف، این روش‌ها خوب هستند، نیازی به دسترسی به شی `Range` زیرین نیست.
+
+به عنوان مثال، انتخاب کل محتوای پاراگراف `<p>`:
 
 ```html run
 <p id="p">Select me: <i>italic</i> and <b>bold</b></p>
@@ -477,7 +480,7 @@ For example, selecting the whole contents of the paragraph `<p>`:
 </script>
 ```
 
-The same thing using ranges:
+همین مورد با استفاده از محدوده ها:
 
 ```html run
 <p id="p">Select me: <i>italic</i> and <b>bold</b></p>
@@ -499,9 +502,9 @@ The exception is some selection methods, that replace the existing selection, su
 
 ## Selection in form controls
 
-Form elements, such as `input` and `textarea` provide [special API for selection](https://html.spec.whatwg.org/#textFieldSelection), without `Selection` or `Range` objects. As an input value is a pure text, not HTML, there's no need for such objects, everything's much simpler.
+عناصر فرم، مانند `input` و textarea [special API for selection](https://html.spec.whatwg.org/#textFieldSelection) را بدون اشیاء `Selection` یا `Range` ارائه می‌کنند. از آنجایی که مقدار ورودی یک متن خالص است، نه HTML، نیازی به چنین اشیایی نیست، همه چیز بسیار ساده تر است.
 
-Properties:
+ویژگی ها:
 - `input.selectionStart` -- position of selection start (writeable),
 - `input.selectionEnd` -- position of selection end (writeable),
 - `input.selectionDirection` -- selection direction, one of: "forward", "backward" or "none" (if e.g. selected with a double mouse click),
