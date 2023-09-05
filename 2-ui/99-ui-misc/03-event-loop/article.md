@@ -1,11 +1,11 @@
 
 # Event loop: microtasks and macrotasks
 
-Browser JavaScript execution flow, as well as in Node.js, is based on an *event loop*.
+اجرای Browser JavaScript execution flow، و همچنین Node.js، بر اساس یک *event loop* است.
 
-Understanding how event loop works is important for optimizations, and sometimes for the right architecture.
+درک نحوه عملکرد حلقه رویداد برای بهینه سازی ها و گاهی اوقات برای معماری مناسب مهم است.
 
-In this chapter we first cover theoretical details about how things work, and then see practical applications of that knowledge.
+در این فصل ابتدا جزئیات نظری در مورد چگونگی کارکرد چیزها را پوشش می دهیم و سپس کاربردهای عملی آن دانش را مشاهده می کنیم.
 
 ## Event Loop
 
