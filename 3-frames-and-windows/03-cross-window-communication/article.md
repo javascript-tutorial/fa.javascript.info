@@ -221,11 +221,11 @@ if (window == top) { // جاری window == window.top?
 
 برای جلوگیری از اجرای کد غیرقابل اعتماد، `sandbox` attribute امکان حذف برخی از اقدامات داخل `<iframe>` را فراهم می‌کند. با تلقی iframe به‌عنوان منبع دیگری و/یا اعمال محدودیت‌های دیگر، iframe را "sandboxes" می‌کند.
 
-There's a "default set" of restrictions applied for `<iframe sandbox src="...">`. But it can be relaxed if we provide a space-separated list of restrictions that should not be applied as a value of the attribute, like this: `<iframe sandbox="allow-forms allow-popups">`.
+یک "مجموعه‌ی پیش‌فرض" از محدودیت‌ها بر `<iframe sandbox src="...">` اعمال شده است. ما اگر فهرستی از محدودیت‌ها که نباید به‌عنوان مقدار attribute اعمال شوند، ارائه کنیم، راحت می‌شود. مثل این: `<iframe sandbox="allow-forms allow-popups">`.
 
-In other words, an empty `"sandbox"` attribute puts the strictest limitations possible, but we can put a space-delimited list of those that we want to lift.
+به عبارتی دیگر، یک `"sandbox"` attribute خالی سخت‌ترین محدودیت‌ها را ممکن می‌کند. اما می‌توانیم فهرستی از محدودیت‌هایی که می‌خواهیم حذف کنیم، با فاصله قرار دهیم.
 
-Here's a list of limitations:
+اینجا لیستی از محدودیت‌ها هست:
 
 `allow-same-origin`
 : By default `"sandbox"` forces the "different origin" policy for the iframe. In other words, it makes the browser to treat the `iframe` as coming from another origin, even if its `src` points to the same site. With all implied restrictions for scripts. This option removes that feature.
