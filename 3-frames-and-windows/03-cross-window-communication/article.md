@@ -228,31 +228,31 @@ if (window == top) { // جاری window == window.top?
 اینجا لیستی از محدودیت‌ها هست:
 
 `allow-same-origin`
-: By default `"sandbox"` forces the "different origin" policy for the iframe. In other words, it makes the browser to treat the `iframe` as coming from another origin, even if its `src` points to the same site. With all implied restrictions for scripts. This option removes that feature.
+: به صورت پیش‌فرض، `"sandbox"` سیاست "different origin" را بر iframe جبر می‌کند. به عبارت دیگر، مرورگر را مجبور می‌کند که `iframe` را به عنوان آمده از یک منبع دیگر در نظر بگیرد، حتی اگر `src` آن به سایت یکسان اشاره کند. با تمام محدودیت‌های ضمنی برای اسکریپت‌ها. این گزینه آن ویژگی را حذف می‌کند.
 
 `allow-top-navigation`
-: Allows the `iframe` to change `parent.location`.
+: اجازه می‌دهد که `iframe` در `parent.location` تغییر ایجاد کند.
 
 `allow-forms`
-: Allows to submit forms from `iframe`.
+: اجازه می‌دهد که از `iframe` فرم‌ها submit شوند. 
 
 `allow-scripts`
-: Allows to run scripts from the `iframe`.
+: اجازه می‌دهد که scriptها از `iframe` اجرا شوند. 
 
 `allow-popups`
-: Allows to `window.open` popups from the `iframe`
+: به popupها از `iframe` با  `window.open` اجازه می‌دهد.
 
-See [the manual](mdn:/HTML/Element/iframe) for more.
+برای اطلاعات بیشتر به [راهنما] (mdn:/HTML/Element/iframe) مراجعه کنید.
 
-The example below demonstrates a sandboxed iframe with the default set of restrictions: `<iframe sandbox src="...">`. It has some JavaScript and a form.
+مثال زیر یک iframe sandbox را با مجموعه پیش‌فرض محدودیت‌ها نشان می‌دهد: `<iframe sandbox src="...">`. مقداری JavaScript و یک فرم دارد.
 
-Please note that nothing works. So the default set is really harsh:
+لطفا توجه داشته باشید که هیچ چیز کار نمی‌کند. بنابراین مجموعه‌ی پیش‌فرض واقعاً سخت است:
 
 [codetabs src="sandbox" height=140]
 
 
 ```smart
-The purpose of the `"sandbox"` attribute is only to *add more* restrictions. It cannot remove them. In particular, it can't relax same-origin restrictions if the iframe comes from another origin.
+.از منبع دیگری باشد، نمی‌تواند محدودیت‌های همان منبع را کاهش دهد iframe فقط *اضافه کردن* محدودیت‌های بیشتر است. نمی‌تواند آن‌ها را حذف کند. به ویژه اگر `"sandbox"` attribute هدف از
 ```
 
 ## Cross-window messaging
