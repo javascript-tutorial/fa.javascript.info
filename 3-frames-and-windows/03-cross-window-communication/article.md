@@ -255,31 +255,31 @@ if (window == top) { // جاری window == window.top?
 .از منبع دیگری باشد، نمی‌تواند محدودیت‌های همان منبع را کاهش دهد iframe فقط *اضافه کردن* محدودیت‌های بیشتر است. نمی‌تواند آن‌ها را حذف کند. به ویژه اگر `"sandbox"` attribute هدف از
 ```
 
-## Cross-window messaging
+## پیام‌رسانی بین‌ پنجره‌ای
 
-The `postMessage` interface allows windows to talk to each other no matter which origin they are from.
+رابط `postMessage` به پنجره‌ها اجازه ‌می‌دهد بدون توجه به اینکه از کدام منبع هستند با یکدیگر صحبت کنند.
 
-So, it's a way around the "Same Origin" policy. It allows a window from `john-smith.com` to talk to `gmail.com` and exchange information, but only if they both agree and call corresponding Javascript functions. That makes it safe for users.
+بنابراین، این یک راه دور از سیاست "Same Origin" است. این به یک پنجره از `john-smith.com` اجازه می‌دهد که با `gmail.com` صحبت کند و اطلاعات رد و بدل کند،‌ اما فقط در صورتی که هر دو توافق کنند و توابع Javascript مربوطه را فراخوانی کنند. این برای کاربران امن است.
 
-The interface has two parts.
+این رابط دو بخش دارد.
 
 ### postMessage
 
-The window that wants to send a message calls [postMessage](mdn:api/Window.postMessage) method of the receiving window. In other words, if we want to send the message to `win`, we should call  `win.postMessage(data, targetOrigin)`.
+پنجره‌ای که می‌خواهد یک پیام بفرستد [postMessage](mdn:api/Window.postMessage) method از پنجره‌ی دریافت‌کننده را فراخوانی می‌کند. به عبارت دیگر، اگر می‌خواهیم به `win` یک پیام بفرستیم،‌ باید `win.postMessage(data, targetOrigin)` را فراخوانی کنیم.
 
-Arguments:
+آرگومان‌ها:
 
 `data`
-: The data to send. Can be any object, the data is cloned using the "structured serialization algorithm". IE supports only strings, so we should `JSON.stringify` complex objects to support that browser.
+: داده‌ای که قرستاده می‌شود. می‌تواند هر objectای باشد، داده با استفاده از "الگوریتم سریال‌سازی ساختار یافته" clone می‌شود. اینترنت اکسپلورر فقط از رشته‌‌ها پشتیبانی می‌کند، بنابراین باید اشیای پیچیده را `JSON.stringify` کنیم تا از آن مرورگر پشتیبانی کنند.
 
 `targetOrigin`
-: Specifies the origin for the target window, so that only a window from the given origin will get the message.
+: مبدا پنجره‌ی مورد نظر را مشخص می‌کند، به طوری که فقط یک پنجره از مبدا داده شده پیام را دریافت می‌کند.
 
-The `targetOrigin` is a safety measure. Remember, if the target window comes from another origin, we can't read its `location` in the sender window. So we can't be sure which site is open in the intended window right now: the user could navigate away, and the sender window has no idea about it.
+این `targetOrigin` یک اقدام امنیتی است. به یاد داشته باشید، اگر پنجره‌ی هدف از منشا دیگری باشد، نمی‌توانیم `location` آن را در پنجره‌ی فرستنده بخوانیم. پس ما نمی‌توانیم مطمئن باشیم در حال حاضر کدام سایت در پنجره‌ی مورد نظر باز است: کاربر می‌تواند از آن دور شود و پنجره‌ی فرستنده هیچ ایده‌ای در این باره نداشته باشد. 
 
-Specifying `targetOrigin` ensures that the window only receives the data if it's still at the right site. Important when the data is sensitive.
+مشخص کردن `targetOrigin` تضمین می‌کند که پنجره فقط در صورتی که در سایت درست باشد داده‌ها را دریافت می‌کند. زمانی که داده‌ها حساس هستند اهمیت دارد.
 
-For instance, here `win` will only receive the message if it has a document from the origin `http://example.com`:
+برای مثال، اینجا `win` تنها در صورتی پیام را می‌گیرد که document ای از منبع `http://example.com` داشته باشد:
 
 ```html no-beautify
 <iframe src="http://example.com" name="example">
@@ -291,7 +291,7 @@ For instance, here `win` will only receive the message if it has a document from
 </script>
 ```
 
-If we don't want that check, we can set `targetOrigin` to `*`.
+اگر آن چک را نخواهیم، می‌توانیم `targetOrigin` را به `*` تنظیم کنیم.
 
 ```html no-beautify
 <iframe src="http://example.com" name="example">
@@ -308,41 +308,41 @@ If we don't want that check, we can set `targetOrigin` to `*`.
 
 ### onmessage
 
-To receive a message, the target window should have a handler on the `message` event. It triggers when `postMessage` is called (and `targetOrigin` check is successful).
+برای دریافت یک پیام، پنجره‌ی هدف باید روی `message` event یک handler داشته باشد. وقتی فعال می‌شود که `postMessage` فراخوانی می‌شود (‌و `targetOrigin` check موفقیت‌آمیز است).
 
-The event object has special properties:
+شی event، دارای propertyهای مخصوص است.
 
 `data`
-: The data from `postMessage`.
+: داده از `postMessage`.
 
 `origin`
-: The origin of the sender, for instance `http://javascript.info`.
+: منبع فرستنده، برای مثال `http://javascript.info`.
 
 `source`
-: The reference to the sender window. We can immediately `source.postMessage(...)` back if we want.
+: ارجاع به پنچره‌ی فرستنده. اگر بخواهیم می‌توانیم بلافاصله `source.postMessage(...)` را برگردانیم.
 
-To assign that handler, we should use `addEventListener`, a short syntax `window.onmessage` does not work.
+برای اختصاص دادن آن handler،‌ باید از `addEventListener` استفاده ککنیم، syntax کوتاه‌شده‌ی `window.onmessage` کار نمی‌کند.
 
-Here's an example:
+اینجا یک مثال هست:
 
 ```js
 window.addEventListener("message", function(event) {
   if (event.origin != 'http://javascript.info') {
-    // something from an unknown domain, let's ignore it
+    // چیزی از یک دامنه‌ی ناشناخته،‌ بیایید آن را نادیده بگیریم
     return;
   }
 
-  alert( "received: " + event.data );
+  alert( "دریافت شده: " + event.data );
 
-  // can message back using event.source.postMessage(...)
+  // پیام ارسال کند event.source.postMessage(...) می‌تواند با استفاده از
 });
 ```
 
-The full example:
+مثال کامل:
 
 [codetabs src="postmessage" height=120]
 
-## Summary
+## خلاصه
 
 To call methods and access the content of another window, we should first have a reference to it.
 
