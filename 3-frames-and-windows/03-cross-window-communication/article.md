@@ -344,34 +344,34 @@ window.addEventListener("message", function(event) {
 
 ## خلاصه
 
-To call methods and access the content of another window, we should first have a reference to it.
+برای فراخوانی methodها و دسترسی به محتوای یک پنجره‌ی دیگر،‌ باید ابتدا یک ارجاع به آن داشته باشیم.
 
-For popups we have these references:
-- From the opener window: `window.open` -- opens a new window and returns a reference to it,
-- From the popup: `window.opener` -- is a reference to the opener window from a popup.
+برای popupها این ارجاعات را داریم:
+- از پنجره‌ی بازکننده: `window.open` -- یک پنجره‌ی جدید باز می‌کند و یک ارجاع به آن را برمی‌گرداند،
+- از popip (نجره‌ی بازشونده): `window.opener` -- ارجاعی به پتجره‌ی بازکننده از یک popup است.
 
-For iframes, we can access parent/children windows using:
-- `window.frames` -- a collection of nested window objects,
-- `window.parent`, `window.top` are the references to parent and top windows,
-- `iframe.contentWindow` is the window inside an `<iframe>` tag.
+برای iframeها،‌ می‌توانیم به پنجره‌های والد/فرزند دسترسی داشته باشیم با استفاده از:
+- `window.frames` -- مجموعه‌ای از شی‌های پنجره‌ی تو در تو,
+- `window.parent` و `window.top` ارجاعات به پنجره‌ی والد و بالاترین پنجره‌ها هستند,
+- `iframe.contentWindow` پنجره‌ی داخل یک تگ `<iframe>` است.
 
-If windows share the same origin (host, port, protocol), then windows can do whatever they want with each other.
+اگر پنجره‌ها منبع یکسانی داشته باشند (host, port, protocol)، آنگاه پنجره‌ها می‌توانند هر کاری می‌خواهند با یکدیگر بکنند.
 
-Otherwise, only possible actions are:
-- Change the `location` of another window (write-only access).
-- Post a message to it.
+در غیر این صورت تنها اقدامات ممکن عبارت‌اند از:
+- تغییر `location` یک پنجره‌ی دیگر (دسترسی write-only)
+- ارسال کردن یک پیام به آن.
 
-Exceptions are:
-- Windows that share the same second-level domain: `a.site.com` and `b.site.com`. Then setting `document.domain='site.com'` in both of them puts them into the "same origin" state.
-- If an iframe has a `sandbox` attribute, it is forcefully put into the "different origin" state, unless the `allow-same-origin` is specified in the attribute value. That can be used to run untrusted code in iframes from the same site.
+استثناها این‌ها هستند:
+- پنجره‌هایی که دامنه‌ی سطح دوم یکسانی دارند: `a.site.com` و `b.site.com`. آنگاه تنظیم کردن `document.domain='site.com'` در هر دوی آن‌ها، آن‌ها را در وضعیت "same origin" قرار می‌دهد.
+- اگر یک iframe دارای `sandbox` attribute باشد، به اجبار در وضعیت "different origin" قرار می‌گیرد،‌ مگر اینکه `allow-same-origin` در مقدار attribute مشخص شده باشد. می‌توان از آن برای اجرای کدهای نامعتبر در iframes از همان سایت استفاده کرد.
 
-The `postMessage` interface allows two windows with any origins to talk:
+رابط `postMessage` اجازه می‌دهد که دو پنجره با هر منبعی با هم صحبت کنند:
 
-1. The sender calls `targetWin.postMessage(data, targetOrigin)`.
-2. If `targetOrigin` is not `'*'`, then the browser checks if window `targetWin` has the origin `targetOrigin`.
-3. If it is so, then `targetWin` triggers the `message` event with special properties:
-    - `origin` -- the origin of the sender window (like `http://my.site.com`)
-    - `source` -- the reference to the sender window.
-    - `data` -- the data, any object in everywhere except IE that supports only strings.
+1. فرستنده `targetWin.postMessage(data, targetOrigin)` را فراخوانی می‌کند.
+2. اگر `targetOrigin` برابر `'*'` نباشد، آنگاه مرورگر چک می‌کند که پنجره‌ی `targetWin` منبع `targetOrigin` را داشته باشد.
+3. اگر چنین باشد،‌ آنگاه `targetWin` آن `message` event را با propertyهای مخصوص فعال می‌کند:
+    - `origin` -- .منبع پنجره‌ی فرستنده (مثل `http://my.site.com`)
+    - `source` -- .ارجاع به پنجره‌ی فرستنده
+    - `data` -- .داده، هر شی‌ای در هر جایی به جز اینکه اینترنت اکسپلورر تنها از رشته‌ها پشتیبانی می‌کند. 
 
-    We should use `addEventListener` to set the handler for this event inside the target window.
+   ما باید از `addEventListener`استفاده کنیم تا handler را برای این event درون پنجره‌ی هدف تنظیم کنیم.
