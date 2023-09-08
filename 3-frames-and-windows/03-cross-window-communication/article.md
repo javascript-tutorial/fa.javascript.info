@@ -1,88 +1,88 @@
-# Cross-window communication
+# ارتباط بین پنجره‌ای
 
-The "Same Origin" (same site) policy limits access of windows and frames to each other.
+سیاست "Same Origin" (در همان سایت) دسترسی پنجره‌ها و فریم‌ها به یکدیگر را محدود می‌کند.
 
-The idea is that if a user has two pages open: one from `john-smith.com`, and another one is `gmail.com`, then they wouldn't want a script from `john-smith.com` to read our mail from `gmail.com`. So, the purpose of the "Same Origin" policy is to protect users from information theft.
+ایده این است که اگر یک یک کاربر دو صفحه‌ی باز داشته باشد: یکی از `john-smith.com` و دیگری از `gmail.com`، آنگاه آن‌ها نمی‌خواهند که که یک script از `john-smith.com` تمام نامه‌‌های شما از `gmail.com` را بخواند. بنابراین، هدف سیاست "Same Origin" این است که کاربران را از دزدی اطلاعات حفظ کند.
 
 ## Same Origin [#same-origin]
 
-Two URLs are said to have the "same origin" if they have the same protocol, domain and port.
+اگر URLها یک protocol، domain و ports داشته باشند، می‌گویند که "same origin" دارند. 
 
-These URLs all share the same origin:
+این لینک‌ها همگی یک منبع را به اشتراک می‌گذارند.
 
 - `http://site.com`
 - `http://site.com/`
 - `http://site.com/my/page.html`
 
-These ones do not:
+این یکی‌ها نه:
 
 - <code>http://<b>www.</b>site.com</code> (another domain: `www.` matters)
 - <code>http://<b>site.org</b></code> (another domain: `.org` matters)
 - <code><b>https://</b>site.com</code> (another protocol: `https`)
 - <code>http://site.com:<b>8080</b></code> (another port: `8080`)
 
-The "Same Origin" policy states that:
+سیاست "Same Origin" بیان می‌کند که:
 
-- if we have a reference to another window, e.g. a popup created by `window.open` or a window inside `<iframe>`, and that window comes from the same origin, then we have full access to that window.
-- otherwise, if it comes from another origin, then we can't access the content of that window: variables, document, anything. The only exception is `location`: we can change it (thus redirecting the user). But we can't not *read* location (so we can't see where the user is now, no information leak).
+- اگر ما ارجاعی به پنجره‌ای دیگر داشته باشیم، برای مثال یک popup که با `window.open` ایجاد شده یا یک پنجره داخل `<iframe>`، و آن پنجره از منبع یکسان بیاید،‌آنگاه ما به آن پنجره دسترسی کامل داریم.
+- ذر غیر این صورت اگر از یک منبع دیگر بیاید،‌ آنگاه نمی‌توانیم به محتوای آن صفحه دسترسی داشته باشیم: متغیرها، document، هر چیزی. تنها استثنا `location` است: ما می‌توانیم آن را تغییر دهیم. (در نتیجه کاربر را هدایت کنیم). اما نمی‌توانیم از location *بخوانیم* (در نتیجه نمی‌توانیم ببینیم که کاربر در حال حاضر کجا است،‌ هیچ نشت اطلاعاتی وجود ندارد).
 
-### In action: iframe
+### در عمل: iframe
 
-An `<iframe>` tag hosts a separate embedded window, with its own separate `document` and `window` objects.
+یک تگ `<iframe>` میزبان یک پنجره‌ی جاسازی‌شده‌ی جداگانه با `document` جداگانه‌ی خود و اشیای `window` است.
 
-We can access them using properties:
+می‌توان با استفاده از property‌ها به آن‌ها دسترسی داشت:
 
-- `iframe.contentWindow` to get the window inside the `<iframe>`.
-- `iframe.contentDocument` to get the document inside the `<iframe>`, shorthand for `iframe.contentWindow.document`.
+- برای گرفتن پنجره‌ی داخل `<iframe>` از `iframe.contentWindow` استفاده می‌شود.
+- برای گرفتن documdnt داخل `<iframe>` از `iframe.contentDocument` استفاده می‌شود، کوتاه‌شده‌ی `iframe.contentWindow.document`.
 
-When we access something inside the embedded window, the browser checks if the iframe has the same origin. If that's not so then the access is denied (writing to `location` is an exception, it's still permitted).
+وقتی به چیزی داخل پنجره‌ی جاسازی شده دسترسی پیدا می‌کنیم، مرورگر چک می‌کند که آیا iframe همان منبع را دارد یا نه. اگر اینطور نباشد،‌ دسترسی رد می‌شود (نوشتن بر `location` یک استثنا است،‌ آن همچنان مجاز است).
 
 For instance, let's try reading and writing to `<iframe>` from another origin:
-
+برای مثال، بیایید تلاش کنیم خواندن و نوشتن بر `<iframe>` از یک منبع دیگر را امتحان کنیم. 
 ```html run
 <iframe src="https://example.com" id="iframe"></iframe>
 
 <script>
   iframe.onload = function() {
-    // we can get the reference to the inner window
+    // می‌توانیم ارجاع‌ها به پنجره‌ی درونی را بگیریم
 *!*
     let iframeWindow = iframe.contentWindow; // OK
 */!*
     try {
-      // ...but not to the document inside it
+      // ... داخل آن نه document اما
 *!*
       let doc = iframe.contentDocument; // ERROR
 */!*
     } catch(e) {
-      alert(e); // Security Error (another origin)
+      alert(e); // خطای امنیتی (یک منبع دیگر)
     }
 
-    // also we can't READ the URL of the page in iframe
+    // را بخوانیم iframe یک صفحه درون URL همچنین ما نمی‌توانیم
     try {
-      // Can't read URL from the Location object
+      // بخوانیم Location object را از URL نمی‌توانیم
 *!*
       let href = iframe.contentWindow.location.href; // ERROR
 */!*
     } catch(e) {
-      alert(e); // Security Error
+      alert(e); // خطای امنیتی
     }
 
-    // ...we can WRITE into location (and thus load something else into the iframe)!
+    // ... !(بارگذاری کنیم iframe و در نتیجه چیز دیگری را) بنویسیم location ما می‌توانیم بر
 *!*
     iframe.contentWindow.location = '/'; // OK
 */!*
 
-    iframe.onload = null; // clear the handler, not to run it after the location change
+    iframe.onload = null; // آن را اجرا کند location را پاک می‌کند، نه اینکه بعد از تغییر handler این
   };
 </script>
 ```
 
-The code above shows errors for any operations except:
+کد بالا خطاهای هر عملیاتی را نشان می‌هد به جز:
 
-- Getting the reference to the inner window `iframe.contentWindow` - that's allowed.
-- Writing to `location`.
+- گرفتن ارجاع به پنجره‌ی درونی `iframe.contentWindow` - آن مجاز است.
+- نوشتن بر `location`
 
-Contrary to that, if the `<iframe>` has the same origin, we can do anything with it:
+بر خلاف آن، اگر `<iframe>` منبع یکسانی داشته باشد،‌ ما می‌توانیم با آن هر کاری بکنیم:
 
 ```html run
 <!-- iframe from the same site -->
@@ -90,48 +90,48 @@ Contrary to that, if the `<iframe>` has the same origin, we can do anything with
 
 <script>
   iframe.onload = function() {
-    // just do anything
-    iframe.contentDocument.body.prepend("Hello, world!");
+    // هر کاری می‌کند
+    iframe.contentDocument.body.prepend("سلام، دنیا");
   };
 </script>
 ```
 
-```smart header="`iframe.onload` vs `iframe.contentWindow.onload`"
-The `iframe.onload` event (on the `<iframe>` tag) is essentially the same as `iframe.contentWindow.onload` (on the embedded window object). It triggers when the embedded window fully loads with all resources.
+```smart header="`iframe.onload` در مقابل `iframe.contentWindow.onload`"
+اساسا `iframe.onload` event (در تگ `<iframe>`) همان `iframe.contentWindow.onload` (در شی پنجره‌ی جداسازی‌شده)‌ است. وقتی که پنجره‌ی جاسازی شده به طور کامل با تمام منابع load می‌شود، فعال می‌شود.
 
-...But we can't access `iframe.contentWindow.onload` for an iframe from another origin, so using `iframe.onload`.
+...اما نمی‌توانیم به `iframe.contentWindow.onload` برای یک iframe از مبدا دیگری دسترسی پیدا کنیم،‌بنابراین از `iframe.onload` استفاده می‌کنیم.
 ```
 
-## Windows on subdomains: document.domain
+## پنجره‌ها در زیردامنه‌ها: document.domain
 
-By definition, two URLs with different domains have different origins.
+طبق تعریف، دو URL با دامنه‌های مختلف، منشأ متفاوتی دارند.
 
-But if windows share the same second-level domain, for instance `john.site.com`, `peter.site.com` and `site.com` (so that their common second-level domain is `site.com`), we can make the browser ignore that difference, so that they can be treated as coming from the "same origin" for the purposes of cross-window communication.
+اما اگر پنجره‌ها دامنه‌ی سطح دوم یکسانی داشته باشند، برای مثال `john.site.com`، `peter.site.com` و `site.com` (به طوری که دامنه‌ی سطح دوم مشترک آن‌ها `site.com` باشد) ما می‌توانیم مرورگر را مجبور کنیم این تفاوت را نادیده بگیرد، به طوری که می‌توان آن‌ها را به عنوان "same origin" برای اهداف ارتباط بین پنجره‌ای در نظر گرفت.
 
-To make it work, each such window should run the code:
+برای اینکه کار کند، هر پنجره باید کد زیر را اجرا کند:
 
 ```js
 document.domain = 'site.com';
 ```
 
-That's all. Now they can interact without limitations. Again, that's only possible for pages with the same second-level domain.
+همه‌اش همین است. حالا آن‌ها می‌توانند بدون محدودیت با هم تعامل داشته باشند. باز هم، این فقط برای صفحاتی با همان دامنه‌ی سطح دوم امکان پذیر است.
 
-```warn header="Deprecated, but still working"
-The `document.domain` property is in the process of being removed from the [specification](https://html.spec.whatwg.org/multipage/origin.html#relaxing-the-same-origin-restriction). The cross-window messaging (explained soon below) is the suggested replacement.
+```warn header="منسوخ شده، اما همچنان کار می‌کند"
+امروزه `document.domain` property در حال حذف از [مشخصات](https://html.spec.whatwg.org/multipage/origin.html#relaxing-the-same-origin-restriction) است. پیام دادن بین پنجره‌ای (به زودی در زیر توضیح داده می‌شود) جایگزین پیشنهادی است.
 
-That said, as of now all browsers support it. And the support will be kept for the future, not to break old code that relies on `document.domain`.
+گقته می‌شود تا کنون تمام مرورگرها از آن پشتیبانی می‌کنند. و پشتیبانی برای آینده حفظ خواهد شد، نه برای شکستن کدهای قدیمی که به `document.domain` متکی هستند.
 ```
 
 
-## Iframe: wrong document pitfall
+## Iframe: تله‌ی اشتباه document
 
-When an iframe comes from the same origin, and we may access its  `document`, there's a pitfall. It's not related to cross-origin things, but important to know.
+وقتی یک iframe از همان منبع می‌آید، و ما ممکن است به `document` آن دسترسی پیدا کنیم، یک تله وجود دارد. این به چیزهای متقاطع مربوط نیست، اما مهم است که بدانید.
 
-Upon its creation an iframe immediately has a document. But that document is different from the one that loads into it!
+به محض ایجاد یک iframe بلافاصله یک document دارد. اما آن document با documentای که در آن بارگذاری می‌شود متفاوت است!
 
-So if we do something with the document immediately, that will probably be lost.
+بنابراین اگر فورا با document کاری انجام دهیم، احتمالا از بین خواهد رفت.
 
-Here, look:
+اینجا، نگاه کنید:
 
 
 ```html run
@@ -142,20 +142,20 @@ Here, look:
   iframe.onload = function() {
     let newDoc = iframe.contentDocument;
 *!*
-    // the loaded document is not the same as initial!
+    // !بارگذاری شده مشابه اولیه نیست document
     alert(oldDoc == newDoc); // false
 */!*
   };
 </script>
 ```
 
-We shouldn't work with the document of a not-yet-loaded iframe, because that's the *wrong document*. If we set any event handlers on it, they will be ignored.
+ما نباید با document یک iframe که هنوز بارگذاری نشده است کار کنیم، زیرا آن *docment اشتباه* است. اگر روی آن هر event handlerای تنظیم کنیم، نادیده گرفته خواهند شد. 
 
-How to detect the moment when the document is there?
+چگونه می‌توان لحظه‌ای که document وجود دارد را تشخیص داد؟
 
-The right document is definitely at place when `iframe.onload`  triggers. But it only triggers when the whole iframe with all resources is loaded.
+وقتی `iframe.onload` راه‌اندازی می‌شود، قطعا document مناسب در محل قرار می‌گیرد. اما فقط زمانی فعال می‌شود که کل iframe با تمام منابعش بارگذاری شود.
 
-We can try to catch the moment earlier using checks in `setInterval`:
+می‌توانیم با استفاده از چک‌های `setInterval` آن لحظه را زودتر بگیریم:
 
 ```html run
 <iframe src="/" id="iframe"></iframe>
@@ -163,26 +163,26 @@ We can try to catch the moment earlier using checks in `setInterval`:
 <script>
   let oldDoc = iframe.contentDocument;
 
-  // every 100 ms check if the document is the new one
+  // جدید باشد document هر 100 میلی‌ثانیه چک می‌کند که
   let timer = setInterval(() => {
     let newDoc = iframe.contentDocument;
     if (newDoc == oldDoc) return;
 
-    alert("New document is here!");
+    alert("!جدید اینجا است document");
 
-    clearInterval(timer); // cancel setInterval, don't need it any more
+    clearInterval(timer); // را کنسل می‌کند، دیگر به آن نیازی نیست setInterval
   }, 100);
 </script>
 ```
 
-## Collection: window.frames
+## مجموعه: window.frames
 
-An alternative way to get a window object for `<iframe>` -- is to get it from the named collection  `window.frames`:
+یک راه جایگزین برای دریافت یک شی پنجره برای `<iframe>` -- این است که از مجموعه‌ی نام‌گذاری‌شده‌ی `window.frames` آن را بگیریم:
 
-- By number: `window.frames[0]` -- the window object for the first frame in the document.
-- By name: `window.frames.iframeName` -- the window object for the frame with  `name="iframeName"`.
-
-For instance:
+- با عدد: `window.frames[0]` -- شی پنجره برای اولین فریم در document.
+- با نام: `window.frames.iframeName` -- شی پنجره برای فریم با نام `name="iframeName"`.
+  
+برای مثال:
 
 ```html run
 <iframe src="/" style="height:80px" name="win" id="iframe"></iframe>
@@ -193,93 +193,93 @@ For instance:
 </script>
 ```
 
-An iframe may have other iframes inside. The corresponding `window` objects form a hierarchy.
+یک فریم ممکن است فریم‌های دیگری هم درون خود داشته باشد. اشیای `پنجره‌ی` مربوطه یک سلسله مراتب را تشکیل می‌دهند.
 
-Navigation links are:
+لینک‌های هدایت‌کننده این‌ها هستند:
 
-- `window.frames` -- the collection of "children" windows (for nested frames).
-- `window.parent` -- the reference to the "parent" (outer) window.
-- `window.top` -- the reference to the topmost parent window.
+- `window.frames` -- مجموعه‌ی پنجره‌های "فرزند" (برای فریم‌های تو در تو).
+- `window.parent` -- ارجاع به پنجره‌ی "والد" (بیرونی).
+- `window.top` -- ارجاع به بالاترین پنجره‌ی والد.
 
-For instance:
+برای مثال:
 
 ```js run
 window.frames[0].parent === window; // true
 ```
 
-We can use the `top` property to check if the current document is open inside a frame or not:
+می‌توانیم از `top` property استفاده کنیم که چک کنیم که document جاری درون یک فریم باز است یا نه:
 
 ```js run
-if (window == top) { // current window == window.top?
-  alert('The script is in the topmost window, not in a frame');
+if (window == top) { // جاری window == window.top?
+  alert('در بالاترین پنجره است، نه در یک فریم script');
 } else {
-  alert('The script runs in a frame!');
+  alert('!در یک فریم اجرا می‌شود script');
 }
 ```
 
-## The "sandbox" iframe attribute
+## "sandbox" iframe attribute
 
-The `sandbox` attribute allows for the exclusion of certain actions inside an `<iframe>` in order to prevent it executing untrusted code. It "sandboxes" the iframe by treating it as coming from another origin and/or applying other limitations.
+برای جلوگیری از اجرای کد غیرقابل اعتماد، `sandbox` attribute امکان حذف برخی از اقدامات داخل `<iframe>` را فراهم می‌کند. با تلقی iframe به‌عنوان منبع دیگری و/یا اعمال محدودیت‌های دیگر، iframe را "sandboxes" می‌کند.
 
-There's a "default set" of restrictions applied for `<iframe sandbox src="...">`. But it can be relaxed if we provide a space-separated list of restrictions that should not be applied as a value of the attribute, like this: `<iframe sandbox="allow-forms allow-popups">`.
+یک "مجموعه‌ی پیش‌فرض" از محدودیت‌ها بر `<iframe sandbox src="...">` اعمال شده است. ما اگر فهرستی از محدودیت‌ها که نباید به‌عنوان مقدار attribute اعمال شوند، ارائه کنیم، راحت می‌شود. مثل این: `<iframe sandbox="allow-forms allow-popups">`.
 
-In other words, an empty `"sandbox"` attribute puts the strictest limitations possible, but we can put a space-delimited list of those that we want to lift.
+به عبارتی دیگر، یک `"sandbox"` attribute خالی سخت‌ترین محدودیت‌ها را ممکن می‌کند. اما می‌توانیم فهرستی از محدودیت‌هایی که می‌خواهیم حذف کنیم، با فاصله قرار دهیم.
 
-Here's a list of limitations:
+اینجا لیستی از محدودیت‌ها هست:
 
 `allow-same-origin`
-: By default `"sandbox"` forces the "different origin" policy for the iframe. In other words, it makes the browser to treat the `iframe` as coming from another origin, even if its `src` points to the same site. With all implied restrictions for scripts. This option removes that feature.
+: به صورت پیش‌فرض، `"sandbox"` سیاست "different origin" را بر iframe جبر می‌کند. به عبارت دیگر، مرورگر را مجبور می‌کند که `iframe` را به عنوان آمده از یک منبع دیگر در نظر بگیرد، حتی اگر `src` آن به سایت یکسان اشاره کند. با تمام محدودیت‌های ضمنی برای اسکریپت‌ها. این گزینه آن ویژگی را حذف می‌کند.
 
 `allow-top-navigation`
-: Allows the `iframe` to change `parent.location`.
+: اجازه می‌دهد که `iframe` در `parent.location` تغییر ایجاد کند.
 
 `allow-forms`
-: Allows to submit forms from `iframe`.
+: اجازه می‌دهد که از `iframe` فرم‌ها submit شوند. 
 
 `allow-scripts`
-: Allows to run scripts from the `iframe`.
+: اجازه می‌دهد که scriptها از `iframe` اجرا شوند. 
 
 `allow-popups`
-: Allows to `window.open` popups from the `iframe`
+: به popupها از `iframe` با  `window.open` اجازه می‌دهد.
 
-See [the manual](mdn:/HTML/Element/iframe) for more.
+برای اطلاعات بیشتر به [راهنما] (mdn:/HTML/Element/iframe) مراجعه کنید.
 
-The example below demonstrates a sandboxed iframe with the default set of restrictions: `<iframe sandbox src="...">`. It has some JavaScript and a form.
+مثال زیر یک iframe sandbox را با مجموعه پیش‌فرض محدودیت‌ها نشان می‌دهد: `<iframe sandbox src="...">`. مقداری JavaScript و یک فرم دارد.
 
-Please note that nothing works. So the default set is really harsh:
+لطفا توجه داشته باشید که هیچ چیز کار نمی‌کند. بنابراین مجموعه‌ی پیش‌فرض واقعاً سخت است:
 
 [codetabs src="sandbox" height=140]
 
 
 ```smart
-The purpose of the `"sandbox"` attribute is only to *add more* restrictions. It cannot remove them. In particular, it can't relax same-origin restrictions if the iframe comes from another origin.
+.از منبع دیگری باشد، نمی‌تواند محدودیت‌های همان منبع را کاهش دهد iframe فقط *اضافه کردن* محدودیت‌های بیشتر است. نمی‌تواند آن‌ها را حذف کند. به ویژه اگر `"sandbox"` attribute هدف از
 ```
 
-## Cross-window messaging
+## پیام‌رسانی بین‌ پنجره‌ای
 
-The `postMessage` interface allows windows to talk to each other no matter which origin they are from.
+رابط `postMessage` به پنجره‌ها اجازه ‌می‌دهد بدون توجه به اینکه از کدام منبع هستند با یکدیگر صحبت کنند.
 
-So, it's a way around the "Same Origin" policy. It allows a window from `john-smith.com` to talk to `gmail.com` and exchange information, but only if they both agree and call corresponding Javascript functions. That makes it safe for users.
+بنابراین، این یک راه دور از سیاست "Same Origin" است. این به یک پنجره از `john-smith.com` اجازه می‌دهد که با `gmail.com` صحبت کند و اطلاعات رد و بدل کند،‌ اما فقط در صورتی که هر دو توافق کنند و توابع Javascript مربوطه را فراخوانی کنند. این برای کاربران امن است.
 
-The interface has two parts.
+این رابط دو بخش دارد.
 
 ### postMessage
 
-The window that wants to send a message calls [postMessage](mdn:api/Window.postMessage) method of the receiving window. In other words, if we want to send the message to `win`, we should call  `win.postMessage(data, targetOrigin)`.
+پنجره‌ای که می‌خواهد یک پیام بفرستد [postMessage](mdn:api/Window.postMessage) method از پنجره‌ی دریافت‌کننده را فراخوانی می‌کند. به عبارت دیگر، اگر می‌خواهیم به `win` یک پیام بفرستیم،‌ باید `win.postMessage(data, targetOrigin)` را فراخوانی کنیم.
 
-Arguments:
+آرگومان‌ها:
 
 `data`
-: The data to send. Can be any object, the data is cloned using the "structured serialization algorithm". IE supports only strings, so we should `JSON.stringify` complex objects to support that browser.
+: داده‌ای که قرستاده می‌شود. می‌تواند هر objectای باشد، داده با استفاده از "الگوریتم سریال‌سازی ساختار یافته" clone می‌شود. اینترنت اکسپلورر فقط از رشته‌‌ها پشتیبانی می‌کند، بنابراین باید اشیای پیچیده را `JSON.stringify` کنیم تا از آن مرورگر پشتیبانی کنند.
 
 `targetOrigin`
-: Specifies the origin for the target window, so that only a window from the given origin will get the message.
+: مبدا پنجره‌ی مورد نظر را مشخص می‌کند، به طوری که فقط یک پنجره از مبدا داده شده پیام را دریافت می‌کند.
 
-The `targetOrigin` is a safety measure. Remember, if the target window comes from another origin, we can't read its `location` in the sender window. So we can't be sure which site is open in the intended window right now: the user could navigate away, and the sender window has no idea about it.
+این `targetOrigin` یک اقدام امنیتی است. به یاد داشته باشید، اگر پنجره‌ی هدف از منشا دیگری باشد، نمی‌توانیم `location` آن را در پنجره‌ی فرستنده بخوانیم. پس ما نمی‌توانیم مطمئن باشیم در حال حاضر کدام سایت در پنجره‌ی مورد نظر باز است: کاربر می‌تواند از آن دور شود و پنجره‌ی فرستنده هیچ ایده‌ای در این باره نداشته باشد. 
 
-Specifying `targetOrigin` ensures that the window only receives the data if it's still at the right site. Important when the data is sensitive.
+مشخص کردن `targetOrigin` تضمین می‌کند که پنجره فقط در صورتی که در سایت درست باشد داده‌ها را دریافت می‌کند. زمانی که داده‌ها حساس هستند اهمیت دارد.
 
-For instance, here `win` will only receive the message if it has a document from the origin `http://example.com`:
+برای مثال، اینجا `win` تنها در صورتی پیام را می‌گیرد که document ای از منبع `http://example.com` داشته باشد:
 
 ```html no-beautify
 <iframe src="http://example.com" name="example">
@@ -291,7 +291,7 @@ For instance, here `win` will only receive the message if it has a document from
 </script>
 ```
 
-If we don't want that check, we can set `targetOrigin` to `*`.
+اگر آن چک را نخواهیم، می‌توانیم `targetOrigin` را به `*` تنظیم کنیم.
 
 ```html no-beautify
 <iframe src="http://example.com" name="example">
@@ -308,70 +308,70 @@ If we don't want that check, we can set `targetOrigin` to `*`.
 
 ### onmessage
 
-To receive a message, the target window should have a handler on the `message` event. It triggers when `postMessage` is called (and `targetOrigin` check is successful).
+برای دریافت یک پیام، پنجره‌ی هدف باید روی `message` event یک handler داشته باشد. وقتی فعال می‌شود که `postMessage` فراخوانی می‌شود (‌و `targetOrigin` check موفقیت‌آمیز است).
 
-The event object has special properties:
+شی event، دارای propertyهای مخصوص است.
 
 `data`
-: The data from `postMessage`.
+: داده از `postMessage`.
 
 `origin`
-: The origin of the sender, for instance `http://javascript.info`.
+: منبع فرستنده، برای مثال `http://javascript.info`.
 
 `source`
-: The reference to the sender window. We can immediately `source.postMessage(...)` back if we want.
+: ارجاع به پنچره‌ی فرستنده. اگر بخواهیم می‌توانیم بلافاصله `source.postMessage(...)` را برگردانیم.
 
-To assign that handler, we should use `addEventListener`, a short syntax `window.onmessage` does not work.
+برای اختصاص دادن آن handler،‌ باید از `addEventListener` استفاده ککنیم، syntax کوتاه‌شده‌ی `window.onmessage` کار نمی‌کند.
 
-Here's an example:
+اینجا یک مثال هست:
 
 ```js
 window.addEventListener("message", function(event) {
   if (event.origin != 'http://javascript.info') {
-    // something from an unknown domain, let's ignore it
+    // چیزی از یک دامنه‌ی ناشناخته،‌ بیایید آن را نادیده بگیریم
     return;
   }
 
-  alert( "received: " + event.data );
+  alert( "دریافت شده: " + event.data );
 
-  // can message back using event.source.postMessage(...)
+  // پیام ارسال کند event.source.postMessage(...) می‌تواند با استفاده از
 });
 ```
 
-The full example:
+مثال کامل:
 
 [codetabs src="postmessage" height=120]
 
-## Summary
+## خلاصه
 
-To call methods and access the content of another window, we should first have a reference to it.
+برای فراخوانی methodها و دسترسی به محتوای یک پنجره‌ی دیگر،‌ باید ابتدا یک ارجاع به آن داشته باشیم.
 
-For popups we have these references:
-- From the opener window: `window.open` -- opens a new window and returns a reference to it,
-- From the popup: `window.opener` -- is a reference to the opener window from a popup.
+برای popupها این ارجاعات را داریم:
+- از پنجره‌ی بازکننده: `window.open` -- یک پنجره‌ی جدید باز می‌کند و یک ارجاع به آن را برمی‌گرداند،
+- از popip (نجره‌ی بازشونده): `window.opener` -- ارجاعی به پتجره‌ی بازکننده از یک popup است.
 
-For iframes, we can access parent/children windows using:
-- `window.frames` -- a collection of nested window objects,
-- `window.parent`, `window.top` are the references to parent and top windows,
-- `iframe.contentWindow` is the window inside an `<iframe>` tag.
+برای iframeها،‌ می‌توانیم به پنجره‌های والد/فرزند دسترسی داشته باشیم با استفاده از:
+- `window.frames` -- مجموعه‌ای از شی‌های پنجره‌ی تو در تو,
+- `window.parent` و `window.top` ارجاعات به پنجره‌ی والد و بالاترین پنجره‌ها هستند,
+- `iframe.contentWindow` پنجره‌ی داخل یک تگ `<iframe>` است.
 
-If windows share the same origin (host, port, protocol), then windows can do whatever they want with each other.
+اگر پنجره‌ها منبع یکسانی داشته باشند (host, port, protocol)، آنگاه پنجره‌ها می‌توانند هر کاری می‌خواهند با یکدیگر بکنند.
 
-Otherwise, only possible actions are:
-- Change the `location` of another window (write-only access).
-- Post a message to it.
+در غیر این صورت تنها اقدامات ممکن عبارت‌اند از:
+- تغییر `location` یک پنجره‌ی دیگر (دسترسی write-only)
+- ارسال کردن یک پیام به آن.
 
-Exceptions are:
-- Windows that share the same second-level domain: `a.site.com` and `b.site.com`. Then setting `document.domain='site.com'` in both of them puts them into the "same origin" state.
-- If an iframe has a `sandbox` attribute, it is forcefully put into the "different origin" state, unless the `allow-same-origin` is specified in the attribute value. That can be used to run untrusted code in iframes from the same site.
+استثناها این‌ها هستند:
+- پنجره‌هایی که دامنه‌ی سطح دوم یکسانی دارند: `a.site.com` و `b.site.com`. آنگاه تنظیم کردن `document.domain='site.com'` در هر دوی آن‌ها، آن‌ها را در وضعیت "same origin" قرار می‌دهد.
+- اگر یک iframe دارای `sandbox` attribute باشد، به اجبار در وضعیت "different origin" قرار می‌گیرد،‌ مگر اینکه `allow-same-origin` در مقدار attribute مشخص شده باشد. می‌توان از آن برای اجرای کدهای نامعتبر در iframes از همان سایت استفاده کرد.
 
-The `postMessage` interface allows two windows with any origins to talk:
+رابط `postMessage` اجازه می‌دهد که دو پنجره با هر منبعی با هم صحبت کنند:
 
-1. The sender calls `targetWin.postMessage(data, targetOrigin)`.
-2. If `targetOrigin` is not `'*'`, then the browser checks if window `targetWin` has the origin `targetOrigin`.
-3. If it is so, then `targetWin` triggers the `message` event with special properties:
-    - `origin` -- the origin of the sender window (like `http://my.site.com`)
-    - `source` -- the reference to the sender window.
-    - `data` -- the data, any object in everywhere except IE that supports only strings.
+1. فرستنده `targetWin.postMessage(data, targetOrigin)` را فراخوانی می‌کند.
+2. اگر `targetOrigin` برابر `'*'` نباشد، آنگاه مرورگر چک می‌کند که پنجره‌ی `targetWin` منبع `targetOrigin` را داشته باشد.
+3. اگر چنین باشد،‌ آنگاه `targetWin` آن `message` event را با propertyهای مخصوص فعال می‌کند:
+    - `origin` -- .منبع پنجره‌ی فرستنده (مثل `http://my.site.com`)
+    - `source` -- .ارجاع به پنجره‌ی فرستنده
+    - `data` -- .داده، هر شی‌ای در هر جایی به جز اینکه اینترنت اکسپلورر تنها از رشته‌ها پشتیبانی می‌کند. 
 
-    We should use `addEventListener` to set the handler for this event inside the target window.
+   ما باید از `addEventListener`استفاده کنیم تا handler را برای این event درون پنجره‌ی هدف تنظیم کنیم.
