@@ -2,14 +2,14 @@
 # Reference Type
 
 ```warn header="In-depth language feature"
-This article covers an advanced topic, to understand certain edge-cases better.
+این مقاله در دسته بندی مباحث پیشرفته است, برای فهم آن باید به مباحث پایه مسلط باشید.
 
-It's not important. Many experienced developers live fine without knowing it. Read on if you want to know how things work under the hood.
+ممکن است این مباحث زیاد مهم نباشند چون خیلی از برنامه نویسان باتجربه ای هستند که کارشان به خوبی پیش میرود و این مباحث را نمیدانند. اگر علاقه مند به دانستن اینکه دستورات چگونه کار میکنند هستید بخوانید.
 ```
 
-A dynamically evaluated method call can lose `this`.
+با فراخوانی یک متد به صورت پویا و داینامیک ممکن است مقدار `this` از دست برود.
 
-For instance:
+به عنوان مثال:
 
 ```js run
 let user = {
@@ -18,7 +18,7 @@ let user = {
   bye() { alert("Bye"); }
 };
 
-user.hi(); // works
+user.hi(); // کار میکند!
 
 // now let's call user.hi or user.bye depending on the name
 *!*
@@ -26,34 +26,32 @@ user.hi(); // works
 */!*
 ```
 
-On the last line there is a conditional operator that chooses either `user.hi` or `user.bye`. In this case the result is `user.hi`.
+در خط آخر ما شرط سه تایی (تک خطی) را داریم که براساس true یا false بودن مقدار `user.name` مشخص میشود که آیا متد `user.hi` اجرا میشود یا `user.bye`. نتیجه درست است و `user.hi` برگردانده میشود ولی چون متد پرانتز ندارد درهنگام اجرا با مشکل روبرو خواهیم بود.
 
-Then the method is immediately called with parentheses `()`. But it doesn't work correctly!
+همانطور که میبینید هنگام اجرا به ارور برخورد کردیم. چون مقدار `"this"` برابر با `undefined` است.
 
-As you can see, the call results in an error, because the value of `"this"` inside the call becomes `undefined`.
-
-This works (object dot method):
+کد زیر کار میکند (آبجکت با عملگر نقطه):
 ```js
 user.hi();
 ```
-
-This doesn't (evaluated method):
+اما این کد اصلا! (فانکشن بدون پرانتز)
 ```js
-(user.name == "John" ? user.hi : user.bye)(); // Error!
+(user.name == "John" ? user.hi : user.bye)(); // خطا!
 ```
 
-Why? If we want to understand why it happens, let's get under the hood of how `obj.method()` call works.
+چرا؟ اگر متوجه شدید که تا اینجا چه اتفاقی افتاده, بیایید به عملکرد `()obj.method` بپردازیم.
 
-## Reference type explained
+## توضیحات درباره Reference type 
 
-Looking closely, we may notice two operations in `obj.method()` statement:
+نگاه کنید. عبارت `()obj.method` دو عملگر داخل خود دارد:
 
-1. First, the dot `'.'` retrieves the property `obj.method`.
-2. Then parentheses `()` execute it.
+1. ابتدا, عملگر نقطه `'.'` ویژگی `obj.method` را پیدا میکند.
+2. سپس پرانتز `()` آن را اجرا میکند.
 
-So, how does the information about `this` get passed from the first part to the second one?
 
-If we put these operations on separate lines, then `this` will be lost for sure:
+خب پس چگونه اطلاعات مربوط به `this` از قسمت اول به دوم منتقل میشود؟
+
+اگر ما این سوال هارا در خط های جداگانه ای قرار بدهیم, مطمئنا مقدار `this` از دست خواهد رفت:
 
 ```js run
 let user = {
@@ -62,47 +60,45 @@ let user = {
 };
 
 *!*
-// split getting and calling the method in two lines
+// اگر به این صورت در دو خط جدا متد را صدا بزنیم:
 let hi = user.hi;
-hi(); // Error, because this is undefined
+hi(); // است undefiend برابر با this خطا! چون مقدار
 */!*
 ```
 
-Here `hi = user.hi` puts the function into the variable, and then on the last line it is completely standalone, and so there's no `this`.
+در اینجا `hi = user.hi` تابع را در متغیر میریزد و چون خط آخر مستقل و از نظر جاوااسکریپت دستور جداگانه ای است به همین دلیل `this` وجود ندارد.
 
-**To make `user.hi()` calls work, JavaScript uses a trick -- the dot `'.'` returns not a function, but a value of the special [Reference Type](https://tc39.github.io/ecma262/#sec-reference-specification-type).**
+** برای اینکه دستور `()user.hi` درست کار کند, جاوااسکریپت برای آن یک راه حلی دارد. عملگر نقطه  `'.'` نه فقط فانکشن بلکه مقدار خاصی از ریفرنس تایپ ها [Reference Type](https://tc39.github.io/ecma262/#sec-reference-specification-type) را برمیگرداند  **
 
-The Reference Type is a "specification type". We can't explicitly use it, but it is used internally by the language.
+ریفرنس تایپ ها یا نوع ارجاعی "نوع خاصی از داده ها یا specification type" هستند. ما نمیتوانیم به صورت مستقیم از آن استفاده کنیم ولی به صورت داخلی داخل زبان تعبیه شده و استفاده میشود
 
-The value of Reference Type is a three-value combination `(base, name, strict)`, where:
+این نوع داده خاص شامل سه مقدار `(base, name, strict)` هست که:
+-  `base` یک آبجکت است
+-  `name` نام ویژگی آبجکت هست
+-   اگر `use strict` تعبیه شده باشد مقدار `strict` نیز true است.
 
-- `base` is the object.
-- `name` is the property name.
-- `strict` is true if `use strict` is in effect.
-
-The result of a property access `user.hi` is not a function, but a value of Reference Type. For `user.hi` in strict mode it is:
+نه تنها مقدار `user.hi` فانکشن نیست بلکه نوع آن از نوع Reference type هست. `user.hi` در حالت strict mode به این صورت است:
 
 ```js
-// Reference Type value
+// مقدار Reference Type
 (user, "hi", true)
 ```
+وقتی که پرانتزی در Reference type ها صدا زده میشود, همه اطلاعات مربوط به اشیاء و متد فعلی را دریافت میکند و به درستی کلمه کلیدی `this` را مقداردهی میکند. 
 
-When parentheses `()` are called on the Reference Type, they receive the full information about the object and its method, and can set the right `this` (`user` in this case).
+نوع Reference type یک نوع داده داخلی "واسط" با هدف انتقال اطلاعات مربوطه از عملگر نقطه `.` به پرانتز است   
 
-Reference type is a special "intermediary" internal type, with the purpose to pass information from dot `.` to calling parentheses `()`.
+عملگری مانند عملگر انتساب (Assign) در `hi = user.hi` خاصیت Reference type را در متغیر جدید کنار میذارد و صرفا مقدار تابع `user.hi` برگردانده شده را میریزد. و سپس `this` مقدار خود را از دست میدهد.
 
-Any other operation like assignment `hi = user.hi` discards the reference type as a whole, takes the value of `user.hi` (a function) and passes it on. So any further operation "loses" `this`.
+درنتیجه, تنها درصورتی مقدار `this` به درستی پاس میشود که مستقیما فانکشن را با استفاده از نقطه `obj.method()` یا براکت باز و بسته `obj['method']()` صدا بزنیم. راه های مختلفی برای رفع این مشکل هست مثل [func.bind()](/bind#solution-2-bind).
 
-So, as the result, the value of `this` is only passed the right way if the function is called directly using a dot `obj.method()` or square brackets `obj['method']()` syntax (they do the same here). There are various ways to solve this problem such as [func.bind()](/bind#solution-2-bind).
+## خلاصه مطلب
 
-## Summary
+تایپ مرجعی یا Reference Type ها نوع داده داخلی در زبان جاوااسکریپت هستند.
 
-Reference Type is an internal type of the language.
+وقتی که یک ویژگی یا Peraperty مخصوصا توسط عملگر نقطه `.` در `()obj.method` خوانده میشود, نه تنها مقدار ویژگی بلکه مقادیر خاص مانند ویژگی ها یا توابع خاص را هم برمیگرداند.
 
-Reading a property, such as with dot `.` in `obj.method()` returns not exactly the property value, but a special "reference type" value that stores both the property value and the object it was taken from.
+بعد از اینکه متدی فراخوانی شد, عملگر پرانتز آبجکت را دریافت و `this` را مقداردهی میکند
 
-That's for the subsequent method call `()` to get the object and set `this` to it.
+برای مابقی عملگر ها Reference Type تبدیل به مقدار ویژگی میشود (تابع هم همینطور)
 
-For all other operations, the reference type automatically becomes the property value (a function in our case).
-
-The whole mechanics is hidden from our eyes. It only matters in subtle cases, such as when a method is obtained dynamically from the object, using an expression.
+همه مکانیزم هایی که از چشم ما پنهان هستند, خیلی کم پیش میاید که از آن را مهم بدانیم و مطلع شویم که چطور کار میکنند. مانند زمانی که یک مقد به صورت پویا از طریق آبجکت و با استفاده از عبارت ها به دست میاید.
