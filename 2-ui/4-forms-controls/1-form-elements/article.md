@@ -1,23 +1,24 @@
-# Form properties and methods
+# Form properties و methods
 
-Forms and control elements, such as `<input>` have a lot of special properties and events.
+فرم‌ها و control elementها مثل `<input>` دارای prperty و eventهای ویژه‌ای هستند.
 
-Working with forms will be much more convenient when we learn them.
+وقتی فرم‌ها را یاد بگیریم، کار کردن با آن‌ها بسیار راحت‌تر می‌شود.
 
 ## Navigation: form and elements
 
-Document forms are members of the special collection `document.forms`.
+فرم‌های document از اعضای مجموعه‌ی ویژه‌ی `document.forms` هستند.
 
-That's a so-called *"named collection"*: it's both named and ordered. We can use both the name or the number in the document to get the form.
+این به اصطلاح یک مجموعه‌ی نام‌گذاری شده است: هم نام‌گذاری شده و هم ترتیب‌دار شده است. برای دسترسی به فرم می‌توانیم هم از نام آن و هم از شماره‌ی آن در document استفاده کنیم.
+
 
 ```js no-beautify
-document.forms.my; // the form with name="my"
-document.forms[0]; // the first form in the document
+document.forms.my; // "my" = فرم با نام
+document.forms[0]; // document اولین فرم در
 ```
 
-When we have a form, then any element is available in the named collection `form.elements`.
+وقتی یک فرم داریم،‌ در این صورت هر elementای در مجموعه‌ی نام‌گذاری شده با `form.elements` قابل دسترسی است.
 
-For instance:
+برای مثال:
 
 ```html run height=40
 <form name="my">
@@ -26,19 +27,19 @@ For instance:
 </form>
 
 <script>
-  // get the form
+  // form گرفتن
   let form = document.forms.my; // <form name="my"> element
 
-  // get the element
+  // element گرفتن
   let elem = form.elements.one; // <input name="one"> element
 
   alert(elem.value); // 1
 </script>
 ```
 
-There may be multiple elements with the same name. This is typical with radio buttons and checkboxes.
+ممکن است elementهای زیادی با نام یکسان وجود داشته باشند. این در مورد radio buttonها و checkboxها معمول است.
 
-In that case, `form.elements[name]` is a *collection*. For instance:
+در آن صورت، `form.elements[name]` یک *مجموعه*‌است. برای مثال:‌
 
 ```html run height=40
 <form>
@@ -57,11 +58,11 @@ alert(ageElems[0]); // [object HTMLInputElement]
 </script>
 ```
 
-These navigation properties do not depend on the tag structure. All control elements, no matter how deep they are in the form, are available in `form.elements`.
+این navigation propertyها به tag structure وابستگی ندارند. تمام control elementها، فرقی ندارد چقدر در فرم عمیق باشند، در `form.elements` قابل دسترسی هستند.
 
 
 ````smart header="Fieldsets as \"subforms\""
-A form may have one or many `<fieldset>` elements inside it. They also have `elements` property that lists form controls inside them.
+.را درون خود فهرست می‌کنند form controls دارند که `elements` property در خودش داشته باشد. آن‌ها همچنین `<fieldset>` elements یک فرم ممکن است یک یا چند
 
 For instance:
 
@@ -81,7 +82,7 @@ For instance:
     let fieldset = form.elements.userFields;
     alert(fieldset); // HTMLFieldSetElement
 
-    // we can get the input by name both from the form and from the fieldset
+    // .دریافت کنیم fieldset و هم از form را با نام هم از input ما می‌توانیم
     alert(fieldset.elements.login == form.elements.login); // true
 */!*
   </script>
@@ -89,14 +90,14 @@ For instance:
 ```
 ````
 
-````warn header="Shorter notation: `form.name`"
-There's a shorter notation: we can access the element as `form[index/name]`.
+````warn header="نماد کوتاه‌تر: `form.name`"
+.دسترسی داشته باشیم element به `form[index/name]` کوتاه‌تر هم وجود دارد: ما می‌توانیم با notation یک
 
-In other words, instead of `form.elements.login` we can write `form.login`.
+به عبارت دیگر، به جای `form.elements.login` می‌توانیم بنویسیم `form.login`. 
 
-That also works, but there's a minor issue: if we access an element, and then change its `name`, then it is still available under the old name (as well as under the new one).
+آن هم کار می‌کند، ولی یک مشکل جزئی وجود دارد: اگر به یک element دسترسی داشته باشیم، و بعد `name` آن را تغییر بدهیم، آنگاه آن هنوز با نام قدیمی قابل دسترسی است (همچنین با نام جدید)
 
-That's easy to see in an example:
+آسان‌تر است که آن را در یک مثال ببینیم:
 
 ```html run height=40
 <form id="form">
@@ -104,34 +105,34 @@ That's easy to see in an example:
 </form>
 
 <script>
-  alert(form.elements.login == form.login); // true, the same <input>
+  alert(form.elements.login == form.login); // true, همان <input>
 
-  form.login.name = "username"; // change the name of the input
+  form.login.name = "username"; // را تغییر می‌دهد input نام
 
-  // form.elements updated the name:
+  // می‌کند update را name، forms.elements
   alert(form.elements.login); // undefined
   alert(form.elements.username); // input
 
 *!*
-  // form allows both names: the new one and the old one
+  // را مجاز می‌کند: هم جدید و هم قدیمی name فرم هر دو 
   alert(form.username == form.login); // true
 */!*
 </script>
 ```
 
-That's usually not a problem, however, because we rarely change names of form elements.
+با این حال، این معمولا یک مشکل نیست، چون ما به ندرت نام elementهای فرم را تغییر می‌دهیم.
 
 ````
 
 ## Backreference: element.form
 
-For any element, the form is available as `element.form`. So a form references all elements, and elements reference the form.
+برای هر elementای، فرم به عنوان `element.form` قابل دسترسی است. بنابراین یک فرم به همه‌ی elementها ارجاع می‌دهد و elementها هم به فرم ارجاع می‌دهند.
 
-Here's the picture:
+این هم تصویرش است:
 
 ![](form-navigation.svg)
 
-For instance:
+برای مثال:
 
 ```html run height=40
 <form id="form">
@@ -151,64 +152,64 @@ For instance:
 
 ## Form elements
 
-Let's talk about form controls.
+.صحبت کنیم form controls بیایید درباره‌ی 
 
 ### input and textarea
 
-We can access their value as `input.value` (string) or `input.checked` (boolean) for checkboxes and radio buttons.
+.به مقدار آن‌ها دسترسی داشته باشیم radio buttons و checkboxes برای `input.value` (string) یا `input.checked` (boolean) ما می‌توانیم با
 
-Like this:
+مثل این:
 
 ```js
-input.value = "New value";
-textarea.value = "New text";
+input.value = "جدید value";
+textarea.value = "جدید text";
 
-input.checked = true; // for a checkbox or radio button
+input.checked = true; // radio button یا checkbox برای یک
 ```
 
-```warn header="Use `textarea.value`, not `textarea.innerHTML`"
-Please note that even though `<textarea>...</textarea>` holds its value as nested HTML, we should never use `textarea.innerHTML` to access it.
+```warn header="Use `textarea.value`, نه `textarea.innerHTML`"
+.به آن دسترسی داشته باشیم `textarea.innerHTML` تو در تو حفظ می‌کند اما ما هرگز نباید از طریق HTML مقدار خود را به عنوان `<textarea>...</textarea>` لطفا توجه کنید که با اینکه
 
-It stores only the HTML that was initially on the page, not the current value.
+.که در ابتدا در صفحه بوده را ذخیره می‌کند، نه مقدار فعلی را HTML آن فقط
 ```
 
-### select and option
+### select و option
 
-A `<select>` element has 3 important properties:
+:مهم دارد property سه `<select>` element یک
 
-1. `select.options` -- the collection of `<option>` subelements,
-2. `select.value` -- the *value* of the currently selected `<option>`,
-3. `select.selectedIndex` -- the *number* of the currently selected `<option>`.
+1. `select.options` -- `<option>` subelements مجموعه‌ای از 
+2. `select.value` -- در حال حاضر انتخاب شده `<option>` *مقدار*
+3. `select.selectedIndex` -- در حال حاضر انتخاب شده `<option>` *تعداد* 
 
-They provide three different ways of setting a value for a `<select>`:
+:عرضه می‌کنند `<select>` کردن یک مقدار برای set آن‌ها سه راه مختلف برای
 
-1. Find the corresponding `<option>` element (e.g. among `select.options`) and set its `option.selected` to `true`.
-2. If we know a new value: set `select.value` to the new value.
-3. If we know the new option number: set `select.selectedIndex` to that number.
+1. .قرار می‌دهد `true` آن را برابر `option.selected` و مقدار (برای مثال `select.options`) متناظر را پیدا می‌کند `<option>` عنصر 
+2. .را برابر آن مقدار جدید قرار می‌دهد `select.value` اگر یک مقدار جدید را بدانیم:
+3. .را برابر آن عدد قرار می‌دهد `select.selectedIndex` جدید را بدانیم: مقدار option number اگر
 
-Here is an example of all three methods:
+:اینجا مثالی از هر سه متد می‌بینیم
 
 ```html run
 <select id="select">
-  <option value="apple">Apple</option>
-  <option value="pear">Pear</option>
-  <option value="banana">Banana</option>
+  <option value="apple">سیب</option>
+  <option value="pear">گلابی</option>
+  <option value="banana">موز</option>
 </select>
 
 <script>
-  // all three lines do the same thing
+  // تمام سه خط کار یکسانی انجام می‌دهند
   select.options[2].selected = true; 
   select.selectedIndex = 2;
   select.value = 'banana';
-  // please note: options start from zero, so index 2 means the 3rd option.
+  // .option از صفر شروع می‌شوند، پس اندیس دو یعنی سومین options :لطفا دقت داشته باشید
 </script>
 ```
 
-Unlike most other controls, `<select>` allows to select multiple options at once if it has `multiple` attribute. This attribute is rarely used, though.
+.به ندرت استفاده می‌شود attribute به طور همزمان انتخاب شوند. با این حال، این option داشته باشد، اجازه می‌دهد که چند attribute `چند` `<select>` های دیگر اگرcontrol برعکس بیشتر
 
-For multiple selected values, use the first way of setting values: add/remove the `selected` property from `<option>` subelements.
+.حذف/به آن اضافه کنید `<option>` subelements را از `selected` property برای چندین مقدار انتخاب شده، از روش اول برای تنظیم مقادیر استفاده کنید
 
-Here's an example of how to get selected values from a multi-select:
+:مقدار انتخاب‌شده را به دست آوریم ،multi-select اینجا یک مثال داریم از اینکه چگونه از یک
 
 ```html run
 <select id="select" *!*multiple*/!*>
@@ -218,7 +219,7 @@ Here's an example of how to get selected values from a multi-select:
 </select>
 
 <script>
-  // get all selected values from multi-select
+  // multi-select گرفتن تمام مقادیر انتخاب‌شده از
   let selected = Array.from(select.options)
     .filter(option => option.selected)
     .map(option => option.value);
@@ -227,72 +228,72 @@ Here's an example of how to get selected values from a multi-select:
 </script>
 ```
 
-The full specification of the `<select>` element is available in the specification <https://html.spec.whatwg.org/multipage/forms.html#the-select-element>.
+.موجود است <https://html.spec.whatwg.org/multipage/forms.html#the-select-element> در مشخصات `<select>` element مشخصات کامل
 
-### new Option
+### جدید Option
 
-In the [specification](https://html.spec.whatwg.org/multipage/forms.html#the-option-element) there's a nice short syntax to create an `<option>` element:
+:وجود دارد <option>` element کوتاه و زیبا برای ایجاد یک syntax یک [مشخصات](https://html.spec.whatwg.org/multipage/forms.html#the-option-element) در
 
 ```js
 option = new Option(text, value, defaultSelected, selected);
 ```
 
-This syntax is optional. We can use `document.createElement('option')` and set attributes manually. Still, it may be shorter, so here are the parameters:
+:را به صورت دستی مقداردهی کنیم. با این حال،‌ ممکن است کوتاه‌تر باشد پس اینجا پارامترها وجود دارند attributes استقاده کنیم و `document.createElement('option')` اختیاری است، ما می‌توانیم از syntax این
 
-- `text` -- the text inside the option,
-- `value` -- the option value,
-- `defaultSelected` -- if `true`, then `selected` HTML-attribute is created,
-- `selected` -- if `true`, then the option is selected.
+- `text` -- option متن درون,
+- `value` -- option مقدار,
+- `defaultSelected` -- ایجاد می‌شود `selected` HTML-attribute باشد `true` اگر
+- `selected` -- انتخاب می‌شود option باشد `true` اگر
 
-The difference between `defaultSelected` and `selected` is that `defaultSelected` sets the HTML-attribute (that we can get using `option.getAttribute('selected')`, while `selected` sets whether the option is selected or not.
+.انتخاب شده است یا نه option مشخص می‌کند که آیا `selected` در حالی که (آن را بگیریم `option.getAttribute('selected')` که ما می‌توانیم با) می‌کند set را HTML-attribute مقدار `defaultSelected` در این است که `selected` و `defaultSelected` تفاوت بین
 
-In practice, one should usually set _both_ values to `true` or `false`. (Or, simply omit them; both default to `false`.)
+(`false` یا به سادگی حذف شوند، مقدار پیش‌فرض هر دو) .باشند `false` یا `true` در عمل باید معمولا _هر دو_ مقدار
 
-For instance, here's a new "unselected" option:
+برای مثال، اینجا بک "unselected" option داریم:
 
 ```js
 let option = new Option("Text", "value");
-// creates <option value="value">Text</option>
+// ایجاد می‌کند <option value="value">Text</option>
 ```
 
-The same option, but selected:
+شده select اما option همان
 
 ```js
 let option = new Option("Text", "value", true, true);
 ```
 
-Option elements have properties:
+:دارند property یک سری Option elements
 
 `option.selected`
-: Is the option selected.
+: انتخاب شده است یا نه option
 
 `option.index`
-: The number of the option among the others in its `<select>`.
+خودش `<select>` در بین بقیه option عدد :
 
 `option.text`
-: Text content of the option (seen by the visitor).
+(توسط بازدیدکننده دیده می‌شود) option محتوای متنی :
 
-## References
+## منابع
 
-- Specification: <https://html.spec.whatwg.org/multipage/forms.html>.
+- جزئیات: <https://html.spec.whatwg.org/multipage/forms.html>.
 
-## Summary
+## خلاصه
 
 Form navigation:
 
 `document.forms`
-: A form is available as `document.forms[name/index]`.
+.قابل دسترسی است `document.forms[name/index]` یک فرم با :
 
 `form.elements`  
-: Form elements are available as `form.elements[name/index]`, or can use just `form[name/index]`. The `elements` property also works for `<fieldset>`.
+.کار می‌کنند `<fieldset>` همچنین با `elements` property استفاده کرد. `form[name/index]` قابل دسترسی هستند، یا فقط می‌توان از `form.elements[name/index]` با Form elements عناصر :
 
 `element.form`
-: Elements reference their form in the `form` property.
+.به فرم خود ارجاع می‌دهند `form` property عناصر در :
 
-Value is available as `input.value`, `textarea.value`, `select.value`, etc. (For checkboxes and radio buttons, use `input.checked` to determine whether a value is selected.)
+(.استفاده کنید که مشخص می‌کند یک مقدار انتخاب شده است یا نه `input.checked` از radio buttons و checkboxes برای) و ... قابل دسترسی است. `input.value`، `textarea.value`، `select.value` با value مقدار
 
-For `<select>`, one can also get the value by the index `select.selectedIndex` or through the options collection `select.options`.
+.به دست آورد options collection `select.options` یا از طریق `select.selectedIndex` همچنین می‌توان مقدار را با اندیس `<select>` برای 
 
-These are the basics to start working with forms. We'll meet many examples further in the tutorial.
+این‌ها مبانی شروع کار با فرم‌ها هستند. ما مثال‌های بیشتری را در آموزش خواهیم دید.
 
-In the next chapter we'll cover `focus` and `blur` events that may occur on any element, but are mostly handled on forms.
+.را پوشش خواهیم داد که ممکن است در هر عنصری اتفاق بیفتند، اما بیشتر در فرم‌ها مدیریت می‌شوند `blur` و `focus` در فصل بعدی ما
