@@ -554,7 +554,6 @@ From <input id="from" disabled> – To <input id="to" disabled>
 یک مورد مهم لبه زمانی است که `selectionStart` و `selectionEnd` با هم برابر باشند. سپس دقیقاً موقعیت مکان نما است. یا، برای بازنویسی، وقتی چیزی انتخاب نشده است، انتخاب در موقعیت مکان نما جمع می شود.
 
 بنابراین، با تنظیم `selectionStart` و `selectionEnd` روی یک مقدار، مکان‌نما را حرکت می‌دهیم.
-
 مثلا:
 
 ```html run autorun
