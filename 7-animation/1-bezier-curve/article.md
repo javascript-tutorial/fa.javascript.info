@@ -1,38 +1,35 @@
 # Bezier curve
 
-Bezier curves are used in computer graphics to draw shapes, for CSS animation and in many other places.
+منحنی های Bezier در گرافیک کامپیوتری برای ترسیم اشکال، برای انیمیشن های CSS و در بسیاری از مکان های دیگر استفاده می شود.
 
-They are a very simple thing, worth to study once and then feel comfortable in the world of vector graphics and advanced animations.
+آنها چیز بسیار ساده ای هستند، ارزش یک بار مطالعه و سپس احساس راحتی در دنیای گرافیک های برداری و انیمیشن های پیشرفته را دارند.
 
 ```smart header="Some theory, please"
-This article provides a theoretical, but very needed insight into what Bezier curves are, while [the next one](info:css-animations#bezier-curve) shows how we can use them for CSS animations.
+این مقاله بینشی نظری، اما بسیار مورد نیاز در مورد اینکه منحنی های Bezier چیست، ارائه می دهد، در حالی که [مطلب بعدی] (info:css-animations#bezier-curve) نشان می دهد که چگونه می توانیم از آنها برای انیمیشن های CSS استفاده کنیم.
 
-Please take your time to read and understand the concept, it'll serve you well.
+لطفاً وقت خود را صرف مطالعه و درک مفهوم کنید، این به شما کمک خواهد کرد.
 ```
 
 ## Control points
 
-A [bezier curve](https://en.wikipedia.org/wiki/B%C3%A9zier_curve) is defined by control points.
+یگ [bezier curve](https://en.wikipedia.org/wiki/B%C3%A9zier_curve) توسط control points تعریف می شود.
 
-There may be 2, 3, 4 or more.
+ممکن است 2، 3، 4 یا بیشتر وجود داشته باشد.
 
-For instance, two points curve:
-
+به عنوان مثال منحنی دو نقطه:
 ![](bezier2.svg)
 
-Three points curve:
-
+منحنی سه نقطه:
 ![](bezier3.svg)
 
-Four points curve:
-
+منحنی چهار نقطه:
 ![](bezier4.svg)
 
-If you look closely at these curves, you can immediately notice:
+اگر به این منحنی ها دقت کنید، بلافاصله متوجه می شوید:
 
-1. **Points are not always on curve.** That's perfectly normal, later we'll see how the curve is built.
-2. **The curve order equals the number of points minus one**.
-For two points we have a linear curve (that's a straight line), for three points -- quadratic curve (parabolic), for four points -- cubic curve.
+1. **نقاط همیشه روی منحنی نیستند.** این کاملا طبیعی است، بعداً خواهیم دید که منحنی چگونه ساخته می شود.
+2. **ترتیب منحنی برابر است با تعداد نقاط منهای یک**.
+برای دو نقطه یک منحنی خطی داریم (این یک خط مستقیم است)، برای سه نقطه - منحنی درجه دوم (پارابولیک)، برای چهار نقطه - منحنی مکعبی.
 3. **A curve is always inside the [convex hull](https://en.wikipedia.org/wiki/Convex_hull) of control points:**
 
     ![](bezier4-e.svg) ![](bezier3-e.svg)
