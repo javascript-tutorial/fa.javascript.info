@@ -3,21 +3,24 @@ libs:
 
 ---
 
-# Currying
+# کاری کردن 
 
-[Currying](https://en.wikipedia.org/wiki/Currying) is an advanced technique of working with functions. It's used not only in JavaScript, but in other languages as well.
+[کاری کردن](https://en.wikipedia.org/wiki/Currying) (Currying) یک شیوه پیشرفته کار با فانکشن ها است.
+این فقط مختص به جاوااسکریپت نیست و در زبان های دیگر نیز مورد استفاده قرار می‌گیرد.
 
-Currying is a transformation of functions that translates a function from callable as `f(a, b, c)` into callable as `f(a)(b)(c)`.
+کاری کردن به معنای تبدیل فانکشن ها به گونه‌ای است که فانکشنی که در ابتدا به صورت `f(a, b, c)` فراخوانی می‌شد، به شکل قابل فراخوانی `f(a)(b)(c)` تبدیل می‌شود.
 
-Currying doesn't call a function. It just transforms it.
+به این نکته توجه کنید که کاری کردن فانکشن را صدا نمی‌زند بلکه فقط آن را تغییر می‌دهد.
 
-Let's see an example first, to better understand what we're talking about, and then practical applications.
+برای درک بهتر این مفهوم، ابتدا یک مثال را مشاهده می‌کنیم و سپس کاربرد‌های عملی آن را بررسی می‌کنیم.
 
-We'll create a helper function `curry(f)` that performs currying for a two-argument `f`. In other words, `curry(f)` for two-argument `f(a, b)` translates it into a function that runs as `f(a)(b)`:
+ما یک فانکشن کمکی با نام `curry(f)` ایجاد خواهیم کرد که برای دو آرگومان `f` کاری را اجرا می‌کند.
+به عبارتی دیگر، `curry(f)` برای دو آرگومان `f(a, b)` آن را به تابعی ترجمه می‌کند که به صورت `f(a)(b)` اجرا می‌شود.
+
 
 ```js run
 *!*
-function curry(f) { // curry(f) does the currying transform
+function curry(f) { // تبدیل کاری را انجام می‌دهد curry(f)
   return function(a) {
     return function(b) {
       return f(a, b);
@@ -26,7 +29,7 @@ function curry(f) { // curry(f) does the currying transform
 }
 */!*
 
-// usage
+// استفاده
 function sum(a, b) {
   return a + b;
 }
@@ -36,68 +39,69 @@ let curriedSum = curry(sum);
 alert( curriedSum(1)(2) ); // 3
 ```
 
-As you can see, the implementation is straightforward: it's just two wrappers.
+همانطور که می‌بینید، پیاده سازی بسیار ساده است: تنها دو بسته بندی صورت می‌گیرد.
 
-- The result of `curry(func)` is a wrapper `function(a)`.
-- When it is called like `curriedSum(1)`, the argument is saved in the Lexical Environment, and a new wrapper is returned `function(b)`.
-- Then this wrapper is called with `2` as an argument, and it passes the call to the original `sum`.
+- نتیجه `curry(func)` یک بسته بندی به شکل `function(a)` است. 
+- وقتی به صورت  `curriedSum(1)` فراخوانی می‌شود، آرگومان در محیط واژگانی (the Lexical Environment) ذخیره می‌شود,
+و یک بسته بندی جدید به شکل `function(b)` بازگشت داده می‌شود .
+- سپس این بسته با 2 به عنوان آرگومان صدا زده می‌شود، و فراخوانی را به سمت فانکشن اصلی `sum` ارسال می‌کند.
 
-More advanced implementations of currying, such as [_.curry](https://lodash.com/docs#curry) from lodash library, return a wrapper that allows a function to be called both normally and partially:
+پیاده سازی پیشرفته تری از کاری کردن، مثل [_.curry](https://lodash.com/docs#curry) از کتابخانه lodash، یک بسته بندی بر می‌گرداند که به کاربر این امکان را می‌دهد که به صورت عادی و یا جزئی فانکشن را فراخوانی کند.
 
 ```js run
 function sum(a, b) {
   return a + b;
 }
 
-let curriedSum = _.curry(sum); // using _.curry from lodash library
+let curriedSum = _.curry(sum); // lodash استفاده کاری از کتابخانه 
 
-alert( curriedSum(1, 2) ); // 3, still callable normally
-alert( curriedSum(1)(2) ); // 3, called partially
+alert( curriedSum(1, 2) ); // 3, هنوز به شکل عادی قابل فراخوانی است
+alert( curriedSum(1)(2) ); // 3, به شکل جزئی فراخوانده شده است
 ```
 
-## Currying? What for?
+## کاری کردن؟ چرا استفاده می‌شود؟
 
-To understand the benefits we need a worthy real-life example.
+برای درک مزایای کاری کردن، به یک مثال واقعی و مفید نیاز داریم.
 
-For instance, we have the logging function `log(date, importance, message)` that formats and outputs the information. In real projects such functions have many useful features like sending logs over the network, here we'll just use `alert`:
+برای مثال، ما فانکشن `log(date, importance, message)` را داریم که اطلاعات را قالب بندی کرده و خروجی می‌دهد.
+در پروژه های واقعی چنین فانکشن هایی دارای بسیاری از ویژگی های مفید مانند ارسال لاگ ها از طریق شبکه هستند. در اینحا ما فقط از `alert` استفاده خواهیم کرد:
 
 ```js
+
 function log(date, importance, message) {
   alert(`[${date.getHours()}:${date.getMinutes()}] [${importance}] ${message}`);
 }
 ```
 
-Let's curry it!
+بیایید کاری اش کنیم!
 
 ```js
 log = _.curry(log);
 ```
 
-After that `log` works normally:
+پس از آن `log` به شکل عادی کار می‌کند:
 
 ```js
 log(new Date(), "DEBUG", "some debug"); // log(a, b, c)
 ```
 
-...But also works in the curried form:
+... و همینطور در شکل کاری شده کار می‌کند:
 
 ```js
 log(new Date())("DEBUG")("some debug"); // log(a)(b)(c)
 ```
-
-Now we can easily make a convenience function for current logs:
+اکنون می توانیم به راحتی یک فانکشن ساده‌تر برای لاگ های کنونی ایجاد کنیم:
 
 ```js
-// logNow will be the partial of log with fixed first argument
-let logNow = log(new Date());
+let logNow = log(new Date()); // با آرگومان ثابت اول خواهد بود log جزئی از
 
-// use it
+// استفاده از آن
 logNow("INFO", "message"); // [HH:mm] INFO message
 ```
+حالا `log` یک نسخه از فانکشن `logNow` است که آرگومان اول آن ثابت شده است.
+به عبارت دیگر "فانکشن جزئی اعمال شده" یا به اختصار "جزئی" است.
 
-Now `logNow` is `log` with fixed first argument, in other words "partially applied function" or "partial" for short.
-
-We can go further and make a convenience function for current debug logs:
+می‌توانیم جلوتر برویم و یک فانکشن برای لاگ‌های اشکال زدایی کنونی ایجاد کنیم:
 
 ```js
 let debugNow = logNow("DEBUG");
@@ -105,15 +109,15 @@ let debugNow = logNow("DEBUG");
 debugNow("message"); // [HH:mm] DEBUG message
 ```
 
-So:
-1. We didn't lose anything after currying: `log` is still callable normally.
-2. We can easily generate partial functions such as for today's logs.
+بنابراین:
+1. ما چیزی را بعد از کاری کردن از دست ندادیم: `لاگ` هنوز به شکل عادی قابل فراخوانی است.
+2. همچنین به راحتی می‌توانیم فانکشن‌های جزئی مانند لاگ‌های امروزی را ایجاد کنیم.
 
-## Advanced curry implementation
+## پیاده سازی پیشرفته کاری
 
-In case you'd like to get in to the details, here's the "advanced" curry implementation for multi-argument functions that we could use above.
+در صورتی که مایلید وارد جزئیات شوید، اینجا پیاده سازی "پیشرفته" کاری برای فانکشن های دارای چند آرگومانه آمده است که می‌توانیم در بالا استفاده کنیم.
 
-It's pretty short:
+این پیاده سازی بسیار کوتاه است:
 
 ```js
 function curry(func) {
@@ -131,7 +135,7 @@ function curry(func) {
 }
 ```
 
-Usage examples:
+نمونه های استفاده:
 
 ```js
 function sum(a, b, c) {
@@ -140,17 +144,15 @@ function sum(a, b, c) {
 
 let curriedSum = curry(sum);
 
-alert( curriedSum(1, 2, 3) ); // 6, still callable normally
-alert( curriedSum(1)(2,3) ); // 6, currying of 1st arg
-alert( curriedSum(1)(2)(3) ); // 6, full currying
+alert( curriedSum(1, 2, 3) ); // هنوز به شکل عادی قابل فراخوانی است، 6
+alert( curriedSum(1)(2,3) ); // کاری کردن آرگومان اول، 6
+alert( curriedSum(1)(2)(3) ); // کاری کردن کامل، 6
 ```
-
-The new `curry` may look complicated, but it's actually easy to understand.
-
-The result of `curry(func)` call is the wrapper `curried` that looks like this:
+  `کاری` جدید ممکن است به نظر پیچیده بیاید، اما در واقع درک آن آسان است.
+  نتیجه فراخوانی `curry(func)` بسته بندی `curried` است که به این شکل است:
 
 ```js
-// func is the function to transform
+// func فانکشن برای تبدیل است
 function curried(...args) {
   if (args.length >= func.length) { // (1)
     return func.apply(this, args);
@@ -162,27 +164,35 @@ function curried(...args) {
 };
 ```
 
-When we run it, there are two `if` execution branches:
+وقتی آن را اجرا می‌کنیم، دو شاخه اجرای شرطی `if` وجود دارد:
 
-1. If passed `args` count is the same or more than the original function has in its definition (`func.length`) , then just pass the call to it using `func.apply`. 
-2. Otherwise, get a partial: we don't call `func` just yet. Instead, another wrapper is returned, that will re-apply `curried` providing previous arguments together with the new ones. 
+1. اگر تعداد `args` ارسال شده یکسان یا بیشتر از فانکشن اصلی در تعریف آن باشد (`func.length`)، کافیست با استفاده از `func.apply` فراخوانی را به آن ارسال کنید.
 
-Then, if we call it, again, we'll get either a new partial (if not enough arguments) or, finally, the result.
+2. در غیر این صورت، یک فانکشن جزئی ایجاد می‌شود: ما فعلا `func` را صدا نمی‌زنیم. در عوض، یک بسته بندی دیگر بازگشت داده می‌شود، که مجدد `کاری شدن` را با فراهم کردن آرگومان های قبلی همراه با آرگومان های جدید اعمال می‌کند.
 
-```smart header="Fixed-length functions only"
-The currying requires the function to have a fixed number of arguments.
+سپس، اگره دوباره آن را فراخوانی کنیم، دوباره، یا یک جزئی جدید(اگر آرگومان ها کافی نباشند) یا در نهایت نتیجه را دریافت می‌کنیم.
 
-A function that uses rest parameters, such as `f(...args)`, can't be curried this way.
+<div dir="rtl">
+
+```smart header="فقط فانکشن هایی با طول ثابت"
+کاری کردن فانکشنی را نیاز دارد که دارای تعداد ثابتی آرگومان باشد.
+
+فانکشنی که از پارامتر های rest استفاده می‌کند، مانند `f(...args)`، نمی‌تواند به این شکل کاری شود.
+
 ```
 
-```smart header="A little more than currying"
-By definition, currying should convert `sum(a, b, c)` into `sum(a)(b)(c)`.
+```smart header="یکم بیشتر از کاری کردن"
 
-But most implementations of currying in JavaScript are advanced, as described: they also keep the function callable in the multi-argument variant.
+بر اساس تعریف، در کاری کردن `sum(a, b, c)` باید تبدل به `sum(a)(b)(c)` شود.
+
+بیشتر پیاده سازی های کاری کردن در جاوااسکریپت پیشرفته هستند، همانطور که توضیح داده شد: آنها همچنین فانکشن را در نوع چند آرگومانی قابل فراخوانی نگه می‌دارند.
+
 ```
+</div>
 
-## Summary
+## خلاصه
 
-*Currying* is a transform that makes `f(a,b,c)` callable as `f(a)(b)(c)`. JavaScript implementations usually both keep the function callable normally and return the partial if the arguments count is not enough.
+*کاری کردن* یک تبدیل کردن است که `f(a,b,c)` را به صورت `f(a)(b)(c)` قابل فراخوانی می‌کند. در پیاده سازی های جاوااسکریپت معمولا فانکشن را قابل فراخوانی به صورت عادی نگه می‌دارند و اگر تعداد آرگومان ها کافی نباشد، یک فانکشن جزئی را بر می‌گردانند.
 
-Currying allows us to easily get partials. As we've seen in the logging example, after currying the three argument universal function `log(date, importance, message)` gives us partials when called with one argument (like `log(date)`) or two arguments (like `log(date, importance)`).  
+کاری کردن به ما این امکان را می‌دهد که به راحتی فانکشن های جزئی را دریافت کنیم. همانطور که در مثال لاگ مشاهده کردیم، پس از اجرای سه آرگومان فانکشن یونیورسال `log(date, importance, message)` زمانی که با یک آرگومان فراخوانی می‌شود (مانند `log(date)`) یا دو آرگومان (مانند `log(date, importance)`)  فانکشن جزئی را بر می‌گرداند.
+
