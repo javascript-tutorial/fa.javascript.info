@@ -1,21 +1,21 @@
 # حمله‌ی کلیک جک
 
-The "clickjacking" attack allows an evil page to click on a "victim site" *on behalf of the visitor*.
+حمله‌ی "clickjacking" به یک صفحه‌ی شیطانی اجازه می‌دهد تا روی "سایت قربانی" *از طرف بازدیدکننده* کلیک کند.
 
-Many sites were hacked this way, including Twitter, Facebook, Paypal and other sites. They are all fixed, of course.
+تعداد زیادی از سایت‌ها با این راه هک می‌شوند، شامل Twitter، Facebook، Paypal و سایت‌های دیگر. البته همه‌ی آن‌ها درست شده‌اند.
 
-## The idea
+## ایده
 
-The idea is very simple.
+ایده بسیار ساده است.
 
-Here's how clickjacking was done with Facebook:
+اینجا می‌گوییم که clickjacking چگونه با Facebook انجام شد:
 
-1. A visitor is lured to the evil page. It doesn't matter how.
-2. The page has a harmless-looking link on it (like "get rich now" or "click here, very funny").
-3. Over that link the evil page positions a transparent `<iframe>` with `src` from facebook.com, in such a way that the "Like" button is right above that link. Usually that's done with `z-index`.
-4. In attempting to click the link, the visitor in fact clicks the button.
+1. یک بازدیدکننده به صفحه‌ی شیطانی اغوا می‌شود. مهم نیست چگونه.
+2. این صفحه درون خود یک لینک به ظاهر غیرآسیب‌زننده دارد (مثال "الان ثروتمند شوید" یا "اینجا کلیک کنید،‌ بسیار بامزه است").
+3. روی آن لینک، آن صفحه‌ی شیطانی یک `<iframe>` شفاف با `src` از facebook.com قرار می‌دهد، به طوری که دکمه‌ی "پسندیدن" درست بالای لینک است. معمولا این کار با `z-index` انجام می‌شود.
+4. در تلاش برای کلیک کردن لینک، بازدیدکننده در واقع روی دکمه کلیک می‌کند.
 
-## The demo
+## نسخه‌ی نمایشی
 
 Here's how the evil page looks. To make things clear, the `<iframe>` is half-transparent (in real evil pages it's fully transparent):
 
