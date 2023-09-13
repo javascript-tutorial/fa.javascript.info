@@ -1,4 +1,4 @@
-# The clickjacking attack
+# حمله‌ی کلیک جک
 
 The "clickjacking" attack allows an evil page to click on a "victim site" *on behalf of the visitor*.
 
