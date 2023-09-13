@@ -356,6 +356,7 @@ Click buttons to run methods on the selection, "resetExample" to reset it.
 
  ```smart header="انتخاب پایان/شروع در مقابل محدوده"
 
+یک تفاوت بسیار مهم بین selection anchor/focus و `Range` start/end
 
 تفاوت‌های مهمی بین لنگر/فوکوس انتخاب در مقایسه با `Range` start/end وجود دارد.
 
