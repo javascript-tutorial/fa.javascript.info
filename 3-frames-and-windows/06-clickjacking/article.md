@@ -17,49 +17,49 @@
 
 ## نسخه‌ی نمایشی
 
-Here's how the evil page looks. To make things clear, the `<iframe>` is half-transparent (in real evil pages it's fully transparent):
+اینجا می‌بینیم که صفحه‌ی شیطانی چگونه به نظر می‌رسد. برای واضح شدن همه چیز، `<iframe>` نیمه‌شفاف است (در صفحات شیطانی واقعی، کاملا شفاف است):
 
 ```html run height=120 no-beautify
 <style>
-iframe { /* iframe from the victim site */
+iframe { /* از سایت قربانی iframe */
   width: 400px;
   height: 100px;
   position: absolute;
   top:0; left:-20px;
 *!*
-  opacity: 0.5; /* in real opacity:0 */
+  opacity: 0.5; /* opacity:0 در واقع */
 */!*
   z-index: 1;
 }
 </style>
 
-<div>Click to get rich now:</div>
+<div>کلیک کنید تا الان ثروتمند شوید:</div>
 
-<!-- The url from the victim site -->
+<!-- لینک سایت قربانی -->
 *!*
 <iframe src="/clickjacking/facebook.html"></iframe>
 
-<button>Click here!</button>
+<button>!اینجا کلیک کنید</button>
 */!*
 
-<div>...And you're cool (I'm a cool hacker actually)!</div>
+<div>!و شما باحال هستید(در واقع من یک هکر باحال هستم)...</div>
 ```
 
-The full demo of the attack:
+نسخه‌ی نمایشی کامل این حمله:
 
 [codetabs src="clickjacking-visible" height=160]
 
-Here we have a half-transparent `<iframe src="facebook.html">`, and in the example we can see it hovering over the button. A click on the button actually clicks on the iframe, but that's not visible to the user, because the iframe is transparent.
+اینجا ما یک `<iframe src="facebook.html">` نیمه‌شفاف داریم، و در مثال می‌توانیم ببینیم که روی دکمه شناور است. یک کلیک روی دکمه در واقع روی  iframe کلیک می‌کند، اما این برای کاربر قابل دیدن نیست، چون iframe شفاف است.
 
-As a result, if the visitor is authorized on Facebook ("remember me" is usually turned on), then it adds a "Like". On Twitter that would be a "Follow" button.
+در نتیجه،‌اگر بازدیدکننده در Facebook مجاز باشد (معمولا "مرا به خاطر بسپار" روشن است)، آنگاه یک "پسندیدم" اضافه می‌کند. در Twitter، این یک دکمه‌ی "دنبال کردن" خواهد بود.
 
-Here's the same example, but closer to reality, with `opacity:0` for `<iframe>`:
+اینجا مثال نمونه را داریم، اما نزدیک‌تر به واقعیت، با `opacity:0` برای `<iframe>`:
 
 [codetabs src="clickjacking" height=160]
 
-All we need to attack -- is to position the `<iframe>` on the evil page in such a way that the button is right over the link. So that when a user clicks the link, they actually click the button. That's usually doable with CSS.
+تمام چیزی که برای حمله نیاز داریم -- این است که `<iframe>` را در صفحه‌ی شیطانی به گونه‌ای قرار دهیم که دکمه درست روی لینک باشد. بنابراین، وقتی یک کاربر روی لینک کلیک می‌کند، در واقع روی دکمه کلیک می‌کند. این معمولا با CSS قابل انجام است.
 
-```smart header="Clickjacking is for clicks, not for keyboard"
+```smart header="Clickjacking برای کلیک‌ها است،‌ نه برای keyboard"
 The attack only affects mouse actions (or similar, like taps on mobile).
 
 Keyboard input is much difficult to redirect. Technically, if we have a text field to hack, then we can position an iframe in such a way that text fields overlap each other. So when a visitor tries to focus on the input they see on the page, they actually focus on the input inside the iframe.
