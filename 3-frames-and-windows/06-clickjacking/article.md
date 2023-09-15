@@ -89,7 +89,6 @@ if (top != window) {
 
 می‌توانیم transition ناشی از تغییر `top.location` را در event handler [beforeunload](info:onload-ondomcontentloaded#window.onbeforeunload) مسدود کنیم.
 
-The top page (enclosing one, belonging to the hacker) sets a preventing handler to it, like this:
 صفحه‌ی بالا (که یک مورد را محصور می‌کند، متعلق به هکر است) یک preventing handler را برای آن تنظیم می‌کند، مانند این:
 
 ```js
