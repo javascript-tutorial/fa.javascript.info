@@ -1,3 +1,4 @@
+
 # Reference Type
 
 ```warn header="ویژگی یک زبان عمیق"
