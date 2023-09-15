@@ -60,20 +60,20 @@ iframe { /* از سایت قربانی iframe */
 تمام چیزی که برای حمله نیاز داریم -- این است که `<iframe>` را در صفحه‌ی شیطانی به گونه‌ای قرار دهیم که دکمه درست روی لینک باشد. بنابراین، وقتی یک کاربر روی لینک کلیک می‌کند، در واقع روی دکمه کلیک می‌کند. این معمولا با CSS قابل انجام است.
 
 ```smart header="Clickjacking برای کلیک‌ها است،‌ نه برای keyboard"
-The attack only affects mouse actions (or similar, like taps on mobile).
+این حمله فقط فعالیت‌های با موش را تحت تاثیر قرار می‌دهد (یا مشابه،‌ مثل ضربه‌ها روی تلفن همراه).
 
-Keyboard input is much difficult to redirect. Technically, if we have a text field to hack, then we can position an iframe in such a way that text fields overlap each other. So when a visitor tries to focus on the input they see on the page, they actually focus on the input inside the iframe.
+.فوکوس می‌کند iframe داخل input که در صفحه می‌بیند فوکوس کند، در واقع روی input را به گونه‌ای قرار دهیم که فیلدهای متنی روی یکدیگر همپوشانی داشته باشند.بنابراین وقتی یک بازدیدکننده تلاش می‌کند که روی یک iframe تغییر مسیر ورودی صفحه‌کلید بسیار دشوار است. از نظر فنی، اگر یک فیلد متنی برای هک داشته باشیم، می‌توانیم یک
 
-But then there's a problem. Everything that the visitor types will be hidden, because the iframe is not visible.
+.قابل دیدن نیست iframe ،اما آنگاه یک مشکل وجود دارد. هرچیزی که یک بازدیدکننده تایپ می‌کند پنهان می‌شود چون
 
-People will usually stop typing when they can't see their new characters printing on the screen.
+مردم معمولا وقتی نمی‌توانند کاراکترهای جدید را در حال چاپ شدن روی صفحه‌نمایش ببینند تایپ کردن را متوقف می‌کنند.
 ```
 
-## Old-school defences (weak)
+## دفاع قدیمی (ضعیف)
 
-The oldest defence is a bit of JavaScript which forbids opening the page in a frame (so-called "framebusting").
+قدیمی‌ترین دفاع کمی JavaScript است که باز کردن یک صفحه در یک فریم را ممنوع می‌کند (به اصطلاح "framebusting")
 
-That looks like this:
+آن شبیه این است:
 
 ```js
 if (top != window) {
@@ -81,15 +81,16 @@ if (top != window) {
 }
 ```
 
-That is: if the window finds out that it's not on top, then it automatically makes itself the top.
+یعنی: اگر پنجره متوجه شود که در بالا نیست، به طور خودکار خود را در بالای صفحه قرار می‌دهد.
 
-This not a reliable defence, because there are many ways to hack around it. Let's cover a few.
+این یک دفاع قابل اعتماد نیست، چون راه‌های زیادی وجود دارد که هک آن وجود دارد. بیایید چند مورد را پوشش دهیم.
 
-### Blocking top-navigation
+### مسدود کردن top-navigation
 
-We can block the transition caused by changing `top.location` in  [beforeunload](info:onload-ondomcontentloaded#window.onbeforeunload) event handler.
+می‌توانیم transition ناشی از تغییر `top.location` را در event handler [beforeunload](info:onload-ondomcontentloaded#window.onbeforeunload) مسدود کنیم.
 
 The top page (enclosing one, belonging to the hacker) sets a preventing handler to it, like this:
+صفحه‌ی بالا (که یک مورد را محصور می‌کند، متعلق به هکر است) یک preventing handler را برای آن تنظیم می‌کند، مانند این:
 
 ```js
 window.onbeforeunload = function() {
