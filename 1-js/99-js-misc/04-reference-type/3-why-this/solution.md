@@ -1,21 +1,21 @@
 
-با توجه به موارد زیر.
+Here's the explanations.
 
-1. متدی که داخل یک آبجکت معمولی بوده, اجرا شده.
+1. That's a regular object method call.
 
-2. به همین ترتیب, پرانتز در اینجا اولیت را عوض نمیکند و مهم نقطه `.` است.
+2. The same, parentheses do not change the order of operations here, the dot is first anyway.
 
-3. ما نمونه پیچیده تری نسبت به  `()(expression)`.  در زیر داریم که به دو خط کد تقسیم شده است:
+3. Here we have a more complex call `(expression)()`. The call works as if it were split into two lines:
 
     ```js no-beautify
-    f = obj.go; // محاسبه عبارت
-    f();        // اجرای تابع
+    f = obj.go; // calculate the expression
+    f();        // call what we have
     ```
 
-    اینجا `()f` به عنوان یک تابع, بدون `this` اجرا میشود.
+    Here `f()` is executed as a function, without `this`.
 
-4. در موارد مشابه `(3)`, در سمت چپ پرانتز عبارت داریم.
+4. The similar thing as `(3)`, to the left of the parentheses `()` we have an expression.
 
-برای اینکه اتفاقاتی که در مورد `(3)` و `(4)` رج میدهد را بدانیم, باید به خاطر داشته باشیم که دسترسی به مقدار ویژگی ها (چه با نقطه یا چه با استفاده از براکت) یک مقداری از Reference Type را برمیگرداند.
+To explain the behavior of `(3)` and `(4)` we need to recall that property accessors (dot or square brackets) return a value of the Reference Type.  
 
-هر عملیاتی که برروی آن غیر از توابع (مثل عملگر تخصیص `=` یا `||`) اعمال میشود, از آن یک مقدار معمولی میسازد, که اطلاعاتی برای تنظیم مقدار `this` ندارد.
+Any operation on it except a method call (like assignment `=` or `||`) turns it into an ordinary value, which does not carry the information allowing to set `this`.
