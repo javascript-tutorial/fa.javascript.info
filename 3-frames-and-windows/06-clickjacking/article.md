@@ -97,27 +97,27 @@ window.onbeforeunload = function() {
 };
 ```
 
-When the `iframe` tries to change `top.location`, the visitor gets a message asking them whether they want to leave.
+وقتی `iframe` تلاش می‌کند `top.location` را تغییر دهد، بازدیدکننده پیامی می‌گیرد که می‌پرسد می‌خواهند ترک کنند یا نه.
 
-In most cases the visitor would answer negatively because they don't know about the iframe - all they can see is the top page, there's no reason to leave. So `top.location` won't change!
+در بیشتر موارد، بازدیدکننده پاسخ منفی می‌دهد، زیرا از iframe اطلاعی ندارد - تنها چیزی که می‌توانند ببینند صفحه بالایی است، دلیلی برای ترک آن وجود ندارد. بنابراین `top.location` تغییری نخواهد کرد.
 
-In action:
+در عمل:
 
 [codetabs src="top-location"]
 
 ### Sandbox attribute
 
-One of the things restricted by the `sandbox` attribute is navigation. A sandboxed iframe may not change `top.location`.
+یکی از چیزهایی که توسط `sandbox` attribute محدود می‌شود navigation است. یک sandboxed iframe ممکن است `top.location` را تغییر ندهد.
 
-So we can add the iframe with `sandbox="allow-scripts allow-forms"`. That would relax the restrictions, permitting scripts and forms. But we omit `allow-top-navigation` so that changing `top.location` is forbidden.
+پس ما می‌توانیم iframe را با `sandbox="allow-scripts allow-forms"` اضافه کنیم. این امر محدودیت‌ها را کاهش می‌دهد و اسکریپت‌ها و فرم‌ها را مجاز می‌کند. اما ما `allow-top-navigation` را حذف می کنیم تا تغییر `top.location` ممنوع باشد.
 
-Here's the code:
+کد اینجاست:
 
 ```html
 <iframe *!*sandbox="allow-scripts allow-forms"*/!* src="facebook.html"></iframe>
 ```
 
-There are other ways to work around that simple protection too.
+راه‌های دیگری نیز برای دور زدن این حفاظت ساده وجود دارد.
 
 ## X-Frame-Options
 
