@@ -1,35 +1,33 @@
-# ArrayBuffer, binary arrays
+# ArrayBuffer، آرایه دودویی
 
-In web-development we meet binary data mostly while dealing with files (create, upload, download). Another typical use case is image processing.
+در توسعه‌ی وب ما معمولا هنگام سروکار داشتن با فایل‌ها(ساختن، بارگذاری کردن، دانلود کردن) به داده‌های دودویی برخورد می‌کنیم. یکی دیگر از استفاده‌های رایج آن پردازش تصویر می‌باشد.
 
-That's all possible in JavaScript, and binary operations are high-performant.
+همه‌ی این‌ها در جاوااسکریپت ممکن است، و عملیات‌های دودویی عملکرد بالایی دارند.
 
-Although, there's a bit of confusion, because there are many classes. To name a few:
+هرچند، اندکی احتمال اشتباه کردن وجود دارد، زیرا کلاس‌های بسیاری وجود دارند. برخی از آن‌ها عبارتند از:
 - `ArrayBuffer`, `Uint8Array`, `DataView`, `Blob`, `File`, etc.
 
-Binary data in JavaScript is implemented in a non-standard way, compared to other languages. But when we sort things out, everything becomes fairly simple.
+داده‌های دودویی در جاوااسکریپت، نسبت به سایر زبان‌ها به شکل غیراستانداردی پیاده‌سازی شده‌اند. ولی هنگاهی که ما چیزها را مرتب می‌کنیم، همه چیز نسبتا ساده می‌شود.
 
-**The basic binary object is `ArrayBuffer` -- a reference to a fixed-length contiguous memory area.**
+**شی دودویی پایه `ArrayBuffer` است -- یک اشاره به یک ناحیه‌ی پیوسته‌ی حافظه با طول ثابت.**
 
-We create it like this:
+آن را به شکل زیر می‌سازیم:
 ```js run
-let buffer = new ArrayBuffer(16); // create a buffer of length 16
+let buffer = new ArrayBuffer(16); // ساخت یک بافر با طول 16
 alert(buffer.byteLength); // 16
 ```
 
-This allocates a contiguous memory area of 16 bytes and pre-fills it with zeroes.
+این کد یک حافظه‌ی پیوسته به اندازه 16 بایت را اختصاص می‌دهد و آن را با صفر مقداردهی اولیه می‌کند.
 
-```warn header="`ArrayBuffer` is not an array of something"
-Let's eliminate a possible source of confusion. `ArrayBuffer` has nothing in common with `Array`:
-- It has a fixed length, we can't increase or decrease it.
-- It takes exactly that much space in the memory.
-- To access individual bytes, another "view" object is needed, not `buffer[index]`.
+```هدر هشدار="`ArrayBuffer` یک آرایه از چیزی نیست." بیایید یک منبع احتمال اشتباه کردن را رفع کنیم. `ArrayBuffer` هیچ ارتباطی با آرایه ندارد:
+- یک طول ثابت دارد، ما نمی‌توانیم آن را کم یا زیاد کنیم.
+- دقیقا به همان میزان حافظه اشغال می‌کند.
+- برای دسترسی به بایت‌های جداگانه، یک شی "View" دیگر لازم است، نه `buffer[index]`.
 ```
 
-`ArrayBuffer` is a memory area. What's stored in it? It has no clue. Just a raw sequence of bytes.
+یک ناحیه از حافظه است. چه چیزی در آن ذخیره می‌شود؟ هیچ سرنخی وجود ندارد. فقط یک دنباله خالی از بایت‌ها`ArrayBuffer`.
 
-**To manipulate an `ArrayBuffer`, we need to use a "view" object.**
-
+**برای دستکاری کردن یک `ArrayBuffer`، ما باید از یک شی "View" استفاده کنیم.**
 A view object does not store anything on its own. It's the "eyeglasses" that give an interpretation of the bytes stored in the `ArrayBuffer`.
 
 For instance:
