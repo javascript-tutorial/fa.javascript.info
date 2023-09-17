@@ -33,10 +33,10 @@ alert(buffer.byteLength); // 16
 
 :برای مثال
 
-- **`Uint8Array`** -- مانند یک عدد جداگانه برخورد می‌کند که مقادیر مجاز آن از 0 تا 255 است.(یک بایت 8 بیت است پس فقط تا همان مقدار را می‌تواند نگه دارد.). به این مقدار یک عدد صحیح بدون علامت هشت بیتی گفته می‌شود `ArrayBuffer` با هر بایت در
-- **`Uint16Array`** -- treats every 2 bytes as an integer, with possible values from 0 to 65535. That's called a "16-bit unsigned integer".
-- **`Uint32Array`** -- treats every 4 bytes as an integer, with possible values from 0 to 4294967295. That's called a "32-bit unsigned integer".
-- **`Float64Array`** -- treats every 8 bytes as a floating point number with possible values from <code>5.0x10<sup>-324</sup></code> to <code>1.8x10<sup>308</sup></code>.
+- **`Uint8Array`** -- مانند یک عدد جداگانه برخورد می‌کند و مقادیر مجاز آن از 0 تا 255 است.(یک بایت 8 بیت است پس فقط تا همان مقدار را می‌تواند نگه دارد.). به این مقدار یک عدد صحیح بدون‌علامت 8-بیتی گفته می‌شود `ArrayBuffer` با هر بایت در
+- **`Uint16Array`** -- برخورد می‌کند که مقادیر مجاز آن از 0 تا 65535 می‌باشد. به آن یک عدد صحیح بدون‌علامت 16-بیتی گفته می‌شود integer با هر 2 بایت به عنوان یک
+- **`Uint32Array`** -- برخورد می‌کند که مقادیر مجاز آن از 0 تا 4294967295 می‌باشد. به آن یک عدد صحیح بدون‌علامت 32-بیتی گفته می‌شود integer با هر 4 بایت به عنوان یک
+- **`Float64Array`** -- می‌باشد <code>1.8x10<sup>308</sup></code> تا <code>5.0x10<sup>-324</sup></code> رفتار می‌کند و مقادیر مجاز آن از float با هر 8 بایت به عنوان یک عدد
 
 So, the binary data in an `ArrayBuffer` of 16 bytes can be interpreted as 16 "tiny numbers", or 8 bigger numbers (2 bytes each), or 4 even bigger (4 bytes each), or 2 floating-point values with high precision (8 bytes each).
 
