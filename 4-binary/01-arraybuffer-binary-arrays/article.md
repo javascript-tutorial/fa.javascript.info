@@ -1,4 +1,4 @@
-# ArrayBuffer, آرایه دودویی
+# ArrayBuffer, آرایه‌های دودویی
 
 در توسعه‌ی وب، ما معمولا هنگام سروکار داشتن با فایل‌ها(ساختن، بارگذاری کردن، دانلود کردن) به داده‌های دودویی برخورد می‌کنیم. یکی دیگر از استفاده‌های رایج آن پردازش تصویر می‌باشد.
 
@@ -68,17 +68,17 @@ for(let num of view) {
 
 ## TypedArray
 
-The common term for all these views (`Uint8Array`, `Uint32Array`, etc) is [TypedArray](https://tc39.github.io/ecma262/#sec-typedarray-objects). They share the same set of methods and properties.
+اصطلاح رایج برای تمامی این viewها (`Uint8Array` و `Unit32Array` و غیره) [TypedArray](https://tc39.github.io/ecma262/#sec-typedarray-objects) می‌باشد. آن‌ها متدها و ویژگی‌های یکسانی دارند.
 
-Please note, there's no constructor called `TypedArray`, it's just a common "umbrella" term to represent one of views over `ArrayBuffer`: `Int8Array`, `Uint8Array` and so on, the full list will soon follow.
+لطفا به خاطر داشته باشید که هیچ سازنده‌ای با عنوان `TypedArray` وجود ندارد و این فقط یک اصطلاح رایج برای پوشش یکی از viewهای موضوع گسترده‌ی `ArrayBuffer` می‌باشد: `Int8Array` و `Uint8Array` و به همین ترتیب، لیست کامل به زودی ارائه می‌شود.
 
-When you see something like `new TypedArray`, it means any of `new Int8Array`, `new Uint8Array`, etc.
+هرگاه چیزی مانند `new TypedArray` مشاهده کردید، این عبارت به معنای هرکدام از `new Int8Array`، `new Uint8Array` و غیره می‌باشد.
 
-Typed arrays behave like regular arrays: have indexes and are iterable.
+آرایه‌های Typed مانند آرایه‌های عادی رفتار می‌کنند: دارای اندیش هستند و قابل پیمایش می‌باشند.
 
-A typed array constructor (be it `Int8Array` or `Float64Array`, doesn't matter) behaves differently depending on argument types.
+یک سازنده‌ی آرایه‌ی Typed(می‌تواند `Int8Array` یا `Float64Array` باشد، اهمیتی ندارد) با توجه به نوع آرگومان آن متفاوت رفتار می‌کند.
 
-There are 5 variants of arguments:
+5 نوع مختلف آرگومان‌ها وجود دارند:
 
 ```js
 new TypedArray(buffer, [byteOffset], [length]);
@@ -88,92 +88,93 @@ new TypedArray(length);
 new TypedArray();
 ```
 
-1. If an `ArrayBuffer` argument is supplied, the view is created over it. We used that syntax already.
 
-    Optionally we can provide `byteOffset` to start from (0 by default) and the `length` (till the end of the buffer by default), then the view will cover only a part of the `buffer`.
+1. اگر یک آرگومان `ArrayBuffer` وجود داشته باشد، view بر حسب آن ساخته می‌شود. ما پیش از این از همین سینتکس استفاده کردیم.
+    
+ما می‌توانیم به صورت اختیاری `byteOffset` تهیه کنیم که از آن شروع کنیم(به شکل پیش‌فرض از 0 شروع می‌کنیم) و یک `length` که تا آنجا ادامه دهیم(به صورت پیش‌فرض تا انتهای بافر ادامه‌ می‌دهیم)؛ در نتیجه، view فقط بخشی از بافر را پوشش می‌دهد.
 
-2. If an `Array`, or any array-like object is given, it creates a typed array of the same length and copies the content.
-
-    We can use it to pre-fill the array with the data:
+2. اگر یک آرایه یا هر شی مانند آن داشته باشیم، آن شی یک آرایه‌ی typed به همان طول می‌سازد و محتوا را نیز کپی می‌کند.
+   
+   ما می‌توانیم از آن برای مقداردهی اولیه‌ی آرایه با داده استفاده کنیم:
     ```js run
     *!*
     let arr = new Uint8Array([0, 1, 2, 3]);
     */!*
-    alert( arr.length ); // 4, created binary array of the same length
-    alert( arr[1] ); // 1, filled with 4 bytes (unsigned 8-bit integers) with given values
+    alert( arr.length ); // 4, یک آرایه دودویی به همان طول می‌سازد
+    alert( arr[1] ); // 1, با 4 بایت(اعداد صحیح بدون‌علامت 8-بیتی) با مقادیر داده شده پر می‌شود
     ```
-3. If another `TypedArray` is supplied, it does the same: creates a typed array of the same length and copies values. Values are converted to the new type in the process, if needed.
+3. اگر یک `TypedArray` دیگر وجود داشته باشد، به همان شکل رفتار می‌کند: ک آرایه‌ی typed به همان طول می‌سازد و محتوا را نیز کپی می‌کند. در طول این فرآیند، مقادیر در صورت نیاز به نوع جدیدی تبدیل می‌شوند.
     ```js run
     let arr16 = new Uint16Array([1, 1000]);
     *!*
     let arr8 = new Uint8Array(arr16);
     */!*
     alert( arr8[0] ); // 1
-    alert( arr8[1] ); // 232, tried to copy 1000, but can't fit 1000 into 8 bits (explanations below)
+    alert( arr8[1] ); // 232,  تلاش می‌کند 1000 را کپی کند اما نمی‌تواند 1000 را در 8 بیت جا دهد(توضیخات در پایین)
     ```
 
-4. For a numeric argument `length` -- creates the typed array to contain that many elements. Its byte length will be `length` multiplied by the number of bytes in a single item `TypedArray.BYTES_PER_ELEMENT`:
+4. برای آرگومان عددی `length` -- یک آرایه‌ typed که به همان تعداد عضو دارد می‌سازد. طول بایت آن برابر `length` ضرب در تعداد بایت‌های یک آیتم واحد `TypedArray.BYTES_PER_ELEMENT` خواهد بود:
     ```js run
-    let arr = new Uint16Array(4); // create typed array for 4 integers
-    alert( Uint16Array.BYTES_PER_ELEMENT ); // 2 bytes per integer
-    alert( arr.byteLength ); // 8 (size in bytes)
+    let arr = new Uint16Array(4); // برای 4 عدد صحیح می‌سازد typed یک آرایه‌ی
+    alert( Uint16Array.BYTES_PER_ELEMENT ); // به ازای هر عدد صحیح 2 بایت
+    alert( arr.byteLength ); // 8 (اندازه در بایت‌ها)
     ```
 
-5. Without arguments, creates an zero-length typed array.
+5. بدون آرگومان‌ها یک آرایه‌ی typed با طول صفر می‌سازد.
 
-We can create a `TypedArray` directly, without mentioning `ArrayBuffer`. But a view cannot exist without an underlying `ArrayBuffer`, so gets created automatically in all these cases except the first one (when provided).
+ما می‌توانیم مستقیما یک `TypedArray` بسازیم، بدون اینکه به `ArrayBuffer` اشاره‌ای کنیم. ولی یک view بدون `ArrayBuffer` دربرگیرنده نمی‌تواند وجود دشاته باشد؛ در نتیجه در همه‌ی این موارد بجز مورد اول(هنگامی که فراهم شده است) به طور خودکار ساخته می@شود.
 
-To access the underlying `ArrayBuffer`, there are following properties in `TypedArray`:
-- `buffer` -- references the `ArrayBuffer`.
-- `byteLength` -- the length of the `ArrayBuffer`.
+برای دسترسی به `ArrayBuffer` دربرگیرنده، ویژگی‌های زیر در `TypedArray` وجود دارد:
+- `buffer` -- ارجاع به `ArrayBuffer`.
+- `byteLength` -- طول `ArrayBuffer`.
 
-So, we can always move from one view to another:
+بنابراین، ما همیشه می‌توانیم از یک view به دیگری برویم:
 ```js
 let arr8 = new Uint8Array([0, 1, 2, 3]);
 
-// another view on the same data
+// دیگر در همان داده view یک
 let arr16 = new Uint16Array(arr8.buffer);
 ```
 
 
-Here's the list of typed arrays:
+در ادامه لیست آرایه‌های typed آمده است:
 
-- `Uint8Array`, `Uint16Array`, `Uint32Array` -- for integer numbers of 8, 16 and 32 bits.
-  - `Uint8ClampedArray` -- for 8-bit integers, "clamps" them on assignment (see below).
-- `Int8Array`, `Int16Array`, `Int32Array` -- for signed integer numbers (can be negative).
-- `Float32Array`, `Float64Array` -- for signed floating-point numbers of 32 and 64 bits.
+- `Uint8Array`, `Uint16Array`, `Uint32Array` -- برای اعداد صحیح 8 و 16 و 32 بیتی
+  - `Uint8ClampedArray` -- برای اعداد صحیح 8 بیتی، آن‌ها را "clamps" می‌کند(در ادامه خواهید دید)
+- `Int8Array`, `Int16Array`, `Int32Array` -- برای اعداد صحیح علامت‌دار(می‌توانند منفی باشند)
+- `Float32Array`, `Float64Array` -- برای اعداد اعشاری علامت‌دار 32 و 64 بیتی
 
-```warn header="No `int8` or similar single-valued types"
-Please note, despite of the names like `Int8Array`, there's no single-value type like `int`, or `int8` in JavaScript.
+```هدر هشدار="بدون `int8` یا انواع مشابه با مقدار واحد"
 
-That's logical, as `Int8Array` is not an array of these individual values, but rather a view on `ArrayBuffer`.
+لطفا به خاطر داشته باشید، علی‌رغم نام‌هایی مانند `Int8Array`، هیچ نوعی با مقدار واحد مانند `int` یا `int8` در جاوااسکریپت وجود ندارد.
+
+این موضوع منطقی است، زیرا `Int8Array` یک آرایه از این مقادیر مجزا نیست، بلکه یک view روی `ArrayBuffer` است.
 ```
 
-### Out-of-bounds behavior
+### رفتار خارج از محدوده
 
-What if we attempt to write an out-of-bounds value into a typed array? There will be no error. But extra bits are cut-off.
+بنویسیم چه؟ هیچ خطایی وجود نخواهد داشت، اما بیت‌ههای اضافی حذف خواهند شد typed اگر بخواهیم یک مقدار خارج از محدوده را در یک آرایه‌ی
 
-For instance, let's try to put 256 into `Uint8Array`. In binary form, 256 is `100000000` (9 bits), but `Uint8Array` only provides 8 bits per value, that makes the available range from 0 to 255.
+به ازای هر مقدار 8 بیت دارد، پس بازه‌ی آن بین 0 تا 255 خواهد بود `Uint8Array` قرار دهیم. در حالت دودویی، 256 برابر `100000000`(9 بیت) خواهد بود، ولی `Uint8Array` به عنوان مثال، بیایید سعی کنیم 256 را در
 
-For bigger numbers, only the rightmost (less significant) 8 bits are stored, and the rest is cut off:
+:برای اعداد بزرگتر، فقط 8 بیت سمت راست(بیت‌های کم‌ارزش‌تر) ذخیره می‌شود، و بقیه بیت‌ها حذف می‌شوند
 
 ![](8bit-integer-256.svg)
 
-So we'll get zero.
+.در نتیجه صفر دریافت می‌کنیم
 
-For 257, the binary form is `100000001` (9 bits), the rightmost 8 get stored, so we'll have `1` in the array:
+:برای 257، حالت دودویی `100000001`(9 بیت) خواهد بود، 8 بیت سمت راست ذخیره می‌شوند، در نتیجه در آرایه `1` را داریم
 
 ![](8bit-integer-257.svg)
+ذخیره می‌شود 2<sup>8</sup> به عبارت دیگر، باقی‌مانده عدد
 
-In other words, the number modulo 2<sup>8</sup> is saved.
-
-Here's the demo:
+:یک نمونه
 
 ```js run
 let uint8array = new Uint8Array(16);
 
 let num = 256;
-alert(num.toString(2)); // 100000000 (binary representation)
+alert(num.toString(2)); // 100000000 (نمایش دودویی)
 
 uint8array[0] = 256;
 uint8array[1] = 257;
@@ -182,9 +183,9 @@ alert(uint8array[0]); // 0
 alert(uint8array[1]); // 1
 ```
 
-`Uint8ClampedArray` is special in this aspect, its behavior is different. It saves 255 for any number that is greater than 255, and 0 for any negative number. That behavior is useful for image processing.
+از این نظر، `Uint8ClampedArray` خاص است و رفتار متفاوتی دارد. این مورد به ازای هر عدد بزرگتر از 255، 255 و به ازای هر عدد منفی، 0 را ذخیره می‌کند. این رفتار ببرای پردازش تصویر مفید است.
 
-## TypedArray methods
+## متدهای TypedArray
 
 `TypedArray` has regular `Array` methods, with notable exceptions.
 
