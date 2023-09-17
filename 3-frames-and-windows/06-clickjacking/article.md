@@ -137,7 +137,7 @@ window.onbeforeunload = function() {
 `ALLOW-FROM domain`
 : گر parent document از دامنه‌ی داده شده باشد، درون یک فریم را مجاز می‌کند.
 
-For instance, Twitter uses `X-Frame-Options: SAMEORIGIN`.
+برای مثال، Twitter از `X-Frame-Options: SAMEORIGIN` استفاده می‌کند.
 
 ````online
 نتیجه اینجاست:
@@ -149,16 +149,16 @@ For instance, Twitter uses `X-Frame-Options: SAMEORIGIN`.
 <!-- ebook: prerender/ chrome headless dies and timeouts on this iframe -->
 <iframe src="https://twitter.com"></iframe>
 
-Depending on your browser, the `iframe` above is either empty or alerting you that the browser won't permit that page to be navigating in this way.
+بسته به مرورگرتان، `iframe` بالا یا خالی است یا به شما هشدار می‌دهد که مرورگر اجازه نمی‌دهد آن صفحه به این روش پیمایش کند.
 ````
 
-## Showing with disabled functionality
+## نمایش با عملکرد غیرفعال
 
-The `X-Frame-Options` header has a side effect. Other sites won't be able to show our page in a frame, even if they have good reasons to do so.
+هدر `X-Frame-Options` یک عارضه‌ی جانبی دارد. بقیه‌ی سایت‌ها قادر نخواهند بود که صفحه‌ی ما را در یک فریم نمایش دهند، حتی اگر دلایل خوبی داشته باشند که انجام دهند.
 
-So there are other solutions... For instance, we can "cover" the page with a `<div>` with styles `height: 100%; width: 100%;`, so that it will intercept all clicks. That `<div>` is to be removed if `window == top` or if we figure out that we don't need the protection.
+بنابراین، راه‌حل‌های دیگری وجود دارد... برای مثال، می‌توانیم یک صفحه را با یک `<div>` با استایل‌های `height: 100%; width: 100%;` "پوشش" دهیم، در نتیجه تمام کلیک‌ها را قطع می‌کند. اگر `window == top` یا متوجه شویم که به حفاظت نیازی نداریم، `<div>` باید حذف شود.
 
-Something like this:
+چیزی شبیه به این:
 
 ```html
 <style>
@@ -177,15 +177,15 @@ Something like this:
 </div>
 
 <script>
-  // there will be an error if top window is from the different origin
-  // but that's ok here
+  // اگر پنجره‌ی بالایی از منبع متفاوتی باشد، خطا خواهیم داشت
+  // اما اینجا اوکی است
   if (top.document.domain == document.domain) {
     protector.remove();
   }
 </script>
 ```
 
-The demo:
+نسخه‌ی پیش‌نمایش:
 
 [codetabs src="protector"]
 
