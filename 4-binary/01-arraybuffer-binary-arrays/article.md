@@ -1,4 +1,4 @@
-# ArrayBuffer، آرایه دودویی
+# ArrayBuffer, آرایه دودویی
 
 در توسعه‌ی وب، ما معمولا هنگام سروکار داشتن با فایل‌ها(ساختن، بارگذاری کردن، دانلود کردن) به داده‌های دودویی برخورد می‌کنیم. یکی دیگر از استفاده‌های رایج آن پردازش تصویر می‌باشد.
 
@@ -29,7 +29,7 @@ alert(buffer.byteLength); // 16
 
 **استفاده کنیم "View" ما باید از یک شی ،`ArrayBuffer` برای دستکاری کردن یک**
 
-A view object does not store anything on its own. It's the "eyeglasses" that give an interpretation of the bytes stored in the `ArrayBuffer`.
+را می‌دهد `ArrayBuffer` است که تفسیری از بایت‌های ذخیره شده در "eyeglasses" چیزی را در خود ذخیره نمی‌کند. این view یک شی
 
 For instance:
 
