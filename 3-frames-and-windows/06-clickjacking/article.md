@@ -191,31 +191,31 @@ window.onbeforeunload = function() {
 
 ## Samesite cookie attribute
 
-The `samesite` cookie attribute can also prevent clickjacking attacks.
+برای جلوگیری از حمله‌های clickjacking، می‌توان از `samesite` cookie attribute نیز استفاده کرد.
 
-A cookie with such attribute is only sent to a website if it's opened directly, not via a frame, or otherwise. More information in the chapter <info:cookie#samesite>.
+یک کوکی با این attribute فقط اگر به صورت مستقیم باز شده باشد، نه از طریق یک فریم، یا هر چیز دیگری، برای یک وبسایت فرستاده می‌شود. اطلاعات بیشتر در بخش <info:cookie#samesite>.
 
-If the site, such as Facebook, had `samesite` attribute on its authentication cookie, like this:
+اگر سایت، مثل Facebook، روی authentication cookie خود `samesite` attribute را داشت، مثل این:
 
 ```
 Set-Cookie: authorization=secret; samesite
 ```
 
-...Then such cookie wouldn't be sent when Facebook is open in iframe from another site. So the attack would fail.
+...آنگاه همچین کوکی وقتی Facebook در iframe از یک سایت دیگر باز می‌شود، فرستاده نمی‌شود. بنابراین حمله شکست می‌خورد.
 
-The `samesite` cookie attribute will not have an effect when cookies are not used. This may allow other websites to easily show our public, unauthenticated pages in iframes.
+وقتی کوکی‌ها استفاده نمی‌شوند، `samesite` cookie attribute تاثیری نخواهد داشت. این می‌تواند بع وبسایت‌ها اجازه دهد که به سادگی صفحات عمومی و احراز هویت نشده‌ی ما را در iframeها نمایش دهند.
 
-However, this may also allow clickjacking attacks to work in a few limited cases. An anonymous polling website that prevents duplicate voting by checking IP addresses, for example, would still be vulnerable to clickjacking because it does not authenticate users using cookies.
+با این حال، این ممکن است به حملات clickjacking در چند مورد محدود نیز اجازه دهد. برای مثال، یک وبسایت نظرسنجی ناشناس که با بررسی آدرس‌های IP از رای‌گیری تکراری جلوگیری می‌کند، همچنان در برابر clickjacking آسیب‌پذیر است زیرا کاربران را با استفاده از کوکی‌ها احراز هویت نمی‌کند.
 
-## Summary
+## خلاصه
 
-Clickjacking is a way to "trick" users into clicking on a victim site without even knowing what's happening. That's dangerous if there are important click-activated actions.
+یک راه برای "فریب دادن" کاربران که روی سایت قربانی کلیک کنند بدون اینکه حتی بدانند چه اتفاقی می‌افتد، Clickjacking است. اگر اقدامات مهم فعال شده با کلیک وجود داشته باشد، این خطرناک است.
 
-A hacker can post a link to their evil page in a message, or lure visitors to their page by some other means. There are many variations.
+یک هکر می‌تواند لینکی به صفحه‌ی شیطانی خود در یک پیام ارسال کند یا بازدیدکنندگان را با روش‌های دیگر به صفحه‌ی خود جذب کند. تنوع زیادی وجود دارد.
 
-From one perspective -- the attack is "not deep": all a hacker is doing is intercepting a single click. But from another perspective, if the hacker knows that after the click another control will appear, then they may use cunning messages to coerce the user into clicking on them as well.
+از یک منظر -- حمله "عمیق" نیست: تمام کاری که یک هکر انجام می‌دهد رهگیری یک کلیک است. اما از منظری دیگر، اگر هکر بداند که پس از کلیک، کنترل دیگری ظاهر می‌شود، ممکن است از پیام‌های حیله‌آمیز برای وادار کردن کاربر به کلیک کردن روی آن‌ها نیز استفاده کند.
 
-The attack is quite dangerous, because when we engineer the UI we usually don't anticipate that a hacker may click on behalf of the visitor. So vulnerabilities can be found in totally unexpected places.
+حمله بسیار خطرناک است، زیرا زمانی که ما رابط کاربری را مهندسی می‌کنیم، معمولاً پیش‌بینی نمی‌کنیم که یک هکر از طرف بازدیدکننده کلیک کند. بنابراین آسیب‌پذیری‌ها را می‌توان در مکان‌های کاملاً غیرمنتظره یافت.
 
-- It is recommended to use `X-Frame-Options: SAMEORIGIN` on pages (or whole websites) which are not intended to be viewed inside frames.
-- Use a covering `<div>` if we want to allow our pages to be shown in iframes, but still stay safe.
+- توصیه می‌شود از `X-Frame-Options: SAMEORIGIN` در صفحات (یا کل وب‌سایت‌ها) استفاده کنید که قرار نیست در داخل فریم‌ها مشاهده شوند.
+- اگر می‌خواهیم اجازه دهیم صفحاتمان در iframe نشان داده شوند، اما همچنان ایمن بمانیم، از پوشش `<div>` استفاده کنیم.
