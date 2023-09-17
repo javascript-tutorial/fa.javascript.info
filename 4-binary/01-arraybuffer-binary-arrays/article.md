@@ -25,9 +25,10 @@ alert(buffer.byteLength); // 16
 - برای دسترسی به بایت‌های جداگانه، یک شی "View" دیگر لازم است، نه `buffer[index]`.
 ```
 
-یک ناحیه از حافظه است. چه چیزی در آن ذخیره می‌شود؟ هیچ سرنخی وجود ندارد. فقط یک دنباله خالی از بایت‌ها`ArrayBuffer`.
 
-**برای دستکاری کردن یک `ArrayBuffer`، ما باید از یک شی "View" استفاده کنیم.**
+یک ناحیه از حافظه است. چه چیزی در آن ذخیره می‌شود؟ هیچ سرنخی `ArrayBuffer` .وجود ندارد. فقط یک دنباله خالی از بایت‌ها
+
+**استفاده کنیم "View" ما باید از یک شی ،`ArrayBuffer` برای دستکاری کردن یک
 A view object does not store anything on its own. It's the "eyeglasses" that give an interpretation of the bytes stored in the `ArrayBuffer`.
 
 For instance:
