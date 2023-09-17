@@ -33,7 +33,7 @@ alert(buffer.byteLength); // 16
 
 :برای مثال
 
-- **`Uint8Array`** -- گفته می‌شود "8-bit unsigned int" با هر بایت در `ArrayBuffer` مانند یک عدد جداگانه برخورد می‌کند که مقادیر مجاز آن از 0 تا 255 است.(یک بایت 8 بیت است پس فقط تا همان مقدار را می‌تواند نگه دارد.). به این مقدار `ArrayBuffer` با هر بایت در
+- **`Uint8Array`** -- مانند یک عدد جداگانه برخورد می‌کند که مقادیر مجاز آن از 0 تا 255 است.(یک بایت 8 بیت است پس فقط تا همان مقدار را می‌تواند نگه دارد.). به این مقدار یک عدد صحیح بدون علامت هشت بیتی گفته می‌شود `ArrayBuffer` با هر بایت در
 - **`Uint16Array`** -- treats every 2 bytes as an integer, with possible values from 0 to 65535. That's called a "16-bit unsigned integer".
 - **`Uint32Array`** -- treats every 4 bytes as an integer, with possible values from 0 to 4294967295. That's called a "32-bit unsigned integer".
 - **`Float64Array`** -- treats every 8 bytes as a floating point number with possible values from <code>5.0x10<sup>-324</sup></code> to <code>1.8x10<sup>308</sup></code>.
