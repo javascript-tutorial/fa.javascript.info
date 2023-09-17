@@ -38,32 +38,30 @@ alert(buffer.byteLength); // 16
 - **`Uint32Array`** -- برخورد می‌کند که مقادیر مجاز آن از 0 تا 4294967295 می‌باشد. به آن یک عدد صحیح بدون‌علامت 32-بیتی گفته می‌شود integer با هر 4 بایت به عنوان یک
 - **`Float64Array`** -- می‌باشد <code>1.8x10<sup>308</sup></code> تا <code>5.0x10<sup>-324</sup></code> رفتار می‌کند و مقادیر مجاز آن از float با هر 8 بایت به عنوان یک عدد
 
-So, the binary data in an `ArrayBuffer` of 16 bytes can be interpreted as 16 "tiny numbers", or 8 bigger numbers (2 bytes each), or 4 even bigger (4 bytes each), or 2 floating-point values with high precision (8 bytes each).
-
+با دقت بالا(هر کدام 8 بایت) تفسیر شود float یی با اندازه‌ی 16 بایت، می‌تواند به عنوان 16 عدد کوچک یا 8 عدد بزرگ‌تر (هر کدام 2 بایت) یا 4 عدد بزرگ‌تر از قبلی(هر کدام 4 بایت) یا 2 عدد `ArrayBuffer` بنابراین، یک داده‌ی دودویی درون
 ![](arraybuffer-views.svg)
 
-`ArrayBuffer` is the core object, the root of everything, the raw binary data.
+شی اصلی، ریشه‌ی همه چیز و داده‌ی باینری خام است `ArrayBuffer`
 
-But if we're going to write into it, or iterate over it, basically for almost any operation – we must use a view, e.g:
-
+مانند زیر استفاده کنیم view اما اگر بخواهیم هر عملیاتی روی آن انجام دهیم، از جمله، در آن بنویسیم، یا آن را پیمایش کتیم - باید از یک
 ```js run
-let buffer = new ArrayBuffer(16); // create a buffer of length 16
+let buffer = new ArrayBuffer(16); // ساخت یک بافر با طول 16
 
 *!*
-let view = new Uint32Array(buffer); // treat buffer as a sequence of 32-bit integers
+let view = new Uint32Array(buffer); // رفتار با بافر مانند یک دنباله از اعداد صحیح 32 بیتی
 
-alert(Uint32Array.BYTES_PER_ELEMENT); // 4 bytes per integer
+alert(Uint32Array.BYTES_PER_ELEMENT); // به ازای هر عدد صحیح، 4 بایت
 */!*
 
-alert(view.length); // 4, it stores that many integers
-alert(view.byteLength); // 16, the size in bytes
+alert(view.length); // 4, به این تعداد عدد صحیح در خود ذخیره می‌کند
+alert(view.byteLength); // 16, اندازه‌ی بایت‌ها
 
-// let's write a value
+// نوشتن یک مقدار
 view[0] = 123456;
 
-// iterate over values
+// پیمایش روی مقادیر
 for(let num of view) {
-  alert(num); // 123456, then 0, 0, 0 (4 values total)
+  alert(num); // ابتدا 123456 سپس 0 و 0 و 0(در مجموع 4 مقدار)
 }
 
 ```
