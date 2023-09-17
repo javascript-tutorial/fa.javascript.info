@@ -121,26 +121,26 @@ window.onbeforeunload = function() {
 
 ## X-Frame-Options
 
-The server-side header `X-Frame-Options` can permit or forbid displaying the page inside a frame.
+هدر سمت سرور `X-Frame-Options` می‌تواند نمایش صفحه را در یک فریم مجاز یا ممنوع کند.
 
-It must be sent exactly as HTTP-header: the browser will ignore it if found in HTML `<meta>` tag. So, `<meta http-equiv="X-Frame-Options"...>` won't do anything.
+این باید دقیقا به عنوان HTTP-header فرستاده شود: اگر مرورگر آن را در HTML `<meta>` tag پیدا کند، آن را نادیده می‌گیرد. بنابراین `<meta http-equiv="X-Frame-Options"...>` هیچ کاری انجام نخواهد داد.
 
-The header may have 3 values:
+هدر می‌نواند 3 مقدار داشته باشد:
 
 
 `DENY`
-: Never ever show the page inside a frame.
+: هیچ‌گاه صفحه را درون یک فریم نشان ندهید.
 
 `SAMEORIGIN`
-: Allow inside a frame if the parent document comes from the same origin.
+: اگر parent document از منبع یکسان بیاید، درون یک فریم را مجاز می‌کند.
 
 `ALLOW-FROM domain`
-: Allow inside a frame if the parent document is from the given domain.
+: گر parent document از دامنه‌ی داده شده باشد، درون یک فریم را مجاز می‌کند.
 
 For instance, Twitter uses `X-Frame-Options: SAMEORIGIN`.
 
 ````online
-Here's the result:
+نتیجه اینجاست:
 
 ```html
 <iframe src="https://twitter.com"></iframe>
