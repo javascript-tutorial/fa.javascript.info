@@ -245,27 +245,28 @@ dataView.setUint32(0, 0); // صفر قرار دادن یک عدد 4 بایتی،
 
 هنگامی که می‌خواهیم داده‌هایی با فرمت‌های درهم و برهم را در یک بافر ذخیره کنیم، `DataView` عالی است. به عنوان مثال، هنگامی که دنباله‌ای از جفت‌های(عدد صحیح 16 بیتی، عدد اعشاری 32 بیتی) را ذخیره می‌کنیم، `DataView` به آسانی اجازه دسترسی به آن‌ها را می‌دهد.
 
-## Summary
+## خلاصه
 
-`ArrayBuffer` is the core object, a reference to the fixed-length contiguous memory area.
+یک `ArrayBuffer`، شی اصلی است، یک ارجاع به یک ناحیه پیوسته از حافظه با طول ثابت.
 
-To do almost any operation on `ArrayBuffer`, we need a view.
+برای انجام تقریبا هر عملیاتی روی `ArrayBuffer`، ما به یک view نیاز داریم.
 
-- It can be a `TypedArray`:
-    - `Uint8Array`, `Uint16Array`, `Uint32Array` -- for unsigned integers of 8, 16, and 32 bits.
-    - `Uint8ClampedArray` -- for 8-bit integers, "clamps" them on assignment.
-    - `Int8Array`, `Int16Array`, `Int32Array` -- for signed integer numbers (can be negative).
-    - `Float32Array`, `Float64Array` -- for signed floating-point numbers of 32 and 64 bits.
-- Or a `DataView` -- the view that uses methods to specify a format, e.g. `getUint8(offset)`.
+- این می‌تواند یک `TypedArray` باشد:
+    - `Uint8Array`, `Uint16Array`, `Uint32Array` -- برای اعداد صحیح بدون عللامت 8 و 16 و 32 بیتی
+    - `Uint8ClampedArray` -- می‌کند "clamps" برای اعداد صحیح 8 بیتی، آن‌ها را
+    - `Int8Array`, `Int16Array`, `Int32Array` -- برای اعداد صحیح علامت‌دار(می‌توانند منفی باشند)
+    - `Float32Array`, `Float64Array` -- برای اعداد اعشاری علامت‌دار 32 و 64 بیتی
+- یا یک `DataView` -- همان viewیی که از متدها برای مشخص کردن یک فرمت استفاده می‌کند، مانند `getUint8(offset)`
 
-In most cases we create and operate directly on typed arrays, leaving `ArrayBuffer` under cover, as a "common denominator". We can access it as `.buffer` and make another view if needed.
+در بیشتر موارد، ما مستقیما آرایه‌های typed را می‌سازیم و اجرا می‌کنیم، `ArrayBuffer` را به عنوان یک "مخرج مشترک" تخت پوشش قرار می‌دهیم. می‌توانیم با `.buffer` به آن دسترسی پیدا کنیم و در صورت نیاز یک view دیگر ایجاد کنیم.
 
-There are also two additional terms, that are used in descriptions of methods that operate on binary data:
-- `ArrayBufferView` is an umbrella term for all these kinds of views.
-- `BufferSource` is an umbrella term for `ArrayBuffer` or `ArrayBufferView`.
+دو اصطلاح اضافی نیز وجود دارد، که برای توصیف متدهایی که روی داده‌های دودویی عملیات انجام می‌دهند استفاده می‌شوند:
 
-We'll see these terms in the next chapters. `BufferSource` is one of the most common terms, as it means "any kind of binary data" -- an `ArrayBuffer` or a view over it.
+- اصطلاح `ArrayBufferView`، از نوعی اصطلاح است که برای پوشش دسته‌ی گسترده‌ای از چیزها استفاده می‌شود، که در این مورد، برای تمام انواع viewها استفاده می‌شود.
 
-Here's a cheatsheet:
+- اصطلاح `BufferSource`، از نوعی اصطلاح است که برای پوشش دسته‌ی گسترده‌ای از چیزها استفاده می‌شود، که در این مورد، برای `ArrayBuffer` یا `ArrayBufferView` استفاده می‌شود.
 
+این اصطلاحات را در بخش بعد مشاهده خواهیم کرد. `BufferSource` یکی از رایج‌ترین اصطلاحات می‌باشد، که معنی آن "هر نوع از داده دودویی" است -- یک `ArrayBuffer` یا یک view روی آن.
+
+در اینجا یک چیت‌شیت(برگه تقلب) داریم:
 ![](arraybuffer-view-buffersource.svg)
