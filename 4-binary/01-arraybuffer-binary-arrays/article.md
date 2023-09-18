@@ -187,62 +187,64 @@ alert(uint8array[1]); // 1
 
 ## متدهای TypedArray
 
-`TypedArray` has regular `Array` methods, with notable exceptions.
+متدهای `TypedArray` مانند آرایه‌های معمولی می‌باشد ولی استثناهای قابل توجهی نیز وجود دارد.
 
-We can iterate, `map`, `slice`, `find`, `reduce` etc.
+ما می‌توانیم `map`، `slice`، `find`، `reduce` و غیره را پیمایش کنیم.
 
-There are few things we can't do though:
+هرچند، تعداد کمی کار وجود دارد که ما نمی‌توانیم انجام دهیم:
 
-- No `splice` -- we can't "delete" a value, because typed arrays are views on a buffer, and these are fixed, contiguous areas of memory. All we can do is to assign a zero.
-- No `concat` method.
+- بدون `splice` -- ما نمی‌توانیم یک مقدار را "حذف" کنیم، زیرا آرایه‌های typed، درواقع viewهایی روی یک بافر هستند که ناحیه‌هایی ثابت و پیوسته روی حافظه می‌باشند. تنها کاری که ما می‌توانیم انجام دهیم تخصیص یک صفر است.
 
-There are two additional methods:
+- بدون متد `concat`
 
-- `arr.set(fromArr, [offset])` copies all elements from `fromArr` to the `arr`, starting at position `offset` (0 by default).
-- `arr.subarray([begin, end])` creates a new view of the same type from `begin` to `end` (exclusive). That's similar to `slice` method (that's also supported), but doesn't copy anything -- just creates a new view, to operate on the given piece of data.
+دو ممتد اضافی نیز وجود دارد:
 
-These methods allow us to copy typed arrays, mix them, create new arrays from existing ones, and so on.
+- متد `arr.set(fromArr, [offset])` تمام اعضای `fromArr` را در `arr` کپی می‌کند، که این کپی کردن از محل `offset` شروع می‌شود.(حالت پیش‌فرض آن 0 است.)
+
+- متد `arr.subarray([begin, end])` یک view جدید از همان نوع را از `begin` تا `end` می‌سازد(انحصاری). این متد مانند متد `slice` است(آن متد نیز پشتیبانی می‌شود.) ولی چیزی را کپی نمی‌کند -- فقط یک view جدید می‌سازد که روی داده‌های داده شده، عمملیات انجام دهد.
+
+این متدها به ما اجازه می‌دهد که آرایه‌های typed را کپی کنیم، آن‌ها را با هم ترکیب کنیم، آرایه‌های جدید از آرایه‌های موجود بسازیم، و به همین ترتیب.
 
 
 
 ## DataView
 
-[DataView](mdn:/JavaScript/Reference/Global_Objects/DataView) is a special super-flexible "untyped" view over `ArrayBuffer`. It allows to access the data on any offset in any format.
+یک [DataView](mdn:/JavaScript/Reference/Global_Objects/DataView) یک view خاص فوق‌العاده انعطاف‌پذیر "untyped" روی `ArrayBuffer` است. DataView اجازه می‌هد که در هر offset و در هر فرمتی به داده‌ها دسترسی داشته باشیم.
 
-- For typed arrays, the constructor dictates what the format is. The whole array is supposed to be uniform. The i-th number is `arr[i]`.
-- With `DataView` we access the data with methods like `.getUint8(i)` or `.getUint16(i)`. We choose the format at method call time instead of the construction time.
+- برای آرایه‌های typed، سازنده فرمت را مشخص می‌کند. کل آرایه قرار است یکنواخت باشد. عدد iام، `arr[i]` است.
 
-The syntax:
+- با `DataView`، ما با متدهایی مانند `.getUint8(i)` یا `.getUint16(i)` به داده دسترسی پیدا می‌کنیم. ما فرمت را بجای هنگام ساخت، هنگام فراخوانی متد انتخاب می‌کنیم.
 
+سینتکس:
 ```js
 new DataView(buffer, [byteOffset], [byteLength])
 ```
 
-- **`buffer`** -- the underlying `ArrayBuffer`. Unlike typed arrays, `DataView` doesn't create a buffer on its own. We need to have it ready.
-- **`byteOffset`** -- the starting byte position of the view (by default 0).
-- **`byteLength`** -- the byte length of the view (by default till the end of `buffer`).
+- **`buffer`** --  بافر مخصوص خودش را نمی‌سازد. ما باید آن را آماده داشته باشیم typed برخلاف آرایه‌های `DataView` .دربرگیرنده `ArrayBuffer`
+- **`byteOffset`** -- (حالت پیش‌فرض 0 می‌باشد)view محل بایت شروع‌کننده‌ی
+- **`byteLength`** -- (حالت پیش‌فرض تا انتهای بافر می‌باشد)view طول بایت‌های
 
-For instance, here we extract numbers in different formats from the same buffer:
+برای نمونه، در اینجا ما اعداد یک بافر یکسان را در فرمت‌های مختلف استخراج کرده‌ایم:
 
 ```js run
-// binary array of 4 bytes, all have the maximal value 255
+// آرایه‌های دودویی 4 بایتی، که حداکثر مقدار همه‌ی آن‌ها 255 است
 let buffer = new Uint8Array([255, 255, 255, 255]).buffer;
 
 let dataView = new DataView(buffer);
 
-// get 8-bit number at offset 0
+// صفر offset دریافت یک عدد 8 بیتی در
 alert( dataView.getUint8(0) ); // 255
 
-// now get 16-bit number at offset 0, it consists of 2 bytes, together interpreted as 65535
-alert( dataView.getUint16(0) ); // 65535 (biggest 16-bit unsigned int)
+// صفر، این عدد از دو بایت تشکیل شده است که با هم 65535 را نشان می‌دهند offset حالا دریافت یک عدد 16 بیتی در
+alert( dataView.getUint16(0) ); // 65535 (بزرگترین عدد صحیح بدون‌علامت 16 بیتی)
 
-// get 32-bit number at offset 0
-alert( dataView.getUint32(0) ); // 4294967295 (biggest 32-bit unsigned int)
+//  صفر offset دریافت یک عدد 32 بیتی در
+alert( dataView.getUint32(0) ); // 4294967295 (بزرگترین عدد صحیح بدون‌علامت 32 بیتی)
 
-dataView.setUint32(0, 0); // set 4-byte number to zero, thus setting all bytes to 0
+dataView.setUint32(0, 0); // صفر قرار دادن یک عدد 4 بایتی، در نتیجه همه بایت‌ها را صفر می‌کنیم
 ```
 
-`DataView` is great when we store mixed-format data in the same buffer. For example, when we store a sequence of pairs (16-bit integer, 32-bit float), `DataView` allows to access them easily.
+هنگامی که می‌خواهیم داده‌هایی با فرمت‌های درهم و برهم را در یک بافر ذخیره کنیم، `DataView` عالی است. به عنوان مثال، هنگامی که دنباله‌ای از جفت‌های(عدد صحیح 16 بیتی، عدد اعشاری 32 بیتی) را ذخیره می‌کنیم، `DataView` به آسانی اجازه دسترسی به آن‌ها را می‌دهد.
 
 ## Summary
 
