@@ -1,4 +1,4 @@
 
-# Concatenate typed arrays
+# به‌هم پیوستن آرایه‌های typed
 
-Given an array of `Uint8Array`, write a function `concat(arrays)` that returns a concatenation of them into a single array.
+یک آرایه‌ از `Uint8Array` داده شده است. یک تابع `concat(arrays)` بنویسید که آن‌ها را در یک آرایه‌ی واحد به هم متصل کند و برگرداند.
