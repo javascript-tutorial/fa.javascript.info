@@ -21,7 +21,7 @@
 
       window.onbeforeunload = function() {
         window.onbeforeunload = null;
-        return "Want to leave without learning all the secrets (he-he)?";
+        return "می‌خواهی بدون اینکه تمام رازها را یادبگیری بروی؟ (ها-ها)";
       };
 
       document.body.insertAdjacentHTML('beforeend', '<iframe src="iframe.html">');
@@ -31,11 +31,11 @@
 
 <body>
 
-  <p>After a click on the button the visitor gets a "strange" question about whether they want to leave.</p>
+  <p>بعد از یک کلیک روی دکمه، بازدیدکننده یک سوال "عجیب" دریافت می‌کند دباره‌ی اینکه می‌خواهد ترک کند یا نه.</p>
 
-  <p>Probably they would respond "No", and the iframe protection is hacked.</p>
+  <p>احتمالا آن‌ها پاسخ می‌دهد "نه" و حفاظت آ‌ی‌فریم هک می‌شود.</p>
 
-  <button onclick="attack()">Add a "protected" iframe</button>
+  <button onclick="attack()">یک آی‌فریم "حفاظت‌شده" اضافه کنید.</button>
 
 </body>
 </html>
