@@ -52,21 +52,21 @@ let binaryString = uint8Array.subarray(1, -1);
 alert( new TextDecoder().decode(binaryString) ); // Hello
 ```
 
-## TextEncoder
+## رمزگذار متن
 
-[TextEncoder](https://encoding.spec.whatwg.org/#interface-textencoder) does the reverse thing -- converts a string into bytes.
+شی رمزگذار متن([TextEncoder](https://encoding.spec.whatwg.org/#interface-textencoder)) برعکس کار را انجام می‌دهد -- یک رشته را به بایت‌ها تبدیل می‌کند.
 
-The syntax is:
+سینتکس آن به صورت زیر است:
 
 ```js
 let encoder = new TextEncoder();
 ```
 
-The only encoding it supports is "utf-8".
+تنها رمزگذاری‌ای که رمزگذار متن از آن پشتیبانی می‌کند "utf-8" می‌باشد.
 
-It has two methods:
-- **`encode(str)`** -- returns `Uint8Array` from a string.
-- **`encodeInto(str, destination)`** -- encodes `str` into `destination` that must be `Uint8Array`.
+رمزگذار متن دو متد دارد:
+- متد **`encode(str)`** -- از یک رشته، `Uint8Array` را برمیگرداند.
+- متد **`encodeInto(str, destination)`** -- رشته‌ی `str` را درون `destination` که باید `Uint8Array` باشد، رمزگذاری می‌کند.
 
 ```js run
 let encoder = new TextEncoder();
