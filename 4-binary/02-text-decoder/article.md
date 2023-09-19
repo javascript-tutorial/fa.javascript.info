@@ -1,30 +1,30 @@
-# TextDecoder and TextEncoder
+# رمزگشای متن و رمزگذار متن
 
-What if the binary data is actually a string? For instance, we received a file with textual data.
+اگر داده‌ی دودویی ما درواقع یک رشته باشد چه؟ برای نمونه، ما یک فایل با داده‌ی متنی دریافت می‌کنیم.
 
-The built-in [TextDecoder](https://encoding.spec.whatwg.org/#interface-textdecoder) object allows one to read the value into an actual JavaScript string, given the buffer and the encoding.
+شی رمزگشای متن([TextDecoder](https://encoding.spec.whatwg.org/#interface-textdecoder)) درونی، به یک نفر اجازه می‌دهد که با توجه به بافر و رمزگذاری داده شده، مقدار را در یک رشته‌ی واقعی جاوااسکریپت بخواند.
 
-We first need to create it:
+ابتدا ما نیاز به ساخت آن داریم:
 ```js
 let decoder = new TextDecoder([label], [options]);
 ```
 
-- **`label`** -- the encoding, `utf-8` by default, but `big5`, `windows-1251` and many other are also supported.
-- **`options`** -- optional object:
-  - **`fatal`** -- boolean, if `true` then throw an exception for invalid (non-decodable) characters, otherwise (default) replace them with character `\uFFFD`.
-  - **`ignoreBOM`** -- boolean, if `true` then ignore BOM (an optional byte-order Unicode mark), rarely needed.
+- **`label`** -- و برخی دیگر از رمزگذارای‌ها نیز پشتیبانی می‌شوند `windows-1251` و `big5` است اما `utf-8` رمزگذاری، به طور پیش فرض
+- **`options`** -- :شی اختیاری
+  - **`fatal`** -- جایگذاری می‌کند `\uFFFD` برای کاراکتر غیرقابل قبول (غیرقابل رمزگشایی) پرتاب می‌شود. در غیر این صورت (که حالت پیش‌فرض می‌باشد)، آن‌ها را با کاراکتر (exception)باشد، یک استثنا `true` اگر مقدار آن .boolean از جنس
+  - **`ignoreBOM`** -- اختیاری مرتب شده برحسب بایت) که به ندرت به آن نیاز پیدا می‌شود را نادیده می‌گیرد unicode یک علامت)BOM ،باشد `true` اگر مقدار آن .boolean از جنس
 
-...And then decode:
+...و سپس رمزگشایی کنید:
 
 ```js
 let str = decoder.decode([input], [options]);
 ```
 
-- **`input`** -- `BufferSource` to decode.
-- **`options`** -- optional object:
-  - **`stream`** -- true for decoding streams, when `decoder` is called repeatedly with incoming chunks of data. In that case a multi-byte character may occasionally split between chunks. This options tells `TextDecoder` to memorize "unfinished" characters and decode them when the next chunk comes.
+- **`input`** -- برای رمزگشایی (`BufferSource`)منبع
+- **`options`** -- :شی اختیاری
+  - **`stream`** -- ها، هنگامی که رمزگشا برای مقادیر قابل توجه داده‌ها مکررا فراخوانی می‌شود، درست است. در این مورد، ممکن است یک کاراکتر چند بایتی، برخی مواقع بین بخش‌هایی از داده‌ها تقسیم شود. این امکان به رمزگشای متن می‌گوید که کاراکترهای "ناتمام" را به خاطر داشته باشد و هنگامی که بخش بعدی داده وارد شد، آن‌ها را رمزگشایی کندstream برای رمزگشایی
 
-For instance:
+برای نمونه:
 
 ```js run
 let uint8Array = new Uint8Array([72, 101, 108, 108, 111]);
@@ -39,14 +39,14 @@ let uint8Array = new Uint8Array([228, 189, 160, 229, 165, 189]);
 alert( new TextDecoder().decode(uint8Array) ); // 你好
 ```
 
-We can decode a part of the buffer by creating a subarray view for it:
+ما می‌توانیم بخشی از یک بافر را با ساخت یک view زیرآرایه برای آن، رمزگشایی کنیم:
 
 
 ```js run
 let uint8Array = new Uint8Array([0, 72, 101, 108, 108, 111, 0]);
 
-// the string is in the middle
-// create a new view over it, without copying anything
+// رشته در وسط می‌باشد
+// جدید روی آن، بدون کپی کردن چیزی view ساخت یک
 let binaryString = uint8Array.subarray(1, -1);
 
 alert( new TextDecoder().decode(binaryString) ); // Hello
