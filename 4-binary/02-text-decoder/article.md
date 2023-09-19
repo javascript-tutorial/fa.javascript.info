@@ -1,30 +1,30 @@
-# TextDecoder and TextEncoder
+# رمزگشای متن و رمزگذار متن
 
-What if the binary data is actually a string? For instance, we received a file with textual data.
+اگر داده‌ی دودویی ما درواقع یک رشته باشد چه؟ برای نمونه، ما یک فایل با داده‌ی متنی دریافت می‌کنیم.
 
-The built-in [TextDecoder](https://encoding.spec.whatwg.org/#interface-textdecoder) object allows one to read the value into an actual JavaScript string, given the buffer and the encoding.
+شی رمزگشای متن([TextDecoder](https://encoding.spec.whatwg.org/#interface-textdecoder)) درونی، به یک نفر اجازه می‌دهد که با توجه به بافر و رمزگذاری داده شده، مقدار را در یک رشته‌ی واقعی جاوااسکریپت بخواند.
 
-We first need to create it:
+ابتدا ما نیاز به ساخت آن داریم:
 ```js
 let decoder = new TextDecoder([label], [options]);
 ```
 
-- **`label`** -- the encoding, `utf-8` by default, but `big5`, `windows-1251` and many other are also supported.
-- **`options`** -- optional object:
-  - **`fatal`** -- boolean, if `true` then throw an exception for invalid (non-decodable) characters, otherwise (default) replace them with character `\uFFFD`.
-  - **`ignoreBOM`** -- boolean, if `true` then ignore BOM (an optional byte-order Unicode mark), rarely needed.
+- شی **`label`** -- رمزگذاری، به طور پیش فرض `utf-8` است اما `big5` و `windows-1251` و برخی دیگر از رمزگذارای‌ها نیز پشتیبانی می‌شوند.
+- شی **`options`** -- شی اختیاری:
+  - شی **`fatal`** -- از جنس boolean. اگر مقدار آن `true` باشد، یک استثنا(exception) برای کاراکتر غیرقابل قبول (غیرقابل رمزگشایی) پرتاب می‌شود. در غیر این صورت (که حالت پیش‌فرض می‌باشد)، آن‌ها را با کاراکتر `\uFFFD` جایگذاری می‌کند.
+  - شی **`ignoreBOM`** -- از جنس boolean. اگر مقدار آن `true` باشد، BOM(یک علامت unicode اختیاری مرتب شده برحسب بایت) که به ندرت به آن نیاز پیدا می‌شود را نادیده می‌گیرد.
 
-...And then decode:
+...و سپس رمزگشایی کنید:
 
 ```js
 let str = decoder.decode([input], [options]);
 ```
 
-- **`input`** -- `BufferSource` to decode.
-- **`options`** -- optional object:
-  - **`stream`** -- true for decoding streams, when `decoder` is called repeatedly with incoming chunks of data. In that case a multi-byte character may occasionally split between chunks. This options tells `TextDecoder` to memorize "unfinished" characters and decode them when the next chunk comes.
+- شی **`input`** -- برای رمزگشایی (`BufferSource`)منبع
+- شی **`options`** -- شی اختیاری:
+  - شی **`stream`** -- برای رمزگشایی streamها، هنگامی که رمزگشا برای مقادیر قابل توجه داده‌ها مکررا فراخوانی می‌شود، درست است. در این مورد، ممکن است یک کاراکتر چند بایتی، برخی مواقع بین بخش‌هایی از داده‌ها تقسیم شود. این امکان به رمزگشای متن می‌گوید که کاراکترهای "ناتمام" را به خاطر داشته باشد و هنگامی که بخش بعدی داده وارد شد، آن‌ها را رمزگشایی کند.
 
-For instance:
+برای نمونه:
 
 ```js run
 let uint8Array = new Uint8Array([72, 101, 108, 108, 111]);
@@ -39,34 +39,34 @@ let uint8Array = new Uint8Array([228, 189, 160, 229, 165, 189]);
 alert( new TextDecoder().decode(uint8Array) ); // 你好
 ```
 
-We can decode a part of the buffer by creating a subarray view for it:
+ما می‌توانیم بخشی از یک بافر را با ساخت یک view زیرآرایه برای آن، رمزگشایی کنیم:
 
 
 ```js run
 let uint8Array = new Uint8Array([0, 72, 101, 108, 108, 111, 0]);
 
-// the string is in the middle
-// create a new view over it, without copying anything
+// رشته در وسط می‌باشد
+// جدید روی آن، بدون کپی کردن چیزی view ساخت یک
 let binaryString = uint8Array.subarray(1, -1);
 
 alert( new TextDecoder().decode(binaryString) ); // Hello
 ```
 
-## TextEncoder
+## رمزگذار متن
 
-[TextEncoder](https://encoding.spec.whatwg.org/#interface-textencoder) does the reverse thing -- converts a string into bytes.
+شی رمزگذار متن([TextEncoder](https://encoding.spec.whatwg.org/#interface-textencoder)) برعکس کار را انجام می‌دهد -- یک رشته را به بایت‌ها تبدیل می‌کند.
 
-The syntax is:
+سینتکس آن به صورت زیر است:
 
 ```js
 let encoder = new TextEncoder();
 ```
 
-The only encoding it supports is "utf-8".
+تنها رمزگذاری‌ای که رمزگذار متن از آن پشتیبانی می‌کند "utf-8" می‌باشد.
 
-It has two methods:
-- **`encode(str)`** -- returns `Uint8Array` from a string.
-- **`encodeInto(str, destination)`** -- encodes `str` into `destination` that must be `Uint8Array`.
+رمزگذار متن دو متد دارد:
+- متد **`encode(str)`** -- از یک رشته، `Uint8Array` را برمیگرداند.
+- متد **`encodeInto(str, destination)`** -- رشته‌ی `str` را درون `destination` که باید `Uint8Array` باشد، رمزگذاری می‌کند.
 
 ```js run
 let encoder = new TextEncoder();
