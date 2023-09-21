@@ -2,9 +2,9 @@ importance: 2
 
 ---
 
-# Syntax check
+# بررسی سینتکس
 
-What is the result of this code?
+خروجی کد زیر چیست؟
 
 
 ```js no-beautify
@@ -16,4 +16,4 @@ let user = {
 (user.go)()
 ```
 
-P.S. There's a pitfall :)
+نکته: سوال دام دار است (یعنی نکته دارد) :)
