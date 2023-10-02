@@ -71,6 +71,7 @@ growing.onclick = function() {
 ```
 
 حالا بیایید ویژگی های انیمیشن را یکی یکی پوشش دهیم.
+
 ## transition-property
 
 In `transition-property`, we write a list of properties to animate, for instance: `left`, `margin-left`, `height`, `color`. Or we could write `all`, which means "animate all properties".
