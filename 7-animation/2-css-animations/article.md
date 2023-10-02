@@ -1,16 +1,16 @@
 # CSS-animations
 
-CSS animations make it possible to do simple animations without JavaScript at all.
+نیمیشن‌های CSS امکان انجام انیمیشن‌های ساده را بدون جاوا اسکریپت فراهم می‌کنند.
 
-JavaScript can be used to control CSS animations and make them even better, with little code.
+جاوا اسکریپت می تواند برای کنترل انیمیشن های CSS و حتی بهتر کردن آنها با کد کمی استفاده شود.
 
-## CSS transitions [#css-transition]
+## انتقال CSS [#css-transition]
 
-The idea of CSS transitions is simple. We describe a property and how its changes should be animated. When the property changes, the browser paints the animation.
+ایده انتقال CSS ساده است. ما یک ویژگی را توضیح می دهیم و چگونه تغییرات آن باید متحرک شود. هنگامی که ویژگی تغییر می کند، مرورگر انیمیشن را رنگ می کند.
 
-That is, all we need is to change the property, and the fluid transition will be done by the browser.
+یعنی تنها چیزی که نیاز داریم تغییر ویژگی است و انتقال سیال توسط مرورگر انجام می شود.
 
-For instance, the CSS below animates changes of `background-color` for 3 seconds:
+برای مثال، CSS زیر تغییرات 'رنگ پس‌زمینه' را به مدت ۳ ثانیه متحرک می‌کند:
 
 ```css
 .animated {
@@ -19,9 +19,9 @@ For instance, the CSS below animates changes of `background-color` for 3 seconds
 }
 ```
 
-Now if an element has `.animated` class, any change of `background-color` is animated during 3 seconds.
+حال اگر عنصری دارای کلاس '.animated' باشد، هر تغییری در 'رنگ پس‌زمینه' در طول 3 ثانیه متحرک می‌شود.
 
-Click the button below to animate the background:
+برای متحرک سازی پس زمینه روی دکمه زیر کلیک کنید:
 
 ```html run autorun height=60
 <button id="color">Click me</button>
@@ -40,16 +40,16 @@ Click the button below to animate the background:
 </script>
 ```
 
-There are 4 properties to describe CSS transitions:
+4 ویژگی برای توصیف انتقال CSS وجود دارد:
 
 - `transition-property`
 - `transition-duration`
 - `transition-timing-function`
 - `transition-delay`
 
-We'll cover them in a moment, for now let's note that the common `transition` property allows declaring them together in the order: `property duration timing-function delay`, as well as animating multiple properties at once.
+ما آنها را در یک لحظه پوشش خواهیم داد، فعلاً توجه داشته باشیم که ویژگی مشترک 'transition' اجازه می دهد تا آنها را با هم به ترتیب اعلام کنیم: 'تأخیر زمان بندی-عملکرد مدت زمان' و همچنین متحرک سازی چندین ویژگی به طور همزمان.
 
-For instance, this button animates both `color` and `font-size`:
+به عنوان مثال، این دکمه هم `color` و هم `font-size` را متحرک می کند:
 
 ```html run height=80 autorun no-beautify
 <button id="growing">Click me</button>
@@ -70,8 +70,7 @@ growing.onclick = function() {
 </script>
 ```
 
-Now, let's cover animation properties one by one.
-
+حالا بیایید ویژگی های انیمیشن را یکی یکی پوشش دهیم.
 ## transition-property
 
 In `transition-property`, we write a list of properties to animate, for instance: `left`, `margin-left`, `height`, `color`. Or we could write `all`, which means "animate all properties".
