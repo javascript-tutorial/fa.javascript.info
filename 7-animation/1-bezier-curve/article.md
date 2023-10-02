@@ -52,7 +52,8 @@
 در اینجا چند نمونه آورده شده است:
 
 ![](bezier-car.svg) ![](bezier-letter.svg) ![](bezier-vase.svg)
-## De Casteljau's algorithm
+
+## De Casteljau's الگوریتم
 
 یک فرمول ریاضی برای منحنی های Bezier وجود دارد، اما اجازه دهید کمی بعد آن را پوشش دهیم، زیرا
 [الگوریتم De Casteljau](https://en.wikipedia.org/wiki/De_Casteljau%27s_algorithm) با تعریف ریاضی یکسان است و به صورت بصری نحوه ساخت آن را نشان می دهد.
