@@ -10,7 +10,7 @@
 لطفاً وقت خود را صرف مطالعه و درک مفهوم کنید، این به شما کمک خواهد کرد.
 ```
 
-## Control points
+## نقاط کنترلی
 
 یگ [bezier curve](https://en.wikipedia.org/wiki/B%C3%A9zier_curve) توسط control points تعریف می شود.
 
@@ -147,7 +147,7 @@
 ```
 
 
-## Maths
+## ریاضی
 
 A Bezier curve can be described using a mathematical formula.
 همانطور که دیدیم - در واقع نیازی به دانستن آن نیست، اکثر مردم فقط با حرکت دادن نقاط با ماوس منحنی را ترسیم می کنند. اما اگر به ریاضیات علاقه دارید - اینجاست.
@@ -181,7 +181,7 @@ A Bezier curve can be described using a mathematical formula.
 
 اکنون که «t» از «0» تا «1» اجرا می شود، مجموعه مقادیر «(x,y)» برای هر «t» منحنی چنین نقاط کنترلی را تشکیل می دهد.
 
-## Summary
+## خلاصه
 
 منحنی های Bezier با نقاط کنترل آنها تعریف می شوند.
 
