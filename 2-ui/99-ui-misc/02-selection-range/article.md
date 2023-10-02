@@ -358,8 +358,6 @@ Click buttons to run methods on the selection, "resetExample" to reset it.
 
 یک تفاوت بسیار مهم بین selection anchor/focus و `Range` start/end
 
-تفاوت‌های مهمی بین لنگر/فوکوس انتخاب در مقایسه با `Range` start/end وجود دارد.
-
 همانطور که می دانیم، اشیاء  `Range` همیشه شروع خود را قبل از پایان دارند.
 
 برای انتخاب، همیشه اینطور نیست.
@@ -367,6 +365,7 @@ Click buttons to run methods on the selection, "resetExample" to reset it.
 انتخاب چیزی با ماوس را می توان در هر دو جهت انجام داد:  "left-to-right" یا  "right-to-left".
 
 به عبارت دیگر، وقتی دکمه ماوس را فشار داده و سپس در سند به جلو حرکت می کند، انتهای آن (focus) بعد از شروع آن (anchor) خواهد بود.
+
 به عنوان مثال. اگر کاربر شروع به انتخاب با ماوس کند و از "مثال" به "مورب" برود:
 
 ![](selection-direction-forward.svg)
