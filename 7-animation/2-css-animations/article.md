@@ -74,26 +74,24 @@ growing.onclick = function() {
 
 ## transition-property
 
-In `transition-property`, we write a list of properties to animate, for instance: `left`, `margin-left`, `height`, `color`. Or we could write `all`, which means "animate all properties".
+در «transition-property»، ما فهرستی از ویژگی‌ها را برای متحرک کردن می‌نویسیم، به‌عنوان مثال: `left`, `margin-left`, `height`, `color`. یا می‌توانیم `all` را بنویسیم که به معنای «animate به همه ویژگی‌ها» است.
 
-Do note that, there are properties which can not be animated. However, [most of the generally used properties are animatable](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animated_properties).
+توجه داشته باشید که ویژگی هایی وجود دارد که نمی توان آنها را متحرک کرد. با این حال، [بیشتر ویژگی‌هایی که معمولاً مورد استفاده قرار می‌گیرند متحرک هستند](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animated_properties).
 
-## transition-duration
+## مدت زمان انتقال
 
-In `transition-duration` we can specify how long the animation should take. The time should be in [CSS time format](https://www.w3.org/TR/css3-values/#time): in seconds `s` or milliseconds `ms`.
+در 'transition-duration' می‌توانیم مشخص کنیم که انیمیشن چقدر طول می‌کشد. زمان باید در [قالب زمان CSS](https://www.w3.org/TR/css3-values/#time): بر حسب ثانیه یا میلی ثانیه «ms» باشد.
 
 ## transition-delay
 
-In `transition-delay` we can specify the delay *before* the animation. For instance, if `transition-delay` is `1s` and `transition-duration` is `2s`, then the animation starts 1 second after the property change and the total duration will be 2 seconds.
+در `transition-delay` می‌توانیم تاخیر *قبل از* انیمیشن را مشخص کنیم. برای مثال، اگر `تاخیر انتقال` `1 ثانیه` و `مدت انتقال` `2 ثانیه` باشد، انیمیشن 1 ثانیه پس از تغییر ویژگی شروع می‌شود و مدت زمان کل 2 ثانیه خواهد بود.
 
-Negative values are also possible. Then the animation is shown immediately, but the starting point of the animation will be after given value (time). For example, if `transition-delay` is `-1s` and `transition-duration` is `2s`, then animation starts from the halfway point and total duration will be 1 second.
+مقادیر منفی نیز ممکن است. سپس انیمیشن بلافاصله نشان داده می شود، اما نقطه شروع انیمیشن پس از مقدار داده شده (زمان) خواهد بود. به عنوان مثال، اگر `تاخیر انتقال` `-۱ ثانیه` و `مدت انتقال` `۲ ثانیه` باشد، انیمیشن از نیمه شروع می‌شود و مدت زمان کل ۱ ثانیه خواهد بود.
 
-Here the animation shifts numbers from `0` to `9` using CSS `translate` property:
-
+در اینجا انیمیشن با استفاده از ویژگی `translate` CSS اعداد را از `0` به `9` تغییر می‌دهد:
 [codetabs src="digits"]
 
-The `transform` property is animated like this:
-
+ویژگی `transform` به شکل زیر متحرک است:
 ```css
 #stripe.animate {
   transform: translate(-90%);
@@ -102,19 +100,18 @@ The `transform` property is animated like this:
 }
 ```
 
-In the example above JavaScript adds the class `.animate` to the element -- and the animation starts:
+در مثال بالا جاوا اسکریپت کلاس `.animate` را به عنصر اضافه می کند -- و انیمیشن شروع می شود:
 
 ```js
 stripe.classList.add('animate');
 ```
 
-We could also start it from somewhere in the middle of the transition, from an exact number, e.g. corresponding to the current second, using a negative `transition-delay`.
+ما همچنین می‌توانیم آن را از جایی در میانه انتقال، از یک عدد دقیق شروع کنیم، به عنوان مثال. متناظر با ثانیه فعلی، با استفاده از `transition-delay` منفی.
 
-Here if you click the digit -- it starts the animation from the current second:
-
+در اینجا اگر روی رقم کلیک کنید -- انیمیشن را از ثانیه فعلی شروع می کند:
 [codetabs src="digits-negative-delay"]
 
-JavaScript does it with an extra line:
+جاوا اسکریپت این کار را با یک خط اضافی انجام می دهد:
 
 ```js
 stripe.onclick = function() {
@@ -127,43 +124,40 @@ stripe.onclick = function() {
 };
 ```
 
-## transition-timing-function
+## تابع انتقال-زمان
 
-The timing function describes how the animation process is distributed along its timeline. Will it start slowly and then go fast, or vice versa.
+تابع زمان بندی نحوه توزیع فرآیند انیمیشن در طول جدول زمانی آن را توصیف می کند. آیا به آرامی شروع می شود و سپس سریع می رود یا برعکس.
 
-It appears to be the most complicated property at first. But it becomes very simple if we devote a bit time to it.
+به نظر می رسد در ابتدا پیچیده ترین ویژگی باشد. اما اگر کمی زمان را به آن اختصاص دهیم بسیار ساده می شود.
 
-That property accepts two kinds of values: a Bezier curve or steps. Let's start with the curve, as it's used more often.
+این ویژگی دو نوع مقدار را می پذیرد: منحنی Bezier یا مراحل. بیایید با منحنی شروع کنیم، زیرا بیشتر استفاده می شود.
 
-### Bezier curve
+### Bezier منحنی
 
-The timing function can be set as a [Bezier curve](/bezier-curve) with 4 control points that satisfy the conditions:
+تابع زمان بندی را می توان به عنوان یک [منحنی Bezier](/bezier-curve) با 4 نقطه کنترل که شرایط را برآورده می کند تنظیم کرد:
+1. اولین نقطه کنترل: `(0,0)`.
+2. آخرین نقطه کنترل: `(1,1)`.
+3. برای نقاط میانی، مقادیر `x` باید در بازه `0..1` باشد، `y` می تواند هر چیزی باشد.
 
-1. First control point: `(0,0)`.
-2. Last control point: `(1,1)`.
-3. For intermediate points, the values of `x` must be in the interval `0..1`, `y` can be anything.
+نحو برای منحنی Bezier در `CSS: cubic-bezier(x2، y2، x3، y3)`. در اینجا باید فقط نقاط کنترل 2 و 3 را مشخص کنیم، زیرا اولین نقطه روی `(0,0)` ثابت شده است و نقطه چهارم `(1،1)` است.
 
-The syntax for a Bezier curve in CSS: `cubic-bezier(x2, y2, x3, y3)`. Here we need to specify only 2nd and 3rd control points, because the 1st one is fixed to `(0,0)` and the 4th one is `(1,1)`.
+تابع زمان بندی سرعت فرآیند انیمیشن را توصیف می کند.
 
-The timing function describes how fast the animation process goes.
+- محور `x` زمان است: `0` -- شروع، `1` -- پایان `transition-duration`.
+- محور `y` تکمیل فرآیند را مشخص می کند: `0` -- مقدار شروع ویژگی، `1` -- مقدار نهایی.
 
-- The `x` axis is the time: `0` -- the start, `1` -- the end of `transition-duration`.
-- The `y` axis specifies the completion of the process: `0` -- the starting value of the property, `1` -- the final value.
+ساده ترین حالت زمانی است که انیمیشن به طور یکنواخت و با همان سرعت خطی پیش می رود. این را می توان با منحنی `cubic-bezier(0، 0، 1، 1)` مشخص کرد.
 
-The simplest variant is when the animation goes uniformly, with the same linear speed. That can be specified by the curve `cubic-bezier(0, 0, 1, 1)`.
-
-Here's how that curve looks:
+در اینجا این منحنی به نظر می رسد:
 
 ![](bezier-linear.svg)
 
-...As we can see, it's just a straight line. As the time (`x`) passes, the completion (`y`) of the animation steadily goes from `0` to `1`.
+... همانطور که می بینیم، فقط یک خط مستقیم است. با گذشت زمان (`x`)، تکمیل (`y`) انیمیشن به طور پیوسته از 0 به 1 می رود.
 
-The train in the example below goes from left to right with the permanent speed (click it):
-
+قطار در مثال زیر از چپ به راست با سرعت دائمی حرکت می کند (روی آن کلیک کنید):
 [codetabs src="train-linear"]
 
-The CSS `transition` is based on that curve:
-
+`انتقال` CSS بر اساس آن منحنی است:
 ```css
 .train {
   left: 0;
@@ -172,18 +166,17 @@ The CSS `transition` is based on that curve:
 }
 ```
 
-...And how can we show a train slowing down?
+... و چگونه می توانیم قطاری را در حال کاهش سرعت نشان دهیم؟
 
-We can use another Bezier curve: `cubic-bezier(0.0, 0.5, 0.5 ,1.0)`.
+می‌توانیم از منحنی دیگر Bezier استفاده کنیم: `cubic-bezier(0.0، 0.5، 0.5، 1.0)`.
 
-The graph:
+نمودار:
 
 ![](train-curve.svg)
 
-As we can see, the process starts fast: the curve soars up high, and then slower and slower.
+همانطور که می بینیم، این روند سریع شروع می شود: منحنی به اوج می رسد و سپس کندتر و کندتر می شود.
 
-Here's the timing function in action (click the train):
-
+در اینجا تابع زمان بندی در عمل آمده است (روی train کلیک کنید):
 [codetabs src="train"]
 
 CSS:
@@ -195,20 +188,21 @@ CSS:
 }
 ```
 
-There are several built-in curves: `linear`, `ease`, `ease-in`, `ease-out` and `ease-in-out`.
+  چندین منحنی داخلی وجود دارد: `linear`, `ease`, `ease-in`, `ease-out` و `ease-in-out`.
+.
 
-The `linear` is a shorthand for `cubic-bezier(0, 0, 1, 1)` -- a straight line, which we described above.
+`linear` مخفف `cubic-bezier(0، 0، 1، 1)` است - یک خط مستقیم، که در بالا توضیح دادیم.
 
-Other names are shorthands for the following `cubic-bezier`:
+نام‌های دیگر مخفف عبارت `cubic-bezier` زیر هستند:
 
 | <code>ease</code><sup>*</sup> | <code>ease-in</code> | <code>ease-out</code> | <code>ease-in-out</code> |
 |-------------------------------|----------------------|-----------------------|--------------------------|
 | <code>(0.25, 0.1, 0.25, 1.0)</code> | <code>(0.42, 0, 1.0, 1.0)</code> | <code>(0, 0, 0.58, 1.0)</code> | <code>(0.42, 0, 0.58, 1.0)</code> |
 | ![ease, figure](ease.svg) | ![ease-in, figure](ease-in.svg) | ![ease-out, figure](ease-out.svg) | ![ease-in-out, figure](ease-in-out.svg) |
 
-`*` -- by default, if there's no timing function, `ease` is used.
+`*` -- به‌طور پیش‌فرض، اگر تابع زمان‌بندی وجود نداشته باشد، `ease` استفاده می‌شود.
 
-So we could use `ease-out` for our slowing down train:
+بنابراین می‌توانیم از `ease-out` برای کاهش سرعت قطار خود استفاده کنیم:
 
 ```css
 .train {
@@ -218,13 +212,13 @@ So we could use `ease-out` for our slowing down train:
 }
 ```
 
-But it looks a bit differently.
+اما کمی متفاوت به نظر می رسد.
 
-**A Bezier curve can make the animation exceed its range.**
+**یک منحنی Bezier می تواند باعث شود که انیمیشن از محدوده خود فراتر رود.**
 
-The control points on the curve can have any `y` coordinates: even negative or huge ones. Then the Bezier curve would also extend very low or high, making the animation go beyond its normal range.
+نقاط کنترل روی منحنی می توانند هر مختصات `y` داشته باشند: حتی منفی یا بزرگ. سپس منحنی Bezier نیز بسیار کم یا زیاد می شود و باعث می شود انیمیشن از محدوده طبیعی خود فراتر رود.
 
-In the example below the animation code is:
+در مثال زیر کد انیمیشن به شرح زیر است:
 
 ```css
 .train {
@@ -234,37 +228,36 @@ In the example below the animation code is:
 }
 ```
 
-The property `left` should animate from `100px` to `400px`.
+ویژگی "چپ" باید از `100px` تا `400px` متحرک شود.
 
-But if you click the train, you'll see that:
+اما اگر روی قطار کلیک کنید، خواهید دید که:
 
-- First, the train goes *back*: `left` becomes less than `100px`.
-- Then it goes forward, a little bit farther than `400px`.
-- And then back again -- to `400px`.
-
+- ابتدا، قطار *به عقب* می رود: «چپ» کمتر از `100px` می شود.
+- سپس به جلو می رود، کمی دورتر از `400px`.
+- و سپس دوباره -- به `400px`.
 [codetabs src="train-over"]
 
-Why it happens is pretty obvious if we look at the graph of the given Bezier curve:
+اگر به نمودار منحنی Bezier داده شده نگاه کنیم، چرا این اتفاق می افتد کاملاً واضح است:
 
 ![](bezier-train-over.svg)
 
-We moved the `y` coordinate of the 2nd point below zero, and for the 3rd point we made it over `1`, so the curve goes out of the "regular" quadrant. The `y` is out of the "standard" range `0..1`.
+  مختصات `y` نقطه دوم را به زیر صفر رساندیم و برای نقطه سوم آن را روی `1` قرار دادیم، بنابراین منحنی از ربع `منظم` خارج می‌شود. `y` خارج از محدوده `استاندارد` `0..1` است.
 
-As we know, `y` measures "the completion of the animation process". The value `y = 0` corresponds to the starting property value and `y = 1` -- the ending value. So values `y<0` move the property beyond the starting `left` and `y>1` -- past the final `left`.
+همانطور که می دانیم، `y` "تکمیل فرآیند انیمیشن" را اندازه گیری می کند. مقدار "y = 0" مربوط به مقدار ویژگی شروع و `y = 1` - مقدار پایانی است. بنابراین مقادیر `y<0` ویژگی را فراتر از `چپ` شروع و `y>1` - از `چپ` نهایی عبور می‌کند.
 
-That's a "soft" variant for sure. If we put `y` values like `-99` and `99` then the train would jump out of the range much more.
+مطمئناً این یک نوع "نرم" است. اگر مقادیر `y` مانند `-99` و «99» را قرار دهیم، قطار بسیار بیشتر از محدوده خارج خواهد شد.
 
-But how do we make a Bezier curve for a specific task? There are many tools.
+اما چگونه یک منحنی Bezier برای یک کار خاص بسازیم؟ ابزارهای زیادی وجود دارد.
 
-- For instance, we can do it on the site <https://cubic-bezier.com>.
-- Browser developer tools also have special support for Bezier curves in CSS:
-    1. Open the developer tools with `key:F12` (Mac: `key:Cmd+Opt+I`).
-    2. Select the `Elements` tab, then pay attention to the `Styles` sub-panel at the right side.
-    3. CSS properties with a word `cubic-bezier` will have an icon before this word.
-    4. Click this icon to edit the curve.
+- به عنوان مثال، ما می توانیم این کار را در سایت <https://cubic-bezier.com> انجام دهیم.
+- ابزارهای توسعه دهنده مرورگر همچنین از منحنی های Bezier در CSS پشتیبانی می کنند:
+     1. ابزارهای توسعه دهنده را با `key:F12` باز کنید (`Mac: key:Cmd+Opt+I`).
+     2. برگه `Elements` را انتخاب کنید، سپس به پنل فرعی `Styles` در سمت راست توجه کنید.
+     3. ویژگی های CSS با کلمه `cubic-bezier` یک نماد قبل از این کلمه خواهد داشت.
+     4. برای ویرایش منحنی روی این نماد کلیک کنید.
 
 
-### Steps
+### مراحل
 
 The timing function `steps(number of steps[, start/end])` allows splitting an transition into multiple steps.
 
