@@ -197,7 +197,6 @@ CSS:
 
   چندین منحنی داخلی وجود دارد: `linear`, `ease`, `ease-in`, `ease-out` و `ease-in-out`.
 
-
 `linear` مخفف `cubic-bezier(0، 0، 1، 1)` است - یک خط مستقیم، که در بالا توضیح دادیم.
 
 نام‌های دیگر مخفف عبارت `cubic-bezier` زیر هستند:
