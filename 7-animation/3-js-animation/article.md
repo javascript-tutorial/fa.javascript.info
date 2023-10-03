@@ -1,16 +1,16 @@
-# JavaScript animations
+# JavaScript انیمیشن های
 
-JavaScript animations can handle things that CSS can't.
+انیمیشن‌های جاوا اسکریپت می‌توانند چیزهایی را که CSS قادر به انجام آن نیست، مدیریت کنند.
 
-For instance, moving along a complex path, with a timing function different from Bezier curves, or an animation on a canvas.
+به عنوان مثال، حرکت در امتداد یک مسیر پیچیده، با یک تابع زمان بندی متفاوت از منحنی های Bezier، یا یک انیمیشن روی بوم.
 
-## Using setInterval
+## بکار بردن setInterval
 
-An animation can be implemented as a sequence of frames -- usually small changes to HTML/CSS properties.
+یک انیمیشن را می توان به عنوان دنباله ای از فریم ها پیاده سازی کرد - معمولاً تغییرات کوچکی در ویژگی های HTML/CSS.
 
-For instance, changing `style.left` from `0px` to `100px` moves the element. And if we increase it in `setInterval`, changing by `2px` with a tiny delay, like 50 times per second, then it looks smooth. That's the same principle as in the cinema: 24 or more frames per second is enough to make it look smooth.
+برای مثال، تغییر «style.left» از `0px` به `100px` عنصر را جابه‌جا می‌کند. و اگر آن را در `setInterval` افزایش دهیم، با یک تاخیر کوچک، مانند 50 بار در ثانیه، `2px` تغییر کند، آنگاه صاف به نظر می رسد. این همان اصل در سینما است: 24 فریم یا بیشتر در ثانیه برای صاف به نظر رسیدن کافی است.
 
-The pseudo-code can look like this:
+شبه کد می تواند به شکل زیر باشد:
 
 ```js
 let timer = setInterval(function() {
@@ -19,7 +19,7 @@ let timer = setInterval(function() {
 }, 20); // change by 2px every 20ms, about 50 frames per second
 ```
 
-More complete example of the animation:
+نمونه کاملتر انیمیشن:
 
 ```js
 let start = Date.now(); // remember start time
@@ -45,19 +45,20 @@ function draw(timePassed) {
 }
 ```
 
-Click for the demo:
+برای دمو کلیک کنید:
 
 [codetabs height=200 src="move"]
 
-## Using requestAnimationFrame
+## بکار بردن requestAnimationFrame
 
-Let's imagine we have several animations running simultaneously.
+بیایید تصور کنیم چندین انیمیشن به طور همزمان اجرا می شوند.
 
-If we run them separately, then even though each one has `setInterval(..., 20)`, then the browser would have to repaint much more often than every `20ms`.
+اگر آن‌ها را جداگانه اجرا کنیم، حتی اگر هر کدام دارای `setInterval(...، 20)` باشند، مرورگر باید بیشتر از هر `20 میلی‌ثانیه` دوباره رنگ‌آمیزی کند.
 
-That's because they have different starting time, so "every 20ms" differs between different animations. The intervals are not aligned. So we'll have several independent runs within `20ms`.
+این به این دلیل است که آنها زمان شروع متفاوتی دارند، بنابراین "هر 20 میلی ثانیه" بین انیمیشن های مختلف متفاوت است. فواصل هم تراز نیستند. بنابراین ما چندین اجرا مستقل در عرض `20 میلی ثانیه` خواهیم داشت.
 
-In other words, this:
+به عبارت دیگر، این:
+
 
 ```js
 setInterval(function() {
@@ -67,7 +68,7 @@ setInterval(function() {
 }, 20)
 ```
 
-...Is lighter than three independent calls:
+... سبکتر از سه تماس مستقل است:
 
 ```js
 setInterval(animate1, 20); // independent animations
@@ -75,32 +76,32 @@ setInterval(animate2, 20); // in different places of the script
 setInterval(animate3, 20);
 ```
 
-These several independent redraws should be grouped together, to make the redraw easier for the browser and hence load less CPU load and look smoother.
+این چندین تصویر مجدد مستقل باید با هم گروه بندی شوند تا ترسیم مجدد برای مرورگر آسان تر شود و در نتیجه بار CPU کمتری بارگیری شود و روان تر به نظر برسد.
 
-There's one more thing to keep in mind. Sometimes CPU is overloaded, or there are other reasons to redraw less often (like when the browser tab is hidden), so we really shouldn't run it every `20ms`.
+یک چیز دیگر را باید در نظر داشت. گاهی اوقات CPU بیش از حد بارگیری می شود، یا دلایل دیگری برای ترسیم مجدد کمتر وجود دارد (مانند زمانی که برگه مرورگر پنهان است)، بنابراین ما واقعاً نباید آن را هر 20 میلی ثانیه اجرا کنیم.
 
-But how do we know about that in JavaScript? There's a specification [Animation timing](https://www.w3.org/TR/animation-timing/) that provides the function `requestAnimationFrame`. It addresses all these issues and even more.
+اما چگونه در مورد آن در جاوا اسکریپت بدانیم؟ یک مشخصات [Animation timeing](https://www.w3.org/TR/animation-timing/) وجود دارد که تابع "requestAnimationFrame" را ارائه می دهد. به همه این مسائل و حتی بیشتر می پردازد.
 
-The syntax:
+نحو:
 ```js
 let requestId = requestAnimationFrame(callback)
 ```
 
-That schedules the `callback` function to run in the closest time when the browser wants to do animation.
+زمانی که مرورگر می‌خواهد انیمیشن انجام دهد، عملکرد `callback` را برنامه‌ریزی می‌کند تا در نزدیک‌ترین زمان اجرا شود.
 
-If we do changes in elements in `callback` then they will be grouped together with other `requestAnimationFrame` callbacks and with CSS animations. So there will be one geometry recalculation and repaint instead of many.
+اگر تغییراتی را در عناصر در `بازگشت به تماس` انجام دهیم، آن‌ها با دیگر تماس‌های `requestAnimationFrame` و با انیمیشن‌های CSS گروه‌بندی می‌شوند. بنابراین یک محاسبه مجدد هندسی و رنگ آمیزی مجدد به جای تعداد زیادی وجود خواهد داشت.
 
-The returned value `requestId` can be used to cancel the call:
+مقدار بازگشتی درخواست Id می تواند برای لغو تماس استفاده شود:
 ```js
 // cancel the scheduled execution of callback
 cancelAnimationFrame(requestId);
 ```
 
-The `callback` gets one argument -- the time passed from the beginning of the page load in milliseconds. This time can also be obtained by calling [performance.now()](mdn:api/Performance/now).
+`بازگشت به تماس` یک آرگومان دریافت می کند -- زمان سپری شده از آغاز بارگیری صفحه بر حسب میلی ثانیه. این زمان را نیز می توان از طریق تماس دریافت کرد[performance.now()](mdn:api/Performance/now).
 
-Usually `callback` runs very soon, unless the CPU is overloaded or the laptop battery is almost discharged, or there's another reason.
+معمولاً `callback` خیلی زود اجرا می‌شود، مگر اینکه CPU بیش از حد بارگیری شده باشد یا باتری لپ‌تاپ تقریباً خالی شده باشد یا دلیل دیگری وجود داشته باشد.
 
-The code below shows the time between first 10 runs for `requestAnimationFrame`. Usually it's 10-20ms:
+کد زیر زمان بین 10 اجرای اول درخواست AnimationFrame را نشان می دهد. معمولاً 10-20 میلی ثانیه است:
 
 ```html run height=40 refresh
 <script>
@@ -116,9 +117,9 @@ The code below shows the time between first 10 runs for `requestAnimationFrame`.
 </script>
 ```
 
-## Structured animation
+## انیمیشن ساخت یافته
 
-Now we can make a more universal animation function based on `requestAnimationFrame`:
+اکنون می‌توانیم یک تابع انیمیشن جهانی‌تر بر اساس `requestAnimationFrame` ایجاد کنیم:
 
 ```js
 function animate({timing, draw, duration}) {
