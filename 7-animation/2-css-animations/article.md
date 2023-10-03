@@ -163,6 +163,7 @@ stripe.onclick = function() {
 [codetabs src="train-linear"]
 
 `انتقال` CSS بر اساس آن منحنی است:
+
 ```css
 .train {
   left: 0;
@@ -182,6 +183,7 @@ stripe.onclick = function() {
 همانطور که می بینیم، این روند سریع شروع می شود: منحنی به اوج می رسد و سپس کندتر و کندتر می شود.
 
 در اینجا تابع زمان بندی در عمل آمده است (روی train کلیک کنید):
+
 [codetabs src="train"]
 
 CSS:
