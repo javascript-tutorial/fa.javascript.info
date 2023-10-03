@@ -167,9 +167,8 @@
      <code>P = (1−t)<sup>2</sup>P<sub>1</sub> + 2(1−t)tP<sub>2</sub> + t<sup>2< /sup>P<sub>3</sub></code>
 - برای 4 نقطه کنترل:
 
-     <code>P = (1−t)<sup>3</sup>P<sub>1</sub> + 3(1−t)<sup>2</sup>tP<sub>2</sub>  +3(1−t)t<sup>2</sup>P<sub>3</sub> + t<sup>3</sup>P<sub>4</sub></code>
+  <code>P = (1−t)<sup>3</sup>P<sub>1</sub> + 3(1−t)<sup>2</sup>tP<sub>2</sub>  +3(1−t)t<sup>2</sup>P<sub>3</sub> + t<sup>3</sup>P<sub>4</sub></code>
      
-
 اینها معادلات برداری هستند. به عبارت دیگر، می‌توانیم 'x' و 'y' را به جای 'P' قرار دهیم تا مختصات مربوطه را بدست آوریم.
 
 به عنوان مثال، منحنی 3 نقطه ای توسط نقاط '(x,y)' تشکیل می شود که به صورت زیر محاسبه می شود:
