@@ -266,15 +266,15 @@ CSS:
 
 ### مراحل
 
-The timing function `steps(number of steps[, start/end])` allows splitting an transition into multiple steps.
+تابع زمان‌بندی `گام‌ها (تعداد مراحل[، شروع/پایان])` اجازه می‌دهد یک انتقال را به چند مرحله تقسیم کنید.
 
-Let's see that in an example with digits.
+بیایید آن را در یک مثال با ارقام ببینیم.
 
-Here's a list of digits, without any animations, just as a source:
+در اینجا لیستی از ارقام، بدون هیچ گونه انیمیشن، فقط به عنوان منبع آمده است:
 
 [codetabs src="step-list"]
 
-In the HTML, a stripe of digits is enclosed into a fixed-length `<div id="digits">`:
+در HTML، نواری از ارقام در یک `<div id="digits">` با طول ثابت محصور شده است:
 
 ```html
 <div id="digit">
@@ -282,13 +282,13 @@ In the HTML, a stripe of digits is enclosed into a fixed-length `<div id="digits
 </div>
 ```
 
-The `#digit` div has a fixed width and a border, so it looks like a red window.
+Div '#digit' دارای یک عرض و یک حاشیه ثابت است، بنابراین مانند یک پنجره قرمز به نظر می رسد.
 
-We'll make a timer: the digits will appear one by one, in a discrete way.
+ما یک تایمر می سازیم: ارقام یک به یک، به روشی گسسته ظاهر می شوند.
 
-To achieve that, we'll hide the `#stripe` outside of `#digit` using `overflow: hidden`, and then shift the `#stripe` to the left step-by-step.
+برای رسیدن به این هدف، `#stripe` را خارج از `# رقم` با استفاده از `overflow: hidden` پنهان می کنیم و سپس `#stripe` را گام به گام به سمت چپ تغییر می دهیم.
 
-There will be 9 steps, a step-move for each digit:
+9 مرحله وجود خواهد داشت که برای هر رقم یک گام حرکت می کند:
 
 ```css
 #stripe.animate  {
@@ -297,60 +297,59 @@ There will be 9 steps, a step-move for each digit:
 }
 ```
 
-The first argument of `steps(9, start)` is the number of steps. The transform will be split into 9 parts (10% each). The time interval is automatically divided into 9 parts as well, so `transition: 9s` gives us 9 seconds for the whole animation – 1 second per digit.
+اولین آرگومان `steps(9، start)` تعداد مراحل است. تبدیل به 9 قسمت (هر کدام 10٪) تقسیم می شود. بازه زمانی به طور خودکار به 9 قسمت نیز تقسیم می شود، بنابراین «Transition: 9s» به ما 9 ثانیه برای کل انیمیشن می دهد – 1 ثانیه در هر رقم.
 
-The second argument is one of two words: `start` or `end`.
+آرگومان دوم یکی از دو کلمه است: `شروع` یا `پایان`.
 
-The `start` means that in the beginning of animation we need to make the first step immediately.
+`شروع` به این معنی است که در ابتدای انیمیشن باید بلافاصله اولین قدم را برداریم.
 
-In action:
+در عمل:
 
 [codetabs src="step"]
 
-A click on the digit changes it to `1` (the first step) immediately, and then changes in the beginning of the next second.
+با کلیک بر روی رقم آن را بلافاصله به `1` (مرحله اول) تغییر می دهد و سپس در ابتدای ثانیه بعدی تغییر می کند.
 
-The process is progressing like this:
+روند به این صورت پیش می رود:
 
-- `0s` -- `-10%` (first change in the beginning of the 1st second, immediately)
+- `0s` -- `-10%` (اولین تغییر در ابتدای ثانیه اول، بلافاصله)
 - `1s` -- `-20%`
 - ...
 - `8s` -- `-90%`
-- (the last second shows the final value).
+- (ثانیه آخر مقدار نهایی را نشان می دهد).
 
-Here, the first change was immediate because of `start` in the `steps`.
+در اینجا، اولین تغییر فوری به دلیل `شروع` در `مراحل` بود.
 
-The alternative value `end` would mean that the change should be applied not in the beginning, but at the end of each second.
+مقدار جایگزین `پایان` به این معنی است که تغییر نه در ابتدا، بلکه در پایان هر ثانیه اعمال شود.
 
-So the process for `steps(9, end)` would go like this:
+بنابراین فرآیند `steps(9, end)` به این صورت خواهد بود:
 
-- `0s` -- `0` (during the first second nothing changes)
-- `1s` -- `-10%` (first change at the end of the 1st second)
+- `0s` -- `0` (در ثانیه اول هیچ چیز تغییر نمی کند)
+- `1s` -- `-10%` (اولین تغییر در پایان ثانیه اول)
 - `2s` -- `-20%`
 - ...
 - `9s` -- `-90%`
 
-Here's `steps(9, end)` in action (note the pause before the first digit change):
+در اینجا `مراحل (9، پایان)` در عمل آمده است (به مکث قبل از تغییر رقم اول توجه کنید):
 
 [codetabs src="step-end"]
 
-There are also some pre-defined shorthands for `steps(...)`:
+همچنین چند مختصر از پیش تعریف شده برای آن وجود دارد `steps(...)`:
 
-- `step-start` -- is the same as `steps(1, start)`. That is, the animation starts immediately and takes 1 step. So it starts and finishes immediately, as if there were no animation.
-- `step-end` -- the same as `steps(1, end)`: make the animation in a single step at the end of `transition-duration`.
+- `step-start` -- همان "steps(1, start)" است. یعنی انیمیشن بلافاصله شروع می شود و 1 مرحله می گیرد. بنابراین بلافاصله شروع می شود و به پایان می رسد، گویی هیچ انیمیشنی وجود ندارد.
+- `step-end` -- همانند "steps(1, end)": انیمیشن را در یک مرحله در پایان `transition-duration` بسازید.
 
-These values are rarely used, as they represent not a real animation, but rather a single-step change. We mention them here for completeness.
+این مقادیر به ندرت مورد استفاده قرار می گیرند، زیرا نشان دهنده یک انیمیشن واقعی نیستند، بلکه یک تغییر تک مرحله ای هستند. ما در اینجا برای تکمیل آنها را ذکر می کنیم.
+## رویداد: "transitionend"
 
-## Event: "transitionend"
+هنگامی که انیمیشن CSS به پایان می رسد، رویداد ÷transitionend÷ فعال می شود.
 
-When the CSS animation finishes, the `transitionend` event triggers.
+به طور گسترده ای برای انجام یک عمل پس از انجام انیمیشن استفاده می شود. همچنین می توانیم به انیمیشن ها بپیوندیم.
 
-It is widely used to do an action after the animation is done. Also we can join animations.
-
-For instance, the ship in the example below starts to sail there and back when clicked, each time farther and farther to the right:
+به عنوان مثال، کشتی در مثال زیر شروع به حرکت به آنجا می کند و با کلیک کردن، هر بار دورتر و دورتر به سمت راست باز می گردد:
 
 [iframe src="boat" height=300 edit link]
 
-The animation is initiated by the function `go` that re-runs each time the transition finishes, and flips the direction:
+انیمیشن توسط تابع «go» شروع می‌شود که هر بار که انتقال به پایان می‌رسد، دوباره اجرا می‌شود و جهت را برمی‌گرداند:
 
 ```js
 boat.onclick = function() {
@@ -379,21 +378,21 @@ boat.onclick = function() {
 };
 ```
 
-The event object for `transitionend` has a few specific properties:
+شی رویداد برای «transitionend» دارای چند ویژگی خاص است:
 
-`event.propertyName`
-: The property that has finished animating. Can be good if we animate multiple properties simultaneously.
+`event.propertyName`.
+: خاصیتی که انیمیشن آن تمام شده است. اگر چندین ویژگی را به طور همزمان متحرک کنیم، می تواند خوب باشد.
 
-`event.elapsedTime`
-: The time (in seconds) that the animation took, without `transition-delay`.
+`event.elapsedTime`.
+: زمان (بر حسب ثانیه) که انیمیشن طول کشید، بدون `تاخیر انتقال`.
 
-## Keyframes
+## فریم های کلیدی
 
-We can join multiple simple animations together using the `@keyframes` CSS rule.
+می‌توانیم چندین انیمیشن ساده را با استفاده از قانون `CSS @keyframes` به هم بپیوندیم.
 
-It specifies the "name" of the animation and rules - what, when and where to animate. Then using the `animation` property, we can attach the animation to the element and specify additional parameters for it.
+`نام` انیمیشن و قوانین را مشخص می کند - چه چیزی، چه زمانی و کجا باید متحرک شود. سپس با استفاده از ویژگی `animation` می توانیم انیمیشن را به عنصر متصل کرده و پارامترهای اضافی را برای آن مشخص کنیم.
 
-Here's an example with explanations:
+در اینجا یک مثال با توضیحات آورده شده است:
 
 ```html run height=60 autorun="no-epub" no-beautify
 <div class="progress"></div>
@@ -425,45 +424,45 @@ Here's an example with explanations:
 </style>
 ```
 
-There are many articles about `@keyframes` and a [detailed specification](https://drafts.csswg.org/css-animations/).
+مقالات زیادی در مورد `@keyframes` و [detailed specification](https://drafts.csswg.org/css-animations/).
 
-You probably won't need `@keyframes` often, unless everything is in constant motion on your sites.
+احتمالاً اغلب به `@keyframes` نیاز نخواهید داشت، مگر اینکه همه چیز در سایت شما در حال حرکت باشد.
 
-## Performance
+## اجرا
 
-Most CSS properties can be animated, because most of them are numeric values. For instance, `width`, `color`, `font-size` are all numbers. When you animate them, the browser gradually changes these numbers frame by frame, creating a smooth effect.
+اکثر خصوصیات CSS را می توان متحرک کرد، زیرا اکثر آنها مقادیر عددی هستند. به عنوان مثال، «عرض»، «رنگ»، «اندازه قلم» همه اعداد هستند. وقتی آنها را متحرک می کنید، مرورگر به تدریج این اعداد را فریم به فریم تغییر می دهد و یک جلوه صاف ایجاد می کند.
 
-However, not all animations will look as smooth as you'd like, because different CSS properties cost differently to change.
+با این حال، همه انیمیشن ها آنطور که می خواهید صاف به نظر نمی رسند، زیرا ویژگی های مختلف CSS هزینه متفاوتی برای تغییر دارند.
 
-In more technical details, when there's a style change, the browser goes through 3 steps to render the new look:
+در جزئیات فنی بیشتر، هنگامی که تغییر سبک وجود دارد، مرورگر 3 مرحله را برای ارائه ظاهر جدید طی می کند:
 
-1. **Layout**: re-compute the geometry and position of each element, then
-2. **Paint**: re-compute how everything should look like at their places, including background, colors,
-3. **Composite**: render the final results into pixels on screen, apply CSS transforms if they exist.
+1. **طراحی**: هندسه و موقعیت هر عنصر را دوباره محاسبه کنید، سپس
+2. **نقاشی**: دوباره محاسبه کنید که همه چیز در مکان خود چگونه باید باشد، از جمله پس زمینه، رنگ ها،
+3. **کامپوزیت**: نتایج نهایی را به پیکسل های روی صفحه نمایش دهید، در صورت وجود، تبدیل های CSS را اعمال کنید.
 
-During a CSS animation, this process repeats every frame. However, CSS properties that never affect geometry or position, such as `color`, may skip the Layout step. If a `color` changes, the browser  doesn't calculate any new geometry, it goes to Paint -> Composite. And there are few properties that directly go to Composite. You can find a longer list of CSS properties and which stages they trigger at <https://csstriggers.com>.
+در طول یک انیمیشن CSS، این فرآیند هر فریم را تکرار می کند. با این حال، ویژگی‌های CSS که هرگز بر هندسه یا موقعیت تأثیر نمی‌گذارند، مانند «رنگ»، ممکن است مرحله Layout را نادیده بگیرند. اگر یک "رنگ" تغییر کند، مرورگر هیچ هندسه جدیدی را محاسبه نمی کند، به Paint -> Composite می رود. و خواص کمی وجود دارد که مستقیماً به Composite می رود. در <https://csstriggers.com> می‌توانید فهرست طولانی‌تری از ویژگی‌های CSS و اینکه کدام مراحل را راه‌اندازی می‌کنند پیدا کنید.
 
-The calculations may take time, especially on pages with many elements and a complex layout. And the delays are actually visible on most devices, leading to "jittery", less fluid animations.
+محاسبات ممکن است زمان ببرد، به خصوص در صفحاتی که عناصر زیاد و طرح بندی پیچیده دارند. و تأخیرها در واقع در اکثر دستگاه‌ها قابل مشاهده است، که منجر به انیمیشن‌های کم‌تر روان‌تر می‌شود.
 
-Animations of properties that skip the Layout step are faster. It's even better if Paint is skipped too.
+انیمیشن های خواصی که مرحله Layout را رد می کنند سریعتر هستند. حتی بهتر است از Paint نیز صرف نظر شود.
 
-The `transform` property is a great choice, because:
-- CSS transforms affect the target element box as a whole (rotate, flip, stretch, shift it).
-- CSS transforms never affect neighbour elements.
+ویژگی `transform` یک انتخاب عالی است، زیرا:
+- تبدیل های CSS روی جعبه عنصر هدف به عنوان یک کل تأثیر می گذارد (چرخش، تلنگر، کشش، تغییر آن).
+- تبدیل CSS هرگز بر عناصر همسایه تأثیر نمی گذارد.
 
-...So browsers apply `transform` "on top" of existing Layout and Paint calculations, in the Composite stage.
+...بنابراین مرورگرها `تبدیل` را `در بالای` محاسبات Layout و Paint موجود در مرحله ترکیبی اعمال می کنند.
 
-In other words, the browser calculates the Layout (sizes, positions), paints it with colors, backgrounds, etc at the Paint stage, and then applies `transform` to element boxes that need it.
+به عبارت دیگر، مرورگر Layout (اندازه‌ها، موقعیت‌ها) را محاسبه می‌کند، آن را با رنگ‌ها، پس‌زمینه‌ها و غیره در مرحله Paint رنگ می‌کند و سپس `تبدیل` را در جعبه‌های عناصری که به آن نیاز دارند اعمال می‌کند.
 
-Changes (animations) of the `transform` property never trigger Layout and Paint steps. More than that, the browser  leverages the graphics accelerator (a special chip on the CPU or graphics card) for CSS transforms, thus making them very efficient.
+تغییرات (انیمیشن) ویژگی «تبدیل» هرگز مراحل Layout و Paint را راه‌اندازی نمی‌کند. بیشتر از آن، مرورگر از شتاب دهنده گرافیکی (چیپ مخصوص روی CPU یا کارت گرافیک) برای تبدیل CSS استفاده می کند، بنابراین آنها را بسیار کارآمد می کند.
 
-Luckily, the `transform` property is very powerful. By using `transform` on an element, you could rotate and flip it, stretch and shrink it, move it around, and [much more](https://developer.mozilla.org/docs/Web/CSS/transform#syntax). So instead of `left/margin-left` properties we can use `transform: translateX(…)`, use `transform: scale` for increasing element size, etc.
+خوشبختانه، ویژگی «تبدیل» بسیار قدرتمند است. با استفاده از «تبدیل» روی یک عنصر، می‌توانید آن را بچرخانید و بچرخانید، آن را کشیده و کوچک کنید، آن را به اطراف حرکت دهید، و [خیلی بیشتر](https://developer.mozilla.org/docs/Web/CSS/transform#syntax ). بنابراین به جای ویژگی‌های `left/margin-left` می‌توانیم از `transform: translateX(…)` استفاده کنیم، از `transform: scale` برای افزایش اندازه عنصر و غیره استفاده کنیم.
 
-The `opacity` property also never triggers Layout (also skips Paint in Mozilla Gecko). We can use it for show/hide or fade-in/fade-out effects.
+خاصیت `تعوض` نیز هرگز Layout را فعال نمی‌کند (از Paint در Mozilla Gecko نیز عبور می‌کند). می‌توانیم از آن برای جلوه‌های نمایش/پنهان کردن یا محو شدن/محو شدن استفاده کنیم.
 
-Paring `transform` with `opacity` can usually solve most of our needs, providing fluid, good-looking animations.
+تفکیک `تبدیل` با `تصادف` معمولاً می‌تواند اکثر نیازهای ما را برطرف کند و انیمیشن‌های روان و خوش‌نظری ارائه کند.
 
-For example, here clicking on the `#boat` element adds the class with `transform: translateX(300)` and `opacity: 0`, thus making it move `300px` to the right and disappear:
+برای مثال، در اینجا با کلیک بر روی عنصر «#boat» کلاسی با `transform: translateX(300)` و `opacity: 0` اضافه می‌شود، بنابراین باعث می‌شود «300px» به سمت راست حرکت کند و ناپدید شود:
 
 ```html run height=260 autorun no-beautify
 <img src="https://js.cx/clipart/boat.png" id="boat">
@@ -484,7 +483,7 @@ For example, here clicking on the `#boat` element adds the class with `transform
 </script>
 ```
 
-Here's a more complex example, with `@keyframes`:
+در اینجا یک مثال پیچیده تر، با `@keyframes` آمده است:
 
 ```html run height=80 autorun no-beautify
 <h2 onclick="this.classList.toggle('animated')">click me to start / stop</h2>
@@ -510,23 +509,23 @@ Here's a more complex example, with `@keyframes`:
 </style>
 ```
 
-## Summary
+## خلاصه
 
-CSS animations allow smoothly (or step-by-step) animated changes of one or multiple CSS properties.
+انیمیشن های CSS اجازه می دهند به آرامی (یا گام به گام) تغییرات متحرک یک یا چند ویژگی CSS را انجام دهند.
 
-They are good for most animation tasks. We're also able to use JavaScript for animations, the next chapter is devoted to that.
+آنها برای اکثر کارهای انیمیشن خوب هستند. ما همچنین می‌توانیم از جاوا اسکریپت برای انیمیشن‌ها استفاده کنیم، فصل بعدی به آن اختصاص دارد.
 
-Limitations of CSS animations compared to JavaScript animations:
+محدودیت های انیمیشن های CSS در مقایسه با انیمیشن های جاوا اسکریپت:
 
-```compare plus="CSS animations" minus="JavaScript animations"
-+ Simple things done simply.
-+ Fast and lightweight for CPU.
-- JavaScript animations are flexible. They can implement any animation logic, like an "explosion" of an element.
-- Not just property changes. We can create new elements in JavaScript as part of the animation.
+```compare plus="CSS animations" منهای ="JavaScript animations"
++ کارهای ساده به سادگی انجام می شود.
++ سریع و سبک برای CPU.
+- انیمیشن های جاوا اسکریپت انعطاف پذیر هستند. آنها می توانند هر منطق انیمیشنی را مانند "انفجار" یک عنصر پیاده سازی کنند.
+- نه فقط تغییر ملک. ما می توانیم عناصر جدیدی را در جاوا اسکریپت به عنوان بخشی از انیمیشن ایجاد کنیم.
 ```
 
-In early examples in this chapter, we animate `font-size`, `left`, `width`, `height`, etc. In real life projects, we should use `transform: scale()` and `transform: translate()` for better performance.
+در مثال‌های اولیه در این فصل، «اندازه قلم»، «چپ»، «عرض»، «ارتفاع» و غیره را متحرک می‌کنیم. در پروژه‌های واقعی، باید از `transform: scale()` و `transform: translate( استفاده کنیم. )` برای عملکرد بهتر.
 
-The majority of animations can be implemented using CSS as described in this chapter. And the `transitionend` event allows JavaScript to be run after the animation, so it integrates fine with the code.
+اکثر انیمیشن ها را می توان با استفاده از CSS همانطور که در این فصل توضیح داده شد پیاده سازی کرد. و رویداد `transitionend` اجازه می دهد تا جاوا اسکریپت بعد از انیمیشن اجرا شود، بنابراین به خوبی با کد یکپارچه می شود.
 
-But in the next chapter we'll do some JavaScript animations to cover more complex cases.
+اما در فصل بعدی چند انیمیشن جاوا اسکریپت را برای پوشش موارد پیچیده تر انجام خواهیم داد.
