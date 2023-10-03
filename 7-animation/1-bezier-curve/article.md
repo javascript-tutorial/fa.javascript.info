@@ -145,7 +145,7 @@
 ```smart header="How to draw a curve *through* given points?"
 برای تعیین منحنی Bezier، از نقاط کنترل استفاده می شود. همانطور که می بینیم، آنها در منحنی نیستند، به جز اولین و آخرین.
 
-گاهی اوقات کار دیگری داریم: ترسیم منحنی *از میان چندین نقطه*، به طوری که همه آنها روی یک منحنی صاف قرار گیرند. این کار [interpolation] (https://en.wikipedia.org/wiki/Interpolation) نامیده می شود و در اینجا ما آن را پوشش نمی دهیم.
+گاهی اوقات کار دیگری داریم: ترسیم منحنی *از میان چندین نقطه*، به طوری که همه آنها روی یک منحنی صاف قرار گیرند. این کار [interpolation][(https://en.wikipedia.org/wiki/Interpolation)](https://fa.wikipedia.org/wiki/%D8%AF%D8%B1%D9%88%D9%86%E2%80%8C%DB%8C%D8%A7%D8%A8%DB%8C) نامیده می شود و در اینجا ما آن را پوشش نمی دهیم.
 
 فرمول های ریاضی برای چنین منحنی هایی وجود دارد، به عنوان مثال [چند جمله ای لاگرانژ](https://en.wikipedia.org/wiki/Lagrange_polynomial). در گرافیک کامپیوتری [اسپلاین درون یابی](https://en.wikipedia.org/wiki/Spline_interpolation) اغلب برای ایجاد منحنی های صاف که نقاط زیادی را به هم متصل می کند، استفاده می شود.
 ```
@@ -167,15 +167,15 @@
      <code>P = (1−t)<sup>2</sup>P<sub>1</sub> + 2(1−t)tP<sub>2</sub> + t<sup>2< /sup>P<sub>3</sub></code>
 - برای 4 نقطه کنترل:
 
-     <code>P = (1−t)<sup>3</sup>P<sub>1</sub> + 3(1−t)<sup>2</sup>tP<sub>2</sub > +3(1−t)t<sup>2</sup>P<sub>3</sub> + t<sup>3</sup>P<sub>4</sub></code>
-
+     <code>P = (1−t)<sup>3</sup>P<sub>1</sub> + 3(1−t)<sup>2</sup>tP<sub>2</sub>  +3(1−t)t<sup>2</sup>P<sub>3</sub> + t<sup>3</sup>P<sub>4</sub></code>
+     
 
 اینها معادلات برداری هستند. به عبارت دیگر، می‌توانیم 'x' و 'y' را به جای 'P' قرار دهیم تا مختصات مربوطه را بدست آوریم.
 
 به عنوان مثال، منحنی 3 نقطه ای توسط نقاط '(x,y)' تشکیل می شود که به صورت زیر محاسبه می شود:
 
-- <code>x = (1−t)<sup>2</sup>x<sub>1</sub> + 2(1−t)tx<sub>2</sub> + t<sup>2 </sup>x<sub>3</sub></code>
-- <code>y = (1−t)<sup>2</sup>y<sub>1</sub> + 2(1−t)ty<sub>2</sub> + t<sup>2 </sup>y<sub>3</sub></code>
+- <code>x = (1−t)<sup>2</sup>x<sub>1</sub> + 2(1−t)tx<sub>2</sub> + t<sup>2</sup>x<sub>3</sub></code>
+- <code>y = (1−t)<sup>2</sup>y<sub>1</sub> + 2(1−t)ty<sub>2</sub> + t<sup>2</sup>y<sub>3</sub></code>
 
 به جای <code>x<sub>1</sub>، y<sub>1</sub>، x<sub>2</sub>، y<sub>2</sub>، x<sub>3 </sub>، y<sub>3</sub></code> باید مختصات 3 نقطه کنترل را قرار دهیم، و سپس با انتقال 't' از '0' به '1'، برای هر مقدار 't' '(x,y)' از منحنی را خواهیم داشت.
 
