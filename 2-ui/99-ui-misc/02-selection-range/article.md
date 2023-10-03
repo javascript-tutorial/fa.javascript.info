@@ -4,7 +4,7 @@
     
 ---
 
-# Selection and Range
+# Selection و Range
 
 
 در این فصل به انتخاب در سند و همچنین انتخاب در فیلدهای فرم، مانند `<input>` خواهیم پرداخت.
@@ -13,7 +13,7 @@
 
 می‌توانید دستور العمل‌هایی برای کارهای رایج در انتهای فصل، در بخش "Summary" بیابید. شاید این نیازهای فعلی شما را پوشش دهد، اما اگر متن کامل را بخوانید، خیلی بیشتر به دست خواهید آورد.
 
-## Range
+## رنج(range)
 
 فهوم اصلی انتخاب [Range](https://dom.spec.whatwg.org/#ranges) است، که اساساً یک جفت "boundary points"است: شروع محدوده و پایان محدوده.
 
@@ -28,7 +28,7 @@ let range = new Range();
 
 همانطور که ممکن است حدس بزنید، در ادامه از اشیاء `Range`  برای انتخاب استفاده خواهیم کرد، اما ابتدا اجازه دهید تعداد کمی از این اشیاء ایجاد کنیم.
 
-### Selecting the text partially
+### انتخاب متن به صورت جزئی
 
 نکته جالب این است که آرگومان اول `node` در هر دو روش می تواند یک text node یا یelement node عنصر باشد و معنای آرگومان دوم به آن بستگی دارد.
 
@@ -53,7 +53,7 @@ let range = new Range();
 
 
 ![](range-hello-1.svg)
-### Selecting element nodes
+### سلکت کردن node  های  element
 
 
 ** متناوباً، اگر `node` یک element node است، `offset` باید شماره فرزند باشد.**
@@ -169,7 +169,7 @@ From <input id="start" type="number" value=1> – To <input id="end" type="numbe
 ما مجبور نیستیم از همان گره در «setStart» و «setEnd» استفاده کنیم. یک محدوده ممکن است در بسیاری از گره‌های غیرمرتبط باشد. فقط مهم است که پایان آن پس از شروع در سند باشد.
 ```
 
-### Selecting a bigger fragment
+### سلکت کردن  fragment بزرگ تر
 
 بیایید در مثال خود یک انتخاب بزرگتر انجام دهیم، مانند این:
 
@@ -201,7 +201,7 @@ From <input id="start" type="number" value=1> – To <input id="end" type="numbe
 
 اگر می‌خواهیم گره‌ها را به‌عنوان یک کل بگیریم، می‌توانیم عناصر را در  `setStart/setEnd` ارسال کنیم. در غیر این صورت می توانیم در سطح متن کار کنیم.
 
-## Range properties
+## Range ویژگی های
 
 شی range که در مثال بالا ایجاد کردیم دارای ویژگی های زیر است:
 
@@ -217,7 +217,7 @@ From <input id="start" type="number" value=1> – To <input id="end" type="numbe
    - در مثال بالا:`<p>`.
 
 
-## Range selection methods
+## Range selection متد های
 
 روش‌های راحت زیادی برای دستکاری محدوده‌ها وجود دارد.
 
@@ -245,7 +245,7 @@ From <input id="start" type="number" value=1> – To <input id="end" type="numbe
 - `selectNodeContents(node)` اگر `toStart=true` set end=start، در غیر این صورت start=end را تنظیم کنید، بنابراین محدوده را جمع می کند
 - `cloneRange()` یک محدوده جدید با شروع/پایان یکسان ایجاد می کند
 
-## Range editing methods
+## Range editing متد های
 
 هنگامی که محدوده ایجاد شد، می‌توانیم محتوای آن را با استفاده از این روش‌ها دستکاری کنیم:
 
@@ -317,7 +317,7 @@ Click buttons to run methods on the selection, "resetExample" to reset it.
 مچنین روش هایی برای مقایسه محدوده ها وجود دارد، اما به ندرت از آنها استفاده می شود. هنگامی که به آنها نیاز دارید، لطفاً به spec](https://dom.spec.whatwg.org/#interface-range) یا [MDN manual](mdn:/api/Range) مراجعه کنید.
 
 
-## Selection
+## سلکت کردن
 
 در واقع `Range` یک شیء عمومی برای مدیریت محدوده های انتخابی است. اگرچه، ایجاد یک `Range` به این معنی نیست که ما یک انتخاب را روی صفحه می بینیم.
 
@@ -335,7 +335,7 @@ Click buttons to run methods on the selection, "resetExample" to reset it.
 
 <button onclick="alert(document.getSelection())">alert(document.getSelection())</button>
 
-## Selection properties
+## Selection ویژگی های
 
 همانطور که گفته شد، یک انتخاب ممکن است در تئوری شامل چندین محدوده باشد. ما می توانیم این اشیاء محدوده را با استفاده از روش بدست آوریم:
 
@@ -375,7 +375,7 @@ Click buttons to run methods on the selection, "resetExample" to reset it.
 ![](selection-direction-backward.svg)
 ```
 
-## Selection events
+## Selection رویداد های
 
 رویدادهایی برای پیگیری انتخاب وجود دارد:
 
@@ -384,7 +384,7 @@ Click buttons to run methods on the selection, "resetExample" to reset it.
 - `document.onselectionchange` - هر زمان که یک انتخاب تغییر کند یا شروع شود.
      - لطفاً توجه داشته باشید: این کنترل کننده را می توان فقط روی `document` تنظیم کرد، همه انتخاب های موجود در آن را ردیابی می کند.
 
-### Selection tracking demo
+### Selection tracking دمو
 
 در اینجا یک نسخه نمایشی کوچک است. این انتخاب فعلی در `document` را ردیابی می کند و مرزهای آن را نشان می دهد:
 
@@ -405,7 +405,7 @@ From <input id="from" disabled> – To <input id="to" disabled>
 </script>
 ```
 
-### Selection copying demo
+### Selection دمو کپی کردن
 
 دو روش برای کپی کردن محتوای انتخابی وجود دارد:
 
@@ -438,7 +438,7 @@ As text: <span id="astext"></span>
 </script>
 ```
 
-## Selection methods
+## Selection متد های
 
 ا می توانیم با افزودن/حذف محدوده ها با انتخاب کار کنیم:
 
@@ -493,7 +493,7 @@ If a document selection already exists, empty it first with `removeAllRanges()`.
 The exception is some selection methods, that replace the existing selection, such as `setBaseAndExtent`.
 ```
 
-## Selection in form controls
+## Selection در form controls
 
 عناصر فرم، مانند `input` و textarea [special API for selection](https://html.spec.whatwg.org/#textFieldSelection) را بدون اشیاء `Selection` یا `Range` ارائه می‌کنند. از آنجایی که مقدار ورودی یک متن خالص است، نه HTML، نیازی به چنین اشیایی نیست، همه چیز بسیار ساده تر است.
 
@@ -522,7 +522,7 @@ The exception is some selection methods, that replace the existing selection, su
 
 حال بیایید این روش ها را در عمل ببینیم.
 
-### Example: tracking selection
+### مثال: tracking selection
 
 رای مثال، این کد از رویداد `onselect` برای ردیابی انتخاب استفاده می‌کند:
 
@@ -546,7 +546,7 @@ From <input id="from" disabled> – To <input id="to" disabled>
 - طبق [spec](https://w3c.github.io/selection-api/#dfn-selectionchange)، رویداد  `document.onselectionchange` نباید برای انتخاب‌های داخل یک کنترل فرم فعال شود، زیرا به مرتبط نیست انتخاب `document` و محدوده برخی از مرورگرها آن را تولید می کنند، اما ما نباید به آن تکیه کنیم.
 
   
-### Example: moving cursor
+### مثال: moving cursor
 
 می‌توانیم `selectionStart` و `selectionEnd` را تغییر دهیم که انتخاب را تنظیم می‌کند.
 
@@ -573,7 +573,7 @@ Focus on me, the cursor will be at position 10.
 </script>
 ```
 
-### Example: modifying selection
+### مثال: e: modifying selection
 
 برای تغییر محتوای انتخابی، می‌توانیم از روش `input.setRangeText()` استفاده کنیم. البته، می‌توانیم `selectionStart/End` را بخوانیم و با آگاهی از انتخاب، زیررشته مربوط به `value` را تغییر دهیم، اما `setRangeText` قدرتمندتر و اغلب راحت‌تر است.
 
@@ -616,7 +616,7 @@ button.onclick = () => {
 </script>
 ```
 
-### Example: insert at cursor
+### مثال: insert در cursor
 
 اگر چیزی انتخاب نشده باشد، یا از `start` و `end` مساوی در `setRangeText` استفاده کنیم، آنگاه متن جدید فقط درج می‌شود، چیزی حذف نمی‌شود.
 
@@ -637,7 +637,7 @@ button.onclick = () => {
 ```
 
 
-## Making unselectable
+## غیر قابل انتخاب شدن
 
  برای غیرقابل انتخاب کردن چیزی، سه راه وجود دارد:
 
@@ -673,14 +673,14 @@ button.onclick = () => {
    
 3. همچنین می‌توانیم انتخاب post-factum را بعد از اینکه با `document.getSelection().empty()` رخ داد پاک کنیم. این به ندرت استفاده می شود، زیرا باعث چشمک زدن ناخواسته با ظاهر شدن انتخاب می شود - ناپدید می شود.
 
-## References
+## منابع
 
 - [DOM spec: Range](https://dom.spec.whatwg.org/#ranges)
 - [Selection API](https://www.w3.org/TR/selection-api/#dom-globaleventhandlers-onselectstart)
 - [HTML spec: APIs for the text control selections](https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#textFieldSelection)
 
 
-## Summary
+## خلاصه
 
  ما دو API مختلف را برای انتخاب پوشش دادیم:
 
