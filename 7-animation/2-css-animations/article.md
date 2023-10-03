@@ -93,6 +93,7 @@ growing.onclick = function() {
 [codetabs src="digits"]
 
 ویژگی `transform` به شکل زیر متحرک است:
+
 ```css
 #stripe.animate {
   transform: translate(-90%);
