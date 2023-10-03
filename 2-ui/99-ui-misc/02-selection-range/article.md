@@ -107,7 +107,6 @@ drawHtmlTree(selectPDomtree, 'div.select-p-domtree', 690, 320);
 
 بیایید یک محدوده برای `"Example: <i>italic</i>"` بسازیم.
 
-همانطور که می بینیم، این عبارت دقیقاً از دو فرزند `<p>` با نمایه های  `0`  و `1` تشکیل شده است:
 ![](range-example-p-0-1.svg)
 
 
