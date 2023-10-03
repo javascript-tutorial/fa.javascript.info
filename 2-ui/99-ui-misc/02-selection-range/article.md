@@ -17,6 +17,7 @@
 
 فهوم اصلی انتخاب [Range](https://dom.spec.whatwg.org/#ranges) است، که اساساً یک جفت "boundary points"است: شروع محدوده و پایان محدوده.
 
+
 یک `Range` object بدون پارامتر ساخته می شود: 
 
 ```js
