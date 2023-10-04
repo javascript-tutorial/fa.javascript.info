@@ -259,6 +259,8 @@ function circ(timeFraction) {
 
 برخلاف توابع قبلی، به یک پارامتر اضافی `x`، `ضریب الاستیسیته` بستگی دارد. فاصله `کشیدن ریسمان کمان` با آن مشخص می شود.
 
+کد:
+
 ```js
 function back(x, timeFraction) {
   return Math.pow(timeFraction, 2) * ((x + 1) * timeFraction - x)
