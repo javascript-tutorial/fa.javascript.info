@@ -143,7 +143,7 @@ function animate({timing, draw, duration}) {
   });
 }
 ```
-///
+
 Function `animate` accepts 3 parameters that essentially describes the animation:
 
 `duration`
