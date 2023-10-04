@@ -272,6 +272,7 @@ function back(x, timeFraction) {
 ![](back.svg)
 
 برای انیمیشن از آن با مقدار خاصی از `x` استفاده می کنیم. مثال برای `x = 1.5`:
+
 [iframe height=40 src="back" link]
 
 ### پرش یا Bounce
