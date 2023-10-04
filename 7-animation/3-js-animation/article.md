@@ -182,6 +182,7 @@ function animate({timing, draw, duration}) {
 بیایید با استفاده از تابع خود عنصر `width` را از `0` به `100٪` متحرک کنیم.
 
 روی عنصر برای دمو کلیک کنید:
+
 [codetabs height=60 src="width"]
 
 کد نمونه:
