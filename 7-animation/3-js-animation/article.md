@@ -143,15 +143,15 @@ function animate({timing, draw, duration}) {
 }
 ```
 
-Function `animate` accepts 3 parameters that essentially describes the animation:
+تابع animate` 3` پارامتر را می پذیرد که اساساً انیمیشن را توصیف می کند:
 
 `duration`
-: Total time of animation. Like, `1000`.
+: زمان کل انیمیشن. مانند `1000`.
 
-`timing(timeFraction)`
-: Timing function, like CSS-property `transition-timing-function` that gets the fraction of time that passed (`0` at start, `1` at the end) and returns the animation completion (like `y` on the Bezier curve).
+`زمان بندی (زمان کسر)`.
+: تابع زمان بندی، مانند ویژگی `CSS `transition-timing-function که کسری از زمان سپری شده را دریافت می کند ('0' در شروع، '1' در پایان) و تکمیل انیمیشن را برمی گرداند (مانند `y` در Bezier منحنی).
 
-    For instance, a linear function means that the animation goes on uniformly with the same speed:
+     به عنوان مثال، یک تابع خطی به این معنی است که انیمیشن به طور یکنواخت با همان سرعت ادامه می یابد:
 
     ```js
     function linear(timeFraction) {
@@ -162,30 +162,28 @@ Function `animate` accepts 3 parameters that essentially describes the animation
     Its graph:
     ![](linear.svg)
 
-    That's just like `transition-timing-function: linear`. There are more interesting variants shown below.
+    این دقیقاً مانند تابع `Transition-timing-function: خطی` است. انواع جالب تری وجود دارد که در زیر نشان داده شده است.
 
 `draw(progress)`
-: The function that takes the animation completion state and draws it. The value `progress=0` denotes the beginning animation state, and `progress=1` -- the end state.
+: تابعی که حالت تکمیل انیمیشن را می گیرد و آن را ترسیم می کند. مقدار `پیشرفت=0` نشان‌دهنده وضعیت شروع انیمیشن، و `پیشرفت=1` -- حالت پایان است.
 
-    This is that function that actually draws out the animation.
+     این همان تابعی است که در واقع انیمیشن را بیرون می کشد.
 
-    It can move the element:
+     می تواند عنصر را جابجا کند:
     ```js
     function draw(progress) {
       train.style.left = progress + 'px';
     }
     ```
 
-    ...Or do anything else, we can animate anything, in any way.
+  ... یا هر کار دیگری انجام دهیم، ما می توانیم هر چیزی را به هر شکلی متحرک کنیم.
 
+بیایید با استفاده از تابع خود عنصر `width` را از `0` به `100٪` متحرک کنیم.
 
-Let's animate the element `width` from `0` to `100%` using our function.
-
-Click on the element for the demo:
-
+روی عنصر برای دمو کلیک کنید:
 [codetabs height=60 src="width"]
 
-The code for it:
+کد نمونه:
 
 ```js
 animate({
@@ -199,19 +197,19 @@ animate({
 });
 ```
 
-Unlike CSS animation, we can make any timing function and any drawing function here. The timing function is not limited by Bezier curves. And `draw` can go beyond properties, create new elements for like fireworks animation or something.
+برخلاف انیمیشن CSS، ما می توانیم هر تابع زمان بندی و هر تابع ترسیمی را در اینجا ایجاد کنیم. عملکرد زمان بندی توسط منحنی های Bezier محدود نمی شود. و `draw` می‌تواند فراتر از ویژگی‌ها باشد، عناصر جدیدی مانند انیمیشن آتش‌بازی یا چیز دیگری ایجاد کند.
 
-## Timing functions
+## Timing تابع
 
-We saw the simplest, linear timing function above.
+ما ساده ترین تابع زمان بندی خطی را در بالا دیدیم.
 
-Let's see more of them. We'll try movement animations with different timing functions to see how they work.
+بیایید بیشتر آنها را ببینیم. ما انیمیشن های حرکتی را با عملکردهای زمان بندی مختلف امتحان می کنیم تا ببینیم چگونه کار می کنند.
 
-### Power of n
+### توان برای  n
 
-If we want to speed up the animation, we can use `progress` in the power `n`.
+اگر بخواهیم سرعت انیمیشن را افزایش دهیم، می‌توانیم از `پیشرفت` در قدرت `n` استفاده کنیم.
 
-For instance, a parabolic curve:
+به عنوان مثال، منحنی سهموی:
 
 ```js
 function quad(timeFraction) {
@@ -219,27 +217,27 @@ function quad(timeFraction) {
 }
 ```
 
-The graph:
+گراف:
 
 ![](quad.svg)
 
-See in action (click to activate):
+برای دیدن کلیک کنید:
 
 [iframe height=40 src="quad" link]
 
-...Or the cubic curve or even greater `n`. Increasing the power makes it speed up faster.
+... یا منحنی مکعب یا حتی `n` بزرگتر. افزایش قدرت باعث افزایش سرعت آن می شود.
 
-Here's the graph for `progress` in the power `5`:
+در اینجا نمودار `پیشرفت` در توان `5` آمده است:
 
 ![](quint.svg)
 
-In action:
+در عمل:
 
 [iframe height=40 src="quint" link]
 
-### The arc
+### قوس یا The arc
 
-Function:
+تابع:
 
 ```js
 function circ(timeFraction) {
@@ -247,19 +245,17 @@ function circ(timeFraction) {
 }
 ```
 
-The graph:
+گراف:
 
 ![](circ.svg)
 
 [iframe height=40 src="circ" link]
 
-### Back: bow shooting
+### Back: تیر اندازی با کمان
 
-This function does the "bow shooting". First we "pull the bowstring", and then "shoot".
+این تابع `تیراندازی با کمان` را انجام می دهد. ابتدا سیم کمان را می کشیم و سپس شلیک می کنیم.
 
-Unlike previous functions, it depends on an additional parameter `x`, the "elasticity coefficient". The distance of "bowstring pulling" is defined by it.
-
-The code:
+برخلاف توابع قبلی، به یک پارامتر اضافی `x`، `ضریب الاستیسیته` بستگی دارد. فاصله `کشیدن ریسمان کمان` با آن مشخص می شود.
 
 ```js
 function back(x, timeFraction) {
@@ -267,19 +263,18 @@ function back(x, timeFraction) {
 }
 ```
 
-**The graph for `x = 1.5`:**
+**گراف برای `x = 1.5`:**
 
 ![](back.svg)
 
-For animation we use it with a specific value of `x`. Example for `x = 1.5`:
-
+برای انیمیشن از آن با مقدار خاصی از `x` استفاده می کنیم. مثال برای `x = 1.5`:
 [iframe height=40 src="back" link]
 
-### Bounce
+### پرش یا Bounce
 
-Imagine we are dropping a ball. It falls down, then bounces back a few times and stops.
+تصور کنید در حال رها کردن یک توپ هستیم. سقوط می کند، سپس چند بار به عقب برگشته و می ایستد.
 
-The `bounce` function does the same, but in the reverse order: "bouncing" starts immediately. It uses few special coefficients for that:
+تابع `جهش` همین کار را می کند، اما به ترتیب معکوس: `جهش` بلافاصله شروع می شود. از چند ضرایب خاص برای آن استفاده می کند:
 
 ```js
 function bounce(timeFraction) {
@@ -291,13 +286,13 @@ function bounce(timeFraction) {
 }
 ```
 
-In action:
+در عمل:
 
 [iframe height=40 src="bounce" link]
 
-### Elastic animation
+### Elastic انیمیشن
 
-One more "elastic" function that accepts an additional parameter `x` for the "initial range".
+یک تابع `الاستیک` دیگر که یک پارامتر اضافی `x` را برای `محدوده اولیه` می پذیرد.
 
 ```js
 function elastic(x, timeFraction) {
@@ -305,10 +300,10 @@ function elastic(x, timeFraction) {
 }
 ```
 
-**The graph for `x=1.5`:**
+**گراف برای `x=1.5`:**
 ![](elastic.svg)
 
-In action for `x=1.5`:
+در عمل برای `x=1.5`:
 
 [iframe height=40 src="elastic" link]
 
