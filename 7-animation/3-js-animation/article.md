@@ -419,7 +419,6 @@ bounceEaseInOut = makeEaseInOut(bounce);
 
 در اینجا تابع کمکی `animate` برای تنظیم بیشتر انیمیشن ها است:
 
-
 ```js
 function animate({timing, draw, duration}) {
 
