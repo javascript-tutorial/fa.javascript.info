@@ -312,21 +312,21 @@ function elastic(x, timeFraction) {
 
 [iframe height=40 src="elastic" link]
 
-## Reversal: ease*
+## معکوس: ease*
 
-So we have a collection of timing functions. Their direct application is called "easeIn".
+بنابراین ما مجموعه ای از توابع زمان بندی داریم. کاربرد مستقیم آنها `easeIn` نامیده می شود.
 
-Sometimes we need to show the animation in the reverse order. That's done with the "easeOut" transform.
+گاهی اوقات لازم است انیمیشن را به ترتیب معکوس نشان دهیم. این کار با تبدیل `easeOut` انجام می شود.
 
 ### easeOut
 
-In the "easeOut" mode the `timing` function is put into a wrapper `timingEaseOut`:
+در حالت `easeOut` تابع `timing` در لفاف `timingEaseOut` قرار می گیرد:
 
 ```js
 timingEaseOut(timeFraction) = 1 - timing(1 - timeFraction)
 ```
 
-In other words, we have a "transform" function `makeEaseOut` that takes a "regular" timing function and returns the wrapper around it:
+به عبارت دیگر، ما یک تابع `تغییر` `makeEaseOut` داریم که یک تابع زمان بندی "عادی" را می گیرد و پوشش دور آن را برمی گرداند:
 
 ```js
 // accepts a timing function, returns the transformed variant
@@ -337,32 +337,31 @@ function makeEaseOut(timing) {
 }
 ```
 
-For instance, we can take the `bounce` function described above and apply it:
+برای مثال، می‌توانیم تابع `جهش` که در بالا توضیح داده شد را گرفته و آن را اعمال کنیم:
 
 ```js
 let bounceEaseOut = makeEaseOut(bounce);
 ```
 
-Then the bounce will be not in the beginning, but at the end of the animation. Looks even better:
+سپس پرش نه در ابتدا، بلکه در انتهای انیمیشن خواهد بود. حتی بهتر به نظر می رسد:
 
 [codetabs src="bounce-easeout"]
 
-Here we can see how the transform changes the behavior of the function:
+در اینجا می توانیم ببینیم که چگونه تبدیل رفتار تابع را تغییر می دهد:
 
 ![](bounce-inout.svg)
 
-If there's an animation effect in the beginning, like bouncing -- it will be shown at the end.
+اگر در ابتدا یک افکت انیمیشن وجود داشته باشد، مانند پرش -- در انتها نشان داده می شود.
 
-In the graph above the <span style="color:#EE6B47">regular bounce</span> has the red color, and the <span style="color:#62C0DC">easeOut bounce</span> is blue.
+در نمودار بالا، <span style="color:#EE6B47">پرش منظم</span> رنگ قرمز دارد و <span style="color:#62C0DC">easeOut bounce</span> آبی است.
 
-- Regular bounce -- the object bounces at the bottom, then at the end sharply jumps to the top.
-- After `easeOut` -- it first jumps to the top, then bounces there.
-
+- پرش منظم - جسم در پایین می پرد، سپس در انتها به شدت به بالا می پرد.
+- بعد از `easeOut` - ابتدا به بالا می پرد، سپس به آنجا می پرد.
 ### easeInOut
 
-We also can show the effect both in the beginning and the end of the animation. The transform is called "easeInOut".
+ما همچنین می توانیم اثر را هم در ابتدا و هم در انتهای انیمیشن نشان دهیم. تبدیل `easeInOut` نامیده می شود.
 
-Given the timing function, we calculate the animation state like this:
+با توجه به تابع زمان بندی، حالت انیمیشن را به صورت زیر محاسبه می کنیم:
 
 ```js
 if (timeFraction <= 0.5) { // first half of the animation
@@ -372,7 +371,7 @@ if (timeFraction <= 0.5) { // first half of the animation
 }
 ```
 
-The wrapper code:
+کد wrraper:
 
 ```js
 function makeEaseInOut(timing) {
@@ -387,37 +386,39 @@ function makeEaseInOut(timing) {
 bounceEaseInOut = makeEaseInOut(bounce);
 ```
 
-In action, `bounceEaseInOut`:
+در عمل, `bounceEaseInOut`:
 
 [codetabs src="bounce-easeinout"]
 
-The "easeInOut" transform joins two graphs into one: `easeIn` (regular) for the first half of the animation and `easeOut` (reversed) -- for the second part.
+تبدیل `easeInOut` دو نمودار را به یک نمودار می پیوندد: `easeIn` (عادی) برای نیمه اول انیمیشن و `easeOut` (معکوس) -- برای قسمت دوم.
 
-The effect is clearly seen if we compare the graphs of `easeIn`, `easeOut` and `easeInOut` of the `circ` timing function:
+اگر نمودارهای `easeIn`، `easeOut` و `easeInOut` تابع زمانبندی `circ` را با هم مقایسه کنیم، این اثر به وضوح مشاهده می شود:
 
 ![](circ-ease.svg)
 
-- <span style="color:#EE6B47">Red</span> is the regular variant of `circ` (`easeIn`).
+- <span style="color:#EE6B47">Red</span> نوع معمولی است `circ` (`easeIn`).
 - <span style="color:#8DB173">Green</span> -- `easeOut`.
 - <span style="color:#62C0DC">Blue</span> -- `easeInOut`.
 
-As we can see, the graph of the first half of the animation is the scaled down `easeIn`, and the second half is the scaled down `easeOut`. As a result, the animation starts and finishes with the same effect.
+همانطور که می بینیم، نمودار نیمه اول انیمیشن `easeIn` کوچک شده و نیمه دوم `easeOut` کوچک شده است. در نتیجه انیمیشن با همان افکت شروع و به پایان می رسد.
 
-## More interesting "draw"
 
-Instead of moving the element we can do something else. All we need is to write the proper `draw`.
+## نکته جالب تر "draw"
 
-Here's the animated "bouncing" text typing:
+به جای جابجایی عنصر می توانیم کار دیگری انجام دهیم. تنها چیزی که نیاز داریم این است که  `draw` مناسب را بنویسیم.
+
+در اینجا تایپ متن متحرک `bouncing` آمده است:
 
 [codetabs src="text"]
 
-## Summary
+## خلاصه
 
-For animations that CSS can't handle well, or those that need tight control, JavaScript can help. JavaScript animations should be implemented via `requestAnimationFrame`. That built-in method allows to setup a callback function to run when the browser will be preparing a repaint. Usually that's very soon, but the exact time depends on the browser.
+برای انیمیشن هایی که CSS نمی تواند به خوبی از عهده آنها برآید، یا آنهایی که نیاز به کنترل دقیق دارند، جاوا اسکریپت می تواند کمک کند. انیمیشن های جاوا اسکریپت باید از طریق `requestAnimationFrame` پیاده سازی شوند. این روش داخلی به شما امکان می‌دهد تا زمانی که مرورگر در حال آماده‌سازی رنگ‌آمیزی مجدد است، یک تابع پاسخ به تماس را تنظیم کنید. معمولاً خیلی زود است، اما زمان دقیق به مرورگر بستگی دارد.
 
-When a page is in the background, there are no repaints at all, so the callback won't run: the animation will be suspended and won't consume resources. That's great.
+وقتی یک صفحه در پس‌زمینه است، هیچ رنگ‌آمیزی مجدد وجود ندارد، بنابراین تماس برگشتی اجرا نمی‌شود: انیمیشن به حالت تعلیق در می‌آید و منابع را مصرف نمی‌کند. عالیه.
 
-Here's the helper `animate` function to setup most animations:
+در اینجا تابع کمکی `animate` برای تنظیم بیشتر انیمیشن ها است:
+
 
 ```js
 function animate({timing, draw, duration}) {
@@ -442,14 +443,14 @@ function animate({timing, draw, duration}) {
 }
 ```
 
-Options:
+گزینه ها:
 
-- `duration` -- the total animation time in ms.
-- `timing` -- the function to calculate animation progress. Gets a time fraction from 0 to 1, returns the animation progress, usually from 0 to 1.
-- `draw` -- the function to draw the animation.
+- `مدت` -- کل زمان انیمیشن بر حسب ms.
+- `زمان بندی` -- تابعی برای محاسبه پیشرفت انیمیشن. کسر زمانی را از 0 تا 1 دریافت می کند، پیشرفت انیمیشن را معمولاً از 0 به 1 برمی گرداند.
+- `draw` -- تابعی برای ترسیم انیمیشن.
 
-Surely we could improve it, add more bells and whistles, but JavaScript animations are not applied on a daily basis. They are used to do something interesting and non-standard. So you'd want to add the features that you need when you need them.
+مطمئناً می‌توانیم آن را بهبود بخشیم، زنگ‌ها و سوت‌های بیشتری اضافه کنیم، اما انیمیشن‌های جاوا اسکریپت به صورت روزانه اعمال نمی‌شوند. از آنها برای انجام کارهای جالب و غیر استاندارد استفاده می شود. بنابراین شما می خواهید ویژگی های مورد نیاز خود را در صورت نیاز اضافه کنید.
 
-JavaScript animations can use any timing function. We covered a lot of examples and transformations to make them even more versatile. Unlike CSS, we are not limited to Bezier curves here.
+انیمیشن های جاوا اسکریپت می توانند از هر تابع زمان بندی استفاده کنند. ما نمونه ها و دگرگونی های زیادی را پوشش دادیم تا همه کاره تر شوند. برخلاف CSS، ما در اینجا به منحنی های Bezier محدود نمی شویم.
 
-The same is about `draw`: we can animate anything, not just CSS properties.
+در مورد `draw` هم همینطور است: ما می توانیم هر چیزی را متحرک کنیم، نه فقط ویژگی های CSS.
