@@ -1,16 +1,16 @@
-# CSS-animations
+# CSS انیمیشن های
 
-CSS animations make it possible to do simple animations without JavaScript at all.
+نیمیشن‌های CSS امکان انجام انیمیشن‌های ساده را بدون جاوا اسکریپت فراهم می‌کنند.
 
-JavaScript can be used to control CSS animations and make them even better, with little code.
+جاوا اسکریپت می تواند برای کنترل انیمیشن های CSS و حتی بهتر کردن آنها با کد کمی استفاده شود.
 
-## CSS transitions [#css-transition]
+## انتقال CSS transitions [#css-transition]
 
-The idea of CSS transitions is simple. We describe a property and how its changes should be animated. When the property changes, the browser paints the animation.
+ایده انتقال CSS ساده است. ما یک ویژگی را توضیح می دهیم و چگونه تغییرات آن باید متحرک شود. هنگامی که ویژگی تغییر می کند، مرورگر انیمیشن را رنگ می کند.
 
-That is, all we need is to change the property, and the fluid transition will be done by the browser.
+یعنی تنها چیزی که نیاز داریم تغییر ویژگی است و انتقال سیال توسط مرورگر انجام می شود.
 
-For instance, the CSS below animates changes of `background-color` for 3 seconds:
+برای مثال، CSS زیر تغییرات 'رنگ پس‌زمینه' را به مدت ۳ ثانیه متحرک می‌کند:
 
 ```css
 .animated {
@@ -19,9 +19,9 @@ For instance, the CSS below animates changes of `background-color` for 3 seconds
 }
 ```
 
-Now if an element has `.animated` class, any change of `background-color` is animated during 3 seconds.
+حال اگر عنصری دارای کلاس '.animated' باشد، هر تغییری در 'رنگ پس‌زمینه' در طول 3 ثانیه متحرک می‌شود.
 
-Click the button below to animate the background:
+برای متحرک سازی پس زمینه روی دکمه زیر کلیک کنید:
 
 ```html run autorun height=60
 <button id="color">Click me</button>
@@ -40,16 +40,16 @@ Click the button below to animate the background:
 </script>
 ```
 
-There are 4 properties to describe CSS transitions:
+4 ویژگی برای توصیف انتقال CSS وجود دارد:
 
 - `transition-property`
 - `transition-duration`
 - `transition-timing-function`
 - `transition-delay`
 
-We'll cover them in a moment, for now let's note that the common `transition` property allows declaring them together in the order: `property duration timing-function delay`, as well as animating multiple properties at once.
+ما آنها را در یک لحظه پوشش خواهیم داد، فعلاً توجه داشته باشیم که ویژگی مشترک 'transition' اجازه می دهد تا آنها را با هم به ترتیب اعلام کنیم: 'تأخیر زمان بندی-عملکرد مدت زمان' و همچنین متحرک سازی چندین ویژگی به طور همزمان.
 
-For instance, this button animates both `color` and `font-size`:
+به عنوان مثال، این دکمه هم `color` و هم `font-size` را متحرک می کند:
 
 ```html run height=80 autorun no-beautify
 <button id="growing">Click me</button>
@@ -70,29 +70,29 @@ growing.onclick = function() {
 </script>
 ```
 
-Now, let's cover animation properties one by one.
+حالا بیایید ویژگی های انیمیشن را یکی یکی پوشش دهیم.
 
 ## transition-property
 
-In `transition-property`, we write a list of properties to animate, for instance: `left`, `margin-left`, `height`, `color`. Or we could write `all`, which means "animate all properties".
+در «transition-property»، ما فهرستی از ویژگی‌ها را برای متحرک کردن می‌نویسیم، به‌عنوان مثال: `left`, `margin-left`, `height`, `color`. یا می‌توانیم `all` را بنویسیم که به معنای «animate به همه ویژگی‌ها» است.
 
-Do note that, there are properties which can not be animated. However, [most of the generally used properties are animatable](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animated_properties).
+توجه داشته باشید که ویژگی هایی وجود دارد که نمی توان آنها را متحرک کرد. با این حال، [بیشتر ویژگی‌هایی که معمولاً مورد استفاده قرار می‌گیرند متحرک هستند](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animated_properties).
 
-## transition-duration
+## مدت زمان انتقال
 
-In `transition-duration` we can specify how long the animation should take. The time should be in [CSS time format](https://www.w3.org/TR/css3-values/#time): in seconds `s` or milliseconds `ms`.
+در 'transition-duration' می‌توانیم مشخص کنیم که انیمیشن چقدر طول می‌کشد. زمان باید در [قالب زمان CSS](https://www.w3.org/TR/css3-values/#time): بر حسب ثانیه یا میلی ثانیه «ms» باشد.
 
 ## transition-delay
 
-In `transition-delay` we can specify the delay *before* the animation. For instance, if `transition-delay` is `1s` and `transition-duration` is `2s`, then the animation starts 1 second after the property change and the total duration will be 2 seconds.
+در `transition-delay` می‌توانیم تاخیر *قبل از* انیمیشن را مشخص کنیم. برای مثال، اگر `تاخیر انتقال` `1 ثانیه` و `مدت انتقال` `2 ثانیه` باشد، انیمیشن 1 ثانیه پس از تغییر ویژگی شروع می‌شود و مدت زمان کل 2 ثانیه خواهد بود.
 
-Negative values are also possible. Then the animation is shown immediately, but the starting point of the animation will be after given value (time). For example, if `transition-delay` is `-1s` and `transition-duration` is `2s`, then animation starts from the halfway point and total duration will be 1 second.
+مقادیر منفی نیز ممکن است. سپس انیمیشن بلافاصله نشان داده می شود، اما نقطه شروع انیمیشن پس از مقدار داده شده (زمان) خواهد بود. به عنوان مثال، اگر `تاخیر انتقال` `-۱ ثانیه` و `مدت انتقال` `۲ ثانیه` باشد، انیمیشن از نیمه شروع می‌شود و مدت زمان کل ۱ ثانیه خواهد بود.
 
-Here the animation shifts numbers from `0` to `9` using CSS `translate` property:
+در اینجا انیمیشن با استفاده از ویژگی `translate` CSS اعداد را از `0` به `9` تغییر می‌دهد:
 
 [codetabs src="digits"]
 
-The `transform` property is animated like this:
+ویژگی `transform` به شکل زیر متحرک است:
 
 ```css
 #stripe.animate {
@@ -102,19 +102,19 @@ The `transform` property is animated like this:
 }
 ```
 
-In the example above JavaScript adds the class `.animate` to the element -- and the animation starts:
+در مثال بالا جاوا اسکریپت کلاس `.animate` را به عنصر اضافه می کند -- و انیمیشن شروع می شود:
 
 ```js
 stripe.classList.add('animate');
 ```
 
-We could also start it from somewhere in the middle of the transition, from an exact number, e.g. corresponding to the current second, using a negative `transition-delay`.
+ما همچنین می‌توانیم آن را از جایی در میانه انتقال، از یک عدد دقیق شروع کنیم، به عنوان مثال. متناظر با ثانیه فعلی، با استفاده از `transition-delay` منفی.
 
-Here if you click the digit -- it starts the animation from the current second:
+در اینجا اگر روی رقم کلیک کنید -- انیمیشن را از ثانیه فعلی شروع می کند:
 
 [codetabs src="digits-negative-delay"]
 
-JavaScript does it with an extra line:
+جاوا اسکریپت این کار را با یک خط اضافی انجام می دهد:
 
 ```js
 stripe.onclick = function() {
@@ -127,42 +127,42 @@ stripe.onclick = function() {
 };
 ```
 
-## transition-timing-function
+## تابع انتقال-زمان
 
-The timing function describes how the animation process is distributed along its timeline. Will it start slowly and then go fast, or vice versa.
+تابع زمان بندی نحوه توزیع فرآیند انیمیشن در طول جدول زمانی آن را توصیف می کند. آیا به آرامی شروع می شود و سپس سریع می رود یا برعکس.
 
-It appears to be the most complicated property at first. But it becomes very simple if we devote a bit time to it.
+به نظر می رسد در ابتدا پیچیده ترین ویژگی باشد. اما اگر کمی زمان را به آن اختصاص دهیم بسیار ساده می شود.
 
-That property accepts two kinds of values: a Bezier curve or steps. Let's start with the curve, as it's used more often.
+این ویژگی دو نوع مقدار را می پذیرد: منحنی Bezier یا مراحل. بیایید با منحنی شروع کنیم، زیرا بیشتر استفاده می شود.
 
-### Bezier curve
+### Bezier منحنی
 
-The timing function can be set as a [Bezier curve](/bezier-curve) with 4 control points that satisfy the conditions:
+تابع زمان بندی را می توان به عنوان یک [منحنی Bezier](/bezier-curve) با 4 نقطه کنترل که شرایط را برآورده می کند تنظیم کرد:
 
-1. First control point: `(0,0)`.
-2. Last control point: `(1,1)`.
-3. For intermediate points, the values of `x` must be in the interval `0..1`, `y` can be anything.
+1. اولین نقطه کنترل: `(0,0)`.
+2. آخرین نقطه کنترل: `(1,1)`.
+3. برای نقاط میانی، مقادیر `x` باید در بازه `0..1` باشد، `y` می تواند هر چیزی باشد.
 
-The syntax for a Bezier curve in CSS: `cubic-bezier(x2, y2, x3, y3)`. Here we need to specify only 2nd and 3rd control points, because the 1st one is fixed to `(0,0)` and the 4th one is `(1,1)`.
+نحو برای منحنی Bezier در `CSS: cubic-bezier(x2، y2، x3، y3)`. در اینجا باید فقط نقاط کنترل 2 و 3 را مشخص کنیم، زیرا اولین نقطه روی `(0,0)` ثابت شده است و نقطه چهارم `(1،1)` است.
 
-The timing function describes how fast the animation process goes.
+تابع زمان بندی سرعت فرآیند انیمیشن را توصیف می کند.
 
-- The `x` axis is the time: `0` -- the start, `1` -- the end of `transition-duration`.
-- The `y` axis specifies the completion of the process: `0` -- the starting value of the property, `1` -- the final value.
+- محور `x` زمان است: `0` -- شروع، `1` -- پایان `transition-duration`.
+- محور `y` تکمیل فرآیند را مشخص می کند: `0` -- مقدار شروع ویژگی، `1` -- مقدار نهایی.
 
-The simplest variant is when the animation goes uniformly, with the same linear speed. That can be specified by the curve `cubic-bezier(0, 0, 1, 1)`.
+ساده ترین حالت زمانی است که انیمیشن به طور یکنواخت و با همان سرعت خطی پیش می رود. این را می توان با منحنی `cubic-bezier(0، 0، 1، 1)` مشخص کرد.
 
-Here's how that curve looks:
+در اینجا این منحنی به نظر می رسد:
 
 ![](bezier-linear.svg)
 
-...As we can see, it's just a straight line. As the time (`x`) passes, the completion (`y`) of the animation steadily goes from `0` to `1`.
+... همانطور که می بینیم، فقط یک خط مستقیم است. با گذشت زمان (`x`)، تکمیل (`y`) انیمیشن به طور پیوسته از 0 به 1 می رود.
 
-The train in the example below goes from left to right with the permanent speed (click it):
+قطار در مثال زیر از چپ به راست با سرعت دائمی حرکت می کند (روی آن کلیک کنید):
 
 [codetabs src="train-linear"]
 
-The CSS `transition` is based on that curve:
+`انتقال` CSS بر اساس آن منحنی است:
 
 ```css
 .train {
@@ -172,17 +172,17 @@ The CSS `transition` is based on that curve:
 }
 ```
 
-...And how can we show a train slowing down?
+... و چگونه می توانیم قطاری را در حال کاهش سرعت نشان دهیم؟
 
-We can use another Bezier curve: `cubic-bezier(0.0, 0.5, 0.5 ,1.0)`.
+می‌توانیم از منحنی دیگر Bezier استفاده کنیم: `cubic-bezier(0.0، 0.5، 0.5، 1.0)`.
 
-The graph:
+نمودار:
 
 ![](train-curve.svg)
 
-As we can see, the process starts fast: the curve soars up high, and then slower and slower.
+همانطور که می بینیم، این روند سریع شروع می شود: منحنی به اوج می رسد و سپس کندتر و کندتر می شود.
 
-Here's the timing function in action (click the train):
+در اینجا تابع زمان بندی در عمل آمده است (روی train کلیک کنید):
 
 [codetabs src="train"]
 
@@ -195,20 +195,20 @@ CSS:
 }
 ```
 
-There are several built-in curves: `linear`, `ease`, `ease-in`, `ease-out` and `ease-in-out`.
+  چندین منحنی داخلی وجود دارد: `linear`, `ease`, `ease-in`, `ease-out` و `ease-in-out`.
 
-The `linear` is a shorthand for `cubic-bezier(0, 0, 1, 1)` -- a straight line, which we described above.
+`linear` مخفف `cubic-bezier(0، 0، 1، 1)` است - یک خط مستقیم، که در بالا توضیح دادیم.
 
-Other names are shorthands for the following `cubic-bezier`:
+نام‌های دیگر مخفف عبارت `cubic-bezier` زیر هستند:
 
 | <code>ease</code><sup>*</sup> | <code>ease-in</code> | <code>ease-out</code> | <code>ease-in-out</code> |
 |-------------------------------|----------------------|-----------------------|--------------------------|
 | <code>(0.25, 0.1, 0.25, 1.0)</code> | <code>(0.42, 0, 1.0, 1.0)</code> | <code>(0, 0, 0.58, 1.0)</code> | <code>(0.42, 0, 0.58, 1.0)</code> |
 | ![ease, figure](ease.svg) | ![ease-in, figure](ease-in.svg) | ![ease-out, figure](ease-out.svg) | ![ease-in-out, figure](ease-in-out.svg) |
 
-`*` -- by default, if there's no timing function, `ease` is used.
+`*` -- به‌طور پیش‌فرض، اگر تابع زمان‌بندی وجود نداشته باشد، `ease` استفاده می‌شود.
 
-So we could use `ease-out` for our slowing down train:
+بنابراین می‌توانیم از `ease-out` برای کاهش سرعت قطار خود استفاده کنیم:
 
 ```css
 .train {
@@ -218,13 +218,13 @@ So we could use `ease-out` for our slowing down train:
 }
 ```
 
-But it looks a bit differently.
+اما کمی متفاوت به نظر می رسد.
 
-**A Bezier curve can make the animation exceed its range.**
+**یک منحنی Bezier می تواند باعث شود که انیمیشن از محدوده خود فراتر رود.**
 
-The control points on the curve can have any `y` coordinates: even negative or huge ones. Then the Bezier curve would also extend very low or high, making the animation go beyond its normal range.
+نقاط کنترل روی منحنی می توانند هر مختصات `y` داشته باشند: حتی منفی یا بزرگ. سپس منحنی Bezier نیز بسیار کم یا زیاد می شود و باعث می شود انیمیشن از محدوده طبیعی خود فراتر رود.
 
-In the example below the animation code is:
+در مثال زیر کد انیمیشن به شرح زیر است:
 
 ```css
 .train {
@@ -234,47 +234,47 @@ In the example below the animation code is:
 }
 ```
 
-The property `left` should animate from `100px` to `400px`.
+ویژگی "چپ" باید از `100px` تا `400px` متحرک شود.
 
-But if you click the train, you'll see that:
+اما اگر روی قطار کلیک کنید، خواهید دید که:
 
-- First, the train goes *back*: `left` becomes less than `100px`.
-- Then it goes forward, a little bit farther than `400px`.
-- And then back again -- to `400px`.
-
+- ابتدا، قطار *به عقب* می رود: «چپ» کمتر از `100px` می شود.
+- سپس به جلو می رود، کمی دورتر از `400px`.
+- و سپس دوباره -- به `400px`.
+  
 [codetabs src="train-over"]
 
-Why it happens is pretty obvious if we look at the graph of the given Bezier curve:
+اگر به نمودار منحنی Bezier داده شده نگاه کنیم، چرا این اتفاق می افتد کاملاً واضح است:
 
 ![](bezier-train-over.svg)
 
-We moved the `y` coordinate of the 2nd point below zero, and for the 3rd point we made it over `1`, so the curve goes out of the "regular" quadrant. The `y` is out of the "standard" range `0..1`.
+  مختصات `y` نقطه دوم را به زیر صفر رساندیم و برای نقطه سوم آن را روی `1` قرار دادیم، بنابراین منحنی از ربع `منظم` خارج می‌شود. `y` خارج از محدوده `استاندارد` `0..1` است.
 
-As we know, `y` measures "the completion of the animation process". The value `y = 0` corresponds to the starting property value and `y = 1` -- the ending value. So values `y<0` move the property beyond the starting `left` and `y>1` -- past the final `left`.
+همانطور که می دانیم، `y` "تکمیل فرآیند انیمیشن" را اندازه گیری می کند. مقدار "y = 0" مربوط به مقدار ویژگی شروع و `y = 1` - مقدار پایانی است. بنابراین مقادیر `y<0` ویژگی را فراتر از `چپ` شروع و `y>1` - از `چپ` نهایی عبور می‌کند.
 
-That's a "soft" variant for sure. If we put `y` values like `-99` and `99` then the train would jump out of the range much more.
+مطمئناً این یک نوع "نرم" است. اگر مقادیر `y` مانند `-99` و «99» را قرار دهیم، قطار بسیار بیشتر از محدوده خارج خواهد شد.
 
-But how do we make a Bezier curve for a specific task? There are many tools.
+اما چگونه یک منحنی Bezier برای یک کار خاص بسازیم؟ ابزارهای زیادی وجود دارد.
 
-- For instance, we can do it on the site <https://cubic-bezier.com>.
-- Browser developer tools also have special support for Bezier curves in CSS:
-    1. Open the developer tools with `key:F12` (Mac: `key:Cmd+Opt+I`).
-    2. Select the `Elements` tab, then pay attention to the `Styles` sub-panel at the right side.
-    3. CSS properties with a word `cubic-bezier` will have an icon before this word.
-    4. Click this icon to edit the curve.
+- به عنوان مثال، ما می توانیم این کار را در سایت <https://cubic-bezier.com> انجام دهیم.
+- ابزارهای توسعه دهنده مرورگر همچنین از منحنی های Bezier در CSS پشتیبانی می کنند:
+     1. ابزارهای توسعه دهنده را با `key:F12` باز کنید (`Mac: key:Cmd+Opt+I`).
+     2. برگه `Elements` را انتخاب کنید، سپس به پنل فرعی `Styles` در سمت راست توجه کنید.
+     3. ویژگی های CSS با کلمه `cubic-bezier` یک نماد قبل از این کلمه خواهد داشت.
+     4. برای ویرایش منحنی روی این نماد کلیک کنید.
 
 
-### Steps
+### مراحل
 
-The timing function `steps(number of steps[, start/end])` allows splitting an transition into multiple steps.
+تابع زمان‌بندی `گام‌ها (تعداد مراحل[، شروع/پایان])` اجازه می‌دهد یک انتقال را به چند مرحله تقسیم کنید.
 
-Let's see that in an example with digits.
+بیایید آن را در یک مثال با ارقام ببینیم.
 
-Here's a list of digits, without any animations, just as a source:
+در اینجا لیستی از ارقام، بدون هیچ گونه انیمیشن، فقط به عنوان منبع آمده است:
 
 [codetabs src="step-list"]
 
-In the HTML, a stripe of digits is enclosed into a fixed-length `<div id="digits">`:
+در HTML، نواری از ارقام در یک `<div id="digits">` با طول ثابت محصور شده است:
 
 ```html
 <div id="digit">
@@ -282,13 +282,13 @@ In the HTML, a stripe of digits is enclosed into a fixed-length `<div id="digits
 </div>
 ```
 
-The `#digit` div has a fixed width and a border, so it looks like a red window.
+Div '#digit' دارای یک عرض و یک حاشیه ثابت است، بنابراین مانند یک پنجره قرمز به نظر می رسد.
 
-We'll make a timer: the digits will appear one by one, in a discrete way.
+ما یک تایمر می سازیم: ارقام یک به یک، به روشی گسسته ظاهر می شوند.
 
-To achieve that, we'll hide the `#stripe` outside of `#digit` using `overflow: hidden`, and then shift the `#stripe` to the left step-by-step.
+برای رسیدن به این هدف، `#stripe` را خارج از `# رقم` با استفاده از `overflow: hidden` پنهان می کنیم و سپس `#stripe` را گام به گام به سمت چپ تغییر می دهیم.
 
-There will be 9 steps, a step-move for each digit:
+9 مرحله وجود خواهد داشت که برای هر رقم یک گام حرکت می کند:
 
 ```css
 #stripe.animate  {
@@ -297,60 +297,60 @@ There will be 9 steps, a step-move for each digit:
 }
 ```
 
-The first argument of `steps(9, start)` is the number of steps. The transform will be split into 9 parts (10% each). The time interval is automatically divided into 9 parts as well, so `transition: 9s` gives us 9 seconds for the whole animation – 1 second per digit.
+اولین آرگومان `steps(9، start)` تعداد مراحل است. تبدیل به 9 قسمت (هر کدام 10٪) تقسیم می شود. بازه زمانی به طور خودکار به 9 قسمت نیز تقسیم می شود، بنابراین «Transition: 9s» به ما 9 ثانیه برای کل انیمیشن می دهد – 1 ثانیه در هر رقم.
 
-The second argument is one of two words: `start` or `end`.
+آرگومان دوم یکی از دو کلمه است: `شروع` یا `پایان`.
 
-The `start` means that in the beginning of animation we need to make the first step immediately.
+`شروع` به این معنی است که در ابتدای انیمیشن باید بلافاصله اولین قدم را برداریم.
 
-In action:
+در عمل:
 
 [codetabs src="step"]
 
-A click on the digit changes it to `1` (the first step) immediately, and then changes in the beginning of the next second.
+با کلیک بر روی رقم آن را بلافاصله به `1` (مرحله اول) تغییر می دهد و سپس در ابتدای ثانیه بعدی تغییر می کند.
 
-The process is progressing like this:
+روند به این صورت پیش می رود:
 
-- `0s` -- `-10%` (first change in the beginning of the 1st second, immediately)
+- `0s` -- `-10%` (اولین تغییر در ابتدای ثانیه اول، بلافاصله)
 - `1s` -- `-20%`
 - ...
 - `8s` -- `-90%`
-- (the last second shows the final value).
+- (ثانیه آخر مقدار نهایی را نشان می دهد).
 
-Here, the first change was immediate because of `start` in the `steps`.
+در اینجا، اولین تغییر فوری به دلیل `شروع` در `مراحل` بود.
 
-The alternative value `end` would mean that the change should be applied not in the beginning, but at the end of each second.
+مقدار جایگزین `پایان` به این معنی است که تغییر نه در ابتدا، بلکه در پایان هر ثانیه اعمال شود.
 
-So the process for `steps(9, end)` would go like this:
+بنابراین فرآیند `steps(9, end)` به این صورت خواهد بود:
 
-- `0s` -- `0` (during the first second nothing changes)
-- `1s` -- `-10%` (first change at the end of the 1st second)
+- `0s` -- `0` (در ثانیه اول هیچ چیز تغییر نمی کند)
+- `1s` -- `-10%` (اولین تغییر در پایان ثانیه اول)
 - `2s` -- `-20%`
 - ...
 - `9s` -- `-90%`
 
-Here's `steps(9, end)` in action (note the pause before the first digit change):
+در اینجا `مراحل (9، پایان)` در عمل آمده است (به مکث قبل از تغییر رقم اول توجه کنید):
 
 [codetabs src="step-end"]
 
-There are also some pre-defined shorthands for `steps(...)`:
+همچنین چند مختصر از پیش تعریف شده برای آن وجود دارد `steps(...)`:
 
-- `step-start` -- is the same as `steps(1, start)`. That is, the animation starts immediately and takes 1 step. So it starts and finishes immediately, as if there were no animation.
-- `step-end` -- the same as `steps(1, end)`: make the animation in a single step at the end of `transition-duration`.
+- `step-start` -- همان "steps(1, start)" است. یعنی انیمیشن بلافاصله شروع می شود و 1 مرحله می گیرد. بنابراین بلافاصله شروع می شود و به پایان می رسد، گویی هیچ انیمیشنی وجود ندارد.
+- `step-end` -- همانند "steps(1, end)": انیمیشن را در یک مرحله در پایان `transition-duration` بسازید.
 
-These values are rarely used, as they represent not a real animation, but rather a single-step change. We mention them here for completeness.
+این مقادیر به ندرت مورد استفاده قرار می گیرند، زیرا نشان دهنده یک انیمیشن واقعی نیستند، بلکه یک تغییر تک مرحله ای هستند. ما در اینجا برای تکمیل آنها را ذکر می کنیم.
 
-## Event: "transitionend"
+## رویداد: "transitionend"
 
-When the CSS animation finishes, the `transitionend` event triggers.
+هنگامی که انیمیشن CSS به پایان می رسد، رویداد `transitionend` فعال می شود.
 
-It is widely used to do an action after the animation is done. Also we can join animations.
+به طور گسترده ای برای انجام یک عمل پس از انجام انیمیشن استفاده می شود. همچنین می توانیم به انیمیشن ها بپیوندیم.
 
-For instance, the ship in the example below starts to sail there and back when clicked, each time farther and farther to the right:
+به عنوان مثال، کشتی در مثال زیر شروع به حرکت به آنجا می کند و با کلیک کردن، هر بار دورتر و دورتر به سمت راست باز می گردد:
 
 [iframe src="boat" height=300 edit link]
 
-The animation is initiated by the function `go` that re-runs each time the transition finishes, and flips the direction:
+انیمیشن توسط تابع «go» شروع می‌شود که هر بار که انتقال به پایان می‌رسد، دوباره اجرا می‌شود و جهت را برمی‌گرداند:
 
 ```js
 boat.onclick = function() {
@@ -379,21 +379,21 @@ boat.onclick = function() {
 };
 ```
 
-The event object for `transitionend` has a few specific properties:
+شی رویداد برای «transitionend» دارای چند ویژگی خاص است:
 
-`event.propertyName`
-: The property that has finished animating. Can be good if we animate multiple properties simultaneously.
+`event.propertyName`.
+: خاصیتی که انیمیشن آن تمام شده است. اگر چندین ویژگی را به طور همزمان متحرک کنیم، می تواند خوب باشد.
 
-`event.elapsedTime`
-: The time (in seconds) that the animation took, without `transition-delay`.
+`event.elapsedTime`.
+: زمان (بر حسب ثانیه) که انیمیشن طول کشید، بدون `تاخیر انتقال`.
 
 ## Keyframes
 
-We can join multiple simple animations together using the `@keyframes` CSS rule.
+می‌توانیم چندین انیمیشن ساده را با استفاده از قانون `CSS @keyframes` به هم بپیوندیم.
 
-It specifies the "name" of the animation and rules - what, when and where to animate. Then using the `animation` property, we can attach the animation to the element and specify additional parameters for it.
+`نام` انیمیشن و قوانین را مشخص می کند - چه چیزی، چه زمانی و کجا باید متحرک شود. سپس با استفاده از ویژگی `animation` می توانیم انیمیشن را به عنصر متصل کرده و پارامترهای اضافی را برای آن مشخص کنیم.
 
-Here's an example with explanations:
+در اینجا یک مثال با توضیحات آورده شده است:
 
 ```html run height=60 autorun="no-epub" no-beautify
 <div class="progress"></div>
@@ -425,45 +425,45 @@ Here's an example with explanations:
 </style>
 ```
 
-There are many articles about `@keyframes` and a [detailed specification](https://drafts.csswg.org/css-animations/).
+مقالات زیادی در مورد `@keyframes` و [detailed specification](https://drafts.csswg.org/css-animations/).
 
-You probably won't need `@keyframes` often, unless everything is in constant motion on your sites.
+احتمالاً اغلب به `@keyframes` نیاز نخواهید داشت، مگر اینکه همه چیز در سایت شما در حال حرکت باشد.
 
-## Performance
+## اجرا
 
-Most CSS properties can be animated, because most of them are numeric values. For instance, `width`, `color`, `font-size` are all numbers. When you animate them, the browser gradually changes these numbers frame by frame, creating a smooth effect.
+اکثر خصوصیات CSS را می توان متحرک کرد، زیرا اکثر آنها مقادیر عددی هستند. به عنوان مثال، «عرض»، «رنگ»، «اندازه قلم» همه اعداد هستند. وقتی آنها را متحرک می کنید، مرورگر به تدریج این اعداد را فریم به فریم تغییر می دهد و یک جلوه صاف ایجاد می کند.
 
-However, not all animations will look as smooth as you'd like, because different CSS properties cost differently to change.
+با این حال، همه انیمیشن ها آنطور که می خواهید صاف به نظر نمی رسند، زیرا ویژگی های مختلف CSS هزینه متفاوتی برای تغییر دارند.
 
-In more technical details, when there's a style change, the browser goes through 3 steps to render the new look:
+در جزئیات فنی بیشتر، هنگامی که تغییر سبک وجود دارد، مرورگر 3 مرحله را برای ارائه ظاهر جدید طی می کند:
 
-1. **Layout**: re-compute the geometry and position of each element, then
-2. **Paint**: re-compute how everything should look like at their places, including background, colors,
-3. **Composite**: render the final results into pixels on screen, apply CSS transforms if they exist.
+1. **طراحی**: هندسه و موقعیت هر عنصر را دوباره محاسبه کنید، سپس
+2. **نقاشی**: دوباره محاسبه کنید که همه چیز در مکان خود چگونه باید باشد، از جمله پس زمینه، رنگ ها،
+3. **کامپوزیت**: نتایج نهایی را به پیکسل های روی صفحه نمایش دهید، در صورت وجود، تبدیل های CSS را اعمال کنید.
 
-During a CSS animation, this process repeats every frame. However, CSS properties that never affect geometry or position, such as `color`, may skip the Layout step. If a `color` changes, the browser  doesn't calculate any new geometry, it goes to Paint -> Composite. And there are few properties that directly go to Composite. You can find a longer list of CSS properties and which stages they trigger at <https://csstriggers.com>.
+در طول یک انیمیشن CSS، این فرآیند هر فریم را تکرار می کند. با این حال، ویژگی‌های CSS که هرگز بر هندسه یا موقعیت تأثیر نمی‌گذارند، مانند «رنگ»، ممکن است مرحله Layout را نادیده بگیرند. اگر یک "رنگ" تغییر کند، مرورگر هیچ هندسه جدیدی را محاسبه نمی کند، به Paint -> Composite می رود. و خواص کمی وجود دارد که مستقیماً به Composite می رود. در <https://csstriggers.com> می‌توانید فهرست طولانی‌تری از ویژگی‌های CSS و اینکه کدام مراحل را راه‌اندازی می‌کنند پیدا کنید.
 
-The calculations may take time, especially on pages with many elements and a complex layout. And the delays are actually visible on most devices, leading to "jittery", less fluid animations.
+محاسبات ممکن است زمان ببرد، به خصوص در صفحاتی که عناصر زیاد و طرح بندی پیچیده دارند. و تأخیرها در واقع در اکثر دستگاه‌ها قابل مشاهده است، که منجر به انیمیشن‌های کم‌تر روان‌تر می‌شود.
 
-Animations of properties that skip the Layout step are faster. It's even better if Paint is skipped too.
+انیمیشن های خواصی که مرحله Layout را رد می کنند سریعتر هستند. حتی بهتر است از Paint نیز صرف نظر شود.
 
-The `transform` property is a great choice, because:
-- CSS transforms affect the target element box as a whole (rotate, flip, stretch, shift it).
-- CSS transforms never affect neighbour elements.
+ویژگی `transform` یک انتخاب عالی است، زیرا:
+- تبدیل های CSS روی جعبه عنصر هدف به عنوان یک کل تأثیر می گذارد (چرخش، تلنگر، کشش، تغییر آن).
+- تبدیل CSS هرگز بر عناصر همسایه تأثیر نمی گذارد.
 
-...So browsers apply `transform` "on top" of existing Layout and Paint calculations, in the Composite stage.
+...بنابراین مرورگرها `تبدیل` را `در بالای` محاسبات Layout و Paint موجود در مرحله ترکیبی اعمال می کنند.
 
-In other words, the browser calculates the Layout (sizes, positions), paints it with colors, backgrounds, etc at the Paint stage, and then applies `transform` to element boxes that need it.
+به عبارت دیگر، مرورگر Layout (اندازه‌ها، موقعیت‌ها) را محاسبه می‌کند، آن را با رنگ‌ها، پس‌زمینه‌ها و غیره در مرحله Paint رنگ می‌کند و سپس `تبدیل` را در جعبه‌های عناصری که به آن نیاز دارند اعمال می‌کند.
 
-Changes (animations) of the `transform` property never trigger Layout and Paint steps. More than that, the browser  leverages the graphics accelerator (a special chip on the CPU or graphics card) for CSS transforms, thus making them very efficient.
+تغییرات (انیمیشن) ویژگی «تبدیل» هرگز مراحل Layout و Paint را راه‌اندازی نمی‌کند. بیشتر از آن، مرورگر از شتاب دهنده گرافیکی (چیپ مخصوص روی CPU یا کارت گرافیک) برای تبدیل CSS استفاده می کند، بنابراین آنها را بسیار کارآمد می کند.
 
-Luckily, the `transform` property is very powerful. By using `transform` on an element, you could rotate and flip it, stretch and shrink it, move it around, and [much more](https://developer.mozilla.org/docs/Web/CSS/transform#syntax). So instead of `left/margin-left` properties we can use `transform: translateX(…)`, use `transform: scale` for increasing element size, etc.
+خوشبختانه، ویژگی «تبدیل» بسیار قدرتمند است. با استفاده از «تبدیل» روی یک عنصر، می‌توانید آن را بچرخانید و بچرخانید، آن را کشیده و کوچک کنید، آن را به اطراف حرکت دهید، و [خیلی بیشتر](https://developer.mozilla.org/docs/Web/CSS/transform#syntax ). بنابراین به جای ویژگی‌های `left/margin-left` می‌توانیم از `transform: translateX(…)` استفاده کنیم، از `transform: scale` برای افزایش اندازه عنصر و غیره استفاده کنیم.
 
-The `opacity` property also never triggers Layout (also skips Paint in Mozilla Gecko). We can use it for show/hide or fade-in/fade-out effects.
+خاصیت `تعوض` نیز هرگز Layout را فعال نمی‌کند (از Paint در Mozilla Gecko نیز عبور می‌کند). می‌توانیم از آن برای جلوه‌های نمایش/پنهان کردن یا محو شدن/محو شدن استفاده کنیم.
 
-Paring `transform` with `opacity` can usually solve most of our needs, providing fluid, good-looking animations.
+تفکیک `تبدیل` با `تصادف` معمولاً می‌تواند اکثر نیازهای ما را برطرف کند و انیمیشن‌های روان و خوش‌نظری ارائه کند.
 
-For example, here clicking on the `#boat` element adds the class with `transform: translateX(300)` and `opacity: 0`, thus making it move `300px` to the right and disappear:
+برای مثال، در اینجا با کلیک بر روی عنصر «#boat» کلاسی با `transform: translateX(300)` و `opacity: 0` اضافه می‌شود، بنابراین باعث می‌شود «300px» به سمت راست حرکت کند و ناپدید شود:
 
 ```html run height=260 autorun no-beautify
 <img src="https://js.cx/clipart/boat.png" id="boat">
@@ -484,7 +484,7 @@ For example, here clicking on the `#boat` element adds the class with `transform
 </script>
 ```
 
-Here's a more complex example, with `@keyframes`:
+در اینجا یک مثال پیچیده تر، با `@keyframes` آمده است:
 
 ```html run height=80 autorun no-beautify
 <h2 onclick="this.classList.toggle('animated')">click me to start / stop</h2>
@@ -510,23 +510,23 @@ Here's a more complex example, with `@keyframes`:
 </style>
 ```
 
-## Summary
+## خلاصه
 
-CSS animations allow smoothly (or step-by-step) animated changes of one or multiple CSS properties.
+انیمیشن های CSS اجازه می دهند به آرامی (یا گام به گام) تغییرات متحرک یک یا چند ویژگی CSS را انجام دهند.
 
-They are good for most animation tasks. We're also able to use JavaScript for animations, the next chapter is devoted to that.
+آنها برای اکثر کارهای انیمیشن خوب هستند. ما همچنین می‌توانیم از جاوا اسکریپت برای انیمیشن‌ها استفاده کنیم، فصل بعدی به آن اختصاص دارد.
 
-Limitations of CSS animations compared to JavaScript animations:
+محدودیت های انیمیشن های CSS در مقایسه با انیمیشن های جاوا اسکریپت:
 
-```compare plus="CSS animations" minus="JavaScript animations"
-+ Simple things done simply.
-+ Fast and lightweight for CPU.
-- JavaScript animations are flexible. They can implement any animation logic, like an "explosion" of an element.
-- Not just property changes. We can create new elements in JavaScript as part of the animation.
+```compare plus="CSS animations" منهای ="JavaScript animations"
++ کارهای ساده به سادگی انجام می شود.
++ سریع و سبک برای CPU.
+- انیمیشن های جاوا اسکریپت انعطاف پذیر هستند. آنها می توانند هر منطق انیمیشنی را مانند "انفجار" یک عنصر پیاده سازی کنند.
+- نه فقط تغییر ملک. ما می توانیم عناصر جدیدی را در جاوا اسکریپت به عنوان بخشی از انیمیشن ایجاد کنیم.
 ```
 
-In early examples in this chapter, we animate `font-size`, `left`, `width`, `height`, etc. In real life projects, we should use `transform: scale()` and `transform: translate()` for better performance.
+در مثال‌های اولیه در این فصل، «اندازه قلم»، «چپ»، «عرض»، «ارتفاع» و غیره را متحرک می‌کنیم. در پروژه‌های واقعی، باید از `transform: scale()` و `transform: translate( استفاده کنیم. )` برای عملکرد بهتر.
 
-The majority of animations can be implemented using CSS as described in this chapter. And the `transitionend` event allows JavaScript to be run after the animation, so it integrates fine with the code.
+اکثر انیمیشن ها را می توان با استفاده از CSS همانطور که در این فصل توضیح داده شد پیاده سازی کرد. و رویداد `transitionend` اجازه می دهد تا جاوا اسکریپت بعد از انیمیشن اجرا شود، بنابراین به خوبی با کد یکپارچه می شود.
 
-But in the next chapter we'll do some JavaScript animations to cover more complex cases.
+اما در فصل بعدی چند انیمیشن جاوا اسکریپت را برای پوشش موارد پیچیده تر انجام خواهیم داد.
