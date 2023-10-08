@@ -1,16 +1,16 @@
-# JavaScript animations
+# JavaScript انیمیشن های
 
-JavaScript animations can handle things that CSS can't.
+انیمیشن‌های جاوا اسکریپت می‌توانند چیزهایی را که CSS قادر به انجام آن نیست، مدیریت کنند.
 
-For instance, moving along a complex path, with a timing function different from Bezier curves, or an animation on a canvas.
+به عنوان مثال، حرکت در امتداد یک مسیر پیچیده، با یک تابع زمان بندی متفاوت از منحنی های Bezier، یا یک انیمیشن روی بوم.
 
-## Using setInterval
+## بکار بردن setInterval
 
-An animation can be implemented as a sequence of frames -- usually small changes to HTML/CSS properties.
+یک انیمیشن را می توان به عنوان دنباله ای از فریم ها پیاده سازی کرد - معمولاً تغییرات کوچکی در ویژگی های HTML/CSS.
 
-For instance, changing `style.left` from `0px` to `100px` moves the element. And if we increase it in `setInterval`, changing by `2px` with a tiny delay, like 50 times per second, then it looks smooth. That's the same principle as in the cinema: 24 or more frames per second is enough to make it look smooth.
+برای مثال، تغییر «style.left» از `0px` به `100px` عنصر را جابه‌جا می‌کند. و اگر آن را در `setInterval` افزایش دهیم، با یک تاخیر کوچک، مانند 50 بار در ثانیه، `2px` تغییر کند، آنگاه صاف به نظر می رسد. این همان اصل در سینما است: 24 فریم یا بیشتر در ثانیه برای صاف به نظر رسیدن کافی است.
 
-The pseudo-code can look like this:
+شبه کد می تواند به شکل زیر باشد:
 
 ```js
 let timer = setInterval(function() {
@@ -19,7 +19,7 @@ let timer = setInterval(function() {
 }, 20); // change by 2px every 20ms, about 50 frames per second
 ```
 
-More complete example of the animation:
+نمونه کاملتر انیمیشن:
 
 ```js
 let start = Date.now(); // remember start time
@@ -45,19 +45,19 @@ function draw(timePassed) {
 }
 ```
 
-Click for the demo:
+برای دمو کلیک کنید:
 
 [codetabs height=200 src="move"]
 
-## Using requestAnimationFrame
+## بکار بردن requestAnimationFrame
 
-Let's imagine we have several animations running simultaneously.
+بیایید تصور کنیم چندین انیمیشن به طور همزمان اجرا می شوند.
 
-If we run them separately, then even though each one has `setInterval(..., 20)`, then the browser would have to repaint much more often than every `20ms`.
+اگر آن‌ها را جداگانه اجرا کنیم، حتی اگر هر کدام دارای `setInterval(...، 20)` باشند، مرورگر باید بیشتر از هر `20 میلی‌ثانیه` دوباره رنگ‌آمیزی کند.
 
-That's because they have different starting time, so "every 20ms" differs between different animations. The intervals are not aligned. So we'll have several independent runs within `20ms`.
+این به این دلیل است که آنها زمان شروع متفاوتی دارند، بنابراین "هر 20 میلی ثانیه" بین انیمیشن های مختلف متفاوت است. فواصل هم تراز نیستند. بنابراین ما چندین اجرا مستقل در عرض `20 میلی ثانیه` خواهیم داشت.
 
-In other words, this:
+به عبارت دیگر، این:
 
 ```js
 setInterval(function() {
@@ -67,7 +67,7 @@ setInterval(function() {
 }, 20)
 ```
 
-...Is lighter than three independent calls:
+... سبکتر از سه تماس مستقل است:
 
 ```js
 setInterval(animate1, 20); // independent animations
@@ -75,32 +75,32 @@ setInterval(animate2, 20); // in different places of the script
 setInterval(animate3, 20);
 ```
 
-These several independent redraws should be grouped together, to make the redraw easier for the browser and hence load less CPU load and look smoother.
+این چندین تصویر مجدد مستقل باید با هم گروه بندی شوند تا ترسیم مجدد برای مرورگر آسان تر شود و در نتیجه بار CPU کمتری بارگیری شود و روان تر به نظر برسد.
 
-There's one more thing to keep in mind. Sometimes CPU is overloaded, or there are other reasons to redraw less often (like when the browser tab is hidden), so we really shouldn't run it every `20ms`.
+یک چیز دیگر را باید در نظر داشت. گاهی اوقات CPU بیش از حد بارگیری می شود، یا دلایل دیگری برای ترسیم مجدد کمتر وجود دارد (مانند زمانی که برگه مرورگر پنهان است)، بنابراین ما واقعاً نباید آن را هر 20 میلی ثانیه اجرا کنیم.
 
-But how do we know about that in JavaScript? There's a specification [Animation timing](https://www.w3.org/TR/animation-timing/) that provides the function `requestAnimationFrame`. It addresses all these issues and even more.
+اما چگونه در مورد آن در جاوا اسکریپت بدانیم؟ یک مشخصات [Animation timeing](https://www.w3.org/TR/animation-timing/) وجود دارد که تابع "requestAnimationFrame" را ارائه می دهد. به همه این مسائل و حتی بیشتر می پردازد.
 
-The syntax:
+نحو:
 ```js
 let requestId = requestAnimationFrame(callback)
 ```
 
-That schedules the `callback` function to run in the closest time when the browser wants to do animation.
+زمانی که مرورگر می‌خواهد انیمیشن انجام دهد، عملکرد `callback` را برنامه‌ریزی می‌کند تا در نزدیک‌ترین زمان اجرا شود.
 
-If we do changes in elements in `callback` then they will be grouped together with other `requestAnimationFrame` callbacks and with CSS animations. So there will be one geometry recalculation and repaint instead of many.
+اگر تغییراتی را در عناصر در `بازگشت به تماس` انجام دهیم، آن‌ها با دیگر تماس‌های `requestAnimationFrame` و با انیمیشن‌های CSS گروه‌بندی می‌شوند. بنابراین یک محاسبه مجدد هندسی و رنگ آمیزی مجدد به جای تعداد زیادی وجود خواهد داشت.
 
-The returned value `requestId` can be used to cancel the call:
+مقدار بازگشتی درخواست Id می تواند برای لغو تماس استفاده شود:
 ```js
 // cancel the scheduled execution of callback
 cancelAnimationFrame(requestId);
 ```
 
-The `callback` gets one argument -- the time passed from the beginning of the page load in milliseconds. This time can also be obtained by calling [performance.now()](mdn:api/Performance/now).
+`بازگشت به تماس` یک آرگومان دریافت می کند -- زمان سپری شده از آغاز بارگیری صفحه بر حسب میلی ثانیه. این زمان را نیز می توان از طریق تماس دریافت کرد[performance.now()](mdn:api/Performance/now).
 
-Usually `callback` runs very soon, unless the CPU is overloaded or the laptop battery is almost discharged, or there's another reason.
+معمولاً `callback` خیلی زود اجرا می‌شود، مگر اینکه CPU بیش از حد بارگیری شده باشد یا باتری لپ‌تاپ تقریباً خالی شده باشد یا دلیل دیگری وجود داشته باشد.
 
-The code below shows the time between first 10 runs for `requestAnimationFrame`. Usually it's 10-20ms:
+کد زیر زمان بین 10 اجرای اول درخواست AnimationFrame را نشان می دهد. معمولاً 10-20 میلی ثانیه است:
 
 ```html run height=40 refresh
 <script>
@@ -116,9 +116,9 @@ The code below shows the time between first 10 runs for `requestAnimationFrame`.
 </script>
 ```
 
-## Structured animation
+## انیمیشن ساخت یافته
 
-Now we can make a more universal animation function based on `requestAnimationFrame`:
+اکنون می‌توانیم یک تابع انیمیشن جهانی‌تر بر اساس `requestAnimationFrame` ایجاد کنیم:
 
 ```js
 function animate({timing, draw, duration}) {
@@ -143,15 +143,15 @@ function animate({timing, draw, duration}) {
 }
 ```
 
-Function `animate` accepts 3 parameters that essentially describes the animation:
+تابع animate` 3` پارامتر را می پذیرد که اساساً انیمیشن را توصیف می کند:
 
 `duration`
-: Total time of animation. Like, `1000`.
+: زمان کل انیمیشن. مانند `1000`.
 
-`timing(timeFraction)`
-: Timing function, like CSS-property `transition-timing-function` that gets the fraction of time that passed (`0` at start, `1` at the end) and returns the animation completion (like `y` on the Bezier curve).
+`زمان بندی (زمان کسر)`.
+: تابع زمان بندی، مانند ویژگی `CSS `transition-timing-function که کسری از زمان سپری شده را دریافت می کند ('0' در شروع، '1' در پایان) و تکمیل انیمیشن را برمی گرداند (مانند `y` در Bezier منحنی).
 
-    For instance, a linear function means that the animation goes on uniformly with the same speed:
+     به عنوان مثال، یک تابع خطی به این معنی است که انیمیشن به طور یکنواخت با همان سرعت ادامه می یابد:
 
     ```js
     function linear(timeFraction) {
@@ -162,30 +162,30 @@ Function `animate` accepts 3 parameters that essentially describes the animation
     Its graph:
     ![](linear.svg)
 
-    That's just like `transition-timing-function: linear`. There are more interesting variants shown below.
+    این دقیقاً مانند تابع `Transition-timing-function: خطی` است. انواع جالب تری وجود دارد که در زیر نشان داده شده است.
 
 `draw(progress)`
-: The function that takes the animation completion state and draws it. The value `progress=0` denotes the beginning animation state, and `progress=1` -- the end state.
+: تابعی که حالت تکمیل انیمیشن را می گیرد و آن را ترسیم می کند. مقدار `پیشرفت=0` نشان‌دهنده وضعیت شروع انیمیشن، و `پیشرفت=1` -- حالت پایان است.
 
-    This is that function that actually draws out the animation.
+     این همان تابعی است که در واقع انیمیشن را بیرون می کشد.
 
-    It can move the element:
+     می تواند عنصر را جابجا کند:
     ```js
     function draw(progress) {
       train.style.left = progress + 'px';
     }
     ```
 
-    ...Or do anything else, we can animate anything, in any way.
+  ... یا هر کار دیگری انجام دهیم، ما می توانیم هر چیزی را به هر شکلی متحرک کنیم.
 
 
-Let's animate the element `width` from `0` to `100%` using our function.
+بیایید با استفاده از تابع خود عنصر `width` را از `0` به `100٪` متحرک کنیم.
 
-Click on the element for the demo:
+روی عنصر برای دمو کلیک کنید:
 
 [codetabs height=60 src="width"]
 
-The code for it:
+کد نمونه:
 
 ```js
 animate({
@@ -199,19 +199,19 @@ animate({
 });
 ```
 
-Unlike CSS animation, we can make any timing function and any drawing function here. The timing function is not limited by Bezier curves. And `draw` can go beyond properties, create new elements for like fireworks animation or something.
+برخلاف انیمیشن CSS، ما می توانیم هر تابع زمان بندی و هر تابع ترسیمی را در اینجا ایجاد کنیم. عملکرد زمان بندی توسط منحنی های Bezier محدود نمی شود. و `draw` می‌تواند فراتر از ویژگی‌ها باشد، عناصر جدیدی مانند انیمیشن آتش‌بازی یا چیز دیگری ایجاد کند.
 
-## Timing functions
+## Timing تابع
 
-We saw the simplest, linear timing function above.
+ما ساده ترین تابع زمان بندی خطی را در بالا دیدیم.
 
-Let's see more of them. We'll try movement animations with different timing functions to see how they work.
+بیایید بیشتر آنها را ببینیم. ما انیمیشن های حرکتی را با عملکردهای زمان بندی مختلف امتحان می کنیم تا ببینیم چگونه کار می کنند.
 
-### Power of n
+### توان برای  n
 
-If we want to speed up the animation, we can use `progress` in the power `n`.
+اگر بخواهیم سرعت انیمیشن را افزایش دهیم، می‌توانیم از `پیشرفت` در قدرت `n` استفاده کنیم.
 
-For instance, a parabolic curve:
+به عنوان مثال، منحنی سهموی:
 
 ```js
 function quad(timeFraction) {
@@ -219,27 +219,27 @@ function quad(timeFraction) {
 }
 ```
 
-The graph:
+گراف:
 
 ![](quad.svg)
 
-See in action (click to activate):
+برای دیدن کلیک کنید:
 
 [iframe height=40 src="quad" link]
 
-...Or the cubic curve or even greater `n`. Increasing the power makes it speed up faster.
+... یا منحنی مکعب یا حتی `n` بزرگتر. افزایش قدرت باعث افزایش سرعت آن می شود.
 
-Here's the graph for `progress` in the power `5`:
+در اینجا نمودار `پیشرفت` در توان `5` آمده است:
 
 ![](quint.svg)
 
-In action:
+در عمل:
 
 [iframe height=40 src="quint" link]
 
-### The arc
+### قوس یا The arc
 
-Function:
+تابع:
 
 ```js
 function circ(timeFraction) {
@@ -247,19 +247,19 @@ function circ(timeFraction) {
 }
 ```
 
-The graph:
+گراف:
 
 ![](circ.svg)
 
 [iframe height=40 src="circ" link]
 
-### Back: bow shooting
+### Back: تیر اندازی با کمان
 
-This function does the "bow shooting". First we "pull the bowstring", and then "shoot".
+این تابع `تیراندازی با کمان` را انجام می دهد. ابتدا سیم کمان را می کشیم و سپس شلیک می کنیم.
 
-Unlike previous functions, it depends on an additional parameter `x`, the "elasticity coefficient". The distance of "bowstring pulling" is defined by it.
+برخلاف توابع قبلی، به یک پارامتر اضافی `x`، `ضریب الاستیسیته` بستگی دارد. فاصله `کشیدن ریسمان کمان` با آن مشخص می شود.
 
-The code:
+کد:
 
 ```js
 function back(x, timeFraction) {
@@ -267,19 +267,19 @@ function back(x, timeFraction) {
 }
 ```
 
-**The graph for `x = 1.5`:**
+**گراف برای `x = 1.5`:**
 
 ![](back.svg)
 
-For animation we use it with a specific value of `x`. Example for `x = 1.5`:
+برای انیمیشن از آن با مقدار خاصی از `x` استفاده می کنیم. مثال برای `x = 1.5`:
 
 [iframe height=40 src="back" link]
 
-### Bounce
+### پرش یا Bounce
 
-Imagine we are dropping a ball. It falls down, then bounces back a few times and stops.
+تصور کنید در حال رها کردن یک توپ هستیم. سقوط می کند، سپس چند بار به عقب برگشته و می ایستد.
 
-The `bounce` function does the same, but in the reverse order: "bouncing" starts immediately. It uses few special coefficients for that:
+تابع `جهش` همین کار را می کند، اما به ترتیب معکوس: `جهش` بلافاصله شروع می شود. از چند ضرایب خاص برای آن استفاده می کند:
 
 ```js
 function bounce(timeFraction) {
@@ -291,13 +291,13 @@ function bounce(timeFraction) {
 }
 ```
 
-In action:
+در عمل:
 
 [iframe height=40 src="bounce" link]
 
-### Elastic animation
+### Elastic انیمیشن
 
-One more "elastic" function that accepts an additional parameter `x` for the "initial range".
+یک تابع `الاستیک` دیگر که یک پارامتر اضافی `x` را برای `محدوده اولیه` می پذیرد.
 
 ```js
 function elastic(x, timeFraction) {
@@ -305,28 +305,28 @@ function elastic(x, timeFraction) {
 }
 ```
 
-**The graph for `x=1.5`:**
+**گراف برای `x=1.5`:**
 ![](elastic.svg)
 
-In action for `x=1.5`:
+در عمل برای `x=1.5`:
 
 [iframe height=40 src="elastic" link]
 
-## Reversal: ease*
+## معکوس: ease*
 
-So we have a collection of timing functions. Their direct application is called "easeIn".
+بنابراین ما مجموعه ای از توابع زمان بندی داریم. کاربرد مستقیم آنها `easeIn` نامیده می شود.
 
-Sometimes we need to show the animation in the reverse order. That's done with the "easeOut" transform.
+گاهی اوقات لازم است انیمیشن را به ترتیب معکوس نشان دهیم. این کار با تبدیل `easeOut` انجام می شود.
 
 ### easeOut
 
-In the "easeOut" mode the `timing` function is put into a wrapper `timingEaseOut`:
+در حالت `easeOut` تابع `timing` در لفاف `timingEaseOut` قرار می گیرد:
 
 ```js
 timingEaseOut(timeFraction) = 1 - timing(1 - timeFraction)
 ```
 
-In other words, we have a "transform" function `makeEaseOut` that takes a "regular" timing function and returns the wrapper around it:
+به عبارت دیگر، ما یک تابع `تغییر` `makeEaseOut` داریم که یک تابع زمان بندی "عادی" را می گیرد و پوشش دور آن را برمی گرداند:
 
 ```js
 // accepts a timing function, returns the transformed variant
@@ -337,32 +337,32 @@ function makeEaseOut(timing) {
 }
 ```
 
-For instance, we can take the `bounce` function described above and apply it:
+برای مثال، می‌توانیم تابع `جهش` که در بالا توضیح داده شد را گرفته و آن را اعمال کنیم:
 
 ```js
 let bounceEaseOut = makeEaseOut(bounce);
 ```
 
-Then the bounce will be not in the beginning, but at the end of the animation. Looks even better:
+سپس پرش نه در ابتدا، بلکه در انتهای انیمیشن خواهد بود. حتی بهتر به نظر می رسد:
 
 [codetabs src="bounce-easeout"]
 
-Here we can see how the transform changes the behavior of the function:
+در اینجا می توانیم ببینیم که چگونه تبدیل رفتار تابع را تغییر می دهد:
 
 ![](bounce-inout.svg)
 
-If there's an animation effect in the beginning, like bouncing -- it will be shown at the end.
+اگر در ابتدا یک افکت انیمیشن وجود داشته باشد، مانند پرش -- در انتها نشان داده می شود.
 
-In the graph above the <span style="color:#EE6B47">regular bounce</span> has the red color, and the <span style="color:#62C0DC">easeOut bounce</span> is blue.
+در نمودار بالا، <span style="color:#EE6B47">پرش منظم</span> رنگ قرمز دارد و <span style="color:#62C0DC">easeOut bounce</span> آبی است.
 
-- Regular bounce -- the object bounces at the bottom, then at the end sharply jumps to the top.
-- After `easeOut` -- it first jumps to the top, then bounces there.
-
+- پرش منظم - جسم در پایین می پرد، سپس در انتها به شدت به بالا می پرد.
+- بعد از `easeOut` - ابتدا به بالا می پرد، سپس به آنجا می پرد.
+  
 ### easeInOut
 
-We also can show the effect both in the beginning and the end of the animation. The transform is called "easeInOut".
+ما همچنین می توانیم اثر را هم در ابتدا و هم در انتهای انیمیشن نشان دهیم. تبدیل `easeInOut` نامیده می شود.
 
-Given the timing function, we calculate the animation state like this:
+با توجه به تابع زمان بندی، حالت انیمیشن را به صورت زیر محاسبه می کنیم:
 
 ```js
 if (timeFraction <= 0.5) { // first half of the animation
@@ -372,7 +372,7 @@ if (timeFraction <= 0.5) { // first half of the animation
 }
 ```
 
-The wrapper code:
+کد wrraper:
 
 ```js
 function makeEaseInOut(timing) {
@@ -387,37 +387,37 @@ function makeEaseInOut(timing) {
 bounceEaseInOut = makeEaseInOut(bounce);
 ```
 
-In action, `bounceEaseInOut`:
+در عمل, `bounceEaseInOut`:
 
 [codetabs src="bounce-easeinout"]
 
-The "easeInOut" transform joins two graphs into one: `easeIn` (regular) for the first half of the animation and `easeOut` (reversed) -- for the second part.
+تبدیل `easeInOut` دو نمودار را به یک نمودار می پیوندد: `easeIn` (عادی) برای نیمه اول انیمیشن و `easeOut` (معکوس) -- برای قسمت دوم.
 
-The effect is clearly seen if we compare the graphs of `easeIn`, `easeOut` and `easeInOut` of the `circ` timing function:
+اگر نمودارهای `easeIn`، `easeOut` و `easeInOut` تابع زمانبندی `circ` را با هم مقایسه کنیم، این اثر به وضوح مشاهده می شود:
 
 ![](circ-ease.svg)
 
-- <span style="color:#EE6B47">Red</span> is the regular variant of `circ` (`easeIn`).
+- <span style="color:#EE6B47">Red</span> نوع معمولی است `circ` (`easeIn`).
 - <span style="color:#8DB173">Green</span> -- `easeOut`.
 - <span style="color:#62C0DC">Blue</span> -- `easeInOut`.
 
-As we can see, the graph of the first half of the animation is the scaled down `easeIn`, and the second half is the scaled down `easeOut`. As a result, the animation starts and finishes with the same effect.
+همانطور که می بینیم، نمودار نیمه اول انیمیشن `easeIn` کوچک شده و نیمه دوم `easeOut` کوچک شده است. در نتیجه انیمیشن با همان افکت شروع و به پایان می رسد.
 
-## More interesting "draw"
+## نکته جالب تر "draw"
 
-Instead of moving the element we can do something else. All we need is to write the proper `draw`.
+به جای جابجایی عنصر می توانیم کار دیگری انجام دهیم. تنها چیزی که نیاز داریم این است که  `draw` مناسب را بنویسیم.
 
-Here's the animated "bouncing" text typing:
+در اینجا تایپ متن متحرک `bouncing` آمده است:
 
 [codetabs src="text"]
 
-## Summary
+## خلاصه
 
-For animations that CSS can't handle well, or those that need tight control, JavaScript can help. JavaScript animations should be implemented via `requestAnimationFrame`. That built-in method allows to setup a callback function to run when the browser will be preparing a repaint. Usually that's very soon, but the exact time depends on the browser.
+برای انیمیشن هایی که CSS نمی تواند به خوبی از عهده آنها برآید، یا آنهایی که نیاز به کنترل دقیق دارند، جاوا اسکریپت می تواند کمک کند. انیمیشن های جاوا اسکریپت باید از طریق `requestAnimationFrame` پیاده سازی شوند. این روش داخلی به شما امکان می‌دهد تا زمانی که مرورگر در حال آماده‌سازی رنگ‌آمیزی مجدد است، یک تابع پاسخ به تماس را تنظیم کنید. معمولاً خیلی زود است، اما زمان دقیق به مرورگر بستگی دارد.
 
-When a page is in the background, there are no repaints at all, so the callback won't run: the animation will be suspended and won't consume resources. That's great.
+وقتی یک صفحه در پس‌زمینه است، هیچ رنگ‌آمیزی مجدد وجود ندارد، بنابراین تماس برگشتی اجرا نمی‌شود: انیمیشن به حالت تعلیق در می‌آید و منابع را مصرف نمی‌کند. عالیه.
 
-Here's the helper `animate` function to setup most animations:
+در اینجا تابع کمکی `animate` برای تنظیم بیشتر انیمیشن ها است:
 
 ```js
 function animate({timing, draw, duration}) {
@@ -442,14 +442,14 @@ function animate({timing, draw, duration}) {
 }
 ```
 
-Options:
+گزینه ها:
 
-- `duration` -- the total animation time in ms.
-- `timing` -- the function to calculate animation progress. Gets a time fraction from 0 to 1, returns the animation progress, usually from 0 to 1.
-- `draw` -- the function to draw the animation.
+- `مدت` -- کل زمان انیمیشن بر حسب ms.
+- `زمان بندی` -- تابعی برای محاسبه پیشرفت انیمیشن. کسر زمانی را از 0 تا 1 دریافت می کند، پیشرفت انیمیشن را معمولاً از 0 به 1 برمی گرداند.
+- `draw` -- تابعی برای ترسیم انیمیشن.
 
-Surely we could improve it, add more bells and whistles, but JavaScript animations are not applied on a daily basis. They are used to do something interesting and non-standard. So you'd want to add the features that you need when you need them.
+مطمئناً می‌توانیم آن را بهبود بخشیم، زنگ‌ها و سوت‌های بیشتری اضافه کنیم، اما انیمیشن‌های جاوا اسکریپت به صورت روزانه اعمال نمی‌شوند. از آنها برای انجام کارهای جالب و غیر استاندارد استفاده می شود. بنابراین شما می خواهید ویژگی های مورد نیاز خود را در صورت نیاز اضافه کنید.
 
-JavaScript animations can use any timing function. We covered a lot of examples and transformations to make them even more versatile. Unlike CSS, we are not limited to Bezier curves here.
+انیمیشن های جاوا اسکریپت می توانند از هر تابع زمان بندی استفاده کنند. ما نمونه ها و دگرگونی های زیادی را پوشش دادیم تا همه کاره تر شوند. برخلاف CSS، ما در اینجا به منحنی های Bezier محدود نمی شویم.
 
-The same is about `draw`: we can animate anything, not just CSS properties.
+در مورد `draw` هم همینطور است: ما می توانیم هر چیزی را متحرک کنیم، نه فقط ویژگی های CSS.
