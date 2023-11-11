@@ -1,20 +1,20 @@
 # From the orbital height
 
-This section describes a set of modern standards for "web components".
+این بخش مجموعه ای از استانداردهای مدرن را برای  "web components" توصیف می کند.
 
-As of now, these standards are under development. Some features are well-supported and integrated into the modern HTML/DOM standard, while others are yet in draft stage. You can try examples in any browser, Google Chrome is probably the most up to date with these features. Guess, that's because Google fellows are behind many of the related specifications.
+در حال حاضر، این استانداردها در حال توسعه هستند. برخی از ویژگی ها به خوبی پشتیبانی شده و در استاندارد مدرن HTML/DOM یکپارچه شده اند، در حالی که برخی دیگر هنوز در مرحله پیش نویس هستند. می‌توانید نمونه‌هایی را در هر مرورگری امتحان کنید، Google Chrome احتمالاً به‌روزترین با این ویژگی‌ها است. حدس بزنید، به این دلیل است که همکاران گوگل پشت بسیاری از مشخصات مرتبط هستند.
 
 ## What's common between...
 
-The whole component idea is nothing new. It's used in many frameworks and elsewhere.
+کل ایده جزء چیز جدیدی نیست. در بسیاری از چارچوب ها و جاهای دیگر استفاده می شود.
 
-Before we move to implementation details, take a look at this great achievement of humanity:
+قبل از اینکه به جزئیات پیاده سازی برویم، به این دستاورد بزرگ بشریت نگاهی بیندازیم:
 
 ![](satellite.jpg)
 
-That's the International Space Station (ISS).
+این ایستگاه فضایی بین المللی (ISS) است.
 
-And this is how it's made inside (approximately):
+و اینطوری داخلش ساخته شده (تقریبا):
 
 ![](satellite-expanded.jpg)
 
