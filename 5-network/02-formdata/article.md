@@ -1,26 +1,26 @@
 
 # FormData
 
-This chapter is about sending HTML forms: with or without files, with additional fields and so on.
+این فصل در مورد ارسال فرم‌های HTML است، با یا بدون فایل، با فیلدهای اضافی و غیره.
 
-[FormData](https://xhr.spec.whatwg.org/#interface-formdata) objects can help with that. As you might have guessed, it's the object to represent HTML form data.
+شیء [FormData](https://xhr.spec.whatwg.org/#interface-formdata) میتوانند به شما در این زمینه کمک کنند. همانطور که ممکن است حدس زده باشید، این شیء برای نمایش دادن داده‌های فرم HTML استفاده میشود.
 
-The constructor is:
+constructor به صورت زیر است:
 ```js
 let formData = new FormData([form]);
 ```
 
-If HTML `form` element is provided, it automatically captures its fields.
+اگر عنصر `فرم` HTML وجود داشته باشد، خود به طور خودکار فیلدهای آن را گرفته و ذخیره می‌کند.
 
-The special thing about `FormData` is that network methods, such as `fetch`, can accept a `FormData` object as a body. It's encoded and sent out with `Content-Type: multipart/form-data`.
+ ویژگی مهم اینکه از `FormData` متدهای شبکه مانند `fetch` می‌توانند یک شیء `FormData` را در بدنه (body) درخواست قبول کنند. این داده‌ها با هدر  `Content-Type: multipart/form-data` رمزگذاری شده و ارسال میشوند.
+ 
+.از نظر سرور، این مانند یک ارسال فرم معمولی به نظر میرسد
 
-From the server point of view, that looks like a usual form submission.
+##  ارسال یک فرم ساده
 
-## Sending a simple form
+بیایید ابتدا یک فرم ساده بفرستیم.
 
-Let's send a simple form first.
-
-As you can see, that's almost one-liner:
+همانطور که مشاهده می‌کنید، این تقریباً یک خط کد است:
 
 ```html run autorun
 <form id="formElem">
@@ -47,9 +47,9 @@ As you can see, that's almost one-liner:
 </script>
 ```
 
-In this example, the server code is not presented, as it's beyond our scope. The server accepts the POST request and replies "User saved".
+در این مثال، کد سرور نمایش داده نشده است، چرا که خارج از بحث ما است. سرور درخواست POST را قبول کرده و با پاسخ "کاربر ذخیره شد" پاسخ می‌دهد.
 
-## FormData Methods
+## متدهای FormData
 
 We can modify fields in `FormData` with methods:
 
