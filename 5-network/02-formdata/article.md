@@ -3,22 +3,22 @@
 
 این فصل در مورد ارسال فرم‌های HTML است، با یا بدون فایل، با فیلدهای اضافی و غیره.
 
-شیء [FormData](https://xhr.spec.whatwg.org/#interface-formdata) میتوانند به شما در این زمینه کمک کنند. همانطور که ممکن است حدس زده باشید، این شیء برای نمایش دادن داده‌های فرم HTML استفاده میشود.
+شیء [FormData](https://xhr.spec.whatwg.org/#interface-formdata) میتواند به شما در این زمینه کمک کنند. همانطور که ممکن است حدس زده باشید، این شیء برای نمایش دادن داده‌های فرم HTML استفاده میشود.
 
 constructor به صورت زیر است:
 ```js
 let formData = new FormData([form]);
 ```
 
-اگر عنصر `فرم` HTML وجود داشته باشد، خود به طور خودکار فیلدهای آن را گرفته و ذخیره می‌کند.
+اگر عنصر `فرم` HTML وجود داشته باشد به طور خودکار فیلدهای آن را گرفته و ذخیره می‌کند.
 
  ویژگی مهم اینکه از `FormData` متدهای شبکه مانند `fetch` می‌توانند یک شیء `FormData` را در بدنه (body) درخواست قبول کنند. این داده‌ها با هدر  `Content-Type: multipart/form-data` رمزگذاری شده و ارسال میشوند.
  
-.از نظر سرور، این مانند یک ارسال فرم معمولی به نظر میرسد
+.از نظر سرور، این مانند  ارسال فرم معمولی به نظر میرسد
 
 ##  ارسال یک فرم ساده
 
-بیایید ابتدا یک فرم ساده بفرستیم.
+بیایید ابتدا یک فرم ساده را بفرستیم.
 
 همانطور که مشاهده می‌کنید، این تقریباً یک خط کد است:
 
@@ -47,26 +47,26 @@ let formData = new FormData([form]);
 </script>
 ```
 
-در این مثال، کد سرور نمایش داده نشده است، چرا که خارج از بحث ما است. سرور درخواست POST را قبول کرده و با پاسخ "کاربر ذخیره شد" پاسخ می‌دهد.
+در این مثال، کد سرور نمایش داده نشده است، چرا که خارج از بحث ما است. سرور درخواست POST را قبول کرده و با پاسخ "کاربر ذخیره شد" پاسخ میدهد.
 
 ## متدهای FormData
 
-We can modify fields in `FormData` with methods:
+ما می‌توانیم با استفاده از متدهای `FormData` فیلدها را تغییر دهیم:
 
-- `formData.append(name, value)` - add a form field with the given `name` and `value`,
-- `formData.append(name, blob, fileName)` - add a field as if it were `<input type="file">`, the third argument `fileName` sets file name (not form field name), as it were a name of the file in user's filesystem,
-- `formData.delete(name)` - remove the field with the given `name`,
-- `formData.get(name)` - get the value of the field with the given `name`,
-- `formData.has(name)` - if there exists a field with the given `name`, returns `true`, otherwise `false`
+- `formData.append(name, value)` - اضافه کردن یک فیلد به فرم با `name` و `value` داده شده
+- `formData.append(name, blob, fileName)` -  اضافه کردن یک فیلد به عنوان  `<input type="file">` آرگومان سوم `fileName` نام فایل را تنظیم میکند (نه نام فیلد فرم)، به عنوان نام فایل در سیستم کاربر
+- `formData.delete(name)` - حذف فیلد با `name` داده شده
+- `formData.get(name)` - دریافت مقدار فیلد با `name` داده شده
+- `formData.has(name)` -   اگر یک فیلد با `name` داده شده وجود داشته باشد `true` و در غیر اینصورت `false` را برمی‌گرداند.
 
-A form is technically allowed to have many fields with the same `name`, so multiple calls to `append` add more same-named fields.
+یک فرم به طور فنی اجازه دارد که فیلدهای زیادی با همان `name` داشته باشد بنابراین فراخوانی‌های چندگانه به `append` منجر به افزودن فیلدهایی با همان نام میشود.
 
-There's also method `set`, with the same syntax as `append`. The difference is that `.set` removes all fields with the given `name`, and then appends a new field. So it makes sure there's only one field with such `name`, the rest is just like `append`:
+همچنین یک متد `set` وجود دارد با همان سینتکسی که `append` دارد. تفاوت این است که `set.` تمامی فیلدهایی که `name`داده شده را دارا میباشند را حذف کرده و سپس یک فیلد جدید با همان نام اضافه می‌کند. بنابراین، این گونه مطمئن می‌شود که تنها یک فیلد با این `name` وجود دارد بقیه همانند `append` هستند:
 
 - `formData.set(name, value)`,
 - `formData.set(name, blob, fileName)`.
 
-Also we can iterate over formData fields using `for..of` loop:
+همچنین می‌توانیم با استفاده از حلقه `for..of` روی فیلدهای formData حلقه بزنیم:
 
 ```js run
 let formData = new FormData();
@@ -79,11 +79,11 @@ for(let [name, value] of formData) {
 }
 ```
 
-## Sending a form with a file
+## ارسال فرم به همراه یک فایل:
 
-The form is always sent as `Content-Type: multipart/form-data`, this encoding allows to send files. So, `<input type="file">` fields are sent also, similar to a usual form submission.
+فرم همواره به عنوان `Content-Type: multipart/form-data` ارسال میشود. این رمزگذاری امکان ارسال فایل‌ها را فراهم میکند. بنابراین، فیلدهای `<input type="file">` نیز مشابه یک فرم ارسال میشوند.
 
-Here's an example with such form:
+مثال با چنین فرمی به صورت زیر است:
 
 ```html run autorun
 <form id="formElem">
@@ -110,15 +110,15 @@ Here's an example with such form:
 </script>
 ```
 
-## Sending a form with Blob data
+## ارسال یک فرم با داده Blob
 
-As we've seen in the chapter <info:fetch>, it's easy to send dynamically generated binary data e.g. an image, as `Blob`. We can supply it directly as `fetch` parameter `body`.
+همانطور که در فصل <info:fetch> دیدیم، ارسال داده‌های دودویی به صورت پویا مانند یک تصویر به عنوان `Blob` آسان است. میتوانیم آن را به عنوان پارامتر `body` مستقیماً با `fetch` ارسال کنیم.
 
-In practice though, it's often convenient to send an image not separately, but as a part of the form, with additional fields, such as "name" and other metadata.
+در عمل اغلب مناسبتر است که تصویر را به صورت جداگانه نفرستیم بلکه به عنوان یک قسمت از فرم با فیلدهای اضافی مانند "نام" و دیگر فراداده‌ها بفرستیم.
 
-Also, servers are usually more suited to accept multipart-encoded forms, rather than raw binary data.
+همچنین، سرورها معمولاً برای پذیرش فرم‌های رمزگذاری چند قسمتی (multipart-encoded) مناسب‌تر از داده دودویی خام هستند.
 
-This example submits an image from `<canvas>`, along with some other fields, as a form, using `FormData`:
+یک مثال از ارسال تصویر`<canvas>` به همراه باقی فیلد ها در قالب یک فرم با استفاده از `FormData`:
 
 ```html run autorun height="90"
 <body style="margin:0">
@@ -154,36 +154,36 @@ This example submits an image from `<canvas>`, along with some other fields, as 
 </body>
 ```
 
-Please note how the image `Blob` is added:
+به نحوه اضافه شدن `Blob` توجه کنید:
 
 ```js
 formData.append("image", imageBlob, "image.png");
 ```
 
-That's same as if there were `<input type="file" name="image">` in the form, and the visitor submitted a file named `"image.png"` (3rd argument) with the data `imageBlob` (2nd argument) from their filesystem.
+این همانند این است که در فرم `<input type="file" name="image">` وجود داشته باشد و بازدیدکننده یک فایل به نام `"image.png"` (آرگومان سوم) را با داده `imageBlob` (آرگومان دوم) از سیستم خود ارسال کند.
 
-The server reads form data and the file, as if it were a regular form submission.
+سرور داده‌های فرم و فایل را می‌خواند انگار که یک ارسال فرم معمولی انجام شده است.
 
-## Summary
+## خلاصه
 
-[FormData](https://xhr.spec.whatwg.org/#interface-formdata) objects are used to capture HTML form and submit it using `fetch` or another network method.
+شی های [FormData](https://xhr.spec.whatwg.org/#interface-formdata) برای گرفتن فرم HTML و ارسال آن با استفاده از `fetch` یا یک متد های دیگر شبکه استفاده می‌شوند.
 
-We can either create `new FormData(form)` from an HTML form, or create an object without a form at all, and then append fields with methods:
+ما می‌توانیم یا یک `new FormData(form)` جدید از یک فرم HTML ایجاد کنیم، یا یک شیء بدون فرم ایجاد کنیم و سپس با استفاده از متدها فیلدها را اضافه کنیم:
 
 - `formData.append(name, value)`
 - `formData.append(name, blob, fileName)`
 - `formData.set(name, value)`
 - `formData.set(name, blob, fileName)`
 
-Let's note two peculiarities here:
+به دو نکته ویژه در اینجا توجه کنید:
 
-1. The `set` method removes fields with the same name, `append` doesn't. That's the only difference between them.
-2. To send a file, 3-argument syntax is needed, the last argument is a file name, that normally is taken from user filesystem for `<input type="file">`.
+1.  متد `set` فیلدهای با همان نام را حذف می‌کند، اما `append` اینکار را نمیکند. این تنها تفاوت بین آنهاست.
+2. برای ارسال یک فایل، نیاز به سینتکس با 3 آرگومان است، آخرین آرگومان نام فایل است که به طور معمول از فایل سیستم کاربر برای `<input type="file">` گرفته میشود.
 
-Other methods are:
+متدهای دیگر:
 
 - `formData.delete(name)`
 - `formData.get(name)`
 - `formData.has(name)`
 
-That's it!
+کل داستان همین بود!
