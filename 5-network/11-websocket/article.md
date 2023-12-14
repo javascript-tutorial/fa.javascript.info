@@ -1,32 +1,33 @@
-# WebSocket
+# وب سوکت
 
-The `WebSocket` protocol, described in the specification [RFC 6455](https://datatracker.ietf.org/doc/html/rfc6455), provides a way to exchange data between browser and server via a persistent connection. The data can be passed in both directions as "packets", without breaking the connection and the need of additional HTTP-requests.
+پروتوکل _وب‌ سوکت_, همانطور که در [RFC 6455](https://datatracker.ietf.org/doc/html/rfc6455) توضیحات آن ارائه شده است, راهی را برای ردوبدل کردن دیتا بین مرورگر و سرور به شکل یک ارتباط مستمر میسر میسازد. در این پروتوکل اطلاعات میتواندد بدون شکستن ارتباط و نیاز به درخواست HTTP اضافه به شکل دوسویه و در قالب "packets" رد و بدل شوند.
 
-WebSocket is especially great for services that require continuous data exchange, e.g. online games, real-time trading systems and so on.
+به طور خاص وب سوکت برای سرویس‌هایی که نیاز به تبادل اطلاعات به شکل مستمر دارند مثل بازیهای آنلاین، سیستم‌های ترید لحظه‌ای و امثالهم استفاده می‌شود.
 
-## A simple example
+## یک مثال ساده
 
-To open a websocket connection, we need to create `new WebSocket` using the special protocol `ws` in the url:
+برای باز کردن یک ارتباط از نوع وب سوکت، ما نیاز به ایجاد یک `وب سوکت جدید` با استفاده از پروتوکل مخصوص `ws` در url داریم:
 
 ```js
 let socket = new WebSocket("*!*ws*/!*://javascript.info");
 ```
 
-There's also encrypted `wss://` protocol. It's like HTTPS for websockets.
+همچنین پروتوکل رمزگذاری شده `wss://` وجود دارد. این پروتوکل همانند پروتوکل HTTPS برای وب سوکت ها میباشد.
 
 ```smart header="Always prefer `wss://`"
-The `wss://` protocol is not only encrypted, but also more reliable.
+پروتوکل `wss://` نه تنها رمزگذاری شده بلکه قابل اعتماد نیز هست
 
-That's because `ws://` data is not encrypted, visible for any intermediary. Old proxy servers do not know about WebSocket, they may see "strange" headers and abort the connection.
+عدم رمزگذاری در ارتباط با پروتوکل `ws://` باعث قابل رویت بودن اطلاعات توسط هر رابطی میشود. چون پروکسی سرورهای قدیمی راجع به وب سوکت ها اطلاعی ندارند ممکن است هدرها را "ناآشنا" تشخیص داده و ارتبط را قطع کنند.
 
-On the other hand, `wss://` is WebSocket over TLS, (same as HTTPS is HTTP over TLS), the transport security layer encrypts the data at the sender and decrypts it at the receiver. So data packets are passed encrypted through proxies. They can't see what's inside and let them through.
-```
+از طرف دیگر، پروتوکل `wss://` برروی TLS بوده (همانطور که HTTPS همان HTTP برروی TLS میباشد.) لایه امنیت انتقال اطلاعات را از سمت فرستنده رمزگذاری کرده و در سمت گیرنده رمزگذاری میکند. بنابراین اطلاعات به شکل رمزگذاری شده از میان پروکسی‌ها عبور میکنند. آنها نمیتوانند ببینند چه چیزی درون این بسته ها وجود دارد و تنها آنهارا عبور میدهند.
 
-Once the socket is created, we should listen to events on it. There are totally 4 events:
-- **`open`** -- connection established,
-- **`message`** -- data received,
-- **`error`** -- websocket error,
-- **`close`** -- connection closed.
+````
+
+زمانی که سوکت ایجاد میشود، ما باید به رویدادهای آن گوش کنیم. درمجموع 4 نوع رویداد وجود دارد:
+- **`open`** -- ارتبط ساخته شده است,
+- **`message`** -- دریافت اطلاعات,
+- **`error`** -- خطای وب سوکت,
+- **`close`** -- بسته شدن ارتباط .
 
 ...And if we'd like to send something, then `socket.send(data)` will do that.
 
