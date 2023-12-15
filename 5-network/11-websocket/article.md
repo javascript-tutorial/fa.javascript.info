@@ -12,14 +12,14 @@
 let socket = new WebSocket("*!*ws*/!*://javascript.info");
 ```
 
-همچنین پروتوکل رمزگذاری شده `wss://` وجود دارد. این پروتوکل همانند پروتوکل HTTPS برای وب سوکت ها میباشد.
+همچنین پروتوکل رمزگذاری شده `//:wss` وجود دارد. این پروتوکل همانند پروتوکل HTTPS برای وب سوکت ها میباشد.
 
 ```smart header="Always prefer `wss://`"
 پروتوکل `wss://` نه تنها رمزگذاری شده بلکه قابل اعتماد نیز هست
 
-عدم رمزگذاری در ارتباط با پروتوکل `ws://` باعث قابل رویت بودن اطلاعات توسط هر رابطی میشود. چون پروکسی سرورهای قدیمی راجع به وب سوکت ها اطلاعی ندارند ممکن است هدرها را "ناآشنا" تشخیص داده و ارتبط را قطع کنند.
+عدم رمزگذاری در ارتباط با پروتوکل `//:wss` باعث قابل رویت بودن اطلاعات توسط هر رابطی میشود. چون پروکسی سرورهای قدیمی راجع به وب سوکت ها اطلاعی ندارند ممکن است هدرها را "ناآشنا" تشخیص داده و ارتبط را قطع کنند.
 
-از طرف دیگر، پروتوکل `wss://` برروی TLS بوده (همانطور که HTTPS همان HTTP برروی TLS میباشد.) لایه امنیت انتقال اطلاعات را از سمت فرستنده رمزگذاری کرده و در سمت گیرنده رمزگذاری میکند. بنابراین اطلاعات به شکل رمزگذاری شده از میان پروکسی‌ها عبور میکنند. آنها نمیتوانند ببینند چه چیزی درون این بسته ها وجود دارد و تنها آنهارا عبور میدهند.
+از طرف دیگر، پروتوکل `//:wss` برروی TLS بوده (همانطور که HTTPS همان HTTP برروی TLS میباشد.) لایه امنیت انتقال اطلاعات را از سمت فرستنده رمزگذاری کرده و در سمت گیرنده رمزگذاری میکند. بنابراین اطلاعات به شکل رمزگذاری شده از میان پروکسی‌ها عبور میکنند. آنها نمیتوانند ببینند چه چیزی درون این بسته ها وجود دارد و تنها آنهارا عبور میدهند.
 
 ````
 
@@ -59,25 +59,25 @@ socket.onclose = function(event) {
 socket.onerror = function(error) {
   alert(`[error]`);
 };
-```
+````
 
-For demo purposes, there's a small server [server.js](demo/server.js) written in Node.js, for the example above, running. It responds with "Hello from server, John", then waits 5 seconds and closes the connection.
+برای نمایش نحوه عملکرد وب سوکت، سرور کوچک [server.js](demo/server.js) که با Node.js نوشته شده است وجود دارد. برای مثال بالا اجرای آن یک پاسخ به شکل "Hello from server, John" برمیگرداند سپس به مدت 5 ثانیه صبر کرده و ارتباط را میبندد.
 
-So you'll see events `open` -> `message` -> `close`.
+بنابراین شما رویدادهای `open` -> `message` -> `close` را خواهید دید
 
-That's actually it, we can talk WebSocket already. Quite simple, isn't it?
+در واقع کلیت ماجرا همین است، حالا میتونیم با وب سوکت ارتباط برقرار کنیم. ساده است مگه نه؟
 
-Now let's talk more in-depth.
+حالا بیاید تا عمیق‌تر بررسی کنیم.
 
-## Opening a websocket
+## ایجاد یک وب سوکت
 
-When `new WebSocket(url)` is created, it starts connecting immediately.
+زمانی که یک وب سوکت با دستور `new WebSocket(url)` ایجاد می‌شود, بلافاصله شروع به اتصال میکند.
 
-During the connection, the browser (using headers) asks the server: "Do you support Websocket?" And if the server replies "yes", then the talk continues in WebSocket protocol, which is not HTTP at all.
+درطول اتصال، مروگر (با استفاده از هدرها) از سرور سوال میکند: "آیا از وب سوکت پشتیبانی میکنی؟" و اگر سرور جواب مثبت بدهد، آنگاه مکالمه در پروتوکل وب سوکت ادامه می‌یابد که به هیچ وجه HTTP نیست.
 
 ![](websocket-handshake.svg)
 
-Here's an example of browser headers for a request made by `new WebSocket("wss://javascript.info/chat")`.
+در زیر نمونه‌ای از هدرهای مرورگر در درخواست `new WebSocket("wss://javascript.info/chat")` آورده شده است.
 
 ```
 GET /chat
@@ -130,7 +130,7 @@ For instance:
 
 The server should respond with a list of protocols and extensions that it agrees to use.
 
-For example, the request:
+برای مثال، درخواست:
 
 ```
 GET /chat
@@ -146,7 +146,7 @@ Sec-WebSocket-Protocol: soap, wamp
 */!*
 ```
 
-Response:
+پاسخ:
 
 ```
 101 Switching Protocols
@@ -159,11 +159,11 @@ Sec-WebSocket-Protocol: soap
 */!*
 ```
 
-Here the server responds that it supports the extension "deflate-frame", and only SOAP of the requested subprotocols.
+اینجا سرور پاسخ میدهد که extension `deflate-frame` و تنها SOAP subprotocol ها را پشتیبانی میکند.
 
-## Data transfer
+## انتقال اطلاعات
 
-WebSocket communication consists of "frames" -- data fragments, that can be sent from either side, and can be of several kinds:
+ارتباط از طریق وب سوکت از "frame" ها یا همان برش‌هایی از اطلاعات ساخته شده که میتواند از هر سمت ارسال شده و انواع متفاوتی داشته باشد:
 
 - "text frames" -- contain text data that parties send to each other.
 - "binary data frames" -- contain binary data that parties send to each other.
