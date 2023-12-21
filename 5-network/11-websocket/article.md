@@ -47,7 +47,7 @@ socket.onmessage = function(event) {
 };
 
 socket.onclose = function(event) {
-  if (event.wasClean) {  
+  if (event.wasClean) {
     alert(`[close] Connection closed cleanly, code=${event.code} reason=${event.reason}`);
   } else {
     // e.g. server process killed or network down
@@ -89,17 +89,17 @@ Sec-WebSocket-Key: Iv8io/9s+lYFgZWcXczP8Q==
 Sec-WebSocket-Version: 13
 ```
 
-- `Origin` -- the origin of the client page, e.g. `https://javascript.info`. WebSocket objects are cross-origin by nature. There are no special headers or other limitations. Old servers are unable to handle WebSocket anyway, so there are no compatibility issues. But the `Origin` header is important, as it allows the server to decide whether or not to talk WebSocket with this website.
-- `Connection: Upgrade` -- signals that the client would like to change the protocol.
-- `Upgrade: websocket` -- the requested protocol is "websocket".
-- `Sec-WebSocket-Key` -- a random browser-generated key, used to ensure that the server supports WebSocket protocol. It's random to prevent proxies from caching any following communication.
-- `Sec-WebSocket-Version` -- WebSocket protocol version, 13 is the current one.
+- `Origin` -- آدرس اصلی صفحه کلاینت، برای مثال `https://javascript.info`. آبجکت‌های وب سوکت به ذاتا cross-origin هستند. هیچگونه هدر خاص یا محدودیتی در این رابطه وجود ندارد. چون سرورهای قدیمی قادر به کار کردن با وب سوکت نیستند, بنابراین هیچگونه مشکلی از نظر سازگاری وجود ندارد. اما هدر `Origin` از این نظر اهمیت دارد که به سرور اجازه میدهد درمورد ارتباط یا عدم ارتبط از طریق وب سوکت با این وب‌سایت تصمیم بگیرد.
+- `Connection: Upgrade` -- علامتی نمایانگر آنکه کلاینت خواهان تغییر پروتوکل میباشد.
+- `Upgrade: websocket` -- پروتوکل درخواستی "وب سوکت" میباشد
+- `Sec-WebSocket-Key` -- یک کلید تصادفی که توسط مرورگر ساخته میشود و برای اطمینان از اینکه آیا سرور از وب سوکت پشتیبانی میکند یا نه استفاده میشود. این کلید به صورت تصادفی است تا از cache کردن هر نوع ارتباطی توسط پروکسی‌ها جلوگیری کند
+- `Sec-WebSocket-Version` -- ورژن پروتوکل وب سوکت، نسخه کنونی 13 میباشد
 
-```smart header="WebSocket handshake can't be emulated"
-We can't use `XMLHttpRequest` or `fetch` to make this kind of HTTP-request, because JavaScript is not allowed to set these headers.
+```smart header="هنشیک (handshake) وب سوکت قابل بازسازی نیست"
+نمیتوانیم از `XMLHttpRequest` یا `fetch` برای ساخت این نوع از HTTP-request استفاده کنیم چون جاوااسکریپت اجازه‌ی تنظیم این هدرهارا ندارد.
 ```
 
-If the server agrees to switch to WebSocket, it should send code 101 response:
+اگر سرور با تعویض به پروتوکل وب سوکت موافقت کند آنگاه باید کد 101 را در پاسخ ارسال کند
 
 ```
 101 Switching Protocols
@@ -108,27 +108,27 @@ Connection: Upgrade
 Sec-WebSocket-Accept: hsBlbuDTkk24srzEOTBUlZAlC2g=
 ```
 
-Here `Sec-WebSocket-Accept` is `Sec-WebSocket-Key`, recoded using a special algorithm. Upon seeing it, the browser understands that the server really does support the WebSocket protocol.
+اینجا `Sec-WebSocket-Accept` همان `Sec-WebSocket-Key` ای هست که توسط یک الگوریتم خاص دوباره کدگذاری شده است. با دیدن آن مرورگر متوجه میشود که سرور واقعا از پروتوکل وب سوکت پشتیبانی میکند
 
-Afterwards, the data is transferred using the WebSocket protocol, we'll see its structure ("frames") soon. And that's not HTTP at all.
+سپس اطلاعات بر بستر پروتوکل وب سوکت انتقال پیدا میکنند, که به زودی با ساختار آن ("frames") آشنا میشویم.
 
-### Extensions and subprotocols
+### افزونه ها و زیرپروتوکل‌ها
 
-There may be additional headers `Sec-WebSocket-Extensions` and `Sec-WebSocket-Protocol` that describe extensions and subprotocols.
+امکان دارد که هدرهای اضافی همچون `Sec-WebSocket-Extensions` و `Sec-WebSocket-Protocol` وجود داشته باشند که بیانگر افزونه(extension)ها و زیرپروتوکل‌ها(subprotocols) هستند.
 
-For instance:
+برای مثال:
 
-- `Sec-WebSocket-Extensions: deflate-frame` means that the browser supports data compression. An extension is something related to transferring the data, functionality that extends the WebSocket protocol. The header `Sec-WebSocket-Extensions` is sent automatically by the browser, with the list of all extensions it supports.
+- `Sec-WebSocket-Extensions: deflate-frame` نمایانگر آن است که مروگر فشرده‌سازی اطلاعات را پشتیبانی میکند. یک extension به انتقال اطلاعات مرتبط است. سازوکاری که پروتوکل وب سوکت را گسترش میدهد. `Sec-WebSocket-Extensions: deflate-frame` به صورت خودکار توسط مروگر ارسال میشود و حاوی لیستی از همه‌ی extension هایی که پشتیبانی میکند میباشد.
 
 - `Sec-WebSocket-Protocol: soap, wamp` means that we'd like to transfer not just any data, but the data in [SOAP](https://en.wikipedia.org/wiki/SOAP) or WAMP ("The WebSocket Application Messaging Protocol") protocols. WebSocket subprotocols are registered in the [IANA catalogue](https://www.iana.org/assignments/websocket/websocket.xml). So, this header describes the data formats that we're going to use.
 
-    This optional header is set using the second parameter of `new WebSocket`. That's the array of subprotocols, e.g. if we'd like to use SOAP or WAMP:
+  این هدر اختیاری با استفاده از دومین پارامتر `new websocket` تنظیم میشود که آرایه ای از subprotocol هاست. برای مثال اگر بخواهیم از SOAP یا WAWP استفاده کنیم داریم:
 
-    ```js
-    let socket = new WebSocket("wss://javascript.info/chat", ["soap", "wamp"]);
-    ```
+  ```js
+  let socket = new WebSocket("wss://javascript.info/chat", ["soap", "wamp"]);
+  ```
 
-The server should respond with a list of protocols and extensions that it agrees to use.
+سرور باید با لیستی از پروتوکل‌ها و extension هایی که با استفاده از آنها موافق است پاسخ دهد
 
 برای مثال، درخواست:
 
