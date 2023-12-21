@@ -370,20 +370,20 @@ function onSocketConnect(ws) {
 
 که API ساده ای است
 
-The API is simple.
+روش‌ها:
 
-Methods:
 - `socket.send(data)`,
 - `socket.close([code], [reason])`.
 
-Events:
+رویدادها:
+
 - `open`,
 - `message`,
 - `error`,
 - `close`.
 
-WebSocket by itself does not include reconnection, authentication and many other high-level mechanisms. So there are client/server libraries for that, and it's also possible to implement these capabilities manually.
+وب سوکت به تنهایی شامل امکاناتی همچون اتصال دوباره, احراز هویت و دیگر مکانیزم‌های سطح بالا نمیباشد. بنابراین کتابخانه هایی هم در کلاینت و هم در سرور برای اینکار وجود دارند، همچنین پیاده‌سازی دستی این موارد امکان پذیر میباشد.
 
-Sometimes, to integrate WebSocket into existing projects, people run a WebSocket server in parallel with the main HTTP-server, and they share a single database. Requests to WebSocket use `wss://ws.site.com`, a subdomain that leads to the WebSocket server, while `https://site.com` goes to the main HTTP-server.
+گاهی اوقات، برای افزودن وب سوکت به یک پروژه‌، افراد یک سرور وب سوکت به موازات سرور http را با یک دیتابیس مشترک راه اندازی میکنند. درخواست های وب سوکت از آدرس `wss://ws.site.com` که یک ساب دامین بوده و به سرور وب سوکت میرسد استفاده میکنند درحالی که درخواست های آدرس `https://site.com` به سرور http اصلی میروند.
 
-Surely, other ways of integration are also possible.
+مطمئنا راههای دیگری برای ادغام وجود دارد.
