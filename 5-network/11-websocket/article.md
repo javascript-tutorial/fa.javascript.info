@@ -261,65 +261,64 @@ socket.onclose = (event) => {
 };
 ```
 
+## وضعیت اتصال
 
-## Connection state
+برای اطلاع از وضعیت اتصال پراپرتی `socket.readyState` با مقادیر زیر وجود دارد:
 
-To get connection state, additionally there's `socket.readyState` property with values:
+- **`0`** -- "CONNECTING": اتصال هنوز برقرار نشده است,
+- **`1`** -- "OPEN": درحال برقراری ارتباط,
+- **`2`** -- "CLOSING": درحال بستن ارتباط,
+- **`3`** -- "CLOSED": ارتباط بسته شده است.
 
-- **`0`** -- "CONNECTING": the connection has not yet been established,
-- **`1`** -- "OPEN": communicating,
-- **`2`** -- "CLOSING": the connection is closing,
-- **`3`** -- "CLOSED": the connection is closed.
+## مثال چت
 
+بیاید تا با هم یک مثال از پیاده‌سازی یک برنامه چت را بااستفاده از ای پی آی وب سوکت و ماژول وب سوکت node.js <https://github.com/websockets/ws> بررسی کنیم. تمرکز اصلی ما سمت کلاینت خواهد بود اما سمت سرور هم ساده است.
 
-## Chat example
-
-Let's review a chat example using browser WebSocket API and Node.js WebSocket module <https://github.com/websockets/ws>. We'll pay the main attention to the client side, but the server is also simple.
-
-HTML: we need a `<form>` to send messages and a `<div>` for incoming messages:
+کد HTML: نیاز به یک تگ `<form>` برای ارسال پیامها و یک تگ `<div>` برای پیامهای دریافتی داریم
 
 ```html
 <!-- message form -->
 <form name="publish">
-  <input type="text" name="message">
-  <input type="submit" value="Send">
+  <input type="text" name="message" />
+  <input type="submit" value="Send" />
 </form>
 
 <!-- div with messages -->
 <div id="messages"></div>
 ```
 
-From JavaScript we want three things:
-1. Open the connection.
+برای کدهای جاوااسکریپت برنامه ما نیاز به سه چیز داریم:
+
+1. باز کردن اتصال.
 2. On form submission -- `socket.send(message)` for the message.
 3. On incoming message -- append it to `div#messages`.
 
-Here's the code:
+کد رو به اینصورت خواهیم داشت:
 
 ```js
 let socket = new WebSocket("wss://javascript.info/article/websocket/chat/ws");
 
-// send message from the form
-document.forms.publish.onsubmit = function() {
+// ارسال پیام از فرم
+document.forms.publish.onsubmit = function () {
   let outgoingMessage = this.message.value;
 
   socket.send(outgoingMessage);
   return false;
 };
 
-// message received - show the message in div#messages
-socket.onmessage = function(event) {
+// div#messagesپیام دریافت شد - نمایش پیام در
+socket.onmessage = function (event) {
   let message = event.data;
 
-  let messageElem = document.createElement('div');
+  let messageElem = document.createElement("div");
   messageElem.textContent = message;
-  document.getElementById('messages').prepend(messageElem);
-}
+  document.getElementById("messages").prepend(messageElem);
+};
 ```
 
-Server-side code is a little bit beyond our scope. Here we'll use Node.js, but you don't have to. Other platforms also have their means to work with WebSocket.
+کد سمت سرور یک مقدار فراتر از بحث ما هست. اینجا ما از node.js استفاده میکنیم, اما شما مجبور نیستید. دیگر پلتفورم‌ها روش‌های خاص خودشون رو برای کار با وب سوکت دارا هستند.
 
-The server-side algorithm will be:
+الگوریتم سمت سرور به اینصورت خواهد بود:
 
 1. Create `clients = new Set()` -- a set of sockets.
 2. For each accepted websocket, add it to the set `clients.add(socket)` and set `message` event listener to get its messages.
@@ -327,48 +326,49 @@ The server-side algorithm will be:
 4. When a connection is closed: `clients.delete(socket)`.
 
 ```js
-const ws = new require('ws');
-const wss = new ws.Server({noServer: true});
+const ws = new require("ws");
+const wss = new ws.Server({ noServer: true });
 
 const clients = new Set();
 
 http.createServer((req, res) => {
-  // here we only handle websocket connections
-  // in real project we'd have some other code here to handle non-websocket requests
+  // در اینجا فقط ارتباط وب سوکت را کنترل میکنیم
+  // در پروژه‌ واقعی کدهای دیگری برای رسیدگی به درخواست‌های غیر وب سوکت خواهیم داشت
   wss.handleUpgrade(req, req.socket, Buffer.alloc(0), onSocketConnect);
 });
 
 function onSocketConnect(ws) {
   clients.add(ws);
 
-  ws.on('message', function(message) {
-    message = message.slice(0, 50); // max message length will be 50
+  ws.on("message", function (message) {
+    message = message.slice(0, 50); // حداکثر طول 50 را میتواند دارا باشد
 
-    for(let client of clients) {
+    for (let client of clients) {
       client.send(message);
     }
   });
 
-  ws.on('close', function() {
+  ws.on("close", function () {
     clients.delete(ws);
   });
 }
 ```
 
-
-Here's the working example:
+یک مثال:
 
 [iframe src="chat" height="100" zip]
 
-You can also download it (upper-right button in the iframe) and run it locally. Just don't forget to install [Node.js](https://nodejs.org/en/) and `npm install ws` before running.
+شما همچنین میتونید این مثال رو دانلود کرده (دکمه بالا سمت راست در آیفریم) و در لوکال خودتون اجرا کنید. فقط فراموش نکنید که [Node.js](https://nodejs.org/en/) رو نصب کرده و دستور `npm install ws` رو قبل از راه اندازی اجرا کنید
 
-## Summary
+## خلاصه
 
-WebSocket is a modern way to have persistent browser-server connections.
+وب سوکت یک راه مدرن برای داشتن یک ارتباط مرورگر-سرور مستمر میباشد.
 
-- WebSockets don't have cross-origin limitations.
-- They are well-supported in browsers.
-- Can send/receive strings and binary data.
+- وب سوکت‌ها محدودیت cross origin ندارند.
+- به خوبی در مرورگرها پشتیبانی میشوند.
+- میتوانند اطلاعات را به شکل رشته و باینری ارسال/دریافت کنند
+
+که API ساده ای است
 
 The API is simple.
 
