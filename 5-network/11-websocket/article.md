@@ -165,20 +165,20 @@ Sec-WebSocket-Protocol: soap
 
 ارتباط از طریق وب سوکت از "frame" ها یا همان برش‌هایی از اطلاعات ساخته شده که میتواند از هر سمت ارسال شده و انواع متفاوتی داشته باشد:
 
-- "text frames" -- contain text data that parties send to each other.
-- "binary data frames" -- contain binary data that parties send to each other.
-- "ping/pong frames" are used to check the connection, sent from the server, the browser responds to these automatically.
-- there's also "connection close frame" and a few other service frames.
+- "text frames" -- دیتای متنی ردوبدل شده را شامل می‌شود.
+- "binary data frames" -- دیتای باینری رد و بدل شده را شامل می‌شود.
+- "ping/pong frames" -- برای بررسی اتصال از سمت سرور ارسال می‌شود و مرورگر به صورت خودکار به آن پاسخ می‌دهد.
+- همچنین فریمی به نام "connection close frame" و تعداد دیگری از سرویس فریم‌ها وجود دارند.
 
-In the browser, we directly work only with text or binary frames.
+در مرورگر، ما مستقیما با متن یا binary frames کار میکنیم.
 
-**WebSocket `.send()` method can send either text or binary data.**
+**متد `()send.` وب سوکت توانایی ارسال هم متن و هم دیتای باینری را دارا میباشد**
 
-A call `socket.send(body)` allows `body` in string or a binary format, including `Blob`, `ArrayBuffer`, etc. No settings are required: just send it out in any format.
+صدا زدن `socket.send(body)` اجازه‌ی استفاده از هم رشته و هم فرمت باینری را در `body` می‌دهد که شامل `Blob`, `ArrayBuffer` و موارد مشابه میباشد. هیچ تنظیماتی نیاز نیست: میتوانید با هر فرمتی ارسالش کنید.
 
-**When we receive the data, text always comes as string. And for binary data, we can choose between `Blob` and `ArrayBuffer` formats.**
+**هنگام دریافت دیتا، متن همیشه به صورت رشته می‌آید. و برای دیتای باینری میتوانیم بین فرمت‌های `Blob` و `ArrayBuffer` انتخاب کنیم**
 
-That's set by `socket.binaryType` property, it's `"blob"` by default, so binary data comes as `Blob` objects.
+که با مشخصه `socket.binaryType` قابل تنظیم بوده و به صورت پیشفرض `""blob""` است بنابراین دیتای باینری به شکل آبجکت‌های `Blob` دریافت می‌شود.
 
 [Blob](info:blob) is a high-level binary object, it directly integrates with `<a>`, `<img>` and other tags, so that's a sane default. But for binary processing, to access individual data bytes, we can change it to `"arraybuffer"`:
 
@@ -189,19 +189,19 @@ socket.onmessage = (event) => {
 };
 ```
 
-## Rate limiting
+## محدود کردن نرخ
 
-Imagine, our app is generating a lot of data to send. But the user has a slow network connection, maybe on a mobile internet, outside of a city.
+تصور کنید که برنامه‌ی ما مقدار زیادی دیتا ارسال میکند اما اینترنت کاربر سرعت پایینی دارد شاید بشه اینترنت همراه خارج از شهر رو مثال زد.
 
-We can call `socket.send(data)` again and again. But the data will be buffered (stored) in memory and sent out only as fast as network speed allows.
+ما `socket.send(data)` را بارها و بارها صدا میزنیم. اما دیتا در حافظه بافر (ذخیره) شده و زمانی که سرعت شبکه به حد کافی برسد به بیرون ارسال خواهد شد.
 
-The `socket.bufferedAmount` property stores how many bytes remain buffered at this moment, waiting to be sent over the network.
+مشخصه `socket.bufferedAmount` تعداد بایت‌های ذخیره شده درلحظه و درحال انتظار برای ارسال تحت شبکه را ذخیره می‌کند.
 
-We can examine it to see whether the socket is actually available for transmission.
+با ارزیابی این پارامتر میتونیم بفهمیم که آیا سوکت واقعا برای انتقال دردسترس است یا نه
 
 ```js
-// every 100ms examine the socket and send more data  
-// only if all the existing data was sent out
+// هر صد میلی ثانیه سوکت را بررسی کرده و دیتای بیشتری را ارسال میکند
+// تنها زمانی که همه‌ی دیتای موجود ارسال شده باشد
 setInterval(() => {
   if (socket.bufferedAmount == 0) {
     socket.send(moreData());
@@ -209,52 +209,52 @@ setInterval(() => {
 }, 100);
 ```
 
+## بستن اتصال
 
-## Connection close
+به طور معمولی زمانی که یک طرف قصد بستن اتصال را داشته باشد(هر دوی مروگر و سرور حق برابری برای اینکار دارا هستند.), آنها عبارت `connection close frame` را به همراه یک کد عددی و دلیل اینکار را به شکل متنی ارسال میکنند.
 
-Normally, when a party wants to close the connection (both browser and server have equal rights), they send a "connection close frame" with a numeric code and a textual reason.
+روش انجام این کار به شکل زیر است:
 
-The method for that is:
 ```js
 socket.close([code], [reason]);
 ```
 
-- `code` is a special WebSocket closing code (optional)
-- `reason` is a string that describes the reason of closing (optional)
+- `code` یک کد خاص برای بستن وب سوکت (اختیاری)
+- `reason` رشته‌ای که علت بستن اتصال را توضیح می‌دهد (اختیاری)
 
-Then the other party in the `close` event handler gets the code and the reason, e.g.:
+سپس طرف دیگر رویداد کد `close` و علت آنرا دریافت میکند. برای مثال:
 
 ```js
-// closing party:
+// سمتی که ارتباط را میبندد:
 socket.close(1000, "Work complete");
 
-// the other party
-socket.onclose = event => {
+// سمت دیگر:
+socket.onclose = (event) => {
   // event.code === 1000
   // event.reason === "Work complete"
   // event.wasClean === true (clean close)
 };
 ```
 
-Most common code values:
+رایجع‌ترین کدها و مقادیر آنها:
 
-- `1000` -- the default, normal closure (used if no `code` supplied),
-- `1006` -- no way to set such code manually, indicates that the connection was lost (no close frame).
+- `1000` -- بستن پیش‌فرض و عادی (زمانی که `code` نباشد استفاده می‌شود),
+- `1006` -- راهی برای تنظیم این کد به صورت دستی وجود نداشته و نمایانگر از دست رفتن ارتباط هست (no close frame)
 
-There are other codes like:
+کدهای دیگر مثل موارد زیر هم وجود دارند:
 
 - `1001` -- the party is going away, e.g. server is shutting down, or a browser leaves the page,
-- `1009` -- the message is too big to process,
-- `1011` -- unexpected error on server,
-- ...and so on.
+- `1009` -- حجم پیام برای انجام پردازش زیاد است,
+- `1011` -- خطای پیش‌بینی نشده در سرور,
+- ...و غیره.
 
-The full list can be found in [RFC6455, §7.4.1](https://tools.ietf.org/html/rfc6455#section-7.4.1).
+لیست کامل رو میتونید در [RFC6455, §7.4.1](https://tools.ietf.org/html/rfc6455#section-7.4.1) پیدا کنید.
 
-WebSocket codes are somewhat like HTTP codes, but different. In particular, codes lower than `1000` are reserved, there'll be an error if we try to set such a code.
+کدهای وب سوکت تاحدی مشابه کدهای HTTP میباشند اما متفاوتند. به صورت خاص کدهای کمتر از `1000` از قبل رزرو شده اند و اگر تلاش کنیم تا یکی از این کدهارو استفاده کنیم به ارور برخورد خواهیم کرد.
 
 ```js
-// in case connection is broken
-socket.onclose = event => {
+// اگر ارتباط دچار مشکل باشد:
+socket.onclose = (event) => {
   // event.code === 1006
   // event.reason === ""
   // event.wasClean === false (no closing frame)
