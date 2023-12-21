@@ -179,7 +179,6 @@ Sec-WebSocket-Protocol: soap
 
 که با مشخصه `socket.binaryType` قابل تنظیم بوده و به صورت پیشفرض `""blob""` است بنابراین دیتای باینری به شکل آبجکت‌های `Blob` دریافت می‌شود.
 
-[Blob](info:blob) is a high-level binary object, it directly integrates with `<a>`, `<img>` and other tags, so that's a sane default. But for binary processing, to access individual data bytes, we can change it to `"arraybuffer"`:
 تغییر دهیم. `"arraybuffer"` و دیگر تگ ها ادغام میشود بنابراین مقدار پیشفرض منطقی خواهد بود. اما برای دیتای باینری میتوانیم آنرا به `<img>` و `<a>` آبجکت باینری سطح بالایی است که به صورت مستقیم با [Blob](info:blob)
 
 ```js
