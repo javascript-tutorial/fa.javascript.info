@@ -20,7 +20,6 @@ let socket = new WebSocket("*!*ws*/!*://javascript.info");
 عدم رمزگذاری در ارتباط با پروتوکل `//:ws` باعث قابل رویت بودن اطلاعات توسط هر رابطی میشود. چون پروکسی سرورهای قدیمی راجع به وب سوکت ها اطلاعی ندارند ممکن است هدرها را "ناآشنا" تشخیص داده و ارتبط را قطع کنند.
 
 از طرف دیگر، پروتوکل `//:wss` برروی TLS بوده (همانطور که HTTPS همان HTTP برروی TLS میباشد.) لایه امنیت انتقال اطلاعات را از سمت فرستنده رمزگذاری کرده و در سمت گیرنده رمزگشایی میکند. بنابراین اطلاعات به شکل رمزگذاری شده از میان پروکسی‌ها عبور میکنند. آنها نمیتوانند ببینند چه چیزی درون این بسته ها وجود دارد و تنها آنهارا عبور میدهند.
-
 ````
 
 زمانی که سوکت ایجاد میشود، ما باید به رویدادهای آن گوش کنیم. درمجموع 4 نوع رویداد وجود دارد:
@@ -47,7 +46,7 @@ socket.onmessage = function(event) {
 };
 
 socket.onclose = function(event) {
-  if (event.wasClean) {
+  if (event.wasClean) {  
     alert(`[close] Connection closed cleanly, code=${event.code} reason=${event.reason}`);
   } else {
     // برای مثال عملیات سمت سرور به مشکل خورده و یا شبکه از کار افتاده است
@@ -59,7 +58,7 @@ socket.onclose = function(event) {
 socket.onerror = function(error) {
   alert(`[error]`);
 };
-````
+```
 
 برای نمایش نحوه عملکرد وب سوکت، سرور کوچک [server.js](demo/server.js) که با Node.js نوشته شده است وجود دارد. برای مثال بالا اجرای آن یک پاسخ به شکل "Hello from server, John" برمیگرداند سپس به مدت 5 ثانیه صبر کرده و ارتباط را میبندد.
 
@@ -119,13 +118,14 @@ Sec-WebSocket-Accept: hsBlbuDTkk24srzEOTBUlZAlC2g=
 برای مثال:
 
 - `Sec-WebSocket-Extensions: deflate-frame` نمایانگر آن است که مروگر فشرده‌سازی اطلاعات را پشتیبانی میکند. یک افزونه به انتقال اطلاعات مرتبط است. سازوکاری که پروتوکل وب سوکت را گسترش میدهد. `Sec-WebSocket-Extensions: deflate-frame` به صورت خودکار توسط مروگر ارسال میشود و حاوی لیستی از همه‌ی افزونه هایی که پشتیبانی میکند میباشد.
+
 - `Sec-WebSocket-Protocol: soap, wamp` به این معنی است که ما نمیخواهیم هر دیتایی را ارسال کنیم بلکه دیتای در [SOAP](https://en.wikipedia.org/wiki/SOAP) یا WAMP ("پروتوکل پیامرسانی از طریق وب سوکت"). زیرپروتوکل های وب سوکت در [IANA catalogue](https://www.iana.org/assignments/websocket/websocket.xml) لیست شده اند. بنابراین این هدر فرمت دیتایی که میخواهیم استفاده کنیم را توصیف میکند.
 
   این هدر اختیاری با استفاده از دومین پارامتر `new websocket` تنظیم میشود که آرایه ای از subprotocol هاست. برای مثال اگر بخواهیم از SOAP یا WAWP استفاده کنیم داریم:
 
-  ```js
-  let socket = new WebSocket("wss://javascript.info/chat", ["soap", "wamp"]);
-  ```
+    ```js
+    let socket = new WebSocket("wss://javascript.info/chat", ["soap", "wamp"]);
+    ```
 
 سرور باید با لیستی از پروتوکل‌ها و extension هایی که با استفاده از آنها موافق است پاسخ دهد
 
@@ -158,7 +158,7 @@ Sec-WebSocket-Protocol: soap
 */!*
 ```
 
-اینجا سرور پاسخ میدهد که extension `deflate-frame` و تنها SOAP subprotocol ها را پشتیبانی میکند.
+اینجا سرور پاسخ میدهد که extension "deflate-frame" و تنها SOAP subprotocol ها را پشتیبانی میکند.
 
 ## انتقال اطلاعات
 
@@ -208,12 +208,12 @@ setInterval(() => {
 }, 100);
 ```
 
+
 ## بستن اتصال
 
-به طور معمولی زمانی که یک طرف قصد بستن اتصال را داشته باشد(هر دوی مروگر و سرور حق برابری برای اینکار دارا هستند.), آنها عبارت `connection close frame` را به همراه یک کد عددی و دلیل اینکار را به شکل متنی ارسال میکنند.
+به طور معمولی زمانی که یک طرف قصد بستن اتصال را داشته باشد(هر دوی مروگر و سرور حق برابری برای اینکار دارا هستند.), آنها عبارت "connection close frame" را به همراه یک کد عددی و دلیل اینکار را به شکل متنی ارسال میکنند.
 
 روش انجام این کار به شکل زیر است:
-
 ```js
 socket.close([code], [reason]);
 ```
@@ -228,7 +228,7 @@ socket.close([code], [reason]);
 socket.close(1000, "Work complete");
 
 // سمت دیگر:
-socket.onclose = (event) => {
+socket.onclose = event => {
   // event.code === 1000
   // event.reason === "Work complete"
   // event.wasClean === true (clean close)
@@ -253,12 +253,13 @@ socket.onclose = (event) => {
 
 ```js
 // اگر ارتباط دچار مشکل باشد:
-socket.onclose = (event) => {
+socket.onclose = event => {
   // event.code === 1006
   // event.reason === ""
   // event.wasClean === false (no closing frame)
 };
 ```
+
 
 ## وضعیت اتصال
 
@@ -269,6 +270,7 @@ socket.onclose = (event) => {
 - **`2`** -- "CLOSING": درحال بستن ارتباط,
 - **`3`** -- "CLOSED": ارتباط بسته شده است.
 
+
 ## مثال چت
 
 بیاید تا با هم یک مثال از پیاده‌سازی یک برنامه چت را بااستفاده از ای پی آی وب سوکت و ماژول وب سوکت node.js <https://github.com/websockets/ws> بررسی کنیم. تمرکز اصلی ما سمت کلاینت خواهد بود اما سمت سرور هم ساده است.
@@ -278,8 +280,8 @@ socket.onclose = (event) => {
 ```html
 <!-- message form -->
 <form name="publish">
-  <input type="text" name="message" />
-  <input type="submit" value="Send" />
+  <input type="text" name="message">
+  <input type="submit" value="Send">
 </form>
 
 <!-- div with messages -->
@@ -287,8 +289,7 @@ socket.onclose = (event) => {
 ```
 
 برای کدهای جاوااسکریپت برنامه ما نیاز به سه چیز داریم:
-
-1. باز کردن اتصال.
+1. ایجاد اتصال.
 2. On form submission -- `socket.send(message)` for the message.
 3. On incoming message -- append it to `div#messages`.
 
@@ -298,7 +299,7 @@ socket.onclose = (event) => {
 let socket = new WebSocket("wss://javascript.info/article/websocket/chat/ws");
 
 // ارسال پیام از فرم
-document.forms.publish.onsubmit = function () {
+document.forms.publish.onsubmit = function() {
   let outgoingMessage = this.message.value;
 
   socket.send(outgoingMessage);
@@ -306,13 +307,13 @@ document.forms.publish.onsubmit = function () {
 };
 
 // div#messagesپیام دریافت شد - نمایش پیام در
-socket.onmessage = function (event) {
+socket.onmessage = function(event) {
   let message = event.data;
 
-  let messageElem = document.createElement("div");
+  let messageElem = document.createElement('div');
   messageElem.textContent = message;
-  document.getElementById("messages").prepend(messageElem);
-};
+  document.getElementById('messages').prepend(messageElem);
+}
 ```
 
 کد سمت سرور یک مقدار فراتر از بحث ما هست. اینجا ما از node.js استفاده میکنیم, اما شما مجبور نیستید. دیگر پلتفورم‌ها روش‌های خاص خودشون رو برای کار با وب سوکت دارا هستند.
@@ -325,8 +326,8 @@ socket.onmessage = function (event) {
 4. زمانی که یک اتصال بسته میشود: `clients.delete(socket)`
 
 ```js
-const ws = new require("ws");
-const wss = new ws.Server({ noServer: true });
+const ws = new require('ws');
+const wss = new ws.Server({noServer: true});
 
 const clients = new Set();
 
@@ -339,26 +340,26 @@ http.createServer((req, res) => {
 function onSocketConnect(ws) {
   clients.add(ws);
 
-  ws.on("message", function (message) {
+  ws.on('message', function(message) {
     message = message.slice(0, 50); // حداکثر طول 50 را میتواند دارا باشد
 
-    for (let client of clients) {
+    for(let client of clients) {
       client.send(message);
     }
   });
 
-  ws.on("close", function () {
+  ws.on('close', function() {
     clients.delete(ws);
   });
 }
 ```
+
 
 یک مثال:
 
 [iframe src="chat" height="100" zip]
 
 شما همچنین میتونید این مثال رو دانلود کرده (دکمه بالا سمت راست در آیفریم) و در لوکال خودتون اجرا کنید. فقط فراموش نکنید که [Node.js](https://nodejs.org/en/) رو نصب کرده و دستور `npm install ws` رو قبل از راه اندازی اجرا کنید
-
 ## خلاصه
 
 وب سوکت یک راه مدرن برای داشتن یک ارتباط مرورگر-سرور مستمر میباشد.
@@ -375,7 +376,6 @@ function onSocketConnect(ws) {
 - `socket.close([code], [reason])`.
 
 رویدادها:
-
 - `open`,
 - `message`,
 - `error`,
