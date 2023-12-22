@@ -1,36 +1,36 @@
-# WebSocket
+# وب سوکت
 
-The `WebSocket` protocol, described in the specification [RFC 6455](https://datatracker.ietf.org/doc/html/rfc6455), provides a way to exchange data between browser and server via a persistent connection. The data can be passed in both directions as "packets", without breaking the connection and the need of additional HTTP-requests.
+پروتوکل _وب‌ سوکت_, همانطور که در [RFC 6455](https://datatracker.ietf.org/doc/html/rfc6455) توضیحات آن ارائه شده است, راهی را برای ردوبدل کردن دیتا بین مرورگر و سرور به شکل یک ارتباط مستمر میسر میسازد. در این پروتوکل اطلاعات میتوانند بدون شکستن ارتباط و نیاز به درخواست HTTP اضافه به شکل دوسویه و در قالب "packets" رد و بدل شوند.
 
-WebSocket is especially great for services that require continuous data exchange, e.g. online games, real-time trading systems and so on.
+به طور خاص وب سوکت برای سرویس‌هایی که نیاز به تبادل اطلاعات به شکل مستمر دارند مثل بازیهای آنلاین، سیستم‌های ترید لحظه‌ای و موارد مشابه استفاده می‌شود.
 
-## A simple example
+## یک مثال ساده
 
-To open a websocket connection, we need to create `new WebSocket` using the special protocol `ws` in the url:
+برای آغاز یک اتصال از نوع وب سوکت، ما نیاز به ایجاد یک `وب سوکت جدید` با استفاده از پروتوکل مخصوص `ws` در url داریم:
 
 ```js
 let socket = new WebSocket("*!*ws*/!*://javascript.info");
 ```
 
-There's also encrypted `wss://` protocol. It's like HTTPS for websockets.
+همچنین پروتوکل رمزگذاری شده `//:wss` وجود دارد. این پروتوکل همانند پروتوکل HTTPS برای وب سوکت ها میباشد.
 
-```smart header="Always prefer `wss://`"
-The `wss://` protocol is not only encrypted, but also more reliable.
+```smart header="است `wss://` همواره ترجیح براستفاده از پروتوکل"
+پروتوکل`wss://` نه تنها رمزگذاری شده بلکه قابل اعتماد نیز هست
 
-That's because `ws://` data is not encrypted, visible for any intermediary. Old proxy servers do not know about WebSocket, they may see "strange" headers and abort the connection.
+عدم رمزگذاری در ارتباط با پروتوکل `//:ws` باعث قابل رویت بودن اطلاعات توسط هر رابطی میشود. چون پروکسی سرورهای قدیمی راجع به وب سوکت ها اطلاعی ندارند ممکن است هدرها را "ناآشنا" تشخیص داده و ارتبط را قطع کنند.
 
-On the other hand, `wss://` is WebSocket over TLS, (same as HTTPS is HTTP over TLS), the transport security layer encrypts the data at the sender and decrypts it at the receiver. So data packets are passed encrypted through proxies. They can't see what's inside and let them through.
-```
+از طرف دیگر، پروتوکل `//:wss` برروی TLS بوده (همانطور که HTTPS همان HTTP برروی TLS میباشد.) لایه امنیت انتقال اطلاعات را از سمت فرستنده رمزگذاری کرده و در سمت گیرنده رمزگشایی میکند. بنابراین اطلاعات به شکل رمزگذاری شده از میان پروکسی‌ها عبور میکنند. آنها نمیتوانند ببینند چه چیزی درون این بسته ها وجود دارد و تنها آنهارا عبور میدهند.
+````
 
-Once the socket is created, we should listen to events on it. There are totally 4 events:
-- **`open`** -- connection established,
-- **`message`** -- data received,
-- **`error`** -- websocket error,
-- **`close`** -- connection closed.
+زمانی که سوکت ایجاد میشود، ما باید به رویدادهای آن گوش کنیم. درمجموع 4 نوع رویداد وجود دارد:
+- **`open`** -- اغاز ارتباط,
+- **`message`** -- دریافت اطلاعات,
+- **`error`** -- خطای وب سوکت,
+- **`close`** -- بسته شدن ارتباط .
 
-...And if we'd like to send something, then `socket.send(data)` will do that.
+...و اگر بخواهیم چیزی ارسال کنیم آنگاه `socket.send(data)` این کار را انجام خواهد داد.
 
-Here's an example:
+یک مثال:
 
 ```js run
 let socket = new WebSocket("wss://javascript.info/article/websocket/demo/hello");
@@ -49,8 +49,8 @@ socket.onclose = function(event) {
   if (event.wasClean) {  
     alert(`[close] Connection closed cleanly, code=${event.code} reason=${event.reason}`);
   } else {
-    // e.g. server process killed or network down
-    // event.code is usually 1006 in this case
+    // برای مثال عملیات سمت سرور به مشکل خورده و یا شبکه از کار افتاده است
+    // در این موقعیت event.code عدد 1006 است.
     alert('[close] Connection died');
   }
 };
@@ -60,23 +60,23 @@ socket.onerror = function(error) {
 };
 ```
 
-For demo purposes, there's a small server [server.js](demo/server.js) written in Node.js, for the example above, running. It responds with "Hello from server, John", then waits 5 seconds and closes the connection.
+برای نمایش نحوه عملکرد وب سوکت، سرور کوچک [server.js](demo/server.js) که با Node.js نوشته شده است وجود دارد. برای مثال بالا اجرای آن یک پاسخ به شکل "Hello from server, John" برمیگرداند سپس به مدت 5 ثانیه صبر کرده و ارتباط را میبندد.
 
-So you'll see events `open` -> `message` -> `close`.
+بنابراین شما رویدادهای `open` -> `message` -> `close` را خواهید دید
 
-That's actually it, we can talk WebSocket already. Quite simple, isn't it?
+در واقع کلیت ماجرا همین است، حالا میتونیم با وب سوکت ارتباط برقرار کنیم. ساده است مگه نه؟
 
-Now let's talk more in-depth.
+حالا بیاید تا عمیق‌تر بررسی کنیم.
 
-## Opening a websocket
+## ایجاد یک وب سوکت
 
-When `new WebSocket(url)` is created, it starts connecting immediately.
+زمانی که یک وب سوکت با دستور `new WebSocket(url)` ایجاد می‌شود, بلافاصله شروع به اتصال میکند.
 
-During the connection, the browser (using headers) asks the server: "Do you support Websocket?" And if the server replies "yes", then the talk continues in WebSocket protocol, which is not HTTP at all.
+درطول اتصال، مروگر (با استفاده از هدرها) از سرور سوال میکند: "آیا از وب سوکت پشتیبانی میکنی؟" و اگر سرور جواب مثبت بدهد، آنگاه مکالمه در پروتوکل وب سوکت ادامه می‌یابد که به اصلا HTTP نیست.
 
 ![](websocket-handshake.svg)
 
-Here's an example of browser headers for a request made by `new WebSocket("wss://javascript.info/chat")`.
+در زیر نمونه‌ای از هدرهای مرورگر در درخواست `new WebSocket("wss://javascript.info/chat")` آورده شده است.
 
 ```
 GET /chat
@@ -88,17 +88,17 @@ Sec-WebSocket-Key: Iv8io/9s+lYFgZWcXczP8Q==
 Sec-WebSocket-Version: 13
 ```
 
-- `Origin` -- the origin of the client page, e.g. `https://javascript.info`. WebSocket objects are cross-origin by nature. There are no special headers or other limitations. Old servers are unable to handle WebSocket anyway, so there are no compatibility issues. But the `Origin` header is important, as it allows the server to decide whether or not to talk WebSocket with this website.
-- `Connection: Upgrade` -- signals that the client would like to change the protocol.
-- `Upgrade: websocket` -- the requested protocol is "websocket".
-- `Sec-WebSocket-Key` -- a random browser-generated key, used to ensure that the server supports WebSocket protocol. It's random to prevent proxies from caching any following communication.
-- `Sec-WebSocket-Version` -- WebSocket protocol version, 13 is the current one.
+- `Origin` --هستند. هیچ هدرخاص و یا دیگر محدودیتی وجود ندارد. درهرصورت سرورهای قدیمی قادر به کار با وب سوکت ها نیستند. بنابراین هیچگونه مشکل سازگاری وجود ندارد. اما این هدر مهم است چون به سرور این اجازه را میدهد تا درمورد ارتباط با وبسایت از طریق وب سوکت تصمیم بگیرد. cross-origin آبجکت‌های وب سوکت ذاتا .`https://javascript.info` خواستگاه صفحه در سمت کلاینت برای مثال
+- `Connection: Upgrade` -- علامتی نمایانگر آنکه کلاینت خواهان تغییر پروتوکل میباشد.
+- `Upgrade: websocket` -- پروتوکل درخواستی "وب سوکت" میباشد
+- `Sec-WebSocket-Key` -- یک کلید تصادفی که توسط مرورگر ساخته میشود و برای اطمینان از اینکه آیا سرور از وب سوکت پشتیبانی میکند یا نه استفاده میشود. این کلید به صورت تصادفی است تا از cache کردن هر نوع ارتباطی توسط پروکسی‌ها جلوگیری کند
+- `Sec-WebSocket-Version` -- ورژن پروتوکل وب سوکت، نسخه کنونی 13 میباشد
 
-```smart header="WebSocket handshake can't be emulated"
-We can't use `XMLHttpRequest` or `fetch` to make this kind of HTTP-request, because JavaScript is not allowed to set these headers.
+```smart header="هنشیک (handshake) وب سوکت قابل بازسازی نیست"
+نمیتوانیم از `XMLHttpRequest` یا `fetch` برای ساخت این نوع از HTTP-request استفاده کنیم چون جاوااسکریپت اجازه‌ی تنظیم این هدرهارا ندارد.
 ```
 
-If the server agrees to switch to WebSocket, it should send code 101 response:
+اگر سرور با تعویض به پروتوکل وب سوکت موافقت کند آنگاه باید کد 101 را در پاسخ ارسال کند
 
 ```
 101 Switching Protocols
@@ -107,29 +107,29 @@ Connection: Upgrade
 Sec-WebSocket-Accept: hsBlbuDTkk24srzEOTBUlZAlC2g=
 ```
 
-Here `Sec-WebSocket-Accept` is `Sec-WebSocket-Key`, recoded using a special algorithm. Upon seeing it, the browser understands that the server really does support the WebSocket protocol.
+اینجا `Sec-WebSocket-Accept` همان `Sec-WebSocket-Key` ای هست که توسط یک الگوریتم خاص دوباره کدگذاری شده است. با دیدن آن، مرورگر متوجه میشود که سرور واقعا از پروتوکل وب سوکت پشتیبانی میکند
 
-Afterwards, the data is transferred using the WebSocket protocol, we'll see its structure ("frames") soon. And that's not HTTP at all.
+سپس اطلاعات بر بستر پروتوکل وب سوکت انتقال پیدا میکنند, که به زودی با ساختار آن ("frames") آشنا میشویم.
 
-### Extensions and subprotocols
+### افزونه ها و زیرپروتوکل‌ها
 
-There may be additional headers `Sec-WebSocket-Extensions` and `Sec-WebSocket-Protocol` that describe extensions and subprotocols.
+امکان دارد که هدرهای اضافی همچون `Sec-WebSocket-Extensions` و `Sec-WebSocket-Protocol` وجود داشته باشند که بیانگر افزونه(extension)ها و زیرپروتوکل‌ها(subprotocols) هستند.
 
-For instance:
+برای مثال:
 
-- `Sec-WebSocket-Extensions: deflate-frame` means that the browser supports data compression. An extension is something related to transferring the data, functionality that extends the WebSocket protocol. The header `Sec-WebSocket-Extensions` is sent automatically by the browser, with the list of all extensions it supports.
+- `Sec-WebSocket-Extensions: deflate-frame` نمایانگر آن است که مروگر فشرده‌سازی اطلاعات را پشتیبانی میکند. یک افزونه به انتقال اطلاعات مرتبط است. سازوکاری که پروتوکل وب سوکت را گسترش میدهد. `Sec-WebSocket-Extensions: deflate-frame` به صورت خودکار توسط مروگر ارسال میشود و حاوی لیستی از همه‌ی افزونه هایی که پشتیبانی میکند میباشد.
 
-- `Sec-WebSocket-Protocol: soap, wamp` means that we'd like to transfer not just any data, but the data in [SOAP](https://en.wikipedia.org/wiki/SOAP) or WAMP ("The WebSocket Application Messaging Protocol") protocols. WebSocket subprotocols are registered in the [IANA catalogue](https://www.iana.org/assignments/websocket/websocket.xml). So, this header describes the data formats that we're going to use.
+- `Sec-WebSocket-Protocol: soap, wamp` به این معنی است که ما نمیخواهیم هر دیتایی را ارسال کنیم بلکه دیتای در [SOAP](https://en.wikipedia.org/wiki/SOAP) یا WAMP ("پروتوکل پیامرسانی از طریق وب سوکت"). زیرپروتوکل های وب سوکت در [IANA catalogue](https://www.iana.org/assignments/websocket/websocket.xml) لیست شده اند. بنابراین این هدر فرمت دیتایی که میخواهیم استفاده کنیم را توصیف میکند.
 
-    This optional header is set using the second parameter of `new WebSocket`. That's the array of subprotocols, e.g. if we'd like to use SOAP or WAMP:
+  این هدر اختیاری با استفاده از دومین پارامتر `new websocket` تنظیم میشود که آرایه ای از subprotocol هاست. برای مثال اگر بخواهیم از SOAP یا WAWP استفاده کنیم داریم:
 
     ```js
     let socket = new WebSocket("wss://javascript.info/chat", ["soap", "wamp"]);
     ```
 
-The server should respond with a list of protocols and extensions that it agrees to use.
+سرور باید با لیستی از پروتوکل‌ها و extension هایی که با استفاده از آنها موافق است پاسخ دهد
 
-For example, the request:
+برای مثال، درخواست:
 
 ```
 GET /chat
@@ -145,7 +145,7 @@ Sec-WebSocket-Protocol: soap, wamp
 */!*
 ```
 
-Response:
+پاسخ:
 
 ```
 101 Switching Protocols
@@ -158,28 +158,28 @@ Sec-WebSocket-Protocol: soap
 */!*
 ```
 
-Here the server responds that it supports the extension "deflate-frame", and only SOAP of the requested subprotocols.
+اینجا سرور پاسخ میدهد که extension "deflate-frame" و تنها SOAP subprotocol ها را پشتیبانی میکند.
 
-## Data transfer
+## انتقال اطلاعات
 
-WebSocket communication consists of "frames" -- data fragments, that can be sent from either side, and can be of several kinds:
+ارتباط از طریق وب سوکت از "frame" ها یا همان برش‌هایی از اطلاعات ساخته شده که میتواند از هر سمت ارسال شده و انواع متفاوتی داشته باشد:
 
-- "text frames" -- contain text data that parties send to each other.
-- "binary data frames" -- contain binary data that parties send to each other.
-- "ping/pong frames" are used to check the connection, sent from the server, the browser responds to these automatically.
-- there's also "connection close frame" and a few other service frames.
+- "text frames" -- دیتای متنی ردوبدل شده را شامل می‌شود.
+- "binary data frames" -- دیتای باینری رد و بدل شده را شامل می‌شود.
+- "ping/pong frames" -- برای بررسی اتصال از سمت سرور ارسال می‌شود و مرورگر به صورت خودکار به آن پاسخ می‌دهد.
+- همچنین فریمی به نام "connection close frame" و تعداد دیگری از سرویس فریم‌ها وجود دارند.
 
-In the browser, we directly work only with text or binary frames.
+در مرورگر، ما مستقیما با متن یا binary frames کار میکنیم.
 
-**WebSocket `.send()` method can send either text or binary data.**
+**متد `()send.` وب سوکت توانایی ارسال هم متن و هم دیتای باینری را دارا میباشد**
 
-A call `socket.send(body)` allows `body` in string or a binary format, including `Blob`, `ArrayBuffer`, etc. No settings are required: just send it out in any format.
+صدا زدن `socket.send(body)` اجازه‌ی استفاده از هم رشته و هم فرمت باینری را در `body` می‌دهد که شامل `Blob`, `ArrayBuffer` و موارد مشابه میباشد. هیچ تنظیماتی نیاز نیست: میتوانید با هر فرمتی ارسالش کنید.
 
-**When we receive the data, text always comes as string. And for binary data, we can choose between `Blob` and `ArrayBuffer` formats.**
+**هنگام دریافت دیتا، متن همیشه به صورت رشته می‌آید. و برای دیتای باینری میتوانیم بین فرمت‌های `Blob` و `ArrayBuffer` انتخاب کنیم**
 
-That's set by `socket.binaryType` property, it's `"blob"` by default, so binary data comes as `Blob` objects.
+که با مشخصه `socket.binaryType` قابل تنظیم بوده و به صورت پیشفرض `""blob""` است بنابراین دیتای باینری به شکل آبجکت‌های `Blob` دریافت می‌شود.
 
-[Blob](info:blob) is a high-level binary object, it directly integrates with `<a>`, `<img>` and other tags, so that's a sane default. But for binary processing, to access individual data bytes, we can change it to `"arraybuffer"`:
+تغییر دهیم. `"arraybuffer"` و دیگر تگ ها ادغام میشود بنابراین مقدار پیشفرض منطقی خواهد بود. اما برای دیتای باینری میتوانیم آنرا به `<img>` و `<a>` آبجکت باینری سطح بالایی است که به صورت مستقیم با [Blob](info:blob)
 
 ```js
 socket.binaryType = "arraybuffer";
@@ -188,19 +188,19 @@ socket.onmessage = (event) => {
 };
 ```
 
-## Rate limiting
+## محدود کردن نرخ
 
-Imagine, our app is generating a lot of data to send. But the user has a slow network connection, maybe on a mobile internet, outside of a city.
+تصور کنید که برنامه‌ی ما مقدار زیادی دیتا ارسال میکند اما اینترنت کاربر سرعت پایینی دارد شاید بشه اینترنت همراه خارج از شهر رو مثال زد.
 
-We can call `socket.send(data)` again and again. But the data will be buffered (stored) in memory and sent out only as fast as network speed allows.
+ما `socket.send(data)` را بارها و بارها صدا میزنیم. اما دیتا در حافظه بافر (ذخیره) شده و زمانی که سرعت شبکه به حد کافی برسد به بیرون ارسال خواهد شد.
 
-The `socket.bufferedAmount` property stores how many bytes remain buffered at this moment, waiting to be sent over the network.
+مشخصه `socket.bufferedAmount` تعداد بایت‌های ذخیره شده درلحظه و درحال انتظار برای ارسال تحت شبکه را ذخیره می‌کند.
 
-We can examine it to see whether the socket is actually available for transmission.
+با ارزیابی این پارامتر میتونیم بفهمیم که آیا سوکت واقعا برای انتقال دردسترس است یا نه
 
 ```js
-// every 100ms examine the socket and send more data  
-// only if all the existing data was sent out
+// هر صد میلی ثانیه سوکت را بررسی کرده و دیتای بیشتری را ارسال میکند
+// تنها زمانی که همه‌ی دیتای موجود ارسال شده باشد
 setInterval(() => {
   if (socket.bufferedAmount == 0) {
     socket.send(moreData());
@@ -209,25 +209,25 @@ setInterval(() => {
 ```
 
 
-## Connection close
+## بستن اتصال
 
-Normally, when a party wants to close the connection (both browser and server have equal rights), they send a "connection close frame" with a numeric code and a textual reason.
+به طور معمولی زمانی که یک طرف قصد بستن اتصال را داشته باشد(هر دوی مروگر و سرور حق برابری برای اینکار دارا هستند.), آنها عبارت "connection close frame" را به همراه یک کد عددی و دلیل اینکار را به شکل متنی ارسال میکنند.
 
-The method for that is:
+روش انجام این کار به شکل زیر است:
 ```js
 socket.close([code], [reason]);
 ```
 
-- `code` is a special WebSocket closing code (optional)
-- `reason` is a string that describes the reason of closing (optional)
+- `code` یک کد خاص برای بستن وب سوکت (اختیاری)
+- `reason` رشته‌ای که علت بستن اتصال را توضیح می‌دهد (اختیاری)
 
-Then the other party in the `close` event handler gets the code and the reason, e.g.:
+سپس طرف دیگر رویداد کد `close` و علت آنرا دریافت میکند. برای مثال:
 
 ```js
-// closing party:
+// سمتی که ارتباط را میبندد:
 socket.close(1000, "Work complete");
 
-// the other party
+// سمت دیگر:
 socket.onclose = event => {
   // event.code === 1000
   // event.reason === "Work complete"
@@ -235,24 +235,24 @@ socket.onclose = event => {
 };
 ```
 
-Most common code values:
+رایجع‌ترین کدها و مقادیر آنها:
 
-- `1000` -- the default, normal closure (used if no `code` supplied),
-- `1006` -- no way to set such code manually, indicates that the connection was lost (no close frame).
+- `1000` -- بستن پیش‌فرض و عادی (زمانی که `code` نباشد استفاده می‌شود),
+- `1006` -- راهی برای تنظیم این کد به صورت دستی وجود نداشته و نمایانگر از دست رفتن ارتباط هست (no close frame)
 
-There are other codes like:
+کدهای دیگر مثل موارد زیر هم وجود دارند:
 
 - `1001` -- the party is going away, e.g. server is shutting down, or a browser leaves the page,
-- `1009` -- the message is too big to process,
-- `1011` -- unexpected error on server,
-- ...and so on.
+- `1009` -- حجم پیام برای انجام پردازش زیاد است,
+- `1011` -- خطای پیش‌بینی نشده در سرور,
+- ...و غیره.
 
-The full list can be found in [RFC6455, §7.4.1](https://tools.ietf.org/html/rfc6455#section-7.4.1).
+لیست کامل رو میتونید در [RFC6455, §7.4.1](https://tools.ietf.org/html/rfc6455#section-7.4.1) پیدا کنید.
 
-WebSocket codes are somewhat like HTTP codes, but different. In particular, codes lower than `1000` are reserved, there'll be an error if we try to set such a code.
+کدهای وب سوکت تاحدی مشابه کدهای HTTP میباشند اما متفاوتند. به صورت خاص کدهای کمتر از `1000` از قبل رزرو شده اند و اگر تلاش کنیم تا یکی از این کدهارو استفاده کنیم به ارور برخورد خواهیم کرد.
 
 ```js
-// in case connection is broken
+// اگر ارتباط دچار مشکل باشد:
 socket.onclose = event => {
   // event.code === 1006
   // event.reason === ""
@@ -261,21 +261,21 @@ socket.onclose = event => {
 ```
 
 
-## Connection state
+## وضعیت اتصال
 
-To get connection state, additionally there's `socket.readyState` property with values:
+برای اطلاع از وضعیت اتصال پراپرتی `socket.readyState` با مقادیر زیر وجود دارد:
 
-- **`0`** -- "CONNECTING": the connection has not yet been established,
-- **`1`** -- "OPEN": communicating,
-- **`2`** -- "CLOSING": the connection is closing,
-- **`3`** -- "CLOSED": the connection is closed.
+- **`0`** -- "CONNECTING": اتصال هنوز برقرار نشده است,
+- **`1`** -- "OPEN": درحال برقراری ارتباط,
+- **`2`** -- "CLOSING": درحال بستن ارتباط,
+- **`3`** -- "CLOSED": ارتباط بسته شده است.
 
 
-## Chat example
+## مثال چت
 
-Let's review a chat example using browser WebSocket API and Node.js WebSocket module <https://github.com/websockets/ws>. We'll pay the main attention to the client side, but the server is also simple.
+بیاید تا با هم یک مثال از پیاده‌سازی یک برنامه چت را بااستفاده از ای پی آی وب سوکت و ماژول وب سوکت node.js <https://github.com/websockets/ws> بررسی کنیم. تمرکز اصلی ما سمت کلاینت خواهد بود اما سمت سرور هم ساده است.
 
-HTML: we need a `<form>` to send messages and a `<div>` for incoming messages:
+کد HTML: نیاز به یک تگ `<form>` برای ارسال پیامها و یک تگ `<div>` برای پیامهای دریافتی داریم
 
 ```html
 <!-- message form -->
@@ -288,17 +288,17 @@ HTML: we need a `<form>` to send messages and a `<div>` for incoming messages:
 <div id="messages"></div>
 ```
 
-From JavaScript we want three things:
-1. Open the connection.
+برای کدهای جاوااسکریپت برنامه ما نیاز به سه چیز داریم:
+1. ایجاد اتصال.
 2. On form submission -- `socket.send(message)` for the message.
 3. On incoming message -- append it to `div#messages`.
 
-Here's the code:
+کد رو به اینصورت خواهیم داشت:
 
 ```js
 let socket = new WebSocket("wss://javascript.info/article/websocket/chat/ws");
 
-// send message from the form
+// ارسال پیام از فرم
 document.forms.publish.onsubmit = function() {
   let outgoingMessage = this.message.value;
 
@@ -306,7 +306,7 @@ document.forms.publish.onsubmit = function() {
   return false;
 };
 
-// message received - show the message in div#messages
+// div#messagesپیام دریافت شد - نمایش پیام در
 socket.onmessage = function(event) {
   let message = event.data;
 
@@ -316,14 +316,14 @@ socket.onmessage = function(event) {
 }
 ```
 
-Server-side code is a little bit beyond our scope. Here we'll use Node.js, but you don't have to. Other platforms also have their means to work with WebSocket.
+کد سمت سرور یک مقدار فراتر از بحث ما هست. اینجا ما از node.js استفاده میکنیم, اما شما مجبور نیستید. دیگر پلتفورم‌ها روش‌های خاص خودشون رو برای کار با وب سوکت دارا هستند.
 
-The server-side algorithm will be:
+الگوریتم سمت سرور به اینصورت خواهد بود:
 
-1. Create `clients = new Set()` -- a set of sockets.
-2. For each accepted websocket, add it to the set `clients.add(socket)` and set `message` event listener to get its messages.
-3. When a message is received: iterate over clients and send it to everyone.
-4. When a connection is closed: `clients.delete(socket)`.
+1. Create `clients = new Set()` --از سوکت ها set یک
+2. تنظیم کنید event listener را برای دریافت پیامهای مربوط به `message` اضافه کرده و set به `clients.add(socket)` هر یک از وب سوکت های پذیرفته شده را با
+3. زمانی که یک پیام دریافت می‌شود: بر روی کلاینت‌ها پویش کرده و آنرا به همه ارسال کن
+4. زمانی که یک اتصال بسته میشود: `clients.delete(socket)`
 
 ```js
 const ws = new require('ws');
@@ -332,8 +332,8 @@ const wss = new ws.Server({noServer: true});
 const clients = new Set();
 
 http.createServer((req, res) => {
-  // here we only handle websocket connections
-  // in real project we'd have some other code here to handle non-websocket requests
+  // در اینجا فقط ارتباط وب سوکت را کنترل میکنیم
+  // در پروژه‌ واقعی کدهای دیگری برای رسیدگی به درخواست‌های غیر وب سوکت خواهیم داشت
   wss.handleUpgrade(req, req.socket, Buffer.alloc(0), onSocketConnect);
 });
 
@@ -341,7 +341,7 @@ function onSocketConnect(ws) {
   clients.add(ws);
 
   ws.on('message', function(message) {
-    message = message.slice(0, 50); // max message length will be 50
+    message = message.slice(0, 50); // حداکثر طول 50 را میتواند دارا باشد
 
     for(let client of clients) {
       client.send(message);
@@ -355,34 +355,34 @@ function onSocketConnect(ws) {
 ```
 
 
-Here's the working example:
+یک مثال:
 
 [iframe src="chat" height="100" zip]
 
-You can also download it (upper-right button in the iframe) and run it locally. Just don't forget to install [Node.js](https://nodejs.org/en/) and `npm install ws` before running.
+شما همچنین میتونید این مثال رو دانلود کرده (دکمه بالا سمت راست در آیفریم) و در لوکال خودتون اجرا کنید. فقط فراموش نکنید که [Node.js](https://nodejs.org/en/) رو نصب کرده و دستور `npm install ws` رو قبل از راه اندازی اجرا کنید
+## خلاصه
 
-## Summary
+وب سوکت یک راه مدرن برای داشتن یک ارتباط مرورگر-سرور مستمر میباشد.
 
-WebSocket is a modern way to have persistent browser-server connections.
+- وب سوکت‌ها محدودیت cross origin ندارند.
+- به خوبی در مرورگرها پشتیبانی میشوند.
+- میتوانند اطلاعات را به شکل رشته و باینری ارسال/دریافت کنند
 
-- WebSockets don't have cross-origin limitations.
-- They are well-supported in browsers.
-- Can send/receive strings and binary data.
+که API ساده ای است
 
-The API is simple.
+روش‌ها:
 
-Methods:
 - `socket.send(data)`,
 - `socket.close([code], [reason])`.
 
-Events:
+رویدادها:
 - `open`,
 - `message`,
 - `error`,
 - `close`.
 
-WebSocket by itself does not include reconnection, authentication and many other high-level mechanisms. So there are client/server libraries for that, and it's also possible to implement these capabilities manually.
+وب سوکت به تنهایی شامل امکاناتی همچون اتصال دوباره, احراز هویت و دیگر مکانیزم‌های سطح بالا نمیباشد. بنابراین کتابخانه هایی هم در کلاینت و هم در سرور برای اینکار وجود دارند، همچنین پیاده‌سازی دستی این موارد امکان پذیر میباشد.
 
-Sometimes, to integrate WebSocket into existing projects, people run a WebSocket server in parallel with the main HTTP-server, and they share a single database. Requests to WebSocket use `wss://ws.site.com`, a subdomain that leads to the WebSocket server, while `https://site.com` goes to the main HTTP-server.
+گاهی اوقات، برای افزودن وب سوکت به یک پروژه‌، افراد یک سرور وب سوکت به موازات سرور http را با یک دیتابیس مشترک راه اندازی میکنند. درخواست های وب سوکت از آدرس `wss://ws.site.com` که یک ساب دامین بوده و به سرور وب سوکت میرسد استفاده میکنند درحالی که درخواست های آدرس `https://site.com` به سرور http اصلی میروند.
 
-Surely, other ways of integration are also possible.
+مطمئنا راههای دیگری برای ادغام وجود دارد.
