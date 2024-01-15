@@ -1,157 +1,175 @@
-# Shadow DOM
+# سایه‌ DOM
 
-Shadow DOM serves for encapsulation. It allows a component to have its very own "shadow" DOM tree, that can't be accidentally accessed from the main document, may have local style rules, and more.
+دلیل استفاده از Shadow DOM جداسایزی یا (کپسوله کردن) است. Shadow DOM به یک المنت اجازه می دهد تا سند DOM "سایه‌ی" خود را داشته باشد، که به طور کامل از سند DOM اصلی قابل دسترسی نیست،سند Shadow DOM می‌تواند قوانین خاص خود را داشته باشد مثل style محلی مربوط به خود.
 
-## Built-in shadow DOM
+## سایه DOM های داخلی (Built-in)
 
-Did you ever think how complex browser controls are created and styled?
+آیا تا به حال فکر کرده‌اید که چگونه کنترلرهای پیچیده مرورگر مثل المان زیر (ورودی محدود) ایجاد شده و style دهی می‌شوند؟
 
-Such as `<input type="range">`:
+`<input type="range">`:
 
 <p>
 <input type="range">
 </p>
 
-The browser uses DOM/CSS internally to draw them. That DOM structure is normally hidden from us, but we can see it in developer tools. E.g. in Chrome, we need to enable in Dev Tools "Show user agent shadow DOM" option.
+مرورگر با DOM/CSS آن‌ها را پیاده سازی می‌کند. ساختار DOM این المان‌ها از دیدگاه ما پنهان است ولی با استفاده از developer tools می‌توان به آن‌ها دسترسی پیدا کرد٬ برای مثال در chrome کافی‌ است گزینه "Show user agent shadow DOM" را در Dev tools فعال کنید.
 
-Then `<input type="range">` looks like this:
+برای مثال `<"input type="range>` به شکل زیر است.
 
 ![](shadow-dom-range.png)
 
-What you see under `#shadow-root` is called "shadow DOM".
+همه اجزای زیرمجموعه‌ی `#shadow-root` را می‌توان "shadow DOM" نامید.
 
-We can't get built-in shadow DOM elements by regular JavaScript calls or selectors. These are not regular children, but a powerful encapsulation technique.
+چون المان‌های Shadow DOM داخلی (built-in) از المان‌های معمول DOM جدا سازی شده‌اند نمی‌توان با استفاده از انتخابگراهای جاوااسکریپت مرورگر به آنها دسترسی پیدا کرد.
 
-In the example above, we can see a useful attribute `pseudo`. It's non-standard, exists for historical reasons. We can use it style subelements with CSS, like this:
+اگر در مثال بالا توجه کنید یک attribute به نام `pseudo` می‌بینید.`pseudo` یک ویژگی غیر استاندارد است که وجود آن دلایل تاریخی دارد اما با استفاده از آن می‌توانیم المان‌های زیرمجموعه را به شکل زیر style دهی کنیم.
 
 ```html run autorun
 <style>
-/* make the slider track red */
-input::-webkit-slider-runnable-track {
-  background: red;
-}
+  /* make the slider track red */
+  input::-webkit-slider-runnable-track {
+    background: red;
+  }
 </style>
 
-<input type="range">
+<input type="range" />
 ```
 
-Once again, `pseudo` is a non-standard attribute. Chronologically, browsers first started to experiment with internal DOM structures to implement controls, and then, after time, shadow DOM was standardized to allow us, developers, to do the similar thing.
+فراموش نکنید که `pseudo` یک ویژگی غیر استاندارد است. مرورگر‌ها در ابتدا به پیاده‌سازی آزمایشی کنترل‌های داخلی با استفاده از المان‌های DOM کردند بعد از گذشت زمان shadow DOM استاندارد سازی شد تا توسعه دهندگان بتوانند المان‌های کنترلی خود را بسازند.
 
-Further on, we'll use the modern shadow DOM standard, covered by [DOM spec](https://dom.spec.whatwg.org/#shadow-trees) and other related specifications.
+در ادامه از shadow DOM استاندارد استفاده خواهیم کرد که در [DOM spec](https://dom.spec.whatwg.org/#shadow-trees) توضیحات کاملی از آن موجود است.
 
-## Shadow tree
+## درخت Sadow
 
-A DOM element can have two types of DOM subtrees:
+یک المان DOM می‌تواند دو نوع زیرمجموعه DOM داشته باشد:
 
-1. Light tree -- a regular DOM subtree, made of HTML children. All subtrees that we've seen in previous chapters were "light".
-2. Shadow tree -- a hidden DOM subtree, not reflected in HTML, hidden from prying eyes.
+1. درخت روشن -- یک زیر مجموعه معمولی از DOM است که از زیرمجموعه HTML ساخته شده است. تمام مثال‌های که در فصول قبل دیدیم از نوع روشن بودند.
+2. درخت سایه -- یک زیرمجموعه پنهان از DOM است که در HTML نمایش داده نمی‌شود و از چشم مخفی است.
 
-If an element has both, then the browser renders only the shadow tree. But we can setup a kind of composition between shadow and light trees as well. We'll see the details later in the chapter <info:slots-composition>.
+اگر المانی هر دو زیرمجموعه را داشت مرورگر فقط قسمت تاریک را نمایش خواهد داد. اما می توانیم نوعی ترکیب بندی بین درختان سایه و روشن ایجاد کنیم. جزیات بیشتر را در <info:slots-composition> خواهیم خواند.
 
-Shadow tree can be used in Custom Elements to hide component internals and apply component-local styles.
+می‌توان از درخت سایه برای پنهان سازی المان‌های داخلی استفاده کرد و از استایل دهی محلی برای المان جدید استفاده کرد.
 
-For example, this `<show-hello>` element hides its internal DOM in shadow tree:
+برای مثال`<show-hello>` المان‌های داخلی خود را در سایه تاریک پنهان می‌کند و مقدار نمایش داده شده را به عنوان ویژگی دریافت می‌کند.
 
 ```html run autorun height=60
 <script>
-customElements.define('show-hello', class extends HTMLElement {
-  connectedCallback() {
-    const shadow = this.attachShadow({mode: 'open'});
-    shadow.innerHTML = `<p>
-      Hello, ${this.getAttribute('name')}
+  customElements.define(
+    "show-hello",
+    class extends HTMLElement {
+      connectedCallback() {
+        const shadow = this.attachShadow({ mode: "open" });
+        shadow.innerHTML = `<p>
+      Hello, ${this.getAttribute("name")}
     </p>`;
-  }  
-});
+      }
+    }
+  );
 </script>
 
 <show-hello name="John"></show-hello>
 ```
 
-That's how the resulting DOM looks in Chrome dev tools, all the content is under "#shadow-root":
+خروجی DOM بالا در Chrome dev tool به شکل زیر نشان داده می‌شود و تمام اجزا زیر مجموعه "#shadow-root" خواهد بود.
 
 ![](shadow-dom-say-hello.png)
 
-First, the call to `elem.attachShadow({mode: …})` creates a shadow tree.
+در ابتدا `elem.attachShadow({mode: …})` یک درخت سایه ایجاد می‌کند.
 
-There are two limitations:
-1. We can create only one shadow root per element.
-2. The `elem` must be either a custom element, or one of: "article", "aside", "blockquote", "body", "div", "footer", "h1..h6", "header", "main" "nav", "p", "section", or "span". Other elements, like `<img>`, can't host shadow tree.
+ما در این جا ۲ محدودیت داریم:
 
-The `mode` option sets the encapsulation level. It must have any of two values:
-- `"open"` -- the shadow root is available as `elem.shadowRoot`.
+1. هر المان در صفحه فقط می‌تواند یک سایه داشته باشد.
+2. المان `elem` باید یک المان سفارشی سازی شده(custom) باشد یا یکی از المان های زیر
 
-    Any code is able to access the shadow tree of `elem`.   
-- `"closed"` -- `elem.shadowRoot` is always `null`.
+"article", "aside", "blockquote", "body", "div", "footer", "h1..h6", "header", "main" "nav", "p", "section", "span"
+.نمی‌توانند دارای سایه باشند `<img>` دیگر المان‌ها مثل
 
-    We can only access the shadow DOM by the reference returned by `attachShadow` (and probably hidden inside a class). Browser-native shadow trees, such as  `<input type="range">`, are closed. There's no way to access them.
+گزینه `mode` سطح جداسازی (encapsulation) را مشخص می‌کند. و باید یکی از دو مقدار زیر را داشته باشد:
 
-The [shadow root](https://dom.spec.whatwg.org/#shadowroot), returned by `attachShadow`, is like an element: we can use `innerHTML` or DOM methods, such as `append`, to populate it.
+- `"open"` -- قابل دسترس باشد `elem.shadowRoot` که باعث می‌شود سایه تحت.
+
+هر کدی قابلیت دسترسی به درخت سایه المان `elem` را دارد.
+
+- `"closed"` -- است `null` همیشه `elem.shadowRoot`.
+
+فقط با استفاده از مقدار(refrance) براگردانده شده از `attachShadow`(که احتمالا یک کلاس پنهان داخلی دارد) می‌توانیم به DOM تاریک دسترسی پیدا کنیم. اما در مورد درخت‌های تاریک بومی مرورگر مثل `<input type="range">` که بسته(`"closed"`) هستند٬ هیچ راهی برای دسترسی به این درخت‌های تاریک وجود ندارد.
+
+با [shadow root](https://dom.spec.whatwg.org/#shadowroot) که خروجی `attachShadow` است می‌توان مثل یک المان معمولی برخورد کرد و از `innerHTML` یا `append` برای پر کردن آن استفاده کرد.
 
 The element with a shadow root is called a "shadow tree host", and is available as the shadow root `host` property:
 
+به المانی که دارای shadow root باشد "shadow tree host" گفته می‌شود و با استفاده از ویژگی "host" قابل دسترسی است:
+
 ```js
-// assuming {mode: "open"}, otherwise elem.shadowRoot is null
+// است null برابر با elem.shadowRoot در غیر این صورت {"mode" : open} با فرض
 alert(elem.shadowRoot.host === elem); // true
 ```
 
-## Encapsulation
+## جداسازی (Encapsulation)
 
-Shadow DOM is strongly delimited from the main document:
+دسترسی DOM سایه به طول کامل از سند اصلی گرفته شده است.
 
-1. Shadow DOM elements are not visible to `querySelector` from the light DOM. In particular,  Shadow DOM elements may have ids that conflict with those in the light DOM. They must be unique only within the shadow tree.
-2. Shadow DOM has own stylesheets. Style rules from the outer DOM don't get applied.
+1. المان‌های DOM سایه توسط `querySelector` های DOM روشن قابل شناسایی نیستنتد. به طور دقیق‌تر المان‌های داخلی DOM سایه ممکن است id هایی یکسانی با المان‌های DOM روشن داشته باشند اما این idها باید در درخت تاریک یکتا باشند.
 
-For example:
+2. دام تاریک stylesheet مجزای مخصوص به خود را دارد. قوانین style خارجی (light DOM) در آن عمل نمی‌کنند.
+
+به مثال زیر توجه کنید:
 
 ```html run untrusted height=40
 <style>
-*!*
-  /* document style won't apply to the shadow tree inside #elem (1) */
-*/!*
-  p { color: red; }
+  /*  
+	* اجرا نمی‌شود (۱) #elem استایل سند بر درخت تاریک در 	
+	*/
+  p {
+    color: red;
+  }
 </style>
 
 <div id="elem"></div>
 
 <script>
-  elem.attachShadow({mode: 'open'});
-*!*
-    // shadow tree has its own style (2)
-*/!*
+  elem.attachShadow({ mode: "open" });
+  /*
+   * درخت تاریک استایل خود را دارد (۲)
+   */
   elem.shadowRoot.innerHTML = `
-    <style> p { font-weight: bold; } </style>
-    <p>Hello, John!</p>
-  `;
+      <style> p { font-weight: bold; } </style>
+      <p>Hello, John!</p>
+    `;
 
-*!*
-  // <p> is only visible from queries inside the shadow tree (3)
-*/!*
-  alert(document.querySelectorAll('p').length); // 0
-  alert(elem.shadowRoot.querySelectorAll('p').length); // 1
-</script>  
+  /*
+   * (۳) ‌های داخل درخت تاریک قابل دسترسی است qury فقط از
+   */
+
+  alert(document.querySelectorAll("p").length); // 0
+  alert(elem.shadowRoot.querySelectorAll("p").length); // 1
+</script>
 ```
 
-1. The style from the document does not affect the shadow tree.
-2. ...But the style from the inside works.
-3. To get elements in shadow tree, we must query from inside the tree.
+1. استایل از سند اصلی هیچ تاثیری روی درخت تاریک ندارد.
+2. اما استایل از داخل به خوبی کار می‌کند.
+3. برای دریافت المان‌های داخل درخت تاریک باید از داخل درخت تاریک این query‌ها را اجرا کنیم.
 
-## References
+## منابع
 
 - DOM: <https://dom.spec.whatwg.org/#shadow-trees>
 - Compatibility: <https://caniuse.com/#feat=shadowdomv1>
 - Shadow DOM is mentioned in many other specifications, e.g. [DOM Parsing](https://w3c.github.io/DOM-Parsing/#the-innerhtml-mixin) specifies that shadow root has `innerHTML`.
 
+## خلاصه
 
-## Summary
+سایه DOM روشی است برای ایجاد یک المان محلی برای DOM.
 
-Shadow DOM is a way to create a component-local DOM.
+1. `shadowRoot = elem.attachShadow({mode: open|closed})` --
 
-1. `shadowRoot = elem.attachShadow({mode: open|closed})` -- creates shadow DOM for `elem`. If `mode="open"`, then it's accessible as `elem.shadowRoot` property.
-2. We can populate `shadowRoot` using `innerHTML` or other DOM methods.
+یک دام سایه برای `elem` می‌سازد. اگر "mode="open باشد این المان با ویژگی `elem,shadowRoot` قابل دسترسی است.
 
-Shadow DOM elements:
-- Have their own ids space,
-- Invisible to JavaScript selectors from the main document, such as `querySelector`,
-- Use styles only from the shadow tree, not from the main document.
+2. با استفاده از ویژگی `innerHtml` یا ویژگی های دیگر DOM موجود در `shadowRoor` می‌توان اجزای جدید به آن اضافه کرد.
 
-Shadow DOM, if exists, is rendered by the browser instead of so-called "light DOM" (regular children). In the chapter <info:slots-composition> we'll see how to compose them.
+المان‌های سایه DOM:
+
+- داری فضای مجزای خود هستند.
+- از انتخابگر‌های جاوا اسکریپت موجد در DOM اصلی مثل `querySelector` پنهان هستند.
+- از استایل‌های موجود در درخت تاریک خود استفاده می‌کنند و نه از استایل موجود در DOM اصلی.
+
+اگر المانی در صفحه دارای DOM سایه بود، مرورگر به صورت پیشفرض المان‌های موجود در درخت تاریک را نمایش می‌دهد و از المان‌های DOM روشن یا همان زیرمجموعه‌های HTML معمول صرف نظر می‌کند. در فصل <info:slots-composition> در مورد ترکیب این ۲ بیشتر مطالعه می‌کنیم.
