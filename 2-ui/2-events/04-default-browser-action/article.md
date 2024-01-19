@@ -114,17 +114,17 @@ Certain events flow one into another. If we prevent the first event, there will 
 
 ## event.defaultPrevented
 
-The property `event.defaultPrevented` is `true` if the default action was prevented, and `false` otherwise.
+ویژگی `event.defaultPrevented` اگر از اکشن پیشفرض جلوگیری شده باشد `true` بوده و درغیراینصورت `false` خواهد بود.
 
-There's an interesting use case for it.
+یک مورد استفاده جالب برای این وجود دارد.
 
-You remember in the chapter <info:bubbling-and-capturing> we talked about `event.stopPropagation()` and why stopping bubbling is bad?
+به یاد دارید که در فصل <info:bubbling-and-capturing> راجع به `()event.propagation` اینکه چرا bubbling خوب نیست صحبت کردیم؟
 
-Sometimes we can use `event.defaultPrevented` instead, to signal other event handlers that the event was handled.
+گاهی اوقات برای اینکه به باقی ایونت هندلرها خبر بدهیم که ایونت هندل شده میتوانیم از `event.defaultPrevented` استفاده کنیم.
 
-Let's see a practical example.
+بیاید تا با هم یک مثال عملی را ببینیم.
 
-By default the browser on `contextmenu` event (right mouse click) shows a context menu with standard options. We can prevent it and show our own, like this:
+به صورت پیشفرض مروگر در پاسخ به ایونت `contextmenu` (کلیک راست ماوس) یک منو با آپشن‌های استاندارد را نمایش می‌دهد. ما می‌توانیم از این موضوع جلوگیری کرده و منوی خودمان را نمایش دهیم. به اینصورت:
 
 ```html autorun height=50 no-beautify run
 <button>Right-click shows browser context menu</button>
@@ -134,9 +134,9 @@ By default the browser on `contextmenu` event (right mouse click) shows a contex
 </button>
 ```
 
-Now, in addition to that context menu we'd like to implement document-wide context menu.
+حالا علاوه بر context menu میخواهیم تا یک منو به وسعت داکیومنت پیاده‌سازی کنیم.
 
-Upon right click, the closest context menu should show up.
+با کلیک‌راست نزدیک‌ترین context menu ظاهر خواهد شد.
 
 ```html autorun height=80 no-beautify run
 <p>Right-click here for the document context menu</p>
@@ -155,14 +155,15 @@ Upon right click, the closest context menu should show up.
 </script>
 ```
 
-The problem is that when we click on `elem`, we get two menus: the button-level and (the event bubbles up) the document-level menu.
+مشکل این است زمانی که برروی `elem` کلیک کنیم دو منو خواهیم داشت: منوی تعریف شده برروی دکمه و (زمانی که رویداد bubble up می‌کند) منوی تعریف شده در داکیومنت.
 
-How to fix it? One of solutions is to think like: "When we handle right-click in the button handler, let's stop its bubbling" and use `event.stopPropagation()`:
+چطور این مسئله را فیکس کنیم؟ یکی از راه‌حل ها این است: "زمانی که که میخواهیم کلیک‌راست را در هندلر دکمه هندل کنیم بیاید تا bubbling آن را متوقف کرده" و از `()event.stopPropagation` استفاده کنیم.
 
 ```html autorun height=80 no-beautify run
 <p>Right-click for the document menu</p>
 <button id="elem">
-  Right-click for the button menu (fixed with event.stopPropagation)
+  Right-click for the button menu (fixed with event.stopPropagation) کلیک راست
+  برای منوی دکمه (با event.stopPropagation فیکس شده)
 </button>
 
 <script>
@@ -181,9 +182,9 @@ How to fix it? One of solutions is to think like: "When we handle right-click in
 </script>
 ```
 
-Now the button-level menu works as intended. But the price is high. We forever deny access to information about right-clicks for any outer code, including counters that gather statistics and so on. That's quite unwise.
+حالا منوی تعریف شده برروی دکمه همانطور که میخواستیم کار می‌کند. اما هزینه اینکار بالاست. ما برای همیشه دسترسی به اطلاعات راجع به کلیک راست را برای کدهای بیرونی قطع میکنیم که شامل شمارنده‌هایی که آمار و امثالهم را جمع میکنند میشود. که اینکار هوشمندانه نیست.
 
-An alternative solution would be to check in the `document` handler if the default action was prevented? If it is so, then the event was handled, and we don't need to react on it.
+یک راه‌حل جایگزین بررسی هندلر `document` و اینکه آیا اکشن جلوگیری شده یا نه می‌باشد. اگر اینگونه است آنگاه رویداد هندل شده و نیازی به واکنش به آن نیست.
 
 ```html autorun height=80 no-beautify run
 <p>
@@ -208,18 +209,20 @@ An alternative solution would be to check in the `document` handler if the defau
 </script>
 ```
 
-Now everything also works correctly. If we have nested elements, and each of them has a context menu of its own, that would also work. Just make sure to check for `event.defaultPrevented` in each `contextmenu` handler.
+حالا همه چیز به درستی کار میکند. این راه حل حتی اگر المنت‌های تودرتویی داشته باشیم که هرکدام منوی خودشان را داشته باشند هم کار می‌کند. فقط اطمینان حاصل کنید که `event.defaultPrevented` در هر یک از هندلرهای `contextmenu` چک می‌شود.
 
 ```smart header="event.stopPropagation() and event.preventDefault()"
 As we can clearly see, `event.stopPropagation()` and `event.preventDefault()` (also known as `return false`) are two different things. They are not related to each other.
+به خوبی میتوانیم ببینیم که `event.stopPropagation()` و `event.preventDefault()` (که همچنین به عنوان `return false` شناخته می‌شود) دو چیز متفاوت از هم هستند که به یکدیگر ربطی ندارند.
 ```
 
 ```smart header="Nested context menus architecture"
+همچنین راه‌های جایگزینی برای پیاده‌‍سازی منوهای تودرتو وجود دارد.
 There are also alternative ways to implement nested context menus. One of them is to have a single global object with a handler for `document.oncontextmenu`, and also methods that allow us to store other handlers in it.
 
-The object will catch any right-click, look through stored handlers and run the appropriate one.
+آبجت هرگونه کلیک راستی را گرفته، نگاهی به هندلرهای آن می‌اندازد و هندلر مناسب را اجرا میکند.
 
-But then each piece of code that wants a context menu should know about that object and use its help instead of the own `contextmenu` handler.
+اما در اینصورت هر تکه کدی که بخواهد context menu داشته باشد باید راجع به آن آبجکت بداند و به جای هندلر `contextmenu` خودش از کمک آن آبجکت گلوبال استفاده کند.
 ```
 
 ## خلاصه
