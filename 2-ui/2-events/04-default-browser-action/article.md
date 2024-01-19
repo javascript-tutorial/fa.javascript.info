@@ -20,9 +20,9 @@
 در این فایل HTML, کلیک بر روی یک لینک منجر به تغییر آدرس مروگر نمی‌شود; مرورگر کاری نمی‌کند:
 
 ```html autorun height=60 no-beautify
-<a href="/" onclick="return false">Click here</a>
+<a href="/" onclick="return false">اینجا را کلیک کنید</a>
 or
-<a href="/" onclick="event.preventDefault()">here</a>
+<a href="/" onclick="event.preventDefault()">اینجا</a>
 ```
 
 در مثال بعدی ما از این تکنیک برای ایجاد یک منو با جاوااسکریپت استفاده خواهیم کرد.
@@ -79,7 +79,6 @@ menu.onclick = function(event) {
 درضمن استفاده از event delegation در اینجا منوی ما را بسیار انعطاف پذیر می‌کند. چون می‌توانیم از لیست‌های تودرتو استفاده کرده و آنرا با استفاده از CSS استایل دهیم. مثل استایل "slide down"
 
 ````smart header="Follow-up events"
-Certain events flow one into another. If we prevent the first event, there will be no second.
 رویدادهای مشخص در یکدیگر جاری میشوند. اگر از اولی جلوگیری کنیم رویداد دومی وجود نخواهد داشت.
 
 برای مثال رویداد `mousedown` برروی `<input>` منجر به فوکوس آن و رویداد فوکوس می‌شود. اگر از رویداد `mousedown` جلوگیری کنیم آنگاه فوکوسی نخواهیم داشت.
@@ -127,10 +126,10 @@ Certain events flow one into another. If we prevent the first event, there will 
 به صورت پیشفرض مروگر در پاسخ به ایونت `contextmenu` (کلیک راست ماوس) یک منو با آپشن‌های استاندارد را نمایش می‌دهد. ما می‌توانیم از این موضوع جلوگیری کرده و منوی خودمان را نمایش دهیم. به اینصورت:
 
 ```html autorun height=50 no-beautify run
-<button>Right-click shows browser context menu</button>
+<button>کلیک راست context menu مرورگر را نمایش می‌دهد</button>
 
 <button *!*oncontextmenu="alert('Draw our menu'); return false"*/!*>
-  Right-click shows our context menu
+  کلیک راست context menu ما را نمایش می‌دهد
 </button>
 ```
 
@@ -139,8 +138,8 @@ Certain events flow one into another. If we prevent the first event, there will 
 با کلیک‌راست نزدیک‌ترین context menu ظاهر خواهد شد.
 
 ```html autorun height=80 no-beautify run
-<p>Right-click here for the document context menu</p>
-<button id="elem">Right-click here for the button context menu</button>
+<p>برای context menu داکیومنت اینجا کلیک راست کنید</p>
+<button id="elem">برای context menu دکمه اینجا کلیک راست کنید</button>
 
 <script>
   elem.oncontextmenu = function (event) {
@@ -160,11 +159,8 @@ Certain events flow one into another. If we prevent the first event, there will 
 چطور این مسئله را فیکس کنیم؟ یکی از راه‌حل ها این است: "زمانی که که میخواهیم کلیک‌راست را در هندلر دکمه هندل کنیم بیاید تا bubbling آن را متوقف کرده" و از `()event.stopPropagation` استفاده کنیم.
 
 ```html autorun height=80 no-beautify run
-<p>Right-click for the document menu</p>
-<button id="elem">
-  Right-click for the button menu (fixed with event.stopPropagation) کلیک راست
-  برای منوی دکمه (با event.stopPropagation فیکس شده)
-</button>
+<p>برای منوی داکیومنت اینجا کلیک راست کنید</p>
+<button id="elem">برای منوی دکمه (با event.stopPropagation فیکس شده)</button>
 
 <script>
     elem.oncontextmenu = function(event) {
@@ -188,9 +184,11 @@ Certain events flow one into another. If we prevent the first event, there will 
 
 ```html autorun height=80 no-beautify run
 <p>
-  Right-click for the document menu (added a check for event.defaultPrevented)
+  برای منو داکیومنت اینجا کلیک راست کنید (حالتی که event.defaultPrevented بررسی
+  می‌شود) Right-click for the document menu (added a check for
+  event.defaultPrevented)
 </p>
-<button id="elem">Right-click for the button menu</button>
+<button id="elem">برای منوی دکمه کلیک راست کنید</button>
 
 <script>
     elem.oncontextmenu = function(event) {
@@ -212,13 +210,11 @@ Certain events flow one into another. If we prevent the first event, there will 
 حالا همه چیز به درستی کار میکند. این راه حل حتی اگر المنت‌های تودرتویی داشته باشیم که هرکدام منوی خودشان را داشته باشند هم کار می‌کند. فقط اطمینان حاصل کنید که `event.defaultPrevented` در هر یک از هندلرهای `contextmenu` چک می‌شود.
 
 ```smart header="event.stopPropagation() and event.preventDefault()"
-As we can clearly see, `event.stopPropagation()` and `event.preventDefault()` (also known as `return false`) are two different things. They are not related to each other.
 به خوبی میتوانیم ببینیم که `event.stopPropagation()` و `event.preventDefault()` (که همچنین به عنوان `return false` شناخته می‌شود) دو چیز متفاوت از هم هستند که به یکدیگر ربطی ندارند.
 ```
 
 ```smart header="Nested context menus architecture"
-همچنین راه‌های جایگزینی برای پیاده‌‍سازی منوهای تودرتو وجود دارد.
-There are also alternative ways to implement nested context menus. One of them is to have a single global object with a handler for `document.oncontextmenu`, and also methods that allow us to store other handlers in it.
+همچنین راه‌های جایگزینی برای پیاده‌‍سازی منوهای تودرتو وجود دارد. یکی از آنها این است که یک آبجکت گلوبال با یک هندلر برای `document.oncontextmenu` داشته باشیم و همچنین متدهایی که به ما اجازه می‌دهند تا دیگر هندلرهایی را در آن ذخیره کنیم.
 
 آبجت هرگونه کلیک راستی را گرفته، نگاهی به هندلرهای آن می‌اندازد و هندلر مناسب را اجرا میکند.
 
@@ -227,14 +223,14 @@ There are also alternative ways to implement nested context menus. One of them i
 
 ## خلاصه
 
-اکشن های دیفالت مختلفی وجود دارند:
+اکشن های پیشفرض مختلفی وجود دارند:
 
-- `mousedown` -- starts the selection (move the mouse to select).
-- `click` on `<input type="checkbox">` -- checks/unchecks the `input`.
-- `submit` -- clicking an `<input type="submit">` or hitting `key:Enter` inside a form field causes this event to happen, and the browser submits the form after it.
-- `keydown` -- pressing a key may lead to adding a character into a field, or other actions.
-- `contextmenu` -- the event happens on a right-click, the action is to show the browser context menu.
-- ...there are more...
+- `mousedown` -- انتخاب متن را آغاز می‌کند (برای انتخاب ماوس را حرکت دهید)
+- `click` بر روی `<input type="checkbox">` -- `input` را check/uncheck می‌کند.
+- `submit` -- کلیک بر روی `<input type="submit">` یا فشردن `key:Enter` درون یک فیلد فرم باعث رخ دادن این رویداد می‌شود و مرورگر پس از آن فرم را سابمیت می‌کند.
+- `keydown` -- فشردن یک کلید ممکن است باعث افزودن یک کاراکتر به فیلد یا اکشن‌های دیگر شود.
+- `contextmenu` -- رویدادی که با کلیک راست رخ می‌دهد و اکشن مرتبط با آن نمایش context menu مرورگر است.
+- --موارد بیشتری هم وجود دارند--
 
 اگر بخواهیم تا ایونت را به طور خاص با جاوااسکریپت هندل کنیم می‌توانیم از همه‌ی اکشن‌های پیشفرض جلوگیری کنیم.
 
@@ -242,12 +238,12 @@ There are also alternative ways to implement nested context menus. One of them i
 
 اگر از اکشن پیشفرض جلوگیری شده باشد مقدار `event.defaultPrevented` به `true` تغییر می‌کند در غیراینصورت `false` می‌شود.
 
-```warn header="Stay semantic, don't abuse"
-Technically, by preventing default actions and adding JavaScript we can customize the behavior of any elements. For instance, we can make a link `<a>` work like a button, and a button `<button>` behave as a link (redirect to another URL or so).
+```warn header="سمنتیک باقی بمانید و سوءاستفاده نکنید"
+به شکل تکنیکال با جلوگیری از اکشن‌های پیشفرض مرورگر و افزودن جاوااسکریپت میتوانیم رفتار المنت‌ها را شخصی‌سازی کنیم. برای مثال  میتوانیم کاری کنیم تا تگ `<a>` مانند یک دکمه کار کند و یک دکمه `<button>` مانند یک لینک رفتار کند (یه یک آدرس دیگر ریدایرکت کند و امثالهم).
 
-But we should generally keep the semantic meaning of HTML elements. For instance, `<a>` should perform navigation, not a button.
+اما ما باید به طور کلی معنای سمنتیک المنت‌ها را حفظ کنیم. برای مثال `<a>` باید هدایت مرورگر به آدرس‌ها را انجام دهد نه یک دکمه.
 
-Besides being "just a good thing", that makes your HTML better in terms of accessibility.
+این موضوع علاوه بر اینکه "چیز خوبی است" کد HTML شما را از نظر دسترسی‌پذیری بهتر میکند.
 
-Also if we consider the example with `<a>`, then please note: a browser allows us to open such links in a new window (by right-clicking them and other means). And people like that. But if we make a button behave as a link using JavaScript and even look like a link using CSS, then `<a>`-specific browser features still won't work for it.
+علاوه بر این اگر مثال `<a>` را درنظر بگیریم باید به این نکته توجه کنید که: یک مرورگر به ما این اجازه را می‌دهد تا این لینک‌ها را در یک پنجره جدید باز کنیم (بار کلیک راست  برروی منوها) و کاربران این رو دوست دارند. اما اگر کاری کنیم که یک دکمه مانند لینک رفتار کند و حتی با استفاده از css ظاهرش را مانند یک لینک کنیم آنگاه ویژگی‌های منحصر به فرد تگ `<a>` برای آن عمل نخواهد کرد.
 ```
