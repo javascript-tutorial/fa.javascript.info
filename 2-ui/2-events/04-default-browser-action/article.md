@@ -45,7 +45,7 @@
   <li><a href="/javascript">JavaScript</a></li>
   <li><a href="/css">CSS</a></li>
 </ul>
-````
+```
 
 با مقدار CSS اینطور به نظر می‌رسد:
 
@@ -92,8 +92,8 @@ menu.onclick = function(event) {
 این بخاطر آن است که اکشن مرورگر برروی `mousedown` لغو شده است. فوکوس کردن همچنان امکان‌پذیر است اگر ما راه دیگری برای وارد کردن اینپوت استفاده کنیم.  برای مثال کلید `Tab` برای انتقال از اینپوت اول به دوم اما بدون استفاده از کلیک ماوس.
 ````
 
-# <<<<<<< HEAD
-
+<<<<<<< HEAD
+=======
 ## امکان هندلر "passive"
 
 آپشن اختیاری `passive: true` از `addEventListener` این سیگنال را به مرورگر میدهد که مرورگر هندلر `()preventDefault` را صدا نخواهد کرد.
@@ -108,7 +108,7 @@ menu.onclick = function(event) {
 
 در بعضی از مرورگرها (فایرفاکس و کروم) مقدار `passive` به صورت پیشفرض برای رویدادهای `touchstart` و `touchmove` مقدار `true` دارد.
 
-> > > > > > > bae0ef44d0208506f6e9b7f3421ee640ab41af2b
+>>>>>>> bae0ef44d0208506f6e9b7f3421ee640ab41af2b
 
 ## event.defaultPrevented
 
@@ -141,12 +141,12 @@ menu.onclick = function(event) {
 <button id="elem">برای context menu دکمه اینجا کلیک راست کنید</button>
 
 <script>
-  elem.oncontextmenu = function (event) {
+  elem.oncontextmenu = function(event) {
     event.preventDefault();
     alert("Button context menu");
   };
 
-  document.oncontextmenu = function (event) {
+  document.oncontextmenu = function(event) {
     event.preventDefault();
     alert("Document context menu");
   };
@@ -162,18 +162,18 @@ menu.onclick = function(event) {
 <button id="elem">برای منوی دکمه (با event.stopPropagation فیکس شده)</button>
 
 <script>
-    elem.oncontextmenu = function(event) {
-      event.preventDefault();
-  *!*
-      event.stopPropagation();
-  */!*
-      alert("Button context menu");
-    };
+  elem.oncontextmenu = function(event) {
+    event.preventDefault();
+*!*
+    event.stopPropagation();
+*/!*
+    alert("Button context menu");
+  };
 
-    document.oncontextmenu = function(event) {
-      event.preventDefault();
-      alert("Document context menu");
-    };
+  document.oncontextmenu = function(event) {
+    event.preventDefault();
+    alert("Document context menu");
+  };
 </script>
 ```
 
@@ -187,19 +187,19 @@ menu.onclick = function(event) {
 <button id="elem">برای منوی دکمه کلیک راست کنید</button>
 
 <script>
-    elem.oncontextmenu = function(event) {
-      event.preventDefault();
-      alert("Button context menu");
-    };
+  elem.oncontextmenu = function(event) {
+    event.preventDefault();
+    alert("Button context menu");
+  };
 
-    document.oncontextmenu = function(event) {
-  *!*
-      if (event.defaultPrevented) return;
-  */!*
+  document.oncontextmenu = function(event) {
+*!*
+    if (event.defaultPrevented) return;
+*/!*
 
-      event.preventDefault();
-      alert("Document context menu");
-    };
+    event.preventDefault();
+    alert("Document context menu");
+  };
 </script>
 ```
 
