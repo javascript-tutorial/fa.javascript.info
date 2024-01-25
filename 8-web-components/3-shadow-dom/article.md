@@ -54,17 +54,14 @@
 
 ```html run autorun height=60
 <script>
-  customElements.define(
-    "show-hello",
-    class extends HTMLElement {
-      connectedCallback() {
-        const shadow = this.attachShadow({ mode: "open" });
-        shadow.innerHTML = `<p>
-      Hello, ${this.getAttribute("name")}
+customElements.define('show-hello', class extends HTMLElement {
+  connectedCallback() {
+    const shadow = this.attachShadow({mode: 'open'});
+    shadow.innerHTML = `<p>
+      Hello, ${this.getAttribute('name')}
     </p>`;
-      }
-    }
-  );
+  }  
+});
 </script>
 
 <show-hello name="John"></show-hello>
@@ -77,16 +74,13 @@
 در ابتدا `elem.attachShadow({mode: …})` یک درخت سایه ایجاد می‌کند.
 
 ما در این جا ۲ محدودیت داریم:
-
 1. هر المان در صفحه فقط می‌تواند یک سایه داشته باشد.
-2. المان `elem` باید یک المان سفارشی سازی شده(custom) یا یکی از المان های "article", "aside", "blockquote", "body", "div", "footer", "h1..h6", "header", "main" "nav", "p", "section", "span" باشد. دیگر المان ها مثل `<imb>` نمی‌توانند سایه داشته باشند.
+2. المان `elem` باید یک المان سفارشی سازی شده(custom) یا یکی از المان های "article", "aside", "blockquote", "body", "div", "footer", "h1..h6", "header", "main" "nav", "p", "section", "span" باشد. دیگر المان ها مثل `<img>` نمی‌توانند سایه داشته باشند.
 
-گزینه `mode` سطح جداسازی (encapsulation) را مشخص می‌کند. و باید یکی از دو مقدار زیر را داشته باشد:
-
+ گزینه `mode` سطح جداسازی (encapsulation) را مشخص می‌کند. و باید یکی از دو مقدار زیر را داشته باشد:
 - `"open"` -- قابل دسترس باشد `elem.shadowRoot` که باعث می‌شود سایه تحت.
 
 هر کدی قابلیت دسترسی به درخت سایه المان `elem` را دارد.
-
 - `"closed"` -- است `null` همیشه `elem.shadowRoot`.
 
 فقط با استفاده از مقدار(refrance) براگردانده شده از `attachShadow`(که احتمالا یک کلاس پنهان داخلی دارد) می‌توانیم به DOM سایه دسترسی پیدا کنیم. اما در مورد درخت‌های سایه بومی مرورگر مثل `<input type="range">` که بسته(`"closed"`) هستند٬ هیچ راهی برای دسترسی به این درخت‌های سایه وجود ندارد.
@@ -111,32 +105,30 @@ alert(elem.shadowRoot.host === elem); // true
 
 ```html run untrusted height=40
 <style>
-  /*  
-	* اجرا نمی‌شود (۱) #elem استایل سند بر درخت تاریک در 	
-	*/
-  p {
-    color: red;
-  }
+*!*
+  /* اجرا نمی‌شود (۱) #elem استایل سند بر درخت تاریک در 	
+*/!*
+  p { color: red; }
 </style>
 
 <div id="elem"></div>
 
 <script>
-  elem.attachShadow({ mode: "open" });
-  /*
-   * درخت تاریک استایل خود را دارد (۲)
-   */
+  elem.attachShadow({mode: 'open'});
+*!*
+    // درخت تاریک استایل خود را دارد (۲)
+*/!*
   elem.shadowRoot.innerHTML = `
-      <style> p { font-weight: bold; } </style>
-      <p>Hello, John!</p>
-    `;
+    <style> p { font-weight: bold; } </style>
+    <p>Hello, John!</p>
+  `;
 
-  /*
-   * (۳) ‌های داخل درخت تاریک قابل دسترسی است qury فقط از
-   */
-  alert(document.querySelectorAll("p").length); // 0
-  alert(elem.shadowRoot.querySelectorAll("p").length); // 1
-</script>
+*!*
+   // (۳) ‌های داخل درخت تاریک قابل دسترسی است qury فقط از <p>
+*/!*
+  alert(document.querySelectorAll('p').length); // 0
+  alert(elem.shadowRoot.querySelectorAll('p').length); // 1
+</script>  
 ```
 
 1. استایل از سند اصلی هیچ تاثیری روی درخت تاریک ندارد.
@@ -149,6 +141,7 @@ alert(elem.shadowRoot.host === elem); // true
 - Compatibility: <https://caniuse.com/#feat=shadowdomv1>
 - Shadow DOM is mentioned in many other specifications, e.g. [DOM Parsing](https://w3c.github.io/DOM-Parsing/#the-innerhtml-mixin) specifies that shadow root has `innerHTML`.
 
+
 ## خلاصه
 
 سایه DOM روشی است برای ایجاد یک المان محلی برای DOM.
@@ -157,7 +150,6 @@ alert(elem.shadowRoot.host === elem); // true
 2. با استفاده از ویژگی `innerHtml` یا ویژگی های دیگر DOM موجود در `shadowRoot` می‌توان اجزای جدید به آن اضافه کرد.
 
 المان‌های DOM سایه:
-
 - داری فضای مجزای خود هستند.
 - از انتخابگر‌های جاوا اسکریپت موجد در DOM اصلی مثل `querySelector` پنهان هستند.
 - از استایل‌های موجود در درخت تاریک خود استفاده می‌کنند و نه از استایل موجود در DOM اصلی.
