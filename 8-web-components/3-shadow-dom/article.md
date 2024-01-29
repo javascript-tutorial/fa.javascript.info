@@ -26,10 +26,10 @@
 
 ```html run autorun
 <style>
-  /* رنگ ریل را به قرمز تغییر می‌دهد */
-  input::-webkit-slider-runnable-track {
-    background: red;
-  }
+/* رنگ ریل را به قرمز تغییر می‌دهد */
+input::-webkit-slider-runnable-track {
+  background: red;
+}
 </style>
 
 <input type="range" />
