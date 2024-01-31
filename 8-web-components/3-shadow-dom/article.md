@@ -46,7 +46,7 @@ input::-webkit-slider-runnable-track {
 1. light tree -- یک زیر مجموعه معمولی از DOM است که از زیرمجموعه HTML ساخته شده است. تمام مثال‌های که در فصول قبل دیدیم از نوع light بودند.
 2. shadow tree -- یک زیرمجموعه پنهان از DOM است که در HTML نمایش داده نمی‌شود و از چشم مخفی است.
 
-اگر المانی هر دو زیرمجموعه را داشت مرورگر فقط قسمت shadow را نمایش خواهد داد. اما می توانیم نوعی ترکیب بندی بین shadow trees و light ایجاد کنیم. جزیات بیشتر را در <info:slots-composition> خواهیم خواند.
+اگر المانی هر دو زیرمجموعه را داشت مرورگر فقط قسمت shadow را نمایش خواهد داد. اما می توانیم نوعی ترکیب بندی بین shadow treeها و light ایجاد کنیم. جزیات بیشتر را در <info:slots-composition> خواهیم خواند.
 
 می‌توان از shadow tree برای پنهان سازی المان‌های داخلی استفاده کرد و از استایل دهی محلی برای المان جدید استفاده کرد.
 
@@ -83,7 +83,7 @@ customElements.define('show-hello', class extends HTMLElement {
 هر کدی قابلیت دسترسی به shadow tree المان `elem` را دارد.
 - `"closed"` -- است `null` همیشه `elem.shadowRoot`.
 
-فقط با استفاده از مقدار(refrance) براگردانده شده از `attachShadow`(که احتمالا یک کلاس پنهان داخلی دارد) می‌توانیم به shadow DOM دسترسی پیدا کنیم. اما در مورد shadow trees بومی مرورگر مثل `<input type="range">` که بسته(`"closed"`) هستند٬ هیچ راهی برای دسترسی به این shadow trees وجود ندارد.
+فقط با استفاده از مقدار(refrance) براگردانده شده از `attachShadow`(که احتمالا یک کلاس پنهان داخلی دارد) می‌توانیم به shadow DOM دسترسی پیدا کنیم. اما در مورد shadow treeها بومی مرورگر مثل `<input type="range">` که بسته(`"closed"`) هستند٬ هیچ راهی برای دسترسی به این shadow treeها وجود ندارد.
 
 با [shadow root](https://dom.spec.whatwg.org/#shadowroot) که خروجی `attachShadow` است می‌توان مثل یک المان معمولی برخورد کرد و از `innerHTML` یا `append` برای پر کردن آن استفاده کرد.
 
