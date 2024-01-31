@@ -83,7 +83,7 @@ customElements.define('show-hello', class extends HTMLElement {
 هر کدی قابلیت دسترسی به shadow tree المان `elem` را دارد.
 - `"closed"` -- است `null` همیشه `elem.shadowRoot`.
 
-فقط با استفاده از مقدار(refrance) براگردانده شده از `attachShadow`(که احتمالا یک کلاس پنهان داخلی دارد) می‌توانیم به shadow DOM دسترسی پیدا کنیم. اما در مورد shadow treeها بومی مرورگر مثل `<input type="range">` که بسته(`"closed"`) هستند٬ هیچ راهی برای دسترسی به این shadow treeها وجود ندارد.
+فقط با استفاده از مقدار(refrance) براگردانده شده از `attachShadow`(که احتمالا یک کلاس پنهان داخلی دارد) می‌توانیم به shadow DOM دسترسی پیدا کنیم. اما در مورد shadow treeهای بومی مرورگر مثل `<input type="range">` که بسته(`"closed"`) هستند٬ هیچ راهی برای دسترسی به این shadow treeها وجود ندارد.
 
 با [shadow root](https://dom.spec.whatwg.org/#shadowroot) که خروجی `attachShadow` است می‌توان مثل یک المان معمولی برخورد کرد و از `innerHTML` یا `append` برای پر کردن آن استفاده کرد.
 
