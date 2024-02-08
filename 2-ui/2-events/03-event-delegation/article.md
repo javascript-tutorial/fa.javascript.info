@@ -1,7 +1,7 @@
 
-# پنرن Event delegation
+# پترن Event delegation
 
-کپچر (capture) و bubbling ایونت ها به ما این توانایی را میدهد که از یکی از قویترین الگوهای کنترل ایونت هندلینگ یعنی *event delegation* استفاده کنیم.
+گرفتن (capture) و bubbling ایونت ها به ما این توانایی را میدهد که از یکی از قویترین الگوهای ایونت هندلینگ یعنی *event delegation* استفاده کنیم.
 
 ایده این است که اگر تعداد زیادی المنت داریم و میخواهیم به یک شکل آنها رو هندل کنیم به جای اینکه به تک تک آنها هندلر مجزا اختصاص دهیم، یک هندلر را برای المنت والد مشترک آنها اختصاص میدهیم.
 
@@ -36,7 +36,7 @@
 
 به جای آنکه هندلر `onclick` را به هریک از تگ های `<td>` اساین کنیم (که ممکن است تعداد زیادی از آنها داشته باشیم)، هندلر "catch-all" را برروی المنت `<table>` اساین میکنیم.
 
-اینکار باعث استفاده از `event.target` برای گرفتن المنت کلیک شده و هایلایت آن می‌شود.
+این عمل از `event.target` برای پیدا کردن المنت کلیک شده و هایلایت آن استفاده می‌کند.
 
 کد:
 
@@ -62,7 +62,7 @@ function highlight(td) {
 }
 ```
 
-این کد به اینکه چند سلول داخل جدول قرار دارد اهمیتی نمیدهد. میتوانیم المنت‍‌های `<td>` رو به شکل دینامیکی هر زمان که خواستیم اضافه/کم کنیم و همچنان هایلایت کردن کار خواهد کرد.
+این کد به اینکه چند سلول داخل جدول قرار دارد اهمیتی نمیدهد. میتوانیم المنت‌های `<td>` رو به شکل دینامیکی هر زمان که خواستیم اضافه/کم کنیم و همچنان هایلایت کار خواهد کرد.
 
 اما همچنان یک اشکال وجود دارد.
 
@@ -101,7 +101,7 @@ table.onclick = function(event) {
 
 توضیحات:
 1. متد `elem.closest(selector)` نزدیک‌ترین المنت به سلکتور را برمیگرداند. در این مسئله ما در مسیر از سورس المنت به بالا به دنبال المنت `<td>` هستیم.
-2. اگر `event.target` درون هیچ `<td>` نباید آنگاه فراخوانی تابع بلافاصله برمیگردد. درست مانند آنکه چیزی برای انجام دادن وجود ندارد.
+2. اگر `event.target` درون هیچ `<td>` نباشد آنگاه فراخوانی تابع بلافاصله برمیگردد. درست مانند آنکه چیزی برای انجام دادن وجود ندارد.
 3. در مسئله جدول‌های تودرتو `event.target` ممکن است یک المنت `<td>` باشد که خارج از جدول مورد نظر ما قرار گرفته است بنابراین نیاز است بررسی کنیم که المنت آیا درون جدول موردنظر ما قرار دارد یا نه.
 4. و اگر چنین است آنگاه هایلایتش کن.
 
@@ -165,12 +165,12 @@ table.onclick = function(event) {
 
 خب، استفاده از الگوی delegation اینجا برای ما چه فایده‌ای دارد؟
 
-```compare
-+ We don't need to write the code to assign a handler to each button. Just make a method and put it in the markup.
-+ The HTML structure is flexible, we can add/remove buttons at any time.
+```مقایسه
++ نیازی به نوشتن کد برای اختصاص دادن یک هندلر به هریک از دکمه‌ها نداریم. فقط یک متد مینویسیم و در مارک‌آپ قرار می‌دهیم.
++ ساختار HTML منعطف خواهد بود، می‌توانیم دکمه‌ها را هر زمان که خواستیم اضافه/کم کنیم.
 ```
 
-We could also use classes `.action-save`, `.action-load`, but an attribute `data-action` is better semantically. And we can use it in CSS rules too.
+همچنین میتوانیم از کلاس‌های `action-save`، `action-load` استفاده کنیم. اما از لحاط سمنتیک اتریبیوت `data-action` بهتر است. به علاوه می‌توانیم از آن در CSS rule ها هم استفاده کنیم.
 
 ## الگوی "behavior"
 
@@ -191,7 +191,7 @@ One more counter: <input type="button" value="2" data-counter>
 <script>
   document.addEventListener('click', function(event) {
 
-    if (event.target.dataset.counter != undefined) { // if the attribute exists...
+    if (event.target.dataset.counter != undefined) { // در صورتی که اتریبیوت وجود داشته باشد..
       event.target.value++;
     }
 
@@ -201,10 +201,9 @@ One more counter: <input type="button" value="2" data-counter>
 
 اگر بر روی یک دکمه کلیک کنیم مقدار آن افزایش می‌یابد. اینجا روش کلی مهم است نه دکمه ها.
 
-ممکن است هر تعداد اتریبیوت با مقدار `data-counter` که بخواهیم داشته باشیم. هر زمان که بخواهیم میتوانیم یکی دیگه اضافه کنیم. با استفاده از الگوی event delegation  با افزودن یک اتریبیوت که بیانگر رفتاری جدید است HTML را گسترش دادیم.
+ممکن است هر تعداد اتریبیوت با مقدار `data-counter` که بخواهیم داشته باشیم. هر زمان که بخواهیم میتوانیم یکی دیگه اضافه کنیم. با استفاده از الگوی event delegation  با افزودن یک اتریبیوت که بیانگر رفتاری جدید است HTML را گسترش داده‌ایم.
 
 ```warn header="For document-level handlers -- always `addEventListener`"
-When we assign an event handler to the `document` object, we should always use `addEventListener`, not `document.on<event>`, because the latter will cause conflicts: new handlers overwrite old ones.
 زمانی که یک ایونت هندلر را به آبجکت `document` اختصاص میدهیم، همواره باید از `addEventListener` استفاده کنیم، نه `document.on<event>` چون دومی موجب کانفلیکت خواهد شد: هندلرهای جدید جایگزین قدیمی‌ها خواهند شد.
 
 برای پروژه‌های واقعی طبیعتا ممکن است هندلرهای زیادی روی `document` در قسمت‌های مختلف کد تعریف شده باشد.
