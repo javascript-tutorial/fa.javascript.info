@@ -1,5 +1,5 @@
 
-# Event delegation
+# پنرن Event delegation
 
 کپچر (capture) و bubbling ایونت ها به ما این توانایی را میدهد که از یکی از قویترین الگوهای کنترل ایونت هندلینگ یعنی *event delegation* استفاده کنیم.
 
@@ -7,15 +7,13 @@
 
 در هندلری که اختصاص میدهیم با استفاده از `event.target` محل وقوع رویداد را متوجه میشویم و بنابراین میتوانیم آنرا هندل کنیم.
 
-Let's see an example -- the [Ba-Gua diagram](http://en.wikipedia.org/wiki/Ba_gua) reflecting the ancient Chinese philosophy.
 بیاید تا با هم یک مثال رو بررسی کنیم -- [دیاگرام Ba-Gua] (http://en.wikipedia.org/wiki/Ba_gua) که یک فلسفه چینی باستانی رو نشون میده
 
 به این شکل :
 
 [iframe height=350 src="bagua" edit link]
 
-The HTML is like this:
-اچ‌تی‌ام‌ال به این صورت هست:
+فایل HTML به اینصورت خواهد بود:
 
 ```html
 <table>
@@ -47,20 +45,20 @@ let selectedTd;
 
 *!*
 table.onclick = function(event) {
-  let target = event.target; // where was the click?
+  let target = event.target; // کلیک کجا اتفاق افتاد؟
 
-  if (target.tagName != 'TD') return; // not on TD? Then we're not interested
+  if (target.tagName != 'TD') return; // المنت TD نیست؟ پس المنت موردنظر ما نیست
 
-  highlight(target); // highlight it
+  highlight(target); // هایلایتش کن
 };
 */!*
 
 function highlight(td) {
-  if (selectedTd) { // remove the existing highlight if any
+  if (selectedTd) { // اگر هایلایتی وجود دارد آنرا حذف کن
     selectedTd.classList.remove('highlight');
   }
   selectedTd = td;
-  selectedTd.classList.add('highlight'); // highlight the new td
+  selectedTd.classList.add('highlight'); // TD جدید را هایلایت کن
 }
 ```
 
@@ -102,20 +100,19 @@ table.onclick = function(event) {
 ```
 
 توضیحات:
-1. The method `elem.closest(selector)` returns the nearest ancestor that matches the selector. In our case we look for `<td>` on the way up from the source element.
-2. If `event.target` is not inside any `<td>`, then the call returns immediately, as there's nothing to do.
-3. In case of nested tables, `event.target` may be a `<td>`, but lying outside of the current table. So we check if that's actually *our table's* `<td>`.
-4. And, if it's so, then highlight it.
+1. متد `elem.closest(selector)` نزدیک‌ترین المنت به سلکتور را برمیگرداند. در این مسئله ما در مسیر از سورس المنت به بالا به دنبال المنت `<td>` هستیم.
+2. اگر `event.target` درون هیچ `<td>` نباید آنگاه فراخوانی تابع بلافاصله برمیگردد. درست مانند آنکه چیزی برای انجام دادن وجود ندارد.
+3. در مسئله جدول‌های تودرتو `event.target` ممکن است یک المنت `<td>` باشد که خارج از جدول مورد نظر ما قرار گرفته است بنابراین نیاز است بررسی کنیم که المنت آیا درون جدول موردنظر ما قرار دارد یا نه.
+4. و اگر چنین است آنگاه هایلایتش کن.
 
 در نتیحه ما یک کد هایلایتر سریع و کارا داریم که عملکرد آن به تعداد سلول‌های `<td>` در جدول ارتباطی ندارد.
 
-## Delegation example: actions in markup
+## مثالی از الگوی delegation: اکشن‌های مارک‌آپ
 
 استفاده‌های دیگری هم برای event delegation وجود دارد
 
 در نظر بگیرید که میخواهیم یک منو با دکمه‌های "Save", "Load"، "Search" و مانند آن بسازیم آبجکتی با متدهای `save`, `load`, `search` و ... وجود دارد. چطور میتوانیم این متدهارا به دکمه‌های مربوطه وصل کنیم؟
 
-The first idea may be to assign a separate handler to each button. But there's a more elegant solution. We can add a handler for the whole menu and `data-action` attributes for buttons that has the method to call:
 اولین ایده‌ای که به ذهن میرسد ممکن است این باشد که برای هریک از دکمه‌ها هندلر مجزا اساین کنیم. اما راه‌حل بهتری هم وجود دارد. می‌توانیم یک هندلر به کل منو و اتریبیوت‌های `data-action` دکمه‌ها اضافه کنیم.
 
 ```html
@@ -164,9 +161,9 @@ The first idea may be to assign a separate handler to each button. But there's a
 </script>
 ```
 
-Please note that `this.onClick` is bound to `this` in `(*)`. That's important, because otherwise `this` inside it would reference the DOM element (`elem`), not the `Menu` object, and `this[action]` would not be what we need.
+توجه کنید که در `(*)` متد `this.onClick` به `this` متصل شده است. این مهم است زیرا در غیراینصورت `this` درون آن به المنت DOM رفرنس میدهد (`elem`) نه به آبجکت `Menu` و `this[action]` چیزی که ما میخواهیم نخواهد بود.
 
-So, what advantages does delegation give us here?
+خب، استفاده از الگوی delegation اینجا برای ما چه فایده‌ای دارد؟
 
 ```compare
 + We don't need to write the code to assign a handler to each button. Just make a method and put it in the markup.
@@ -175,17 +172,17 @@ So, what advantages does delegation give us here?
 
 We could also use classes `.action-save`, `.action-load`, but an attribute `data-action` is better semantically. And we can use it in CSS rules too.
 
-## The "behavior" pattern
+## الگوی "behavior"
 
-We can also use event delegation to add "behaviors" to elements *declaratively*, with special attributes and classes.
+همچنین ما میتوانیم با استفاده از الگوی delegation با استفاده از اتریبیوت‌ها و کلاس‌های خاص رفتارهایی را به صورت *declaratively* به المنت‌ها اضافه کنیم.
 
-The pattern has two parts:
-1. We add a custom attribute to an element that describes its behavior.
-2. A document-wide handler tracks events, and if an event happens on an attributed element -- performs the action.
+الگو دو قسمت دارم:
+1. یک اتریبیوت شخصی‌سازی شده که بیانگر رفتار آن باشد را به المنت اضافه میکنیم.
+2. یک هندلر به وسعت داکیومنت ایونت‌ها را ردیابی میکند و اگر یک رویداد بر روی المنتی بااتریبوت موردنظر اتفاق آنگاه عمل خواهد کرد.
 
-### Behavior: Counter
+### رفتار شمارشگر
 
-For instance, here the attribute `data-counter` adds a behavior: "increase value on click" to buttons:
+برای مثال اینجا اتریبیوت `data-counter` رفتار "مقدار را با کلیک افزایش بده" را به دکمه‌ها اضافه میکند.
 
 ```html run autorun height=60
 Counter: <input type="button" value="1" data-counter>
@@ -202,19 +199,20 @@ One more counter: <input type="button" value="2" data-counter>
 </script>
 ```
 
-If we click a button -- its value is increased. Not buttons, but the general approach is important here.
+اگر بر روی یک دکمه کلیک کنیم مقدار آن افزایش می‌یابد. اینجا روش کلی مهم است نه دکمه ها.
 
-There can be as many attributes with `data-counter` as we want. We can add new ones to HTML at any moment. Using the event delegation we "extended" HTML, added an attribute that describes a new behavior.
+ممکن است هر تعداد اتریبیوت با مقدار `data-counter` که بخواهیم داشته باشیم. هر زمان که بخواهیم میتوانیم یکی دیگه اضافه کنیم. با استفاده از الگوی event delegation  با افزودن یک اتریبیوت که بیانگر رفتاری جدید است HTML را گسترش دادیم.
 
 ```warn header="For document-level handlers -- always `addEventListener`"
 When we assign an event handler to the `document` object, we should always use `addEventListener`, not `document.on<event>`, because the latter will cause conflicts: new handlers overwrite old ones.
+زمانی که یک ایونت هندلر را به آبجکت `document` اختصاص میدهیم، همواره باید از `addEventListener` استفاده کنیم، نه `document.on<event>` چون دومی موجب کانفلیکت خواهد شد: هندلرهای جدید جایگزین قدیمی‌ها خواهند شد.
 
-For real projects it's normal that there are many handlers on `document` set by different parts of the code.
+برای پروژه‌های واقعی طبیعتا ممکن است هندلرهای زیادی روی `document` در قسمت‌های مختلف کد تعریف شده باشد.
 ```
 
-### Behavior: Toggler
+### رفتار: تغییر وضعیت
 
-One more example of behavior. A click on an element with the attribute `data-toggle-id` will show/hide the element with the given `id`:
+یک مثال دیگر از این رفتار. یک کلیک بر روی المنتی با اتریبیوت `data-toggle-id` المنتی با `id` داده شده را نمایش/پنهان می‌کند.
 
 ```html autorun run height=60
 <button *!*data-toggle-id="subscribe-mail"*/!*>
@@ -239,13 +237,13 @@ One more example of behavior. A click on an element with the attribute `data-tog
 </script>
 ```
 
-Let's note once again what we did. Now, to add toggling functionality to an element -- there's no need to know JavaScript, just use the attribute `data-toggle-id`.
+بیاید تا یک بار دیگه به کاری که انجام دادیم توجه کنیم. حالا برای افزودن کارکرد تغییر وضعیت به یک المنت نیازی به دانستن جاوااسکریپت نداریم، تنها با استفاده از اتریبیوت `data-toggle-id` میتوان اینکار را انجام داد.
 
-That may become really convenient -- no need to write JavaScript for every such element. Just use the behavior. The document-level handler makes it work for any element of the page.
+این ممکن است خیلی کار مارا راحت کند. نیازی به نوشتن جاوااسکریپت برای هر المنت نیست. تنها با استفاده از رفتار. هندلری که به وسعت داکیومنت تعریف کردیم باعث میشود راه حل ما برای همه‌ی المنت‌های داخل صفحه کار کند.
 
-We can combine multiple behaviors on a single element as well.
+همچنین میتوانیم چندین رفتار را برای یک المنت ترکیب کنیم.
 
-The "behavior" pattern can be an alternative to mini-fragments of JavaScript.
+الگوی "رفتار" میتواند یک جایگزین برای mini fragment های جاوااسکریپت باشد.
 
 ## خلاصه
 
@@ -261,7 +259,7 @@ The "behavior" pattern can be an alternative to mini-fragments of JavaScript.
 
 فواید:
 
-```compare
+```مقایسه
 + عدم نیاز به اضافه کردن تعداد زیادی هندلر باعث ذخیره حافظه و ساده‌سازی شروع میشود
 + کد کمتر: زمان اضافه و کم کردن المان‌ها نیازی به تغییر در هندلرها نیست.
 + تغییرات DOM: میتواینم با استفاده از `innerHTML` و ابزارهای مشابه آن تعداد زیادی المان را کم/زیاد کنیم.
@@ -269,7 +267,7 @@ The "behavior" pattern can be an alternative to mini-fragments of JavaScript.
 
 بدون شک این الگو هم محدودیت‌های خودش را دارد:
 
-```compare
-- First, the event must be bubbling. Some events do not bubble. Also, low-level handlers should not use `event.stopPropagation()`.
-- Second, the delegation may add CPU load, because the container-level handler reacts on events in any place of the container, no matter whether they interest us or not. But usually the load is negligible, so we don't take it into account.
+```مقایسه
+- نخست ایونت باید bubble کند. بعضی از ایونت‌ها bubble نمی‌کنند. همچنین هندلرهای سطح پایین نباید از `event.stopPropagation()` استفاده کنند.
+- دوم اینکه ممکن است به بار CPU اضافه کند چون  هندلری که در سطح کانتینر تعریف شده است، درهرکجای کانتینر، بدون توجه به اینکه آیا مدنظر ما هستند یا نه به رویدادها واکنش نشان خواهد داد. اما این بار CPU معمولا قابل چشم‌پوشی است بنابراین ما آنرا به حساب نمی‌آوریم.
 ```
