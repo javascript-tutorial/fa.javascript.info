@@ -356,7 +356,11 @@ Click buttons to run methods on the selection, "resetExample" to reset it.
 
  ```smart header="انتخاب پایان/شروع در مقابل محدوده"
 
+<<<<<<< HEAD
 یک تفاوت بسیار مهم بین selection anchor/focus و `Range` start/end
+=======
+There's an important difference between a selection anchor/focus compared with a `Range` start/end.
+>>>>>>> b258d7d5b635c88228f7556e14fbe5e5ca7f736d
 
 همانطور که می دانیم، اشیاء  `Range` همیشه شروع خود را قبل از پایان دارند.
 
