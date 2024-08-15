@@ -1,6 +1,7 @@
 
-# Custom elements
+# عناصر سفارشی
 
+با استفاده از یک کلاس خاص که دارای متدها و ویژگی‌های خود، رویدادها و غیره است، می‌توانیم عناصر HTML سفارشی ایجاد کنیم.
 We can create custom HTML elements, described by our class, with its own methods and properties, events and so on.
 
 Once a custom element is defined, we can use it on par with built-in HTML elements.
