@@ -95,7 +95,11 @@
 
 بنابراین اکثر مرورگرها فقط در محدوده اقدامات خاص کاربر، مانند copy/paste کردن و ...، دسترسی یکپارچه خواندن/نوشتن به clipboard را مجاز می‌کنند.
 
+<<<<<<< HEAD
 در تمام مرورگرها به جز Firefox ممنوع است که با `dispatchEvent` یک سری "custom" clipboard event ایجاد کنیم. و حتی اگر بخاهیم چنین eventهایی را ارسال کنیم، مضخصات به وضوح بیان می‌کنند که چنین "syntetic" eventهایی نباید به clipboard دسترسی داشته باشند.
+=======
+It's forbidden to generate "custom" clipboard events with `dispatchEvent` in all browsers except Firefox. And even if we manage to dispatch such event, the specification clearly states that such "synthetic" events must not provide access to the clipboard.
+>>>>>>> b258d7d5b635c88228f7556e14fbe5e5ca7f736d
 
 حتی اگر کسی تصمیم بگیرد که `event.clipboardData` را در یک event handler ذخیره کند و بعدا به آن دسترسی داشته باشد -- کار نخواهد کرد.
 
