@@ -14,7 +14,11 @@
 
 اگرچه یک متد خاص برای این کار هم وجود دارد:
 
+<<<<<<< HEAD
 - [Object.create(proto, [descriptors])](mdn:js/Object/create) -- یک شیء خالی با تنظیم `proto` داده شده به عنوان `[[Prototype]]` و توصیف‌کننده‌های ویژگی اختیاری ایجاد می‌کند.
+=======
+- [Object.create(proto[, descriptors])](mdn:js/Object/create) -- creates an empty object with given `proto` as `[[Prototype]]` and optional property descriptors.
+>>>>>>> b258d7d5b635c88228f7556e14fbe5e5ca7f736d
 
 برای مثال:
 
@@ -191,7 +195,16 @@ chineseDictionary.bye = "再见";
 alert(Object.keys(chineseDictionary)); // hello,bye
 ```
 
+<<<<<<< HEAD
 ## خلاصه
+=======
+## Summary
+
+- To create an object with the given prototype, use:
+
+    - literal syntax: `{ __proto__: ... }`, allows to specify multiple properties
+    - or [Object.create(proto[, descriptors])](mdn:js/Object/create), allows to specify property descriptors.
+>>>>>>> b258d7d5b635c88228f7556e14fbe5e5ca7f736d
 
 - برای ایجاد یک شیء با پروتوتایپ تعیین شده، از این‌ها استفاده کنید:
 
