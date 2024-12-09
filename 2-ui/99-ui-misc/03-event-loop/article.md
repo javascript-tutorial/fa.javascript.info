@@ -17,7 +17,11 @@
      - آنها را با قدیمی ترین کار شروع کنید.
 2. بخوابید تا زمانی که یک کار ظاهر شود، سپس به 1 بروید.
 
+<<<<<<< HEAD
 ین یک رسمی سازی برای چیزی است که هنگام مرور یک صفحه می بینیم. موتور جاوا اسکریپت در اکثر مواقع هیچ کاری انجام نمی دهد، فقط در صورتی اجرا می شود که یک اسکریپت/هندلر/رویداد فعال شود.
+=======
+That's a formalization of what we see when browsing a page. The JavaScript engine does nothing most of the time, it only runs if a script/handler/event activates.
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 
 نمونه هایی از وظایف:
 
@@ -30,6 +34,7 @@
 
 ممکن است زمانی اتفاق بیفتد که یک کار در حالی که موتور مشغول است بیاید، سپس در نوبت قرار گیرد.
 
+<<<<<<< HEAD
 وظایف یک صف تشکیل می دهند که اصطلاحاً به آن "macrotask queue" (v8 term) می گویند:
 
 ![](eventLoop.svg)
@@ -37,12 +42,29 @@
 به عنوان مثال، در حالی که موتور مشغول اجرای یک `script` است، یک کاربر ممکن است ماوس خود را حرکت دهد و باعث `mousemove` شود، و `setTimeout` ممکن است به دلیل وجود داشته باشد و غیره، این وظایف یک صف تشکیل می دهند، همانطور که در تصویر بالا نشان داده شده است.
 
 وظایف از صف بر اساس "first come – first served"  پردازش می شود. وقتی مرورگر موتور با `script` تمام شد، رویداد `mousemove`  و سپس `setTimeout`و غیره را کنترل می‌کند.
+=======
+It may happen that a task comes while the engine is busy, then it's enqueued.
+
+The tasks form a queue, the so-called "macrotask queue" ([v8](https://v8.dev/) term):
+
+![](eventLoop.svg)
+
+For instance, while the engine is busy executing a `script`, a user may move their mouse causing `mousemove`, and `setTimeout` may be due and so on, these tasks form a queue, as illustrated in the picture above.
+
+Tasks from the queue are processed on a "first come – first served" basis. When the engine browser is done with the `script`, it handles `mousemove` event, then `setTimeout` handler, and so on.
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 
 تا اینجا، کاملا ساده، درست است؟
 
+<<<<<<< HEAD
 دو جزئیات دیگر:
 1. رندر هرگز اتفاق نمی افتد در حالی که موتور یک کار را اجرا می کند. مهم نیست که کار زمان زیادی ببرد. تغییرات در DOM فقط پس از تکمیل کار انجام می شود.
 2. اگر یک کار بیش از حد طولانی شود، مرورگر نمی تواند کارهای دیگری مانند پردازش رویدادهای کاربر را انجام دهد. بنابراین پس از مدتی، هشداری مانند "Page Unresponsive" را مطرح می‌کند که نشان می‌دهد کار با کل صفحه از بین می‌رود. این زمانی اتفاق می افتد که محاسبات پیچیده زیادی وجود داشته باشد یا یک خطای برنامه نویسی منجر به یک حلقه بی نهایت شود.
+=======
+Two more details:
+1. Rendering never happens while the engine executes a task. It doesn't matter if the task takes a long time. Changes to the DOM are painted only after the task is complete.
+2. If a task takes too long, the browser can't do other tasks, such as processing user events. So after some time, it raises an alert like "Page Unresponsive", suggesting killing the task with the whole page. That happens when there are a lot of complex calculations or a programming error leading to an infinite loop.
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 
 این نظریه بود. حال بیایید ببینیم چگونه می توانیم این دانش را به کار ببریم.
 
@@ -54,7 +76,11 @@
 
 در حالی که موتور مشغول برجسته‌سازی نحو است، نمی‌تواند سایر کارهای مربوط به DOM، پردازش رویدادهای کاربر و غیره را انجام دهد. حتی ممکن است باعث شود مرورگر برای مدتی "hiccup" یا حتی  "hang"  کند، که غیرقابل قبول است.
 
+<<<<<<< HEAD
 ما می توانیم با تقسیم کار بزرگ به قطعات از مشکلات جلوگیری کنیم. ابتدا 100 خط را برجسته کنید، سپس `setTimeout`  (با تاخیر صفر) را برای 100 خط بعدی برنامه ریزی کنید، و به همین ترتیب.
+=======
+We can avoid problems by splitting the big task into pieces. Highlight the first 100 lines, then schedule `setTimeout` (with zero-delay) for the next 100 lines, and so on.
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 
 برای نشان دادن این رویکرد، به‌خاطر سادگی، به‌جای برجسته‌سازی متن، تابعی را انتخاب می‌کنیم که از `1` تا `1000000000` محاسبه می‌شود.
 
