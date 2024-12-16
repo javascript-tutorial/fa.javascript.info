@@ -46,7 +46,7 @@ let promise = new Promise(function(resolve, reject) {
 
 در اینجا یک نمونه از سازنده Promise و یک تابع اجرا‌کننده ساده با «کد تولید‌کننده» داریم که زمانبر است (از طریق `setTimeout`):
 
-```js run
+```js
 let promise = new Promise(function(resolve, reject) {
   //  ساخته می‌شود به طور خودکار اجرا می‌شود Promise این تابع زمانی که 
 
