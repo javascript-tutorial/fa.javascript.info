@@ -4,7 +4,11 @@ importance: 2
 
 # زنجیره‌ای
 
+<<<<<<< HEAD
 یک شیء `ladder` وجود دارد که بالا و پایین رفتن را ممکن می‌کند:
+=======
+There's a `ladder` object that allows you to go up and down:
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 ```js
 let ladder = {
@@ -21,7 +25,11 @@ let ladder = {
 };
 ```
 
+<<<<<<< HEAD
 حال اگر ما نیاز داشته باشیم که برای چند بار متوالی صدا بزنیم، می‌توانیم اینگونه این کار را انجام دهیم:
+=======
+Now, if we need to make several calls in sequence, we can do it like this:
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 ```js
 ladder.up();
@@ -32,10 +40,18 @@ ladder.down();
 ladder.showStep(); // 0
 ```
 
+<<<<<<< HEAD
 کد `up`، `down` و `showStep` را تغییر دهید تا صدازدن‌ها را زنجیره‌ای کنید، مثل این:
+=======
+Modify the code of `up`, `down`, and `showStep` to make the calls chainable, like this:
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 ```js
 ladder.up().up().down().showStep().down().showStep(); // اول 1 را نشان می‌دهد سپس 0 را
 ```
 
+<<<<<<< HEAD
 چنین روشی در بین کتابخانه‌های جاوااسکریپت به طور گسترده استفاده می‌شود.
+=======
+Such an approach is widely used across JavaScript libraries.
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e

@@ -1,6 +1,10 @@
 # متدهای آرایه
 
+<<<<<<< HEAD
 آرایه‌ها متدهای زیادی را فراهم می‌کنند. برای ساده‌سازی، در این فصل متدها به چند گروه تقسیم شده‌اند.
+=======
+Arrays provide a lot of methods. To make things easier, in this chapter, they are split into groups.
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 ## اضافه/حذف کردن عضوها
 
@@ -32,11 +36,19 @@ alert( arr.length ); // 3
 
 المان حذف شد، اما آرایه هنوز هم 3 عضو دارد که می‌توانیم آن را با `arr.length == 3` ببینیم.
 
+<<<<<<< HEAD
 این چیز طبیعی است چون `delete obj.key` یک مقدار را با استفاده از `key` حذف می‌کند. به طور کلی کارش همین است. برای شیءها مناسب است. اما برای آرایه‌ها ما معمولا می‌خواهیم که بقیه المان‌ها پخش شوند و فضای آزاد شده را اشغال کنند. توقع داریم که الان آرایه‌ای کوتاه‌تر داشته باشیم.
+=======
+That's natural, because `delete obj.key` removes a value by the `key`. It's all it does. Fine for objects. But for arrays we usually want the rest of the elements to shift and occupy the freed place. We expect to have a shorter array now.
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 بنابراین متدهای خاص باید استفاده شوند.
 
+<<<<<<< HEAD
 متد [arr.splice](mdn:js/Array/splice) یک شمشیر ارتشی سوئیسی برای آرایه‌ها است. می‌تواند هر کاری کند: اضافه کند، حذف کند و المان‌ها را جایگزین کند.
+=======
+The [arr.splice](mdn:js/Array/splice) method is a Swiss army knife for arrays. It can do everything: insert, remove and replace elements.
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 سینتکس آن اینگونه است:
 
@@ -62,7 +74,11 @@ alert( arr ); // ["I", "JavaScript"]
 
 راحت است، نه؟ از ایندکس `1` به تعداد `1` المان حذف کرد.
 
+<<<<<<< HEAD
 در مثال بعد ما 3 المان را حذف و آنها را با دو المان جایگزین می‌کنیم:
+=======
+In the next example, we remove 3 elements and replace them with the other two:
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 ```js run
 let arr = [*!*"I", "study", "JavaScript",*/!* "right", "now"];
@@ -84,7 +100,11 @@ let removed = arr.splice(0, 2);
 alert( removed ); // "I", "study" <-- array of removed elements
 ```
 
+<<<<<<< HEAD
 متد `splice` همچنین قادر به اضافه کردن المان بدون هیچ حذفیاتی است. برای این کار باید `deleteCount` را `0` بگذاریم:
+=======
+The `splice` method is also able to insert the elements without any removals. For that, we need to set `deleteCount` to `0`:
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 ```js run
 let arr = ["I", "study", "JavaScript"];
@@ -114,7 +134,11 @@ alert( arr ); // 1,2,3,4,5
 
 ### متد slice
 
+<<<<<<< HEAD
 متد [arr.slice](mdn:js/Array/slice) از متد `arr.splice` که از لحاظ ظاهری شبیه به آن است بسیار ساده‌تر است.
+=======
+The method [arr.slice](mdn:js/Array/slice) is much simpler than the similar-looking `arr.splice`.
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 سینتکس اینگونه است:
 
@@ -124,7 +148,11 @@ arr.slice([start], [end])
 
 این متد یک آرایه جدید که تمام المان‌ها را از ایندکس `start` تا `end` (شامل خود `end` نمی‌شود) کپی می‌کند، برمی‌گرداند. `start` و `end` هر دو می‌توانند منفی باشند، که در این صورت موقعیت از انتهای آرایه حساب می‌شود.
 
+<<<<<<< HEAD
 این متد شبیه متد رشته `str.slice` است، اما به جای زیر رشته، زیر آرایه ایجاد می‌کند.
+=======
+It's similar to a string method `str.slice`, but instead of substrings, it makes subarrays.
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 برای مثال:
 
@@ -206,7 +234,11 @@ alert( arr.concat(arrayLike) ); // 1,2,something,else
 سینتکس اینگونه است:
 ```js
 arr.forEach(function(item, index, array) {
+<<<<<<< HEAD
   // ... با المان کاری انجام دهید
+=======
+  // ... do something with an item
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 });
 ```
 
@@ -239,7 +271,11 @@ arr.forEach(function(item, index, array) {
 - `arr.indexOf(item, from)` -- با شروع از ایندکس `from` به دنبال `item` می‌گردد و ایندکسی که المان در آن پیدا شد را برمی‌گرداند، در غیر این صورت `1-`.
 - `arr.includes(item, from)` -- با شروع از ایندکس `from` به دنبال `item` می‌گردد، اگر پیدا کند `true` را برمی‌گرداند.
 
+<<<<<<< HEAD
 معمولا این متدها تنها با یک آرگومان استفاده می‌شوند: المانی (`item`) که جستجو برای آن انجام می‌شود. به طور پیش‌فرض، جستجو از ابتدا انجام می‌شود.
+=======
+Usually, these methods are used with only one argument: the `item` to search. By default, the search is from the beginning.
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 برای مثال:
 
@@ -255,7 +291,11 @@ alert( arr.includes(1) ); // true
 
 توجه داشته باشید که متدها از مقایسه `===` استفاده می‌کنند. پس اگر ما به دنبال `false` باشیم، متد دقیقا `false` را پیدا می‌کند و نه صفر را.
 
+<<<<<<< HEAD
 اگر ما بخواهیم بررسی کنیم که `item` درون آرایه وجود دارد یا نه و به دنبال ایندکس دقیق نیستیم، پس `arr.includes` ترجیح داده می‌شود.
+=======
+If we want to check if `item` exists in the array and don't need the index, then `arr.includes` is preferred.
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 متد [arr.lastIndexOf](mdn:js/Array/lastIndexOf) مانند `indexOf` است اما از راست به چپ جستجو می‌کند.
 
@@ -273,11 +313,20 @@ const arr = [NaN];
 alert( arr.indexOf(NaN) ); // -1 (اشتباه است، باید 0 باشد)
 alert( arr.includes(NaN) );// true (درست است)
 ```
+<<<<<<< HEAD
 به این دلیل که `includes` بسیار بعدتر به جاوااسکریپت اضافه شد و از درون از الگوریتم‌های مقایسه بروزتری استفاده می‌کند.
+=======
+That's because `includes` was added to JavaScript much later and uses the more up-to-date comparison algorithm internally.
+````
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 ### متدهای find و findIndex/findLastIndex
 
+<<<<<<< HEAD
 تصور کنید که یک آرایه‌ای از شیءها داریم. چگونه باید یک شیء با شرطی مشخص را پیدا کنیم؟
+=======
+Imagine we have an array of objects. How do we find an object with a specific condition?
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 اینجاست که متد [arr.find(fn)](mdn:js/Array/find) بدرد می‌خورد.
 
@@ -295,7 +344,11 @@ let result = arr.find(function(item, index, array) {
 - `index` ایندکس آن است.
 - `array` خود آرایه است.
 
+<<<<<<< HEAD
 اگر `true` برگرداند، جستجو متوقف می‎شود، `item` برگردانده می‌شود. اگر چیزی پیدا نشود، `undefined` برگردانده می‌شود.
+=======
+If it returns `true`, the search is stopped, the `item` is returned. If nothing is found, `undefined` is returned.
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 برای مثال، ما یک آرایه‌ای از کاربران داریم، که هر کدام دارای `id` و `name` هستند. بیایید کاربری که `id == 1` داشته باشد را پیدا کنیم:
 
@@ -311,11 +364,19 @@ let user = users.find(item => item.id == 1);
 alert(user.name); // John
 ```
 
+<<<<<<< HEAD
 در واقعیت، آرایه‌هایی از شیءها چیز متداولی است، پس متد `find` بسیار مفید است.
+=======
+In real life, arrays of objects are a common thing, so the `find` method is very useful.
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 توجه داشته باشید که در مثال بالا ما تابع `item => item.id == 1` را همراه با یک آرگومان برای `find` در نظر گرفتیم. این چیز معمولی است، بقیه آرگومان‌های این تابع به ندرت استفاده می‌شوند.
 
+<<<<<<< HEAD
 متد [arr.findIndex](mdn:js/Array/findIndex) سینتکس یکسانی دارد اما به جای خود المان ایندکسی که المان در آن پیدا شد را برمی‌گرداند. اگر چیزی پیدا نشد مقدار `1-` برگردانده می‌شود.
+=======
+The [arr.findIndex](mdn:js/Array/findIndex) method has the same syntax but returns the index where the element was found instead of the element itself. The value of `-1` is returned if nothing is found.
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 متد [arr.findLastIndex](mdn:js/Array/findLastIndex) مانند `findIndex` است اما مانند `lastIndexOf` از راست به چپ جستجو می‌کند.
 
@@ -447,11 +508,19 @@ alert(arr);  // *!*1, 2, 15*/!*
 
 حالا همانطور که انتظار می‌رفت کار می‌کند.
 
+<<<<<<< HEAD
 بیایید کمی عقب بمانیم و ببینیم چه چیزی در حال اتفاق افتادن است. `arr` می‌تواند آرایه‌ای از هر چیزی باشد نه؟ ممکن است شامل اعداد یا رشته‌ها یا شیءها یا هرچیز دیگری باشد. ما دسته‌ای از *چیزها* داریم. برای مرتب کردن آن، ما به یک *تابع مرتب‌کننده* که می‌داند چگونه المان‌های دسته را مقایسه کند، نیاز داریم. ترتیب رشته‌ای پیش‌فرض است.
+=======
+Let's step aside and think about what's happening. The `arr` can be an array of anything, right? It may contain numbers or strings or objects or whatever. We have a set of *some items*. To sort it, we need an *ordering function* that knows how to compare its elements. The default is a string order.
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 متد `arr.sort(fn)` یک الگوریتم مرتب‌سازی کلی را پیاده‌سازی می‌کند. ما نیازی نداریم که بدانیم درون آن چه اتفاقی می‌افتد (اکثر اوقات از یک [مرتب‌سازی سریع](https://fa.wikipedia.org/wiki/مرتب%E2%80%8Cسازی_سریع) یا [Timsort](https://fa.wikipedia.org/wiki/مرتب%E2%80%8Cسازی_تیم) بهینه‌شده استفاده می‌شود). این متد آرایه را طی می‌کند، المان‌های آن را با استفاده از تابع فراهم شده مقایسه می‌کند و آنها را مرتب می‌کند، تمام آن چیزی که ما نیاز داریم این است که یک `fn` فراهم کنیم که مقایسه را انجام دهد.
 
+<<<<<<< HEAD
 راستی، اگر ما بخواهیم بدانیم که کدام المان‌ها مقایسه می‌شوند -- چیزی ما را از alert کردن آنها متوقف نمی‌کند:
+=======
+By the way, if we ever want to know which elements are compared -- nothing prevents us from alerting them:
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 ```js run
 [1, -2, 15, 2, 0, 8].sort(function(a, b) {
@@ -523,7 +592,11 @@ alert( arr ); // 5,4,3,2,1
 
 متد [str.split(delim)](mdn:js/String/split) دقیقا همین کار را انجام می‌دهد. این متد رشته را با استفاده از جداکننده‌ی داده شده `delim` به یک آرایه تقسیم می‌کند.
 
+<<<<<<< HEAD
 در مثال بالا، ما توسط یک کاما که بعد آن space می‌آید رشته را جدا می‌کنیم:
+=======
+In the example below, we split by a comma followed by a space:
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 ```js run
 let names = 'Bilbo, Gandalf, Nazgul';
@@ -590,9 +663,15 @@ let value = arr.reduce(function(accumulator, item, index, array) {
 - `index` -- موقعیت آن است.
 - `array` -- آرایه است.
 
+<<<<<<< HEAD
 همانطور که تابع اعمال می‌شود، نتیجه فراخوانی قبلی به عنوان آرگومان اول به فراخوانی بعدی منتقل می‌شود.
 
 بنابراین، اولین آرگومان اساسا همان حافظه‌ای است که نتیجه ترکیب شده تمام فراخوانی‌های قبلی را ذخیره کرده است. و در پایان تبدیل به نتیجه `reduce` می‌شود.
+=======
+As the function is applied, the result of the previous function call is passed to the next one as the first argument.
+
+So, the first argument is essentially the accumulator that stores the combined result of all previous executions. And at the end, it becomes the result of `reduce`.
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 بنظر پیچیده می‌آید؟
 
@@ -661,7 +740,11 @@ arr.reduce((sum, current) => sum + current);
 
 بنابراین توصیه می‌شود همیشه مقدار اولیه را تعیین کنید.
 
+<<<<<<< HEAD
 متد [arr.reduceRight](mdn:js/Array/reduceRight) کار یکسان را انجام می‌هد، اما از راست به چپ.
+=======
+The method [arr.reduceRight](mdn:js/Array/reduceRight) does the same but goes from right to left.
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 
 ##متد Array.isArray
@@ -687,7 +770,11 @@ alert(Array.isArray([])); // true
 
 تقریبا تمام متدهای آرایه که تابعی را صدا می‌زنند -- مانند `find`، `filter`، `map`، همچنین یک استثنا از `sort`، پارامتر اختیاری اضافی `thisArg` را قبول می‌کنند.
 
+<<<<<<< HEAD
 این پارامتر به دلیل اینکه به ندرت استفاده می‌شود، در قسمت‌های بالایی گفته نشد. اما برای کامل بودن ما باید آن را پوشش دهیم.
+=======
+That parameter is not explained in the sections above, because it's rarely used. But for completeness, we have to cover it.
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 سینتکس کامل این متدها در زیر آمده است:
 
@@ -746,11 +833,19 @@ alert(soldiers[1].age); // 23
   - `slice(start, end)` -- با ساختن یک آرایه جدید، المان‌ها را از ایندکس `start` تا `end` (شامل نمی‌شود) در آن کپی می‌کند.
   - `concat(...items)` -- یک آرایه جدید را برمی‌گرداند: تمام عضوهای آرایه کنونی را کپی می‌کند و `items` را به آن اضافه می‌کند. اگر هر کدام از `items` آرایه باشد، سپس المان‌های آن اضافه می‌شوند.
 
+<<<<<<< HEAD
 - برای جستجو در بین المان‌ها:
   - `indexOf/lastIndexOf(item, pos)` -- با شروع از موقعیت `pos` به دنبال `item` می‌گردد، ایندکس آن را برمی‌گرداند و در صورتی که پیدا نشود `1-` را برمی‌گرداند.
   - `includes(value)` -- اگر آرایه دارای `value` باشد، مقدار `true` را برمی‌گرداند در غیر این صورت `false`.
   - `find/filter(func)` -- المان‌ها را از طریق تابع فیلتر می‌کند، اولین/تمام مقدارهایی که سبب می‌شوند تابع `true` برگرداند را برمی‌گرداند.
   - `findIndex` مانند `find` است اما به جای مقدار ایندکس را برمی‌گرداند.
+=======
+- To search among elements:
+  - `indexOf/lastIndexOf(item, pos)` -- look for `item` starting from position `pos`, and return the index or `-1` if not found.
+  - `includes(value)` -- returns `true` if the array has `value`, otherwise `false`.
+  - `find/filter(func)` -- filter elements through the function, return first/all values that make it return `true`.
+  - `findIndex` is like `find`, but returns the index instead of a value.
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 - برای حلقه زدن در یک آرایه:
   - `forEach(func)` -- برای تمام المان‌ها تابع `func` را صدا می‌زند، چیزی را برنمی‌گرداند.
@@ -792,7 +887,11 @@ alert(soldiers[1].age); // 23
 
 برای دیدن لیست کامل، از [راهنما](mdn:js/Array) استفاده کنید.
 
+<<<<<<< HEAD
 با اولین نگاه ممکن است به نظر برسد که متدهای بسیار زیادی وجود دارد و به حافظه سپردن آنها مشکل است. اما در واقع بسیار آسان‌تر است.
+=======
+At first sight, it may seem that there are so many methods, quite difficult to remember. But actually, that's much easier.
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 برای داشتن شناخت از آنها به برگه تقلب نگاه بیاندازید. سپس تکلیف‌های این فصل را برای تمرین انجام دهید تا نسبت به متدهای آرایه تجربه بدست بیاورید.
 

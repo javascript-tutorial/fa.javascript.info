@@ -14,7 +14,11 @@
 
 اگرچه یک متد خاص برای این کار هم وجود دارد:
 
+<<<<<<< HEAD
 - [Object.create(proto, [descriptors])](mdn:js/Object/create) -- یک شیء خالی با تنظیم `proto` داده شده به عنوان `[[Prototype]]` و توصیف‌کننده‌های ویژگی اختیاری ایجاد می‌کند.
+=======
+- [Object.create(proto[, descriptors])](mdn:js/Object/create) -- creates an empty object with given `proto` as `[[Prototype]]` and optional property descriptors.
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 برای مثال:
 
@@ -195,8 +199,13 @@ alert(Object.keys(chineseDictionary)); // hello,bye
 
 - برای ایجاد یک شیء با پروتوتایپ تعیین شده، از این‌ها استفاده کنید:
 
+<<<<<<< HEAD
     - سینتکس لیترال: `{ __proto__: ...}`، اجازه می‌دهد که چند ویژگی تعیین کنیم
     - یا [Object.create(proto, [descriptors])](mdn:js/Object/create)، اجازه می‌دهد که توصیف‌کننده‌های ویژگی را تعیین کنیم.
+=======
+    - literal syntax: `{ __proto__: ... }`, allows to specify multiple properties
+    - or [Object.create(proto[, descriptors])](mdn:js/Object/create), allows to specify property descriptors.
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 - متدهای مدرن برای دریافت/تنظیم پروتوتایپ این‌ها هستند:
 
