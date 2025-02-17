@@ -46,7 +46,7 @@ let promise = new Promise(function(resolve, reject) {
 
 در اینجا یک نمونه از سازنده Promise و یک تابع اجرا‌کننده ساده با «کد تولید‌کننده» داریم که زمانبر است (از طریق `setTimeout`):
 
-```js run
+```js
 let promise = new Promise(function(resolve, reject) {
   //  ساخته می‌شود به طور خودکار اجرا می‌شود Promise این تابع زمانی که 
 
@@ -223,7 +223,11 @@ promise.catch(alert); // .را بعد از 1 ثانیه نشان می‌دهد "
 
 به عنوان مثال، نشانگرهای بارگیری(loading indicators) خود را متوقف می‌کنیم، اتصال‌هایی که دیگر نیاز نیستند یا ببندیم و غیره.
 
+<<<<<<< HEAD
 به عنوان یک پایان‌دهنده مهمانی به آن فکر کنید. مهم نیست که مهمانی خوب یا بد بود یا چند دوست در آن حضور داشتند، ما هنوز نیاز داریم (یا حداقل باید) که بعد از مهمانی تمیزکاری انجام دهیم.
+=======
+Think of it as a party finisher. Irresepective of whether a party was good or bad, how many friends were in it, we still need (or at least should) do a cleanup after it.
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 کد ما ممکن است اینگونه بنظر برسد:
 
