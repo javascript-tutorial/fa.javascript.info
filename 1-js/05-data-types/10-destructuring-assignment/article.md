@@ -5,18 +5,30 @@
 - شیءها به ما این امکان را می‌دهند تا چیزی بسازیم که المان‌های داده را به واسطه کلید ذخیره کند.
 - آرایه‌ها به ما امکان جمع‌آوری المان‌های داده را در لیستی مرتب می‌دهند.
 
+<<<<<<< HEAD
 اگرچه، زمانی که ما آن‌ها را به تابع می‌دهیم، ممکن است که نیازی به کل یک شیء/آرایه نباشد. شاید تنها قطعه‌های تکی نیاز باشد.
  
 *مقداردهیِ تجزیه‌کننده‌ی ساختار (Destructuring assignment)* یک سینتکس خاص است که به ما امکان می‌دهد تا آرایه‌ها یا شیءها را درون چند متغیر «پخش کنیم» چون بعضی اوقات این موضوع کار را راحت‌تر می‌کند.
+=======
+However, when we pass these to a function, we may not need all of it. The function might only require certain elements or properties.
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 تخریب ساختار همچنین با تابع‌های پیچیده که تعداد زیادی پارامتر، مقدارهای پیش‌فرض و... دارند هم به خوبی کار می‌کند. به زودی آن را خواهیم دید.
 
+<<<<<<< HEAD
 ## تجزیه ساختار آرایه
+=======
+Destructuring also works well with complex functions that have a lot of parameters, default values, and so on. Soon we'll see that.
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 کد پایین یک مثال از چگونگی تبدیل یک آرایه به چند متغیر است:
 
 ```js
+<<<<<<< HEAD
 // ما یک آرایه شامل نام و نام خانوادگی داریم
+=======
+// we have an array with a name and surname
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 let arr = ["John", "Smith"]
 
 *!*
@@ -40,10 +52,17 @@ alert(firstName); // John
 alert(surname);  // Smith
 ```
 
+<<<<<<< HEAD
 همانطور که می‌بینید، سینتکس ساده است. البته چند چیز ویژه در جزییات خود دارد. بیایید برای فهمیدن بهتر آن، مثال‌های بیشتری ببینیم.
 
 ````smart header="عبارت «تجزیه‌کننده‌ی ساختار» به معنی «مخرب» نیست."
 این سینتکس «مقداردهی تجزیه‌کننده‌ی ساختار» نامیده می‌شود چون با کپی کردن المان‌ها در چند متغیر «ساختار را تغییر می‌دهد». اما خود آرایه تغییر نمی‌کند.
+=======
+As you can see, the syntax is simple. There are several peculiar details though. Let's see more examples to understand it better.
+
+````smart header="\"Destructuring\" does not mean \"destructive\"."
+It's called "destructuring assignment," because it "destructurizes" by copying items into variables. However, the array itself is not modified.
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 فقط یک راه کوتاه‌تر برای نوشتن است:
 ```js
@@ -65,7 +84,11 @@ let [firstName, , title] = ["Julius", "Caesar", "Consul", "of the Roman Republic
 alert( title ); // Consul
 ```
 
+<<<<<<< HEAD
 در کد بالا، از المان دوم آرایه گذشتیم، المان سوم به `title` تخصیص داده شد و بقیه المان‌های آرایه هم نادیده گرفته شدند (به دلیل اینکه متغیری برای ذخیره آنها وجود ندارد).
+=======
+In the code above, the second element of the array is skipped, the third one is assigned to `title`, and the rest of the array items are also skipped (as there are no variables for them).
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 ````
 
 ````smart header="با هر حلقه‌پذیری در سمت راست کار می‌کند"
@@ -94,10 +117,17 @@ alert(user.surname); // Smith
 
 ````
 
+<<<<<<< HEAD
 ````smart header="حلقه زدن با .entries()"
 در فصل قبل ما متد [Object.entries(obj)](mdn:js/Object/entries) را دیدیم.
 
 می‌توانیم آن را با تجزیه‌کننده‌ی ساختار برای حلقه زدن در کلیدها و مقدارهای یک شیء استفاده کنیم:
+=======
+````smart header="Looping with .entries()"
+In the previous chapter, we saw the [Object.entries(obj)](mdn:js/Object/entries) method.
+
+We can use it with destructuring to loop over the keys-and-values of an object:
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 ```js run
 let user = {
@@ -105,7 +135,11 @@ let user = {
   age: 30
 };
 
+<<<<<<< HEAD
 // حلقه زدن در کلیدها و مقدارها
+=======
+// loop over the keys-and-values
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 *!*
 for (let [key, value] of Object.entries(user)) {
 */!*
@@ -169,7 +203,11 @@ alert(name2); // Caesar
 let [name1, name2, *!*...rest*/!*] = ["Julius", "Caesar", *!*"Consul", "of the Roman Republic"*/!*];
 
 *!*
+<<<<<<< HEAD
 // آرایه‌ای از المان‌ها است که از المان سوم شروع می‌شود rest
+=======
+// rest is an array of items, starting from the 3rd one
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 alert(rest[0]); // Consul
 alert(rest[1]); // of the Roman Republic
 alert(rest.length); // 2
@@ -187,7 +225,11 @@ let [name1, name2, *!*...titles*/!*] = ["Julius", "Caesar", "Consul", "of the Ro
 
 ### مقدارهای پیش‌فرض
 
+<<<<<<< HEAD
 اگر آرایه از لیست متغیرهای سمت چپ کوتاه‌تر باشد، هیچ اروری ایجاد نمی‌شود. مقدارهای ناموجود undefined در نظر گرفته می‌شوند:
+=======
+If the array is shorter than the list of variables on the left, there will be no errors. Absent values are considered undefined:
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 ```js run
 *!*
@@ -418,7 +460,11 @@ alert( title ); // Menu
 
 ## تجزیه ساختار تودرتو
 
+<<<<<<< HEAD
 اگر یک شیء یا آرایه، شیء و آرایه‌های تودرتو دیگری را شامل شود، ما می‌توانیم از الگوری پیچیده‌تری در سمت چپ برای استخراج قسمت‌های عمیق‌تر استفاده کنیم.
+=======
+If an object or an array contains other nested objects and arrays, we can use more complex left-side patterns to extract deeper portions.
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 در کد زیر `options` یک شیء دیگری درون ویژگی `size` و یک آرایه درون ویژگی `items` دارد. الگوی سمت چپ مقداردهی ساختار یکسانی برای استخراج مقدار از آنها را دارد:
 
@@ -449,7 +495,11 @@ alert(item1);  // Cake
 alert(item2);  // Donut
 ```
 
+<<<<<<< HEAD
 تمام ویژگی‌های شیء `options` به جز `extra` که در سمت چپ وجود ندارد، به متغیرهای متناظر خود تخصیص داده شده‌اند:
+=======
+All properties of `options` object except `extra` which is absent in the left part, are assigned to corresponding variables:
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 ![](destructuring-complex.svg)
 
@@ -459,9 +509,15 @@ alert(item2);  // Donut
 
 ## پارامترهای هوشمند تابع
 
+<<<<<<< HEAD
 بعضی اوقات پیش می‌آید که یک تابع پارامترهای زیادی داشته باشد که اکثر آنها الزامی نیستند. خصوصا برای رابط کاربری این اتفاق می‌افتد. یک تابع را تصور کنید که یک منو ایجاد می‌کند. این منو ممکن است دارای طول(width)، ارتفاع(height)، عنوان(title)، لیستی از کالاها و غیره باشد.
 
 این یک راه برای نوشتن چنین تابعی است:
+=======
+There are times when a function has many parameters, most of which are optional. That's especially true for user interfaces. Imagine a function that creates a menu. It may have a width, a height, a title, an item list and so on.
+
+Here's a bad way to write such a function:
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 ```js
 function showMenu(title = "Untitled", width = 200, height = 100, items = []) {
@@ -469,7 +525,11 @@ function showMenu(title = "Untitled", width = 200, height = 100, items = []) {
 }
 ```
 
+<<<<<<< HEAD
 در واقعیت، مشکل این است که چگونه ترتیب آرگومان‌ها را به یاد بسپاریم. معمولا محیط‌های کدنویسی (IDE) سعی می‌کنند به ما کمک کنند، مخصوصا اگر کد، مستند خوبی داشته باشد اما باز هم... مشکل دیگری که وجود دارد این است که چگونه یک تابع را زمانی که اکثر پارامترها به صورت پیش‌فرض مشکلی ندارند فراخوانی کنیم.
+=======
+In real-life, the problem is how to remember the order of arguments. Usually, IDEs try to help us, especially if the code is well-documented, but still... Another problem is how to call a function when most parameters are ok by default.
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 مثلا اینگونه؟
 
@@ -534,7 +594,11 @@ function({
 })
 ```
 
+<<<<<<< HEAD
 سپس به صورت پیش‌فرض، برای یک شیء شامل پارامترها، یک متغیر `varName` (اسم متغیر) برای ویژگی `incomingProperty` (ویژگی ورودی)، همراه با `defaultValue` وجود خواهد داشت.
+=======
+Then, for an object of parameters, there will be a variable `varName` for the property `incomingProperty`, with `defaultValue` by default.
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 لطفا در نظر داشته باشید که چنین تجزیه ساختاری فرض می‌کند که `showMenu()` یک آرگومان دارد. اگر ما تمام مقدارهای پیش‌فرض را بخواهیم، پس باید یک شیء خالی مشخص کنیم:
 
@@ -561,7 +625,7 @@ showMenu(); // Menu 100 200
 - مقداردهی تجزیه‌کننده‌ی ساختار به ما اجازه می‌دهد تا بلافاصله یک شیء یا آرایه را روی بسیاری از متغیرها ترسیم کنیم.
 - سینتکس کامل شیء:
     ```js
-    let {prop : varName = default, ...rest} = object
+    let {prop : varName = defaultValue, ...rest} = object
     ```
 
     این به این معنی است که ویژگی `prop` باید درون متغیر `varName` برود و اگر چنین ویژگی‌ای وجود نداشت، سپس مقدار `default` باید استفاده شود.
@@ -571,9 +635,13 @@ showMenu(); // Menu 100 200
 - سینتکس کامل آرایه:
 
     ```js
-    let [item1 = default, item2, ...rest] = array
+    let [item1 = defaultValue, item2, ...rest] = array
     ```
 
+<<<<<<< HEAD
     المان اول درون `item1` می‎رود؛ المان دوم درون `item2` می‌شود، تمام المان‌های باقی مانده آرایه `rest` را تشکیل می‌دهند.
+=======
+    The first item goes to `item1`; the second goes into `item2`, and all the rest makes the array `rest`.
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 - استخراج داده از آرایه/شیءهای تودرتو هم ممکن است، برای اینکار سمت چپ باید ساختار یکسانی با سمت راست داشته باشد.
