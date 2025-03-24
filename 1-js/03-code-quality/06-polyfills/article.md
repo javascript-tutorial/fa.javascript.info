@@ -7,7 +7,11 @@
 
 پس کاملا طبیعی است که یک موتور فقط بخشی از یک استاندارد را پیاده‌سازی کند.
 
+<<<<<<< HEAD
 یک صفحه‌ی خوب برای این که ببینید در حال حاضر چه چیزهایی پشتیبانی می‌شود اینجاست <https://compat-table.github.io/compat-table/es6/> (خیلی بزرگ است، ما چیزهای زیادی برای مطالعه داریم).
+=======
+A good page to see the current state of support for language features is <https://compat-table.github.io/compat-table/es6/> (it's big, we have a lot to study yet).
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 
 به عنوان توسعه‌دهنده، ما همیشه دوست داریم از ویژگی‌ها و امکانات جدید استفاده کنیم. هر چه جدیدتر، بهتر!
 
@@ -71,10 +75,14 @@ if (!Math.trunc) { // اگر چنین تابعی وجود ندارد
 
 جاوااسکریپت یک زبان به‌شدت داینامیک است. اسکریپت‌ها می‌توانند هر تابعی را تغییر دهند یا اضافه کنند. حتی تابع‌های built-in.
 
+<<<<<<< HEAD
 دو کتابخانه جالب پلیفیل‌ها:
 - [core js](https://github.com/zloirock/core-js) که از چیزهای زیادی پشتیبانی می‌کند و اجازه می‌دهد فقط فیچرهای مورد نیاز خود را اضافه کنید.
 - [polyfill.io](http://polyfill.io) سرویسی که یک اسکریپت با پلیفیل‌ها ارائه می‌دهد. بسته به فیچرها و مرورگر کاربر.
 
+=======
+One interesting polyfill library is [core-js](https://github.com/zloirock/core-js), which supports a wide range of features and allows you to include only the ones you need.
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 
 ## خلاصه
 
@@ -84,9 +92,15 @@ if (!Math.trunc) { // اگر چنین تابعی وجود ندارد
 
 برای مثال، بعدها که با جاوااسکریپت آشنایی بیشتری پیدا کنید، می‌توانید یک سیستم build کد با [webpack](https://webpack.js.org/) و پلاگین [babel-loader](https://github.com/babel/babel-loader) راه‌اندازی کنید.
 
+<<<<<<< HEAD
 منابع خوبی که نشان می‌دهند فیچرهای مختلف در چه حالتی از پشتیبانی قرار دارند:
 - <https://compat-table.github.io/compat-table/es6/> - برای جاوااسکریپت.
 - <https://caniuse.com/> - برای تابع‌های مربوط به مرورگر.
+=======
+Good resources that show the current state of support for various features:
+- <https://compat-table.github.io/compat-table/es6/> - for pure JavaScript.
+- <https://caniuse.com/> - for browser-related functions.
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 
 پانوشت گوگل کروم معمولا نسبت به فیچرهای زبان به‌روزترین است. اگر دموی یک آموزش کار نکرد، آن را امتحان کنید. البته بیشتر دموهای آموزش با هر مرورگر مدرنی کار می‌کنند.
 

@@ -452,4 +452,8 @@ function animate({timing, draw, duration}) {
 
 انیمیشن های جاوا اسکریپت می توانند از هر تابع زمان بندی استفاده کنند. ما نمونه ها و دگرگونی های زیادی را پوشش دادیم تا همه کاره تر شوند. برخلاف CSS، ما در اینجا به منحنی های Bezier محدود نمی شویم.
 
+<<<<<<< HEAD
 در مورد `draw` هم همینطور است: ما می توانیم هر چیزی را متحرک کنیم، نه فقط ویژگی های CSS.
+=======
+The same is true about `draw`: we can animate anything, not just CSS properties.
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6

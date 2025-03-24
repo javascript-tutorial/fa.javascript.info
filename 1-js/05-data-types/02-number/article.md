@@ -4,7 +4,11 @@
 
 1. اعداد معمولی در جاوااسکریپت با فرمت 64 بیتی [IEEE-754](https://en.wikipedia.org/wiki/IEEE_754-2008_revision) ذخیره می‌شوند، همچنین با "اعداد اعشاری با دقت یک صدم" هم شناخته می‌شوند. ما اکثر اوقات از این اعداد استفاده می‌کنیم، و درباره آنها در این فصل صحبت خواهیم کرد.
 
+<<<<<<< HEAD
 2. اعداد BigInt، برای نمایش اعدادی با طول دلخواه استفاده می‌شوند. آنها بعضی اوقات مورد نیاز هستند، چون اعداد معمولی نمی‌توانند از <code>2<sup>53</sup></code> بیشتر یا از <code>-2<sup>53</sup></code> کمتر باشند. چون bigintها در چند حوزه خاص استفاده می‌شوند، ما به آنها یک فصل خاص <info:bigint> اختصاص می‌دهیم.
+=======
+2. BigInt numbers represent integers of arbitrary length. They are sometimes needed because a regular integer number can't safely exceed <code>(2<sup>53</sup>-1)</code> or be less than <code>-(2<sup>53</sup>-1)</code>, as we mentioned earlier in the chapter <info:types>. As bigints are used in a few special areas, we devote them to a special chapter <info:bigint>.
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 
 پس اینجا درباره اعداد معمولی صحبت می‌کنیم. بیایید دانش‌مان درباره آنها را گسترش دهیم.
 
@@ -41,7 +45,11 @@ alert( 7.3e9 );  // 7.3 billions (same as 7300000000 or 7_300_000_000)
 1.23e6 === 1.23 * 1000000; // e6 یعنی *1000000
 ```
 
+<<<<<<< HEAD
 حالا بگذارید مقداری خیلی کوچک بنویسیم. مثلا؛ یک میکروثانیه، (یک میلیونیوم ثانیه):
+=======
+Now let's write something very small. Say, 1 microsecond (one-millionth of a second):
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 
 ```js
 let mсs = 0.000001;
@@ -103,13 +111,23 @@ alert( num.toString(16) );  // ff
 alert( num.toString(2) );   // 11111111
 ```
 
+<<<<<<< HEAD
 پایه میتواند از بین `۲` تا `۳۶` تغییر کند. در حالت عادی، `۱۰` است.
+=======
+The `base` can vary from `2` to `36`. By default, it's `10`.
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 
 حالات معمول استفاده بدین شکلند:
 
+<<<<<<< HEAD
 - **base=16** برای رنگ‌های هگزایی، کدگذاری حروف و غیره، ارقام میتوانند به صورت `0..9` یا `A..F` باشند.
 - **base=2** برای دیباگ کردن عملوند‌های بیتی هستند، ارقام میتوانند `0` یا `1` باشند. 
 - **base=36** بزرگترین است، ارقام میتوانند `0..9` یا `A..Z` باشند. کل الفبای لاتین برای نمایش یک عدد مورد استفاده قرار میگیرد. یک حالت خنده دار، اما مفید برای  `۳۶` وقتی است که ما نیاز داریم تا یک نشانگر بزرگ عددی را به چیز کوچکتری تبدیل کنیم، به عنوان مثال برای . ساختن لینک‌ های کوتاه شده (short url). میتوان به سادگی اعداد را در پایه‌ی `۳۶` نمایش داد:
+=======
+- **base=16** is used for hex colors, character encodings etc, digits can be `0..9` or `A..F`.
+- **base=2** is mostly for debugging bitwise operations, digits can be `0` or `1`.
+- **base=36** is the maximum, digits can be `0..9` or `A..Z`. The whole Latin alphabet is used to represent a number. A funny, but useful case for `36` is when we need to turn a long numeric identifier into something shorter, for example, to make a short url. Can simply represent it in the numeral system with base `36`:
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 
     ```js run
     alert( 123456..toString(36) ); // 2n9c
@@ -118,7 +136,13 @@ alert( num.toString(2) );   // 11111111
 ```warn header="دو نقطه برای صدا زدن یک تابع"
 توجه داشته باشید که دو نقطه در `123456..toString(36)`، غلط املایی نیست. اگر میخواهیم یک تابعی را مستقیما روی عدد صدا بزنیم مثل `toString` در مثال بالا، آنگاه ما نیاز داریم تا بعد از آن دوتا نقطه بگذاریم.
 
+<<<<<<< HEAD
 اگر ما یک نقطه بگذاریم: `123456.toString(36)`، آنگاه خطایی به وجود می‌آید، چراکه قواعد نوشتاری جاوااسکریپت بعد از یک نقطه، آن را قسمت اعشاری آن در نظر میگیرد. و اگر یک نقطه بیشتر بگذاریم، جاوااسکریپت فرض میکند قسمت اعشاری خالی‌ست و سپس تابع فراخوانده میشود.
+=======
+If we placed a single dot: `123456.toString(36)`, then there would be an error, because JavaScript syntax implies the decimal part after the first dot. And if we place one more dot, then JavaScript knows that the decimal part is empty and now uses the method.
+
+Also could write `(123456).toString(36)`.
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 
 همچنین میتوانیم بنویسیم `(123456).toString(36)`:
 ```
@@ -136,7 +160,11 @@ alert( num.toString(2) );   // 11111111
 : رند بالا: `۳.۱` میشود `۴`, و `-۱.۱` میشود `-۱`.
 
 `Math.round`
+<<<<<<< HEAD
 : رند کردن به نزدیک ترین عدد صحیح: `۳.۱` میشود `۳`, `۳.۶` میشود `۴` و `-۱.۱` میشود `-۱`.
+=======
+: Rounds to the nearest integer: `3.1` becomes `3`, `3.6` becomes `4`. In the middle cases `3.5` rounds up to `4`, and `-3.5` rounds up to `-3`.
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 
 `Math.trunc` (توسط اینترنت اکسپلورر ساپورت نمیشود)
 : حذف کردن قسمت اعشاری بدون رند کردن: `۳.۱` میشود `۳`, `-۱.۱` میشود `-۱`.
@@ -145,10 +173,19 @@ alert( num.toString(2) );   // 11111111
 
 |   | `Math.floor` | `Math.ceil` | `Math.round` | `Math.trunc` |
 |---|---------|--------|---------|---------|
+<<<<<<< HEAD
 |`۳.۱`|  `۳`    |   `۴`  |    `۳`  |   `۳`   |
 |`۳.۶`|  `۳`    |   `۴`  |    `۴`  |   `۳`   |
 |`-۱.۱`|  `-۲`    |   `-۱`  |    `-۱`  |   `-۱`   |
 |`-۱.۶`|  `-۲`    |   `-۱`  |    `-۲`  |   `-۱`   |
+=======
+|`3.1`|  `3`    |   `4`  |    `3`  |   `3`   |
+|`3.5`|  `3`    |   `4`  |    `4`  |   `3`   |
+|`3.6`|  `3`    |   `4`  |    `4`  |   `3`   |
+|`-1.1`|  `-2`    |   `-1`  |    `-1`  |   `-1`   |
+|`-1.5`|  `-2`    |   `-1`  |    `-1`  |   `-1`   |
+|`-1.6`|  `-2`    |   `-1`  |    `-2`  |   `-1`   |
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 
 
 این توابع تمام حالات کار با قسمت اعشاری یک عدد را پوشش میدهند. اما چطور میتوانیم عدد را تا رقم `n-ام` بعد از اعشار رند کنیم؟
@@ -187,7 +224,11 @@ alert( num.toString(2) );   // 11111111
     alert( num.toFixed(5) ); // "12.34000", صفر اضافه شده تا دقیقا ۵ رقم شود 
     ```
 
+<<<<<<< HEAD
     ما می‌توانیم آن را با کمک عملگر جمع یگانه یا با فراخوانی `Number()` تبدیل کنیم؛ برای مثال بنویسیم  `+num.toFixed(5)`.
+=======
+    We can convert it to a number using the unary plus or a `Number()` call, e.g. write `+num.toFixed(5)`.
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 
 ## محاسبات تقریبی
 
@@ -221,7 +262,17 @@ alert( 0.1 + 0.2 ); // 0.30000000000000004
 
 یک عدد در حافظه به شکل دودویی آن ذخیره میشود، مجموعه‌ای از صفرها و یک‌ها. اما کسرهایی مثل `0.1`، `0.2` که در سیستم اعداد اعشاری ساده به نظر میرسند در اصل کسرهای بی‌پایانی در شکل دودویی خود هستند.
 
+<<<<<<< HEAD
 مقدار  `0.1` چیست؟ مقدار یک که بر ده تقسیم شده، `1/10` یعنی یک دهم. در سیستم اعداد اعشاری چنین اعدادی به سادگی قابل نمایش هستند. آن را با یک سوم `1/3` مقایسه کنید. به کسری بی‌پایان تبدیل می‌شود `0.33333(3)`.
+=======
+```js run
+alert(0.1.toString(2)); // 0.0001100110011001100110011001100110011001100110011001101
+alert(0.2.toString(2)); // 0.001100110011001100110011001100110011001100110011001101
+alert((0.1 + 0.2).toString(2)); // 0.0100110011001100110011001100110011001100110011001101
+```
+
+What is `0.1`? It is one divided by ten `1/10`, one-tenth. In the decimal numeral system, such numbers are easily representable. Compare it to one-third: `1/3`. It becomes an endless fraction `0.33333(3)`.
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 
 بنابراین، تقسیم های از توان ده، قطعا در سیستم اعشاری کار میکند اما تقسیم‌های بر ۳ اینطور نیست. به علت مشابه، در سیستم اعداد دودویی، تقسیم توان‌های ۲ هم قطعا کار میکند اما ۱/۱۰، کسر دودویی بی‌پایانی میشود.
 
@@ -241,7 +292,11 @@ alert( 0.1.toFixed(20) ); // 0.10000000000000000555
 ```smart header="نه تنها جاوااسکریپت"
 این مشکل در دیگر زبان‌های برنامه‌نویسی بسیاری وجود دارد.
 
+<<<<<<< HEAD
 PHP، Java، C، Perl، Ruby دقیقا نتیجه‌ی مشابه را میدهند چراکه بر پایه‌ی فرمت عددی یکسانی بنا شده‌‌اند.
+=======
+PHP, Java, C, Perl, and Ruby give exactly the same result, because they are based on the same numeric format.
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 ```
 
 آیا ما میتوانیم راهی برای حل این مسأله پیدا کنیم؟ طبعا، قابل اطمینان ترین راه حل این است که نتیجه را با کمک متد [toFixed(n)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed) رند کنیم:
@@ -265,7 +320,11 @@ alert( (0.1 * 10 + 0.2 * 10) / 10 ); // 0.3
 alert( (0.28 * 100 + 0.14 * 100) / 100); // 0.4200000000000001
 ```
 
+<<<<<<< HEAD
 پس روش ضرب/تقسیم ارور را کاهش می‌دهد، اما آن را به طور کامل ازبین نمی‌برد.
+=======
+So, the multiply/divide approach reduces the error, but doesn't remove it totally.
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 
 گاهی اوقات می‌توانیم به طور کلی از کسرها فرار کنیم. برای مثال اگر ما با یک فروشگاه سر و کار داریم، می‌توانیم قیمت‌ها را به جای دلار به صورت سنت (cent) ذخیره کنیم. اما اگر یک تخفیف 30 درصدی را اعمال کنیم چه؟ در عمل، فرار کردن از کسرها به ندرت ممکن است. زمانی که نیاز شد فقط آنها را رند کنید تا "دم‌شان" را ببرید.
 
@@ -287,7 +346,11 @@ alert( 9999999999999999 ); // shows 10000000000000000
 
 این به این علت است که علامت با یک بیت مشخص میشود بنابراین هر عدد میتواند مثبت یا منفی باشد، حتی صفر.
 
+<<<<<<< HEAD
 در اکثر حالات، تفاوت غیرقابل توجه است، چراکه عملگرها برای داشتن رفتار یکسان وفق داده شده‌ند. 
+=======
+In most cases, the distinction is unnoticeable, because operators are suited to treat them as the same.
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 ```
 
 ## آزمون‌ها: isFinite و isNaN
@@ -336,7 +399,11 @@ alert( isFinite(num) );
 ````smart header="`Number.isNaN` و `Number.isFinite`"
 متدهای [Number.isNaN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/isNaN) و [Number.isFinite](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/isFinite) نسخه‌های «سخت‌گیرتر» از تابع‌های `isNaN` و `isFinite` هستند. آن‌ها به طور خودکار آرگومان خود را به عدد تبدیل نمی‌کنند بلکه در عوض بررسی می‌کنند که آیا آرگومان به نوع `number` تعلق دارد یا خیر. 
 
+<<<<<<< HEAD
 - `Number.isNaN(value)` اگر آرگومان به نوع `number` تعلق داشته باشد و برابر با `NaN` باشد مقدار `true` را برمی‌گرداند. در غیر این صورت `false` برگردانده می‌شود.
+=======
+- `Number.isNaN(value)` returns `true` if the argument belongs to the `number` type and it is `NaN`. In any other case, it returns `false`.
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 
     ```js run
     alert( Number.isNaN(NaN) ); // true
@@ -347,7 +414,11 @@ alert( isFinite(num) );
     alert( isNaN("str") ); // true را دریافت می‌کند پس NaN را به یک عدد تبدیل می‌کند و از این تبدیل "str" رشته isNaN چون
     ```
 
+<<<<<<< HEAD
 - `Number.isFinite(value)` اگر آرگومان به نوع `number` تعلق داشته باشد و `NaN/Infinity/-Infinity` نباشد مقدار `true` برگردانده می‌شود. در غیر این صورت `false` را برمی‌گرداند.
+=======
+- `Number.isFinite(value)` returns `true` if the argument belongs to the `number` type and it is not `NaN/Infinity/-Infinity`. In any other case, it returns `false`.
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 
     ```js run
     alert( Number.isFinite(123) ); // true
@@ -365,8 +436,13 @@ alert( isFinite(num) );
 ```smart header="مقایسه کنید با `Object.is`"
 یک متد درون‌ساخت خاص به نام [Object.is](mdn:js/Object/is) وجود دارد که مقادیر را مثل `===` مقایسه میکند، اما برای دو حالت مرزی قابل اعتمادتر است:
 
+<<<<<<< HEAD
 ۱. با `NaN` کار میکند:  `Object.is(NaN, NaN) === true`، که چیز خوبیست.
 ۲. مقادیر `0` و `-0` متفاوت هستند: `Object.is(0, -0) === false`، به ندرت اهمیت دارد، اما این مقادیر در اصل متفاوتند.
+=======
+1. It works with `NaN`: `Object.is(NaN, NaN) === true`, that's a good thing.
+2. Values `0` and `-0` are different: `Object.is(0, -0) === false`, technically that's correct because internally the number has a sign bit that may be different even if all other bits are zeroes.
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 
 در تمام حالات دیگر، `Object.is(a, b)` با `a === b` برابراست.
 
@@ -384,7 +460,11 @@ alert( +"100px" ); // NaN
 
 تنها استثنا، کاراکتر خالی در شروع یا انتهای رشته حرفی هستند که آنها در تابع در نظر گرفته نمی‌شوند.
 
+<<<<<<< HEAD
 اما در دنیای واقعی، ما مقادیر در واحدهای مختلفی داریم، مثل `"100px"` یا `"12pt"` در CSS. همینطور در بسیاری از کشورها، نماد پولی آنها بعد از مقدار عددی ظاهر میشود. مثل `"19€"`، که میخواهیم آن مقدار را از قسمت حرفی جدا کنیم.
+=======
+But in real life, we often have values in units, like `"100px"` or `"12pt"` in CSS. Also in many countries, the currency symbol goes after the amount, so we have `"19€"` and would like to extract a numeric value out of that.
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 
 به همین علت است که `parseInt` و `parseFloat` استفاده می‌شوند.
 
@@ -478,4 +558,8 @@ alert( parseInt('2n9c', 36) ); // 123456
 
 توابع ریاضی بیشتر:
 
+<<<<<<< HEAD
 - [Math](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Math) شئ را وقتی به آنها نیاز دارید ببینید. کتابخانه‌ی بسیار کوچکیست اما توابع پایه‌ای را پوشش می‌دهد.
+=======
+- See the [Math](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Math) object when you need them. The library is very small but can cover basic needs.
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
