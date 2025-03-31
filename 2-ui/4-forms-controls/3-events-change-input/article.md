@@ -97,7 +97,11 @@
 
 در تمام مرورگرها به جز Firefox ممنوع است که با `dispatchEvent` یک سری "custom" clipboard event ایجاد کنیم. و حتی اگر بخاهیم چنین eventهایی را ارسال کنیم، مضخصات به وضوح بیان می‌کنند که چنین "syntetic" eventهایی نباید به clipboard دسترسی داشته باشند.
 
+<<<<<<< HEAD
 حتی اگر کسی تصمیم بگیرد که `event.clipboardData` را در یک event handler ذخیره کند و بعدا به آن دسترسی داشته باشد -- کار نخواهد کرد.
+=======
+It's forbidden to generate "custom" clipboard events with `dispatchEvent` in all browsers except Firefox. And even if we manage to dispatch such event, the specification clearly states that such "synthetic" events must not provide access to the clipboard.
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 برای تکرار، [event.clipboardData](https://www.w3.org/TR/clipboard-apis/#clipboardevent-clipboarddata) تنها در زمینه‌ی user-initiated event handler کار می‌کند.
 

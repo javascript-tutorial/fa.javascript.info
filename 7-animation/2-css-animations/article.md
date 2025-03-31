@@ -463,7 +463,11 @@ boat.onclick = function() {
 
 تفکیک `تبدیل` با `تصادف` معمولاً می‌تواند اکثر نیازهای ما را برطرف کند و انیمیشن‌های روان و خوش‌نظری ارائه کند.
 
+<<<<<<< HEAD
 برای مثال، در اینجا با کلیک بر روی عنصر «#boat» کلاسی با `transform: translateX(300)` و `opacity: 0` اضافه می‌شود، بنابراین باعث می‌شود «300px» به سمت راست حرکت کند و ناپدید شود:
+=======
+For example, here clicking on the `#boat` element adds the class with `transform: translateX(300px)` and `opacity: 0`, thus making it move `300px` to the right and disappear:
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 ```html run height=260 autorun no-beautify
 <img src="https://js.cx/clipart/boat.png" id="boat">
