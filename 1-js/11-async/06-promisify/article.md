@@ -1,10 +1,10 @@
-# Promisification
+# پرومیس‌سازی (Promisification)
 
-"Promisification" is a long word for a simple transformation. It's the conversion of a function that accepts a callback into a function that returns a promise.
+«پرومیس‌سازی» واژه‌ای طولانی برای یک تبدیل ساده است. این به معنای تبدیل یک تابعی است که از callback استفاده می‌کند، به تابعی که یک promise بازمی‌گرداند.
 
-Such transformations are often required in real-life, as many functions and libraries are callback-based. But promises are more convenient, so it makes sense to promisify them.
+چنین تبدیل‌هایی در دنیای واقعی اغلب لازم هستند، چرا که بسیاری از توابع و کتابخانه‌ها مبتنی بر callback هستند. اما استفاده از promiseها راحت‌تر و خواناتر است، بنابراین منطقی است که آن‌ها را پرومیس‌سازی کنیم.
 
-For instance, we have `loadScript(src, callback)` from the chapter <info:callbacks>.
+برای مثال، تابع loadScript(src, callback) را از فصل info:callbacks در نظر بگیرید.
 
 ```js run
 function loadScript(src, callback) {
@@ -21,7 +21,7 @@ function loadScript(src, callback) {
 // loadScript('path/script.js', (err, script) => {...})
 ```
 
-Let's promisify it. The new `loadScriptPromise(src)` function achieves the same result, but it accepts only `src` (no `callback`) and returns a promise.
+بیایید آن را پرومیس‌سازی کنیم. تابع جدید loadScriptPromise(src) همان نتیجه را به دست می‌دهد، اما فقط src را به عنوان ورودی می‌پذیرد (بدون callback) و یک promise بازمی‌گرداند.
 
 ```js
 let loadScriptPromise = function(src) {
@@ -37,13 +37,13 @@ let loadScriptPromise = function(src) {
 // loadScriptPromise('path/script.js').then(...)
 ```
 
-Now `loadScriptPromise` fits well in promise-based code.
+اکنون loadScriptPromise به خوبی با کدی که بر پایه‌ی promise نوشته شده سازگار است.
 
-As we can see, it delegates all the work to the original `loadScript`, providing its own callback that translates to promise `resolve/reject`.
+همان‌طور که می‌بینیم، این تابع تمام کار را به تابع اصلی loadScript واگذار می‌کند و callback مخصوص به خود را به آن می‌دهد که نتیجه را به resolve/reject در promise تبدیل می‌کند.
 
-In practice we'll probably need to promisify many functions, so it makes sense to use a helper. We'll call it `promisify(f)`: it accepts a to-promisify function `f` and returns a wrapper function.
+در عمل، احتمالاً نیاز خواهیم داشت که توابع زیادی را پرومیس‌سازی کنیم، بنابراین منطقی است که از یک تابع کمکی استفاده کنیم. ما آن را promisify(f) می‌نامیم: این تابع، یک تابع f را که می‌خواهیم پرومیس‌سازی کنیم دریافت می‌کند و یک تابع جدید (wrapper) بازمی‌گرداند.
 
-That wrapper does the same as in the code above: returns a promise and passes the call to the original `f`, tracking the result in a custom callback:
+این تابع wrapper همان کاری را انجام می‌دهد که در کد بالا دیدیم: یک promise بازمی‌گرداند و فراخوانی تابع اصلی f را انجام می‌دهد، و نتیجه را از طریق یک callback سفارشی دنبال می‌کند.
 
 ```js
 function promisify(f) {
@@ -69,11 +69,11 @@ let loadScriptPromise = promisify(loadScript);
 loadScriptPromise(...).then(...);
 ```
 
-Here we assume that the original function expects a callback with two arguments `(err, result)`. That's what we encounter most often. Then our custom callback is in exactly the right format, and `promisify` works great for such a case.
+در اینجا فرض می‌کنیم که تابع اصلی، یک callback با دو آرگومان (err, result) را انتظار دارد. این رایج‌ترین حالتی است که با آن مواجه می‌شویم. در این صورت، callback سفارشی ما دقیقاً در قالب مناسب قرار دارد و promisify برای چنین حالتی بسیار خوب عمل می‌کند.
 
-But what if the original `f` expects a callback with more arguments `callback(err, res1, res2, ...)`?
+اما اگر تابع اصلی f یک callback با آرگومان‌های بیشتری بخواهد، مثل callback(err, res1, res2, ...) چه می‌شود؟
 
-Here's a more advanced version of `promisify`: if called as `promisify(f, true)`, the promise result will be an array of callback results `[res1, res2, ...]`:
+در اینجا نسخه پیشرفته‌تری از promisify را داریم: اگر آن را به صورت promisify(f, true) فراخوانی کنیم، نتیجه‌ی promise به صورت یک آرایه از نتایج callback خواهد بود: [res1, res2, ...].
 
 ```js
 // promisify(f, true) to get array of results
@@ -101,14 +101,14 @@ f = promisify(f, true);
 f(...).then(arrayOfResults => ..., err => ...)
 ```
 
-For more exotic callback formats, like those without `err` at all: `callback(result)`, we can promisify such functions manually without using the helper.
+برای قالب‌های غیرمعمول‌تر از callback، مثل آن‌هایی که اصلاً err ندارند، مانند callback(result)، می‌توانیم این توابع را به صورت دستی پرومیس‌سازی کنیم، بدون استفاده از تابع کمکی.
 
-There are also modules with a bit more flexible promisification functions, e.g. [es6-promisify](https://github.com/digitaldesignlabs/es6-promisify). In Node.js, there's a built-in `util.promisify` function for that.
+همچنین ماژول‌هایی وجود دارند که توابع پرومیس‌سازی انعطاف‌پذیرتری ارائه می‌دهند، مانند es6-promisify. در Node.js نیز یک تابع داخلی به نام util.promisify برای این کار وجود دارد.
 
 ```smart
-Promisification is a great approach, especially when you use `async/await` (see the next chapter), but not a total replacement for callbacks.
+پرومیس‌سازی رویکرد بسیار خوبی است، به‌ویژه زمانی که از async/await استفاده می‌کنید (به فصل بعدی مراجعه کنید)، اما جایگزین کامل و همیشگی برای callbackها نیست.
 
-Remember, a promise may have only one result, but a callback may technically be called many times.
+به خاطر داشته باشید که یک promise فقط می‌تواند یک نتیجه داشته باشد، اما یک callback از نظر فنی ممکن است چندین بار فراخوانی شود.
 
-So promisification is only meant for functions that call the callback once. Further calls will be ignored.
+بنابراین، پرومیس‌سازی فقط برای توابعی مناسب است که callback را تنها یک بار صدا می‌زنند. فراخوانی‌های بعدی نادیده گرفته خواهند شد.
 ```
