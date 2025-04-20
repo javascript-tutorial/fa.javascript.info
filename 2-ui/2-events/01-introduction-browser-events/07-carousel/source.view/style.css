@@ -30,9 +30,9 @@ ul {
 ul img {
   width: 130px;
   height: 130px;
-  display: block; /* removes extra space near images */
+  display: block; /* حذف فاصله‌های اضافی نزدیک عکس‌ها */
 }
 
 ul li {
-  display: inline-block; /* removes extra space between list items
+  display: inline-block; /* حذف فاصله اضافی بین آیتم‌های لیست */
 }

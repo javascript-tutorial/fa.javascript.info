@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# Sort by field
+# مرتب‌سازی براساس حوزه
 
-We've got an array of objects to sort:
+ما یک ارایه از شیءها را برای مرتب‌سازی دریافت کرده‌ایم:
 
 ```js
 let users = [
@@ -14,23 +14,23 @@ let users = [
 ];
 ```
 
-The usual way to do that would be:
+راه معمولی برای انجام آن می‌تواند این باشد:
 
 ```js
-// by name (Ann, John, Pete)
+// (Ann، John، Pete) براساس اسم
 users.sort((a, b) => a.name > b.name ? 1 : -1);
 
-// by age (Pete, Ann, John)
+// (Pete، Ann، John) براساس سن
 users.sort((a, b) => a.age > b.age ? 1 : -1);
 ```
 
-Can we make it even less verbose, like this?
+آیا می‌توانیم آن را کوتاه‌تر کنیم، مثلا اینگونه؟
 
 ```js
 users.sort(byField('name'));
 users.sort(byField('age'));
 ```
 
-So, instead of writing a function, just put `byField(fieldName)`.
+پس به جای اینکه یک تابع بنویسیم، فقط `byField(fieldName)` را قرار می‌دهیم.
 
-Write the function `byField` that can be used for that.
+تابع `byField` را بنویسید که می‌تواند برای این کار استفاده شود.

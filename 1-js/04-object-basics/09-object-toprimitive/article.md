@@ -1,93 +1,117 @@
 
-# Object to primitive conversion
+# تبدیل شیء به مقدار اصلی
 
-What happens when objects are added `obj1 + obj2`, subtracted `obj1 - obj2` or printed using `alert(obj)`?
+زمانی که شیءها بهم اضافه شوند `obj1 + obj2`، از هم کم شوند `obj1 - obj2` یا با استفاده از `alert(obj)` چاپ شوند چه اتفاقی می‌افتد؟
 
-In that case, objects are auto-converted to primitives, and then the operation is carried out.
+جاوااسکریپت اجازه نمی‌دهد که چگونگی کار کردن عملگرها روی شیءها را شخصی‌سازی کنیم. بر خلاف بعضی از زبان‌های برنامه‌نویسی، مثل Ruby یا C++، ما نمی‌توانیم یک متد خاص شیء پیاده‌سازی کنیم تا اضافه کردن (یا بقیه عملگرها) را کنترل کند.
 
-In the chapter <info:type-conversions> we've seen the rules for numeric, string and boolean conversions of primitives. But we left a gap for objects. Now, as we know about methods and symbols it becomes possible to fill it.
+در صورت وجود چنین عملیاتی، شیءها به طور خودکار به مقدار اصلی تبدیل و سپس عملیات با این مقدارهای اصلی انجام می‌شوند و نتایج به شکل یک مقدار اصلی است.
 
-1. All objects are `true` in a boolean context. There are only numeric and string conversions.
-2. The numeric conversion happens when we subtract objects or apply mathematical functions. For instance, `Date` objects (to be covered in the chapter <info:date>) can be subtracted, and the result of `date1 - date2` is the time difference between two dates.
-3. As for the string conversion -- it usually happens when we output an object like `alert(obj)` and in similar contexts.
+این محدودیت مهمی است چون نتیجه `obj1 + obj2` (یا عملیات ریاضی دیگری) نمی‌تواند شیء دیگری باشد!
 
-## ToPrimitive
+برای مثال ما نمی‌توانیم کاری کنیم که شیءها بردارها یا ماتریس‌ها (یا دستاوردها یا هرچیزی) را نمایش دهند، آن‌ها را بهم اضافه کنند و توقع یک شیء «جمع‌شده» را به عنوان نتیجه داشته باشیم. چنین شاهکارهای معماری به طور خودکار «خارج از بحث» هستند.
 
-We can fine-tune string and numeric conversion, using special object methods.
+پس چون نمی‌توانیم در این باره از لحاظ فنی کار خاصی کنیم، در پروژه‌های واقعی شیءها همراه با ریاضیات استفاده نمی‌شوند. زمانی که اتفاق می‌افتد، معمولا بخاطر یک اشتباه کدنویسی است.
 
-There are three variants of type conversion, so-called "hints", described in the [specification](https://tc39.github.io/ecma262/#sec-toprimitive):
+در این فصل ما چگونگی تبدیل یک شیء به مقدار اصلی و شخصی‌سازی آن را پوشش می‌دهیم.
+
+ما دو هدف داریم:
+
+1. این کار به ما اجازه می‌دهد که متوجه شویم در صورت بروز اشتباه‌های کدنویسی چه چیزی در حال رخ دادن است، زمانی که چنین عملیاتی به صورت تصادفی اتفاق افتاد.
+2. استثناهایی وجود دارد که چنین عملیاتی مجاز هستند و خوب بنظر می‌رسند. مثلا تفریق یا مقایسه تاریخ‌ها (شیءهای `Date`). ما بعدا به سراغ آن می‌رویم.
+
+## قوانین تبدیل
+
+در فصل <info:type-conversions> ما قوانینی برای تبدیل عددی، رشته‌ای و بولین مقدارهای اصلی را دیدیم. اما ابهامی برای شیءها به جا گذاشتیم. حالا، چون درباره متدها و سمبل‌ها می‌دانیم این موضوع برای پوشش دادن آماده است.
+
+1. تبدیل به بولین وجود ندارد. در زمینه بولین تمام شیءها `true` هستند. فقط تبدیل عددی و رشته‌ای وجود دارد.
+2. تبدیل عددی زمانی که ما شیءها را از هم کم می‌کنیم یا تابع‌های ریاضی را اعمال می‌کنیم اتفاق می‌افتد. برای مثال، شیءهای `Date` (در فصل <info:date> پوشش داده می‌شوند) می‌توانند از هم کم شوند و نتیجه `date1 - date2` برابر با تفاوت زمانی بین دو تاریخ است.
+3. همینطور برای تبدیل رشته‌ای -- این تبدیل زمانی که ما یک شیء را خروجی می‌گیریم مثل `alert(obj)` و در زمینه‌های مشابه اتفاق می‌افتد.
+
+می‌توانیم با استفاده از متدهای خاص شیء تبدیل رشته‌ای و عددی را پیاده‌سازی کنیم.
+
+حال بیایید به جزئیات فنی وارد شویم چون تنها راه پوشش دادن این موضوع همین است.
+
+## جزءها (Hints)
+
+جاوااسکریپت چگونه تشخیص می‌دهد کدام تبدیل را اعمال کند؟
+
+سه نوع تبدیل داده وجود دارد که در موقعیت‌های گوناگون اتفاق می‌افتد. همانطور که در [مشخصات زبان](https://tc39.github.io/ecma262/#sec-toprimitive) گفته شده، به آن‌ها «جزء (hint)» می‌گویند:
 
 `"string"`
-: For an object-to-string conversion, when we're doing an operation on an object that expects a string, like `alert`:
+: برای تبدیل شیء به رشته، زمانی که ما در حال انجام کاری روی شیءای هستیم که توقع یک رشته دارد، مثل `alert`:
 
     ```js
-    // output
+    // خروجی
     alert(obj);
 
-    // using object as a property key
+    // استفاده از شیء به عنوان کلید ویژگی
     anotherObj[obj] = 123;
     ```
 
 `"number"`
-: For an object-to-number conversion, like when we're doing maths:
+: برای تبدیل شیء به عدد، مثل زمانی که ما از ریاضی استفاده می‌کنیم:
 
     ```js
-    // explicit conversion
+    // تبدیل واضح
     let num = Number(obj);
 
-    // maths (except binary plus)
-    let n = +obj; // unary plus
+    // ریاضیات (به غیر از عملگر مثبت دوگانه)
+    let n = +obj; // مثبت دوگانه
     let delta = date1 - date2;
 
-    // less/greater comparison
+    // مقایسه بزرگ‌تر/کمتر
     let greater = user1 > user2;
     ```
 
+    اکثر تابع‌های ریاضیاتی درون‌ساخت هم چنین تبدیلی را شامل می‌شوند.
+
 `"default"`
-: Occurs in rare cases when the operator is "not sure" what type to expect.
+: در موارد کمیاب زمانی که عملگر «مطمئن نیست» که چه نوعی را دریافت می‌کند.
 
-    For instance, binary plus `+` can work both with strings (concatenates them) and numbers (adds them), so both strings and numbers would do. So if the a binary plus gets an object as an argument, it uses the `"default"` hint to convert it.
+    برای مثال، عملگر مثبت دوگانه `+` هم می‌تواند با رشته‌ها کار کند (آن‌ها را ادغام کند) و هم با عددها (آن‌ها را اضافه می‌کند). پس اگر یک مثبت دوگانه شیءای را دریافت کند، از جزء `"default"` برای تبدیل آن استفاده می‌کند.
 
-    Also, if an object is compared using `==` with a string, number or a symbol, it's also unclear which conversion should be done, so the `"default"` hint is used.
+    همچنین، اگر شیءای با استفاده از `==` با یک رشته، عدد یا سمبل مقایسه شود، معلوم نیست که کدام تبدیل باید انجام شود پس جزء `"default"` استفاده می‌شود.
 
     ```js
-    // binary plus uses the "default" hint
+    // استفاده می‌کند "default" مثبت دوگانه از جزء
     let total = obj1 + obj2;
 
-    // obj == number uses the "default" hint
+    // استفاده می‌کند "default" از جزء obj == number
     if (user == 1) { ... };
     ```
 
-    The greater and less comparison operators, such as `<` `>`, can work with both strings and numbers too. Still, they use the `"number"` hint, not `"default"`. That's for historical reasons.
+    عملگرهای مقایسه کمتر و بزرگ‌تر، مانند `<` `>`، می‌توانند هم با رشته‌ها و هم با عددها کار کنند. با این حال، این عملگرها از جزء `"number"` استفاده می‌کنند نه `"default"` بنا به دلایلی مربوط به گذشته.
 
-    In practice though, we don't need to remember these peculiar details, because all built-in objects except for one case (`Date` object, we'll learn it later) implement `"default"` conversion the same way as `"number"`. And we can do the same.
+اگرچه در عمل، قضایا کمی ساده‌تر هستند. 
+    
+تمام شیءهای درون‌ساخت به جز یک مورد (شیء `Date`، بعدا آن را یاد خواهیم گرفت) تبدیل `"default"` را مانند `"number"` پیاده‌سازی می‌کنند. و احتمالا ما هم باید همین کار را کنیم.
 
-```smart header="No `\"boolean\"` hint"
-Please note -- there are only three hints. It's that simple.
+با این حال، دانشتن درباره تمام 3 جزء مهم است. به زودی دلیل آن را خواهیم دید.
 
-There is no "boolean" hint (all objects are `true` in boolean context) or anything else. And if we treat `"default"` and `"number"` the same, like most built-ins do, then there are only two conversions.
-```
+**برای انجام تبدیل‌ها، جاوااسکریپت سعی می‌کند که سه متد شیء را پیدا و فراخوانی کند:**
 
-**To do the conversion, JavaScript tries to find and call three object methods:**
+1. فراخوانی `obj[Symbol.toPrimitive](hint)` - متدی شامل کلید سمبلی `Symbol.toPrimitive` (سمبلِ سیستم)، اگر چنین متدی وجود داشته باشد،
+2. در غیر این صورت اگر جزء `"string"` باشد
+    - متد `obj.toString()` و `obj.valueOf()` را امتحان کن، هر کدام که وجود داشته باشد.
+3. در غیر این صورت اگر جزء `"number"` یا `"default"` باشد
+    - متد `obj.valueOf()` and `obj.toString()` را امتحان کن، هر کدام که وجود داشته باشد.
 
-1. Call `obj[Symbol.toPrimitive](hint)` - the method with the symbolic key `Symbol.toPrimitive` (system symbol), if such method exists,
-2. Otherwise if hint is `"string"`
-    - try `obj.toString()` and `obj.valueOf()`, whatever exists.
-3. Otherwise if hint is `"number"` or `"default"`
-    - try `obj.valueOf()` and `obj.toString()`, whatever exists.
+## متد Symbol.toPrimitive
 
-## Symbol.toPrimitive
-
-Let's start from the first method. There's a built-in symbol named `Symbol.toPrimitive` that should be used to name the conversion method, like this:
+بیایید از اولین متد شروع کنیم. یک سمبل درون‌ساخت به نام `Symbol.toPrimitive` وجود دارد که باید برای نام‌گذاری متد تبدیل استفاده شود، مثلا اینگونه:
 
 ```js
 obj[Symbol.toPrimitive] = function(hint) {
-  // must return a primitive value
-  // hint = one of "string", "number", "default"
+  // اینجا کدی برای تبدیل این شیء به مقدار اصلی قرار می‌گیرد
+  // این کد باید یک مقدار اصلی برگرداند
+  // "string" ،"number" ،"default" یکی از = hint
 };
 ```
 
-For instance, here `user` object implements it:
+اگر متد `Symbol.toPrimitive` وجود داشته باشد، برای تمام جزءها استفاده می‌شود و متد دیگری نیاز نیست.
+
+برای مثال، اینجا شیء `user` این متد را پیاده‌سازی می‌کند:
 
 ```js run
 let user = {
@@ -100,32 +124,31 @@ let user = {
   }
 };
 
-// conversions demo:
+// دموی تبدیل کردن:
 alert(user); // hint: string -> {name: "John"}
 alert(+user); // hint: number -> 1000
 alert(user + 500); // hint: default -> 1500
 ```
 
-As we can see from the code, `user` becomes a self-descriptive string or a money amount depending on the conversion. The single method `user[Symbol.toPrimitive]` handles all conversion cases.
+همانطور که از کد می‌بینیم، با توجه به تبدیل، `user` به رشته‌ای خودتعریف‌کننده یا مقداری پول تبدیل می‌شود. متد `user[Symbol.toPrimitive]` به تنهایی تمام موارد تبدیل را به عهده می‌گیرد.
 
+## متد toString/valueOf
 
-## toString/valueOf
+اگر `Symbol.toPrimitive` وجود نداشته باشد، سپس جاوااسکریپت سعی می‌کند که متدهای `toString` و `valueOf`  را پیدا کند:
 
-Methods `toString` and `valueOf` come from ancient times. They are not symbols (symbols did not exist that long ago), but rather "regular" string-named methods. They provide an alternative "old-style" way to implement the conversion.
+- برای جزء "string": `toString` و اگر این متد وجود نداشت یا به جای یک مقدار اصلی شیءای را برگرداند، سپس `valueOf` (پس `toString` برای تبدیل‌های رشته‌ای اولویت دارد).
+- برای بقیه جزءها: `valueOf` و اگر این متد وجود نداشت یا به جای یک مقدار اصلی شیءای را برگرداند، سپس `toString` (پس `valueOf` برای ریاضیات اولویت دارد).
 
-If there's no `Symbol.toPrimitive` then JavaScript tries to find them and try in the order:
+متدهای `toString` و `valueOf` از زمان‌های گذشته وجود دارند. آن‌ها سمبل نیستند (سمبل‌ها انقدر قدیمی نیستند) بلکه متدهای «معمولی» هستند که اسمی رشته‌ای دارد. آن‌ها راهی جایگزین برای پیاده‌سازی تبدیل به «سبک قدیمی» را  فراهم می‌کنند.
 
-- `toString -> valueOf` for "string" hint.
-- `valueOf -> toString` otherwise.
+این متدها باید یک مقدار اصلی برگردانند. اگر `toString` یا `valueOf` یک شیء برگرداند، سپس این مقدار نادیده گرفته می‌شود (مثل این است که متدی وجود نداشته باشد).
 
-These methods must return a primitive value. If `toString` or `valueOf` returns an object, then it's ignored (same as if there were no method).
+به صورت پیش‌فرض، یک شیء ساده متدهای `toString` و `valueOf` پایین را دارد:
 
-By default, a plain object has following `toString` and `valueOf` methods:
+- متد `toString` رشته `"[object Object]"` را برمی‌گرداند.
+- متد `valueOf` خود شیء را برمی‌گرداند.
 
-- The `toString` method returns a string `"[object Object]"`.
-- The `valueOf` method returns the object itself.
-
-Here's the demo:
+اینجا یک دمو داریم:
 
 ```js run
 let user = {name: "John"};
@@ -134,25 +157,25 @@ alert(user); // [object Object]
 alert(user.valueOf() === user); // true
 ```
 
-So if we try to use an object as a string, like in an `alert` or so, then by default we see `[object Object]`.
+پس اگر ما سعی کنیم که از شیء به عنوان یک رشته استفاده کنیم، مثلا درون `alert` یا بقیه، سپس به صورت پیش‌فرض ما `[object Object]` را می‌بینیم.
 
-And the default `valueOf` is mentioned here only for the sake of completeness, to avoid any confusion. As you can see, it returns the object itself, and so is ignored. Don't ask me why, that's for historical reasons. So we can assume it doesn't exist.
+متد `valueOf` پیش‌فرض فقط برای کامل بودن مطالب اینجا گفته شد تا از هر سردرگمی جلوگیری شود. همانطور که می‌بینید، خود شیء را برمی‌گرداند پس نادیده گرفته می‌شود. نپرسید چرا، دلیلش مربوط به گذشته است. پس ما می‌توانیم فرض کنیم که این متد وجود ندارد.
 
-Let's implement these methods.
+بیایید این متدها را برای شخصی‌سازی تبدیل پیاده‌سازی کنیم.
 
-For instance, here `user` does the same as above using a combination of `toString` and `valueOf` instead of `Symbol.toPrimitive`:
+برای مثال، اینجا `user` با استفاده از ترکیب `toString` و `valueOf` به جای `Symbol.toPrimitive` کار یکسانی با کد بالا را انجام می‌دهد:
 
 ```js run
 let user = {
   name: "John",
   money: 1000,
 
-  // for hint="string"
+  // hint="string" به ازای
   toString() {
     return `{name: "${this.name}"}`;
   },
 
-  // for hint="number" or "default"
+  // "default" یا hint="number" به ازای
   valueOf() {
     return this.money;
   }
@@ -164,9 +187,9 @@ alert(+user); // valueOf -> 1000
 alert(user + 500); // valueOf -> 1500
 ```
 
-As we can see, the behavior is the same as the previous example with `Symbol.toPrimitive`.
+همانطور که می‌بینیم، رفتار این کد با مثال قبل که شامل `Symbol.toPrimitive` بود یکسان است.
 
-Often we want a single "catch-all" place to handle all primitive conversions. In this case, we can implement `toString` only, like this:
+اغلب اوقات ما یک چیز «همه‌گیر» می‌خواهیم که تمام تبدیل‌های مقدار اصلی را کنترل کند. در این مورد، می‌توانیم فقط `toString` را پیاده‌سازی کنیم، مثلا اینگونه:
 
 ```js run
 let user = {
@@ -181,47 +204,47 @@ alert(user); // toString -> John
 alert(user + 500); // toString -> John500
 ```
 
-In the absence of `Symbol.toPrimitive` and `valueOf`, `toString` will handle all primitive conversions.
+در نبود `Symbol.toPrimitive` و `valueOf`، متد `toString` تمام تبدیل‌های مقدار اصلی را به عهده می‌گیرد.
 
-## Return types
+### یک تبدیل می‌تواند هر نوع مقدار اصلی را برگرداند
 
-The important thing to know about all primitive-conversion methods is that they do not necessarily return the "hinted" primitive.
+چیز مهمی که باید درباره تمام متدهای تبدیل به مقدار اصلی بدانیم این است که آن‌ها حتما مقدار اصلی «جزئی» را برنمی‌گردانند.
 
-There is no control whether `toString` returns exactly a string, or whether `Symbol.toPrimitive` method returns a number for a hint `"number"`.
+هیچ کنترلی بر روی اینکه `toString` دقیقا رشته برگرداند یا اینکه متد `Symbol.toPrimitive` برای جزء `"number"` حتما یک عدد برگرداند نیست.
 
-The only mandatory thing: these methods must return a primitive, not an object.
+تنها مورد الزامی: این متدها باید یک مقدار اصلی برگردانند نه یک شیء.
 
-```smart header="Historical notes"
-For historical reasons, if `toString` or `valueOf` returns an object, there's no error, but such value is ignored (like if the method didn't exist). That's because in ancient times there was no good "error" concept in JavaScript.
+```smart header="نکاتی مربوط به قدیم"
+بنا به دلایلی مربوط به گذشته، اگر `toString` یا `valueOf` یک شیء برگرداند، اروری ایجاد نمی‌شود، اما چنین مقداری نادیده گرفته می‌شود (انگار که متد وجود ندارد). به این دلیل که در گذشته مفهوم «ارور» مناسبی در جاوااسکریپت وجود نداشت.
 
-In contrast, `Symbol.toPrimitive` *must* return a primitive, otherwise there will be an error.
+در مقابل، `Symbol.toPrimitice` *باید* مقدار اصلی برگرداند، در غیر این صورت یک ارور خواهیم داشت.
 ```
 
-## Further conversions
+## تبدیل‌های بیشتر
 
-As we know already, many operators and functions perform type conversions, e.g. multiplication `*` converts operands to numbers.
+همانطور که از قبل می‌دانیم، بسیاری از عملگرها و تابع‌ها تبدیل نوع داده را انجام می‌دهند، مثلا عملگر ضرب `*` عملوندها را به عدد تبدیل می‌کند.
 
-If we pass an object as an argument, then there are two stages:
-1. The object is converted to a primitive (using the rules described above).
-2. If the resulting primitive isn't of the right type, it's converted.
+اگر ما شیء را به عنوان یک آرگومان پاس دهیم سپس دو مرحله از محاسبات وجود خواهد داشت:
+1. شیء به یک مقدار اصلی تبدیل می‌شود (با استفاده از قوانینی که بالاتر گفتیم).
+2. اگر برای محاسبات بعدی لازم باشد، مقدار اصلی حاصل باز هم تبدیل می‌شود.
 
-For instance:
+برای مثال:
 
 ```js run
 let obj = {
-  // toString handles all conversions in the absence of other methods
+  // در نبود بقیه متدها تمام تبدیل‌ها را به عهده می‌گیرد toString
   toString() {
     return "2";
   }
 };
 
-alert(obj * 2); // 4, object converted to primitive "2", then multiplication made it a number
+alert(obj * 2); // شیء به مقدار اصلی "2" تبدیل شد، عملگر ضرب آن را به عدد تبدیل کرد، 4
 ```
 
-1. The multiplication `obj * 2` first converts the object to primitive (that's a string `"2"`).
-2. Then `"2" * 2` becomes `2 * 2` (the string is converted to number).
+1. ضرب `obj * 2` ابتدا شیء را به مقدار اصلی تبدیل می‌کند (برابر است با رشته `"2"`).
+2. سپس `"2" * 2` تبدیل می‌شود به `2 * 2` (رشته به عدد تبدیل می‌شود).
 
-Binary plus will concatenate strings in the same situation, as it gladly accepts a string:
+عملگر مثبت دوگانه همانطور که با خوشحالی یک رشته را قبول می‌کند، رشته‌ها را در موقعیت یکسان ادغام می‌کند:
 
 ```js run
 let obj = {
@@ -230,26 +253,28 @@ let obj = {
   }
 };
 
-alert(obj + 2); // 22 ("2" + 2), conversion to primitive returned a string => concatenation
+alert(obj + 2); // تبدیل به مقدار اصلی یک رشته برگرداند => ادغام، (2 + "2") 22
 ```
 
-## Summary
+## خلاصه
 
-The object-to-primitive conversion is called automatically by many built-in functions and operators that expect a primitive as a value.
+تبدیل شیء به مقدار اصلی توسط بسیاری از تابع‌ها و عملگرهای درون‌ساخت که مقداری اصلی را به عنوان ورودی قبول می‌کنند به طور خودکار فراخوانی می‌شود.
 
-There are 3 types (hints) of it:
-- `"string"` (for `alert` and other operations that need a string)
-- `"number"` (for maths)
-- `"default"` (few operators)
+سه نوع (جزء) از آن وجود دارد:
+- `"string"` (برای `alert` و عملیات دیگر که به رشته نیاز دارند)
+- `"number"` (برای ریاضیات)
+- `"default"` (برای عملگرها، معمولا شیءها آن را مانند `"number"` پیاده‌سازی می‌کنند)
 
-The specification describes explicitly which operator uses which hint. There are very few operators that "don't know what to expect" and use the `"default"` hint. Usually for built-in objects `"default"` hint is handled the same way as `"number"`, so in practice the last two are often merged together.
+مشخصات زبان به طور واضح بیان کرده است که کدام عملگر از کدام جزء استفاده می‌کند.
 
-The conversion algorithm is:
+الگوریتم تبدیل:
 
-1. Call `obj[Symbol.toPrimitive](hint)` if the method exists,
-2. Otherwise if hint is `"string"`
-    - try `obj.toString()` and `obj.valueOf()`, whatever exists.
-3. Otherwise if hint is `"number"` or `"default"`
-    - try `obj.valueOf()` and `obj.toString()`, whatever exists.
+1. فراخوانی `obj[Symbol.toPrimitive](hint)` در صورتی که وجود داشت،
+2. در غیر این صورت اگر جزء `"string"` بود
+    - متدهای `obj.toString()` و `obj.valueOf()` را امتحان کن، هر کدام که وجود داشت.
+3. در غیر این صورت اگر جزء `"number"` یا `"default"` بود
+    - متدهای `obj.valueOf()` و `obj.toString()` را امتحان کن، هر کدام که وجود داشت.
 
-In practice, it's often enough to implement only `obj.toString()` as a "catch-all" method for all conversions that return a "human-readable" representation of an object, for logging or debugging purposes.  
+تمام این متدها باید یک مقدار اصلی را برگردانند تا کار انجام شود (اگر تعریف شده باشد).
+
+در عمل، اینکه فقط `obj.toString()` را به عنوان متدی «همه‌گیر» برای تبدیل‌های رشته‌ای که باید یک نمایش «قابل خواندن برای انسان» از شیء را برگدانند، برای اهداف دیباگ یا لاگ گرفتن، اغلب اوقات کافی است.

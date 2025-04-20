@@ -1,4 +1,4 @@
 
-1. `true`, taken from `rabbit`.
-2. `null`, taken from `animal`.
-3. `undefined`, there's no such property any more.
+1. مقدار `true`، از `rabbit` گرفته شده.
+2. مقدار `null`، از `animal` گرفته شده.
+3. مقدار `undefined`، چنین ویژگی‌ای دیگر وجود ندارد.

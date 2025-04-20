@@ -2,21 +2,21 @@ importance: 5
 
 ---
 
-# Rewrite 'if..else' into '?'
+# دستور 'if..else' را به '?' بازنویسی کنید
 
-Rewrite `if..else` using multiple ternary operators `'?'`.
+با استفاده از چند عملگر سه‌گانه `'?'` دستور `if..else` را بازنویسی کنید.
 
-For readability, it's recommended to split the code into multiple lines.
+برای خوانایی بهتر، پیشنهاد می‌شود کد را در چند خط بنویسید.
 
 ```js
 let message;
 
-if (login == 'Employee') {
-  message = 'Hello';
-} else if (login == 'Director') {
-  message = 'Greetings';
+if (login == 'کارمند') {
+  message = 'سلام';
+} else if (login == 'مدیر') {
+  message = 'درود';
 } else if (login == '') {
-  message = 'No login';
+  message = 'وارد سیستم نشدید';
 } else {
   message = '';
 }

@@ -1,6 +1,6 @@
-Let's walk the array items:
-- For each item we'll check if the resulting array already has that item.
-- If it is so, then ignore, otherwise add to results.
+بیایید المان‌های آرایه را بررسی کنیم:
+- برای هر المان بررسی می‌کنیم که آیا آرایه حاصل دارای آن المان هست یا نه.
+- اگر بود، المان را نادیده می‌گیریم، در غیر این صورت آن را به نتایج اضافه می‌کنیم.
 
 ```js run
 function unique(arr) {
@@ -22,18 +22,18 @@ let strings = ["Hare", "Krishna", "Hare", "Krishna",
 alert( unique(strings) ); // Hare, Krishna, :-O
 ```
 
-The code works, but there's a potential performance problem in it.
+این کد کار می‌کند، اما احتمالا یک اشکال عملکردی دارد.
 
-The method `result.includes(str)` internally walks the array `result` and compares each element against `str` to find the match.
+متد `result.includes(str)` درون آرایه `result` را بررسی می‌کند و هر المان را با `str` مقایسه می‌کند تا المان مورد نظر را پیدا کند.
 
-So if there are `100` elements in `result` and no one matches `str`, then it will walk the whole `result` and do exactly `100` comparisons. And if `result` is large, like `10000`, then there would be `10000` comparisons.
+ینابراین اگر `100` المان درون `result` وجود داشته باشد و هیچ کدام با `str` برابر نباشد، سپس تمام `result` را بررسی می‌کند و دقیقا `100` مقایسه انجام می‌دهد. و اگر `result` بزرگ باشد، مثلا `10000`، سپس به تعداد `10000` مقایسه وجود خواهد داشت.
 
-That's not a problem by itself, because JavaScript engines are very fast, so walk `10000` array is a matter of microseconds.
+این به خودی خود مشکل محسوب نمی‌شود، چون موتورهای جاوااسکریپت بسیار سریع هستند، پس بررسی یک آرایه با `10000` المان چند میکروثانیه طول می‌کشد.
 
-But we do such test for each element of `arr`, in the `for` loop.
+اما ما در حلقه `for` چنین آزمایشی را برای هر المان درون `arr` انجام می‌دهیم.
 
-So if `arr.length` is `10000` we'll have something like `10000*10000` = 100 millions of comparisons. That's a lot.
+پس اگر `arr.length` برابر با `10000` باشد ما چیزی مثل `10000*10000` = 100 میلیون مقایسه خواهیم داشت. این مقدار بسیار زیاد است.
 
-So the solution is only good for small arrays.
+بنابراین این راه حل تنها برای آرایه‌های کوچک مناسب است.
 
-Further in the chapter <info:map-set> we'll see how to optimize it.
+بعدا در فصل <info:map-set> ما یاد می‌گیریم که چگونه آن را بهینه کنیم.

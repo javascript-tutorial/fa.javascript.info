@@ -1,241 +1,243 @@
 
 
-# Introduction: callbacks
+# مقدمه: فراخوان
 
-```warn header="We use browser methods in examples here"
-To demonstrate the use of callbacks, promises and other abstract concepts, we'll be using some browser methods: specifically, loading scripts and performing simple document manipulations.
+```warn header="از متد‌های مخصوص مرورگر در مثال‌های این بخش استفاده می‌کنیم"
+برای نشان دادن استفاده فراخوان‌ها و پرامیس‌ها و دیگر مفاهیم انتزاعی، از برخی متد‌های مرورگر استفاده خواهیم کرد به ویژه بارگذاری اسکریپت‌ها و انجام تغییرات ساده در سند HTML.
 
-If you're not familiar with these methods, and their usage in the examples is confusing, you may want to read a few chapters from the [next part](/document) of the tutorial.
+اگر به این متدها و کاربردشان در مثال ها آشنا نیستید شاید بخواهید چند فصل از [بخش بعدی آموزش](/document) را بخوانید.
 
-Although, we'll try to make things clear anyway. There won't be anything really complex browser-wise.
-```
+اگرچه، ما سعی می‌کنیم همه چیز را واضح و شفاف بیان کنیم. از نظر بخش مربوط به مرورگر چیز بسیار پیچیده‌ای وجود نخواهد داشت. 
+``` 
 
-Many functions are provided by JavaScript host environments that allow you to schedule *asynchronous* actions. In other words, actions that we initiate now, but they finish later.
+بسیاری از توابع توسط محیط‌های میزبان جاوااسکریپت فراهم شده‌اند که به شما اجازه می‌دهند اقدامات *غیرهمگام* را برنامه‌ریزی کنید. به عبارت دیگر، اقداماتی که الان آغاز می‌کنیم، اما بعدا تمام می‌شوند.
 
-For instance, one such function is the `setTimeout` function.
+به عنوان مثال، یکی از این توابع، تابع `setTimeout` است.
 
-There are other real-world examples of asynchronous actions, e.g. loading scripts and modules (we'll cover them in later chapters).
+مثال‌های واقعی دیگری از اقدامات غیرهمگام وجود دارد، مانند بارگذاری اسکریپت‌ها و ماژول‌ها (در فصل‌های بعدی درباره آنها صحبت خواهیم کرد).
 
-Take a look at the function `loadScript(src)`, that loads a script with the given `src`:
+یک نگاه به تابع `loadScript(src)` بیندازید که یک اسکریپتی با `src` داده شده را بارگذاری می‌کند.
 
-```js
-function loadScript(src) {
-  // creates a <script> tag and append it to the page
-  // this causes the script with given src to start loading and run when complete
-  let script = document.createElement('script');
-  script.src = src;
-  document.head.append(script);
+‍‍‍
+ ```js
+ function loadScript(src) {
+	 //یک تگ اسکریپت می‌سازد و آن را به صفحه اضافه می‌کند
+	 // داده شده شروع به بارگذاری کند و زمانی که بارگذاری کامل شد اجرا شود src این باعث می‌شود اسکریپت با
+	 let script = document.createElement("script");
+	 script.src = src;
+	 document.head.append(script);
 }
 ```
 
-It appends to the document the new, dynamically created, tag `<script src="…">` with given `src`. The browser automatically starts loading it and executes when complete.
+این تابع یک تگ `<script src="...">‎` را به صورت پویا ایجاد می‌کند و با `src` داده شده به سند اضافه می‌کند. مرورگر به طور خودکار شروع به بارگذاری آن می‌کند و زمانی که کامل شد، اجرایش می‌کند.
 
-We can use this function like this:
+می‌توانیم از این تابع به صورت زیر استفاده کنیم:
 
 ```js
-// load and execute the script at the given path
-loadScript('/my/script.js');
+// اسکریپت با مسیر داده شده بارگذاری و اجرا می‌کند
+loadScript("/my/script.js");
 ```
+اسکریپت به صورت *غیرهمگام* اجرا می‌شود، زیرا الآن شروع به بارگذاری می‌کند، اما بعدا (زمانی‌که کار تابع تمام شده)، اجرا می‌شود.
 
-The script is executed "asynchronously", as it starts loading now, but runs later, when the function has already finished.
-
-If there's any code below `loadScript(…)`, it doesn't wait until the script loading finishes.
+اگر کدی بعد از ‍‍`loadScript(...)‎` وجود داشته باشد، منتظر بارگذاری کامل اسکریپت نمی‌ماند.
 
 ```js
-loadScript('/my/script.js');
-// the code below loadScript
-// doesn't wait for the script loading to finish
+loadScript("/my/script");
+// loadScript کدهای پس از تابع 
+// منتظر بارگذاری کامل اسکریپت نمی‌ماند
 // ...
 ```
 
-Let's say we need to use the new script as soon as it loads. It declares new functions, and we want to run them.
+فرض کنید نیاز داریم بلافاصله بعد از بارگذاری اسکریپت جدید از آن استفاده کنیم. آن اسکریپت توابع جدیدی اعلام می‌کند و ما می‌خواهیم آن‌ها را فراخوانی کنیم.
 
-But if we do that immediately after the `loadScript(…)` call, that wouldn't work:
+اما اگر این کار را فورا بعد از صدا زدن ‍‍`loadScript(...)‎` انجام دهیم کار نخواهد کرد.
 
 ```js
-loadScript('/my/script.js'); // the script has "function newFunction() {…}"
+loadScript("/my/script.js"); // است function newFunction() {...} شامل 
 
 *!*
-newFunction(); // no such function!
+newFunction();
 */!*
 ```
 
-Naturally, the browser probably didn't have time to load the script. As of now, the `loadScript` function doesn't provide a way to track the load completion. The script loads and eventually runs, that's all. But we'd like to know when it happens, to use new functions and variables from that script.
+احتمالاً مرورگر زمان لازم برای بارگذاری اسکریپت را نداشته است. در حال حاضر، تابع `loadScript` راهی برای ردیابی اتمام بارگذاری فراهم نمی‌کند. اسکریپت بارگذاری می‌شود و در نهایت اجرا می‌شود، همین. اما ما می‌خواهیم بدانیم چه زمانی این اتفاق می‌افتد تا بتوانیم از توابع و متغیرهای جدید آن اسکریپت استفاده کنیم.
 
-Let's add a `callback` function as a second argument to `loadScript` that should execute when the script loads:
+بیایید به عنوان آرگومان دوم `loadScript` یک تابع `callback` اضافه کنیم که زمانی که اسکریپت بارگذاری شد، اجرا شود:
 
 ```js
-function loadScript(src, *!*callback*/!*) {
-  let script = document.createElement('script');
-  script.src = src;
+function leadScript(src, *!*callback*/!*) {
+    let script = document.createElement("script");
+    script.src = src;
 
-*!*
-  script.onload = () => callback(script);
-*/!*
+    *!*
+    script.onload = () => callback(script);
+    */!*
 
-  document.head.append(script);
+    document.head.append(script);
 }
 ```
 
-Now if we want to call new functions from the script, we should write that in the callback:
+رویداد `onload` در مقاله <info:onload-onerror#loading-a-script> توضیح داده شده است؛ درواقع این رویداد تابعی را بعد از اینکه اسکریپت بارگیری و اجرا شد، اجرا می‌کند.
+
+حالا اگر بخواهیم تابع‌های جدیدی از اسکریپت را فراخوانی کنیم، باید آن را در callback بنویسیم:
 
 ```js
 loadScript('/my/script.js', function() {
-  // the callback runs after the script is loaded
-  newFunction(); // so now it works
+  // بعد از اینکه اسکریپت بارگیری شد، اجرا می‌شود callback این
+  newFunction(); // حالا کار می‌کند
   ...
 });
 ```
 
-That's the idea: the second argument is a function (usually anonymous) that runs when the action is completed.
+ایده این است: آرگومان دوم یک تابع است (معمولاً ناشناس) که زمانی که عملیات کامل شد، اجرا می‌شود.
 
-Here's a runnable example with a real script:
+این‌هم یک مثال قابل اجرا با یک اسکریپت واقعی:
 
 ```js run
 function loadScript(src, callback) {
-  let script = document.createElement('script');
-  script.src = src;
-  script.onload = () => callback(script);
-  document.head.append(script);
+    let script = document.createElement("script");
+    script.src = src;
+    script.onload = () => callback(script);
+    document.head.append(script);
 }
 
 *!*
-loadScript('https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.2.0/lodash.js', script => {
-  alert(`Cool, the script ${script.src} is loaded`);
-  alert( _ ); // function declared in the loaded script
+leadScript("https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.2.0/lodash.js", () => {
+    alert(`اسکریپت ${script.src} بارگیری شد`);
+    alert( _ ); // یک تابع تعریف شده در اسکریپت بارگیری شده است _
 });
 */!*
 ```
 
-That's called a "callback-based" style of asynchronous programming. A function that does something asynchronously should provide a `callback` argument where we put the function to run after it's complete.
+این "سبک برنامه‌نویسی غیرهمگام مبتنی بر callback" نامیده می‌شود. یک تابع که کاری را به صورت غیرهمگام انجام می‌دهد، باید آرگومان `callback` دریافت کند که تابعی را که بعد از اتمام کار اجرا شود، در آن قرار دهیم.
 
-Here we did it in `loadScript`, but of course it's a general approach.
+در اینجا ما این عمل را در `loadScript` انجام دادیم، اما البته این یک رویکرد کلی است.
 
-## Callback in callback
+## فراخوان در فراخوان
 
-How can we load two scripts sequentially: the first one, and then the second one after it?
+چگونه می‌توانیم دو اسکریپت را به ترتیب بارگذاری کنیم: اول اسکریپت اول و بعد از آن اسکریپت دوم؟
 
-The natural solution would be to put the second `loadScript` call inside the callback, like this:
-
-```js
-loadScript('/my/script.js', function(script) {
-
-  alert(`Cool, the ${script.src} is loaded, let's load one more`);
-
-*!*
-  loadScript('/my/script2.js', function(script) {
-    alert(`Cool, the second script is loaded`);
-  });
-*/!*
-
-});
-```
-
-After the outer `loadScript` is complete, the callback initiates the inner one.
-
-What if we want one more script...?
+راه حل طبیعی، قرار دادن تابع دوم `loadScript` درون callback اول است، مانند این:
 
 ```js
-loadScript('/my/script.js', function(script) {
+loadScript("/my/script.js" , function(script) {
 
-  loadScript('/my/script2.js', function(script) {
+    alert(`عالی، ${script.src} بارگذاری شد، حالا یکی دیگر را بارگیری می‌کنیم`);
 
-*!*
-    loadScript('/my/script3.js', function(script) {
-      // ...continue after all scripts are loaded
+    *!*
+    loadScript("/my/script2.js", function(script) {
+        alert(`عالی، اسکریپت دوم بارگذاری شد`);
     });
-*/!*
-
-  })
+    */!*
 
 });
 ```
 
-So, every new action is inside a callback. That's fine for few actions, but not good for many, so we'll see other variants soon.
+وقتی تابع بیرونی `loadScript` تمام شد، callback آن تابع درونی را شروع می‌کند.
 
-## Handling errors
+اگر یک اسکریپت دیگر هم بخواهیم چطور؟
 
-In the above examples we didn't consider errors. What if the script loading fails? Our callback should be able to react on that.
+```js
+loadScript("/my/script.js", function(script) {
 
-Here's an improved version of `loadScript` that tracks loading errors:
+    loadScript("/my/script2.js", function(script) {
+
+        *!*
+        loadScript("/my/script3.js", function(script) {
+            // ...ادامه کار بعد از بارگذاری همه اسکریپت‌ها 
+        });
+        */!*
+
+    });
+
+});
+```
+
+پس، هر عمل جدیدی درون یک callback قرار دارد. این برای چند عملیات کوچک مناسب است، اما برای تعداد زیاد عملیات خوب نیست. به زودی روش‌های دیگری را هم خواهیم دید.
+
+## مدیریت خطاها
+
+در مثال های بالا هیچ خطایی را در نظر نگرفته بودیم. اگر بارگیری با مشکل مواجه شود چه می‌شود؟ callback های ما باید بتوانند نسبت به آن واکنش نشان بدهند.
+
+این نسخه بهبود یافته `loadScript` است که خطاهای بارگذاری را ردیابی می‌کند:
 
 ```js
 function loadScript(src, callback) {
-  let script = document.createElement('script');
-  script.src = src;
+    let script = document.createElement("script");
+    script.src = src;
 
-*!*
-  script.onload = () => callback(null, script);
-  script.onerror = () => callback(new Error(`Script load error for ${src}`));
-*/!*
+    *!*
+    script.onload = () => callback(null, script);
+    script.onerror = () => callback(new Error(` خطا در بارگذاری اسکریپت برای ${src}`));
+    */!*
 
-  document.head.append(script);
+    document.head.append(script);
 }
 ```
 
-It calls `callback(null, script)` for successful load and `callback(error)` otherwise.
+در صورت بارگذاری موفق `callback(null, script)` و در غیر این صورت `callback(error)` صدا زده می‌شود.
 
-The usage:
+به این صورت استفاده می‌شود: 
 ```js
-loadScript('/my/script.js', function(error, script) {
-  if (error) {
-    // handle error
-  } else {
-    // script loaded successfully
-  }
+loadScript("/my/script.js", function(error, script) {
+    if (error) {
+        // مدیریت خطاها
+    }else {
+        // اسکریپت با موفقیت بارگیری شده است
+    }
 });
 ```
 
-Once again, the recipe that we used for `loadScript` is actually quite common. It's called the "error-first callback" style.
+یک بار دیگر، الگویی که برای `loadScript` استفاده کردیم، در واقع کاملاً رایج است. به آن "error-first callback" می‌گویند.
 
-The convention is:
-1. The first argument of the `callback` is reserved for an error if it occurs. Then `callback(err)` is called.
-2. The second argument (and the next ones if needed) are for the successful result. Then `callback(null, result1, result2…)` is called.
+قرارداد این است:
+1. آرگومان اول `callback` برای خطا در صورت بروز اختصاص داده شده است. سپس `callback(err)` صدا زده می‌شود.
+2. آرگومان دوم (و آرگومان‌های بعدی اگر لازم باشد) برای نتیجه موفقیت‌آمیز هستند. سپس `callback(null, result1, result2...)` صدا زده می‌شود.
 
-So the single `callback` function is used both for reporting errors and passing back results.
+پس یک تابع `callback` واحد هم برای گزارش خطا و هم برای برگرداندن نتایج استفاده می‌شود.
 
-## Pyramid of Doom
+## هرم مصیبت‌بار
 
-From the first look, it's a viable way of asynchronous coding. And indeed it is. For one or maybe two nested calls it looks fine.
+در نگاه اول، به نظر می‌رسد رویکرد قابل قبولی برای کدنویسی غیرهمگام باشد. و در واقع هم هست. برای یک یا شاید دو تودرتویی خوب به نظر می‌رسد.
 
-But for multiple asynchronous actions that follow one after another we'll have code like this:
+اما برای چندین عمل غیرهمگام که پشت سر هم اجرا می‌شوند، کدی شبیه این خواهیم داشت:
 
 ```js
-loadScript('1.js', function(error, script) {
+loadScript("1.js", function(error, script) {
 
-  if (error) {
-    handleError(error);
-  } else {
-    // ...
-    loadScript('2.js', function(error, script) {
-      if (error) {
+    if(error) {
         handleError(error);
-      } else {
-        // ...
-        loadScript('3.js', function(error, script) {
-          if (error) {
-            handleError(error);
-          } else {
-  *!*
-            // ...continue after all scripts are loaded (*)
-  */!*
-          }
-        });
+    }else {
+        //...
+        loadScript("2.js", function(error, script) {
+            if(error) {
+                handleError(error);
+            }else {
+                //...
+                loadScript("3.js", function(error, script) {
+                    if(error) {
+                        handleError(error);
+                    }else {
+                        *!*
+                        //... تا زمانی که همه اسکریپت ها بارگیری شوند ادامه داد
+                        */!*
+                    }
+                });
 
-      }
-    })
-  }
+            }
+        });
+    }
 });
 ```
 
-In the code above:
-1. We load `1.js`, then if there's no error.
-2. We load `2.js`, then if there's no error.
-3. We load `3.js`, then if there's no error -- do something else `(*)`.
+در کد بالا داریم:
+1. `1.js` را بارگیری می‌کنیم سپس اگر خطایی نبود 
+2. `2.js` را بارگیری می‌کنیم سپس اگر خطایی نبود 
+3. `3.js` را بارگیری می‌کنیم سپس اگر خطایی نبود  -- کار دیگری انجام می‌دهیم`(*)`
 
-As calls become more nested, the code becomes deeper and increasingly more difficult to manage, especially if we have real code instead of `...` that may include more loops, conditional statements and so on.
+هرچه تودرتویی‌ها بیشتر شود، کد عمیق‌تر می‌شود و مدیریت آن سخت‌تر می‌شود، به ویژه اگر به جای `...` کد واقعی داشته باشیم که شامل حلقه‌ها، شرطی‌ها و ... بیشتری باشد.
 
-That's sometimes called "callback hell" or "pyramid of doom."
+گاهی اوقات به این "جهنم callback (callback hell)" یا "هرم مصیبت‌بار (pyramid of doom)" می‌گویند.
 
 <!--
 loadScript('1.js', function(error, script) {
@@ -256,55 +258,55 @@ loadScript('1.js', function(error, script) {
           }
         });
       }
-    })
+    });
   }
 });
 -->
 
 ![](callback-hell.svg)
 
-The "pyramid" of nested calls grows to the right with every asynchronous action. Soon it spirals out of control.
+"هرم" تودرتویی‌ها با هر عمل غیرهمگام جدید به سمت راست رشد می‌کند. به زودی کنترل آن از دست می‌رود.
 
-So this way of coding isn't very good.
+پس این روش کدنویسی خیلی خوب نیست.
 
-We can try to alleviate the problem by making every action a standalone function, like this:
+می‌توانیم تلاش کنیم مشکل را با تبدیل هر عمل به یک تابع مستقل، مثل زیر قابل کنترل کنیم:
 
 ```js
-loadScript('1.js', step1);
+loadScript("1.js", step1);
 
 function step1(error, script) {
-  if (error) {
-    handleError(error);
-  } else {
-    // ...
-    loadScript('2.js', step2);
-  }
-}
-
-function step2(error, script) {
-  if (error) {
-    handleError(error);
-  } else {
-    // ...
-    loadScript('3.js', step3);
-  }
+    if(error) {
+        handleError(error);
+    }else {
+        //...
+        loadScript("2.js", step2);
+    }
 }
 
 function step3(error, script) {
-  if (error) {
-    handleError(error);
-  } else {
-    // ...continue after all scripts are loaded (*)
-  }
-};
+    if(error) {
+        handleError(error);
+    }else {
+        //...
+        loadScript("3.js", step3);
+    }
+}
+
+function step3(error, script) {
+    if(error) {
+        handleError(error);
+    }else {
+        //... تا زمانی که همه اسکریپت ها بارگیری شوند ادامه داد
+    }
+}
 ```
 
-See? It does the same, and there's no deep nesting now because we made every action a separate top-level function.
+همانطور که مشاهده می‌کنید نتیجه تغییری نکرد ولی از تودرتو بودن callback ها با تعریف کردن توابع به صورت جداگانه برای هر مرحله، از تودرتو بودن عمیق جلوگیری کردیم.
 
-It works, but the code looks like a torn apart spreadsheet. It's difficult to read, and you probably noticed that one needs to eye-jump between pieces while reading it. That's inconvenient, especially if the reader is not familiar with the code and doesn't know where to eye-jump.
+این روش کار می‌کند ولی کدش تکه تکه و جدا از هم است. خواندن آن دشوارتر است و احتمالا متوجه شدید که لازم است در حین خواندن از جایی به جای دیگر بپرید. اینگونه اصلا مناسب نیست مخصوصا اگر به کد آشنا نباشید و ندانید برای ادامه باید کجا ی کد را بخوانید.
 
-Also, the functions named `step*` are all of single use, they are created only to avoid the "pyramid of doom." No one is going to reuse them outside of the action chain. So there's a bit of namespace cluttering here.
+همچنین توابعِ `step*‎` فقط یکبار استفاده می‌شوند و فقط برای اجتناب از "هرم مصیبت‌بار" ایجاد شده‌اند. که باعث بی نظمی زیادی در کد می‌شوند.
 
-We'd like to have something better.
+ما می‌خواهیم چیز بهتری داشته باشیم.
 
-Luckily, there are other ways to avoid such pyramids. One of the best ways is to use "promises," described in the next chapter.
+خوشبختانه راه‌های دیگری برای اجتناب از این هرم‌ها وجود دارد. یکی از بهترین راه‌ها استفاده از "promise" است که در فصل بعد توضیح داده می‌شود.

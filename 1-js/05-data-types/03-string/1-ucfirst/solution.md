@@ -1,20 +1,14 @@
-We can't "replace" the first character, because strings in JavaScript are immutable.
+ما نمی‌توانیم حرف اول را «جایگزین» کنیم، چون رشته‌ها در جاوااسکریپت غیر قابل تغییر هستند.
 
-But we can make a new string based on the existing one, with the uppercased first character:
+اما می‌توانیم یک رشته جدید را بر اساس رشته موجود با کاراکتر اول بزرگ شده بسازیم:
 
 ```js
 let newStr = str[0].toUpperCase() + str.slice(1);
 ```
 
-There's a small problem though. If `str` is empty, then `str[0]` is `undefined`, and as `undefined` doesn't have the `toUpperCase()` method, we'll get an error.
+البته یک مشکل کوچک وجود دارد. اگر `str` خالی باشد، پس `str[0]` برابر با `undefined` است و `undefined` متد `toUpperCase()` را ندارد، پس ما ارور خواهیم داشت.
 
-There are two variants here:
-
-1. Use `str.charAt(0)`, as it always returns a string (maybe empty).
-2. Add a test for an empty string.
-
-Here's the 2nd variant:
-
+آسان‌ترین روش اضافه کردن یک تست برای یک رشته خالی است، مانند:
 ```js run demo
 function ucFirst(str) {
   if (!str) return str;
@@ -24,4 +18,3 @@ function ucFirst(str) {
 
 alert( ucFirst("john") ); // John
 ```
-

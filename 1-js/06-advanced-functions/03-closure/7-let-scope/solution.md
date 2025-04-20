@@ -1,6 +1,6 @@
-The result is: **error**.
+نتیجه: **ارور**.
 
-Try running it:
+سعی کنید آن را اجرا کنید:
 
 ```js run
 let x = 1;
@@ -15,20 +15,20 @@ function func() {
 func();
 ```
 
-In this example we can observe the peculiar difference between a "non-existing" and "unitialized" variable.
+در این مثال ما می‌توانیم تفاوت خاص بین یک متغیر «ناموجود» و «بدون مقداردهی اولیه» را بفهمیم.
 
-As you may have read in the article [](info:closure), a variable starts in the "uninitialized" state from the moment when the execution enters a code block (or a function). And it stays uninitalized until the corresponding `let` statement.
+همانطور که در مقاله [](info:closure) خواندید، زمانی که یک بلوک کد (یا یک تابع) شروع به اجرا شدن می‌کند، یک متغیر در حالت «بدون مقداردهی اولیه» قرار می‌گیرد. و تا زمانی که به دستور `let` برسد بدون مقداردهی اولیه می‌ماند.
 
-In other words, a variable technically exists, but can't be used before `let`.
+به عبارتی دیگر، یک متغیر به صورت فنی موجود است اما نمی‌تواند قبل از `let` استفاده شود.
 
-The code above demonstrates it.
+کد بالا این را نشان می‌دهد.
 
 ```js
 function func() {
 *!*
-  // the local variable x is known to the engine from the beginning of the function,
-  // but "unitialized" (unusable) until let ("dead zone")
-  // hence the error
+  // از ابتدای اجرای تابع برای موتور شناخته‌شده است x متغیر محلی
+  // برسد، «بدون مقداردهی اولیه» (غیر قابل استفاده) است («منطقه مرگ») let اما تا به
+  // از این رو با ارور مواجه می‌شویم
 */!*
 
   console.log(x); // ReferenceError: Cannot access 'x' before initialization
@@ -37,4 +37,4 @@ function func() {
 }
 ```
 
-This zone of temporary unusability of a variable (from the beginning of the code block till `let`) is sometimes called the "dead zone".
+این منطقه که یک متغیر به طور موقتی غیر قابل استفاده است (از ابتدای بلوک کد تا `let`) را بعضی اوقات «منطقه مرگ» می‌گویند.

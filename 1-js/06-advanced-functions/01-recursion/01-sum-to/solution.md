@@ -1,4 +1,4 @@
-The solution using a loop:
+راه‌حل با استفاده از حلقه:
 
 ```js run
 function sumTo(n) {
@@ -12,7 +12,7 @@ function sumTo(n) {
 alert( sumTo(100) );
 ```
 
-The solution using recursion:
+راه‌حل با استفاده از بازگشت:
 
 ```js run
 function sumTo(n) {
@@ -23,7 +23,7 @@ function sumTo(n) {
 alert( sumTo(100) );
 ```
 
-The solution using the formula: `sumTo(n) = n*(n+1)/2`:
+راه‌حل با استفاده از فرمول `sumTo(n) = n*(n+1)/2`:
 
 ```js run
 function sumTo(n) {
@@ -33,8 +33,8 @@ function sumTo(n) {
 alert( sumTo(100) );
 ```
 
-P.S. Naturally, the formula is the fastest solution. It uses only 3 operations for any number `n`. The math helps!
+پی‌نوشت: به طور طبیعی، فرمول سریع‌ترین راه‌حل است. این فرمول فقط از 3 عمل برای هر عدد `n` استفاده می‌کند. ریاضی کمک می‌کند!
 
-The loop variant is the second in terms of speed. In both the recursive and the loop variant we sum the same numbers. But the recursion involves nested calls and execution stack management. That also takes resources, so it's slower.
+راه‌حل حلقه از نظر سرعت دوم است. در هر دو نوع بازگشتی و حلقه ما اعداد یکسانی را جمع می‌زنیم. اما بازگشت، فراخوانی‌های تودرتو و مدیریت پشته اجرا را دخیل می‌کند. همچنین منابع بیشتری مصرف می‌کند پس کندتر است.
 
-P.P.S. Some engines support the "tail call" optimization: if a recursive call is the very last one in the function (like in `sumTo` above), then the outer function will not need to resume the execution, so the engine doesn't need to remember its execution context. That removes the burden on memory, so counting `sumTo(100000)` becomes possible. But if the JavaScript engine does not support tail call optimization (most of them don't), there will be an error: maximum stack size exceeded, because there's usually a limitation on the total stack size.
+پی‌نوشت دوم: بعضی از موتورها از بهینه‌سازی «فراخوانی دنباله‌دار» پشتیبانی می‌کنند: اگر یک فراخوانی بازگشتی دقیقا آخرین فراخوانی در تابع باشد، سپس تابع بیرونی نیازی نخواهد داشت که اجرا شدن را ادامه دهد پس موتور نیازی ندارد که زمینه‌اجرای آن را به یاد بسپارد. این موضوع بار را از دوش حافظه برمی‌دارد پس محاسبه ممکن می‌شود. اما اگر موتور جاوااسکریپت از بهینه‌سازی فراخوانی دنباله‌دار پشتیبانی نکند (اکثر آنها پشتیبانی نمی‌کنند)، یک ارور ایجاد می‌شود: از حداکثر اندازه پشته گذشتیم، چون معمولا یک محدودیت برای کل اندازه پشته وجود دارد.

@@ -1,20 +1,20 @@
 
-# Iterables
+# حلقه‌پذیرها
 
-*Iterable* objects is a generalization of arrays. That's a concept that allows us to make any object useable in a `for..of` loop.
+شیءهای *حلقه‌پذیر* تعمیمی از آرایه‌ها هستند. این مفهومی است که به ما اجازه می‌دهد تا هر شیءای را در حلقه `for..of` قابل استفاده کنیم.
 
-Of course, Arrays are iterable. But there are many other built-in objects, that are iterable as well. For instance, strings are also iterable.
+قطعا آرایه‌ها حلقه‌پذیر هستند. اما شیءهای درون‌ساخت دیگری هم هستند که حلقه‌پذیرند. برای مثال، رشته‌ها هم حلقه‌پذیرند.
 
-If an object isn't technically an array, but represents a collection (list, set) of something, then `for..of` is a great syntax to loop over it, so let's see how to make it work.
+اگر یک شیء به طور فنی آرایه نباشد، اما یک مجموعه (لیست یا دسته) از چیزها را نشان دهد، `for..of` یک سینتکس عالی برای حلقه‌زدن درون آن است، پس بیایید ببینیم چگونه چنین کاری را انجام دهیم.
 
 
-## Symbol.iterator
+## ویژگی Symbol.iterator
 
-We can easily grasp the concept of iterables by making one of our own.
+ما می‌توانیم به راحتی مفهوم حلقه‌پذیرها را با ایجاد حلقه‌پذیر خودمان درک کنیم.
 
-For instance, we have an object that is not an array, but looks suitable for `for..of`.
+برای مثال، ما یک شیء داریم که آرایه نیست، اما برای استفاده در `for..of` مناسب است.
 
-Like a `range` object that represents an interval of numbers:
+مانند یک شیء `range` که بازه‌ای از اعداد را نشان می‌دهد:
 
 ```js
 let range = {
@@ -22,18 +22,18 @@ let range = {
   to: 5
 };
 
-// We want the for..of to work:
+// :کار کند for..of می‌خواهیم که
 // for(let num of range) ... num=1,2,3,4,5
 ```
 
-To make the `range` iterable (and thus let `for..of` work) we need to add a method to the object named `Symbol.iterator` (a special built-in symbol just for that).
+برای اینکه شیء `range` را حلقه‌پذیر کنیم (و به این ترتیب بگذاریم `for..of` کار کند) ما نیاز داریم که یک متد به اسم `Symbol.iterator` را به شیء اضافه کنیم ( یک سمبل خاص درون ساخت که فقط برای این کار است).
 
-1. When `for..of` starts, it calls that method once (or errors if not found). The method must return an *iterator* -- an object with the method `next`.
-2. Onward, `for..of` works *only with that returned object*.
-3. When `for..of` wants the next value, it calls `next()` on that object.
-4. The result of `next()` must have the form `{done: Boolean, value: any}`, where `done=true`  means that the iteration is finished, otherwise `value` is the next value.
+1. زمانی که `for..of` شروع می‌شود، متد را یک بار صدا می‌زند (یا اگر پیدا نشود ارور می‌دهد). متد باید یک *حلقه‌زننده* را برگرداند -- شیءای که متد `next` را دارد.
+2. همینطور رو به جلو، `for..of` *تنها با شیء برگردانده شده* کار می‌کند.
+3. زمانی که `for..of` مقدار بعدی را نیاز دارد، روی آن شیء `next()` را صدا می‌زند.
+4. نتیجه `next()` باید به شکل `{done: Boolean, value: any}` باشد که `done=true` به معنی پایان حلقه‌زدن است، در غیر این صورت `value` مقدار بعدی خواهد بود.
 
-Here's the full implementation for `range` with remarks:
+اینجا پیاده‌سازی کامل `range` را به همراه ملاحظات داریم:
 
 ```js run
 let range = {
@@ -41,18 +41,18 @@ let range = {
   to: 5
 };
 
-// 1. call to for..of initially calls this
+// 1. در ابتدا این متد صدا زده می‌شود for..of با صدازدن
 range[Symbol.iterator] = function() {
 
-  // ...it returns the iterator object:
-  // 2. Onward, for..of works only with this iterator, asking it for next values
+  // :این متد شیء حلقه‌زننده را برمی‌گرداند...
+  // 2. فقط با این حلقه‌زننده کار می‌کند، که از آن مقدار بعدی را درخواست می‌کند for..of ،همینطور رو به جلو
   return {
     current: this.from,
-    last: this.to,      
+    last: this.to,
 
-    // 3. next() is called on each iteration by the for..of loop
+    // 3. فراخوانی می‌شود for..of در هر دور حلقه توسط next()
     next() {
-      // 4. it should return the value as an object {done:.., value :...}
+      // 4. برگرداند {done:..., value:...} این متد باید مقدار را به عنوان یک شیء
       if (this.current <= this.last) {
         return { done: false, value: this.current++ };
       } else {
@@ -62,22 +62,22 @@ range[Symbol.iterator] = function() {
   };
 };
 
-// now it works!
+// !حالا کار می‌کند
 for (let num of range) {
   alert(num); // 1, then 2, 3, 4, 5
 }
 ```
 
-Please note the core feature of iterables: separation of concerns.
+لطفا خاصیت اصلی حلقه‌پذیرها را در نظر داشته باشید: تفکیک وظایف.
 
-- The `range` itself does not have the `next()` method.
-- Instead, another object, a so-called "iterator" is created by the call to `range[Symbol.iterator]()`, and its `next()` generates values for the iteration.
+- شیء `range` به خودی خود دارای متد `next()` نیست.
+- به جای آن، شیء دیگری که به آن «حلقه‌زننده» هم می‌گویند با فراخوانی `range[Symbol.iterator]()` و متد `next()` آن، مقدارها را برای حلقه‌زدن ایجاد می‌کند.
 
-So, the iterator object is separate from the object it iterates over.
+بنابراین، شیء حلقه‌زننده از شیءای که در آن حلقه می‌زند جدا است.
 
-Technically, we may merge them and use `range` itself as the iterator to make the code simpler.
+به طور فنی، ما می‌توانیم آنها را ترکیب کنیم و از خود `range` به عنوان حلقه‌زننده استفاده کنیم تا کد ساده‌تر شود.
 
-Like this:
+مانند این:
 
 ```js run
 let range = {
@@ -103,33 +103,33 @@ for (let num of range) {
 }
 ```
 
-Now `range[Symbol.iterator]()` returns the `range` object itself:  it has the necessary `next()` method and remembers the current iteration progress in `this.current`. Shorter? Yes. And sometimes that's fine too.
+حالا `range[Symbol.iterator]()` خود شیء `range` را برمی‌گرداند: این شیء دارای متد مورد نیاز `next()` است و فرایند کنونی حلقه‌زدن را در `this.current` به خاطر می‌سپارد. کوتاه‌تر است؟ بله. و گاهی اوقات این هم خوب است.
 
-The downside is that now it's impossible to have two `for..of` loops running over the object simultaneously: they'll share the iteration state, because there's only one iterator -- the object itself. But two parallel for-ofs is a rare thing, even in async scenarios.
+اما امتیازی منفی وجود دارد: حالا غیر ممکن است که دو حلقه `for..of` بتوانند به طور همزمان در شیء حلقه بزنند چون آنها وضعیت حلقه‌زدن را به اشتراک می‌گذارند و آن هم به دلیل اینکه تنها یک حلقه‌زننده وجود دارد -- خود شیءها. اما دو for-of همزمان به ندرت پیش می‌آید، حتی در سناریوهای async (همگام‌سازی).
 
-```smart header="Infinite iterators"
-Infinite iterators are also possible. For instance, the `range` becomes infinite for `range.to = Infinity`. Or we can make an iterable object that generates an infinite sequence of pseudorandom numbers. Also can be useful.
+```smart header="حلقه‌زننده‌های بی‌نهایت"
+حلقه‌زننده‌های بی‌نهایت هم ممکن است ایجاد شوند. برای مثل، `range` به ازای `range.to = Infinity` بی‌نهایت می‌شود. یا ما می‌توانیم یک شیء حلقه‌پذیر را که یک دنباله بی‌نهایت از شبه اعداد ایجاد می‌کند بسازیم. می‌تواند مفید هم باشد.
 
-There are no limitations on `next`, it can return more and more values, that's normal.
+هیچ محدودیتی برای `next` وجود ندارد، این متد می‌تواند مقدارهای بیشتر و بیشتری برگرداند و این عادی است.
 
-Of course, the `for..of` loop over such an iterable would be endless. But we can always stop it using `break`.
+قطعا، حلقه `for..of` درون چنین حلقه‌پذیری پایان‌ناپذیر خواهد بود. اما می‌توانیم آن را همیشه با `break` متوقف کنیم.
 ```
 
 
-## String is iterable
+## رشته حلقه‌پذیر است
 
-Arrays and strings are most widely used built-in iterables.
+آرایه‌ها و رشته‌ها به عنوان حلقه‌پذیرهای درون ساخت بیشترین استفاده را دارند.
 
-For a string, `for..of` loops over its characters:
+برای یک رشته، `for..of` در کاراکترهای آن حلقه می‌زند:
 
 ```js run
 for (let char of "test") {
-  // triggers 4 times: once for each character
+  // چهار بار اجرا می‌شود: یک بار برای هر کاراکتر
   alert( char ); // t, then e, then s, then t
 }
 ```
 
-And it works correctly with surrogate pairs!
+و با جفت‌های جایگیر به درستی کار می‌کند!
 
 ```js run
 let str = '𝒳😂';
@@ -138,16 +138,16 @@ for (let char of str) {
 }
 ```
 
-## Calling an iterator explicitly
+## صدا زدن یک حلقه‌زننده به طور ضمنی
 
-For deeper understanding let's see how to use an iterator explicitly.
+برای فهم عمیق‌تر، بیایید ببینیم چگونه از حلقه‌زننده به طور ضمنی استفاده کنیم.
 
-We'll iterate over a string in exactly the same way as `for..of`, but with direct calls. This code creates a string iterator and gets values from it "manually":
+ما در یک رشته دقیقا به همان روش `for..of` حلقه می‌زنیم، اما با فراخوانی‌های مستقیم. این کد یک حلقه‌زننده برای رشته ایجاد می‌کند و مقدارها را از آن به صورت «دستی» دریافت می‌کند:
 
 ```js run
 let str = "Hello";
 
-// does the same as
+// کار مشابهی با حلقه پایین انجام می‌دهد
 // for (let char of str) alert(char);
 
 *!*
@@ -157,49 +157,49 @@ let iterator = str[Symbol.iterator]();
 while (true) {
   let result = iterator.next();
   if (result.done) break;
-  alert(result.value); // outputs characters one by one
+  alert(result.value); // هر کاراکتر را یکی یکی نشان می‌دهد
 }
 ```
 
-That is rarely needed, but gives us more control over the process than `for..of`. For instance, we can split the iteration process: iterate a bit, then stop, do something else, and then resume later.
+این روش به ندرت نیاز می‌شود، اما نسبت به `for..of` به ما کنترل بیشتری بر روی فرایند می‌دهد. برای مثال، ما می‌توانیم فرایند حلقه‌زدن را بشکافیم: مقداری حلقه بزنیم، سپس متوقف شویم، کاری انجام دهیم و بعدا ادامه دهیم.
 
-## Iterables and array-likes [#array-like]
+## حلقه‌پذیرها و شبه آرایه‌ها [#array-like]
 
-There are two official terms that look similar, but are very different. Please make sure you understand them well to avoid the confusion.
+دو اصطلاح رسمی که شبیه به هم هستند اما بسیار تفاوت دارند. لطفا مطمئن شوید که آنها را به خوبی متوجه می‌شوید تا از گیج‌شدن دور بمانید.
 
-- *Iterables* are objects that implement the `Symbol.iterator` method, as described above.
-- *Array-likes* are objects that have indexes and `length`, so they look like arrays.
+- *حلقه‌پذیرها* شیءهایی هستند که متد `Symbol.iterator` را پیاده‌سازی می‌کنند، درست مانند چیزی که بالا گفته شد.
+- *شبه آرایه‌ها* شیءهایی هستند که دارای ایندکس و `length` هستند، پس آنها شبیه آرایه بنظر می‌رسند.
 
-When we use JavaScript for practical tasks in browser or other environments, we may meet objects that are iterables or array-likes, or both.
+زمانی که ما از جاوااسکریپت برای انجام کارهایی در مرورگر یا هر محیط دیگری استفاده می‌کنیم، ممکن است با شیءهایی روبرو شویم که هم حلقه‌پذیر هستند و هم شبه آرایه و یا هر دو.
 
-For instance, strings are both iterable (`for..of` works on them) and array-like (they have numeric indexes and `length`).
+برای مثال، رشته‌ها هم حلقه‌پذیر هستند (`for..of` روی آنها کار می‌کند) و هم شبه آرایه هستند (آنها ایندکس عددی و `length` دارند).
 
-But an iterable may be not array-like. And vice versa an array-like may be not iterable.
+اما یک حلقه‌پذیر ممکن است شبه آرایه نباشد. برعکس آن هم ممکن است یعنی یک شبه آرایه ممکن است حلقه‌پذیر نباشد.
 
-For example, the `range` in the example above is iterable, but not array-like, because it does not have indexed properties and `length`.
+برای مثال، در مثال بالا `range` حلقه‌پذیر است اما شبه آرایه نیست، چون ویژگی‌های ایندکسی و `length` ندارد.
 
-And here's the object that is array-like, but not iterable:
+اینجا هم یک شیء داریم که شبه آرایه است اما حلقه‌پذیر نیست:
 
 ```js run
-let arrayLike = { // has indexes and length => array-like
+let arrayLike = { // است => شبه آرایه length دارای ایندکس و
   0: "Hello",
   1: "World",
   length: 2
 };
 
 *!*
-// Error (no Symbol.iterator)
+// (وجود ندارد Symbol.iterator) ارور
 for (let item of arrayLike) {}
 */!*
 ```
 
-Both iterables and array-likes are usually *not arrays*, they don't have `push`, `pop` etc. That's rather inconvenient if we have such an object and want to work with it as with an array. E.g. we would like to work with `range` using array methods. How to achieve that?
+حلقه‌پذیرها و شبه آرایه‌ها هر دو معمولا *آرایه نیستند*، آنها دارای متدهای `push`، `pop` و... نیستند. اگر ما یک شیء داشته باشیم و بخواهیم با آن مانند یک آرایه کار کنیم، این موضوع خوب نیست. مثلا ما بخواهیم در `range` از متدهای آرایه استفاده کنیم. چگونه این کار را انجام دهیم؟
 
-## Array.from
+## متد Array.from
 
-There's a universal method [Array.from](mdn:js/Array/from) that takes an iterable or array-like value and makes a "real" `Array` from it. Then we can call array methods on it.
+یک متد کلی [Array.from](mdn:js/Array/from) وجود دارد که یک حلقه‌پذیر یا شبه آرایه می‌گیرد و یک آرایه واقعی از آن تشکیل می‌دهد. سپس ما متدهای آرایه را روی آن استفاده می‌کنیم.
 
-For instance:
+برای مثل:
 
 ```js run
 let arrayLike = {
@@ -211,43 +211,43 @@ let arrayLike = {
 *!*
 let arr = Array.from(arrayLike); // (*)
 */!*
-alert(arr.pop()); // World (method works)
+alert(arr.pop()); // World (متد کار کرد)
 ```
 
-`Array.from` at the line `(*)` takes the object, examines it for being an iterable or array-like, then makes a new array and copies all items to it.
+`Array.from` در خط `(*)` شیء را می‌گیرد، آن را برای اینکه حلقه‌پذیر یا شبه آرایه باشد بررسی می‌کند، سپس یک آرایه جدید می‌سازد و تمام المان‌ها را در آن کپی می‌کند.
 
-The same happens for an iterable:
+اتفاق مشابهی برای حلقه‌پذیر می‌افتد:
 
 ```js
-// assuming that range is taken from the example above
+// از مثال بالا گرفته شده است range فرض می‌کنیم که
 let arr = Array.from(range);
-alert(arr); // 1,2,3,4,5 (array toString conversion works)
+alert(arr); // 1,2,3,4,5 (آرایه کار می‌کند toString تبدیل)
 ```
 
-The full syntax for `Array.from` also allows us to provide an optional "mapping" function:
+سینتکس کامل برای `Array.from` به اجازه فراهم کردن یک تابع «طراحی» هم می‌دهد:
 ```js
 Array.from(obj[, mapFn, thisArg])
 ```
 
-The optional second argument `mapFn` can be a function that will be applied to each element before adding it to the array, and `thisArg` allows us to set `this` for it.
+آرگومان اختیاری دوم `mapFn` می‌تواند تابعی باشد که روی تمام المان‌ها قبل از اینکه به آرایه اضافه شوند اعمال می‌شود و `thisArg` اجازه می‌دهد که برای آن `this` قرار دهیم.
 
-For instance:
+برای مثال:
 
 ```js
-// assuming that range is taken from the example above
+// از مثال بالا گرفته شده است range فرض می‌کنیم
 
-// square each number
+// به توان 2 رساندن هر عدد
 let arr = Array.from(range, num => num * num);
 
 alert(arr); // 1,4,9,16,25
 ```
 
-Here we use `Array.from` to turn a string into an array of characters:
+اینجا ما از `Array.from` برای تبدیل یک رشته به آرایه‌ای از کاراکترها استفاده می‌کنیم:
 
 ```js run
 let str = '𝒳😂';
 
-// splits str into array of characters
+// به آرایه‌ای از کاراکترها str تقسیم
 let chars = Array.from(str);
 
 alert(chars[0]); // 𝒳
@@ -255,14 +255,14 @@ alert(chars[1]); // 😂
 alert(chars.length); // 2
 ```
 
-Unlike `str.split`, it relies on the iterable nature of the string and so, just like `for..of`, correctly works with surrogate pairs.
+برخلاف `str.split`، این روش بر اساس طبیعت حلقه‌پذیری رشته کار می‌کند و به همین دلیل، درست مانند `for..of`، با جفت‌های جایگیر به درستی کار می‌کند.
 
-Technically here it does the same as:
+از لحاظ فنی این هم کار مشابهی را انجام می‌دهد:
 
 ```js run
 let str = '𝒳😂';
 
-let chars = []; // Array.from internally does the same loop
+let chars = []; // هم از درون این حلقه را اجرا می‌کند Array.from
 for (let char of str) {
   chars.push(char);
 }
@@ -270,9 +270,9 @@ for (let char of str) {
 alert(chars);
 ```
 
-...But it is shorter.    
+...اما این روش کوتاه‌تر است.
 
-We can even build surrogate-aware `slice` on it:
+ما حتی می‌توانیم یک `slice` که از جفت‌های جایگیر آگاه است را روی آن بسازیم:
 
 ```js run
 function slice(str, start, end) {
@@ -283,25 +283,25 @@ let str = '𝒳😂𩷶';
 
 alert( slice(str, 1, 3) ); // 😂𩷶
 
-// the native method does not support surrogate pairs
-alert( str.slice(1, 3) ); // garbage (two pieces from different surrogate pairs)
+// متد اصلی از جفت‌های جایگیر پشتیبانی نمی‌کند
+alert( str.slice(1, 3) ); // چرت و پرت (دو قطعه از جفت‌های جایگیر متفاوت)
 ```
 
 
-## Summary
+## خلاصه
 
-Objects that can be used in `for..of` are called *iterable*.
+شیءهایی که بتوانند در `for..of` استفاده شوند، *حلقه‌پذیر* نامیده می‌شوند.
 
-- Technically, iterables must implement the method named `Symbol.iterator`.
-    - The result of `obj[Symbol.iterator]` is called an *iterator*. It handles the further iteration process.
-    - An iterator must have the method named `next()` that returns an object `{done: Boolean, value: any}`, here `done:true` denotes the end of the iteration process, otherwise the `value` is the next value.
-- The `Symbol.iterator` method is called automatically by `for..of`, but we also can do it directly.
-- Built-in iterables like strings or arrays, also implement `Symbol.iterator`.
-- String iterator knows about surrogate pairs.
+- به طور فنی، حلقه‌پذیرها باید متدی به اسم `Symbol.iterator` را پیاده‌سازی کنند.
+    - نتیجه فراخوانی `obj[Symbol.iterator]()` باید یک حلقه‌زننده باشد که فرایند حلقه‌زدن‌های بعدی را مدیریت می‌کند.
+    - یک حلقه‌زننده باید متدی به نام `next()` داشته باشد که یک شیء به صورت `{done: Boolean, value: any}` را برمی‌گرداند، اینجا `done:true` نشان دهنده پایان فرایند حلقه‌زدن است، در غیر این صورت `value` مقدار بعدی است.
+- متد `Symbol.iterator` توسط `for..of` به صورت خودکار صدا زده می‌شود اما ما می‌توانیم به طور مستقیم این کار را انجام دهیم.
+- حلقه‌پذیرهای داخلی مانند رشته‌ها یا آرایه‌ها هم `Symbol.iterator` را پیاده‌سازی می‌کنند.
+- حلقه‌زننده رشته‌ای از جفت‌های جایگیر آگاه است.
 
 
-Objects that have indexed properties and `length` are called *array-like*. Such objects may also have other properties and methods, but lack the built-in methods of arrays.
+شیءهایی که دارای ویژگی‌های ایندکسی و `length` هستند *شبه آرایه* نامیده می‌شوند. چنین شیءهایی ممکن است ویژگی‌ها و متدهای دیگری هم داشته باشند اما متدهای آرایه را ندارند.
 
-If we look inside the specification -- we'll see that most built-in methods assume that they work with iterables or array-likes instead of "real" arrays, because that's more abstract.
+اگر ما به خصوصیات زبان نگاهی بیاندازیم -- خواهیم دید که بیشتر متدهای درون‌ساخت، فرض می‌کنند که به جای آرایه‌های «واقعی» با حلقه‌پذیرها یا شبه آرایه‌ها کار می‌کنند چون اینگونه کوتاه‌تر است.
 
-`Array.from(obj[, mapFn, thisArg])` makes a real `Array` of an iterable or array-like `obj`, and we can then use array methods on it. The optional arguments `mapFn` and `thisArg` allow us to apply a function to each item.
+`Array.from(obj[, mapFn, thisArg])` یک آرایه واقعی از یک حلقه‌پذیر یا شبه آرایه‌ی `obj` می‌سازد و سپس می‌توانیم بر روی آن از متدهای آرایه‌استفاده کنیم. آرگومان اختیاری `mapFn` و `thisArg` به ما اجازه اعمال یک تابع بر روی هر یک از المان‌ها را می‌دهند.

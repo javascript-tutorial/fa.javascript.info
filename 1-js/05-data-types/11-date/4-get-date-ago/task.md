@@ -2,13 +2,13 @@ importance: 4
 
 ---
 
-# Which day of month was many days ago?
+# چند روز قبل کدام روز ماه بود؟
 
-Create a function `getDateAgo(date, days)` to return the day of month `days` ago from the `date`.
+یک تابع `getDateAgo(date, days)` بسازید که روز ماه را به اندازه `days` روز قبل از `date` برگرداند. 
 
-For instance, if today is 20th, then `getDateAgo(new Date(), 1)` should be 19th and `getDateAgo(new Date(), 2)` should be 18th.
+برای مثال، اگر امروز 20ام باشد، سپس `getDateAgo(new Date(), 1)` باید 19ام را برگرداند و `getDateAgo(new Date(), 2)` باید 18ام باشد.
 
-Should work reliably for `days=365` or more:
+باید به ازای `days=365` یا بیشتر به درستی کار کند:
 
 ```js
 let date = new Date(2015, 0, 2);
@@ -18,4 +18,4 @@ alert( getDateAgo(date, 2) ); // 31, (31 Dec 2014)
 alert( getDateAgo(date, 365) ); // 2, (2 Jan 2014)
 ```
 
-P.S. The function should not modify the given `date`.
+پی‌نوشت: تابع نباید `date` داده شده را تغییر دهد.

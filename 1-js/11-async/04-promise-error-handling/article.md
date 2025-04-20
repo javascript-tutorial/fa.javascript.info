@@ -1,21 +1,21 @@
 
-# Error handling with promises
+# مدیریت ارورها با promiseها
 
-Promise chains are great at error handling. When a promise rejects, the control jumps to the closest rejection handler. That's very convenient in practice.
+زنجیره‌های promise در مدیریت ارورها عالی هستند. هنگام reject شدن یک promise، کنترل برنامه به نزدیک‌ترین مدیریت‌کننده rejection (رد شدن) جهش می‌کند. این موضوع در عمل خیلی مناسب است.
 
-For instance, in the code below the URL to `fetch` is wrong (no such site) and `.catch` handles the error:
+برای مثال، در کد پایین URL درون fetch اشتباه است (چنین سایتی وجود ندارد) و `.catch` ارور را مدیریت می‌کند:
 
 ```js run
 *!*
-fetch('https://no-such-server.blabla') // rejects
+fetch('https://no-such-server.blabla') // می‌شود reject
 */!*
   .then(response => response.json())
-  .catch(err => alert(err)) // TypeError: failed to fetch (the text may vary)
+  .catch(err => alert(err)) // TypeError: failed to fetch (متن ممکن است تفاوت داشته باشد)
 ```
 
-As you can see, the `.catch` doesn't have to be immediate. It may appear after one or maybe several `.then`.
+همانطور که می‌بینید، `.catch` حتما نباید بلافاصله وجود داشته باشد. می‌تواند بعد از یک یا چند `.then` ظاهر شود.
 
-Or, maybe, everything is all right with the site, but the response is not valid JSON. The easiest way to catch all errors is to append `.catch` to the end of chain:
+یا شاید سایت مشکلی ندارد اما پاسخ یک جی‌سان معتبر نباشد. آسان‌ترین راه برای گرفتن تمام ارورها اضافه کردن `.catch` به انتهای زنجیره است:
 
 ```js run
 fetch('/article/promise-chaining/user.json')
@@ -38,13 +38,13 @@ fetch('/article/promise-chaining/user.json')
 */!*
 ```
 
-Normally, such `.catch` doesn't trigger at all. But if any of the promises above rejects (a network problem or invalid json or whatever), then it would catch it.
+معمولا، چنین `.catch`هایی اصلا فعال نمی‌شوند. اما اگر هر کدام از promiseهای بالا reject شوند (به دلیل مشکل شبکه یا جی‌سان نامعتبر یا هر چیزی) سپس ارور دریافت می‌شود.
 
-## Implicit try..catch
+## try..catch ضمنی
 
-The code of a promise executor and promise handlers has an "invisible `try..catch`" around it. If an exception happens, it gets caught and treated as a rejection.
+کد یک اجرا کننده promise و مدیریت‌کننده‌های promise یک «`try..catch` نامرئی» دور خود دارند. اگر اروری رخ دهد، دریافت می‌شود و به عنوان یک rejection با آن رفتار می‌شود.
 
-For instance, this code:
+برای مثال، این کد:
 
 ```js run
 new Promise((resolve, reject) => {
@@ -54,7 +54,7 @@ new Promise((resolve, reject) => {
 }).catch(alert); // Error: Whoops!
 ```
 
-...Works exactly the same as this:
+...دقیقا مانند این کد عمل می‌کند:
 
 ```js run
 new Promise((resolve, reject) => {
@@ -64,65 +64,65 @@ new Promise((resolve, reject) => {
 }).catch(alert); // Error: Whoops!
 ```
 
-The "invisible `try..catch`" around the executor automatically catches the error and turns it into rejected promise.
+«`try..catch` نامرئی» به دور اجرا کننده به صورت خودکار ارور را دریافت می‌کند و آن را به یک promise که reject شده تبدیل می‌کند.
 
-This happens not only in the executor function, but in its handlers as well. If we `throw` inside a `.then` handler, that means a rejected promise, so the control jumps to the nearest error handler.
+این نه تنها در تابع اجرا کننده اتفاق می‌افتد بلکه در مدیریت‌کننده‌های آن هم این چنین است. اگر ما درون یک مدیریت‌کننده `.then` عمل `thorw` انجام دهیم، به معنی یک promise که reject شده است پس کنترل برنامه به نزدیک‌ترین مدیریت‌کننده ارور جهش می‌کند.
 
-Here's an example:
+اینجا یک مثال داریم:
 
 ```js run
 new Promise((resolve, reject) => {
   resolve("ok");
 }).then((result) => {
 *!*
-  throw new Error("Whoops!"); // rejects the promise
+  throw new Error("Whoops!"); // می‌کند rejects را promise
 */!*
 }).catch(alert); // Error: Whoops!
 ```
 
-This happens for all errors, not just those caused by the `throw` statement. For example, a programming error:
+این برای تمام ارورها اتفاق می‌افتد نه فقط آن‌هایی که توسط دستور `throw` اتفاق می‌افتند. برای مثال، یک ارور برنامه‌نویسی:
 
 ```js run
 new Promise((resolve, reject) => {
   resolve("ok");
 }).then((result) => {
 *!*
-  blabla(); // no such function
+  blabla(); // چنین تابعی نداریم
 */!*
 }).catch(alert); // ReferenceError: blabla is not defined
 ```
 
-The final `.catch` not only catches explicit rejections, but also accidental errors in the handlers above.
+`.catch` انتهایی نه تنها تمام rejectionهای واضح را دریافت می‌کند بلکه ارورهای تصادفی در مدیریت‌کننده‌های بالا را هم دریافت می‌کند.
 
-## Rethrowing
+## throw کردن دوباره
 
-As we already noticed, `.catch` at the end of the chain is similar to `try..catch`. We may have as many `.then` handlers as we want, and then use a single `.catch` at the end to handle errors in all of them.
+همانطور که متوجه شده‌ایم، `.catch` در انتهای زنجیره شبیه `try..catch` است. می‌توانیم هر تعداد مدیریت‌کننده `.then` که بخواهیم داشته باشیم و سپس از یک `.catch` در انتها برای مدیریت ارورهای تمام آن‌ها استفاده کنیم.
 
-In a regular `try..catch` we can analyze the error and maybe rethrow it if it can't be handled. The same thing is possible for promises.
+در یک `try..catch` عادی ما می‌توانیم ارور را آنالیز کنیم و اگر نتوان آن را مدیریت کرد، دوباره throw کنیم. همین موضوع برای promiseها هم صدق می‌کند.
 
-If we `throw` inside `.catch`, then the control goes to the next closest error handler. And if we handle the error and finish normally, then it continues to the next closest successful `.then` handler.
+اگر ما درون `.catch` عمل `throw` را انجام دهیم، سپس کنترل برنامه به نزدیک‌ترین مدیریت‌کننده ارور بعدی منتقل می‌شود. و اگر ما ارور را مدیریت کنیم و با موفقیت به اتمام برسد، سپس به نزدیک‌ترین مدیریت‌کننده `.then` بعدی منتقل می‌شود.
 
-In the example below the `.catch` successfully handles the error:
+در مثال پایین، `.catch` ارور را با موفقیت مدیریت می‌کند:
 
 ```js run
-// the execution: catch -> then
+// catch -> then :اجرای برنامه
 new Promise((resolve, reject) => {
 
   throw new Error("Whoops!");
 
 }).catch(function(error) {
 
-  alert("The error is handled, continue normally");
+  alert("ارور مدیریت شد، ادامه دهید");
 
-}).then(() => alert("Next successful handler runs"));
+}).then(() => alert("مدیریت‌کننده بعدی اجرا می‌شود"));
 ```
 
-Here the `.catch` block finishes normally. So the next successful `.then` handler is called.
+اینجا بلوک `.catch` به طور معمولی به اتمام می‌رسد. پس مدیریت‌کنند `.then` بعدی فراخوانی می‌شود.
 
-In the example below we see the other situation with `.catch`. The handler `(*)` catches the error and just can't handle it (e.g. it only knows how to handle `URIError`), so it throws it again:
+در مثال پایین ما موقعیت دیگر با `.catch` را می‌بینیم. مدیریت‌کننده `(*)` ارور را دریافت می‌کند و نمی‌تواند آن را مدیریت کند (مثلا فقط می‌داند که چگونه `URIError` را مدیریت کند) پس دوباره آن را throw می‌کند:
 
 ```js run
-// the execution: catch -> catch -> then
+// catch -> catch :اجرای برنامه
 new Promise((resolve, reject) => {
 
   throw new Error("Whoops!");
@@ -135,70 +135,71 @@ new Promise((resolve, reject) => {
     alert("Can't handle such error");
 
 *!*
-    throw error; // throwing this or another error jumps to the next catch
+    throw error; // بعدی جهش می‌کند catch کردن این یا ارور دیگری به throw
 */!*
   }
 
 }).then(function() {
-  /* doesn't run here */
+  /* اینجا اجرا نمی‌شود */
 }).catch(error => { // (**)
 
   alert(`The unknown error has occurred: ${error}`);
-  // don't return anything => execution goes the normal way
+  // چیزی برنمی‌گرداند => اجرای برنامه به راه عادی خود ادامه می‌دهد
 
 });
 ```
 
-The execution jumps from the first `.catch` `(*)` to the next one `(**)` down the chain.
+اجرای برنامه از `.catch` اول `(*)` به بعدی `(**)` در انتهای زنجیره منتقل می‌شود.
 
-## Unhandled rejections
+## rejectionهای مدیریت نشده
 
-What happens when an error is not handled? For instance, we forgot to append `.catch` to the end of the chain, like here:
+زمانی که یک ارور مدیریت نشده است چه اتفاقی می‌افتد؟ برای مثال، ما فراموش کرده باشیم که `.catch` را به انتهای زنجیره اضافه کنیم، مانند اینجا:
 
 ```js untrusted run refresh
 new Promise(function() {
-  noSuchFunction(); // Error here (no such function)
+  noSuchFunction(); // (چنین تابعی نداریم) اینجا ارور ساخته می‌شود
 })
   .then(() => {
-    // successful promise handlers, one or more
-  }); // without .catch at the end!
+    // یکی یا بیشتر ،promise مدیریت‌کننده‌های موفقیت‌آمیز
+  }); // !در انتها .catch بدون
 ```
 
-In case of an error, the promise becomes rejected, and the execution should jump to the closest rejection handler. But there is none. So the error gets "stuck". There's no code to handle it.
+در صورت وجود ارور، promise ما reject می‌شود و اجرای برنامه باید به نزدیک‌ترین مدیریت‌کننده rejection جهش کند. اما وجود ندارد. پس ارور «گیر» می‌افتد. کدی برای مدیریت آن وجود ندارد.
 
-In practice, just like with regular unhandled errors in code, it means that something has gone terribly wrong.
+در عمل، درست مانند ارورهای مدیریت‌نشده در کد، این موضوع یعنی اشتباه وحشتناکی رخ داده است.
 
-What happens when a regular error occurs and is not caught by `try..catch`? The script dies with a message in the console. A similar thing happens with unhandled promise rejections.
+زمانی که یک ارور معمولی رخ می‌دهد و توسط `try..catch` دریافت نمی‌شود چه اتفاقی می‌افتد؟ اسکریپت همراه با یک پیام درون کنسول می‌میرد. چنین چیزی هم درباره rejectionهای مدیریت‌نشده promise اتفاق می‌افتد.
 
-The JavaScript engine tracks such rejections and generates a global error in that case. You can see it in the console if you run the example above.
+در این صورت، موتور جاوااسکریپت چنین rejectionهایی را ردیابی می‌کند و یک ارور گلوبال می‌سازد. اگر مثال بالا را اجرا کنید می‌توانید آن را درون کنسول مشاهده کنید.
 
-In the browser we can catch such errors using the event `unhandledrejection`:
+در مرورگر ما می‌توانیم چنین ارورهایی را با استفاده از رویداد `unhandledrejection` دریافت کنیم:
 
 ```js run
 *!*
 window.addEventListener('unhandledrejection', function(event) {
-  // the event object has two special properties:
-  alert(event.promise); // [object Promise] - the promise that generated the error
-  alert(event.reason); // Error: Whoops! - the unhandled error object
+  // :دو ویژگی خاص دارد event شیء
+  alert(event.promise); // [object Promise] - که ارور را ساخته است promise
+  alert(event.reason); // Error: Whoops! - شیء ارور مدیریت نشده
 });
 */!*
 
 new Promise(function() {
   throw new Error("Whoops!");
-}); // no catch to handle the error
+}); // نداریم catch برای مدیریت ارور
 ```
 
-The event is the part of the [HTML standard](https://html.spec.whatwg.org/multipage/webappapis.html#unhandled-promise-rejections).
+این رویداد بخشی از [استاندارد HTML](https://html.spec.whatwg.org/multipage/webappapis.html#unhandled-promise-rejections) است.
 
-If an error occurs, and there's no `.catch`, the `unhandledrejection` handler triggers, and gets the `event` object with the information about the error, so we can do something.
+اگر اروری رخ دهد، و `.catch` نداشته باشیم، مدیریت‌کننده `unhandlesrejection` فعال می‌شود و شیء `event` را همراه با اطلاعاتی درباره ارور دریافت می‌کند تا ما بتوانیم کاری کنیم.
 
-Usually such errors are unrecoverable, so our best way out is to inform the user about the problem and probably report the incident to the server.
+معمولا چنین ارورهایی قابل بازیابی نیستند پس بهترین راه خروج ما مطلع کردن کاربر درباره مشکل احتمالا گزارش دادن حادثه به سرور است.
 
-In non-browser environments like Node.js there are other ways to track unhandled errors.
+در محیط‌های غیر مرورگر مانند Node.js راه‌هایی برای ردیابی ارورهای مدیریت نشده وجود دارد.
 
-## Summary
+## خلاصه
 
-- `.catch` handles errors in promises of all kinds: be it a `reject()` call, or an error thrown in a handler.
-- We should place `.catch` exactly in places where we want to handle errors and know how to handle them. The handler should analyze errors (custom error classes help) and rethrow unknown ones (maybe they are programming mistakes).
-- It's ok not to use `.catch` at all, if there's no way to recover from an error.
-- In any case we should have the `unhandledrejection` event handler (for browsers, and analogs for other environments) to track unhandled errors and inform the user (and probably our server) about them, so that our app never "just dies".
+- `.catch` هر نوع ارور درون promiseها را مدیریت می‌کند: چه فراخوانی `reject()` باشد یا چه اروری درون یک مدیریت‌کننده.
+- `.then` هم به نوعی ارورها را دریافت می‌کند در صورتی که آرگومان دوم به آن داده شده باشد (که همان مدیریت‌کننده ارور است).
+- ما باید `.catch` را دقیقا در مکان‌هایی قرار دهیم که می‌خواهیم ارورها را مدیریت کنیم و می‌دانیم چگونه. مدیریت‌کننده باید ارورها را بررسی کند (با کمک کلاس‌های ارورهای شخصی‌سازی شده) و ارورهای ناشناخته را دوباره throw کند (شاید آن‌ها اشتباهات برنامه‌نویسی باشند).
+- اگر راهی برای نجات از یک ارور وجود نداشته باشد، استفاده نکردن از `.catch` به طور کلی مشکلی ندارد.
+- در هر صورت ما باید مدیریت‌کننده رویداد `unhandledrejection` را داشته باشیم (برای مرورگرها و مشابه‌های آن برای بقیه محیط‌ها) تا ارورهای مدیریت‌نشده را ردیابی کنیم و کاربر (و احتمالا سرور خود) را از آن‌ها مطلع کنیمت تا برنامه ما هیچوقت «نمیرد».

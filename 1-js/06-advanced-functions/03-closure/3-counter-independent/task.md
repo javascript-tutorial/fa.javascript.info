@@ -2,11 +2,11 @@ importance: 5
 
 ---
 
-# Are counters independent?
+# آیا شمارنده‌ها مستقل هستند؟
 
-Here we make two counters: `counter` and `counter2` using the same `makeCounter` function.
+اینجا ما دو شمارنده می‌سازیم: `counter` و `counter2` با استفاده از تابع یکسان `makeCounter`.
 
-Are they independent? What is the second counter going to show? `0,1` or `2,3` or something else?
+آیا آنها مستقل هستند؟ دومین شمارنده چه چیزی را نمایش خواهد داد؟ `0,1` یا `2,3` یا چیز دیگری؟
 
 ```js
 function makeCounter() {

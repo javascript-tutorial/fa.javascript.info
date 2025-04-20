@@ -3,23 +3,23 @@
 ```js run demo
 let userName = prompt("Who's there?", '');
 
-if (userName == 'Admin') {
+if (userName === 'Admin') {
 
   let pass = prompt('Password?', '');
 
-  if (pass == 'TheMaster') {
+  if (pass === 'TheMaster') {
     alert( 'Welcome!' );
-  } else if (pass == '' || pass == null) {
+  } else if (pass === '' || pass === null) {
     alert( 'Canceled' );
   } else {
     alert( 'Wrong password' );
   }
 
-} else if (userName == '' || userName == null) {
+} else if (userName === '' || userName === null) {
   alert( 'Canceled' );
 } else {
   alert( "I don't know you" );
 }
 ```
 
-Note the vertical indents inside the `if` blocks. They are technically not required, but make the code more readable.
+به تورفتگی عمودی درون بلوک های `if` توجه کنید. از لحاظ فنی به آنها نیازی نیست، اما کد را خواناتر می کنند.

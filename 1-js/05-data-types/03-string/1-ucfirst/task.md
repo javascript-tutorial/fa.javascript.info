@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# Uppercase the first character
+# کاراکتر اول را بزرگ کنید
 
-Write a function `ucFirst(str)` that returns the string `str` with the uppercased first character, for instance:
+یک تابع `ucFirst(str)` بنویسید که رشته `str` را با حرف اول بزرگ شده برمی‌گرداند، برای مثال:
 
 ```js
 ucFirst("john") == "John";

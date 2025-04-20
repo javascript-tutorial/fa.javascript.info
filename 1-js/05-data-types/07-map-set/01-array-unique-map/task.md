@@ -2,17 +2,17 @@ importance: 5
 
 ---
 
-# Filter unique array members
+# اعداد یکتای آرایه را جداسازی کنید
 
-Let `arr` be an array.
+فرض کنیم `arr` یک آرایه باشد.
 
-Create a function `unique(arr)` that should return an array with unique items of `arr`.
+تابع `unique(arr)` را بسازید که باید آرایه‌ای شامل المان‌های خاص `arr` را برگرداند.
 
-For instance:
+برای مثال:
 
 ```js
 function unique(arr) {
-  /* your code */
+  /* کد شما */
 }
 
 let values = ["Hare", "Krishna", "Hare", "Krishna",
@@ -22,6 +22,6 @@ let values = ["Hare", "Krishna", "Hare", "Krishna",
 alert( unique(values) ); // Hare, Krishna, :-O
 ```
 
-P.S. Here strings are used, but can be values of any type.
+پی‌نوشت: اینجا رشته‌ها استفاده شده‌اند اما می‌توانند هر مقداری از هر نوعی باشند.
 
-P.P.S. Use `Set` to store unique values.
+پی‌نوشت دوم: از `Set` برای ذخیره مقدارهای یکتا استفاده کنید.

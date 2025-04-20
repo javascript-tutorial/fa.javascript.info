@@ -2,8 +2,8 @@ importance: 3
 
 ---
 
-# Check the range between
+# حدود بین را بررسی کنید
 
-Write an "if" condition to check that `age` is between `14` and `90` inclusively.
+یک شرط `if` بنویسید که بررسی کند `age` بین `14` و `90` به صورتی که شامل خودشان هم بشود هست یا نه.
 
-"Inclusively" means that `age` can reach the edges `14` or `90`.
+"شامل خودشان" یعنی `age` می تواند به مرز `14` و `90` هم برسد.

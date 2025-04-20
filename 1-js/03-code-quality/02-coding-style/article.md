@@ -1,15 +1,18 @@
-# Coding Style
+# سبک کدنویسی
 
-Our code must be as clean and easy to read as possible.
+کد ما باید تا حد امکان تمیز و خوانا باشد
 
-That is actually the art of programming -- to take a complex task and code it in a way that is both correct and human-readable. A good code style greatly assists in that.  
+این در واقع هنر برنامه نویسی است - گرفتن یک کار پیچیده و نوشتن کد آن به روشی که هم درست باشد و هم برای انسان قابل خواندن باشد. یک سبک کدنویسی خوب است  که در آن بسیار کمک می‌کند.
 
-## Syntax
 
-Here is a cheat sheet with some suggested rules (see below for more details):
+
+## سینتکس
+
+این یک برگهٔ تقلب با قوانین پیشنهادی است(عکس زیر را برای جزئییات بیشتر مشاهده کنید)
 
 ![](code-style.svg)
 <!--
+
 ```js
 function pow(x, n) {
   let result = 1;
@@ -34,15 +37,18 @@ if (n < 0) {
 
 -->
 
-Now let's discuss the rules and reasons for them in detail.
+خب حالا بیاید در مورد قوانین و علت آن باهم بحث کنیم
 
-```warn header="There are no \"you must\" rules"
+```warn header="هیچ قوانین \"بایدی\" وجود ندارد"
 Nothing is set in stone here. These are style preferences, not religious dogmas.
+هیچ وحی منزلی درکار نیست.این ها ترجیحات سبک کد زنی است نه عقاید مذهبی
 ```
 
-### Curly Braces
 
-In most JavaScript projects curly braces are written in "Egyptian" style with the opening brace on the same line as the corresponding keyword -- not on a new line. There should also be a space before the opening bracket, like this:
+
+### آکولاد
+
+در اکثر پروژه‌های جاوااسکریپت آکولاد به روش «مصری»  و با سبک باز کردن آکولاد در خط مشابه کلمه کلیدی متناظر و نه در خط جدید نوشته میشود. همچنین قبل از بازکردن یک آکولاد یک فاصله نیز باید وجود داشته باشد، مانند زیر: 
 
 ```js
 if (condition) {
@@ -52,37 +58,47 @@ if (condition) {
 }
 ```
 
-A single-line construct, such as `if (condition) doSomething()`, is an important edge case. Should we use braces at all?
+یک سازه تک‌خطی ، مانند  `if (condition) doSomething()` ، یک مورد بسیار مهم است. اصلاً باید از آکولاد استفاده کنیم؟
 
-Here are the annotated variants so you can judge their readability for yourself:
+در اینجا انواع حاشیه‌نویسی آورده شده است تا بتوانید خوانایی آن‌ها را برای خود قضاوت کنید:
 
-1. 😠 Beginners sometimes do that. Bad! Curly braces are not needed:
+1. تازه‌کارها بعضی اوقات اینکار را انجام میدهند.این خیلی بد است آکولاد کامنت لازم ندارد
+
     ```js
     if (n < 0) *!*{*/!*alert(`Power ${n} is not supported`);*!*}*/!*
     ```
-2. 😠 Split to a separate line without braces. Never do that, easy to make an error when adding new lines:
+
+4.  شکاندن خط بدون آکولاد. هرگز اینکارو نکنید به علت اینکه براحتی با افزودن خط جدید با خطا مواجه می‌شوید.
+
     ```js
     if (n < 0)
       alert(`Power ${n} is not supported`);
     ```
-3. 😏 One line without braces - acceptable, if it's short:
+
+6. یک خط بدون آکولاد قابل قبول است اگر کوتاه باشد 😏
+
     ```js
     if (n < 0) alert(`Power ${n} is not supported`);
     ```
-4. 😃 The best variant:
+
+8. بهترین نوع😃:
+
     ```js
     if (n < 0) {
       alert(`Power ${n} is not supported`);
     }
     ```
 
-For a very brief code, one line is allowed, e.g. `if (cond) return null`. But a code block (the last variant) is usually more readable.
+برای یک کد بسیار مختصر، یک خطی نوستن مشکلی ندارد برای مثال `if (cond) return null`. ولی برای یک بلاک کد، آخرین مثال حالت خواناتری است
 
-### Line Length
 
-No one likes to read a long horizontal line of code. It's best practice to split them.
 
-For example:
+### طول خط
+
+هیچکس دوست ندارد یک خط طولانی افقی را بخواند. بهترین حالت آن است که آن‌ها را بشکنیم.
+
+برای مثال :
+
 ```js
 // backtick quotes ` allow to split the string into multiple lines
 let str = `
@@ -92,7 +108,7 @@ let str = `
 `;
 ```
 
-And, for `if` statements:
+و برای `if` :
 
 ```js
 if (
@@ -104,34 +120,37 @@ if (
 }
 ```
 
-The maximum line length should be agreed upon at the team-level. It's usually 80 or 120 characters.
+حداکثر طول خط باید در سطح تیم توافق شود. معمولاً 80 یا 120 کاراکتر است.
 
-### Indents
 
-There are two types of indents:
 
-- **Horizontal indents: 2 or 4 spaces.**
+### تورفتگی
 
-    A horizontal indentation is made using either 2 or 4 spaces or the horizontal tab symbol (key `key:Tab`). Which one to choose is an old holy war. Spaces are more common nowadays.
+دو نوع تورفتگی وجود دارد :
 
-    One advantage of spaces over tabs is that spaces allow more flexible configurations of indents than the tab symbol.
+- **تو رفتگی افقی : ۲ یا ۴ فاصله**
 
-    For instance, we can align the arguments with the opening bracket, like this:
+    یک تورفتگی افقی با استفاده از 2 یا 4 فاصله یا کلید تب ساخته می‌شود (کلید `Tab`).کدام یک را انتخاب کنید یک جنگ مقدس قدیمی است. امروزه فاصله بیشتر رایج هستند
 
+    یکی از مزایای استفاده از فاصله به جای تب این است که فاصله از پیکربندی‌های انعطاف‌پذیرتری از تب‌ها استفاده می‌کنند.
+
+    برای نمونه, مامی‌توانیم پارامترهای ورودی و آکولاد باز را باهم تراز کنیم، مانند زیر:
+
+    
     ```js no-beautify
-    show(parameters,
+show(parameters,
          aligned, // 5 spaces padding at the left  
-         one,
+     one,
          after,
-         another
+     another
       ) {
       // ...
     }
     ```
+    
+- **تو رفتگی عمودی: خط های خالی برای شکستن کد به قسمت های منطقی.**
 
-- **Vertical indents: empty lines for splitting code into logical blocks.**
-
-    Even a single function can often be divided into logical blocks. In the example below, the initialization of variables, the main loop and returning the result are split vertically:
+    حتی یک فانکشن می‌تواند به قسمت‌های منطقی تقسیم شود. در مثال زیر، تعریف متغیر، حلقهٔ اصلی و بازگزداندن مقدار(`return`)  به صورت عمودی شکسته شده‌اند
 
     ```js
     function pow(x, n) {
@@ -145,23 +164,27 @@ There are two types of indents:
     }
     ```
 
-    Insert an extra newline where it helps to make the code more readable. There should not be more than nine lines of code without a vertical indentation.
+    افزودن یک خط خالی اضافه باعث میشود کد خواناتر شود. نباید بیشتر از ۹ خط کد بدون تورفتگی عمودی وجود داشته باشد.
 
-### Semicolons
 
-A semicolon should be present after each statement, even if it could possibly be skipped.
 
-There are languages where a semicolon is truly optional and it is rarely used. In JavaScript, though, there are cases where a line break is not interpreted as a semicolon, leaving the code vulnerable to errors. See more about that in the chapter <info:structure#semicolon>.
+### نقطه ویرگول (semicolon)
 
-If you're an experienced JavaScript programmer, you may choose a no-semicolon code style like [StandardJS](https://standardjs.com/). Otherwise, it's best to use semicolons to avoid possible pitfalls. The majority of developers put semicolons.
+بعد از هر عبارت باید یک نقطه ویرگول وجود داشته باشد، حتی اگر احتمالاً قابل رد شدن باشند
 
-### Nesting Levels
+زبانهایی وجود دارد که نقطه ویرگول واقعاً اختیاری است و بندرت از آن استفاده می شود. اگرچه در JavaScript مواردی وجود دارد که شکستن خط به عنوان نقطه ویرگول تعبیر نمی شود و کد را در برابر خطاها آسیب پذیر می کند. برای اطلاعات بیشتر قسمت مربوطه را مشاهده کنید  <info:structure#semicolon>
 
-Try to avoid nesting code too many levels deep.
+اگر شما یک توسعه دهنده جاوااسکریپت حرفه ای باشید شاید شما سبک کد زنی بدون نقطه ویرگول را مانند [StandardJS](https://standardjs.com/) انتخاب کنید.در غیر اینصورت از نقطه ویرگول حتما استفاده کنید چون باعث جلوگیری از خطاهای ناخواسته میشود.
 
-For example, in the loop, it's sometimes a good idea to use the [`continue`](info:while-for#continue) directive to avoid extra nesting.
 
-For example, instead of adding a nested `if` conditional like this:
+
+### سطح تورفتگی
+
+از تو رفتگی عمیق در کد خود دوری کنید.
+
+برای مثال، در حلقه‌ها بعضی اوقات ایده خوبی است که از  [`continue`](info:while-for#continue) برای جلوگیری از سطح زیاد تورفتگی جلوگیری کرد.
+
+به طور مثال به جای افزودن `if` به صورت تورفته مثل زیر :
 
 ```js
 for (let i = 0; i < 10; i++) {
@@ -171,7 +194,7 @@ for (let i = 0; i < 10; i++) {
 }
 ```
 
-We can write:
+ما می‌توانیم بنویسم :
 
 ```js
 for (let i = 0; i < 10; i++) {
@@ -180,11 +203,11 @@ for (let i = 0; i < 10; i++) {
 }
 ```
 
-A similar thing can be done with `if/else` and `return`.
+موارد مشابه میتواند با `if/else` و `return‍` انجام گیرد..
 
-For example, two constructs below are identical.
+به عنوان مثال ، دو حالت زیر یکسان هستند.
 
-Option 1:
+حالت اول :
 
 ```js
 function pow(x, n) {
@@ -202,7 +225,7 @@ function pow(x, n) {
 }
 ```
 
-Option 2:
+حالت دوم :
 
 ```js
 function pow(x, n) {
@@ -221,102 +244,110 @@ function pow(x, n) {
 }
 ```
 
-The second one is more readable because the "special case" of `n < 0` is handled early on. Once the check is done we can move on to the "main" code flow without the need for additional nesting.
+حالت دوم خواناتر است به این دلیل که حالت خاص  `n < 0`  در ابتدا بررسی شده است. بعد از اینکه بررسی به اتمام رسید ما می‌توانیم به قسمت اصلی کد برویم بدون اینکه به تورفتگی خاصی احتیاج داشته باشیم.
 
-## Function Placement
 
-If you are writing several "helper" functions and the code that uses them, there are three ways to organize the functions.
 
-1. Declare the functions *above* the code that uses them:
+## جای تابع
+
+اگر شما از چندین تابع کمکی در کد خود استفاده میکنید، سه راه برای سازمان‌دهی کردن آنها وجود دارد.
+
+1. تابع را بالای کدی که می‌خواهید استفاده کنید تعریف کنید :
 
     ```js
     // *!*function declarations*/!*
     function createElement() {
       ...
     }
-
+    
     function setHandler(elem) {
       ...
     }
-
+    
     function walkAround() {
       ...
     }
-
+    
     // *!*the code which uses them*/!*
     let elem = createElement();
     setHandler(elem);
     walkAround();
     ```
-2. Code first, then functions
+
+2. اول کد بعد تابع :)
 
     ```js
     // *!*the code which uses the functions*/!*
     let elem = createElement();
     setHandler(elem);
     walkAround();
-
+    
     // --- *!*helper functions*/!* ---
     function createElement() {
       ...
     }
-
+    
     function setHandler(elem) {
       ...
     }
-
+    
     function walkAround() {
       ...
     }
     ```
-3. Mixed: a function is declared where it's first used.
 
-Most of time, the second variant is preferred.
+3. ترکیبی : یک تابع جای تعریف شود که اولین جای استفاده آن است.
 
-That's because when reading code, we first want to know *what it does*. If the code goes first, then it becomes clear from the start. Then, maybe we won't need to read the functions at all, especially if their names are descriptive of what they actually do.
+اکثر مواقع حالت دوم ترجیح داده می‌شود.
 
-## Style Guides
+به این خاطر که زمانی که ما کد را میخوانیم٬ ما ابتدا می‌خواهیم بدانیم چه کاری انجام میدهد. اگر کد در ابتدا قرار می‌گیرد درهمان ابتدا کد تمیز است.سپس، شاید شما اصلا لازم نباشد که تابع را بخوانید به خصوص اگر که نام آن ها توضیح دهنده عمکلرد آن‌ها باشد.
 
-A style guide contains general rules about "how to write" code, e.g. which quotes to use, how many spaces to indent, the maximal line length, etc. A lot of minor things.
 
-When all members of a team use the same style guide, the code looks uniform, regardless of which team member wrote it.
 
-Of course, a team can always write their own style guide, but usually there's no need to. There are many existing guides to choose from.
+## راهنمای سبک (Style Guides) 
 
-Some popular choices:
+راهنمای سبک شامل قوانین کلی درباره "نحوه نوشتن کد" است برای مثال کدام نوع کوتیشن استفاده شود، تعداد فاصله‌ها برای تو رفتگی، حداکثر طول خط و غیره. و خیلی چیزهای جزئی دیگر.
+
+وقتی همه اعضای یک تیم از یک راهنمای سبک یکسان استفاده می‌کنند، فارغ از اینکه کدام یک از اعضای تیم آن را نوشته است، کد یکنواخت به نظر می‌رسد.
+
+البته ، یک تیم همیشه می‌تواند راهنمای سبک خود را بنویسد، اما معمولاً نیازی به این کار نیست. راهنماهای موجود زیادی برای انتخاب وجود دارد.
+
+برخی انتخاب‌های محبوب :
 
 - [Google JavaScript Style Guide](https://google.github.io/styleguide/jsguide.html)
 - [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript)
 - [Idiomatic.JS](https://github.com/rwaldron/idiomatic.js)
 - [StandardJS](https://standardjs.com/)
-- (plus many more)
+- (به علاوه بسیاری دیگر)
 
-If you're a novice developer, start with the cheat sheet at the beginning of this chapter. Then you can browse other style guides to pick up more ideas and decide which one you like best.
+اگر یک توسعه‌دهنده تازه‌کار هستید، با برگهٔ تقلب در ابتدای این فصل شروع کنید. سپس می‌توانید سایر راهنماهای سبک را مرور کنید تا ایده‌های بیشتری به دست بیاورید و تصمیم بگیرید کدام یک را بیشتر دوست دارید.
 
-## Automated Linters
 
-Linters are tools that can automatically check the style of your code and make improving suggestions.
 
-The great thing about them is that style-checking can also find some bugs, like typos in variable or function names. Because of this feature, using a linter is recommended even if you don't want to stick to one particular "code style".
+## لینترهای خودکار
 
-Here are some well-known linting tools:
+لیتنرها ابزاری هستند که می‌توانند به طور خودکار سبک کد شما را بررسی کرده و پیشنهادهای را برای بهبود کد ارائه دهند.
 
-- [JSLint](http://www.jslint.com/) -- one of the first linters.
-- [JSHint](http://www.jshint.com/) -- more settings than JSLint.
-- [ESLint](http://eslint.org/) -- probably the newest one.
+نکته قابل توجه در مورد آنها این است که بررسی سبک می تواند اشکالاتی مانند اشتباه تایپی در نام متغیر یا نام تابع را نیز پیدا کند. به دلیل این ویژگی ، استفاده از لینتر حتی اگر نمی‌خواهید به یک "سبک کد" خاص پایبند باشید ، توصیه می‌شود
 
-All of them can do the job. The author uses [ESLint](http://eslint.org/).
+برخی از ابزارهای لینت کردن شناخته شده :
 
-Most linters are integrated with many popular editors: just enable the plugin in the editor and configure the style.
+- [JSLint](http://www.jslint.com/) --یکی از اولین لینترها.
+- [JSHint](http://www.jshint.com/) -- تنظیمات بیشتری نسبت به JSLint.
+- [ESLint](http://eslint.org/) --شاید یکی از جدیدترین ها.
 
-For instance, for ESLint you should do the following:
+همه‌ی آنها می‌توانند کارشان را انجام دهند. نویسنده از [ESLint](http://eslint.org/) استفاده میکند. 
 
-1. Install [Node.JS](https://nodejs.org/).
-2. Install ESLint with the command `npm install -g eslint` (npm is a JavaScript package installer).
-3. Create a config file named `.eslintrc` in the root of your JavaScript project (in the folder that contains all your files).
-4. Install/enable the plugin for your editor that integrates with ESLint. The majority of editors have one.
+اکثر لینترها میتواند با ویرایشگرهای محبوب ادغام شوند : فقط کافیست پلاگین مربوطه رو نصب و سبک(style) را پیکربندی کنید.
 
-Here's an example of an `.eslintrc` file:
+برای نمونه٬ برای ESLint این کارها را باید انجام دهید :
+
+1. نصب  [Node.JS](https://nodejs.org/).
+2. نصب ESLint با کامند    npm `npm install -g eslint` نصب کننده پکیج های جاوا اسکریپت است. 
+3. یک فایل تنظیمات به نام `.eslintrc` در مسیر کف پروژه جاوااسکریپت(فولدری که شامل همه فولدر ها هستند)
+4. نصب/فعال کردن پلاگین برای ویرایشگر خودتان برای ادغام با ESLint. اکثر ویرایشگرها یک پلاگین دارند:
+
+این یک مثال از فایل `.eslintrc` است :
 
 ```js
 {
@@ -328,21 +359,21 @@ Here's an example of an `.eslintrc` file:
   },
   "rules": {
     "no-console": 0,
-    "indent": ["warning", 2]
+    "indent": 2
   }
 }
 ```
 
-Here the directive `"extends"` denotes that the configuration is based on the "eslint:recommended" set of settings. After that, we specify our own.
+در اینجا دستورالعمل `"extends"`  نشان می‌دهد که پیکربندی براساس مجموعه تنظیمات "eslint: recommended" است. پس از آن، ما مشخصات خود را مشخص می‌کنیم.
 
-It is also possible to download style rule sets from the web and extend them instead. See <http://eslint.org/docs/user-guide/getting-started> for more details about installation.
+همچنین می‌توان مجموعه قوانین سبک را از وب دانلود و به جای آن گسترش داد. برای اطلاعات بیشتر در مورد نصب ، به <http://eslint.org/docs/user-guide/getting-started> مراجعه کنید
 
-Also certain IDEs have built-in linting, which is convenient but not as customizable as ESLint.
+همچنین IDE های مشخصی linting داخلی دارند که راحت است اما به اندازه ESLint قابل تنظیم نیست.
 
-## Summary
+## خلاصه
 
-All syntax rules described in this chapter (and in the style guides referenced) aim to increase the readability of your code. All of them are debatable.
+تمام قوانین سینتکسی توصیف شده در این فصل (و همه آنهای که در راهنماهای سبک اشاره شده بود) با هدف افزایش خوانایی کد شما است. همه آنها قابل بحث است.
 
-When we think about writing "better" code, the questions we should ask ourselves are: "What makes the code more readable and easier to understand?" and "What can help us avoid errors?" These are the main things to keep in mind when choosing and debating code styles.
+وقتی به نوشتن کد "بهتر" فکر می کنیم ، سوالاتی که باید از خود بپرسیم این است: "چه چیزی کد را خواناتر و آسان تر می کند؟" و "چه چیزی می تواند به ما کمک کند تا از خطا جلوگیری کنیم؟" اینها اصلی ترین مواردی است که باید هنگام انتخاب و بحث در مورد سبک کد به خاطر بسپارید.
 
-Reading popular style guides will allow you to keep up to date with the latest ideas about code style trends and best practices.
+خواندن راهنماهای سبک محبوب به شما امکان می‌دهد با جدیدترین ایده ها در مورد سبک کدهای رو به رشد و بهترین روش ها به روز باشید.

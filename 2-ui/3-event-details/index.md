@@ -1,3 +1,3 @@
-# Events in details
+# جزئیات Eventها
 
-Here we cover most important events and details of working with them.
+اینجا ما مهم‌ترین eventها و جزئیات کار کردن با آن‌ها را پوشش می‌دهیم.

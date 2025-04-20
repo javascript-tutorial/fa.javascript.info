@@ -1,102 +1,104 @@
 
-# Private and protected properties and methods
+# ویژگی‌ها و متدهای شخصی و محافظت شده
 
-One of the most important principles of object oriented programming -- delimiting internal interface from the external one.
+یکی از مهم‌ترین قواعد برنامه‌نویسی شیءگرا -- محدود کردن رابط داخلی از رابط بیرونی است.
 
-That is "a must" practice in developing anything more complex than a "hello world" app.
+یعنی یک کارِ «بایدی» در توسعه هر چیزی پیچیده‌تر از یک برنامه‌ی «hello world».
 
-To understand this, let's break away from development and turn our eyes into the real world.
+برای فهمیدن این موضوع، بیایید از توسعه دور شویم و به دنیای واقعی نگاه کنیم.
 
-Usually, devices that we're using are quite complex. But delimiting the internal interface from the external one allows to use them without problems.
+معمولا، دستگاه‌هایی که ما استفاده می‌کنیم بسیار پیچیده هستند. اما محدود کردن رابط داخلی از رابط بیرونی به ما این امکان را می‌دهد که بدون مشکل از آن‌ها استفاده کنیم.
 
-## A real-life example
+## یک مثال در زندگی واقعی
 
-For instance, a coffee machine. Simple from outside: a button, a display, a few holes...And, surely, the result -- great coffee! :)
+برای مثال، یک قهوه‌ساز. از بیرون ساده است: یک دکمه، یک نمایشگر، چند سوراخ...و قطعا، نتیجه -- یک قهوه عالی :)
 
 ![](coffee.jpg)
 
-But inside... (a picture from the repair manual)
+اما از درون... (تصویری از دفترچه راهنمای تعمیرات)
 
 ![](coffee-inside.jpg)
 
-A lot of details. But we can use it without knowing anything.
+مقدار زیادی جزئیات. اما می‌توانیم بدون دانستن چیزی از آن استفاده کنیم.
 
-Coffee machines are quite reliable, aren't they? We can use one for years, and only if something goes wrong -- bring it for repairs.
+قهوه‌سازها بسیار قابل اطمینان هستند نه؟ می‌توانیم برای سال‌ها از آن‌ها استفاده کنیم و اگر چیزی درست نبود -- آن را به تعمیراتی ببرید.
 
-The secret of reliability and simplicity of a coffee machine -- all details are well-tuned and *hidden* inside.
+راز قابل اطمینان و ساده بودن یک قهوه‌ساز -- تمام جزئیات به خوبی تنظیم شده و درون آن *پنهان* است.
 
-If we remove the protective cover from the coffee machine, then using it will be much more complex (where to press?), and dangerous (it can electrocute).
+اگر ما پوشش حفاظتی را از قهوه‌ساز برداریم، سپس استفاده از آن پیچیده‌تر (کجا را فشار دهیم؟) و خطرناک‌تر (می‌تواند باعث برق گرفتگی شود) خواهد بود.
 
-As we'll see, in programming objects are like coffee machines.
+همانطور که خواهیم دید، در برنامه‌نویسی شیءها مانند قهوه‌سازها هستند.
 
-But in order to hide inner details, we'll use not a protective cover, but rather special syntax of the language and conventions.
+اما برای مخفی‌سازی جزئیات درونی،ما از پوشش حفاظتی استفاده نمی‌کنیم، بلکه از سینتکس خاص زبان و قراردادها استفاده می‌کنیم.
 
-## Internal and external interface
+## رابط درونی و بیرونی
 
-In object-oriented programming, properties and methods are split into two groups:
+در برنامه‌نویسی شیءگرا، ویژگی‌ها و متدها به دو گروه تقسیم می‌شوند:
 
-- *Internal interface* -- methods and properties, accessible from other methods of the class, but not from the outside.
-- *External interface* -- methods and properties, accessible also from outside the class.
+- *رابط درونی* -- متدها و ویژگی‌ها، قابل دسترس از متدهای دیگر کلاس، اما نه از بیرون.
+- *رابط بیرونی* -- متدها و ویژگی‌ها، قابل دسترس از بیرون از کلاس.
 
-If we continue the analogy with the coffee machine -- what's hidden inside: a boiler tube, heating element, and so on -- is its internal interface.
+اگر ما مقایسه را با قهوه‌ساز ادامه دهیم -- چیزی که درون آن است: یک مجرای بخار، المنت حرارت و غیره -- رابط درونی است.
 
-An internal interface is used for the object to work, its details use each other. For instance, a boiler tube is attached to the heating element.
+یک رابط درونی برای اینکه شیء کار کند استفاده می‌شود، جزئیات آن از یکدیگر استفاده می‌کنند. برای مثال، یک مجرای بخار به المنت حرارت متصل شده است.
 
-But from the outside a coffee machine is closed by the protective cover, so that no one can reach those. Details are hidden and inaccessible. We can use its features via the external interface.
+اما از بیرون یک قهوه‌ساز توسط پوشش محافظ بسته شده است پس کسی نمی‌تواند به آن‌ها دسترسی داشته باشد. جزئیات پنهان و غیر قابل دسترس شده‌اند. ما می‌توانیم از طریق رابط بیرونی از خصوصیات آن استفاده کنیم.
 
-So, all we need to use an object is to know its external interface. We may be completely unaware how it works inside, and that's great.
+پس تمام چیزی که برای استفاده از یک شیء نیاز داریم این است که رابط بیرونی آن را بشناسیم. شاید کاملا از اینکه چگونه کار می‌کند و این عالی است.
 
-That was a general introduction.
+این یک معرفی کلی بود.
 
-In JavaScript, there are two types of object fields (properties and methods):
+در جاوااسکریپت، دو نوع فیلد شیء داریم (ویژگی‌ها و متدها):
 
-- Public: accessible from anywhere. They comprise the external interface. Until now we were only using public properties and methods.
-- Private: accessible only from inside the class. These are for the internal interface.
+- عمومی (public): قابل دسترس از هر جا. آن‌ها شامل رابط بیرونی می‌شوند. تا اینجا ما فقط از ویژگی‌ها و متدهای عمومی استفاده می‌کردیم.
+- خصوصی (private): فقط درون کلاس قابل دسترس است. این‌ها برای رابط درونی هستند.
 
-In many other languages there also exist "protected" fields: accessible only from inside the class and those extending it (like private, but plus access from inheriting classes). They are also useful for the internal interface. They are in a sense more widespread than private ones, because we usually want inheriting classes to gain access to them.
+در بسیاری از زبان‌های دیگر فیلدهای «محافظت‌شده» (protected) هم وجود دارد: فقط از درون کلاس و کلاس‌هایی که آن را تعمیم می‌دهند قابل دسترس است (مانند نوع خصوصی اما قابل دسترس از کلاس‌های ارث‌بر). آن‌ها هم برای رابط درونی مفید هستند. آن‌ها در کل نسبت به نوع خصوصی بیشتر رایج هستند چون ما معمولا می‌خواهیم کلاس‌های ارث‌بر به آن‌ها دسترسی داشته باشند.
 
-Protected fields are not implemented in JavaScript on the language level, but in practice they are very convenient, so they are emulated.
+فیلدهای محافظت‌شده در جاوااسکریپت در سطح زبان پیاده‌سازی نشده‌اند اما در عمل بسیار مناسب هستند پس تقلید شده‌اند.
 
-Now we'll make a coffee machine in JavaScript with all these types of properties. A coffee machine has a lot of details, we won't model them to stay simple (though we could).
+حالا در جاوااسکریپت یک قهوه‌ساز همراه با انواع ویژگی خواهیم ساخت. یک قهوه‌ساز جزئیات زیادی دارد، ما برای ساده بودن آن‌ها را مدل‌سازی نمی‌کنیم (اگرچه می‌توانستیم).
 
-## Protecting "waterAmount"
+## فیلد "waterAmount" محافظت‌شده
 
-Let's make a simple coffee machine class first:
+بیایید یک کلاس ساده قهوه‌ساز ایجاد کنیم:
 
 ```js run
 class CoffeeMachine {
-  waterAmount = 0; // the amount of water inside
+  waterAmount = 0; // مقدار آب درون
 
   constructor(power) {
     this.power = power;
-    alert( `Created a coffee-machine, power: ${power}` );
+    alert( `یک قهوه‌ساز ایجاد کردیم، توان: ${power}` );
   }
 
 }
 
-// create the coffee machine
+// ایجاد قهوه‌ساز
 let coffeeMachine = new CoffeeMachine(100);
 
-// add water
+// اضافه کردن آب
 coffeeMachine.waterAmount = 200;
 ```
 
-Right now the properties `waterAmount` and `power` are public. We can easily get/set them from the outside to any value.
+حالا ویژگی‌های `waterAmount` و `power` عمومی هستند. می‌توانیم به راحتی از بیرون آن‌ها را دریافت کنیم یا مقداردهی کنیم.
 
-Let's change `waterAmount` property to protected to have more control over it. For instance, we don't want anyone to set it below zero.
+بیایید برای داشتن کنترل بیشتر ویژگی `waterAmount` را به محافظت‌شده تغییر دهیم. برای مثال، ما نمی‌خواهیم کسی آن را کمتر از صفر تنظیم کند.
 
-**Protected properties are usually prefixed with an underscore `_`.**
+**قبل از ویژگی‌های محافظت‌شده معمولا یک زیرخط (underscore) `_` می‌آید.**
 
-That is not enforced on the language level, but there's a well-known convention between programmers that such properties and methods should not be accessed from the outside.
+این نوع در سطح زبان اجرایی نشده اما یک قرارداد شناخته‌شده بین برنامه‌نویسان وجود دارد که نباید از بیرون به چنین ویژگی‌ها و متدهایی دسترسی پیدا کرد.
 
-So our property will be called `_waterAmount`:
+پس ویژگی ما `_waterAmount` خواهد بود:
 
 ```js run
 class CoffeeMachine {
   _waterAmount = 0;
 
   set waterAmount(value) {
-    if (value < 0) throw new Error("Negative water");
+    if (value < 0) {
+      value = 0;
+    }
     this._waterAmount = value;
   }
 
@@ -110,22 +112,22 @@ class CoffeeMachine {
 
 }
 
-// create the coffee machine
+// ایجاد قهوه‌ساز
 let coffeeMachine = new CoffeeMachine(100);
 
-// add water
-coffeeMachine.waterAmount = -10; // Error: Negative water
+// اضافه کردن آب
+coffeeMachine.waterAmount = -10; // -برابر با 0 خواهد بود نه 10 _waterAmount
 ```
 
-Now the access is under control, so setting the water below zero fails.
+حالا دسترسی تحت کنترل است پس تنظیم مقدار آب کمتر از صفر ممکن نیست.
 
-## Read-only "power"
+## ویژگی "power" فقط‌خواندنی
 
-For `power` property, let's make it read-only. It sometimes happens that a property must be set at creation time only, and then never modified.
+بیایید ویژگی `power` را فقط‌خواندنی کنیم. گاهی اوقات یک ویژگی باید فقط زمان ایجاد کردن مقداردهی شود و دیگر هیچ‌وقت تغییر نکند.
 
-That's exactly the case for a coffee machine: power never changes.
+این دقیقا برای قهوه‌ساز هم صدق می‌کند: توان (power) هیچ‌وقت تغییر نمی‌کند.
 
-To do so, we only need to make getter, but not the setter:
+برای انجام این کار، ما فقط نیاز داریم که یک getter ایجاد کنیم اما setter را نه:
 
 ```js run
 class CoffeeMachine {
@@ -141,25 +143,25 @@ class CoffeeMachine {
 
 }
 
-// create the coffee machine
+// ایجاد قهوه‌ساز
 let coffeeMachine = new CoffeeMachine(100);
 
-alert(`Power is: ${coffeeMachine.power}W`); // Power is: 100W
+alert(`توان: ${coffeeMachine.power} وات`); // توان: 100 وات
 
-coffeeMachine.power = 25; // Error (no setter)
+coffeeMachine.power = 25; // (نداریم setter) ارور
 ```
 
-````smart header="Getter/setter functions"
-Here we used getter/setter syntax.
+````smart header="تابع‌های Getter/setter"
+اینجا ما از سینتکس getter/setter استفاده کردیم.
 
-But most of the time `get.../set...` functions are preferred, like this:
+اما اکثر اوقات تابع‌های `get.../set...` ترجیح داده می‌شوند، مثلا اینگونه:
 
 ```js
 class CoffeeMachine {
   _waterAmount = 0;
 
   *!*setWaterAmount(value)*/!* {
-    if (value < 0) throw new Error("Negative water");
+    if (value < 0) value = 0;
     this._waterAmount = value;
   }
 
@@ -171,26 +173,26 @@ class CoffeeMachine {
 new CoffeeMachine().setWaterAmount(100);
 ```
 
-That looks a bit longer, but functions are more flexible. They can accept multiple arguments (even if we don't need them right now).
+این کمی طولانی‌تر بنظر می‌رسد اما تابع‌ها بیشتر منعطف هستند. آن‌ها می‌توانند چند آرگومان دریافت کنند (حتی اگر ما همین الان به آن‌ها نیاز نداشته باشیم).
 
-On the other hand, get/set syntax is shorter, so ultimately there's no strict rule, it's up to you to decide.
+از سویی دیگر، سینتکس get/set` کوتاه‌تر است پس در نهایت هیچ قانونی وجود ندارد، تصمیم با شماست.
 ````
 
-```smart header="Protected fields are inherited"
-If we inherit `class MegaMachine extends CoffeeMachine`, then nothing prevents us from accessing `this._waterAmount` or `this._power` from the methods of the new class.
+```smart header="فیلدهای محافظت‌شده به ارث برده می‌شوند"
+اگر ما `class MegaMachine extends CoffeeMachine` را ارث‌بری کنیم، سپس چیزی جلوی ما را برای دسترسی به `this._waterAmount` یا `this._power` از متدهای کلاس جدید نمی‌گیرد.
 
-So protected fields are naturally inheritable. Unlike private ones that we'll see below.
+پس فیلدهای محافظت‌شده به طور طبیعی قابل ارث‌بری هستند. برخلاف فیلدهای خصوصی که پایین خواهیم دید.
 ```
 
-## Private "#waterLimit"
+## فیلد "#waterLimit" خصوصی
 
 [recent browser=none]
 
-There's a finished JavaScript proposal, almost in the standard, that provides language-level support for private properties and methods.
+یک طرح پیشنهادی تمام شده جاوااسکریپت وجود دارد، تقریبا درون استاندارد وارد شده، که پشتیبانی برای ویژگی‌ها و متدهای خصوصی (private) را در سطح زبان فراهم می‌کند.
 
-Privates should start with `#`. They are only accessible from inside the class.
+ویژگی‌ها خصوصی با `#` شروع می‌شوند. آن‌ها فقط از درون کلاس قابل دسترس هستند.
 
-For instance, here's a private `#waterLimit` property and the water-checking private method `#checkWater`:
+برای مثال، اینجا ویژگی خصوصی `#waterLimit` و متد خصوصی `#fixWaterAmount` را داریم:
 
 ```js run
 class CoffeeMachine {
@@ -199,28 +201,32 @@ class CoffeeMachine {
 */!*
 
 *!*
-  #checkWater(value) {
-    if (value < 0) throw new Error("Negative water");
-    if (value > this.#waterLimit) throw new Error("Too much water");
+  #fixWaterAmount(value) {
+    if (value < 0) return 0;
+    if (value > this.#waterLimit) return this.#waterLimit;
   }
 */!*
+
+  setWaterAmount(value) {
+    this.#waterLimit = this.#fixWaterAmount(value);
+  }
 
 }
 
 let coffeeMachine = new CoffeeMachine();
 
 *!*
-// can't access privates from outside of the class
-coffeeMachine.#checkWater(); // Error
-coffeeMachine.#waterLimit = 1000; // Error
+// نمی‌توان بیرون از کلاس به خصوصی‌ها دسترسی پیدا کرد
+coffeeMachine.#fixWaterAmount(123); // ارور
+coffeeMachine.#waterLimit = 1000; // ارور
 */!*
 ```
 
-On the language level, `#` is a special sign that the field is private. We can't access it from outside or from inheriting classes.
+در سطح زبان، `#` نمادی خاص است که یعنی فیلد خصوصی است. ما نمی‌توانیم از بیرون یا از کلاس‌های ارث‌بر به آن دسترسی داشته باشیم.
 
-Private fields do not conflict with public ones. We can have both private `#waterAmount` and public `waterAmount` fields at the same time.
+فیلدهای خصوصی با فیلدهای عمومی ناسازگار نیستند. می‌توانیم در یک زمان هم `#waterAmount` خصوصی داشته باشیم و هم `waterAmount` عمومی.
 
-For instance, let's make `waterAmount` an accessor for `#waterAmount`:
+برای مثال، بیایید `waterAmount` را به عنوان اکسسر برای `#waterAmount` ایجاد کنیم:
 
 ```js run
 class CoffeeMachine {
@@ -232,7 +238,7 @@ class CoffeeMachine {
   }
 
   set waterAmount(value) {
-    if (value < 0) throw new Error("Negative water");
+    if (value < 0) value = 0;
     this.#waterAmount = value;
   }
 }
@@ -240,29 +246,29 @@ class CoffeeMachine {
 let machine = new CoffeeMachine();
 
 machine.waterAmount = 100;
-alert(machine.#waterAmount); // Error
+alert(machine.#waterAmount); // ارور
 ```
 
-Unlike protected ones, private fields are enforced by the language itself. That's a good thing.
+برخلاف محافظت‌شده‌ها، فیلدهای خصوصی در سطح خود زبان اجرایی شده‌اند. این چیز خوبی است.
 
-But if we inherit from `CoffeeMachine`, then we'll have no direct access to `#waterAmount`. We'll need to rely on `waterAmount` getter/setter:
+اما اگر ما از `CoffeMachine` ارث‌بری کنیم، سپس دسترسی مستقیم به `#waterAmount` نداریم. باید به سراغ getter/setter برای `waterAmount` برویم:
 
 ```js
 class MegaCoffeeMachine extends CoffeeMachine {
   method() {
 *!*
-    alert( this.#waterAmount ); // Error: can only access from CoffeeMachine
+    alert( this.#waterAmount ); // ممکن است CoffeMachine ارور: دسترسی فقط از
 */!*
   }
 }
 ```
 
-In many scenarios such limitation is too severe. If we extend a `CoffeeMachine`, we may have legitimate reasons to access its internals. That's why protected fields are used more often, even though they are not supported by the language syntax.
+در بسیاری از سناریوها چنین محدودیتی خیلی سخت‌گیرانه است. اگر ما `CoffeMachine` را تعمیم دهیم، شاید دلایل قابل قبولی برای دسترسی به درون آن داشته باشیم. به همین دلیل فیلدهای محافظت‌شده اغلب اوقات استفاده می‌شوند حتی اگر آن‌ها توسط سینتکس زبان پشتیبانی نمی‌شوند.
 
-````warn header="Private fields are not available as this[name]"
-Private fields are special.
+````warn header="فیلدهای خصوصی به صورت this[name] در دسترس نیستند"
+فیلدهای خصوصی خاص هستند.
 
-As we know, usually we can access fields using `this[name]`:
+همانطور که می‌دانیم، معمولا با استفاده از `this[name]` به فیلدها دسترسی پیدا می‌کنیم:
 
 ```js
 class User {
@@ -274,43 +280,43 @@ class User {
 }
 ```
 
-With private fields that's impossible: `this['#name']` doesn't work. That's a syntax limitation to ensure privacy.
+این برای فیلدهای خصوصی غیر ممکن است: `this['#name']` کار نمی‌کند. این یک محدودیت سینتکسی است تا حریم اطمینان حاصل کند.
 ````
 
-## Summary
+## خلاصه
 
-In terms of OOP, delimiting of the internal interface from the external one is called [encapsulation](https://en.wikipedia.org/wiki/Encapsulation_(computer_programming)).
+از نظر برنامه‌نویسی شیءگرا، جدا کردن رابط درونی از بیرونی را [کپسوله‌سازی](https://fa.wikipedia.org/wiki/پوشاندن_(علم_رایانه)) می‌گویند.
 
-It gives the following benefits:
+این مزایا را به ما می‌دهد:
 
-Protection for users, so that they don't shoot themselves in the foot
-: Imagine, there's a team of developers using a coffee machine. It was made by the "Best CoffeeMachine" company, and works fine, but a protective cover was removed. So the internal interface is exposed.
+حفاظت از کاربران، تا آن‌ها خودشان را در مخمصه نیاندازند
+: تصور کنید، تیمی از توسعه‌دهندگان در حال استفاده از قهوه‌ساز هستند. این دستگاه توسط شرکت «بهترین قهوه‌ساز» ساخته شده و به خوبی کار می‌کند، اما یک پوشش محافظ برداشته شد. پس رابط درونی افشاء شده است.
 
-    All developers are civilized -- they use the coffee machine as intended. But one of them, John, decided that he's the smartest one, and made some tweaks in the coffee machine internals. So the coffee machine failed two days later.
+    تمام توسعه‌دهندگان متمدن هستند -- آن‌ها از قهوه‌ساز همانطور که توقع می‌رود استفاده می‌کنند. اما یکی از آن‌ها، John، تصمیم گرفته است که باهوش‌ترین است و درون قهوه‌ساز تغییراتی ایجاد کرد. قهوه‌ساز دو روز بعد از کار می‌افتد.
 
-    That's surely not John's fault, but rather the person who removed the protective cover and let John do his manipulations.
+    قطعا این تقصیر John نیست بلکه تقصیر کسی است که پوشش محافظ را برداشت و اجازه داد که John قهوه‌ساز را دست‌کاری کند.
 
-    The same in programming. If a user of a class will change things not intended to be changed from the outside -- the consequences are unpredictable.
+    همچین چیزی در برنامه‌نویسی هم وجود دارد. اگر یک کاربرِ کلاس چیزهایی را که قرار نیست تغییر کنند را از بیرون تغییر دهد -- عواقب آن غیر قابل پیش‌بینی هستند.
 
-Supportable
-: The situation in programming is more complex than with a real-life coffee machine, because we don't just buy it once. The code constantly undergoes development and improvement.
+قابل پشتیبانی
+: این وضعیت در برنامه‌نویسی پیچیده‌تر از یک قهوه‌ساز در زندگی واقعی است چون ما فقط آن را یک بار نمی‌خریم. کد دائما در توسعه و پیشرفت است.
 
-    **If we strictly delimit the internal interface, then the developer of the class can freely change its internal properties and methods, even without informing the users.**
+    **اگر ما به صورت سخت‌گیرانه رابط درونی را جداسازی کنیم، سپس توسعه‌دهنده‌ی کلاس آزادانه می‌تواند ویژگی‌ها و متدهای درون آن را تغییر دهد، حتی بدون اینکه کاربران را خبردار کند.**
 
-    If you're a developer of such class, it's great to know that private methods can be safely renamed, their parameters can be changed, and even removed, because no external code depends on them.
+    اگر شما توسعه‌دهنده چنین کلاسی باشید، این خوب است که بتوانید متدهای خصوصی را با خیال راحت تغییر نام دهید، پارامترهای آن‌ها را تغییر دهید و حتی حذف کنید، چون هیچ کد بیرونی به آن‌ها وابسته نیست.
 
-    For users, when a new version comes out, it may be a total overhaul internally, but still simple to upgrade if the external interface is the same.
+    برای کاربران، زمانی که نسخه‌ای جدید منتشر می‌شود، ممکن است از درون تعمیرات اساسی نیاز داشته باشد اما اگر رابط بیرونی یکسان باشد هنوز برای ارتقا دادن ساده است.
 
-Hiding complexity
-: People adore using things that are simple. At least from outside. What's inside is a different thing.
+پنهان کردن پیچیدگی
+: مردم عاشق استفاده از چیزهای ساده هستند. حداقل از بیرون. چیزی که درون وجود دارد موضوع متفاوتی است.
 
-    Programmers are not an exception.
+    برنامه‌نویسان استثنا نیستند.
 
-    **It's always convenient when implementation details are hidden, and a simple, well-documented external interface is available.**
+    **همیشه زمانی که جزئیات پیاده‌سازی پنهان هستند و یک رابط بیرونی ساده و به خوبی مستند شده وجود دارد کار راحت است.**
 
-To hide an internal interface we use either protected or private properties:
+برای پنهان‌سازی یک رابط درونی می‌توانیم یا از ویژگی‌های محافظت‌شده استفاده کنیم یا ویژگی‌های خصوصی:
 
-- Protected fields start with `_`. That's a well-known convention, not enforced at the language level. Programmers should only access a field starting with `_` from its class and classes inheriting from it.
-- Private fields start with `#`. JavaScript makes sure we can only access those from inside the class.
+- فیلدهای محافظت‌شده با `_` شروع می‌شوند. این یک قرارداد شناخته‌شده است و در سطح زبان اجرایی نشده‌اند. برنامه‌نویسان فقط باید از درون کلاس و کلاس‌هایی که از آن ارث می‌برند، به فیلدی که با `_` شروع می‌شود دسترسی پیدا کنند.
+- فیلدهای خصوصی با `#` شروع می‌شوند. جاوااسکریپت مطمئن می‌شود که ما فقط از درون کلاس بتوانیم به آن‌ها دسترسی پیدا کنیم.
 
-Right now, private fields are not well-supported among browsers, but can be polyfilled.
+در حال حاضر، فیلدهای خصوصی به خوبی در میان مرورگرها پشتیبانی نمی‌شوند اما می‌توان برای آن‌ها از پلیفیل‌ها استفاده کرد.

@@ -2,8 +2,8 @@ importance: 3
 
 ---
 
-# Check the range outside
+# محدوده خارج را بررسی کنید
 
-Write an `if` condition to check that `age` is NOT between 14 and 90 inclusively.
+یک شرط `if` بنویسید که بررسی کند `age` بین `14` و `90` به صورتی که که شامل خود آنها هم بشود نباشد.
 
-Create two variants: the first one using NOT `!`, the second one -- without it.
+دو نوع بسازید: اولی با استفاده از NOT `!`، و دومی بدون آن.

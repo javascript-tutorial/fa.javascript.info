@@ -1,40 +1,40 @@
 
-# Property flags and descriptors
+# پرچم‌های ویژگی و توصیف‌کننده‌ها
 
-As we know, objects can store properties.
+همانطور که می‌دانیم، شیءها می‌توانند ویژگی‌هایی را ذخیره کنند.
 
-Until now, a property was a simple "key-value" pair to us. But an object property is actually a more flexible and powerful thing.
+تا حالا، یک ویژگی برای ما فقط جفتی ساده از «کلید-مقدار» بود. اما یک ویژگی شیء در واقع چیزی منعطف‌تر و قدرتمندتر است.
 
-In this chapter we'll study additional configuration options, and in the next we'll see how to invisibly turn them into getter/setter functions.
+در این فصل ما درباره گزینه‌های اضافی پیکربندی مطالعه خواهیم کرد و در فصل بعد خواهیم دید که چگونه به طور پنهانی آن‌ها را به تابع‌های گیرنده/تنظیم‌کننده (getter/setter functions) تبدیل کنیم.
 
-## Property flags
+## پرچم‌های ویژگی (Property flags)
 
-Object properties, besides a **`value`**, have three special attributes (so-called "flags"):
+ویژگی‌های شیء، در کنار **`value`** دارای سه صفت (attribute) هم هستند (اصطلاحا «پرچم» یا flag هم می‌گویند):
 
-- **`writable`** -- if `true`, the value can be changed, otherwise it's read-only.
-- **`enumerable`** -- if `true`, then listed in loops, otherwise not listed.
-- **`configurable`** -- if `true`, the property can be deleted and these attributes can be modified, otherwise not.
+- **`writable`** -- اگر `true` باشد، مقدار می‌تواند تغییر کند، در غیر این صورت مقدار فقط برای خواندن است.
+- **`enumerable`** -- اگر `true` باشد، ویژگی در حلقه‌ها لیست می‌شود، در غیر این صورت لیست نمی‌شود.
+- **`configurable`** -- اگر `true` باشد، ویژگی می‌تواند حذف شود و این صفت‌ها می‌توانند تغییر کنند، در غیر این صورت هیچ‌کدام مقدور نیست.
 
-We didn't see them yet, because generally they do not show up. When we create a property "the usual way", all of them are `true`. But we also can change them anytime.
+چون این‌ها معمولا نمایان نمی‌شوند، هنوز آن‌ها را ندیدیم. زمانی که «از راه عادی» یک ویژگی ایجاد می‌کنیم، تمام آن‌ها `true` هستند. اما می‌توانیم هر زمان تغییرشان دهیم.
 
-First, let's see how to get those flags.
+اول بیایید ببینیم چگونه این پرچم‌ها بدست آوریم.
 
-The method [Object.getOwnPropertyDescriptor](mdn:js/Object/getOwnPropertyDescriptor) allows to query the *full* information about a property.
+متد [Object.getOwnPropertyDescriptor](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyDescriptor) به ما اجازه می‌دهد تا اطلاعات *کاملی* درباره یک ویژگی بدست آوریم.
 
-The syntax is:
+سینتکس آن:
 ```js
 let descriptor = Object.getOwnPropertyDescriptor(obj, propertyName);
 ```
 
 `obj`
-: The object to get information from.
+: شیءای که از آن اطلاعات دریافت می‌کنیم.
 
 `propertyName`
-: The name of the property.
+: اسم ویژگی.
 
-The returned value is a so-called "property descriptor" object: it contains the value and all the flags.
+مقدار برگردانده شده، یک شیء به اصطلاح «توصیف‌کننده ویژگی(property descriptor)» است: این شیء شامل مقدار و تمام پرچم‌ها می‌شود.
 
-For instance:
+برای مثال:
 
 ```js run
 let user = {
@@ -44,7 +44,7 @@ let user = {
 let descriptor = Object.getOwnPropertyDescriptor(user, 'name');
 
 alert( JSON.stringify(descriptor, null, 2 ) );
-/* property descriptor:
+/* :توصیف‌کننده ویژگی
 {
   "value": "John",
   "writable": true,
@@ -54,23 +54,23 @@ alert( JSON.stringify(descriptor, null, 2 ) );
 */
 ```
 
-To change the flags, we can use [Object.defineProperty](mdn:js/Object/defineProperty).
+برای تغییر پرچم‌ها، می‌توانیم از [Object.defineProperty](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty) استفاده کنیم.
 
-The syntax is:
+سینتکس آن:
 
 ```js
 Object.defineProperty(obj, propertyName, descriptor)
 ```
 
 `obj`, `propertyName`
-: The object and its property to apply the descriptor.
+: شیء و ویژگی‌ای که توصیف‌کننده روی آن اعمال می‌شود.
 
 `descriptor`
-: Property descriptor object to apply.
+: شیء توصیف‌کننده ویژگی برای اعمال کردن.
 
-If the property exists, `defineProperty` updates its flags. Otherwise, it creates the property with the given value and flags; in that case, if a flag is not supplied, it is assumed `false`.
+اگر ویژگی وجود داشته باشد، `defineProperty` پرچم‌های آن را بروزرسانی می‌کند. در غیر این صورت، این متد ویژگی را همراه با مقدار و پرچم‌های داده شده ایجاد می‌کند؛ در این صورت، اگر پرچمی قرار داده نشود، `false` فرض می‌شود.
 
-For instance, here a property `name` is created with all falsy flags:
+برای مثال، اینجا ویژگی `name` با تمام پرچم‌های falsy ساخته شده است:
 
 ```js run
 let user = {};
@@ -96,13 +96,13 @@ alert( JSON.stringify(descriptor, null, 2 ) );
  */
 ```
 
-Compare it with "normally created" `user.name` above: now all flags are falsy. If that's not what we want then we'd better set them to `true` in `descriptor`.
+این خروجی را با `user.name` بالا «که به صورت عادی ساخته شده» مقایسه کنید: حالا تمام پرچم‌ها falsy هستند. اگر این چیزی که ما می‌خواهیم نیست، پس بهتر است درون `descriptor` آن‌ها را برابر با `true` قرار دهیم.
 
-Now let's see effects of the flags by example.
+حالا بیایید با استفاده از مثال تاثیر پرچم‌ها را ببینیم.
 
-## Non-writable
+## غیر قابل نوشتن
 
-Let's make `user.name` non-writable (can't be reassigned) by changing `writable` flag:
+بیایید با تغییر دادن پرچم `writable` کاری کنیم که `user.name` غیر قابل نوشتن شود:
 
 ```js run
 let user = {
@@ -116,17 +116,17 @@ Object.defineProperty(user, "name", {
 });
 
 *!*
-user.name = "Pete"; // Error: Cannot assign to read only property 'name'
+user.name = "Pete"; // مقدار داد 'name' ارور: نمی‌توان به ویژگی فقط‌خواندنی
 */!*
 ```
 
-Now no one can change the name of our user, unless they apply their own `defineProperty` to override ours.
+حالا هیچ‌کس نمی‌تواند اسم کاربر ما را تغییر دهد، مگر اینکه `defineProperty` خودش را برای باطل کردن توصیف‌کننده‌ی ما اعمال کند.
 
-```smart header="Errors appear only in strict mode"
-In the non-strict mode, no errors occur when writing to non-writable properties and such. But the operation still won't succeed. Flag-violating actions are just silently ignored in non-strict.
+```smart header="ارورها فقط در strict mode ایجاد می‌شوند"
+در حالت غیر strict، زمانی که بر روی ویژگی‌های غیرقابل نوشتن می‌نویسیم، هیچ اروری رخ نمی‌دهد. اما همچنان این کار انجام نمی‌شود. در حالت غیر strict، کارهای نقص‌کننده‌ی پرچم بی سر و صدا نادیده گرفته می‌شوند.
 ```
 
-Here's the same example, but the property is created from scratch:
+اینجا مثالی مشابه داریم اما ویژگی از اول ایجاد شده است:
 
 ```js run
 let user = { };
@@ -134,7 +134,7 @@ let user = { };
 Object.defineProperty(user, "name", {
 *!*
   value: "John",
-  // for new properties we need to explicitly list what's true
+  // است true برای ویژگی‌های جدید ما باید به طور واضح لیست کنیم که چه چیزی
   enumerable: true,
   configurable: true
 */!*
@@ -144,11 +144,11 @@ alert(user.name); // John
 user.name = "Pete"; // Error
 ```
 
-## Non-enumerable
+## غیر قابل شمارش
 
-Now let's add a custom `toString` to `user`.
+حالا بیایید یک `toString` سفارشی به `user` اضافه کنیم.
 
-Normally, a built-in `toString` for objects is non-enumerable, it does not show up in `for..in`. But if we add a `toString` of our own, then by default it shows up in `for..in`, like this:
+طبیعتا، یک `toString` درون‌ساخت برای شیءها غیر قابل شمارش است و در `for..in` ظاهر نمی‌شود. اما اگر ما `toString` خودمان را اضافه کنیم، سپس به طور پیش‌فرض درون `for..in` نمایش داده می‌شود، مثلا اینگونه:
 
 ```js run
 let user = {
@@ -158,11 +158,11 @@ let user = {
   }
 };
 
-// By default, both our properties are listed:
+// :به طور پیش‌فرض هر دو ویژگی ما لیست می‌شوند
 for (let key in user) alert(key); // name, toString
 ```
 
-If we don't like it, then we can set `enumerable:false`. Then it won't appear in a `for..in` loop, just like the built-in one:
+اگر ما نخواهیم که اینطور باشد، می‌توانیم `enumerable:false` را تنظیم کنیم. سپس این ویژگی درون حلقه `for..in` ظاهر نمی‌شود، درست مانند متد درون‌ساخت آن:
 
 ```js run
 let user = {
@@ -179,24 +179,24 @@ Object.defineProperty(user, "toString", {
 });
 
 *!*
-// Now our toString disappears:
+// :ما ظاهر نمی‌شود toString حالا
 */!*
 for (let key in user) alert(key); // name
 ```
 
-Non-enumerable properties are also excluded from `Object.keys`:
+ویژگی‌های غیر قابل شمارش از `Object.keys` هم حذف می‌شوند:
 
 ```js
 alert(Object.keys(user)); // name
 ```
 
-## Non-configurable
+## غیر قابل تنظیم
 
-The non-configurable flag (`configurable:false`) is sometimes preset for built-in objects and properties.
+پرچم غیر قابل تنظیم (`configurable:false`) بعضی اوقات برای شیءها و ویژگی‌های درون‌ساخت ارائه می‌شود.
 
-A non-configurable property can not be deleted.
+یک ویژگی غیر قابل تنظیم نمی‌تواند حذف شود و صفت‌های آن نمی‌توانند تغییر کنند.
 
-For instance, `Math.PI` is non-writable, non-enumerable and non-configurable:
+برای مثال، `Math.PI` غیر قابل نوشتن، غیر قابل شمارش و غیر قابل تنظیم است:
 
 ```js run
 let descriptor = Object.getOwnPropertyDescriptor(Math, 'PI');
@@ -211,54 +211,72 @@ alert( JSON.stringify(descriptor, null, 2 ) );
 }
 */
 ```
-So, a programmer is unable to change the value of `Math.PI` or overwrite it.
+پس یک برنامه‌نویس نمی‌تواند مقدار `Math.PI` را تغییر دهد یا آن را دوباره بنویسد.
 
 ```js run
-Math.PI = 3; // Error
+Math.PI = 3; // writable: false ارور، چون 
 
-// delete Math.PI won't work either
+// هم کار نمی‌کند Math.PI حذف
 ```
 
-Making a property non-configurable is a one-way road. We cannot change it back with `defineProperty`.
-
-To be precise, non-configurability imposes several restrictions on `defineProperty`:
-1. Can't change `configurable` flag.
-2. Can't change `enumerable` flag.
-3. Can't change `writable: false` to `true` (the other way round works).
-4. Can't change `get/set` for an accessor property (but can assign them if absent).
-
-Here we are making `user.name` a "forever sealed" constant:
+همچنین ما نمی‌توانیم `Math.PI` را تغییر دهیم تا دوباره `writable`(قابل نوشتن) باشد:
 
 ```js run
-let user = { };
+// configurable: false ارور، چون
+Object.defineProperty(Math, "PI", { writable: true });
+```
+
+هیچ کاری نمی‌توانیم با `Math.PI` انجام دهیم.
+
+غیر قابل تنظیم کردن یک ویژگی راهی یک‌طرفه است. ما نمی‌توانیم آن را با `defineProperty` دوباره تغییر دهیم.
+
+**لطفا در نظر داشته باشید: `configurable: false` از تغییرات پرچم‌های ویژگی و حذف آن جلوگیری می‌کند در حالی که تغییر مقدار آن مجاز است.**
+
+اینجا `user.name` غیر قابل تنظیم است اما همچنان می‌توانیم آن را تغییر دهیم (چون قابل نوشتن است):
+
+```js run
+let user = {
+  name: "John"
+};
 
 Object.defineProperty(user, "name", {
-  value: "John",
+  configurable: false
+});
+
+user.name = "Pete"; // به درستی کار می‌کند
+delete user.name; // ارور
+```
+
+و اینجا ما کاری می‌کنیم که `user.name` برای همیشه «مهر و موم شده» بماند، درست مانند `Math.PI` درون‌ساخت:
+
+```js run
+let user = {
+  name: "John"
+};
+
+Object.defineProperty(user, "name", {
   writable: false,
   configurable: false
 });
 
-*!*
-// won't be able to change user.name or its flags
-// all this won't work:
-//   user.name = "Pete"
-//   delete user.name
-//   defineProperty(user, "name", { value: "Pete" })
-Object.defineProperty(user, "name", {writable: true}); // Error
-*/!*
+// یا پرچم‌های آن را تغییر دهیم user.name نمی‌توانیم
+// :هیچ کدام این‌ها کار نخواهند کرد
+user.name = "Pete";
+delete user.name;
+Object.defineProperty(user, "name", { value: "Pete" });
 ```
 
-```smart header="\"Non-configurable\" doesn't mean \"non-writable\""
-Notable exception: a value of non-configurable, but writable property can be changed.
+```smart header="تنها تغییر ممکن روی صفت: writable true -> false"
+یک استثنای کوچک درباره تغییر پرچم‌ها وجود دارد.
 
-The idea of `configurable: false` is to prevent changes to property flags and its deletion, not changes to its value.
+ما می‌توانیم برای یک ویژگی غیر قابل تنظیم `writable: true` را به `false` تغییر دهیم و به این ترتیب از تغییر مقدار آن جلوگیری کنیم (تا لایه‌ای دیگر از حفاظت را اضافه کنیم). اما برعکس آن ممکن نیست.
 ```
 
-## Object.defineProperties
+## متد Object.defineProperties
 
-There's a method [Object.defineProperties(obj, descriptors)](mdn:js/Object/defineProperties) that allows to define many properties at once.
+یک متد [Object.defineProperties(obj, descriptors)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperties) وجود دارد که امکان توصیف چند ویژگی با هم را ایجاد می‌کند.
 
-The syntax is:
+سینتکس آن:
 
 ```js
 Object.defineProperties(obj, {
@@ -268,7 +286,7 @@ Object.defineProperties(obj, {
 });
 ```
 
-For instance:
+برای مثال:
 
 ```js
 Object.defineProperties(user, {
@@ -278,19 +296,19 @@ Object.defineProperties(user, {
 });
 ```
 
-So, we can set many properties at once.
+پس ما می‌توانیم چند ویژگی را یک‌باره تنظیم کنیم.
 
-## Object.getOwnPropertyDescriptors
+## متد Object.getOwnPropertyDescriptors
 
-To get all property descriptors at once, we can use the method [Object.getOwnPropertyDescriptors(obj)](mdn:js/Object/getOwnPropertyDescriptors).
+برای گرفتن تمام توصیف‌کننده‌های ویژگی با هم، می‌توانیم از متد [Object.getOwnPropertyDescriptors(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyDescriptors) استفاده کنیم.
 
-Together with `Object.defineProperties` it can be used as a "flags-aware" way of cloning an object:
+این متد همراه با `Object.defineProperties` می‌تواند به عنوان راهی «همراه با پرچم‌ها» برای کپی کردن یک شیء استفاده شود:
 
 ```js
 let clone = Object.defineProperties({}, Object.getOwnPropertyDescriptors(obj));
 ```
 
-Normally when we clone an object, we use an assignment to copy properties, like this:
+طبیعتا زمانی که ما یک شیء را کپی می‌کنیم، از عملگر مقداردهی برای کپی کردن ویژگی‌ها استفاده می‌کنیم، مانند اینجا:
 
 ```js
 for (let key in user) {
@@ -298,34 +316,34 @@ for (let key in user) {
 }
 ```
 
-...But that does not copy flags. So if we want a "better" clone then `Object.defineProperties` is preferred.
+...اما این روش پرچم‌ها را کپی نمی‌کند. پس اگر ما کپی‌برداری «بهتری» بخواهیم `Object.defineProperties` ترجیح داده می‌شود.
 
-Another difference is that `for..in` ignores symbolic properties, but `Object.getOwnPropertyDescriptors` returns *all* property descriptors including symbolic ones.
+تفاوتی دیگر این است که `for..in` ویژگی‌های سمبلی (symbolic) و ویژگی‌های غیر قابل شمارش را نادیده می‌گیرد، اما `Object.getOwnPropertyDescriptors` *تمام* توصیف‌کننده‌های ویژگی‌ها را برمی‌گرداند که شامل ویژگی‌های سمبلی و غیر قابل شمارش هم می‌شود.
 
-## Sealing an object globally
+## مهر و موم کردن شیء به طور کلی
 
-Property descriptors work at the level of individual properties.
+توصیف‌کننده‌های ویژگی‌ها با ویژگی‌های جداگانه کار می‌کنند.
 
-There are also methods that limit access to the *whole* object:
+متدهایی هم هستند که دسترسی به *کل* شیء را محدود می‌کنند:
 
-[Object.preventExtensions(obj)](mdn:js/Object/preventExtensions)
-: Forbids the addition of new properties to the object.
+[Object.preventExtensions(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/preventExtensions)
+: اضافه کردن ویژگی جدید به شیء را ممنوع می‌کند.
 
-[Object.seal(obj)](mdn:js/Object/seal)
-: Forbids adding/removing of properties. Sets `configurable: false` for all existing properties.
+[Object.seal(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/seal)
+: اضافه/حذف کردن ویژگی را ممنوع می‌کند. `configurable: false` را برای تمام ویژگی‌های موجود تنظیم می‌کند.
 
-[Object.freeze(obj)](mdn:js/Object/freeze)
-: Forbids adding/removing/changing of properties. Sets `configurable: false, writable: false` for all existing properties.
+[Object.freeze(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze)
+: اضافه/حذف/تغییر دادن ویژگی‌ها را ممنوع می‌کند. `configurable: false, writable: false` را برای تمام ویژگی‌های موجود تنظیم می‌کند.
 
-And also there are tests for them:
+همچنین آزمایش‌هایی هم برای آن‌ها وجود دارد:
 
-[Object.isExtensible(obj)](mdn:js/Object/isExtensible)
-: Returns `false` if adding properties is forbidden, otherwise `true`.
+[Object.isExtensible(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/isExtensible)
+: اگر اضافه کردن ویژگی ممنوع باشد `false` برمی‌گرداند، در غیر این صورت `true`.
 
-[Object.isSealed(obj)](mdn:js/Object/isSealed)
-: Returns `true` if adding/removing properties is forbidden, and all existing properties have `configurable: false`.
+[Object.isSealed(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/isSealed)
+: اگر اضافه/حذف کردن ویژگی ممنوع باشد و تمام ویژگی‌های موجود `configurable: false` را داشته باشند `true` برمی‌گرداند.
 
-[Object.isFrozen(obj)](mdn:js/Object/isFrozen)
-: Returns `true` if adding/removing/changing properties is forbidden, and all current properties are `configurable: false, writable: false`.
+[Object.isFrozen(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/isFrozen)
+: اگر اضافه/حذف/تغییر دادن ویژگی‌ها ممنوع باشد و تمام ویژگی‌ها `configurable: false, writable: false` را داشته باشند `true` برمی‌گرداند.
 
-These methods are rarely used in practice.
+این متدها به ندرت در عمل استفاده می‌شوند.

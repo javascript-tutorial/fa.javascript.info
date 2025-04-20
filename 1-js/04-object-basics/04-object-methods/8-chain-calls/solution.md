@@ -1,4 +1,4 @@
-The solution is to return the object itself from every call.
+راه حل این است که خود شیء را با هربار صدازدن برگردانیم.
 
 ```js run
 let ladder = {
@@ -21,20 +21,19 @@ let ladder = {
     return this;
 */!*
   }
-}
+};
 
-ladder.up().up().down().up().down().showStep(); // 1
+ladder.up().up().down().showStep().down().showStep(); // اول 1 را نشان می‌دهد و سپس 0 را
 ```
 
-We also can write a single call per line. For long chains it's more readable:
+همچنین می‌توانیم به ازای هر خط یک بار صدا بزنیم. برای زنجیره‌های طولانی این روش خوانایی بیشتری دارد:
 
 ```js 
 ladder
   .up()
   .up()
   .down()
-  .up()
+  .showStep() // 1
   .down()
-  .showStep(); // 1
+  .showStep(); // 0
 ```
-

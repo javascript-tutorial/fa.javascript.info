@@ -7,23 +7,23 @@ function throttle(func, ms) {
   function wrapper() {
 
     if (isThrottled) {
-      // memo last arguments to call after the cooldown
+      // بخاطر سپردن آخرین آرگومان‌ها برای فراخوانی بعد از آرام‌شدن
       savedArgs = arguments;
       savedThis = this;
       return;
     }
 
-    // otherwise go to cooldown state
+    // در غیر این صورت به حالت آرام‌شدن برو
     func.apply(this, arguments);
 
     isThrottled = true;
 
-    // plan to reset isThrottled after the delay
+    // بعد از تأخیر isThrottled زمان‌بندی برای تنظیم مجدد
     setTimeout(function() {
       isThrottled = false;
       if (savedArgs) {
-        // if there were calls, savedThis/savedArgs have the last one
-        // recursive call runs the function and sets cooldown again
+        // آخرین آن‌ها را دارند savedThis/savedArgs ،اگر فراخوانی‌ای وجود داشت
+        // فراخوانی بازگشتی تابع را اجرا می‌کند و حالت آرام‌شدن را دوباره تنظیم می‌کند
         wrapper.apply(savedThis, savedArgs);
         savedArgs = savedThis = null;
       }

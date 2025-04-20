@@ -162,7 +162,7 @@ In the example below `id` is modified as an attribute, and we can see the proper
 </script>
 ```
 
-But there are exclusions, for instance `input.value` synchronizes only from attribute -> to property, but not back:
+But there are exclusions, for instance `input.value` synchronizes only from attribute -> property, but not back:
 
 ```html run
 <input>
@@ -298,7 +298,7 @@ For instance, here for the order state the attribute `order-state` is used:
 </div>
 ```
 
-Why would using an attribute be preferable to having classes like `.order-state-new`, `.order-state-pending`, `order-state-canceled`?
+Why would using an attribute be preferable to having classes like `.order-state-new`, `.order-state-pending`, `.order-state-canceled`?
 
 Because an attribute is more convenient to manage. The state can be changed as easy as:
 

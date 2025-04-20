@@ -2,11 +2,11 @@ importance: 5
 
 ---
 
-# Check for spam
+# بررسی هرزنامه
 
-Write a function `checkSpam(str)` that returns `true` if `str` contains 'viagra' or 'XXX', otherwise `false`.
+یک تابع `checkSpam(str)` بنویسید که اگر `str` دارای کلمات 'viagra' یا 'XXX' باشد مقدار `true` را برگرداند، در غیر این صورت `false`.
 
-The function must be case-insensitive:
+تابع نباید به بزرگی یا کوچکی حرف حساس باشد:
 
 ```js
 checkSpam('buy ViAgRA now') == true

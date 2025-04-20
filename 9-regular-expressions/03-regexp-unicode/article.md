@@ -1,12 +1,12 @@
-# Unicode: flag "u" and class \p{...}
+# یونیکد: پرچم "u" و کلاس {...}p\
 
-JavaScript uses [Unicode encoding](https://en.wikipedia.org/wiki/Unicode) for strings. Most characters are encoded with 2 bytes, but that allows to represent at most 65536 characters.
+جاوااسکریپت از [رمزگذاری یونیکد](https://en.wikipedia.org/wiki/Unicode) برای رشته ها استفاده می کند. اکثر کاراکترها با 2 بایت کدگذاری می شوند، اما این امکان را برای نمایش حداکثر 65536 کاراکتر فراهم می کند.
 
-That range is not big enough to encode all possible characters, that's why some rare characters are encoded with 4 bytes, for instance like `𝒳` (mathematical X) or `😄` (a smile), some hieroglyphs and so on.
+این محدوده به اندازه کافی بزرگ نیست تا همه کاراکترهای ممکن را رمزگذاری کند، به همین دلیل است که برخی از کاراکترهای کمیاب با 4 بایت کدگذاری می شوند، به عنوان مثال مانند `𝒳` (X ریاضی) یا `😄` (لبخند)، برخی از هیروگلیف ها و غیره.
 
-Here are the unicode values of some characters:
+در اینجا مقادیر یونیکد برخی از کاراکترها آمده است:
 
-| Character  | Unicode | Bytes count in unicode  |
+| کاراکتر  | یونیکد | تعداد بایت یونیکد  |
 |------------|---------|--------|
 | a | `0x0061` |  2 |
 | ≈ | `0x2248` |  2 |
@@ -14,108 +14,102 @@ Here are the unicode values of some characters:
 |𝒴| `0x1d4b4` | 4 |
 |😄| `0x1f604` | 4 |
 
-So characters like `a` and `≈` occupy 2 bytes, while codes for `𝒳`, `𝒴` and `😄` are longer, they have 4 bytes.
+بنابراین کاراکتر هایی مانند `a` و `≈` 2 بایت را اشغال می کنند، در حالی که کدهای `𝒳`، `𝒴` و `😄` طولانی تر هستند و 4 بایت دارند.
 
-Long time ago, when JavaScript language was created, Unicode encoding was simpler: there were no 4-byte characters. So, some language features still handle them incorrectly.
+مدت ها پیش، زمانی که زبان جاوااسکریپت ایجاد شد، رمزگذاری یونیکد ساده تر بود: هیچ کاراکتر 4 بایتی وجود نداشت. بنابراین برخی از ویژگی های زبان را به اشتباه مدیریت می کردند.
 
-For instance, `length` thinks that here are two characters:
+به عنوان مثال، `length` فکر می کند که در اینجا دو کاراکتر وجود دارد:
 
 ```js run
 alert('😄'.length); // 2
 alert('𝒳'.length); // 2
 ```
 
-...But we can see that there's only one, right? The point is that `length` treats 4 bytes as two 2-byte characters. That's incorrect, because they must be considered only together (so-called "surrogate pair", you can read about them in the article <info:string>).
+...اما ما می توانیم ببینیم که فقط یک کاراکتر وجود دارد، درست است؟ نکته این است که `length` آن 4 بایت را به عنوان دو کاراکتر 2 بایتی در نظر می گیرد. این نادرست است، زیرا آنها باید فقط با هم در نظر گرفته شوند (به اصطلاح "surrogate pair"، می توانید در مورد آنها در مقاله <info:string> بخوانید).
 
-By default, regular expressions also treat 4-byte "long characters" as a pair of 2-byte ones. And, as it happens with strings, that may lead to odd results. We'll see that a bit later, in the article <info:regexp-character-sets-and-ranges>.
+به‌ طور پیش‌ فرض، عبارات باقاعده نیز "کاراکتر های طولانی" 4 بایتی را به عنوان یک جفت 2 بایتی در نظر می‌ گیرند. همانطور که در مورد رشته ها اتفاق می افتد، ممکن است به نتایج عجیب و غریب منجر شود. این را کمی بعد، در مقاله <info:regexp-character-sets-and-ranges> خواهیم دید.
 
-Unlike strings, regular expressions have flag `pattern:u` that fixes such problems. With such flag, a regexp handles 4-byte characters correctly. And also Unicode property search becomes available, we'll get to it next.
+برخلاف رشته‌ها، عبارات باقاعده دارای پرچم `pattern:u` هستند که چنین مشکلاتی را برطرف می‌ کند. با چنین پرچمی، یک regexp کاراکترهای 4 بایتی را به درستی مدیریت می کند. همچنین جستجوی ویژگی یونیکد در دسترس قرار می گیرد. در ادامه به آن خواهیم پرداخت.
 
-## Unicode properties \p{...}
+## ویژگی های یونیکد {...}p\
 
-```warn header="Not supported in Firefox and Edge"
-Despite being a part of the standard since 2018, unicode properties are not supported in Firefox ([bug](https://bugzilla.mozilla.org/show_bug.cgi?id=1361876)) and Edge ([bug](https://github.com/Microsoft/ChakraCore/issues/2969)).
+هر کاراکتر در یونیکد دارای ویژگی های زیادی است. آنها توصیف می کنند که کاراکتر به چه "رده ای" تعلق دارد و حاوی اطلاعات متفرقه در مورد آن است.
 
-There's [XRegExp](http://xregexp.com) library that provides "extended" regular expressions with cross-browser support for unicode properties.
-```
+به عنوان مثال، اگر یک کاراکتر دارای ویژگی `Letter` باشد، به این معنی است که کاراکتر متعلق به الفبا (از هر زبان) است. ویژگی `Number` به این معنی است که آن کاراکتر یک رقم است: شاید عربی یا چینی و غیره.
 
-Every character in Unicode has a lot of properties. They describe what "category" the character belongs to, contain miscellaneous information about it.
+می‌ توانیم کاراکترهایی را با یک ویژگی جستجو کنیم که به صورت `{…}pattern:\p` نوشته شده است. برای استفاده از `{…}pattern:\p`، یک عبارت باقاعده باید دارای پرچم `pattern:u` باشد.
 
-For instance, if a character has `Letter` property, it means that the character belongs to an alphabet (of any language). And `Number` property means that it's a digit: maybe Arabic or Chinese, and so on.
+برای مثال، `{Letter}p\` یک حرف در هر زبانی را نشان می‌دهد. همچنین می‌ توانیم از `p{L}\` استفاده کنیم، زیرا `L` نام مستعار `Letter` است. تقریباً برای هر ویژگی نام مستعار کوتاه تری وجود دارد.
 
-We can search for characters with a property, written as `pattern:\p{…}`. To use `pattern:\p{…}`, a regular expression must have flag `pattern:u`.
-
-For instance, `\p{Letter}` denotes a letter in any of language. We can also use `\p{L}`, as `L` is an alias of `Letter`. There are shorter aliases for almost every property.
-
-In the example below three kinds of letters will be found: English, Georgean and Korean.
+در مثال زیر سه نوع حرف وجود دارد: انگلیسی، گرجی و کره ای.
 
 ```js run
 let str = "A ბ ㄱ";
 
 alert( str.match(/\p{L}/gu) ); // A,ბ,ㄱ
-alert( str.match(/\p{L}/g) ); // null (no matches, as there's no flag "u")
+alert( str.match(/\p{L}/g) ); // null (کار نمی کند "u" بدون پرچم \p ،بدون انطباق)
 ```
 
-Here's the main character categories and their subcategories:
+در اینجا دسته بندی کاراکتر های اصلی و زیر شاخه های آنها آمده است:
 
-- Letter `L`:
-  - lowercase `Ll`
-  - modifier `Lm`,
-  - titlecase `Lt`,
-  - uppercase `Lu`,
-  - other `Lo`.
-- Number `N`:
-  - decimal digit `Nd`,
-  - letter number `Nl`,
-  - other `No`.
-- Punctuation `P`:
-  - connector `Pc`,
-  - dash `Pd`,
-  - initial quote `Pi`,
-  - final quote `Pf`,
-  - open `Ps`,
-  - close `Pe`,
-  - other `Po`.
-- Mark `M` (accents etc):
-  - spacing combining `Mc`,
-  - enclosing `Me`,
-  - non-spacing `Mn`.
-- Symbol `S`:
-  - currency `Sc`,
-  - modifier `Sk`,
-  - math `Sm`,
-  - other `So`.
-- Separator `Z`:
-  - line `Zl`,
-  - paragraph `Zp`,
-  - space `Zs`.
-- Other `C`:
-  - control `Cc`,
-  - format `Cf`,
-  - not assigned `Cn`,
-  - private use `Co`,
-  - surrogate `Cs`.
+- حرف `L`:
+  - حروف کوچک `Ll`
+  - اصلاح کننده `Lm`,
+  - عنوان `Lt`,
+  - حروف بزرگ `Lu`,
+  - سایر `Lo`.
+- عدد `N`:
+  - رقم اعشاری `Nd`,
+  - شماره نامه `Nl`,
+  - سایر `No`.
+- نقطه گذاری `P`:
+  - اتصال دهنده `Pc`,
+  - خط تیره `Pd`,
+  - نقل قول اولیه `Pi`,
+  - نقل قول نهایی `Pf`,
+  - باز `Ps`,
+  - بسته `Pe`,
+  - سایر `Po`.
+- علامت `M` (لهجه ها و غیره):
+  - ترکیب فاصله `Mc`,
+  - محصور کردن `Me`,
+  - بدون فاصله `Mn`.
+- نماد `S`:
+  - واحد پول `Sc`,
+  - اصلاح کننده `Sk`,
+  - ریاضی `Sm`,
+  - سایر `So`.
+- جداکننده `Z`:
+  - خط `Zl`,
+  - پاراگراف `Zp`,
+  - فاصله `Zs`.
+- سایر `C`:
+  - کنترل `Cc`,
+  - فرمت `Cf`,
+  - اختصاص داده نشده `Cn`,
+  - استفاده خصوصی `Co`,
+  - جانشین `Cs`.
 
 
-So, e.g. if we need letters in lower case, we can write `pattern:\p{Ll}`, punctuation signs: `pattern:\p{P}` and so on.
+بنابراین، به عنوان مثال اگر به حروف کوچک نیاز داریم، می‌ توانیم `pattern:\p{Ll}`، علائم نگارشی: `pattern:\p{P}` و غیره را بنویسیم.
 
-There are also other derived categories, like:
-- `Alphabetic` (`Alpha`), includes Letters `L`, plus letter numbers `Nl` (e.g. Ⅻ - a character for the roman number 12), plus some other symbols `Other_Alphabetic` (`OAlpha`).
-- `Hex_Digit` includes hexadecimal digits: `0-9`, `a-f`.
-- ...And so on.
+دسته های مشتق شده دیگری نیز وجود دارد، مانند:
+- `Alphabetic` (`Alpha`)، شامل حروف `L`، به اضافه اعداد حروف `Nl` (مثلاً Ⅻ - یک کاراکتر برای عدد رومی 12)، به‌علاوه برخی از نمادهای دیگر `Other_Alphabetic` (`OAlpha`).
+- `Hex_Digit` شامل اعداد هگزا دسیمال است. `0-9` `a-f`
+- ...و غیره.
 
-Unicode supports many different properties, their full list would require a lot of space, so here are the references:
+یونیکد از بسیاری از ویژگی های مختلف پشتیبانی می کند، لیست کامل آنها به فضای زیادی نیاز دارد، بنابراین در اینجا منابع آمده است:
 
-- List all properties by a character: <https://unicode.org/cldr/utility/character.jsp>.
-- List all characters by a property: <https://unicode.org/cldr/utility/list-unicodeset.jsp>.
-- Short aliases for properties: <https://www.unicode.org/Public/UCD/latest/ucd/PropertyValueAliases.txt>.
-- A full base of Unicode characters in text format, with all properties, is here: <https://www.unicode.org/Public/UCD/latest/ucd/>.
+- لیست تمام ویژگی ها بر اساس یک کاراکتر: <https://unicode.org/cldr/utility/character.jsp>.
+- همه کاراکترها را بر اساس یک ویژگی: <https://unicode.org/cldr/utility/list-unicodeset.jsp>.
+- نام مستعار کوتاه برای خواص: <https://www.unicode.org/Public/UCD/latest/ucd/PropertyValueAliases.txt>.
+- یک پایه کامل از کاراکترهای یونیکد در قالب متن، با تمام خصوصیات، اینجا است: <https://www.unicode.org/Public/UCD/latest/ucd/>.
 
-### Example: hexadecimal numbers
+### مثال: اعداد هگزادسیمال
 
-For instance, let's look for hexadecimal numbers, written as `xFF`, where `F` is a hex digit (0..1 or A..F).
+برای مثال، بیایید به دنبال اعداد هگزادسیمال بگردیم که به صورت `xFF` نوشته می‌ شوند، جایی که `F` یک رقم هگزاست (0..9 یا A..F).
 
-A hex digit can be denoted as `pattern:\p{Hex_Digit}`:
+یک رقم هگز را می توان به عنوان `pattern:\p{Hex_Digit}` نشان داد:
 
 ```js run
 let regexp = /x\p{Hex_Digit}\p{Hex_Digit}/u;
@@ -123,45 +117,45 @@ let regexp = /x\p{Hex_Digit}\p{Hex_Digit}/u;
 alert("number: xAF".match(regexp)); // xAF
 ```
 
-### Example: Chinese hieroglyphs
+### مثال: هیروگلیف چینی
 
-Let's look for Chinese hieroglyphs.
+بیایید دنبال هیروگلیف چینی بگردیم.
 
-There's a unicode property `Script` (a writing system), that may have a value: `Cyrillic`, `Greek`, `Arabic`, `Han` (Chinese) and so on, [here's the full list](https://en.wikipedia.org/wiki/Script_(Unicode)).
+یک ویژگی یونیکد `Script` (یک سیستم نوشتاری) وجود دارد که ممکن است دارای مقدارهای روبرو باشد: `Cyrillic`، `Greek`، `Arabic`، `Han` (چینی) و غیره، [فهرست کامل در اینجا آمده است](https://en.wikipedia.org/wiki/Script_(Unicode)).
 
-To look for characters in a given writing system we should use `pattern:Script=<value>`, e.g. for Cyrillic letters: `pattern:\p{sc=Cyrillic}`, for Chinese hieroglyphs: `pattern:\p{sc=Han}`, and so on:
+برای جستجوی کاراکترها در یک سیستم نوشتاری معین، باید از `<pattern:Script=<value` استفاده کنیم، به عنوان مثال. برای حروف سیریلیک: `pattern:\p{sc=Cyrillic}`، برای هیروگلیف چینی: `pattern:\p{sc=Han}` و غیره:
 
 ```js run
-let regexp = /\p{sc=Han}/gu; // returns Chinese hieroglyphs
+let regexp = /\p{sc=Han}/gu; // هیروگلیف های چینی را برمی گرداند
 
 let str = `Hello Привет 你好 123_456`;
 
 alert( str.match(regexp) ); // 你,好
 ```
 
-### Example: currency
+### مثال: ارز
 
-Characters that denote a currency, such as `$`, `€`, `¥`, have unicode property  `pattern:\p{Currency_Symbol}`, the short alias: `pattern:\p{Sc}`.
+کاراکتر ‌هایی که یک ارز را نشان می‌ دهند، مانند `$`، `€`، `¥`، دارای ویژگی یونیکد `pattern:\p{Currency_Symbol}` هستند، نام مستعار کوتاه: `pattern:\p{Sc}`.
 
-Let's use it to look for prices in the format "currency, followed by a digit":
+بیایید از آن برای جستجوی قیمت‌ها در قالب "ارز و به دنبال آن یک رقم" استفاده کنیم:
 
 ```js run
 let regexp = /\p{Sc}\d/gu;
 
-let  str = `Prices: $2, €1, ¥9`;
+let str = `Prices: $2, €1, ¥9`;
 
 alert( str.match(regexp) ); // $2,€1,¥9
 ```
 
-Later, in the article <info:regexp-quantifiers> we'll see how to look for numbers that contain many digits.
+بعداً، در مقاله <info:regexp-quantifiers> خواهیم دید که چگونه به دنبال اعدادی بگردیم که دارای ارقام زیادی هستند.
 
-## Summary
+## خلاصه
 
-Flag `pattern:u` enables the support of Unicode in regular expressions.
+پرچم `pattern:u` پشتیبانی از یونیکد را در عبارات منظم فعال می کند.
 
-That means two things:
+یعنی دو چیز:
 
-1. Characters of 4 bytes are handled correctly: as a single character, not two 2-byte characters.
-2. Unicode properties can be used in the search: `\p{…}`.
+1. کاراکترهای 4 بایتی به درستی مدیریت می شوند: به عنوان یک کاراکتر، نه دو کاراکتر 2 بایتی.
+2. از ویژگی های یونیکد می توان در جستجو استفاده کرد: `{…}p\`.
 
-With Unicode properties we can look for words in given languages, special characters (quotes, currencies) and so on.
+با ویژگی‌های یونیکد می‌توانیم به دنبال کلمات در زبان‌های معین، کاراکترهای خاص (نقل‌ ها، ارزها) و غیره بگردیم.

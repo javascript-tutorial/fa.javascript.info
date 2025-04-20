@@ -2,14 +2,14 @@ importance: 5
 
 ---
 
-# How many seconds have passed today?
+# چند ثانیه از امروز گذشته است؟
 
-Write a function `getSecondsToday()` that returns the number of seconds from the beginning of today.
+تابع `getSecondsToday()` را بنویسید که تعداد ثانیه‌هایی که از شروع روز گذشته است را برگرداند.
 
-For instance, if now were `10:00 am`, and there was no daylight savings shift, then:
+برای مثال، اگر الان `10:00 am` (قبل از ظهر) باشد و ساعت تابستانی هم وجود نداشته باشد، سپس داریم:
 
 ```js
 getSecondsToday() == 36000 // (3600 * 10)
 ```
 
-The function should work in any day. That is, it should not have a hard-coded value of "today".
+تابع باید به ازای هر روزی کار کند. یعنی اینکه نباید برای «امروز» کد اختصاصی داشته باشد.

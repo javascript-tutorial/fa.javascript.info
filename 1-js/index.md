@@ -1,6 +1,6 @@
-# The JavaScript language
+# زبان جاوااسکریپت
 
-Here we learn JavaScript, starting from scratch and go on to advanced concepts like OOP.
+اینجا ما جاوااسکریپت را یاد می‌گیریم و از ابتدا شروع می‌کنیم و تا مباحث پیشرفته مانند شیءگرایی ادامه می‌دهیم.
 
-We concentrate on the language itself here, with the minimum of environment-specific notes.
+ما اینجا، با استفاده حداقلی از نکات مربوط به محیط‌های اجرای خاص، بر روی خود زبان تمرکز می‌کنیم.
 

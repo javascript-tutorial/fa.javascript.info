@@ -1,6 +1,6 @@
-The answer: the first and the third will execute.
+جواب: اولی و سومی اجرا خواهند شد.
 
-Details:
+جزییات:
 
 ```js run
 // Runs.

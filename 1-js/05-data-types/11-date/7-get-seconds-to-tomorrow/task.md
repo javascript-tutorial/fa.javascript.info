@@ -2,14 +2,14 @@ importance: 5
 
 ---
 
-# How many seconds till tomorrow?
+# چند ثانیه تا فردا مانده است؟
 
-Create a function `getSecondsToTomorrow()` that returns the number of seconds till tomorrow.
+تابع `getSecondsToTomorrow()` بسازید که تعداد ثانیه‌ها را تا فردا برمی‌گرداند.
 
-For instance, if now is `23:00`, then:
+برای مثال، اگر الان `23:00` باشد داریم:
 
 ```js
 getSecondsToTomorrow() == 3600
 ```
 
-P.S. The function should work at any day, the "today" is not hardcoded.
+پی‌نوشت: تابع باشد به ازای هر روزی کار کند، «امروز» کد اختصاصی ندارد.

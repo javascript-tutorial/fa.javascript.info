@@ -1,4 +1,4 @@
-The first two checks turn into two `case`. The third check is split into two cases:
+دو چک اول به دو `case` تبدیل می‌شوند. و چک سوم به دو case تقسیم می‌شود:
 
 ```js run
 let a = +prompt('a?', '');
@@ -21,6 +21,6 @@ switch (a) {
 }
 ```
 
-Please note: the `break` at the bottom is not required. But we put it to make the code future-proof.
+دقت داشته باشید: `break` که در انتها آمده ضروری نیست ولی آن را برای این می‌گذاریم که کدمان در آینده درست کار کند..
 
-In the future, there is a chance that we'd want to add one more `case`, for example `case 4`. And if we forget to add a break before it, at the end of `case 3`, there will be an error. So that's a kind of self-insurance.
+ممکن است بخواهیم در آینده `case` های بیشتری اضافه کنیم؛ برای مثال `case 4`. در این صورت اگر فراموش می‌کنم که قبل از آن در `case 3` یک break بگذاریم به مشکل برمی‌خوریم. و ارور دریافت می‌کنیم. برای همین است که این `break` آخری را می‌گذاریم.

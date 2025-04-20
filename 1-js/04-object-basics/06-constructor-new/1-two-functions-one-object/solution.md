@@ -1,8 +1,8 @@
-Yes, it's possible.
+بله، امکان دارد.
 
-If a function returns an object then `new` returns it instead of `this`.
+اگر یک تابع یک شیء را برگرداند سپس `new` آن را به جای `this` برمی گرداند.
 
-So they can, for instance, return the same externally defined object `obj`:
+پس آنها می توانند، برای مثال، شیء تعریف شده خارجی مشابه را برگردانند. 
 
 ```js run no-beautify
 let obj = {};
@@ -10,5 +10,5 @@ let obj = {};
 function A() { return obj; }
 function B() { return obj; }
 
-alert( new A() == new B() ); // true
+alert( new A() == new B() ); // درست
 ```

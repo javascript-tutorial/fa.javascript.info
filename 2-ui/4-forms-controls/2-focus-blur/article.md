@@ -1,25 +1,25 @@
-# Focusing: focus/blur
+# Focus: متمرکز کردن/محو کردن
 
-An element receives a focus when the user either clicks on it or uses the `key:Tab` key on the keyboard. There's also an `autofocus` HTML attribute that puts the focus into an element by default when a page loads and other means of getting a focus.
+یک element وقتی focus دریافت می‌کند که کاربر روی آن click کند یا از کلید `key:Tab` در صفحه‌کلید استفاده کند. همچنین یک attribute به نام `autofocus` در HTML وجود دارد که وقتی صفحه بارگیری می‌شود، به صورت پیش‌فرض focus را روی یک element می‌گذارد. روش‌های دیگری برای دریافت focus وجود دارند.
 
-Focusing on an element generally means: "prepare to accept the data here", so that's the moment when we can run the code to initialize the required functionality.
+قرار دادن focus روی یک element به طور کلی یعنی: "آماده شدن برای دریافت داده در اینجا"، پس این زمانی است که می‌توانیم کد را برای مقداردهی اولیه برای عملکرد مورد نیاز اجرا کنیم. 
 
-The moment of losing the focus ("blur") can be even more important. That's when a user clicks somewhere else or presses `key:Tab` to go to the next form field, or there are other means as well.
+لحظه‌ای که focus از دست می‌رود ("blur") حتی می‌تواند مهم‌تر باشد. آن وقتی است که کاربر روی جایی دیگر click می‌کند یا `key:Tab` را فشار می‌دهد تا به form بعدی برود یا راه‌های دیگری نیز وجود دارد. 
 
-Losing the focus generally means: "the data has been entered", so we can run the code to check it or even to save it to the server and so on.
+از دست دادن داده به طور کلی یعنی "داده وارد شده است"، پس ما می‌توانیم کد را اجرا کنیم تا آن را چک کنیم یا حتی آن را در server ذخیره کنیم و چیزهای دیگر.
 
-There are important peculiarities when working with focus events. We'll do the best to cover them further on.
+هنگام کار با focus eventها،‌ ویژگی‌های مهمی وجود دارند. ما در ادامه بیشترین تلاش خود را می‌کنیم تا آن‌ها را پوشش دهیم. 
 
 ## Events focus/blur
 
-The `focus` event is called on focusing, and `blur` -- when the element loses the focus.
+هنگام متمرکز شدن از `focus` استفاده می‌شود و `blur` -- برای زمانی است که element آن focus را از دست می‌دهد. 
 
-Let's use them for validation of an input field.
+بیایید برای اعتبارسنجی یک input field از آن‌ها استفاده کنیم. 
 
-In the example below:
+در مثال زیر:
 
-- The `blur` handler checks if the field the email is entered, and if not -- shows an error.
-- The `focus` handler hides the error message (on `blur` it will be checked again):
+- هندلر `blur` چک می‌کند که یک email وارد شده است یا نه، و اگر نه -- یک error نشان می‌دهد. 
+- هندلر `focus` پیام error را پنهان می‌کند (در حالت `blur` دوباره چک می‌شود):
 
 ```html run autorun height=60
 <style>
@@ -27,21 +27,21 @@ In the example below:
   #error { color: red }
 </style>
 
-Your email please: <input type="email" id="input">
+ایمیلتان لطفا: <input type="email" id="input">
 
 <div id="error"></div>
 
 <script>
 *!*input.onblur*/!* = function() {
-  if (!input.value.includes('@')) { // not email
+  if (!input.value.includes('@')) { // ایمیل نیست
     input.classList.add('invalid');
-    error.innerHTML = 'Please enter a correct email.'
+    error.innerHTML = '.لطفا یک ایمیل درست وارد کنید'
   }
 };
 
 *!*input.onfocus*/!* = function() {
   if (this.classList.contains('invalid')) {
-    // remove the "error" indication, because the user wants to re-enter something
+    // را پاک می‌کند، چون کاربر می‌خواهد دوباره چیزی را وارد کند error علامت
     this.classList.remove('invalid');
     error.innerHTML = "";
   }
@@ -49,14 +49,14 @@ Your email please: <input type="email" id="input">
 </script>
 ```
 
-Modern HTML allows us to do many validations using input attributes: `required`, `pattern` and so on. And sometimes they are just what we need. JavaScript can be used when we want more flexibility. Also we could automatically send the changed value to the server if it's correct.
+زبان HTML مدرن به ما اجازه می‌دهد که بسیاری از اعتبارسنجی‌ها را با input attributeها انجام دهیم: `required`، `pattern` و چیزهای دیگر. و بعضی وقت‌ها این‌ها دقیقا چیزهایی هستند که ما نیاز داریم. وقتی که می‌خواهیم انعطاف‌پذیری بیشتری داشته باشیم، می‌توانیم از جاوااسکریپت استفاده کنیم. همچنین اگر داده درست باشد، ما می‌توانیم داده‌ی تغییرداده‌شده را به صورت خودکار به سرور بفرستیم.
 
 
-## Methods focus/blur
+## متدهای focus/blur
 
-Methods `elem.focus()` and `elem.blur()` set/unset the focus on the element.
+تابع‌های `elem.focus()` و `elem.blur()` برای این هستند که focus را روی element فعال/غیرفعال کنند. 
 
-For instance, let's make the visitor unable to leave the input if the value is invalid:
+برای مثال، بیایید کاری کنیم که اگر مقدار نامعتبر باشد، نتواند input را ترک کند:
 
 ```html run autorun height=80
 <style>
@@ -65,16 +65,16 @@ For instance, let's make the visitor unable to leave the input if the value is i
   }
 </style>
 
-Your email please: <input type="email" id="input">
-<input type="text" style="width:220px" placeholder="make email invalid and try to focus here">
+ایمیلتان لطفا: <input type="email" id="input">
+<input type="text" style="width:220px" placeholder="کنید focus ایمیل را نامعتبر کنید و سعی کنید اینجا">
 
 <script>
   input.onblur = function() {
-    if (!this.value.includes('@')) { // not email
-      // show the error
+    if (!this.value.includes('@')) { // نیست email
+      // را نشان می‌دهد error
       this.classList.add("error");
 *!*
-      // ...and put the focus back
+      // ... را برگردانید focus و
       input.focus();
 */!*
     } else {
@@ -84,59 +84,61 @@ Your email please: <input type="email" id="input">
 </script>
 ```
 
-It works in all browsers except Firefox ([bug](https://bugzilla.mozilla.org/show_bug.cgi?id=53579)).
+این روی تمام مرورگرها به جز Firefox کار می‌کند ([bug](https://bugzilla.mozilla.org/show_bug.cgi?id=53579)).
 
-If we enter something into the input and then try to use `key:Tab` or click away from the `<input>`, then `onblur` returns the focus back.
+اگر چیزی را در input وارد کنیم و سپس سعی کنیم از `key:Tab` استفاده کنیم یا روی input کلیک کنیم، `onblur` فوکوس را برمی‌گرداند. 
 
-Please note that we can't "prevent losing focus" by calling `event.preventDefault()` in `onblur`, because `onblur` works *after* the element lost the focus.
+لطفا توجه داشته باشید که ما نمی‌توانیم با فراخوانی `event.preventDefault()` از "از دست دادن focus" در `onblur` جلوگیری کنیم، چون `onblur` *پس از* اینکه عنصر focus را از دست می‌دهد کار می‌کند. 
 
-```warn header="JavaScript-initiated focus loss"
-A focus loss can occur for many reasons.
+اگرچه در عمل، قبل از اینکه چیزی مثل این را پیاده‌سازی کنیم،‌باید خوب فکر کنیم، چون به طور کلی *باید به کاربر error نمایش دهیم* اما *نباید مانع پیشرفت آن‌ها* در پر کردن form خودمان شویم. ممکن است آن‌ها بخواهند ابتدا fieldهای دیگر را پر کنند. 
 
-One of them is when the visitor clicks somewhere else. But also JavaScript itself may cause it, for instance:
+```warn header="از دست دادن focus ایجاد شده توسط جاوااسکریپت"
+ممکن است به دلایل مختلفی رخ دهد focus از دست رفتن
 
-- An `alert` moves focus to itself, so it causes the focus loss at the element (`blur` event), and when the `alert` is dismissed, the focus comes back (`focus` event).
-- If an element is removed from DOM, then it also causes the focus loss. If it is reinserted later, then the focus doesn't return.
+یکی از آن‌ها وقتی است که بازدیدکننده روی جای دیگری کلیک می‌کند. اما خود جاوااسکریپت هم می‌تواند باعث آن شود. برای مثال:
 
-These features sometimes cause `focus/blur` handlers to misbehave -- to trigger when they are not needed.
+یک `alert` فوکوس را به خودش جلب می‌کند، پس باعث از بین رفتن focus در element می‌شود (`blur` event) و هنگامی که `alert` نادیده گرفته می‌شود،‌focus برمی‌گردد. (`focus` event)
+- اگر یک element از DOM پاک شود، آنگاه همچنین باعث از بین رفتن focus می‌شود. اگر آن بعدا دوباره وارد شود، focus برگردانده نمی‌شود.
 
-The best recipe is to be careful when using these events. If we want to track user-initiated focus-loss, then we should avoid causing it ourselves.
+این ویژگی‌ها گاهی باعث می‌شوند که `focus/blurs` handlers بدرفتاری کنند -- زمانی که نیاز نیست فعال شوند. 
+
+بهترین دستورالعمل این است که موقع کار با این eventها مراقب باشید. اگر بخواهیم از دست دادن focus که توسط کاربر انجام می‌شود را ردیابی کنیم، پس باید از ایجاد آن توسط خودمان جلوگیری کنیم.
 ```
-## Allow focusing on any element: tabindex
+## اجازه focus کردن روی هر عنصر: tabindex
 
-By default many elements do not support focusing.
+به صورت پیش‌فرض، بیشتر عناصر از focus پشتیبانی نمی‌کنند.
 
-The list varies a bit between browsers, but one thing is always correct: `focus/blur` support is guaranteed for elements that a visitor can interact with: `<button>`, `<input>`, `<select>`, `<a>` and so on.
+این لیست کمی میان مرورگرها تفاوت می‌کند اما یک چیز همیشه درست است: پشتیبانی از `focus/blur` برای elementهایی که یک کاربر می‌تواند با آن‌ها تعامل داشته باشد:‌ `<button>`, `<input>`, `<select>`, `<a>` و ... تضمین شده است.
 
-From the other hand, elements that exist to format something, such as `<div>`, `<span>`, `<table>` -- are unfocusable by default. The method `elem.focus()` doesn't work on them, and `focus/blur` events are never triggered.
+از طرفی دیگر، عناصری که برای format کردن چیزی وجود دارند،‌ مثل `<div>`، `<span>`، `<table>` -- به طور پیش‌فرض غیر قابل focus هستند. متد `elem.focus()` روی آن‌ها کار نمی‌کند و eventهای `focus/blur` هیچ وقت trigger نمی‌شوند. 
 
-This can be changed using HTML-attribute `tabindex`.
+می‌توانیم این را با `tabindex` که یک HTML-attribute است تغییر دهیم.
 
-Any element becomes focusable if it has `tabindex`. The value of the attribute is the order number of the element when `key:Tab` (or something like that) is used to switch between them.
+هر elementای اگر `tabindex` داشته باشد، قابل focus می‌شود. هنگامی که `key:Tab` (یا چیزی شبیه آن) برای جابه‌جایی بین آن‌ها استفاده می‌شود،‌ مقدار attribute برابر order number آن element می‌شود. 
 
-That is: if we have two elements, the first has `tabindex="1"`, and the second has `tabindex="2"`, then pressing `key:Tab` while in the first element -- moves the focus into the second one.
+یعنی: اگر ما دو element داشته باشیم که اولی `tabindex="1"` داشته باشد و دومی `tabindex="2"` داشته باشد، آنگاه وقتی در اولین element هستیم و `key:Tab` را فشار می‌دهیم -- focus را به دومی می‌برد.
 
-The switch order is: elements with `tabindex` from `1` and above go first (in the `tabindex` order), and then elements without `tabindex` (e.g. a regular `<input>`).
+ترتیب تغییر به این صورت است: elementهایی با `tabindex` از `1` و بالاتر ابتدا می‌روند (در ترتیب `tabindex`) و بعد از آن، elementهای بدون `tabindex` (مثلا یک `<input>` معمولی)
 
-Elements with matching `tabindex` are switched in the document source order (the default order).
+عناصری که با `tabindex` تطبیق پیدا نمی‌کنند، به ترتیب document source (به ترتیب پیش‌فرض) تغییر می‌کنند. 
 
-There are two special values:
+دو مقدار استثنا وجود دارند:‌
 
-- `tabindex="0"` puts an element among those without `tabindex`. That is, when we switch elements, elements with `tabindex=0` go after elements with `tabindex ≥ 1`.
+- مقدار `tabindex="0"` یک element را میان عناصری که `tabindex` ندارند قرار می‌دهد. یعنی،‌ وقتی elementها را تغییر می‌دهیم، elementهایی با `tabindex=0` بعد از elementهایی با `tabindex ≥ 1` می‌آیند.
 
-    Usually it's used to make an element focusable, but keep the default switching order. To make an element a part of the form on par with `<input>`.
+    معمولا برای focusable کردن یک element استفاده می‌شود، اما ترتیب switching پیش‌فرض را حفظ کنید. برای اینکه یک element به صورت همتراز با `<input>` باشد. 
 
-- `tabindex="-1"` allows only programmatic focusing on an element. The `key:Tab` key ignores such elements, but method `elem.focus()` works.
+- مقدار `tabindex="-1"` فقط امکان programmatic focusing روی یک element را فراهم می‌کند. `key:Tab` همچین کلیدهایی را نادیده می‌گیرد اما `elem.focus()` کار می‌کند.
 
-For instance, here's a list. Click the first item and press `key:Tab`:
+برای مثال، اینجا یک لیست داریم. روی اولین item کلیک کنید و `key:Tab` را فشار دهید.
 
 ```html autorun no-beautify
-Click the first item and press Tab. Keep track of the order. Please note that many subsequent Tabs can move the focus out of the iframe with the example.
+روی اولین item کلیک کنید و Tab را فشار دهید. order را پیگری کنید. لطفا توجه داشته باشد که تعداد زیادی Tab بعدی می‌تواند focus را از iframe داخل مثال خارج کند.
 <ul>
-  <li tabindex="1">One</li>
-  <li tabindex="0">Zero</li>
-  <li tabindex="2">Two</li>
-  <li tabindex="-1">Minus one</li>
+  <li tabindex="1">یک</li>
+  <li tabindex="0">صفر</li>
+  <li tabindex="2">دو</li>
+  <li tabindex="-1">منهای یک</li>
 </ul>
 
 <style>
@@ -145,63 +147,63 @@ Click the first item and press Tab. Keep track of the order. Please note that ma
 </style>
 ```
 
-The order is like this: `1 - 2 - 0`. Normally, `<li>` does not support focusing, but `tabindex` full enables it, along with events and styling with `:focus`.
+ترتیب به این صورت است: `1 - 2 - 0`. به طور نرمال، `<li>` از focus پشتیبانی نمی‌کند اما `tabindex` آن را به همراه eventها و style دادن با `:focus` مهیا می‌کند.
 
-```smart header="The property `elem.tabIndex` works too"
-We can add `tabindex` from JavaScript by using the `elem.tabIndex` property. That has the same effect.
+```smart header="هم کار می‌کند. `elem.tabIndex`"
+ما می‌توانیم `tabindex` از جاوااسکریپت را با استفاده از `elem.tabIndex` اضافه کنیم. آن هم اثر یکسان را دارد
 ```
 
 ## Delegation: focusin/focusout
 
-Events `focus` and `blur` do not bubble.
+.وجود ندارد `blur` و `focus` رفتار بالا رفتن به صورت حبابی در
 
-For instance, we can't put `onfocus` on the `<form>` to highlight it, like this:
+برای مثال، ما نمی‌توانیم `onfocus` را روی `<form>` بگذاریم تا آن را highlight کنیم. مثل این:
 
 ```html autorun height=80
-<!-- on focusing in the form -- add the class -->
+<!-- را اضافه کنید class -- روی فرم focus در مورد -->
 <form *!*onfocus="this.className='focused'"*/!*>
-  <input type="text" name="name" value="Name">
-  <input type="text" name="surname" value="Surname">
+  <input type="text" name="name" value="نام">
+  <input type="text" name="surname" value="نام خانوادگی">
 </form>
 
 <style> .focused { outline: 1px solid red; } </style>
 ```
 
-The example above doesn't work, because when user focuses on an `<input>`, the `focus` event triggers on that input only. It doesn't bubble up. So `form.onfocus` never triggers.
+مثال بالا کار نمی‌کند زیرا وقتی کاربر روی یک `<input>` فوکوس می‌کند، `focus` event فقط روی آن input فعال می‌شود. رفتار بالا رفتن به صورت حبابی را ندارد. پس `form.onfocus` هیچوقت فعال نمی‌شود.
 
-There are two solutions.
+دو راه حل وجود دارد.
 
-First, there's a funny historical feature: `focus/blur` do not bubble up, but propagate down on the capturing phase.
+ابتدا یک ویژگی قدیمی خنده‌دار وجود دارد: `focus/blur` رفتار بالا رفتن به صورت حبابی را ندارند، بلکه در مرحله‌ی capturing به پایین منتشر می‌شوند.
 
-This will work:
+این کار می‌کند:
 
 ```html autorun height=80
 <form id="form">
-  <input type="text" name="name" value="Name">
-  <input type="text" name="surname" value="Surname">
+  <input type="text" name="name" value="نام">
+  <input type="text" name="surname" value="نام خانوادگی">
 </form>
 
 <style> .focused { outline: 1px solid red; } </style>
 
 <script>
 *!*
-  // put the handler on capturing phase (last argument true)
+  //قرار دهید (آخرین آرگومان درست) capturing کنترلگر را روی فاز 
   form.addEventListener("focus", () => form.classList.add('focused'), true);
   form.addEventListener("blur", () => form.classList.remove('focused'), true);
 */!*
 </script>
 ```
 
-Second, there are `focusin` and `focusout` events -- exactly the same as `focus/blur`, but they bubble.
+دوم، eventهای `focusin` و `focusout` وجود دارند. -- دقیقا مثل `focus/blur`، اما آن‌ها رفتار بالا رفتن حبابی دارند.
 
-Note that they must be assigned using `elem.addEventListener`, not `on<event>`.
+توجه داشته باشید که آن‌ها باید با استفاده از `elem.addEventListener` انتصاب داده شوند، نه `on<event>`.
 
-So here's another working variant:
+پس در اینجا یک نوع دیگر داریم که کار می‌کند:
 
 ```html autorun height=80
 <form id="form">
-  <input type="text" name="name" value="Name">
-  <input type="text" name="surname" value="Surname">
+  <input type="text" name="name" value="نام">
+  <input type="text" name="surname" value="نام خانوادگی">
 </form>
 
 <style> .focused { outline: 1px solid red; } </style>
@@ -214,12 +216,12 @@ So here's another working variant:
 </script>
 ```
 
-## Summary
+## خلاصه
 
-Events `focus` and `blur` trigger on focusing/losing focus on the element.
+فعال شدن eventهای `focus` و `blur` بسته به این است که آن عنصر فوکوس کند/از دست بدهد.
 
-Their specials are:
-- They do not bubble. Can use capturing state instead or `focusin/focusout`.
-- Most elements do not support focus by default. Use `tabindex` to make anything focusable.
+استثناهای آن‌ها عبارت‌اند از:
+- آن‌ها رفتار بالا رفتن حبابی ندارند. می‌توانند به جایش از حالت capturing یا `focusin/focusout` استفاده کنند.
+- بیشتر elementها به طور پیش‌فرض از focus پشتیبانی نمی‌کنند. از `tabindex` استفاده کنید تا هر چیزی قابلیت focus داشته باشد.
 
-The current focused element is available as `document.activeElement`.
+عنصری که در حال حاضر روی آن focus شده است با `document.activeElement` قابل دسترسی است.

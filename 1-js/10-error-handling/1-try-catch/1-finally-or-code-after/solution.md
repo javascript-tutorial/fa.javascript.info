@@ -1,47 +1,47 @@
-The difference becomes obvious when we look at the code inside a function.
+تفاوت زمانی آشکار می‌شود که ما درون یک تابع به کد نگاه کنیم.
 
-The behavior is different if there's a "jump out" of `try..catch`.
+اگر یک «پرش به بیرون» از `try...catch` وجود داشته باشد، رفتار متفاوت است.
 
-For instance, when there's a `return` inside `try..catch`. The `finally` clause works in case of *any* exit from `try..catch`, even via the `return` statement: right after `try..catch` is done, but before the calling code gets the control.
+برای مثال، زمانی که یک `return` درون `try...catch` وجود دارد. بند `finally` در صورت *هر گونه* خارج شدن از `try...catch` کار می‌کند حتی با دستور `return`: درست بعد تمام شدن `try...catch` اما قبل از اینکه کد فراخوانی شده کنترل را به دست بگیرد.
 
 ```js run
 function f() {
   try {
-    alert('start');
+    alert('شروع');
 *!*
-    return "result";
+    return "نتیجه";
 */!*
-  } catch (e) {
+  } catch (err) {
     /// ...
   } finally {
-    alert('cleanup!');
+    alert('پاک سازی!');
   }
 }
 
-f(); // cleanup!
+f(); // !پاک سازی
 ```
 
-...Or when there's a `throw`, like here:
+...یا زمانی که یک `throw` وجود داشته باشد، مثل اینجا:
 
 ```js run
 function f() {
   try {
-    alert('start');
-    throw new Error("an error");
-  } catch (e) {
+    alert('شروع');
+    throw new Error("یک ارور");
+  } catch (err) {
     // ...
-    if("can't handle the error") {
+    if("نمی‌توانی ارور را مدیریت کنی") {
 *!*
-      throw e;
+      throw err;
 */!*
     }
 
   } finally {
-    alert('cleanup!')
+    alert('پاک سازی!')
   }
 }
 
-f(); // cleanup!
+f(); // !پاک سازی
 ```
 
-It's `finally` that guarantees the cleanup here. If we just put the code at the end of `f`, it wouldn't run in these situations.
+این `finally` است که در اینجا پاک سازی را تضمین می‌کند. اگر ما فقط کد را در انتهای `f` قرار دهیم، در این موقعیت‌ها اجرا نمی‌شود.

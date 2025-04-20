@@ -1,31 +1,31 @@
-# Arrays
+# آرایه‌ها
 
-Objects allow you to store keyed collections of values. That's fine.
+شیءها به شما اجازه می‌دهند که مجموعه‌ای کلیددار از مقدارها را ذخیره کنید. این چیز خوبی است.
 
-But quite often we find that we need an *ordered collection*, where we have a 1st, a 2nd, a 3rd element and so on. For example, we need that to store a list of something: users, goods, HTML elements etc.
+اما بسیار پیش می‌آید که ما به یک *مجموعه‌ی مرتب* نیاز داشته باشیم، که دارای یک المان اول، دوم، سوم و غیره باشیم. برای مثال، ما نیاز داریم که یک لیست از چیزی را ذخیره کنیم: کاربران، کالاها، المان‌های HTML و غیره.
 
-It is not convenient to use an object here, because it provides no methods to manage the order of elements. We can’t insert a new property “between” the existing ones. Objects are just not meant for such use.
+اینکه اینجا از یک شیء استفاده کنیم خوب نیست، چون هیچ روشی برای کنترل کردن ترتیب المان‌ها فراهم نمی‌کند. ما نمی‌توانیم یک ویژگی جدید را «بین» ویژگی‌های جدید اضافه کنیم. شیءها برای چنین موردی ساخته نشده‌اند.
 
-There exists a special data structure named `Array`, to store ordered collections.
+یک ساختار داده خاص به نام `Array` وجود دارد که برای ذخیره مجموعه‌های مرتب استفاده می‌شود.
 
-## Declaration
+## تعریف کردن
 
-There are two syntaxes for creating an empty array:
+برای ساخت یک آرایه خالی دو سینتکس وجود دارد:
 
 ```js
 let arr = new Array();
 let arr = [];
 ```
 
-Almost all the time, the second syntax is used. We can supply initial elements in the brackets:
+تقریبا همیشه، سینتکس دوم استفاده می‌شود. ما می‌توانیم المان‌هایی اولیه را درون براکت‌ها قرار دهیم:
 
 ```js
 let fruits = ["Apple", "Orange", "Plum"];
 ```
 
-Array elements are numbered, starting with zero.
+المان‌های آرایه عددگذاری شده‌اند که از صفر شروع می‌شود.
 
-We can get an element by its number in square brackets:
+ما می‌توانیم یک المان را با استفاده از عددش درون براکت‌ها دریافت کنیم:
 
 ```js run
 let fruits = ["Apple", "Orange", "Plum"];
@@ -35,19 +35,19 @@ alert( fruits[1] ); // Orange
 alert( fruits[2] ); // Plum
 ```
 
-We can replace an element:
+می‌توانیم یک المان را جایگزین کنیم:
 
 ```js
 fruits[2] = 'Pear'; // now ["Apple", "Orange", "Pear"]
 ```
 
-...Or add a new one to the array:
+...یا یک المان جدید را به آرایه اضافه کنیم:
 
 ```js
 fruits[3] = 'Lemon'; // now ["Apple", "Orange", "Pear", "Lemon"]
 ```
 
-The total count of the elements in the array is its `length`:
+تعداد کل المان‌های درون آرایه در `length` آن است:
 
 ```js run
 let fruits = ["Apple", "Orange", "Plum"];
@@ -55,7 +55,7 @@ let fruits = ["Apple", "Orange", "Plum"];
 alert( fruits.length ); // 3
 ```
 
-We can also use `alert` to show the whole array.
+همچنین ما می‌توانیم از `alert` برای نشان دادن کل آرایه استفاده کنیم.
 
 ```js run
 let fruits = ["Apple", "Orange", "Plum"];
@@ -63,24 +63,24 @@ let fruits = ["Apple", "Orange", "Plum"];
 alert( fruits ); // Apple,Orange,Plum
 ```
 
-An array can store elements of any type.
+یک آرایه می‌تواند المان‌هایی از هر نوع را ذخیره کند.
 
-For instance:
+برای مثال:
 
 ```js run no-beautify
-// mix of values
+// ترکیبی از مقدارها
 let arr = [ 'Apple', { name: 'John' }, true, function() { alert('hello'); } ];
 
-// get the object at index 1 and then show its name
+// آن name دریافت شیء در ایندکس 1 و سپس نمایش
 alert( arr[1].name ); // John
 
-// get the function at index 3 and run it
+// دریافت تابع در ایندکس 3 و اجرا کردن آن
 arr[3](); // hello
 ```
 
 
-````smart header="Trailing comma"
-An array, just like an object, may end with a comma:
+````smart header="کامای دنباله‌دار"
+یک آرایه، درست مانند یک شیء، می‌تواند با یک کاما پایان یاید:
 ```js
 let fruits = [
   "Apple",
@@ -89,57 +89,91 @@ let fruits = [
 ];
 ```
 
-The "trailing comma" style makes it easier to insert/remove items, because all lines become alike.
+سبک «کامای دنباله‌دار» اضافه/حذف کردن المان را آسان‌تر می‌کند، چون همه خطوط مشابه می‌شوند.
 ````
 
+## دریافت آخرین المان‌ها با «at»
 
-## Methods pop/push, shift/unshift
+[recent browser="new"]
 
-A [queue](https://en.wikipedia.org/wiki/Queue_(abstract_data_type)) is one of the most common uses of an array. In computer science, this means an ordered collection of elements which supports two operations:
+فرض کنیم ما آخرین المان یک ارایه را می‌خواهیم.
 
-- `push` appends an element to the end.
-- `shift` get an element from the beginning, advancing the queue, so that the 2nd element becomes the 1st.
+بعضی از زبان‌های برنامه‌نویسی به ما اجازه می‌دهند که برای چنین اهدافی از ایندکس‌های منفی استفاده کنیم، مانند `friuts[-1]`.
+
+اگرچه این کار در جاوااسکریپت کار نمی‌کند. نتیجه `undefined` خواهد بود چون در براکت‌ها با ایندکس به صورت لفظی رفتار می‌شود.
+
+ما می‌توانیم به صورت واضح ایندکس المان آخر را محاسبه کنیم و به آن دسترسی پیدا کنیم: `fruits[fruits.length - 1]`.
+
+```js run
+let fruits = ["Apple", "Orange", "Plum"];
+
+alert( fruits[fruits.length-1] ); // Plum
+```
+پ
+کمی زحمت دارد نه؟ ما باید اسم متغیر را دوبار بنویسیم.
+
+خوشبختانه سینتکسی کوتاه‌تر وجود دارد: `fruits.at(-1)`:
+
+```js run
+let fruits = ["Apple", "Orange", "Plum"];
+
+// fruits[fruits.length-1] درست مانند
+alert( fruits.at(-1) ); // Plum
+```
+
+به عبارتی دیگر، `arr.at(i)`:
+- اگر `i >= 0` باشد درست مانند `arr[i]` است.
+- برای مقدارهای منفی از `i`، از انتهای آرایه به عقب قدم برمی‌دارد.
+
+## متدهای pop/push، shift/unshift
+
+یک [صف](https://fa.wikipedia.org/wiki/صف_(نوع_داده_انتزاعی)) یکی از متداول‌ترین استفاده‌ها از یک آرایه است. در علوم کامپیوتر، آرایه به معنای یک مجموعه مرتب‌شده از المان‌ها است که دو عملیات را پشتیبانی می‌کند:
+
+- `push` یک المان را به آخر اضافه می‌کند.
+- `shift` یک المان را از آغاز برمی‌دارد، صف را پیش می‌برد، پس المان دوم به المان اول تبدیل می‌شود.
 
 ![](queue.svg)
 
-Arrays support both operations.
+آرایه‌ها هر دو عملیات را پشیبانی می‌کنند.
 
-In practice we need it very often. For example, a queue of messages that need to be shown on-screen.
+خیلی پیش می‌آید که در عمل به آن نیاز داشته باشیم. برای مثال، یک صف از پیام‌ها که باید روی صفحه نمایش داده شوند.
 
-There's another use case for arrays -- the data structure named [stack](https://en.wikipedia.org/wiki/Stack_(abstract_data_type)).
+آرایه‌ها یک مورد استفاده دیگر هم دارند که یک ساختار داده به نام [پشته](https://fa.wikipedia.org/wiki/پشته) است.
 
-It supports two operations:
+پشته دو عملیات را پشتیبانی می‌کند:
 
-- `push` adds an element to the end.
-- `pop` takes an element from the end.
+- `push` یک المان را به آخر اضافه می‌کند.
+- `pop` یک المان را از آخر برمی‌دارد.
 
-So new elements are added or taken always from the "end".
+پس المان‌های جدید یا اضافه می‌شوند یا همیشه از «آخر» برداشته می‌شوند.
 
-A stack is usually illustrated as a pack of cards: new cards are added to the top or taken from the top:
+یک پشته معمولا به عنوان یک بسته‌ای از کارت‌ها فرض می‎شود: کارت‌های جدید به بالا اضافه می‌شوند یا از بالا برداشته می‌شوند:
 
 ![](stack.svg)
 
-For stacks, the latest pushed item is received first, that's also called LIFO (Last-In-First-Out) principle. For queues, we have FIFO (First-In-First-Out).
+برای پشته‌ها، آخرین چیزی که اضافه شده باشد اول دریافت می‌شود، همچنین به آن LIFO (Last-In-First-Out) هم گفته می‌شود. برای صف‌ها، ما FIFO (First-In-First-Out) را داریم.
 
-Arrays in JavaScript can work both as a queue and as a stack. They allow you to add/remove elements both to/from the beginning or the end.
+آرایه‌ها در جاوااسکریپت می‌توانند هم به عنوان یک صف و هم به عنوان یک پشته کار کنند. آنها به شما اجازه می‌دهند که المان‌ها را به/از آغاز یا پایان اضافه/حذف کنید.
 
-In computer science the data structure that allows this, is called [deque](https://en.wikipedia.org/wiki/Double-ended_queue).
+در علوم کامپیوتر ساختار داده‌ای که همچنین چیزی را ممکن می‌کند، [صف دو طرفه](https://en.wikipedia.org/wiki/Double-ended_queue) نامیده می‌شود.
 
-**Methods that work with the end of the array:**
+**متدهایی که با انتهای آرایه کار می‌کنند:**
 
 `pop`
-: Extracts the last element of the array and returns it:
+: آخرین المان از آرایه را خارج می‌کند و آن را برمی‌گرداند:
 
     ```js run
     let fruits = ["Apple", "Orange", "Pear"];
 
-    alert( fruits.pop() ); // remove "Pear" and alert it
+    alert( fruits.pop() ); // می‌کند alert را حذف می‌کند و آن را "Pear"
 
     alert( fruits ); // Apple, Orange
     ```
 
+    هر دوی `fruits.pop()` و `fruits.at(-1)` المان آخر آرایه را برمی‌گردانند اما `fruits.pop()` با حذف آن المان آرایه را تغییر می‌دهد.
+
 `push`
-: Append the element to the end of the array:
+: المان را به انتهای آرایه اضافه می‌کند:
 
     ```js run
     let fruits = ["Apple", "Orange"];
@@ -149,23 +183,23 @@ In computer science the data structure that allows this, is called [deque](https
     alert( fruits ); // Apple, Orange, Pear
     ```
 
-    The call `fruits.push(...)` is equal to `fruits[fruits.length] = ...`.
+    صدا زدن `friuts.push(...)` برابر است با `fruits[fruits.length] = ...`.
 
-**Methods that work with the beginning of the array:**
+**متدهایی که با آغاز آرایه کار می‌کنند:**
 
 `shift`
-: Extracts the first element of the array and returns it:
+: اولین المان آرایه را خارج می‌کند و آن را برمی‌گرداند:
 
     ```js run
     let fruits = ["Apple", "Orange", "Pear"];
 
-    alert( fruits.shift() ); // remove Apple and alert it
+    alert( fruits.shift() ); // می‌کند alert را حذف می‌کند و آن را "Apple"
 
     alert( fruits ); // Orange, Pear
     ```
 
 `unshift`
-: Add the element to the beginning of the array:
+: المان را به آغاز آرایه اضافه می‌کند:
 
     ```js run
     let fruits = ["Orange", "Pear"];
@@ -175,7 +209,7 @@ In computer science the data structure that allows this, is called [deque](https
     alert( fruits ); // Apple, Orange, Pear
     ```
 
-Methods `push` and `unshift` can add multiple elements at once:
+متدهای `push` و `unshift` می‌توانند چند المان را یک جا اضافه کنند:
 
 ```js run
 let fruits = ["Apple"];
@@ -187,97 +221,97 @@ fruits.unshift("Pineapple", "Lemon");
 alert( fruits );
 ```
 
-## Internals
+## اجزای داخلی
 
-An array is a special kind of object. The square brackets used to access a property `arr[0]` actually come from the object syntax. That's essentially the same as `obj[key]`, where `arr` is the object, while numbers are used as keys.
+یک آرایه نوع خاصی از یک شیء است. براکت‌ها که برای دسترسی به یک ویژگی `arr[0]` استفاده می‌شوند در واقع از سینتکس شیء آمده‌اند. اساسا شبیه به `obj[key]` است، که در آن `arr` شیء است، درحالی که اعداد به عنوان کلیدها استفاده می‌شوند.
 
-They extend objects providing special methods to work with ordered collections of data and also the `length` property. But at the core it's still an object.
+آنها شیءها را با فراهم کردن متدهای خاصی برای کارکردن با مجموعه‌های مرتب شده‌ی داده و ویژگی `length` گسترده می‌کنند. اما در ریشه و ذات هنوز یک شیء هستند.
 
-Remember, there are only 7 basic types in JavaScript. Array is an object and thus behaves like an object.
+به یاد داشته باشید، فقط 8 نوع داده ساده در جاوااسکریپت وجود دارد (برای اطلاعات بیشتر فصل [انواع داده](info:types) را ببینید). آرایه یک شیء است و به همین دلیل مانند یک شیء عمل می‌کند.
 
-For instance, it is copied by reference:
+برای مثال، آرایه توسط مرجع کپی می‌شود:
 
 ```js run
-let fruits = ["Banana"]
+let fruits = ["موز"]
 
-let arr = fruits; // copy by reference (two variables reference the same array)
+let arr = fruits; کپی شدن توسط مرجع (دو متغیر به آرایه مشابهی رجوع می‌کنند)
 
 alert( arr === fruits ); // true
 
-arr.push("Pear"); // modify the array by reference
+arr.push("گلابی"); // تغییر دادن آرایه با استفاده از مرجع
 
-alert( fruits ); // Banana, Pear - 2 items now
+alert( fruits ); // حال دارای 2 المان است - موز، گلابی
 ```
 
-...But what makes arrays really  special is their internal representation. The engine tries to store its elements in the contiguous memory area, one after another, just as depicted on the illustrations in this chapter, and there are other optimizations as well, to make arrays work really fast.
+اما چیزی که باعث می‌شود آرایه‌ها خاص باشند نمایش داخلی آنها است. موتور سعی می‌کند که المان‌های آرایه را در ناحیه‌ای پیوسته در حافظه ذخیره کند، یکی پس از دیگری، درست همانطور که در تصاویر این فصل  نشان داده شد، و بهینه‌سازی‌هایی هم وجود دارد، برای اینکه آرایه‌ها را بسیار سریع کنند.
 
-But they all break if we quit working with an array as with an "ordered collection" and start working with it as if it were a regular object.
+اما اگر ما از کار کردن با آرایه به عنوان یک «مجموعه مرتب شده» دست بکشیم و شروع به کار کردن به عنوان یک شیء معمولی کنیم، بهینه‌سازی‌ها متوقف می‌شوند.
 
-For instance, technically we can do this:
+برای مثال، به طور فنی می‌توانیم همچین کاری کنیم:
 
 ```js
-let fruits = []; // make an array
+let fruits = []; // یک آرایه بسازیم
 
-fruits[99999] = 5; // assign a property with the index far greater than its length
+fruits[99999] = 5; // مقداردهی به یک ویژگی با ایندکسی بسیار بیشتر از طول آرایه
 
-fruits.age = 25; // create a property with an arbitrary name
+fruits.age = 25; // ساخت یک ویژگی با یک اسم دلخواه
 ```
 
-That's possible, because arrays are objects at their base. We can add any properties to them.
+این کار قابل انجام است، چون آرایه‌ها در ذات خود شیء هستند. ما می‌توانیم هر ویژگی‌ای را به آنها اضافه کنیم.
 
-But the engine will see that we're working with the array as with a regular object. Array-specific optimizations are not suited for such cases and will be turned off, their benefits disappear.
+اما موتور خواهد دید که ما با آرایه به عنوان یک شیء معمولی کار می‌کنیم. بهینه‌سازی‌های مخصوص آرایه برای چنین موارد استفاده‌ای مناسب نیستند و غیر فعال خواهند شد و فواید آنها هم از بین خواهند رفت.
 
-The ways to misuse an array:
+راه‌های استفاده نامناسب با یک آرایه:
 
-- Add a non-numeric property like `arr.test = 5`.
-- Make holes, like: add `arr[0]` and then `arr[1000]` (and nothing between them).
-- Fill the array in the reverse order, like `arr[1000]`, `arr[999]` and so on.
+- اضافه کردن یک ویژگی غیر عددی مانند `arr.test = 5`.
+- ایجاد فضای خالی، مانند: اضافه کردن `arr[0]` و سپس `arr[1000]` (اضافه نکردن چیزی بین آنها).
+- پر کردن آرایه با ترتیب برعکس، مثل `arr[1000]`، `arr[999]` و غیره.
 
-Please think of arrays as special structures to work with the *ordered data*. They provide special methods for that. Arrays are carefully tuned inside JavaScript engines to work with contiguous ordered data, please use them this way. And if you need arbitrary keys, chances are high that you actually require a regular object `{}`.
+لطفا به آرایه‌ها به عنوان یک ساختار خاص برای کارکردن با *داده مرتب شده* نگاه کنید. آنها متدهای خاصی را برای این موضوع فراهم می‌کنند. آرایه‌ها با حساسیت به داخل موتورهای جاوااسکریپت برای کارکردن با داده مرتب شده‌ی متوالی راه یافته‌اند، لطفا از آنها در همین راه استفاده کنید. اگر به کلیدهای دلخواه نیاز دارید، به احتمال زیاد شما در واقع به یک شیء معمولی `{}` احتیاج دارید.
 
-## Performance
+## عملکرد
 
-Methods `push/pop` run fast, while `shift/unshift` are slow.
+متدهای `push/pop` سربع اجرا می‌شوند، در حالی که `shift/unshift` کند هستند.
 
 ![](array-speed.svg)
 
-Why is it faster to work with the end of an array than with its beginning? Let's see what happens during the execution:
+چرا کارکردن با انتهای آرایه از آغاز آن سریع‌تر است؟ بیایید ببینیم در طی اجراشدن چه اتفاقی می‌افتد:
 
 ```js
-fruits.shift(); // take 1 element from the start
+fruits.shift(); // یک المان را از آغاز از بین ببر
 ```
 
-It's not enough to take and remove the element with the number `0`. Other elements need to be renumbered as well.
+اینکه المان با عدد `0` را بگیریم و ازبین ببریم کافی نیست. بقیه المان‌ها هم نیاز دارند که دوباره شماره گذاری شوند.
 
-The `shift` operation must do 3 things:
+عملیات `shift` باید 3 کار انجام دهد:
 
-1. Remove the element with the index `0`.
-2. Move all elements to the left, renumber them from the index `1` to `0`, from `2` to `1` and so on.
-3. Update the `length` property.
+1. المان دارای ایندکس `0` را ازبین ببرد.
+2. تمام المان‌ها را به سمت چپ حرکت دهد، آنها را از ایندکس `1` به `0`، از `2` به `1` و غیره دوباره شماره گذاری کند.
+3. ویژگی `length` را بروز کند.
 
 ![](array-shift.svg)
 
-**The more elements in the array, the more time to move them, more in-memory operations.**
+**هر چقدر المان‌های بیشتری داخل آرایه باشند، زمان بیشتری برای حرکت آنها نیاز است و عملیات درون حافظه هم بیشتر می‌شود.**
 
-The similar thing happens with `unshift`: to add an element to the beginning of the array, we need first to move existing elements to the right, increasing their indexes.
+روند مشابهی برای `unshift` اتفاق می‌افتد: برای اضافه کردن یک المان به آغاز آرایه، ما باید اول المان‌های موجود را به سمت راست حرکت دهیم و ایندکس آنها را افزایش دهیم.
 
-And what's with `push/pop`? They do not need to move anything. To extract an element from the end, the `pop` method cleans the index and shortens `length`.
+درباره `push/pop` چطور؟ آنها نیازی به حرکت دادن چیزی ندارند. برای استخراج یک المان از انتهای آرایه، متد `pop` ایندکس را پاک می‌کند و `length` را کوتاه می‌کند.
 
-The actions for the `pop` operation:
+اقدامات برای عملیات `pop`:
 
 ```js
-fruits.pop(); // take 1 element from the end
+fruits.pop(); // یک المان را از انتها ازبین ببر
 ```
 
 ![](array-pop.svg)
 
-**The `pop` method does not need to move anything, because other elements keep their indexes. That's why it's blazingly fast.**
+**متد `pop` نیازی به حرکت دادن چیزی ندارد، چون المان‌های دیگر ایندکس‌های خود را نگه می‌دارند. به همین دلیل این متد بسیار بسیار سریع است.**
 
-The similar thing with the `push` method.
+روند مشابهی هم برای متد `push` اتفاق می‌افتد.
 
-## Loops
+## حلقه‌ها
 
-One of the oldest ways to cycle array items is the `for` loop over indexes:
+یکی از قدیمی‌ترین راه‌ها برای چرخش بین المان‌های آرایه استفاده از حلقه `for` برای ایندکس‌ها است:
 
 ```js run
 let arr = ["Apple", "Orange", "Pear"];
@@ -289,20 +323,20 @@ for (let i = 0; i < arr.length; i++) {
 }
 ```
 
-But for arrays there is another form of loop, `for..of`:
+اما برای آرایه‌ها شکل دیگری از حلقه وجود دارد، `for..of`:
 
 ```js run
 let fruits = ["Apple", "Orange", "Plum"];
 
-// iterates over array elements
+// حلقه‌زدن بین المان‌ها آرایه
 for (let fruit of fruits) {
   alert( fruit );
 }
 ```
 
-The `for..of` doesn't give access to the number of the current element, just its value, but in most cases that's enough. And it's shorter.
+حلقه `for..of` به عدد المان کنونی دسترسی نمی‌دهد، فقط مقدار آن، اما در بیشتر موارد همین کافی است. و کوتاه‌تر هم است.
 
-Technically, because arrays are objects, it is also possible to use `for..in`:
+از لحاظ فنی، به دلیل اینکه آرایه‌ها شیء هستند، استفاده از `for..in` هم ممکن است:
 
 ```js run
 let arr = ["Apple", "Orange", "Pear"];
@@ -314,22 +348,22 @@ for (let key in arr) {
 }
 ```
 
-But that's actually a bad idea. There are potential problems with it:
+اما در واقع این ایده مناسب نیست. مشکلاتی ممکن است همراه با آن رخ دهد:
 
-1. The loop `for..in` iterates over *all properties*, not only the numeric ones.
+1. حلقه `for..in` بین *تمام ویژگی‌ها* حلقه می‌زند، نه فقط ویژگی‌های عددی.
 
-    There are so-called "array-like" objects in the browser and in other environments, that *look like arrays*. That is, they have `length` and indexes properties, but they may also have other non-numeric properties and methods, which we usually don't need. The `for..in` loop will list them though. So if we need to work with array-like objects, then these "extra" properties can become a problem.
+    شیءهایی «آرایه مانند» در مرورگر و در دیگر محیط‌ها وجود دارند، که *مانند آرایه به نظر می‌رسند*. یعنی اینکه آنها دارای `length` و ویژگی‌های ایندکسی هستند، اما ممکن است ویژگی‌ها و متدهای غیر عددی دیگری هم داشته باشند، که ما معمولا نیازی به آنها نداریم. حلقه `for..in` آنها را لیست می‌کند. پس اگر ما نیاز به کارکردن با شیءهای آرایه مانند داشته باشیم، ویژگی‌های اضافی ممکن است تبدیل به مشکل شوند.
 
-2. The `for..in` loop is optimized for generic objects, not arrays, and thus is 10-100 times slower. Of course, it's still very fast. The speedup may only matter in bottlenecks. But still we should be aware of the difference.
+2. حلقه `for..in` برای شیءهای معمولی بهینه‌سازی شده است، نه آرایه‌ها، و به همین دلیل 10 تا 100 برابر کندتر است. قطعا هنوز خیلی سریع است. پر سرعت بودن ممکن است فقط در تنگناها مهم باشد. اما با این حال باید از تفاوت آنها مطلع باشیم.
 
-Generally, we shouldn't use `for..in` for arrays.
+به طور کلی ما نباید از `for..in` برای آرایه‌ها استفاده کنیم.
 
 
-## A word about "length"
+## سخنی درباره "length"
 
-The `length` property automatically updates when we modify the array. To be precise, it is actually not the count of values in the array, but the greatest numeric index plus one.
+ویژگی `length` زمانی که ما تغییری در آرایه ایجاد می‌کنیم، به صورت خودکار بروز می‌شود. اگر بخواهیم دقیق باشیم، در واقع این ویژگی برابر با تعداد مقدارها در آرایه نیست، بلکه برابر با بزرگ‌ترین ایندکس عددی به علاوه یک است.
 
-For instance, a single element with a large index gives a big length:
+برای مثال، یک المان با ایندکس بزرگ مسبب ایجاد یک length بزرگ می‌شود:
 
 ```js run
 let fruits = [];
@@ -338,54 +372,52 @@ fruits[123] = "Apple";
 alert( fruits.length ); // 124
 ```
 
-Note that we usually don't use arrays like that.
+توجه داشته باشید که ما معمولا از آرایه‌ها به این صورت استفاده نمی‌کنیم.
 
-Another interesting thing about the `length` property is that it's writable.
+یک چیز جالب دیگر درباره ویژگی `length` این است که قابل نوشتن است.
 
-If we increase it manually, nothing interesting happens. But if we decrease it, the array is truncated. The process is irreversible, here's the example:
+اگر آن را به طور دستی افزایش دهیم، چیز جالبی اتفاق نمی‌افتد. اما اگر آن را کم کنیم، آرایه بریده می‌شود. این فرایند قابل بازگشت نیست، برای مثال:
 
 ```js run
 let arr = [1, 2, 3, 4, 5];
 
-arr.length = 2; // truncate to 2 elements
+arr.length = 2; // تا 2 المان بریده شد
 alert( arr ); // [1, 2]
 
-arr.length = 5; // return length back
-alert( arr[3] ); // undefined: the values do not return
+arr.length = 5; // را برگرداندیم length مقدار
+alert( arr[3] ); // undefined :مقدارها برنمی‌گردند
 ```
 
-So, the simplest way to clear the array is: `arr.length = 0;`.
+بنابراین، ساده‌ترین راه برای خالی کردن آرایه `arr.length = 0` است.
 
 
-## new Array() [#new-array]
+## سازنده new Array() [#new-array]
 
-There is one more syntax to create an array:
+یک سینتکس دیگر برای ساخت آرایه وجود دارد:
 
 ```js
 let arr = *!*new Array*/!*("Apple", "Pear", "etc");
 ```
 
-It's rarely used, because square brackets `[]` are shorter. Also there's a tricky feature with it.
+این سینتکس به ندرت استفاده می‌شود چون استفاده از براکت‌ها کوتاه‌تر است. همچنین یک خاصیت فریبنده همراه آن وجود دارد.
 
-If `new Array` is called with a single argument which is a number, then it creates an array *without items, but with the given length*.
+اگر `new Array` همراه با یک آرگومان که عدد است صدا زده شود، سپس یک آرایه *بدون المان، اما با طول داده شده* ساخته می‌شود.
 
-Let's see how one can shoot themself in the foot:
+بیایید ببینیم چگونه یک شخص به طور ناخواسته شرایط را برای خود بدتر می‌کند:
 
 ```js run
-let arr = new Array(2); // will it create an array of [2] ?
+let arr = new Array(2); آیا یک آرایه با 2 المان ساخته می‌شود؟
 
-alert( arr[0] ); // undefined! no elements.
+alert( arr[0] ); // undefined !المانی وجود ندارد
 
 alert( arr.length ); // length 2
 ```
 
-In the code above, `new Array(number)` has all elements `undefined`.
+برای اینکه از چنین سوپرایزهایی جلوگیری کنیم، باید از براکت‌ها استفاده کنیم، مگر اینکه واقعا بدانیم در حال انجام چه کاری هستیم.
 
-To evade such surprises, we usually use square brackets, unless we really know what we're doing.
+## آرایه‌های چند بعدی
 
-## Multidimensional arrays
-
-Arrays can have items that are also arrays. We can use it for multidimensional arrays, for example to store matrices:
+آرایه‌ها می‌توانند المان‌هایی داشته باشند که خودشان هم آرایه هستند. ما می‌توانیم از آن برای آرایه‌های چند بعدی استفاده کنیم، برای مثال ذخیره کردن ماتریس‌ها:
 
 ```js run
 let matrix = [
@@ -394,14 +426,14 @@ let matrix = [
   [7, 8, 9]
 ];
 
-alert( matrix[1][1] ); // 5, the central element
+alert( matrix[1][1] ); // 5 ،المان مرکزی
 ```
 
-## toString
+## متد toString
 
-Arrays have their own implementation of `toString` method that returns a comma-separated list of elements.
+آرایه‌ها پیاده‌سازی خود را از متد `toString` دارند که یک لیستی از المان‌ها که توسط کاما جدا شده‌اند را برمی‌گرداند.
 
-For instance:
+برای مثال:
 
 
 ```js run
@@ -411,7 +443,7 @@ alert( arr ); // 1,2,3
 alert( String(arr) === '1,2,3' ); // true
 ```
 
-Also, let's try this:
+بیایید این را هم امتحان کنیم:
 
 ```js run
 alert( [] + 1 ); // "1"
@@ -419,9 +451,9 @@ alert( [1] + 1 ); // "11"
 alert( [1,2] + 1 ); // "1,21"
 ```
 
-Arrays do not have `Symbol.toPrimitive`, neither a viable `valueOf`, they implement only `toString` conversion, so here `[]` becomes an empty string, `[1]` becomes `"1"` and `[1,2]` becomes `"1,2"`.
+آرایه‌ها نه `Symbol.toPrimitive` دارند و نه یک `valueOf` مناسب، آنها فقط تبدیل `toString` را پیاده‌سازی می‌کنند، پس اینجا `[]` به یک رشته خالی تبدیل می‌شود، `[1]` به `"1"` تبدیل می‌شود و `[1,2]` به `"1,2"` تبدیل می‌شود.
 
-When the binary plus `"+"` operator adds something to a string, it converts it to a string as well, so the next step looks like this:
+زمانی که عملگر مثبت دوگانه `"+"` چیزی را به یک رشته اضافه می‌کند، آن را هم به یک رشته تبدیل می‌کند، پس مرحله بعد اینگونه به نظر می‌رسد:
 
 ```js run
 alert( "" + 1 ); // "1"
@@ -429,35 +461,91 @@ alert( "1" + 1 ); // "11"
 alert( "1,2" + 1 ); // "1,21"
 ```
 
-## Summary
+## آرایه‌ها را با استفاده از == مقایسه نکنید
 
-Array is a special kind of object, suited to storing and managing ordered data items.
+آرایه‌ها در جاوااسکریپت، بر خلاف زبان‌های برنامه‌نویسی دیگر، نباید با عملگر `==` مقایسه شوند.
 
-- The declaration:
+این عملگر نحوه برخورد خاصی برای آرایه‌ها ندارد و با آنها مانند شیءها رفتار می‌کند.
 
-    ```js
-    // square brackets (usual)
-    let arr = [item1, item2...];
+بیایید قوانین را یادآوری کنیم:
 
-    // new Array (exceptionally rare)
-    let arr = new Array(item1, item2...);
-    ```
+- دو شیء با `==` فقط زمانی برابر هستند که مرجع آنها به یک شیء باشد.
+- اگر یکی از آرگومان‌های `==` شیء باشد و دیگری یک مقدار اصلی (primitive) باشد، سپس شیء به مقدار اصلی تبدیل می‌شود، همانطور که در فصل <info:object-toprimitive> توضیح داده شد.
+- ...به استثنای `null` و `undefined` که با `==` برابر هستند اما با چیز دیگری برابر نیستند.
 
-    The call to `new Array(number)` creates an array with the given length, but without elements.
+مقایسه سخت‌گیرانه `===` حتی ساده‌تر است چون نوع مقدارها را تبدیل نمی‌کند.
 
-- The `length` property is the array length or, to be precise, its last numeric index plus one. It is auto-adjusted by array methods.
-- If we shorten `length` manually, the array is truncated.
+پس اگر ما آرایه‌ها را با `==` مقایسه کنیم، آنها هیچ وقت برابر نیستند، مگر اینکه دو متغیر را که به یک آرایه رجوع می‌کنند را مقایسه کنیم.
 
-We can use an array as a deque with the following operations:
+برای مثال:
+```js run
+alert( [] == [] ); // false
+alert( [0] == [0] ); // false
+```
 
-- `push(...items)` adds `items` to the end.
-- `pop()` removes the element from the end and returns it.
-- `shift()` removes the element from the beginning and returns it.
-- `unshift(...items)` adds `items` to the beginning.
+این آرایه‌ها به طور فنی شیءهای متفاوت هستند. پس  آنها برابر نیستند. عملگر `==` المان به المان مقایسه نمی‌کند.
 
-To loop over the elements of the array:
-  - `for (let i=0; i<arr.length; i++)` -- works fastest, old-browser-compatible.
-  - `for (let item of arr)` -- the modern syntax for items only,
-  - `for (let i in arr)` -- never use.
+مقایسه با مقدارهای اصلی هم ظاهرا می‌تواند نتایج عجیبی بدهد:
 
-We will return to arrays and study more methods to add, remove, extract elements and sort arrays in the chapter <info:array-methods>.
+```js run
+alert( 0 == [] ); // true
+
+alert('0' == [] ); // false
+```
+ 
+اینجا در هر دو مورد، ما یک مقدار اصلی را با یک شیء آرایه‌ای مقایسه می‌کنیم. پس آرایه `[]` برای انجام مقایسه به مقدار اصلی و سپس به یک رشته خالی `''` تبدیل می‌شود.
+
+سپس فرایند مقایسه با مقدارهای اصلی پیش می‌رود، همانطور که در فصل <info:type-conversions> توضیح داده شد:
+
+```js run
+// بعد از اینکه [] به '' تبدیل شد
+alert( 0 == '' ); // true ،چون '' به عدد 0 تبدیل شد
+
+alert('0' == '' ); // false ،هیچ تبدیلی رخ نداد، رشته‌ها متفاوت هستند
+```
+
+پس، چگونه آرایه‌ها را مقایسه کنیم؟
+
+کاری ندارد: از عملگر `==` استفاده نکنید. به جای آن، آنها را در یک حلقه یا با استفاده از متدهای حلقه‌زدن که در فصل بعد توضیح داده شده‌اند، المان به المان مقایسه کنید.
+
+## خلاصه
+
+آرایه یک نوع خاصی از شیء است که برای ذخیره و مدیریت داده‌های مرتب مناسب است.
+
+- نحوه تعریف کردن:
+
+```js
+// براکت‌ها (معمولا)
+let arr = [item1, item2...];
+
+// new Array (به ندرت)
+let arr = new Array(item1, item2...);
+```
+
+صدا زدن `new Array(number)` یک آرایه با طول داده شده می‌سازد، اما بدون المان.
+
+- ویژگی `length` طول آرایه است، یا اگر بخواهیم دقیق باشیم، برابر با آخرین ایندکس به علاوه یک است. این ویژگی به طور خودکار توسط متدهای آرایه تنظیم می‌شود.
+- اگر ما به طور دستی `length` را کوتاه کنیم، آرایه بریده می‌شود.
+
+دریافت المان‌ها:
+
+- می‌توانیم المان را با استفاده از ایندکس آن دریافت کنیم، مانند `arr[0]`
+- همچنین می‌توانیم از متد `at(i)` که ایندکس‌های منفی را هم مجاز می‌داند استفاده کنیم. برای مقادیر منفی `i`، این متد از انتهای آرایه به سمت عقب قدم برمی‌دارد. اگر `i >= 0` باشد، این متد مانند `arr[i]` کار می‌کند.
+
+ما می‌توانیم از یک آرایه با عملیات‌های زیر به عنوان یک صف دو طرفه استفاده کنیم:
+
+- `push(...items)` اضافه می‌کند `items` را به انتهای آرایه.
+- `pop()` المان را از آخر حذف می‌کند و آن را برمی‌گرداند.
+- `shift()` - المان را از آغاز حذف می‌کند و آن را برمی‌گرداند.
+- `unshift(...items)` اضافه می‌کند `items` را به آغاز آرایه.
+
+برای حلقه‌زدن در المان‌های آرایه:
+  - `for (let i=0; i<arr.length; i++)` -- سریع کار می‌کند و با مرورگرهای قدیمی سازگار است،
+  - `for (let item of arr)` -- سینتکسی مدرن که فقط برای المان‌ها استفاده می‌شود،
+  - `for (let i in arr)` -- هیچ وقت از این استفاده نکنید.
+
+برای مقایسه آرایه‌ها، از عملگر `==` (همینطور `>`، `<` و بقیه) استفاده نکنید، چون آنها با آرایه‌ها به طور خاص رفتار نمی‌کنند. با آرایه‌ها به عنوان شیء کار می‌کنند و این چیزی نیست که ما معمولا می‌خواهیم.
+
+به جای آن، می‌توانیم از حلقه `for..of` برای مقایسه المان به المان آرایه‌ها استفاده کنیم.
+
+ما آرایه‌ها را ادامه می‌دهیم و در فصل بعدی <info:array-methods> متدهای بیشتری برای اضافه کردن، حذف کردن، استخراج سازی المان‌ها و مرتب کردن آرایه‌ها یاد می‌گیریم

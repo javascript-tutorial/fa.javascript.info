@@ -1,34 +1,34 @@
-# Anchors: string start ^ and end $
+# anchorها: شروع ^ رشته و پایان $ آن
 
-The caret `pattern:^` and dollar `pattern:$` characters have special meaning in a regexp. They are called "anchors".
+کاراکترهای `pattern:^` و `pattern:$` معنای خاصی در یک regexp دارند. به آنها "anchor" (به معنی لنگر) می گویند.
 
-The caret `pattern:^` matches at the beginning of the text, and the dollar `pattern:$` -- at the end.
+`pattern:^` در ابتدای متن و `pattern:$`  در پایان متن مطابقت دارد.
 
-For instance, let's test if the text starts with `Mary`:
+به عنوان مثال، بیایید آزمایش کنیم که آیا متن با `Mary` شروع می شود یا خیر:
 
 ```js run
 let str1 = "Mary had a little lamb";
 alert( /^Mary/.test(str1) ); // true
 ```
 
-The pattern `pattern:^Mary` means: "string start and then Mary".
+الگوی `pattern:^Mary` یعنی: "رشته شروع می‌شود و سپس کلمه Mary ظاهر می‌شود".
 
-Similar to this, we can test if the string ends with `snow` using `pattern:snow$`:
+مشابه این، می‌توانیم با استفاده از `pattern:snow$` آزمایش کنیم که آیا رشته به `snow` ختم می‌شود:
 
 ```js run
-let str1 = "it's fleece was white as snow";
+let str1 = "its fleece was white as snow";
 alert( /snow$/.test(str1) ); // true
 ```
 
-In these particular cases we could use string methods `startsWith/endsWith` instead. Regular expressions should be used for more complex tests.
+در این موارد خاص، می‌توانیم به جای آن از متدهای مختص به رشته‌ها به نام `startsWith/endsWith` استفاده کنیم. برای تست های پیچیده تر باید از عبارات منظم استفاده شود.
 
-## Testing for a full match
+## آزمایش یک انطباق کامل
 
-Both anchors together `pattern:^...$` are often used to test whether or not a string fully matches the pattern. For instance, to check if the user input is in the right format.
+هر دو anchor یعنی `$...^:pattern` با هم اغلب برای آزمایش اینکه آیا یک رشته کاملاً با الگو مطابقت دارد یا نه استفاده می شود. به عنوان مثال، برای بررسی اینکه آیا ورودی کاربر در قالب مناسب است یا خیر.
 
-Let's check whether or not a string is a time in `12:34` format. That is: two digits, then a colon, and then another two digits.
+بیایید بررسی کنیم که آیا یک رشته زمان در قالب `12:34` است یا خیر. یعنی: دو رقم، سپس یک دونقطه، و سپس دو رقم دیگر.
 
-In regular expressions language that's `pattern:\d\d:\d\d`:
+در زبان عبارات با قاعده به صورت `pattern:\d\d:\d\d` است:
 
 ```js run
 let goodInput = "12:34";
@@ -39,14 +39,14 @@ alert( regexp.test(goodInput) ); // true
 alert( regexp.test(badInput) ); // false
 ```
 
-Here the match for `pattern:\d\d:\d\d` must start exactly after the beginning of the text `pattern:^`, and the end `pattern:$` must immediately follow.
+در اینجا تطبیق `pattern:\d\d:\d\d` باید دقیقاً بعد از ابتدای متن `^:pattern` شروع شود و انتهای `$:pattern` باید بلافاصله به دنبال آن بیاید.
 
-The whole string must be exactly in this format. If there's any deviation or an extra character, the result is `false`.
+کل رشته باید دقیقاً در این قالب باشد. اگر انحراف یا یک کاراکتر اضافی وجود داشته باشد، نتیجه `false` است.
 
-Anchors behave differently if flag `pattern:m` is present. We'll see that in the next article.
+اگر پرچم `pattern:m` وجود داشته باشد، anchorها رفتار متفاوتی دارند. آن را در مقاله بعدی خواهیم دید.
 
 ```smart header="Anchors have \"zero width\""
-Anchors `pattern:^` and `pattern:$` are tests. They have zero width.
+anchorهای `^:pattern` و `$:pattern` تست هستند. عرض آنها صفر است.
 
-In other words, they do not match a character, but rather force the regexp engine to check the condition (text start/end).
+به عبارت دیگر، آنها با یک کاراکتر مطابقت ندارند، بلکه موتور regexp را مجبور می‌کنند تا شرایط را بررسی کند (شروع/پایان متن).
 ```

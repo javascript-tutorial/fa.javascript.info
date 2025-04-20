@@ -12,10 +12,9 @@ function throttle(func, ms) {
       savedThis = this;
       return;
     }
+    isThrottled = true;
 
     func.apply(this, arguments); // (1)
-
-    isThrottled = true;
 
     setTimeout(function() {
       isThrottled = false; // (3)
@@ -30,10 +29,10 @@ function throttle(func, ms) {
 }
 ```
 
-A call to `throttle(func, ms)` returns `wrapper`.
+فراخوانی `throttle(func, ms)` تابع `wrapper` را برمی‌گرداند.
 
-1. During the first call, the `wrapper` just runs `func` and sets the cooldown state (`isThrottled = true`).
-2. In this state all calls are memorized in `savedArgs/savedThis`. Please note that both the context and the arguments are equally important and should be memorized. We need them simultaneously to reproduce the call.
-3. After `ms` milliseconds pass, `setTimeout` triggers. The cooldown state is removed (`isThrottled = false`) and, if we had ignored calls, `wrapper` is executed with the last memorized arguments and context.
+1. در حین اولین فراخوانی، تابع `wrapper` فقط `func` را اجرا می‌کند و وضعیت آرام‌شدن را تنظیم می‌کند (`isThrottled = true`).
+2. در این حالت، تمام فراخوانی‌ها در `savedArgs/savedThis` ذخیره می‌شوند. لطفا در نظر داشته باشید که هم زمینه و هم آرگومان‌ها به یک اندازه مهم هستند و باید به یاد سپرده شوند. ما برای اینکه فراخوانی جدید بسازیم به هر دوی آن‌ها نیاز داریم.
+3. بعد از اینکه `ms` میلی‌ثانیه طی شد، `setTimeout` فعال می‌شود. حالت آرام‌شدن حذف می‌شود (`isThrottled = false`) و اگر ما فراخوانی نادیده‌گرفته‌شده‌ای داشتیم، `wrapper` همراه با آخرین آرگومان‌ها و زمینه ذخیره شده اجرا می‌شود.
 
-The 3rd step runs not `func`, but `wrapper`, because we not only need to execute `func`, but once again enter the cooldown state and setup the timeout to reset it.
+مرحله سوم `wrapper` را اجرا می‌کند نه `func` را، چون ما نه تنها نیاز داریم که `func` را اجرا کنیم بلکه باید دوباره به حالت آرام‌شدن برگردیم و زمان‌بندی را برای تنظیم مجدد آن پیاده‌سازی کنیم.

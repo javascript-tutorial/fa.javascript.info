@@ -2,11 +2,11 @@ importance: 5
 
 ---
 
-# Army of functions
+# ارتشی از تابع‌ها
 
-The following code creates an array of `shooters`.
+کد پایین یک ارایه از `shooters`(تیراندازها) را می‌سازد.
 
-Every function is meant to output its number. But something is wrong...
+هر تابع باید عدد آن را نمایش دهد. اما یک چیز اشتباه است...
 
 ```js run
 function makeArmy() {
@@ -14,22 +14,28 @@ function makeArmy() {
 
   let i = 0;
   while (i < 10) {
-    let shooter = function() { // shooter function
-      alert( i ); // should show its number
+    let shooter = function() { // shooter ساخت یک تابع
+      alert( i ); // که باید عدد خود را نمایش دهد
     };
-    shooters.push(shooter);
+    shooters.push(shooter); // و آن را به ارایه اضافه کند
     i++;
   }
 
+  // ها را برگرداندshooter و آرایه‌ای از...
   return shooters;
 }
 
 let army = makeArmy();
 
-army[0](); // the shooter number 0 shows 10
-army[5](); // and number 5 also outputs 10...
-// ... all shooters show 10 instead of their 0, 1, 2, 3...
+*!*
+// ها به جای عدد خود یعنی ...3 ،2 ،1 ،0 عدد 10 را نمایش می‌دهندshooter تمام
+army[0](); // عدد 10 از تیرانداز 0
+army[1](); // عدد 10 از تیرانداز 1
+army[2](); // عدد 10 و همینطور ادامه می‌یابد
+*/!*
 ```
+ 
+چرا تمام shooterها مقدار یکسان را نمایش می‌دهند؟
 
-Why do all of the shooters show the same value? Fix the code so that they work as intended.
+کد را درست کنید تا همانطور که می‌خواهیم کار کند.
 

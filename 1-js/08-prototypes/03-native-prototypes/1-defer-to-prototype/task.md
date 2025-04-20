@@ -2,16 +2,16 @@ importance: 5
 
 ---
 
-# Add method "f.defer(ms)" to functions
+# متد "f.defer(ms)" را به تابع‌ها اضافه کنید
 
-Add to the prototype of all functions the method `defer(ms)`, that runs the function after `ms` milliseconds.
+متد `defer(ms)` را به پروتوتایپ تمام تابع‌ها اضافه کنید که تابع را بعد از `ms` میلی‌ثانیه اجرا می‌کند.
 
-After you do it, such code should work:
+بعد از اینکه آن را انجام دادید، چنین کدی باید کار کند:
 
 ```js
 function f() {
   alert("Hello!");
 }
 
-f.defer(1000); // shows "Hello!" after 1 second
+f.defer(1000); // را نشان می‌دهد "Hello!" بعد از 1 ثانیه
 ```

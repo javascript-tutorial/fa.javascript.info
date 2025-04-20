@@ -1,10 +1,10 @@
-# JSON methods, toJSON
+# متدهای JSON، toJSON
 
-Let's say we have a complex object, and we'd like to convert it into a string, to send it over a network, or just to output it for logging purposes.
+بیایید فرض کنیم یک شیء پیچیده داریم و می‌خواهیم آن را به رشته تبدیل کنیم تا آن را به یک شبکه بفرستیم یا فقط آن را به قصد ثبت کردن خروجی بگیریم.
 
-Naturally, such a string should include all important properties.
+به طور طبیعی، چنین رشته‌ای باید تمام ویژگی‌های مهم شیء را داشته باشد.
 
-We could implement the conversion like this:
+ما می‌توانیم این تبدیل را اینگونه پیاده‌سازی کنیم:
 
 ```js run
 let user = {
@@ -21,78 +21,78 @@ let user = {
 alert(user); // {name: "John", age: 30}
 ```
 
-...But in the process of development, new properties are added, old properties are renamed and removed. Updating such `toString` every time can become a pain. We could try to loop over properties in it, but what if the object is complex and has nested objects in properties? We'd need to implement their conversion as well.
+...اما در فرایند توسعه، ویژگی‌های جدید اضافه و ویژگی‌های قدیمی دوباره نامگذاری و حذف می‌شوند. بروزرسانی `toString` هر بار می‌تواند طاقت‌فرسا باشد. ما می‌توانیم در ویژگی‌های آن حلقه بزنیم اما اگر شیء پیچیده باشد و شیءهای تودرتو را در ویژگی‌ها داشته باشد چیکار کنیم؟ ما باید تبدیل آنها را هم پیاده‌سازی کنیم.
 
-Luckily, there's no need to write the code to handle all this. The task has been solved already.
+خوشبختانه نیازی به نوشتن کدی برای کنترل تمام اینها نیست. از قبل این مشکل حل شده است.
 
-## JSON.stringify
+## متد JSON.stringify
 
-The [JSON](http://en.wikipedia.org/wiki/JSON) (JavaScript Object Notation) is a general format to represent values and objects. It is described as in [RFC 4627](http://tools.ietf.org/html/rfc4627) standard. Initially it was made for JavaScript, but many other languages have libraries to handle it as well.  So it's easy to use JSON for data exchange when the client uses JavaScript and the server is written on Ruby/PHP/Java/Whatever.
+[JSON](http://fa.wikipedia.org/wiki/جی%E2%80%8Cسان) (نشانه‌گذاری شیء جاوااسکریپت، جِی‌سان) یک فرمت کلی برای نمایش مقدارها و شیءها است. جِی‌سان در استاندارد [RFC 4627](http://tools.ietf.org/html/rfc4627) شرح داده شده است. در ابتدا برای جاوااسکریپت ساخته شد اما بسیاری از زبان‌های دیگر هم کتابخانه‌هایی برای بکاربردن آن دارند. پس هنگامی که سمت کاربر سایت از جاوااسکریپت و سمت سرور با زبان‌های Ruby/PHP/Java/یا هر چیز دیگر نوشته شده باشد، استفاده از جی‌سان برای رد و بدل کردن داده آسان است.
 
-JavaScript provides methods:
+جاوااسکریپت متدهای زیر را دارد:
 
-- `JSON.stringify` to convert objects into JSON.
-- `JSON.parse` to convert JSON back into an object.
+- `JSON.stringify` برای تبدیل شیءها به جی‌سان.
+- `JSON.parse` برای تبدیل جی‌سان به یک شیء.
 
-For instance, here we `JSON.stringify` a student:
+برای مثال، اینجا ما متد `JSON.stringify` را روی یک دانشجو اجرا می‌کنیم:
 ```js run
 let student = {
   name: 'John',
   age: 30,
   isAdmin: false,
   courses: ['html', 'css', 'js'],
-  wife: null
+  spouse: null
 };
 
 *!*
 let json = JSON.stringify(student);
 */!*
 
-alert(typeof json); // we've got a string!
+alert(typeof json); // !ما یک رشته داریم
 
 alert(json);
 *!*
-/* JSON-encoded object:
+/* :شیء کدگذاری شده جی‌سان
 {
   "name": "John",
   "age": 30,
   "isAdmin": false,
   "courses": ["html", "css", "js"],
-  "wife": null
+  "spouse": null
 }
 */
 */!*
 ```
 
-The method `JSON.stringify(student)` takes the object and converts it into a string.
+متد `JSON.stringify(student)`شیء را دریافت می‌کند و آن را به رشته تبدیل می‌کند.
 
-The resulting `json` string is called a *JSON-encoded* or *serialized* or *stringified* or *marshalled* object. We are ready to send it over the wire or put into a plain data store.
+رشته `json` حاصل را شیء *جی‌سان کدگذاری شده* یا *سریالی‌شده* یا *مرتب‌شده* می‌گویند. ما برای فرستادن آن به جایی یا قرار دادن آن در یک انبارِ داده آماده هستیم. 
 
 
-Please note that a JSON-encoded object has several important differences from the object literal:
+لطفا در نظر داشته باشید که یک شیء جی‌سان کدگذاری شده با شیء لیترال چند تفاوت مهم دارد:
 
-- Strings use double quotes. No single quotes or backticks in JSON. So `'John'` becomes `"John"`.
-- Object property names are double-quoted also. That's obligatory. So `age:30` becomes `"age":30`.
+- رشته‌ها از کوتیشن دوتایی استفاده می‌کنند. کوتیشن‌های تکی یا backtickها در جی‌سان جایی ندارند. پس `'John'` به `"John"` تبدیل می‌شود.
+- اسم ویژگی‌های شیء هم کوتیشن دوتایی می‌گیرند. این کار لازم است. پس `age:30` به `"age":30` تبدیل می‌شود.
 
-`JSON.stringify` can be applied to primitives as well.
+متد `JSON.stringify` می‌تواند روی مقدارهای اولیه هم اجرا شود.
 
-JSON supports following data types:
+جی‌سان از انواع داده  زیر پشتیبانی می‌کند:
 
-- Objects `{ ... }`
-- Arrays `[ ... ]`
-- Primitives:
-    - strings,
-    - numbers,
-    - boolean values `true/false`,
+- شیءها `{ ... }`
+- آرایه‌ها `[ ... ]`
+- مقدارهای اولیه:
+    - رشته‌ها،
+    - اعداد،
+    - مقدارهای boolean `true/false`،
     - `null`.
 
-For instance:
+برای مثال:
 
 ```js run
-// a number in JSON is just a number
+// یک عدد در جی‌سان تنها یک عدد است
 alert( JSON.stringify(1) ) // 1
 
-// a string in JSON is still a string, but double-quoted
+// یک رشته در جی‌سان هنوز هم یک رشته است اما کوتیشن دوتایی می‌گیرد
 alert( JSON.stringify('test') ) // "test"
 
 alert( JSON.stringify(true) ); // true
@@ -100,31 +100,31 @@ alert( JSON.stringify(true) ); // true
 alert( JSON.stringify([1, 2, 3]) ); // [1,2,3]
 ```
 
-JSON is data-only language-independent specification, so some JavaScript-specific object properties are skipped by `JSON.stringify`.
+جی‌سان مشخصه‌ای است که فقط با داده سر و کار دارد و از زبان مستقل است، پس بعضی از ویژگی‌های شیء مخصوص جاوااسکریپت توسط `JSON.stringify` نادیده گرفته می‌شوند.
 
-Namely:
+برای مثال:
 
-- Function properties (methods).
-- Symbolic properties.
-- Properties that store `undefined`.
+- ویژگی‌های تابعی (متدها).
+- مقدارها و ویژگی‌های سمبلی (symbolic).
+- ویژگی‌هایی که `undefined` را در خود ذخیره دارند.
 
 ```js run
 let user = {
-  sayHi() { // ignored
+  sayHi() { // نادیده‌گرفته می‌شود
     alert("Hello");
   },
-  [Symbol("id")]: 123, // ignored
-  something: undefined // ignored
+  [Symbol("id")]: 123, // نادیده‌گرفته می‌شود
+  something: undefined // نادیده‌گرفته می‌شود
 };
 
-alert( JSON.stringify(user) ); // {} (empty object)
+alert( JSON.stringify(user) ); // {} (شیء خالی)
 ```
 
-Usually that's fine. If that's not what we want, then soon we'll see how to customize the process.
+معمولا این موضوع مشکلی ندارد. اگر این چیزی نیست که ما بخواهیم، به زودی خواهیم دید که چگونه فرایند را شخصی‌سازی کنیم.
 
-The great thing is that nested objects are supported and converted automatically.
+یک چیز عالی این است که شیءهای تودرتو هم پشتیبانی و به طور خودکار تبدیل می‌شوند.
 
-For instance:
+برای مثال:
 
 ```js run
 let meetup = {
@@ -138,7 +138,7 @@ let meetup = {
 };
 
 alert( JSON.stringify(meetup) );
-/* The whole structure is stringified:
+/* :تمام ساختار به رشته تبدیل شد
 {
   "title":"Conference",
   "room":{"number":23,"participants":["john","ann"]},
@@ -146,9 +146,9 @@ alert( JSON.stringify(meetup) );
 */
 ```
 
-The important limitation: there must be no circular references.
+محدودیت مهم این است: نباید هیچ مرجع دایره‌ای وجود داشته باشد.
 
-For instance:
+برای مثال:
 
 ```js run
 let room = {
@@ -160,41 +160,41 @@ let meetup = {
   participants: ["john", "ann"]
 };
 
-meetup.place = room;       // meetup references room
-room.occupiedBy = meetup; // room references meetup
+meetup.place = room;       // مراجعه می‌کند room به meetup
+room.occupiedBy = meetup; // مراجعه می‌کند meetup به room
 
 *!*
 JSON.stringify(meetup); // Error: Converting circular structure to JSON
 */!*
 ```
 
-Here, the conversion fails, because of circular reference: `room.occupiedBy` references `meetup`, and `meetup.place` references `room`:
+اینجا، فرایند تبدیل به دلیل مرجع دایره‌ای با شکست مواجه می‌شود: `room.occupiedBy` به `meetup` رجوع می‌کند و `meetup.place` به `room` رجوع می‌کند:
 
 ![](json-meetup.svg)
 
 
-## Excluding and transforming: replacer
+## مشمول نکردن و تغییر شکل دادن: تابع replacer
 
-The full syntax of `JSON.stringify` is:
+سینتکل کامل `JSON.stringify` اینگونه است:
 
 ```js
 let json = JSON.stringify(value[, replacer, space])
 ```
 
 value
-: A value to encode.
+: مقداری که کدگذاری می‌شود.
 
 replacer
-: Array of properties to encode or a mapping function `function(key, value)`.
+: یک آرایه از ویژگی‌هایی که باید کدگذاری شوند یا یک تابع `function(key, value)`.
 
 space
-: Amount of space to use for formatting
+: مقدار فاصله خالی که برای قالب‌بندی استفاده می‌شود.
 
-Most of the time, `JSON.stringify` is used with the first argument only. But if we need to fine-tune the replacement process, like to filter out circular references, we can use the second argument of `JSON.stringify`.
+اکثر اوقات، `JSON.stringify` تنها با آرگومان اول استفاده می‌شود. اما اگر ما بخواهیم که فرایند جایگزینی را بهتر کنیم، مثلا برای جداسازی مرجع‌های دایره‌ای، می‌توانیم از آرکومان دومِ `JSON.stringify` استفاده کنیم.
 
-If we pass an array of properties to it, only these properties will be encoded.
+اگر یک آرایه از ویژگی‌ها را به آن بدهیم، تنها این ویژگی‌ها کدگذاری می‌شوند.
 
-For instance:
+برای مثال:
 
 ```js run
 let room = {
@@ -204,18 +204,18 @@ let room = {
 let meetup = {
   title: "Conference",
   participants: [{name: "John"}, {name: "Alice"}],
-  place: room // meetup references room
+  place: room // مراجعه می‌کند room به meetup
 };
 
-room.occupiedBy = meetup; // room references meetup
+room.occupiedBy = meetup; // مراجعه می‌کند meetup به room
 
 alert( JSON.stringify(meetup, *!*['title', 'participants']*/!*) );
 // {"title":"Conference","participants":[{},{}]}
 ```
 
-Here we are probably too strict. The property list is applied to the whole object structure. So the objects in `participants` are empty, because `name` is not in the list.
+احتمالا اینجا ما بسیار سخت‌گیر هستیم. لیست ویژگی بر روی تمام ساختار شیء اعمال شده است. پس پس شیءهای درون `participants` خالی هستند چون `name` درون لیست نیست.
 
-Let's include in the list every property except `room.occupiedBy` that would cause the circular reference:
+بیایید تمام ویژگی‌ها را به جز `room.occupiedBy` که باعث مرجع دایره‌ای است را اضافه کنیم:
 
 ```js run
 let room = {
@@ -225,10 +225,10 @@ let room = {
 let meetup = {
   title: "Conference",
   participants: [{name: "John"}, {name: "Alice"}],
-  place: room // meetup references room
+  place: room // مراجعه می‌کند room به meetup
 };
 
-room.occupiedBy = meetup; // room references meetup
+room.occupiedBy = meetup; // مراجعه می‌کند meetup به room
 
 alert( JSON.stringify(meetup, *!*['title', 'participants', 'place', 'name', 'number']*/!*) );
 /*
@@ -240,13 +240,13 @@ alert( JSON.stringify(meetup, *!*['title', 'participants', 'place', 'name', 'num
 */
 ```
 
-Now everything except `occupiedBy` is serialized. But the list of properties is quite long.
+حالا همه چیز به جز `occupiedBy` سریالی شده‌اند. اما لیست ویژگی‌ها هنوز هم خیلی طولانی است.
 
-Fortunately, we can use a function instead of an array as the `replacer`.
+خوشبختانه، ما می‌توانیم از یک تابع به جای آرایه استفاده کنیم مانند `replacer`.
 
-The function will be called for every `(key, value)` pair and should return the "replaced" value, which will be used instead of the original one. Or `undefined` if the value is to be skipped.
+تابع بر روی هر جفت `(key, value)` صدا زده می‌شود و باید مقدار «جایگزین شده» را برگرداند که به جای مقدار اصلی استفاده می‌شود. یا اگر مقدار قرار است نادیده گرفته شود، `undefined` را برگرداند.
 
-In our case, we can return `value` "as is" for everything except `occupiedBy`. To ignore `occupiedBy`, the code below returns `undefined`:
+در این مورد ما، می‌توانیم `value` را برای همه چیز به جز `occupiedby` «همانطور که هست» برگردانیم. برای نادیده گرفتن `occupiedBy`، کد پایین `undefined` را برمی‌گرداند:
 
 ```js run
 let room = {
@@ -256,17 +256,17 @@ let room = {
 let meetup = {
   title: "Conference",
   participants: [{name: "John"}, {name: "Alice"}],
-  place: room // meetup references room
+  place: room // مراجعه می‌کند room به meetup
 };
 
-room.occupiedBy = meetup; // room references meetup
+room.occupiedBy = meetup; // مراجعه می‌کند meetup به room
 
 alert( JSON.stringify(meetup, function replacer(key, value) {
   alert(`${key}: ${value}`);
   return (key == 'occupiedBy') ? undefined : value;
 }));
 
-/* key:value pairs that come to replacer:
+/* جفت‌های کلید:مقدار که جایگزین می‌شوند
 :             [object Object]
 title:        Conference
 participants: [object Object],[object Object]
@@ -276,23 +276,24 @@ name:         John
 name:         Alice
 place:        [object Object]
 number:       23
+occupiedBy: [object Object]
 */
 ```
 
-Please note that `replacer` function gets every key/value pair including nested objects and array items. It is applied recursively. The value of `this` inside `replacer` is the object that contains the current property.
+لطفا در نظر داشته باشید که تابع `replacer` تمام جفت‌های کلید/مقدار شامل شیءهای تودرتو و المان‌های آرایه را دریافت می‌کند. این تابع به صورت بازگشتی اعمال می‌شود. مقدار `this` درون `replacer` شیءای است که ویژگی کنونی را در خود دارد.
 
-The first call is special. It is made using a special "wrapper object": `{"": meetup}`. In other words, the first `(key, value)` pair has an empty key, and the value is the target object as a whole. That's why the first line is `":[object Object]"` in the example above.
+اولین فراخوانی خاص است. این فراخوانی با استفاده از یک «شیء دربرگیرنده»: `{"":meetup}` ساخته می‌شود. به بیانی دیگر، اولین جفت `(key, value)` یک کلید خالی دارد و مقدار برابر با کل شیء مورد نظر است. به همین دلیل است که در مثال بالا، اولین خط `":[object Object]"` است.
 
-The idea is to provide as much power for `replacer` as possible: it has a chance to analyze and replace/skip even the whole object if necessary.
+ایده این موضوع این است که تا جایی که می‌شود به `replacer` قدرت داده شود: این تابع شانس این را دارد که اگر لازم بود حتی تمام شیء را تجزیه و تحلیل یا جایگزین کند/نادیده بگیرد.
 
 
-## Formatting: space
+## قالب‌بندی: space
 
-The third argument of `JSON.stringify(value, replacer, space)` is the number of spaces to use for pretty formatting.
+آرگومان سوم `JSON.stringify(value, replacer, space)` تعداد فاصله خالی برای استفاده در قالب‌بندی شکیل است.
 
-Previously, all stringified objects had no indents and extra spaces. That's fine if we want to send an object over a network. The `space` argument is used exclusively for a nice output.
+قبلا تمام شیءهایی که به رشته تبدیل شده بودند هیچ تورفتگی و فاصله اضافی نداشتند. اگر بخواهیم یک شیء را به یک شبکه بفرستیم این موضوع مشکلی ندارد. آرگومان `space` خصوصا برای یک خروجی زیبا استفاده می‌شود.
 
-Here `space = 2` tells JavaScript to show nested objects on multiple lines, with indentation of 2 spaces inside an object:
+اینجا `space = 2` به جاوااسکریپت می‌گوید که شیءهای تودرتو را در چند خط و با 2 فاصله خالی تورفتگی درون یک شیء نشان بده:
 
 ```js run
 let user = {
@@ -305,7 +306,7 @@ let user = {
 };
 
 alert(JSON.stringify(user, null, 2));
-/* two-space indents:
+/* :با 2 فاصله خالی تورفتگی
 {
   "name": "John",
   "age": 25,
@@ -316,7 +317,7 @@ alert(JSON.stringify(user, null, 2));
 }
 */
 
-/* for JSON.stringify(user, null, 4) the result would be more indented:
+/* :نتیجه، تورفتگی بیشتری خواهد داشت JSON.stringify(user, null, 4) برای
 {
     "name": "John",
     "age": 25,
@@ -328,13 +329,15 @@ alert(JSON.stringify(user, null, 2));
 */
 ```
 
-The `space` parameter is used solely for logging and nice-output purposes.
+آرگومان سوم رشته هم می‌تواند باشد. در این صورت، به جای تعداد فاصله خالی، آن رشته برای اعمال تورفتگی استفاده می‌شود.
 
-## Custom "toJSON"
+پارامتر `space` صرفا برای اهدافی مانند خروجی زیبا استفاده می‌شود.
 
-Like `toString` for string conversion, an object may provide method `toJSON` for to-JSON conversion. `JSON.stringify` automatically calls it if available.
+## متد "toJSON" شخصی‌سازی شده
 
-For instance:
+مانند `toString` برای تبدیل به رشته، یک شیء می‌تواند متد `toJSON` را برای تبدیل به جی‌سان داشته باشد. اگر این متد موجود باشد، `JSON.stringify` به طور خودکار آن را صدا می‌زند.
+
+برای مثال:
 
 ```js run
 let room = {
@@ -359,9 +362,9 @@ alert( JSON.stringify(meetup) );
 */
 ```
 
-Here we can see that `date` `(1)` became a string. That's because all dates have a built-in `toJSON` method which returns such kind of string.
+اینجا می‌بینیم که `date` `(1)` به رشته تبدیل شد. به این دلیل که تمام تاریخ‌ها یک متد درونی `toJSON` دارند که چنین رشته‌ای را برمی‌گرداند.
 
-Now let's add a custom `toJSON` for our object `room`:
+حالا بیایید یک `toJSON` شخصی‌ساز به شیء `room` اضافه کنیم:
 
 ```js run
 let room = {
@@ -393,28 +396,28 @@ alert( JSON.stringify(meetup) );
 */
 ```
 
-As we can see, `toJSON` is used both for the direct call `JSON.stringify(room)` and when `room` is nested in another encoded object.
+همانطور که می‌بینیم، `toJSON` هم برای فراخوانی مستقیم `JSON.stringify(room)` استفاده می‌شود و هم زمانی که `room` در یک شیء کدگذاری شده دیگر به صورت تودرتو وجود دارد.
 
 
-## JSON.parse
+## متد JSON.parse
 
-To decode a JSON-string, we need another method named [JSON.parse](mdn:js/JSON/parse).
+برای برگرداندن کدگذاری یک رشته‌ی جی‌سان، ما به متد دیگری به نام [JSON.parse](mdn:js/JSON/parse) نیاز داریم.
 
-The syntax:
+سینتکس آن:
 ```js
 let value = JSON.parse(str, [reviver]);
 ```
 
-str
-: JSON-string to parse.
+پارامتر str
+: رشته‌ی جی‌سان برای تجزیه.
 
-reviver
-: Optional function(key,value) that will be called for each `(key, value)` pair and can transform the value.
+پارامتر reviver
+: تابع اختیاری function(key,value) که برای هر جفت `(key, value)` فراخوانی می‌شود و می‌تواند مقدار را تغییر شکل دهد.
 
-For instance:
+برای مثال:
 
 ```js run
-// stringified array
+// آرایه‌ای که رشته شده
 let numbers = "[0, 1, 2, 3]";
 
 numbers = JSON.parse(numbers);
@@ -422,7 +425,7 @@ numbers = JSON.parse(numbers);
 alert( numbers[1] ); // 1
 ```
 
-Or for nested objects:
+یا برای شیءهای تودرتو:
 
 ```js run
 let userData = '{ "name": "John", "age": 35, "isAdmin": false, "friends": [0,1,2,3] }';
@@ -432,40 +435,40 @@ let user = JSON.parse(userData);
 alert( user.friends[1] ); // 1
 ```
 
-The JSON may be as complex as necessary, objects and arrays can include other objects and arrays. But they must obey the same JSON format.
+جی‌سان ممکن است در صورت لزوم پیچیده باشد و شیءها و آرایه‌ها شامل شیءها و آرایه‌های دیگری هم باشند. اما آنها باید از یک فرمت جی‌سان مشابه تابعیت کنند.
 
-Here are typical mistakes in hand-written JSON (sometimes we have to write it for debugging purposes):
+اینجا چند اشتباه رایج در جی‌سان دست نویس را آوردیم (گاهی اوقات باید برای رفع خطا (Debugging) آن را بنویسیم):
 
 ```js
 let json = `{
-  *!*name*/!*: "John",                     // mistake: property name without quotes
-  "surname": *!*'Smith'*/!*,               // mistake: single quotes in value (must be double)
-  *!*'isAdmin'*/!*: false                  // mistake: single quotes in key (must be double)
-  "birthday": *!*new Date(2000, 2, 3)*/!*, // mistake: no "new" is allowed, only bare values
-  "friends": [0,1,2,3]              // here all fine
+  *!*name*/!*: "John",                     // اشتباه: اسم ویژگی بدون کوتیشن
+  "surname": *!*'Smith'*/!*,               // اشتباه: مقدار، کوتیشن تکی دارد (باید دوتایی باشد)
+  *!*'isAdmin'*/!*: false                  // اشتباه: کلید، کوتیشن تکی دارد (باشد دوتایی باشد)
+  "birthday": *!*new Date(2000, 2, 3)*/!*, // مجاز نیست، فقط مقدارهای خام مجازند "new" اشتباه: عملگر
+  "friends": [0,1,2,3]              // اینجا همه چیز درست است
 }`;
 ```
 
-Besides, JSON does not support comments. Adding a comment to JSON makes it invalid.
+به علاوه، جی‌سان از کامنت پشتیبانی نمی‌کند. اضافه کردن کامنت به جی‌سان آن را نامعتبر می‌کند.
 
-There's another format named [JSON5](http://json5.org/), which allows unquoted keys, comments etc. But this is a standalone library, not in the specification of the language.
+یک فرمت دیگر به نام [JSON5](http://json5.org/) وجود دارد که کلیدها بدون کوتیشن، کامنت و... را معتبر می‌داند. اما این جی‌سان یک کتابخانه مستقل است و در مشخصات زبان وجود ندارد.
 
-The regular JSON is that strict not because its developers are lazy, but to allow easy, reliable and very fast implementations of the parsing algorithm.
+دلیل اینکه جی‌سان معمولی انقدر سخت‌گیرانه است این نیست که توسعه دهندگان آن تنبل هستند، بلکه دلیلش این است که یک پیاده‌سازی آسان، مورد اطمینان و سریع از الگوریتم تجزیه را فراهم کند.
 
-## Using reviver
+## استفاده از احیاکننده (reviver)
 
-Imagine, we got a stringified `meetup` object from the server.
+فرض کنید ما یک شیء `meetup` که به رشته تبدیل شده را از سرور گرفتیم.
 
-It looks like this:
+این شیء اینگونه بنظر می‌رسد:
 
 ```js
 // title: (meetup title), date: (meetup date)
 let str = '{"title":"Conference","date":"2017-11-30T12:00:00.000Z"}';
 ```
 
-...And now we need to *deserialize* it, to turn back into JavaScript object.
+...و حالا ما نیاز داریم که آن را از *سریالی بودن* خارج کنیم تا دوباره به یک شیء جاوااسکریپت تبدیل شود.
 
-Let's do it by calling `JSON.parse`:
+بیایید با فراخوانی `JSON.parse` این کار را انجام دهیم:
 
 ```js run
 let str = '{"title":"Conference","date":"2017-11-30T12:00:00.000Z"}';
@@ -473,15 +476,15 @@ let str = '{"title":"Conference","date":"2017-11-30T12:00:00.000Z"}';
 let meetup = JSON.parse(str);
 
 *!*
-alert( meetup.date.getDate() ); // Error!
+alert( meetup.date.getDate() ); // !ارور
 */!*
 ```
 
-Whoops! An error!
+ای وای! یک ارور!
 
-The value of `meetup.date` is a string, not a `Date` object. How could `JSON.parse` know that it should transform that string into a `Date`?
+مقدار `meetup.date` یک رشته است، نه یک شیء `Date`. متد `JSON.parse` از کجا بداند که باید آن رشته را به یک `Date` تبدیل کند؟
 
-Let's pass to `JSON.parse` the reviving function as the second argument, that returns all values "as is", but `date` will become a `Date`:
+بیایید به `JSON.parse` تابع احیاکننده (reviver) را به عنوان آرگومان دوم بدهیم که تمام مقدارهای را «همانطور که هستند» برگرداند اما `date` به یک شیء `Date` تبدیل خواهد شد:
 
 ```js run
 let str = '{"title":"Conference","date":"2017-11-30T12:00:00.000Z"}';
@@ -493,10 +496,10 @@ let meetup = JSON.parse(str, function(key, value) {
 });
 */!*
 
-alert( meetup.date.getDate() ); // now works!
+alert( meetup.date.getDate() ); // !حالا کار می‌کند
 ```
 
-By the way, that works for nested objects as well:
+در ضمن برای شیءهای تودرتو هم کار می‌کند:
 
 ```js run
 let schedule = `{
@@ -512,16 +515,16 @@ schedule = JSON.parse(schedule, function(key, value) {
 });
 
 *!*
-alert( schedule.meetups[1].date.getDate() ); // works!
+alert( schedule.meetups[1].date.getDate() ); // !کار می‌کند
 */!*
 ```
 
 
 
-## Summary
+## خلاصه
 
-- JSON is a data format that has its own independent standard and libraries for most programming languages.
-- JSON supports plain objects, arrays, strings, numbers, booleans, and `null`.
-- JavaScript provides methods [JSON.stringify](mdn:js/JSON/stringify) to serialize into JSON and [JSON.parse](mdn:js/JSON/parse) to read from JSON.
-- Both methods support transformer functions for smart reading/writing.
-- If an object has `toJSON`, then it is called by `JSON.stringify`.
+- جی‌سان یک فرمت داده است که برای بیشتر زبان‌های برنامه‌نویسی، استاندارد و کتابخانه‌های مستقل خود را دارد.
+- جی‌سان از شیءهای ساده، آرایه‌ها، رشته‌ها، اعداد، بولین‌ها و `null` پشتیبانی می‌کند.
+- جاوااسکریپت متدهای [JSON.stringify](mdn:js/JSON/stringify) برای سریالی کردن به جی‌سان و [JSON.parse](mdn:js/JSON/parse) برای خواندن از جی‌سان را فراهم می‌کند.
+- هر دو متد از تابع‌های تغییر شکل دهنده برای خواندن/نوشتن هوشمندانه پشتیبانی می‌کنند.
+- اگر یک شیء متد `toJSON` داشته باشد، سپس این متد توسط `JSON.stringify` فراخوانی می‌شود.

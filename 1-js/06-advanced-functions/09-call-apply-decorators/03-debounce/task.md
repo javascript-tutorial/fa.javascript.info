@@ -2,50 +2,50 @@ importance: 5
 
 ---
 
-# Debounce decorator
+# دکوراتور معلق‌کننده
 
-The result of `debounce(f, ms)` decorator is a wrapper that suspends calls to `f` until there's `ms` milliseconds of inactivity (no calls, "cooldown period"), then invokes `f` once with the latest arguments.
+نتیجه دکوراتور `debounce(f, md)` یک دربرگیرنده است که تا `ms` میلی‌ثانیه عدم فعالیت وجود نداشته باشد، فراخوانی‌های `f` را به حالت تعلیق در می‌آورد (فراخوانی انجام نمی‌شود، «مدت زمان آرام‌شدن») سپس `f` را با آخرین آرگومان‌ها فراخوانی می‌کند.
 
-For instance, we had a function `f` and replaced it with `f = debounce(f, 1000)`.
+به عبارتی دیگر، `debounce` مانند یک منشی است که «تماس‌های تلفنی» را می‌پذیرد و تا زمانی که `ms` میلی‌ثانیه سکوت برقرار شود صبر می‌کند. و فقط بعد از این مدت اطلاعات آخرین تماس را به «رئیس» منتقل می‌کند (تابع واقعی `f` را فرا می‌خواند).
 
-Then if the wrapped function is called at 0ms, 200ms and 500ms, and then there are no calls, then the actual `f` will be only called once, at 1500ms. That is: after the cooldown period of 1000ms from the last call.
+برای مثال، ما یک تابع `f` داشتیم و آن را با `f = debounce(f, 1000)` جایگزین کردیم.
+
+سپس اگر تابع دربرگرفته شده در زمان‌های 0، 200، 500 میلی‌ثانیه فراخوانی شد، و پس از آن هیچ فراخوانی‌ای وجود نداشت، سپس تابع واقعی `f` فقط یک بار بعد از 1500 میلی‌ثانیه فراخوانی می‌شود. یعنی اینکه: پس از 1000 میلی‌ثانیه زمان آرام‌شدن از زمان آخرین فراخوانی.
 
 ![](debounce.svg)
 
-...And it will get the arguments of the very last call, other calls are ignored.
+...و این تابع آرگومان‌های آخرین فراخوانی را دریافت می‌کند و بقیه فراخوانی‌ها نادیده گرفته می‌شوند.
 
-Here's the code for it (uses the debounce decorator from the [Lodash library](https://lodash.com/docs/4.17.15#debounce):
+اینجا کدی برای آن داریم (از دکوراتور معلق‌کننده در کتابخانه [Lodash library](https://lodash.com/docs/4.17.15#debounce) استفاده می‌کند):
 
 ```js
 let f = _.debounce(alert, 1000);
 
-f("a"); 
+f("a");
 setTimeout( () => f("b"), 200);
-setTimeout( () => f("c"), 500); 
-// debounced function waits 1000ms after the last call and then runs: alert("c")
+setTimeout( () => f("c"), 500);
+// alert("c") :تابع معلق 1000 میلی‌ثانیه بعد از آخرین فراخوانی صبر می‌کند و سپس اجرا می‌شود
 ```
 
+حالا یک مثال عملی. بیایید فرض کنیم که کاربر چیزی تایپ می‌کند و ما می‌خواهیم یک زمانی که وارد کردن تمام شد یک درخواست به سرور ارسال کنیم.
 
-Now a practical example. Let's say, the user types something, and we'd like to send a request to the server when the input is finished.
+دلیلی برای فرستادن درخواست برای هر کاراکتر تایپ شده وجود ندارد. به جای آن ما می‌خواهیم صبر کنیم و سپس تمام نتیجه را پردازش کنیم.
 
-There's no point in sending the request for every character typed. Instead we'd like to wait, and then process the whole result.
-
-In a web-browser, we can setup an event handler -- a function that's called on every change of an input field. Normally, an event handler is called very often, for every typed key. But if we `debounce` it by 1000ms, then it will be only called once, after 1000ms after the last input.
+در یک مرورگر وب، ما می‌توانیم یک کنترل‌کننده رویداد ترتیب دهیم -- تابعی که برای هر تغییر در قسمت ورودی فراخوانی می‌شود. در حالت عادی، یک کنترل‌کننده رویداد خیلی فراخوانی می‌شود، برای هر کلید تایپ شده. اما اگر ما آن را به مدت 1000 میلی‌ثانیه `debounce`(معلق) کنیم، پس از 1000 میلی‌ثانیه بعد از آخرین ورودی، فقط یک بار فراخوانی می‌شود.
 
 ```online
 
-In this live example, the handler puts the result into a box below, try it:
+در این مثال زنده، کنترل‌کننده نتیجه را درون جعبه بیرون می‌گذارد، امتحانش کنید:
 
 [iframe border=1 src="debounce" height=200]
 
-See? The second input calls the debounced function, so its content is processed after 1000ms from the last input.
+می‌بینید؟ ورودی دوم، تابع معلق را فراخوانی می‌کند پس محتوای آن پس از 1000 میلی‌ثانیه بعد از آخرین ورودی پردازش می‌شود.
 ```
 
-So, `debounce` is a great way to process a sequence of events: be it a sequence of key presses, mouse movements or something else.
+پس `debounce` راهی عالی برای پردازش دنباله‌ای از رویدادها است: چه دنباله‎ای از فشار دادن کلیدها باشد، چه حرکت مَوس(mouse) یا هر چیز دیگری.
 
+این تابع به اندازه زمان داده شده پس از آخرین فراخوانی صبر می‌کند و سپس تابع خودش که می‌تواند نتیجه را پردازش کند را فرا می‌خواند.
 
-It waits the given time after the last call, and then runs its function, that can process the result.
+تمرین، پیاده‌سازی دکوراتور `debounce` است.
 
-The task is to implement `debounce` decorator.
-
-Hint: that's just a few lines if you think about it :)
+راهنمایی: اگر درباره آن فکر کنید، فقط چند خط می‌شود :)

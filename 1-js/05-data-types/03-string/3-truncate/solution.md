@@ -1,6 +1,6 @@
-The maximal length must be `maxlength`, so we need to cut it a little shorter, to give space for the ellipsis.
+بیشترین طول باید `maxlength` باشد، پس ما نیاز داریم که آن را کمتر کنیم، تا برای کاراکتر حذف جا باز شود.
 
-Note that there is actually a single unicode character for an ellipsis. That's not three dots.
+در نظر داشته باشید در واقع یک کاراکتر Unicode برای کاراکتر حذف وجود دارد. این کاراکتر سه نقطه نیست.
 
 ```js run
 function truncate(str, maxlength) {

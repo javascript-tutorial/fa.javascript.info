@@ -2,14 +2,14 @@ importance: 5
 
 ---
 
-# Create an object with the same constructor
+# یک شیء با سازنده یکسان ایجاد کنید
 
-Imagine, we have an arbitrary object `obj`, created by a constructor function -- we don't know which one, but we'd like to create a new object using it.
+تصور کنید، یک شیء دلخواه `obj` داریم که توسط یک تابع سازنده ایجاد شده است -- نمی‌دانیم کدام یک، اما می‌خواهیم با استفاده از آن یک شیء جدید ایجاد کنیم.
 
-Can we do it like that?
+می‌توانیم آن را انجام دهیم؟
 
 ```js
 let obj2 = new obj.constructor();
 ```
 
-Give an example of a constructor function for `obj` which lets such code work right. And an example that makes it work wrong.
+مثالی از یک تابع سازنده برای `obj` بیاورید که به این کد اجازه می‌دهد درست کار کند. و مثالی که باعث می‌شود اشتباه کار کند.

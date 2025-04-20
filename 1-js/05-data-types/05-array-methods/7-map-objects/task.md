@@ -2,13 +2,13 @@ importance: 5
 
 ---
 
-# Map to objects
+# دست‌یابی به شیءها
 
-You have an array of `user` objects, each one has `name`, `surname` and `id`.
+شما آرایه‌ای از شیءهای `user` دارید که هر کدام دارای `name`، `surname` و `id` هستند.
 
-Write the code to create another array from it, of objects with `id` and `fullName`, where `fullName` is generated from `name` and `surname`.
+کدی برای ساختن یک آرایه دیگر از آن بنویسید که شامل شیءهای دارای `id` و `fullName` است، که `fullName` از `name` و `suname` ایجاد می‌شود.
 
-For instance:
+برای مثال:
 
 ```js no-beautify
 let john = { name: "John", surname: "Smith", id: 1 };
@@ -18,7 +18,7 @@ let mary = { name: "Mary", surname: "Key", id: 3 };
 let users = [ john, pete, mary ];
 
 *!*
-let usersMapped = /* ... your code ... */
+let usersMapped = /* ... کد شما ... */
 */!*
 
 /*
@@ -33,4 +33,4 @@ alert( usersMapped[0].id ) // 1
 alert( usersMapped[0].fullName ) // John Smith
 ```
 
-So, actually you need to map one array of objects to another. Try using `=>` here. There's a small catch.
+پس در واقع شما باید طرحی از آرایه‌ای از شیءها برای آرایه‌ای دیگر بیابید. سعی کنید از `<=` اینجا استفاده کنید. یک فریب کوچک وجود دارد.

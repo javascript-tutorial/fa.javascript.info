@@ -1,54 +1,92 @@
 
-# Polyfills
+# پلیفیل‌ها و ترنسپایلرها
 
-The JavaScript language steadily evolves. New proposals to the language appear regularly, they are analyzed and, if considered worthy, are appended to the list at <https://tc39.github.io/ecma262/> and then progress to the [specification](http://www.ecma-international.org/publications/standards/Ecma-262.htm).
+زبان جاوااسکریپت پیوسته در حال تکامل است. پیشنهادهایی برای بهتر شدن آن به‌طور منظم صورت می‌گیرد، این پیشنهاد‌ها بررسی می‌شوند و اگر ارزشمند باشند، به لیست <https://tc39.github.io/ecma262/> اضافه می‌شوند و سپس برای [مشخصات زبان (specification)](http://www.ecma-international.org/publications/standards/Ecma-262.htm) پیش می‌روند.
 
-Teams behind JavaScript engines have their own ideas about what to implement first. They may decide to implement proposals that are in draft and postpone things that are already in the spec, because they are less interesting or just harder to do.
+تیم‌های مسئول موتورهای جاوااسکریپت تصمیم می‌گیرند کدام یک را اول پیاده‌سازی کنند. ممکن است تصمیم بگیرند پیشنهادهایی که هنوز به‌صورت پیش‌نویس هستند را اول پیاده‌سازی کنند و پیشنهادهایی که در مرحلهٔ تشخیص هستند را به بعدتر موکول کنند، به دلیل اینکه کمتر جالب هستند و یا فقط سخت‌تر هستند.
 
-So it's quite common for an engine to implement only the part of the standard.
+پس کاملا طبیعی است که یک موتور فقط بخشی از یک استاندارد را پیاده‌سازی کند.
 
-A good page to see the current state of support for language features is <https://kangax.github.io/compat-table/es6/> (it's big, we have a lot to study yet).
+یک صفحه‌ی خوب برای این که ببینید در حال حاضر چه چیزهایی پشتیبانی می‌شود اینجاست <https://compat-table.github.io/compat-table/es6/> (خیلی بزرگ است، ما چیزهای زیادی برای مطالعه داریم).
 
-## Babel
+به عنوان توسعه‌دهنده، ما همیشه دوست داریم از ویژگی‌ها و امکانات جدید استفاده کنیم. هر چه جدیدتر، بهتر!
 
-When we use modern features of the language, some engines may fail to support such code. Just as said, not all features are implemented everywhere.
+از طرف دیگر، دوست داریم کدهایمان روی مرورگرهای قدیمی‌تر که امکانات جدید را نمی‌فهمند هم کار کنند. اما چطور می‌شود این کار را انجام داد؟
 
-Here Babel comes to the rescue.
+دو ابزار برای این کار وجود دارد:
 
-[Babel](https://babeljs.io) is a [transpiler](https://en.wikipedia.org/wiki/Source-to-source_compiler). It rewrites modern JavaScript code into the previous standard.
+1. ترنسپایلرها (Transpilers).
+2. پلیفیل‌ها (Polyfills).
 
-Actually, there are two parts in Babel:
+هدف ما در این فصل این است که درک کنیم این دو چگونه کار می‌کنند و جایگاه آن‌ها در توسعه وب چیست.
 
-1. First, the transpiler program, which rewrites the code. The developer runs it on their own computer. It rewrites the code into the older standard. And then the code is delivered to the website for users. Modern project build systems like [webpack](http://webpack.github.io/) provide means to run transpiler automatically on every code change, so that it's very easy to integrate into development process.
+## ترنسپایلرها
 
-2. Second, the polyfill.
+یک [ترنسپایلر](https://en.wikipedia.org/wiki/Source-to-source_compiler) در واقع قطعه‌ای نرم‌افزار است که می‌تواند کد مدرن و جدید را parse کند ("بخواند و بفهمد") و سپس همان کد را با syntax قدیمی بازنویسی کند به‌طوری که خروجی کد یکسان باشد.
 
-    New language features may include new built-in functions and syntax constructs.
-    The transpiler rewrites the code, transforming syntax constructs into older ones. But as for new built-in functions, we need to implement them. JavaScript is a highly dynamic language, scripts may add/modify any functions, so that they behave according to the modern standard.
+برای مثال جاوااسکریپت تا سال ۲۰۲۰ "nullish coalescing عملگر" `??` را نداشت. و اگر کاربری از یک مرورگر منسوخ‌شده استفاده کند، ممکن است کدی مانند `height = height ?? 100` را متوجه نشود.
 
-    A script that updates/adds new functions is called "polyfill". It "fills in" the gap and adds missing implementations.
+یک ترنسپایلر این کد را آنالیز می‌کند و `height ?? 100` را به‌صورت `(height !== undefined && height !== null) ? height : 100` بازنویسی می‌کند.
 
-    Two interesting polyfills are:
-    - [core js](https://github.com/zloirock/core-js) that supports a lot, allows to include only needed features.
-    - [polyfill.io](http://polyfill.io) service that provides a script with polyfills, depending on the features and user's browser.
+```js
+// قبل از اجرا شدن ترنسپایلر
+height = height ?? 100;
 
-So, if we're going to use modern language features, a transpiler and a polyfill are necessary.
-
-## Examples in the tutorial
-
-
-````online
-Most examples are runnable at-place, like this:
-
-```js run
-alert('Press the "Play" button in the upper-right corner to run');
+// بعد از اجرا شدن ترنسپایلر
+height = height !== undefined && height !== null ? height : 100;
 ```
 
-Examples that use modern JS will work only if your browser supports it.
-````
+کد بازنویسی شده مناسب موتورهای قدیمی‌تر جاوااسکریپت است.
 
-```offline
-As you're reading the offline version, in PDF examples are not runnable. In EPUB some of them can run.
+معمولا توسعه‌دهنده ترنسپایلر را روی کامپیوتر خودش اجرا می‌کند و سپس کد transpileشده را روی سرور deploy می‌کند.
+
+حالا که صحبتش شد، بهتر است بدانید [Babel](http://babeljs.io/) یکی از برجسته‌ترین ترنسپایلرها است.
+
+سیستم‌های build پروژه مدرن مثل [webpack](https://webpack.js.org/) این امکان را می‌دهند که بعد از هر بار تغییر کد، ترنسپایلر به‌صورت اتوماتیک اجرا شود و برای همین ادغام کردن آن در روند توسعه کار بسیار ساده‌ای است.
+
+## پلیفیل‌ها
+
+فیچر‌ها و امکانات جدید یک زبان می‌توانند علاوه بر syntax و عملگرهای جدید، تابع‌های جدید نیز باشند.
+
+برای مثال `Math.trunc(n)` یک تابع است که بخش دهدهی یک عدد را حذف می‌کند. مانند `Math.trunc(1.23)` که `1` را بر می‌گرداند.
+
+در برخی از موتورهای (خیلی قدیمی) جاوااسکریپت تابع `Math.trunc` وجود ندارد و چنین کدی اجرا نمی‌شود.
+
+از آن‌جایی که داریم راجع‌به تابع‌های جدید صحبت می‌کنیم و بحث تغییر syntax نیست، اینجا چیزی برای transpile وجود ندارد. فقط باید تابع ناموجود را تعریف کنیم.
+
+اسکریپتی که تابع‌های جدید آپدیت و یا اضافه می‌کند، «پلیفیل» نام دارد. در واقع جای خالی را پر می‌کند و پیاده‌سازی‌های لازم را انجام می‌دهد.
+
+در این مثال خاص، پلیفیلی که برای `Math.trunc` وجود دارد یک اسکریپت است که آن را پیاده‌سازی کرده است. مانند زیر:
+
+```js
+if (!Math.trunc) { // اگر چنین تابعی وجود ندارد
+  // آن زا پیاده‌سازی کن
+  Math.trunc = function (number) {
+    // Math.ceil و Math.floor جتی در موتورهای قدیمی جاوااسکریپت هم حضور دارند
+    // و در همین tutorial جلوتر آموزش داده می‌شوند
+    return number < 0 ? Math.ceil(number) : Math.floor(number);
+  };
+}
 ```
 
-Google Chrome is usually the most up-to-date with language features, good to run bleeding-edge demos without any transpilers, but other modern browsers also work fine.
+جاوااسکریپت یک زبان به‌شدت داینامیک است. اسکریپت‌ها می‌توانند هر تابعی را تغییر دهند یا اضافه کنند. حتی تابع‌های built-in.
+
+دو کتابخانه جالب پلیفیل‌ها:
+- [core js](https://github.com/zloirock/core-js) که از چیزهای زیادی پشتیبانی می‌کند و اجازه می‌دهد فقط فیچرهای مورد نیاز خود را اضافه کنید.
+- [polyfill.io](http://polyfill.io) سرویسی که یک اسکریپت با پلیفیل‌ها ارائه می‌دهد. بسته به فیچرها و مرورگر کاربر.
+
+
+## خلاصه
+
+در این فصل ما می‌خواهیم به شما انگیزه بدهیم تا بروید و فیچرهای جدید زبان را یاد بگیرید. حتی اگر هنوز توسط موتورهای جاوااسکریپت به‌خوبی پشتیبانی نمی‌شوند.
+
+فراموش نکنید که از یک ترنسپایلر (اگر از syntax یا عملگرهای مدرن استفاده می‌کنید) و پلیفیل‌ها (برای اضافه کردن تابع‌هایی که ممکن است موجود نباشند) استفاده کنید. و با این کار مطمئن خواهید بود که کد شما کار می‌کند.
+
+برای مثال، بعدها که با جاوااسکریپت آشنایی بیشتری پیدا کنید، می‌توانید یک سیستم build کد با [webpack](https://webpack.js.org/) و پلاگین [babel-loader](https://github.com/babel/babel-loader) راه‌اندازی کنید.
+
+منابع خوبی که نشان می‌دهند فیچرهای مختلف در چه حالتی از پشتیبانی قرار دارند:
+- <https://compat-table.github.io/compat-table/es6/> - برای جاوااسکریپت.
+- <https://caniuse.com/> - برای تابع‌های مربوط به مرورگر.
+
+پانوشت گوگل کروم معمولا نسبت به فیچرهای زبان به‌روزترین است. اگر دموی یک آموزش کار نکرد، آن را امتحان کنید. البته بیشتر دموهای آموزش با هر مرورگر مدرنی کار می‌کنند.
+

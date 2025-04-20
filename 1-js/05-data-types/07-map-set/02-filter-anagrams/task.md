@@ -2,11 +2,11 @@ importance: 4
 
 ---
 
-# Filter anagrams
+# واروواژه‌ها را جداسازی کنید
 
-[Anagrams](https://en.wikipedia.org/wiki/Anagram) are words that have the same number of same letters, but in different order.
+[واروواژه‌ها](https://fa.wikipedia.org/wiki/واروواژه) کلمه‌هایی هستند که تعداد برابری از حروف یکسان دارند، اما با ترتیبی متفاوت.
 
-For instance:
+برای مثال:
 
 ```
 nap - pan
@@ -14,15 +14,14 @@ ear - are - era
 cheaters - hectares - teachers
 ```
 
-Write a function `aclean(arr)` that returns an array cleaned from anagrams.
+یک تابع `aclean(arr)` بنویسید که آرایه‌ای تهی از واروواژه‌ها را برمی‌گرداند.
 
-For instance:
+برای مثال:
 
 ```js
 let arr = ["nap", "teachers", "cheaters", "PAN", "ear", "era", "hectares"];
 
-alert( aclean(arr) ); // "nap,teachers,ear" or "PAN,cheaters,era"
+alert( aclean(arr) ); // "nap,teachers,ear" یا "PAN,cheaters,era"
 ```
 
-From every anagram group should remain only one word, no matter which one.
-
+از هر گروه واروواژه باید تنها یک کلمه بماند، مهم نیست کدام باشد.

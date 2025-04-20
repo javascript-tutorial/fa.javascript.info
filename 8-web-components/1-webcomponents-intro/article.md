@@ -1,76 +1,76 @@
-# From the orbital height
+# از ارتفاع مداری
 
-This section describes a set of modern standards for "web components".
+این بخش مجموعه ای از استانداردهای مدرن را برای  "web components" توصیف می کند.
 
-As of now, these standards are under development. Some features are well-supported and integrated into the modern HTML/DOM standard, while others are yet in draft stage. You can try examples in any browser, Google Chrome is probably the most up to date with these features. Guess, that's because Google fellows are behind many of the related specifications.
+در حال حاضر، این استانداردها در حال توسعه هستند. برخی از ویژگی ها به خوبی پشتیبانی شده و در استاندارد مدرن HTML/DOM یکپارچه شده اند، در حالی که برخی دیگر هنوز در مرحله پیش نویس هستند. می‌توانید نمونه‌هایی را در هر مرورگری امتحان کنید، Google Chrome احتمالاً به‌روزترین با این ویژگی‌ها است. حدس بزنید، به این دلیل است که همکاران گوگل پشت بسیاری از مشخصات مرتبط هستند.
 
-## What's common between...
+## چه چیز هایی مشابه است بین...
 
-The whole component idea is nothing new. It's used in many frameworks and elsewhere.
+کل ایده جزء چیز جدیدی نیست. در بسیاری از چارچوب ها و جاهای دیگر استفاده می شود.
 
-Before we move to implementation details, take a look at this great achievement of humanity:
+قبل از اینکه به جزئیات پیاده سازی برویم، به این دستاورد بزرگ بشریت نگاهی بیندازیم:
 
 ![](satellite.jpg)
 
-That's the International Space Station (ISS).
+این ایستگاه فضایی بین المللی (ISS) است.
 
-And this is how it's made inside (approximately):
+و اینطوری داخلش ساخته شده (تقریبا):
 
 ![](satellite-expanded.jpg)
 
-The International Space Station:
-- Consists of many components.
-- Each component, in its turn, has many smaller details inside.
-- The components are very complex, much more complicated than most websites.
-- Components are developed internationally, by teams from different countries, speaking different languages.
+ایستگاه فضایی بین المللی:
+- از اجزای زیادی تشکیل شده است.
+- هر جزء به نوبه خود دارای جزئیات کوچک تری در داخل است.
+- اجزاء بسیار پیچیده هستند، بسیار پیچیده تر از بسیاری از وب سایت ها.
+- کامپوننت ها در سطح بین المللی، توسط تیم هایی از کشورهای مختلف، که به زبان های مختلف صحبت می کنند، توسعه می یابند.
 
-...And this thing flies, keeps humans alive in space!
+...و این چیز پرواز می کند، انسان ها را در فضا زنده نگه می دارد!
 
-How such complex devices are created?
+چگونه چنین دستگاه های پیچیده ای ایجاد می شوند؟
 
-Which principles we could borrow to make our development same-level reliable and scalable? Or, at least, close to it.
+کدام اصول را می‌توانیم قرض بگیریم تا توسعه‌مان در همان سطح قابل اعتماد و مقیاس‌پذیر باشد؟ یا حداقل به آن نزدیک است؟
 
-## Component architecture
+## معماری Component ها 
 
-The well known rule for developing complex software is: don't make complex software.
+قانون شناخته شده برای توسعه نرم افزارهای پیچیده این است: نرم افزار پیچیده نسازید.
 
-If something becomes complex -- split it into simpler parts and connect in the most obvious way.
+اگر چیزی پیچیده شد - آن را به بخش های ساده تر تقسیم کنید و به واضح ترین روش متصل کنید.
 
-**A good architect is the one who can make the complex simple.**
+** یک معمار خوب کسی است که بتواند مجموعه را ساده کند.**
 
-We can split user interface into visual components: each of them has own place on the page, can "do" a well-described task, and is separate from the others.
+ما می‌توانیم رابط کاربری را به اجزای بصری تقسیم کنیم: هر یک از آنها جایگاه خاص خود را در صفحه دارند، می‌توانند یک کار به خوبی توصیف شده را انجام دهند و از بقیه جدا هستند.
 
-Let's take a look at a website, for example Twitter.
+بیایید نگاهی به یک وب سایت بیندازیم، به عنوان مثال توییتر.
 
-It naturally splits into components:
+به طور طبیعی به اجزای زیر تقسیم می شود:
 
 ![](web-components-twitter.svg)
 
-1. Top navigation.
-2. User info.
-3. Follow suggestions.
-4. Submit form.
-5. (and also 6, 7) -- messages.
+1. پیمایش بالا.
+2. اطلاعات کاربر.
+3. پیشنهادات را دنبال کنید.
+4. ارسال فرم.
+5. (و همچنین 6، 7) -- پیام ها.
+ 
+کامپوننت ها ممکن است دارای اجزای فرعی باشند، به عنوان مثال. پیام ها ممکن است بخشی از یک جزء "فهرست پیام" سطح بالاتر باشند. یک تصویر کاربر قابل کلیک ممکن است خود یک جزء باشد و غیره.
 
-Components may have subcomponents, e.g. messages may be parts of a higher-level "message list" component. A clickable user picture itself may be a component, and so on.
+چگونه تصمیم بگیریم که یک جزء چیست؟ این از شهود، تجربه و عقل سلیم ناشی می شود. معمولاً این یک موجودیت بصری جداگانه است که می‌توانیم آن را از نظر کاری که انجام می‌دهد و نحوه تعامل آن با صفحه توصیف کنیم. در مورد بالا، صفحه دارای بلوک هایی است، هر کدام از آنها نقش خود را ایفا می کنند، منطقی است که این اجزا را بسازید.
 
-How do we decide, what is a component? That comes from intuition, experience and common sense. Usually it's a separate visual entity that we can describe in terms of what it does and how it interacts with the page. In the case above, the page has blocks, each of them plays its own role, it's logical to make these components.
+یک جزء دارای:
+- کلاس جاوا اسکریپت خودش.
+- ساختار DOM، که صرفاً توسط کلاس خود مدیریت می شود، کد خارجی به آن دسترسی ندارد (اصل "کپسوله سازی").
+- سبک های CSS، اعمال شده بر روی کامپوننت.
+- API: رویدادها، متدهای کلاس و غیره، برای تعامل با اجزای دیگر.
 
-A component has:
-- Its own JavaScript class.
-- DOM structure, managed solely by its class, outside code doesn't access it ("encapsulation" principle).
-- CSS styles, applied to the component.
-- API: events, class methods etc, to interact with other components.
+یک بار دیگر، کل چیز "component" چیز خاصی نیست.
 
-Once again, the whole "component" thing is nothing special.
+چارچوب ها و روش های توسعه زیادی برای ساخت آنها وجود دارد که هر کدام زنگ ها و سوت های خاص خود را دارند. معمولاً از کلاس‌ها و قراردادهای ویژه CSS برای ارائه «احساس مؤلفه» استفاده می‌شود - محدوده CSS و کپسوله‌سازی DOM.
+​
+"Web components" قابلیت های داخلی مرورگر را برای آن فراهم می کند، بنابراین دیگر نیازی به تقلید از آنها نداریم.
 
-There exist many frameworks and development methodologies to build them, each with its own bells and whistles. Usually, special CSS classes and conventions are used to provide "component feel" -- CSS scoping and DOM encapsulation.
+- [Custom elements](https://html.spec.whatwg.org/multipage/custom-elements.html#custom-elements) -- برای تعریف کردن custom HTML elements.
+- [Shadow DOM](https://dom.spec.whatwg.org/#shadow-trees) -- برای ساختن internal DOM برای component, به صورت مخفی.
+- [CSS Scoping](https://drafts.csswg.org/css-scoping/) -- برای تعریف کردن style هایی که فقط داخل Shadow DOM در component می باشند.
+- [Event retargeting](https://dom.spec.whatwg.org/#retarget) و سایر موارد جزئی برای ساختن اجزای سفارشی بهتر با توسعه.
 
-"Web components" provide built-in browser capabilities for that, so we don't have to emulate them any more.
-
-- [Custom elements](https://html.spec.whatwg.org/multipage/custom-elements.html#custom-elements) -- to define custom HTML elements.
-- [Shadow DOM](https://dom.spec.whatwg.org/#shadow-trees) -- to create an internal DOM for the component, hidden from the others.
-- [CSS Scoping](https://drafts.csswg.org/css-scoping/) -- to declare styles that only apply inside the Shadow DOM of the component.
-- [Event retargeting](https://dom.spec.whatwg.org/#retarget) and other minor stuff to make custom components better fit the development.
-
-In the next chapter we'll go into details of "Custom Elements" -- the fundamental and well-supported feature of web components, good on its own.
+در فصل بعدی به جزئیات "Custom Elements"خواهیم پرداخت--ویژگی اساسی و پشتیبانی شده اجزای وب، که به تنهایی خوب است.

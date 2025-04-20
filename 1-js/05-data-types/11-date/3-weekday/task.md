@@ -2,11 +2,11 @@ importance: 5
 
 ---
 
-# European weekday
+# روز هفته اروپایی
 
-European countries have days of week starting with Monday (number 1), then Tuesday (number 2) and till Sunday (number 7). Write a function `getLocalDay(date)` that returns the "European" day of week for `date`.
+کشورهای اروپایی روزهای هفته‌شان از دوشنبه (عدد 1) شروع می‌شود، سپس سه‌شنبه (عدد 2) و تا یکشنبه (عدد 7) ادامه دارد. یک تابع `getLocalDay(date)` بنویسید که روز هفته «اروپایی» را به ازای `date` برگرداند.
 
 ```js no-beautify
 let date = new Date(2012, 0, 3);  // 3 Jan 2012
-alert( getLocalDay(date) );       // tuesday, should show 2
+alert( getLocalDay(date) );       // سه‌شنبه، باید 2 را برگرداند
 ```

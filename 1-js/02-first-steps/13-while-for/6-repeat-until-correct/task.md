@@ -2,12 +2,12 @@ importance: 5
 
 ---
 
-# Repeat until the input is correct
+# تا زمانی که ورودی درست باشد تکرار کنید
 
-Write a loop which prompts for a number greater than `100`. If the visitor enters another number -- ask them to input again.
+یک حلقه بنویسید که برای یک عدد بزرگ تر از `100` prompt می کند. اگر بازدیدکننده عدد دیگری وارد کرد -- دوباره از او بخواهید که وارد کند.
 
-The loop must ask for a number until either the visitor enters a number greater than `100` or cancels the input/enters an empty line.
+حلقه باید برای یک عدد درخواست کند مگر اینکه بازدیدکننده یک عدد بزرگ تر از `100` وارد کند یا ورودی گرفتن را لغو کند / یک خط خالی وارد کند.
 
-Here we can assume that the visitor only inputs numbers. There's no need to implement a special handling for a non-numeric input in this task.
+اینجا ما می توانیم فرض کنیم که بازدیدکننده فقط عدد وارد می کند. در این تمرین نیازی به پیاده سازی بررسی خاصی برای ورودی غیر عددی نیست.
 
-[demo]
+[دمو]

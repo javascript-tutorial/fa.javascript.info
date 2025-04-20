@@ -1,38 +1,38 @@
-# Garbage collection
+# زباله‌روبی
 
-Memory management in JavaScript is performed automatically and invisibly to us. We create primitives, objects, functions... All that takes memory.
+مدیریت حافظه در جاوااسکریپت به صورت خودکار و پنهان از ما انجام می‌شود. ما مقدارهای اصلی، شیءها، تابع‌ها و غیره را می‌سازیم... تمام اینها حافظه را اشغال می‌کنند.
 
-What happens when something is not needed any more? How does the JavaScript engine discover it and clean it up?
+وقتی چیزی دیگر مورد نیاز نباشد چه اتفاقی می‌افتد؟ موتور جاوااسکریپت چگونه این را تشخیص می‌دهد و پاک می‌کند؟
 
-## Reachability
+## قابلیت دسترسی
 
-The main concept of memory management in JavaScript is *reachability*.
+مفهوم اصلی مدیریت حافظه در جاوااسکریپت *قابلیت دسترسی* است.
 
-Simply put, "reachable" values are those that are accessible or usable somehow. They are guaranteed to be stored in memory.
+به بیان ساده، مقدارهای "قابل دسترس" مقدارهایی هستند که به نحوی بتوان به آنها دسترسی داشت یا از آنها استفاده کرد. ذخیره‌شدن آنها در حافظه تضمین شده است.
 
-1. There's a base set of inherently reachable values, that cannot be deleted for obvious reasons.
+1. یک مجموعه از مقدارهایی که به طور ذاتی قابل دسترس هستند وجود دارد که نمی‌توانند به دلیل‌هایی واضح حذف شوند.
 
-    For instance:
+    برای مثال:
 
-    - Local variables and parameters of the current function.
-    - Variables and parameters for other functions on the current chain of nested calls.
-    - Global variables.
-    - (there are some other, internal ones as well)
+    - تابعی که در حال اجرا باشد، متغیرهای محلی و پارامترهای آن.
+    - تابع‌های دیگر در زنجیره‌ی کنونیِ صدازدن های تو در تو، متغیرهای محلی و پارامترهای آن.
+    - متغیرهای گلوبال.
+    - (چند مورد دیگر هم هستند، همچنین موردهای داخلی)
 
-    These values are called *roots*.
+    این مقدارها *ریشه‌ها* نامیده می‌شوند.
 
-2. Any other value is considered reachable if it's reachable from a root by a reference or by a chain of references.
+2. هر مقدار دیگری قابل دسترس فرض می‌شود اگر از یک ریشه توسط یک مرجع یا زنجیره‎ای از مراجع قابل دسترس باشد.
 
-    For instance, if there's an object in a local variable, and that object has a property referencing another object, that object is considered reachable. And those that it references are also reachable. Detailed examples to follow.
+    برای مثال، اگر یک شیء در متغیری گلوبال وجود داشته باشد، و آن شیء یک ویژگی داشته باشد که به شیءای دیگر رجوع می‌کند، *آن* شیء قابل دسترس فرض می‌شود. و آنهایی که این شیء به آنها رجوع می‌کند هم قابل دسترس هستند. مثال‌های دارای جزئیات در ادامه آمده است.
 
-There's a background process in the JavaScript engine that is called [garbage collector](https://en.wikipedia.org/wiki/Garbage_collection_(computer_science)). It monitors all objects and removes those that have become unreachable.
+یک فرایند پشت پرده در موتور جاوااسکریپت وجود دارد به نام [زباله‌روبی](https://fa.wikipedia.org/wiki/بازیافت_حافظه). این فرایند تمام شیءها را زیر نظر می‌گیرد و آنهایی که غیر قابل دسترس شده‌اند را پاک می‌کند.
 
-## A simple example
+## یک مثال ساده
 
-Here's the simplest example:
+اینجا ساده‌ترین مثال را داریم:
 
 ```js
-// user has a reference to the object
+// یک ارجاع به شیء دارد user
 let user = {
   name: "John"
 };
@@ -40,9 +40,9 @@ let user = {
 
 ![](memory-user-john.svg)
 
-Here the arrow depicts an object reference. The global variable `"user"` references the object `{name: "John"}` (we'll call it John for brevity). The `"name"` property of John stores a primitive, so it's painted inside the object.
+اینجا، کمان یک مرجع شیء را نشان می‌دهد. متغیر گلوبال `"user"` به شیء `{name: "John"}` رجوع می‌کند (برای اختصار به آن John می‌گوییم). ویژگی `"name"` از John یک مقدار اصلی را ذخیره می‌کند، پس درون آن نقش بسته است.
 
-If the value of `user` is overwritten, the reference is lost:
+اگر مقدار `user` بازنویسی شود، مرجع از دست می‌رود:
 
 ```js
 user = null;
@@ -50,14 +50,14 @@ user = null;
 
 ![](memory-user-john-lost.svg)
 
-Now John becomes unreachable. There's no way to access it, no references to it. Garbage collector will junk the data and free the memory.
+حال John غیر قابل دسترس شده است. هیج راه و مرجعی برای دسترسی به آن وجود ندارد. زباله جمع‌کن داده را دور می‌اندازد و حافظه را آزاد می‌کند.
 
-## Two references
+## دو مرجع
 
-Now let's imagine we copied the reference from `user` to `admin`:
+حال بیایید تصور کنیم که مرجع را از `user` در `admin` کپی کردیم:
 
 ```js
-// user has a reference to the object
+// یک ارجاع به شیء دارد user
 let user = {
   name: "John"
 };
@@ -69,16 +69,16 @@ let admin = user;
 
 ![](memory-user-john-admin.svg)
 
-Now if we do the same:
+حال اگر دوباره کار مشابه را انجام دهیم:
 ```js
 user = null;
 ```
 
-...Then the object is still reachable via `admin` global variable, so it's in memory. If we overwrite `admin` too, then it can be removed.
+...سپس شیء هنوز توسط متغیر گلوبال `admin` قابل دسترس است، پس در حافظه وجود دارد. اگر ما `admin` را هم بازنویسی کنیم، سپس این شیء حذف می‌شود.
 
-## Interlinked objects
+## شیءهای بهم پیوسته
 
-Now a more complex example. The family:
+حالا یک مثال پیچیده‌تر. خانواده:
 
 ```js
 function marry(man, woman) {
@@ -98,15 +98,15 @@ let family = marry({
 });
 ```
 
-Function `marry` "marries" two objects by giving them references to each other and returns a new object that contains them both.
+تابع `marry` دو شیء را با دادن مرجع‌های آنها به یکدیگر "بهم پیوند می‌زند" و یک شیء جدید که شامل هر دو است را برمی‌گرداند.
 
-The resulting memory structure:
+ساختار حافظه حاصل:
 
 ![](family.svg)
 
-As of now, all objects are reachable.
+از هم اکنون، تمام شیءها قابل دسترس هستند.
 
-Now let's remove two references:
+حال بیایید دو مرجع را حذف کنیم:
 
 ```js
 delete family.father;
@@ -115,98 +115,106 @@ delete family.mother.husband;
 
 ![](family-delete-refs.svg)
 
-It's not enough to delete only one of these two references, because all objects would still be reachable.
+اینکه فقط یکی از دو مرجع را حذف کنیم کافی نیست، چون تمام شیءها هنوز قابل دسترس هستند.
 
-But if we delete both, then we can see that John has no incoming reference any more:
+اما اگر ما هر دو را حذف کنیم، آن گاه می‌بینیم که John دیگر هیچ مرجع ورودی ندارد:
 
 ![](family-no-father.svg)
 
-Outgoing references do not matter. Only incoming ones can make an object reachable. So, John is now unreachable and will be removed from the memory with all its data that also became unaccessible.
+مرجع‌های خروجی مهم نیستند. تنها مرجع‌های ورودی می‌توانند یک شیء را قابل دسترس کنند. پس John حالا غیر قابل دسترس شده است و همراه با تمام داده‌اش که آنها هم غیر قابل دسترس شده اند، از حافظه پاک می‌شود.
 
-After garbage collection:
+بعد از زباله‌روبی:
 
 ![](family-no-father-2.svg)
 
-## Unreachable island
+## جزیره‌ی غیر قابل دسترس
 
-It is possible that the whole island of interlinked objects becomes unreachable and is removed from the memory.
+اینکه تمام جزیره‌ی شیءهای بهم پیوسته غیر قابل دسترس شوند و از حافظه پاک شوند ممکن است.
 
-The source object is the same as above. Then:
+شیء منبع مانند شیء بالا است. پس:
 
 ```js
 family = null;
 ```
 
-The in-memory picture becomes:
+تصویر درون حافظه به تصویر زیر تبدیل می‌شود:
 
 ![](family-no-family.svg)
 
-This example demonstrates how important the concept of reachability is.
+این مثال اهمیت زیاد مفهوم قابلیت دسترسی را نشان می‌دهد.
 
-It's obvious that John and Ann are still linked, both have incoming references. But that's not enough.
+این واضح است که John و Ann هنوز هم بهم پیوسته هستند و هر دو مرجع‌های ورودی دارند. اما این کافی نیست.
 
-The former `"family"` object has been unlinked from the root, there's no reference to it any more, so the whole island becomes unreachable and will be removed.
+شیء سابق `"family"` از ریشه پیوندش را از دست داده است و دیگر هیچ مرجعی به آن وجود ندارد، پس تمام جزیره غیر قابل دسترس و پاک می‌شود.
 
-## Internal algorithms
+## الگوریتم داخلی
 
-The basic garbage collection algorithm is called "mark-and-sweep".
+الگوریتم پایه‌ی زباله‌روبی "علامت گذاری و جارو کردن" نامیده می‌شود.
 
-The following "garbage collection" steps are regularly performed:
+مراحل "جمع‌آوری زباله" پایین به طور منظم انجام می‌شوند:
 
-- The garbage collector takes roots and "marks" (remembers) them.
-- Then it visits and "marks" all references from them.
-- Then it visits marked objects and marks *their* references. All visited objects are remembered, so as not to visit the same object twice in the future.
-- ...And so on until every reachable (from the roots) references are visited.
-- All objects except marked ones are removed.
+- زباله جمع‌کن ریشه‌ها را می‌گیرد و آنها را "علامت گذاری" می‌کند (به خاطر می‌سپارد).
+- سپس از تمام مرجع‌های آنها بازدید می‌کند و آنها را "علامت گذاری می‌کند".
+- سپس از شیءهای علامت گذاری شده بازدید می‌کند و مرجع‌های *آنها* را علامت گذاری می‌کند. تمام شیءهای بازدید شده به خاطر سپرده می‌شوند تا در آینده دوباره از شیء یکسانی بازدید نشود.
+- ...و این فرایند تا زمانی که از تمام مرجع‌های قابل دسترس (از ریشه‌ها) بازدید شود ادامه پیدا می‌کند.
+- تمام شیءها به جز آنهایی که علامت گذاری شده‌اند پاک می‌شوند.
 
-For instance, let our object structure look like this:
+برای مثال، بیایید فرض کنیم ساختار شیء ما اینگونه باشد:
 
 ![](garbage-collection-1.svg)
 
-We can clearly see an "unreachable island" to the right side. Now let's see how "mark-and-sweep" garbage collector deals with it.
+می‌توانیم به وضوح یک "جزیره‌ی غیر قابل دسترس" را در سمت راست ببینیم. حال بیایید ببینیم زباله جمع‌کنِ "علامت گذار و جارو کننده" چگونه با آن برخورد می‌کند.
 
-The first step marks the roots:
+اولین مرحله علامت گذاری ریشه‌ها است:
 
 ![](garbage-collection-2.svg)
 
-Then their references are marked:
+سپس مرجع‌های آنها را دنبال می‌کنیم و شیءهایی که به آنها رجوع شده است را علامت گذاری می‌کنیم:
 
 ![](garbage-collection-3.svg)
 
-...And their references, while possible:
+...و تا جایی که ممکن باشد، دنبال کردن مرجع‌های بعدی را ادامه می‌دهیم:
 
 ![](garbage-collection-4.svg)
 
-Now the objects that could not be visited in the process are considered unreachable and will be removed:
+حالا شیءهایی که نمی‌توان حین فرایند از آنها بازدید شود غیر قابل دسترس فرض می‌شوند و پاک می‌شوند:
 
 ![](garbage-collection-5.svg)
 
-We can also imagine the process as spilling a huge bucket of paint from the roots, that flows through all references and marks all reachable objects. The unmarked ones are then removed.
+همچنین می‌توانیم فرایند را اینگونه فرض کنیم که یک سطل رنگ بسیار بزرگ از ریشه ریخته می‌شود که بین تمام مرجع‌ها جریان می‌یابد و تمام شیءهای قابل دسترس را علامت گذاری می‌کند. سپس شیءهایی که علامت گذاری نشده‌اند پاک می‌شوند.
 
-That's the concept of how garbage collection works. JavaScript engines apply many optimizations to make it run faster and not affect the execution.
+این مفهوم کلی چگونگی کار کردن زباله‌روبی است. موتورهای جاوااسکریپت بهینه‌سازی‌های زیادی را اعمال می‌کنند تا آن را سریع‌تر کنند و باعث ایجاد تاخیر در اجرا شدن برنامه نشوند.
 
-Some of the optimizations:
+بعضی از بهینه‌سازی‌ها:
 
-- **Generational collection** -- objects are split into two sets: "new ones" and "old ones". Many  objects appear, do their job and die fast, they can be cleaned up aggressively. Those that survive for long enough, become "old" and are examined less often.
-- **Incremental collection** -- if there are many objects, and we try to walk and mark the whole object set at once, it may take some time and introduce visible delays in the execution. So the engine tries to split the garbage collection into pieces. Then the pieces are executed one by one, separately. That requires some extra bookkeeping between them to track changes, but we have many tiny delays instead of a big one.
-- **Idle-time collection** -- the garbage collector tries to run only while the CPU is idle, to reduce the possible effect on the execution.
+- **جمع‌آوری نسلی** -- شیءها به دو دسته تقسیم می‌شوند: "جدیدها" و " قدیمی‌ها". در کد معمولی، بسیاری از شیءها به وجود می‌آیند، کارشان را انجام می‌دهند و به سرعت می‌میرند، آنها می‌توانند به سرعت پاک می‌شوند، پس منطقی است که شیءهای جدید تحت نظر قرار بگیرند و اگر این موضوع صادق باشد آنها را از حافظه پاک کنیم. شیءهایی که برای مدت زیاد باقی می‌مانند، "قدیمی" می‌شوند و کمتر بررسی می‌شوند.
+- **جمع‌آوری افزایشی** -- اگر شیءهای زیادی وجود داشته باشند و ما تلاش کنیم که یک باره برویم و تمام دسته شیء را علامت گذاری کنیم، ممکن است این کار زمان ببرد و اختلال‌های قابل رویت را در اجرا ایجاد کند. پس موتور تمام شیءهای موجود را به چند بخش تقسیم کند. سپس هر بخش یکی پس از دیگری پاک‌سازی می‌شوند. زباله‌روبی‌های کوچک زیادی به جای یک زباله‌روبی کامل وجود خواهد داشت. این کار برای دنبال کردن تغییرات به ثبت کردن بیشتری نیاز دارد، اما ما به جای اختلالی بزرگ اختلال‌های خیلی کوچک را خواهیم داشت.
+- **جمع‌آوری زمان بیکاری** -- زباله جمع‌کن سعی می‌کند که فقط زمانی که پردازنده (CPU) بیکار است کار خود را انجام دهد تا تاثیر ممکن روی اجرا شدن را کاهش دهد.
 
-There exist other optimizations and flavours of garbage collection algorithms. As much as I'd like to describe them here, I have to hold off, because different engines implement different tweaks and techniques. And, what's even more important, things change as engines develop, so studying deeper "in advance", without a real need is probably not worth that. Unless, of course, it is a matter of pure interest, then there will be some links for you below.
+بهینه‌سازی و روش‌های دیگری هم برای الگوریتم‌های زباله‌روبی وجود دارد. همان قدر که دوست دارم آنها را اینجا توضیح دهم، نباید ادامه دهم، چون موتورهای مختلف تکنیک و فن‌های مختلفی را پیاده‌سازی می‌کنند. و این حتی مهم تر است که همانطور که موتورها پیشرفت می‌کنند چیزهایی هم تغییر می‌کنند، پس مطالعه‌ی عمیق‌تر "پیشرفته" بدون نیاز واقعی احتمالا ارزش ندارد. مگر اینکه، موضوع کاملا مربوط به علاقه باشد که در این صورت لینک‌هایی برای شما در پایین قرار داده شده است.
 
-## Summary
+## خلاصه
 
-The main things to know:
+چیزهای مهم که باید بدانیم:
 
-- Garbage collection is performed automatically. We cannot force or prevent it.
-- Objects are retained in memory while they are reachable.
-- Being referenced is not the same as being reachable (from a root): a pack of interlinked objects can become unreachable as a whole.
+- زباله‌روبی به صورت خودکار انجام می‌شود. ما نمی‌توانیم آن را مجبور یا از آن جلوگیری کنیم.
+- شیءها تا زمانی که قابل دسترس باشند در حافظه باقی می‌مانند.
+- مرجع بودن با قابل دسترس بودن (از یک ریشه) یکسان نیست: همانطور که در مثال بالا دیدیم، یک دسته‌ی شیءهای بهم پیوسته می‌توانند به طور کامل غیر قابل دسترس شوند.
 
-Modern engines implement advanced algorithms of garbage collection.
+موتورهای مدرن الگوریتم‌های پیشرفته‌ی زباله‌روبی را پیاده‌سازی می‌کنند.
 
-A general book "The Garbage Collection Handbook: The Art of Automatic Memory Management" (R. Jones et al) covers some of them.
+کتاب کلی "The Garbage Collection Handbook: The Art of Automatic Memory Management" (R. Jones و بقیه افراد) بعضی از آنها را پوشش می‌دهد.
 
-If you are familiar with low-level programming, the more detailed information about V8 garbage collector is in the article [A tour of V8: Garbage Collection](http://jayconrod.com/posts/55/a-tour-of-v8-garbage-collection).
+<<<<<<< HEAD
+اگر شما با برنامه‌نویسی سطح پایین آشنایی دارید، اطلاعاتی با جزییات درباره زباله‌روبی V8 در این مقاله است [A tour of V8: Garbage Collection](http://jayconrod.com/posts/55/a-tour-of-v8-garbage-collection).
 
-[V8 blog](https://v8.dev/) also publishes articles about changes in memory management from time to time. Naturally, to learn the garbage collection, you'd better prepare by learning about V8 internals in general and read the blog of [Vyacheslav Egorov](http://mrale.ph) who worked as one of V8 engineers. I'm saying: "V8", because it is best covered with articles in the internet. For other engines, many approaches are similar, but garbage collection differs in many aspects.
+[بلاگ V8](https://v8.dev/) هم هر چند گاهی مقاله‌هایی درباره تغییرات مدیریت حافظه منتشر می‌کند. طبیعتا، برای یادگیری زباله‌روبی، شما بهتر است به طور کلی با یاد گرفتن موارد داخلی V8 آماده شوید و بلاگ [Vyacheslav Egorov](http://mrale.ph) که یکی از مهندس‌های V8 بود را بخوانید. من می‌گویم: "V8" چون مقاله‌های زیادی درباره آن در اینترنت وجود دارد. برای موتورهای دیگر، بیشتر روش‌ها مشابه هستند، اما زباله‌روبی در جنبه‌های زیادی متفاوت است.
 
-In-depth knowledge of engines is good when you need low-level optimizations. It would be wise to plan that as the next step after you're familiar with the language.  
+اگر شما بهینه‌سازی‌های سطح پایین را نیاز دارید، دانش عمیق درباره موتورها چیز خوبی است. این کار عاقلانه‌ای است که بعد از آشنایی با زبان برای آن برنامه‌ریزی کنید.
+=======
+If you are familiar with low-level programming, more detailed information about V8's garbage collector is in the article [A tour of V8: Garbage Collection](https://jayconrod.com/posts/55/a-tour-of-v8-garbage-collection).
+
+The [V8 blog](https://v8.dev/) also publishes articles about changes in memory management from time to time. Naturally, to learn more about garbage collection, you'd better prepare by learning about V8 internals in general and read the blog of [Vyacheslav Egorov](https://mrale.ph) who worked as one of the V8 engineers. I'm saying: "V8", because it is best covered by articles on the internet. For other engines, many approaches are similar, but garbage collection differs in many aspects.
+
+In-depth knowledge of engines is good when you need low-level optimizations. It would be wise to plan that as the next step after you're familiar with the language.
+>>>>>>> 5dff42ba283bce883428c383c080fa9392b71df8

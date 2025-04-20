@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# Store read dates
+# تاریخ خواندن را ذخیره کنید
 
-There's an array of messages as in the [previous task](info:task/recipients-read). The situation is similar.
+یک آرایه از پیام‌ها مانند [تکلیف قبلی](info:task/recipients-read) داریم. وضعیت هم مشابه است.
 
 ```js
 let messages = [
@@ -14,8 +14,8 @@ let messages = [
 ];
 ```
 
-The question now is: which data structure you'd suggest to store the information: "when the message was read?".
+حالا سوال این است: کدام ساختار داده را برای ذخیره اطلاعات «در چه تاریخی پیام خوانده شد؟» استفاده می‌کنید.
 
-In the previous task we only needed to store the "yes/no" fact. Now we need to store the date, and it should only remain in memory until the message is garbage collected.
+در تکلیف قبلی ما فقط نیاز داشتیم که «بله/خیر» را ذخیره کنیم. حالا نیاز داریم که تاریخ را ذخیره کنیم و باید تا زمانی که پیام زباله‌روبی شود باقی بماند.
 
-P.S. Dates can be stored as objects of built-in `Date` class, that we'll cover later.
+پی‌نوشت: تاریخ‌ها می‌توانند به عنوان شیء از کلاس درون ساخت `Date` ذخیره شوند که بعدا آن را پوشش می‌دهیم.

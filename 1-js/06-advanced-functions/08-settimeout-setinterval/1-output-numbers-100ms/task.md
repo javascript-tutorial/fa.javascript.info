@@ -2,11 +2,11 @@ importance: 5
 
 ---
 
-# Output every second
+# در هر ثانیه خروجی بگیرید
 
-Write a function `printNumbers(from, to)` that outputs a number every second, starting from `from` and ending with `to`.
+یک تابع `printNumbers(from, to)` بنویسید که هر ثانیه یک عدد را نمایش می‌دهد که از `from` شروع می‌شود و با `to` پایان می‌یابد.
 
-Make two variants of the solution.
+دو نوع راه‌حل بسازید.
 
-1. Using `setInterval`.
-2. Using nested `setTimeout`.
+1. با استفاده از `setInterval`.
+2. با استفاده از `setTimeout` تودرتو.

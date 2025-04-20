@@ -2,11 +2,11 @@ importance: 5
 
 ---
 
-# Using "this" in object literal
+# استفاده از "this" در شیء لیترال
 
-Here the function `makeUser` returns an object.
+در اینجا تابع `makeUser` یک شیء را برمی‌گرداند.
 
-What is the result of accessing its `ref`? Why?
+نتیجه دسترسی داشتن به `ref` چیست؟ چرا؟
 
 ```js
 function makeUser() {
@@ -14,10 +14,10 @@ function makeUser() {
     name: "John",
     ref: this
   };
-};
+}
 
 let user = makeUser();
 
-alert( user.ref.name ); // What's the result?
+alert( user.ref.name ); // نتیجه چیست؟
 ```
 

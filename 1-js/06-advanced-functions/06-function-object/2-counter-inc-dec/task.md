@@ -2,14 +2,14 @@ importance: 5
 
 ---
 
-# Set and decrease for counter
+# تنظیم و کم کردن برای شمارنده
 
-Modify the code of `makeCounter()` so that the counter can also decrease and set the number:
+کد `makeCounter()` را طوری تغییر دهید که شمارنده بتواند هم عدد را تنظیم کند و هم آن را کاهش دهد:
 
-- `counter()` should return the next number (as before).
-- `counter.set(value)` should set the counter to `value`.
-- `counter.decrease()` should decrease the counter by 1.
+- `counter()` باید عدد بعدی را برگرداند (مانند قبل).
+- `counter.set(value)` باید شمارنده را در `value` تنظیم کند.
+- `counter.decrease()` باید از شمارنده به اندازه 1 کم کند.
 
-See the sandbox code for the complete usage example.
+برای دیدن مثالی کامل از نحوه استفاده، کد جعبهٔ شنی(sandbox) را ببینید.
 
-P.S. You can use either a closure or the function property to keep the current count. Or write both variants.
+پی‌نوشت: شما می‌توانید از کلوژر یا ویژگی تابع برای حفظ کردن شماره کنونی استفاده کنید. یا هر دو نوع را بنویسید.

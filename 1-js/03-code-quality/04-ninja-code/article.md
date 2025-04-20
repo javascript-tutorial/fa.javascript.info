@@ -1,7 +1,16 @@
 # کد نینجا
 
+@@@needs translation@@@
+@@@old part@@@
 ```quote author="کنفسیوس"
 یادگیری بدون تفکر، بی‌فایده است؛ تفکر بدون یادگیری، خطرناک.
+@@@old part@@@
+
+@@@new part@@@
+```quote author="Confucius (Analects)"
+Learning without thought is labor lost; thought without learning is perilous.
+@@@new part@@@
+@@@needs translation@@@
 ```
 
 نینجاهای برنامه‌نویس در گذشته از این ترفندها برای باز کردن ذهن **حافظان کد** استفاده می‌کرده‌اند.
@@ -16,6 +25,12 @@
 ```warn header="مزاح"
 افراد زیادی سعی می‌کنند مسیرهای نینجا شدن را طی کنند. تعداد اندکی موفق می‌شوند.
 ```
+
+
+```warn header="نکته مترجم"
+تقریباً هر جمله ای که در این بخش بیان میشه یک عادت / مفهوم کد غیرسالم هست. لطفا اون ها را امتحان و رعایت نکنید، همون جوری که در بالا گفته شده همه این ها صرفا برای خنده است و اینکه شما نباید از اینجور ساختار ها استفاده کنید 
+```
+
 
 ## اختصار، روح شوخ‌طبعی است
 
@@ -102,8 +117,16 @@ i = i ? i < 0 ? Math.max(0, len + i) : i : 0;
 
 ## مترادف‌های خلاقانه
 
+@@@needs translation@@@
+@@@old part@@@
 ```quote author="کنفسیوس"
 سخت‌ترین کار، یافتن یک گربه‌ی سیاه در یک اتاق تاریک است، به‌خصوص اگر هیچ گربه‌ای وجود نداشته باشد.
+@@@old part@@@
+@@@new part@@@
+```quote author="Laozi (Tao Te Ching)"
+The Tao that can be told is not the eternal Tao. The name that can be named is not the eternal name.
+@@@new part@@@
+@@@needs translation@@@
 ```
 
 استفاده از نام‌های **مشابه** برای مفاهیم **یکسان**  زندگی را بسیار جذاب‌تر نموده و خلاقیت شما را در معرض دید عموم قرار می‌دهد.

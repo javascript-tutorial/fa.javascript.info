@@ -2,20 +2,20 @@ importance: 5
 
 ---
 
-# Deposit calculator
+# ماشین حساب سپرده
 
-Create an interface that allows to enter a sum of bank deposit and percentage, then calculates how much it will be after given periods of time.
+یک interface ایجاد کنید که اجازه می‌دهد مجموع سپرده بانکی و درصد را وارد کنید، سپس محاسبه می‌کند که پس از دوره‌های زمانی مشخص چقدر خواهد بود.
 
-Here's the demo:
+اینجا نسخه‌ی نمایشی هست:
 
 [iframe src="solution" height="350" border="1"]
 
-Any input change should be processed immediately.
+هر تغییری در input باید بلافاصله پردازش شود.
 
-The formula is:
+فرمول این است:
 ```js
-// initial: the initial money sum
-// interest: e.g. 0.05 means 5% per year
-// years: how many years to wait
-let result = Math.round(initial * (1 + interest * years));
+// initial: مبلغ اولیه پول
+// interest: مثلا 0.05 یعنی 5% در هر سال
+// years: تعداد سال برای صبر کردن
+let result = Math.round(initial * (1 + interest) ** years);
 ```

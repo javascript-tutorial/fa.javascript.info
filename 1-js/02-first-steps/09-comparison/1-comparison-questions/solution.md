@@ -10,12 +10,12 @@ null == "\n0\n" → false
 null === +"\n0\n" → false
 ```
 
-Some of the reasons:
+بعضی از دلایل:
 
-1. Obviously, true.
-2. Dictionary comparison, hence false. `"a"` is smaller than `"p"`.
-3. Again, dictionary comparison, first char of `"2"` is greater than the first char of `"1"`.
-4. Values `null` and `undefined` equal each other only.
-5. Strict equality is strict. Different types from both sides lead to false.
-6. Similar to `(4)`, `null` only equals `undefined`.
-7. Strict equality of different types.
+1. true، نیاز به توضیح نداره.
+2. false، بر اساس مقایسه لغت نامه ای که `"a"` کوچک تر از `"p"` است.
+3. دوباره مانند مثال قبل در مقایسه لغت نامه ای حرف اول `"2"` بزرگ تر از حرف اول عبارت دیگر `"1"` است.
+4. مقادیر `null` و `undefined` تنها برابر یکدیگرند.
+5. برابری سختگیرانه، سختگیرانه است. به دلیل تفاوت در نوع داده پاسخ false است.
+6. مانند مثال شماره `(4)`، `null` تنها برابر `undefined` است.
+7. برابری سختگیرانه برای دو داده از دو نوع متفاوت.

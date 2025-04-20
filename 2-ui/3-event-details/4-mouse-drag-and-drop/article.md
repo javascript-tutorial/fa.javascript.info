@@ -18,19 +18,19 @@ The basic Drag'n'Drop algorithm looks like this:
 2. Then on `mousemove` move it by changing `left/top` with `position:absolute`.
 3. On `mouseup` - perform all actions related to finishing the drag'n'drop.
 
-These are the basics. Later we'll see how to other features, such as highlighting current underlying elements while we drag over them.
+These are the basics. Later we'll see how to add other features, such as highlighting current underlying elements while we drag over them.
 
 Here's the implementation of dragging a ball:
 
 ```js
-ball.onmousedown = function(event) { 
+ball.onmousedown = function(event) {
   // (1) prepare to moving: make absolute and on top by z-index
   ball.style.position = 'absolute';
   ball.style.zIndex = 1000;
 
   // move it out of any current parents directly into body
   // to make it positioned relative to the body
-  document.body.append(ball);  
+  document.body.append(ball);
 
   // centers the ball at (pageX, pageY) coordinates
   function moveAt(pageX, pageY) {
@@ -93,14 +93,14 @@ So we should listen on `document` to catch it.
 
 ## Correct positioning
 
-In the examples above the ball is always moved so, that it's center is under the pointer:
+In the examples above the ball is always moved so that its center is under the pointer:
 
 ```js
 ball.style.left = pageX - ball.offsetWidth / 2 + 'px';
 ball.style.top = pageY - ball.offsetHeight / 2 + 'px';
 ```
 
-Not bad, but there's a side-effect. To initiate the drag'n'drop, we can `mousedown` anywhere on the ball. But if "take" it from its edge, then the ball suddenly "jumps" to become centered under the mouse pointer.
+Not bad, but there's a side effect. To initiate the drag'n'drop, we can `mousedown` anywhere on the ball. But if "take" it from its edge, then the ball suddenly "jumps" to become centered under the mouse pointer.
 
 It would be better if we keep the initial shift of the element relative to the pointer.
 
@@ -124,7 +124,7 @@ Let's update our algorithm:
 
     ```js
     // onmousemove
-    // ball has position:absoute
+    // ball has position:absolute
     ball.style.left = event.pageX - *!*shiftX*/!* + 'px';
     ball.style.top = event.pageY - *!*shiftY*/!* + 'px';
     ```
@@ -219,7 +219,7 @@ That's why the initial idea to put handlers on potential droppables doesn't work
 
 So, what to do?
 
-There's a method called `document.elementFromPoint(clientX, clientY)`. It returns the most nested element on given window-relative coordinates (or `null` if given coordinates are out of the window).
+There's a method called `document.elementFromPoint(clientX, clientY)`. It returns the most nested element on given window-relative coordinates (or `null` if given coordinates are out of the window). If there are multiple overlapping elements on the same coordinates, then the topmost one is returned.
 
 We can use it in any of our mouse event handlers to detect the potential droppable under the pointer, like this:
 
@@ -276,7 +276,7 @@ function onMouseMove(event) {
 }
 ```
 
-In the example below when the ball is dragged over the soccer gate, the gate is highlighted.
+In the example below when the ball is dragged over the soccer goal, the goal is highlighted.
 
 [codetabs height=250 src="ball4"]
 
@@ -300,4 +300,4 @@ We can lay a lot on this foundation.
 - We can use event delegation for `mousedown/up`. A large-area event handler that checks  `event.target` can manage Drag'n'Drop for hundreds of elements.
 - And so on.
 
-There are frameworks that build architecture over it: `DragZone`, `Droppable`, `Draggable` and other classes. Most of them do the similar stuff to what's described above, so it should be easy to understand them now. Or roll your own, as you can see that that's easy enough to do, sometimes easier than adapting a third-part solution.
+There are frameworks that build architecture over it: `DragZone`, `Droppable`, `Draggable` and other classes. Most of them do the similar stuff to what's described above, so it should be easy to understand them now. Or roll your own, as you can see that that's easy enough to do, sometimes easier than adapting a third-party solution.

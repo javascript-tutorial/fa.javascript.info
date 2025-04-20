@@ -2,13 +2,13 @@ importance: 5
 
 ---
 
-# Last day of month?
+# آخرین روز ماه؟
 
-Write a function `getLastDayOfMonth(year, month)` that returns the last day of month. Sometimes it is 30th, 31st or even 28/29th for Feb.
+تابع `getLastDayOfMonth(year, month)` را بنویسید که آخرین روز ماه را برمی‌گرداند. بعضی اوقات آخرین روز 30ام، 31ام یا حتی برای ماه فوریه 28/29ام است.
 
-Parameters:
+پارامترها:
 
-- `year` -- four-digits year, for instance 2012.
-- `month` -- month, from 0 to 11.
+- `year` -- سال 4 رقمی، برای مثال 2012.
+- `month` -- ماه، از 0 تا 11.
 
-For instance, `getLastDayOfMonth(2012, 1) = 29` (leap year, Feb).
+برای مثال، `getLastDayOfMonth(2012, 1) = 29` (سال کبیسه، فوریه).

@@ -1,22 +1,22 @@
 
-# Class basic syntax
+# سینتکس پایه کلاس
 
-```quote author="Wikipedia"
-In object-oriented programming, a *class* is an extensible program-code-template for creating objects, providing initial values for state (member variables) and implementations of behavior (member functions or methods).
+```quote author="ویکی‌پدیا"
+در برنامه‌نویسی شیء‌گرا، *کلاس* یک الگوی-کد-برنامه قابل توسعه برای ایجاد اشیاء، ارائه مقادیر اولیه برای حالت (متغیرهای عضو) و پیاده‌سازی رفتار (توابع یا روش‌های عضو) است.
 ```
 
-In practice, we often need to create many objects of the same kind, like users, or goods or whatever.
+در عمل، ما اغلب نیاز به ایجاد بسیاری از اشیاء از یک نوع، مانند کاربران، یا کالاها یا هر چیز دیگری داریم.
 
-As we already know from the chapter <info:constructor-new>, `new function` can help with that.
+همانطور که قبلاً از فصل <info:constructor-new> می‌دانیم، `new function` می‌تواند در این مورد کمک کند.
 
-But in the modern JavaScript, there's a more advanced "class" construct, that introduces great new features which are useful for object-oriented programming.
+اما در جاوا‌اسکریپت مدرن، ساختار «کلاس» پیشرفته‌تری وجود دارد که ویژگی‌های جدید بسیار خوبی را معرفی می‌کند که برای برنامه‌نویسی شیء‌گرا مفید هستند.
 
-## The "class" syntax
+## سینتکس «کلاس»
 
-The basic syntax is:
+سینتکس پایه اینگونه است:
 ```js
 class MyClass {
-  // class methods
+  // متد‌های کلاس
   constructor() { ... }
   method1() { ... }
   method2() { ... }
@@ -25,11 +25,11 @@ class MyClass {
 }
 ```
 
-Then use `new MyClass()` to create a new object with all the listed methods.
+سپس از `new MyClass()` برای ایجاد یک شیء جدید با تمام متدهای فهرست شده استفاده کنید.
 
-The `constructor()` method is called automatically by `new`, so we can initialize the object there.
+متد `constructor()` به طور خودکار توسط `new` فراخوانی می‌شود، بنابراین می‌توانیم شیء را در آنجا مقداردهی اولیه کنیم.
 
-For example:
+برای مثال:
 
 ```js run
 class User {
@@ -49,28 +49,28 @@ let user = new User("John");
 user.sayHi();
 ```
 
-When `new User("John")` is called:
-1. A new object is created.
-2. The `constructor` runs with the given argument and assigns `this.name` to it.
+وقتی `new User("John")` فراخوانی می‌شود:
+1. یک شیء جدید ایجاد می‌شود.
+2. `constructor` با آرگومان داده شده اجرا می‌شود و آن را به `this.name` اختصاص می‌دهد.
 
-...Then we can call object methods, such as `user.sayHi()`.
+..سپس ما می‌توانیم متد‌های شیء را فراخوانی کنیم، مانند `user.sayHi()`.
 
 
-```warn header="No comma between class methods"
-A common pitfall for novice developers is to put a comma between class methods, which would result in a syntax error.
+```warn header="بین متدهای کلاس کاما وجود ندارد"
+یک مشکل رایج برای توسعه دهندگان تازه کار این است که یک کاما بین متدهای کلاس قرار می‌دهند که منجر به یک خطای سینتکس می‌شود.
 
-The notation here is not to be confused with object literals. Within the class, no commas are required.
+نماد در اینجا نباید با شیء لفظی اشتباه شود. در کلاس، نیازی به کاما نیست.
 ```
 
-## What is a class?
+## یک کلاس چیست؟
 
-So, what exactly is a `class`? That's not an entirely new language-level entity, as one might think.
+بنابراین، `class` دقیقاً چیست؟ این یک موجودیت کاملاً جدید در سطح زبان نیست، همانطور که ممکن است تصور شود.
 
-Let's unveil any magic and see what a class really is. That'll help in understanding many complex aspects.
+بیایید از هر جادویی رونمایی کنیم و ببینیم کلاس واقعاً چیست. این به درک بسیاری از جنبه‌های پیچیده کمک می‌کند.
 
-In JavaScript, a class is a kind of function.
+در جاوااسکریپت کلاس نوعی تابع است.
 
-Here, take a look:
+در اینجا، نگاهی بیندازیم:
 
 ```js run
 class User {
@@ -78,24 +78,24 @@ class User {
   sayHi() { alert(this.name); }
 }
 
-// proof: User is a function
+// اثبات: کاربر یک تابع است
 *!*
-alert(typeof User); // function
+alert(typeof User); // تابع
 */!*
 ```
 
-What `class User {...}` construct really does is:
+کاری که ساختار `class User {...}` واقعا انجام می‌دهد این است:
 
-1. Creates a function named `User`, that becomes the result of the class declaration. The function code is taken from the `constructor` method (assumed empty if we don't write such method).
-2. Stores class methods, such as `sayHi`, in `User.prototype`.
+1. تابعی به نام `User` ایجاد می‌کند که نتیجه تعریف کلاس می‌شود. کد تابع از متد سازنده گرفته شده است (اگر چنین روشی را ننویسیم خالی فرض می‌شود).
+2. متدهای کلاس، مانند `sayHi` را در `User.prototype` ذخیره می‌کند.
 
-After `new User` object is created, when we call its method, it's taken from the prototype, just as described in the chapter <info:function-prototype>. So the object has access to class methods.
+پس از ایجاد شیء `new User`، وقتی متد آن را فراخوانی می‌کنیم، از نمونه اولیه گرفته می‌شود، درست همانطور که در فصل <info:function-prototype> توضیح داده شد. بنابراین شیء به متدهای کلاس دسترسی دارد.
 
-We can illustrate the result of `class User` declaration as:
+ما می‌توانیم نتیجه تعریف `class User` را به صورت زیر نشان دهیم:
 
 ![](class-user.svg)
 
-Here's the code to introspect it:
+این کد برای درون‌یابی آن است:
 
 ```js run
 class User {
@@ -103,34 +103,34 @@ class User {
   sayHi() { alert(this.name); }
 }
 
-// class is a function
-alert(typeof User); // function
+// کلاس یک تابع است
+alert(typeof User); // تابع
 
-// ...or, more precisely, the constructor method
+// ... یا به طور دقیق تر، متد سازنده
 alert(User === User.prototype.constructor); // true
 
-// The methods are in User.prototype, e.g:
-alert(User.prototype.sayHi); // alert(this.name);
+// :هستند، به عنوان مثال User.prototype متدها در
+alert(User.prototype.sayHi); // sayHi کد متد
 
-// there are exactly two methods in the prototype
-alert(Object.getOwnPropertyNames(User.prototype)); // constructor, sayHi
+// دقیقا دو متد در پروتوتایپ وجود دارد
+alert(Object.getOwnPropertyNames(User.prototype)); // sayHi ،سازنده
 ```
 
-## Not just a syntactic sugar
+## فقط یک سینتکس برای زیباکردن(syntactic sugar) نیست
 
-Sometimes people say that `class` is a "syntactic sugar" (syntax that is designed to make things easier to read, but doesn't introduce anything new), because we could actually declare the same without `class` keyword at all:
+گاهی اوقات مردم می‌گویند که `class` یک «سینتکس برای زیباکردن(syntactic sugar)» است (سینتکسی که برای خواندن ساده‌تر طراحی شده است، اما چیز جدیدی معرفی نمی‌کند)، زیرا در واقع می‌توانیم همان را بدون کلمه کلیدی `class` تعریف کنیم:
 
 ```js run
-// rewriting class User in pure functions
+// بازنویسی کلاس کاربر در توابع خالص
 
-// 1. Create constructor function
+// 1. ایجاد تابع سازنده
 function User(name) {
   this.name = name;
 }
-// a function prototype has "constructor" property by default,
-// so we don't need to create it
+// یک پروتوتایپ تابع به طور پیش‌فرض دارای ویژگی "سازنده" است،
+// پس ما نیاز نداریم که آن را ایجاد کنیم
 
-// 2. Add the method to prototype
+// 2. اضافه کردن متد به پروتوتایپ
 User.prototype.sayHi = function() {
   alert(this.name);
 };
@@ -140,13 +140,13 @@ let user = new User("John");
 user.sayHi();
 ```
 
-The result of this definition is about the same. So, there are indeed reasons why `class` can be considered a syntactic sugar to define a constructor together with its prototype methods.
+نتیجه این تعریف تقریباً یکسان است. بنابراین، در واقع دلایلی وجود دارد که می‌توان `class` را یک سینتکس برای زیباکردن(syntactic sugar) برای تعریف سازنده همراه با روش‌های نمونه اولیه آن در نظر گرفت.
 
-Still, there are important differences.
+با این حال، تفاوت‌های مهمی وجود دارد.
 
-1. First, a function created by `class` is labelled by a special internal property `[[FunctionKind]]:"classConstructor"`. So it's not entirely the same as creating it manually.
+1. ابتدا، یک تابع ایجاد شده توسط `class` توسط یک ویژگی داخلی ویژه `[[IsClassConstructor]]: true` برچسب گذاری می‌شود:. بنابراین کاملاً مشابه ایجاد آن به صورت دستی نیست.
 
-    The language checks for that property in a variety of places. For example, unlike a regular function, it must be called with `new`:
+    زبان آن ویژگی را در مکان‌های مختلف بررسی می‌کند. به عنوان مثال، بر خلاف یک تابع معمولی، باید با `new` فراخوانی شود:
 
     ```js run
     class User {
@@ -154,10 +154,10 @@ Still, there are important differences.
     }
 
     alert(typeof User); // function
-    User(); // Error: Class constructor User cannot be invoked without 'new'
+    User(); // خطا: سازنده کلاس کاربر را نمی‌توان بدون 'new' فراخوانی کرد
     ```
 
-    Also, a string representation of a class constructor in most JavaScript engines starts with the "class..."
+    همچنین، نمایش رشته‌ای از سازنده کلاس در اکثر موتورهای جاوا‌اسکریپت با "کلاس..." شروع می‌شود.
 
     ```js run
     class User {
@@ -166,80 +166,80 @@ Still, there are important differences.
 
     alert(User); // class User { ... }
     ```
-    There are other differences, we'll see them soon.
+    تفاوت‌های دیگری نیز وجود دارد، به زودی آنها را خواهیم دید.
 
-2. Class methods are non-enumerable.
-    A class definition sets `enumerable` flag to `false` for all methods in the `"prototype"`.
+2. روش‌های کلاس غیرقابل شمارش هستند.
+     یک تعریف کلاس، پرچم `enumerable` را برای همه متدهای `"prototype"`روی `false` تنظیم می‌کند.
 
-    That's good, because if we `for..in` over an object, we usually don't want its class methods.
+    این خوب است، زیرا اگر `for..in` را روی یک شیء قرار دهیم، معمولاً متد‌های کلاس آن را نمی‌خواهیم.
 
-3. Classes always `use strict`.
-    All code inside the class construct is automatically in strict mode.
+3. کلاس‌ها همیشه از `use strict` استفاده می‌کنند.
+     تمام کدهای داخل ساختار کلاس به طور خودکار در حالت سخت قرار می‌گیرند.
 
-Besides, `class` syntax brings many other features that we'll explore later.
+علاوه بر این، سینتکس `class` بسیاری از ویژگی‌های دیگر را به همراه دارد که بعداً بررسی خواهیم کرد.
 
-## Class Expression
+## بیان کلاس
 
-Just like functions, classes can be defined inside another expression, passed around, returned, assigned, etc.
+درست مانند توابع، کلاس‌ها را می‌توان در یک عبارت دیگر تعریف کرد، ارسال کرد، برگرداند، تخصیص داد و غیره.
 
-Here's an example of a class expression:
+در اینجا نمونه‌ای از عبارت کلاس آورده شده است:
 
 ```js
 let User = class {
   sayHi() {
-    alert("Hello");
+    alert("سلام");
   }
 };
 ```
 
-Similar to Named Function Expressions, class expressions may have a name.
+شبیه به عبارت‌های تابع نام‌گذاری شده، عبارات کلاس ممکن است یک نام داشته باشند.
 
-If a class expression has a name, it's visible inside the class only:
+اگر یک عبارت کلاس دارای نام باشد، فقط در داخل کلاس قابل مشاهده است:
 
 ```js run
-// "Named Class Expression"
-// (no such term in the spec, but that's similar to Named Function Expression)
+// «عبارت کلاس نامگذاری شده»
+// (چنین اصطلاحی در مشخصات وجود ندارد، اما شبیه به عبارت تابع نامگذاری شده است)
 let User = class *!*MyClass*/!* {
   sayHi() {
-    alert(MyClass); // MyClass name is visible only inside the class
+    alert(MyClass); // فقط در داخل کلاس قابل مشاهده است MyClass نام
   }
 };
 
-new User().sayHi(); // works, shows MyClass definition
+new User().sayHi(); // را نشان می‌دهد MyClass کار می کند، تعریف
 
-alert(MyClass); // error, MyClass name isn't visible outside of the class
+alert(MyClass); // خارج از کلاس قابل مشاهده نیست MyClass خطا، نام
 ```
 
-We can even make classes dynamically "on-demand", like this:
+ما حتی می‌توانیم کلاس‌ها را به صورت پویا "بر اساس تقاضا" بسازیم، مانند این:
 
 ```js run
 function makeClass(phrase) {
-  // declare a class and return it
+  // یک کلاس تعریف کنید و آن را برگردانید
   return class {
     sayHi() {
       alert(phrase);
-    };
+    }
   };
 }
 
 // Create a new class
-let User = makeClass("Hello");
+let User = makeClass("سلام");
 
-new User().sayHi(); // Hello
+new User().sayHi(); // سلام
 ```
 
 
-## Getters/setters
+## گیرنده/ تنظیم کننده
 
-Just like literal objects, classes may include getters/setters, computed properties etc.
+درست مانند اشیاء تحت اللفظی، کلاس‌ها ممکن است شامل گیرنده‌ها/تنظیم کننده‌ها، خصوصیات محاسبه شده و غیره باشند.
 
-Here's an example for `user.name` implemented using `get/set`:
+در اینجا یک مثال برای `user.name` است که با استفاده از `get/set` پیاده‌سازی شده است:
 
 ```js run
 class User {
 
   constructor(name) {
-    // invokes the setter
+    // تنظیم کننده را فراخوانی می‌کند
     this.name = name;
   }
 
@@ -253,7 +253,7 @@ class User {
   set name(value) {
 */!*
     if (value.length < 4) {
-      alert("Name is too short.");
+      alert("نام بسیار کوتاه است.");
       return;
     }
     this._name = value;
@@ -264,14 +264,14 @@ class User {
 let user = new User("John");
 alert(user.name); // John
 
-user = new User(""); // Name is too short.
+user = new User(""); // .نام بسیار کوتاه است
 ```
 
-Technically, such class declaration works by creating getters and setters in `User.prototype`.
+از نظر فنی، چنین فراخوانی کلاس با ایجاد گیرنده و تنظیم کننده در `User.prototype` کار می‌کند.
 
-## Computed names [...]
+## نام‌های محاسبه شده [...]
 
-Here's an example with a computed method name using brackets `[...]`:
+در اینجا یک مثال با نام متد محاسبه شده با استفاده از براکت  `[...]` آورده شده است:
 
 ```js run
 class User {
@@ -279,7 +279,7 @@ class User {
 *!*
   ['say' + 'Hi']() {
 */!*
-    alert("Hello");
+    alert("سلام");
   }
 
 }
@@ -287,19 +287,19 @@ class User {
 new User().sayHi();
 ```
 
-Such features are easy to remember, as they resemble that of literal objects.
+به خاطر سپردن چنین ویژگی‌هایی آسان است، زیرا آنها شبیه به اشیاء تحت اللفظی هستند.
 
-## Class fields
+## فیلدهای کلاس
 
-```warn header="Old browsers may need a polyfill"
-Class fields are a recent addition to the language.
+```warn header="مرورگرهای قدیمی ممکن است به polyfill نیاز داشته باشند"
+فیلدهای کلاس اخیرا به زبان اضافه شده هستند.
 ```
 
-Previously, our classes only had methods.
+قبلا، کلاس‌های ما فقط متد داشتند.
 
-"Class fields" is a syntax that allows to add any properties.
+"فیلدهای کلاس" سینتکسی است که اجازه می‌دهد هر ویژگی را اضافه کنید.
 
-For instance, let's add `name` property to `class User`:
+برای مثال، اجازه دهید ویژگی `name` را به `class User` اضافه کنیم:
 
 ```js run
 class User {
@@ -315,9 +315,9 @@ class User {
 new User().sayHi(); // Hello, John!
 ```
 
-So, we just write "<property name> = <value>" in the declaration, and that's it.
+بنابراین، ما فقط "<property name> = <value>" را در فراخوانی می‌نویسیم، و تمام.
 
-The important difference of class fields is that they are set on individual objects, not `User.prototype`:
+تفاوت مهم فیلدهای کلاس در این است که آنها بر روی اشیاء جداگانه تنظیم می‌شوند، نه `User.prototype`:
 
 ```js run
 class User {
@@ -331,12 +331,12 @@ alert(user.name); // John
 alert(User.prototype.name); // undefined
 ```
 
-Technically, they are processed after the constructor has done it's job, and we can use for them complex expressions and function calls:
+همچنین می‌توانیم با استفاده از عبارات و فراخوانی‌های توابع پیچیده‌تر، مقادیری را اختصاص دهیم:
 
 ```js run
 class User {
 *!*
-  name = prompt("Name, please?", "John");
+  name = prompt("نام، لطفا؟", "John");
 */!*
 }
 
@@ -344,13 +344,14 @@ let user = new User();
 alert(user.name); // John
 ```
 
-### Making bound methods with class fields
 
-As demonstrated in the chapter <info:bind> functions in JavaScript have a dynamic `this`. It depends on the context of the call.
+### ساخت متدهای محدود با فیلدهای کلاس
 
-So if an object method is passed around and called in another context, `this` won't be a reference to its object any more.
+همانطور که در فصل نشان داده شد توابع <info:bind> در جاوا‌اسکریپت دارای `this` پویا هستند. بستگی به زمینه فراخوانی دارد.
 
-For instance, this code will show `undefined`:
+بنابراین، اگر یک متد شیء منتقل شود و در زمینه دیگری فراخوانی شود، `this` دیگر ارجاعی به شیء آن نخواهد بود.
+
+به عنوان مثال، این کد `undefined` را نشان می‌دهد:
 
 ```js run
 class Button {
@@ -363,42 +364,21 @@ class Button {
   }
 }
 
-let button = new Button("hello");
+let button = new Button("سلام");
 
 *!*
 setTimeout(button.click, 1000); // undefined
 */!*
 ```
 
-The problem is called "losing `this`".
+مشکل "از دست دادن `this`" نامیده می‌شود.
 
-There are two approaches to fixing it, as discussed in the chapter <info:bind>:
+همانطور که در فصل <info:bind> مورد بحث قرار گرفت، دو روش برای رفع آن وجود دارد:
 
-1. Pass a wrapper-function, such as `setTimeout(() => button.click(), 1000)`.
-2. Bind the method to object, e.g. in the constructor:
+1. یک تابع دربرگیرنده مانند `setTimeout(() => button.click(), 1000)` را عبور دهید.
+2. متد را به شیء متصل کنید، به عنوان مثال. در سازنده
 
-```js run
-class Button {
-  constructor(value) {
-    this.value = value;
-*!*
-    this.click = this.click.bind(this);
-*/!*
-  }
-
-  click() {
-    alert(this.value);
-  }
-}
-
-let button = new Button("hello");
-
-*!*
-setTimeout(button.click, 1000); // hello
-*/!*
-```
-
-Class fields provide a more elegant syntax for the latter solution:
+فیلدهای کلاس، سینتکس بسیار ظریف دیگری را ارائه می‌دهند:
 
 ```js run
 class Button {
@@ -412,37 +392,37 @@ class Button {
 */!*
 }
 
-let button = new Button("hello");
+let button = new Button("سلام");
 
-setTimeout(button.click, 1000); // hello
+setTimeout(button.click, 1000); // سلام
 ```
 
-The class field `click = () => {...}` creates an independent function on each `Button` object, with `this` bound to the object. Then we can pass `button.click` around anywhere, and it will be called with the right `this`.
+فیلد کلاس `click = () => {...}` بر اساس هر شیء ایجاد می‌شود، یک تابع جداگانه برای هر شیء `Button` وجود دارد که `this` در داخل آن به آن شیء ارجاع می‌دهد. ما می‌توانیم `button.click` را به هر‌جایی منتقل کنیم، و مقدار `this` همیشه درست خواهد بود.
 
-That's especially useful in browser environment, when we need to setup a method as an event listener.
+این به ویژه در محیط مرورگر، برای شنوندگان رویداد مفید است.
 
-## Summary
+## خلاصه
 
-The basic class syntax looks like this:
+سینتکس کلاس پایه به شکل زیر است:
 
 ```js
 class MyClass {
-  prop = value; // property
+  prop = value; // ویژگی
 
-  constructor(...) { // constructor
+  constructor(...) { // سازنده
     // ...
   }
 
-  method(...) {} // method
+  method(...) {} // متد
 
-  get something(...) {} // getter method
-  set something(...) {} // setter method
+  get something(...) {} // متد گیرنده
+  set something(...) {} // متد تنظیم کننده
 
-  [Symbol.iterator]() {} // method with computed name (symbol here)
+  [Symbol.iterator]() {} // (Symbol در اینجا) متد با نام محاسبه شده
   // ...
 }
 ```
 
-`MyClass` is technically a function (the one that we provide as `constructor`), while methods, getters and setters are written to `MyClass.prototype`.
+`MyClass` از نظر فنی یک تابع است (توابعی که ما به عنوان `constructor` ارائه می‌کنیم)، در حالی که متدها، دریافت کننده‌ها و تنظیم کننده‌ها در `MyClass.prototype` نوشته می‌شوند.
 
-In the next chapters we'll learn more about classes, including inheritance and other features.
+در فصل‌های بعدی درباره کلاس‌ها، از جمله وراثت و سایر ویژگی‌ها بیشتر خواهیم آموخت.

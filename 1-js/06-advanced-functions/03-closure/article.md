@@ -1,71 +1,75 @@
 
-# Variable scope
+# محدوده متغیر، کلوژِر
 
-JavaScript is a very function-oriented language. It gives us a lot of freedom. A function can be created dynamically, passed as an argument to another function and called from a totally different place of code later.
+جاوااسکریپت یک زبان بسیار تابع‌محور است. این زبان به ما آزادی زیادی می‌دهد. یک تابع می‌تواند در هر لحظه ساخته شود، به عنوان آرگومان به تابع دیگری داده شود و سپس بعدا در یک جای کاملا متفاوت از کد فراخوانی شود.
 
-We already know that a function can access variables outside of it.
+ما از قبل می‌دانیم که یک تابع می‌تواند به متغیرهای بیرون از خودش دسترسی داشته باشد (متغیرهای «بیرونی»).
 
-Now let's expand our knowledge to include more complex scenarios.
+اما اگر متغیرهای بیرونی از زمانی که یک تابع ساخته شد تغییر کنند چه اتفاقی می‌افتد؟ آیا تابع مقدارهای جدید را دریافت می‌کند یا قدیمی‌ها را؟
 
-```smart header="We'll talk about `let/const` variables here"
-In JavaScript, there are 3 ways to declare a variable: `let`, `const` (the modern ones), and `var` (the remnant of the past).
+و اگر یک تابع به عنوان یک پارامتر رد و بدل شود و جای دیگری از کد فراخوانی شود، آیا به متغیرهای بیرونی در جای جدید دسترسی پیدا می‌کند؟
 
-- In this article we'll use `let` variables in examples.
-- Variables, declared with `const`, behave the same, so this article is about `const` too.
-- The old `var` has some notable differences, they will be covered in the article <info:var>.
+بیایید دانش خود را گسترده‌تر کنیم تا این سناریوها و پیچیده‌تر از اینها را درک کنیم.
+
+```smart header="اینجا ما درباره متغیرهای `let/const` حرف می‌زنیم"
+در جاوااسکریپت، 3 راه برای تعریف یک متغیر وجود دارد: `let`، `const` (این دو روش مدرن هستند) و `var` (که از گذشته باقی مانده است).
+
+- در این مقاله ما از متغیرهای `let` در مثال‌ها استفاده می‌کنیم.
+- متغیرهایی که با `const` تعریف شوند، رفتار مشابهی دارند پس این مقاله درباره `const` هم هست.
+- `var` قدیمی چند تفاوت قابل توجه دارد که در مقاله <info:var> پوشش داده می‌شوند.
 ```
 
-## Code blocks
+## بلوک‌های کد
 
-If a variable is declared inside a code block `{...}`, it's only visible inside that block.
+اگر یک متغیر درون بلوک کد `{...}` تعریف شود، فقط درون همان بلوک قابل رویت است.
 
-For example:
+برای مثال:
 
 ```js run
 {
-  // do some job with local variables that should not be seen outside
+  // یک کار با متغیرهای محلی که از بیرون نباید شناخته شوند انجام دهید
 
-  let message = "Hello"; // only visible in this block
+  let message = "Hello"; // فقط درون این بلوک قابل رویت است
 
   alert(message); // Hello
 }
 
-alert(message); // Error: message is not defined
+alert(message); // تعریف نشده است message :ارور
 ```
 
-We can use this to isolate a piece of code that does its own task, with variables that only belong to it:
+ما می‌توانیم از این خاصیت برای ایزوله کردن یک قطعه از کد که دارای متغیرهایی است که فقط به آن تعلق دارند و کار خودش را انجام می‌دهد استفاده کنیم:
 
 ```js run
 {
-  // show message
+  // نمایش پیام
   let message = "Hello";
   alert(message);
 }
 
 {
-  // show another message
+  // نمایش پیامی دیگر
   let message = "Goodbye";
   alert(message);
 }
 ```
 
-````smart header="There'd be an error without blocks"
-Please note, without separate blocks there would be an error, if we use `let` with the existing variable name:
+````smart header="بدون وجود بلوک‌ها ارور ایجاد خواهد شد"
+لطفا در نظر داشته باشید که بدون بلوک‌های جدا اگر ما از `let` همراه با یک متغیر موجود استفاده کنیم، یک ارور ایجاد خواهد شد.
 
 ```js run
-// show message
+// نمایش پیام
 let message = "Hello";
 alert(message);
 
-// show another message
+// نمایش پیامی دیگر
 *!*
-let message = "Goodbye"; // Error: variable already declared
+let message = "Goodbye"; // ارور: متغیر از قبل تعریف شده است
 */!*
 alert(message);
 ```
 ````
 
-For `if`, `for`, `while` and so on, variables declared in `{...}` are also only visible inside:
+برای `if`، `for`، `while` و بقیه، متغیرهایی که درون `{...}` تعریف شده باشند تنها درون آنها قابل رویت هستند:
 
 ```js run
 if (true) {
@@ -74,53 +78,53 @@ if (true) {
   alert(phrase); // Hello!
 }
 
-alert(phrase); // Error, no such variable!
+alert(phrase); // !ارور، چنین متغیری وجود ندارد
 ```
 
-Here, after `if` finishes, the `alert` below won't see the `phrase`, hence the error.
+اینجا، بعد از اینکه `if` تمام می‌شود، `alert` متغیر `phrase` را نمی‌بیند و به همین دلیل ارور ایجاد می‌شود.
 
-That's great, as it allows us to create block-local variables, specific to an `if` branch.
+این عالی است چون به ما اجازه می‌دهد که متغیرهایی در سطح بلوک محلی بسازیم که به یک شاخه `if` اختصاص دارند.
 
-The similar thing holds true for `for` and `while` loops:
+همین موضوع برای حلقه‌های `for` و `while` هم صادق است:
 
 ```js run
 for (let i = 0; i < 3; i++) {
-  // the variable i is only visible inside this for
-  alert(i); // 0, then 1, then 2
+  // قابل رویت است for فقط درون این حلقه i متغیر
+  alert(i); // اول 0، سپس 1، سپس 2
 }
 
-alert(i); // Error, no such variable
+alert(i); // ارور، چنین متغیری وجود ندارد
 ```
 
-Visually, `let i` is outside of `{...}`. But the `for` construct is special here: the variable, declared inside it, is considered a part of the block.
+از لحاظ ظاهری، `let i` بیرون از `{...}` است. اما اینجا ساختار `for` خاص است: متغیری که درون آن ساخته شود، جزئی از بلوک کد فرض می‌شود.
 
-## Nested functions
+## تابع‌های تودرتو
 
-A function is called "nested" when it is created inside another function.
+به تابعی که درون تابع دیگری ساخته شود «تودرتو» گفته می‌شود.
 
-It is easily possible to do this with JavaScript.
+این کار را به راحتی در جاوااسکریپت می‌توان انجام داد.
 
-We can use it to organize our code, like this:
+می‌توانیم از آن برای سازماندهی کد خود استفاده کنیم، مثلا اینگونه:
 
 ```js
 function sayHiBye(firstName, lastName) {
 
-  // helper nested function to use below
+  // تابع کمک کننده که پایین‌تر استفاده می‌شود
   function getFullName() {
     return firstName + " " + lastName;
   }
 
-  alert( "Hello, " + getFullName() );
-  alert( "Bye, " + getFullName() );
+  alert( "سلام " + getFullName() );
+  alert( "خداحافظ " + getFullName() );
 
 }
 ```
 
-Here the *nested* function `getFullName()` is made for convenience. It can access the outer variables and so can return the full name. Nested functions are quite common in JavaScript.
+اینجا تابع *تودرتو* `getFullName()` برای راحتی استفاده شده است. این تابع می‌تواند به متغیرهای بیرونی دسترسی داشته باشد پس می‌تواند اسم کامل را برگرداند. تابع‌های تودرتو در جاوااسکریپت بسیار رایج هستند.
 
-What's much more interesting, a nested function can be returned: either as a property of a new object or as a result by itself. It can then be used somewhere else. No matter where, it still has access to the same outer variables.
+یک چیز جالب‌تر این است که یک تابع تودرتو می‌تواند برگردانده شود: حالا یا به عنوان یک ویژگی از شیءای جدید یا خودش به عنوان نتیجه برگردانده شود. بعدا می‌تواند در جایی دیگر مورد استفاده قرار بگیرد. مهم نیست کجا باشد، هنوز هم به متغیرهای بیرونی یکسان دسترسی دارد.
 
-Below, `makeCounter` creates the "counter" function that returns the next number on each invocation:
+در کد پایین، `makeCounter` تابع «شمارنده» را می‌سازد که با هر بار فراخوانی عدد بعدی را برمی‌گرداند:
 
 ```js run
 function makeCounter() {
@@ -138,87 +142,87 @@ alert( counter() ); // 1
 alert( counter() ); // 2
 ```
 
-Despite being simple, slightly modified variants of that code have practical uses, for instance, as a [random number generator](https://en.wikipedia.org/wiki/Pseudorandom_number_generator) to generate random values for automated tests.
+علاوه بر اینکه ساده است، گونه‌هایی که نسبت به آن کد کمی تغییر کرده‌اند موارد استفاده کاربردی‌ای دارند، برای مثال یک [سازنده عدد تصادفی](https://fa.wikipedia.org/wiki/مولد_اعداد_شبه_تصادفی) تا برای آزمایش‌های خودکار مقدارهای تصادفی تولید کند.
 
-How does this work? If we create multiple counters, will they be independent? What's going on with the variables here?
+این چگونه کار می‌کند؟ اگر ما چند شمارنده بسازیم، آیا آنها مستقل خواهند بود؟ چه چیزی در حال رخ دادن روی متغیرها است؟
 
-Undestanding such things is great for the overall knowledge of JavaScript and beneficial for more complex scenarios. So let's go a bit in-depth.
+درک چنین چیزهایی برای دانش کلی از جاوااسکریپت و سناریوهای پیچیده‌تر خوب است. پس بیایید کمی عمیق‌تر شویم.
 
-## Lexical Environment
+## محیط لغوی (Lexical Environment)
 
-```warn header="Here be dragons!"
-The in-depth technical explanation lies ahead.
+```warn header="مطالب ناشناخته‌ای وجود دارند!"
+توضیحات عمیق فنی را ادامه می‌خوانید.
 
-As far as I'd like to avoid low-level language details, any understanding without them would be lacking and incomplete, so get ready.
+هر چقدر که می‌خواهم از جزئیات سطح پایین زبان دوری کنم، هرگونه درکی بدون آنها کمبود دارد و کامل نیست، پس آماده باشید.
 ```
 
-For clarity, the explanation is split into multiple steps.
+برای واضح بودن، توضیحات به چند مرحله تقسیم شده‌اند.
 
-### Step 1. Variables
+### مرحله 1. متغیرها
 
-In JavaScript, every running function, code block `{...}`, and the script as a whole have an internal (hidden) associated object known as the *Lexical Environment*.
+در جاوااسکریپت، هر تابع در حال اجرا، بلوک کد `{...}` و تمام اسکریپت، یک شیء درونی (پنهان) اختصاص یافته دارد که به عنوان *محیط لغوی* شناخته می‌شود.
 
-The Lexical Environment object consists of two parts:
+شیء محیط لغوی شامل دو بخش است:
 
-1. *Environment Record* -- an object that stores all local variables as its properties (and some other information like the value of `this`).
-2. A reference to the *outer lexical environment*, the one associated with the outer code.
+1. *ذخایر محیط (Environment Record)* -- یک شیء که تمام متغیرهای محلی را به عنوان ویژگی‌های خود (و اطلاعات دیگری مانند مقدار `this`) ذخیره می‌کند.
+2. یک رجوع به *محیط لغوی بیرونی (outer)*، محیطی که به کد بیرونی اختصاص دارد.
 
-**A "variable" is just a property of the special internal object, `Environment Record`. "To get or change a variable" means "to get or change a property of that object".**
+**یک «متغیر» فقط یک ویژگی از شیء خاص درونی `Environment Record` است. «دریافت یا تغییر یک متغیر» به معنی «دریافت یا تغییر یک ویژگی از آن شیء» است.**
 
-In this simple code without functions, there is only one Lexical Environment:
+در این کد ساده که تابعی ندارد، تنها یک محیط لغوی وجود دارد:
 
 ![lexical environment](lexical-environment-global.svg)
 
-This is the so-called *global* Lexical Environment, associated with the whole script.
+این همان محیط لغوی *گلوبال* است که به تمام کد اختصاص یافته.
 
-On the picture above, the rectangle means Environment Record (variable store) and the arrow means the outer reference. The global Lexical Environment has no outer reference, that's why the arrow points to `null`.
+در تصویر بالا، مستطیل به معنای ذخایر محیط (ذخایر متغیر) است و کمان به معنی مرجع بیرونی. محیط لغوی گلوبال مرجع بیرونی ندارد و به همین دلیل است که کمان به `null` اشاره می‌کند.
 
-As the code starts executing and goes on, the Lexical Environment changes.
+همانطور که کد شروع به اجرا شدن می‌کند و ادامه می‌یابد، محیط لغوی تغییر می‌کند.
 
-Here's a little bit longer code:
+یک کد طولانی‌تر را اینجا داریم:
 
 ![lexical environment](closure-variable-phrase.svg)
 
-Rectangles on the right-hand side demonstrate how the global Lexical Environment changes during the execution:
+مستطیل‌های سمت راست نشان می‌دهند که محیط لغوی گلوبال در حین اجرا شدن چگونه تغییر می‌کند:
 
-1. When the script starts, the Lexical Environment is pre-populated with all declared variables.
-    - Initially, they are in the "Uninitialized" state. That's a special internal state, it means that the engine knows about the variable, but it cannot be referenced until it has been declared with `let`. It's almost the same as if the variable didn't exist.
-2. Then `let phrase` definition appears. There's no assignment yet, so its value is `undefined`. We can use the variable from this point forward.
-3. `phrase` is assigned a value.
-4. `phrase` changes the value.
+1. زمانی که اسکریپت شروع می‌کند، محیط لغوی از تمام متغیرهای تعریف شده پر می‌شود.
+    - در ابتدا، آنها در حالت «بدون مقدار اولیه (Uninitialized)» هستند. این یک حالت درونی خاص است و به این معنی است که موتور درباره متغیر آگاه است اما تا زمانی که با `let` تعریف شود نمی‌توان به آن رجوع کرد. تقریبا مانند این است که متغیر وجود ندارد.
+2. تعریف `let phrase` نمایان می‌شود. هنوز مقداردهی نشده است، پس مقدار آنها `undefined` است. ما می‌توانیم از اینجا به بعد از متغیر استفاده کنیم.
+3. `phrase` یک مقدار گرفته است.
+4. `phrase` مقدار را تغییر می‌دهد.
 
-Everything looks simple for now, right?
+تا اینجا همه چیز ساده بنظر می‌رسد نه؟
 
-- A variable is a property of a special internal object, associated with the currently executing block/function/script.
-- Working with variables is actually working with the properties of that object.
+- یک متغیر، ویژگی یک شیء خاص درونی است که به بلوک/تابع/اسکریپتی که در حال اجرا است اختصاص یافته.
+- کارکردن با متغیرها در واقع کارکردن با ویژگی‌های آن شیء است.
 
-```smart header="Lexical Environment is a specification object"
-"Lexical Environment" is a specification object: it only exists "theoretically" in the [language specification](https://tc39.es/ecma262/#sec-lexical-environments) to describe how things work. We can't get this object in our code and manipulate it directly.
+```smart header="محیط لغوی یک شیء درون مشخصات است"
+«محیط لغوی» یک شیء درون مشخصات است: این شیء فقط «به صورت تئوری» در [مشخصات زبان](https://tc39.es/ecma262/#sec-lexical-environments) وجود دارد تا چگونگی کارکردن چیزها را توصیف کند. ما نمی‌توانیم این شیء را در کدمان دریافت کنیم و آن را به صورت مستقیم دستکاری کنیم.
 
-JavaScript engines also may optimize it, discard variables that are unused to save memory and perform other internal tricks, as long as the visible behavior remains as described.
+ تا آنجایی که رفتار قابل مشاهده همانطور که توصیف شد باقی بماند، موتورهای جاوااسکریپت ممکن است آن را بهینه کنند مثلا برای صرفه‌جویی در اشغال حافظه متغیرهایی که استفاده نمی‌شوند را حذف کنند و ترفندهای درونی دیگری را اجرا کنند.
 ```
 
-### Step 2. Function Declarations
+### مرحله 2. Function Declaration
 
-A function is also a value, like a variable.
+یک تابع هم مانند یک متغیر، مقدار است.
 
-**The difference is that a Function Declaration is instantly fully initialized.**
+**تفاوت اینجاست که Function Declaration سریعا به طور کامل مقداردهی می‌شوند.**
 
-When a Lexical Environment is created, a Function Declaration immediately becomes a ready-to-use function (unlike `let`, that is unusable till the declaration).
+زمانی که یک محیط لغوی ساخته می‌شود، یک Function Declaration سریعا به یک تابع آماده استفاده تبدیل می‌شود (برخلاف `let` که تا زمان تعریف آن در کد غیر قابل استفاده است).
 
-That's why we can use a function, declared as Function Declaration, even before the declaration itself.
+به همین دلیل است که از تابعی که به صورت Function Declaration تعریف شده باشد، حتی قبل از رسیدن به تعریف آن می‌توانیم استفاده کنیم.
 
-For example, here's the initial state of the global Lexical Environment when we add a function:
+برای مثال، زمانی که ما یک تابع اضافه می‌کنیم وضعیت اولیه محیط لغوی گلوبال اینگونه است:
 
 ![](closure-function-declaration.svg)
 
-Naturally, this behavior only applies to Function Declarations, not Function Expressions where we assign a function to a variable, such as `let say = function(name)...`.
+طبیعتا، این رفتار فقط برای Function Declarations است نه برای اعلان تابع Expression که ما یک متغیر را برابر با یک تابع قرار می‌دهیم مانند `let say = function(name)...`.
 
-### Step 3. Inner and outer Lexical Environment
+### مرحله 3. محیط‌های لغوی درونی و بیرونی
 
-When a function runs, at the beginning of the call, a new Lexical Environment is created automatically to store local variables and parameters of the call.
+زمانی که یک تابع اجرا می‌شود، در ابتدای فراخوانی، به طور خودکار یک محیط لغوی جدید برای ذخیره متغیرهای محلی و پارامترهای فراخوانی ایجاد می‌شود.
 
-For instance, for `say("John")`, it looks like this (the execution is at the line, labelled with an arrow):
+برای مثال، برای `say("John)"` اینگونه بنظر می‌رسد (فرایند اجرا شدن در خطی است که با کمان نشانه گذاری شده است):
 
 <!--
     ```js
@@ -233,28 +237,28 @@ For instance, for `say("John")`, it looks like this (the execution is at the lin
 
 ![](lexical-environment-simple.svg)
 
-During the function call we have two Lexical Environments: the inner one (for the function call) and the outer one (global):
+در حین فراخوانی تابع ما دو محیط لغوی داریم: محیط درونی (برای فراخوانی تابع) و محیط بیرونی (گلوبال):
 
-- The inner Lexical Environment corresponds to the current execution of `say`. It has a single property: `name`, the function argument. We called `say("John")`, so the value of the `name` is `"John"`.
-- The outer Lexical Environment is the global Lexical Environment. It has the `phrase` variable and the function itself.
+- محیط لغوی درونی متناظر با فرایند اجرای کنونی `say` است. این محیط یک ویژگی(property) دارد: `name` که همان آرگومان تابع است. ما `say("John")` را فراخوانی کردیم پس مقدار `name` برابر با `"John"` خواهد بود.
+- محیط لغوی بیرونی همان محیط لغوی گلوبال است. این محیط متغیر `phrase` و خود تابع را شامل می‌شود.
 
-The inner Lexical Environment has a reference to the `outer` one.
+محیط لغوی درونی یک رجوع به محیط `outer`(بیرونی) دارد.
 
-**When the code wants to access a variable -- the inner Lexical Environment is searched first, then the outer one, then the more outer one and so on until the global one.**
+**زمانی که کد می‌خواهد به یک متغیر دسترسی پیدا کند -- اول محیط لغوی درونی جستجو می‌شود، سپس محیط بیرونی، سپس محیط بیرونی‌تر و همینطور تا محیط لغوی گلوبال ادامه پیدا می‌کند**
 
-If a variable is not found anywhere, that's an error in strict mode (without `use strict`, an assignment to a non-existing variable creates a new global variable, for compatibility with old code).
+اگر متغیری جایی پیدا نشود، در حالت سخت‌گیرانه(strict mode) ارور ایجاد می‌شود (بدون `use strict`، برای سازگاری با کدهای قدیمی اگر یک متغیر که موجود نیست را برای مقداردهی استفاده کنیم، یک متغیر گلوبال جدید ساخته می‌شود).
 
-In this example the search proceeds as follows:
+در این مثال، جستجو اینگونه پیش می‌رود:
 
-- For the `name` variable, the `alert` inside `say` finds it immediately in the inner Lexical Environment.
-- When it wants to access `phrase`, then there is no `phrase` locally, so it follows the reference to the outer Lexical Environment and finds it there.
+- برای متغیر `name`، `alert` که درون `say` است بلافاصله آن را در محیط لغوی درونی پیدا می‌کند.
+- زمانی که می‌خواهد به `phrase` دسترسی پیدا کند، هیچ `phrase` محلی موجود نیست، پس به محیط لغوی بیرونی رجوع و آن را آنجا پیدا می‌کند.
 
 ![lexical environment lookup](lexical-environment-simple-lookup.svg)
 
 
-### Step 4. Returning a function
+### مرحله 4. برگرداندن یک تابع
 
-Let's return to the `makeCounter` example.
+بیایید به مثال `makeCounter` برگردیم.
 
 ```js
 function makeCounter() {
@@ -268,53 +272,53 @@ function makeCounter() {
 let counter = makeCounter();
 ```
 
-At the beginning of each `makeCounter()` call, a new Lexical Environment object is created, to store variables for this `makeCounter` run.
+در ابتدای هر فراخوانی `makeCounter`، یک شیء محیط لغوی جدید ساخته می‌شود تا متغیرها را برای این فراخوانیِ `makeCounter` ذخیره کند.
 
-So we have two nested Lexical Environments, just like in the example above:
+بنابراین ما دو محیط لغوی تودرتو داریم، درست مانند مثال بالا:
 
 ![](closure-makecounter.svg)
 
-What's different is that, during the execution of `makeCounter()`, a tiny nested function is created of only one line: `return count++`. We don't run it yet, only create.
+تفاوتی که وجود دارد این است که در حین اجرای `makeCounter`، یک تابع کوچک تودرتو فقط به خاطر یک خط ایجاد می‌شود: `return count++`. ما هنوز این را اجرا نمی‌کنیم فقط می‌سازیم.
 
-All functions remember the Lexical Environment in which they were made. Technically, there's no magic here: all functions have the hidden property named `[[Environment]]`, that keeps the reference to the Lexical Environment where the function was created:
+تمام تابع‌ها محیط لغوی‌ای که در آن ساخته شده‌اند را به یاد می‌سپارند. از لحاظ فنی، هیچ جادویی اینجا وجود ندارد: تمام تابع‌ها یک ویژگی پنهان `[[Environment]]` دارند که یک رجوع به محیط لغوی‌ای که تابع در آن ساخته شده است دارد:
 
 ![](closure-makecounter-environment.svg)
 
-So, `counter.[[Environment]]` has the reference to `{count: 0}` Lexical Environment. That's how the function remembers where it was created, no matter where it's called. The `[[Environment]]` reference is set once and forever at function creation time.
+بنابراین `counter.[[Environment]]` یک رجوع به محیط لغوی `{count: 0}` دارد. اینگونه است که تابع بدون توجه به اینکه کجا فراخوانی شده است، جایی که ساخته شده را به یاد می‌سپارد. مرجع `[[Environment]]` فقط یک بار و برای همیشه در زمان ساخت تابع تنظیم می‌شود.
 
-Later, when `counter()` is called, a new Lexical Environment is created for the call, and its outer Lexical Environment reference is taken from `counter.[[Environment]]`:
+بعدا، زمانی که `counter()` فراخوانی می‌شود، یک محیط لغوی جدید برای آن فراخوانی ایجاد می‌شود و مرجع محیط لغوی بیرونی آن از `counter.[[Environment]]` گرفته می‌شود:
 
 ![](closure-makecounter-nested-call.svg)
 
-Now when the code inside `counter()` looks for `count` variable, it first searches its own Lexical Environment (empty, as there are no local variables there), then the Lexical Environment of the outer `makeCounter()` call, where it finds and changes it.
+حالا زمانی که کد، درون `counter()` را برای متغیر `count` جستجو می‌کند، ابتدا محیط لغوی خودش را جستجو می‌کند (که به دلیل نبود متغیری محلی خالی است)، سپس محیط لغویِ فراخوانیِ بیرونیِ `makeCounter()` را جستجو و آنجا آن را پیدا می‌کند و تغییرش می‌دهد.
 
-**A variable is updated in the Lexical Environment where it lives.**
+**یک متغیر در محیط لغوی‌ای که وجود دارد تغییر می‌یابد.**
 
-Here's the state after the execution:
+بعد از اجرا شدن وضعیت اینگونه است:
 
 ![](closure-makecounter-nested-call-2.svg)
 
-If we call `counter()` multiple times, the `count` variable will be increased to `2`, `3` and so on, at the same place.
+اگر ما `counter()` را چند بار فراخوانی کنیم، متغیر `count` به `2`، `3` و بیشتر در جای یکسانی افزایش می‌یابد.
 
-```smart header="Closure"
-There is a general programming term "closure", that developers generally should know.
+```smart header="Closure(کلوژِر)"
+یک عبارت کلی برنامه‌نویسی به نام "کلوژر" وجود دارد که به طور کلی توسعه‌دهندگان باید درباره آن بدانند.
 
-A [closure](https://en.wikipedia.org/wiki/Closure_(computer_programming)) is a function that remembers its outer variables and can access them. In some languages, that's not possible, or a function should be written in a special way to make it happen. But as explained above, in JavaScript, all functions are naturally closures (there is only one exception, to be covered in <info:new-function>).
+یک [کلوژر](https://fa.wikipedia.org/wiki/بستار_(علوم_رایانه)) تابعی است که متغیرهای بیرون از خودش را به یاد دارد و می‌تواند به آنها دسترسی پیدا کند. در بعضی از زبان‌ها، این موضوع ممکن است یا باید یک تابع به گونه‌ای نوشته شود که این کار را انجام دهد. اما همانطور که در بالا توضیح داده شد، در جاوااسکریپت، تمام تابع‌ها به طور طبیعی کلوژر هستند (تنها یک استثنا وجود دارد که در <info:new-function> پوشش می‌دهیم).
 
-That is: they automatically remember where they were created using a hidden `[[Environment]]` property, and then their code can access outer variables.
+این یعنی اینکه: آنها به طور خودکار جایی که ساخته شده‌اند را با استفاده از ویژگی پنهان `[[Environment]]` به یاد می‌سپارند و سپس کد آنها می‌تواند به متغیرهای بیرونی دسترسی پیدا کند.
 
-When on an interview, a frontend developer gets a question about "what's a closure?", a valid answer would be a definition of the closure and an explanation that all functions in JavaScript are closures, and maybe a few more words about technical details: the `[[Environment]]` property and how Lexical Environments work.
+زمانی که در مصاحبه کاری هستید و یک توسعه‌دهنده فرانت‌اند سوالی درباره اینکه «کلوژر چیست؟» دریافت می‌کند، به عنوان یک پاسخ معتبر می‌توانید تعریف کلوژر و یک توضیح درباره اینکه تمام تابع‌ها در جاوااسکریپت کلوژر هستند را بگویید و شاید چند کلمه درباره جزییات فنی: ویژگی `[[Environment]]` و اینکه محیط لغوی چگونه کار می‌کند.
 ```
 
-## Garbage collection
+## زباله‌روبی
 
-Usually, a Lexical Environment is removed from memory with all the variables after the function call finishes. That's because there are no references to it. As any JavaScript object, it's only kept in memory while it's reachable.
+معمولا یک محیط لغوی زمانی که فراخوانی تابع تمام می‌شود با تمام متغیرهای خود از حافظه پاک می‌شود. به این دلیل که هیچ رجوعی به آن وجود ندارد. مانند هر شیء جاوااسکریپت، فقط تا زمانی که قابل دستیابی باشد در حافظه نگهداری می‌شود.
 
-...But if there's a nested function that is still reachable after the end of a function, then it has `[[Environment]]` property that references the lexical environment.
+گرچه، اگر تابع‌ای تودرتو وجود داشته باشد که بعد از پایان یک تابع هنوز قابل دسترس باشد، پس یک ویژگی `[[Environment]]` دارد که به محیط لغوی رجوع می‌کند. 
 
-In that case the Lexical Environment is still reachable even after the completion of the function, so it stays alive.
+در این صورت محیط لغوی حتی بعد از تکمیل تابع هنوز قابل دسترس است پس از بین نمی‌رود.
 
-For example:
+برای مثال:
 
 ```js
 function f() {
@@ -325,11 +329,11 @@ function f() {
   }
 }
 
-let g = f(); // g.[[Environment]] stores a reference to the Lexical Environment
-// of the corresponding f() call
+let g = f(); // یک رجوع به محیط لغوی را ذخیره می‌کند g.[[Environment]]
+// است f() که همان محیط لغوی فراخوانی
 ```
 
-Please note that if `f()` is called many times, and resulting functions are saved, then all corresponding Lexical Environment objects will also be retained in memory. All 3 of them in the code below:
+لطفا در نظر داشته باشید که اگر `f()` چند بار فراخوانی شود و تابع‌های برگردانده‌شده ذخیره شوند، سپس تمام شیءهای محیط لغوی متناظر هم در حافظه نگهداری می‌شود. در کد زیر هر 3تای آنها ذخیره می‌شود:
 
 ```js
 function f() {
@@ -338,14 +342,14 @@ function f() {
   return function() { alert(value); };
 }
 
-// 3 functions in array, every one of them links to Lexical Environment
-// from the corresponding f() run
+// در آرایه 3 تابع وجود دارد، هر کدام به محیط لغوی متصل هستند
+// f() محیطی از فراخوانی متناظر
 let arr = [f(), f(), f()];
 ```
 
-A Lexical Environment object dies when it becomes unreachable (just like any other object). In other words, it exists only while there's at least one nested function referencing it.
+یک شیء محیط لغوی زمانی که غیر قابل دسترس شود ازبین می‌رود (درست مانند هر شیء دیگری). به عبارتی دیگر، فقط تا زمانی که حداقل یک تابع تودرتو وجود داشته باشد که به آن رجوع کند وجود خواهد داشت.
 
-In the code below, after the nested function is removed, its enclosing Lexical Environment (and hence the `value`) is cleaned from memory:
+در کد زیر، بعد از اینکه تابع تودرتو حذف شود، محیط لغوی ضمیمه شده به آن (و از این رو `value`) از حافظه پاک می‌شود:
 
 ```js
 function f() {
@@ -356,29 +360,29 @@ function f() {
   }
 }
 
-let g = f(); // while g function exists, the value stays in memory
+let g = f(); // در حافظه می‌ماند value وجود داشته باشد، متغیر g تا زمانی که تابع
 
-g = null; // ...and now the memory is cleaned up
+g = null; // و حالا حافظه تمیز شده...
 ```
 
-### Real-life optimizations
+### بهینه‌سازی در واقعیت
 
-As we've seen, in theory while a function is alive, all outer variables are also retained.
+همانطور که دیدیم، از لحاظ تئوری تا زمانی که یک تابع موجود است، تمام متغیرهای بیرونی هم حفظ می‌شوند.
 
-But in practice, JavaScript engines try to optimize that. They analyze variable usage and if it's obvious from the code that an outer variable is not used -- it is removed.
+اما در عمل، موتورهای جاوااسکریپت سعی می‌کنند که آن را بهینه کنند. آنها استفاده از متغیر را آنالیز می‌کنند و اگر از کد معلوم باشد که یک متغیر بیرونی استفاده نمی‌شود، آن را حذف می‌کنند.
 
-**An important side effect in V8 (Chrome, Opera) is that such variable will become unavailable in debugging.**
+**یک عارضه جانبی در موتور V8 (Chrome، Edge، Opera) این است که چنین متغیرهایی در دیباگ کردن غیر قابل دسترس می‌شوند.**
 
-Try running the example below in Chrome with the Developer Tools open.
+سعی کنید که مثال پایین را در Chrome بعد از بازکردن Developer Tools اجرا کنید.
 
-When it pauses, in the console type `alert(value)`.
+زمانی که متوقف می‌شود، در کنسول `alert(value)` را تایپ کنید.
 
 ```js run
 function f() {
   let value = Math.random();
 
   function g() {
-    debugger; // in console: type alert(value); No such variable!
+    debugger; // ؛ چنین متغیری وجود نداردalert(value) :در کنسول تایپ کنید
   }
 
   return g;
@@ -388,18 +392,18 @@ let g = f();
 g();
 ```
 
-As you could see -- there is no such variable! In theory, it should be accessible, but the engine optimized it out.
+همانطور که دیدید، چنین متغیری وجود نداشت! از لحاظ تئوری، باید قابل دسترس باشد، اما موتور با بهینه‌سازی آن را ازبین برد.
 
-That may lead to funny (if not such time-consuming) debugging issues. One of them -- we can see a same-named outer variable instead of the expected one:
+این موضوع ممکن است منجر به مشکل‌های جالب (شاید وقت‌گیر) در زمان دیباگ کردن شود. یک از آنها این است که امکان دارد ما یک متغیر که هم نام با متغیر مورد نظر ما است را ببینیم:
 
 ```js run global
-let value = "Surprise!";
+let value = "سوپرایز!";
 
 function f() {
-  let value = "the closest value";
+  let value = "value نزدیک ترین متغیر";
 
   function g() {
-    debugger; // in console: type alert(value); Surprise!
+    debugger; // !؛ سوپرایزalert(value) در کنسول: تایپ کنید
   }
 
   return g;
@@ -409,6 +413,6 @@ let g = f();
 g();
 ```
 
-This feature of V8 is good to know. If you are debugging with Chrome/Opera, sooner or later you will meet it.
+خوب است که درباره این خاصیت V8 بدانید. اگر در حال دیباگ کردن با Chrome/Edge/Opera باشید، به دیر یا زود با آن روبرو می‌شوید.
 
-That is not a bug in the debugger, but rather a special feature of V8. Perhaps it will be changed sometime. You always can check for it by running the examples on this page.
+این یک باگ در debugger نیست بلکه یک ویژگی خاص V8 است. شاید زمانی آن را تغییر دهند. شما همیشه می‌توانید با اجرای مثال‌های این صفحه آن را بررسی کنید.

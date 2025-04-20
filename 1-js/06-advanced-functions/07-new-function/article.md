@@ -1,19 +1,19 @@
 
-# The "new Function" syntax
+# سینتکس "new Function"
 
-There's one more way to create a function. It's rarely used, but sometimes there's no alternative.
+یک راه دیگر برای ساخت یک تابع وجود دارد. به ندرت استفاده می‌شود، اما گاهی اوقات راه دیگری وجود ندارد.
 
-## Syntax
+## سینتکس
 
-The syntax for creating a function:
+سینتکس آن برای ساخت یک تابع به صورت زیر است:
 
 ```js
 let func = new Function ([arg1, arg2, ...argN], functionBody);
 ```
 
-The function is created with the arguments `arg1...argN` and the given `functionBody`.
+تابع ساخته شده دارای آرگومان‌های `arg1...argN` و بدنه‌ی `functionBody` خواهد بود.
 
-It's easier to understand by looking at an example. Here's a function with two arguments:
+این روش با نگاه به یک مثال قابل درک‌تر است. در زیر تابعی با دو آرگومان ساخته شده:
 
 ```js run
 let sum = new Function('a', 'b', 'return a + b');
@@ -21,40 +21,40 @@ let sum = new Function('a', 'b', 'return a + b');
 alert( sum(1, 2) ); // 3
 ```
 
-And here there's a function without arguments, with only the function body:
+و این هم یک تابع بدون آرگومان است، که فقط بدنه دارد:
 
 ```js run
-let sayHi = new Function('alert("Hello")');
+let sayHi = new Function('alert("سلام")');
 
-sayHi(); // Hello
+sayHi(); // سلام
 ```
 
-The major difference from other ways we've seen is that the function is created literally from a string, that is passed at run time.
+تفاوت اصلی از روش‌های دیگری که دیدیم این است که تابع در واقع از یک رشته‌‌ای ساخته می‌شود که در زمان اجرا (ران‌تایم) وارد تابع می‌شود.
 
-All previous declarations required us, programmers, to write the function code in the script.
+همه‌ی روش‌های تعریف تابع قبلی ما برنامه‌نویس‌ها را ملزم به نوشتن کد تابع می‌کرد.
 
-But `new Function` allows to turn any string into a function. For example, we can receive a new function from a server and then execute it:
+اما `new Function` به ما این امکان را می‌دهد که هر رشته‌ی دلخواه را به تابع تبدیل کنیم. برای مثال می‌توانیم یک تابع را از یک سرور دریافت و سپس آنرا اجرا کنیم:
 
 ```js
-let str = ... receive the code from a server dynamically ...
+let str = ... کد را به صورت زنده از سرور دریافت کن ...
 
 let func = new Function(str);
 func();
 ```
 
-It is used in very specific cases, like when we receive code from a server, or to dynamically compile a function from a template, in complex web-applications.
+از این روش در روش شرایط خیلی خاص، برای مثال زمانی که کد را از یک سرور دریافت می‌کنیم، یا کامپایل یک تابع از روی یک الگو به صورت پویا، در وب‌اپلیکیشن‌های پیچیده استفاده می‌شود.
 
-## Closure
+## بستار
 
-Usually, a function remembers where it was born in the special property `[[Environment]]`. It references the Lexical Environment from where it's created  (we covered that in the chapter <info:closure>).
+معمولا، یک تابع به واسطه ویژگی `[[Environment]]` به یاد دارد که کجا متولد شده. این ویژگی به محیط لغوی (lexical environment) از جایی که ساخته شده ارجاع می‌دهد (در این باره قبلا در بخش <info:closure> صحبت کرده‌ایم).
 
-But when a function is created using `new Function`, its `[[Environment]]` is set to reference not the current Lexical Environment, but the global one.
+اما زمانی که تابعی با `new Function` ساخته شود، `[[Environment]]` آن نه به محیط لغوی بلکه به محیط سراسری یا گلوبال اشاره می‌شود.
 
-So, such function doesn't have access to outer variables, only to the global ones.
+در نتیجه، تابع به متغیرهای بیرونی خودش دسترسی ندارد، بلکه فقط به متغیرهای گلوبایل دسترسی دارد.
 
 ```js run
 function getFunc() {
-  let value = "test";
+  let value = "تست";
 
 *!*
   let func = new Function('alert(value)');
@@ -66,11 +66,11 @@ function getFunc() {
 getFunc()(); // error: value is not defined
 ```
 
-Compare it with the regular behavior:
+این را با رفتار عادی مقایسه کنید:
 
 ```js run
 function getFunc() {
-  let value = "test";
+  let value = "تست";
 
 *!*
   let func = function() { alert(value); };
@@ -79,45 +79,45 @@ function getFunc() {
   return func;
 }
 
-getFunc()(); // *!*"test"*/!*, from the Lexical Environment of getFunc
+getFunc()(); // *!*"test"*/!*, از محیط لغوی تابع getFunc
 ```
 
-This special feature of `new Function` looks strange, but appears very useful in practice.
+این قابلیت ویژه‌ی `new Function` عجیب به نظر می‌رسد، اما در عمل بسیار کارا است.
 
-Imagine that we must create a function from a string. The code of that function is not known at the time of writing the script (that's why we don't use regular functions), but will be known in the process of execution. We may receive it from the server or from another source.
+تصور کنید که ما مجبور هستیم تابعی از یک رشته بسازیم. کد آن تابع در زمان نوشتن کد معلوم نیست (به همین دلیل است در این موقعیت از تابع معمولی استفاده نمی‌کنیم) ، اما در زمان اجرا کد تابع معلوم خواهد شد. شاید آنرا از سرور یا یک منبع دیگری دریافت کرده‌ایم.
 
-Our new function needs to interact with the main script.
+تابع جدید ما نیاز دارد که با کدهای سند اصلی ما تعامل داشته باشد.
 
-What if it could access the outer variables?
+اما چه اتفاقی می‌افتد اگر به متغیرهای بیرونی دسترسی داشته باشد؟
 
-The problem is that before JavaScript is published to production, it's compressed using a *minifier* -- a special program that shrinks code by removing extra comments, spaces and -- what's important, renames local variables into shorter ones.
+مشکل این است که قبل از این که جاوااسکریپت برای استفاده منتشر شود، توسط یک *minifier* -- یک برنامه مخصوص که کد را با حذف کامنت‌ها، فاصله‌گذاری‌ها و ... فشرده می‌کند -- فشرده می‌کند. چیزی که مهم است این است که نام متغیرهای محلی به کلمات کوتاه‌تری تغییر داده‌ می‌شوند.
 
-For instance, if a function has `let userName`, minifier replaces it `let a` (or another letter if this one is occupied), and does it everywhere. That's usually a safe thing to do, because the variable is local, nothing outside the function can access it. And inside the function, minifier replaces every mention of it. Minifiers are smart, they analyze the code structure, so they don't break anything. They're not just a dumb find-and-replace.
+برای مثال، اگر یک تابع در بدنه‌اش شامل `let userName` باشد، آن برنامه کوچک‌ساز (minifier) آن‌را با چیزی شبیه `let a` (یا حرفی که تا کنون استفاده نشده باشد) جایگزین می‌کند. این کار معمولا بدون خطر خواهد بود، زیرا متغیر محلی است و در هیچ‌کجا خارج از تابع به آن دسترسی نخواهند داشت. و درون تابع، کوچک‌ساز هر اسمی از آن را جایگزین می‌کند. کوچک‌سازها باهوش عمل می‌کنند، آنها ساختار کد را ارزیابی می‌کنند، تا مطمئن شوند چیزی خراب نمی‌شود. آنها فقط یک پیداکن و جایگزین‌کن احمق نیستند.
 
-So if `new Function` had access to outer variables, it would be unable to find renamed  `userName`.
+پس اگر `new Function` به متغیرهای بیرونی دسترسی داشته باشد، عملا نمی‌تواند متغیر تغییرنام یاقته‌ی `userName` را پیدا کند.
 
-**If `new Function` had access to outer variables, it would have problems with minifiers.**
+**اگر `new Function` به متغیرهای بیرونی دسترسی داشت, با کوچک‌سازها دچار تداخل و ناسازگاری می‌شد.**
 
-Besides, such code would be architecturally bad and prone to errors.
+غیر از این، چنین کدی از نظر معماری بد و دارای ضعف بوده و احتمالا باعث بروز مشکلاتی می‌شود.
 
-To pass something to a function, created as `new Function`, we should use its arguments.
+برای دادن ورودی به یک تابعی که به وسیله `new Function` ساخته شده، باید از آرگومان‌های آن استفاده کنیم.
 
-## Summary
+## خلاصه
 
-The syntax:
+سینتکس:
 
 ```js
 let func = new Function ([arg1, arg2, ...argN], functionBody);
 ```
 
-For historical reasons, arguments can also be given as a comma-separated list.
+به دلایلی،‌ آرگومان‌ها می‌توانند به صورت یک لیست که با کاما جدا شده نیز معرفی شوند.
 
-These three declarations mean the same:
+تعاریف زیر، همگی شبیه هم است و یک معنی خواهد داشت:
 
 ```js
-new Function('a', 'b', 'return a + b'); // basic syntax
-new Function('a,b', 'return a + b'); // comma-separated
-new Function('a , b', 'return a + b'); // comma-separated with spaces
+new Function('a', 'b', 'return a + b'); // سینتکس معمولی
+new Function('a,b', 'return a + b'); // جدا شده با کاما
+new Function('a , b', 'return a + b'); // جدا شده با کاما - و وجود فاصله گذاری
 ```
 
-Functions created with `new Function`, have `[[Environment]]` referencing the global Lexical Environment, not the outer one. Hence, they cannot use outer variables. But that's actually good, because it insures us from errors. Passing parameters explicitly is a much better method architecturally and causes no problems with minifiers.
+توابعی که با `new Function` ساخته می‌شوند، ‍`[[Environment]]` آنها به محیط لغوی گلوبال اشاره دارد، نه بیرونی. به همین دلیل، نمی‌توانند از متغیرهای بیرونی استفاده کنند، که در واقع چیز خوبی‌است، به ما اطمینان می‌دهد که به اروری برنخواهیم خورد. اینکه به صورت واضح از پارامترهای ورودی استفاده کنیم، از نظر معماری روش بهتری است و هیچ مشکلی را هم رابطه با کوچک‌سازها ایجاد نخواهد کرد.

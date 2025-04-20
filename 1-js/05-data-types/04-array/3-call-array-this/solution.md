@@ -1,6 +1,6 @@
-The call `arr[2]()` is syntactically the good old `obj[method]()`, in the role of `obj` we have `arr`, and in the role of `method` we have `2`.
+صدازدن `arr[2]()` از لحاظ سینتکس همان `obj[method]()` قدیم است، ما `arr` را در نقش `obj` داریم و `2` در نقش `method`.
 
-So we have a call of the function `arr[2]` as an object method. Naturally, it receives `this` referencing the object `arr` and outputs the array:
+پس صدازدن تابع `arr[2]` مانند متد یک شیء است. به طور طبیعی، این تابع `this` را درحالی که به شیء `arr` رجوع می‌کند می‌گیرد و آرایه را نمایش می‌دهد:
 
 ```js run
 let arr = ["a", "b"];
@@ -11,5 +11,4 @@ arr.push(function() {
 
 arr[2](); // a,b,function(){...}
 ```
-
-The array has 3 values: initially it had two, plus the function. 
+آرایه 3 مقدار دارد: در ابتدا 2 مقدار داشت سپس تابع اضافه شد.

@@ -10,7 +10,7 @@
       text-align: center;
     }
     .circle {
-      transition-property: width, height, margin-left, margin-top;
+      transition-property: width, height;
       transition-duration: 2s;
       position: fixed;
       transform: translateX(-50%) translateY(-50%);
@@ -22,14 +22,14 @@
 
 <body>
 
-  <button onclick="go()">Click me</button>
+  <button onclick="go()">روی من کلیک کن</button>
 
   <script>
 
   function go() {
     showCircle(150, 150, 100).then(div => {
       div.classList.add('message-ball');
-      div.append("Hello, world!");
+      div.append("سلام دنیا!");
     });
   }
 

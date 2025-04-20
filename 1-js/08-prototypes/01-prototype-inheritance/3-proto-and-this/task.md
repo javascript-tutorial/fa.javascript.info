@@ -2,11 +2,11 @@ importance: 5
 
 ---
 
-# Where does it write?
+# کجا می‌نویسد؟
 
-We have `rabbit` inheriting from `animal`.
+ما `rabbit` را داریم که از `animal` ارث‌بری می‌کند.
 
-If we call `rabbit.eat()`, which object receives the `full` property: `animal` or `rabbit`? 
+اگر ما `rabbit.eat()` را فراخوانی کنیم، کدام شیء ویژگی `full` را دریافت می‌کند: `animal` یا `rabbit`؟
 
 ```js
 let animal = {

@@ -1,132 +1,132 @@
-# Patterns and flags
+# الگو ها و پرچم ها (Patterns and flags)
 
-Regular expressions are patterns that provide a powerful way to search and replace in text.
+عبارات باقاعده (Regular expressions) الگوهایی هستند که روشی قدرتمند برای جستجو و جایگزینی در متن ارائه می دهند.
 
-In JavaScript, they are available via the [RegExp](mdn:js/RegExp) object, as well as being integrated in methods of strings.
+در جاوااسکریپت، آنها از طریق شیء [RegExp](mdn:js/RegExp) استفاده می شوند و همچنین به خوبی با متد های رشته ها ادغام می شوند.
 
-## Regular Expressions
+## عبارات باقاعده (Regular Expressions)
 
-A regular expression (also "regexp", or just "reg") consists of a *pattern* and optional *flags*.
+عبارت باقاعده (همچنین "regexp"، یا فقط "reg") از یک *الگو(pattern)* و *پرچم های(flags)* اختیاری تشکیل می شوند.
 
-There are two syntaxes that can be used to create a regular expression object.
+دو روش وجود دارد که می توان از آنها برای ایجاد یک شیء عبارت باقاعده استفاده کرد.
 
-The "long" syntax:
-
-```js
-regexp = new RegExp("pattern", "flags");
-```
-
-And the "short" one, using slashes `"/"`:
+سینتکس "طولانی":
 
 ```js
-regexp = /pattern/; // no flags
-regexp = /pattern/gmi; // with flags g,m and i (to be covered soon)
+regexp = new RegExp("pattern(الگو)", "flags(پرچم)");
 ```
 
-Slashes `pattern:/.../` tell JavaScript that we are creating a regular expression. They play the same role as quotes for strings.
-
-In both cases `regexp` becomes an instance of the built-in `RegExp` class.
-
-The main difference between these two syntaxes is that pattern using slashes `/.../` does not allow for expressions to be inserted (like string template literals with `${...}`). They are fully static.
-
-Slashes are used when we know the regular expression at the code writing time -- and that's the most common situation. While `new RegExp`, is more often used when we need to create a regexp "on the fly" from a dynamically generated string. For instance:
+و سینتکس "کوتاه" نیز، استفاده از اسلش `"/"` می باشد.
 
 ```js
-let tag = prompt("What tag do you want to find?", "h2");
-
-let regexp = new RegExp(`<${tag}>`); // same as /<h2>/ if answered "h2" in the prompt above
+regexp = /pattern/; // بدون پرچم
+regexp = /pattern/gmi; // (به زودی گفته می‌شود) i، m، g با پرچم
 ```
 
-## Flags
+اسلش های `pattern:/.../` به جاوااسکریپت می گوید که ما در حال ایجاد یک عبارت باقاعده هستیم. آنها همان نقش کوتیشن(') را برای رشته ها بازی می کنند.
 
-Regular expressions may have flags that affect the search.
+در هر دو مورد، `regexp` به یک نمونه از کلاس درون‌ساخت`RegExp` تبدیل می‌ شود.
 
-There are only 6 of them in JavaScript:
+تفاوت اصلی بین این دو سینتکس این است که الگو با استفاده از اسلش‌های `/.../`، اجازه درج عبارات را نمی دهد (مانند حروف الفبای قالب(template literals) رشته با `${...}`). آنها کاملا ایستا هستند.
+
+اسلش ها زمانی استفاده می شوند که عبارت باقاعده را در زمان نوشتن کد بدانیم -- و این رایج ترین حالت است. در حالی که `new RegExp` بیشتر زمانی استفاده می شود که ما "در حین انجام کار" نیاز به ایجاد یک regexp از یک رشته که به صورت پویا تولید شده داشته باشیم. برای مثال:
+
+```js
+let tag = prompt("کدام تگ HTML را می خواهید پیدا کنید؟", "h2");
+
+let regexp = new RegExp(`<${tag}>`); // خواهد بود /<h2>/ جواب داده شود درست مانند "h2" اگر در اعلان بالا
+```
+
+## پرچم ها (Flags)
+
+عبارات باقاعده ممکن است دارای پرچم هایی باشند که بر نحوه جستجو تأثیر  بگذارد.
+
+در جاوااسکریپت، تنها 6 مورد از آنها وجود دارد:
 
 `pattern:i`
-: With this flag the search is case-insensitive: no difference between `A` and `a` (see the example below).
+: با این پرچم، جستجو به حروف کوچک و بزرگ حساس نیست: تفاوتی بین `A` و `a` نمی گذارد (به مثال زیر مراجعه کنید).
 
 `pattern:g`
-: With this flag the search looks for all matches, without it -- only the first match is returned.
+: با این پرچم، جستجو برای همه موارد منطبق، بدون آن - فقط اولین موردی که هم خوانی دارد، برگردانده می شود.
 
 `pattern:m`
-: Multiline mode (covered in the chapter <info:regexp-multiline-mode>).
+: حالت چند خطی (در فصل <info:regexp-multiline-mode> پوشش داده شده است).
 
 `pattern:s`
-: Enables "dotall" mode, that allows a dot `pattern:.` to match newline character `\n` (covered in the chapter <info:regexp-character-classes>).
+: حالت `dotall` را فعال می‌ کند، که به یک نقطه `.:pattern` اجازه می‌ دهد تا با کاراکتر خط جدید `n\` مطابقت داشته باشد (در فصل <info:regexp-character-classes> پوشش داده شده است).
 
 `pattern:u`
-: Enables full unicode support. The flag enables correct processing of surrogate pairs. More about that in the chapter <info:regexp-unicode>.
+: پشتیبانی کامل از یونیکد را فعال می کند. پرچم پردازش صحیح surrogate pair را امکان پذیر می کند. اطلاعات بیشتر در مورد آن در فصل <info:regexp-unicode>.
 
 `pattern:y`
-: "Sticky" mode: searching at the exact position in the text  (covered in the chapter <info:regexp-sticky>)
+: حالت `Sticky`: جستجو در موقعیت دقیق متن (در فصل <info:regexp-sticky> پوشش داده شده است)
 
-```smart header="Colors"
-From here on the color scheme is:
+```smart header="رنگ ها"
+از اینجا به بعد رنگ بندی درون متن آموزش به این صورت است:
 
-- regexp -- `pattern:red`
-- string (where we search) -- `subject:blue`
-- result -- `match:green`
+- regexp -- `pattern:red` (عبارت باقاعده خط قرمز دارد)
+- string (where we search) -- `subject:blue` (چیزی که  جستجو می کنیم خط آبی دارد)
+- result -- `match:green` (نتیجه خط سبز دارد)
 ```
 
-## Searching: str.match
+## جستجو: str.match
 
-As mentioned previously, regular expressions are integrated with string methods.
+همانطور که قبلا ذکر شد، عبارات باقاعده با متدهای رشته ای ادغام می شوند.
 
-The method `str.match(regexp)` finds all matches of `regexp` in the string `str`.
+متد `str.match(regexp)` همه تطابق های `regexp` را در رشته `str` پیدا می‌ کند.
 
-It has 3 working modes:
+و دارای 3 حالت کار است:
 
-1. If the regular expression has flag `pattern:g`, it returns an array of all matches:
+1. اگر عبارت باقاعده دارای پرچم `pattern:g` باشد، آرایه‌ای از همه موارد مطابق با آن را بر می‌ گرداند:
     ```js run
     let str = "We will, we will rock you";
 
-    alert( str.match(/we/gi) ); // We,we (an array of 2 substrings that match)
+    alert( str.match(/we/gi) ); // We,we (آرایه ای از 2 رشته که مطابقت دارند)
     ```
-    Please note that both `match:We` and `match:we` are found, because flag `pattern:i` makes the regular expression case-insensitive.
+    لطفاً توجه کنید که `match:We` و `match:we` نتیجه یکسانی می دهند، زیرا پرچم `pattern:i` باعث می‌ شود که عبارت باقاعده به حروف بزرگ و کوچک حساس نباشد.
 
-2. If there's no such flag it returns only the first match in the form of an array, with the full match at index `0` and some additional details in properties:
+2. اگر چنین پرچمی وجود نداشته باشد، فقط اولین تطابق را در یک آرایه، با تطابق کامل در ایندکس `0` و برخی جزئیات اضافی در ویژگی ها بر می گرداند:
     ```js run
     let str = "We will, we will rock you";
 
-    let result = str.match(/we/i); // without flag g
+    let result = str.match(/we/i); // بدون پرچم g
 
-    alert( result[0] );     // We (1st match)
+    alert( result[0] );     // We (اولین تطابق)
     alert( result.length ); // 1
 
     // Details:
-    alert( result.index );  // 0 (position of the match)
-    alert( result.input );  // We will, we will rock you (source string)
+    alert( result.index );  // 0 (موقعیت تطابق)
+    alert( result.input );  // We will, we will rock you (رشته منبع)
     ```
-    The array may have other indexes, besides `0` if a part of the regular expression is enclosed in parentheses. We'll cover that in the chapter  <info:regexp-groups>.
+    اگر بخشی از عبارت باقاعده در داخل پرانتز قرار بگیرد، ممکن است آرایه، ایندکس های دیگری در کنار ایندکس `0` نیز داشته باشد. ما آن را در فصل <info:regexp-groups> پوشش خواهیم داد.
 
-3. And, finally, if there are no matches, `null` is returned (doesn't matter if there's flag `pattern:g` or not).
+3. و در نهایت، اگر هیچ تطابقی وجود نداشته باشد، `null` بر می گرداند. (فرقی نمی‌ کند که پرچم `pattern:g` وجود داشته باشد یا خیر).
 
-    This a very important nuance. If there are no matches, we don't receive an empty array, but instead receive `null`. Forgetting about that may lead to errors, e.g.:
+    این یک فرق ریز و بسیار مهم است. اگر هیچ تطابقی وجود نداشته باشد، یک آرایه خالی دریافت نمی‌ کنیم، بلکه `null` دریافت می‌ کنیم. فراموش کردن آن ممکن است منجر به خطاهایی شود، به عنوان مثال:
 
     ```js run
     let matches = "JavaScript".match(/HTML/); // = null
 
     if (!matches.length) { // Error: Cannot read property 'length' of null
-      alert("Error in the line above");
+      alert("خطا در خط بالایی");
     }
     ```
 
-    If we'd like the result to always be an array, we can write it this way:
+    اگر می‌ خواهیم نتیجه همواره به صورت یک آرایه باشد، می‌ توانیم آن را به این صورت بنویسیم:
 
     ```js run
     let matches = "JavaScript".match(/HTML/)*!* || []*/!*;
 
     if (!matches.length) {
-      alert("No matches"); // now it works
+      alert("No matches"); // الان درست کار میکند
     }
     ```
 
-## Replacing: str.replace
+## جایگزین کردن: str.replace
 
-The method `str.replace(regexp, replacement)` replaces matches found using `regexp` in string `str` with `replacement` (all matches if there's flag `pattern:g`, otherwise, only the first one).
+روش `str.replace(regexp، replacement)` تطابق ‌هایی را که با استفاده از `regexp` در رشته `str` یافت می‌ شود را با `replacement` جایگزین می‌ کند (اگر پرچم `pattern:g` وجود داشته باشد همه منطبق هستند، در غیر این صورت، فقط اولین مورد تطابق دارد).
 
-For instance:
+برای مثال:
 
 ```js run
 // no flag g
@@ -136,26 +136,26 @@ alert( "We will, we will".replace(/we/i, "I") ); // I will, we will
 alert( "We will, we will".replace(/we/ig, "I") ); // I will, I will
 ```
 
-The second argument is the `replacement` string. We can use special character combinations in it to insert fragments of the match:
+آرگومان دوم رشته `replacement(جایگزین)` است. می‌ توانیم از ترکیب کاراکترهای ویژه در آن برای درج قطعاتی از تطابق استفاده کنیم:
 
-| Symbols | Action in the replacement string |
+| نماد | عمل در رشته جایگزین |
 |--------|--------|
-|`$&`|inserts the whole match|
-|<code>$&#096;</code>|inserts a part of the string before the match|
-|`$'`|inserts a part of the string after the match|
-|`$n`|if `n` is a 1-2 digit number, then it inserts the contents of n-th parentheses, more about it in the chapter <info:regexp-groups>|
-|`$<name>`|inserts the contents of the parentheses with the given `name`, more about it in the chapter <info:regexp-groups>|
-|`$$`|inserts character `$` |
+|`$&`|کل تطابق را درج می کند|
+|<code>$&#096;</code>|قسمتی از رشته را قبل از تطابق وارد می کند|
+|`$'`|قسمتی از رشته را بعد از تطابق وارد می کند|
+|`$n`|اگر`n` یک عدد 1-2 رقمی باشد، محتویات پرانتزهای n را درج می کند، اطلاعات بیشتر در مورد آن در فصل <info:regexp-groups>|
+|`$<name>`|محتویات پرانتز را با `name` داده شده درج می کند، اطلاعات بیشتر در مورد آن در فصل <info:regexp-groups>|
+|`$$`|کاراکتر "$" را درج می کند |
 
-An example with `pattern:$&`:
+مثالی برای `pattern:$&`:
 
 ```js run
 alert( "I love HTML".replace(/HTML/, "$& and JavaScript") ); // I love HTML and JavaScript
 ```
 
-## Testing: regexp.test
+## تست کردن: regexp.test
 
-The method `regexp.test(str)` looks for at least one match, if found, returns `true`, otherwise `false`.
+متد `regexp.test(str)` حداقل یک تطابق را جستجو می‌ کند، در صورت یافتن `true`، در غیر این صورت `false` بر می گرداند.
 
 ```js run
 let str = "I love JavaScript";
@@ -164,14 +164,14 @@ let regexp = /LOVE/i;
 alert( regexp.test(str) ); // true
 ```
 
-Later in this chapter we'll study more regular expressions, walk through more examples, and also meet other methods.
+بعدا در این فصل، عبارات باقاعده بیشتری را یاد می گیریم. مثال‌ های بیشتری را مرور می‌ کنیم و همچنین با روش‌ های دیگری آشنا می‌ شویم.
 
-Full information about the methods is given in the article <info:regexp-methods>.
+اطلاعات کامل در مورد متد ها در مقاله <info:regexp-methods> آورده شده است.
 
-## Summary
+## خلاصه
 
-- A regular expression consists of a pattern and optional flags: `pattern:g`, `pattern:i`, `pattern:m`, `pattern:u`, `pattern:s`, `pattern:y`.
-- Without flags and special symbols  (that we'll study later), the search by a regexp is the same as a substring search.
-- The method `str.match(regexp)` looks for matches: all of them if there's `pattern:g` flag, otherwise, only the first one.
-- The method `str.replace(regexp, replacement)` replaces matches found using `regexp` with `replacement`: all of them if there's `pattern:g` flag, otherwise only the first one.
-- The method `regexp.test(str)` returns `true` if there's at least one match, otherwise, it returns `false`.
+- یک عبارت باقاعده از یک الگو و پرچم‌ های اختیاری تشکیل شده است: `pattern:g`، `pattern:i`، `pattern:m`، `pattern:u`، `pattern:s`، `pattern:y`.
+- بدون پرچم و نمادهای خاص (که بعداً مطالعه خواهیم کرد)، جستجو توسط regexp مانند جستجوی زیر رشته(substring) است.
+- متد `str.match(regexp)` به دنبال تطابق است: اگر پرچم `pattern:g` وجود داشته باشد، همه آنها را بر می گرداند، در غیر این صورت، فقط اولین مورد را بر می گرداند.
+- متد `str.replace(regexp، replacement)` تطابق های یافت شده با استفاده از `regexp` را با `replacement` جایگزین می‌ کند: اگر پرچم `pattern:g` وجود داشته باشد به همه آنها این فرایند را اعمال می کند، در غیر این صورت فقط به اولین مورد اعمال می کند.
+- متد `regexp.test(str)` اگر حداقل یک مورد مطابقت داشته باشد، `true` بر می‌ گرداند، در غیر این صورت، `false` بر می‌ گرداند.

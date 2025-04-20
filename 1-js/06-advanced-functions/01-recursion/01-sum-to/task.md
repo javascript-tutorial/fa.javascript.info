@@ -2,11 +2,11 @@ importance: 5
 
 ---
 
-# Sum all numbers till the given one
+# مجموع را تا عدد داده شده پیدا کنید
 
-Write a function `sumTo(n)` that calculates the sum of numbers `1 + 2 + ... + n`.
+یک تابع `sumTo(n)` بنویسید که جمع اعداد `1 + 2 + ... + n` را حساب می‌کند.
 
-For instance:
+برای مثال:
 
 ```js no-beautify
 sumTo(1) = 1
@@ -17,20 +17,20 @@ sumTo(4) = 4 + 3 + 2 + 1 = 10
 sumTo(100) = 100 + 99 + ... + 2 + 1 = 5050
 ```
 
-Make 3 solution variants:
+3 نوع راه‌حل بنویسید:
 
-1. Using a for loop.
-2. Using a recursion, cause `sumTo(n) = n + sumTo(n-1)` for `n > 1`.
-3. Using the [arithmetic progression](https://en.wikipedia.org/wiki/Arithmetic_progression) formula.
+1. با استفاده از یک حلقه for.
+2. با استفاده از بازگشت، چون به ازای `n > 1` داریم `sumTo(n) = n + sumTo(n-1)`.
+3. با استفاده از فرمول [تصاعد حسابی](https://fa.wikipedia.org/wiki/تصاعد_حسابی).
 
-An example of the result:
+یک مثال از نتیجه:
 
 ```js
-function sumTo(n) { /*... your code ... */ }
+function sumTo(n) { /*... کد شما ... */ }
 
 alert( sumTo(100) ); // 5050
 ```
 
-P.S. Which solution variant is the fastest? The slowest? Why?
+پی‌نوشت: کدام راه‌حل سریع‌ترین است؟ کدام کندترین؟ چرا؟
 
-P.P.S. Can we use recursion to count `sumTo(100000)`? 
+پی‌نوشت دوم: آیا می‌توانیم از بازگشت برای محاسبه `sumTo(100000)` استفاده کنیم؟

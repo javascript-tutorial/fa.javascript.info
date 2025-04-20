@@ -1,7 +1,7 @@
 
-That's because `map.keys()` returns an iterable, but not an array.
+دلیلش این است که `map.keys()` یک حلقه‌پذیر را برمی‌گرداند نه یک آرایه.
 
-We can convert it into an array using `Array.from`:
+ما می‌توانیم با استفاده از `Array.from` آن را به آرایه تبدیل کنیم:
 
 
 ```js run

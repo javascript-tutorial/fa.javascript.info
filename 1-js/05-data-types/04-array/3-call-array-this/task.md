@@ -2,17 +2,16 @@ importance: 5
 
 ---
 
-# Calling in an array context
+# فراخوانی محتوای یک آرایه
 
-What is the result? Why?
+نتیجه چه خواهد بود؟ چرا؟
 
 ```js
 let arr = ["a", "b"];
 
 arr.push(function() {
   alert( this );
-})
+});
 
 arr[2](); // ?
 ```
-

@@ -1,1 +1,1 @@
-# Prototypes, inheritance
+# پروتوتایپ‌ها، ارث‌بری

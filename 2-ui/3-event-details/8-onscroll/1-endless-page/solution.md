@@ -1,16 +1,16 @@
-The core of the solution is a function that adds more dates to the page (or loads more stuff in real-life) while we're at the page end.
+هسته راه‌حل تابعی است که تاریخ های بیشتر را  هنگامی که در انتهای صفحه هستیم به صفحه اضافه می‌کند (یا در واقعیت بارگذاری اجناس بیشتر).
 
-We can call it immediately and add as a `window.onscroll` handler.
+ما می‌توانیم بلافاصله آن را فراخوانی کنیم و به عنوان هندلر `window.onscroll` اضافه‌اش کنیم.
 
-The most important question is: "How do we detect that the page is scrolled to bottom?"
+مهم‌ترین سوال این است که: "چگونه تشخیص دهیم که صفحه به پایین اسکرول شده است؟"
 
-Let's use window-relative coordinates.
+بیایید از مختصات مربوط به window استفاده کنیم.
 
-The document is represented (and contained) within `<html>` tag, that is `document.documentElement`.
+داکیومنت در تگ `<html>` نمایش داده می‌شود که آن `document.documentElement` است.
 
-We can get window-relative coordinates of the whole document as `document.documentElement.getBoundingClientRect()`, the `bottom` property will be window-relative coordinate of the document bottom.
+ما می‌توانیم مختصات مروبط به window کل داکیومنت را به صورت `()document.documentElement.getBoundingClientRect` دریافت کنیم. ویژگی `bottom`، مختصات مربوط به window document bottom خواهد بود.
 
-For instance, if the height of the whole HTML document is `2000px`, then:
+برای مثال اگر ارتفاع کل داکیومنت `2000px` HTML است سپس:
 
 ```js
 // when we're on the top of the page
@@ -22,7 +22,7 @@ document.documentElement.getBoundingClientRect().top = 0
 document.documentElement.getBoundingClientRect().bottom = 2000
 ```
 
-If we scroll `500px` below, then:
+اگر ما `500px` به پایین اسکرول کنیم سپس:
 
 ```js
 // document top is above the window 500px
@@ -31,8 +31,7 @@ document.documentElement.getBoundingClientRect().top = -500
 document.documentElement.getBoundingClientRect().bottom = 1500
 ```
 
-When we scroll till the end, assuming that the window height is `600px`:
-
+هنگامی که ما تا انتها اسکرول می‌کنیم فرض می‌کنیم ارتفاع `600px` window است:
 
 ```js
 // document top is above the window 1400px
@@ -41,13 +40,13 @@ document.documentElement.getBoundingClientRect().top = -1400
 document.documentElement.getBoundingClientRect().bottom = 600
 ```
 
-Please note that the `bottom` can't be `0`, because it never reaches the window top. The lowest limit of the `bottom` coordinate is the window height (we assumed it to be `600`), we can't scroll it any more up.
+لطفا توجه داشته باشید که `bottom` نمی‌تواند `0` باشد چون هیچوقت به بالای window نمی‌رسد. پایین‌ترین حد مختصات `bottom` ارتفاع window است (ما فرض کردیم `600` است)، ما نمی‌توانیم دیگر بیشتر اسکرول کنیم.
 
-We can obtain the window height as `document.documentElement.clientHeight`.
+ما می‌توانیم ارتفاع window را به صورت `document.documentElement.clientHeight` به دست آوریم.
 
-For our task, we need to know when the document bottom is not no more than `100px` away from it (that is: `600-700px`, if the height is `600`).
+برای تمرین‌مان، ما باید بدانیم تا پایین داکیومنت چه زمانی بیشتر از `100px` فاصله دارد (آن: `600px-700px` است اگر ارتفاع `600` باشد)
 
-So here's the function:
+پس این تابع است:
 
 ```js
 function populate() {
@@ -55,11 +54,11 @@ function populate() {
     // document bottom
     let windowRelativeBottom = document.documentElement.getBoundingClientRect().bottom;
 
-    // if the user scrolled far enough (<100px to the end)
-    if (windowRelativeBottom < document.documentElement.clientHeight + 100) {
-      // let's add more data
-      document.body.insertAdjacentHTML("beforeend", `<p>Date: ${new Date()}</p>`);
-    }
+    // if the user hasn't scrolled far enough (>100px to the end)
+    if (windowRelativeBottom > document.documentElement.clientHeight + 100) break;
+    
+    // let's add more data
+    document.body.insertAdjacentHTML("beforeend", `<p>Date: ${new Date()}</p>`);
   }
 }
 ```

@@ -1,12 +1,12 @@
-For the second parentheses to work, the first ones must return a function.
+برای اینکه پرانتز دوم کار کند، پرانتز اول باید یک تابع برگرداند.
 
-Like this:
+مانند این:
 
 ```js run
 function sum(a) {
 
   return function(b) {
-    return a + b; // takes "a" from the outer lexical environment
+    return a + b; // را از محیط لغوی بیرونی می‌گیرد "a" متغیر
   };
 
 }

@@ -1,7 +1,7 @@
-Yeah, looks strange indeed.
+بله، واقعا عجیب به نظر می‌رسد.
 
-But `instanceof` does not care about the function, but rather about its `prototype`, that it matches against the prototype chain.
+اما `instanceof` به تابع اهمیتی نمی‌دهد بلکه `prototype` آن مهم است که در زنجیره پروتوتایپی همتای آن پیدا شود.
 
-And here `a.__proto__ == B.prototype`, so `instanceof` returns `true`.
+و اینجا `a.__proto__ == B.prototype` برقرار است پس `instanceof` مقدار `true` برمی‌گرداند.
 
-So, by the logic of `instanceof`, the `prototype` actually defines the type, not the constructor function.
+پس بنابر منطق `instanceof`، ویژگی `prototype` در واقع نوع را تعریف می‌کند نه تابع تابع سازنده را.

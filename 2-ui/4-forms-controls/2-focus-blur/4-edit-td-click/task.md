@@ -2,15 +2,15 @@ importance: 5
 
 ---
 
-# Edit TD on click
+# ویرایش TD با click
 
-Make table cells editable on click.
+سلول‌های جدول را با کلیک قابل ویرایش کنید.
 
-- On click -- the cell should became "editable" (textarea appears inside), we can change HTML. There should be no resize, all geometry should remain the same.
-- Buttons OK and CANCEL appear below the cell to finish/cancel the editing.
-- Only one cell may be editable at a moment. While a `<td>` is in "edit mode", clicks on other cells are ignored.
-- The table may have many cells. Use event delegation.
+- با کلیک -- سلول باید "قابل ویرایش" باشد. (textarea داخل آن نمایش داده شود)،‌ ما می‌توانیم HTML را تغییر دهیم. هیچ تفییر سایزی نباید وجود داشته باشد،‌تمام اندازه‌های هندسی باید یکسان بمانند.
+- دکمه‌های OK و CANCEL زیر سلول ظاهر می‌شوند تا ویرایش کردن را تمام/کنسل کنند.
+- دذ لحظه تنها یک سلول می‌تواند قابلیت ویرایش داشته باشد. زمانی که یک `<td>` در "حالت ویرایش" است، کلیک‌های روی بقیه سلول‌ها نادیده گرفته می‌شوند.
+- جدول ممکن است سلول‌های زیادی داشته باشد. از event delegation استفاده کنید.
 
-The demo:
+نسخه‌ی نمایشی:
 
 [iframe src="solution" height=400]

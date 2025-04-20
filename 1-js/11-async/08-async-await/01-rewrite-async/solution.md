@@ -1,5 +1,5 @@
 
-The notes are below the code:
+نکات پایین کد قرار دارند:
 
 ```js run
 async function loadJson(url) { // (1)
@@ -13,15 +13,17 @@ async function loadJson(url) { // (1)
   throw new Error(response.status);
 }
 
-loadJson('no-such-user.json')
+loadJson('https://javascript.info/no-such-user.json')
   .catch(alert); // Error: 404 (4)
 ```
 
-Notes:
+نکات:
 
-1. The function `loadJson` becomes `async`.
-2. All `.then` inside are replaced with `await`.
-3. We can `return response.json()` instead of awaiting for it, like this:
+۱. تابع `loadJson` به `async` تغییر کرد.
+
+۲. تمام `then.` ها با `await` جایگزین شده اند.
+
+۳. ما می توانیم بجای صبر کردن برای نتیجه، مستقیما آن `return response.json()` را برگردانیم؛ مانند زیر:
 
     ```js
     if (response.status == 200) {
@@ -29,5 +31,5 @@ Notes:
     }
     ```
 
-    Then the outer code would have to `await` for that promise to resolve. In our case it doesn't matter.
-4. The error thrown from `loadJson` is handled by `.catch`. We can't use `await loadJson(…)` there, because we're not in an `async` function.
+    بنابراین کد بیرونی باید برای اجرا شدن Promise از `await` استفاده کند. در مثال ما خیلی اهمیت ندارد.
+۵. خطای ایجاد شده از `loadJson` توسط `catch.` مدیریت می شود. ما نمی توانیم به صورت `(...)await loadJson` استفاده کنیم، زیرا ما در هیچ تابع `async` ای نیستیم.

@@ -1,7 +1,9 @@
+importance: 5
 
-# Function in if
+---
+# تابعی درون if
 
-Look at the code. What will be the result of the call at the last line?
+به کد زیر نگاه بیاندازید. نتیجه فراخوانی در خط اخر چه چیزی خواهد بود؟
 
 ```js run
 let phrase = "Hello";

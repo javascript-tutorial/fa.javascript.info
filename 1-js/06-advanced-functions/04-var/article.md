@@ -1,123 +1,123 @@
 
-# The old "var"
+# ‌کلمه‌ی "var" قدیمی
 
-```smart header="This article is for understanding old scripts"
-The information in this article is useful for understanding old scripts.
+```smart header="این مقاله برای فهمیدن اسکریپت‌های قدیمی است"
+اطلاعات این مقاله برای فهمیدن اسکریپت‌های قدیمی مفید است.
 
-That's not how we write a new code.
+ما کدهای جدید را اینگونه نمی‌نویسیم.
 ```
 
-In the very first chapter about [variables](info:variables), we mentioned three ways of variable declaration:
+دقیقا در فصل اول درباره [متغیرها](info:variables)، ما سه راه تعریف متغیر را معرفی کردیم:
 
 1. `let`
 2. `const`
 3. `var`
 
-<<<<<<< HEAD
-`let` and `const` behave exactly the same way in terms of Lexical Environments.
-
-But `var` is a very different beast, that originates from very old times. It's generally not used in modern scripts, but still lurks in the old ones.
-
-If you don't plan meeting such scripts you may even skip this chapter or postpone it, but then there's a chance that it bites you later.
-
-From the first sight, `var` behaves similar to `let`. That is, declares a variable:
-=======
-The `var` declaration is similar to `let`. Most of the time we can replace `let` by `var` or vice-versa and expect things to work:
->>>>>>> d35baee32dcce127a69325c274799bb81db1afd8
+تعریف متغیر توسط `var` مانند `let` است. اکثر اوقات ما می‌توانیم `let` را با `var` جایگزین کنیم یا برعکس و توقع داشته باشیم که دستورات کار کنند:
 
 ```js run
-var message = "Hi";
-alert(message); // Hi
+var message = "سلام";
+alert(message); // سلام
 ```
 
-But internally `var` is a very different beast, that originates from very old times. It's generally not used in modern scripts, but still lurks in the old ones.
+اما از درون، `var` گونه‌ای بسیار متفاوت است که از زمان‌های قدیم وجود دارد. به طور کلی در اسکریپت‌های جدید استفاده نمی‌شود ولی هنوز هم در اسکریپت‌های قدیمی کمین کرده است.
 
-If you don't plan on meeting such scripts you may even skip this chapter or postpone it.
+اگر شما قرار نیست چنین اسکریپت‌هایی را ببینید می‌توانید این فصل را رد کنید یا مطالعه آن را عقب بیاندازید.
 
-On the other hand, it's important to understand differences when migrating old scripts from `var` to `let`, to avoid odd errors.
+از سویی دیگر، زمانی که اسکریپت‌های قدیمی را از `var` به `let` کوچ می‌دهیم، دانستن تفاوت‎ها برای جلوگیری از ارورهای عجیب مهم است.
 
-## "var" has no block scope
+## کلمه‌ی "var" محدوده بلوک ندارد
 
-`var` variables are either function-wide or global, they are visible through blocks.
+متغیرهایی که با `var` تعریف شده‌اند، یا محدوده تابع دارند یا محدوده گلوبال. آن‌ها در این بلوک‌ها قابل رویت هستند.
 
-For instance:
+برای مثال:
 
-```js
+```js run
 if (true) {
-  var test = true; // use "var" instead of "let"
+  var test = true; // استفاده کنید "var" از "let" به جای
 }
 
 *!*
-alert(test); // true, the variable lives after if
+alert(test); // true ،هم باقی می‌ماند if متغیر بعد از
 */!*
 ```
 
-If we used `let test` on the 2nd line, then it wouldn't be visible to `alert`. But `var` ignores code blocks, so we've got a global `test`.
+چون `var` بلوک‌های کد را نادیده می‌گیرد، ما یک متغیر گلوبال `test` خواهیم داشت.
 
-The same thing for loops: `var` cannot be block- or loop-local:
+اگر ما به جای `var test` از `let test` استفاده می‌کردیم، سپس متغیر فقط درون `if` قابل رویت بود:
 
-```js
+```js run
+if (true) {
+  let test = true; // "let" استفاده از
+}
+
+*!*
+alert(test); // ReferenceError: test is not defined
+*/!*
+```
+
+همین مورد برای حلقه‌ها هم صدق می‌کند: `var` نمی‌تواند در محدوده بلوک حلقه باشد:
+
+```js run
 for (var i = 0; i < 10; i++) {
+  var one = 1;
   // ...
 }
 
 *!*
-alert(i); // 10, "i" is visible after loop, it's a global variable
+alert(i);   // 10 ،بعد از حلقه قابل رویت است چون یک متغیر گلوبال است "i"
+alert(one); // 1 ،بعد از حلقه قابل رویت است چون یک متغیر گلوبال است "one"
 */!*
 ```
 
-If a code block is inside a function, then `var` becomes a function-level variable:
+اگر یک بلوک کد درون تابع باشد، سپس `var` یک متغیر در سطح تابع می‌شود:
 
-```js
+```js run
 function sayHi() {
   if (true) {
-    var phrase = "Hello";
+    var phrase = "سلام";
   }
 
-  alert(phrase); // works
+  alert(phrase); // کار می‌کند
 }
 
 sayHi();
-alert(phrase); // Error: phrase is not defined
+alert(phrase); // ReferenceError: phrase is not defined
 ```
 
-As we can see, `var` pierces through `if`, `for` or other code blocks. That's because a long time ago in JavaScript blocks had no Lexical Environments. And `var` is a remnant of that.
+همانطور که می‌بینیم، `var` از درون `if`، `for` یا بقیه بلوک‌های کد بیرون می‌آید. به این دلیل که در زمان‌های قدیم، بلوک‌ها در جاوااسکریپت محیط‌های لغوی نداشتند و `var` یک باقی‌مانده از آن است.
 
-<<<<<<< HEAD
-## "var" are processed at the function start
-=======
-## "var" tolerates redeclarations
+## کلمه "var" تعریف‌های دوباره را قبول می‌کند
 
-If we declare the same variable with `let` twice in the same scope, that's an error:
+اگر ما با `let` متغیری یکسان را دوبار در محدوده بلوک یکسان تعریف کنیم، یک ارور ایجاد می‌شود:
 
 ```js run
 let user;
 let user; // SyntaxError: 'user' has already been declared
 ```
 
-With `var`, we can redeclare a variable any number of times. If we use `var` with an already-declared variable, it's just ignored:
+با `var` ما می‌توانیم یک متغیر را هر چند بار که بخواهیم دوباره تعریف کنیم. اگر ما از `var` همراه با یک متغیر از قبل تعریف شده استفاده کنیم، نادیده گرفته می‌شود:
 
 ```js run
 var user = "Pete";
 
-var user = "John"; // this "var" does nothing (already declared)
-// ...it doesn't trigger an error
+var user = "John"; // کاری انجام نمی‌دهد (از قبل تعریف شده) "var" این
+// ...اروری ایجاد نمی‌کند
 
 alert(user); // John
 ```
 
-## "var" variables can be declared below their use
->>>>>>> d35baee32dcce127a69325c274799bb81db1afd8
+## متغیرهای "var" می‌توانند پایین محل استفاده‌شان تعریف شوند
 
-`var` declarations are processed when the function starts (or script starts for globals).
+متغیرهای تعریف شده با `var` زمانی که اجرای تابع شروع می‌شود (یا برای متغیرهای گلوبال زمانی که اسکریپت شروع می‌شود) پردازش می‌شوند.
 
-In other words, `var` variables are defined from the beginning of the function, no matter where the definition is (assuming that the definition is not in the nested function).
+به عبارتی دیگر، متغیرهای `var` بدون توجه به محل تعریف آن‌ها، از زمانی که اجرای تابع شروع می‌شود تعریف می‌شوند (با فرض اینکه تعریف کردن درون تابع تودرتو نیست).
 
-So this code:
+پس این کد:
 
-```js
+```js run
 function sayHi() {
-  phrase = "Hello";
+  phrase = "سلام";
 
   alert(phrase);
 
@@ -125,27 +125,29 @@ function sayHi() {
   var phrase;
 */!*
 }
+sayHi();
 ```
 
-...Is technically the same as this (moved `var phrase` above):
+...از لحاظ فنی با این کد برابر است (عبارت `var phrase` را بالا بردیم):
 
-```js
+```js run
 function sayHi() {
 *!*
   var phrase;
 */!*
 
-  phrase = "Hello";
+  phrase = "سلام";
 
   alert(phrase);
 }
+sayHi();
 ```
 
-...Or even as this (remember, code blocks are ignored):
+...حتی با این هم برابر است (به یاد داشته باشید که بلوک‌های کد نادیده گرفته می‌شوند):
 
-```js
+```js run
 function sayHi() {
-  phrase = "Hello"; // (*)
+  phrase = "سلام"; // (*)
 
   *!*
   if (false) {
@@ -155,130 +157,131 @@ function sayHi() {
 
   alert(phrase);
 }
+sayHi();
 ```
 
-People also call such behavior "hoisting" (raising), because all `var` are "hoisted" (raised) to the top of the function.
+افراد به آن «بالا بردن» هم می‌گویند چون تمام `var`ها به بالای تابع «سعود می‌کنند».
 
-So in the example above, `if (false)` branch never executes, but that doesn't matter. The `var` inside it is processed in the beginning of the function, so at the moment of `(*)` the variable exists.
+پس در مثال بالا، شاخه `if (false)` هیچوقت اجرا نمی‌شود اما اصلا مهم نیست. `var` که درون آن است در ابتدای اجرای تابع پردازش می‌شود پس هنگام اجرای `(*)` متغیر وجود دارد.
 
-**Declarations are hoisted, but assignments are not.**
+**تعریف متغیر بالا می‌رود اما مقداردهی‌ها نه.**
 
-That's best demonstrated with an example:
+این موضوع یک مثال بهتر نمایش داده می‌شود:
 
 ```js run
 function sayHi() {
-  alert(phrase);  
+  alert(phrase);
 
 *!*
-  var phrase = "Hello";
+  var phrase = "سلام";
 */!*
 }
 
 sayHi();
 ```
 
-The line `var phrase = "Hello"` has two actions in it:
+خط `var phrase = "سلام"` در خودش دو کار انجام می‌دهد:
 
-1. Variable declaration `var`
-2. Variable assignment `=`.
+1. تعریف متغیر با `var`.
+2. مقداردهی متغیر با `=`.
 
-The declaration is processed at the start of function execution ("hoisted"), but the assignment always works at the place where it appears. So the code works essentially like this:
+تعریف متغیر در ابتدای اجرای تابع پردازش می‌شود («بالا می‌رود») اما مقداردهی همیشه در جایی که وجود دارد انجام می‌شود. پس کد بالا اساسا مانند کد پایین کار می‌کند:
 
 ```js run
 function sayHi() {
 *!*
-  var phrase; // declaration works at the start...
+  var phrase; // ...تعریف متغیر در ابتدا انجام می‌شود
 */!*
 
   alert(phrase); // undefined
 
 *!*
-  phrase = "Hello"; // ...assignment - when the execution reaches it.
+  phrase = "Hello"; // ...مقداردهی - زمانی که اجرا به آن می‌رسد
 */!*
 }
 
 sayHi();
 ```
 
-Because all `var` declarations are processed at the function start, we can reference them at any place. But variables are undefined until the assignments.
+چون تمام تعریف متغیرهای `var` در ابتدای تابع پردازش می‌شوند، ما می‌توانیم به آن‌ها در هر زمانی رجوع کنیم. اما متغیرها تا زمان مقداردهی برابر با undefined هستند.
 
-In both examples above `alert` runs without an error, because the variable `phrase` exists. But its value is not yet assigned, so it shows `undefined`.
+در هر دو مثال بالا، `alert` بدون هیچ اروری اجرا می‌شود چون متغیر `phrase` وجود دارد. اما مقدار آن هنوز تخصیص داده نشده است پس `undefined` را نشان می‌شود.
 
-### IIFE
+## روش IIFE
 
-As in the past there was only `var`, and it has no block-level visibility, programmers invented a way to emulate it. What they did was called "immediately-invoked function expressions" (abbreviated as IIFE).
+در گذشته، چون فقط `var` وجود داشت و قابلیت رویت در بلوک کد را ندارد، برنامه‌نویسان برای تقلید آن راهی ایجاد کردند. کاری کردند را «فراخوانی بلافاصله‌ی function expressionها (immediately-invoked function expressions)» است (خلاصه شده به عنوان IIFE).
 
-That's not something we should use nowadays, but you can find them in old scripts.
+امروزه از این روش نباید استفاده کنیم اما می‌توانید آن‌ها را در اسکریپت‌های قدیمی پیدا کنید.
 
-An IIFE looks like this:
+یک IIFE اینگونه به نظر می‌رسد:
 
 ```js run
 (function() {
 
-  let message = "Hello";
+  var message = "سلام";
 
-  alert(message); // Hello
+  alert(message); // سلام
 
 })();
 ```
 
-Here a Function Expression is created and immediately called. So the code executes right away and has its own private variables.
+اینجا، یک Function Expression ساخته شده و بلافاصله فراخوانی شده است. پس کد هر چه سریع‌تر اجرا می‌شود و متغیرهای مخصصوص خودش را دارد.
 
-The Function Expression is wrapped with parenthesis `(function {...})`, because when JavaScript meets `"function"` in the main code flow, it understands it as the start of a Function Declaration. But a Function Declaration must have a name, so this kind of code will give an error:
+Function Expression درون پرانتز قرار گرفته است `(function {...})` چون زمانی که موتور جاوااسکریپت در کد اصلی با `"function"` مواجه می‌شود، آن را به عنوان ابتدای یک Function Declaration فرض می‌کند. اما یک Function Declaration باید اسم داشته باشد پس کدی به این شکل ارور ایجاد می‌کند:
 
 ```js run
-// Try to declare and immediately call a function
-function() { // <-- Error: Function statements require a function name
+// سعی می‌کنیم یک تابع را تعریف و بلافاصله فراخوانی کنیم
+function() { // <-- SyntaxError: Function statements require a function name
 
-  let message = "Hello";
+  var message = "سلام";
 
-  alert(message); // Hello
+  alert(message); // سلام
 
 }();
 ```
 
-Even if we say: "okay, let's add a name", that won't work, as JavaScript does not allow Function Declarations to be called immediately:
+حتی اگر بگوییم: «مشکلی نیست، بیایید یک اسم اضافه کنیم» باز هم کار نمی‌کند چون جاوااسکریپت اجازه نمی‌دهد که Function Declarationها بلافاصله فراخوانی شوند:
 
 ```js run
-// syntax error because of parentheses below
+// به دلیل وجود پرانتزهای پایین ارور سینتکس دریافت می‌کنیم
 function go() {
 
-}(); // <-- can't call Function Declaration immediately
+}(); // <-- را بلافاصله فراخوانی کرد Function Declaration نمی‌توان
 ```
 
-So, the parentheses around the function is a trick to show JavaScript that the function is created in the context of another expression, and hence it's a Function Expression: it needs no name and can be called immediately.
+پس پرانتزهای دور تابع یک ترفند است تا به جاوااسکریپت نشان دهیم که تابع در زمینه‌ی عبارتی دیگر ساخته شده و از این رو یک Function Expression است: به اسم نیازی ندارد و می‌تواند بلافاصله فراخوانی شود.
 
-There exist other ways besides parentheses to tell JavaScript that we mean a Function Expression:
+برای اینکه به جاوااسکریپت بگوییم که منظورمان یک Function Expression است راه‌های دیگری در کنار پرانتزها وجود دارد:
 
 ```js run
-// Ways to create IIFE
+// IIFE راه‌هایی برای ایجاد
 
-(function() {
-  alert("Parentheses around the function");
+*!*(*/!*function() {
+  alert("پرانتزهای دور تابع");
 }*!*)*/!*();
 
-(function() {
-  alert("Parentheses around the whole thing");
+*!*(*/!*function() {
+  alert("پرانتزهای دور تمام عبارت");
 }()*!*)*/!*;
 
 *!*!*/!*function() {
-  alert("Bitwise NOT operator starts the expression");
+  alert("عملگر بیتی NOT عبارت را آغاز می‌کند");
 }();
 
 *!*+*/!*function() {
-  alert("Unary plus starts the expression");
+  alert("عملگر مثبت یگانه عبارت را آغاز می‌کند");
 }();
 ```
 
-In all the above cases we declare a Function Expression and run it immediately. Let's note again: nowadays there's no reason to write such code.
+در تمام موارد بالا ما یک Function Expression تعریف می‌کنیم و آن را بلافاصله فراخوانی می‌کنیم. بیایید دوباره به این موضوع توجه کنیم: امروزه هیج دلیلی برای نوشتن چنین کدی وجود ندارد.
 
-## Summary
+## خلاصه
 
-There are two main differences of `var`:
+بین `var` و `let/const` دو تفاوت اصلی وجود دارد:
 
-1. Variables have no block scope, they are visible minimum at the function level.
-2. Variable declarations are processed at function start.
+1. متغیرهای `var` محدودیت بلوک ندارند، قابلیت رویت آن‌ها یا محدود به تابع کنونی است یا اگر بیرون از تابع تعریف شده باشند محدود به گلوبال است.
+2. تعریف متغیر با `var` در ابتدای اجرای تابع پردازش می‌شود (یا برای متغیرهای گلوبال در ابتدای اسکریپت).
 
-There's one more very minor difference related to the global object, that we'll cover in the next chapter.
+یک تفاوت جزئی دیگر در رابطه با شیء گلوبال وجود دارد که در فصل بعدی آن را بیان می‌کنیم.
 
-These differences are actually a bad thing most of the time. First, we can't create block-local variables. And hoisting just creates more space for errors. So, for new scripts `var` is used exceptionally rarely.
+این تفاوت‌های در اکثر اوقات `var` را نسبت به `let` بدتر جلوه می‌دهند. متغیرهای سطح بلوک چیز خیلی خوبی هستند. به این دلیل است که خیلی قبل‌تر `let` در استاندارد معرفی شد و حالا برای تعریف متغیر روش اصلی است (در کنار `const`).

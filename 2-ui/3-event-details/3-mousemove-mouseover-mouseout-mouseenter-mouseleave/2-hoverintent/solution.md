@@ -1,18 +1,18 @@
 
-The algorithm looks simple:
-1. Put `onmouseover/out` handlers on the element. Also can use `onmouseenter/leave` here, but they are less universal, won't work if we introduce delegation.
-2. When a mouse cursor entered the element, start measuring the speed on `mousemove`.
-3. If the speed is slow, then run `over`.
-4. When we're going out of the element, and `over` was executed, run `out`.
+الگوریتم ساده به نظر می‌رسد:
+1. برای رویدادهای `onmouseover/out` کنترل‌کننده‌هایی روی عنصر تعریف می‌کنیم. همچنین می‌توانیم از ‍‍‍`onmouseenter/leave` نیز در این مورد استفاده کنیم، اما کمتر استفاده می‌شوند. درصورتی که از واگذاری رویدادها استفاده کنیم، کار نمی‌کنند.
+2. زمانی که اشاره‌گر موس وارد یک عنصر می‌شود، سرعت آن را در `mousemove` محاسبه می‌کنیم.
+3. اگر سرعت حرکت آن کند باشد، تابع `over` را صدا می‌زنیم.
+4. زمانی که از عنصر خارج می‌شویم، و `over` صدا زده شده بود، تابع `out`‌ را نیز صدا می‌زنیم.
 
-But how to measure the speed?
+اما چگونه سرعت اشاره‌گر موس را اندازه گیری کنیم؟
 
-The first idea can be: run a function every `100ms` and measure the distance between previous and new coordinates. If it's small, then the speed is small.
+اولین چیزی که به ذهن می‌رسد این است که: یک تابع را هر `‍100ms‍` اجرا کنیم و مسافتی که بین مختصات قبلی و جدید طی شده را اندازه بگیریم. اگر کوچک باشد، پس سرعت حرکت اشاره‌گر موس کند بوده.
 
-Unfortunately, there's no way to get "current mouse coordinates" in JavaScript. There's no function like `getCurrentMouseCoordinates()`.
+متاسفانه راهی برای گرفتن  "مختصات فعلی اشاره‌گر موس" در جاوا اسکریپت وجود ندارد. هیچ تابع از قبل آماده‌ای مانند `getCurrentMouseCoordiantes()` وجود ندارد.
 
-The only way to get coordinates is to listen for mouse events, like `mousemove`, and take coordinates from the event object.
+تنها راه برای گرفتن مختصات گوش دادن  به رویدادهای موس مانند `mousemove` و گرفتن مختصات از شئ event خواهد بود.
 
-So let's set a handler on `mousemove` to track coordinates and remember them. And then compare them, once per `100ms`.
+درنتیجه باید برای رویداد `mousemove` یک کنترل‌کننده تعریف می‌کنیم تا مختصات را ذخیره کنیم، و آنها را هر `100ms` مقایسه کنیم.
 
-P.S. Please note: the solution tests use `dispatchEvent` to see if the tooltip works right.
+پی‌نوشت: توجه کنید که برای آزمایش راه حل از `dispatchEvent` استفاده می‌شود تا ببیند تولتیپ به درستی کار می‌کند یا نه.

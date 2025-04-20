@@ -1,18 +1,18 @@
-# Recursion and stack
+# بازگشت و پشته
 
-Let's return to functions and study them more in-depth.
+بیایید برگردیم به تابع‌ها و آن‌ها را عمیق‌تر مطالعه کنیم.
 
-Our first topic will be *recursion*.
+اولین موضوع ما *بازگشت (recursion)* خواهد بود.
 
-If you are not new to programming, then it is probably familiar and you could skip this chapter.
+اگر شما در برنامه‌نویسی تازه‌کار نیستید، احتمالا این برای شما آشنا است و می‌توانید این فصل را رد کنید.
 
-Recursion is a programming pattern that is useful in situations when a task can be naturally split into several tasks of the same kind, but simpler. Or when a task can be simplified into an easy action plus a simpler variant of the same task. Or, as we'll see soon, to deal with certain data structures.
+بازگشت یک الگوی برنامه‌نویسی است که در مواقعی که یک کار به طور طبیعی می‌تواند به چند کار از نوع یکسان اما ساده‌تر تقسیم شود کاربرد دارد. یا زمانی که کاری می‌تواند به عملی آسان به علاوه‌ی یک نوع ساده‌تر از همان کار ساده‌سازی شود. یا همانطور که به زودی خواهیم دید، برای کنار آمدن با بعضی از ساختارهای داده.
 
-When a function solves a task, in the process it can call many other functions. A partial case of this is when a function calls *itself*. That's called *recursion*.
+زمانی که یک تابع کاری را انجام می‌دهد، در فرایند آن، تابع می‌تواند تعداد زیادی از تابع‌های دیگر را فرا بخواند. یک مورد جرئی از این موضوع زمانی است که تابع *خودش* را فراخوانی می‌کند. به این عمل *بازگشت (recursion)* می‌گویند.
 
-## Two ways of thinking
+## دو طرز فکر
 
-For something simple to start with -- let's write a function `pow(x, n)` that raises `x` to a natural power of `n`. In other words, multiplies `x` by itself `n` times.
+برای اینکه با چیزی ساده شروع کنیم، بیایید بک تابع `pow(x, n)` بنویسیم که `x` را به توانی طبیعی از `n` می‌رساند. به عبارتی دیگر، `x` را `n` بار در خودش ضرب می‌کند.
 
 ```js
 pow(2, 2) = 4
@@ -20,15 +20,15 @@ pow(2, 3) = 8
 pow(2, 4) = 16
 ```
 
-There are two ways to implement it.
+دو راه برای پیاده‌سازی آن وجود دارد.
 
-1. Iterative thinking: the `for` loop:
+1. طرز فکر تکرارشونده: حلقه `for`:
 
     ```js run
     function pow(x, n) {
       let result = 1;
 
-      // multiply result by x n times in the loop
+      // ضرب می‌کند x بار در n را result در حلقه
       for (let i = 0; i < n; i++) {
         result *= x;
       }
@@ -39,7 +39,7 @@ There are two ways to implement it.
     alert( pow(2, 3) ); // 8
     ```
 
-2. Recursive thinking: simplify the task and call self:
+2. طرز فکر بازگشتی: کار را ساده کن و خودت را فراخوانی کن:
 
     ```js run
     function pow(x, n) {
@@ -53,39 +53,39 @@ There are two ways to implement it.
     alert( pow(2, 3) ); // 8
     ```
 
-Please note how the recursive variant is fundamentally different.
+لطفا در نظر داشته باشید که نوع بازگشتی از پایه تفاوت دارد.
 
-When `pow(x, n)` is called, the execution splits into two branches:
+زمانی که `pow(x, n)` فراخوانی می‌شود، اجرای آن به دو بخش تقسیم می‌شود:
 
 ```js
               if n==1  = x
              /
 pow(x, n) =
-             \       
+             \
               else     = x * pow(x, n - 1)
 ```
 
-1. If `n == 1`, then everything is trivial. It is called *the base* of recursion, because it immediately produces the obvious result: `pow(x, 1)` equals `x`.
-2. Otherwise, we can represent `pow(x, n)` as `x * pow(x, n - 1)`. In maths, one would write <code>x<sup>n</sup> = x * x<sup>n-1</sup></code>. This is called *a recursive step*: we transform the task into a simpler action (multiplication by `x`) and a simpler call of the same task (`pow` with lower `n`). Next steps simplify it further and further until `n` reaches `1`.
+1. اگر `n == 1`، سپس همه چیز بدیهی می‎شود. به آن *پایه* بازگشت می‌گویند چون بلافاصله نتیجه واضحی را ایجاد می‌کند: `pow(x, 1)` برابر با `x` است.
+2. در غیر این صورت، ما می‌تونیم `pow(x, n)` را به عنوان نمایش دهیم. در ریاضیات، ممکن است کسی اینگونه <code>x<sup>n</sup> = x * x<sup>n-1</sup></code> بنویسد. به آن *مرحله بازگشتی* می‌گویند: ما می‌توانیم کار را به یک عمل ساده‌تر (ضرب در `x`) و یک فراخوانی ساده از کار یکسان (`pow` به همراه `n` کمتر) تبدیل کنیم. مرحله‌های بعدی آن را بیشتر و بیشتر ساده می‌کنند تا `n` به `1` برسد.
 
-We can also say that `pow` *recursively calls itself* till `n == 1`.
+ما همچنین می‌توانیم بگوییم که `pow` *به طور بازگشتی* تا زمانی که `n == 1` باشد خودش را فراخوانی می‌کند.
 
 ![recursive diagram of pow](recursion-pow.svg)
 
 
-For example, to calculate `pow(2, 4)` the recursive variant does these steps:
+برای مثال، برای محاسبه `pow(2, 4)` نوع بازگشتی این مراحل را می‌گذراند:
 
 1. `pow(2, 4) = 2 * pow(2, 3)`
 2. `pow(2, 3) = 2 * pow(2, 2)`
 3. `pow(2, 2) = 2 * pow(2, 1)`
 4. `pow(2, 1) = 2`
 
-So, the recursion reduces a function call to a simpler one, and then -- to even more simpler, and so on, until the result becomes obvious.
+پس بازگشت، یک فراخوانی تابع را به فراخوانی‌ای ساده‌تر تبدیل می‌کند و سپس، به چیزی ساده‌تر و همینطور ادامه پیدا می‌کند تا نتیجه واضح باشد.
 
-````smart header="Recursion is usually shorter"
-A recursive solution is usually shorter than an iterative one.
+````smart header="بازگشت معمولا کوتاه‌تر است"
+یک راه حل بازگشتی معمولا از راه حل تکرارشونده کوتاه‌تر است.
 
-Here we can rewrite the same using the conditional operator `?` instead of `if` to make `pow(x, n)` more terse and still very readable:
+اینجا می‌توانیم کدی یکسان را با استفاده از عملگر `?` به جای `if` بنویسیم تا `pow(x, n)` را در حالی که هنوز هم خوانا باشد کوتاه‌تر کنیم:
 
 ```js run
 function pow(x, n) {
@@ -94,36 +94,36 @@ function pow(x, n) {
 ```
 ````
 
-The maximal number of nested calls (including the first one) is called *recursion depth*. In our case, it will be exactly `n`.
+حداکثر تعداد فراخوانی‌های تودرتو (شامل اولی هم می‌شود) را *عمق بازگشت (recursion depth)* می‌گویند. در مورد ما، این تعداد دقیقا `n` خواهد بود.
 
-The maximal recursion depth is limited by JavaScript engine. We can rely on it being 10000, some engines allow more, but 100000 is probably out of limit for the majority of them. There are automatic optimizations that help alleviate this ("tail calls optimizations"), but they are not yet supported everywhere and work only in simple cases.
+عمق بازگشت حداکثری توسط موتور جاوااسکریپت محدود می‌شود. ما می‌توانیم به 10000 بودن آن اعتماد کنیم، بعضی از موتورها بیشتر را هم مجاز می‌دانند، اما 100000 احتمالا از محدودیت بیشتر آنها خارج است. بهینه‌سازی‌های خودکاری هستند که به کاهش این عدد کمک می‌کنند («بهینه‌سازی‌های فراخوانی‌های پی‌در‎پی») اما آنها هنوز در همه‌جا پشتیبانی نمی‌شوند و فقط در موارد ساده کار می‌کنند.
 
-That limits the application of recursion, but it still remains very wide. There are many tasks where recursive way of thinking gives simpler code, easier to maintain.
+این موضوع کاربرد بازگشت را محدود می‌کند اما هنوز هم بسیار گسترده است. کارهای زیادی هستند که طرز فکر بازگشتی، برای آنها کد ساده‌تر و راحت‌تری در نگهداری ارائه می‌دهد.
 
-## The execution context and stack
+## زمینه‌ی اجرا و پشته
 
-Now let's examine how recursive calls work. For that we'll look under the hood of functions.
+حالا بیایید بررسی کنیم که فراخوانی‌های بازگشتی چگونه کار می‌کنند. برای این کار ما به اتفاقات پشت پرده در تابع نگاه می‌اندازیم.
 
-The information about the process of execution of a running function is stored in its *execution context*.
+اطلاعاتی که درباره فرایند اجرای یک تابع درحال اجرا هستند در *زمینه‌ی اجرا (execution context)* آن ذخیره می‌شوند.
 
-The [execution context](https://tc39.github.io/ecma262/#sec-execution-contexts) is an internal data structure that contains details about the execution of a function: where the control flow is now, the current variables, the value of `this` (we don't use it here) and few other internal details.
+[زمینه‌ی اجرا](https://tc39.github.io/ecma262/#sec-execution-contexts) یک ساختار داده داخلی است که جزئیاتی درباره اجرای تابع را شامل می‌شود: جایی که روند کنترل در آن است، متغیرهای کنونی، مقدار `this` (ما اینجا از آن استفاده نمی‌کنیم) و چند چیز داخلی دیگر.
 
-One function call has exactly one execution context associated with it.
+یک فراخوانی تابع دقیقا یک زمینه‌ی اجرا دارد که به آن اختصاص دارد.
 
-When a function makes a nested call, the following happens:
+زمانی که یک تابع فراخوانی تودرتو می‌سازد، موارد زیر اتفاق می‌افتند:
 
-- The current function is paused.
-- The execution context associated with it is remembered in a special data structure called *execution context stack*.
-- The nested call executes.
-- After it ends, the old execution context is retrieved from the stack, and the outer function is resumed from where it stopped.
+- تابع کنونی موقتا متوقف می‌شود.
+- زمینه‌ی اجرای اختصاص یافته به آن در یک ساختار داده خاص به نام *پشته زمینه‌ی اجرا (execution context stack)* ذخیره می‌شود.
+- فراخوانی تودرتو اجرا می‌شود.
+- بعد از اینکه پایان یافت، زمینه‌ی اجرا قبلی از پشته دریافت می‌شود و تابع بیرونی از جایی که متوقف شده بود ادامه می‌یابد.
 
-Let's see what happens during the `pow(2, 3)` call.
+بیایید ببینیم در حین فراخوانی `pow(2, 3)` چه اتفاقی می‌افتد.
 
-### pow(2, 3)
+### تابع pow(2, 3)
 
-In the beginning of the call `pow(2, 3)` the execution context will store variables: `x = 2, n = 3`, the execution flow is at line `1` of the function.
+در ابتدای فراخوانی `pow(2, 3)` زمینه‌ی اجرا متغیرها را ذخیره می‌کند: `x = 2, n = 3`، مسیر اجرا حالا در خط `1` تابع قرار دارد.
 
-We can sketch it as:
+ما می‌توانیم آن را به این صورت نمایش دهیم:
 
 <ul class="function-execution-context-list">
   <li>
@@ -132,7 +132,7 @@ We can sketch it as:
   </li>
 </ul>
 
-That's when the function starts to execute. The condition `n == 1` is false, so the flow continues into the second branch of `if`:
+این زمانی است که تابع شروع به اجرا شدن می‌کند. شرط `n == 1` falsy است پس مسیر به شاخه دوم `if` ادامه می‌دهد:
 
 ```js run
 function pow(x, n) {
@@ -149,7 +149,7 @@ alert( pow(2, 3) );
 ```
 
 
-The variables are same, but the line changes, so the context is now:
+متغیرها یکسان هستند اما خط تغییر می‌کند پس زمینه الان اینگونه است:
 
 <ul class="function-execution-context-list">
   <li>
@@ -158,19 +158,19 @@ The variables are same, but the line changes, so the context is now:
   </li>
 </ul>
 
-To calculate `x * pow(x, n - 1)`, we need to make a subcall of `pow` with new arguments `pow(2, 2)`.
+برای محاسبه `x * pow(x, n - 1)`، ما باید یک زیرفراخوانی از `pow` با آرگومان‌های جدید `pow(2, 2)` بسازیم.
 
-### pow(2, 2)
+### تابع pow(2, 2)
 
-To do a nested call, JavaScript remembers the current execution context in the *execution context stack*.
+برای اینکه یک فراخوانی تودرتو داشته باشیم، جاوااسکریپت زمینه‌ی اجرای کنونی را در *پشته زمینه‌ی اجرا* به یاد می‌سپارد.
 
-Here we call the same function `pow`, but it absolutely doesn't matter. The process is the same for all functions:
+اینجا ما تابع یکسان `pow` را فراخوانی می‌کنیم اما این موضوع اصلا مهم نیست. فرایند برای تمام تابع‌ها یکسان است:
 
-1. The current context is "remembered" on top of the stack.
-2. The new context is created for the subcall.
-3. When the subcall is finished -- the previous context is popped from the stack, and its execution continues.
+1. زمینه‌ی کنونی در بالای پشته «به خاطر سپرده می‌شود».
+2. زمینه‌ی جدید برای زیرفراخوانی ایجاد می‌شود.
+3. زمانی که زیرفراخوانی تمام شود، زمینه‌ی قبلی از پشته بیرون می‌آید و اجرای آن ادامه پیدا می‌کند.
 
-Here's the context stack when we entered the subcall `pow(2, 2)`:
+زمانی که ما وارد زیرفراخوانی `pow(2, 2)` شدیم پشته زمینه اینگونه خواهد بود:
 
 <ul class="function-execution-context-list">
   <li>
@@ -183,21 +183,21 @@ Here's the context stack when we entered the subcall `pow(2, 2)`:
   </li>
 </ul>
 
-The new current execution context is on top (and bold), and previous remembered contexts are below.
+زمینه‌ی اجرای کنونی در بخش بالایی (و پر رنگ) است و زمینه‌های حفظ شده قدیمی در بخش پایینی هستند.
 
-When we finish the subcall -- it is easy to resume the previous context, because it keeps both variables and the exact place of the code where it stopped.
+زمانی که ما زیرفراخوانی را به پایان رساندیم، ادامه دادن زمینه‌ی قبلی آسان است چون هر دو متغیر و محل دقیق کد که در آنجا متوقف شد را حفظ می‌کند.
 
 ```smart
-Here in the picture we use the word "line", as our example there's only one subcall in line, but generally a single line of code may contain multiple subcalls, like `pow(…) + pow(…) + somethingElse(…)`.
+اینجا در تصویر ما از کلمه «خط(line)» استفاده کردیم چون در مثال ما فقط یک زیرفراخوانی در خط وجود دارد اما به طور کلی یک خط ممکن است چند زیرفراخوانی را شامل شود، مثلا `pow(…) + pow(…) + somethingElse(…)`.
 
-So it would be more precise to say that the execution resumes "immediately after the subcall".
+بنابراین اینکه بگوییم مسیر اجرا «بلافاصله بعد از زیرفراخوانی» ادامه می‌یابد دقیق‌تر است.
 ```
 
-### pow(2, 1)
+### تابع pow(2, 1)
 
-The process repeats: a new subcall is made at line `5`, now with arguments `x=2`, `n=1`.
+فرایند تکرار می‌شود: در خط `5` یک زیرفراخوانی جدید با آرگومان‌های `x=2`، `n=1` ایجاد می‌شود.
 
-A new execution context is created, the previous one is pushed on top of the stack:
+یک زمینه‌ی اجرای جدید ساخته می‌شود و زمینه‌ی قبلی در بالای پشته قرار می‌گیرد:
 
 <ul class="function-execution-context-list">
   <li>
@@ -214,11 +214,11 @@ A new execution context is created, the previous one is pushed on top of the sta
   </li>
 </ul>
 
-There are 2 old contexts now and 1 currently running for `pow(2, 1)`.
+حالا 2 زمینه‌ی قدیمی وجود دارد و یک زمینه‌ی برای `pow(2, 1)` در حال اجرا است.
 
-### The exit
+### خروج
 
-During the execution of `pow(2, 1)`, unlike before, the condition `n == 1` is truthy, so the first branch of `if` works:
+در حین اجرای `pow(2, 1)` برخلاف قبل، شرط `n == 1` truthy است پس اولین شاخه `if` کار می‌کند:
 
 ```js
 function pow(x, n) {
@@ -232,9 +232,9 @@ function pow(x, n) {
 }
 ```
 
-There are no more nested calls, so the function finishes, returning `2`.
+فراخوانی‌های تودرتوی بیشتری وجود ندارد پس تابع کارش تمام می‌شود و `2` را برمی‌گرداند.
 
-As the function finishes, its execution context is not needed anymore, so it's removed from the memory. The previous one is restored off the top of the stack:
+همانطور که تابع به پایان می‌رسد، دیگر نیازی به زمینه‌ی اجرای آن نیست پس از حافظه حذف می‌شود. زمینه‌ی قبلی از بالای پشته بازگردانده می‌شود:
 
 
 <ul class="function-execution-context-list">
@@ -248,9 +248,9 @@ As the function finishes, its execution context is not needed anymore, so it's r
   </li>
 </ul>
 
-The execution of `pow(2, 2)` is resumed. It has the result of the subcall `pow(2, 1)`, so it also can finish the evaluation of `x * pow(x, n - 1)`, returning `4`.
+فرایند اجرای `pow(2, 2)` ادامه می‌یابد. این فرایند دارای نتیجه زیرفراخوانی `pow(2, 1)` است پس می‌تواند ارزیابی `x * pow(x, n - 1)` را تمام کند و `4` را برگرداند.
 
-Then the previous context is restored:
+سپس زمینه‌ی قبلی بازگردانده می‌شود:
 
 <ul class="function-execution-context-list">
   <li>
@@ -259,15 +259,15 @@ Then the previous context is restored:
   </li>
 </ul>
 
-When it finishes, we have a result of `pow(2, 3) = 8`.
+زمانی که تمام شود، ما نتیجه `pow(2, 3) = 8` را داریم.
 
-The recursion depth in this case was: **3**.
+عمق بازگشت در این مورد **3** بود.
 
-As we can see from the illustrations above, recursion depth equals the maximal number of context in the stack.
+همانطور که از تصاویر بالا دیدیم، عمق بازگشت برابر با حداکثر تعداد زمینه‌ها در پشته است.
 
-Note the memory requirements. Contexts take memory. In our case, raising to the power of `n` actually requires the memory for `n` contexts, for all lower values of `n`.
+نیازمندی‌های حافظه را در نظر داشته باشید. زمینه‌ها حافظه را اشغال می‌کنند. در این مورد ما، به توان `n` رساندن در واقع برای تمام مقدارهای کمتر از `n`، به تعداد `n` زمینه حافظه نیاز دارد.
 
-A loop-based algorithm is more memory-saving:
+یک الگوریتم بر پایه حلقه کمتر حافظه اشغال می‌کند:
 
 ```js
 function pow(x, n) {
@@ -281,19 +281,19 @@ function pow(x, n) {
 }
 ```
 
-The iterative `pow` uses a single context changing `i` and `result` in the process. Its memory requirements are small, fixed and do not depend on `n`.
+تابع `pow` تکرارشونده از زمینه‌ای استفاده می‌کند که در فرایند خود `i` و `result` را تغییر می‌دهد. نیازمندی‌های حافظه آن کوچک، ثابت و بدون وابستگی به `n` هستند.
 
-**Any recursion can be rewritten as a loop. The loop variant usually can be made more effective.**
+**تمام بازگشت‌ها می‌توانند به عنوان یک حلقه بازنویسی شوند. نوعی که با حلقه نوشته شده است ممکن است مفیدتر باشد.**
 
-...But sometimes the rewrite is non-trivial, especially when function uses different recursive subcalls depending on conditions and merges their results or when the branching is more intricate. And the optimization may be unneeded and totally not worth the efforts.
+...اما گاهی اوقات بازنویسی بدیهی نیست خصوصا زمانی که تابع با توجه به شروط از زیرفراخوانی‌های بازگشتی مختلف استفاده می‌کند و نتیجه‌های آنها را ادغام می‌کند یا زمانی که شاخه‌بندی پیچیده‌تر است. و بهینه‌سازی شاید نیاز نباشد و ارزش سختی آن را نداشته باشد.
 
-Recursion can give a shorter code, easier to understand and support. Optimizations are not required in every place, mostly we need a good code, that's why it's used.
+بازگشت می‌تواند کد کوتاه‌تری ایجاد کند و درک و پشتیبانی از آن راحت‌تر باشد. به بهینه‌سازی‌ها همه جا نیاز نیست. اکثر اوقات ما به کد خوب نیاز داریم و به همین دلیل است که بازگشت استفاده می‌شود.
 
-## Recursive traversals
+## پیمایش‌های بازگشتی
 
-Another great application of the recursion is a recursive traversal.
+یکی دیگر از کاربردهای عالی بازگشت پیمایش بازگشتی است.
 
-Imagine, we have a company. The staff structure can be presented as an object:
+تصور کنید، ما یک شرکت داریم. ساختار کارمندان می‌تواند به عنوان یک شیء نمایش داده شود:
 
 ```js
 let company = {
@@ -322,34 +322,34 @@ let company = {
 };
 ```
 
-In other words, a company has departments.
+به عبارتی دیگر، یک شرکت بخش‌های اداری دارد.
 
-- A department may have an array of staff. For instance, `sales` department has 2 employees: John and Alice.
-- Or a department may split into subdepartments, like `development` has two branches: `sites` and `internals`. Each of them has the own staff.
-- It is also possible that when a subdepartment grows, it divides into subsubdepartments (or teams).
+- یک بخش اداری ممکن است یک آرایه از کارمندان داشته باشد. برای مثال، بخش `sales`(فروش) 2 کارمند دارد: John و Alice.
+- یا بخش اداری ممکن است به زیربخش‌هایی تقسیم شود، مثل `dovelopment`(توسعه) که دو شاخه دارد: `sites`(سایت‌ها) و `internals`(داخلی). هر کدام از آنها کارمندان خودشان را دارند.
+- همچنین ممکن است که یک زیربخش رشد کند و به زیرزیربخش‌های اداری (یا تیم‌ها) تقسیم شود.
 
-    For instance, the `sites` department in the future may be split into teams for `siteA` and `siteB`. And they, potentially, can split even more. That's not on the picture, just something to have in mind.
+    برای مثال، بخش `sites` ممکن است در آینده به تیم‌های `siteA` و `siteB` تقسیم شود. و آنها، احتمال دارد، حتی بیشتر تقسیم شوند. این در تصویر وجود ندارد فقط چیزی است که در نظر داریم.
 
-Now let's say we want a function to get the sum of all salaries. How can we do that?
+حالا بیایید بگوییم که ما یک تابع می‌خواهیم تا جمع تمام حقوق‌ها را بدست بیارد. چگونه می‌توانیم این کار را کنیم؟
 
-An iterative approach is not easy, because the structure is not simple. The first idea may be to make a `for` loop over `company` with nested subloop over 1st level departments. But then we need more nested subloops to iterate over the staff in 2nd level departments like `sites`... And then another subloop inside those for 3rd level departments that might appear in the future? If we put 3-4 nested subloops in the code to traverse a single object, it becomes rather ugly.
+یک راه‌حل تکرارشونده راحت نیست چون ساختار ساده نیست. ایده اول می‌تواند این باشد که یک حلقه `for` همراه با زیرحلقه‌ای در بخش‌های اداری سطح اول برای `company` بسازیم. اما سپس ما برای حلقه زدن در کارمندان بخش‌های سطح دوم مانند `sites` به زیرحلقه‌های تودرتوی بیشتری نیاز داریم. و سپس یک زیرحلقه دیگر برای بخش‌های سطح سوم که ممکن است در آینده نمایان شوند؟ اگر ما 3 یا 4 زیرحلقه درون کد بگذاریم تا در یک شیء پیمایش کنیم، کد نسبتا زشت می‌شود.
 
-Let's try recursion.
+بیایید بازگشت را امتحان کنیم.
 
-As we can see, when our function gets a department to sum, there are two possible cases:
+همانطور که می‌بینیم، زمانی که تابع ما یک بخش اداری برای جمع زدن دارد، 2 حالت احتمالی وجود دارد:
 
-1. Either it's a "simple" department with an *array* of people -- then we can sum the salaries in a simple loop.
-2. Or it's *an object* with `N` subdepartments -- then we can make `N` recursive calls to get the sum for each of the subdeps and combine the results.
+1. یا یک بخش «ساده» با *آرایه‌ای* از اشخاص است که در این صورت می‌توانیم در یک حلقه ساده حقوق‌ها را جمع بزنیم.
+2. یا یک *شیء* یا `N` زیربخش است که در این صورت می‌توانیم `N` فراخوانی بازگشتی بسازیم تا مجموع را برای هر کدام از زیربخش‌ها بدست بیاریم و نتیجه‌ها را ادغام کنیم.
 
-The 1st case is the base of recursion, the trivial case, when we get an array.
+مورد اول پایه بازگشت است، مورد واضح و بدیهی، زمانی که ما یک آرایه داریم.
 
-The 2nd case when we get an object is the recursive step. A complex task is split into subtasks for smaller departments. They may in turn split again, but sooner or later the split will finish at (1).
+مورد دوم، زمانی که ما یک شیء داریم، مرحله بازگشتی است. یک کار پیچیده به چند کار ریز برای بخش‌های کوچکتر تقسیم شده است. آنها ممکن است دوباره تقسیم شوند اما دیر یا زود تقسیم شدن در (1) پایان می‌یابد.
 
-The algorithm is probably even easier to read from the code:
+الگوریتم در کد راحت‌تر خوانده می‌شود:
 
 
 ```js run
-let company = { // the same object, compressed for brevity
+let company = { // شیء یکسان است، برای ساده بودن فشرده شده است
   sales: [{name: 'John', salary: 1000}, {name: 'Alice', salary: 1600 }],
   development: {
     sites: [{name: 'Peter', salary: 2000}, {name: 'Alex', salary: 1800 }],
@@ -357,15 +357,15 @@ let company = { // the same object, compressed for brevity
   }
 };
 
-// The function to do the job
+// تابعی برای انجام کار
 *!*
 function sumSalaries(department) {
-  if (Array.isArray(department)) { // case (1)
-    return department.reduce((prev, current) => prev + current.salary, 0); // sum the array
-  } else { // case (2)
+  if (Array.isArray(department)) { // (1) مورد
+    return department.reduce((prev, current) => prev + current.salary, 0); // آرایه را جمع می‌زنیم
+  } else { // (2) مورد
     let sum = 0;
     for (let subdep of Object.values(department)) {
-      sum += sumSalaries(subdep); // recursively call for subdepartments, sum the results
+      sum += sumSalaries(subdep); // فراخوانی بازگشتی برای زیربخش‌ها، نتیجه‌ها را جمع می‌زند
     }
     return sum;
   }
@@ -375,62 +375,62 @@ function sumSalaries(department) {
 alert(sumSalaries(company)); // 7700
 ```
 
-The code is short and easy to understand (hopefully?). That's the power of recursion. It also works for any level of subdepartment nesting.
+این کد کوتاه و برای فهمیدن راحت است (امیدواریم). این قدرت بازگشت است. همچنین برای هر سطحی از تودرتویی زیربخش‌های اداری کار می‌کند.
 
-Here's the diagram of calls:
+اینجا نمودار فراخوانی‌ها را داریم:
 
 ![recursive salaries](recursive-salaries.svg)
 
-We can easily see the principle: for an object `{...}` subcalls are made, while arrays `[...]` are the "leaves" of the recursion tree, they give immediate result.
+می‌توانیم قاعده را به راحتی ببینیم: برای یک شیء `{...}` زیرفراخوانی ایجاد می‌شود در حالی که آرایه‌ها `[...]` «خروجی‌های« درخت بازگشت هستند و نتیجه فوری می‌دهند.
 
-Note that the code uses smart features that we've covered before:
+در نظر داشته باشید که کد از ویژگی‌های هوشمند که ما قبلا آنها را پوشش دادیم استفاده می‌کند:
 
-- Method `arr.reduce` explained in the chapter <info:array-methods> to get the sum of the array.
-- Loop `for(val of Object.values(obj))` to iterate over object values: `Object.values` returns an array of them.
+- متد `arr.reduce` در فصل <info:array-methods> توضیح داده شد که برای گرفتن مجموع آرایه است.
+- حلقه `for(val of Object.values(obj))` برای حلقه زدن در مقدارهای شیء: `Object.values` یک آرایه از آنها را برمی‌گرداند.
 
 
-## Recursive structures
+## ساختارهای بازگشتی
 
-A recursive (recursively-defined) data structure is a structure that replicates itself in parts.
+یک ساختار داده بازگشتی (تعریف شده به صورت بازگشتی) ساختاری است که خودش را در اجزا تکرار می‌کند.
 
-We've just seen it in the example of a company structure above.
+ما به تازگی آن را بالاتر در مثال ساختار شرکت دیدیم.
 
-A company *department* is:
-- Either an array of people.
-- Or an object with *departments*.
+یک *بخش اداری* شرکت برابر است با:
+- یا آرایه‌ای از اشخاص.
+- یک شیءای شامل *بخش‌ها*.
 
-For web-developers there are much better-known examples: HTML and XML documents.
+برای توسعه‌دهندگان وب مثال‌های شناخته‌شده‌تر وجود دارد: مستندات HTML و XML.
 
-In the HTML document, an *HTML-tag* may contain a list of:
-- Text pieces.
-- HTML-comments.
-- Other *HTML-tags* (that in turn may contain text pieces/comments or other tags etc).
+در سند HTML، یک *برچسب HTML* ممکن است لیستی از این‌ها را شامل شود:
+- قسمت‌های متنی.
+- کامنت‌های HTML.
+- بقیه‌ی *برچسب‌های HTML* (که خودشان ممکن است شامل قسمت‌های متنی/کامنت‌ها یا برچسب‌های دیگر باشند).
 
-That's once again a recursive definition.
+این هم یک تعریف بازگشتی است.
 
-For better understanding, we'll cover one more recursive structure named "Linked list" that might be a better alternative for arrays in some cases.
+برای درک بهتر، ما یک ساختار بازگشتی دیگر به نام «لیست پیوندی (Linked list)» که ممکن است در بعضی موارد جایگزینی برای آرایه‌ها باشند را پوشش می‌دهیم.
 
-### Linked list
+### لیست پیوندی
 
-Imagine, we want to store an ordered list of objects.
+تصور کنید، ما می‌خواهیم یک لیست مرتب از شیءها را ذخیره کنیم.
 
-The natural choice would be an array:
+انتخاب طبیعی می‌تواند آرایه باشد:
 
 ```js
 let arr = [obj1, obj2, obj3];
 ```
 
-...But there's a problem with arrays. The "delete element" and "insert element" operations are expensive. For instance, `arr.unshift(obj)` operation has to renumber all elements to make room for a new `obj`, and if the array is big, it takes time. Same with `arr.shift()`.
+...اما یک مشکل با آرایه‌ها وجود دارد. عمل‌های «حذف المان» و «اضافه‌کردن المان» زحمت زیادی دارند. برای مثال، عمل `arr.unshift(obj)` برای اینکه جایی برای `obj` جدید ایجاد کند باید تمام المان‌ها را دوباره عددگذاری کند و اگر آرایه بزرگ باشد، این کار زمان می‌برد. همین مشکل برای `arr.shift()` هم وجود دارد.
 
-The only structural modifications that do not require mass-renumbering are those that operate with the end of array: `arr.push/pop`. So an array can be quite slow for big queues, when we have to work with the beginning.
+تنها تغییرات ساختاری که به عددگذاری دوباره عظیم نیازی ندارند آنهایی هستند که با انتهای آرایه کار انجام می‌دهند: `arr.push/pop`. پس زمانی که ما باید با آغاز آرایه کار کنیم، آرایه می‌تواند برای صف‌های طولانی بسیار کند باشد.
 
-Alternatively, if we really need fast insertion/deletion, we can choose another data structure called a [linked list](https://en.wikipedia.org/wiki/Linked_list).
+به منظور جایگزینی، اگر ما واقعا به حذف/اضافه کردن سریع احتیاج داریم، می‌توانیم یک ساختار داده دیگر به نام [لیست پیوندی (linked list)](https://fa.wikipedia.org/wiki/لیست_پیوندی) را انتخاب کنیم.
 
-The *linked list element* is recursively defined as an object with:
+*المان لیست پیوندی* به صورت بازگشتی به عنوان یک شیء شامل ویژگی‌های زیر تعریف می‌شود:
 - `value`.
-- `next` property referencing the next *linked list element* or `null` if that's the end.
+- `next` ویژگی‌ای که به *المان لیست پیوندی* بعدی رجوع می‌کند یا اگر آخر باشد به `null`.
 
-For instance:
+برای مثال:
 
 ```js
 let list = {
@@ -448,11 +448,11 @@ let list = {
 };
 ```
 
-Graphical representation of the list:
+نمایش گرافیکی لیست:
 
 ![linked list](linked-list.svg)
 
-An alternative code for creation:
+یک کد جایگزین برای ساختن آن:
 
 ```js no-beautify
 let list = { value: 1 };
@@ -462,9 +462,9 @@ list.next.next.next = { value: 4 };
 list.next.next.next.next = null;
 ```
 
-Here we can even more clearly see that there are multiple objects, each one has the `value` and `next` pointing to the neighbour. The `list` variable is the first object in the chain, so following `next` pointers from it we can reach any element.
+اینجا ما می‌توانیم حتی واضح‌تر ببینیم که چند شیء وجود دارند که هر کدام دارای `value` و `next` که به همسایه اشاره می‌کند هستند. متغیر `list` اولین شیء در زنجیره است پس با دنبال کردن اشاره‌گرهای `next` از آن می‌توانیم به هر المانی برسیم.
 
-The list can be easily split into multiple parts and later joined back:
+لیست می‌تواند به راحتی به چند قسمت تقسیم شود و بعدا دوباره بهم بپیوندد:
 
 ```js
 let secondList = list.next.next;
@@ -473,15 +473,15 @@ list.next.next = null;
 
 ![linked list split](linked-list-split.svg)
 
-To join:
+برای پیوند دادن:
 
 ```js
 list.next.next = secondList;
 ```
 
-And surely we can insert or remove items in any place.
+و قطعا ما می‌توانیم المان‌ها را در هر جایی حذف یا اضافه کنیم.
 
-For instance, to prepend a new value, we need to update the head of the list:
+برای مثال، برای اضافه کردن یک مقدار جدید به آغاز لیست، ما باید راس لیست را بروزرسانی کنیم:
 
 ```js
 let list = { value: 1 };
@@ -490,14 +490,14 @@ list.next.next = { value: 3 };
 list.next.next.next = { value: 4 };
 
 *!*
-// prepend the new value to the list
+// اضافه کردن مقدار جدید به آغاز لیست
 list = { value: "new item", next: list };
 */!*
 ```
 
 ![linked list](linked-list-0.svg)
 
-To remove a value from the middle, change `next` of the previous one:
+برای حذف یک مقدار از وسط، `next` قبلی را تغییر می‌دهیم:
 
 ```js
 list.next = list.next.next;
@@ -505,38 +505,38 @@ list.next = list.next.next;
 
 ![linked list](linked-list-remove-1.svg)
 
-We made `list.next` jump over `1` to value `2`. The value `1` is now excluded from the chain. If it's not stored anywhere else, it will be automatically removed from the memory.
+ما کاری کردیم که `list.next` از `1` به `2` بپرد. مقدار `1` حالا از زنجیره خارج شده است. اگر جایی دیگر ذخیره نشده باشد، به طور خودکار از حافظه پاک می‌شود.
 
-Unlike arrays, there's no mass-renumbering, we can easily rearrange elements.
+یرخلاف آرایه‌ها، هیچ عددگذاری دوباره عظیمی وجود ندارد و ما می‌توانیم به راحتی المان‌ها را دوباره تنظیم کنیم.
 
-Naturally, lists are not always better than arrays. Otherwise everyone would use only lists.
+به طور طبیعی، لیست‌ها همیشه از آرایه‌ها بهتر نیستند. در غیر این صورت همه از لیست‌ها استفاده می‌کردند.
 
-The main drawback is that we can't easily access an element by its number. In an array that's easy: `arr[n]` is a direct reference. But in the list we need to start from the first item and go `next` `N` times to get the Nth element.
+ضعف اصلی این است که ما نمی‌توانیم به راحتی با عدد یک المان به آن دسترسی پیدا کنیم. در یک آرایه کار راحتی است: `arr[n]` یک رجوع مستقیم است. اما در لیست ما باید از اولین المان شروع کنیم و به تعداد `N` بار به `next` برویم تا به المان Nاُم برسیم.
 
-...But we don't always need such operations. For instance, when we need a queue or even a [deque](https://en.wikipedia.org/wiki/Double-ended_queue) -- the ordered structure that must allow very fast adding/removing elements from both ends, but access to its middle is not needed.
+...اما همیشه به چنین کارهایی نیاز نداریم. برای مثال، زمانی که ما به یک صف یا حتی یک [صف دوطرفه](https://fa.wikipedia.org/wiki/صف_دوطرفه) نیاز داریم، ساختاری که باید اضافه/حذف کردن سریع را از هر دو انتها ممکن سازد اما دسترسی به وسط آن نیاز نیست.
 
-Lists can be enhanced:
-- We can add property `prev` in addition to `next` to reference the previous element, to move back easily.
-- We can also add a variable named `tail` referencing the last element of the list (and update it when adding/removing elements from the end).
-- ...The data structure may vary according to our needs.
+لیست‌ها می‌توانند پیشرفت کنند:
+- ما می‌توانیم ویژگی `prev` را در کنار `next` اضافه کنیم تا به المان قبلی رجوع کنیم و به راحتی به عقب برگردیم.
+- همچنین می‌توانیم یک متغیر به نام `tail` که به المان آخر لیست رجوع می‌کند اضافه کنیم (و هر زمان که المانی اضافه/حذف می‌کنیم آن را اپدیت کنیم).
+- ...ساختار داده می‌تواند با توجه به نیازهای ما خیلی تنوع داشته باشد.
 
-## Summary
+## خلاصه
 
-Terms:
-- *Recursion*  is a programming term that means calling a function from itself. Recursive functions can be used to solve tasks in elegant ways.
+اصطلاحات:
+- *بازگشت* یک عبارت برنامه‌نویسی و به معنی فراخوانی یک تابع در خودش است. تابع‌های بازگشتی می‌توانند برای حل کردن مسائل با راه‌هایی عالی استفاده شوند.
 
-    When a function calls itself, that's called a *recursion step*. The *basis* of recursion is function arguments that make the task so simple that the function does not make further calls.
+    زمانی که یک تابع خودش را فراخوانی می‌کند، به آن *مرحله بازگشت* می‌گویند. *اساس* بازگشت، آرگومان‌های تابع هستند که کار را انقدر ساده می‌کنند که تابع دیگر فراخوانی‌های بیشتری انجام نمی‌دهد.
 
-- A [recursively-defined](https://en.wikipedia.org/wiki/Recursive_data_type) data structure is a data structure that can be defined using itself.
+- یک ساختار داده که به صورت [بازگشتی تعریف شده باشد](https://en.wikipedia.org/wiki/Recursive_data_type) ساختار داده‌ای است که می‌تواند با استفاده از خودش تعریف شود.
 
-    For instance, the linked list can be defined as a data structure consisting of an object referencing a list (or null).
+    برای مثال، لیست پیوندی می‌تواند به عنوان ساختار داده‌ای تعریف شود که شیءای رجوع‌کننده به یک لیست (یا هیچی) را شامل شود.
 
     ```js
     list = { value, next -> list }
     ```
 
-    Trees like HTML elements tree or the department tree from this chapter are also naturally recursive: they branch and every branch can have other branches.
+    درخت‌ها مانند المان‌های HTML یا درخت بخش اداری در این فصل هم به طور طبیعی بازگشتی هستند: آنها شاخه‌‌هایی دارند و هر شاخه می‌تواند شاخه‌های دیگر هم داشته باشد.
 
-    Recursive functions can be used to walk them as we've seen in the `sumSalary` example.
+    همانطور که در مثال `sumSalary` دیدیم تابع‌های بازگشتی می‌توانند برای پیمایش درون آنها استفاده شوند.
 
-Any recursive function can be rewritten into an iterative one. And that's sometimes required to optimize stuff. But for many tasks a recursive solution is fast enough and easier to write and support.
+هر تابع بازگشتی می‌تواند به صورت تکرارشونده بازنویسی شود. و گاهی اوقات برای بهینه کردن به آن نیاز است. اما برای بسیاری از کارها راه‌حل بازگشتی به اندازه کافی سریع و برای نوشتن و پشتیبانی کردن راحت‌تر است.

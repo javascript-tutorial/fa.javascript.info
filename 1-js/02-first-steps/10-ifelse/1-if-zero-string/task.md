@@ -2,13 +2,13 @@ importance: 5
 
 ---
 
-# if (a string with zero)
+# if (رشته‌ای شامل عدد صفر)
 
-Will `alert` be shown?
+آیا `alert` اجرا می‌شود؟
 
 ```js
 if ("0") {
-  alert( 'Hello' );
+  alert( 'سلام' );
 }
 ```
 

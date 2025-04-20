@@ -2,24 +2,24 @@ importance: 5
 
 ---
 
-# Create an extendable calculator
+# یک ماشین حساب قابل توسعه بسازید
 
-Create a constructor function `Calculator` that creates "extendable" calculator objects.
+یک تابع سازنده `Calculator` بسازید که شیءهای ماشین حساب «قابل توسعه» می‌سازد.
 
-The task consists of two parts.
+این تکلیف از دو بخش تشکیل شده است.
 
-1. First, implement the method `calculate(str)` that takes a string like `"1 + 2"` in the format "NUMBER operator NUMBER" (space-delimited) and returns the result. Should understand plus `+` and minus `-`.
+1. اول، متد `calculate(str)` را بسازید که یک رشته مانند `"1 + 2"` را در شکل «عدد عملگر عدد» دریافت می‌کند و نتیجه را برمی‌گرداند. این متد باید جمع `+` و منها `-` را متوجه شود.
 
-    Usage example:
+    مثالی از کاربرد آن:
 
     ```js
     let calc = new Calculator;
 
     alert( calc.calculate("3 + 7") ); // 10
     ```
-2. Then add the method `addMethod(name, func)` that teaches the calculator a new operation. It takes the operator `name` and the two-argument function `func(a,b)` that implements it.
+2. سپس متد `addMethod(name, func)` را اضافه کنید که به ماشین حساب یک عملیات جدید را آموزش می‌دهد. این متد اسم عملگر `name` و تابع دو آرگومانی `func(a,b)` که عملیات را پیاده‌سازی می‌کند را دریافت می‌کند.
 
-    For instance, let's add the multiplication `*`, division `/` and power `**`:
+    برای مثال، بیایید عمل ضرب `*`، تقسیم `/` و به توان رساندن `**` را اضافه کنیم:
 
     ```js
     let powerCalc = new Calculator;
@@ -31,6 +31,6 @@ The task consists of two parts.
     alert( result ); // 8
     ```
 
-- No parentheses or complex expressions in this task.
-- The numbers and the operator are delimited with exactly one space.
-- There may be error handling if you'd like to add it.
+- پرانتز یا عبارات پیچیده در این تکلیف وجود ندارند.
+- اعداد و عملگر دقیقا به یک فاصله خالی محدود می‌شوند.
+- اگر دوست داشته باشید می‌توانید مدیریت ارور را هم اضافه کنید.

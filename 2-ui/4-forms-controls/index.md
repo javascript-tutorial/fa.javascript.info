@@ -1,3 +1,3 @@
-# Forms, controls
+# فرم‌ها، کنترل‌ها
 
-Special properties and events for forms `<form>` and controls: `<input>`, `<select>` and other.
+ویژگی‌ها و eventهای خاص برای فرم‌ها `<form>` و کنترل‌ها: `<input>`، `<select>` و دیگر موارد.

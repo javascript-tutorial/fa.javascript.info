@@ -1,26 +1,14 @@
-# Multiline mode of anchors ^ $, flag "m"
+# حالت چند خطی anchors ^ $، flag "m"
 
-The multiline mode is enabled by the flag `pattern:m`.
+حالت چند خطی با flag `pattern:m` فعال می شود.
 
-It only affects the behavior of `pattern:^` and `pattern:$`.
+فقط بر رفتار `^:pattern` و `$:pattern` تأثیر می گذارد.
 
-In the multiline mode they match not only at the beginning and the end of the string, but also at start/end of line.
+در حالت چند خطی، نه تنها در ابتدا و انتهای رشته، بلکه در شروع/پایان خط نیز مطابقت دارند.
 
-## Searching at line start ^
+## جستجو در شروع خط ^
 
-In the example below the text has multiple lines. The pattern `pattern:/^\d/gm` takes a digit from the beginning of each line:
-
-```js run
-let str = `1st place: Winnie
-2nd place: Piglet
-3rd place: Eeyore`;
-
-*!*
-alert( str.match(/^\d/gm) ); // 1, 2, 3
-*/!*
-```
-
-Without the flag `pattern:m` only the first digit is matched:
+در مثال زیر متن دارای چندین خط است. الگوی `pattern:/^\d/gm` از ابتدای هر خط یک رقم می گیرد:
 
 ```js run
 let str = `1st place: Winnie
@@ -28,60 +16,72 @@ let str = `1st place: Winnie
 3rd place: Eeyore`;
 
 *!*
-alert( str.match(/^\d/g) ); // 1
+console.log( str.match(/^\d/gm) ); // 1, 2, 3
 */!*
 ```
 
-That's because by default a caret `pattern:^` only matches at the beginning of the text, and in the multiline mode -- at the start of any line.
+بدون flag `pattern:m` تنها رقم اول مطابقت دارد:
 
-```smart
-"Start of a line" formally means "immediately after a line break": the test  `pattern:^` in multiline mode matches at all positions preceeded by a newline character `\n`.
+```js run
+let str = `1st place: Winnie
+2nd place: Piglet
+3rd place: Eeyore`;
 
-And at the text start.
+*!*
+console.log( str.match(/^\d/g) ); // 1
+*/!*
 ```
 
-## Searching at line end $
+دلیلش این است که به طور پیش‌ فرض یک `^:pattern` فقط در ابتدای متن و در حالت چند خطی - در ابتدای هر خط مطابقت دارد.
 
-The dollar sign `pattern:$` behaves similarly.
+```smart
+"شروع یک خط" به طور رسمی به معنای "بلافاصله پس از شکست خط" است: آزمایش "^:pattern" در حالت چند خطی با همه موقعیت هایی که بعد از یک کاراکترِ خط جدید `n\` قرار دارند مطابقت دارد.
 
-The regular expression `pattern:\d$` finds the last digit in every line
+و در شروع متن.
+```
+
+## جستجو در انتهای خط $
+
+علامت دلار `$:pattern` رفتار مشابهی دارد.
+
+عبارت منظم `$pattern:\d` آخرین رقم را در هر خط پیدا می کند
 
 ```js run
 let str = `Winnie: 1
 Piglet: 2
 Eeyore: 3`;
 
-alert( str.match(/\d$/gm) ); // 1,2,3
+console.log( str.match(/\d$/gm) ); // 1,2,3
 ```
 
-Without the flag `pattern:m`, the dollar `pattern:$` would only match the end of the whole text, so only the very last digit would be found.
+بدون flag `pattern:m` و `$:pattern` علامت دلار فقط با انتهای کل متن مطابقت دارد، بنابراین فقط آخرین رقم پیدا می‌ شود.
 
 ```smart
-"End of a line" formally means "immediately before a line break": the test  `pattern:$` in multiline mode matches at all positions succeeded by a newline character `\n`.
+"پایان یک خط" به طور رسمی به معنای "بلافاصله قبل از شکست خط" است: تست "$:pattern" در حالت چند خطی با همه موقعیت‌هایی که قبل از یک کاراکتر خط جدید "n\" قرار دارند، مطابقت دارد.
 
-And at the text end.
+و در انتهای متن.
 ```
 
-## Searching for \n instead of ^ $
+## جستجو برای \n به جای ^ $
 
-To find a newline, we can use not only anchors `pattern:^` and `pattern:$`, but also the newline character `\n`.
+برای یافتن یک خط جدید، می‌ توانیم نه تنها از anchorهای `^:pattern` و `$:pattern`، بلکه از کاراکتر خط جدید `n\` استفاده کنیم.
 
-What's the difference? Let's see an example.
+تفاوت در چیست؟ بیایید یک مثال را ببینیم.
 
-Here we search for `pattern:\d\n` instead of `pattern:\d$`:
+در اینجا ما `pattern:\d\n` را به جای `$pattern:\d` جستجو می کنیم:
 
 ```js run
 let str = `Winnie: 1
 Piglet: 2
 Eeyore: 3`;
 
-alert( str.match(/\d\n/gm) ); // 1\n,2\n
+console.log( str.match(/\d\n/g) ); // 1\n,2\n
 ```
 
-As we can see, there are 2 matches instead of 3.
+همانطور که می بینیم به جای 3 شباهت 2 شباهت وجود دارد.
 
-That's because there's no newline after `subject:3` (there's text end though, so it matches `pattern:$`).
+دلیلش این است که بعد از `3:subject` خط جدیدی وجود ندارد (البته پایان متن وجود دارد، بنابراین با `$:pattern` مطابقت دارد.
 
-Another difference: now every match includes a newline character `match:\n`. Unlike the anchors `pattern:^` `pattern:$`, that only test the condition (start/end of a line), `\n` is a character, so it becomes a part of the result.
+تفاوت دیگر: اکنون هر تطابق شامل یک کاراکتر خط جدید `match:\n` است. برخلاف `$:pattern` و `^:pattern` که فقط شرط (شروع/پایان یک خط) را آزمایش می‌ کنند، `n\` یک کاراکتر است، بنابراین بخشی از نتیجه می‌ شود.
 
-So, a `\n` in the pattern is used when we need newline characters in the result, while anchors are used to find something at the beginning/end of a line.
+بنابراین، زمانی که به کاراکترهای خط جدید در نتیجه نیاز داشته باشیم، از `n\` در الگو استفاده می‌ شود، در حالی که از anchorها برای یافتن چیزی در ابتدا/پایان یک خط استفاده می‌ شود.

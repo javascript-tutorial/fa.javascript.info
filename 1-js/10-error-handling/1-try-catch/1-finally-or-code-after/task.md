@@ -2,37 +2,37 @@ importance: 5
 
 ---
 
-# Finally or just the code?
+# بند finally یا فقط کد؟
 
-Compare the two code fragments.
+این دو قطعه کد را مقایسه کنید.
 
-1. The first one uses `finally` to execute the code after `try..catch`:
+1. کد اول از `finally` برای اجرای کد بعد از `try...catch` استفاده می‌کند:
 
     ```js
     try {
-      work work
-    } catch (e) {
-      handle errors
+      انجام کارها
+    } catch (err) {
+      مدیریت ارورها
     } finally {
     *!*
-      cleanup the working space
+      پاک سازی فضاری کاری
     */!*
     }
     ```
-2. The second fragment puts the cleaning right after `try..catch`:
+2. قطعه دوم پاک سازی را درست بعد از `try...catch` قرار می‌دهد:
 
     ```js
     try {
-      work work
-    } catch (e) {
-      handle errors
+      انجام کارها
+    } catch (err) {
+      مدیریت ارورها
     }
 
     *!*
-    cleanup the working space
+    پاک سازی فضای کاری
     */!*
     ```
 
-We definitely need the cleanup after the work, doesn't matter if there was an error or not.
+ما قطعا به پاک سازی بعد از کار نیاز داریم، مهم نیست که ارور وجود داشته باشد یا خیر.
 
-Is there an advantage here in using `finally` or both code fragments are equal? If there is such an advantage, then give an example when it matters.
+آیا اینجا استفاده از `finally` برتری دارد یا هر دو قطعه کد یکسان هستند؟ اگر برتری وجود داشته باشد، سپس برای زمانی که این برتری مهم است یک مثال بزنید.
