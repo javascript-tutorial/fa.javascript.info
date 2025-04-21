@@ -96,10 +96,17 @@ say.sayBye('John');
 1. فهرست کردن صریح مواردی که باید وارد شوند، نام‌های کوتاه‌تری را نشان می‌دهد: `sayHi()‎` به جای `say.sayHi()‎`.
 2. لیست واضح از import مرور بهتری از ساختار کد ایجاد می‌کند: چه چیزی استفاده شده و کجا. این پشتیبانی و بازبینی کد را آسان تر می‌کند.
 
+<<<<<<< HEAD
 ```smart header="از import کردن زیاد نترسید."
 ابزارهای مدرن بیلد مانند [webpack](https://webpack.js.org/) و مانند آن، ماژول ها را با هم باندل (ترکیب و فشرده سازی) می‌کنند و بهینه می‌کنند تا سرعت بارگذاری را افزایش دهند. آنها همچنین import های استفاده نشده را حذف می‌کنند. 
 
 به عنوان مثال، اگر `import * as library` از یک کتابخانه کد بزرگ import کنیم و سپس تنها از چند تابع آن استفاده کنیم، موارد استفاده نشده [درون بسته بهینه شده نخواهد بود](https://github.com/webpack/webpack/tree/main/examples/harmony-unused#examplejs).
+=======
+```smart header="Don't be afraid to import too much"
+Modern build tools, such as [webpack](https://webpack.js.org/) and others, bundle modules together and optimize them to speedup loading. They also remove unused imports.
+
+For instance, if you `import * as library` from a huge code library, and then use only few methods, then unused ones [will not be included](https://github.com/webpack/webpack/tree/main/examples/harmony-unused#examplejs) into the optimized bundle.
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 ```
 
 ## Import "as"‎
