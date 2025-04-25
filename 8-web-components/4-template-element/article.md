@@ -1,13 +1,12 @@
 
-# Template element
+# Template element (عنصر قالب)
 
-A built-in `<template>` element serves as a storage for HTML markup templates. The browser ignores its contents, only checks for syntax validity, but we can access and use it in JavaScript, to create other elements.
+عنصر داخلی  `<template>` به عنوان محلی برای ذخیره‌ی قالب‌های نشانه‌گذاری HTML استفاده می‌شود. مرورگر محتوای آن را نادیده می‌گیرد و تنها اعتبار نحوی آن را بررسی می‌کند، اما ما می‌توانیم با استفاده از JavaScript به آن دسترسی پیدا کنیم و برای ساخت سایر عناصر از آن استفاده کنیم.
+در تئوری، می‌توانیم هر عنصر نامرئی دیگری را در HTML برای ذخیره‌ی کد HTML قرار دهیم. پس چه چیزی `<template>` را خاص می‌کند؟
+اول از همه، محتوای آن می‌تواند هر HTML معتبری باشد، حتی اگر معمولاً نیاز به یک تگ محاط‌کننده داشته باشد.
+برای مثال، می‌توانیم یک ردیف جدول `<tr>`را داخل آن قرار دهیم:
 
-In theory, we could create any invisible element somewhere in HTML for HTML markup storage purposes. What's special about `<template>`?
 
-First, its content can be any valid HTML, even if it normally requires a proper enclosing tag.
-
-For example, we can put there a table row `<tr>`:
 ```html
 <template>
   <tr>
@@ -16,9 +15,9 @@ For example, we can put there a table row `<tr>`:
 </template>
 ```
 
-Usually, if we try to put `<tr>` inside, say, a `<div>`, the browser detects the invalid DOM structure and "fixes" it, adds `<table>` around. That's not what we want. On the other hand, `<template>` keeps exactly what we place there.
+معمولاً اگر سعی کنیم تگ `<tr>` را داخل مثلاً یک `<div>` قرار دهیم، مرورگر ساختار نامعتبر DOM را تشخیص می‌دهد و آن را "اصلاح" می‌کند؛ یعنی به‌طور خودکار یک `<table>` به اطراف آن اضافه می‌کند. اما این چیزی نیست که ما بخواهیم. در عوض، `<template>` دقیقاً همان چیزی را که درونش قرار می‌دهیم، بدون تغییر نگه می‌دارد.
 
-We can put styles and scripts into `<template>` as well:
+ما حتی می‌توانیم استایل‌ها و اسکریپت‌ها را نیز داخل `<template>` قرار دهیم:
 
 ```html
 <template>
@@ -30,18 +29,17 @@ We can put styles and scripts into `<template>` as well:
   </script>
 </template>
 ```
+مرورگر محتوای درون `<template>` را «خارج از سند» در نظر می‌گیرد: استایل‌ها اعمال نمی‌شوند، اسکریپت‌ها اجرا نمی‌شوند، تگ `<video autoplay>` پخش نمی‌شود و غیره.
 
-The browser considers `<template>` content "out of the document": styles are not applied, scripts are not executed, `<video autoplay>` is not run, etc.
+وقتی این محتوا را وارد سند (document) کنیم، فعال می‌شود (استایل‌ها اعمال می‌شوند، اسکریپت‌ها اجرا می‌شوند و غیره).
 
-The content becomes live (styles apply, scripts run etc) when we insert it into the document.
+## وارد کردن template
 
-## Inserting template
+محتوای یک template از طریق ویژگی `content` آن در دسترس است که یک [DocumentFragment](info:modifying-document#document-fragment) محسوب می‌شود — نوع خاصی از گره DOM.
 
-The template content is available in its `content` property as a [DocumentFragment](info:modifying-document#document-fragment) -- a special type of DOM node.
+می‌توانیم با آن مانند هر گره‌ی دیگری از DOM رفتار کنیم، با یک تفاوت خاص: زمانی که آن را در جایی قرار می‌دهیم، فقط فرزندانش وارد سند می‌شوند، نه خود `DocumentFragment`.
 
-We can treat it as any other DOM node, except one special property: when we insert it somewhere, its children are inserted instead.
-
-For example:
+برای مثال:
 
 ```html run
 <template id="tmpl">
@@ -64,7 +62,7 @@ For example:
 </script>
 ```
 
-Let's rewrite a Shadow DOM example from the previous chapter using `<template>`:
+بیایید یک مثال از Shadow DOM را از فصل قبلی با استفاده از `<template>` بازنویسی کنیم:
 
 ```html run untrusted autorun="no-epub" height=60
 <template id="tmpl">
@@ -87,9 +85,9 @@ Let's rewrite a Shadow DOM example from the previous chapter using `<template>`:
 </script>
 ```
 
-In the line `(*)` when we clone and insert `tmpl.content`, as its `DocumentFragment`, its children (`<style>`, `<p>`) are inserted instead.
+در خط `(*)`، زمانی که `tmpl.content` را کپی کرده و درج می‌کنیم، از آنجایی که یک `DocumentFragment` است، فرزندان آن (یعنی `<style>` و `<p>`) به جای خودش درج می‌شوند.
 
-They form the shadow DOM:
+این عناصر، Shadow DOM را تشکیل می‌دهند:
 
 ```html
 <div id="elem">
@@ -99,18 +97,18 @@ They form the shadow DOM:
 </div>
 ```
 
-## Summary
+## خلاصه
 
-To summarize:
+برای جمع‌بندی:
 
-- `<template>` content can be any syntactically correct HTML.
-- `<template>` content is considered "out of the document", so it doesn't affect anything.
-- We can access `template.content` from JavaScript, clone it to reuse in a new component.
+- محتوای `<template>` می‌تواند هر HTML با ساختار نحوی صحیح باشد.
+- محتوای `<template>` به‌عنوان «خارج از سند» در نظر گرفته می‌شود، بنابراین روی چیزی تأثیر نمی‌گذارد.
+- ما می‌توانیم از طریق JavaScript به `template.content` دسترسی پیدا کنیم و با کپی کردن آن، در یک کامپوننت جدید استفاده‌اش کنیم.
 
-The `<template>` tag is quite unique, because:
+تگ `<template>` ویژگی‌های منحصربه‌فردی دارد، زیرا:
 
-- The browser checks HTML syntax inside it (as opposed to using a template string inside a script).
-- ...But still allows use of any top-level HTML tags, even those that don't make sense without proper wrappers (e.g. `<tr>`).
-- The content becomes interactive: scripts run, `<video autoplay>` plays etc, when inserted into the document.
+- مرورگر ساختار نحوی HTML داخل آن را بررسی می‌کند (برخلاف استفاده از رشته قالب درون اسکریپت).
+- ...اما همچنان اجازه می‌دهد که از هر تگ HTML در سطح بالا استفاده شود، حتی تگ‌هایی که بدون تگ‌های محصورکننده منطقی نیستند (مثل `<tr>`).
+- وقتی محتوا وارد سند شود، تعاملی می‌شود: اسکریپت‌ها اجرا می‌شوند، ویدیوهای `<video autoplay>` پخش می‌شوند و غیره.
 
-The `<template>` element does not feature any iteration mechanisms, data binding or variable substitutions, but we can implement those on top of it.
+عنصر `<template>` به‌خودی‌خود هیچ مکانیزمی برای تکرار، اتصال داده‌ها (data binding) یا جایگزینی متغیرها ندارد، اما می‌توانیم این قابلیت‌ها را بر روی آن پیاده‌سازی کنیم.
