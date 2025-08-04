@@ -245,7 +245,11 @@ option = new Option(text, value, defaultSelected, selected);
 - `defaultSelected` -- ایجاد می‌شود `selected` HTML-attribute باشد `true` اگر
 - `selected` -- انتخاب می‌شود option باشد `true` اگر
 
+<<<<<<< HEAD
 .انتخاب شده است یا نه option مشخص می‌کند که آیا `selected` در حالی که (آن را بگیریم `option.getAttribute('selected')` که ما می‌توانیم با) می‌کند set را HTML-attribute مقدار `defaultSelected` در این است که `selected` و `defaultSelected` تفاوت بین
+=======
+The difference between `defaultSelected` and `selected` is that `defaultSelected` sets the HTML-attribute (that we can get using `option.getAttribute('selected')`), while `selected` sets whether the option is selected or not.
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 (`false` یا به سادگی حذف شوند، مقدار پیش‌فرض هر دو) .باشند `false` یا `true` در عمل باید معمولا _هر دو_ مقدار
 
