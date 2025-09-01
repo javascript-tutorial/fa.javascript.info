@@ -88,16 +88,26 @@ let user = 'John'
 *!*var*/!* message = 'سلام';
 ```
 
+<<<<<<< HEAD
 کلیدواژه `var` تقریبا* با* `let` یکسان است. آن هم یک متغیر را تعریف می‌کند، ولی روش کار آن قدیمی است.
 
 تفاوت‌های کوچکی بین این دو وجود دارد که در حال حاضر به آن نمی‌پردازیم. در مبحث <info:var> با جزییات به آن خواهیم پرداخت.
+=======
+The `var` keyword is *almost* the same as `let`. It also declares a variable but in a slightly different, "old-school" way.
+
+There are subtle differences between `let` and `var`, but they do not matter to us yet. We'll cover them in detail in the chapter <info:var>.
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 ````
 
 ## یک مقایسه‌ی واقعی
 
 برای درک مفهوم متغیر، می‌توانیم آن را یک جعبه برای نگهداری اطلاعات تصور کنیم، که یک نام منحصربه‌فرد روی آن چسبانده‌ایم.
 
+<<<<<<< HEAD
 برای نمونه، تصور کنید متغیر "`message`" در جعبه‌ای با برچسب `message` و با مقدار "`سلام!`" داخل آن وجود دارد:
+=======
+For instance, the variable `message` can be imagined as a box labelled `"message"` with the value `"Hello!"` in it:
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 ![](variable.svg)
 
@@ -196,15 +206,24 @@ let my-name; // خط‌های پیوند '-' در نام‌ها ممنوع هس�
 متغیرهای apple و Apple دو متغیر متفاوت هستند.
 ```
 
+<<<<<<< HEAD
 ````smart header="کاراکترهای غیر انگلیسی مجاز هستند ولی توصیه نمی‌شوند"
 امکان استفاده از هر زبانی، شامل حروف cyrillic، لوگوگرام‌های چینی و دیگر زبان‌ها وجود دارد، مثلا اینگونه::
+=======
+````smart header="Non-Latin letters are allowed, but not recommended"
+It is possible to use any language, including Cyrillic letters, Chinese logograms and so on, like this:
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 ```js
 let имя = '...';
 let 我 = '...';
 ```
 
+<<<<<<< HEAD
 از نظر فنی، این‌ها درست کار می‌کنند و مجاز هستند، ولی بر اساس یک قائده بین‌المللی برای نام متغیرها از زبان انگلیسی استفاده می‌شود. حتی اگر اسکریپتی کوچک می‌نویسیم، ممکن است تا مدت طولانی‌ای مورد استفاده و توسعه قرار بگیرد. اشخاصی از سایر کشورها ممکن است نیاز باشد روزی آن اسکریپت را بخوانند.
+=======
+Technically, there is no error here. Such names are allowed, but there is an international convention to use English in variable names. Even if we're writing a small script, it may have a long life ahead. People from other countries may need to read it sometime.
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 ````
 
 ````warn header="نام‌های رِزِرو شده"
@@ -261,10 +280,18 @@ const myBirthday = '18.04.1982';
 myBirthday = '01.01.2001'; // !ارور، نمی‌توان ثابت را دوباره مقداردهی کرد
 ```
 
+<<<<<<< HEAD
 وقتی برنامه‎‌نویس اطمینان دارد که متغیری هیچگاه تغییر نمی‌کند می‌تواند آن را به عنوان const تعریف کند تا برای دیگران نیز این موضوع واضح باشد.
+=======
+When a programmer is sure that a variable will never change, they can declare it with `const` to guarantee and communicate that fact to everyone.
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 
+<<<<<<< HEAD
 ### ثابت‌های با حروف بزرگ
+=======
+There is a widespread practice to use constants as aliases for difficult-to-remember values that are known before execution.
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 به صورت یک عُرفِ همه‌گیر، از ثابت‌های با حروف بزرگ به عنوان نام مستعار برای مقادیری که به خاطر سپردن آنها دشوار است، استفاده می‌شود. این دسته از ثابت‌ها اصطلاحا prior to execution (پیش از اجرای برنامه) مقدارشان مشخص است.
 
@@ -291,7 +318,11 @@ alert(color); // #FF7F00
 
 چه زمانی باید از حروف بزرگ و چه زمانی باید از حروف معمولی برای نام‌گذاری یک constant استفاده کنیم؟ بیایید قضیه را روشن کنیم.
 
+<<<<<<< HEAD
 ثابت بودن یک متغیر صرفا بدین معناست که مقدار آن تغییر نخواهد کرد. یک دسته از ثابت‌ها پیش از اجرای برنامه مقدارشان مشخص خواهد بود (مثل هگزادسیمال برای رنگ قرمز) و دسته دیگر در حین اجرای (Run Time) برنامه مقدارشان مشخص می‌شود، اما پس از مقدار دهی اولیه مقدارشان تغییر نمی‌کند.
+=======
+Being a "constant" just means that a variable's value never changes. But some constants are known before execution (like a hexadecimal value for red) and some constants are *calculated* in run-time, during the execution, but do not change after their initial assignment.
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 برای نمونه:
 
@@ -299,7 +330,11 @@ alert(color); // #FF7F00
 const pageLoadTime = /* زمان بارگیری برای یک صفحه وب */;
 ```
 
+<<<<<<< HEAD
 مقدار `pageLoadTime` پیش از اجرای برنامه مشخص نبوده و به همین دلیل به صورت عادی نوشته شده است. اما همچنان یک ثابت است چراکه زمان اجرای برنامه بعد از مقداردهی دیگر تغییر نخواهد کرد.
+=======
+The value of `pageLoadTime` is not known before the page load, so it's named normally. But it's still a constant because it doesn't change after the assignment.
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 به تعبیری دیگر، ثابت‌های با حروف بزرگ فقط به عنوان نام مستعار برای مقدارهای «hard-coded» استفاده می‌شوند.
 
@@ -309,18 +344,31 @@ const pageLoadTime = /* زمان بارگیری برای یک صفحه وب */;
 
 نام یک متغیر باید معنی واضح و روشنی داشته باشد که داده درون خود را توصیف می‌کند.
 
+<<<<<<< HEAD
 انتخاب نام برای متغیرها یکی از کارهای مهم و پیچیده در برنامه‌نویسی است. یک نگاه سریع به نام متغیرها می‌تواند تفاوت یک برنامه‌نویس تازه‌کار و با تجربه را نشان دهد.
 
 در پروژه‌های واقعی، بجای از صفر نوشتن برنامه‌ها، بیشتر زمان صرف اصلاح و توسعه کدهای موجود می‌شود. وقتی پس از مدتی به کدهای قبلی باز می‌گردیم، بدست آوردن اطلاعات از آن دسته کدهایی که نام‌گذاری‌های خوبی دارند بسیار راحت‌تر است (منظور متغیرهایی است که نام‌های خوبی دارند).
+=======
+Variable naming is one of the most important and complex skills in programming. A glance at variable names can reveal which code was written by a beginner versus an experienced developer.
+
+In a real project, most of the time is spent modifying and extending an existing code base rather than writing something completely separate from scratch. When we return to some code after doing something else for a while, it's much easier to find information that is well-labelled. Or, in other words, when the variables have good names.
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 لطفا پیش از انتخاب نام برای یک متغیر، خوب به آن فکر کنید. ثمره‌ی آن را خواهید دید.
 
 بعضی از دستورالعمل‌های مفید:
 
+<<<<<<< HEAD
 - از نام‌هایی که برای انسان قابل فهم است استفاده کنید مانند `userName` یا `shoppingCart`.
 - از نام‌های مخفف یا کوتاه استفاده نکنید مانند `a`، `b`، `c`، مگر آنکه واقعا بدانید چه می‌کنید.
 - نام‌های کاملا واضح و مختصر انتخاب کنید. نمونه‌هایی از نام‌های بد `data` و `value` هستند. این نام‌ها هیچ‌چیز را توضیح نمی‌دهند. استفاده از این دست نام‌ها فقط زمانی قابل قبول است که محتوای کدی که می‌نویسید به طور استثنا مشخص کند که data یا value به چه چیزی اشاره می‌کند.
 - با ذهن خود و تیم کاریتان توافق نظر داشته باشید. اگر به مخاطبان وب‌سایت‌تان user می‌گویید، متغیرهای مرتبط را بجای `currentVisitor` یا `newManInTown` باید `currentUser` یا `newUser` بنامید.
+=======
+- Use human-readable names like `userName` or `shoppingCart`.
+- Stay away from abbreviations or short names like `a`, `b`, and `c`, unless you know what you're doing.
+- Make names maximally descriptive and concise. Examples of bad names are `data` and `value`. Such names say nothing. It's only okay to use them if the context of the code makes it exceptionally obvious which data or value the variable is referencing.
+- Agree on terms within your team and in your mind. If a site visitor is called a "user" then we should name related variables `currentUser` or `newUser` instead of `currentVisitor` or `newManInTown`.
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 ```smart header="ایجاد یا استفاده مجدد?"
 و آخرین نکته: برخی برنامه‌نویسان تنبل بجای تعریف متغیرهای جدید، از متغیرهای موجود دوباره استفاده می‌کنند.
