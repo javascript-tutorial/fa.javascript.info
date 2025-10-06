@@ -55,8 +55,13 @@ alert( arr instanceof Object ); // true
     برای مثال:
 
     ```js run
+<<<<<<< HEAD
     // تا instanceof راه‌اندازی بررسی کردن
     // فرض کند (animal) را یک جانور canEat هر چیزی شامل ویژگی
+=======
+    // set up instanceof check that assumes that
+    // anything with canEat property is an animal
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
     class Animal {
       static [Symbol.hasInstance](obj) {
         if (obj.canEat) return true;
@@ -68,7 +73,11 @@ alert( arr instanceof Object ); // true
     alert(obj instanceof Animal); // true :فراخوانی شده Animal[Symbol.hasInstance](obj)
     ```
 
+<<<<<<< HEAD
 2. اکثر کلاس‌ها `Symbol.instanceof` را ندارند. در این صورت، منطق استاندارد استفاده می‌شود: `obj instanceOf Class` بررسی می‌کند که آیا `Class.prototype` برابر با یکی از پروتوتایپ‌ها در زجیره پروتوتایپی `obj` هست یا نه.
+=======
+2. Most classes do not have `Symbol.hasInstance`. In that case, the standard logic is used: `obj instanceof Class` checks whether `Class.prototype` is equal to one of the prototypes in the `obj` prototype chain.
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
     به عبارتی دیگر، یکی پس از دیگری آن را مقایسه می‌کند:
     ```js
