@@ -20,7 +20,7 @@
 
 پنل توسعه‌دهندگان به صورت پیش‌فرض روی تب Console باز می‌شود و شما چیزی شبیه به این را باید ببینید : 
 
-![chrome](chrome.png)
+![chrome](chrome.webp)
 
 ظاهر دقیق این پنل بر اساس نسخه Chrome تغییر می‌کند ولی در نهایت چیزی شبیه به این خواهد بود. 
 
@@ -42,7 +42,11 @@
 
 این مرورگر (فقط در سیستم عامل Mac و نه در Windows و Linux) در اینجا مقداری متفاوت است و ابتدا باید ویژگی Developer menu را فعال کنیم. 
 
+<<<<<<< HEAD
 به Preferences رفته و به تب Advanced بروید و تیک مربوط به Developer menu را در پایین فعال کنید. 
+=======
+Open Settings and go to the "Advanced" pane. There's a checkbox at the bottom:
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 ![safari](safari.png)
 
