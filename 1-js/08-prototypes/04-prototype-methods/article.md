@@ -14,7 +14,11 @@
 
 اگرچه یک متد خاص برای این کار هم وجود دارد:
 
+<<<<<<< HEAD
 - [Object.create(proto, [descriptors])](mdn:js/Object/create) -- یک شیء خالی با تنظیم `proto` داده شده به عنوان `[[Prototype]]` و توصیف‌کننده‌های ویژگی اختیاری ایجاد می‌کند.
+=======
+- [Object.create(proto[, descriptors])](mdn:js/Object/create) -- creates an empty object with given `proto` as `[[Prototype]]` and optional property descriptors.
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 برای مثال:
 
@@ -111,7 +115,11 @@ alert(obj[key]); // [object Object], not "یک مقدار"!
 
 در اینجا، اگر کاربر `__proto__` را تایپ کند، انتساب در خط 4 نادیده گرفته می‌شود!
 
+<<<<<<< HEAD
 این می‌تواند قطعا برای یک غیر توسعه‌دهنده شوکه کننده باشد اما برای ما بسیار قابل فهم است. ویژگی `__proto__` خاص است: باید یک شیء یا `null` باشد. یک رشته نمی‌تواند به یک پروتوتایپ تبدیل شود. به همین دلیل است که انتساب یک رشته به `__proto__` نادیده گرفته می‌شود.
+=======
+That could surely be surprising for a non-developer, but pretty understandable for us. The `__proto__` property is special: it must be either an object or `null`. A string can not become a prototype. That's why assigning a string to `__proto__` is ignored.
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 اما ما *قصد* اجرای چنین رفتاری را نداشتیم، درست است؟ ما می‌خواهیم جفت‌های کلید/مقدار را ذخیره کنیم، و کلید با نام `"__proto__"`  به درستی ذخیره نشده است. پس این یک اشکال است!
 
@@ -195,8 +203,13 @@ alert(Object.keys(chineseDictionary)); // hello,bye
 
 - برای ایجاد یک شیء با پروتوتایپ تعیین شده، از این‌ها استفاده کنید:
 
+<<<<<<< HEAD
     - سینتکس لیترال: `{ __proto__: ...}`، اجازه می‌دهد که چند ویژگی تعیین کنیم
     - یا [Object.create(proto, [descriptors])](mdn:js/Object/create)، اجازه می‌دهد که توصیف‌کننده‌های ویژگی را تعیین کنیم.
+=======
+    - literal syntax: `{ __proto__: ... }`, allows to specify multiple properties
+    - or [Object.create(proto[, descriptors])](mdn:js/Object/create), allows to specify property descriptors.
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 - متدهای مدرن برای دریافت/تنظیم پروتوتایپ این‌ها هستند:
 
