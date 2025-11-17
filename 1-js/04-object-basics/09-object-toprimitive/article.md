@@ -253,7 +253,11 @@ let obj = {
   }
 };
 
+<<<<<<< HEAD
 alert(obj + 2); // تبدیل به مقدار اصلی یک رشته برگرداند => ادغام، (2 + "2") 22
+=======
+alert(obj + 2); // "22" ("2" + 2), conversion to primitive returned a string => concatenation
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 ```
 
 ## خلاصه
