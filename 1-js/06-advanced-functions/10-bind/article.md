@@ -125,7 +125,11 @@ funcUser(); // John
 */!*
 ```
 
+<<<<<<< HEAD
 اینجا `func.bind(user)` به عنوان «یک نوع پیوند زده شده» از `func` با `this=user` شناخته می‌شود.
+=======
+Here `func.bind(user)` is a "bound variant" of `func`, with fixed `this=user`.
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 تمام آرگومان‌ها «بدون تغییر» به تابع اصلی `func` منتقل می‌شوند، برای مثال:
 

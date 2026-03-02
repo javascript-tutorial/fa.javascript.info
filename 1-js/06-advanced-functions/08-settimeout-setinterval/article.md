@@ -218,7 +218,11 @@ setTimeout(function run() {
 
 ![](settimeout-interval.svg)
 
+<<<<<<< HEAD
 **`setTimeout` تودرتو فاصله زمانی ثابت را تضمین می‌کند (اینجا 100 میلی‌ثانیه).**
+=======
+**The nested `setTimeout` ensures a minimum delay (100ms here) between the end of one call and the beginning of the subsequent one.**
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 به این دلیل که فراخوانی جدید در انتهای فراخوانی قبلی زمان‌بندی می‌شود.
 

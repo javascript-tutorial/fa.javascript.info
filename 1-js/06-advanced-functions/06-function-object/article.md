@@ -325,7 +325,11 @@ welcome(); // (فراخوانی تودرتو کار می‌کند) Guest ،سل�
 
 حالا کار می‌کند چون اسم `"func"` یک تابع محلی است. این اسم از بیرون دریافت نمی‌شود (و آنجا هم قابل رویت نیست). مشخصات زبان تضمین می‌کند که این اسم همیشه به تابع کنونی رجوع می‌کند.
 
+<<<<<<< HEAD
 کد بیرونی هنوز هم متغیر `sayHi` یا `welcome` خود را دارد. و `func` یک «اسم درونی تابع» است، جوری که تابع می‌توانند از درون خودش را فراخوانی کند.
+=======
+The outer code still has its variable `sayHi` or `welcome`. And `func` is an "internal function name", the way for the function to call itself reliably.
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 ```smart header="چنین چیزی برای Function Declaration وجود ندارد"
 خصوصیت «اسم درونی» که اینجا توضیح داده شد فقط برای Function Expessionها قابل استفاده است نه برای Function Declarationها. برای Function Declarationها، سینتکسی برای اضاف کردن اسم «درونی» وجود ندارد.
