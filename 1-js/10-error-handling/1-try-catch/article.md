@@ -632,7 +632,11 @@ window.onerror = function(message, url, line, col, error) {
 
 معمولا نقش کنترل‌کننده گلوبال `window.onerror` این نیست که اجرای اسکریپت را ترمیم کند -- این موضوع در صورتی که ارور برنامه‌نویسی وجود داشته باشد احتمالا غیر ممکن است اما فرستادن پیام ارور به توسعه‌دهندگان ممکن است.
 
+<<<<<<< HEAD
 همچنین سرویس‌های وب وجود دارند که رخدادنگاری ارور را برای چنین مواردی فراهم می‌کنند مانند <https://errorception.com> یا <http://www.muscula.com>.
+=======
+There are also web-services that provide error-logging for such cases, like <https://muscula.com> or <https://www.sentry.io>.
+>>>>>>> 52c1e61915bc8970a950a3f59bd845827e49b4bf
 
 آن‌ها اینگونه کار می‌کنند:
 
