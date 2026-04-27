@@ -208,8 +208,16 @@ alert( undefined == 0 ); // false (3)
 
 ## خلاصه
 
+<<<<<<< HEAD
 - عملگرهای مقایسه یک مقدار boolean را برمی گردانند.
 - رشته ها به صورت حرف به حرف با توجه به ترتیب حروف در "دیکشنری" با هم مقایسه می شوند.
 - وقتی که مقادیری با نوع های متفاوت با یکدیگر مقایسه می شوند، به نوع number تبدیل می شوند (بدون در نظر گرفتن حالت استفاده از عملگر === ).
 - مقادیری `null` و `undefined` با یکدیگر برابر `==` و با هر مقدار دیگری نابرابرند.
 - زمانی که از علامت ها `>` یا `<` برای مقایسه متغیر هایی که می توانند مقدار `null/undefined` داشته باشند استفاده می کنید، مراقب باشید. بررسی برای مقارید `null/undefined` به صورت جداگانه کار بسیار پسندیده ای است.
+=======
+- Comparison operators return a boolean value.
+- Strings are compared letter-by-letter in the "dictionary" order.
+- When values of different types are compared, they get converted to numbers (with the exclusion of a strict equality check).
+- The values `null` and `undefined` are equal `==` to themselves and each other, but do not equal any other value.
+- Be careful when using comparisons like `>` or `<` with variables that can occasionally be `null/undefined`. Checking for `null/undefined` separately is a good idea.
+>>>>>>> 52c1e61915bc8970a950a3f59bd845827e49b4bf
