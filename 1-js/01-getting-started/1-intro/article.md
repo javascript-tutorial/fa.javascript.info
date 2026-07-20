@@ -72,8 +72,13 @@
 
     به این موضوع Same Origin Policy گفته می‌شود. برای آنکه بتوان در این حالت کار کرد هر دو صفحه باید یک کد جاوااسکریپت مخصوصی داشته باشند تا بتوان این تبادل اطلاعات را انجام داد.   
 
+<<<<<<< HEAD
     این محدودیت‌ها برای امنیت کاربر است. صفحه‌ای از دامنه `http://anysite.com/` که کاربر آن را باز کرده است نباید به تب دیگر مرورگر با آدرس `http://gmail.com/` دسترسی داشته باشد و اطلاعات آن را به سرقت ببرد.  
 - جاوااسکریپت می‌تواند در سطح شبکه با سِروِرها ارتباط بر قرار کند. اما توانایی آن در دریافت اطلاعات از دیگر دامنه‌ها و سایت‌ها با مسائلی مواجه هست. اگر چنین چیزی امکان‌پذیر است اما به اجازه مستقیم از طرف سِروِرِ مربوطه نیازمند می‌باشد. تمام این محدودیت‌ها برای امنیت کاربر قرار داده شده‌اند.  
+=======
+    This limitation is, again, for the user's safety. A page from `http://anysite.com` which a user has opened must not be able to access another browser tab with the URL `http://gmail.com`, for example, and steal information from there.
+- JavaScript can easily communicate over the net to the server where the current page came from. But its ability to receive data from other sites/domains is severely limited. Though possible, it requires explicit agreement (expressed in HTTP headers) from the remote side. Once again, that's a safety limitation.
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
 ![](limitations.svg) 
 

@@ -1,5 +1,9 @@
 
+<<<<<<< HEAD
 به دلیل اینکه `ask` تابع‌های `loginOk/loginFail` را بدون شیء دریافت می‌کند ارور ایجاد می‌شود.
+=======
+The error occurs because `askPassword` gets functions `loginOk/loginFail` without the object.
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
 زمانی که این تابع آن‌ها را فرا می‌خواند، به طور طبیعی آن‌ها `this=undefined` را فرض می‌کنند.
 
