@@ -1,24 +1,24 @@
 
-# Fetch: Download progress
+# متد Fetch: پیشرفت دانلود
 
-The `fetch` method allows to track *download* progress.
+متد `fetch` به ما اجازه می‌دهد پیشرفت *دانلود* را دنبال کنیم.
 
-Please note: there's currently no way for `fetch` to track *upload* progress. For that purpose, please use [XMLHttpRequest](info:xmlhttprequest), we'll cover it later.
+لطفاً توجه کنید: در حال حاضر هیچ راهی وجود ندارد که `fetch` بتواند پیشرفت *آپلود* را ردیابی کند. برای این کار باید از [XMLHttpRequest](info:xmlhttprequest) استفاده کنید که بعداً بررسی خواهد شد.
 
-To track download progress, we can use `response.body` property. It's a `ReadableStream` -- a special object that provides body chunk-by-chunk, as it comes. Readable streams are described in the [Streams API](https://streams.spec.whatwg.org/#rs-class) specification.
+برای دنبال‌کردن پیشرفت دانلود، می‌توانیم از ویژگی `response.body` استفاده کنیم. این یک `ReadableStream` است -- یک شیء خاص که بدنه را به صورت تکه‌تکه (chunk-by-chunk) و هم‌زمان با دریافت فراهم می‌کند. جریان‌های قابل خواندن در  [Streams API](https://streams.spec.whatwg.org/#rs-class) توضیح داده شده‌اند.
 
-Unlike `response.text()`, `response.json()` and other methods, `response.body` gives full control over the reading process, and we can count how much is consumed at any moment.
+برخلاف `response.text()`، `response.json()` و سایر متدها، ویژگی `response.body` کنترل کامل روی فرایند خواندن می‌دهد و می‌توانیم در هر لحظه مقدار داده‌ی مصرف‌شده را اندازه‌گیری کنیم.
 
-Here's the sketch of code that reads the response from `response.body`:
+در ادامه اسکلت کدی را می‌بینید که پاسخ را از `response.body` می‌خواند:
 
 ```js
-// instead of response.json() and other methods
+// به‌جای response.json() و سایر متدها
 const reader = response.body.getReader();
 
-// infinite loop while the body is downloading
+// حلقه بی‌نهایت تا زمانی که بدنه در حال دانلود است
 while(true) {
-  // done is true for the last chunk
-  // value is Uint8Array of the chunk bytes
+  // done برای آخرین chunk برابر true می‌شود
+  // value یک Uint8Array از بایت‌های chunk است
   const {done, value} = await reader.read();
 
   if (done) {
@@ -29,32 +29,32 @@ while(true) {
 }
 ```
 
-The result of `await reader.read()` call is an object with two properties:
-- **`done`** -- `true` when the reading is complete, otherwise `false`.
-- **`value`** -- a typed array of bytes: `Uint8Array`.
+نتیجه‌ی فراخوانی `await reader.read()` یک شیء با دو ویژگی است:  
+- ویژگی **`done`** -- زمانی `true` می‌شود که خواندن کامل شده باشد، در غیر این صورت `false` است.  
+- ویژگی **`value`** -- یک آرایه تایپ‌شده از بایت‌ها: `Uint8Array`.  
 
 ```smart
-Streams API also describes asynchronous iteration over `ReadableStream` with `for await..of` loop, but it's not yet widely supported (see [browser issues](https://github.com/whatwg/streams/issues/778#issuecomment-461341033)), so we use `while` loop.
+توجه: Streams API همچنین پیمایش ناهمزمان (`async iteration`) روی `ReadableStream` را با حلقه‌ی `for await..of` تعریف می‌کند، اما هنوز به طور گسترده پشتیبانی نمی‌شود (به [مشکلات مرورگرها](https://github.com/whatwg/streams/issues/778#issuecomment-461341033) مراجعه کنید)، بنابراین از حلقه‌ی `while` استفاده می‌کنیم.
 ```
 
-We receive response chunks in the loop, until the loading finishes, that is: until `done` becomes `true`.
+ما در حلقه، تکه‌های پاسخ را دریافت می‌کنیم تا زمانی که بارگذاری تمام شود؛ یعنی تا زمانی که `done` برابر `true` شود.
 
-To log the progress, we just need for every received fragment `value` to add its length to the counter.
+برای ثبت پیشرفت، کافی است در هر بار دریافت قطعه‌ی `value`، طول آن را به شمارنده اضافه کنیم.
 
-Here's the full working example that gets the response and logs the progress in console, more explanations to follow:
+در ادامه یک مثال کامل داریم که پاسخ را دریافت می‌کند و پیشرفت را در کنسول لاگ می‌کند. توضیحات بیشتر بعد از آن آمده است:
 
 ```js run async
-// Step 1: start the fetch and obtain a reader
+// مرحله 1: شروع fetch و گرفتن reader
 let response = await fetch('https://api.github.com/repos/javascript-tutorial/en.javascript.info/commits?per_page=100');
 
 const reader = response.body.getReader();
 
-// Step 2: get total length
+// مرحله 2: گرفتن طول کل داده
 const contentLength = +response.headers.get('Content-Length');
 
-// Step 3: read the data
-let receivedLength = 0; // received that many bytes at the moment
-let chunks = []; // array of received binary chunks (comprises the body)
+// مرحله 3: خواندن داده
+let receivedLength = 0; // تا این لحظه این مقدار بایت دریافت شده  
+let chunks = []; // آرایه‌ای از تکه‌های باینری دریافت‌شده (بدنه)  
 while(true) {
   const {done, value} = await reader.read();
 
@@ -68,47 +68,47 @@ while(true) {
   console.log(`Received ${receivedLength} of ${contentLength}`)
 }
 
-// Step 4: concatenate chunks into single Uint8Array
-let chunksAll = new Uint8Array(receivedLength); // (4.1)
+// مرحله 4: اتصال chunkها به یک Uint8Array واحد
+let chunksAll = new Uint8Array(receivedLength); // (مرحله 4.1)
 let position = 0;
 for(let chunk of chunks) {
-	chunksAll.set(chunk, position); // (4.2)
-	position += chunk.length;
+    chunksAll.set(chunk, position); // (مرحله 4.2)
+    position += chunk.length;
 }
 
-// Step 5: decode into a string
+// مرحله 5: تبدیل به رشته
 let result = new TextDecoder("utf-8").decode(chunksAll);
 
-// We're done!
+// کار تمام شد!
 let commits = JSON.parse(result);
 alert(commits[0].author.login);
 ```
 
-Let's explain that step-by-step:
+بیایید مرحله به مرحله توضیح بدهیم:
 
-1. We perform `fetch` as usual, but instead of calling `response.json()`, we obtain a stream reader `response.body.getReader()`.
+1. ما مانند حالت عادی `fetch` انجام می‌دهیم، اما به جای `response.json()`، یک stream reader می‌گیریم: `response.body.getReader()`.
 
-    Please note, we can't use both these methods to read the same response: either use a reader or a response method to get the result.
-2. Prior to reading, we can figure out the full response length from the `Content-Length` header.
+   توجه کنید که نمی‌توان هم‌زمان از هر دو روش برای خواندن یک پاسخ استفاده کرد: یا باید از reader استفاده کنیم یا از متدهای آماده‌ی response.  
+2. قبل از خواندن، می‌توانیم از هدر `Content-Length` طول کل پاسخ را به دست آوریم.
 
-    It may be absent for cross-origin requests (see chapter <info:fetch-crossorigin>) and, well, technically a server doesn't have to set it. But usually it's at place.
-3. Call `await reader.read()` until it's done.
+   این مقدار ممکن است در درخواست‌های cross-origin وجود نداشته باشد (به فصل <info:fetch-crossorigin> مراجعه کنید) و در عمل هم سرور مجبور به ارسال آن نیست. اما معمولاً وجود دارد.
+3. تابع `await reader.read()` را تا زمانی که تمام شود اجرا می‌کنیم.
 
-    We gather response chunks in the array `chunks`. That's important, because after the response is consumed, we won't be able to "re-read" it using `response.json()` or another way (you can try, there'll be an error).
-4. At the end, we have `chunks` -- an array of `Uint8Array` byte chunks. We need to join them into a single result. Unfortunately, there's no single method that concatenates those, so there's some code to do that:
-    1. We create `chunksAll = new Uint8Array(receivedLength)` -- a same-typed array with the combined length.
-    2. Then use `.set(chunk, position)` method to copy each `chunk` one after another in it.
-5. We have the result in `chunksAll`. It's a byte array though, not a string.
+   ما تکه‌های پاسخ را در آرایه‌ی `chunks` جمع می‌کنیم. این مهم است چون بعد از مصرف شدن پاسخ، دیگر نمی‌توان آن را دوباره با `response.json()` یا روش‌های مشابه خواند (اگر امتحان کنید خطا خواهید گرفت).
+4. در پایان، ما `chunks` را داریم -- آرایه‌ای از قطعات بایت `Uint8Array`. باید آن‌ها را به یک خروجی واحد تبدیل کنیم. متأسفانه متد مستقیمی برای اتصال آن‌ها وجود ندارد، بنابراین این کار را دستی انجام می‌دهیم:
+    1. یک `Uint8Array` جدید با طول کل ایجاد می‌کنیم: `chunksAll = new Uint8Array(receivedLength)`
+    2. سپس با `.set(chunk, position)` هر قطعه را پشت سر هم داخل آن کپی می‌کنیم.
+5. در نهایت داده‌ی نهایی در `chunksAll` قرار دارد، اما هنوز رشته نیست.
 
-    To create a string, we need to interpret these bytes. The built-in [TextDecoder](info:text-decoder) does exactly that. Then we can `JSON.parse` it, if necessary.
+   برای تبدیل به رشته، باید این بایت‌ها را تفسیر کنیم. کلاس داخلی [TextDecoder](info:text-decoder) دقیقاً همین کار را انجام می‌دهد. سپس در صورت نیاز می‌توانیم آن را با `JSON.parse` تبدیل کنیم.
 
-    What if we need binary content instead of a string? That's even simpler. Replace steps 4 and 5 with a single line that creates a `Blob` from all chunks:
+   اگر به جای رشته داده‌ی باینری بخواهیم، کار ساده‌تر است: کافی است مراحل 4 و 5 را با یک خط جایگزین کنیم:
     ```js
     let blob = new Blob(chunks);
     ```
 
-At the end we have the result (as a string or a blob, whatever is convenient), and progress-tracking in the process.
+در نهایت ما نتیجه را (به صورت رشته یا Blob) داریم و هم‌زمان در طول فرایند، پیشرفت دانلود را هم دنبال می‌کنیم.
 
-Once again, please note, that's not for *upload* progress (no way now with `fetch`), only for *download* progress.
+دوباره توجه کنید: این روش برای *پیشرفت آپلود* نیست (فعلاً با `fetch` ممکن نیست)، فقط برای *پیشرفت دانلود* است.
 
-Also, if the size is unknown, we should check `receivedLength` in the loop and break it once it reaches a certain limit. So that the `chunks` won't overflow the memory. 
+همچنین اگر اندازه‌ی داده مشخص نباشد، باید در حلقه مقدار `receivedLength` را بررسی کنیم و اگر از یک حدی بیشتر شد، حلقه را متوقف کنیم تا آرایه‌ی `chunks` باعث مصرف بیش از حد حافظه نشود. 
