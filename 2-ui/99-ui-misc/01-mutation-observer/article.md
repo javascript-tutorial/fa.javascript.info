@@ -130,11 +130,17 @@ mutationRecords = [{
 ```
  کردن آن، از کتابخانه برجسته سازی نحوی جاوا اسکریپت در سایت خود مانند [Prism.js](https://prismjs.com/) استفاده خواهیم کرد. برای دریافت syntax highlighting برای قطعه بالا درprism، که `Prism.highlightElem(pre)` نامیده می‌شود، که محتویات چنین عناصر`pre`را بررسی می‌کند و تگ‌ها و سبک‌های خاصی را برای  syntax highlighting رنگی به آن عناصر اضافه می‌کند، مشابه آنچه در این صفحه می بینید.
 
+<<<<<<< HEAD
 دقیقاً چه زمانی باید آن روش برجسته سازی را اجرا کنیم؟ خوب، می‌توانیم این کار را در رویداد  `DOMContentLoaded` انجام دهیم یا اسکریپت را در پایین صفحه قرار دهیم. لحظه‌ای که DOM ما آماده است، می‌توانیم عناصر `pre[class*="language"]` را جستجو کنیم و روی آنها  `Prism.highlightElem` را صدا کنیم:
+=======
+For better readability and at the same time, to beautify it, we'll be using a JavaScript syntax highlighting library on our site, like [Prism.js](https://prismjs.com/). To get syntax highlighting for above snippet in Prism, `Prism.highlightElement(pre)` is called, which examines the contents of such `pre` elements and adds special tags and styles for colored syntax highlighting into those elements, similar to what you see in examples here, on this page.
+
+When exactly should we run that highlighting method? Well, we can do it on `DOMContentLoaded` event, or put the script at the bottom of the page. The moment our DOM is ready, we can search for elements `pre[class*="language"]` and call `Prism.highlightElement` on them:
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 ```js
 // highlight all code snippets on the page
-document.querySelectorAll('pre[class*="language"]').forEach(Prism.highlightElem);
+document.querySelectorAll('pre[class*="language"]').forEach(elem => Prism.highlightElement(elem));
 ```
 
 
@@ -145,8 +151,14 @@ let article = /* fetch new content from server */
 articleElem.innerHTML = article;
 ```
 
+<<<<<<< HEAD
 
 در HTML `article` جدید ممکن است حاوی کدهایی باشد. باید`Prism.highlightElem` را روی آنها صدا کنیم، در غیر این صورت برجسته نمی‌شوند.
+=======
+The new `article` HTML may contain code snippets. We need to call `Prism.highlightElement` on them, otherwise they won't get highlighted.
+
+**Where and when to call `Prism.highlightElement` for a dynamically loaded article?**
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 **کجا و چه زمانی برای یک مقاله بارگذاری شده پویا با `Prism.highlightElem` تماس بگیرید؟**
 
@@ -158,7 +170,7 @@ articleElem.innerHTML = article;
 
 *!*
 let snippets = articleElem.querySelectorAll('pre[class*="language-"]');
-snippets.forEach(Prism.highlightElem);
+snippets.forEach(elem => Prism.highlightElement(elem));
 */!*
 ```
 
