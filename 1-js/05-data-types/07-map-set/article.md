@@ -243,7 +243,7 @@ let obj = Object.fromEntries(map); // را حذف کردیم .entries()
 - [`set.clear()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/clear) -- همه چیز را از set حذف می‌کند.
 - [`set.size`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/size) -- برابر با تعداد المان‌ها است.
 
-ویژگی اصلی این اصت که فراخوانی‌های پی‌در‌پی `set.add(value)` با مقداری یکسان، کاری انجام نمی‌دهد. به همین دلیل است که هر مقدار تنها یک بار در `Set` واقع می‌شوند.
+ویژگی اصلی این است که فراخوانی‌های پی‌در‌پی `set.add(value)` با مقداری یکسان، کاری انجام نمی‌دهد. به همین دلیل است که هر مقدار تنها یک بار در `Set` واقع می‌شوند.
 
 برای مثال، ما بازدیدکنندگانی داریم و می‌خواهیم همه افراد را به یاد بسپاریم. اما بازدیدهای تکراری نباید حساب شوند. یک بازدیدکننده باید تنها یک بار «شمرده شود».
 
