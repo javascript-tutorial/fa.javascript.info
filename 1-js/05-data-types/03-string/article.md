@@ -74,15 +74,11 @@ World`;
 alert(str1 == str2); // true
 ```
 
-<<<<<<< HEAD
 کاراکترهای "خاص" دیگر و غیر متداول هم هستند:
-=======
-There are other, less common special characters:
->>>>>>> 18b1314af4e0ead5a2b10bb4bacd24cecbb3f18e
 
 | کاراکتر | توضیحات |
 |-----------|-------------|
-<<<<<<< HEAD
+HEAD
 |`\n`|خط جدید|
 |`\r`|فایل‌های متنی ویندوز از ترکیب دو کاراکتر `\r\n` برای نمایش یک خط جدید استفاده می‌کند، در حالی که برای سیستم‌های غیر ویندوزی `\n` این کار را انجام می‌دهد.
 دلیل آن مربوط به گذشته‌ها است. بیشتر نرم‌افزارهای ویندوزی `\n` را هم می‌شناسند. |
@@ -115,11 +111,7 @@ alert( 'I*!*\'*/!*m the Walrus!' ); // *!*I'm*/!* the Walrus!
 alert( "I'm the Walrus!" ); // I'm the Walrus!
 ```
 
-<<<<<<< HEAD
 در کنار این کاراکترهای خاص، همچنین یک نشان خاص برای کدهای Unicode `\u…` وجود دارد که کمی بعدتر در این فصل آن را پوشش می‌دهیم.
-=======
-Besides these special characters, there's also a special notation for Unicode codes `\u…`, it's rarely used and is covered in the optional chapter about [Unicode](info:unicode).
->>>>>>> 18b1314af4e0ead5a2b10bb4bacd24cecbb3f18e
 
 ## طول رشته
 
@@ -128,61 +120,34 @@ Besides these special characters, there's also a special notation for Unicode co
 ```js run
 alert( `My\n`.length ); // 3
 ```
-
 در نظر داشته باشید که `\n` یک کاراکتر "خاص" مفرد است، پس طول در واقع `3` است.
 
 ```warn header="`length` یک ویژگی است"
 بعضی اوقات افرادی که زمینه‌ای در بعضی زبان‌های برنامه نویسی دیگر دارند اشتباها `str.length()` را به جای نوشتن `str.length` صدا می‌زنند. اینگونه کار نمی‌کند.
 
-<<<<<<< HEAD
 لطفا در نظر داشته باشید که `str.length` یک ویژگی عددی است نه یک تابع. نیازی به اضافه کردن پرانتر بعد از آن نیست.
-=======
-Please note that `str.length` is a numeric property, not a function. There is no need to add parenthesis after it. Not `.length()`, but `.length`.
->>>>>>> 18b1314af4e0ead5a2b10bb4bacd24cecbb3f18e
-```
-
 ## دسترسی داشتن به کاراکترها
 
-<<<<<<< HEAD
 برای دریافت یک کاراکتر در موقعیت `pos`، از براکت‌ها استفاده کنید یا متد [str.charAt(pos)](mdn:js/String/charAt) را صدا بزنید. اولین کاراکتر از موقعیت صفر شروع می‌شود:
-=======
-To get a character at position `pos`, use square brackets `[pos]` or call the method [str.at(pos)](mdn:js/String/at). The first character starts from the zero position:
->>>>>>> 18b1314af4e0ead5a2b10bb4bacd24cecbb3f18e
-
 ```js run
 let str = `Hello`;
-
 // اولین کاراکتر
 alert( str[0] ); // H
 alert( str.at(0) ); // H
-
 // آخرین کاراکتر
 alert( str[str.length - 1] ); // o
 alert( str.at(-1) );
 ```
-
-<<<<<<< HEAD
 براکت‌ها روش مدرن دریافت کاراکتر هستند، در حالی که `charAt` بنا به دلایلی مربوط به تاریخچه زبان وجود دارد.
 
 تنها تفاوت میان آنها این است که اگر کاراکتری پیدا نشود، `[]` مقدار `undefined` را برمی‌گرداند، و `charAt` یک رشته خالی را برمی‌گرداند:
-=======
-As you can see, the `.at(pos)` method has a benefit of allowing negative position. If `pos` is negative, then it's counted from the end of the string.
-
-So `.at(-1)` means the last character, and `.at(-2)` is the one before it, etc.
-
-The square brackets always return `undefined` for negative indexes, for instance:
->>>>>>> 18b1314af4e0ead5a2b10bb4bacd24cecbb3f18e
 
 ```js run
 let str = `Hello`;
-
-<<<<<<< HEAD
 alert( str[1000] ); // undefined
 alert( str.charAt(1000) ); // '' (یک رشته خالی)
-=======
 alert( str[-2] ); // undefined
 alert( str.at(-2) ); // l
->>>>>>> 18b1314af4e0ead5a2b10bb4bacd24cecbb3f18e
 ```
 
 همچنین ما می‌توانیم با استفاده از `for..of` برای کاراکترها حلقه بزنیم:
@@ -201,7 +166,6 @@ for (let char of "Hello") {
 
 ```js run
 let str = 'Hi';
-
 str[0] = 'h'; // ارور می‌دهد
 alert( str[0] ); // کار نمی‌کند
 ```
@@ -212,9 +176,7 @@ alert( str[0] ); // کار نمی‌کند
 
 ```js run
 let str = 'Hi';
-
 str = 'h' + str[1]; // رشته را جایگزین می‌کنیم
-
 alert( str ); // hi
 ```
 
@@ -244,7 +206,6 @@ alert( 'Interface'[0].toLowerCase() ); // 'i'
 متد اول [str.indexOf(substr, pos)](mdn:js/String/indexOf) است.
 
 این متد به دنبال `substr` درون `str` می‌گردد، و از موقعیت `pos` داده شده شروع می‌کند، و موقعیتی که زیر رشته مورد نظر پیدا شد یا اگر چیزی پیدا نشد `-1` را برمی‌گرداند.
-
 برای مثال:
 
 ```js run
@@ -255,22 +216,15 @@ alert( str.indexOf('widget') ); // -1 ،چیزی پیدا نشد، جستجو ب
 
 alert( str.indexOf("id") ); // 1 ،(است id دارای ..idget) در موقعیت 1 پیدا شد "id"
 ```
-
 پارامتر اختیاری دوم به ما اجازه جستجو از موقعیت داده شده را می‌دهد.
-
 برای مثال، اولین `"id"` که وجود دارد در موقعیت `1` است. برای پیدا کردن بعدی، بیایید جستجو را از موقعیت `2` شروع کنیم:
-
 ```js run
 let str = 'Widget with id';
-
 alert( str.indexOf('id', 2) ) // 12
 ```
-
 اگر ما مشتاق این هستیم که تمام آنها را پیدا کنیم، می‌توانیم `indexOf` را دورن یک حلقه اجرا کنیم. تمام صدازدن‌های جدید با موقعیتی بعد از موقعیت زیر رشته‌ی پیدا شده قبلی انجام می‌شود:
-
 ```js run
 let str = 'As sly as a fox, as strong as an ox';
-
 let target = 'as'; // بیایید به دنبال آن بگردیم
 
 let pos = 0;
@@ -301,8 +255,6 @@ while ((pos = str.indexOf(target, pos + 1)) != -1) {
 یک متد مشابه [str.lastIndexOf(substr, position)](mdn:js/String/lastIndexOf) هم وجود دارد که از انتهای رشته تا آغاز آن جستجو می‌کند.
 
 این متد زیر رشته‌های پیدا شده را با ترتیب برعکس لیست می‌کند.
-```
-
 یک چیز ناخوشایند در رابطه با `indexOf` در `if` وجود دارد. ما نمی‌توانیم آن را اینگونه درون `if` بگذاریم:
 
 ```js run
@@ -338,9 +290,7 @@ alert( "Widget with id".includes("Widget") ); // true
 
 alert( "Hello".includes("Bye") ); // false
 ```
-
 آرگومان دوم و اختیاری `str.includes` موقعیتی است که جستجو از آن شروع می‌شود:
-
 ```js run
 alert( "Widget".includes("id") ); // true
 alert( "Widget".includes("id", 3) ); // false وجود ندارد پس "id" از موقعیت 3 هیج
@@ -354,91 +304,68 @@ alert( "Wid*!*get*/!*".endsWith("get") ); // true پایان می‌یابد پ�
 ```
 
 ## گرفتن یک زیر رشته
-
 در جاوااسکریپت 3 متد برای گرفتن یک زیر رشته وجود دارد: `substring`، `substr` و `slice`.
-
 `str.slice(start [, end])`
 : قسمتی از رشته را از موقعیت `start` تا `end` (شامل `end` نمی‌شود) را برمی‌گرداند.
-
     برای مثال:
 
-    ```js run
+```js run
     let str = "stringify";
     alert( str.slice(0, 5) ); // 'strin' :زیر رشته از 0 تا 5 (شامل 5 نمی‌شود)
     alert( str.slice(0, 1) ); // 's' :از 0 تا 1، اما شامل 1 نمی‌شود، پس فقط کاراکتری که در 0 است
-    ```
+```
 
-    اگر هیچ آرگومان دومی در کار نباشد، سپس `slice` تا آخر رشته می‌رود:
-
+اگر هیچ آرگومان دومی در کار نباشد، سپس `slice` تا آخر رشته می‌رود:
     ```js run
     let str = "st*!*ringify*/!*";
     alert( str.slice(2) ); // 'ringify' :از موقعیت دوم تا آخر
     ```
 
-    مقدارهای منفی برای `start/end` هم ممکن هستند. آنها به این معنی هستند که موقعیت از آخر رشته شمارش می‌شود:
-
+مقدارهای منفی برای `start/end` هم ممکن هستند. آنها به این معنی هستند که موقعیت از آخر رشته شمارش می‌شود:
     ```js run
     let str = "strin*!*gif*/!*y";
-
     // از موقعیت 4 از سمت راست شروع می‌شود، در موقعیت 1 از سمت راست پایان می‌یابد
     alert( str.slice(-4, -1) ); // 'gif'
     ```
-
 `str.substring(start [, end])`
 : قسمتی از رشته *بین* `start` و `end` را برمی‌گرداند (شامل `end` نمی‌شود).
 
-    این متد تقریبا مشابه با `slice` است، اما این اجازه را می‌دهد که `start` بیشتر از `end` باشد (در این صورت مقدارهای `start` و `end` را جابجا می‌کند).
-
-    برای مثال:
-
+این متد تقریبا مشابه با `slice` است، اما این اجازه را می‌دهد که `start` بیشتر از `end` باشد (در این صورت مقدارهای `start` و `end` را جابجا می‌کند).
+برای مثال:
     ```js run
     let str = "st*!*ring*/!*ify";
-
     // یکسان هستند substring این دو برای
     alert( str.substring(2, 6) ); // "ring"
     alert( str.substring(6, 2) ); // "ring"
-
     // ...اینطور نیست slice اما برای
     alert( str.slice(2, 6) ); // "ring" (یکسان است)
     alert( str.slice(6, 2) ); // "" (یک رشته خالی)
-
     ```
-
-    آرگومان‌های منفی (برخلاف slice) پشتیبانی نمی‌شوند، با آنها مانند `0` رفتار می‎شود.
-
+آرگومان‌های منفی (برخلاف slice) پشتیبانی نمی‌شوند، با آنها مانند `0` رفتار می‎شود.
 `str.substr(start [, length])`
 : قسمتی از رشته از `start`، تا `length` (طول) داده شده را برمی‌گرداند.
-
-    در تضاد با متدهای قبلی، این متد به ما اجازه می‌دهد که به جای موقعیت پایانی `length` (طول) را تعیین کنیم:
-
+در تضاد با متدهای قبلی، این متد به ما اجازه می‌دهد که به جای موقعیت پایانی `length` (طول) را تعیین کنیم:
     ```js run
     let str = "st*!*ring*/!*ify";
     alert( str.substr(2, 4) ); // 'ring' :از موقعیت دوم 4 کاراکتر را بگیر
     ```
-
-    اولین آرگومان می‌تواند برای شمارش از آخر، منفی باشد:
-    
-
+اولین آرگومان می‌تواند برای شمارش از آخر، منفی باشد:
     ```js run
     let str = "strin*!*gi*/!*fy";
     alert( str.substr(-4, 2) ); // 'gi' :از موقعیت چهارم 2 کاراکتر را بگیر
     ```
-
 بیایید این متدها را برای جلوگیری از هر گمراهی خلاصه کنیم:
-
 | متد | انتخاب می‌کند... | منفی‌ها |
 |--------|-----------|-----------|
 | `slice(start, end)` | از `start` تا `end` (شامل `end` نمی‌شود) | منفی‌ها مجازند |
 | `substring(start, end)` | بین `start` و `end` (شامل `end` نمی‌شود) | مقدار منفی به معنای `0` است |
 | `substr(start, length)` | از `start` به تعداد `length` کاراکتر می‌گیرد | `start` منفی مجاز است |
-
-```smart header="کدام را انتخاب کنیم؟"
+کدام را انتخاب کنیم؟
 تمام آنها می‌توانند کار را انجام دهند. به طور رسمی، `substr` یک اشکال جزئی دارد: این متد در هسته مشخصات جاوااسکریپت تعریف نشده است، اما در Annex B تعریف شده، که فقط ویژگی‌های مختص به مرورگر را پوشش می‌دهد که به دلایلی مربوط به تاریخچه زبان وجود دارد. پس محیط‌هایی که مرورگر نباشند ممکن است از آن پشتیبانی نکنند. اما در عمل این متد همه‌جا کار می‌کند.
 
 از بین دو متد دیگر، `slice` مقداری قابل انعطاف‌تر است، و آرگومان‌های منفی را مجاز می‌داند و برای نوشتن کوتاه‌تر است.
 
 پس برای استفاده‌های عملی به یاد داشتن `slice` کافی است.
-```
 
 ## مقایسه رشته‌ها
 
@@ -460,28 +387,18 @@ alert( "Wid*!*get*/!*".endsWith("get") ); // true پایان می‌یابد پ�
 
     اگر ما اسم این کشورها را مرتب کنیم این موضوع ممکن است باعث ایجاد نتایج عجیب شود. معمولا مردم توقع داشند که `Zealand` بعد از `Österreich` در لیست بیاید.
 
-<<<<<<< HEAD
 برای فهمیدن اینکه چه چیزی رخ می‌دهد، بیایید نمایش داخلی رشته‌ها را در جاوااسکریپت مرور کنیم.
 
 تمام رشته‌ها با استفاده از [UTF-16](https://en.wikipedia.org/wiki/UTF-16) کدگذاری شده‌اند. یعنی اینکه: هر کاراکتر یک کد عددی متناظر دارد. متدهای خاصی هستند که گرفتن کد از کاراکتر و برعکس را ممکن می‌سازند.
-=======
-To understand what happens, we should be aware that strings in Javascript are encoded using [UTF-16](https://en.wikipedia.org/wiki/UTF-16). That is: each character has a corresponding numeric code.
-
-There are special methods that allow to get the character for the code and back:
->>>>>>> 18b1314af4e0ead5a2b10bb4bacd24cecbb3f18e
 
 `str.codePointAt(pos)`
 : یک عدد دهدهی که نمایان‌گر کد کاراکتر در موقعیت `pos` است را برمی‌گرداند:
-
     ```js run
     // حروف با بزرگی یا کوچکی متفاوت کدهای متفاوت دارند
     alert( "z".codePointAt(0) ); // 122
-<<<<<<< HEAD
     alert( "Z".codePointAt(0) ); // 90
     alert( "z".codePointAt(0).toString(16) ); // 7a (اگر ما به مقدار هگزادسیمال کد نیاز داشته باشیم)
-=======
     alert( "z".codePointAt(0).toString(16) ); // 7a (if we need a hexadecimal value)
->>>>>>> 18b1314af4e0ead5a2b10bb4bacd24cecbb3f18e
     ```
 
 `String.fromCodePoint(code)`
@@ -492,18 +409,14 @@ There are special methods that allow to get the character for the code and back:
     alert( String.fromCodePoint(0x5a) ); // Z (همچنین می‌توانیم از یک مقدار هگزادسیمال به عنوان آرگومان استفاده کنیم)
     ```
 
-<<<<<<< HEAD
-    همچنین ما می‌توانیم کاراکترهای Unicode را از طریق کد آنها با استفاده از `\u` که بعد از آن کد hex می‌آید اضافه کنیم:
+همچنین ما می‌توانیم کاراکترهای Unicode را از طریق کد آنها با استفاده از `\u` که بعد از آن کد hex می‌آید اضافه کنیم:
 
     ```js run
     // 5a عدد 90 در سیستم عددی بر پایه 16 برابر است با
     alert( '\u005a' ); // Z
     ```
 
-حال بیایید با ساختن یک رشته از کاراکترهایی که کد `65..220` دارند آنها را نگاه بیاندازیم (حروف الفبای لاتین و کمی بیشتر):
-=======
-Now let's see the characters with codes `65..220` (the latin alphabet and a little bit extra) by making a string of them:
->>>>>>> 18b1314af4e0ead5a2b10bb4bacd24cecbb3f18e
+حال بیایید با ساختن یک رشته از کاراکترهایی که کد `65..220` دارند آنها را نگاه بیاندازیم (حروف الفبای لاتین و کمی بیشتر)
 
 ```js run
 let str = '';
@@ -652,8 +565,7 @@ alert( '𝒳'.codePointAt(1).toString(16) ); // dcb3
 
 شما راه‌های بیشتری را برای کارکردن با جفت‌های جایگیر را در فصل <info:iterable> می‌آموزید. همچنین احتمالا کتابخانه‌های خاصی برای آنها وجود دارد، اما هیج کدام به اندازه کافی معروف نیستند تا اینجا معرفی شوند.
 
-````warn header="نتیجه: تقسیم کردن یک رشته در نقطه‌ای دلخواه خطرناک است"
-We can't just split a string at an arbitrary position, e.g. take `str.slice(0, 4)` and expect it to be a valid string, e.g.:
+نتیجه: تقسیم کردن یک رشته در نقطه‌ای دلخواه خطرناک است
 ما نمی‌توانیم یک رشته را در یک نقطه دلخواه جدا کنیم مثلا `str.slic(0, 4)` را در نظر بگیریم و تقوع یک رشته معتبر را داشته باشیم، مثلا:
 
 ```js run
@@ -663,7 +575,6 @@ alert( 'hi 😂'.slice(0, 4) ); //  hi [?]
 اینجا می‌توانیم یک کاراکتر بدرد نخور را در خروجی ببینیم (اولین قسمت از جفت جایگیر علامت خنده).
 
 اگر می‌خواهید با اعتماد کامل با جفت‌های جایگیر کار کنید از این موضوع آگاه باشید. شاید مشکل بزرگی نباشد اما شما حداقل باید بدانید که اتفاقی می‌افتد.
-````
 
 ### نشانه‌های تفکیک کننده و عادی‌سازی
 
