@@ -405,7 +405,7 @@ alert( JSON.stringify(meetup) );
 
 سینتکس آن:
 ```js
-let value = JSON.parse(str, [reviver]);
+let value = JSON.parse(str[, reviver]);
 ```
 
 پارامتر str
