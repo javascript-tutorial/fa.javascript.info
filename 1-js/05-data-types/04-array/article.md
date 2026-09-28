@@ -100,7 +100,11 @@ let fruits = [
 
 بعضی از زبان‌های برنامه‌نویسی به ما اجازه می‌دهند که برای چنین اهدافی از ایندکس‌های منفی استفاده کنیم، مانند `friuts[-1]`.
 
+<<<<<<< HEAD
 اگرچه این کار در جاوااسکریپت کار نمی‌کند. نتیجه `undefined` خواهد بود چون در براکت‌ها با ایندکس به صورت لفظی رفتار می‌شود.
+=======
+However, in JavaScript it won't work. The result will be `undefined`, because the index in square brackets is treated literally.
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 ما می‌توانیم به صورت واضح ایندکس المان آخر را محاسبه کنیم و به آن دسترسی پیدا کنیم: `fruits[fruits.length - 1]`.
 
@@ -426,7 +430,11 @@ let matrix = [
   [7, 8, 9]
 ];
 
+<<<<<<< HEAD
 alert( matrix[1][1] ); // 5 ،المان مرکزی
+=======
+alert( matrix[0][1] ); // 2, the second value of the first inner array
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 ```
 
 ## متد toString
